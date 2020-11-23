@@ -2050,6 +2050,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
 		}
 
+		[StepDefinition(@"I Delete the directory and its contents with name: (.*) from the downloads folder")]
+		public void DeleteDirectoryAndItsContentsFromDownloadsFolder(string directoryName)
+		{
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\" + directoryName + "\\";
+
+			if (System.IO.Directory.Exists(rootFolder))
+			{
+				System.IO.Directory.Delete(rootFolder, true);
+				Report.Success("Directory with name: " + directoryName + " was successfully deleted");
+			} else
+			{
+				Report.Failure("Directory with name: " + directoryName + " was not found");
+			}
+		}
+
 		[StepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
 		public void SaveProductIDAsProductInformationNamed(string prodID, string savedAs)
 		{

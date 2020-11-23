@@ -296,6 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+			Report.Screenshot();
 			IWebElement matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue().Contains(menuItem));
 
 			if (matchingMenuItem == null)
@@ -761,6 +762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DoesPDSectionExist(string section)
 		{
+			Report.Info($"Looking for the PD+ panel section: {section}");
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue().Contains(section));
 			if (matchingSection == null)

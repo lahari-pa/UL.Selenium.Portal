@@ -767,6 +767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var MyNewProduct = new NewProduct();
 			MyNewProduct.SetFullNameOfProductForRetailer(retailer, name);
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -866,11 +867,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
 			var selRetailer = new Retailer();
-			if (!selSelectRetailers.DoneButton())
-			{
-				Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
-				selRetailer.ClickAddRetailers();
-			}
+
+			//selRetailer.ClickAddRetailers();
+			//selSelectRetailers.Wait_for_load(30);
+
+			//if (!selSelectRetailers.DoneButton())
+			//{
+			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
+			//	selRetailer.ClickAddRetailers();
+			//}
 			//if (!selSelectRetailers.Wait_for_load(10))
 			//{
 			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
@@ -1533,38 +1538,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid - Without Water Solubility Description\)")]
+		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid, 2nd Phys State\(anything\), mixed \(anything\)\)")]
 		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutWaterSolubilityDescription()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
+			var MyNewProductSteps = new StepsNewProduct();
+			var thisNewProduct = new NewProduct();
+			Report.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("There should only be one option available for Primary Physical State");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			Report.StartStep("Primary Physical State should be showing the value: Solid");
-			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			List<string> showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
-			if (!showing.Contains("Solid"))
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
 			{
-				Report.StartStep("I set the Primary Physical State option to: Solid");
-				Report.Info("Setting the Physical State to Solid because it was not selected by default");
-				MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
 			}
 
 			Report.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
-			MyNewProduct.SetTheSectionOptionTo(
+			MyNewProductSteps.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				Report.StartStep(
 					"I set the Secondary Physical State option to: Solid");
-				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
 					"Solid");
+			} else
+			{
+				Report.Failure("The Secondary Physical State option was not displayed");
+				Report.Screenshot();
 			}
 
 			//Report.StartStep("I set the Secondary Physical State option to: Solid");
 			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Report.StartStep("In the New Product page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
@@ -2259,15 +2279,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			/* --As per TFS70787 warning popup displays for NR  --- */
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
 		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
@@ -2342,6 +2362,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+
+
 			Report.StartStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -3593,8 +3615,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
-		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer,
-			string name, string option)
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
@@ -3618,6 +3639,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("Selecting vendor ID: " + option);
 				new Steps_Retailer().ISelectVendorId(option);
 			}
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
@@ -4457,6 +4479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsSelectRetailers().SelectTheRetailer("CVS");
 			Report.StartStep("I enter private label as 'This Private Label'");
 			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -4478,6 +4501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string use)
 		{
 			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
+
 			var regulationOtcLimit = LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").ToList();
 			var regulationCarbLimit = LimitsTable.Where(x => x.Regulation == "CARB limit").ToList();
 			Report.IsTrue(regulationOtcLimit.Count == 1,
@@ -6278,6 +6302,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"],
 					"Additional requirements: " + thisRetailer["Retailer"]);
 			}
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
+
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 			if (new NewProduct().ErrorMessageText == "This is a required field.")
@@ -7987,8 +8014,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var thisNewProduct = new NewProduct();
@@ -7999,8 +8026,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			/* --As per TFS70787 warning popup displays for NR  --- */
 			//Delay.Seconds(1);
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickChoice("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(
@@ -8439,17 +8466,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new NewProduct().ClickContinue();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
+		[StepDefinition(@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
 		public void SelectRetailers(string retailer)
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			var stepsRetailer = new Retailer();
-			Report.StartStep("In the Select Retailers popup I select the retailer: CVS");
+			Report.StartStep($"In the Select Retailers popup I select the retailer: {retailer}");
 			new StepsSelectRetailers().SelectTheRetailer(retailer);
 			Report.StartStep("I enter private label as 'This Private Label'");
-			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
+			//stepsRetailer.EnterPrivateLabelName("This Private Label");
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -10579,5 +10608,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
+	
 	}
 }

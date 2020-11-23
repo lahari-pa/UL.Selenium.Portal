@@ -1021,21 +1021,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			List<string> IssueDateList = new List<string>();
 			List<string> ExpireDateList = new List<string>();
 
+			bool issueDateFilled;
+			bool expireDateFilled;
+
 			foreach (TableRow row in table.Rows)
 			{
+
 				StewardshipList.Add(row["Stewardship"]);
-				IssueDateList.Add(row["Issue Date"]);
+
+			    issueDateFilled = false;
+				expireDateFilled = false;
+
+				if (row["Issue Date"] == "Today")
+				{
+					var input = DateTime.Now.ToString("yyyy-MM-dd");
+					IssueDateList.Add(input);
+					issueDateFilled = true;
+				}
+				else if (row["Issue Date"] == "Tomorrow")
+				{
+					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+					IssueDateList.Add(input);
+					issueDateFilled = true;
+				}
+
+
 				if (row["Expire Date"] == "Today")
 				{
 					var input = DateTime.Now.ToString("yyyy-MM-dd");
 					ExpireDateList.Add(input);
+					expireDateFilled = true;
 				}
 				else if (row["Expire Date"] == "Tomorrow")
 				{
 					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 					ExpireDateList.Add(input);
+					expireDateFilled = true;
 				}
-				else
+
+
+				if (!issueDateFilled)
+				{
+					IssueDateList.Add(row["Issue Date"]);
+				}
+
+				if (!expireDateFilled)
 				{
 					ExpireDateList.Add(row["Expire Date"]);
 				}
@@ -1044,15 +1074,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			int k = 0;
 			int textboxesPerRow = 3;
+			bool textEntered = true;
 			for (int i = 0; i < StewardshipList.Count() * 3; i += textboxesPerRow)
 			{
-				Textboxes[i].TryEnterText(StewardshipList[k]);
-				Textboxes[i + 1].TryEnterText(IssueDateList[k]);
-				Textboxes[i + 2].TryEnterText(ExpireDateList[k]);
+
+				if (Textboxes[i].TryEnterText(StewardshipList[k]) == false)
+				{
+					Report.Info($"Failed to enter Stewardship Info into row");
+					textEntered = false;
+				}
+				if (Textboxes[i + 1].TryEnterText(IssueDateList[k]) == false)
+				{
+					Report.Info($"Failed to enter Issue Date into row");
+					textEntered = false;
+
+				}
+				if (Textboxes[i + 2].TryEnterText(ExpireDateList[k]) == false)
+				{
+					Report.Info($"Failed to enter Expire Data into row");
+					textEntered = false;
+
+				}
+
 				k++;
+
 			}
 
-			return true;
+			return textEntered;
 		}
 
 		public bool ClickSaveButtonForStewardshipNumbers()
@@ -1522,6 +1570,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool StewardshipEdit_click()
 		{
+			GeneralUtilities.Wait_for_load_finish();
 			IWebElement StwdshipEdit = this.containerElement.FindElement(By.Id("edit-stewardship"), 2);
 			Report.Info("Attempting to Click Edit Stewardship Button");
 
@@ -1807,8 +1856,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				form_no == "0" ? "" : form_no + " Formulated",
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
-			};
-			string ExpectedText = string.Join(", ", Expected.Where(x => x != ""), 2);
+			};		
+
+			string newString = "";
+			for(int x=0; x<Expected.Count(); x++)
+			{
+				if (x== Expected.Count() - 1)
+				{
+					newString = newString + Expected[x];
+				}
+				else
+				{
+					newString = newString + Expected[x]+ ", ";
+				}
+			}
+
+			string ExpectedText = newString;
+			
+
 
 			Report.Info("Expected string: " + ExpectedText);
 

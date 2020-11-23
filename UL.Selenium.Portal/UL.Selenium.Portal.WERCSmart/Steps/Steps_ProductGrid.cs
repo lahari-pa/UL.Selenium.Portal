@@ -2515,7 +2515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Update registration is not showing as expected", "Update registration dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes)")]
+		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes|Continue)")]
 		public void InUpdateRegistrationPopupIClickButton(string button)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2812,14 +2812,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-
-		[StepDefinition(@"I confirm the following section: (.*) has the following value: (.*) in the Summary Page")]
-		public void ThenIConfirmTheFollowingSectionHasTheFollowingValueInTheSummaryPage(string section, string value)
-		{
-			MoreFilters moreFiltersObject = new MoreFilters();
-			Report.IsTrue(moreFiltersObject.ConfirmSectionHasFollowingValueInSummaryPage(section, value), "Failed to find the following value: " + value + " in the following section: " + section, "Successfully found the following value: " + value + " in the following section: " + section);
-		}
-
-
 	}
 }

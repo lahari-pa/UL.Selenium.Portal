@@ -321,7 +321,7 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
 
 
-
+@philtag1
 @ScenarioId:10275
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 
@@ -332,7 +332,10 @@ Given I delete all products with UPC Number: saved as UPC59273
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Then I save the product information as: TestCase59273
-Given I call Shared Step 59927 (Primary Physical State > Solid only available Without Water Solubility question)
+Given Primary Physical State should be showing the value: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given in the Product Characteristics page I click Continue
 Given I should see the Additional Product Information Page
 Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -344,6 +347,7 @@ Given I should see the Formulation > Batteries Page
 Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
 Given I click continue
 Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I click 'Add Retailers' in the Retailers page
 Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer                                                 |
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
@@ -353,5 +357,6 @@ Then I confirm the following retailers are showing in the Retailer page
 		| Retailer												   |
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
+		| No Retailer/No UPC Product							   |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 

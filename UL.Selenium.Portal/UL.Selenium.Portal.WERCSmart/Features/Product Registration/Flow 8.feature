@@ -702,3 +702,48 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fireworks
 	Then I navigate to the home page
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
+
+
+
+	@ScenarioId:10277
+Scenario: [144527] Medical Test Kit With Alcohol Swab - RU000955 - Flow 8S
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medical Test Kit With Alcohol Swab
+Given I generate a random UPC number and save as: UPC144527
+Then I save the product information as: TestCase144527
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | Alcohol       | 100     |                     |            |             |
+Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+And The following checkboxes should be displayed for section: Please select DOT Exceptions if applicable?
+		| Checkbox																		                                                    |
+		|  172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. |
+		And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
+		| Checkbox														|
+		| 173.159 (a) - Exemption for non-spillable lead-acid batteries |
+And I set the Please select DOT Exceptions if applicable? field to: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid.
+And I click continue
+And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC144527, container type: Plastic Container and size: 9
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I click continue
+Given I click continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Appearance        | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
+| No data available |                          |                         | Neutral | Not applicable | 9                     |                               |           |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing comment area
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 54796 (Purchase Summary)
+Given I navigate to the home page
+And I search for the product saved as: TestCase144527
+When I click Row Actions for the most recent product returned
+Then I click on the Row Action: View
+Then A Summary page should open in a new browser tab
+Then I confirm the following section: Please select DOT Exceptions if applicable? has the following value: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. in the Summary Page
+Given I close the browser tab with the Summary page
