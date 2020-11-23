@@ -405,8 +405,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForDownloadButtonForTheMostRecentReport()
 		{
-			Report.Info("Check for download button for report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
-			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
+			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[1]//td[@data-bind='text:DateRequested']/..//button"), 2);
 			if (downloadButton != null)
 			{
 				return true;
@@ -414,42 +413,149 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public bool SelectDownloadButtonForTheMostRecentReport()
+		public bool SelectDownloadButtonForTheMostRecentReport(string reportName, string type, string requestedBy)
 		{
-			Report.Info("Downloading report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
-			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
-			return downloadButton.TryClick();
+			IList<IWebElement> rowList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr"), 2);
+
+			for (int i = 1; i < rowList.Count; i++)
+			{
+
+				IList<IWebElement> rowInfo = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[" + i + "]//td[@data-bind='text:DateRequested']/..//td"), 2);
+
+				string reportNameStr = rowInfo[0].Text;
+
+				string reportTypeStr = rowInfo[2].Text;
+
+				string dateRequestedStr = rowInfo[3].Text;
+
+				string reportRequestedByStr = rowInfo[4].Text;
+
+
+				string datePart = DateTime.Now.ToString("M/d/yyyy");
+
+				var columnValueSecondHalf = dateRequestedStr.Remove(0, dateRequestedStr.IndexOf(' ') + 1);
+
+				var columnValueFirstHalf = dateRequestedStr.Replace(columnValueSecondHalf, "").Trim();
+
+				Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+				//TimeSpan convertedValue;
+				bool isTimeFormat = false;
+
+				var dateFormats = "h:mm:ss tt";
+
+				if (GeneralUtilities.IsValidDate(columnValueSecondHalf, dateFormats))
+				{
+					isTimeFormat = true;
+				}
+				else
+				{
+					isTimeFormat = false;
+				}
+
+				Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+
+				if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy && (columnValueFirstHalf == datePart && isTimeFormat))
+				{
+					IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[" + i + "]//td[@data-bind='text:DateRequested']/..//button"), 2);
+					return downloadButton.TryClick();
+				}
+
+				if (i == rowList.Count - 1)
+				{
+
+					if (reportNameStr != reportName)
+					{
+						Report.Failure("Failed to match Report Name");
+					}
+					if (reportTypeStr != type)
+					{
+						Report.Failure("Failed to match Type");
+					}
+					if (reportRequestedByStr != requestedBy)
+					{
+						Report.Failure("Failed to match Requested By");
+					}
+
+					return false;
+
+				}
+
+			}
+
+			return false;
+
 		}
 
-		public bool CheckReportDataForMostRecentFile(string reportName, string type, string dateRequested, string requestedBy)
+		public bool CheckReportDataForMostRecentFile(string reportName, string type, string requestedBy)
 		{
 			Delay.Seconds(10);
-			IList<IWebElement> fileList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//td"), 2);
-			string reportNameStr = fileList[0].Text;
-			string reportTypeStr = fileList[2].Text;
-			string reportDateRequestedStr = fileList[3].Text;
-			string reportRequestedByStr = fileList[4].Text;
+	
+			IList<IWebElement> rowList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr"), 2);
+			
+			for (int i = 1; i < rowList.Count; i++)
+			{
+				
+				IList<IWebElement> rowInfo = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[" + i + "]//td[@data-bind='text:DateRequested']/..//td"), 2);
+			
+				string reportNameStr = rowInfo[0].Text;
 
-			if (reportNameStr == reportName && reportTypeStr == type && reportDateRequestedStr.Contains(Context.GetFromContext(dateRequested).ToString()) && reportRequestedByStr == requestedBy)
-			{
-				return true;
-			}
+				string reportTypeStr = rowInfo[2].Text;
 
-			if (reportNameStr != reportName)
-			{ 
-				Report.Failure("Failed to match Report Name");
-			}
-			if (reportTypeStr != type)
-			{
-				Report.Failure("Failed to match Type");
-			}
-			if (!reportDateRequestedStr.Contains(Context.GetFromContext("LastReportDownloadTime").ToString()))
-			{
-				Report.Failure("Failed to match Date Requested");
-			}
-			if (reportRequestedByStr != requestedBy)
-			{
-				Report.Failure("Failed to match Requested By");
+				string dateRequestedStr = rowInfo[3].Text;
+
+				string reportRequestedByStr = rowInfo[4].Text;
+
+			
+				string datePart = DateTime.Now.ToString("M/d/yyyy");
+
+				var columnValueSecondHalf = dateRequestedStr.Remove(0, dateRequestedStr.IndexOf(' ') + 1);
+
+				var columnValueFirstHalf = dateRequestedStr.Replace(columnValueSecondHalf, "").Trim();
+
+				Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+				//TimeSpan convertedValue;
+				bool isTimeFormat = false;
+
+				var dateFormats = "h:mm:ss tt";
+
+				if (GeneralUtilities.IsValidDate(columnValueSecondHalf, dateFormats))
+				{
+					isTimeFormat = true;
+				}
+				else
+				{
+					isTimeFormat = false;
+				}
+
+				Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+
+				if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy && (columnValueFirstHalf == datePart && isTimeFormat))
+				{
+					return true;
+				}
+
+				if (i == rowList.Count - 1)
+				{
+
+					if (reportNameStr != reportName)
+					{
+						Report.Failure("Failed to match Report Name");
+					}
+					if (reportTypeStr != type)
+					{
+						Report.Failure("Failed to match Type");
+					}
+					if (reportRequestedByStr != requestedBy)
+					{
+						Report.Failure("Failed to match Requested By");
+					}
+
+					return false;
+
+				}
+		
 			}
 
 			return false;
@@ -459,12 +565,98 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-message']//p"), 2);
 
+			if (textEl == null)
+			{
+				Report.Info("Web Element was not found");
+				return false;
+			}
+
 			if (textEl.Text == text)
 			{
 				return true;
 			}
 
 			return false;
+		}
+
+		public bool FindDescriptionInMyReports(string text)
+		{
+			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//div[@class='panel panel-default ws-panel data-consent']//p[@data-bind='text: Description']"), 2);
+
+			if (textEl == null)
+			{
+				Report.Info("Web Element was not found");
+				return false;
+			}
+
+			if (textEl.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool EnterTextIntoWPSIDTextFieldInMyReportsPage(string text)
+		{
+			IWebElement searchbarEl = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-selection__rendered']"), 2);
+	
+			bool searchBarElClicked = false;
+			bool textFieldElEntered = false;
+
+			if (searchbarEl == null)
+			{
+				Report.Failure("SearchbarEl was not found");
+				return false;
+			}
+
+			searchBarElClicked = searchbarEl.TryClick();
+
+			if (!searchBarElClicked)
+			{
+				Report.Failure("Searchbar was not clicked");
+				return false;
+			}
+
+			Delay.Seconds(5);
+
+			IWebElement textfieldEl = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-search select2-search--dropdown']//input"), 2);
+
+			if (textfieldEl == null)
+			{
+				Report.Failure("TextfieldEl was not found");
+				return false;
+			}
+
+			textFieldElEntered = textfieldEl.TryEnterText(text);
+
+			if (!textFieldElEntered)
+			{
+				Report.Failure("Text was not entered in textfield");
+				return false;
+			}
+
+			Delay.Seconds(2);
+
+			return true;
+		}
+
+		public bool SelectFirstResultInWPSIDTextFieldSearchResultsInMyReportsPage()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-search select2-search--dropdown']//input/../following-sibling::span//li[1]"), 2);
+
+			if (el == null)
+			{
+				return false;
+			}
+
+			if (el.Text == "No results found")
+			{
+				Report.Failure("No results were found");
+				return false;
+			}
+
+			return el.TryClick();
 		}
 
 	}

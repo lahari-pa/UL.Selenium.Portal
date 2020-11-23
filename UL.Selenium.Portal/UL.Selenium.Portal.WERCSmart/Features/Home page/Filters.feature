@@ -81,3 +81,6 @@ Scenario: [68413] More Filters - Retailer
 	And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
 	And I Select the check box next to Show Archived Retailers
 	And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
+
+
+

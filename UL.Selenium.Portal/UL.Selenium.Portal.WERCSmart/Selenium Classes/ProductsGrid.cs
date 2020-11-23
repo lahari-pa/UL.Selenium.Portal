@@ -1564,6 +1564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+
 	}
 
 	class RemoveUpcUpdate : ModalDialog
