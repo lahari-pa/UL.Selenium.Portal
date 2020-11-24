@@ -1699,7 +1699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//select[@id='docType']//option"), 2);
-			return true;
+			return el.TryClick();
 		}
 
 	}
@@ -2472,6 +2472,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckForRedTextBelowSupplierMessage(string message)
 		{
 			IWebElement redText = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']/following-sibling::font"));
+			if (redText == null)
+			{
+				Report.Failure("RedText was null");
+				return false;
+			}
 			return (redText.Text == message);
 		}
 
@@ -2587,18 +2592,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SelectSubject(string subject)
 		{
 			IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span[text()='" + subject + "']/preceding-sibling::input"));
+			if (statusSelect == null)
+			{
+				Report.Failure("Status Select null");
+				return false;
+			}
 			return statusSelect.TryCheck();
 		}
 
 		public string GetSubjectMessage()
 		{
 			IWebElement subjectMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectSubject']"));
+			if (subjectMessage == null)
+			{
+				Report.Failure("Subject Message text was null");
+				return null;
+			}
 			return subjectMessage.GetValue();
 		}
 
 		public string GetSupplierMessage()
 		{
 			IWebElement supplierMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			if (supplierMessage == null)
+			{
+				Report.Failure("Supplier Message text was null");
+				return null;
+			}
 			return supplierMessage.GetValue();
 		}
 
