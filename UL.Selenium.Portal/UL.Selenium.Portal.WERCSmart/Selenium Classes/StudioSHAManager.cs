@@ -1698,8 +1698,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//select[@id='docType']//option"), 2);
-			return el.TryClick();
+			IList <IWebElement> elList = this.containerElement.FindElements(By.XPath("//select[@id='docType']//option"), 2);
+
+			foreach (IWebElement el in elList)
+			{
+				if (el.Text == dropDownOption)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 	}
