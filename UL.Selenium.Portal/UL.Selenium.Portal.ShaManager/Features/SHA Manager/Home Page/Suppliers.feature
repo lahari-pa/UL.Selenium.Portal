@@ -83,13 +83,13 @@ Then In the Supplier Manager Popup I click on the close button
 
 
 
-
 Scenario: [141144] SHA Manager - Clear Shopping Cart Action - Email
 
 Given I create an email User_935201d7cde4 and save it as AdminEmailAddress
 Given I save the current emails in the inbox for address saved as: AdminEmailAddress
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC141144
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -98,7 +98,7 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC141144, container type: Plastic Container and size: 2
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -111,7 +111,7 @@ Given I click the Home navigation icon
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I Click 'Suppliers' in SHA Manager
 Then In the Supplier Manager Popup I select radio button: E-Mail
-Given In the Supplier Manager Popup I enter the following search term: User_935201d7cde4.kxxyxunf@mailosaur.io
+Given In the Supplier Manager Popup I enter the following accounts email: ProductAccount
 Given In the Supplier Manager Popup I click on the search button
 Given In the Supplier Manager Popup I click on the first supplier returned
 Given In The Supplier Manager popup I click on the category: Subscription
@@ -128,11 +128,11 @@ Given the body of the email should show: Your shopping cart has been cleared of 
 
 
 
-
 Scenario: [140441] SHA Manager - Clear Shopping Cart Action
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC141144
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -141,7 +141,7 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC141144, container type: Plastic Container and size: 2
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -154,7 +154,7 @@ Given I click the Home navigation icon
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I Click 'Suppliers' in SHA Manager
 Then In the Supplier Manager Popup I select radio button: E-Mail
-Given In the Supplier Manager Popup I enter the following search term: User_935201d7cde4.kxxyxunf@mailosaur.io
+Given In the Supplier Manager Popup I enter the following accounts email: ProductAccount
 Given In the Supplier Manager Popup I click on the search button
 Given In the Supplier Manager Popup I click on the first supplier returned
 Given In The Supplier Manager popup I click on the category: Subscription

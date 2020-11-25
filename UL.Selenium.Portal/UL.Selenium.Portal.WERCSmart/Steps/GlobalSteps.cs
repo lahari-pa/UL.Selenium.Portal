@@ -236,7 +236,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
-
 		}
 
 		/// <summary>

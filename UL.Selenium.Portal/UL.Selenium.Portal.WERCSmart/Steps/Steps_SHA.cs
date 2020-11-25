@@ -2289,15 +2289,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
-			if (searchTerm.Contains("saved as"))
+			if (Context.GetFromContext(searchTerm) != null)
 			{
-				searchTerm = Context.GetFromContext(searchTerm.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+				searchTerm = Context.GetFromContext("searchTerm").ToString();
 			}
+
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
 		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
+		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
+		{
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+
+			if (new TopMenuBar().LoggedIn())
+			{
+				Report.Info("Logged in, logging out");
+				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
+			}
+
+			if (user == null)
+			{
+				string Branch = TReVorSettings.SoftwareBranch;
+				string regexPattern = @"^.*(?=(\/))";
+				var regex = new Regex(regexPattern);
+				Match match = regex.Match(Branch);
+				if (match.Success)
+				{
+					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
+				}
+				else
+				{
+					throw new Exception("User: " + accountSavedAs + " could not be found");
+				}
+			}
+			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
+			{
+				var thisStudioSupplierManager = new StudioSupplierManager();
+				Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(user.Username),
+					"Failed to enter search term: " + user.Username,
+					"Entered search term: " + user.Username);
+			}
+		}
+
 
 		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
 		public void InSupplierManagerPopupISelectRadioButton(string button)
