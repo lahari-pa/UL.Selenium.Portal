@@ -1633,9 +1633,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
                 Report.Screenshot();
             }
 
-            //Report.StartStep("I set the Secondary Physical State option to: Solid");
-            //MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
-            Report.StartStep("In the New Product page I click Continue");
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				Report.StartStep(
+					"I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
+					"Soluble in water");
+			}
+			else
+			{
+				Report.Success("The Select the best Water Solubility description option was not displayed");
+				Report.Screenshot();
+			}
+			//Report.StartStep("I set the Secondary Physical State option to: Solid");
+			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			Report.StartStep("In the New Product page I click Continue");
             MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
         }
 
