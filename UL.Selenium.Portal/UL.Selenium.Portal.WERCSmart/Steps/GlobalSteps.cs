@@ -885,6 +885,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
+				Report.Info("testing1 " + savedAs + " " + emailFrom + " " + title);
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
 					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
@@ -902,10 +903,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Delay.Seconds(10);
 
+				Report.Info("testing2 " + email);
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
-
+					Report.Info("testing3 " + email);
 					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
+					Report.Info("testing4 " + differences);
 					Report.Info("Found " + differences.Count() + " emails");
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
@@ -919,7 +922,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
 					}
-		
+
 					if (matchingEmail != null)
 					{
 						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
@@ -934,7 +937,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				else
 				{
-		
+					Report.Info("testing3.1 " + shouldOrNot);
 					if (shouldOrNot == "should not")
 					{
 						Report.Success("As expected, no email has been received");
@@ -948,6 +951,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			catch (Exception ex)
 			{
+				Report.Info("testing3.2 " + ex.Message);
 				Report.Failure(ex.Message);
 				throw;
 			}
