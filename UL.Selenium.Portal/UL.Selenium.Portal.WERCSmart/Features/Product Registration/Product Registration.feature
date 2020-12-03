@@ -766,10 +766,7 @@ Given I call Shared Step 26897 (Product Characteristics - Solid only available -
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell
-Given In the Retailers tab, for the retailer: Wal-Mart I choose Private Label name: Allswell
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-Given I click continue
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
 And I see the following sections
 | Section                                   |
