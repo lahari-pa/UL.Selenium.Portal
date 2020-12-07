@@ -1064,6 +1064,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		[StepDefinition(@"The following checkboxes (should|should not) be displayed for section: (.*)")]
+		public void CheckCheboxesInSectionAndOrder(string shouldOrNot, string section, Table expected)
+		{
+			var expectedCheckboxes = new List<string>();
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedCheckboxes.Add(x["Checkbox"]));
+			List<string> checkboxesShowing = new NewProduct().CheckboxesInSection(section);
+
+			if (shouldOrNot == "should")
+			{
+				Report.IsTrue(expectedCheckboxes.All(x => checkboxesShowing.Contains(x)),
+					"The actual checkboxes for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", checkboxesShowing) + ". Expected: " + string.Join(", ", checkboxesShowing),
+					"The actual checkboxes for section: " + section + " were as expected: " + string.Join(", ", checkboxesShowing));
+			}
+			else
+			{
+				Report.IsTrue(!expectedCheckboxes.Any(x => checkboxesShowing.Contains(x)),
+					"The actual checkboxes for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", checkboxesShowing) + ". Should not be showing: " + string.Join(", ", checkboxesShowing),
+					"The actual checkboxes for section: " + section + " were as expected: " + string.Join(", ", checkboxesShowing));
+			}
+
+		}
+
 		[StepDefinition(@"I click the 'Add UPC' button")]
 		public void ThenIClickTheAddUpcButton()
 		{

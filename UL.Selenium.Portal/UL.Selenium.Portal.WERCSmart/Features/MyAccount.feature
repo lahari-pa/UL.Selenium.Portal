@@ -562,3 +562,28 @@ Then I pass the following data to the Stweardship Numbers table
 |             |            |             |
 |             |            |             |
 Then I save the Stewardship Numbers data
+
+
+
+
+@ScenarioId:10291
+Scenario: [138836] My Account - Correct Message Displays when Date is Expired
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I navigate to My Account
+Given In the My Account page I navigate to the Company Information page
+Given In Stewardship table click edit
+Given I add following stewardship information
+| Province         | Stewardship |
+| British Columbia | BC-1-1      |
+| Saskatchewan     | SA-1-1      |
+Then I save Stewardship Numbers information
+Given In Stewardship table click edit
+Then I fill in Stweardship Numbers information
+| Stewardship | Issue Date | Expire Date |
+| BC-1-1      | Today      | Tomorrow    |
+| SA-1-1      | Today      | Tomorrow    |
+Then I save Stewardship Numbers information
+Given I call Shared Step 62676 (Go To My Account)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I navigate to My Account
+Given In the My Account page I navigate to the Company Information page

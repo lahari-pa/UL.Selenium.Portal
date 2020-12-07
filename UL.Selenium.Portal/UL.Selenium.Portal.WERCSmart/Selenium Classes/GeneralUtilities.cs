@@ -40,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		
+
 
 		public static bool StudioWaitForSpinner(int maxSecondsToWait)
 		{
@@ -188,10 +188,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static bool DeleteFileFromDownloadsFolder(string fileName)
 		{
+
 			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
 			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
 			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
-
 			foreach (var file in files)
 			{
 				try
@@ -493,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			int x = 0;
 			bool foundMapping = false;
-			while(foundMapping==false && x<6)
+			while (foundMapping == false && x < 6)
 			{
 				Delay.Seconds(2);
 				var abbreviationMappings = this.Map;
@@ -512,13 +512,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
 				x++;
-				
+
 			}
 			return input;
 
 		}
 
-		
+
 
 
 

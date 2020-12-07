@@ -3785,6 +3785,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return radios.Select(x => x.Text).ToList();
 		}
 
+		public List<string> CheckboxesInSection(string section)
+		{
+			string xpath = @"//div[./label[contains(text(), """ + section + @""")]]/following-sibling::div//div[@class='checkbox']//span";
+			IList<IWebElement> checkboxes = this.containerElement.FindElements(By.XPath(xpath), 2);
+			if (checkboxes.Count == 0)
+			{
+				Report.Failure("There were no checkboxes showing in section: " + section);
+				return new List<string>();
+			}
+			return checkboxes.Select(x => x.Text).ToList();
+		}
+
 		// Currently deals with select (option) and input (radio)
 		public List<string> GetAllOptionsForSection(string section)
 		{
