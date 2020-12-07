@@ -24,9 +24,7 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baked Goods, Crackers
 	Then I save the product information as: TestCase60725
-	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-
-	#Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)	
 	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then I click 'Add Retailers' in the Retailers page
@@ -60,19 +58,13 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-
-
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
 	And I click continue
 	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 	Given I call Shared Step 60567 (Upload Product Label only)
 	And I should see the Additional Documents to Provide Page
-	And I click continue
-	#Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
-	# Optional Reports and Documents Available for Purchase Page
+	And I click continue	
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text

@@ -460,8 +460,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				foreach (IWebElement userRow in listOfUsersRows)
 				{
 					Delay.Seconds(3);
-					//string myUsername = userRow.FindElement(By.XPath(".//td[1]"), 2).Text;
-
 					Report.Info($"Looking for username...");
 					IWebElement nameEl = userRow.FindElement(By.XPath(".//td[1]"), 2);
 					if (nameEl.IsNullOrEmpty())
