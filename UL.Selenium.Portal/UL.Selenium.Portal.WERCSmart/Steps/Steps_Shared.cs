@@ -1642,7 +1642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Success("The Select the best Water Solubility description option was not displayed");
+				Report.Failure("The Select the best Water Solubility description option was not displayed");
 				Report.Screenshot();
 			}
 			//Report.StartStep("I set the Secondary Physical State option to: Solid");
