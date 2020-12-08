@@ -974,7 +974,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
-
+				Report.Info("Expected email body text: " + bodyText);
+				Report.Info("Body of the Email was: " + emailBody);
 				//string actualTrimmed = bodyDecode.Replace(" ", "");
 				string actualTrimmed = Regex.Replace(bodyDecode, @"\r|\n| ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
