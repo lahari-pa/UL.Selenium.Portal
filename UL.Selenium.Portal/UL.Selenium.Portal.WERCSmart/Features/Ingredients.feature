@@ -703,9 +703,9 @@ Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 Then I click continue
 And I see the following sections
-| Section                               |
-| Which one best describes your product |
-Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+| Section                                                              |
+| Which best describes your product, including when FIFRA 25(b) Exempt |
+Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
