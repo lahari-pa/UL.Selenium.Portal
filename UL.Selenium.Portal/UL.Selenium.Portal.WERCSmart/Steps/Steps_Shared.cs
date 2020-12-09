@@ -7970,6 +7970,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.StartStep("In the Universal Product Code (UPC) page I click Save");
 				MyNewProduct.ClickSaveButton();
+				GeneralUtilities.Wait_for_load_finish();
 			}
 			else
 			{
