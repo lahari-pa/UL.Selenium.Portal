@@ -1333,6 +1333,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool EnterSearchTextAndClickFind(string value)
+		{
+			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']"), 2);
+			IWebElement searchButton = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
+
+			bool textEntered = searchBar.TryEnterText(value);
+			bool searchClicked = searchButton.TryClick();
+			Delay.Seconds(5);
+			return searchClicked && textEntered;
+		}
+
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
