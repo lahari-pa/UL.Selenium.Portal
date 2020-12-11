@@ -387,8 +387,6 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	| Canadian Tire |
 
 
-   @tfs_design
-   #Waiting for Fabiola to help me find where I can pull a full list of expected retailers from - Philip
    @ScenarioId:6787
 Scenario:[120866] UPC Retailer and Feed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -401,6 +399,7 @@ Scenario:[120866] UPC Retailer and Feed
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: CVS
+	And In the 'Select Retailers' window I select the retailer: Best Buy
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120866, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

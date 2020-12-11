@@ -236,7 +236,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
-
 		}
 
 		/// <summary>
@@ -930,10 +929,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("Matching", matchingEmail);
+					Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
+
 					if (shouldOrNot == "should not")
 					{
 						Report.Success("As expected, no email has been received");
@@ -962,8 +962,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				string emailBody = MailosaurFunctions.GetEmailBody(email);
+			
+				Mailosaur.Email email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				if (email == null)
+				{
+					Report.Info("null email for some reason");
+				}
+			
+				string emailBody = email.Text.ToString();
+	
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);

@@ -125,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickClose()
 		{
-			IWebElement closeButton = this.containerElement.FindElement(By.XPath("..//span[contains(@class, 'close')]"), 2);
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath("./../..//span[text()='Result Clear Shopping Cart All Users']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button"), 2);
 			if (closeButton == null)
 			{
 				Report.Info("Could not find close button");
@@ -137,11 +137,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickFirstSupplier()
 		{
-			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
-			while (firstSupplier == null)
-			{
-				Delay.Seconds(1);
-			}
+			Delay.Seconds(10);
+			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath("//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			//int i = 0;
+			//while (firstSupplier == null)
+			//{
+			//	Delay.Seconds(1);
+			//	i++;
+
+			//	if (i == 30)
+			//	{
+			//		break;
+			//	}
+			//}
 			return firstSupplier.TryClick();
 
 		}
@@ -540,6 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckTextInConfirmClearCartForAllUsersPopup()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+
 			if (el.Text.Contains("You have selected to clear the shopping cart for this account. The Account's Administrator(s) will be notified via email of this action.") &&
 				el.Text.Contains("Are you sure you want to proceed? It cannot be reversed."))
 			{

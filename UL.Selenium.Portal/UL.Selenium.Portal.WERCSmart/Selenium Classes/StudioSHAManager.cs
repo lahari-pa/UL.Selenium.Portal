@@ -1661,11 +1661,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
+					Report.Info(client + " was found");
 					int index = Array.FindIndex(clients, row => row.Contains(client));
 					if (columnData.ElementAt(index).Text.Length < 1)
 					{
 						Report.Info(client + " had no data");
 						return false;
+					} else
+					{
+						Report.Info(client + " had data");
 					}
 				}
 			}
