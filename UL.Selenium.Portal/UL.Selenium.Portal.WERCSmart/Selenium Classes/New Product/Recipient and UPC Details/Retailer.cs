@@ -159,6 +159,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool ChoosePrivateLabelName(string item, string retailer)
+		{
+			try
+			{
+				IList <IWebElement> elList = this.containerElement.FindElements(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[contains(text(), '" + retailer + "')])]//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/following-sibling::select//option"), 2);
+
+				if (elList.Count == 0)
+				{
+					Report.Error("Could not find the input field for retailer: " + retailer);
+					return false;
+				}
+
+				foreach (IWebElement el in elList)
+				{
+					if (el.Text.Contains(item))
+					{
+						return el.TryClick();
+					}
+				}
+				Delay.Seconds(1);
+			}
+			catch (Exception ex)
+			{
+				Report.Error(ex.Message);
+				return false;
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		/// Select first vendor id from dropdown
 		/// </summary>

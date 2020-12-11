@@ -1696,6 +1696,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
+		{
+			IList <IWebElement> elList = this.containerElement.FindElements(By.XPath("//select[@id='docType']//option"), 2);
+
+			foreach (IWebElement el in elList)
+			{
+				if (el.Text == dropDownOption)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -2463,6 +2478,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return (enterField.GetValue() == message);
 		}
 
+		public bool CheckForRedTextBelowSupplierMessage(string message)
+		{
+			IWebElement redText = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']/following-sibling::font"));
+			if (redText == null)
+			{
+				Report.Failure("RedText was null");
+				return false;
+			}
+			return (redText.Text == message);
+		}
+
 		public bool AddSupplierMessage(string message)
 		{
 			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
@@ -2565,7 +2591,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class StudioSHAManagerProductUPC : BaseObject
+	class StudioSHAManagerProductRejectSubmission : BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool SelectSubject(string subject)
+		{
+			IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span[text()='" + subject + "']/preceding-sibling::input"));
+			if (statusSelect == null)
+			{
+				Report.Failure("Status Select null");
+				return false;
+			}
+			return statusSelect.TryCheck();
+		}
+
+		public string GetSubjectMessage()
+		{
+			IWebElement subjectMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectSubject']"));
+			if (subjectMessage == null)
+			{
+				Report.Failure("Subject Message text was null");
+				return null;
+			}
+			return subjectMessage.GetValue();
+		}
+
+		public string GetSupplierMessage()
+		{
+			IWebElement supplierMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			if (supplierMessage == null)
+			{
+				Report.Failure("Supplier Message text was null");
+				return null;
+			}
+			return supplierMessage.GetValue();
+		}
+
+	}
+
+		class StudioSHAManagerProductUPC : BaseObject
 	{
 		public const string BasePath = "//h3[contains(text(),'SHA Manager Product UPC')]";
 
