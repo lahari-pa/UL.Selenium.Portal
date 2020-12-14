@@ -3963,6 +3963,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
+		
 
 		[StepDefinition(
 			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
