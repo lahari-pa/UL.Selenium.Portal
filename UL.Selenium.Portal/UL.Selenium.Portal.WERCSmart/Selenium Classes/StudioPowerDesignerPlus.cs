@@ -295,7 +295,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
+			
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+			if(listOfMenuItems.IsNullOrEmpty())
+			{
+				Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
+				Report.Screenshot();
+				Report.Info($"Is the page showing spacing as bottom of the page?");
+				Report.Info($"Attempting to scroll the top of the page...");
+				SeleniumBrowser.WebBrowser.ScrollToTopOfPage();
+				Report.Screenshot();
+				Report.Info($"swithcing to correct iframe...");
+				IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.Id("Widget3FRAME"));
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+				Report.Info($"Attempting to regrab the menu items...");
+				listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+				if (listOfMenuItems.IsNullOrEmpty())
+				{
+					Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
+					Report.Screenshot();
+					Report.Info($"Is the page showing spacing as bottom of the page?");	
+
+				}
+
+			}
+			else
+			{
+				List<string> menuStrings = listOfMenuItems.Select(x => x.GetValue()).ToList();
+				Report.Info($"Menu items found: {string.Join(",", menuStrings)}");
+			}
+
 			Report.Screenshot();
 			IWebElement matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue().Contains(menuItem));
 

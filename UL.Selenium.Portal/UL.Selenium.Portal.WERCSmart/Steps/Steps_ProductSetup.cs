@@ -1547,6 +1547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the phrase selector screen I click button: Save
 			studioSteps.ThenInThePhraseSelectorScreenIClickButton("Save");
 
+			//42196 Issue In below step -> "Failed to find menu item: Home" -> "Power designer plus has not loaded"
 			//Given I click on home to navigate back to editing specific product saved as TestCase80821
 			studioSteps.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
 
