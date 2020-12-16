@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @SummaryPage
+@SHA
 @run_NewProduct
 
 Feature: New Product
@@ -91,3 +92,141 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 	| For Air transport (IATA), indicate the classification                              |
 	| For Canada's Transportation of Dangerous Goods (TDG), indicate the classification  |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74944
+
+
+
+
+
+Scenario: [149421] CBD - Registration with CBD Ingredient in Formulation
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Given I generate a random UPC number and save as: UPC149421
+Then I save the product information as: TestCase149421
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | Chalk         | 50      |                     |            |             |
+| 1244582   |               | 50      |                     |            |             |
+Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
+Given I close the CBD Registration Guidance popup in the Ingredients Page
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| CVS      |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC149421, container type: Plastic Container and size: 15.2
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor  | Odor Threshold           | Partition Coefficient | Personal Protection Equipment | Viscosity |
+| Amber      |                          |                         | Apple | No information available | 4                     |                               |           |
+Given I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
+  And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase149421)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase149421)
+    Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase149421)
+Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
+    And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase149421)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase149421)
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase149421) for
+| Retailer |
+| CVS      |
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery Containing Mercury
+Given I generate a random UPC number and save as: UPC145400
+Then I save the product information as: TestCase145400
+Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | mercury       | 100     |                     |            |             |
+Given I should see the Formulation > Batteries Page
+Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+Given I click continue
+Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC145400 with container type: Metal Container size: 40.0 and quantity: 100
+And I click the browse button for label: Article Information Sheet (AIS) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+Then I set the Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. option to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
+Then I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian option to: I don't need a WHMIS Compliant SDS
+And I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+And I click continue
+Given I click continue
+Given I click continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145400)
+And In SHA Manager I select the first product
+And I click the following option in the bottom menu: Review
+
+
+
+
+Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC120820
+Then I save the product information as: TestCase120820
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Given I generate a random UPC number and save as: UPC120820
+Then I save the product information as: TestCase120820
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120820, container type: Plastic Container and size: 15.2
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given I click continue
+Given I click continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given In the Thank You screen I click Home
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120820)
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120820)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120820)
+Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase120820
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120820)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase120820)
+Given I call Shared Step 155714 (SHA - Accepted Product - set Retailers to Cancelled for saved as: TestCase120820) for
+| Retailer |
+| Walgreens|
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Status for saved as: TestCase120820)

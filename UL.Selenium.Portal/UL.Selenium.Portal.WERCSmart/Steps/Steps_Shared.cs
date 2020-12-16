@@ -5198,6 +5198,21 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 		}
 
+		[StepDefinition(@"I call Shared Step 155714 \(SHA - Accepted Product - set Retailers to Cancelled for saved as: (.*)\) for")]
+		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCancelledForSavedAs(string savedAs, Table retailers)
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Cancelled");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+
+		}
+
 		[StepDefinition(@"I call Shared Step 67823 \(Login to WERCSmart - Products Automation Account\)")]
 		public void GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount()
 		{

@@ -93,6 +93,7 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77857
+@ScenarioId:10356
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1549414
 	#Given I save to context name: 77862_KitProduct2 and value: 1549415

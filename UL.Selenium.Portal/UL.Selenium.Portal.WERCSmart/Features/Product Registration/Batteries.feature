@@ -11,6 +11,7 @@ Feature: Batteries
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
 @tfs_design
+@ScenarioId:10167
 Scenario: [97488] Stand alone Lithium Battery vehicle
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

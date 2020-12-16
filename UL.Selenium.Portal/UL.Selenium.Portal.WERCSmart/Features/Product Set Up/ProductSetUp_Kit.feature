@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -16,7 +16,7 @@
 
 Feature: ProductSetUp_Kit
 
-@TReVorId:21325
+@ScenarioId:9701
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 	#For this test case you will need two input products in completed status which have SOLD set to US only
 	#and make sure to add any retailer except Walmart as the retailer for these products.

@@ -3809,6 +3809,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
+
+		[StepDefinition(@"I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text")]
+		public void GivenIConfirmTheCBDRegistrationGuidancePopupAppearsInTheIngredientsPageWithTheCorrectText()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			studioSupplierManagerObject.ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText();
+		}
+
+		[StepDefinition(@"I close the CBD Registration Guidance popup in the Ingredients Page")]
+		public void GivenICloseTheCBDRegistrationGuidancePopupInTheIngredientsPage()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			studioSupplierManagerObject.CloseCBDRegistrationGuidancePopupInIngredientsPage();
+		}
+
 	}
 
 }

@@ -643,6 +643,7 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 
 
+@ScenarioId:10534
 Scenario:[121120] Pesticide - New Radio Icon Option
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC121120

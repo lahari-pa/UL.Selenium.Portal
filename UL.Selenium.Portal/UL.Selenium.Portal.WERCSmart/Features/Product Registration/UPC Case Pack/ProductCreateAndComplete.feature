@@ -107,6 +107,7 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Completed
 
 @tfs_design
+@ScenarioId:9406
 Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
@@ -282,6 +283,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+@ScenarioId:9761
 Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87922
