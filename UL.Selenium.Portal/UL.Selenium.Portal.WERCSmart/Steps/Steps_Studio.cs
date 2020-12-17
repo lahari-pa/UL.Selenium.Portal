@@ -435,7 +435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisApplyRulesPage.WaitForSpinner(150);
 				if (thisApplyRulesPage.WaitForSpinner(30))
 				{
-					if (SeleniumBrowser.Alert.WaitForAlert(300))
+					if (SeleniumBrowser.Alert.WaitForAlert(200))
 					{
 						Report.Info($"Attempting to switch to alert 1");
 						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
@@ -445,7 +445,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info($"Waiting for spinner 2");
 					thisApplyRulesPage.WaitForSpinner(150);
-					if (SeleniumBrowser.Alert.WaitForAlert(100))
+					if (SeleniumBrowser.Alert.WaitForAlert(200))
 					{
 						Report.Info($"Attempting to switch to alert 1");
 						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();

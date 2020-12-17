@@ -71,6 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public bool Wait_For_Loading_Finish(int timeout = 30)
 		{
+			//If this continue to timneout, try updating to its a hardcoded timeout value e.g 120 seconds. Currently seems there is an issue with using the given timeout.
 			try
 			{
 				Delay.Seconds(15);

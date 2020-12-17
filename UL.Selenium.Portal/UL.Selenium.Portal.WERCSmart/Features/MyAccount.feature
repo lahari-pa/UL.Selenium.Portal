@@ -161,7 +161,8 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 
 @ScenarioId:1590
 Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I log in with the account saved in TReVor as: NoProductsAccount
 	And I navigate to My Account
 	And In the My Account page I navigate to the Company Information page
 	And In Stewardship table click edit
