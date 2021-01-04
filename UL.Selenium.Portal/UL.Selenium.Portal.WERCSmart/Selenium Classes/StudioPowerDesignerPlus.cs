@@ -296,6 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+			Report.Screenshot();
 			IWebElement matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue().Contains(menuItem));
 
 			if (matchingMenuItem == null)
@@ -761,6 +762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DoesPDSectionExist(string section)
 		{
+			Report.Info($"Looking for the PD+ panel section: {section}");
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue().Contains(section));
 			if (matchingSection == null)
@@ -931,6 +933,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool GivenCategoryContainsData(string category)
+		{
+			int i = 0;
+			while (i < 5)
+			{
+				try
+				{
+
+					IWebElement wantedCategory = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//table[contains(@title,'{category}')]"), 2);
+					string dataCode = wantedCategory.GetAttribute("ss");
+					IWebElement inputField= wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"),2);
+					
+					
+					if (inputField == null)
+					{
+						Report.Info("inputField was not found");
+						return false;
+					}
+					Report.Info("inputField Category was found");
+					string foundText = inputField.Text;
+					if(foundText==""|| foundText== " "|| foundText.ToLower().Contains("data required"))
+					{
+						Report.Info("The found text indicated the category did not contain data");
+						return false;
+					}
+					Report.Info($"The found text indicated the cateogr contained data");
+					return true;
+
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("wantedCategory threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the categorie with title: {category} if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
+					return false;
+				}
+			}
+			return false;
+		}
+
 	}
 
 	class GraphicEditor : BaseObject
@@ -1092,7 +1140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
-				while(alertText.IsNullOrEmpty()|| i<11)
+				while(alertText.IsNullOrEmpty()&& i<11)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
@@ -1116,16 +1164,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 		}
+		public IWebElement GetCheckBoxEl(string name)
+		{
+			ReadOnlyCollection<IWebElement> checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
+			Report.Info($"Entering Switch Statement");
+			IWebElement matchingElement;
+			switch (name.ToLower())
+			{
+				case "authorized":
+					Report.Info($"case was 'authorized");
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAuth");
+					Report.Info($"authorized element set");
+					break;
+				case "apply":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAllSubformatAuthorize");
+					break;
+				case "queue":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkQueue");
+					break;
+				case "clear":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkClearRFR");
+					break;
+				case "do not unauthorize":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkDoNotUnauthorize");
+					break;
+				case "display revision marking":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkRevMarking");
+					break;
+				case "suppress":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkShowTradeSecInfo");
+					break;
+				case "hide alias":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkHideAlias");
+					break;
+				default:
+					Report.Error("Please provide a valid checkbox option. You sent: " + name);
+					return null;
+			}
+
+			return matchingElement;
+
+		}
 
 		public bool SetCheckBox(string name, bool setChecked)
 		{
 			Report.Info("Beginning set checkbox: " + name);
 			ReadOnlyCollection<IWebElement> checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
+			Report.Info($"Entering Switch Statement");
 			IWebElement matchingElement;
 			switch (name.ToLower())
 			{
 				case "authorized":
+					Report.Info($"case was 'authorized");
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAuth");
+					Report.Info($"authorized element set");
 					break;
 				case "apply":
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAllSubformatAuthorize");
@@ -1157,7 +1249,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
+					Report.Info("'Checking' element");
 					matchingElement.Check(setChecked);
+					//Code Below is used to help debug 42196, issue getting the authroized checkbox the be checked (remove once passing)
+					if (name == "authorized")
+					{
+						Delay.Seconds(10);
+						Report.Info($"starting element checked check...");
+						matchingElement = this.GetCheckBoxEl(name);
+						var chckAtr = matchingElement.GetAttribute("checked");
+
+						if(chckAtr.IsNullOrEmpty())
+						{
+							matchingElement = this.GetCheckBoxEl(name);
+							matchingElement.Check(setChecked);
+
+							Delay.Seconds(10);
+							matchingElement = this.GetCheckBoxEl(name);
+							chckAtr = matchingElement.GetAttribute("checked");
+							if (chckAtr.IsNullOrEmpty())
+							{
+								Report.Info($"The element was not checked correctly");
+								return false;
+
+							}
+
+							else
+							{
+								if (chckAtr == "true")
+								{
+
+									Report.Info($"element attribute was: {chckAtr} = indicates the box is checked");
+									return true;
+								}
+								else
+								{
+									Report.Info($"element attribute was: {chckAtr} = indicates the box was not checked");
+									return false;
+								}
+							}
+
+						}
+						else
+						{
+							if(chckAtr == "true")
+							{
+								
+								Report.Info($"element attribute was: {chckAtr} = indicates the box is checked");
+								return true;
+
+							}
+							else
+							{
+								Report.Info($"element attribute was: {chckAtr} = indicates the box was not checked");
+								return false;
+
+							}
+						}
+					}						
 					return true;
 				}
 				catch (Exception e)
@@ -2247,15 +2396,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 			}
-
+			Report.Info("Looking for Iframe");
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 10);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			Report.Info("Switching to Iframe");
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
+			Report.Info("Starting a wait for load");
 			if (base.Wait_for_load(30))
 			{
+				Report.Info("Loading was successfull");
 				return true;
 			}
-
+			Report.Info($"failed to load");
 			return false;
 		}
 

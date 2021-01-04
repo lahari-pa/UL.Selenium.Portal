@@ -364,6 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+
 		}
 
 		[StepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]
@@ -739,7 +740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|My Reports|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Selecting " + item + " in the Navigation Pane");
@@ -928,6 +929,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
 		}
 
+		[StepDefinition(@"In the Live Help dialog I should see the description text: (.*) at the top of the chat window")]
+		public void ThenIShouldSeeDescriptionText(string expectedText)
+		{
+			Report.IsTrue(new LiveHelp().VerifyDescText(expectedText), "Description text is not present", "Description text is present");
+		}
+
 		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
 		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
 		{
@@ -982,6 +989,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
+			if(prodIDs.Count()==0)
+			{
+				Report.Failure("There was no products IDs found to be displayed");
+			}
 		}
 
 		[StepDefinition(@"I navigate to the WERCSmart site")]

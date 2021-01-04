@@ -686,6 +686,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 				thisNewUser.Zip = user.Zip;
+
+				//Below Code cluster is used to add a unique ID (Grabbed from the email) to each company name.
+				//Need to check if this should be for the company name for First/Last Name?
+				string emailFind = user.Email;
+				string userString = emailFind.Replace(TestVariables.GetVariableSavedAs("Mailosaur Prefix"), "");
+				string randomID = userString.Replace("User_", "");
+				string currentCompName = user.CompanyName;
+				user.CompanyName = currentCompName + randomID;
+
+
+
 				thisNewUser.CompanyName = user.CompanyName;
 				thisNewUser.CompanyPhone = user.CompanyPhone;
 				thisNewUser.EmergencyPhoneNumber = user.EmergencyPhoneNumber;
@@ -775,6 +786,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myTermsOfUse = new TermsOfUse();
 				if (myTermsOfUse.Wait_for_load(60))
+				{
+					myTermsOfUse.Accept();
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"If Homepage does not load, accept terms of use")]
+		public void IfHomePageDoesNotLoadAcceptTermsOfUse()
+		{
+			var selHomepage = new Homepage();
+			Report.Info($"Starting, wait for the homepage to appear");
+			if(selHomepage.WaitForContainerToBeVisible(30))
+			{
+				Report.Info($"The homepage was showing");
+				return;
+
+			}
+			try
+			{
+				var myTermsOfUse = new TermsOfUse();
+				if (myTermsOfUse.Wait_for_load(10))
 				{
 					myTermsOfUse.Accept();
 				}

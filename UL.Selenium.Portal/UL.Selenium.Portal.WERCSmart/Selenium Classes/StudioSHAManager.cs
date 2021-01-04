@@ -417,7 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 						int x = 0;
 						bool clickedSuccess = false;
-						while (x<5 && clickedSuccess==false)
+						while (x < 5 && clickedSuccess == false)
 						{
 							Delay.Seconds(2);
 							checkbox.TryClick();
@@ -430,7 +430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							else
 							{
 								Report.Info("Attempted to check checkbox but failed.");
-									
+
 							}
 							x++;
 
@@ -440,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info("Final attempt to check checkbox failed.");
 							return false;
 						}
-						
+
 					}
 					else
 					{
@@ -572,7 +572,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
 				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
 				int i = 0;
-				while (i<70)
+				while (i < 70)
 				{
 					Delay.Seconds(2);
 					actions.MoveToElement(matchingTD2);
@@ -584,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 					i = i - 10;
-				}				
+				}
 				return false;
 			}
 			else
@@ -1275,7 +1275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string backgroundColourTest = upcRow.GetAttribute("background-color");
 			Report.Info($"The string for the attribute 'background-color' was found to be: {backgroundColourTest}");
 
-			return background == "rgb(235, 235, 224)";
+			return background == "rgba(235, 235, 224, 1)";
 		}
 
 		public bool ClickProcessRecertification()
@@ -1443,14 +1443,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							string productsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
 							Delay.Seconds(5);
-							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");						
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
 							string newTab = (string)Context.GetFromContext("CurrentWindow");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
 							new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
 							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
-							return new ProductInformation
-							{
+							return new ProductInformation {
 								Id = thisIDTD.GetValue().Trim(),
 								Name = thisNameTD.GetValue().Trim()
 							};
@@ -1587,69 +1586,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
-			try
+
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			foreach (var columnName in columnNames)
 			{
-				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", currentHandle);
-				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-				Report.Info("Looking for SHA Manager Product UPC window");
-				bool foundWindow = false;
-				foreach (string handle in allHandles)
-				{
-					Report.Info("Checking handle: " + handle);
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
-					{
-						Report.Success("Tab was switched successfully!");
-						Report.Screenshot();
-						currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-						Context.AddToContext("SHAManagerProductUPC", currentHandle);
-						foundWindow = true;
-						break;
-					}
-				}
-
-				if (!foundWindow)
-				{
-					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
-					Report.Screenshot();
-				}
-
-				List<string> columnsNotFound = new List<string>();
-
-				foreach (TableRow row in table.Rows)
-				{
-					//needs updating because "container element" is not correct container. Move this method to same place as other upc retailer feed methods.
-					//After checking looks like is not a "class" of the UPC Tab page, all methods using seleniumBrowser, may need to update these methods later.
-					IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
-					
-
-					if (columnName == null)
-					{
-						columnsNotFound.Add(row["Column Name"]);
-					}
-				}
-
-				return columnsNotFound;
+				columnNamesStrings.Add(columnName.Text);
 			}
 
-
-			catch (NoSuchWindowException)
+			foreach (TableRow row in table.Rows)
 			{
-				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
-				Report.Screenshot();
-				return null;
 
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				Report.Screenshot();
-				return null;
-
+				if (!columnNamesStrings.Contains(row["Column Name"]))
+				{
+					columnsNotFound.Add(row["Column Name"]);
+				}
 			}
 
+			return columnsNotFound;
+
+		}
+
+		public string FindClientsForProduct(string productID)
+		{
+			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
+			return clients.Text;
 		}
 
 		public bool ConfirmUInSecondColumn(string productID)
@@ -1659,6 +1622,94 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (secondColumnU != null)
 			{
 				return true;
+			}
+
+			return false;
+		}
+
+		public bool FindDataForClientsInUPCRetailerAndFeedPage(string[] clients)
+		{
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnData = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			if (columnNames.Count == 0)
+			{
+				Report.Info("No column names were fonud");
+				return false;
+			}
+
+			if (columnData.Count == 0)
+			{
+				Report.Info("No column data was fonud");
+				return false;
+			}
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (string client in clients)
+			{
+
+				if (!columnNamesStrings.Contains(client))
+				{
+					Report.Info(client + " was not found");
+					return false;
+				}
+				else
+				{
+					Report.Info(client + " was found");
+					int index = Array.FindIndex(clients, row => row.Contains(client));
+					if (columnData.ElementAt(index).Text.Length < 1)
+					{
+						Report.Info(client + " had no data");
+						return false;
+					} else
+					{
+						Report.Info(client + " had data");
+					}
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckTheFollowingSectionTitles(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				var columnNamesArr = row["Column Names"].ToString().Split(',');
+				var columnSectionsArr = row["Column Numbers"].ToString().Split(',');
+
+				for (int i = 0; i < columnNamesArr.Count(); i++)
+				{
+					IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + columnSectionsArr[i] + "]"), 2);
+
+					if (!section.Text.Contains(columnNamesArr[i]))
+					{
+						return false;
+					}
+
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
+		{
+			IList <IWebElement> elList = this.containerElement.FindElements(By.XPath("//select[@id='docType']//option"), 2);
+
+			foreach (IWebElement el in elList)
+			{
+				if (el.Text == dropDownOption)
+				{
+					return true;
+				}
 			}
 
 			return false;
@@ -1951,7 +2002,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[contains(@aria-labelledby,'IsArchiveProduct')]");
 
-		
+
 
 		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
 			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
@@ -2409,9 +2460,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
-				if(option.Contains("�"))
+				if (option.Contains("�"))
 				{
-					string updatedOption= option.Replace("�", "–");
+					string updatedOption = option.Replace("�", "–");
 					statusSelect.Select(updatedOption);
 					return statusSelect.SelectedOption() == updatedOption;
 				}
@@ -2429,6 +2480,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
 			enterField.EnterText(message);
 			return (enterField.GetValue() == message);
+		}
+
+		public bool CheckForRedTextBelowSupplierMessage(string message)
+		{
+			IWebElement redText = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']/following-sibling::font"));
+			if (redText == null)
+			{
+				Report.Failure("RedText was null");
+				return false;
+			}
+			return (redText.Text == message);
 		}
 
 		public bool AddSupplierMessage(string message)
@@ -2533,7 +2595,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class StudioSHAManagerProductUPC : BaseObject
+	class StudioSHAManagerProductRejectSubmission : BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool SelectSubject(string subject)
+		{
+			IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span[text()='" + subject + "']/preceding-sibling::input"));
+			if (statusSelect == null)
+			{
+				Report.Failure("Status Select null");
+				return false;
+			}
+			return statusSelect.TryCheck();
+		}
+
+		public string GetSubjectMessage()
+		{
+			IWebElement subjectMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectSubject']"));
+			if (subjectMessage == null)
+			{
+				Report.Failure("Subject Message text was null");
+				return null;
+			}
+			return subjectMessage.GetValue();
+		}
+
+		public string GetSupplierMessage()
+		{
+			IWebElement supplierMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			if (supplierMessage == null)
+			{
+				Report.Failure("Supplier Message text was null");
+				return null;
+			}
+			return supplierMessage.GetValue();
+		}
+
+	}
+
+		class StudioSHAManagerProductUPC : BaseObject
 	{
 		public const string BasePath = "//h3[contains(text(),'SHA Manager Product UPC')]";
 

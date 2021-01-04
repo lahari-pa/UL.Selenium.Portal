@@ -19,6 +19,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -252,7 +254,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
-						Report.IsTrue(thisProductSearch.EnterUser(value),
+						string user = value;
+						if (UL.Automation.Reporting.SpecFlow.Classes.Context.Contains(value))
+						{
+							user = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+						}
+						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
@@ -991,6 +998,92 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
 
+		[StepDefinition(@"In the Reject Submission dialog I Select Subject: (.*)")]
+		public void GivenInTheRejectSubmissionDialogISelectSubject(string subject)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			Report.IsTrue(thisStudioSHAManagerProductRejectSubmission.SelectSubject(subject),
+				"Failed to select subject: " + subject, "Selected: " + subject);
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Subject field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierSubjectIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
@@ -1106,6 +1199,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
+		[StepDefinition(@"In the Suspended dialog below the Supplier Message field I see the following text in red: (.*)")]
+		public void GivenInTheSuspendedDialogBelowTheSupplierMessageFieldIEnterTheFollowingTextInRed(string textToAdd)
+		{
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.CheckForRedTextBelowSupplierMessage(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
@@ -1172,9 +1272,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
+			var thisProductNotificationHistory = new ProductNotificationHistory();
+			thisProductNotificationHistory.WaitForTableContentToLoad();
 			SpecFlowReporting.TableRow(table.Rows[0]);
 			Report.Info("Getting displayed notifications");
-			var thisProductNotificationHistory = new ProductNotificationHistory();
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
 			{
@@ -1956,58 +2057,199 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to double click button: " + button, "Clicked button: " + button);
 		}
 
-		[StepDefinition(
-			@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
-		public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
+		//[StepDefinition(
+		//	@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
+		//public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
+		//{
+		//	var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+		//	string ID = ProductDetails.Id;
+		//	var thisSHADocument = new SHADocumentList();
+		//	Delay.Seconds(3);
+		//	string docURL = thisSHADocument.DocumentWindowOpen();
+		//	if (docURL != null)
+		//	{
+		//		Report.Info($"The found URL was: {docURL}");
+		//		string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+		//		Report.Info($"Found the downloads folder: {downloadsFolder}");
+		//		thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
+		//		Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
+
+
+		//		//TEST CODE
+		//		Report.Info($"Running Test code for PDF check using new downloaded file");
+
+		//		GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
+		//		Report.Info($"tab opened");
+		//		Delay.Seconds(3);
+		//		//string docURL2 = thisSHADocument.DocumentWindowOpen();
+		//		string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+		//		Report.Info($"doc window opened");
+		//		Report.Screenshot();
+
+		//		if (docURL2 == null)
+		//		{
+		//			Report.Info("The docURL was null");
+		//			return;
+		//		}
+
+		//		string pdfText = thisSHADocument.DocumentText(docURL2);
+		//		Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
+
+		//		//END TEST CODE
+
+
+		//		//string pdfText = thisSHADocument.DocumentText(docURL);
+
+
+		//		Report.Info($"The Found PDF Text was: {pdfText}");
+		//		Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
+		//		Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+		//	}
+		//	else
+		//	{
+		//		Report.Error("Tabbed document has not been found as expected");
+		//	}
+		//}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]
+		public void CheckThatFileSavedAsContaisnTextNGHSEnglishTwicAndProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
 		{
-			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string ID = ProductDetails.Id;
+			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
+			string ID1 = productOneDetails.Id;
+
+			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
+			string ID2 = productTwoDetails.Id;
+
+
 			var thisSHADocument = new SHADocumentList();
 			Delay.Seconds(3);
-			string docURL = thisSHADocument.DocumentWindowOpen();
-			if (docURL != null)
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
-				Report.Info($"The found URL was: {docURL}");
-				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-				Report.Info($"Found the downloads folder: {downloadsFolder}");
-				thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
-				Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
-
-
-				//TEST CODE
-				Report.Info($"Running Test code for PDF check using new downloaded file");
-				
-				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
-				Report.Info($"tab opened");
-				Delay.Seconds(3);
-				//string docURL2 = thisSHADocument.DocumentWindowOpen();
-				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
-				Report.Info($"doc window opened");
-				Report.Screenshot();
-
-				if (docURL2 == null)
-				{
-					Report.Info("The docURL was null");
-					return;
-				}
-
-				string pdfText = thisSHADocument.DocumentText(docURL2);
-				Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
-
-				//END TEST CODE		
-
-
-				//string pdfText = thisSHADocument.DocumentText(docURL);
-
-
-				Report.Info($"The Found PDF Text was: {pdfText}");
-				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
-				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
-			else
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
 			{
-				Report.Error("Tabbed document has not been found as expected");
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
 			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"NGHS/English");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the product codes saved as: (.*) and (.*)")]
+		public void CheckThatFileSavedAsContaisnProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
+		{
+			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
+			string ID1 = productOneDetails.Id;
+
+			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
+			string ID2 = productTwoDetails.Id;
+
+			var thisSHADocument = new SHADocumentList();
+			Report.Info($"tab opened");
+			Delay.Seconds(3);
+			//string docURL2 = thisSHADocument.DocumentWindowOpen();
+			string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+			Report.Info($"doc window opened");
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+
+
+		}
+
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / English twice", "PDF contains NGHS / English twice");
+
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / Français' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaFrançaisTwice(string fileSavedAs)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/Français");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / Français twice", "PDF contains NGHS / English twice");
+
 		}
 
 
@@ -2024,6 +2266,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return count;
 		}
+
+
+
 
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
@@ -2044,11 +2289,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
+			if (Context.GetFromContext(searchTerm) != null)
+			{
+				searchTerm = Context.GetFromContext("searchTerm").ToString();
+			}
+
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
 		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
+		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
+		{
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+
+			if (new TopMenuBar().LoggedIn())
+			{
+				Report.Info("Logged in, logging out");
+				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
+			}
+
+			if (user == null)
+			{
+				string Branch = TReVorSettings.SoftwareBranch;
+				string regexPattern = @"^.*(?=(\/))";
+				var regex = new Regex(regexPattern);
+				Match match = regex.Match(Branch);
+				if (match.Success)
+				{
+					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
+				}
+				else
+				{
+					throw new Exception("User: " + accountSavedAs + " could not be found");
+				}
+			}
+			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
+			{
+				var thisStudioSupplierManager = new StudioSupplierManager();
+				Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(user.Username),
+					"Failed to enter search term: " + user.Username,
+					"Entered search term: " + user.Username);
+			}
+		}
+
 
 		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
 		public void InSupplierManagerPopupISelectRadioButton(string button)
@@ -2065,6 +2351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
 				"Clicked search button");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
@@ -2154,7 +2441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
-	public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
 			if (retailer.ToLower().Contains("saved as"))
 			{
@@ -2210,7 +2497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer+" on attempt: "+ j+1);
+				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer + " on attempt: " + j + 1);
 				Delay.Seconds(60);
 				j++;
 
@@ -2578,9 +2865,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
-		public void IUpdateBulkUPCFileToIncludeProductNames (string spreadsheetSavedAs)
+		public void IUpdateBulkUPCFileToIncludeProductNames(string spreadsheetSavedAs)
 		{
-			
+
 			//Currently does not work if the values you are trying to edit are blank (which is by default in the sample file)
 			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
 			var excel = new ExcelFunctions(spreadSheetFile, "Sheet1");
@@ -2588,7 +2875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int x = 1;
 			for (int i = 1; i <= numberOfProducts; i++)
 			{
-				Report.IsTrue(excel.EditCell(i, 1, ("TestName"+x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
+				Report.IsTrue(excel.EditCell(i, 1, ("TestName" + x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
 				x++;
 			}
 		}
@@ -3590,23 +3877,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I ensure that there is a SubscriptionStatus column in the Supplier Manager popup")]
+		public void IEnsureThatThereIsASubscriptionStatusColumn()
+		{
+			Report.Info("Checking for SubscriptionStatus column");
+			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
+		}
+
+		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
+		public void IEnsureThatISeeTheStatusUnderTheSubscriptionStatusColumn(string status)
+		{
+			Report.Info("Checking for status " + status + " under the SubscriptionStatus column");
+			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumnValue("SubscriptionStatus", status), "Failed to find status " + status + " for the SubscriptionStatus", "Successfully found SubscriptionStatus " + status + ".");
+		}
+
+		[StepDefinition(@"I ensure that the Subscription tab has (.*) font")]
+		public void IEnsureThatTheSubscriptionTabHasFont(string color)
+		{
+			Report.Info("Checking for " + color + " font on Subscription tab");
+			Report.IsTrue(new StudioSupplierManager().CheckForSubscriptionTabColor(color), "Failed to find " + color + " font on the Subscription tab", "Successfully found " + color + " font on the Subscription tab");
+		}
+
+		[StepDefinition(@"I ensure that the Subscription tab has (.*) background color")]
+		public void IEnsureThatTheSubscriptionTabHasBackgroundColor(string color)
+		{
+			Report.Info("Checking for " + color + " background color on Subscription tab");
+			Report.IsTrue(new StudioSupplierManager().CheckForSubscriptionTabBackgroundColor(color), "Failed to find " + color + " background color on the Subscription tab", "Successfully found " + color + " background color on the Subscription tab");
+		}
+
+
 
 		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
 		public void InTheSupplierManagerPopupIClickCategory(string category)
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep($"Starting to attempt to click the catagory: {category}");
-			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.IsTrue(new StudioSupplierManager().ClickCategory(category), "Failed to click the category", "Successfully clicked the category");
 			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
-			
+			Delay.Seconds(15);
+		}
+
+		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
+		public void InTheSupplierManagerPopupIClickTheClearCartForAllUsersButton()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"Starting to attempt to click the 'Clear Cart for All Users' button");
+			Report.IsTrue(new StudioSupplierManager().ClickClearCartForAllUsers(), "Failed to click the 'Clear Cart for All Users' button", "Successfully clicked the 'Clear Cart for All Users' button");
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)
@@ -3614,8 +3936,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				expectedValues.Add(thisRow["Expected Value"]);
 			}
 			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
-			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
-			
+			Report.IsTrue(new StudioSupplierManager().ColumnContains(column, expectedValues), "The column: " + column + " did not contain all the expected values", "The column: " + column + " did contain all the expected values");
+
 		}
 
 		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
@@ -3627,7 +3949,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				expectedValues.Add(thisRow["Expected Headers"]);
 			}
-			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues), "The Headers were not as expected", "The headers were as expected");
 
 		}
 
@@ -3635,7 +3957,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
 		{
 			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
-						
+
 		}
 
 		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
@@ -3645,15 +3967,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
+		{
+			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
+		}
+
+		[StepDefinition(@"In the Clear Cart for All Users Popup I confirm the correct text is displayed")]
+		public void GivenIConfirmTheConfirmClearCartForAllUsersPopupContainsTheCorrectText()
+		{
+			Report.IsTrue(new StudioSupplierManager().CheckTextInConfirmClearCartForAllUsersPopup(), "The 'Confirm Clear Cart for All Users' Popup did not display the correct text", "The 'Confirm Clear Cart for All Users' Popup displayed the correct text");
+		}
+
+		[StepDefinition(@"In the Clear Cart for All Users Popup I click the Continue button")]
+		public void GivenInTheClearCartForAllUsersPopupIClickTheContinueButton()
+		{
+			Report.IsTrue(new StudioSupplierManager().ClickContinueInConfirmClearCartForAllUsersPopup(), "Failed to click the Continue button in 'Confirm Clear Cart for All Users' Popup", "Successfully clicked the Continue button in 'Confirm Clear Cart for All Users' Popup");
+		}
+
+		[StepDefinition(@"In the Clear Shopping Cart Popup I enter the following UserID: (.*), Password: (.*), TFS Ticket Number: (.*), Support Ticket Number: (.*) then I click Continue")]
+		public void GivenInTheClearShoppingCartPopupIEnterTheFollowingUserIDAPasswordATFSTicketNumberASupportTicketNumberAThenIClickContinue(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
+		{
+			Report.IsTrue(new StudioSupplierManager().EnterInformationInClearShoppingCartPopup(userID, password, tfsTicketNumber, supportTicketNumber), "Failed to enter information in 'Clear Shopping Cart' Popup", "Successfully entered information in 'Clear Shopping Cart' Popup");
+			Report.IsTrue(new StudioSupplierManager().ClickContinueInClearShoppingCartPopup(), "Failed to click Continue in 'Clear Shopping Cart' Popup", "Successfully clicked Continue 'Clear Shopping Cart' Popup");
+			Delay.Seconds(10);
+		}
+
+		[StepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
+		public void GivenInTheResultsClearShoppingCartForAllUsersPopupIConfirmTheCorrectTextIsDisplayed()
+		{
+			Report.IsTrue(new StudioSupplierManager().CheckTextInResultsClearShoppingCartForAllUsersPopup(), "The 'Results Clear Shopping Cart for All Users' Popup did not display the correct text", "The 'Results Clear Shopping Cart for All Users' Popup displayed the correct text");
+		}
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
-		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
+		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs, Table retailerTable)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			string ID = ProductDetails.Id;
 			string status = "Accepted";
 			Report.Info("Searching for id: " + ID + " and status: " + status);
-			
+
 			int counter = 0;
 
 			bool found = false;
@@ -3716,7 +4069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				counter++;
 			}
-			if(found==true)
+			if (found == true)
 			{
 				new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(productSavedAs, retailerTable);
 				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");
@@ -3727,10 +4080,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-
-	
-
-
 
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
@@ -3744,6 +4093,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Column not found: " + columnName);
 			}
+
+		}
+
+
+		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var clients = studioSHAManagerObject.FindClientsForProduct(id);
+			if (clients != null)
+			{
+				var key = id + "'s Clients";
+				Context.AddToContext(key, clients);
+			}
+
+			Report.IsTrue(clients != null, "Failed to find product clients", "Successfully found product clients");
 		}
 
 

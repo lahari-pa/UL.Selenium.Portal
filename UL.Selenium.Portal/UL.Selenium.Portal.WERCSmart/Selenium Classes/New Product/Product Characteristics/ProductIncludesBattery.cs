@@ -27,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					{
 						if (item.Selected)
 						{
-							string selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							string selectedText = item.FindElement(By.XPath("../..//label/span"), 2).Text;
 							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
@@ -48,10 +48,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 				if (lbl != null)
 				{
-					IWebElement thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					IWebElement thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text.Contains(value));
 					if (thisLabel != null)
 					{
-						IWebElement thisInput = thisLabel.FindElement(By.XPath(".//../input"));
+						IWebElement thisInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 						if (!thisInput.Selected)
 						{
 							thisInput.Click();
@@ -83,7 +83,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get
 			{
 				var listOfBatteries = new List<Battery>();
-				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"), 2);
+
+				if (thisTable == null)
+				{
+					return null;
+				}
+
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//tbody//tr"));
 				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
@@ -92,17 +98,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("required")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
-					string batteryType = thisRow.FindElement(By.XPath(".//td[" + batteryTypeIndex.ToString() + "]//selected")).SelectedOption();
-					string manufacturer = thisRow.FindElement(By.XPath(".//td[" + manufacturerIndex.ToString() + "]")).Text;
-					int numberPerPackage = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + perPackageIndex.ToString() + "]")).Text);
-					int requiredToRun = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + batteriesRequiredIndex.ToString() + "]")).Text);
+					string batteryType = thisRow.FindElement(By.XPath(".//td[" + batteryTypeIndex.ToString() + "]//selected"), 2).SelectedOption();
+					string manufacturer = thisRow.FindElement(By.XPath(".//td[" + manufacturerIndex.ToString() + "]"), 2).Text;
+					int numberPerPackage = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + perPackageIndex.ToString() + "]"), 2).Text);
+					int requiredToRun = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + batteriesRequiredIndex.ToString() + "]"), 2).Text);
 					listOfBatteries.Add(new Battery() { BatteryType = batteryType, Manufacturer = manufacturer, NumberPerPackage = numberPerPackage, RequiredToRun = requiredToRun });
 				}
 				return listOfBatteries;
 			}
 			set
 			{
-				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"), 2);
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 				int manufacturerIndex = th.FirstOrDefault(x => x.Value == "Manufacturer").Key;
@@ -111,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				int batteryCount = 1;
 				foreach (Battery thisBattery in value)
 				{
-					IWebElement addRowButton = this.containerElement.FindElements(By.XPath(".//button")).FirstOrDefault(x => x.Text.Contains("Add Row"));
+					IWebElement addRowButton = this.containerElement.FindElements(By.XPath(".//button"), 2).FirstOrDefault(x => x.Text.Contains("Add Row"));
 					if (addRowButton != null)
 					{
 						addRowButton.Click();
@@ -166,9 +172,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					{
 						throw new Exception("Manufacturer drop down could not be found");
 					}
-					IWebElement perPackage = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath(".//td[" + perPackageIndex + "]//input"));
+					IWebElement perPackage = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath(".//td[" + perPackageIndex + "]//input"), 2);
 					perPackage.TryEnterText(thisBattery.NumberPerPackage.ToString());
-					IWebElement batteriesRequired = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath(".//td[" + batteriesRequiredIndex + "]//input"));
+					IWebElement batteriesRequired = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath(".//td[" + batteriesRequiredIndex + "]//input"), 2);
 					batteriesRequired.TryEnterText(thisBattery.RequiredToRun.ToString());
 					batteryCount++;
 				}
@@ -177,7 +183,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		public void DeleteEmptyBatteryRows()
 		{
-			IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+			IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"), 2);
+			
+			if (thisTable == null)
+			{
+				return;
+			}
+
 			List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 			int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 			int removeIndex = th.FirstOrDefault(x => x.Value == "Remove").Key;
@@ -194,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					IEnumerable<IWebElement> unselectedManufacturerTypes = listOfManufacturerTypes.Where(x => x.SelectedOption() == "Choose...");
 					if (unselectedManufacturerTypes.Count() > 0)
 					{
-						removeButton = unselectedManufacturerTypes.FirstOrDefault().FindElement(By.XPath("../..//td[" + removeIndex.ToString() + "]//a"));
+						removeButton = unselectedManufacturerTypes.FirstOrDefault().FindElement(By.XPath("../..//td[" + removeIndex.ToString() + "]//a"), 2);
 						removeButton.Click();
 						Delay.Seconds(3);
 						modeldialog.ClickButton("YES");

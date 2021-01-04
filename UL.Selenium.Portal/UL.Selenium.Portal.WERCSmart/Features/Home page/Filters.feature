@@ -53,7 +53,7 @@ Scenario: [56829] More Filters
 	Given I confirm the product exists with Product ID: Kit_56829_ID and Name: Kit Product 56829
 	Given I enter combinations of More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
 		| Filter              | Match               |
-		| UPC                 | %Kit_56829_UPC%         |
+		| UPC                 | %Kit_56829_UPC%     |
 		| Brand               | TestBrand           |
 		| Retailer            | Wal-Mart/SAM'S CLUB |
 		| Additional Programs | Kit Registrations   |
@@ -63,12 +63,12 @@ Scenario: [56829] More Filters
 		| Brand               | TestBrand              |
 		| Retailer            | Wal-Mart/SAM'S CLUB    |
 		| Additional Programs | Kit Registrations      |
-	Given I click More Filters in the products grid
-	Then the 'More Filters' options are not displayed
-	Given I click More Filters in the products grid
-	Then the 'More Filters' options are displayed
-	Given I click More Filters in the products grid
-	Then the 'More Filters' options are not displayed
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are not displayed
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are displayed
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are not displayed
 
 # Assigned to Amanda Coutant
 # Created by Amanda Coutant
@@ -81,3 +81,6 @@ Scenario: [68413] More Filters - Retailer
 	And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
 	And I Select the check box next to Show Archived Retailers
 	And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
+
+
+

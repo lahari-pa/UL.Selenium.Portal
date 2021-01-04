@@ -326,13 +326,12 @@ Given I set the Is this product intended to be rinsed off after use? option to: 
 
 Then the question: Refer to your Product Label. Select the options that appear on the label. is displayed at position: 8
 
+#Remove two options according to ticket 145533
 And The following options should be displayed for section: Refer to your Product Label. Select the options that appear on the label.
 | Option                                      |
 | Drug Facts Panel                            |
 | Supplement Facts Panel                      |
 | Nutrition Facts Panel                       |
-| Active Ingredient Panel                     |
-| An Active Ingredient is listed on the Panel |
 | None of the Above                           |
 
 Given I click continue
@@ -565,44 +564,47 @@ Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 Then the question: What is the CVS Store Brand associated to this product? is displayed at position: 1
 
 And The following options should be displayed for section: What is the CVS Store Brand associated to this product?
-| Option                                                                                                   |
-| Beauty 360 (CVS Pharmacy)                                                                                |
-| Blade                                                                                                    |
-| Caliber                                                                                                  |
-| Cottondale                                                                                               |
-| CVS Batteries                                                                                            |
-| CVS Health (CVS Pharmacy)                                                                                |
-| DVX                                                                                                      |
-| Essence Of Beauty                                                                                        |
-| GE Abound                                                                                                |
-| GE Lighting - PL                                                                                         |
-| Gold Emblem                                                                                              |
-| Gran Legacy                                                                                              |
-| Hawaiian Traditions                                                                                      |
-| House to Home                                                                                            |
-| Island Accents                                                                                           |
-| JT Boots                                                                                                 |
-| Just The Basics                                                                                          |
-| Live Better                                                                                              |
-| Lux Flavors                                                                                              |
-| Merry Brite                                                                                              |
-| Non-Brand with CVS Distribution Statement                                                                |
-| Nuance Salma Hayek                                                                                       |
-| Pa'Ina                                                                                                   |
-| Pet Central                                                                                              |
-| Poparazzi                                                                                                |
-| Radiance Base                                                                                            |
-| Radiance Platinum                                                                                        |
-| Red And Pink                                                                                             |
-| Rosebrook                                                                                                |
-| Santa's Treats                                                                                           |
-| Skin + Pharmacy                                                                                          |
-| Spooky Village                                                                                           |
-| Style Essentials                                                                                         |
-| Total Home                                                                                               |
-| Vida Mia                                                                                                 |
-| ZX                                                                                                       |
-| Other                                                                                                    |
+| Option                                             |
+| Beauty 360 (CVS Pharmacy)                          |
+| Blade                                              |
+| Caliber                                            |
+| Cottondale                                         |
+| CVS Batteries                                      |
+| CVS Health (CVS Pharmacy)                          |
+| DVX                                                |
+| Essence Of Beauty                                  |
+| GE Abound                                          |
+| GE Lighting - PL                                   |
+| Gold Emblem                                        |
+| Goodline                                           |
+| Gran Legacy                                        |
+| GSQ by Glamsquad                                   |
+| Hawaiian Traditions                                |
+| House to Home                                      |
+| Island Accents                                     |
+| JT Boots                                           |
+| Just The Basics                                    |
+| Live Better                                        |
+| Lux Flavors                                        |
+| Merry Brite                                        |
+| Non-Brand with CVS Distribution Statement          |
+| Nuance Salma Hayek                                 |
+| Pa'Ina                                             |
+| Pet Central                                        |
+| Poparazzi (All Other Subcategories besides "Nail") |
+| Poparazzi ("Nail" Subcategory Only)                |
+| Radiance Base                                      |
+| Radiance Platinum                                  |
+| Red And Pink                                       |
+| Rosebrook                                          |
+| Santa's Treats                                     |
+| Skin + Pharmacy                                    |
+| Spooky Village                                     |
+| Style Essentials                                   |
+| Total Home                                         |
+| Vida Mia                                           |
+| ZX                                                 |
+| Other                                              |
 
 Given I click continue
 

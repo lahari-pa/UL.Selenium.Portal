@@ -390,7 +390,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) - 
 	And I call Shared Step (Login to WERCSmart - Premium Account)
 	#Should be able to remove the wait but check first
 	Then I wait for 30 seconds
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button
@@ -1645,7 +1645,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
-	And I unselect option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I unselect the option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click Save in The Product Page
 	Then I Wait for a modal popup to appear
@@ -1675,8 +1675,140 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given I navigate to the landing page
 
 
-	Scenario: [cvs] CVSGardenTESTQS
+	Scenario: [cvs] CVSPharmTESTQS
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
-	Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSLawnGardenExcelFile and check that is shows the expected product saved as: CVSLawnGardenProduct1
+	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
+
+
+	Scenario: [DATATIERGETCHECK] Tier check test
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHBExcelFile and check that is shows the expected product saved as: CVSHBProduct1
+
+	Scenario: [KITPDFTEST] Debug scenario for kit pdf
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I save the product ID: 1802471 to a context under type 'ProductInformation' as: TestCase73949
+	Then I save the product ID: 1802381 to a context under type 'ProductInformation' as: TestCase73949PROD1
+	Then I save the product ID: 1802431 to a context under type 'ProductInformation' as: TestCase73949PROD2
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
+	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
+	And I Confirm you see the Document List pop up
+	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
+	And In the Document List popup I Double click on the filename for product saved as: TestCase73949
+	Then I confirm that a file is produced called GetDocument.pdf and save as savedas73949PDF
+	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
+	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice for file: savedas73949PDF
+	Then I Check that the file saved as: savedas73949PDF contains the text 'NGHS / English' twice as well as the product codes saved as: TestCase73949PROD1 and TestCase73949PROD2
+	#Then I should see a new tabbed document whose URL contains DocumentID
+	#Then I Delete the file with name: TempPDF.pdf from the downloads folde
+	Then I delete the file saved as savedas73949PDF
+	And I Click Cancel on the Document List window pop up
+
+	Scenario: [KITPDFTESTFRANCIS] Debug scenario for kit Francis pdf
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I save the product ID: 1802577 to a context under type 'ProductInformation' as: TestCase73949
+	Then I save the product ID: 1802488 to a context under type 'ProductInformation' as: TestCase73949PROD1
+	Then I save the product ID: 1802537 to a context under type 'ProductInformation' as: TestCase73949PROD2
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
+	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
+	And I Confirm you see the Document List pop up
+	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
+	And In the Document List popup I Double click on the filename for product saved as: TestCase73949
+	Then I confirm that a file is produced called GetDocument.pdf and save as savedas73949PDF
+
+	Then I Check that the file saved as: savedas73949PDF contains the product codes saved as: TestCase73949PROD1 and TestCase73949PROD2
+	Then I Check that the file saved as: savedas73949PDF contains the text 'Canada / English' twice
+	Then I Check that the file saved as: savedas73949PDF contains the text 'Canada / Français' twice
+
+	Then I delete the file saved as savedas73949PDF
+	And I Click Cancel on the Document List window pop up
+
+	Scenario: [KITTESTENTRY] Kit Id select issue debug
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+	Then I save the product ID: 1827869 to a context under type 'ProductInformation' as: Kit1
+	Then I save the product ID: 1827913 to a context under type 'ProductInformation' as: Kit2
+
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
+	Then I save the product information as: TestCase63521
+	Given I call Shared Step 63460 (Additional Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Create the Kit Page
+	Given In the Create the kit page I search for and select: saved as Kit1
+	Given In the Create the kit page I search for and select: saved as Kit2
+	Then in the Create the Kit page I click Continue
+	And I should see the Transportation Details 1 Page
+
+
+	Scenario: [UpdatePopupDebug] Update Popup Debug scenario
+
+	
+	Given I login into the WERCSmart Portal - Administrator Role
+	Then I save the product ID: 1828816 to a context under type 'ProductInformation' as: TestCase84511
+	
+	Given I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Completed
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Data
+	Then I wait for the Summary Screen to Load
+	Then In the Summary screen, I click the Edit Product Button
+
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Continue	
+	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+	And I should see the The Product Page
+	Then I click Save in The Product Page
+	#Scenario: Test
+	#Given I save to context name: TestCase84511 and value: 1524214
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
+	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+	And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                           |
+		| saved as TestCase84511 | true   | Recertification of Product by WERCSmart Customer |
+	And I Close the Product Recertification History pop up
+	#Scenario: Test
+	#Given I save to context name: TestCase84511 and value: 1524214
+	Given I navigate to the landing page
+	Given I login into the WERCSmart Portal - Administrator Role
+	Given I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Needs Your Attention
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Required
+	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+	And I should see the The Product Page
+	And In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
+	And I set the Lead option to: Yes
+	And I set the Mercury option to: Yes
+	And I set the Silver option to: Yes
+	Then I click Save in The Product Page
+	And In the New Product page I click tab: Review and Submit
+	And I click the page heading: Data Acceptance
+	And In the Data Acceptance page I click on the Accept button
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	And I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Assessment in Progress
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
+	#And I Confirm your product is shown in the Recertification status without the red recertification font color
+	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+	And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                           |
+		| saved as TestCase84511 | false  | Recertification of Product by WERCSmart Customer |
+	And I Close the Product Recertification History pop up
+
+
+
+

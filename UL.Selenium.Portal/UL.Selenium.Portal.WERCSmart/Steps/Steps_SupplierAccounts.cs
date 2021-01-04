@@ -12,6 +12,7 @@ using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -25,8 +26,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+
+
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Automation_ProductsAccount", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+						//subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+			//	"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
+
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
 
@@ -46,19 +53,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			subEnrollTable.AddRow("Up to 6000 Product(s)", "Up to 6000 Product(s)", "Up to 6000 Product(s)", "Standard", "Bronze");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
 			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+			//myPay.ThenIOpenTheEditAddressForm();
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state:"New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
-			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("6000", "6000", "6000");
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -85,7 +101,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
 
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
+
 			//My Brands
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+
 			myAccount.ClickTabMyLibrary("My Brands");
 			myAccount.ClickAddNewMyLibrary("My Brands");
 			myBrand.EnterBrandNameExpandedRow("TestBrand");
@@ -95,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Supplier/Vendor id 
 			myHome.ClickItemInNavigationPanel("Retail Partners");
 			myRetailPartner.SelectRetailer("Wal-Mart/SAM'S CLUB");
+			
 			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
 			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
 			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
@@ -103,6 +128,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var brandTable = new Table("Supplier ID", "Company or Brand Name");
 			brandTable.AddRow("123456", "TestBrand");
 			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Sears/K-Mart");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable2 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable2.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable2);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("O'Reilly");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable3 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable3.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable3);
 
 			//create a product for Walmart data tier 4.2 
 			myProductsetup.CreateProductConditionerAndTakeToSubmitted("product1", "Conditioner");
@@ -122,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
 			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
 			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.SetDataConsentTier("Tier 4.1", "on");
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
@@ -365,6 +412,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -464,6 +520,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -686,10 +749,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
+
+
+
+
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Only", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Partial_Stewardship_Only", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Partial_Stewardship_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -714,7 +781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_PremiumSubscription", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_PremiumSubscription", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -741,6 +808,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -872,6 +946,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -985,6 +1068,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -1068,9 +1159,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
+				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
+				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
+
+				TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email);
+				TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password);
+				TestUsers.RefreshUsers();
+				var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();				
+				var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
+				Report.IsTrue(foundUser.Username == account.Email, "Not able to update username", "Successfully updated username");				
+				string branch = TReVorSettings.SoftwareBranch;				
+				user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
+				string userpass = user.Password;
+				Report.IsTrue(userpass == account.Password, "Not able to update password", "Successfully updated password");
 			}
+
+
+
+
 			else
 			{
 				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
@@ -1112,19 +1218,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			subEnrollTable.AddRow("Up to 6000 Product(s)", "Up to 6000 Product(s)", "Up to 6000 Product(s)", "Standard", "Bronze");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
 			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
-			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("6000", "6000", "6000");
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -1168,7 +1280,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
 			var brandTable = new Table("Supplier ID", "Company or Brand Name");
 			brandTable.AddRow("123456", "TestBrand");
-			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);		
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Sears/K-Mart");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable2 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable2.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable2);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("O'Reilly");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable3 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable3.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable3);
 
 			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");

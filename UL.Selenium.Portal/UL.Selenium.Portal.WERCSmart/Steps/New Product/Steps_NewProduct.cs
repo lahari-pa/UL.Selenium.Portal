@@ -130,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
 		//		eg. 'Product name', 'Type of product', pH...
 
-		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
 			try
@@ -148,6 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure(ex.Message);
 				throw;
 			}
+
 		}
 
 		[StepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
@@ -183,6 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(10);
 			//this.GivenIShouldSeeXPage(section);
 		}
 
@@ -196,9 +198,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickContinue()
 		{
 			int i = 0;
-			while(i<5)
+			while (i < 5)
 			{
-				if(NewProduct.ClickContinue())
+				if (NewProduct.ClickContinue())
 				{
 					Report.Success("Clicked 'Continue' successfully");
 					Report.Screenshot();
@@ -288,7 +290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void NotErrorMessageSpecific(string message)
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
-			Report.IsTrue(!errors.Contains(message),"Error message was showing when it wasn't expected to! Error: " + message,"As expected, the error message was not showing. Error: " + message);
+			Report.IsTrue(!errors.Contains(message), "Error message was showing when it wasn't expected to! Error: " + message, "As expected, the error message was not showing. Error: " + message);
 		}
 
 		[StepDefinition(@"in page (.*) I should see no errors")]
@@ -1062,6 +1064,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		[StepDefinition(@"The following checkboxes (should|should not) be displayed for section: (.*)")]
+		public void CheckCheboxesInSectionAndOrder(string shouldOrNot, string section, Table expected)
+		{
+			var expectedCheckboxes = new List<string>();
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedCheckboxes.Add(x["Checkbox"]));
+			List<string> checkboxesShowing = new NewProduct().CheckboxesInSection(section);
+
+			if (shouldOrNot == "should")
+			{
+				Report.IsTrue(expectedCheckboxes.All(x => checkboxesShowing.Contains(x)),
+					"The actual checkboxes for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", checkboxesShowing) + ". Expected: " + string.Join(", ", checkboxesShowing),
+					"The actual checkboxes for section: " + section + " were as expected: " + string.Join(", ", checkboxesShowing));
+			}
+			else
+			{
+				Report.IsTrue(!expectedCheckboxes.Any(x => checkboxesShowing.Contains(x)),
+					"The actual checkboxes for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", checkboxesShowing) + ". Should not be showing: " + string.Join(", ", checkboxesShowing),
+					"The actual checkboxes for section: " + section + " were as expected: " + string.Join(", ", checkboxesShowing));
+			}
+
+		}
+
 		[StepDefinition(@"I click the 'Add UPC' button")]
 		public void ThenIClickTheAddUpcButton()
 		{
@@ -1236,7 +1260,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 				Delay.Seconds(1);
 			}
+		}
 
+		[StepDefinition(@"I set the (.*) field to exactly match: (.*)")]
+		[StepDefinition(@"I set the (.*) option to exactly match: (.*)")]
+		public void SetTheSectionOptionToExactlyMatch(string section, string option)
+		{
+			var thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			if (option.StartsWith("UPC"))
+			{
+				var value = Context.GetFromContext(option)?.ToString();
+				if (value == null)
+				{
+					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
+				}
+				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SetOptionInSectionToExactlyMatch(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
 		}
 
 		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
@@ -1333,7 +1386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
-		
+
 
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)
@@ -1836,6 +1889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Screenshot();
 				Report.Info("Selecting the first option for the required field");
 				string option = selNewProduct.GetAllOptionsForSection(section).First();
+
 				selNewProduct.SetOptionInSection(section, option);
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(),
@@ -1890,15 +1944,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
-				var productToAddPI = (ProductInformation)Context
-					.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				
 
+				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
 					"Failed to add product: " + productToAddPI.Id + " to kit.",
 					"Successfully added product: " + productToAddPI.Id + " to kit.");
 			}
 			else
 			{
+				Report.Info($"Attempting to add item to Kit.");
 				Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
 					"Failed to add product: " + productToAdd + " to kit.",
 					"Successfully added product: " + productToAdd + " to kit.");
@@ -2285,6 +2341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Message: '" + alert + "' is displayed as expected");
 		}
 
+
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
@@ -2430,16 +2487,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Section '{section}' colour was red as expected");
 		}
 
-		[StepDefinition(@"I should see following statement: (.*)")]
-		public void SectionStatement(string option)
+		[StepDefinition(@"I (should|should not) see following statement: (.*)")]
+		public void SectionStatement(string shouldOrShouldNot, string option)
 		{
 			Report.Info("Checking statement");
 			var selNewProduct = new NewProduct();
 			List<string> found = selNewProduct.GetDisplayedSections();
 
-			Report.IsTrue(found.Contains(option),
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!found.Contains(option),
+				"statement was not as expected! Not expected: " + option + ", but found: " + found + "!",
+				"statement was not showing: " + option + ", as expected!");
+			}
+
 		}
 
 		[StepDefinition(@"I click on the Notice of Adoption Article link")]
@@ -2514,13 +2581,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
 		}
 
-		[StepDefinition(@"I confirm that retailer ""(.*)"" is present under the 'Destination Retailers' column in the UPC table")]
-		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer)
+		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
+		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
-			Report.IsTrue(displayedRetailers.Contains(retailer),
-				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
-				$@"Retailer ""{retailer}"" is present under Destination Retailers");
+
+			if (isOrIsNot.ToLower() == "is not")
+			{
+				Report.IsTrue(!displayedRetailers.Contains(retailer),
+				$@"Retailer ""{retailer}"" is present under Destination Retailers",
+				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}");
+			}
+			else
+			{
+				Report.IsTrue(displayedRetailers.Contains(retailer),
+					$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
+					$@"Retailer ""{retailer}"" is present under Destination Retailers");
+			}
 		}
 
 		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
@@ -2613,6 +2690,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 		}
 
 		//Item Description
@@ -2897,7 +2975,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			ReportSettings.UseSubSteps = true;
 			Report.Info("Selecting No in the Restrict Use section");
 			var NewProductObject = new NewProduct();
-			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" – Formula is searchable in WERCSmart and does not require an access code") , "Failed to select restriction option", "Successfully selected restriction option");
+			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" – Formula is searchable in WERCSmart and does not require an access code"), "Failed to select restriction option", "Successfully selected restriction option");
 			Report.StartStep("in the Restrict Use page I click continue");
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
@@ -2979,12 +3057,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
 		}
 
-		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		[StepDefinition(@"I unselect the option: (.*) under section: (.*) and subsection: (.*)")]
 		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
 				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
 				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
+		}
+
+		[StepDefinition(@"I unselect option: (.*) under section: (.*)")]
+		public void ForTheOptionUnselect(string option, string section)
+		{
+			Report.IsTrue(new NewProduct().UnsetOptionInSection(section.Trim(), option.Trim()),
+				$"Failed to unset the input to: '{option}' in section: '{section}'",
+				$"Successfully unset the input to: '{option}' in section: '{section}'");
 		}
 
 		[Then(@"I check if alert message displays the following text: (.*)")]
@@ -2994,22 +3080,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
 
-		[StepDefinition(@"In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected")]
-		public void InAdditionalProductInformationPageEnsureOnlySoldInCanada()
+		[StepDefinition(@"I check the options in the dropdown menus for the following sections")]
+		public void ThenICheckTheOptionsInTheDropdownMenusForTheFollowingSections(Table table)
 		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();		
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
+		}
 
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Additional Product Information with the following text: (.*)")]
+		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckForPNKSectionTitleWithText(shouldOrShouldNot, titleText);
+		}
 
+		[StepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
+		public void ThenInPagePesticideDetails_StateRegistrationPageIShouldSeeNoError()
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration(), "Failed to display no error", "Successfully displayed no errors");
+		}
+
+
+		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterExpirationDateForStatePesticideReigstration(date, state), "Failed to enter a date", "Successfully entered a date");
+		}
+
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
+		}
+
+		[StepDefinition(@"I set first VOC option to: 'Yes'")]
+		public void GivenISetFirstVOCOptionToYes1(string yesOrNo)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			ingredientsObject.SetFirstVOCOption(yesOrNo);
 		}
 
 		[StepDefinition(@"In the Regulatory Documents to Prodivde page, I enter the value: (.*) into the WHMIS SDS Docmument Date Field")]
@@ -3018,6 +3130,184 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().EnterWHMISSDSDocumentDate(value), "Text: " + value + " was not successfully inputted into the field!", "Text: " + value + " was successfully inputted into the field!");
 
 		}
+
+		[StepDefinition(@"I check that the input field with label: (.*) has the following text: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingText(string fieldName, string text)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldText(fieldName, text), "The input field text was not as expected", "The input field text was as expected");
+		}
+
+		[StepDefinition(@"I check that the input field with label: (.*) has the following placeholder: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingPlaceholder(string fieldName, string placeholder)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldPlaceholder(fieldName, placeholder), "The input field placeholder was not as expected", "The input field placeholder was as expected");
+		}
+
+
+		[StepDefinition(@"I confirm the Regulatory Information 3 page contains the statement: (.*)")]
+		public void IConfirmRegulatoryInformation3PageContainsStatement(string text)
+		{
+			var newProductPage = new NewProduct();
+			string statementtextfound = newProductPage.GetRegulatoryInformation3Statement();
+			Report.Info($"The expected Text was {text}");
+			Report.Info($"The found text was {statementtextfound}");
+			Report.IsTrue(statementtextfound == text, "The text found was not a match", "The text found matched the expected text");
+		}
+
+		[StepDefinition(@"I check the uploaded file name of document type: (.*) and for control label: (.*) matches: (.*)")]
+		public void CheckUploadedFileNameForTypeAndLabel(string type, string label, string filename)
+		{
+
+			Report.IsTrue(new NewProduct().CheckFileNameForSectionAndType(type, label, filename), "File name did not match the expected", "The file name matched");
+
+		}
+
+		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet \(SDS\), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
+		{
+			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
+
+		}
+
+		[StepDefinition(@"I confirm that the the option: (.*) (.*) checked for the following section: (.*)")]
+		public void ThenIConfirmThatTheTheOptionCheckedForTheFollowingSection(string option, string isOrIsNot, string section)
+		{
+			var newProductPage = new NewProduct();
+
+			if (isOrIsNot.ToLower() == "is")
+			{
+				Report.IsTrue(newProductPage.ConfirmOptionIsCheckedInSection(option, section), "The option " + option + " was not checked", "The option " + option + " was checked");
+			}
+			else
+			{
+				Report.IsTrue(!newProductPage.ConfirmOptionIsCheckedInSection(option, section), "The option " + option + " was checked", "The option " + option + " was not checked");
+			}
+		}
+
+		[StepDefinition(@"I select the case UPC dropdown arrow to (expand|collapse) the UPC saved as: (.*)")]
+		public void ThenISelectTheCaseUPCDropdownArrowForUPCSavedAsUPC(string expandOrCollapse, string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(savedAs, expandOrCollapse), "Failed to select dropdown arrow with the UPC: " + savedAs, "Succesfully selected dropdown arrow with the UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm the correct UPC: saved as (.*) is displayed in the UPC Number textfield")]
+		public void ThenIConfirmTheCorrectUPCSavedAsUPCIsDisplayedInTheUPCNumberTextfield(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmUPCNumberIsDisplayedInUPCNumberField(savedAs), "Failed to confirm UPC Number field contains UPC: " + savedAs, "Successfully confirmed UPC Number field contains UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm Individual UPC field does not display any options")]
+		public void ThenIConfirmIndividualUPCFieldDoesNotDisplayAnyOptions()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.CheckForOptionsInIndividualUPCField(), "Failed to confirm the Individual UPC field has no options", "Successfully confirmed the Individual UPC field has no options");
+		}
+
+		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is shown in the Universal Product Code \(UPC\) Page")]
+		public void ThenIConfirmTheQuantityFieldIsShownInTheUniversalProductCodeUPCPage(string field)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmFieldExists(field), "Failed to confirm " + field + " field exists", "Successfully confirmed the " + field + " exists");
+		}
+
+
+		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is below the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field")]
+		public void ThenIConfirmTheContainerTypeFieldIsBelowTheUPCNumberField(string lowerField, string upperField)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmLowerFieldIsBelowUpperField(lowerField, upperField), "Failed to confirm " + lowerField + " field is below " + upperField + " field", "Successfully confirmed the " + lowerField + " field is below " + upperField + " field");
+		}
+
+
+		[StepDefinition(@"I confirm that the truck icon is displaying next to the case UPC: saved as (.*)")]
+		public void ThenIConfirmThatTheTruckIconIsDisplayingNextToTheCaseUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmTruckIconIsDisplayingNextToUPC(savedAs), "Failed to confirm truck icon is displayd with the UPC: " + savedAs, "Successfuly confirmed truck icon is displayd with the UPC: " + savedAs);
+		}
+
+
+		[StepDefinition(@"I check if the case UPC details are collapsed for UPC: saved as (.*)")]
+		public void ThenICheckIfTheCaseUPCDetailsAreCollapsedForUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmCaseUPCDetailsAreCollapsedForUPC(savedAs), "Failed to confirm case UPC details are collapsed with the UPC: " + savedAs, "Succesfully confirmed case UPC details are collapsed with the UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm the case dropdown with the following UPC: saved as (.*) (should|should not) be available for selection")]
+		public void ThenIConfirmTheCaseDropdownWithTheFollowingUPCSavedAsUPCIsAvailableForSelection(string savedAs, string shouldOrShouldNot)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+
+			if (shouldOrShouldNot == "should")
+			{
+				Report.IsTrue(newProductPage.ConfirmCaseDropDownWithUPCIsAvailableForSelection(savedAs), "Failed to confirm that the dropdown with the UPC: " + savedAs + " is available for selection", "Confirmed that the dropdown with the UPC: " + savedAs + " is available for selection");
+			}
+			else
+			{
+				Report.IsTrue(!newProductPage.ConfirmCaseDropDownWithUPCIsAvailableForSelection(savedAs), "Failed to confirm that the dropdown with the UPC: " + savedAs + " is not available for selection", "Confirmed that the dropdown with the UPC: " + savedAs + " is not available for selection");
+			}
+		}
+
+		[StepDefinition(@"I confirm a case dropdown contains the following UPC: saved as (.*)")]
+		public void ThenIConfirmACaseDropdownContainsTheFollowingUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmCaseDropDownContainsUPC(savedAs), "Failed to confirm that the dropdown contained the UPC: " + savedAs, "Confirmed that the dropdown contained the UPC: " + savedAs);
+		}
+
+
+		[StepDefinition(@"I check for a truck icon for UPC: saved as (.*)")]
+		public void ThenICheckForATruckIconForUPCSavedAsUPC(string savedAs)
+		{
+			var UPCPage = new UPC();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: (.*)")]
+		public void GivenIConfirmTheConsentToTierDataShowsTheAnswerAccept(string answer)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmTierDataShowsCorrectAnswer(answer), "Failed to confirm the following answer: " + answer, "Successfully confirmed the following answer: " + answer);
+		}
+
+		[StepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
+		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
+		}
+
+		[StepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
+		public void InTheOptionalReportsAndDocumentsPageFooterTextContains(string expectedText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmOptionalReportsFooterContains(expectedText), "Failed to find the text", "The text was found");
+
+		}
+
+		[StepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
+		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		{
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+		}
+
 
 
 	}
@@ -3053,3 +3343,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//	}
 	//}
 }
+
+

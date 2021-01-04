@@ -78,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							// No Component name was specified, so we just take the first value with a matching CAS Number!
 							clickResult = matchingCasResults.FirstOrDefault();
 							Report.Info("Clicking result in smart search with CAS number: " +
-										clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+										clickResult.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text);
 						}
 						else
 						{
@@ -92,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 								// No match was found, so just take the first entry!
 								clickResult = matchingCasResults.FirstOrDefault();
 								Report.Info("Clicking result in smart search with CAS number: " +
-											clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+											clickResult.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text);
 							}
 							else
 							{
@@ -174,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					// If access code validation use default 'WPS1434087'
 					var validationModal = new ModalDialog();
-					if(validationModal.WaitForContainerToBeVisible(5))
+					if (validationModal.WaitForContainerToBeVisible(5))
 					{
 						bool test1 = validationModal.EnterValidation("WPS1434087");
 						bool test2 = validationModal.Click_Validate();
@@ -225,6 +225,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						publicName.Select(ingredient.PublicName);
 					}
 
+					if (!string.IsNullOrEmpty(ingredient.GenericName))
+					{
+						IWebElement genericName = matchingrow.FindElement(By.XPath(".//td[@class='newcol']//input[@data-bind='value: GenericName.field']"), 2);
+						genericName.Select(ingredient.GenericName);
+					}
+
 					return success;
 				}
 
@@ -249,11 +255,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Percent = ingredient.Percent,
 				PublicallyDisclosed = ingredient.PublicallyDisclosed,
 				TradeSecret = ingredient.TradeSecret,
-				PublicName = ingredient.PublicName
+				PublicName = ingredient.PublicName,
+				GenericName = ingredient.GenericName
 			};
 			this.AddIngredient(ing);
 
-			pass = this.ISelectIngredientType(ingredient.ComponentName, ingredient.IngredientType);
+			string component;
+			string componentType;
+
+			if (ingredient.ComponentName == "")
+			{
+				component = ingredient.CASNumber;
+				componentType = @"CASNumber";
+
+			}
+			else
+			{
+				component = ingredient.ComponentName;
+				componentType = @"ComponentName";
+			}
+
+			pass = this.ISelectIngredientType(component, ingredient.IngredientType, componentType);
 
 			if (!pass)
 			{
@@ -261,31 +283,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			var tableFunctionalPurpose = new Table("Functional Purpose");
-			string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
-			foreach (string funcPurpose in funcPurposes)
+			if (ingredient.TradeSecret)
 			{
-				pass = this.ISelectFunctionalPurpose(ingredient.ComponentName, funcPurpose.Trim());
+
+				pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
+
 				if (!pass)
 				{
-					Report.Info("Failed to set Functional Purpose");
+					Report.Info("Failed to set Generic Name");
 					return false;
 				}
+
 			}
 
-			if (ingredient.Clean)
+			if (ingredient.FunctionalPurpose.Length > 0)
 			{
-				pass = this.SelectClean(ingredient.ComponentName);
-				if (!pass)
+				var tableFunctionalPurpose = new Table("Functional Purpose");
+				string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
+				foreach (string funcPurpose in funcPurposes)
 				{
-					Report.Info("Failed to set Clean checkbox");
-					return false;
+					pass = this.ISelectFunctionalPurpose(component, funcPurpose.Trim(), componentType);
+					if (!pass)
+					{
+						Report.Info("Failed to set Functional Purpose");
+						return false;
+					}
 				}
 			}
 
 			if (ingredient.Certified)
 			{
-				pass = this.SelectCertified(ingredient.ComponentName);
+				pass = this.SelectCertified(component, componentType);
 				if (!pass)
 				{
 					Report.Info("Failed to set Certified checkbox");
@@ -341,7 +369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetIngredientPubliclyDisclosed(string chemicalName, bool checked_)
 		{
-			IWebElement publiclyDisclosedInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			IWebElement publiclyDisclosedInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"), 2);
 			if (publiclyDisclosedInput == null || !publiclyDisclosedInput.Displayed)
 			{
 				Report.Failure("The Publicly Disclosed checkbox was not displayed");
@@ -358,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetPercentageValue(string ingredient, string value)
 		{
-			IWebElement percentageInput = this.IngredientRow(ingredient).FindElement(By.XPath(".//input[@class='form-control percent-comp']"));
+			IWebElement percentageInput = this.IngredientRow(ingredient).FindElement(By.XPath(".//input[@class='form-control percent-comp']"), 2);
 			if (percentageInput == null)
 			{
 				Report.Failure("Could not find the percentage input");
@@ -371,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetIngredientTradeSecret(string chemicalName, bool checkedTrueFalse)
 		{
-			IWebElement tradeSecretInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
+			IWebElement tradeSecretInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"), 2);
 			if (tradeSecretInput == null)
 			{
 				Report.Failure("Could not find the Trade Secret checkbox");
@@ -408,7 +436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				string totalExpected = this.IngredientRowCount().ToString();
 				string pubDisExpected = total;
-				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
+				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
 				string pubDisSummaryInt = pubDisSummary.Replace("%", "");
 				double percentFoundAsDouble = Convert.ToDouble(pubDisSummaryInt);
 				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected) * 100;
@@ -437,30 +465,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				var thisIngredient = new Ingredient {
 					ComponentName =
-					thisRow.FindElement(By.XPath(".//td[@class='component-name']//div[@class='chemical-name']")).Text,
+					thisRow.FindElement(By.XPath(".//td[@class='component-name']//div[@class='chemical-name']"), 2).Text,
 					CASNumber = thisRow.FindElement(By.XPath(".//div[@class = 'cas-number']/small"), 2)?.Text,
 
 					Percent =
-					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input|.//td[@class='percent-comp']//span")).GetAttribute("value"),
+					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input|.//td[@class='percent-comp']//span"), 2).GetAttribute("value"),
 					PublicallyDisclosed =
-					thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Checked(),
+					thisRow.FindElement(By.XPath(".//td[@class='transparency']//input"), 2).Checked(),
 					TradeSecret =
-					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input|.//td[@class='trade-secret']//span")).Checked(),
+					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input|.//td[@class='trade-secret']//span"), 2).Checked(),
 					PublicName =
-					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).SelectedOption()
+					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2).SelectedOption()
 				};
 				try
 				{
-					thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled;
+					thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2).Enabled;
 				}
 				catch (Exception)
 				{
 					thisIngredient.TradeSecretEnabled = false;
 				}
 
-				thisIngredient.PublicDisclosureEnabled = thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Enabled;
+				thisIngredient.PublicDisclosureEnabled = thisRow.FindElement(By.XPath(".//td[@class='transparency']//input"), 2).Enabled;
 				thisIngredient.PublicNameEnabled =
-					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).Enabled;
+					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2).Enabled;
 				thisIngredient.Selected = thisRow.FindElement(By.XPath("./td[position()=1]/input[@type='checkbox']"), 2).Selected;
 				Ingredients.Add(thisIngredient);
 			}
@@ -804,32 +832,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				case "chemical name":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"), 2)
 						.TryClick();
 				case "cas number":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"), 2)
 						.TryClick();
 				case "percent":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'Percent')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'Percent')]"), 2)
 						.TryClick();
 				case "publicly disclosed":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PubliclyDisclosed')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PubliclyDisclosed')]"), 2)
 						.TryClick();
 				case "trade secret":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'TradeSecret')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'TradeSecret')]"), 2)
 						.TryClick();
 				case "public name":
 					return this.containerElement
 						.FindElement(By.XPath(
-							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PublicName')]"))
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PublicName')]"), 2)
 						.TryClick();
 				default:
 					throw new Exception("Please provide header title");
@@ -842,7 +870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				return this.IngredientRow(ingredient)
-					.FindElement(By.XPath(".//td[@class='inci-name']//p[@class='form-error']/span")).Text;
+					.FindElement(By.XPath(".//td[@class='inci-name']//p[@class='form-error']/span"), 2).Text;
 			}
 			catch (Exception)
 			{
@@ -859,20 +887,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ConfirmTableInputMatchByColumnTitle(string columnTitle, string expectedInput)
 		{
 			IWebElement firstRow = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2).FirstOrDefault();
-			IWebElement cell = firstRow.FindElements(By.XPath(".//td")).FirstOrDefault();
+			IWebElement cell = firstRow.FindElements(By.XPath(".//td"), 2).FirstOrDefault();
 			switch (columnTitle)
 			{
 				case "Percent":
-					cell = firstRow.FindElement(By.XPath(".//td[@class='percent-comp']"));
+					cell = firstRow.FindElement(By.XPath(".//td[@class='percent-comp']"), 2);
 					break;
 				case "Publicly Disclosed?":
-					cell = firstRow.FindElement(By.XPath(".//td[@class='transparency']"));
+					cell = firstRow.FindElement(By.XPath(".//td[@class='transparency']"), 2);
 					break;
 				case "Trade Secret?":
-					cell = firstRow.FindElement(By.XPath(".//td[@class='trade-secret']"));
+					cell = firstRow.FindElement(By.XPath(".//td[@class='trade-secret']"), 2);
 					break;
 				case "Public Name":
-					cell = firstRow.FindElement(By.XPath(".//td[@class='inci-name']"));
+					cell = firstRow.FindElement(By.XPath(".//td[@class='inci-name']"), 2);
 					break;
 				default:
 					throw new Exception("Please provide viable column names");
@@ -880,11 +908,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			switch (expectedInput)
 			{
 				case "checkbox":
-					return cell.FindElements(By.XPath(".//input[@type='checkbox']")).Count > 0;
+					return cell.FindElements(By.XPath(".//input[@type='checkbox']"), 2).Count > 0;
 				case "textbox":
-					return cell.FindElements(By.XPath(".//input[@type='text']")).Count > 0;
+					return cell.FindElements(By.XPath(".//input[@type='text']"), 2).Count > 0;
 				case "select":
-					return cell.FindElements(By.XPath(".//select")).Count > 0;
+					return cell.FindElements(By.XPath(".//select"), 2).Count > 0;
 				default:
 					throw new Exception("Please provide suitable expected input");
 			}
@@ -914,7 +942,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> GetIngredientPublicNameOptions(string chemicalName)
 		{
-			return this.IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x => x.Text).ToList();
+			return this.IngredientRow(chemicalName).FindElements(By.XPath(".//select/option"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool ConcentrationsAreEditable()
@@ -969,9 +997,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			public bool PublicallyDisclosed { get; set; } = false;
 			public bool TradeSecret { get; set; } = false;
 			public string PublicName { get; set; } = "";
+			public string GenericName { get; set; } = "";
 			public bool TradeSecretEnabled { get; set; } = false;
 			public bool PublicDisclosureEnabled { get; set; } = false;
 			public bool PublicNameEnabled { get; set; } = false;
+			public bool GenericNameEnabled { get; set; } = false;
 			public bool Selected { get; set; } = false;
 
 			public string GetDetails()
@@ -1040,10 +1070,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool ISelectIngredientType(string ingredienName, string ingredientType)
+		public bool ISelectIngredientType(string ingredientName, string ingredientType, string componentNameOrCASNumber)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
-			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
+
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath("//td//select[contains(@data-bind,'ingredientType')]"), 2);
+
 			if (ingredientTypeBox == null)
 			{
 				Report.Failure("Could not find the Ingredient Type Input Box");
@@ -1060,9 +1101,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool ISelectAllFunctionalPurpose(string ingredientName)
+		public bool ISetGenericName (string ingredientName, string ingredientType, string ingredientGenericName, string componentNameOrCASNumber)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
+
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//input[@data-bind='value: GenericName.field']"), 2);
+
+			if (ingredientTypeBox == null)
+			{
+				Report.Failure("Could not find the Generic Name Input Box");
+				return false;
+			}
+
+			if (ingredientTypeBox.TryEnterText(ingredientGenericName))
+			{
+				Report.Info($"Successfully entered Generic Name");
+				return true;
+			}
+			Report.Info($"Failed to enter Generic Name");
+			return false;
+
+		}
+
+		public bool ISelectAllFunctionalPurpose(string ingredientName, string componentNameOrCASNumber)
+		{
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
+
 			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
@@ -1094,7 +1176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
 
-				if (currentlySelectedOptionsStr.Contains("�" + option))
+				if (currentlySelectedOptionsStr.Contains("x" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");
 				}
@@ -1110,9 +1192,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool ISelectFunctionalPurpose(string ingredientName, string functionalPurpose)
+		public bool ISelectFunctionalPurpose(string ingredientName, string functionalPurpose, string componentNameOrCASNumber)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
 			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
@@ -1139,7 +1230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				selectedOptionsStr.Add(item.Text);
 			}
 
-			if (selectedOptionsStr.Contains("�" + functionalPurpose))
+			if (selectedOptionsStr.Contains("×" + functionalPurpose))
 			{
 				Report.Info($"The correct Purpose was selected.");
 			}
@@ -1151,9 +1242,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return selectedOptionSuccessfull;
 		}
 
-		public bool SelectClean(string ingredientName)
+		public bool SelectClean(string ingredientName, string componentNameOrCASNumber)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
 			IWebElement cleanCheckbox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caClean')]"), 2);
 			if (cleanCheckbox == null)
 			{
@@ -1165,9 +1265,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool SelectCertified(string ingredientName)
+		public bool SelectCertified(string ingredientName, string componentNameOrCASNumber)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
+
 			IWebElement certifiedCheckBox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caCertified')]"), 2);
 			if (certifiedCheckBox == null)
 			{
@@ -1200,5 +1310,336 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
+
+		public bool SetFirstVOCOption(string yesOrNo)
+		{
+			IWebElement option;
+			if (yesOrNo.ToLower() == "yes")
+			{
+				option = this.FindElement(By.XPath("//a[text()='Alternative Control Plan']/../..//label[contains(text(),'Product has been granted an ')]/../following-sibling::div//input[@value='1']"), 2);
+			}
+			else
+			{
+				option = this.FindElement(By.XPath("//a[text()='Alternative Control Plan']/../..//label[contains(text(),'Product has been granted an ')]/../following-sibling::div//input[@value='0']"), 2);
+			}
+
+			return option.TryClick();
+		}
+
+		public bool ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
+		{
+			IWebElement button = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + buttonTitle + "']"), 2);
+			return button.TryClick();
+		}
+
+		public bool CheckForTheFollowingButtonsInThePopupView(string popupTitle, Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement button = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + row["Button"] + "']"), 2);
+				if (button == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckACheckboxWithTheFollowingText(string text)
+		{
+			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+			return checkbox.TryCheck();
+		}
+
+		public bool ConfirmACheckboxWithTheFollowingTextExists(string text)
+		{
+			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+
+			if (checkbox == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
+		{
+			IList<IWebElement> casNum = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2);
+			IList<IWebElement> name = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2);
+			IList<IWebElement> activeOrInert = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2);
+
+			var index = 0;
+
+			foreach (TableRow row in table.Rows)
+			{
+				if (casNum[index].Text != row["CAS Number"])
+				{
+					Report.Info("CAS Number did not match");
+					return false;
+				}
+				if (name[index].Text != row["Name"])
+				{
+					Report.Info("Name did not match");
+					return false;
+				}
+				if (activeOrInert[index].Text != row["Active or Inert"])
+				{
+					Report.Info("Active or Inert Number did not match");
+					return false;
+				}
+
+				index += 1;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnTitlesInPopupView(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//th[text()='" + row["Titles"] + "']"), 2);
+				if (title == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool ConfirmTheFollowingTextIsInThePopupView(string popupTitle, string text)
+		{
+			IList<IWebElement> textEl = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//h4[contains(text(), \"" + popupTitle + "\")]/../following-sibling::div//p"), 2);
+
+			foreach (IWebElement el in textEl)
+			{
+				Report.Info("Found '" + el.Text + "' expected '" + text + "'");
+				if (el.Text.Contains(text))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
+		{
+			IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
+			Report.Info("found '" + title.Text + "' expected '" + popupTitle + "'");
+			if (title.Text != popupTitle)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool SelectXForComponentNumber(string number)
+		{
+			IList<IWebElement> xButtons = this.containerElement.FindElements(By.XPath("//a[@aria-label='Delete component']"), 2);
+			int numberInt = int.Parse(number);
+			return xButtons[numberInt - 1].TryClick();
+		}
+
+		public bool CheckForCheckBoxWithTextInMessageAtTheTopOfIngredientsPage(string text)
+		{
+			IWebElement alertMessage1 = this.containerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']//label//input"), 2);
+			return alertMessage1.TryCheck();
+		}
+
+		public bool CloseCACleaningIngredientsPopupWindow()
+		{
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			return closeButton.TryClick();
+		}
+		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)
+		{
+			List<string> errors = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				if (row["Error"] == "Generic")
+				{
+					errors.Add("GenericInUse");
+				}
+				else if (row["Error"] == "Percent")
+				{
+					errors.Add("LessThan100Percent");
+				}
+				else if (row["Error"] == "Publicly Disclosed or Trade Secret")
+				{
+					errors.Add("PublicDisclosureOrTradeSecretIssue");
+				}
+				else if (row["Error"] == "Ingredient Type")
+				{
+					errors.Add("IngredientTypeMissing");
+				}
+				else if (row["Error"] == "Functional Purpose")
+				{
+					errors.Add("FragranceComponentFunctionalPurposeMismatch");
+				}
+				else if (row["Error"] == "Publicly Disclosed")
+				{
+					errors.Add("NonFunctionalIngredientDisclosureIssue");
+				}
+				else if (row["Error"] == "Public Name")
+				{
+					errors.Add("CAHCPPublicDisclosureIssues");
+				}
+				else if (row["Error"] == "Ingredient Type with Functional Purpose")
+				{
+					errors.Add("NonFunctionalIngredientTypeOrFunctionalPurposeMismatch");
+				}
+				else if (row["Error"] == "Third Party")
+				{
+					errors.Add("PVBOTThirdPartyError");
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			foreach (string error in errors)
+			{
+				IWebElement errorEl = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model." + error + "'][@style='display: none;']"), 2);
+				if (errorEl != null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
+		{
+			IList<IWebElement> errorMessages = this.containerElement.FindElements(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div"), 2);
+			if (errorMessages[1].Text.Contains("Generic ingredients are not permitted as they cannot be screened for Chemicals of Concern. Each ingredient must use any of the following: Valid Chemical Abstract Service identifier(CAS number); or Valid 3rd - Party Formula registration(CAS begins with \"WPS\"); or Valid CAS Addition(CAS begins with NA) Please note that use of an ingredient with a CAS beginning with NA may result in a suspension of the registration requiring more information or details. You should always use a valid CAS number or 3rd - Party Formula before using an NA option."))
+			{
+				Report.Info("true");
+			}
+			else
+			{
+				Report.Info("false " + errorMessages[1].Text);
+				Report.Info("false " + errorMessages[2].Text);
+				Report.Info("false " + errorMessages[3].Text);
+				Report.Info("false " + errorMessages[4].Text);
+			}
+			return true;
+		}
+
+		public bool CheckForMessageAtTheTopOfIngredientsPage()
+		{
+			IWebElement alertMessage = this.containerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']"), 2);
+			if (alertMessage.Text.Contains("Note: there are special requirements for formulations that must be met in order to generate a California Cleaning Right to Know ingredient disclosure report. Formulations CANNOT contain:")
+				&& alertMessage.Text.Contains("Any generic ingredient names (e.g., fragrance). Each generic ingredient name must be replaced by either a registered 3rd-Party component, or a list of the specific ingredients that comprise the generic mixture.")
+				&& alertMessage.Text.Contains("An indication of the ingredient being EITHER \"Publicly Disclosed\" or \"Trade Secret\".")
+				&& alertMessage.Text.Contains("For each Publicly Disclosed ingredient, select a Public Name.")
+				&& alertMessage.Text.Contains("For each Trade Secret ingredient, provide a public name that is only as generic as necessary to protect its confidential identity."))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickCloseInPopupWithTitle(string title)
+		{
+			IWebElement continueButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			return continueButton.TryClick();
+		}
+		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
+		{
+			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+
+			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
+			{
+				return true;
+			}
+
+			return false;
+		}
+	
+		public bool ClickCloseButtonInFunctionalPurposeDropdownMenu()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//div[@class='select2-link2 select2-close']//button"), 2);
+			if (closeButton == null)
+			{
+				return false;
+			}
+			return closeButton.TryClick();
+		}
+
+		public bool ConfirmTheFollowingFunctionalPurposeIsDisplayed(string functionalPurpose)
+		{
+			IList<IWebElement> functionalPurposesEl = this.ContainerElement.FindElements(By.XPath("//ul[@class='select2-selection__rendered']//li"), 2);
+			if (functionalPurposesEl == null)
+			{
+				return false;
+			}
+			foreach (IWebElement el in functionalPurposesEl)
+			{
+				if (el.Text.Contains(functionalPurpose))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool SelectTheFollowingFunctionalPurpose(string functionalPurpose)
+		{
+			IWebElement functionalPurposeEl = this.ContainerElement.FindElement(By.XPath("//li[@role='treeitem'][text()='" + functionalPurpose + "']"), 2);
+			if (functionalPurposeEl == null)
+			{
+				return false;
+			}
+			return functionalPurposeEl.TryClick();
+		}
+
+		public bool ConfirmDropDownMenuOpensInIngredientsPage(string displayOrNotDisplayed)
+		{
+			IWebElement dropDownMenu = this.ContainerElement.FindElement(By.XPath("//ul[@class='select2-results__options']"), 2);
+
+			if (displayOrNotDisplayed == "displays")
+			{
+				if (dropDownMenu != null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (dropDownMenu == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		public bool SelectChooseOptionForFunctionalPurposeInIngredientsPage()
+		{
+			IWebElement chooseOption = this.ContainerElement.FindElement(By.XPath("//li[@class='select2-selection__choice']"), 2);
+			if (chooseOption == null)
+			{
+				return false;
+			}
+			return chooseOption.TryClick();
+		}
+
 	}
 }

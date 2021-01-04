@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@NewProduct
 @run_voc
 Feature: VOC
 
@@ -21,7 +22,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	Then I call Shared Step 57454 (Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
@@ -31,7 +32,6 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	And I should see the following Voc percent for each state:
 		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
 		| Connecticut     | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Washington D.C. | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Delaware        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Illinois        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Indiana         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
@@ -155,7 +155,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -198,6 +198,8 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified by CARB shows the text: Does not exceed the limits specified by CARB
 	And I confirm statement: limits specified by OTC shows the text: Does not exceed the limits specified by OTC Model Rule
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -272,6 +274,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 40
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted OTC value: 5
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
 	# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -339,7 +342,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -379,6 +382,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -452,7 +456,7 @@ Scenario: [56484] VOC - Aero checks
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -499,6 +503,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set the VOC content in grams ozone per gram field to: 1
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -563,6 +568,7 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Then I confirm that I see the following CARB value: 20
 	Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 20
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -600,7 +606,7 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	And I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations option to: Yes
+    And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes
 	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
 	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 40
 	And I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
@@ -612,14 +618,14 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And I confirm that statement with text: 'Exceeds the limit specified by the California Consumer Products Regulation' is not displayed
 	And The VOC Summary page contains the statement with the text: Alternative Control Plan
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
-	And I click the page heading: Volatile Organic Compounds (VOC)
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 30
+	And I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 40
 	And I click continue
 	Given I scroll to the bottom of the page
 	And I confirm that statement with text: 'Alternative Control Plan' is not displayed
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
 	And I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
-	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations option to: No
+	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
 	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 55
 	And I click continue
 	Given I scroll to the bottom of the page

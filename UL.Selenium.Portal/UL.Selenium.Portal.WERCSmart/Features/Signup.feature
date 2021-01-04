@@ -166,7 +166,7 @@ Scenario: [57737] New Account - Required fields
 	And I enter the pin for user saved as: SignupUser2
 	#Then I wait 2 seconds
 	When In the new user form I click on continue
-	When In the new user form I click on continue
+	#When In the new user form I click on continue
 	#Then I wait 5 seconds
 	Given I go to the WERCSmart Log in
 	Given I login as user: SignupUser2

@@ -144,11 +144,12 @@ And In the Suspended dialog in the Supplier Message field I should see: Please e
 And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
 And In the Suspended dialog in the Internal Product Note field I should see: Please ensure the following is provided, even if exemption or exception applies; UN number, proper shipping name, technical name (if applicable), packing group and if Limited quantity or consumer commodity is being applied.
 And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
-And In the Suspended dialog I click Save
+And In the Suspended dialog I click Suspend
 And I close alert
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for saved as: ID)
 And In the SHA manager grid I right click against product saved as: ID
 And In the SHA manager grid when the right click context menu is open I select option: Notification History
+#Step to ensure the table as loaded
 Then In the Notification History Screen I confirm that one of the rows is as follows:
 | Type      | Notification Date | Subject                  |
 | Suspended | Today             | Transportation Classification |

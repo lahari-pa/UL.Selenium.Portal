@@ -21,7 +21,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				if (searchBy.Length > 0)
 				{
 					IWebElement searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"));
+						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"), 2);
+					
+					if (searchBySelect == null)
+					{
+						return false;
+					}
 					searchBySelect.Select(searchBy);
 
 				}
@@ -30,20 +35,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					SeleniumBrowser.WebBrowser
 						.FindElement(
-							By.XPath("//section[@id='productGridSection']//label[contains(text(), 'Filter')]/following-sibling::input"))
+							By.XPath("//section[@id='productGridSection']//label[contains(text(), 'Filter')]/following-sibling::input"), 2)
 						.EnterText(filter);
 				}
 
 				if (upc.Length > 0)
 				{
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-						"//section[@id='productGridSection']//label[contains(text(), 'UPC')]/following-sibling::input")).EnterText(upc);
+						"//section[@id='productGridSection']//label[contains(text(), 'UPC')]/following-sibling::input"), 2).EnterText(upc);
 				}
 
 				if (status.Length > 0)
 				{
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-							"//section[@id='productGridSection']//label[contains(text(), 'Status')]/following-sibling::select"))
+							"//section[@id='productGridSection']//label[contains(text(), 'Status')]/following-sibling::select"), 2)
 						.Select(status);
 				}
 
@@ -51,6 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			}
 			catch (Exception)
 			{
+				return false;
 			}
 
 			return false;
@@ -59,7 +65,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickFilter()
 		{
-			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']")).TryClick())
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']"), 2);
+			
+			if (el == null)
+			{
+				return false;
+			}
+			if (el.TryClick())
 			{
 				this.WaitForLoadingToGo();
 				return true;
@@ -70,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickClearFilter()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[@id='cmdClear']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@id='cmdClear']"), 2).TryClick();
 		}
 
 		public bool FindAndClickProduct(string findBy, string findValue)
@@ -79,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				System.Collections.Generic.IEnumerable<string> ListOfHeaders =
 					SeleniumBrowser.WebBrowser.FindElements(
-							By.XPath(".//table[@class='ui-jqgrid-htable']//th[not(contains(@style, 'none'))]/div"))
+							By.XPath(".//table[@class='ui-jqgrid-htable']//th[not(contains(@style, 'none'))]/div"), 2)
 						.Select(x => x.Text.Trim());
 
 				//get the index of the header of the item we want to match
@@ -95,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					return SeleniumBrowser.WebBrowser
 						.FindElements(
-							By.XPath("//table[@id='tblProducts']//td[not(contains(@style, 'none'))][" + (i + 1).ToString() + "]"))
+							By.XPath("//table[@id='tblProducts']//td[not(contains(@style, 'none'))][" + (i + 1).ToString() + "]"), 2)
 						.FirstOrDefault(x => x.Text.Trim() == findValue).TryClick();
 				}
 			}
@@ -113,7 +125,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			if (this.FindAndClickProduct(findBy, findValue))
 			{
 				Delay.Seconds(2);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")).TryClick())
+				IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']"), 2);
+
+				if (el == null)
+				{
+					return false;
+				}
+				if (el.TryClick())
 				{
 					Report.Info("Clicked edit button");
 					Delay.Seconds(1);
@@ -131,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				Report.Screenshot();
 				Delay.Seconds(2);
-				return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[@title='Delete Product']")).TryClick();
+				return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[@title='Delete Product']"), 2).TryClick();
 			}
 
 			return false;
@@ -145,7 +163,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				try
 				{
 					IWebElement invisibleLoading =
-						SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"));
+						SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"), 2);
+					
+					if (invisibleLoading == null)
+					{
+						return;
+					}
 					if (invisibleLoading != null)
 					{
 						return;
@@ -172,12 +195,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickDelete()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]")).TryClick();
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]"), 2);
+			
+			if (el == null)
+			{
+				return false;
+			}
+			return el.TryClick();
 		}
 
 		public bool ClickCancel()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]")).TryClick();
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]"), 2);
+			
+			if (el == null)
+			{
+				return false;
+			}
+			return el.TryClick();
 		}
 
 		public bool WaitForDialogToDisappear(int secondsToWait)

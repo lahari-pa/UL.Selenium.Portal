@@ -147,6 +147,7 @@ And The following options should be displayed exclusively for section: Packing G
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+#Confirm that ^ checkbox is selected (failing currently)?
 And UN Number should be showing the value: UN1950
 And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
@@ -275,7 +276,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 And I should see the Product Characteristics Page
-And The following options should be displayed for section: Primary Physical State
+And The following options should be displayed for section: Primary Physical State  
 | Option |
 | Liquid |
 | Solid  |
@@ -289,7 +290,8 @@ And I set the Flash Point Testing Method Used option to: Closed cup method
 And I set the Select the best Water Solubility description option to: Insoluble
 And I click continue
 #And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+Given I call Shared Step 143792 (Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -509,3 +511,31 @@ Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for TDGCP
 And I click alias subsection option TDGCP and confirm data as:
 | Data           |
 | 1 |
+
+
+@ScenarioId:10101
+Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
+
+Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
+Given I generate a random UPC number and save as: UPC126286
+Then I save the product information as: TestCase126286
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Then I click continue
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
+| 64742-49-0 | Naphtha, petroleum, hydrotreated light                                      | 30      |                     |            |             |
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
+And I click the page heading: U. S. Department of Transportation (DOT) Classification
+And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286

@@ -13,7 +13,6 @@
 
 Feature: Flow 15
 
-
 @ScenarioId:698
 Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

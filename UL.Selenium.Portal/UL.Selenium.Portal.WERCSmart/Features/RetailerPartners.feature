@@ -334,7 +334,15 @@ Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 	And I select the retailer: O'Reilly
 	And I confirm the Retailer Details Page has loaded
 	#And I In the Supplier ID table find the Supplier ID 56920x where x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
-	And I find the Supplier ID for O'Reilly in the SupplierID table and save as supplierID56920
+	Then For Retailer: O'Reilly If the supplier ID: 56920x is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I click the Retail Partners icon in the Navigation Pane
+	And I select the retailer: O'Reilly
+	And I confirm the Retailer Details Page has loaded
+	#And I find the Supplier ID for O'Reilly in the SupplierID table and save as supplierID56920
+	Then For retailer: O'Reilly I confirm the the supplier ID: 56920x is found in the supplier ID Table and save it as: supplierID56920
 	And I Confirm the Is Active column for SupplierID saved as supplierID56920 shows a green check mark
 	And I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Supplier ID Is set to Inactive for supplierID saved as supplierID56920
 	#And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
@@ -391,8 +399,15 @@ Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 1: Regulatory Compliance" tab in Data Tier Details
-	And I click download PDF for "What does Regulatory Support mean?"
-	Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
+	And I click download PDF for "What does Regulatory Support mean?"	
+	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56928PDF
+	Then I Check that the pdf file saved as: savedas56928PDF contains the text: WERCSmart Terms of Use
+	#Can not check title as only get full pdf text. Could check first sentence contains text but does not really indicate we are checking title 
+	Then I delete the file saved as savedas56928PDF
+	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	And I close the Data Tier Details popup
+
 
 @ScenarioId:753
 Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
@@ -401,8 +416,13 @@ Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Suppo
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 2: Chemical Program Support" tab in Data Tier Details
+	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
 	And I click download PDF for "What does Chemical Program Support mean?"
-	Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56930PDF
+	Then I Check that the pdf file saved as: savedas56930PDF contains the text: WERCSmart Terms of Use
+	Then I delete the file saved as savedas56930PDF
+	And I close the Data Tier Details popup
 
 @ScenarioId:755
 Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
@@ -411,8 +431,13 @@ Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
+	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
 	And I click download PDF for "What does Supplemental Reports for Internal Business Use Only mean?"
-	Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56932PDF
+	Then I Check that the pdf file saved as: savedas56932PDF contains the text: WERCSmart Terms of Use
+	Then I delete the file saved as savedas56932PDF
+	And I close the Data Tier Details popup
 
 @ScenarioId:757
 Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF
@@ -421,5 +446,10 @@ Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Opti
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
+	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
 	And I click download PDF for "What are my Public Disclosure Options?"
-	Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56934PDF
+	Then I Check that the pdf file saved as: savedas56934PDF contains the text: WERCSmart Terms of Use
+	Then I delete the file saved as savedas56934PDF
+	And I close the Data Tier Details popup

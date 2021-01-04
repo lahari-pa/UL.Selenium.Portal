@@ -182,7 +182,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject
@@ -319,9 +318,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				return this.containerElement
-					.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr/td"), 2).Select(x => x.Text)
-					.ToList().Where(x => x.Length > 0).ToList();
+				//return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody[@data-bind]//tr//td//div[@data-bind='text:Name']"), 2).Select(x => x.Text).ToList().Where(x => x.Length > 0).ToList();
+				return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table[not(contains(@style,'display: none'))]//tbody//tr//td//div"), 2).Select(x => x.Text).ToList().Where(x => x.Length > 0).ToList();
+
 			}
 			catch (Exception)
 			{
@@ -355,6 +354,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool Checked = checkbox.Selected;
 			return Checked;
 		}
+		public bool GetDataConsentTierOnofFSwitch(string tier)
+		{
+			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			if (onOffSwitch != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
 
 		public bool SaveChangesButtonShowing()
 		{

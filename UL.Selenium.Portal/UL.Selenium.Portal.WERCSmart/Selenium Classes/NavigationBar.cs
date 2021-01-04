@@ -5,6 +5,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

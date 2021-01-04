@@ -37,10 +37,11 @@ And I should see the following checkbox:
 | Drug Facts Panel |
 | Supplement Facts Panel |
 | Nutrition Facts Panel |
-| Active Ingredient Panel |
-| An Active Ingredient is listed on the Panel |
 | None of the Above |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88022
+
+#| Active Ingredient Panel |
+#| An Active Ingredient is listed on the Panel |
 
 
 @ScenarioId:1189

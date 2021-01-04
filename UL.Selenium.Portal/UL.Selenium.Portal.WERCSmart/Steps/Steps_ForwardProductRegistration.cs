@@ -135,6 +135,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click continue", "Successfully clicked continue");
 		}
 
+		[StepDefinition(@"I click Home on the Forward Product Registration Purchase Summary page")]
+		public void ClickHomeForwardProductRegistrationPurchaseSummaryScreen()
+		{
+			Delay.Seconds(3);
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickHome() && GeneralUtilities.Wait_for_load_finish(),
+				"Failed to click Home", "Successfully clicked Home");
+		}
+
+
 		[StepDefinition(@"I select the first product under the Select Products tab")]
 		public void SelectTheFirstProduct()
 		{
@@ -284,6 +294,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProdReg.ClickSave(), "Failed to click save in the Edit UPC popup in Forwarding.",
 				"Successfully clicked save in the Edit UPC popup in Forwarding.");
+		}
+
+		[StepDefinition(@"In the Forwarding Edit popup, I set the size \(ounces\) attribute to (.*)")]
+		public void InTheForwardingEditPopupISetTheSizeAttributeTo(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SetSizeAttribute(value), "Failed to set the size attribute for the UPC",
+				"Successfully set the size attribute for the UPC");
 		}
 
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
@@ -599,9 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),
-							"Failed to click the Add UPC button!",
-							"Successfully clicked the Add UPC button");
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),"Failed to click the Add UPC button!",	"Successfully clicked the Add UPC button");
 		}
 
 		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
@@ -653,10 +669,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			} else if(shouldOrShouldNot.ToLower() == "should not") {
 
 				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
-					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+					"ID: " + id + " is showing as expected", "ID: " + id + " is not showing as expected");
 
 			}
-
+	
 		}
 
 		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
@@ -1193,7 +1209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
 		public void IfThereIsTheOptionToSelectVendorISelect(string id)
 		{
-			Report.Info("Checking to see if there is the option to select a Vendor");			
+			Report.Info("Checking to see if there is the option to select a Vendor");
 			var frwdProdReg = new ForwardProductRegistration();
 			if (id.ToLower().Contains("saved as"))
 			{
@@ -1206,7 +1222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			Report.Info("Checking to see if there is the option to select a Vendor");
-			if(!frwdProdReg.GivenProductCheckVendorSelect(id))
+			if (!frwdProdReg.GivenProductCheckVendorSelect(id))
 			{
 				Report.Info($"There was no option for selecting a vendor for the product with ID: {id}");
 				return;
@@ -1215,9 +1231,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string firstOption = frwdProdReg.GivenProductFirstAvailableVendor(id);
 			Report.Info($"The first vendor option for ID: {id} was found as: {firstOption}");
 			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
-			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
+			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option", "Successfully selected the option");
 		}
-
 
 	}
 }

@@ -270,6 +270,7 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	Given I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
+	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
 		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
 		| saved as UPC91800_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |

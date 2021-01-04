@@ -35,15 +35,17 @@ Scenario: [61796] Account User Name in Header
 	Given In the UserDetails page I click Save
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
+
 @ScenarioId:6704
 Scenario: [63514] Add and Deactivate a New User from the User Grid
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I click on My Account
 	Then I create a new email address
 	Then I add a new user with the following information
 		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
 		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
+	Then I search for user with email
 	Then I confirm the new user is Active
 	Given I Select the ... from the Actions column of the account I just created and select Deactivate
 	Then I Wait for a modal popup to appear
@@ -560,3 +562,28 @@ Then I pass the following data to the Stweardship Numbers table
 |             |            |             |
 |             |            |             |
 Then I save the Stewardship Numbers data
+
+
+
+
+@ScenarioId:10291
+Scenario: [138836] My Account - Correct Message Displays when Date is Expired
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I navigate to My Account
+Given In the My Account page I navigate to the Company Information page
+Given In Stewardship table click edit
+Given I add following stewardship information
+| Province         | Stewardship |
+| British Columbia | BC-1-1      |
+| Saskatchewan     | SA-1-1      |
+Then I save Stewardship Numbers information
+Given In Stewardship table click edit
+Then I fill in Stweardship Numbers information
+| Stewardship | Issue Date | Expire Date |
+| BC-1-1      | Today      | Tomorrow    |
+| SA-1-1      | Today      | Tomorrow    |
+Then I save Stewardship Numbers information
+Given I call Shared Step 62676 (Go To My Account)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I navigate to My Account
+Given In the My Account page I navigate to the Company Information page

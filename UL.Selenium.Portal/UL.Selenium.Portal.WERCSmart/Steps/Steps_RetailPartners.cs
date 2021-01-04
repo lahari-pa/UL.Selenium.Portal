@@ -14,6 +14,8 @@ using UL.Automation.Reporting;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using NPOI.SS.Formula.Functions;
+using System.IO.Compression;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -368,17 +370,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success("More Information link clicked!");
 				Report.Info("Switching to new window");
 
+				Delay.Seconds(10);
+				
 				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
-
+			
 				ReadOnlyCollection<string> windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			
 				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+			
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
+		
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
-				Report.Failure(ex.Message);
+				Report.Failure("Exception: " + ex.Message);
 				throw;
 			}
 		}
@@ -444,7 +451,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				//dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
@@ -456,16 +464,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
+		[StepDefinition(@"I confirm that an (excel|html|zip|csv) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Confirm Excel File is downloaded with name: " + file);
+			GeneralUtilities.Wait_for_load_finish();
+
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm " + filetype + " File is downloaded with name: " + file);
 			try
 			{
 				Delay.Seconds(10);
 				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
+				string[] dir2 = Directory.GetFiles(downloadsFolder, "*", SearchOption.AllDirectories);
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 				{
@@ -503,6 +514,133 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the Supplier Reports excel file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheSupplierReportsExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+				bool Data = false;
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> RowData = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+					Data = true;
+				}
+
+				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the zip excel file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheZipExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			string startPath = @".\downloads";
+			string zipPath = File.ToString();
+			string extractPath = File.ToString();
+			extractPath = extractPath.Replace(".zip", ".xlsx");
+
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\ExtractFolder\\";
+			string authorsFile = "" + savedAs + ".xlsx";
+
+			if (Directory.Exists(rootFolder))
+			{
+				Directory.Delete(rootFolder, true);
+			}
+
+			ZipFile.ExtractToDirectory(zipPath, rootFolder);
+
+			Context.AddToContext(savedAs, rootFolder + authorsFile);
+
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + rootFolder + authorsFile))
+			{
+				bool Data = false;
+				var ExcelUtils = new ExcelFunctions(rootFolder + authorsFile, "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				if (FirstRow != null)
+				{
+					Data = true;
+				}
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> RowData = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+					Data = true;
+				}
+
+				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+
+				string s = File.ToString();
+				string[] arr = s.Split(new string[] { "." },
+								  StringSplitOptions.None);
+				if (Report.IsTrue(arr[arr.Length - 1] == "csv", "File was not a csv type file", "File was a csv type file"))
+				{
+					var lines = System.IO.File.ReadAllLines(File.ToString());
+
+					if (lines != null)
+					{
+						Report.IsTrue(lines != null, "CSV file contains data");
+					}
+
+					Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm the zip csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheZipCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			string startPath = @".\downloads";
+			string zipPath = File.ToString();
+			string extractPath = File.ToString();
+			extractPath = extractPath.Replace(".zip", ".csv");
+
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\ExtractFolder\\";
+			string authorsFile = "" + savedAs + ".csv";
+
+			if (Directory.Exists(rootFolder))
+			{
+				Directory.Delete(rootFolder, true);
+			}
+
+			ZipFile.ExtractToDirectory(zipPath, rootFolder);
+
+			Context.AddToContext(savedAs, rootFolder + authorsFile);
+
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + rootFolder + authorsFile))
+			{
+				var lines = System.IO.File.ReadAllLines(rootFolder + authorsFile);
+
+				if (lines != null)
+				{
+					Report.IsTrue(lines != null, "CSV file contains data");
+				}
+
+				Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+			}
+		}
+
 		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
 		public void CheckingDownloadedHTMLFile(string savedAs, string text)
 		{
@@ -515,6 +653,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsTrue(File.ReadAllText(file.ToString()).Contains(text), "File did not contain text: " + text + ", content of file was: " + File.ReadAllText(file.ToString()), "File contained text: " + text + "!", false, false);
 				}
+			}
+		}
+
+		[StepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
+		public void DataConsentTiersSlidersExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier Sliders exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTier("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
+		public void DataConsentTiersOnOffSwitchExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier On/Off switch exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier On/Off switch exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
 			}
 		}
 
@@ -628,7 +810,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
- 			Delay.Seconds(0);
+			Delay.Seconds(0);
 		}
 
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
@@ -775,6 +957,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
+			Delay.Seconds(10);
 			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
@@ -935,6 +1118,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
+		[StepDefinition(@"I confirm that the CSV file saved as: (.*) contains the following columns:")]
+		public void ThenIConfirmThatTheCSVFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
+		{
+			Report.Info("Confirm the CSV file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var lines = System.IO.File.ReadAllLines(File.ToString());
+
+				if (lines != null)
+				{
+					Report.IsTrue(lines != null, "CSV file contains data");
+				}
+
+				string linesStr = lines[0];
+				bool failedToFindData = false;
+				foreach (TableRow row in table.Rows)
+				{
+					if ((!linesStr.Contains(row[@"Column"] + ",")) && (!linesStr.Contains("," + row[@"Column"])))
+					{
+						Report.Failure("The following data was not found: " + row[@"Column"]);
+						failedToFindData = true;
+					}
+				}
+				if (!failedToFindData)
+				{
+					Report.Success("All columns in table have been found");
+				}
+
+			}
+
+		}
+
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
@@ -973,6 +1189,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
 			}
+
 		}
 
 		[StepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]
@@ -1016,17 +1233,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				foreach (TableRow thisRow in table.Rows)
 				{
 					expectedColumns.Add(thisRow["Column"]);
-				}							   	
+				}
 
-				if (Math.Abs(expectedColumns.Count - ColumnTitles.Count)!=0)
+				if (Math.Abs(expectedColumns.Count - ColumnTitles.Count) != 0)
 				{
-					Report.Failure("Found " + Math.Abs(expectedColumns.Count-ColumnTitles.Count) + " unexpected columns.");
-				}				
+					Report.Failure("Found " + Math.Abs(expectedColumns.Count - ColumnTitles.Count) + " unexpected columns.");
+				}
 
 				for (int i = 1; i < expectedColumns.Count; i++)
 				{
 					Report.Info($"The expected column at postion: {i} is: {expectedColumns[i]} and the coloum found was {ColumnTitles[i]}");
-					Report.IsTrue(expectedColumns[i] == ColumnTitles[i], "The Column headings did not match", "The Column headings matched");				
+					Report.IsTrue(expectedColumns[i] == ColumnTitles[i], "The Column headings did not match", "The Column headings matched");
 
 				}
 
@@ -1131,7 +1348,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
 				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
-					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
+					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'"), 2),
 					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
 				selRetailPartnersDetails.ClickBackButton();
 			}
@@ -1205,11 +1422,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
+			Delay.Seconds(10);
 			var expectedTabs = new List<string>();
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
-				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
+				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"), 2)}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"), 2)}""",
 				"The displayed tabs matched the expected tabs.");
 		}
 
@@ -1385,9 +1603,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
-		
+
 			var thisAddNewSupplier = new AddNewSupplier();
-			Report.IsTrue(thisAddNewSupplier.ClickSave(), "Failed to click save", "Successfully clicked save");			
+			Report.IsTrue(thisAddNewSupplier.ClickSave(), "Failed to click save", "Successfully clicked save");
 			Delay.Seconds(2);
 		}
 
@@ -1403,7 +1621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
 				// Use foreach-loop.
-				foreach (Match match in matches)
+				foreach (System.Text.RegularExpressions.Match match in matches)
 				{
 					if (match.Success)
 					{
@@ -1445,6 +1663,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Context.AddToContext(saveAs, requiredId);
+
+		}
+
+		//Creating a new version of this method as the above one was erroring and I am not sure why its getting rootstrings etc?
+		[StepDefinition(@"For retailer: (.*) I confirm the the supplier ID: (.*) is found in the supplier ID Table and save it as: (.*)")]
+		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string expectedID, string saveAs)
+		{
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
+			var regex = new Regex(@"\d+");
+			var potentialRootStrings = new List<string>();
+			if (expectedID.Contains("x"))
+			{
+				switch (supplier)
+				{
+					case "O'Reilly":
+						expectedID = expectedID.Replace("x", "1");
+						break;
+					case "Sears":
+						expectedID = expectedID.Replace("x", "2");
+						break;
+					case "Wal-Mart":
+						expectedID = expectedID.Replace("x", "3");
+						break;
+					default:
+						throw new Exception("You need to specify O'Reilly, Sears or Wal-Mart");
+				}
+			}
+
+			foreach (Supplier thisSupplier in allSuppliers)
+			{
+
+				if (thisSupplier.SupplierID == expectedID)
+				{
+					Report.Success($"The Supplier ID: {expectedID} was found in the supplier ID table");
+					Report.Info($"Adding the supplier ID to context as: {saveAs}");
+					Context.AddToContext(saveAs, expectedID);
+					return;
+				}
+				//MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
+				//// Use foreach-loop.
+				//foreach (Match match in matches)
+				//{
+				//	if (match.Success)
+				//	{
+				//		if(match.ToString()==expectedID)
+				//		{
+				//			Report.Success($"The Supplier ID: {expectedID} was foun in the supplier ID table");
+				//			Report.Info($"Adding the supplier ID to context as: {saveAs}");
+				//			Context.AddToContext()
+				//		}						
+
+				//	}
+				//}
+			}
+
+			Report.Failure($"The Supplier ID: {expectedID} was not found in the supplier ID table");
+			return;
+			//Context.AddToContext(saveAs, requiredId);
 
 		}
 
@@ -1629,23 +1905,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
 
-			List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();		
+			List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();
 
 
 			//List<string> testItems = tiersPresent.FindAll(x => !expectedTiers.Contains(x));
 			//Report.IsTrue(testItems.Count==0, "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", testItems), "The Data Consent Tiers were an exact match");
-						
-			
+
+
 			var diffFound = new List<string>();
 			foreach (var item in tiersPresent)
 			{
-				if(!expectedTiers.Contains(item))
+				if (!expectedTiers.Contains(item))
 				{
 					diffFound.Add(item);
 				}
 			}
 			Report.IsTrue(diffFound.Count == 0, "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", diffFound), "The Data Consent Tiers were an exact match");
-			
+
 			//var diff = tiersPresent.Except(expectedTiers);
 			//Report.IsTrue(diff.Any(), "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", diff), "The Data Consent Tiers were an exact match");
 
@@ -1662,7 +1938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> tierdiff = tiersPresent.FindAll(x => !x.Contains(tier1));
 
-			Report.IsTrue(tierdiff.Any(), "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
+			Report.IsTrue(tierdiff.Count() == 0, "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
 
 
 		}
@@ -1699,24 +1975,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					}
 				}
-				if(!wPSIDColumnFound)
+				if (!wPSIDColumnFound)
 				{
 					Report.Failure("The column: WPS ID could not be found in the spreadsheet");
 					return;
 				}
 				List<string> wPSIDColumnContents = ExcelUtils.Excel_GetColumn(wPSIDColumnIndex);
-				foreach( var item in wPSIDColumnContents)
+				foreach (var item in wPSIDColumnContents)
 				{
-					if(item ==iD)
+					if (item == iD)
 					{
 						Report.Success($"Succesfully found the WPSID in the excel file");
 						return;
 					}
 				}
-				Report.Failure($"The WPSID: {iD} was not found in the column 'WPS ID'");				
+				Report.Failure($"The WPSID: {iD} was not found in the column 'WPS ID'");
 
 			}
-					   			 		  		  
+
 		}
 
 		[StepDefinition(@"I click the Products in Scope button and confirm that a file is not produced called (.*)")]
@@ -1752,15 +2028,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				
+
 				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
 
 			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");
-						
-			Report.Info("Downloads folder: " + downloadsFolder);			
+
+			Report.Info("Downloads folder: " + downloadsFolder);
 
 			foreach (string file_ in dir)
 			{
@@ -1804,7 +2080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				
+
 				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
@@ -1820,7 +2096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
-		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs,string wpsidSavedAs, Table table)
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs, string wpsidSavedAs, Table table)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
@@ -1841,9 +2117,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				List<string> wpsidItems = ExcelUtils.Excel_GetColumn(wpsIDColumnIndex);
 				int wantedWpsidPosition = 0;
 				bool foundWpsid = false;
-				foreach(var wpsidItem in wpsidItems)
+				foreach (var wpsidItem in wpsidItems)
 				{
-					if(wpsidItem!= wpsidStr)
+					if (wpsidItem != wpsidStr)
 					{
 						wantedWpsidPosition++;
 					}
@@ -1854,11 +2130,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					}
 				}
-				if(!foundWpsid)
+				if (!foundWpsid)
 				{
 					Report.Failure("Could not find the WPSID in the SpreadSheet");
 					return;
-				}				
+				}
 
 				foreach (TableRow row in table.Rows)
 				{
@@ -1871,15 +2147,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							columnUPCIndex = i;
 						}
 					}
-					
-					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);					
+
+					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
 					Report.Info($"Looking for a 'Y' for WPSID: {wpsidStr} in the Column: {currentRow}");
 					string actualValue = upcRowItems[wantedWpsidPosition];
 					Report.Info($"actual value was: {actualValue}");
-					Report.IsTrue(actualValue == "Y", "The actual value was not 'Y'", "The actual value was 'Y'");	
+					Report.IsTrue(actualValue == "Y", "The actual value was not 'Y'", "The actual value was 'Y'");
 
 				}
-				
+
 			}
 		}
 
@@ -1909,7 +2185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						columnRetailerFound = true;
 					}
 				}
-				if(!columnRetailerFound)
+				if (!columnRetailerFound)
 				{
 					return;
 				}
@@ -1997,7 +2273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				List<string> cvsRow= ExcelUtils.Excel_GetRow(wantedRetailerPosition);
+				List<string> cvsRow = ExcelUtils.Excel_GetRow(wantedRetailerPosition);
 				//bool tiersListedCorrectly = true;				
 
 				Report.IsTrue(cvsRow[column21Index] != "0", "The Tier 2.1 Granted Column For CVS did not contain products", "The Tier 2.1 Granted Column For CVS contained products");
@@ -2008,8 +2284,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			}
-		
-			
+
+
 		}
 
 		[StepDefinition(@"I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: (.*) and check that is shows the expected product saved as: (.*)")]
@@ -2040,11 +2316,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
-			
+
 				int y = 0;
-				foreach(var item in ColumnTitles)
+				foreach (var item in ColumnTitles)
 				{
-					if(item==column1)
+					if (item == column1)
 					{
 						break;
 					}
@@ -2052,7 +2328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.IsTrue(ColumnTitles[y + 1] == focusColumn && ColumnTitles[y + 2] == column2, "The Column was not found between the 2 specified columns", "The Column was found between the 2 specified columns");
-							
+
 			}
 		}
 
@@ -2064,7 +2340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
-				Report.Info("Column titles: " + string.Join(",", ColumnTitles));				
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
 				foreach (TableRow thisRow in table.Rows)
 				{
@@ -2115,25 +2391,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Failure("Could not find the WPSID in the SpreadSheet");
 					return;
-				}			
-					
-					int columnUPCIndex = 0;
-					for (int i = 0; i < ColumnTitles.Count; i++)
-					{
-						if (ColumnTitles[i] == searchColumn)
-						{
-							columnUPCIndex = i;
-						}
-					}
-
-					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
-					Report.Info($"Looking for {containsValue} for WPSID: {wpsidStr} in the Column: {searchColumn}");
-					string actualValue = upcRowItems[wantedWpsidPosition];
-					Report.Info($"actual value was: {actualValue}");
-					Report.IsTrue(actualValue == containsValue, "The actual value was not: " +containsValue, "The actual value was: "+containsValue);
-
 				}
+
+				int columnUPCIndex = 0;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == searchColumn)
+					{
+						columnUPCIndex = i;
+					}
+				}
+
+				List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
+				Report.Info($"Looking for {containsValue} for WPSID: {wpsidStr} in the Column: {searchColumn}");
+				string actualValue = upcRowItems[wantedWpsidPosition];
+				Report.Info($"actual value was: {actualValue}");
+				Report.IsTrue(actualValue == containsValue, "The actual value was not: " + containsValue, "The actual value was: " + containsValue);
+
 			}
+		}
 
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingRetailers(string savedAs, Table table)
@@ -2202,76 +2478,118 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
-		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
+		[StepDefinition(@"I confirm the excel file saved as: (.*) (contains|does not contain) the following data: (.*)")]
+		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string containsOrDoesNotContain, string data)
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			string savedAs = productID;
-			try
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 
-				if (!Context.Contains(savedAs))
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
 				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
-
-				string id = "";
-
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					id = productToSearch.ProductId;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-
-				//if we didn't get the id try a different object type
-				if (id == "")
-				{
-					try
+					List<string> row = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
+					foreach (var str in row)
 					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
-
-				}
-
-				if (id == "")
-				{
-					try
-					{
-						id = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
-
+						if (str == data && containsOrDoesNotContain == "contains")
+						{
+							Report.Success("Excel file contained the following data: " + data);
+							return true;
+						}
+						if (str == data && containsOrDoesNotContain == "does not contain")
+						{
+							Report.Failure("Excel file contained the following data: " + data);
+							return false;
+						}
 					}
 				}
 
-				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-				Report.IsTrue(new ModalDialog().CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+				if (containsOrDoesNotContain == "contains")
+				{
+					Report.Failure("Excel file did not contain the following data: " + data);
+					return false;
+				}
+
+				if (containsOrDoesNotContain == "does not contain")
+				{
+					Report.Success("Excel file did not contain the following data: " + data);
+					return true;
+				}
 
 			}
-			catch (Exception ex)
-			{
 
-				Report.Failure(ex.Message);
-				throw;
+			return false;
+		}
+
+
+		[StepDefinition(@"For Retailer: (.*) If the supplier ID: (.*) is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.")]
+		public void ForRetailerCheckForSupplierIDAndAddIfNotFound(string retailer, string supplierID)
+		{
+			if (Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!"))
+			{
+				if (supplierID.Contains("x"))
+				{
+					switch (retailer)
+					{
+						case "O'Reilly":
+							supplierID = supplierID.Replace("x", "1");
+							break;
+						case "Sears":
+							supplierID = supplierID.Replace("x", "2");
+							break;
+						case "Wal-Mart":
+							supplierID = supplierID.Replace("x", "3");
+							break;
+						default:
+							throw new Exception("You need to specify O'Reilly, Sears or Wal-Mart");
+					}
+				}
+
+
+				List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
+				foreach (Supplier thisSupplier in allSuppliers)
+				{
+
+					if (thisSupplier.SupplierID == supplierID)
+					{
+						Report.Success($"The Supplier ID: {supplierID} was found to already be in the supplier ID table, no need to add it.");
+						return;
+					}
+
+				}
+
+				Report.Info($"The Supplier ID: {supplierID} was not found in the supplier ID table, beginning the steps to add it.");
+				this.GivenIClickOnTheAddNewSupplierIDLink();
+				new GlobalSteps().IWaitForModalPopupToBeVisible();
+				string companyBrandSavedAs = "companybrand" + supplierID;
+				this.GivenInTheAddNewSupplierDialogISelectTheFirstOptionInTheCompanyOrBrandNameInput(companyBrandSavedAs);
+				this.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(supplierID);
+				this.GivenInTheAddNewSupplierDialogIClickSave();
+				var supplierDetailsTable = new Table("Supplier ID", "Company or Brand Name");
+				supplierDetailsTable.AddRow(supplierID, "saved as: " + companyBrandSavedAs);
+
+				this.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(supplierDetailsTable);
 			}
+			return;
+
 
 		}
+
+		//[StepDefinition(@"In the Retail Partners page, I close the 'What are the Data Usage Tiers' popup")]
+		//public void InTheRetailPartnersPageICloseTheWhatAreTheDataUsageTiersPopup()
+		//{
+		//	Report.IsTrue(new RetailPartnersDetails().)
+		//}
+
+
 	}
 
 
 
 
-	
+
 }
 

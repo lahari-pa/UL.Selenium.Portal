@@ -22,6 +22,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	public class NewProduct : SeleniumBaseObject
@@ -249,7 +250,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool WaitForTab(Tab tab, int secondsToWait = 30)
 		{
 			string tabName = MapTabs[tab];
-			return this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null;
+
+			if (this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null)
+			{
+				return true;
+			}
+			else
+			{
+				return this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step active done' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null;
+			}
+
+			
+
 		}
 
 		/// <summary>
@@ -266,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info($"Tab: {tabName} was already active");
 				return true;
 			}
-			IWebElement tabEl = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'prog-step')]//a/span[contains(text(),'{tabName}')]"), 2);
+			IWebElement tabEl = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'prog-step')]//span[contains(text(),'{tabName}')]"), 2);
 			if (tabEl == null)
 			{
 				return false;
@@ -402,11 +414,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region classes
-		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
+		public enum Tab { ProductType, ProductCharacteristics, RetailerAssociation, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
 
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
+			{ Tab.RetailerAssociation , "Retailer Association" },
 			{ Tab.RecipientAndUpcDetails , "Recipient and UPC Details" },
 			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};
@@ -537,6 +550,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement retailerModalBody = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
 
+			if (retailerModalBody == null)
+			{
+				return false;
+			}
+
 			if (retailerModalBody.Text == text)
 			{
 				return true;
@@ -574,8 +592,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckIfTextDisplayedOverYellowTriangleImageMatches(string textToMatch)
 		{
+
 			IWebElement toolTipDisplayBody = this.containerElement.FindElement(By.XPath(@"//div[@class='tooltip fade top in']//p"), 2);
-			
+
+			if (toolTipDisplayBody == null)
+			{
+				return false;
+			}
+
 			if (toolTipDisplayBody.Text == textToMatch)
 			{
 				return true;
@@ -586,12 +610,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string BatteyWarning()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2);
+
+			if (el == null)
+			{
+				return null;
+			}
+
+			return el.Text;
+
 		}
 
 		public string GetCurrentProduct()
 		{
-			return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2);
+
+			if (el == null)
+			{
+				return null;
+			}
+
+			return el.Text.Trim();
 		}
 
 		//New, Copy or UPC
@@ -703,6 +743,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ClickAddUpcButton()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+
+			if (el == null)
+			{
+				return false;
+			}
+
 			return el != null && el.TryClick();
 		}
 
@@ -787,7 +833,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
 			foreach (var item in listofCert)
 			{
-				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
+				//IWebElement inputbox= item.FindElement(By.XPath(".//"), 2)
 				bool clicked = item.TryClick();
 				string textTitle = item.Text;
 				if (!clicked)
@@ -837,7 +883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			IWebElement packageTypeField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
-			var selectOptions = packageTypeField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+			var selectOptions = packageTypeField.FindElements(By.XPath(".//option"), 2).Select(x => x.GetValue()).ToList();
 			return selectOptions.FirstOrDefault(x => x != "Package Type");
 
 		}
@@ -858,7 +904,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			IWebElement packageTypeField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
-			return packageTypeField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+			return packageTypeField.FindElements(By.XPath(".//option"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool InputUPCNumber(string upcNumber)
@@ -888,8 +934,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool InputZeroBufferUPCNumber(string upcNumber)
 		{
+
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element is null");
+				return false;
+			}
+
 			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			if (upcNumberField == null)
+			{
+				Report.Failure("UPC Number Field Element is null");
+				return false;
+			}
 
 			if (upcNumber.ToLower().Contains("saved as"))
 			{
@@ -937,8 +997,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool InputUPCSize(string size)
 		{
+			
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element is null");
+				return false;
+			}
+
 			IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+
+			if (textInputs == null)
+			{
+				Report.Failure("Text Inputs Element is null");
+				return false;
+			}
+
 			string regex = @"(.*)\((.*)\)";
 			IWebElement sizeField = (from input in textInputs
 									 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -955,21 +1030,61 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectContainerType(string containerType)
 		{
-			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element returned null");
+				return false;
+			}
+
+			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+
+			if (upcNumberField == null)
+			{
+				Report.Failure("UPC Number Field Element returned null");
+				return false;
+			}
+
+			if (containsType == null)
+			{
+				Report.Failure("Contains Type Element returned null");
+				return false;
+			}
+
 			containsType.Select(containerType);
 			return containsType.GetValue() == containerType;
 		}
 
 		public List<string> GetContainerOptions()
 		{
-			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element returned null");
+				return null;
+			}
+
+			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-			return containsType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+
+			if (upcNumberField == null)
+			{
+				Report.Failure("UPC Number Field Element returned null");
+				return null;
+			}
+
+			if (containsType == null)
+			{
+				Report.Failure("Contains Type Element returned null");
+				return null;
+			}
+
+			return containsType.FindElements(By.XPath(".//option"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool InputUpcInformation(UpcInformation info)
@@ -1059,7 +1174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				//		Report.Info("The Field was not empty, Checking for UPCName in the table");
 				//		if (!info.UPCName.IsNullOrEmpty())
 				//		{
-				//			if (info.UPCName.ToLower().Contains("saved as"))
+				//			if (info.UPCName.ToLower().Contains("saved as"), 2)
 				//			{
 				//				try
 				//				{
@@ -1123,6 +1238,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					
+					if (packageField == null)
+					{
+						return false;
+					}
 					if (info.PackageType=="<First>")
 					{
 						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Package Type')]"), 1).Text;
@@ -1134,12 +1254,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.CapsuleCount.Length > 0)
 				{
 					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
+					
+					if (capsuleCountField == null)
+					{
+						return false;
+					}
 					capsuleCountField.EnterText(info.CapsuleCount);
 				}
 
 				if (info.ItemNumber.Length > 0)
 				{
 					IWebElement ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
+					
+					if (ItemNumberField == null)
+					{
+						return false;
+					}
 					ItemNumberField.EnterText(info.ItemNumber);
 				}
 
@@ -1165,7 +1295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					var tempList = new List<string>();
 					try
 					{
-						tempList = container.FindElement(By.XPath($".//th[@class='col-xs-{i}']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+						tempList = container.FindElement(By.XPath($".//th[@class='col-xs-{i}']"), 2).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
 						if (tempList.IsNullOrEmpty())
 						{
 							Report.Info("There was no header text found for that column");
@@ -1211,6 +1341,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+				
+				if (el == null)
+				{
+					return false;
+				}
 				if (append)
 				{
 					el.SendKeys(text);
@@ -1229,7 +1364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CommentErrorDisplayed(string expected, out string actual)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(@"//p[contains(concat(' ',normalize-space(@class),' '),'form-error')]"));
+			IWebElement el = this.containerElement.FindElement(By.XPath(@"//p[contains(concat(' ',normalize-space(@class),' '),'form-error')]"), 2);
 			if (el != null)
 			{
 				actual = el.Text;
@@ -1560,7 +1695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//{
 			//	var el = containerElement
 			//		.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//input"), 2)
-			//		.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"));
+			//		.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"), 2);
 			//	if (el != null)
 			//	{
 			//		return el.Text;
@@ -1572,7 +1707,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//{
 			//	var el = containerElement
 			//		.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
-			//		.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"));
+			//		.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"), 2);
 			//	if (el != null)
 			//	{
 			//		el.TryClick();
@@ -1583,7 +1718,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement
 					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
 				if (el != null)
 				{
 					el.TryClick();
@@ -1608,7 +1743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement
 					.FindElements(By.XPath(".//label[contains(text(),'Select all modes of transport')]/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
 				if (el != null)
 				{
 					el.TryClick();
@@ -1633,7 +1768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement
 					.FindElements(By.XPath(".//label[contains(text(),'Please select DOT Exceptions if applicable?')]/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
 				if (el != null)
 				{
 					el.TryClick();
@@ -1656,7 +1791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement
 					.FindElements(By.XPath(".//label[text()='International Shipping when DOT Exemption taken?']/../following-sibling::div//input"), 2)
-					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"));
+					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"), 2);
 				if (el != null)
 				{
 					return el.Text;
@@ -1668,7 +1803,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement
 					.FindElements(By.XPath(".//label[text()='International Shipping when DOT Exemption taken?']/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"));
+					.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"), 2);
 				if (el != null)
 				{
 					el.TryClick();
@@ -1685,7 +1820,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				var selectedLabels = new List<string>();
 				foreach (IWebElement input in selectedInputs)
 				{
-					selectedLabels.Add(input.FindElement(By.XPath("../span")).Text);
+					selectedLabels.Add(input.FindElement(By.XPath("../span"), 2).Text);
 				}
 
 				return selectedLabels;
@@ -1696,7 +1831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					IWebElement el = this.containerElement
 						.FindElements(By.XPath(".//label[contains(text(),'Please select DOT Exceptions if applicable')]/../following-sibling::div//span"), 2)
-						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"));
+						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"), 2);
 					if (el != null)
 					{
 						el.TryClick();
@@ -1759,11 +1894,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			get
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+
+				if (el == null)
+				{
+					return null;
+				}
+
 				return el.SelectedOption();
 			}
 			set
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+
+				if (el == null)
+				{
+					return;
+				}
+
 				el.Select(value);
 			}
 		}
@@ -1773,37 +1920,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// </summary>
 		public bool ProductHasFlammablePropellant(string item)
 		{
-			try
+			IWebElement el = this.containerElement
+				.FindElements(By.XPath(".//label[contains(text(),'flammable propellant')]/../following-sibling::div//span"), 2)
+				?.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
+			if (el != null)
 			{
-				IWebElement el = this.containerElement
-					.FindElements(By.XPath(".//label[contains(text(),'flammable propellant')]/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
-				if (el != null)
-				{
-					el.TryClick();
-					return true;
-				}
+				el.TryClick();
+				return true;
+			}
 
-				return false;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			return false;
 		}
 
 		public bool SelectBestWaterSolubilityDescription(string item)
 		{
-			try
-			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
-				el.Select(item);
-				return true;
-			}
-			catch (Exception)
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+
+			if (el == null)
 			{
 				return false;
 			}
+
+			el.Select(item);
+			return true;
+
 		}
 
 		/// <summary>
@@ -1818,7 +1959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				var selectedLabels = new List<string>();
 				foreach (IWebElement input in selectedInputs)
 				{
-					selectedLabels.Add(input.FindElement(By.XPath("../span")).Text);
+					selectedLabels.Add(input.FindElement(By.XPath("../span"), 2).Text);
 				}
 
 				return selectedLabels;
@@ -1829,7 +1970,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					IWebElement el = this.containerElement
 						.FindElements(By.XPath(".//label[contains(text(),'Refer to your Product Label')]/../following-sibling::div//span"), 2)
-						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"));
+						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"), 2);
 					if (el != null)
 					{
 						el.TryClick();
@@ -1858,12 +1999,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
+				
 				IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
-				placeholderEl.TryClick();
 				IWebElement MatchedEntry = null;
 				IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
-				inputEl.EnterText(product);
 				IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+
+				if (placeholderEl == null)
+				{
+					Report.Failure("Placeholder Element returned null");
+					return false;
+				}
+
+				if (inputEl == null)
+				{
+					Report.Failure("Input Element returned null");
+					return false;
+				}
+
+				if (searching == null)
+				{
+					Report.Failure("Searching Element returned null");
+					return false;
+				}
+
+				placeholderEl.TryClick();
+				inputEl.EnterText(product);
+
 				int i = 0;
 				while (searching != null && i < 10)
 				{
@@ -1961,9 +2123,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				for (int j = 0; j < 5; j++)
 				{
 					IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+					if(placeholderEl==null)
+					{
+						Report.Info($"placeholderEl was null");
+						return false;
+					}
 					placeholderEl.TryClick();
 					IWebElement MatchedEntry = null;
 					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+					if (inputEl == null)
+					{
+						Report.Info($"inputEl was null");
+						return false;
+					}
 					inputEl.EnterText(product.Id);
 					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
@@ -2016,16 +2188,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		internal bool CommentsAreaContains(string contents)
 		{
-			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+
+			if (commentBox == null)
+			{
+				return false;
+			}
 
 			return contents == commentBox.Text;
 		}
 
 		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
 		{
-			IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"));
-			IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
-			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+
+				IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"), 2);
+				IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
+				IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+
+			if (maxCharacters == null || charactersRemain == null || commentBox == null)
+			{
+				remainDisplayed = 0;
+				return false;
+			}
 
 			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
 				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
@@ -2068,7 +2252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 						if (item.Selected)
 						{
-							string selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							string selectedText = item.FindElement(By.XPath("../..//label/span"), 2).Text;
 							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
@@ -2089,10 +2273,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					IWebElement thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text.Contains(value));
 					if (thisLabel != null)
 					{
-						IWebElement thisInput = thisLabel.FindElement(By.XPath(".//../input"));
+						IWebElement thisInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 						if (!thisInput.Selected)
 						{
 							thisInput.TryClick();
@@ -2118,7 +2302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					return input.Text;
 				}
 				else
@@ -2134,7 +2318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					input.EnterText(value);
 				}
 				else
@@ -2148,12 +2332,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string MinimumIgnitionEnergy {
 			get
 			{
-				IWebElement lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl;
+				
+				if (SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2) == null)
+				{
+					return null;
+				} else
+				{
+					lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Ignition"));
+				}
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					return input.Text;
 				}
 				else
@@ -2169,7 +2361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					input.EnterText(value);
 				}
 				else
@@ -2288,7 +2480,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					return input.Text;
 				}
 				else
@@ -2304,7 +2496,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					input.EnterText(value);
 				}
 				else
@@ -2329,7 +2521,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					if (item.Selected)
 					{
-						return item.FindElement(By.XPath("../..//label")).Text;
+						return item.FindElement(By.XPath("../..//label"), 2).Text;
 					}
 				}
 
@@ -2338,8 +2530,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
-				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"));
+				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
+				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 				if (!optionInput.Selected)
 				{
 					optionInput.Click();
@@ -2350,17 +2542,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string OSHA {
 			get => this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/input"))
-					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("./following-sibling::span")).Text;
+					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/input"), 2)
+					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("./following-sibling::span"), 2).Text;
 			set
 			{
 				IWebElement selectItem = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/span"))
+					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/span"), 2)
 					.FirstOrDefault(y => y.Text.Contains(value));
 
 				if (selectItem != null)
 				{
-					selectItem.FindElement(By.XPath("../input")).TryClick();
+					selectItem.FindElement(By.XPath("../input"), 2).TryClick();
 				}
 			}
 
@@ -2373,14 +2565,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			get
 			{
 				var countries = new List<string>();
-				ReadOnlyCollection<IWebElement> listOfOptions = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				ReadOnlyCollection<IWebElement> listOfOptions = this.containerElement.FindElements(By.XPath(".//label"))
 					.FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation"))
 					.FindElements(By.XPath("../..//input"));
 				foreach (IWebElement item in listOfOptions)
 				{
 					if (item.Selected)
 					{
-						return item.FindElement(By.XPath("../..//label")).Text;
+						return item.FindElement(By.XPath("../..//label"), 2).Text;
 					}
 				}
 
@@ -2389,8 +2581,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
-				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"));
+				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
+				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 				if (!optionInput.Selected)
 				{
 					optionInput.Click();
@@ -2476,6 +2668,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool CheckFileNameForSectionAndType(string label, string section, string pdffileName)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[child::label[contains(text(),'" + label + "')]]/following-sibling::div//span[text()='" + section + "' and not(contains(@style, 'display: none;'))]/..//div[@class='ws-dropzone-container']//span"), 2);
+
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Text == pdffileName;
+
+
+		}
+
 		public string GetDocumentTypeForSection(string section)
 		{
 			try
@@ -2531,7 +2737,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				try
 				{
-					IWebElement error = lbl.FindElement(By.XPath("../..//input/../../../p//span"));
+					IWebElement error = lbl.FindElement(By.XPath("../..//input/../../../p//span"), 2);
 					if (error != null)
 					{
 						return error.Text;
@@ -2722,21 +2928,61 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			// Fetch the indices for each column from the headings by name.
 			var columnHeadings = tableElement.FindElements(By.XPath(".//thead//th"), 2).ToList();
 			int getIndex;
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"));
+			List<string> stringList = columnHeadings.Select(x => x.Text).ToList();
+			
+			int currentPos;
+			currentPos = 0;
+
+			string useInd = "";
+			string complianceInd = "";
+			string unitsInd = "";
+			string regulationInd = "";
+
+			foreach(var thing in stringList)
+			{
+				switch (thing)
+				{
+					case "Use":
+						useInd = (currentPos + 1).ToString();
+						break;
+					case "VOC Compliance Limit":
+						complianceInd = (currentPos + 1).ToString();
+						break;
+
+					case "Units":
+						unitsInd = (currentPos + 1).ToString();
+						break;
+
+					case "Regulation":
+						regulationInd = (currentPos + 1).ToString();
+						break;
+
+					default:
+						Report.Failure("Item must be one of 'Use', 'VOC Compliance Limit', 'Units' or 'Regulation'");
+						return null;
+
+				}
+
+				currentPos++;
+			}			
+
+
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);	
 			// If the returned index for any column name is -1, we return a null string for that property.
-			string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"));
-			string complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Units"));
-			string unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"));
-			string regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"), 2);
+			//string complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Units"), 2);
+			//string unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"), 2);
+			//string regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+
 			foreach (IWebElement row in rows)
 			{
-				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2).GetValue();
-				string voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2).GetValue();
-				string units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2).GetValue();
-				string regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2).GetValue();
+				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2)?.GetValue();
+				string voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2)?.GetValue();
+				string units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2)?.GetValue();
+				string regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2)?.GetValue();
 				retList.Add(new VocLimitsWithUnits() { Use = use, VocComplianceLimit = voccompliancelimit, Units = units, Regulation = regulation });
 			}
 			return retList;
@@ -2780,7 +3026,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					return input.SelectedOption();
 				}
 				else
@@ -2796,7 +3042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					input.Select(value);
 				}
 				else
@@ -2815,7 +3061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					return input.SelectedOption();
 				}
 				else
@@ -2831,7 +3077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					input.Select(value);
 				}
 				else
@@ -2850,7 +3096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					return input.SelectedOption();
 				}
 				else
@@ -2866,7 +3112,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//select"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//select"), 2);
 					input.Select(value);
 				}
 				else
@@ -2885,7 +3131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					return input.Text;
 				}
 				else
@@ -2901,7 +3147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (lbl != null)
 				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"), 2);
 					input.EnterText(value);
 				}
 				else
@@ -2937,7 +3183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAdoptionArticleLink()
 		{
-			IWebElement link = this.containerElement.FindElement(By.XPath(@"//label[@class='control-label']//a"));
+			IWebElement link = this.containerElement.FindElement(By.XPath(@"//label[@class='control-label']//a"), 2);
 			if (link != null)
 			{
 				return link.TryClick();
@@ -2947,6 +3193,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+
+		public bool CheckBoxOptionExists(string label)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath($"//div[@class='form-subgroup']//div[@class='checkbox']//label//span[contains(text(),'{label}')]"), 2);
+			return el != null;
+		}
+
+
+
 
 		public bool OptionExists(string section)
 		{
@@ -2960,6 +3215,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 				IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
+
+
+
+				if (el == null)
+				{
+					string backupXPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+							@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label) and @type='text'] | " +
+							@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label)] | " +
+							@"//div[@class='dropzone' and (.//ancestor::div[starts-with(@class,'form-group')]//label)] | " +
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+					List<IWebElement> backupElList = this.containerElement.FindElements(By.XPath(backupXPath), 2).ToList();
+					List<IWebElement> labelElementsFromXpath = new List<IWebElement>();
+					foreach (var thing in backupElList)
+					{
+						IWebElement currentLableEL = thing.FindElement(By.XPath(".//ancestor::div[starts-with(@class,'form-group')]//label"), 2);
+						labelElementsFromXpath.Add(currentLableEL);
+					}
+					//This handles the new Line. If the devops test case does not space seperate when there is a new line the below will not match.
+					//If issues arise could change below to and "or" and the replace with "" instead.
+					el = labelElementsFromXpath.FirstOrDefault(x => x.Text.Replace("\r\n", " ").Contains(section));
+				}
 				return el != null && el.Displayed;
 			}
 			catch (Exception)
@@ -2967,6 +3244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+
 
 		public bool OptionExists(string section, string value)
 		{
@@ -2986,7 +3264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			if (el.TagName.ToLower() == "select")
 			{
-				return el.FindElements(By.XPath("//option")).Select(x => x.Text.Trim()).Contains(value);
+				return el.FindElements(By.XPath("//option"), 2).Select(x => x.Text.Trim()).Contains(value);
 			}
 
 			return false;
@@ -3045,7 +3323,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			if (el.GetAttribute("type") == "checkbox")
 			{
-				if(el.Checked())
+				if (el.Checked())
+				{
+					el.TryClick();
+					return !el.Checked();
+				}
+				else
+				{
+					Report.Info("Cannot uncheck the input as it was not checked to start");
+					return false;
+				}
+			}
+			Report.Info("Method only applicable to checkbox type input");
+			return false;
+		}
+
+		public bool UnsetOptionInSection(string section, string value)
+		{
+			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				Report.Info($"Unable to find the input under section {section} option {value}");
+				return false;
+			}
+			if (el.GetAttribute("type") == "checkbox")
+			{
+				if (el.Checked())
 				{
 					el.TryClick();
 					return !el.Checked();
@@ -3112,7 +3416,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-
 			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
@@ -3121,7 +3424,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
-			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations."|| section== "Product has been granted an Alternative Control Plan")
+			if(el==null)
+			{
+				Report.Info("The Element found from the original xpath was null");
+			}
+
+			if (section.Contains("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations")|| section== "Product has been granted an Alternative Control Plan")
 			{
 
 				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
@@ -3196,6 +3504,114 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						int x = 0;
 						bool isChecked = false;
 						while(isChecked==false&&x<6)
+						{
+							Delay.Seconds(1);
+							Report.Info($"Attempting to check box, attempt: {x + 2}");
+							el.TryCheck();
+							isChecked = el.Checked();
+							x++;
+						}
+						return isChecked;
+					}
+				}
+
+			}
+			catch (Exception)
+			{
+
+			}
+			// don't click the label if it contains a web link
+			el.Scroll();
+			el.ScrollElementIntoView();			
+			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
+			{
+				Report.Info("Dont Click label if contains web link");
+				Delay.Seconds(2);
+				if (this.SelectedOptionsForSection(section).Contains(value))
+				{
+					return true;
+				}
+			}
+			Report.Info("Trying a basic Try click on the element");
+			return el.FindElement(By.XPath("./input"), 10).TryClick();
+		}
+
+		public bool SetOptionInSectionToExactlyMatch(string section, string value)
+		{
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+
+			if (el == null)
+			{
+				Report.Error("Could not find the correct input in section: " + section);
+				return false;
+			}
+
+			el.ScrollElementIntoView();
+			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
+			if (el.GetAttribute("type") == "text")
+			{
+				el.EnterText(value);
+				if (el.GetValue() == value)
+				{
+					return el.GetValue() == value;
+				}
+				else
+				{
+					int j = 0;
+					bool textEntered = false;
+					while (textEntered == false && j < 6)
+					{
+						Delay.Seconds(1);
+						Report.Info($"Attempting to enter text, attempt: {j + 2}");
+						el.ClearTextBox();
+						el.EnterText(value);
+						textEntered = el.GetValue() == value;
+						j++;
+					}
+					return textEntered;
+
+				}
+			}
+			if (el.TagName.ToLower() == "select")
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						el.Select(value);
+						return el.SelectedOption() == value;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+
+				return el.SelectedOption() == value;
+			}
+
+			try
+			{
+				if (el.GetAttribute("type") == "checkbox")
+				{
+					el.TryCheck();
+					if (el.Checked() == true)
+					{
+						return el.Checked();
+					}
+					else
+					{
+						int x = 0;
+						bool isChecked = false;
+						while (isChecked == false && x < 6)
 						{
 							Delay.Seconds(1);
 							Report.Info($"Attempting to check box, attempt: {x + 2}");
@@ -3346,7 +3762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement vocAnalysisDateStatement =
 				this.containerElement.FindElement(
-					By.XPath(@"//div[contains(text(), 'VOC Analysis Date') and ancestor::div[@class='form-group has-success']]"));
+					By.XPath(@"//div[contains(text(), 'VOC Analysis Date') and ancestor::div[@class='form-group has-success']]"), 2);
 			return vocAnalysisDateStatement?.Text;
 		}
 
@@ -3367,6 +3783,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return new List<string>();
 			}
 			return radios.Select(x => x.Text).ToList();
+		}
+
+		public List<string> CheckboxesInSection(string section)
+		{
+			string xpath = @"//div[./label[contains(text(), """ + section + @""")]]/following-sibling::div//div[@class='checkbox']//span";
+			IList<IWebElement> checkboxes = this.containerElement.FindElements(By.XPath(xpath), 2);
+			if (checkboxes.Count == 0)
+			{
+				Report.Failure("There were no checkboxes showing in section: " + section);
+				return new List<string>();
+			}
+			return checkboxes.Select(x => x.Text).ToList();
 		}
 
 		// Currently deals with select (option) and input (radio)
@@ -3391,11 +3819,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
-				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
 				// Occasionally needs some time to refresh the options in the drop down depending on the previous selection
 				for (int i = 0; i < 5; i++)
 				{
-					optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+					optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
 					if (optionsText.Count > 0)
 					{
 						break;
@@ -3413,8 +3841,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> RegulatoryInformationLabelLinks()
 		{
 			var linksText = new List<string>();
-			linksText = this.containerElement.FindElements(By.XPath(".//a[@class='link-publication']")).Select(x => x.Text).ToList();
+			linksText = this.containerElement.FindElements(By.XPath(".//a[@class='link-publication']"), 2).Select(x => x.Text).ToList();
 			return linksText;
+		}
+
+		public string GetRegulatoryInformation3Statement()
+		{
+			var statementEl = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//div[@data-bind='html: field.field']//strong"), 2);
+			return statementEl.Text;
 		}
 
 		public bool AddDocument(string documentName, string language)
@@ -3488,7 +3922,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string VOCContentInGPerL()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and starts-with(text(), 'VOC content in g/L')]/b")).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and starts-with(text(), 'VOC content in g/L')]/b"), 2).Text;
 		}
 
 		public List<string> AllAdditionalStatements()
@@ -3651,19 +4085,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var thisAlert = new Alert();
 
 			thisAlert.Title = this.containerElement
-				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]/strong"))
+				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]/strong"), 2)
 				.Text;
 			thisAlert.SubTitle = this.containerElement
-				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]")).GetInnerText();
+				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]"), 2).GetInnerText();
 
 			thisAlert.Text = this.containerElement
 				.FindElement(By.XPath(
-					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p"))
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p"), 2)
 				.Text;
 
 			thisAlert.Links = this.containerElement
 				.FindElements(By.XPath(
-					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"))
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"), 2)
 				.Select(x => new Mailosaur.Link() {
 					Href = x.GetAttribute("href"),
 					Text = x.Text
@@ -3676,7 +4110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.containerElement
 				.FindElements(By.XPath(
-					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"))
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"), 2)
 				.FirstOrDefault(x => x.Text == linkText).TryClick();
 		}
 
@@ -3716,12 +4150,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
 			IWebElement pkgType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
-			return pkgType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+			return pkgType.FindElements(By.XPath(".//option"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		internal void SetProductName(string productType)
 		{
-			IWebElement productName = this.containerElement.FindElement(By.XPath(@"//*[@id='collapse1']/div/form/div[1]/div[2]/input"));
+			IWebElement productName = this.containerElement.FindElement(By.XPath(@"//*[@id='collapse1']/div/form/div[1]/div[2]/input"), 2);
 			productName.EnterText(productType);
 		}
 
@@ -3791,16 +4225,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 				IWebElement arrowclass = upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[@title='Expand']"), 2);
-				IWebElement arrowclassEl = arrowclass.FindElement(By.XPath(".//em"),2);
-				if(arrowclassEl.IsNullOrEmpty())
+				IWebElement arrowclassEl = arrowclass.FindElement(By.XPath(".//em"), 2);
+				if (arrowclassEl.IsNullOrEmpty())
 				{
 					Report.Info("Failed to find arrow");
 					return false;
 				}
-				if(arrowclassEl.GetAttribute("class").Contains("right"))
+				if (arrowclassEl.GetAttribute("class").Contains("right"))
 				{
 					Report.Info("The Arrow for the Upc was not expanded, now clicking the element to try and expand the UPC");
-					if(arrowclass.TryClick())
+					if (arrowclass.TryClick())
 					{
 						Report.Info("Successfully clicked expand arrow.");
 						Report.Screenshot();
@@ -3824,7 +4258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 
-				
+
 				Report.Info("Successfully clicked expand arrow.");
 				Report.Screenshot();
 				return true;
@@ -3982,34 +4416,114 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
-
+		
+		
 		public bool RemoveRandomRetailers()
 		{
-			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+
+
+			//This currently is not fully robust. Something about the page means that when you go to select the delete button for a given retailer the tryclick fails.
+			//This appears to be related to the element not being on screen, but even with a scroll into view the element is off the screen
+			//The issue is moslty fixed by using a page up loop, but it appears in some cases, especially if a lot of retailers are removed, then some try clicks still fail
+			//Either an alternative click or a more robust 'scrolling' solution are needed to make this work at all times.
+
+
+			//RemoveRandomRetailersWithoutSameBeginningLetter
+			List<IWebElement> retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
 			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
-			Random random = new Random();
-			int numOfLoops = random.Next(2, deleteButtons.Count - 1);
+			List<char> beginningLettersFound = new List<char>();
+			Random random = new Random();			
+			int numOfLoops = random.Next(2, retailerRows.Count - 1);
+			List<string> RemovedRetailersInitials = new List<string>();
+
+			// xpath to use //div[@class='row']//div//span[@data-bind='text: identifier']//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']
+			bool allButtonClicked = true;
+			IWebElement anchorEl = this.containerElement.FindElement(By.Id("txtSearch"), 2);
+
+			Report.Info($"The random number of loops will be: {numOfLoops}");
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
-				int ran = random.Next(0, deleteButtons.Count);
+
+				retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
+				int ran = random.Next(0, retailerRows.Count);
+
+				
+
 				if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
 				{
-					IWebElement deleteButton = deleteButtons[ran];
-					listOfAlreadyRemovedButtonIndexes.Add(ran);
-					bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
-					if (!RemoveSelectedRetailer)
+
+					IWebElement chosenRow = retailerRows[ran];
+					string foundRetailerInitials = chosenRow.Text;
+					char firstLetter = foundRetailerInitials[0];
+					Report.Info($"Initials of the retailer found was: {foundRetailerInitials}");
+					Report.Info($"First letter of retailer was: {firstLetter}");
+					if(!beginningLettersFound.Contains(firstLetter))
 					{
-						return false;
+
+						var delButtonEl = chosenRow.FindElement(By.XPath($".//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']"), 5);
+						if(delButtonEl.IsNullOrEmpty())
+						{
+							Report.Info($"The Delete button element was not found");
+							return false;
+						}
+						delButtonEl.ScrollElementIntoView();
+						if(delButtonEl.TryClick())
+						{
+							Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
+						}
+						else
+						{
+							Report.Info($"Starting scrolling");
+							GeneralUtilities.ScrollToBottomOfPage();
+							for(int x = 0; x<6; x++)
+							{
+								anchorEl.SendKeys(Keys.PageUp);
+								if(delButtonEl.VisibleInViewport())
+								{
+									Report.Info($"The delete button for the retailer was now visisble");
+									
+									break;
+								}
+							}
+							Report.Info($"Going to tryclick....");
+							if (!delButtonEl.TryClick())
+							{
+								allButtonClicked = false;
+								Report.Info($"Failed to click the delete button for: {foundRetailerInitials}");
+							}
+							else
+							{
+								Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
+							}
+
+						}
+						if(allButtonClicked==false)
+						{
+							Report.Info($"did not click delete for retailer after all attempts");
+							return false;
+						}	
+						Report.Info($"Adding retailer to lists");
+						beginningLettersFound.Add(firstLetter);
+						RemovedRetailersInitials.Add(foundRetailerInitials);
 					}
+					else
+					{
+						Report.Info($"A retailer with that starting character was already deleted, moving on.");
+					}				
+
 				}
 				else
 				{
 					i -= 1;
+					Report.Info($"I was now: {i}");
 				}
 			}
 
-			return true;
+
+			Context.AddToContext("LatestRemovedRetailers", RemovedRetailersInitials);
+			return allButtonClicked;
+
 
 		}
 
@@ -4040,6 +4554,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
 			List<int> listOfAlreadyClickedCheckBoxIndexes = new List<int>();
+			List<string> restoredRetailers = new List<string>();
+
 
 			for (int i = 0; i < CheckBoxes.Count; i++)
 			{
@@ -4051,7 +4567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			Random random = new Random();
 			int numOfLoops = random.Next(1, CheckBoxes.Count - 1);
-			for (int i = 0; i <= numOfLoops; i++)
+			for (int i = 0; i < numOfLoops; i++)
 			{
 				int ran = random.Next(1, CheckBoxes.Count);
 				if (!listOfAlreadyClickedCheckBoxIndexes.Contains(ran))
@@ -4064,13 +4580,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 						return false;
 					}
+
+					IWebElement textLabelEl = CheckBox.FindElement(By.XPath($".//following-sibling::a"), 2);
+					string labelString = textLabelEl.Text;
+					restoredRetailers.Add(labelString);
+
+
 				}
 				else
 				{
 					i -= 1;
 				}
 			}
-
+			Context.AddToContext($"LastRestoredRetailers", restoredRetailers);
 			return true;
 		}
 
@@ -4109,7 +4631,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
 			{
-
+				
 				ReportSettings.UseSubSteps = true;
 				var stepsRetailer = new Retailer();
 				Report.StartStep("In the Select Retailers popup I select the retailer: " + (row["Retailer"]));
@@ -4148,6 +4670,73 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public List<string> GetListOfRemovedRetailersInPopup()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			if(RemovedRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for RemovedRetailers");
+				return null;
+			}
+			List<string> RemovedRetailerNames = new List<string>();
+			foreach (IWebElement element in RemovedRetailers)
+			{
+				RemovedRetailerNames.Add(element.Text);
+			}
+			return RemovedRetailerNames;
+		}
+
+		public bool ListOfRemovedRetailersDoesNotContainListSavedAs(string savedAs)
+		{
+			var listOfRestored = (List<string>)Context.GetFromContext(savedAs);
+			if (listOfRestored.IsNullOrEmpty())
+			{
+				Report.Info("el was null for listOfRestored");
+				return false;
+			}
+			var foundRetailers = this.GetListOfRemovedRetailersInPopup();
+			if (foundRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for foundRetailers");
+				return false;
+			}
+
+			Report.Info($"The list of restored retailers was: {string.Join(",", listOfRestored)}");
+			Report.Info($"The list of deleted retailers was: {string.Join(",", foundRetailers)}");
+
+			if (foundRetailers.Any(x => listOfRestored.Any(y => y == x)))
+			{
+				Report.Info($"Restored Retailers were still found in the deleted retailers list...");
+				return false;
+			}
+			else
+			{
+				Console.WriteLine("No Restored Retailers were found in the deleted retailers list");
+				return true;
+			}
+
+		}
+
+		public bool CheckAllRetailesInAddRetailersPopupAreSelected()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			if (RemovedRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for RemovedRetailers");
+				return false;
+			}
+			foreach(var item in RemovedRetailers)
+			{
+				if(!item.Checked())
+				{
+					Report.Info($"The item was not checked");
+					return false;
+				}	
+			}
+			Report.Info($"All Retailers were selected");
+			return true;
+		}
+
 		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
 		{
 			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
@@ -4159,9 +4748,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			var expectedList = AddedRetailersNames.OrderBy(x => x).ToList();
 
-			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),
-			"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),
-			"Added retailer names are in order");
+			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),"Added retailer names are in order");
 		}
 
 		public bool CompanyTollFreePhoneNumber(string text)
@@ -4315,6 +4902,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					
+					if (packageField == null)
+					{
+						return false;
+					}
+
 					packageField.Select(info.PackageType);
 				}
 
@@ -4514,12 +5107,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool DataAcceptanceShowsAlertX(string expectedAlert)
 		{
 			List<string> foundAlerts = this.GetDataAcceptancePageAlerts();
-			if(foundAlerts.IsNullOrEmpty())
+			if (foundAlerts.IsNullOrEmpty())
 			{
 				Report.Info("No alert messages were found");
 				return false;
 			}
-			foreach(var msg in foundAlerts)
+			foreach (var msg in foundAlerts)
 			{
 				Report.Info($"The Error message found was: {msg.Trim()}");
 				if (msg.Trim().Contains(expectedAlert))
@@ -4552,6 +5145,92 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return restrictOptionCheckBox.TryCheck();
 		}
 
+		public bool CheckOptionsInDropDownMenusForTheFollowingSectinons(Table table)
+		{
+
+			List<string> unexpectedOptions = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{ 
+				IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//div[@class='col-sm-4']//label[text()='" + row["Section"] + "']/../following-sibling::div//select//option"), 2);
+				string[] strArr = row["Options"].Split(',');
+
+				var index = 0;
+				var defaultOptionFound = false;
+				
+				foreach (var option in options)
+				{
+					if (option.Text.Contains("Choose"))
+					{
+						index = options.IndexOf(option);
+						defaultOptionFound = true;
+					}
+				}
+
+				if (defaultOptionFound)
+				{
+					options.RemoveAt(index);
+				}
+
+				if (strArr.Count() != options.Count())
+				{
+					Report.Failure("The amount of options expected and the amount of options found were not the same");
+					return false;
+				} else if (options.Count() < 1)
+				{
+					Report.Failure("No options were found");
+					return false;
+				}
+				foreach (IWebElement option in options)
+				{
+					string optionText = option.Text;
+					if (optionText != "Choose..." && optionText != "choose...")
+					{
+						if (!strArr.Contains(optionText))
+						{
+							unexpectedOptions.Add(optionText);
+						}
+					}
+				}
+
+			}
+
+			if (unexpectedOptions.Count > 0)
+			{
+				foreach (string option in unexpectedOptions)
+				{
+					Report.Info("Unexpected option found: " + option);
+				}
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckForPNKSectionTitleWithText(string shouldOrShouldNot, string titleText)
+		{
+			IWebElement sectionTitle = this.containerElement.FindElement(By.XPath(@"//div[text()='" + titleText + "']"), 2);
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				return sectionTitle != null;
+			} else
+			{
+				return sectionTitle == null;
+			}
+		}
+
+		public bool CheckForInputFieldInSection(string sectionName)
+		{
+			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']/../following-sibling::div//input"), 2);
+			return section != null;
+		}
+
+		public bool EnterTextInInputFieldInSection(string enterText, string sectionName)
+		{
+			IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//label[text()='" + sectionName + "']/../following-sibling::div//input"), 2);
+			return section.TryEnterText(enterText);
+		}
+
 		public bool EnterWHMISSDSDocumentDate(string text)
 		{
 			try
@@ -4574,6 +5253,415 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool CheckRegulatoryDocumentsConfirmationBox()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//div[@class='checkbox']//input[//span[contains(text(),'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration.')]]"), 2);
+			bool clicked= el.TryClick();
+			bool isChecked = el.Checked();
+			return clicked && isChecked;
+			
+		}
+
+		public bool CheckInputFieldText(string fieldName, string text) {
+		
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[text()='" + fieldName + "']/../following-sibling::div//input"), 2);
+			if (el.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckInputFieldPlaceholder(string fieldName, string placeholder)
+		{
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='" + fieldName + "']/../following-sibling::div//input[@placeholder='" + placeholder + "']"), 2);
+			if (el != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmOptionIsCheckedInSection(string option, string section)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//label[text()='" + section + "']/../following-sibling::div//span[text()='" + option + "']/preceding-sibling::input"), 2);
+			if (optionEl.Checked())
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool SelectCaseUPCDropDownArrowForUPC(string savedAs, string expandOrCollapse)
+		{
+			IWebElement optionEl;
+			if (expandOrCollapse.ToLower() == "expand")
+			{
+				optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//em[@class='fa fa-chevron-right']"), 2);
+			}
+			else
+			{
+				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
+			}
+			return optionEl.TryClick();
+		}
+
+		public bool ConfirmUPCNumberIsDisplayedInUPCNumberField(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
+			if (optionEl.Text == savedAs)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmFieldExists(string field)
+		{
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+
+			if (field == "UPC")
+			{
+				field = "upcNumber";
+			}
+			else if (field == "Name")
+			{
+				field = "name";
+			}
+			else if (field == "Container")
+			{
+				field = "type";
+			}
+			else if (field == "Size")
+			{
+				field = "size";
+			}
+			else if (field == "Quantity")
+			{
+				field = "quantity";
+			}
+			else if (field == "Individual UPC")
+			{
+				field = "upcContained";
+			}
+			else if (field == "Transport")
+			{
+				field = "transport";
+			}
+			else if (field == "Package")
+			{
+				field = "packType";
+			}
+
+			IWebElement fieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + field + ".isValid() && " + field + ".hasValue(), 'has-error': !" + field + ".isValid() }\"]"), 2);
+
+			if (field != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmLowerFieldIsBelowUpperField(string lowerField, string upperField)
+		{
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+
+			if (lowerField == "UPC" || upperField == "UPC")
+			{
+				if (lowerField == "UPC")
+				{
+					lowerField = "upcNumber";
+				}
+				if (upperField == "UPC")
+				{
+					upperField = "upcNumber";
+				}
+			}
+			if (lowerField == "Name" || upperField == "Name")
+			{
+				if (lowerField == "Name")
+				{
+					lowerField = "name";
+				}
+				if (upperField == "Name")
+				{
+					upperField = "name";
+				}
+			}
+			if (lowerField == "Container" || upperField == "Container")
+			{
+				if (lowerField == "Container")
+				{
+					lowerField = "type";
+				}
+				if (upperField == "Container")
+				{
+					upperField = "type";
+				}
+			}
+			if (lowerField == "Size" || upperField == "Size")
+			{
+				if (lowerField == "Size")
+				{
+					lowerField = "size";
+				}
+				if (upperField == "Size")
+				{
+					upperField = "size";
+				}
+			}
+			if (lowerField == "Quantity" || upperField == "Quantity")
+			{
+				if (lowerField == "Quantity")
+				{
+					lowerField = "quantity";
+				}
+				if (upperField == "Quantity")
+				{
+					upperField = "quantity";
+				}
+			}
+			if (lowerField == "Indvidual UPC" || upperField == "Indvidual UPC")
+			{
+				if (lowerField == "Indvidual UPC")
+				{
+					lowerField = "upcContained";
+				}
+				if (upperField == "Indvidual UPC")
+				{
+					upperField = "upcContained";
+				}
+			}
+			if (lowerField == "Transport" || upperField == "Transport")
+			{
+				if (lowerField == "Transport")
+				{
+					lowerField = "transport";
+				}
+				if (upperField == "Transport")
+				{
+					upperField = "transport";
+				}
+			}
+			if (lowerField == "Package" || upperField == "Package")
+			{
+				if (lowerField == "Package")
+				{
+					lowerField = "packType";
+				}
+				if (upperField == "Package")
+				{
+					upperField = "packType";
+				}
+			}
+
+			IWebElement lowerFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + lowerField + ".isValid() && " + lowerField + ".hasValue(), 'has-error': !" + lowerField + ".isValid() }\"]"), 2);
+			IWebElement upperFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + upperField + ".isValid() && " + upperField + ".hasValue(), 'has-error': !" + upperField + ".isValid() }\"]"), 2);
+
+			if (fields.IndexOf(lowerFieldEl) > fields.IndexOf(upperFieldEl))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmTruckIconIsDisplayingNextToUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//i[@class='fa fa-truck']"), 2);
+			if (optionEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseUPCDetailsAreCollapsedForUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//input[@data-bind='textInput: upcNumber.field']"), 2);
+			if (optionEl == null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseDropDownContainsUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']"), 2);
+			if (optionEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseDropDownWithUPCIsAvailableForSelection(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/../..//input"), 2);
+
+			if (optionEl != null)
+			{
+				optionEl.TryCheck();
+				return optionEl.Checked();
+			}
+
+			return false;
+		}
+
+
+		public bool ConfirmSectionIsAvailableForSelection(string sectionName)
+		{
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//label[text()=\"" + sectionName + "\"]/../following-sibling::div//div[@data-toggle='buttons']//input"), 2);
+
+			if (options.Count != 2)
+			{
+				Report.Info("The amount of options found were not as expected");
+				return false;
+			}
+
+			foreach (IWebElement el in options)
+			{
+				if ((el.Text.ToLower() != "no") && (el.Text.ToLower() != "yes"))
+				{
+					Report.Info("An option with an unexpected name was found");
+					return false;
+				}
+
+				if (!el.TryClick())
+				{
+					Report.Info("At least one option was not clickable");
+					return false;
+				}
+
+			}
+
+			return true;
+		}
+
+		public bool CheckForOptionsInIndividualUPCField()
+		{
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/..//option"), 2);
+
+			if (options.Count < 2)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
+		{
+			IWebElement truckIcon = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			if (truckIcon != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmTierDataShowsCorrectAnswer(string answer)
+		{
+			IWebElement answerEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Consent to Tier 2.1, 2.2, 4.2 Data Uses']/following-sibling::p[@data-bind='html: Data']"), 2);
+			if (answerEl != null)
+			{
+				if (answerEl.Text == answer)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool CheckTextInForumulationBatteriesPage()
+		{
+
+			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
+			var foundText = displayedText.Text;
+
+			var updatedString = foundText.Replace("\r\n\r\n", "|");
+
+			var updatedStringFinal = updatedString.Replace("\r\n", "|");
+
+			string[] foundStringArray = updatedStringFinal.Split('|');
+			for (int i=0;i<foundStringArray.Count();i++)
+			{
+
+				if (foundStringArray[0] != "Data Use Consents")
+				{
+					Report.Failure("The first line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[1] != "Direct suppliers with products containing your battery (i.e., your customers) may opt to participate in various chemical policy and product qualification programs operated by WERCSmart Recipients. Further information about these consents and data uses are provided in the Data Use Tier Disclosure section of the WERCSmart Terms of Use.")
+				{
+					Report.Failure("The second line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[2] != "You have the option of allowing this battery to be included in such programs by providing the consent below. Such consent means:")
+				{
+					Report.Failure("The third line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[3] != "a. That your battery data may be utilized when UL generates aggregate usage reports, chemical screening results and transparency ratios for such Direct Supplier products (Tier 2.1),")
+				{
+					Report.Failure("The fourth line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[4] != "b. That the identity of ingredients in your battery (i.e., the standard chemical names or CAS Numbers) may be disclosed to your customer and the relevant WERCSmart Recipient, but only if you have marked an ingredient as publicly disclosed on the formulation page (Tier 2.2) or if applicable law requires that an ingredient be publicly disclosed, and")
+				{
+					Report.Failure("The fifth line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[5] != "c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).")
+				{
+					Report.Failure("The sixth line in the displayed text was incorrect");
+					return false;
+				}
+				if (foundStringArray[6] != "These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public.")
+				{
+					Report.Failure("The seventh line in the displayed text was incorrect");
+					return false;
+				}
+			}
+				return true;
+		}
+
+		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		{
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+		}
+
+		public bool ConfirmOptionalReportsFooterContains(string expectedText)
+		{
+			IWebElement footerTextEl = this.ContainerElement.FindElement(By.XPath(".//div[@data-bind='html: field.field']"), 2);
+			if(footerTextEl==null)
+			{
+				Report.Info($"The element was null");
+				return false;
+			}
+			var footerTextFound = footerTextEl.Text;
+			return footerTextFound.Contains(expectedText);
+		}
 
 	}
 

@@ -25,6 +25,8 @@ using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -39,7 +41,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
-		[AfterScenario(Order = 1)]
+		[BeforeFeature(Order = 2)]
+		public static void BeforeTestKillChrome()
+		{
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
+		}
+
+		[AfterFeature(Order = 1)]
 		public static void CloseChrome()
 		{
 			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
@@ -195,13 +203,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
-			
+
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
 				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
-	
+
 			if (user == null)
 			{
 				string Branch = TReVorSettings.SoftwareBranch;
@@ -228,7 +236,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
-			
 		}
 
 		/// <summary>
@@ -278,6 +285,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
+
+
+		
+
 			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
@@ -293,6 +304,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
+
+				//wait 5 seconds max for the consent page/handle
+				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
+
 				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
@@ -387,6 +402,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selHomepage = new Homepage();
 			// check for home page
+
+			new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
+
 			if (selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Success("Successfully logged in!");
@@ -531,7 +549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Navigating to the landing page");
 				Report.Info("Checking the number of tabs that are open in the current window");
 				ReadOnlyCollection<string> currentTabs = SeleniumBrowser.WebBrowser.WindowHandles;
-				if(currentTabs.Count()==1)
+				if (currentTabs.Count() == 1)
 				{
 					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
 					Report.Info("Chrome Quit - Closing the chrome window");
@@ -541,7 +559,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Attempting to Open a chrome window");
 					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
 					//Report.Info("Attempting to maximize the window");
-					SeleniumBrowser.StartBrowser();
+					SeleniumBrowser.StartBrowser(WebDriverType.Chrome);
 					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
 
@@ -580,7 +598,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					
+
 				}
 
 				try
@@ -686,10 +704,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
+			Delay.Seconds(5);
 			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
 				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -805,6 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
 			{
+
 				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 				string myEmail = MailosaurFunctions.CreateEmail(myDate);
@@ -813,6 +834,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					throw new Exception("Failed to Create a New Email Address");
 				}
+
+				if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
+				{
+					Context.ScenarioContext.Remove("CurrentEmail");
+				}
+
 				Context.ScenarioContext.Add("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
 			}
@@ -829,7 +856,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
 			{
-				
+
 				string myEmail = MailosaurFunctions.CreateEmail("<random>");
 
 				if (myEmail == "")
@@ -902,10 +929,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("Matching", matchingEmail);
+					Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
+
 					if (shouldOrNot == "should not")
 					{
 						Report.Success("As expected, no email has been received");
@@ -929,13 +957,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="bodyText"></param>
 		[StepDefinition(@"the body of the email should show: (.*)")]
-	    public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
+		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				string emailBody = MailosaurFunctions.GetEmailBody(email);
+			
+				Mailosaur.Email email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				if (email == null)
+				{
+					Report.Info("null email for some reason");
+				}
+			
+				string emailBody = email.Text.ToString();
+	
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
@@ -1140,7 +1175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (thisModalDialog.Wait_for_load(30))
 			{
 				Report.Success("Modal dialog is opened.");
-				
+
 			}
 			else
 			{
@@ -1152,7 +1187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
-	
+
 			Report.IsTrue(new ModalDialog().ClickButton(button),
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
@@ -1482,6 +1517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current tab")]
 		public void GivenICloseTheCurrentTab()
 		{
+			Delay.Seconds(5);
 			SeleniumBrowser.CloseTabWithURL(SeleniumBrowser.GetActiveTabURL());
 		}
 
@@ -1496,7 +1532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Report.Info("Saving current window to context as MainWindowHandle");
-			
+
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			int i = 1;
 			Report.Info("Attempting up to 10 times to find wanted tab");
@@ -1918,13 +1954,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
-		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs,string productSavedAs, string subject, Table stringTable)
+		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs, string productSavedAs, string subject, Table stringTable)
 		{
 			ReportSettings.UseSubSteps = true;
 			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			string productID = productDetails.Id;
-			string emailSuspensionTitle = "Notification - Product "+productID+" - "+subject;
-						
+			string emailSuspensionTitle = "Notification - Product " + productID + " - " + subject;
+
 			Report.StartStep($"I confirm the administrator receieved an email with subject '{emailSuspensionTitle}'");
 			Delay.Seconds(5);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", emailSuspensionTitle);
@@ -1952,9 +1988,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Body of the Email was: " + emailText);
 					Report.IsTrue(!actualTrimmed.Contains(expectedTrimmed), "Body text did contain the given text", "Body text did not contain the given text");
 				}
-					   	
-																
-			
+
+
+
 			}
 			catch (Exception ex)
 			{
@@ -1971,7 +2007,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailText = email.Text.ToString();
-				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");					
+				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");
 				string expectedTrimmed = Regex.Replace(bodyText, @"\r|\n| ", "");
 				Report.Info("Expected email body text: " + expectedTrimmed);
 				Report.Info("Body of the Email was: " + actualTrimmed);
@@ -1998,7 +2034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Wait for a modal popup to disappear")]
 		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
-			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing", "The modal was gone");
 		}
 
 		[StepDefinition(@"I save the following text: (.*) as (.*)")]
@@ -2013,6 +2049,192 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
 		}
 
+		[StepDefinition(@"I Delete the directory and its contents with name: (.*) from the downloads folder")]
+		public void DeleteDirectoryAndItsContentsFromDownloadsFolder(string directoryName)
+		{
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\" + directoryName + "\\";
+
+			if (System.IO.Directory.Exists(rootFolder))
+			{
+				System.IO.Directory.Delete(rootFolder, true);
+				Report.Success("Directory with name: " + directoryName + " was successfully deleted");
+			} else
+			{
+				Report.Failure("Directory with name: " + directoryName + " was not found");
+			}
+		}
+
+		[StepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		public void SaveProductIDAsProductInformationNamed(string prodID, string savedAs)
+		{
+			var createdProduct = new ProductInformation();
+			createdProduct.Id = prodID;
+			Context.AddToContext(savedAs, createdProduct);
+		}
+
+
+		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
+		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm File is downloaded with name: " + file);
+			try
+			{
+				Delay.Seconds(10);
+				Report.Info("Confirm a file is downloaded with name: " + file);
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info("Downloads folder: " + downloadsFolder);
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+				{
+					Context.AddToContext(savedAs, dir.FirstOrDefault());
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I delete the file saved as (.*)")]
+		public void DeleteFileSavedAs(string savedAs)
+		{
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains text")]
+		public void CheckThatFileSavedAsContainsText(string fileSavedAs)
+		{
+		
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText!=null, "PDF does not contains text","PDF does contain text");		
+
+		}
+
+		[StepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
+		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs,string searchText)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(searchText), "PDF does not contain the text", "PDF does contain the text");
+
+		}
+
+
+		[StepDefinition(@"I save the current window handle to context as: (.*)")]
+		public void SaveTheCurrentWindowHandleToContextAs(string saveAs)
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext(saveAs, currentHandle);		
+		}
+
+		[StepDefinition(@"I switch to the window with handle saved as: (.*)")]
+		public void SwitchToTheWindowWithHandleSavedAs(string savedAs)
+		{
+			string handle = (string)Context.GetFromContext(savedAs);
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+			Delay.Seconds(2);
+		}
+
+		[StepDefinition(@"I close All the current windows")]
+		public void CloseAllTheCurrentWindows()
+		{
+			
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach(var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				Delay.Seconds(1);
+				SeleniumBrowser.WebBrowser.Close();
+
+			}
+		
+		}
+
+
+		[StepDefinition(@"I close All the current windows except the Main Window")]
+		public void CloseAllTheCurrentWindowsExceptTheMainWindow()
+		{
+
+			string mainHandle = (string)Context.GetFromContext("MainWindowHandle");
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				if(handle ==mainHandle)
+				{
+					Report.Info($"Main Handle");
+					//do nothing
+				}
+				else
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);					
+					SeleniumBrowser.WebBrowser.Close();
+				}
+				
+
+			}
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
+
+
+		}
+
+		[StepDefinition(@"An alert is displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string message)
+		{
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				string alertText = SeleniumBrowser.WebBrowser.SwitchTo().Alert().Text;
+				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
+					"Successfully found text in alert!");
+			}
+			else
+			{
+				Report.Failure("Alert not present!");
+			}
+
+		}
 
 
 

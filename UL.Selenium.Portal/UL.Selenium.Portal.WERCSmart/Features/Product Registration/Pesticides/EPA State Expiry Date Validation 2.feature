@@ -9,6 +9,8 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@UPC
+@SHA
 @run_EPAState2
 
 Feature:  EPA State Expiry Date Validation 2 (Suite ID: 56545)
@@ -271,3 +273,182 @@ And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56610
 
+                                                                                                                                                                                    |
+
+@ScenarioId:9325
+	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I call Shared Step 136221 (EPA expiration date - enter current year - Not July 1st) for state: DE
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And  I call Shared Step 136222 (EPA expiration date - enter next year - Not July 1st) for state: DE
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And I call Shared Step 136223 (EPA expiration date - enter current year plus 2 - Not July 1st) for state: DE
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And I call Shared Step 136224 (EPA expiration date - enter current year - July 1st) for state: DE
+	Then in page Pesticide Details - State Registration Details I should see no errors
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+@tfs_design
+#Bug ticket placed for the error that is not displaying - Philip
+	@ScenarioId:9324
+Scenario: [56652] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) for state: MA
+	Then in page Pesticide Details - State Registration Details I should see no errors
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+@ScenarioId:9334
+	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Kansas - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: KS
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: KS
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: KS
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: KS
+	Then in page Pesticide Details - State Registration Details I should see no errors
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+@ScenarioId:9393
+	Scenario: [26827] UPC Assessment Details
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC26827
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase26827
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| CVS      |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 do not click continue
+	And I click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase26827)
+	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase26827
+	And I confirm the Product UPC window has opened
+	Then I check for the following columns in UPC Retailer and Feed
+	| Column Name |
+	| UPC Number  |
+	| Container   |
+	| Size        |
+	| WeightSize  |
+	| Fluid Size  |
+	| Added       |
+	| Archived    |
+	| My Pkg ID   |
+	| CasePack    |
+	| Qty In Case |
+	| NEM         |
+	Then In UPC Retailer and Feed I check that the following sections contain the corresponding titles: 
+	| Section Name | Column Names													   | Column Numbers       |
+	| DOT          | UN,HazClass,Pkg Group,Ltd Qty,DOT Pkging Code,Exception,Sp Permit | 12,13,14,15,16,17,18 |
+	| IMDG         | UN,HazClass,Pkg Group,Ltd Qty									   | 19,20,21,22          |
+	| IATA         | UN,HazClass,Pkg Group,Ltd Qty									   | 23,24,25,26          |
+	| TDG		   | UN,HazClass,Pkg Group,Ltd Qty									   | 27,28,29,30          |

@@ -17,8 +17,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Select Retailers' window appears")]
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
-			var selSelectRetailers = new SelectRetailers();
+			var selSelectRetailers = new SelectRetailers();	
+			new Retailer().ClickAddRetailers();
+			Delay.Seconds(1);			
 			Report.IsTrue(selSelectRetailers.WaitForContainerToBeVisible(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
+
 		}
 
 		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
@@ -86,13 +89,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void SelectTheRetailer(string retailer)
 		{
-			var selectRetailers = new SelectRetailers();
-			if (!selectRetailers.WaitForContainerToBeVisible(1))
-			{
-				new Retailer().ClickAddRetailers();
-				Delay.Seconds(1);
-			}
-			if (!selectRetailers.WaitForContainerToBeVisible(1))
+			var selectRetailers = new SelectRetailers();			
+			new Retailer().ClickAddRetailers();
+			Delay.Seconds(1);
+			
+			if (!selectRetailers.WaitForContainerToBeVisible(30))
 			{
 				throw new Exception("Select retailers popup is not showing as expected");
 			}
@@ -178,6 +179,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
 				"Not all of the expected retailers were selected!",
 				"All of the expected retailers were selected");
+		}
+
+		[StepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
+		public void ThenIConfirmThatTheProductNamesFromTheDropDownForAppearInAlphabeticalOrder(string dropDownTitle, string retailer)
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(dropDownTitle, retailer), "Drop down options were not in alphabetical order", "Drop down options were in alphabetical order");
+		}
+
+		[StepDefinition(@"The following retailers in the Select Retailers popup list view (should|should not) be selected")]
+		public void ThenTheFollowingRetailersInTheSelectRetailersPopupListViewShouldBeSelected(string shouldOrShouldNot, Table table)
+		{
+			var retailerObject = new Retailer();
+
+			if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!retailerObject.CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(table), "Unexpected retailers were not found checked", "All expected retailers were not checked");
+			}
+			else
+			{
+				Report.IsTrue(retailerObject.CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(table), "Unexpected retailers were found checked", "All expected retailers were checked");
+			}
+		}
+
+
+		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		public void ThenIClickTheDeleteIconInTheRetailerPage()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
+		}
+
+		[StepDefinition(@"I select the following retailers in the Retailer page")]
+		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
 		}
 
 	}

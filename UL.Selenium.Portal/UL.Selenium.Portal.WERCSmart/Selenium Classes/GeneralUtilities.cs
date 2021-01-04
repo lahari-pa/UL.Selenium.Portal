@@ -15,6 +15,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Net;
 using System.Drawing;
 using TechTalk.SpecFlow;
+using System.Globalization;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -38,6 +39,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+
 
 		public static bool StudioWaitForSpinner(int maxSecondsToWait)
 		{
@@ -64,14 +67,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			// wait up to 2 seconds for the loading bar to become visible
 			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
-			// waits up to 30 seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
+			// waits up to 60 seconds for the loading bar to then become invisible
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 60);
 		}
 
 		public static bool Loading_Active()
 		{
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
 		}
+
+
 
 		public static void ScrollToBottomOfPage()
 		{
@@ -183,10 +188,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static bool DeleteFileFromDownloadsFolder(string fileName)
 		{
+
 			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
 			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
 			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
-
 			foreach (var file in files)
 			{
 				try
@@ -325,6 +330,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
+		public static bool IsValidDate(string value, string dateFormats)
+		{
+			DateTime tempDate;
+			bool validDate = DateTime.TryParseExact(value, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out tempDate);
+			if (validDate)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -357,7 +377,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "HD Supply", "HS" },
 				{ "Price Chopper", "PR" },
 				{ "The Home Depot", "HD" },
-				{ "Ahold", "AH" },
+				{ "Ahold | DelHaize USA", "AH" },
 				{ "Lowe's", "LW" },
 				{ "SuperValu", "SV" },
 				{ "CVS", "CV" },
@@ -394,6 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "TopCo", "TP" },
 				{ "Subscription", "SB" },
 				{ "Save Mart Supermarkets", "SM" },
+				{"Ace Hardware Corporation", "AC" },
 				{ "Best Buy", "BE" },
 				{ "Albertsons Companies", "SW" },
 				{ "Enterprise license", "EL" }
@@ -472,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			int x = 0;
 			bool foundMapping = false;
-			while(foundMapping==false && x<6)
+			while (foundMapping == false && x < 6)
 			{
 				Delay.Seconds(2);
 				var abbreviationMappings = this.Map;
@@ -491,13 +512,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
 				x++;
-				
+
 			}
 			return input;
 
 		}
 
-		
 
 
 

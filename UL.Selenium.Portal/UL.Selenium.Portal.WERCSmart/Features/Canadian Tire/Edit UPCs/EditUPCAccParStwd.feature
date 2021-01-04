@@ -108,4 +108,3 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86260 and its status is: Recertification
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86260
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86260
-

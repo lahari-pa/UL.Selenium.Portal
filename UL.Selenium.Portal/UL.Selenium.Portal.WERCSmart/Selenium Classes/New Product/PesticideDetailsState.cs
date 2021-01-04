@@ -7,6 +7,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -73,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickEpaKellyServicesLink()
 		{
-			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Services')]"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Solutions')]"));
 			if (links == null || links.Count == 0)
 			{
 				Report.Info("No (span) links showing with text 'Update WERCSmart data...'");
@@ -348,20 +349,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return null;
 			}
-			var rows = epaTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+			var rows = epaTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 			Report.Info("Getting state data for: " + rows.Count + " rows");
 			foreach (IWebElement thisRow in rows)
 			{
-				string state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div")).Text;
-				string expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input")).GetValue();
-				IWebElement registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"));
+				string state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div"), 2).Text;
+				string expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input"), 2).GetValue();
+				IWebElement registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"), 2);
 				string registrationNumber = registrationNumberEl.GetValue();
 				if (registrationNumber.Length == 0)
 				{
 					registrationNumber = registrationNumberEl.GetAttribute("placeholder");
 				}
-				string kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"))?.Text;
-				bool isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div")).Count == 1;
+				string kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"), 2)?.Text;
+				bool isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div"), 2).Count == 1;
 				rStatePest.Add(new StatePesticideRegistration() {
 					State = state,
 					ExpirationDate = expirationDate,
@@ -401,5 +402,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//	return false;
 			//}
 		}
+
+
+		public bool CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration()
+		{
+			IList<IWebElement> error = this.containerElement.FindElements(By.XPath("//div[@class='alert alert-danger']//p[@class='form-error']"), 2);
+			if (error.Count < 1)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		
+
+		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
+		{
+			IWebElement calendar = this.containerElement.FindElement(By.XPath("//div[text()='" + state + "']/../following-sibling::td//input[@data-date-format=\"yyyy-mm-dd\"]"), 2);
+			return calendar.TryEnterText(date);
+		}
+		public bool EnterEPAPesticideRegistrationNo(string enterText)
+		{
+			IWebElement textField = this.containerElement.FindElement(By.XPath("//th[text()='EPA Pesticide Registration No.']/../../following-sibling::tbody//input"), 2);
+			return textField.TryEnterText(enterText);
+		}
+
 	}
 }

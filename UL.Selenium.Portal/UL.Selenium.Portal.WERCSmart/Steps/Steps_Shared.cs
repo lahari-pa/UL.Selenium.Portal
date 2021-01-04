@@ -86,6 +86,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			var modal = new ModalDialog();
+
+			if(type=="Raw Material")
+			{
+				if (modal.WaitForContainerToBeVisible(2) && modal.GetTitle().Contains("Warning"))
+				{
+					Report.Info($"The Raw Material warning popup was found");
+					Report.Info("Closing popup");
+					modal.ClickButton("OK");
+					Delay.Seconds(2);
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+			}
+			
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
 
@@ -104,14 +119,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
 			MyStepsNewProduct.SectExatcDataNotKnown("pH");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7 (Neutral)");
-			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");	
+			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
-			
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
@@ -335,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			}
 
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 57569 \(Enter Product Details for Aerosol\)")]
@@ -658,10 +673,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Pesticide Details - U.S. Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");
-			Report.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
-			Report.StartStep("I set the Product has a State Registration field to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product has a State Registration", "No");
+			Report.StartStep(
+				"I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+			Report.StartStep(
+				"Product has a State Registration: No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has a State Registration", "No");
 			Report.StartStep("I select the first option in section: Select the applicable exemption");
 			MyStepsNewProduct.SelectFirstOptionInSection("Select the applicable exemption");
 			Report.StartStep("In the Pesticide Details - U.S. page I click Continue");
@@ -711,16 +730,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
+		[StepDefinition(@"I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
 		public void GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(
 				"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
-			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains(
-				"OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may including Active Ingredient)");
 			Report.StartStep("I set the Refer to your Product Label option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Refer to your Product Label", "None of the Above");
 			Report.StartStep("In the Regulatory Information 3 page I click Continue");
@@ -736,7 +753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No, due to an exemption or exception");
 			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
-		}
+		}	
 
 		[StepDefinition(
 			@"I call Shared Step 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
@@ -750,6 +767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var MyNewProduct = new NewProduct();
 			MyNewProduct.SetFullNameOfProductForRetailer(retailer, name);
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -849,11 +867,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
 			var selRetailer = new Retailer();
-			if (!selSelectRetailers.DoneButton())
-			{
-				Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
-				selRetailer.ClickAddRetailers();
-			}
+
+			//selRetailer.ClickAddRetailers();
+			//selSelectRetailers.Wait_for_load(30);
+
+			//if (!selSelectRetailers.DoneButton())
+			//{
+			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
+			//	selRetailer.ClickAddRetailers();
+			//}
 			//if (!selSelectRetailers.Wait_for_load(10))
 			//{
 			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
@@ -1068,9 +1090,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedUploadProductLabelOnly()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();			
+			var newProdClass = new NewProduct();
 			Report.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Delay.Seconds(2);
+
+			//60723 uses this on the reulatory docs to provide screen, but also on the additional docs to provide screen in 57950
+			//If keep sds confirm step in does this brake the step if used on the other screen?
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				//Should this show on this page? this step is for the additional docs page? Any examples?
+				Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+				//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			}
+
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -1150,8 +1186,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Minimum Ignition Energy"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
-Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-								 table.Rows[0]["Viscosity"]);
+			Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
+											 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			Report.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
 								 table.Rows[0]["Appearance"]);
@@ -1195,8 +1231,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=23C and <38C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <=815C");
+			Report.StartStep("I set the Flash Point (in Celsius) field to: >=93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
 			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
@@ -1378,8 +1414,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
+		[StepDefinition(@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_SpecialPermit_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1419,6 +1454,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I set the Amount of VOC content as weight percentage of the total formula field to: 50");
 			MyNewProduct.SetTheSectionOptionTo("Amount of VOC content as weight percentage of the total formula", "50");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
 		[StepDefinition(
@@ -1499,11 +1536,120 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 					"Solid");
 			}
 
+		}
+
+		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid, 2nd Phys State\(anything\), mixed \(anything\)\)")]
+		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutWaterSolubilityDescription()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var thisNewProduct = new NewProduct();
+			Report.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("There should only be one option available for Primary Physical State");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			Report.StartStep("Primary Physical State should be showing the value: Solid");
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
+			}
+
+			Report.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.StartStep(
+					"I set the Secondary Physical State option to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid");
+			} else
+			{
+				Report.Failure("The Secondary Physical State option was not displayed");
+				Report.Screenshot();
+			}
+
 			//Report.StartStep("I set the Secondary Physical State option to: Solid");
 			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Report.StartStep("In the New Product page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
+        [StepDefinition(@"I call Shared Step 73223 \(Enter Physical Property - Solid - Without Secondary Physical State\)")]
+        public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState()
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var thisNewProduct = new NewProduct();
+            Report.StartStep("I should see the Product Characteristics Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+            Report.StartStep("There should only be one option available for Primary Physical State");
+            MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+            Report.StartStep("Primary Physical State should be showing the value: Solid");
+            if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+            {
+                Report.Failure("The Primary Physical State was not set to Solid by default.");
+                Report.Screenshot();
+                Report.Info("Setting the Primary Physical State to: Solid");
+                MyNewProductSteps.SetTheSectionOptionTo(
+                    "Primary Physical State",
+                    "Solid");
+            }
+            else
+            {
+                Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+                Report.Screenshot();
+            }
+
+            Report.StartStep(
+                "I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+            MyNewProductSteps.SetTheSectionOptionTo(
+                "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+                "No");
+            if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+            {
+                Report.Failure("The Secondary Physical State option was displayed");
+                Report.StartStep(
+                    "I set the Secondary Physical State option to: Solid");
+                MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
+                    "Solid");
+                Report.Screenshot();
+            }
+            else
+            {
+                Report.Success("The Secondary Physical State option was not displayed");
+                Report.Screenshot();
+            }
+
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				Report.StartStep(
+					"I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
+					"Soluble in water");
+			}
+			else
+			{
+				Report.Failure("The Select the best Water Solubility description option was not displayed");
+				Report.Screenshot();
+			}
+			//Report.StartStep("I set the Secondary Physical State option to: Solid");
+			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			Report.StartStep("In the New Product page I click Continue");
+            MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+        }
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
@@ -1716,6 +1862,32 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 126160 \(U\.S\. Department of Transportation \(DOT\) Classification - Enter UN1057 - Lighter Fluid\)")]
+		public void
+			GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectLightersNoneAddTechnicalNameClickContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN1057");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1057");
+			Delay.Seconds(2);
+			Report.StartStep("I select 'Lighters' option in section: Proper Shipping Name");
+			MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Lighters");
+			Delay.Seconds(2);
+			Delay.Seconds(2);
+			Report.StartStep("I select '2.1' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.1");
+			Report.StartStep("I select 'None' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
+			Report.StartStep("I select '123' in section: For the lighter, provide the DOT Approval Number (LAA)");
+			MyNewProduct.SetTheSectionOptionTo("For the lighter, provide the DOT Approval Number (LAA)", "123");
+			Report.StartStep(
+				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue(
+				"U. S. Department of Transportation (DOT) Classification");
+		}
+
+		[StepDefinition(
 			@"I call Shared Step 65705 \(Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
 		public void
 			GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
@@ -1747,14 +1919,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set the UN Number field to: UN3159");			
+			Report.StartStep("I set the UN Number field to: UN3159");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3159");
-			Delay.Seconds(2);			
+			Delay.Seconds(2);
 			Delay.Seconds(2);
 			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
 			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
 			Delay.Seconds(2);
-			Report.StartStep("I select '2.2' in section: Hazard Class (select)");			
+			Report.StartStep("I select '2.2' in section: Hazard Class (select)");
 			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.2");
 			Report.StartStep("I select 'None' in section: Packing Group (select)");
 			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
@@ -1798,8 +1970,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set the UN Number field to: UN1950");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Delay.Seconds(2);
-			Report.StartStep("I select the first option in section: Proper Shipping Name");			
-			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");	
+			Report.StartStep("I select the first option in section: Proper Shipping Name");
+			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Hazard Class (select)");
 			MyNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
@@ -2141,16 +2313,15 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");			
+			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");			
-			
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
-		{
+		 {
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
@@ -2172,15 +2343,15 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			/* --As per TFS70787 warning popup displays for NR  --- */
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
 		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
@@ -2255,6 +2426,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+
+
 			Report.StartStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -2273,10 +2446,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Retailer Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("The selected retailers on the Retailer page should be:");
-			//MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			//MyNewProductSteps.SelectedRetailersShouldBe("should", new List<string> { retailer });
 			var retailers = new Table("Retailer");
 			retailers.AddRow(retailer);
-			new Steps_Retailer().SelectedRetailersShouldBe(retailers);
+			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -2328,10 +2501,33 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
 			{
-				Report.StartStep(
-					"I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
-				MyStepsNewProduct.SetTheSectionOptionTo(
-					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+				Report.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
+				new NewProduct().containerElement.Scroll();
+				Delay.Seconds(5);
+				var thisNewProduct = new NewProduct();
+				string section = "When mixed with an equal amount of water, will this produce a solution with a pH";
+				string option = "Yes";
+				if (thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()))
+				{
+					Report.Success("Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				}
+				else
+				{
+					int i = 0;
+					bool clicked = false;
+					while (i < 5 && clicked == false)
+					{
+						Delay.Seconds(2);
+						clicked = thisNewProduct.SetOptionInSection(section.Trim(), option.Trim());
+						i++;
+					}
+					Report.IsTrue(clicked, "Failed to set the input to " + option.Trim() + " in section: " + section.Trim(), "Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+
+				}
+				//Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),	"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(), "Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+				//MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+
 			}
 
 			Report.StartStep("I set theSelect all potential allergens included in this product option to: Dairy");
@@ -2436,6 +2632,25 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
 			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data Page page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+
+		[StepDefinition(@"I call Shared Step 133277\(Waste Classification Data - CEPA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		public void ICallSharedWasteClassificationData_CEAPRandom_Pro65No_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			var table = new Table("Section");
+			table.AddRow("Canadian Enviornmental Protection Act (CEPA) status");
+			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
+			Report.StartStep("I set the Canadian Enviornmental Protection Act (CEPA) status option to: Compliant");
+			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartStep("In the Waste Classification Data Page page I click Continue");
@@ -2907,14 +3122,15 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Consent to Tier 2 Data Uses",
 				"Granted"));
-			MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2 Data Uses", "Granted");
-			if (myNewProductClass.SectionExists("Consent to Tier 4.1 Derived Results"))
-			{
-				Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Consent to Tier 4.1 Derived Results",
-				"Granted"));
-				MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 4.1 Derived Results", "Granted");
-			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Granted");
+			//MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2 Data Uses", "Granted");
+			//if (myNewProductClass.SectionExists("Consent to Tier 4.1 Derived Results"))
+			//{
+			//	Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+			//	"Consent to Tier 4.1 Derived Results",
+			//	"Granted"));
+			//	MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 4.1 Derived Results", "Granted");
+			//}
 			Report.StartStep("in the Formulation > 3rd Party page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Formulation > 3rd Party");
 		}
@@ -3463,8 +3679,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 		[StepDefinition(
 			@"I call Shared Step 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
-		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer,
-			string name, string option)
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
@@ -3488,6 +3703,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("Selecting vendor ID: " + option);
 				new Steps_Retailer().ISelectVendorId(option);
 			}
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
@@ -3675,10 +3891,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.StartStep("I should see the Volatile Organic Compound Summary");
-			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");			
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
-			
-
 		}
 
 		[StepDefinition(
@@ -3770,8 +3984,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void
 			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
@@ -3784,6 +3997,52 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Product is not considered a pesticide product");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
+		public void
+			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep(
+				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"Product is not considered a pesticide product");
+			Report.StartStep(
+				"I set the Does the product contain fertilizer (P, N or K) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Does the product contain fertilizer (P, N or K)",
+				"No");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -4284,6 +4543,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			new StepsSelectRetailers().SelectTheRetailer("CVS");
 			Report.StartStep("I enter private label as 'This Private Label'");
 			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -4305,6 +4565,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			string use)
 		{
 			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
+
 			var regulationOtcLimit = LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").ToList();
 			var regulationCarbLimit = LimitsTable.Where(x => x.Regulation == "CARB limit").ToList();
 			Report.IsTrue(regulationOtcLimit.Count == 1,
@@ -4468,6 +4729,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I click continue");
 				selStepsNewProduct.ClickContinue();
 			}
+
 		}
 
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
@@ -4542,8 +4804,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				}
 			}
 			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
-
-
 
 		}
 
@@ -4681,7 +4941,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 					Report.Info("Skipping step because this is an electronic product");
 					return;
 				}
-
 			}
 
 			ReportSettings.UseSubSteps = true;
@@ -4726,10 +4985,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.StartStep("I click Continue");
-			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
-				"Clicked continue button");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
+			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
@@ -4737,9 +4996,16 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			}		
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
+
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 
 		}
 
@@ -4846,8 +5112,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
@@ -5233,6 +5505,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			var MyGlobalSteps = new GlobalSteps();
 			MyGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
+		}
+
+		[StepDefinition(@"I call Shared Step \(Login to WERCSmart - Pharma Account\)")]
+		public void GivenICallSharedStepLoginToWERCSmart_PharmaAccount()
+		{
+			var MyGlobalSteps = new GlobalSteps();
+			MyGlobalSteps.LoginToAccount("PharmaAccount");
 		}
 
 		[StepDefinition(
@@ -5690,14 +5969,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				throw new Exception(
 					$"Needs the product ID to be saved to context as 'TestCase{TReVorSettings.TestCaseId}'!");
 			}
-			
+
 			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
 			Report.StartStep("I confirm CKLT (Checklist) is selected as the subformat");
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
 			Report.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
-			
+
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
@@ -5705,8 +5984,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(
@@ -5938,8 +6223,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var thisMyIngredients = new Steps_MyIngredients();
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
 			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Declined");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Declined");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Declined");
 			var thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
@@ -6094,6 +6379,9 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"],
 					"Additional requirements: " + thisRetailer["Retailer"]);
 			}
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
+
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 			if (new NewProduct().ErrorMessageText == "This is a required field.")
@@ -6418,6 +6706,23 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartStep("I click 'UPC Retailer and Feed'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]
+		public void Shared134404_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			Report.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartStep("I click 'UPC Assessment Details'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Assessment Details");
 			Delay.Seconds(5);
 		}
 
@@ -6762,6 +7067,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
@@ -6771,6 +7077,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+		
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -6781,6 +7094,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
@@ -6794,6 +7108,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -7058,6 +7377,81 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			thisStepsStudio.ICloseAlert();
 			Report.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136221 \(EPA expiration date - enter current year - Not July 1st\) for state: (.*)")]
+		public void SharedStep136221_EPAExpirationDate_EnterCurrentYear_NotJuly1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55843");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the current year that is not June 30th
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "8", "8", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136222 \(EPA expiration date - enter next year - Not July 1st\) for state: (.*)")]
+		public void SharedStep55844a_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136223 \(EPA expiration date - enter current year plus 2 - Not July 1st\) for state: (.*)")]
+		public void SharedStep136223_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextTwoYears("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136224 \(EPA expiration date - enter current year - July 1st\) for state: (.*)")]
+		public void SharedStep136224_EPAExpirationDate_EnterCurrentYear_July1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55845");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the current year
+			// NOTE:  If the current date is after June 30th for the current year select June 30th for next year
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "7", "1", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
 		}
 
 		[StepDefinition(
@@ -7697,8 +8091,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var thisNewProduct = new NewProduct();
@@ -7709,8 +8103,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 			/* --As per TFS70787 warning popup displays for NR  --- */
 			//Delay.Seconds(1);
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickChoice("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(
@@ -7720,6 +8114,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set WHMIS-complient SDS to 'I need an SDS authored'");
@@ -7728,6 +8123,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -7801,6 +8201,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+			//this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
+
 			Report.StartStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			Report.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
@@ -7977,10 +8379,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Pesticide Details - U.S. Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");
-			Report.StartStep(
-				"I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+
+			Report.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+
+			Report.StartStep("I set the Product has a State Registration option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has a State Registration", "No");
+
+
 			Report.StartStep("I select the first option in section: Select the applicable exemption");
 			MyStepsNewProduct.SelectFirstOptionInSection("Select the applicable exemption");
 			Report.StartStep("In the Pesticide Details - U.S. page I click Continue");
@@ -8137,17 +8543,19 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			new NewProduct().ClickContinue();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
+		[StepDefinition(@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
 		public void SelectRetailers(string retailer)
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			var stepsRetailer = new Retailer();
-			Report.StartStep("In the Select Retailers popup I select the retailer: CVS");
+			Report.StartStep($"In the Select Retailers popup I select the retailer: {retailer}");
 			new StepsSelectRetailers().SelectTheRetailer(retailer);
 			Report.StartStep("I enter private label as 'This Private Label'");
-			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
+			//stepsRetailer.EnterPrivateLabelName("This Private Label");
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -8178,6 +8586,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 			Report.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			new StudioSupplierManager().WaitForSuppliersToLoad();
 
 			Report.StartStep("I Make a note of the Supplier Name");
 			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);
@@ -8982,7 +9391,9 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I upload a PDF file to section: OSHA SDS");
 			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			//MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			MyNewProduct.ICheckTheCheckboxWithDescription("check",
+							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -9376,8 +9787,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
 			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			//MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");
@@ -9480,7 +9890,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		@"I filter subformat (.*) and open checklist (.*)")]
 		public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
 		{
-
 			if (Context.Contains("ElectronicProduct"))
 			{
 				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
@@ -9522,8 +9931,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
 				"Set action option");
 
-			string WERCSmartIDFromContext = Context.GetFromContext("WERCSmart ID").ToString();
-			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(WERCSmartIDFromContext), $"Failed to enter {WERCSmartIDFromContext} into the Select Source Product field!", $"Successfully entered {WERCSmartIDFromContext} into the Select Source Product field");
+			if (Context.Contains("WERCSmart ID"))
+			{
+				string WERCSmartIDFromContext = Context.GetFromContext("WERCSmart ID").ToString();
+				Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(WERCSmartIDFromContext), $"Failed to enter {WERCSmartIDFromContext} into the Select Source Product field!", $"Successfully entered {WERCSmartIDFromContext} into the Select Source Product field");
+			}
 
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Delay.Seconds(3);
@@ -10009,7 +10421,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				ExcelEPACode = "NON-RCRA";
 			}
 
-
 			Report.IsTrue(ExcelEPAType == SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does not match the checklist EPA Type: " + SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does match the checklist EPA Type: " + SHA.CheckListEPAType);
 
 			Report.IsTrue(ExcelEPACode == SHA.CheckListEPACode, "The excel EPA Code: " + ExcelEPACode + ", does not match the checklist EPA Code: " + SHA.CheckListEPACode, "The excel EPA Code: " + ExcelEPACode + ", does match the checklist EPA Code: " + SHA.CheckListEPACode);
@@ -10064,7 +10475,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the The Product Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Type");
 			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			if (name == "")
 			{
@@ -10082,8 +10493,56 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
+		[StepDefinition(@"I call Shared Step 135134 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
+		public void IcallSharedStep135134()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			var newProductObject = new NewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
+			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			tableFirst.AddRow(
+				"Product is a Retailer's Private Label or Brand");
+			tableFirst.AddRow(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep(
+				"Product is a Retailer's Private Label or Brand: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is a Retailer's Private Label or Brand",
+				"No");
+			Report.StartStep(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale): No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
 		[StepDefinition(@"I call Shared Step 100974 \(Regulatory Documents to Provide - Canada only - Upload documents > Continue\)")]
-		public void	GivenICallSharedStep100974RegulatoryDocumentsToProvideCanadaOnlyUploadDocumentsContinue()
+		public void GivenICallSharedStep100974RegulatoryDocumentsToProvideCanadaOnlyUploadDocumentsContinue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -10091,20 +10550,141 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I should see the WHMIS SDS question");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
-			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian","I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
+			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
 			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			DateTime currentDate = DateTime.Today;
 			string currentDateString = currentDate.ToString("yyyy-MM-dd");
 			MyNewProduct.InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(currentDateString);
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
-			Report.StartStep("I upload a PDF file in the WHMIS Label section");			
+			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
 
+		[StepDefinition(@"I call Shared Step 132427 \(Waste Classification Data- For OTC Products\)")]
+		public void GivenICallSharedStep132427WasteClassificationDataForOTCProducts()
+		{
+			var regulatoryInformation = new RegulatoryInformation1();
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 132473 \(Regulatory Information 3 - Nutritional Category\)")]
+		public void GivenICallSharedStepRegulatoryInformation_NutritionalCategory()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Regulatory Information 3");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 3");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmRegulatoryInformation3PageContainsStatement("Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).");
+			Report.StartStep("For the 'Refer to your Product Label. From the options, select those that appear on the Label.' question three options should appear: 'Supplement Facts Panel', 'Nutrition Facts Panel' and 'None of the Above'");
+			var table = new Table("Option");
+			table.AddRow("Supplement Facts Panel");
+			table.AddRow("Nutrition Facts Panel");
+			table.AddRow("None of the Above");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed", "Refer to your Product Label.", table);
+			Report.StartStep("Select any of the three options that apply");
+			MyStepsNewProduct.GivenInTheRegulatoryInforamtionTabISelectProductLableAs("Supplement Facts Panel");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Nutritional and Supplement Labels");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Dietary Supplements Label");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Dietary Supplements Label");
+			Report.StartStep("In the Regulatory Information 3 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
+
+		[StepDefinition(@"I call Shared Step 132601 \(Additional Documents to Provide - Nutritional Flow\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_NutritionalFlow()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Additional Documents to Provide screen");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Documents to Provide");
+			MyNewProduct.ThenFieldExists("OSHA-compliant Safety Data Sheet (Optional)");
+			MyNewProduct.ThenFieldExists("Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)");
+
+			//new NewProduct().SectionExists("Upload Full Product Label (required)");
 
 
+
+			Report.StartStep("Upload Product Label");
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.Screenshot();
+			MyNewProduct.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
+			MyNewProduct.ThenFieldExists("Toxicity Characteristic Leaching Procedure (TCLP)");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 140562 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
+		public void IcallSharedStep140562()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			var newProductObject = new NewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
+			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			tableFirst.AddRow(
+				"Product is a Retailer's Private Label or Brand");
+			tableFirst.AddRow(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+
+			Report.StartStep(
+				"California's Cleaning Product Right to Know Act: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"California's Cleaning Product Right to Know Act",
+				"No");
+
+
+
+			Report.StartStep(
+				"Product is a Retailer's Private Label or Brand: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is a Retailer's Private Label or Brand",
+				"No");
+			Report.StartStep(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale): No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+	
 	}
 }

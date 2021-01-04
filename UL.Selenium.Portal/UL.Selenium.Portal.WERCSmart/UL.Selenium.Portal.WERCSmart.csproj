@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" />
+  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props')" />
+  <Import Project="..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.props" Condition="Exists('..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -40,6 +42,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BoDi, Version=1.4.1.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
+      <HintPath>..\packages\BoDi.1.4.1\lib\net45\BoDi.dll</HintPath>
+    </Reference>
+    <Reference Include="Cucumber.Messages, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b10c5988214f940c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cucumber.Messages.6.0.1\lib\net45\Cucumber.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -54,6 +62,9 @@
     <Reference Include="Gherkin, Version=6.0.0.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851, processorArchitecture=MSIL">
       <HintPath>..\packages\Gherkin.6.0.0\lib\net45\Gherkin.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -65,6 +76,10 @@
     </Reference>
     <Reference Include="Mailosaur, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mailosaur.3.0.2\lib\Mailosaur.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -81,8 +96,8 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
@@ -96,8 +111,8 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\stdole.7.0.3301\lib\net10\stdole.dll</HintPath>
@@ -107,6 +122,26 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -118,52 +153,57 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTalk.SpecFlow, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.2.4.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    <Reference Include="TechTalk.SpecFlow, Version=3.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.3.1.97\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.NUnit.3.1.97\lib\net45\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
+    <Reference Include="TReVor.Api.Wrapper, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\lib\net461\UL.Automation.Reporting.dll</HintPath>
+    <Reference Include="UL.Automation.Reporting, Version=2.1.119.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Reporting.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\lib\net461\UL.Automation.Reporting.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.Reporting.SpecFlow, Version=2.1.119.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\lib\net461\UL.Automation.Reporting.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\lib\net461\UL.Automation.Selenium.dll</HintPath>
+    <Reference Include="UL.Automation.Selenium, Version=2.1.177.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\lib\net461\UL.Automation.Selenium.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Selenium.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\lib\net461\UL.Automation.Selenium.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.Selenium.SpecFlow, Version=2.1.177.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\lib\net461\UL.Automation.Selenium.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\lib\net461\UL.Automation.TReVor.dll</HintPath>
+    <Reference Include="UL.Automation.TReVor, Version=2.1.165.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\lib\net461\UL.Automation.TReVor.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.TReVor.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\lib\net461\UL.Automation.TReVor.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.TReVor.SpecFlow, Version=2.1.165.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\lib\net461\UL.Automation.TReVor.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\lib\net461\UL.Automation.Utilities.dll</HintPath>
+    <Reference Include="UL.Automation.Utilities, Version=2.1.55.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\lib\net461\UL.Automation.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Utilities.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\lib\net461\UL.Automation.Utilities.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.Utilities.SpecFlow, Version=2.1.55.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\lib\net461\UL.Automation.Utilities.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="UL.WERCSmart.Library.Testing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.WERCSmart.Library.Testing.1.0.0\lib\UL.WERCSmart.Library.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
       <HintPath>..\packages\Utf8Json.1.3.7\lib\net45\Utf8Json.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.4.0.0.5\lib\net46\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.4.0.0.5\lib\net46\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -288,10 +328,12 @@
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_CACleaning.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_CreateProducts.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
+    <Compile Include="Steps\Steps_DeleteActiveProducts.cs" />
     <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
     <Compile Include="Steps\Steps_FileOps.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
@@ -341,6 +383,7 @@
     <None Include="Features\Basic Tests.feature">
     </None>
     <None Include="Features\Battery.feature" />
+    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
@@ -411,15 +454,13 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\PDPlusFailures.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Distributor.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Distributor.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
-    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
-    </None>
     <None Include="Features\Product Registration\Flow 12.feature">
     </None>
     <None Include="Features\Product Registration\Flow 14.feature">
@@ -509,6 +550,7 @@
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
     </None>
+    <None Include="Features\Product Set Up\CA Cleaning.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_3rdParty.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Chalk.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Electronic.feature" />
@@ -531,6 +573,7 @@
     </None>
     <None Include="Features\SHA Manager Supplier Records.feature" />
     <None Include="Features\SHA Search.feature" />
+    <None Include="Features\SHASubscriptionStatus.feature" />
     <None Include="Features\Signup.feature">
     </None>
     <None Include="Features\Sprint 15.5.2.feature" />
@@ -539,8 +582,9 @@
     </None>
     <None Include="Features\SupplierAccounts.feature">
     </None>
-    <None Include="Features\SupplierReports.feature">
-    </None>
+    <None Include="Features\SupplierReports%281%29.feature" />
+    <None Include="Features\SupplierReports%282%29.feature" />
+    <None Include="Features\SupplierReports%283%29.feature" />
     <None Include="Features\TheProduct.feature">
     </None>
     <None Include="Features\Timeout.feature" />
@@ -567,24 +611,6 @@
     <Folder Include="Steps\New Product\Recipient and UPC Details\" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -598,11 +624,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### UL.Automation.Vanessa Post-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.0.0.64\tools\PostBuild\UL.Automation.Vanessa.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.1.165\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### UL.Automation.Vanessa Pre-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.0.0.64\tools\PostBuild\UL.Automation.Vanessa.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
+"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.1.165\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
   </PropertyGroup>
   <Target Name="AfterUpdateFeatureFilesInProject">
     <ItemGroup>
@@ -615,22 +641,26 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\build\UL.Automation.Selenium.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\build\UL.Automation.Reporting.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.3.1.97\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.3.1.97\build\SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\build\UL.Automation.TReVor.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\build\UL.Automation.Selenium.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\build\UL.Automation.Utilities.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
-  <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets')" />
-  <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" />
-  <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.1.0.81\build\UL.Automation.Selenium.SpecFlow.targets')" />
-  <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.1.0.75\build\UL.Automation.Reporting.SpecFlow.targets')" />
+  <Import Project="..\packages\SpecFlow.3.1.97\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.1.97\build\SpecFlow.targets')" />
+  <Import Project="..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets')" />
+  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.1.165\build\UL.Automation.TReVor.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.1.177\build\UL.Automation.Selenium.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.1.55\build\UL.Automation.Utilities.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets')" />
 </Project>

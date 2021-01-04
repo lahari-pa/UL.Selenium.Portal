@@ -100,7 +100,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LITHIUM ION BATTERIES
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
 	Then I save the product information as: TestCase87650
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
@@ -109,6 +109,9 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
@@ -389,3 +392,159 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I close the window that opened
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
 
+
+@ScenarioId:10103
+	Scenario: [87631] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Given I generate a random UPC number and save as: UPC87631
+Then I save the product information as: TestCase87631
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I should see the Universal Product Code Page
+Given I click the 'Add Case UPC' button
+Given I add the following into the UPC case fields
+		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC87631   | Aerosol Can    | 6    | abc      |                          | 4A: steel box         |
+Then I click continue
+Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
+
+Given I add the following into the UPC case fields
+		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC87631   | Aerosol Can    | 6    | 32.101   |                          | 4A: steel box         |
+Then I click continue
+Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
+
+Given I add the following into the UPC case fields
+		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC87631   | Aerosol Can    | 6    | 32       |                          | 4A: steel box         |
+Then I click continue
+Then I check for the appropriate alert: No error
+And I should see the Regulatory Documents to Provide Page
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87631
+
+
+
+@ScenarioId:10153
+Scenario: [87633] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I generate a random UPC number and save as: UPC87633
+Then I save the product information as: TestCase87633
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I should see the Universal Product Code Page
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: abc do not click continue
+Then I click continue
+Given I check for the appropriate alert: This field must be a number
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: +6 do not click continue
+Then I click continue
+Given I check for the appropriate alert: This field must be a number
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: 6 do not click continue
+Then I click continue
+Then I check for the appropriate alert: No error
+And I should see the Regulatory Documents to Provide Page
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
+
+
+@ScenarioId:10145
+Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+Given I generate a random UPC number and save as: UPC87718
+Then I save the product information as: TestCase87718
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+Given I should see the Universal Product Code (UPC) Page
+Given I click the 'Add Case UPC' button
+Given I add the following into the UPC case fields
+		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC87718   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
+And I Select a package type from the drop down list
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87718
+Then I confirm the case dropdown with the following UPC: saved as UPC87718 should be available for selection
+Then I check for a truck icon for UPC: saved as UPC87718
+Then I check if the case UPC details are collapsed for UPC: saved as UPC87718
+Then I confirm a case dropdown contains the following UPC: saved as UPC87718
+Then I confirm that the truck icon is displaying next to the case UPC: saved as UPC87718
+Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87718
+Then I confirm the Container field is below the UPC field
+Then I confirm the Size field is below the Container field
+Then I confirm the Quantity field is below the Size field
+Then I click continue
+Given I should see the Regulatory Documents Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87718
+
+
+
+
+Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC87818
+Then I save the product information as: TestCase87818
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+Given I click the 'Add Case UPC' button
+Given I add the following into the UPC case fields
+		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC87818   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87818
+Then I confirm the case dropdown with the following UPC: saved as UPC87818 should be available for selection
+Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87818
+Then I confirm the Individual UPC field is shown in the Universal Product Code (UPC) Page
+Then I confirm Individual UPC field does not display any options
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
+
+
+
+
+@ScenarioId:6519
+Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC87821
+Then I save the product information as: TestCase87821
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87821, container type: Plastic Container and size: 32 do not click continue
+And I Select a package type from the drop down list
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87821
+Then I confirm a case dropdown contains the following UPC: saved as UPC87821
+Then I confirm the case dropdown with the following UPC: saved as UPC87821 should be available for selection
+Then I click continue
+Given I should see the Regulatory Documents Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87821

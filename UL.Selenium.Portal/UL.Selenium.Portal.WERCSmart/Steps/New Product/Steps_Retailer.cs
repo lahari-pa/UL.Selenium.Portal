@@ -34,13 +34,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"The selected retailers on the Retailer page should be:")]
-		public void SelectedRetailersShouldBe(Table retailers)
+		[StepDefinition(@"The selected retailers on the Retailer page (should|should not) be:")]
+		public void SelectedRetailersShouldBe(string shouldOrShouldNot, Table retailers)
 		{
 			var expectedRetailers = new List<string>();
 			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => expectedRetailers.Add(x["Retailer"]));
 			var actualRetailers = new Retailer().SelectedRetailers();
-			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+
+			if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue((!actualRetailers.All(expectedRetailers.Contains)), "The selected retailers did match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers
+
+					), " The selected retailers did not match as expected: " + string.Join(", ", expectedRetailers));
+			} else
+			{
+				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+			}
 		}
 
 		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
@@ -128,6 +137,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IEnterPrivateLabelName(string option)
 		{
 			Report.IsTrue(new Retailer().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
+		}
+
+		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I choose Private Label name: (.*)")]
+		public void ForRetailerIChoosePrivateLabelName(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().ChoosePrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
 		}
 
 		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
@@ -245,6 +260,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
 			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
+		
+		[StepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
+		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
+		{
+			Retailer RetailersObject = new Retailer();
+			Report.IsTrue(RetailersObject.CheckForTheFollowingRetailersInRetailerPage(table), "Failed to find all retailers", "Successfully found all retailers");
+		}
 
+		[StepDefinition(@"On The Retailer Screen, I enter 'This Private Label' as the full name of the product for every retailer selected")]
+		public void OnTheRetailerScreenIEnterTheProductNameAsFullNameOfProductForEveryRetailer()
+		{
+
+			var listOfRetailers = new Retailer().SelectedRetailers();
+			if(listOfRetailers.Count()==0)
+			{
+				Report.Failure($"No Retailers were found selected for the product");
+				return;
+			}
+			foreach(var retailer in listOfRetailers)
+			{
+				this.ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
+			}
+
+		}
+		
 	}
 }

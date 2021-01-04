@@ -10,6 +10,8 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using OpenQA.Selenium.DevTools.DOM;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -98,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetAllFilters()
 		{
-			return this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"))
+			return this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2)
 				.Select(x => x.Text).ToList();
 		}
 
@@ -140,6 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return (colourShowing == colourExpected);
 
 		}
+	
+
 
 		public bool ClickStatusFilter(string option)
 		{
@@ -286,7 +290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -301,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 			var retailers = new List<string>();
 			var retailersAbrv = new List<string>();
-			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed);
 
 			foreach (IWebElement retailerLi in retailersLi)
 			{
@@ -382,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					continue;
 				}
-				var productElement = new ProductGridItem { ProductId = row.FindElement(By.XPath(".//small"), 2).Text.Trim(), ProductName = row.FindElement(By.XPath(".//div/p"), 2).Text.Trim(), DateCreated = row.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(), Retailers = row.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList() };
+				var productElement = new ProductGridItem { ProductId = row.FindElement(By.XPath(".//small"), 2).Text.Trim(), ProductName = row.FindElement(By.XPath(".//div/p"), 2).Text.Trim(), DateCreated = row.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(), Retailers = row.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList() };
 				return productElement;
 			}
 			return null;
@@ -390,7 +394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<ProductGridItem> GetAllItemsInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -414,7 +418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList(),
+						Retailers = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList(),
 						NameLabel = labelBrandTag?.Text
 					};
 					ListProductGridItems.Add(productElement);
@@ -436,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
 				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 				DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-				Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+				Retailers = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList()
 			};
 			return thisProduct;
 		}
@@ -508,10 +512,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			if (rows.Count == 0)
 			{
-				Report.Info("No rows were found to delete!");
-				return true;
-			}
+				int x = 0;
+				bool rowsFound = false;
+				while (x<5&&rowsFound==false)
+				{
+					Delay.Seconds(10);
+					IList<IWebElement> newrows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+					if(newrows.Count==0)
+					{
+						Report.Info("No rows were found to delete! Waiting for 10 seconds");
 
+					}
+					else
+					{
+						Report.Info("Rows were found");
+						rowsFound = true;
+					}
+					x++;
+					
+				}
+
+				if(rowsFound == false)
+				{
+					Report.Info("After 1 minute No rows were found to delete! Moving on.");
+					return true;
+				}	
+				
+			}
+			rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			foreach (IWebElement row in rows)
 			{
 				IWebElement toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
@@ -559,8 +587,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						GeneralUtilities.Wait_for_load_finish();
 						//Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
-						row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-						return row == null;
+						int x = 0;
+						while(x<10)
+						{
+							var modalD = new ModalDialog();
+							if (modalD.ContainerVisible())
+							{
+								delDialog.ClickDelete();
+							}
+							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+							if(row==null)
+							{
+								Report.Info($"The products grid was emtpy");
+								return true;
+							}
+							try
+							{
+
+								toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+								toggleButton.TryClick();
+								deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
+								deleteButton.TryClick();
+								delDialog.WaitForContainerToBeVisible();
+								Delay.Seconds(10);
+								GeneralUtilities.Wait_for_load_finish();
+								if (modalD.ContainerVisible())
+								{
+									delDialog.ClickDelete();
+								}
+								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+								if (row == null)
+								{
+									Report.Info($"The products grid was emtpy");
+									return true;
+								}
+
+								Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
+								Delay.Seconds(15);
+								x++;
+							}
+							catch
+							{
+								Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
+								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+								if (row == null)
+								{
+									Report.Info($"The products grid was emtpy");
+									return true;
+								}
+								Report.Info($"The Products grid was still not empty after all attempts");
+								return false;
+							}
+
+						}
+
+						Report.Info($"The Products grid was still not empty after all attempts");
+						return false;						
 					}
 					Report.Info("Failed to click 'Delete' in popup dialog");
 					return false;
@@ -1016,6 +1098,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return popover != null;
 		}
 
+		public bool WaitForRetailerPopupToBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return false;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = false;
+			while (x<30&& popupdisplayed==false)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover != null;
+				x++;
+				Delay.Seconds(2);
+			}
+			return popupdisplayed;
+			
+		}
+
+		public bool WaitForRetailerPopupToNotBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return true;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = true;
+			while (x < 30 && popupdisplayed == true)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover != null;
+				x++;
+				Delay.Seconds(2);
+			}
+			if (popupdisplayed == true)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+			
+
+		}
+
 		public void ClickContainer()
 		{
 			this.containerElement.Click();
@@ -1107,7 +1245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductNotRecertInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -1149,7 +1287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 					var retailers = new List<string>();
 					var retailersAbrv = new List<string>();
-					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed);
 
 					foreach (IWebElement retailerLi in retailersLi)
 					{
@@ -1192,6 +1330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
 		}
+
 
 	}
 
@@ -1394,7 +1533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> MoreFilterLabels()
 		{
-			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool SelectBrandByValue(MyBrands.Brand brand)
@@ -1413,6 +1552,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
 			return checkBox.TryClick();
 		}
+
+		public bool CheckIfProductIsMissing(string wpsID)
+		{
+			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
+			if (product == null)
+			{ 
+				return true;
+			}
+
+			return false;
+
+		}
+
 	}
 
 	class RemoveUpcUpdate : ModalDialog

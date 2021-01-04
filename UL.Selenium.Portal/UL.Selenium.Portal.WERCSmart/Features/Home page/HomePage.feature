@@ -169,7 +169,7 @@ Scenario: [64854] Navigation Settings
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -310,6 +310,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see a small icon with three lines in the upper left hand corner
 	Then In the Live Help dialog I should see an x in the upper right hand corner
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
+	Then In the Live Help dialog I should see the description text: Currently replying in under 2 hours at the top of the chat window
 	Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
 	#Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
 	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
@@ -331,7 +332,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -342,7 +343,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -362,7 +363,7 @@ Scenario: [66336] Main Menu - collapsed
 		| Flask      | Register New Product |
 		| Envelope   | My Messages          |
 		| Handshake  | Retail Partners      |
-		| Cloud      | Supplier Reports     |
+		| File-Text  | My Reports           |
 		| Bulb       | UL Solution Center   |
 		| Cart       | Shopping Cart        |
 		| Life-Saver | Support              |
@@ -395,8 +396,10 @@ Scenario: [85275] Select All - Popup closes
 	And I navigate to the home page
 	And I search for the product saved as: TestCase85275
 	And I click 'All' under Retailers for the first product returned
+	And In The products Grid I Wait for the Retailers Popup to appear
 	Then I confirm the Retailers popup is displayed
 	And I click the products grid container
+	And In The products Grid I Wait for the Retailers Popup to disappear
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
@@ -447,7 +450,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -459,7 +462,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |

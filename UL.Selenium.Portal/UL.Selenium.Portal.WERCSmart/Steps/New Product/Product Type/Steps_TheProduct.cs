@@ -6,6 +6,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 {
@@ -18,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		public void SetProductNameTo(string productName)
 		{
 			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product Type tab is not active",
-				"Product Type tab is loaded.");
+			"Product Type tab is loaded.");
 			Report.Info("Setting Product Name to: " + productName);
 			this.TheProduct.ProductName = productName;
 			Report.IsTrue(this.TheProduct.ProductName == productName, "Failed to set the Product Name", "Successfully set the Product Name");
@@ -27,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set 'Type of Product' to: (.*)")]
 		public void SetTypeOfProductTo(string typeOfProduct)
 		{
-			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
+		    Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			this.TheProduct.ProductType = typeOfProduct;
 			Report.IsTrue(this.TheProduct.ProductType.ToLower().Contains(typeOfProduct.ToLower()), "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
 		}

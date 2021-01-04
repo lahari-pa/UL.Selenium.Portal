@@ -205,3 +205,158 @@ Then I check that Walmart and all of its affiliates are not available
 Then I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase96708
 # Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96708
+
+
+
+@ScenarioId:9399
+Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Then I save the product information as: TestCase1234
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Calcium
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Given I click Done in the Select Retailers popup
+And The selected retailers on the Retailer page should be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Then I select the following retailers in the Retailer page
+| Retailers      |
+| CVS            |
+| Dollar General |
+Then I click the delete icon in the Retailer page
+And The selected retailers on the Retailer page should not be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+Given I click 'Add Retailers' in the Retailers page
+Then The following retailers in the Select Retailers popup list view should not be selected
+| Retailers      |
+| CVS            |
+| Dollar General |
+Given I click Done in the Select Retailers popup
+Given I click continue
+And I click the 'Add UPC' button
+And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
+And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
+
+
+@ScenarioId:9378
+Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | calcium       | 100     |                     |            |             |
+Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Then In the 'Select Retailers' window I select the retailer: Albertsons Companies
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Albertsons Companies appear in alphabetical order
+Then I select the following retailers in the Retailer page
+| Retailers            |
+| Albertsons Companies |
+Then I click the delete icon in the Retailer page
+Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+
+
+Scenario: [125130] Canadian Tire Available for Selection for Articles
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
+Then I save the product information as: TestCase125130
+And I set the Select countries the product may be sold in field to: Canada
+Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
+Then I click continue
+Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Canadian Tire and enter the name: Test
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
+
+
+
+
+Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
+Then I save the product information as: TestCase128920
+Given I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I set the Contains Circuit Board option to: No
+Given I set the Has a LCD or Plasma Display option to: No
+Then I click continue
+Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+		| Retailer												   |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
+
+
+@philtag1
+@ScenarioId:10275
+Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then The home screen should load
+Given I generate a random UPC number and save as: UPC59273
+Given I delete all products with UPC Number: saved as UPC59273
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
+Then I save the product information as: TestCase59273
+Given Primary Physical State should be showing the value: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given in the Product Characteristics page I click Continue
+Given I should see the Additional Product Information Page
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | Potassium hydroxide | 20.5    | false               |            | false       |
+|           | Zinc chloride       | 9.5     | false               |            | false       |
+|           | Aqua                | 70      | false               |            | false       |
+Given I should see the Formulation > Batteries Page
+Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+Given I click continue
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I click 'Add Retailers' in the Retailers page
+Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+		| Retailer												   |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+		| No Retailer/No UPC Product							   |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+

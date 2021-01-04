@@ -14,7 +14,9 @@ using System.Collections.Generic;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Selenium.Extensions;
 using UL.Automation.Utilities;
+using UL.Automation.Selenium.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
