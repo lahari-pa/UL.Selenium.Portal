@@ -3308,6 +3308,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		public void InTheAdditionalProductInformationPageUnselectUS()
+		{
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+		}
 
 
 	}

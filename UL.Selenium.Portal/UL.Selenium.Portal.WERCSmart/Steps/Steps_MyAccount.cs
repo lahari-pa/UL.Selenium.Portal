@@ -50,6 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
+		
 			try
 			{
 				if (username.ToLower().Contains("saved as"))
@@ -57,6 +58,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var savedUser = (User)Context
 						.GetFromContext(username.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 					username = savedUser.Username;
+				}
+				if (username == "<RandomString>")
+				{
+					string randomStringSaved = (string)Context.GetFromContext(username);
+					username = randomStringSaved;
+					Report.Info($"The username was expected to be: '{username}'");
 				}
 				var thisTopMenuBar = new TopMenuBar();
 				Report.Info("Looking for username: " + username);
@@ -166,6 +173,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
+			if(replacedBy== "<RandomString>")
+			{
+				string randomStringSaved = (string)Context.GetFromContext(replacedBy);
+				replacedBy = randomStringSaved;
+				Report.Info($"The replaced by string was expected to be: '{replacedBy}'");
+			}
+
+
 			try
 			{
 				Delay.Seconds(20);
@@ -280,6 +295,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					name = user.Username;
 				}
+				if(name=="<RandomString>")
+				{
+					string newRandom = GeneralUtilities.GenerateRandomString(12);
+					name = newRandom;
+					Context.AddToContext("<RandomString>", newRandom);
+				}
+
+
 				Report.Info("Inputting name: " + name);
 				myUserDetails.Name = name;
 				Report.IsTrue(myUserDetails.Name == name, "Failed to set user details name to: " + name,
