@@ -3320,6 +3320,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();			
+			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
+				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
 
 	}
 

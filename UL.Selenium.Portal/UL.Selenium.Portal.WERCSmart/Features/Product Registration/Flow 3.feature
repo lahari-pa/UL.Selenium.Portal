@@ -81,9 +81,14 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
 	Then I click continue
-	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+	#Ticket 142677 indicates that the VOC qs + error should no longer be seen?
+	#Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
 	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+
+	#Only can add product label now?
+	#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+	Given In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label (required)'
+
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I click continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:

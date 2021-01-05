@@ -1789,11 +1789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Select all modes of transport that you've classified the product for field to: Shipping with limited quantity");
 			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
-				"Shipping with limited quantity");
-			Report.StartStep(
-				"I set the Select all modes of transport that you've classified the product for field to: Shipping with consumer commodity");
-			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
-				"Shipping with consumer commodity");
+				"Shipping with limited quantity");			
 			Report.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
