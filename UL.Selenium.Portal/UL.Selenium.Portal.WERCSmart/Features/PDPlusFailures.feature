@@ -74,6 +74,7 @@ Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 	
 
 
+@ScenarioId:10579
 Scenario: [PDPlusFailure] 42196 | Flow 12
 	
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)

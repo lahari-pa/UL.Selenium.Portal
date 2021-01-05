@@ -570,5 +570,77 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return closeButton.TryClick();
 		}
 
+		public bool RetailsAreInAlphabeticalOrder()
+		{
+			IList<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
+			List<string> retailerNames = new List<string>();
+			foreach (var retailer in retailers)
+			{
+				retailerNames.Add(retailer.Text);
+			}
+
+			var orderedList = retailerNames.OrderBy(item => item.Split('.').First());
+
+			for (int i = 0; i < retailerNames.Count; i++)
+			{
+				if (retailerNames.ElementAt(i) != orderedList.ElementAt(i))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckTextInConfirmClearCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+
+			if (el.Text.Contains("You have selected to clear the shopping cart for this account. The Account's Administrator(s) will be notified via email of this action.") &&
+				el.Text.Contains("Are you sure you want to proceed? It cannot be reversed."))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueInConfirmClearCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']/following-sibling::div//span[text()='Continue']"), 2);
+			return el.TryClick();
+		}
+
+		public bool EnterInformationInClearShoppingCartPopup(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
+		{
+			IWebElement userIDEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetUser']"), 2);
+			IWebElement passwordEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetPassword']"), 2);
+			IWebElement tfsTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='TFSTicketNumber']"), 2);
+			IWebElement supportTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='SupportTicketNumber']"), 2);
+			if (userIDEl.TryEnterText(userID) && passwordEl.TryEnterText(password) && tfsTicketNumberEl.TryEnterText(tfsTicketNumber) && supportTicketNumberEl.TryEnterText(supportTicketNumber))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueInClearShoppingCartPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-dialog-validate-clear-cart']//span[text()='Continue']"), 2);
+			return el.TryClick();
+		}
+
+		public bool CheckTextInResultsClearShoppingCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-1']//div[@class='ui-dialog-content ui-widget-content']"), 2);
+			if (el.Text.Contains("The Cart has successfully been cleared for all users from the active database. the account administrator has been notified via email."))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 }

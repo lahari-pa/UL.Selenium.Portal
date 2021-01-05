@@ -5482,7 +5482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Cancelled");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
-
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Cancelled", savedAs);
 		}
 
 		[StepDefinition(@"I call Shared Step 67823 \(Login to WERCSmart - Products Automation Account\)")]
