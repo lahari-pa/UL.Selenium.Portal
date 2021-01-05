@@ -5467,7 +5467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
-
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
 		}
 
 		[StepDefinition(@"I call Shared Step 155714 \(SHA - Accepted Product - set Retailers to Cancelled for saved as: (.*)\) for")]
