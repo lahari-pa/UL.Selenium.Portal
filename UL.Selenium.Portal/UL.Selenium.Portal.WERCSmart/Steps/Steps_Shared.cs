@@ -9109,7 +9109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Requires a Company Name saved to context as: " + companySavedAs);
 				return;
 			}
-			var expectedText = "Hello " + name + ", Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: ";
+			var expectedText = "Hello " + name + ", Recently the Data Usage permissions for Wal-Mart/SAM'S CLUB were updated to include: ";
 			foreach (var row in dataUsage.Rows)
 			{
 				switch (row["Data Tier"])
@@ -9131,7 +9131,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 				}
 			}
-			expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
+
+			string userName = new TopMenuBar().GetCurrentUser();
+
+			expectedText += $" The update to the Data Usage permissions on your WERCSmart account were performed by the Administrator, {userName}";
+			expectedText += " For questions regarding Data Usage permissions, please contact WERCSmart Support’s Solution Center, or contact a Support Representative for further assistance. Thank you, Your WERCSmart Team";
 			Report.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
 			Delay.Seconds(8);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
