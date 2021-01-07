@@ -231,3 +231,55 @@ Given I call Shared Step 155714 (SHA - Accepted Product - set Retailers to Cance
 | Retailer |
 | Walgreens|
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Status for saved as: TestCase120820)
+
+
+
+
+@ScenarioId:10108
+Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Peripherals (Keyboard, Mouse, Trackball) without Battery
+Then I save the product information as: TestCase128694
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128694
+
+
+
+@ScenarioId:10107
+Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard, no electronic components) - RU001206
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Appliance - Hot Water Tank (Standard, no electronic components)
+Then I save the product information as: TestCase128721
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128721
+
+
+
+@ScenarioId:10147
+Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Components with Electrical Parts -  RU001428
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine Parts and Components with Electrical Parts
+Then I save the product information as: TestCase128703
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
