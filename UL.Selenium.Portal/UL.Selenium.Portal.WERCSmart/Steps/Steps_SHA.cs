@@ -4197,23 +4197,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			studioSupplierManagerObject.CloseCBDRegistrationGuidancePopupInIngredientsPage();
 		}
 
-		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
-		{
-			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+        [StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+        public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+        {
+            StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
-			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = ProductDetails?.Id;
-			if (id == null)
-			{
-				throw new Exception("Could not find product saved to context as: " + savedAs);
-			}
+            var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+            string id = ProductDetails?.Id;
+            if (id == null)
+            {
+                throw new Exception("Could not find product saved to context as: " + savedAs);
+            }
 
-			var key = id + "'s Clients";
-			var clients = Context.GetFromContext(key).ToString();
-			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
-			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
-		}
-
+            var key = id + "'s Clients";
+            var clients = Context.GetFromContext(key).ToString();
+            string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+            studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
+        }
+		
 		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
