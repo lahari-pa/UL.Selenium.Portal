@@ -1588,6 +1588,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 73223 \(Enter Physical Property - Solid - Without Secondary Physical State\)")]
+		public void GivenICallShared73223EnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var thisNewProduct = new NewProduct();
+			Report.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("There should only be one option available for Primary Physical State");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			Report.StartStep("Primary Physical State should be showing the value: Solid");
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
+			}
+
+			Report.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+
+			Report.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
+			MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");			
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
 		{
