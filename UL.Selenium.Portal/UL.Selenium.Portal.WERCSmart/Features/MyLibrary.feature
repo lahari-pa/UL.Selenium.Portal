@@ -195,6 +195,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70556
 
+@ScenarioId:10602
 Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

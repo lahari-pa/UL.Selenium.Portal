@@ -1021,16 +1021,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < 30; i++)
 			{
-				IWebElement messageEl =	SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"));
-				string messageTextFound = messageEl.Text;
-				Report.Info($"The found text was: {messageTextFound}");
-
-				if (messageTextFound == expectedText)
+				IWebElement messageEl =	SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"),2);
+				if (messageEl != null)
 				{
-					return true;
-				}
+					string messageTextFound = messageEl.Text;
+					Report.Info($"The found text was: {messageTextFound}");
 
+					if (messageTextFound == expectedText)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					Report.Info($"The message element was null");
+				}
 				Delay.Seconds(1);
+
 			}
 			return false;
 		}

@@ -9145,21 +9145,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I select a valid retailer and click DONE");
 			var selectRetailers = new SelectRetailers();
-			new Retailer().ClickAddRetailers();
-			List<string> retailers = new SelectRetailers().GetListOfRetailers();
-			List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
-			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
-			string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
-			if (selectRetailer == null)
+			var opened = new Retailer().ClickAddRetailers();
+			if (opened)
 			{
-				Report.Failure("There were no valid retailers to select!");
-				Report.Screenshot();
-				return;
-			} 
-			Report.Info("Selecting retailer: " + selectRetailer);
-			new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
-			Report.StartStep("Click CONTINUE");
-			new StepsNewProduct().ClickContinue();
+				List<string> retailers = new SelectRetailers().GetListOfRetailers();
+				List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
+				Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
+				string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
+				if (selectRetailer == null)
+				{
+					Report.Failure("There were no valid retailers to select!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info("Selecting retailer: " + selectRetailer);
+				new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
+				Report.StartStep("Click CONTINUE");
+				new StepsNewProduct().ClickContinue();
+			}
+			else
+			{
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
