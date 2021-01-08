@@ -1850,3 +1850,35 @@ Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Docume
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase146792) for
 | Retailer |
 | <All>    |
+
+
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Then The home screen should load
+	#Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
+	#And I create a Kit product and save details as: Kit_56829
+	#And I navigate to the landing page
+	#And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#And I should see an option for More Filters
+	#Given I click More Filters in the products grid
+	#Given I confirm the product exists with Product ID: Kit_56829_ID and Name: Kit Product 56829
+	#Given I enter combinations of More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
+	#	| Filter              | Match               |
+	#	| UPC                 | %Kit_56829_UPC%     |
+	#	| Brand               | TestBrand           |
+	#	| Retailer            | Wal-Mart/SAM'S CLUB |
+	#	| Additional Programs | Kit Registrations   |
+	#Given I enter combinations of Status and More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
+	#	| Filter              | Match                  |
+	#	| Status              | Assessment in Progress |
+	#	| Brand               | TestBrand              |
+	#	| Retailer            | Wal-Mart/SAM'S CLUB    |
+	#	| Additional Programs | Kit Registrations      |
+
+
+
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are not displayed
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are displayed
+	#Given I click More Filters in the products grid
+	#Then the 'More Filters' options are not displayed

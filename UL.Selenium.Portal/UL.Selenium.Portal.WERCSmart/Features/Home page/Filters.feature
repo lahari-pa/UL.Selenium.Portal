@@ -39,45 +39,9 @@ Scenario: [68388] More Filters - Brand
 	Then Product Line or Brand (optional) should be showing the value: ~saved as BrandName68388
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
-@morefilters
+
 @ScenarioId:5956
-Scenario: [56829] More Filters
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#Then The home screen should load
-	#Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
-	#And I create a Kit product and save details as: Kit_56829
-	#And I navigate to the landing page
-	#And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#And I should see an option for More Filters
-	#Given I click More Filters in the products grid
-	#Given I confirm the product exists with Product ID: Kit_56829_ID and Name: Kit Product 56829
-	#Given I enter combinations of More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
-	#	| Filter              | Match               |
-	#	| UPC                 | %Kit_56829_UPC%     |
-	#	| Brand               | TestBrand           |
-	#	| Retailer            | Wal-Mart/SAM'S CLUB |
-	#	| Additional Programs | Kit Registrations   |
-	#Given I enter combinations of Status and More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
-	#	| Filter              | Match                  |
-	#	| Status              | Assessment in Progress |
-	#	| Brand               | TestBrand              |
-	#	| Retailer            | Wal-Mart/SAM'S CLUB    |
-	#	| Additional Programs | Kit Registrations      |
-
-
-
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are not displayed
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are displayed
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are not displayed
-
-
-
-
-
-	
+Scenario: [56829] More Filters	
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
