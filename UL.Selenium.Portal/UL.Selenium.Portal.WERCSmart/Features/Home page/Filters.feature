@@ -62,3 +62,11 @@ Scenario: [68413] More Filters - Retailer
 
 
 
+	Scenario: [111111111] Test Kit Filter Creation
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
+
+
+
