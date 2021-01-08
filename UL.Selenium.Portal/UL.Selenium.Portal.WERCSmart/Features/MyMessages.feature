@@ -13,6 +13,7 @@
 @DocumentAcceptance
 @DeleteActiveProducts
 @Solutions
+@ProductSetUp
 @UPC
 @ReviewDocuments
 @SHA
@@ -106,3 +107,11 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
 	Given In the SHA Manager grid I click Message Center
 	And In the Message Center I go to the last page of messages
+
+@ScenarioId:10615
+	Scenario: [65457542] Debug Kit Test
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
+
+

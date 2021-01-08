@@ -40,6 +40,7 @@ Scenario: [68388] More Filters - Brand
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
 
+@tfs_design
 @ScenarioId:5956
 Scenario: [56829] More Filters	
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -60,13 +61,6 @@ Scenario: [68413] More Filters - Retailer
 	And I Select the check box next to Show Archived Retailers
 	And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
 
-
-
-@ScenarioId:10614
-Scenario: [111111111] Test Kit Filter Creation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
 
 
 
