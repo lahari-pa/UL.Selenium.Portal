@@ -40,7 +40,6 @@ Scenario: [68388] More Filters - Brand
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
 @morefilters
-@tfs_design
 @ScenarioId:5956
 Scenario: [56829] More Filters
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -81,7 +80,7 @@ Scenario: [56829] More Filters
 	
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I create a Hair Color Kit using test case 58753 and save as: KitProduct56829
+	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
 	#Create every time or look for id in table first? Need to ensure is passing kit product if do this -> How?
 
 

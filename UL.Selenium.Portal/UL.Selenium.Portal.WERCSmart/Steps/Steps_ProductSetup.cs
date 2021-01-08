@@ -3957,8 +3957,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition(@"I create a Hair Color Kit using test case 58753 and save as: (.*)")]
-		public void CreateHairColorKitUsing58753AndSaveAs(string savedAs)
+		[StepDefinition(@"I create a Hair Color Kit using test case 58753 with product name: (.*) and save as: (.*)")]
+		public void CreateHairColorKitUsing58753AndSaveAs(string productName, string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -3981,8 +3981,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			Report.StartStep("And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))");
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
-			Report.StartStep("And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit");
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit");
+
+
+			//Report.StartStep("And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit");
+			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit");
+
+			Report.StartStep($"The Product- Enter name: {productName}, select product type, Enter TestBrand - Continue - Happy Path): Hair Color Kit");
+			new Steps_TheProduct().SetProductNameProductTypeProductLine(productName, "Hair Color Kit", "TestBrand");
+
 			Report.StartStep("And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))");
 			sharedSteps.Shared60648_AdditionalProductInformation_Us_NoDirectShip_NoPl_NoGnfr();
 			Report.StartStep("And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
