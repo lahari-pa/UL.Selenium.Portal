@@ -4002,7 +4002,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
 			Report.StartStep("And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58753, container type: Plastic Container and size: 100");
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("UPC58753", "Plastic Container", "100");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("58753", "Plastic Container", "100");
 			Report.StartStep("And I should see the Additional Documents to Provide Page");
 			newProductSteps.ProductEditorShouldBeLoaded();
 			Report.StartStep("And I click continue");
