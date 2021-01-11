@@ -60,6 +60,8 @@ Then The selected retailers on the Retailer page should be:
 | Retailer |
 | CVS      |
 | Staples  |
+| No Retailer/No UPC Product |
+
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 

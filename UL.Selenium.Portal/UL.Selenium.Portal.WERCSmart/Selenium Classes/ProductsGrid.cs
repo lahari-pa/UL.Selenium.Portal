@@ -1621,6 +1621,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public class FilterInformation
+		{
+			public string Name { get; set; }
+
+			public string Id { get; set; }
+
+			public string UPC { get; set; }
+
+			public string Brand { get; set; }
+
+
+			public List<string> Retailers { get; set; }
+
+
+			public string AdditionalPrograms { get; set; }
+
+
+			public string Status { get; set; }
+
+
+			
+
+
+		}
 	}
 
 	class RemoveUpcUpdate : ModalDialog
