@@ -298,7 +298,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
-					mySHAManager.SelectFromStatusFilter("Assigned");
+					if (mySHAManager.GetCurrentStatusFilter() == "All")
+					{
+						//do nothing
+					}
+					else
+					{
+						//mySHAManager.SelectFromStatusFilter("Assigned");
+						mySHAManager.SelectFromStatusFilter("All");
+						var myProductSearch = new StudioSHAManagerProductSearch();
+						myProductSearch.Wait_for_load(3);
+						myProductSearch.ClickButton("Find");
+						mySHAManager.WaitForProductList(30);
+					}
+					
 				}
 
 				Delay.Seconds(5);
@@ -1001,6 +1014,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(1);
 			}
 
+			return false;
+		}
+
+		public bool ProcessProductsErrorMessageMatches(string expectedText)
+		{
+			for (int i = 0; i < 30; i++)
+			{
+				IWebElement messageEl =	SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"),2);
+				if (messageEl != null)
+				{
+					string messageTextFound = messageEl.Text;
+					Report.Info($"The found text was: {messageTextFound}");
+
+					if (messageTextFound == expectedText)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					Report.Info($"The message element was null");
+				}
+				Delay.Seconds(1);
+
+			}
 			return false;
 		}
 
@@ -2117,6 +2155,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+
+
 
 		public bool SelectNewStatus(string status)
 		{

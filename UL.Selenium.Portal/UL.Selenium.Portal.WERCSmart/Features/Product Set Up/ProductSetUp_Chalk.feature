@@ -172,3 +172,4 @@ Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = 
 		| Dollar General |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Completed
+

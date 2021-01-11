@@ -1602,8 +1602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 
-				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!",
-					"Successfully inputted UPC information!");
+				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!",	"Successfully inputted UPC information!");
 				Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();

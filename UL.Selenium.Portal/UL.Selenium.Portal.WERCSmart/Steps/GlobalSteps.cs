@@ -2072,6 +2072,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, createdProduct);
 		}
 
+		[StepDefinition(@"Saving the product ID: (.*) and Name: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		public void SaveProductIDAndNameAsProductInformationNamed(string prodID, string prodName, string savedAs)
+		{
+			var createdProduct = new ProductInformation();
+			createdProduct.Id = prodID;
+			createdProduct.Name = prodName;
+			Context.AddToContext(savedAs, createdProduct);
+		}
 
 		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)

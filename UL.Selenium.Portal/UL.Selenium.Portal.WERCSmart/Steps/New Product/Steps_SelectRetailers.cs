@@ -49,11 +49,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
-			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
-			foreach (string retailer in retailersToSelect)
+			var opened = new Retailer().ClickAddRetailers();
+			if (opened)
 			{
-				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
+
+
+				Delay.Seconds(1);
+				retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
+				foreach (string retailer in retailersToSelect)
+				{
+					Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
+				}
 			}
+			else
+			{
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
+			}
+
 		}
 
 		[StepDefinition(@"I click Done in the Select Retailers popup")]

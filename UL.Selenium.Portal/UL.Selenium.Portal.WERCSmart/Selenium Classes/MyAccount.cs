@@ -378,7 +378,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			while (pageNo < 10)
 			{
-				Delay.Seconds(1.5 * Delay.SpeedFactor);
+				Delay.Seconds(10* Delay.SpeedFactor);
 
 				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
 
@@ -386,11 +386,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
 				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
-
+				Report.Info($"the number of rows found was: {listOfUsersRows.Count()}");
 				foreach (IWebElement userRow in listOfUsersRows)
 				{
-					string myUsername = userRow.FindElement(By.XPath(".//td[1]"), 2).Text;
-
+					Report.Info($"Looking for username...");
+					IWebElement nameEl = userRow.FindElement(By.XPath(".//td[1]"), 2);
+					if(nameEl.IsNullOrEmpty())
+					{
+						Report.Info($"nameEl was null or empty.");
+						return false;
+					}
+					string myUsername = nameEl.Text;
+					Report.Info($"Checking to see if name matches...");
 					if (myUsername == userName)
 					{
 						Report.Info("The User I just created was found in the Grid");
@@ -439,7 +446,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			while (pageNo < 10)
 			{
-				Delay.Seconds(3 * Delay.SpeedFactor);
+				Delay.Seconds(10 * Delay.SpeedFactor);
 
 				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
 
@@ -447,17 +454,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
 				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+				Report.Info($"There was {listOfUsersRows.Count()} rows found");
+
 
 				foreach (IWebElement userRow in listOfUsersRows)
 				{
-					Delay.Seconds(2);
-					string myUsername = userRow.FindElement(By.XPath(".//td[1]"), 2).Text;
+					Delay.Seconds(3);
+					Report.Info($"Looking for username...");
+					IWebElement nameEl = userRow.FindElement(By.XPath(".//td[1]"), 2);
+					if (nameEl.IsNullOrEmpty())
+					{
+						Report.Info($"nameEl was null or empty.");
+						return false;
+					}
+					string myUsername = nameEl.Text;
+					Report.Info($"Checking to see if name matches...");
+
 
 					if (myUsername == userName)
 					{
 						Report.Info("Row Found");
 
-						bool userSelected = userRow.FindElement(By.XPath(".//button"), 2).TryClick();
+						IWebElement selEl = userRow.FindElement(By.XPath(".//button"), 2);
+						if(selEl.IsNullOrEmpty())
+						{
+							Report.Info($"selEl was null or empty");
+							return false;
+
+						}	
+						Report.Info($"Attempting to click the element");
+						bool userSelected = selEl.TryClick();
 						if (userSelected)
 						{
 							return userRow.FindElement(By.XPath(".//a[@id='activeDeactivateUser']"), 2).TryClick();

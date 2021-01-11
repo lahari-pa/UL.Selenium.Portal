@@ -62,8 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Seems to be identical to 57500
-		[StepDefinition(
-			@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string name, string type)
 		{
 			this.Step57561(type, name);
@@ -2580,6 +2579,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			Report.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
 			Report.StartStep(
 				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2591,7 +2592,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			//MyNewProduct.SetTheSectionOptionTo(
 			//	"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
-			//	"No");
+			//	"No");			
+			Report.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
@@ -4039,9 +4043,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
-				"I set the Does the product contain fertilizer (P, N or K) field to: No");
+				"I set the Does the product contain fertilizer (N, P, K) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
-				"Does the product contain fertilizer (P, N or K)",
+				"Does the product contain fertilizer (N, P, K)",
 				"No");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -4672,7 +4676,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Select Retailers popup I select the retailer: Rite Aid");
 			new StepsSelectRetailers().SelectTheRetailer("Rite Aid");
 			Report.StartStep("I enter private label as 'This Private Label'");
-			stepsRetailer.IEnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Rite Aid", "This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -5022,8 +5027,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
 		public void GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -9202,20 +9206,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I select a valid retailer and click DONE");
-			List<string> retailers = new SelectRetailers().GetListOfRetailers();
-			List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
-			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
-			string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
-			if (selectRetailer == null)
+			var selectRetailers = new SelectRetailers();
+			var opened = new Retailer().ClickAddRetailers();
+			if (opened)
 			{
-				Report.Failure("There were no valid retailers to select!");
-				Report.Screenshot();
-				return;
+				List<string> retailers = new SelectRetailers().GetListOfRetailers();
+				List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
+				Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
+				string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
+				if (selectRetailer == null)
+				{
+					Report.Failure("There were no valid retailers to select!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info("Selecting retailer: " + selectRetailer);
+				new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
+				Report.StartStep("Click CONTINUE");
+				new StepsNewProduct().ClickContinue();
 			}
-			Report.Info("Selecting retailer: " + selectRetailer);
-			new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
-			Report.StartStep("Click CONTINUE");
-			new StepsNewProduct().ClickContinue();
+			else
+			{
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
@@ -10670,6 +10683,226 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-	
+
+
+		[StepDefinition(@"I call Shared Step 146794 \(Product Includes a Battery > Add test Lithium Ion batteries for checking in Webviewers\)")]
+		public void GivenICallSharedStep146794ProductsIncludesABatteryAddTestLithiumIonBatteriesForCheckingInWebvi(Table table)
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
+			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
+			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			try
+			{
+				var listOfBatteries = new List<Battery>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+					}
+					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+					}
+					var thisBattery = new Battery {
+						BatteryType = thisRow["Battery Type"],
+						Manufacturer = thisRow["Manufacturer"],
+						NumberPerPackage = batteriesPerPackage,
+						RequiredToRun = batteriesRequired
+					};
+					listOfBatteries.Add(thisBattery);
+				}
+				var productIncludesBattery = new ProductIncludesBattery();
+				if (listOfBatteries.Any())
+				{
+					// setter adds a table row for each battery in the list and enters data into each column
+					productIncludesBattery.Batteries = listOfBatteries;
+					productIncludesBattery.DeleteEmptyBatteryRows();
+				}
+				else
+				{
+					Report.Error("There were no batteries to add");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+			Report.StartStep("In the Product Includes Battery page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers\)")]
+		public void GivenICallSharedStep144968Retailers_AddRetailersForWebViewers()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Ace Hardware");
+			retailerTable.AddRow("Albertsons");
+			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("Dicks");
+			retailerTable.AddRow("Genuine Parts");
+			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Office Depot");
+			retailerTable.AddRow("Sears");
+			retailerTable.AddRow("Smart & Final");
+			retailerTable.AddRow("Staples");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("Walmart");
+			retailerTable.AddRow("Winco");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			var allRetailers = selSelectRetailers.AllRetailers();
+			if (allRetailers.Contains($"Canadian Tire"))
+			{
+				Report.Info($"Canadian Tire was found as an option, selecting it as a retailer");
+				new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			}
+			else
+			{
+				Report.Info($"Canadian Tire was not found as an option, moving on.");
+			}
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
+			Report.StartStep("I add the following into the UPC Fields");
+
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+				//Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			}
+
+			IWebElement partNameTextField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/..//input"), 2);
+
+			if (partNameTextField == null)
+			{
+				Report.Info(@"partNameTextField was not found");
+				return;
+			}
+			partNameTextField.EnterText("A0001");
+
+			IWebElement dpciField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'DPCI')]/..//input"), 2);
+			if (dpciField == null)
+			{
+				Report.Info(@"dpciField was not found");
+				return;
+			}
+			dpciField.EnterText("111-22-0001");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+
+
+		}
+
+		[StepDefinition(@"I call Shared Step 145300 \(SHA - Submitted Status - Process BCP product - Close warning message\) for product saved as: (.*)")]
+		public void GivenICallShared145300SHASubmittedStatusProcessBCPProductCloseWarningMessage(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step 145300");
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			string prodName = productDetails.Name;
+
+			bool selectedID = false;
+			for (int i = 0; i < 20; i++)
+			{
+				Report.Info("Waiting interation: " + i.ToString());
+				Report.IsTrue(myStudioShaManager.SelectFromStatusFilter("Submitted"),
+					"Failed to select from status filter",
+					"Selected from status filter");
+				Delay.Seconds(3);
+				if (!myStudioShaManager.Wait_for_load(30))
+				{
+					Report.Error("Studio SHA Manager is not showing");
+				}
+
+				if (myStudioShaManager.SelectProductByID(id))
+				{
+					selectedID = true;
+					break;
+				}
+
+				Delay.Seconds(3);
+			}
+
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
+			myStudioShaManager.ClickProcessProductData();
+			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
+				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
+			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			if (regSpec == null)
+			{
+				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
+				regSpec = "Automated QASha";
+			}
+			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
+
+			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
+				"Failed to select regulatory specialist", "Selected regulatory specialist");
+			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
+				"Clicked continue");
+			Report.IsTrue(myStudioShaManager.ProcessProductsErrorMessageMatches(id+" ("+prodName+ ") - Merge: Document merge for BCP product " + id+ " has failed – Please publish the required SDS for this product and manually run the document merge process."), "Failed to find the error message", "The error message was found");
+			Report.IsTrue(myStudioShaManager.ClickCloseInProcessProducts(), "Failed to click close","Clicked close");
+
+		}
+
+
+
+
 	}
 }
