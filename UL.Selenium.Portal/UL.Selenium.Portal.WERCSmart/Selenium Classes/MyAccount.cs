@@ -629,14 +629,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//New Subscription Button
-		[FindsBy(How = How.XPath, Using = ".//div/a[text()='New Subscription']")]
+		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Enroll']")]
+		//New Subscription Enroll
 		private IWebElement _btnNewSub;
 
 		public bool New_Subscription_click()
 		{
 			Report.Info("Attempting to Click New Subscription Button");
-			this._btnNewSub.Click();
-			return true;
+			var vbutton = this._btnNewSub;
+			var testel = this.containerElement.FindElement(By.XPath($".//div[contains(@data-bind,'subscriptionModel.isSubscription()==false')]/a[text()='Enroll']"), 2);
+			//this._btnNewSub.Click();
+			return testel.TryClick();
+			//return true;
 		}
 
 		public bool ConfirmSubscriptionLevel(string subscription)

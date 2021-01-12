@@ -30,8 +30,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Articles(string articles)
 		{
 			Report.Info("Selecting Number of Articles: " + articles);
-			this._selectArticles.Select(articles);
-			return true;
+			//this._selectArticles.Select(articles);
+			//var el = this.containerElement.FindElement(By.XPath($""), 2);
+
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach(var menu in listofMenus)
+			{
+				string foundTitle = menu.Text.Trim();
+				if (foundTitle == "Articles")
+				{
+					var selectEl = menu.FindElement(By.XPath($".//parent::div//following-sibling::div[@class='panel-body']//select"), 2);
+					if (selectEl != null)
+					{
+						selectEl.Select(articles);
+						return true;
+					}
+					else
+					{
+						Report.Info($"The selection element was null");
+						return false;
+					}
+				}	
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
 		}
 
 		public bool SetSection(string section, string option)
@@ -146,8 +168,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Enhanced_Articles(string enArticles)
 		{
 			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
-			this._selectEnArticles.Select(enArticles);
-			return true;
+			//this._selectEnArticles.Select(enArticles);
+			//return true;
+
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach (var menu in listofMenus)
+			{
+				string foundTitle = menu.Text.Trim();
+				if (foundTitle == "Enhanced Articles")
+				{
+					var selectEl = menu.FindElement(By.XPath($".//parent::div//following-sibling::div[@class='panel-body']//select"), 2);
+					if (selectEl != null)
+					{
+						selectEl.Select(enArticles);
+						return true;
+					}
+					else
+					{
+						Report.Info($"The selection element was null");
+						return false;
+					}
+				}
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
 		}
 
 		public bool Select_Enhanced_Articles_Exists()
@@ -186,8 +230,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Formulated_Products(string formProds)
 		{
 			Report.Info("Selecting Number of Formulated Products: " + formProds);
-			this._selectFormProds.Select(formProds);
-			return true;
+			//this._selectFormProds.Select(formProds);
+			//return true;
+
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach (var menu in listofMenus)
+			{
+				string foundTitle = menu.Text.Trim();
+				if (foundTitle == "Formulated Products")
+				{
+					var selectEl = menu.FindElement(By.XPath($".//parent::div//following-sibling::div[@class='panel-body']//select"), 2);
+					if (selectEl != null)
+					{
+						selectEl.Select(formProds);
+						return true;
+					}
+					else
+					{
+						Report.Info($"The selection element was null");
+						return false;
+					}
+				}
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
 		}
 
 		public bool Select_Formulated_Products_Exists()
@@ -555,40 +621,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Select_Range(string articles, string enArticles, string formProds)
 		{
-			Report.Info("Beginning Select_Range");
+			try
+			{
+				Report.Info("Beginning Select_Range");
 
-			if (!this.Exists)
-			{
-				Report.Info("Not on Subscription Enrollment Page");
-				Report.Screenshot();
-				return false;
+				if (!this.Exists)
+				{
+					Report.Info("Not on Subscription Enrollment Page");
+					Report.Screenshot();
+					return false;
+				}
+				Delay.Seconds(0.5 * Delay.SpeedFactor);
+				if (!this.Select_Articles(articles))
+				{
+					Report.Info("Failed to Select Correct Number of Articles: " + articles);
+					Report.Screenshot();
+					return false;
+				}
+				Delay.Seconds(0.5 * Delay.SpeedFactor);
+				Report.Info("Number of Articles Selected");
+				if (!this.Select_Enhanced_Articles(enArticles))
+				{
+					Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
+					Report.Screenshot();
+					return false;
+				}
+				Delay.Seconds(0.5 * Delay.SpeedFactor);
+				Report.Info("Number of Enhanced Articles Selected");
+				if (!this.Select_Formulated_Products(formProds))
+				{
+					Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Number of Formulated Products Selected");
+				Delay.Seconds(0.5 * Delay.SpeedFactor);
+				Report.Success("Range of Products, Articles and Enhanced Articles Selected");
 			}
-			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			if (!this.Select_Articles(articles))
+			catch
 			{
-				Report.Info("Failed to Select Correct Number of Articles: " + articles);
-				Report.Screenshot();
-				return false;
+				Report.Info($"Catch");
 			}
-			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			Report.Info("Number of Articles Selected");
-			if (!this.Select_Enhanced_Articles(enArticles))
-			{
-				Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
-				Report.Screenshot();
-				return false;
-			}
-			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			Report.Info("Number of Enhanced Articles Selected");
-			if (!this.Select_Formulated_Products(formProds))
-			{
-				Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
-				Report.Screenshot();
-				return false;
-			}
-			Report.Info("Number of Formulated Products Selected");
-			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			Report.Success("Range of Products, Articles and Enhanced Articles Selected");
 			return true;
 		}
 
@@ -599,8 +672,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
 
-			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label"), 2).ToList();
+			//var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label"), 2).ToList();
 
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']//div[contains(@class,'panel-default ws-subscription')]//div[@class='panel-heading info']//label[.//input]"), 2).ToList();
 			foreach (IWebElement feature in allProducts)
 			{
 				string featureNew = feature.Text;
@@ -614,7 +688,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					if (featureStandard == feature_plan)
 					{
-						Report.Success("Feature Plan Found");
+						Report.Success("Feature Plan Found");	
 						return feature;
 					}
 				}
@@ -669,8 +743,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Gold_click()
 		{
 			Report.Info("Attempting to Select Gold Support Services Plan");
-			this._selectGold.Click();
-			return true;
+			//this._selectGold.Click();
+			//return true;
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach (var menu in listofMenus)
+			{
+				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
+				if (titleTrimmed == "Gold Agent Support")
+				{
+					menu.Click();
+					return true;
+				}
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
+
 		}
 
 		//Silver
@@ -679,8 +766,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Silver_click()
 		{
 			Report.Info("Attempting to Select Silver Support Services Plan");
-			this._selectSilver.Click();
-			return true;
+			//this._selectSilver.Click();
+			//return true;
+
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach (var menu in listofMenus)
+			{
+				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
+				if (titleTrimmed == "Silver Agent Support")
+				{
+					menu.Click();
+					return true;
+				}
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
 		}
 
 		//Bronze
@@ -689,8 +789,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			this._selectBronze.Click();
-			return true;
+			//this._selectBronze.Click();
+			//return true;
+
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			foreach (var menu in listofMenus)
+			{
+				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
+				if (titleTrimmed == "No additional Agent Support Service")
+				{
+					menu.Click();
+					return true;
+				}
+			}
+			Report.Info($"The correct panel could not be found");
+			return false;
+
 		}
 
 		public string GetSelectedItemInSection(string section)
