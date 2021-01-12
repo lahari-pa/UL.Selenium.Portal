@@ -167,8 +167,7 @@ Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC145400 with container type: Metal Container size: 40.0 and quantity: 100
 Given I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
-#Given in the Additional Documents to Provide page I click Continue
-And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
