@@ -740,6 +740,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow tableRetailer in table.Rows)
 			{
 				string thisRetailer = tableRetailer["Retailer"];
+				if(thisRetailer=="<All>")
+				{
+					var RetailersList=thisProcessProducts.GetAllRetailers();
+					foreach(var item in RetailersList)
+					{
+						Report.IsTrue(thisProcessProducts.SelectRetailer(item),	"Failed to select retailer: " + item, "Selected retailer: " + item);
+					}
+					return;
+				}
 				if (thisRetailer.ToLower().Contains("saved as"))
 				{
 					thisRetailer = Context

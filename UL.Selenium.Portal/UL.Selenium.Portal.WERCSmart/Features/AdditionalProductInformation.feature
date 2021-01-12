@@ -162,11 +162,11 @@ Given I call Shared Step 74760 (Product Characteristics - Select Liquid as prima
 | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 Given I should see the Additional Product Information Page
-Given I set the Does the product contain fertilizer (P, N or K)? option to: No
+Given I set the Does the product contain fertilizer (N, P, K)? option to: No
 And I should not see following statement: Phosphates /Phosphorous (“P”)
 And I should not see following statement: Nitrogen /Nitrates (“N”)
 And I should not see following statement: Potassium(“K”)
-Given I set the Does the product contain fertilizer (P, N or K)? option to: Yes
+Given I set the Does the product contain fertilizer (N, P, K)? option to: Yes
 And I should see following statement: Phosphates /Phosphorous (“P”)
 And I should see following statement: Nitrogen /Nitrates (“N”)
 And I should see following statement: Potassium(“K”)

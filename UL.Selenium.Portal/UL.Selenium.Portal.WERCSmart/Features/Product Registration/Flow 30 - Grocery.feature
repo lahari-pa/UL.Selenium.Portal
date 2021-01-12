@@ -24,13 +24,16 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baked Goods, Crackers
 	Then I save the product information as: TestCase60725
-	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)	
+	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
-	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+	Then I click 'Add Retailers' in the Retailers page
+	Then In the 'Select retailers' window I should not see the following retailers:
+		| Retailer  |
+		| Auto Zone |
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Aerosol Can and size: 20
-Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
 	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
@@ -55,14 +58,13 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
-	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
-Given I call Shared Step 60567 (Upload Product Label only)
-	# Additional Documents to Provide Page
+	And I click continue
+	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+	Given I call Shared Step 60567 (Upload Product Label only)
 	And I should see the Additional Documents to Provide Page
-	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
-	# Optional Reports and Documents Available for Purchase Page
+	And I click continue	
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
@@ -137,13 +139,11 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cereals
 	Then I save the product information as: TestCase73041
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Then I click 'Add Retailers' in the Retailers page
 	Then In the 'Select retailers' window I should see the following retailers:
-		| Retailer                   |
-		| Ace Hardware Corporation   |
-		| No Retailer/No UPC Product |
-		| Optoro                     |
+		| Retailer                   |	
 		| Walgreens                  |
 	Given I click Done in the Select Retailers popup
 	Given I navigate to the home page

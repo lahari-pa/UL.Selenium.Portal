@@ -2228,7 +2228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
 			if (el == null)
 			{
-				Report.Error("Could not find the Full Product Name field!");
+				Report.Failure("Could not find the Full Product Name field!");
 				return false;
 			}
 
@@ -4913,7 +4913,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (partNameTextField == null)
 				{
-					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					Report.Info(@"partNameTextField was not found");
 					return false;
 				}
 				partNameTextField.EnterText(partNumber);
