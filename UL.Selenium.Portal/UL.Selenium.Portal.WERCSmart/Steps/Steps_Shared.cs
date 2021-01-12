@@ -10689,6 +10689,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-	
+		[StepDefinition(@"I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue")]
+		public void GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue()
+		{
+			StepsNewProduct newProduct = new StepsNewProduct();
+
+			Report.StartStep("I should see the Formulation > Batteries Page");
+			newProduct.GivenIShouldSeeXPage("Formulation > Batteries");
+
+			Report.StartStep("I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to Granted");
+			newProduct.SetTheSectionOptionTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Granted");
+
+			Report.StartStep("I click continue");
+			newProduct.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR")]
+		public void GivenICallSharedStepRegulatoryDocumentsToProvide_UploadAISAndCCCR()
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+
+			Report.StartStep("I upload a PDF file to section: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.");
+			MyNewProduct.UploadPDFFile("I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+
+			Report.StartStep("I set the Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. field to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.");
+			MyNewProduct.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.", "I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.");
+
+			Report.StartStep("I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I don't need a WHMIS Compliant SDS");
+			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I don't need a WHMIS Compliant SDS");
+
+			Report.StartStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
+			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+
+			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
+			MyNewProduct.ICheckTheCheckboxWithDescription("check",
+							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
+
+			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+			
+		}
+
 	}
 }

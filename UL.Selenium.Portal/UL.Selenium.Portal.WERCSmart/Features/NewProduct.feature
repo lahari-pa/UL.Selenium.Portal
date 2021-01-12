@@ -11,6 +11,7 @@
 @RetailPartners
 @SummaryPage
 @SHA
+@PaymentMethods
 @run_NewProduct
 
 Feature: New Product
@@ -97,7 +98,7 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 
 
 
-
+@ScenarioId:10618
 Scenario: [149421] CBD - Registration with CBD Ingredient in Formulation
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -112,6 +113,10 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 |           | Chalk         | 50      |                     |            |             |
 | 1244582   |               | 50      |                     |            |             |
 Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
+Given I click the link in the CBD Registration Guidance popup
+Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+Given I close the current tab
 Given I close the CBD Registration Guidance popup in the Ingredients Page
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -132,14 +137,11 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
-  And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase149421)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase149421)
-    Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase149421)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase149421)
 Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
-    And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase149421)
-	Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase149421)
+Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase149421)
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase149421) for
 | Retailer |
@@ -147,16 +149,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-
-
-
-
-
-
-
-
-
-
+@ScenarioId:10619
 Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -164,25 +157,19 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery Containing Mercury
 Given I generate a random UPC number and save as: UPC145400
 Then I save the product information as: TestCase145400
-Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I call Shared Step 59927 (Primary Physical State > Solid only available â€“ Without Water Solubility question)
 Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | mercury       | 100     |                     |            |             |
-Given I should see the Formulation > Batteries Page
-Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
-Given I click continue
+Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC145400 with container type: Metal Container size: 40.0 and quantity: 100
-And I click the browse button for label: Article Information Sheet (AIS) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-Then I set the Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. option to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
-Then I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian option to: I don't need a WHMIS Compliant SDS
-And I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
-And I click continue
-Given I click continue
-Given I click continue
+Given I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
+#Given in the Additional Documents to Provide page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -192,7 +179,7 @@ And I click the following option in the bottom menu: Review
 
 
 
-
+@tfs_design
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
