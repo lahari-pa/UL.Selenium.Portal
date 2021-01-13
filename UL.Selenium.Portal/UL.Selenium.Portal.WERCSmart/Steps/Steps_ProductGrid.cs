@@ -2819,5 +2819,105 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
+		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
+		{
+			//1566006
+			//Using 4 of the filters (upc, brand, Retailer, Additional Programs)
+			//Need 2 or more filters each time
+			//Do inside a loop which is = totalCombinations
+			//First get random int between 2-4 to decide between how many filters use
+			//construct empty array of string of this ^ size
+			//have a hardcoded list of string = filter names
+			//using our random int, choose filter names from this list and add them to the empty array. If a filter name is already found in the array, then try again.
+
+			//Using our product filter data saved in context (valid filters that will find the product) enter in valid filter data for each of the randomly selected filters in the array.
+			//once filters entered, wait for grid to load fully
+			//search the results displayed for our product ID (from context), may need to check all pages etc.
+			//If found, Report a success and continue the remaining loops. If not  = fail but dont return at this point.
+
+			int x = 0;
+			while(x<totalCombinations)
+			{
+				Random random = new Random();
+				int filtersToUse = random.Next(2, 5);
+				//update so 5 = count of possible filters +1
+
+				string[] chosenFilters = new string[filtersToUse];
+
+				var possibleFilters = new List<string> {
+				"UPC",
+				"Brand",
+				"Retailer",
+				"Additional Programs"};
+
+				for(int b = 0; b<filtersToUse; b++)
+				{
+					bool addedToArray = false;
+					int y = 0;
+					while(addedToArray==false|| y<30)
+					{
+						//if filtersToUse == possibleFilters.Count() then just grab all filters (no point being randomly selected)
+						int randomInt = random.Next(0, possibleFilters.Count() + 1);
+						bool foundInArray = chosenFilters.Contains(possibleFilters[randomInt]);
+						if(foundInArray==false)
+						{
+							chosenFilters[b] = possibleFilters[randomInt];
+							addedToArray = true;
+						}
+
+						y++;
+
+					}
+					if (addedToArray==false)
+					{
+						Report.Failure($"Failed to add filter to the array of filters");
+						return;
+					}
+					b++;
+
+				}
+
+				var selProductsGrid = new ProductsGrid();
+				var selMoreFilters = new MoreFilters();
+
+				MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
+				
+
+				foreach ( var item in chosenFilters)
+				{
+					string optionSelected = "";
+					switch (item)
+					{
+						case "UPC":
+							selProductsGrid.UpcNumber = filterInfo.UPC;
+							selProductsGrid.ClickUpcNumberSearchButton();
+							optionSelected = filterInfo.UPC;
+							break;
+						case "Brand":
+							selMoreFilters.Brand = filterInfo.Brand;
+							optionSelected = filterInfo.Brand;
+							break;
+						case "Retailer":
+							selMoreFilters.Retailer = filterInfo.Retailer;
+							optionSelected = filterInfo.Retailer;
+							break;
+						case "Additional Programs":
+							selMoreFilters.AdditionalPrograms = filterInfo.AdditionalPrograms;
+							optionSelected = filterInfo.AdditionalPrograms;
+							break;
+					}
+					Report.Info("I set the " + item + " to: " + optionSelected);
+
+
+				}
+
+
+			}
+
+
+
+		}
 	}
 }

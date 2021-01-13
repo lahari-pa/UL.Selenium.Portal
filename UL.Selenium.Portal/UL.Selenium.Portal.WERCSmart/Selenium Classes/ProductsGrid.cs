@@ -1632,7 +1632,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string Brand { get; set; }
 
 
-			public List<string> Retailers { get; set; }
+			//public List<string> Retailers { get; set; }
+			public string Retailer { get; set; }
 
 
 			public string AdditionalPrograms { get; set; }
