@@ -683,7 +683,7 @@ Then I save the product information as: TestCase133335
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	## Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
-    When In the New Product page I click tab: Product Characteristics
+   # When In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	And I click continue
 	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page

@@ -176,6 +176,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickPageHeading(string section)
 		{
 			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
+
 			//if current section == section return
 			if (NewProduct.ActivePanelHeadingText() == section)
 			{
