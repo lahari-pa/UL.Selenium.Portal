@@ -11,6 +11,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2894,6 +2896,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							selProductsGrid.UpcNumber = filterInfo.UPC;
 							selProductsGrid.ClickUpcNumberSearchButton();
 							optionSelected = filterInfo.UPC;
+							Delay.Seconds(10);
+							GeneralUtilities.Wait_for_load_finish();
 							break;
 						case "Brand":
 							selMoreFilters.Brand = filterInfo.Brand;
@@ -2913,11 +2917,176 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 
+				Delay.Seconds(10);
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Info("Looking for product ID: " + filterInfo.Id);
+				Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(filterInfo.Id) == true,
+					"The product ID: " + filterInfo.Id + (true ? " did not appear " : " appeared") + " when it " + (true ? "should have" : "should not not have"),
+					"The product ID: " + filterInfo.Id + (true ? " appeared" : " did not appear") + " in the grid as expected");
+				Report.Info("Clearing search criteria");
+				selProductsGrid.UpcNumber = "";
+				selProductsGrid.ClickUpcNumberSearchButton();
+				selProductsGrid.ClickClear();
+				GeneralUtilities.Wait_for_load_finish();
+
 
 			}
 
 
 
 		}
+
+		[StepDefinition(@"I create a object of FilterInformation from the table below: and save it as: (.*)")]
+		public void CreateFilterInformationObjectFromTable(string savedAs, Table table)
+		{
+			MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
+			//UPC and ID change so will need to get them from context, easy for ID but for UPC? If already created how get?
+			foreach (var row in table.Rows)
+			{
+				if(row["FilterType"] == "Brand")
+				{
+					filterInfo.Brand = row["Variable"];
+				}
+			}
+			Report.IsTrue(filterInfo.Brand != null, "did not set filter: 'Brand'", "Succesffully set filter: 'Brand'");
+		
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "Retailer")
+				{
+					filterInfo.Retailer = row["Variable"];
+				}
+			}
+			Report.IsTrue(filterInfo.Retailer != null, "did not set filter: 'Retailer'", "Succesffully set filter: 'Retailer'");
+
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "Additional Programs")
+				{
+					filterInfo.AdditionalPrograms = row["Variable"];
+				}
+			}
+			Report.IsTrue(filterInfo.AdditionalPrograms != null, "did not set filter: 'Additional Programs'", "Succesffully set filter: 'Additional Programs'");
+
+
+			//UPC58753
+			//Will need step That saves UPC / Id etc to context in same format when checking if already existis (via products gird)
+			//KitProduct56829
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "UPC")
+				{
+					if (row["Variable"].Contains("UPC Saved As"))
+					{
+						string UPCSavedAs = row["Variable"];
+						string edited = UPCSavedAs.Replace("UPC Saved As", "").Trim();
+						string foundUPC = (string)Context.GetFromContext(edited);
+						if(foundUPC.IsNullOrEmpty())
+						{
+							Report.Failure($"The UPC was not found in context...");
+							return;
+						}
+						filterInfo.UPC = foundUPC;
+					}
+					else
+					{
+						filterInfo.UPC = row["Variable"];
+
+					}
+
+				}
+			}
+
+			Report.IsTrue(filterInfo.UPC != null, "did not set filter: 'UPC'", "Succesffully set filter: 'UPC'");
+
+
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "ID")
+				{
+					if (row["Variable"].Contains("ID Saved As"))
+					{
+						string UPCSavedAs = row["Variable"];
+						string edited = UPCSavedAs.Replace("ID Saved As", "").Trim();
+						var foundInfo = (ProductInformation)Context.GetFromContext(edited);
+						if (foundInfo.IsNullOrEmpty())
+						{
+							Report.Failure($"The product Information was not found in context...");
+							return;
+						}
+						filterInfo.Id = foundInfo.Id;
+					}
+					else
+					{
+						filterInfo.Id = row["Variable"];
+
+					}
+
+				}
+			}
+			Report.IsTrue(filterInfo.Id != null, "did not set filter: 'Id'", "Succesffully set filter: 'Id'");
+
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "Status")
+				{
+					filterInfo.Status = row["Variable"];
+				}
+			}
+			Report.IsTrue(filterInfo.Status != null, "did not set filter: 'Status'", "Succesffully set filter: 'Status'");
+
+			foreach (var row in table.Rows)
+			{
+				if (row["FilterType"] == "Name")
+				{
+					filterInfo.Name = row["Variable"];
+				}
+			}
+			Report.IsTrue(filterInfo.Name != null, "did not set filter: 'Name'", "Succesffully set filter: 'Name'");
+
+			Context.AddToContext(savedAs, filterInfo);
+		}
+
+
+		[StepDefinition(@"I search the Products gird for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
+		public void SearchProductsGirdForProductByNameAndSaveIDAndUPC(string name, string iDSavedAs, string uPCSavedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Searching for product: " + name);
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = name
+			};
+			GeneralUtilities.Wait_for_load_finish();
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+			ProductInformation productInfo = new ProductInformation();
+			productInfo.Id = productElement.ProductId;
+			if (productElement != null)
+			{
+				Report.StartStep("Saving the top product as: " + iDSavedAs);
+				Context.AddToContext(iDSavedAs, productInfo);
+				Report.Info("Saved product to context");
+
+				Context.AddToContext("ProductGridItemInfo", productElement);
+				Report.Info("Saved ProductGridItemInfo to context");
+
+				var SPG = new StepsProductGrid();
+				SPG.IClickRowActionsForTheProductSavedAs("ProductGridItemInfo");
+				SPG.ClickRowAction("View UPCs");
+				new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+				Delay.Seconds(5);
+				new Steps_ViewUpcs().SaveFirstUpcNumberToContext(uPCSavedAs);
+				new GlobalSteps().SwitchToTabWithTitle("WERCSmart Version 2.0");
+				Report.Info("Saved UPC number to context");
+			}
+			else
+			{
+				Report.Info("No Product was found by name: " + name);
+			}
+			selProdGrid.ProductIdField = string.Empty;
+		}
 	}
+
+
+
+
 }

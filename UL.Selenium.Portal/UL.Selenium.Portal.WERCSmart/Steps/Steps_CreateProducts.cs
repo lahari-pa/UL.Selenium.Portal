@@ -1672,13 +1672,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
-
-
-
-
+		[StepDefinition(@"I Search the Products Grid for the kit product with name: (.*), and create the kit if it is not found")]
+		public void SearchProductsGridForKitByNameAndCreateIfNotFound(string name)
+		{
 
 		}
+
+
+
+
+
+	}
 
 }
 
