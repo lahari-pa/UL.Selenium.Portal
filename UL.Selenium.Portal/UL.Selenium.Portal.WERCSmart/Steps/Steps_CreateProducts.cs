@@ -1675,6 +1675,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Search the Products Grid for the kit product with name: (.*), and create the kit if it is not found")]
 		public void SearchProductsGridForKitByNameAndCreateIfNotFound(string name)
 		{
+			new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Assessment in Progress");
+			GeneralUtilities.Wait_for_load_finish();
+			new StepsProductGrid().SearchProductsGirdForProductByNameAndSaveIDAndUPC(name, "KitProduct56829", "UPC58753");
+			new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("All");
+			GeneralUtilities.Wait_for_load_finish();
+			if(Context.Contains("KitProduct56829"))
+			{
+				Report.Success($"Successfully found the product with name {name} in the Grid");
+				return;
+			}
+			Report.Info($"Could not find the produc '{name}' in the grid. Starting creation of kit product using scenario 58753");
+			new Steps_ProductSetup().CreateHairColorKitUsing58753AndSaveAs(name, "KitProduct56829");
 
 		}
 

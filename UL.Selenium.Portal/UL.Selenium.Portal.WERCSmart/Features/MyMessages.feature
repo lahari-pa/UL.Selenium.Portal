@@ -17,6 +17,7 @@
 @UPC
 @ReviewDocuments
 @SHA
+@CreateProducts
 @MyMessages
 @run_MyMessages
 Feature: MyMessages
@@ -118,7 +119,10 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	#Save id (as product infomation object) and upc to context
 	#change filter back to all
 	#if not exists = run below kit creation step
-	Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
+
+	Then I Search the Products Grid for the kit product with name: KitProductMoreFilters56829, and create the kit if it is not found
+
+	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
 
 
 	Then I create a object of FilterInformation from the table below: and save it as: MoreFiltersInformation56829
