@@ -149,7 +149,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 | CVS      |
 
 
-
+@tfs_design
 @ScenarioId:10619
 Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
 
