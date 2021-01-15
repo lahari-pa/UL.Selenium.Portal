@@ -1643,8 +1643,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText()
 		{
-			IList<IWebElement> popupMainText = this.ContainterElement.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p[not(@style='display: none;')]"), 2);
-			IList<IWebElement> popupListElText = this.ContainterElement.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//ul//li"), 2);
+			IList<IWebElement> popupMainText = this.ContainerElement.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p[not(@style='display: none;')]"), 2);
+			IList<IWebElement> popupListElText = this.ContainerElement.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//ul//li"), 2);
 
 			if (popupMainText[0].Text.Contains("This product contains a cannabidiol (CBD) ingredient and may be subject to FDA restrictions when included in a Final Product Registration that is marketed for therapeutic or medical uses although they have not been approved by the FDA. Note that assessments conducted by UL do not include:")
 				&& popupMainText[1].Text.Contains("UL's assessment includes a full review of the Product Ingredients and Type of Product to ensure the Final Product is correctly identified as a CBD-related product. Please be sure that you've properly indicated the proper Product Type based on the ingredients you've provided.")
@@ -1685,7 +1685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickLinkInCBDRegistrationPopupInIndredientsPage()
 		{
-			IWebElement link = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p//a"), 2);
+			IWebElement link = this.ContainerElement.FindElement(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p//a"), 2);
 
 			if (link == null)
 			{
@@ -1698,7 +1698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CloseCBDRegistrationGuidancePopupInIngredientsPage()
 		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
 			return closeButton.TryClick();
 		}
 
