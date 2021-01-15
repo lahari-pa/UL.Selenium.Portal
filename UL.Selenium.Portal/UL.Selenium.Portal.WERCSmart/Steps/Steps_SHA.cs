@@ -4183,29 +4183,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
-
-		[StepDefinition(@"I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text")]
-		public void GivenIConfirmTheCBDRegistrationGuidancePopupAppearsInTheIngredientsPageWithTheCorrectText()
-		{
-			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
-			Report.IsTrue(studioSupplierManagerObject.ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText(), "The correct text was displayed", "Incorrect text was displayed");
-		}
-
-		[StepDefinition(@"I click the link in the CBD Registration Guidance popup")]
-		public void GivenIConfirmTheLinkInTheCBDRegistrationGuidancePopupOpensTheFollowingLink()
-		{
-			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
-			Report.IsTrue(studioSupplierManagerObject.ClickLinkInCBDRegistrationPopupInIndredientsPage(), "Failed to click link in the CBD Registration Popup", "Successfully to clicked link in the CBD Registration Popu");
-		}
-
-
-		[StepDefinition(@"I close the CBD Registration Guidance popup in the Ingredients Page")]
-		public void GivenICloseTheCBDRegistrationGuidancePopupInTheIngredientsPage()
-		{
-			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
-			Report.IsTrue(studioSupplierManagerObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
-		}
-
         [StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
         public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
         {

@@ -523,67 +523,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
-		public bool ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText()
-		{
-			IList<IWebElement> popupMainText = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p[not(@style='display: none;')]"), 2);
-			IList<IWebElement> popupListElText = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//ul//li"), 2);
-
-			if (popupMainText[0].Text.Contains("This product contains a cannabidiol (CBD) ingredient and may be subject to FDA restrictions when included in a Final Product Registration that is marketed for therapeutic or medical uses although they have not been approved by the FDA. Note that assessments conducted by UL do not include:")
-				&& popupMainText[1].Text.Contains("UL's assessment includes a full review of the Product Ingredients and Type of Product to ensure the Final Product is correctly identified as a CBD-related product. Please be sure that you've properly indicated the proper Product Type based on the ingredients you've provided.")
-				&& popupMainText[2].Text.Contains("For information about FDA’s approach to CBD-containing products, visit their website")
-				&& popupListElText[0].Text.Contains("Marketing messages")
-				&& popupListElText[1].Text.Contains("Labeling for benefit statements")
-				&& popupListElText[2].Text.Contains("Health claims"))
-			{
-				return true;
-			}
-			else if (!popupMainText[0].Text.Contains("This product contains a cannabidiol (CBD) ingredient and may be subject to FDA restrictions when included in a Final Product Registration that is marketed for therapeutic or medical uses although they have not been approved by the FDA. Note that assessments conducted by UL do not include:"))
-			{
-				Report.Failure("The first line did not display the correct text");
-			}
-			else if (popupMainText[1].Text.Contains("UL's assessment includes a full review of the Product Ingredients and Type of Product to ensure the Final Product is correctly identified as a CBD-related product. Please be sure that you've properly indicated the proper Product Type based on the ingredients you've provided."))
-			{
-				Report.Failure("The second line did not display the correct text");
-			}
-			else if (popupMainText[2].Text.Contains("For information about FDA’s approach to CBD-containing products, visit their website"))
-			{
-				Report.Failure("The third line did not display the correct text");
-			}
-			else if (popupListElText[0].Text.Contains("Marketing messages"))
-			{
-				Report.Failure("The first list item did not display the correct text");
-			}
-			else if (popupListElText[1].Text.Contains("Labeling for benefit statements"))
-			{
-				Report.Failure("The second list item did not display the correct text");
-			}
-			else if (popupListElText[2].Text.Contains("Health claims"))
-			{
-				Report.Failure("The third list item did not display the correct text");
-			}
-
-			return false;
-		}
-
-		public bool  ClickLinkInCBDRegistrationPopupInIndredientsPage()
-		{
-			IWebElement link = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@class='alert alert-warning'][@data-bind='visible: model.HasError']//p//a"), 2);
-
-			if (link == null)
-			{
-				Report.Info("No link was found");
-				return false;
-			}
-
-			return link.TryClick();
-		}
-
-		public bool CloseCBDRegistrationGuidancePopupInIngredientsPage()
-		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
-			return closeButton.TryClick();
-		}
-
 		public bool RetailsAreInAlphabeticalOrder()
 		{
 			IList<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
