@@ -564,26 +564,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text")]
-		public void GivenIConfirmTheCBDRegistrationGuidancePopupAppearsInTheIngredientsPageWithTheCorrectText()
-		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText(), "The correct text was displayed", "Incorrect text was displayed");
-		}
-
-		[StepDefinition(@"I click the link in the CBD Registration Guidance popup")]
-		public void GivenIConfirmTheLinkInTheCBDRegistrationGuidancePopupOpensTheFollowingLink()
-		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ClickLinkInCBDRegistrationPopupInIndredientsPage(), "Failed to click link in the CBD Registration Popup", "Successfully to clicked link in the CBD Registration Popu");
-		}
-
-		[StepDefinition(@"I close the CBD Registration Guidance popup in the Ingredients Page")]
-		public void GivenICloseTheCBDRegistrationGuidancePopupInTheIngredientsPage()
-		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
-		}
-
 	}
 }

@@ -12,7 +12,7 @@
 @SummaryPage
 @SHA
 @PaymentMethods
-@MyIngredients
+@NewProduct
 @run_NewProduct
 
 Feature: New Product
