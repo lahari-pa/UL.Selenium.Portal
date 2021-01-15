@@ -134,3 +134,5 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	| ID                  | ID Saved As KitProduct56829 |
 	| Status              | Assessment in Progress      |
 	| Name                | KitProductMoreFilters56829  |
+
+	Then I enter 3 differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: KitProduct56829 each time
