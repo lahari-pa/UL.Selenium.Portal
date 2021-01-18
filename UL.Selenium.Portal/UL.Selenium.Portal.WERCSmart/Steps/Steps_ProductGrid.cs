@@ -2858,10 +2858,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					bool addedToArray = false;
 					int y = 0;
-					while(addedToArray==false|| y<30)
+					while(addedToArray==false&& y<30)
 					{
 						//if filtersToUse == possibleFilters.Count() then just grab all filters (no point being randomly selected)
-						int randomInt = random.Next(0, possibleFilters.Count() + 1);
+						//remove +1 from randomInt as possible filters is zero base? 0-3
+						int randomInt = random.Next(0, possibleFilters.Count());
 						bool foundInArray = chosenFilters.Contains(possibleFilters[randomInt]);
 						if(foundInArray==false)
 						{
@@ -2877,7 +2878,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Failure($"Failed to add filter to the array of filters");
 						return;
 					}
-					b++;
+					
 
 				}
 
@@ -2885,6 +2886,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var selMoreFilters = new MoreFilters();
 
 				MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
+				var obj = (MoreFilters.FilterInformation)Context.GetFromContext(savedAs);
+				filterInfo = obj;
+
 				
 
 				foreach ( var item in chosenFilters)
