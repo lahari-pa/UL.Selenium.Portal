@@ -2396,6 +2396,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			Report.Info("Waiting 10 Seconds...");
+			Delay.Seconds(10);
 			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{

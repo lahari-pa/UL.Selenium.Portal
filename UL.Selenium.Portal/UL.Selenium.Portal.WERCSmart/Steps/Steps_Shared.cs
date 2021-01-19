@@ -10722,6 +10722,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
 			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Ace Hardware Corporation");
+			retailerTable.AddRow("Albertsons Companies");
+			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Dick's Sporting Goods");
+			retailerTable.AddRow("Genuine Parts");
+			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("McLane");
+			retailerTable.AddRow("Meijer");
+			retailerTable.AddRow("Office Depot");
+			retailerTable.AddRow("Sears/K-Mart");
+			retailerTable.AddRow("Smart & Final");
+			retailerTable.AddRow("Staples");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			retailerTable.AddRow("WinCo Foods");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			var allRetailers = selSelectRetailers.AllRetailers();
+			if (allRetailers.Contains($"Canadian Tire"))
+			{
+				Report.Info($"Canadian Tire was found as an option, selecting it as a retailer");
+				new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			}
+			else
+			{
+				Report.Info($"Canadian Tire was not found as an option, moving on.");
+			}
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144968b \(Retailers - Add Retailers for Web viewers & RPS\) for a non PL Product")]
+		public void GivenICallSharedStep144968BRetailers_AddRetailersForWebViewersNonPL()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Ace Hardware");
 			retailerTable.AddRow("Albertsons");
 			retailerTable.AddRow("Autozone");
@@ -10754,8 +10803,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Click Done");
 			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
 			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
-			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
-			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
 			Report.StartStep("Click Continue");
 			new StepsNewProduct().ClickContinue();
 
@@ -10892,6 +10939,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow();
 		}
 
+		[StepDefinition(@"I call Shared Step 57561b \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*) and add a Random Identifier")]
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProductAndAddRandomIdentifier(string name, string type)
+		{
+			var randomID = GeneralUtilities.GenerateRandomString(6);
+			this.Step57561(type, name+" - "+randomID);
+		}
 
 
 	}

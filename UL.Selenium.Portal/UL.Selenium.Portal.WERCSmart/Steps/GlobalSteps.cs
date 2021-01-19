@@ -2237,6 +2237,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Update the TestUser: (.*) to include the name of the product saved as: (.*)")]
+		public void UpdateTestVariableWithProductName(string testVariable, string savedAs)
+		{
+			ProductInformation myProduct = (ProductInformation)Context.GetFromContext(savedAs);
+			string myproductName = myProduct.Name;
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(testVariable);
+			string currentProductList = user.Username;
+			string updatedProductList = currentProductList + "*" + myproductName;
+			TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(testVariable, updatedProductList);
+			TestUsers.RefreshUsers();
+			//Webviewer Products
+		}
+
 
 
 	}

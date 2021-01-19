@@ -47,7 +47,7 @@ Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium I
 
 Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 60096 (Lithium Battery Transportation)
-Given I call Shared Step 144968 (Retailers - Add Retailers for Web viewers & RPS)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
 Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC146792, container type: Plastic Container and size: 50
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -106,6 +106,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
+@ScenarioId:10637
 Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 #Need access to WebViewer Feed Account + Add to TReVor?
 
@@ -114,8 +115,8 @@ Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC144967
-#In 57561a enter the name for final product run to be "Test Case 144697 - US Only, PLP No, Gendoc 1, Doc Accepted Yes"
-Then I call Shared Step 57561a (The Product - Enter Product Name: Chalk Test Product 1 and select Type of Product): Chalk
+#In 57561b enter the name for final product run to be "Test Case 144697 - US Only, PLP No, Gendoc 1, Doc Accepted Yes"
+Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product and select Type of Product): Chalk and add a Random Identifier
 Then I save the product information as: TestCase144967
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -136,6 +137,7 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
 #~~~~~~~~SHA~~~~~~~#
+
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase144967)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase144967)
@@ -151,13 +153,14 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 #~~~~~~~~WERCSmart~~~~~~~#
 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then the WERCSmart homepage should load
-Given I call Shared Step 144970 (Go To Bulk Actions - Accept Documents)
-#Document Acceptance - Approve NGHS document -> Shared Step 144971
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase144967
-#SHA - Document Management - confirm Accepted SDS -> Shared Step 144972
-Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144967) for
-| Retailer |
-| <All>    |
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then the WERCSmart homepage should load
+#Given I call Shared Step 144970 (Go To Bulk Actions - Accept Documents)
+##Document Acceptance - Approve NGHS document -> Shared Step 144971
+#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase144967
+##SHA - Document Management - confirm Accepted SDS -> Shared Step 144972
+#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144967) for
+#| Retailer |
+#| <All>    |
+#Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144967
