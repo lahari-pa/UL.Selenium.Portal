@@ -10713,7 +10713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers\)")]
+		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers & RPS\)")]
 		public void GivenICallSharedStep144968Retailers_AddRetailersForWebViewers()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -10725,9 +10725,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("Ace Hardware");
 			retailerTable.AddRow("Albertsons");
 			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Dicks");
 			retailerTable.AddRow("Genuine Parts");
 			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("McLean");
+			retailerTable.AddRow("Meijer");
 			retailerTable.AddRow("Office Depot");
 			retailerTable.AddRow("Sears");
 			retailerTable.AddRow("Smart & Final");
@@ -10876,6 +10880,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 144970 \(Go To Bulk Actions - Accept Documents\)")]
+		public void GivenICallShared144970GoToBulkActionsAcceptDocuments()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"From the Main Products page in WERCSmart, Click the Bulk Actions button");
+			new StepsProductGrid().GivenIClickBulkActionsInTheProductsGrid();
+			Report.StartStep($"Click the Accept documents button");
+			new StepsProductGrid().GivenIClickForwardProductRegistrationInTheBulkActionsWindow("Accept Documents");
+			Report.StartStep($"I should see the header: Document Acceptance on the Document Acceptance window");
+			new StepsProductGrid().GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow();
+		}
 
 
 
