@@ -902,6 +902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Delay.Seconds(10);
 
+
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
 					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
@@ -952,25 +953,219 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
+		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string savedAs, string emailFrom, string title)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
+			try
+			{
+				if (emailFrom.ToLower() == "<sitenotification>")
+				{
+					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
+				}
+
+				string email = string.Empty;
+				if (savedAs == "ForgotPW_SecQs")
+				{
+					var user = (WERCSmartUser)UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs);
+					email = user.Email;
+				}
+				else
+				{
+					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+				}
+				Delay.Seconds(10);
+
+		
+				if (MailosaurFunctions.WaitForInboxDifferences(email))
+				{
+					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
+					Report.Info("Found " + differences.Count() + " emails");
+
+					if (title.Contains(productSavedAs) || title.Contains("<" + productSavedAs + ">"))
+					{
+						if (!Context.Contains(productSavedAs))
+						{
+							Report.Error("Context does not contain: " + productSavedAs);
+						}
+
+						var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+						string id = product.Id;
+				
+						if (title.Contains("<" + productSavedAs + ">"))
+						{
+							title = title.Replace("<" + productSavedAs + ">", id);
+						} else
+						{
+							title = title.Replace(productSavedAs, id);
+						}
+					}
+
+					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+
+					if (shouldOrNot == "should")
+					{
+						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
+					}
+					else
+					{
+						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
+					}
+
+					if (matchingEmail != null)
+					{
+						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+						{
+							sw.Write(matchingEmail.Html.Body);
+							sw.Flush();
+							sw.Close();
+						}
+					}
+
+					Context.AddToContext("Matching", matchingEmail);
+				}
+				else
+				{
+
+					if (shouldOrNot == "should not")
+					{
+						Report.Success("As expected, no email has been received");
+					}
+					else
+					{
+						throw new Exception("Expected email did not arrive");
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		/// <summary>
 		/// Asserting text in body of email
 		/// </summary>
 		/// <param name="bodyText"></param>
+		[StepDefinition(@"For product saved as: (.*) the html of the email should show: (.*)")]
+		public void ThenTheHTMLOfTheEmailShouldShow(string productSavedAs, string bodyText)
+		{
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+
+				string emailBody = email.Html.ToString();
+
+				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+				string id = product.Id;
+
+				if (emailBody.Contains("<" + productSavedAs + ">"))
+				{
+					emailBody = emailBody.Replace("<" + productSavedAs + ">", id);
+				}
+				else
+				{
+					emailBody = emailBody.Replace(productSavedAs, id);
+				}
+
+				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
+
+				Report.Info("Expected email body text: " + bodyText);
+				Report.Info("Actual email body text: " + emailBody);
+
+				string actualTrimmed = "";
+
+				foreach (char c in emailBody.ToCharArray())
+				{
+					if (c != '<')
+					{
+						actualTrimmed = actualTrimmed + c;
+					}
+				}
+
+				actualTrimmed = actualTrimmed.Replace(@"/p>", @" ");
+				actualTrimmed = actualTrimmed.Replace(@"p>", @"");
+
+				string expectedTrimmed = bodyText;
+
+				actualTrimmed = actualTrimmed.TrimStart();
+				actualTrimmed = actualTrimmed.TrimEnd();
+
+				expectedTrimmed = expectedTrimmed.TrimStart();
+				expectedTrimmed = expectedTrimmed.TrimEnd();
+
+				actualTrimmed = actualTrimmed.Replace(@" ", @"");
+				expectedTrimmed = actualTrimmed.Replace(@" ", @"");
+
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"the html of the email should show: (.*)")]
+		public void ThenTheHTMLOfTheEmailShouldShow(string bodyText)
+		{
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+
+				string emailBody = email.Html.ToString();
+				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
+
+				Report.Info("Expected email body text: " + bodyText);
+				Report.Info("Actual email body text: " + emailBody);
+
+				string actualTrimmed = "";
+
+				foreach (char c in emailBody.ToCharArray())
+				{
+					if (c != '<')
+					{
+						actualTrimmed = actualTrimmed + c;
+					}
+				}
+
+				actualTrimmed = actualTrimmed.Replace(@"/p>", @" ");
+				actualTrimmed = actualTrimmed.Replace(@"p>", @"");
+
+				string expectedTrimmed = bodyText;
+
+				actualTrimmed = actualTrimmed.TrimStart();
+				actualTrimmed = actualTrimmed.TrimEnd();
+
+				expectedTrimmed = expectedTrimmed.TrimStart();
+				expectedTrimmed = expectedTrimmed.TrimEnd();
+
+				actualTrimmed = actualTrimmed.Replace(@" ", @"");
+				expectedTrimmed = actualTrimmed.Replace(@" ", @"");
+
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"the body of the email should show: (.*)")]
 		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
-			
-				Mailosaur.Email email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				if (email == null)
-				{
-					Report.Info("null email for some reason");
-				}
-			
-				string emailBody = email.Text.ToString();
-	
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				// string emailBody = MailosaurFunctions.GetEmailBody(email);
+				string emailBody = MailosaurFunctions.GetEmailBody(email);
+
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
@@ -1220,6 +1415,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to find the correct tab!");
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
+		public void SwitchToUPCRetailerAndFeedTab()
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h1[contains(text(), 'WERCSmart Product ID')]"), 2) != null)
+				{
+					Report.Success("The UPC Retailer and Feed page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+			Report.Screenshot();
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition("I (accept|dismiss) the alert pop up")]

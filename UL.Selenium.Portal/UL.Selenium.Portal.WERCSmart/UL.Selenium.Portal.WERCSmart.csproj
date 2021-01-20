@@ -564,6 +564,7 @@
     </None>
     <None Include="Features\RegulatoryInformation3.feature">
     </None>
+    <None Include="Features\RejectSubmission.feature" />
     <None Include="Features\ReleaseDay.feature">
     </None>
     <None Include="Features\Reset Password.feature">

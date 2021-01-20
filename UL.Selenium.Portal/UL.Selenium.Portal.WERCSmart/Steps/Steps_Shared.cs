@@ -6698,6 +6698,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
+		[StepDefinition(@"I call Shared Step 157868 \(SHA > Select First Product > UPC Retailer and Feed\)")]
+		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
+		public void Shared157868_SHA_SelectFirstProduct_UpcList()
+		{
+			ReportSettings.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("I select first product in the SHA grid");
+			shaSteps.GivenInSHAManagerISelectTheProduct();
+			Report.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickFirstProduct();
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartStep("I click 'UPC Retailer and Feed'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+			Delay.Seconds(5);
+		}
+
 		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]
 		public void Shared134404_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
 		{
