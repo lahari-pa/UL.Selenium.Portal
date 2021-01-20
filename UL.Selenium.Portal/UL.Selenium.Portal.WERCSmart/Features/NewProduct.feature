@@ -142,3 +142,21 @@ And The following options should be displayed exclusively for section: Product i
 | Yes    |
 | No	 |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
+
+
+Scenario: [136058] The Product - Industrial Category not available for Selection
+	
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I set the Product Name as it a appears on the Package Label, Container or Safety Data Sheet (SDS) field to: Product Name as it a appears on the Package Label, Container or Safety Data Sheet (SDS)
+#Given I fill in the 'Type of Product' with: For Industrial use only
+Given I set 'Type of Product' to: For Industrial use only
+Given I confirm no results are returned
+Given I set 'Type of Product' to: Laboratory use only
+Given I confirm no results are returned
+Given I set 'Type of Product' to: Pharmaceutical use only
+Given I confirm no results are returned
+Given I set 'Type of Product' to: Profession use only
+Given I confirm no results are returned
+Given I set 'Type of Product' to: Research and Development use only
+Given I confirm no results are returned
