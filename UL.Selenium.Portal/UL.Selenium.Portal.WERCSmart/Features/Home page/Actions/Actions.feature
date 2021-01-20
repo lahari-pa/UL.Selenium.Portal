@@ -309,6 +309,7 @@ Given I click close on the Save Changes popup dialog
 
 
 
+@ScenarioId:10646
 Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

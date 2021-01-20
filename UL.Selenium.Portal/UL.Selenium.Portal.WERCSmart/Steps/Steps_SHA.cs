@@ -4235,12 +4235,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(table).Count() > 0, "Failed to find the correct properties and values", "Successfully found the correct properties and values");
 		}
 
-		[Given(@"I close UPC Details popup in Retailer and UPC Feed page")]
+		[StepDefinition(@"I close UPC Details popup in Retailer and UPC Feed page")]
 		public void GivenICloseUPCDetailsPopupInRetailerAndUPCFeedPage()
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
 		}
+
+		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
+		{
+			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
+		}
+
 	}
 
 }
