@@ -106,6 +106,20 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+@Missing_Steps
+@Rename_Product
 @ScenarioId:10637
 Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 #Need access to WebViewer Feed Account + Add to TReVor?
@@ -116,13 +130,13 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC144967
 #In 57561b enter the name for final product run to be "Test Case 144697 - US Only, PLP No, Gendoc 1, Doc Accepted Yes"
-Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product and select Type of Product): Chalk and add a Random Identifier
+Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144967 and select Type of Product): Chalk and add a Random Identifier
 Then I save the product information as: TestCase144967
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 144968 (Retailers - Add Retailers for Web viewers & RPS)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
 Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC144967, container type: Plastic Container and size: 50
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -157,6 +171,9 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Then the WERCSmart homepage should load
 #Given I call Shared Step 144970 (Go To Bulk Actions - Accept Documents)
 ##Document Acceptance - Approve NGHS document -> Shared Step 144971
+
+#~~~~~~~~SHA~~~~~~~#
+
 #Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 #Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase144967
 ##SHA - Document Management - confirm Accepted SDS -> Shared Step 144972
@@ -164,3 +181,115 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #| Retailer |
 #| <All>    |
 #Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144967
+
+@Missing_Steps
+@Rename_Product
+Scenario: [144975] US Only, PLP = No, GenDoc = 1, Doc Accepted = No (User rejects published SDS and uploads his own)
+#Login to WS as supplier with feed to Web viewers
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC144975
+#In 57561b enter the name for final product run to be "Test Case 144975 - US Only, PLP No, GenDoc 1, DocAccept - User uploads own SDS"
+Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144975 and select Type of Product): Chalk and add a Random Identifier
+Then I save the product information as: TestCase144975
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
+Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC144975, container type: Plastic Container and size: 50
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I should see the Additional Documents to Provide Page
+Given I click continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+#~~~~~~~~SHA~~~~~~~#
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase144975)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase144975)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144975)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144975 and its status is: Assigned
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase144975)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase144975)
+Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase144975
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase144975)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144975)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144975 and its status is: Accepted
+
+#~~~~~~~~WERCSmart~~~~~~~#
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 144970 (Go To Bulk Actions - Accept Documents)
+#Document Acceptance - reject published and upload your own SDS -> Shared Step 144976
+
+#~~~~~~~~SHA~~~~~~~#
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase144975
+#SHA - Document Management - confirm rejected SDS - users own uploaded SDS is shown -> Shared Step 144978
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144975) for
+| Retailer |
+| <All>    |
+Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144975
+
+
+
+
+
+
+
+
+
+@Rename_Product
+Scenario: [144979] US Only, PLP = No, GenDoc = 0, User uploads own SDS on submission
+
+#Login to WS as supplier with feed to Web viewers
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC144979
+#In 57561b enter the name for final product run to be "Test Case 144979 - US only, PLP No, GenDoc 0, User uploads own SDS"
+Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144979 and select Type of Product): Chalk and add a Random Identifier
+Then I save the product information as: TestCase144979
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
+Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC144979, container type: Plastic Container and size: 50
+And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+And I should see the Additional Documents to Provide Page
+Given I click continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+#~~~~~~~~SHA~~~~~~~#
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase144979)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase144979)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144979)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144979 and its status is: Assigned
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase144979)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase144979)
+And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase144979	
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase144979)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144979)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144979 and its status is: Accepted
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144979) for
+| Retailer |
+| <All>    |
+Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144979

@@ -10803,6 +10803,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Click Done");
 			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
 			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
 			Report.StartStep("Click Continue");
 			new StepsNewProduct().ClickContinue();
 
@@ -10943,7 +10945,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProductAndAddRandomIdentifier(string name, string type)
 		{
 			var randomID = GeneralUtilities.GenerateRandomString(6);
-			this.Step57561(type, name+" - "+randomID);
+			this.Step57561(type, name+" "+randomID);
 		}
 
 
