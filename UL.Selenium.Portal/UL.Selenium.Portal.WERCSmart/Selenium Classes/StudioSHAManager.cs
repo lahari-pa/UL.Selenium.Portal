@@ -1753,6 +1753,72 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool SelectFirstUPCInUPCRetailerAndFeed()
+		{
+			IWebElement firstUPC = this.containerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
+			return firstUPC.TryClick();
+		}
+
+		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
+		{
+			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
+			return retailerEl.TryClick();
+		}
+
+		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
+		{
+			IList<IWebElement> columnOneList = this.containerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
+			List<string> itemsNotFound = new List<string>();
+
+			bool propertyFound = false;
+			bool valueFound = false;
+
+			foreach (TableRow row in table.Rows)
+			{
+
+				propertyFound = false;
+				valueFound = false;
+
+				foreach (IWebElement el in columnOneList)
+				{
+					if (el.Text == row["Property"])
+					{
+						propertyFound = true;
+					}
+
+					if (row["Value"] == "<Any Data>")
+					{
+
+					}
+
+					if ((row["Value"] == "<Any Data>" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+					{
+						valueFound = true;
+					}
+					if (valueFound && propertyFound)
+					{
+						break;
+					}
+				}
+				if (!propertyFound)
+				{
+					itemsNotFound.Add("Property Not Found: " + row["Property"]);
+				}
+				if (!valueFound)
+				{
+					itemsNotFound.Add("Value Not Found: " + row["Value"]);
+				}
+			}
+
+			return itemsNotFound;
+		}
+
+		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
+		{
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
+			return closeButton.TryClick();
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject

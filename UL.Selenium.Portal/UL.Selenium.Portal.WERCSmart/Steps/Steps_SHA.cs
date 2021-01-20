@@ -4214,6 +4214,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.CheckTheDocumentPurposeTypeDropdown(dropDownOption), "The following option was not displayed: " + dropDownOption, "The following option was displayed: " + dropDownOption);
 		}
 
+		[StepDefinition(@"I click the first UPC in the UPC Retailer and Feed page")]
+		public void GivenIClickTheFirstUPCInTheUPCRetailerAndFeedPage()
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.SelectFirstUPCInUPCRetailerAndFeed(), "Failed to select first UPC in UPC Retailer and Feed", "Successfully selected first UPC in UPC Retailer and Feed");
+		}
+
+		[StepDefinition(@"In UPC Details popup in UPC Retailer and Feed page I select retailer: (.*)")]
+		public void GivenISelctRetailerFromUPCDetailsPopupInUPCRetailerAndFeedPage(string retailer)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(retailer), "Failed to select retailer in UPC Details Popup", "Successfully selected retailer in UPC Details Popup");
+		}
+
+		[StepDefinition(@"In UPC Details popup in Retailer and UPC Feed page I see the following properties and values")]
+		public void GivenInUPCDetailsPopupInRetailerAndUPCFeedPageISeeTheFollowingPropertiesAndValues(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(table).Count() > 0, "Failed to find the correct properties and values", "Successfully found the correct properties and values");
+		}
+
+		[Given(@"I close UPC Details popup in Retailer and UPC Feed page")]
+		public void GivenICloseUPCDetailsPopupInRetailerAndUPCFeedPage()
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
+		}
 	}
 
 }
