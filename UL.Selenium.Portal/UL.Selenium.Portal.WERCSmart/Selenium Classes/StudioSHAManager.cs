@@ -2693,6 +2693,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//input"));
+
+				if (checkboxList == null || checkboxList.Count == 0)
+				{
+					Report.Info("Checkbox List was empty");
+					return false;
+				}
+
 				foreach (IWebElement el in checkboxList)
 				{
 					if (el.Checked())
@@ -2703,6 +2710,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				int indexToSelect = 0;
 				IList<IWebElement> spanList = this.containerElement.FindElements(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span"));
+
+				if (checkboxList == null || checkboxList.Count == 0)
+				{
+					Report.Info("Span List was empty");
+					return false;
+				}
+
 				foreach (IWebElement el in spanList)
 				{
 					if (el.Text == subject)
@@ -2712,6 +2726,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				IWebElement checkboxToSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//input[" + indexToSelect + "]"));
+
+				if (checkboxToSelect == null)
+				{
+					Report.Info("Checkbox to select was null");
+					return false;
+				}
+
 				return checkboxToSelect.TryCheck();
 			}
 			catch (Exception)

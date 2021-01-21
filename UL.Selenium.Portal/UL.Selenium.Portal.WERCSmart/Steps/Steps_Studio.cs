@@ -594,6 +594,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
+			Report.Info("testing1 " + alertText);
 			Report.IsTrue(alertText.Contains(expectedAlertText),
 				"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText,
 				"Alert text is showing as expected: " + expectedAlertText, false, false);
