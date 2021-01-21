@@ -1094,7 +1094,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
-			Report.IsTrue(thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button), "Failed to click the " + button + " button", "Successfully clicked the " + button + " button");
+			if (thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button))
+			{
+				Report.Info("Successfully clicked the " + button + " button");
+			} else
+			{
+				Report.Info("Failed to click the " + button + " button");
+			}
 		}
 
 		[StepDefinition(@"In SHA Manager I select the first product")]
