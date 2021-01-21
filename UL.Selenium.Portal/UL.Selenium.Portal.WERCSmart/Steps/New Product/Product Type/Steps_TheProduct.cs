@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		}
 
 		[StepDefinition(@"I clear 'Type of Product'")]
-		public void SetNonExistentTypeOfProductTo()
+		public void ClearTypeOfProductField()
 		{
 			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not cleared", "Product type tab is cleared.");
 			this.TheProduct.ProductType = "";
