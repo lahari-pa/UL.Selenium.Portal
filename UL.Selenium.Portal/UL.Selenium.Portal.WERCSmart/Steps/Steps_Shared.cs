@@ -10901,6 +10901,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 158144 \(Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not considered a pesticide product");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is not considered a pesticide product");
+			Report.StartStep(
+				"I set the Select countries the product may be sold in field to: United States");
+			MyNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep(
+				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.",
+				"Yes");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			Report.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
 
 
 
