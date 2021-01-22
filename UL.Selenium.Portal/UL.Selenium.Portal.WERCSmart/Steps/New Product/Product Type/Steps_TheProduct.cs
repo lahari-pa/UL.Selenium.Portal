@@ -33,6 +33,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			Report.IsTrue(this.TheProduct.ProductType.ToLower().Contains(typeOfProduct.ToLower()), "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
 		}
 
+		[StepDefinition(@"I set non-existent 'Type of Product': (.*)")]
+		public void SetNonExistentTypeOfProductTo(string typeOfProduct)
+		{
+			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
+			this.TheProduct.ProductType = typeOfProduct;
+		}
+
+		[StepDefinition(@"I clear 'Type of Product'")]
+		public void ClearTypeOfProductField()
+		{
+			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not cleared", "Product type tab is cleared.");
+			this.TheProduct.ProductType = "";
+		}
+
+		[StepDefinition(@"I confirm no results are returned")]
+		public void GivenIConfirmNoResultsAreReturned()
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.ConfirmNoResultsAreReturnedForProductType(), "Failed to find no results", "Successfully found no results");
+		}
+
 		[StepDefinition(@"I set 'Product Line Or Brand' to: (.*)'")]
 		public void SetProductLineOrBrand(string lineOrBrand)
 		{
