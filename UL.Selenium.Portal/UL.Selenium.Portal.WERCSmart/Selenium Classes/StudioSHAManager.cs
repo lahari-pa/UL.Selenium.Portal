@@ -1753,93 +1753,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public bool SelectFirstUPCInUPCRetailerAndFeed()
-		{
-			IWebElement firstUPC = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
-
-			if (firstUPC == null)
-			{
-				Report.Info("El was null");
-				return false;
-			}
-
-			return firstUPC.TryClick();
-		}
-
-		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
-		{
-			IWebElement retailerEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
-
-			if (retailerEl == null)
-			{
-				Report.Info("El was null");
-				return false;
-			}
-
-			return retailerEl.TryClick();
-		}
-
-		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
-		{
-			IList<IWebElement> columnOneList = this.containerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
-			List<string> itemsNotFound = new List<string>();
-
-			bool propertyFound = false;
-			bool valueFound = false;
-
-			foreach (TableRow row in table.Rows)
-			{
-
-				propertyFound = false;
-				valueFound = false;
-
-				foreach (IWebElement el in columnOneList)
-				{
-					if (el.Text == row["Property"])
-					{
-						propertyFound = true;
-					}
-
-					if (row["Value"] == "<Any Data>")
-					{
-
-					}
-
-					if ((row["Value"] == "<Any Data>" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
-					{
-						valueFound = true;
-					}
-					if (valueFound && propertyFound)
-					{
-						break;
-					}
-				}
-				if (!propertyFound)
-				{
-					itemsNotFound.Add("Property Not Found: " + row["Property"]);
-				}
-				if (!valueFound)
-				{
-					itemsNotFound.Add("Value Not Found: " + row["Value"]);
-				}
-			}
-
-			return itemsNotFound;
-		}
-
-		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
-		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
-
-			if (closeButton == null)
-			{
-				Report.Info("El was null");
-				return false;
-			}
-
-			return closeButton.TryClick();
-		}
-
 		public bool RightClickFirstProduct()
 		{
 			Delay.Seconds(3);
@@ -3272,6 +3185,95 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'validate-pasword')]");
 
 		public string ValidationPopupHeaderText => this.FindElement(By.XPath(".//span[@class='ui-dialog-title']"), 2).Text;
+
+	}
+
+	class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//body");
+
+		public bool SelectFirstUPCInUPCRetailerAndFeed()
+		{
+			IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
+
+			if (firstUPC == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return firstUPC.TryClick();
+		}
+
+		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
+		{
+			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
+
+			if (retailerEl == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return retailerEl.TryClick();
+		}
+
+		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
+		{
+			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
+			List<string> itemsNotFound = new List<string>();
+
+			bool propertyFound = false;
+			bool valueFound = false;
+
+			foreach (TableRow row in table.Rows)
+			{
+				propertyFound = false;
+				valueFound = false;
+
+				foreach (IWebElement el in columnOneList)
+				{
+					if (el.Text == row["Property"])
+					{
+						propertyFound = true;
+					}
+
+					if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+					{
+						valueFound = true;
+					}
+					if (valueFound && propertyFound)
+					{
+						break;
+					}
+				}
+				if (!propertyFound)
+				{
+					Report.Info("The following property was not found:" + row["Property"]);
+					itemsNotFound.Add("Property Not Found: " + row["Property"]);
+				}
+				if (!valueFound)
+				{
+					Report.Info("The following value was not found:" + row["Value"]);
+					itemsNotFound.Add("Value Not Found: " + row["Value"]);
+				}
+			}
+
+			return itemsNotFound;
+		}
+
+		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
+
+			if (closeButton == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return closeButton.TryClick();
+		}
 
 	}
 

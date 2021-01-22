@@ -6699,7 +6699,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 157868 \(SHA > Select First Product > UPC Retailer and Feed\)")]
-		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
 		public void Shared157868_SHA_SelectFirstProduct_UpcList()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -6713,7 +6712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartStep("I click 'UPC Retailer and Feed'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
-			Delay.Seconds(5);
+			Delay.Seconds(25);
 		}
 
 		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]

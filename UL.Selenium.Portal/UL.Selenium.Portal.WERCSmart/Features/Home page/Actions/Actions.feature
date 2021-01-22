@@ -319,10 +319,10 @@ Given I confirm the UPC Retailer and Feed page opened in a new tab and navigate 
 Given I click the first UPC in the UPC Retailer and Feed page
 Given In UPC Details popup in UPC Retailer and Feed page I select retailer: 99 Cents
 Given In UPC Details popup in Retailer and UPC Feed page I see the following properties and values
-| Property         | Value      |
-| Weight Size (oz) | <Any Data> |
-| Fluid Size (oz)  | <Any Data> |
-| Gas Size (kg)    | <Any Data> |
-| Gas Name         | <Any Data> |
+| Property         | Value    |
+| Weight Size (oz) | Any Data |
+| Fluid Size (oz)  | Any Data |
+| Gas Size (kg)    | Any Data |
+| Gas Name         | Any Data |
 Given I close UPC Details popup in Retailer and UPC Feed page
 Given I close the current tab
