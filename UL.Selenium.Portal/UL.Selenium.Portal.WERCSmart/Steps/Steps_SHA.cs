@@ -485,6 +485,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
+		{
+			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
+		}
+
 		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
@@ -1081,6 +1087,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Matched up to " + builder);
 				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
 					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
+		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			if (thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button))
+			{
+				Report.Info("Successfully clicked the " + button + " button");
+			} else
+			{
+				Report.Info("Failed to click the " + button + " button");
 			}
 		}
 
