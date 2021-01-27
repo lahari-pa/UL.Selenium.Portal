@@ -23,3 +23,7 @@ Then Confirm that 'Amazon' shows Tier 1 marked with a 'Y'
 Then Confirm that 'Dollar Tree Stores, Inc. / Greenbrier International, Inc' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
 Then Confirm that 'Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)' shows Tier 1,Tier 2.1,Tier 2.2,Tier 4.1 marked with a 'Y'
 Then I Close 'Supplier Manager'
+
+
+
+
