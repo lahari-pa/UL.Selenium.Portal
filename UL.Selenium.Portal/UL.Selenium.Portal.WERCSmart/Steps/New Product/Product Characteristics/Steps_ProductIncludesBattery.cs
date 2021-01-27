@@ -77,40 +77,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I delete the following battery saved as: (.*)")]
-		// Requires a table with the headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
-		public void DeleteTheFollowingBatterySavedAs(string savedAs)
-		{
-			try
-			{
-				var listOfBatteries = new List<Battery>();
-				foreach (Battery battery in listOfBatteries)
-				{
-					Report.Info("testing1 " + battery.SavedAs + " " + savedAs);
-					if (battery.SavedAs == savedAs)
-					{
-						Report.Info("testing2");
-						listOfBatteries.Remove(battery);
-					}
-				}
-				if (listOfBatteries.Any())
-				{
-					Report.Info("testing3");
-					// add a table row for each battery in the list and enters data into each column
-					Report.Info("Adding the following batteries:");
-					this.ProductIncludesBattery.Batteries = listOfBatteries;
-					Report.Info("Removing empty battery rows");
-					this.ProductIncludesBattery.DeleteEmptyBatteryRows();
-					return;
-				}
-				Report.Error("There were no batteries to add");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
 	}
 }

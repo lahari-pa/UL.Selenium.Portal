@@ -187,6 +187,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I filter for the product with SKU saved as: (.*)")]
+		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
+		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("Searching for product with ID: '" + id + "'");
+				var selProdGrid = new ProductsGrid {
+					ProductSkuField = id
+				};
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
 		{
@@ -711,6 +780,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
+		{
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs, uPCNo);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
+
+		}
+
+		[StepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
+		public void ThenGenerateARandomSKUNumberRandomDigitsAndSaveAsRandomSKU_(string savedAs)
+		{
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs, uPCNo);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
+		}
+
+
+		[StepDefinition(@"I generate a random SKU number and save as: (.*)")]
+		public void GivenIGenerateARandomSKUNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
