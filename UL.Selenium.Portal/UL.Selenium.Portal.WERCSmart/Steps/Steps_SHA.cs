@@ -485,6 +485,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
+		{
+			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
+		}
+
 		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
@@ -1084,6 +1090,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
+		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			if (thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button))
+			{
+				Report.Info("Successfully clicked the " + button + " button");
+			} else
+			{
+				Report.Info("Failed to click the " + button + " button");
+			}
+		}
+
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
@@ -1096,6 +1115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Id = id
 			};
 			Context.AddToContext("ID", thisProductInformation);
+
 		}
 
 		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
@@ -4182,24 +4202,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
-		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
-		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
-		{
-			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+        [StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+        public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+        {
+            StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
-			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = ProductDetails?.Id;
-			if (id == null)
-			{
-				throw new Exception("Could not find product saved to context as: " + savedAs);
-			}
+            var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+            string id = ProductDetails?.Id;
+            if (id == null)
+            {
+                throw new Exception("Could not find product saved to context as: " + savedAs);
+            }
 
-			var key = id + "'s Clients";
-			var clients = Context.GetFromContext(key).ToString();
-			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
-			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
-		}
-
+            var key = id + "'s Clients";
+            var clients = Context.GetFromContext(key).ToString();
+            string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+            studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
+        }
+		
 		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
