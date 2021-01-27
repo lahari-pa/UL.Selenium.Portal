@@ -18,7 +18,7 @@ indent_style                                                                 = t
 dotnet_sort_system_directives_first                                          = false
 
 # use 'this.' and 'Me.' for clarity and IntelliSense
-dotnet_style_qualification_for_field                                         = true : warning
+dotnet_style_qualification_for_field                                         = false
 dotnet_style_qualification_for_property                                      = true : warning
 dotnet_style_qualification_for_method                                        = true : warning
 dotnet_style_qualification_for_event                                         = true : warning
@@ -80,7 +80,7 @@ dotnet_naming_style.underscore_camel.required_prefix                         = _
 [*.cs]
 # Prefer "var" if type is obvious
 csharp_style_var_for_built_in_types                                      = false : suggestion
-csharp_style_var_when_type_is_apparent                                   = true : suggestion
+csharp_style_var_when_type_is_apparent                                   = true : none
 csharp_style_var_elsewhere                                               = false : suggestion
 
 # Prefer method-like constructs to have a block body
@@ -102,7 +102,7 @@ csharp_style_conditional_delegate_call                                   = true 
 csharp_prefer_simple_default_expression                                  = true : warning
 
 # Newline settings
-csharp_new_line_before_open_brace                                        = accessors,types,anonymous_methods,control_blocks,events,indexers,lambdas,local_functions,methods,object_collection,types
+csharp_new_line_before_open_brace                                        = properties,accessors,types,anonymous_methods,control_blocks,events,indexers,lambdas,local_functions,methods,object_collection,types
 csharp_new_line_before_else                                              = true
 csharp_new_line_before_catch                                             = true
 csharp_new_line_before_finally                                           = true
