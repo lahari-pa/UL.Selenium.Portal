@@ -969,6 +969,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 
 
 
+@ScenarioId:10662
 	Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -994,6 +995,7 @@ Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - 
 Given In the Universal Product Code (UPC) page I click Save
 Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
 Given I delete UPC: saved as UPC156789
-Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 12345678
+Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
 Given In the Universal Product Code (UPC) page I click Save
+Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase
