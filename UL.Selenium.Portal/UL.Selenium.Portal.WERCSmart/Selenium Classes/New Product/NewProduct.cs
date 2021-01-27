@@ -5663,6 +5663,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return footerTextFound.Contains(expectedText);
 		}
 
+		public bool ConfirmNoResultsAreReturnedForProductType()
+		{
+			IWebElement topResult = this.containerElement.FindElement(By.XPath(@"//span[@class='select2-results']//li[1][text()='No results found']"), 2);
+
+			if (topResult == null)
+			{
+				return false;
+			}
+
+			return true;
+
+		}
+
 	}
 
 	public class ProductInformation
@@ -5764,6 +5777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return rList;
 		}
+
 	}
 
 	public class InputError

@@ -608,6 +608,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool RightClickFirstProduct()
+		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to rightclick first product");
+			//int index = SeleniumBrowser.WebBrowser
+			//	.FindElements(By.XPath(
+			//		"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+			//	.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			//IWebElement matchingTD = SeleniumBrowser.WebBrowser
+			//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+			//	.FirstOrDefault(x => x.GetValue().Trim() == id);
+			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product']//span"), 5);
+			if (matchingTD2 != null)
+			{
+				Report.Info("Found matching cell");
+				var thisContextMenu = new RightClickProductMenu();
+				
+				//matchingTD2.RightClick();
+				//This below is to handle the Right click clicking below the element.
+				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				int i = 0;
+				while (i < 70)
+				{
+					Delay.Seconds(2);
+					actions.MoveToElement(matchingTD2);
+					actions.MoveByOffset(0, i);
+					actions.ContextClick();
+					actions.Perform();
+					if (thisContextMenu.MenuExists())
+					{
+						return true;
+					}
+					i = i - 10;
+				}
+				return false;
+			}
+			else
+			{
+				Report.Info("Failed to find matching table cell for first product");
+			}
+
+			return false;
+		}
+
 		public bool ProductTableIsEmpty()
 		{
 			try
@@ -2690,13 +2736,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectSubject(string subject)
 		{
-			IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span[text()='" + subject + "']/preceding-sibling::input"));
-			if (statusSelect == null)
+			try
 			{
-				Report.Failure("Status Select null");
+				IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//input"));
+
+				if (checkboxList == null || checkboxList.Count == 0)
+				{
+					Report.Info("Checkbox List was empty");
+					return false;
+				}
+
+				foreach (IWebElement el in checkboxList)
+				{
+					if (el.Checked())
+					{
+						el.TryCheck();
+					}
+				}
+
+				int indexToSelect = 0;
+				IList<IWebElement> spanList = this.containerElement.FindElements(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//span"));
+
+				if (checkboxList == null || checkboxList.Count == 0)
+				{
+					Report.Info("Span List was empty");
+					return false;
+				}
+
+				foreach (IWebElement el in spanList)
+				{
+					if (el.Text == subject)
+					{
+						indexToSelect = spanList.IndexOf(el) + 1;
+					}
+				}
+
+				IWebElement checkboxToSelect = this.containerElement.FindElement(By.XPath(".//span[@data-bind='foreach: viewModelMsg.selectedItems']//input[" + indexToSelect + "]"));
+
+				if (checkboxToSelect == null)
+				{
+					Report.Info("Checkbox to select was null");
+					return false;
+				}
+
+				return checkboxToSelect.TryCheck();
+			}
+			catch (Exception)
+			{
 				return false;
 			}
-			return statusSelect.TryCheck();
 		}
 
 		public string GetSubjectMessage()
@@ -2719,6 +2807,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 			return supplierMessage.GetValue();
+		}
+
+		public bool RejectSubmissionDialogClickSaveOrCancel(string button)
+		{
+			IWebElement buttonEl = this.containerElement.FindElement(By.XPath(".//span[text()='Product Submission Rejection']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//span[text()='" + button + "']"));
+			if (buttonEl == null)
+			{
+				Report.Failure(button + " button was null");
+				return false;
+			}
+			return buttonEl.TryClick();
 		}
 
 	}
