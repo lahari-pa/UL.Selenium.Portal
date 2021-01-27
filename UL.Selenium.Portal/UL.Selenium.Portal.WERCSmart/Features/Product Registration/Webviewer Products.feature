@@ -240,6 +240,8 @@ Given I call Shared Step 49743 - SHA Manager - Select Product - Actions - Docume
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144975) for
 | Retailer |
 | <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144975)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144975 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144975
 
 
@@ -292,6 +294,8 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144979) for
 | Retailer |
 | <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144979)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144979 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144979
 
 
@@ -342,6 +346,8 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144981) for
 | Retailer |
 | <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144981)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144981 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144981
 
 
@@ -391,6 +397,8 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144984) for
 | Retailer |
 | <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144984)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144984 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144984
 
 
@@ -406,7 +414,6 @@ Given I generate a random UPC number and save as: UPC144992
 #In 57561b enter the name for final product run to be "For WVs TC 144992 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 0, User Uploads own SDS on submission"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144992 and select Type of Product): Chalk and add a Random Identifier
 Then I save the product information as: TestCase144992
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -439,5 +446,48 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase144992) for
 | Retailer |
 | <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144992)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144992 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144992
 
+Scenario: [145074] US Only, Label Only Product - Label Uploaded - process to Complete
+#Login to WS as supplier with feed to Web viewers
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC145074
+#In 57561b enter the name for final product run to be "For WVs TC 145074 - Us Only - Label product - Label uploaded "
+Then I call Shared Step 57561b (The Product - Enter Product Name: Nutritional Supplement - Liquid Test Product 145074 and select Type of Product): Nutritional Supplement - Liquid and add a Random Identifier
+Then I save the product information as: TestCase145074
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
+Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC145074, container type: Plastic Container and size: 50
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+#~~~~~~~~SHA~~~~~~~#
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145074)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase145074)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Assigned
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase145074)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase145074)
+And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase145074	
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145074)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Accepted
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145074) for
+| Retailer |
+| <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Completed
+Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase145074
