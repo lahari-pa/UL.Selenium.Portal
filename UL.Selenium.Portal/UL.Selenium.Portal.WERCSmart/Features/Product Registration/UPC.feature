@@ -970,7 +970,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 
 
 @ScenarioId:10662
-	Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
+Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I generate a random UPC number and save as: UPC156789

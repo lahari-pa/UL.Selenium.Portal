@@ -2734,7 +2734,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
-		public void ASharedEnterUniversalProductCodeUPC_Battery_ConfirmSKUDoNotClickContinue(string upc, string containerType,
+		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
 			string size, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2745,8 +2745,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				sku = Context.GetFromContext(sku).ToString();
 			}
-			
-		var upcTable = new Table(new string[] {
+
+			var upcTable = new Table(new string[] {
 				"Field",
 				"Value"
 			});
@@ -2766,11 +2766,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Internal SKU",
 				sku
 			});
-		
+
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 		}
-
+		
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
 		public void SharedDataAcceptance_ClickSummaryButton()
 		{

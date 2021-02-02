@@ -1277,7 +1277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				
 				if (info.InternalSKU.Length > 0)
 				{
-					IWebElement InternalSKUNumberField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[contains(text(),'Internal SKU')]//following-sibling::input"), 2);
+					IWebElement InternalSKUNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Internal SKU')]//following-sibling::input"), 2);
 				
 					if (InternalSKUNumberField == null)
 					{

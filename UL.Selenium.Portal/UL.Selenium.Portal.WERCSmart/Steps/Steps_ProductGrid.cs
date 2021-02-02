@@ -202,38 +202,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				string id = "";
+				string sku = "";
 
 				try
 				{
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					id = productToSearch.ProductId;
+					sku = productToSearch.ProductSkuField;
 				}
 				catch (Exception)
 				{
 					//do nothing
 				}
 
-				//if we didn't get the id try a different object type
-				if (id == "")
+				if (sku == "")
 				{
 					try
 					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
-
-				}
-
-				if (id == "")
-				{
-					try
-					{
-						id = Context.GetFromContext(savedAs).ToString();
+						sku = Context.GetFromContext(savedAs).ToString();
 					}
 					catch (Exception)
 					{
@@ -241,13 +226,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info("Searching for product with ID: '" + id + "'");
+				Report.Info("Searching for product with ID: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
-					ProductSkuField = id
+					ProductSkuField = sku
 				};
 				GeneralUtilities.Wait_for_load_finish();
 				Delay.Seconds(10);
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + sku + "'!", "Product was returned!");
 			}
 			catch (Exception ex)
 			{
@@ -799,19 +784,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Delay.Seconds(2);
 			Report.Info(uPCNo);
 			Delay.Seconds(1);
-		}
-
-
-		[StepDefinition(@"I generate a random SKU number and save as: (.*)")]
-		public void GivenIGenerateARandomSKUNumberAndSaveAs(string savedAs)
-		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
-			Context.AddToContext(savedAs, uPCNo);
-			//Report.Info("Generated UPC No: " + uPCNo);
-			//Delay.Seconds(2);
-			Report.Info(uPCNo);
-			Delay.Seconds(1);
-
 		}
 
 		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
