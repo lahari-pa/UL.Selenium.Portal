@@ -279,14 +279,13 @@ Given I click continue
 Given I add the following CA Cleaning ingredients:  
 		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName   | IngredientType            | FunctionalPurpose | Clean | Certified |
 		| 68515-73-1 | 100     |                     | true        |            | TS Validation | Nonfunctional Constituent |                   | true  | true      |
-Given for ingredient: 68515-73-1 the Publicly Disclosed field is disabled
-Given for ingredient: 68515-73-1 the Public Name field is disabled
-Given for ingredient: 68515-73-1 the Trade Secret field is enabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Publicly Disclosed field is disabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Public Name field is disabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Trade Secret field is enabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Generic Name field is displayed
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Ingredient Type drop-down is displayed
 Then I confirm the following Functional Purpose is displayed: Non-Functional Ingredient
 Given I click continue
 Given I should see the Waste Classification Data Page
 Given I click the Home navigation icon
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158172
-
-# CONFIRM that the GENERIC NAME Entry Field becomes available
-# CONFIRM the Ingredient Type drop-down is available

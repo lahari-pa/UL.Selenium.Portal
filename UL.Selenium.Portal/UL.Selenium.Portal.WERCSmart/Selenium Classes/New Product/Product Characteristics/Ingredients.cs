@@ -1702,5 +1702,69 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return closeButton.TryClick();
 		}
 
+		public bool CheckGenericNameFieldIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
+		{
+			IWebElement genericNameField = this.ContainerElement.FindElement(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../following-sibling::td//input[@data-bind='value: GenericName.field']"), 2);
+
+			if (displayedOrNotDisplayed == "displayed")
+			{
+				if (genericNameField != null)
+				{
+					return true;
+				}
+			}
+			else if (displayedOrNotDisplayed == "not displayed")
+			{
+				if (genericNameField == null)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool CheckIngredientTypeDropDownIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
+		{
+
+			IList <IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='D-Glucopyranose, oligomeric, decyl octyl glycosides']/../../../preceding-sibling::thead//th"), 2);
+			int ingredientIndex = -1;
+
+			foreach (IWebElement el in thList)
+			{
+				if (el.Text == "Ingredient Type")
+				{
+					ingredientIndex = thList.IndexOf(el);
+				}
+			}
+
+			if (ingredientIndex < 0)
+			{
+				Report.Info("Failed to find Ingredient Type index");
+				return false;
+			}
+
+			ingredientIndex += 1;
+
+			IList <IWebElement> ingredientTypeDropDownList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../td[" + ingredientIndex + "]//select//option"), 2);
+
+			if (displayedOrNotDisplayed == "displayed")
+			{
+				if (ingredientTypeDropDownList.Count > 0)
+				{
+					return true;
+				}
+			}
+			else if (displayedOrNotDisplayed == "not displayed")
+			{
+				if (ingredientTypeDropDownList.Count == 0)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 	}
 }

@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name) field is (enabled|disabled)")]
+		[StepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name|Generic Name) field is (enabled|disabled)")]
 		public void ForIngredientTheTradeSecretCheckboxIsDisabledOrEnabled(string ingredient, string checkbox, string enabledOrDisabled)
 		{
 			var newProductIngredients = new Ingredients();
@@ -68,11 +68,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 								  (enabledOrDisabled.ToLower() == "enabled"), "Public name select box is not showing as expected.",
 						"Public name select box is showing as expected.");
 					break;
+				case "Generic Name":
+					Report.IsTrue(newProductIngredients.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).GenericNameEnabled ==
+								  (enabledOrDisabled.ToLower() == "enabled"), "Generic name select box is not showing as expected.",
+						"Generic name select box is showing as expected.");
+					break;
 
 				default:
 					Report.Failure("Step requires a valid field option: 'Publicly Disclosed', 'Trade Secret' or 'Public Name'");
 					return;
 			}
+		}
+
+		[StepDefinition(@"for ingredient: (.*) the Generic Name field is (displayed|not displayed)")]
+		public void GivenForIngredient_TheGenericName_FieldIs_(string ingredient, string displayedOrNotDisplayed)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected");
+		}
+
+		[StepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
+		public void GivenForIngredientD_GlucopyranoseOligomericDecylOctylGlycosidesTheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected");
 		}
 
 		[StepDefinition(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
@@ -852,7 +871,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(newProductIngredients.AddCACleaningIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
 			}
-			Delay.Seconds(9999);
 		}
 
 
