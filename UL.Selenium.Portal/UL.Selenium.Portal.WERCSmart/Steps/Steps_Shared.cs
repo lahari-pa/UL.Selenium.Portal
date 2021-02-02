@@ -10978,7 +10978,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-
 		[StepDefinition(@"I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue")]
 		public void GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue()
 		{
