@@ -967,5 +967,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
 		}
 
+		[StepDefinition(@"In the Ingredient Reference Number field I enter the following text: (.*) and saved as: (.*)")]
+		public void GivenInTheIngredientReferenceNumberFieldIEnterTheFollowingTextAndSavedAsIngID(string text, string savedAs)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			if (Context.Contains(text))
+			{
+				text = Context.GetFromContext(text).ToString();
+			}
+			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(text), "Failed to enter text in Ingredient Reference Number field", "Successfully entered text in Ingredient Reference Number field");
+			Context.AddToContext(savedAs, text);
+		}
+
+
 	}
 }
