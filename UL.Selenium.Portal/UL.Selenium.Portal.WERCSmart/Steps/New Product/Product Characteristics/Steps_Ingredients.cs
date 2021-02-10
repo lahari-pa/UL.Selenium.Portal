@@ -88,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
-		public void GivenForIngredientD_GlucopyranoseOligomericDecylOctylGlycosidesTheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
+		public void GivenForIngredient_TheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected");

@@ -1727,7 +1727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckIngredientTypeDropDownIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
 		{
 
-			IList <IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='D-Glucopyranose, oligomeric, decyl octyl glycosides']/../../../preceding-sibling::thead//th"), 2);
+			IList <IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../../preceding-sibling::thead//th"), 2);
 			int ingredientIndex = -1;
 
 			foreach (IWebElement el in thList)
