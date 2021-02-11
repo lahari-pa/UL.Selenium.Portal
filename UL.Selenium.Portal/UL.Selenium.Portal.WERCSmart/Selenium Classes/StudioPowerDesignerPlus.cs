@@ -302,10 +302,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 				Report.Screenshot();
 				Report.Info($"Is the page showing spacing as bottom of the page?");
-				Report.Info($"Attempting to scroll the top of the page...");
+				Report.Info($"Attempting to scroll to the top of the page...");
 				SeleniumBrowser.WebBrowser.ScrollToTopOfPage();
 				Report.Screenshot();
-				Report.Info($"swithcing to correct iframe...");
+				Report.Info($"switching to correct iframe...");
 				IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.Id("Widget3FRAME"));
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 				Report.Info($"Attempting to regrab the menu items...");

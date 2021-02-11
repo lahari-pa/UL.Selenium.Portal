@@ -1618,7 +1618,6 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	#And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue

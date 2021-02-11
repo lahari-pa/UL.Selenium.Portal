@@ -15,11 +15,9 @@ Feature: MyAccount
 
 @ScenarioId:734
 Scenario: [61796] Account User Name in Header
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then The home screen should load
 	#CLF 25/6/2019 changed step because the username of this account does not seem to be reliable.
-	#Then I should see user name: Automated, Products in the header next to the user icon
 	Then I should see a user name in the header next to the user icon
 	Given I click on My Account
 	And I should see the heading: My Account on the My Account page
@@ -162,7 +160,6 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 
 @ScenarioId:1590
 Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	And I navigate to My Account
 	And In the My Account page I navigate to the Company Information page

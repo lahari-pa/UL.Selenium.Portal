@@ -300,7 +300,6 @@ And I set the Select countries the product may be sold in field to: Canada
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Then I click continue
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-#Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Canadian Tire and enter the name: Test
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
 

@@ -30,9 +30,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Articles(string articles)
 		{
 			Report.Info("Selecting Number of Articles: " + articles);
-			//this._selectArticles.Select(articles);
-			//var el = this.containerElement.FindElement(By.XPath($""), 2);
-
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach(var menu in listofMenus)
 			{
@@ -167,9 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Select_Enhanced_Articles(string enArticles)
 		{
-			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
-			//this._selectEnArticles.Select(enArticles);
-			//return true;
+			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);		
 
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
@@ -230,9 +225,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Formulated_Products(string formProds)
 		{
 			Report.Info("Selecting Number of Formulated Products: " + formProds);
-			//this._selectFormProds.Select(formProds);
-			//return true;
-
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
@@ -621,8 +613,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Select_Range(string articles, string enArticles, string formProds)
 		{
-			try
-			{
 				Report.Info("Beginning Select_Range");
 
 				if (!this.Exists)
@@ -657,11 +647,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Number of Formulated Products Selected");
 				Delay.Seconds(0.5 * Delay.SpeedFactor);
 				Report.Success("Range of Products, Articles and Enhanced Articles Selected");
-			}
-			catch
-			{
-				Report.Info($"Catch");
-			}
+			
+			
 			return true;
 		}
 
@@ -671,8 +658,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement Get_Feature_Plan(string feature_plan)
 		{
 			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
-
-			//var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label"), 2).ToList();
 
 			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']//div[contains(@class,'panel-default ws-subscription')]//div[@class='panel-heading info']//label[.//input]"), 2).ToList();
 			foreach (IWebElement feature in allProducts)
@@ -742,9 +727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement _selectGold;
 		public bool Gold_click()
 		{
-			Report.Info("Attempting to Select Gold Support Services Plan");
-			//this._selectGold.Click();
-			//return true;
+			Report.Info("Attempting to Select Gold Support Services Plan");			
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
@@ -766,9 +749,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Silver_click()
 		{
 			Report.Info("Attempting to Select Silver Support Services Plan");
-			//this._selectSilver.Click();
-			//return true;
-
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
@@ -789,9 +769,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			//this._selectBronze.Click();
-			//return true;
-
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{

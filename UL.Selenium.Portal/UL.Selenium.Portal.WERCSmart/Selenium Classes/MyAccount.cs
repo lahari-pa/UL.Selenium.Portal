@@ -294,120 +294,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		public bool User_Added_Check_Debug(string userName, string emailAddress, string role)
-		{
-			Report.Info("Beginning User_Added_Check");
-
-			int pageNo = 1;
-			int pageCount = this.GetPage("last");
-			while (pageNo <= pageCount)
-			{
-				Delay.Seconds(1.5 * Delay.SpeedFactor);
-
-				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
-
-				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
-
-				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
-				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
-
-				foreach (IWebElement userRow in listOfUsersRows)
-				{
-					string myUsername = userRow.FindElement(By.XPath(".//td[1]"), 2).Text;
-
-					if (myUsername == userName)
-					{
-						Report.Info("Row Found");
-						string myEmail = userRow.FindElement(By.XPath(".//td[2]"), 2).Text;
-						if (myEmail != emailAddress)
-						{
-							Report.Info("Incorrect Email Address for User: " + userName + ": " + emailAddress);
-							Report.Screenshot();
-							return false;
-						}
-
-						string myRole = userRow.FindElement(By.XPath(".//td[3]"), 2).Text;
-						if (myRole != role)
-						{
-							Report.Info("Incorrect Role for User: " + userName + ": " + role);
-							Report.Screenshot();
-							return false;
-						}
-
-						Report.Success("User: " + userName + " Created");
-						return true;
-					}
-
-					Report.Info("Row Not Found");
-				}
-
-				IWebElement myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
-
-				if (myNext == null)
-				{
-					Report.Info("On Last Page");
-					Report.Screenshot();
-					break;
-				}
-				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
-				myNext.ScrollElementIntoView();
-				if (!myNext.TryClick())
-				{
-					Delay.Seconds(5);
-					myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
-					if (myNext == null)
-					{
-						Report.Info("On Last Page");
-						Report.Screenshot();
-						break;
-					}
-					myNext.ScrollElementIntoView();
-					if (!myNext.TryClick())
-					{
-						throw new Exception("Failed to click move to next page");
-					}
-				}
-				pageNo++;
-				Delay.Seconds(1);
-			}
-			Report.Info("User: " + userName + " Has Not Been Created");
-			Report.Screenshot();
-			return false;
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		public bool Is_User_Active(string userName, string active)
 		{
 			Report.Info("Beginning Is_User_Active");
@@ -636,11 +522,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool New_Subscription_click()
 		{
 			Report.Info("Attempting to Click New Subscription Button");
-			var vbutton = this._btnNewSub;
 			var testel = this.containerElement.FindElement(By.XPath($".//div[contains(@data-bind,'subscriptionModel.isSubscription()==false')]/a[text()='Enroll']"), 2);
-			//this._btnNewSub.Click();
 			return testel.TryClick();
-			//return true;
 		}
 
 		public bool ConfirmSubscriptionLevel(string subscription)

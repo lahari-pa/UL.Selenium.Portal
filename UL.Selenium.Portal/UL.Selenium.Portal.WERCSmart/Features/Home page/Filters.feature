@@ -43,25 +43,11 @@ Scenario: [68388] More Filters - Brand
 @tfs_design
 @ScenarioId:5956
 Scenario: [56829] More Filters	
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#Then The home screen should load
-	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
-	#Create every time or look for id in table first? Need to ensure is passing kit product if do this -> How?
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-
-	#Need a step tht checks for our kit product already existing.
-	#Search grid by name (under assesment in progress) 'KitProductMoreFilters56829' if rows exists = good.
-	#Save id (as product infomation object) and upc to context
-	#change filter back to all
-	#if not exists = run below kit creation step
-
 	Then I Search the Products Grid for the kit product with name: KitProductMoreFilters56829, and create the kit if it is not found
-
 	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
-
-
 	Then I create a object of FilterInformation from the table below: and save it as: MoreFiltersInformation56829
 	| FilterType          | Variable                    |
 	| Brand               | TestBrand                   |
@@ -71,9 +57,8 @@ Scenario: [56829] More Filters
 	| ID                  | ID Saved As KitProduct56829 |
 	| Status              | Assessment in Progress      |
 	| Name                | KitProductMoreFilters56829  |
-
 	Then I enter 3 differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: MoreFiltersInformation56829 each time
-
+	#+Remaining steps from Dev Ops Test Case
 
 # Assigned to Amanda Coutant
 # Created by Amanda Coutant

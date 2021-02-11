@@ -2201,9 +2201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
 		{
 
-			//IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"), 2);			
 			IWebElement fullTextEl = this.FindElement(By.XPath("//span[contains(@data-bind,'maxLength')]"), 2);
-			//IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
 			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
 
 
