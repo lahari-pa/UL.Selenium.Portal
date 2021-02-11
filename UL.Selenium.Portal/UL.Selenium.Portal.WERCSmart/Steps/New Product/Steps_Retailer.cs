@@ -139,6 +139,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new Retailer().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
 		}
 
+		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I choose Private Label name: (.*)")]
+		public void ForRetailerIChoosePrivateLabelName(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().ChoosePrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
+		}
+
 		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
 		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
 		{

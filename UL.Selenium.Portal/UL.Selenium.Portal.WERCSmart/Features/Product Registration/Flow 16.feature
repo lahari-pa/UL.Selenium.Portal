@@ -438,9 +438,10 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
+		And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
@@ -476,9 +477,10 @@ Scenario: [97470] Stand alone Lead Acid Battery
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
+		And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)

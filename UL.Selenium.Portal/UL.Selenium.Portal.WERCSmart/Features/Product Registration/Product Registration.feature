@@ -11,6 +11,7 @@
 @wercsmart
 @RetailPartners
 @UPC
+@NewProduct
 @run_ProductRegistration
 Feature: Product Registration
 
@@ -750,3 +751,53 @@ Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Bey
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
 Given I delete the excel file saved as Products in Scope Report for BBB
+
+
+
+@ScenarioId:10498
+Scenario: [147446] WM - Authoring option ONLY available
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC147446
+Given I save the product information as: testcase147446
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
+And I see the following sections
+| Section                                   |
+| OSHA-compliant Safety Data Sheet, English |
+And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
+		| Option            |
+		| Request to author |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147446
+
+
+
+@ScenarioId:10500
+Scenario: [147447] Sears - Authoring option ONLY available
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC147447
+Given I save the product information as: testcase147447
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Sears/K-Mart and enter the name: TestBrand
+Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
+Given I click continue
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147447, container type: Plastic Container and size: 2
+And I see the following sections
+| Section                                   |
+| OSHA-compliant Safety Data Sheet, English |
+And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
+		| Option            |
+		| Request to author |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147447

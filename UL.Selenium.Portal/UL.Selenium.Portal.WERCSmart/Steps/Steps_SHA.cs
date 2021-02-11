@@ -254,7 +254,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
-						Report.IsTrue(thisProductSearch.EnterUser(value),
+						string user = value;
+						if (UL.Automation.Reporting.SpecFlow.Classes.Context.Contains(value))
+						{
+							user = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+						}
+						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
@@ -478,6 +483,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("No products found");
 			}
+		}
+
+		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
+		{
+			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
@@ -993,6 +1004,105 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
 
+		[StepDefinition(@"In the Reject Submission dialog I Select Subject: (.*)")]
+		public void GivenInTheRejectSubmissionDialogISelectSubject(string subject)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			Report.IsTrue(thisStudioSHAManagerProductRejectSubmission.SelectSubject(subject),
+				"Failed to select subject: " + subject, "Selected: " + subject);
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Subject field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierSubjectIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
+		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			if (thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button))
+			{
+				Report.Info("Successfully clicked the " + button + " button");
+			} else
+			{
+				Report.Info("Failed to click the " + button + " button");
+			}
+		}
+
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
@@ -1005,6 +1115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Id = id
 			};
 			Context.AddToContext("ID", thisProductInformation);
+
 		}
 
 		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
@@ -1108,6 +1219,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
+		[StepDefinition(@"In the Suspended dialog below the Supplier Message field I see the following text in red: (.*)")]
+		public void GivenInTheSuspendedDialogBelowTheSupplierMessageFieldIEnterTheFollowingTextInRed(string textToAdd)
+		{
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.CheckForRedTextBelowSupplierMessage(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
@@ -2191,15 +2309,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
-			if (searchTerm.Contains("saved as"))
+			if (Context.GetFromContext(searchTerm) != null)
 			{
-				searchTerm = Context.GetFromContext(searchTerm.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+				searchTerm = Context.GetFromContext("searchTerm").ToString();
 			}
+
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
 		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
+		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
+		{
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+
+			if (new TopMenuBar().LoggedIn())
+			{
+				Report.Info("Logged in, logging out");
+				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
+			}
+
+			if (user == null)
+			{
+				string Branch = TReVorSettings.SoftwareBranch;
+				string regexPattern = @"^.*(?=(\/))";
+				var regex = new Regex(regexPattern);
+				Match match = regex.Match(Branch);
+				if (match.Success)
+				{
+					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
+				}
+				else
+				{
+					throw new Exception("User: " + accountSavedAs + " could not be found");
+				}
+			}
+			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
+			{
+				var thisStudioSupplierManager = new StudioSupplierManager();
+				Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(user.Username),
+					"Failed to enter search term: " + user.Username,
+					"Entered search term: " + user.Username);
+			}
+		}
+
 
 		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
 		public void InSupplierManagerPopupISelectRadioButton(string button)
@@ -3780,6 +3935,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().ClickCategory(category), "Failed to click the category", "Successfully clicked the category");
 			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+			Delay.Seconds(15);
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
@@ -3854,6 +4010,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().EnterInformationInClearShoppingCartPopup(userID, password, tfsTicketNumber, supportTicketNumber), "Failed to enter information in 'Clear Shopping Cart' Popup", "Successfully entered information in 'Clear Shopping Cart' Popup");
 			Report.IsTrue(new StudioSupplierManager().ClickContinueInClearShoppingCartPopup(), "Failed to click Continue in 'Clear Shopping Cart' Popup", "Successfully clicked Continue 'Clear Shopping Cart' Popup");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
@@ -3861,7 +4018,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().CheckTextInResultsClearShoppingCartForAllUsersPopup(), "The 'Results Clear Shopping Cart for All Users' Popup did not display the correct text", "The 'Results Clear Shopping Cart for All Users' Popup displayed the correct text");
 		}
-
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
 		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs, Table retailerTable)
@@ -4046,24 +4202,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
-		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
-		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
-		{
-			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+        [StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+        public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+        {
+            StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
-			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = ProductDetails?.Id;
-			if (id == null)
-			{
-				throw new Exception("Could not find product saved to context as: " + savedAs);
-			}
+            var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+            string id = ProductDetails?.Id;
+            if (id == null)
+            {
+                throw new Exception("Could not find product saved to context as: " + savedAs);
+            }
 
-			var key = id + "'s Clients";
-			var clients = Context.GetFromContext(key).ToString();
-			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
-			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
-		}
-
+            var key = id + "'s Clients";
+            var clients = Context.GetFromContext(key).ToString();
+            string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+            studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
+        }
+		
 		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
@@ -4071,6 +4227,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
 		}
 
+		[StepDefinition(@"I confirm the Document Purpose Type dropdown shows: (.*)")]
+		public void GivenIConfirmTheDocumentPurposeTypeDropdownShowsAIS(string dropDownOption)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CheckTheDocumentPurposeTypeDropdown(dropDownOption), "The following option was not displayed: " + dropDownOption, "The following option was displayed: " + dropDownOption);
+		}
 
 	}
 

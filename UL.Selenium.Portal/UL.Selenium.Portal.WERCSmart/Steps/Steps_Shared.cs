@@ -1589,44 +1589,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 73223 \(Enter Physical Property - Solid - Without Secondary Physical State\)")]
-		public void GivenICallShared73223EnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			var thisNewProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
-			Report.StartStep("There should only be one option available for Primary Physical State");
-			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
-			Report.StartStep("Primary Physical State should be showing the value: Solid");
-			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+        [StepDefinition(@"I call Shared Step 73223 \(Enter Physical Property - Solid - Without Secondary Physical State\)")]
+        public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState()
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var thisNewProduct = new NewProduct();
+            Report.StartStep("I should see the Product Characteristics Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+            Report.StartStep("There should only be one option available for Primary Physical State");
+            MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+            Report.StartStep("Primary Physical State should be showing the value: Solid");
+            if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+            {
+                Report.Failure("The Primary Physical State was not set to Solid by default.");
+                Report.Screenshot();
+                Report.Info("Setting the Primary Physical State to: Solid");
+                MyNewProductSteps.SetTheSectionOptionTo(
+                    "Primary Physical State",
+                    "Solid");
+            }
+            else
+            {
+                Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+                Report.Screenshot();
+            }
+
+            Report.StartStep(
+                "I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+            MyNewProductSteps.SetTheSectionOptionTo(
+                "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+                "No");
+            if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+            {
+                Report.Failure("The Secondary Physical State option was displayed");
+                Report.StartStep(
+                    "I set the Secondary Physical State option to: Solid");
+                MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
+                    "Solid");
+                Report.Screenshot();
+            }
+            else
+            {
+                Report.Success("The Secondary Physical State option was not displayed");
+                Report.Screenshot();
+            }
+
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
 			{
-				Report.Failure("The Primary Physical State was not set to Solid by default.");
-				Report.Screenshot();
-				Report.Info("Setting the Primary Physical State to: Solid");
-				MyNewProductSteps.SetTheSectionOptionTo(
-					"Primary Physical State",
-					"Solid");
+				Report.StartStep(
+					"I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
+					"Soluble in water");
 			}
 			else
 			{
-				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Failure("The Select the best Water Solubility description option was not displayed");
 				Report.Screenshot();
 			}
-
-			Report.StartStep(
-				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo(
-				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
-				"No");
-
-			Report.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
-			MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");			
+			//Report.StartStep("I set the Secondary Physical State option to: Solid");
+			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Report.StartStep("In the New Product page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-		}
-
+            MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+        }
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
@@ -4785,8 +4810,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
 
-
-
 		}
 
 		[StepDefinition(
@@ -5441,14 +5464,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var thisStepsStudio = new Steps_Studio();
+			var thisProcessProducts = new ProcessProducts();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
+			thisProcessProducts.SelectNewStatus("Accepted");
 			thisStepsStudio.InSHAManagerISelectProductById(id);
 			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
+		}
 
+		[StepDefinition(@"I call Shared Step 155714 \(SHA - Accepted Product - set Retailers to Cancelled for saved as: (.*)\) for")]
+		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCancelledForSavedAs(string savedAs, Table retailers)
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			var thisProcessProducts = new ProcessProducts();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisProcessProducts.SelectNewStatus("Accepted");
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Cancelled");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Cancelled", savedAs);
 		}
 
 		[StepDefinition(@"I call Shared Step 67823 \(Login to WERCSmart - Products Automation Account\)")]
@@ -6667,6 +6709,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
 			Report.StartStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartStep("I click 'UPC Retailer and Feed'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I call Shared Step 157868 \(SHA > Select First Product > UPC Retailer and Feed\)")]
+		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
+		public void Shared157868_SHA_SelectFirstProduct_UpcList()
+		{
+			ReportSettings.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("I select first product in the SHA grid");
+			shaSteps.GivenInSHAManagerISelectTheProduct();
+			Report.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickFirstProduct();
 			// saving the current window so we can naviate back from UPC List
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
@@ -9189,21 +9249,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I select a valid retailer and click DONE");
 			var selectRetailers = new SelectRetailers();
-			new Retailer().ClickAddRetailers();
-			List<string> retailers = new SelectRetailers().GetListOfRetailers();
-			List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
-			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
-			string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
-			if (selectRetailer == null)
+			var opened = new Retailer().ClickAddRetailers();
+			if (opened)
 			{
-				Report.Failure("There were no valid retailers to select!");
-				Report.Screenshot();
-				return;
-			} 
-			Report.Info("Selecting retailer: " + selectRetailer);
-			new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
-			Report.StartStep("Click CONTINUE");
-			new StepsNewProduct().ClickContinue();
+				List<string> retailers = new SelectRetailers().GetListOfRetailers();
+				List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
+				Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
+				string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
+				if (selectRetailer == null)
+				{
+					Report.Failure("There were no valid retailers to select!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info("Selecting retailer: " + selectRetailer);
+				new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
+				Report.StartStep("Click CONTINUE");
+				new StepsNewProduct().ClickContinue();
+			}
+			else
+			{
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
@@ -10927,6 +10994,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(myStudioShaManager.ProcessProductsErrorMessageMatches(id+" ("+prodName+ ") - Merge: Document merge for BCP product " + id+ " has failed – Please publish the required SDS for this product and manually run the document merge process."), "Failed to find the error message", "The error message was found");
 			Report.IsTrue(myStudioShaManager.ClickCloseInProcessProducts(), "Failed to click close","Clicked close");
 
+		}
+
+
+
+		[StepDefinition(@"I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue")]
+		public void GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue()
+		{
+			StepsNewProduct newProduct = new StepsNewProduct();
+
+			Report.StartStep("I should see the Formulation > Batteries Page");
+			newProduct.GivenIShouldSeeXPage("Formulation > Batteries");
+
+			Report.StartStep("I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to Granted");
+			newProduct.SetTheSectionOptionTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Granted");
+
+			Report.StartStep("I click continue");
+			newProduct.ClickContinue();
 		}
 
 		[StepDefinition(@"I call Shared Step 144970 \(Go To Bulk Actions - Accept Documents\)")]

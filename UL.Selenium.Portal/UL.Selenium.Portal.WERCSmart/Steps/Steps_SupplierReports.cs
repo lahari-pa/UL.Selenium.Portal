@@ -398,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure($"Could not find any WERCSmart IDs in the spreadsheet saved as: {fileSavedAs}");
 		}
 
-		[Then(@"I confirm that in the excel file saved as: (.*) for the UPC saved as: (.*) there is a 'Y' in the Case Pack column and an Individual UPC listed as: (.*)")]
+		[StepDefinition(@"I confirm that in the excel file saved as: (.*) for the UPC saved as: (.*) there is a 'Y' in the Case Pack column and an Individual UPC listed as: (.*)")]
 		public void IConfirmThatForTheExcelFileSavedAsThereIsAYinCasePackColumnAndIndvUPC(string savedAs, string casePackUPCSavedAs, string indvUPCSavedAs)
 		{
 			object File = Context.GetFromContext(savedAs);
