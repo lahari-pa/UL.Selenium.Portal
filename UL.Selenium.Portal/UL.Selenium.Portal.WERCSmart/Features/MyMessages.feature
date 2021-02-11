@@ -109,30 +109,3 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	Given In the SHA Manager grid I click Message Center
 	And In the Message Center I go to the last page of messages
 
-@ScenarioId:10615
-	Scenario: [65457542] Debug Kit Test
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-
-	#Need a step tht checks for our kit product already existing.
-	#Search grid by name (under assesment in progress) 'KitProductMoreFilters56829' if rows exists = good.
-	#Save id (as product infomation object) and upc to context
-	#change filter back to all
-	#if not exists = run below kit creation step
-
-	Then I Search the Products Grid for the kit product with name: KitProductMoreFilters56829, and create the kit if it is not found
-
-	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
-
-
-	Then I create a object of FilterInformation from the table below: and save it as: MoreFiltersInformation56829
-	| FilterType          | Variable                    |
-	| Brand               | TestBrand                   |
-	| Retailer            | CVS                         |
-	| Additional Programs | Kit Registrations           |
-	| UPC                 | UPC Saved As UPC58753       |
-	| ID                  | ID Saved As KitProduct56829 |
-	| Status              | Assessment in Progress      |
-	| Name                | KitProductMoreFilters56829  |
-
-	Then I enter 3 differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: MoreFiltersInformation56829 each time
