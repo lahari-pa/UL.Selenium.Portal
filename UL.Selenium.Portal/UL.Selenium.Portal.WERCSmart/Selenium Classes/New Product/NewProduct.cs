@@ -1087,40 +1087,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return containsType.FindElements(By.XPath(".//option"), 2).Select(x => x.GetValue()).ToList();
 		}
 
-		public bool SelectHeight(string height)
-		{
-
-			IWebElement heightEl = this.containerElement.FindElement(By.XPath(".//label[text()='Height in inches (single unit)']/../following-sibling::div//select"), 2);
-			
-			if (height == null)
-			{
-				Report.Failure("Height Element returned null");
-				return false;
-			}
-
-			heightEl.Select(height);
-			return heightEl.GetValue() == height;
-		}
-
-		public List<string> GetHeightOptions()
-		{
-
-			IList <IWebElement> optionsList = this.containerElement.FindElements(By.XPath(".//label[text()='Height in inches (single unit)']/../following-sibling::div//select//option"), 2);
-			List<string> optionsListStrings = new List<string>();
-			if (optionsList.Count == 0)
-			{
-				Report.Failure("Options List returned null");
-				return null;
-			} else {
-				foreach (IWebElement el in optionsList)
-				{
-					optionsListStrings.Add(el.Text);
-				}
-			}
-
-			return optionsListStrings;
-		}
-
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
