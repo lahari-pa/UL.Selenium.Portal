@@ -2439,7 +2439,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
+		[StepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
+		public void SwitchToUPCRetailerAndFeedTab()
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h1[contains(text(), 'WERCSmart Product ID')]"), 2) != null)
+				{
+					Report.Success("The UPC Retailer and Feed page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+			Report.Screenshot();
+			Delay.Seconds(10);
+		}
 
 	}
 }
