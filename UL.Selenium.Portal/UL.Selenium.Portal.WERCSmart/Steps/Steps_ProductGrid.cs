@@ -2825,15 +2825,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
 		{
+			//Andrew - This step is currently not finished 
 			//1566006
-			//Using 4 of the filters (upc, brand, Retailer, Additional Programs)
-			//Need 2 or more filters each time
-			//Do inside a loop which is = totalCombinations
-			//First get random int between 2-4 to decide between how many filters use
-			//construct empty array of string of this ^ size
-			//have a hardcoded list of string = filter names
-			//using our random int, choose filter names from this list and add them to the empty array. If a filter name is already found in the array, then try again.
-
+			
 			//Using our product filter data saved in context (valid filters that will find the product) enter in valid filter data for each of the randomly selected filters in the array.
 			//once filters entered, wait for grid to load fully
 			//search the results displayed for our product ID (from context), may need to check all pages etc.
@@ -2944,7 +2938,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CreateFilterInformationObjectFromTable(string savedAs, Table table)
 		{
 			MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
-			//UPC and ID change so will need to get them from context, easy for ID but for UPC? If already created how get?
 			foreach (var row in table.Rows)
 			{
 				if(row["FilterType"] == "Brand")
@@ -2971,11 +2964,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			Report.IsTrue(filterInfo.AdditionalPrograms != null, "did not set filter: 'Additional Programs'", "Succesffully set filter: 'Additional Programs'");
-
-
-			//UPC58753
-			//Will need step That saves UPC / Id etc to context in same format when checking if already existis (via products gird)
-			//KitProduct56829
+									
 			foreach (var row in table.Rows)
 			{
 				if (row["FilterType"] == "UPC")
@@ -3002,7 +2991,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.IsTrue(filterInfo.UPC != null, "did not set filter: 'UPC'", "Succesffully set filter: 'UPC'");
-
 
 			foreach (var row in table.Rows)
 			{
@@ -3052,8 +3040,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I search the Products gird for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
-		public void SearchProductsGirdForProductByNameAndSaveIDAndUPC(string name, string iDSavedAs, string uPCSavedAs)
+		[StepDefinition(@"I search the Products grid for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
+		public void SearchProductsGridForProductByNameAndSaveIDAndUPC(string name, string iDSavedAs, string uPCSavedAs)
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("Searching for product: " + name);

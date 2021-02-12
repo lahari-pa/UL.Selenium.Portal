@@ -1677,7 +1677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Assessment in Progress");
 			GeneralUtilities.Wait_for_load_finish();
-			new StepsProductGrid().SearchProductsGirdForProductByNameAndSaveIDAndUPC(name, "KitProduct56829", "UPC58753");
+			new StepsProductGrid().SearchProductsGridForProductByNameAndSaveIDAndUPC(name, "KitProduct56829", "UPC58753");
 			new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("All");
 			GeneralUtilities.Wait_for_load_finish();
 			if(Context.Contains("KitProduct56829"))

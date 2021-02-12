@@ -3981,11 +3981,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			Report.StartStep("And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))");
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
-
-
-			//Report.StartStep("And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit");
-			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit");
-
+			
 			Report.StartStep($"The Product- Enter name: {productName}, select product type, Enter TestBrand - Continue - Happy Path): Hair Color Kit");
 			new Steps_TheProduct().SetProductNameProductTypeProductLine(productName, "Hair Color Kit", "TestBrand");
 			new StepsNewProduct().SaveProductInformation(savedAs);
