@@ -7,6 +7,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -75,5 +76,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
+
 	}
 }

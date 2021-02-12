@@ -1050,41 +1050,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
-
-		[StepDefinition(
-			@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
-		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc,
-			string containerType, string size)
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Quantity Header");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Quantity");
-			Report.StartStep("I click the 'Add UPC' button");
-			MyStepsNewProduct.ThenIClickTheAddUpcButton();
-			var upcTable = new Table(new string[] {
-				"Field",
-				"Value"
-			});
-			upcTable.AddRow(new string[] {
-				"UPCNumber",
-				"saved as UPC" + upc
-			});
-			upcTable.AddRow(new string[] {
-				"ContainerType",
-				containerType
-			});
-			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
-			Report.StartStep("I add the following into the UPC Fields");
-			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
-		}
-
 		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\)")]
 		public void GivenICallSharedUploadProductLabelOnly()
 		{
@@ -2733,6 +2698,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
+		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
+			string size, string sku)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			if (Context.Contains(sku))
+			{
+				sku = Context.GetFromContext(sku).ToString();
+			}
+
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Internal SKU",
+				sku
+			});
+
+			Report.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+		}
+		
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
 		public void SharedDataAcceptance_ClickSummaryButton()
 		{
