@@ -3308,7 +3308,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-
+		[StepDefinition(@"I Select a height from the drop down list")]
+		public void GivenISelectAHeightFromTheDropDownList()
+		{
+			List<string> HeightList = new NewProduct().GetHeightOptions();
+			// the container type count must be greater than 1 or random number will throw argument out of range exception (cannot have a range between 1 and 0)
+			if (HeightList.Count <= 1)
+			{
+				Report.Failure("Expected > 1 options to appear under the height select");
+				return;
+			}
+			var random = new Random();
+			int randomNumber = random.Next(1, HeightList.Count - 1);
+			Report.IsTrue(new NewProduct().SelectHeight(HeightList[randomNumber]),
+				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
+		}
 
 	}
 
