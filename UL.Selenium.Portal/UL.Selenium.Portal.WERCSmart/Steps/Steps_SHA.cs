@@ -4234,6 +4234,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.CheckTheDocumentPurposeTypeDropdown(dropDownOption), "The following option was not displayed: " + dropDownOption, "The following option was displayed: " + dropDownOption);
 		}
 
+		[StepDefinition(@"I click the first UPC in the UPC Retailer and Feed page")]
+		public void GivenIClickTheFirstUPCInTheUPCRetailerAndFeedPage()
+		{
+			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
+			Report.IsTrue(studioSHAManagerObject.SelectFirstUPCInUPCRetailerAndFeed(), "Failed to select first UPC in UPC Retailer and Feed", "Successfully selected first UPC in UPC Retailer and Feed");
+		}
+
+		[StepDefinition(@"In UPC Details popup in UPC Retailer and Feed page I select retailer: (.*)")]
+		public void GivenISelctRetailerFromUPCDetailsPopupInUPCRetailerAndFeedPage(string retailer)
+		{
+			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
+			Report.IsTrue(studioSHAManagerObject.SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(retailer), "Failed to select retailer in UPC Details Popup", "Successfully selected retailer in UPC Details Popup");
+		}
+
+		[StepDefinition(@"In UPC Details popup in Retailer and UPC Feed page I see the following properties and values")]
+		public void GivenInUPCDetailsPopupInRetailerAndUPCFeedPageISeeTheFollowingPropertiesAndValues(Table table)
+		{
+			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
+			Report.IsTrue(studioSHAManagerObject.InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(table).Count() == 0, "Failed to find the correct properties and values", "Successfully found the correct properties and values");
+		}
+
+		[StepDefinition(@"I close UPC Details popup in Retailer and UPC Feed page")]
+		public void GivenICloseUPCDetailsPopupInRetailerAndUPCFeedPage()
+		{
+			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
+			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
+		}
+
+		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
+		{
+			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
+		}
+
 	}
 
 }
