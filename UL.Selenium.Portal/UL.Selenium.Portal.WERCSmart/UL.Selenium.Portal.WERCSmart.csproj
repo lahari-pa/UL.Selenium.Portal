@@ -161,13 +161,13 @@
       <HintPath>..\packages\SpecFlow.NUnit.3.1.97\lib\net45\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
     </Reference>
     <Reference Include="TReVor.Api.Wrapper, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Reporting, Version=2.1.119.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\lib\net461\UL.Automation.Reporting.dll</HintPath>
@@ -181,11 +181,11 @@
     <Reference Include="UL.Automation.Selenium.SpecFlow, Version=2.1.183.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.2.1.183\lib\net461\UL.Automation.Selenium.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.TReVor, Version=2.1.184.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\lib\net461\UL.Automation.TReVor.dll</HintPath>
+    <Reference Include="UL.Automation.TReVor, Version=2.3.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\UL.Automation.TReVor.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.TReVor.SpecFlow, Version=2.1.184.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\lib\net461\UL.Automation.TReVor.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.TReVor.SpecFlow, Version=2.3.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\UL.Automation.TReVor.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Utilities, Version=2.1.56.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.2.1.56\lib\net461\UL.Automation.Utilities.dll</HintPath>
@@ -626,11 +626,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### UL.Automation.Vanessa Post-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.1.184\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.3.11\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### UL.Automation.Vanessa Pre-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.1.184\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
+"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.2.3.11\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
   </PropertyGroup>
   <Target Name="AfterUpdateFeatureFilesInProject">
     <ItemGroup>
@@ -652,9 +652,9 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.1.183\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.2.1.183\build\UL.Automation.Selenium.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\build\UL.Automation.TReVor.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.1.56\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.2.1.56\build\UL.Automation.Utilities.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
@@ -662,7 +662,7 @@
   <Import Project="..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.1.97\build\SpecFlow.NUnit.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.1.97\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.2.1.183\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.1.183\build\UL.Automation.Selenium.SpecFlow.targets')" />
-  <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.1.184\build\UL.Automation.TReVor.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.2.1.56\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.1.56\build\UL.Automation.Utilities.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\build\UL.Automation.Reporting.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets')" />
 </Project>
