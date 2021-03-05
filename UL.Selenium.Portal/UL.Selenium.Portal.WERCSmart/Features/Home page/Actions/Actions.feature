@@ -306,3 +306,23 @@ When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Access Code
 Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 1234
 Given I click close on the Save Changes popup dialog
+
+
+
+@ScenarioId:10646
+Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given In SHA Manager I set the filter for status to : Assigned
+Given I call Shared Step 157868 (SHA > Select First Product > UPC Retailer and Feed)
+Given I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it
+Given I click the first UPC in the UPC Retailer and Feed page
+Given In UPC Details popup in UPC Retailer and Feed page I select retailer: 99 Cents
+Given In UPC Details popup in Retailer and UPC Feed page I see the following properties and values
+| Property         | Value    |
+| Weight Size (oz) | Any Data |
+| Fluid Size (oz)  | Any Data |
+| Gas Size (kg)    | Any Data |
+| Gas Name         | Any Data |
+Given I close UPC Details popup in Retailer and UPC Feed page
+Given I close the current tab

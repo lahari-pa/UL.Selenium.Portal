@@ -258,3 +258,34 @@ Then I confirm the following Functional Purpose is displayed: Processing Aid
 Then I click continue
 And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139445
+
+
+
+@ScenarioId:10653
+Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation - 
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I save the product information as: TestCase158172
+Given I call Shared Step 57561a (The Product - Enter Product Name: Trade Secret Validation Product and select Type of Product): General Purpose Cleaner - Non-aerosol
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I call Shared Step 158144 (Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE)
+Given I should see the California Cleaning Product Disclosure Page
+Given I set the Who is publicly identified on the product label as responsible for the product? option to: Manufacturer
+Given In the California Cleaning Product Disclosure tab, I enter: NONE in the Final Domestic Distributor
+Given I set the Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)? option to: No
+Given I set the Product's GTIN Brick Code to: [10000397] Cleaning Aids
+Given I click continue
+Given I add the following CA Cleaning ingredients:  
+		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName   | IngredientType            | FunctionalPurpose | Clean | Certified |
+		| 68515-73-1 | 100     |                     | true        |            | TS Validation | Nonfunctional Constituent |                   | true  | true      |
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Publicly Disclosed field is disabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Public Name field is disabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Trade Secret field is enabled
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Generic Name field is displayed
+Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the Ingredient Type drop-down is displayed
+Then I confirm the following Functional Purpose is displayed: Non-Functional Ingredient
+Given I click continue
+Given I should see the Waste Classification Data Page
+Given I click the Home navigation icon
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158172
