@@ -45,7 +45,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
 	Then I save the product information as: TestCase60695
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)

@@ -58,7 +58,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
 	Then I save the product information as: TestCase87584
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

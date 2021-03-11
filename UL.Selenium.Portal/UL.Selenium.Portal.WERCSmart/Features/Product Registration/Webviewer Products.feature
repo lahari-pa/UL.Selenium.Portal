@@ -458,7 +458,7 @@ Given I generate a random UPC number and save as: UPC145074
 #In 57561b enter the name for final product run to be "For WVs TC 145074 - Us Only - Label product - Label uploaded "
 Then I call Shared Step 57561b (The Product - Enter Product Name: Nutritional Supplement - Liquid Test Product 145074 and select Type of Product): Nutritional Supplement - Liquid and add a Random Identifier
 Then I save the product information as: TestCase145074
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

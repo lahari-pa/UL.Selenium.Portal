@@ -23,7 +23,7 @@ Given I generate a random UPC number and save as: UPC85847
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85847
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -40,7 +40,7 @@ Given I generate a random UPC number and save as: UPC85848
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85848
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -57,7 +57,7 @@ Given I generate a random UPC number and save as: UPC85849
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85849
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
@@ -79,7 +79,7 @@ Given I generate a random UPC number and save as: UPC85850
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85850
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -104,7 +104,7 @@ Given I log in with the account saved in TReVor as: fullstwrdshiponly
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85851
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
@@ -131,7 +131,7 @@ Given I generate a random UPC number and save as: UPC85852
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85852
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)

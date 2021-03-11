@@ -24,7 +24,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 #And I In the shared steps below select Pet Shampoo with Pest Control as your product type
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -53,7 +53,7 @@ Scenario: [56624] Pesticide Data - EPA Expiration date validation (Vermont - Nov
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -80,7 +80,7 @@ Scenario: [56625] Pesticide Data - EPA Expiration date validation (South Carolin
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -113,7 +113,7 @@ Scenario: [56627] Pesticide Data - EPA Expiration date validation (North Dakota 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -158,7 +158,7 @@ Scenario: [56629] Pesticide Data - EPA Expiration date validation (Florida - Dec
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -202,7 +202,7 @@ Scenario: [56635] Pesticide Data - EPA Expiration date validation (Arizona - Dec
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -244,7 +244,7 @@ Scenario: [56636] Pesticide Data - EPA Expiration date validation (Illinois - De
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -285,7 +285,7 @@ Scenario: [56637] Pesticide Data - EPA Expiration date validation (Hawaii - Dec 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -337,7 +337,7 @@ Scenario: [56639] Pesticide Data - EPA Expiration date validation (Connecticut -
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

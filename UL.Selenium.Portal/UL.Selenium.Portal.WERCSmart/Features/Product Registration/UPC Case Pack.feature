@@ -469,7 +469,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 And I should see the Additional Product Information Page
 And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine

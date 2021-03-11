@@ -252,7 +252,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase65392
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

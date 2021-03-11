@@ -237,7 +237,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase56481
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde

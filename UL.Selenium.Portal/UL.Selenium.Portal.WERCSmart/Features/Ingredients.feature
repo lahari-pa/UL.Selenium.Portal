@@ -94,7 +94,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65469
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -112,7 +112,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65470
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -134,7 +134,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65459
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -151,7 +151,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65451
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -170,7 +170,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65448
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -191,7 +191,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase63321
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I should see the Ingredients Page
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue

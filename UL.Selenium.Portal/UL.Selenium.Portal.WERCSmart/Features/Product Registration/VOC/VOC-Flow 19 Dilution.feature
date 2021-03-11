@@ -19,7 +19,7 @@ Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit c
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase62730
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -47,7 +47,7 @@ Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase62728
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -78,7 +78,7 @@ Scenario: [62724] VOC - Flow 19 - Dilution - Sold = 50 Used = 2 - limit checking
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase62724
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -106,7 +106,7 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase62708
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -145,7 +145,7 @@ Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase56478
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
