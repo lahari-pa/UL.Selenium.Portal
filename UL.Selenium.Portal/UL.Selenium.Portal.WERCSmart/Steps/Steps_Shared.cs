@@ -1174,8 +1174,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57441 \(Product Characteristics - Primary Physical Property - Liquid\)")]
-		public void GivenICallSharedProductCharacteristics_PrimaryPhysicalProperty_Liquid()
+		[StepDefinition(@"I call Shared Step 57441 \(Physical and Chemical Properties - Primary Physical Property - Liquid\)")]
+		public void GivenICallSharedPhysicalandChemicalProperties_PrimaryPhysicalProperty_Liquid()
 		{
 			// Secondary Physical State, Specific Gravity (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
 			// Add a variable table in the future if specific data is required.
@@ -1204,8 +1204,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57111 \(Enter Product Data for Physical State - Aerosol only\)")]
@@ -1239,8 +1239,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared Step 57454 \(Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
-		public void ThenICallSharedStepProductCharacteristics_AerosolGasAvailable_SelectAerosol_Continue_HappyPath()
+		[StepDefinition(@"I call Shared Step 57454 \(Physical and Chemical Properties - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
+		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasAvailable_SelectAerosol_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1263,12 +1263,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
-		[StepDefinition(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
+		[StepDefinition(@"I call Shared Step 57528 \(Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_AddData_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1292,8 +1292,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
@@ -2977,14 +2977,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I call Shared Step 26897 \(Product Characteristics - Solid only available - continue\)")]
-		public void SharedProductCharacteristics_SolidOnlyAvailable_Continue()
+		[StepDefinition(@"I call Shared Step 26897 \(Physical and Chemical Properties - Solid only available - continue\)")]
+		public void SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var thisNewProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			Report.StartStep("Primary Physical State should be showing the value: Solid");
@@ -3029,7 +3029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("Clicking continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57590 \(Enter Pesticide Data - United States \(with EPA number\)\)")]
@@ -3220,13 +3220,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			WarningPopup.ClickChoice("Ok");
 		}
 
-		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
-		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
+		[StepDefinition(@"I call Shared Step 73629 \(Physical and Chemical Properties - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		public void ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("Confirm that  you see only Liquid option for Physical state");
 			var option = new Table("Option");
 			option.AddRow("Liquid");
@@ -3319,8 +3319,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
-		public void SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
+		[StepDefinition(@"I call Shared Step 70675 \(Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
+		public void SharedPhysicalandChemicalProperties_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
@@ -3353,7 +3353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"100g/100ml"));
 			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
 			Report.StartStep("In the Product Characteristics page I click Continue");
-			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
@@ -3512,8 +3512,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
-		public void SharedProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue()
+			@"I call Shared Step 57514 \(Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path\)")]
+		public void SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
@@ -3553,8 +3553,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			}
 
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -3719,13 +3719,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
-		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
+			@"I call Shared Step 74760 \(Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data\)")]
+		public void ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
@@ -3772,13 +3772,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 132110 \(Product Characteristics - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
+			@"I call Shared Step 132110 \(Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
 		public void ICallSharedProductCharacteristics_PharmaFlow_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
@@ -3843,13 +3843,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
-		public void ICallSharedProductCharacteristics_Gas(Table table)
+		[StepDefinition(@"I call Shared Step 74981 \(Physical and Chemical Properties - gas\)")]
+		public void ICallSharedPhysicalandChemicalProperties_Gas(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
@@ -3928,8 +3928,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57532 \(Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolAndGasAvailable_SelectGas_Continue()
+			@"I call Shared Step 57532 \(Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AerosolAndGasAvailable_SelectGas_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -3937,8 +3937,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Gas");
 			Report.StartStep("I set the Secondary Physical State option to: Gas");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -3971,13 +3971,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74339 \(Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
-		public void GivenICallSharedStepProductCharacteristics_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
+			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+		public void GivenICallSharedStepPhysicalandChemicalProperties_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Propertiess");
 			// From TFS - Note: In local only the Liquid option is shown - in staging and production we show Liquid and Sold hence the presence of this step
 			if (TReVorSettings.SoftwareBranch == "Development")
 			{
@@ -4111,8 +4111,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
+			@"I call Shared Step 57539 \(Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -4143,8 +4143,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			//Report.StartStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: The product is classified as a D003 Hazardous Waste under RCRA.");
 			//MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "The product is classified as a D003 Hazardous Waste under RCRA.");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -4238,8 +4238,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57978 \(Product Characteristics - All select Gas - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AllSelectGas_Continue_HappyPath()
+			@"I call Shared Step 57978 \(Physical and Chemical Properties - All select Gas - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AllSelectGas_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -4269,8 +4269,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"If Section: Select the best Water Solubility description is visible, I select the first option");
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
 				"Insoluble");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -4368,15 +4368,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
 		public void
-			GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
+			GivenICallSharedStep57501PhysicalandChemicalProperties_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("There should be at least 2 options for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
 			Report.StartStep("I set the Primary Physical State to: Solid");
@@ -4401,7 +4401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("Clicking continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
@@ -6349,8 +6349,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 84554 \(Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path\)")]
-		public void Shared84554_ProductCharacteristics_LiquidAndSolid_EnterAllData_Continue()
+			@"I call Shared Step 84554 \(Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path\)")]
+		public void Shared84554_PhysicalandChemicalProperties_LiquidAndSolid_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -6699,7 +6699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			upcTable.AddRow("Size", size);
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			//If shown select an entry from the Packaging type drop down
-			//If needed add any Retailer specific UPC data (for example OMSID, DPCI, part number etc)
+			//If needed add any Retailer specific UPC data (for example OMSID, DPCI, part number etc)		
 			Report.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 		}
@@ -7823,8 +7823,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 81468 \(Product Characteristics - Solid only available - without secondary physical state\)")]
-		public void SharedStep_81468_ProductCharacteristics_SolidOnlyAvailable_WithoutSecondaryPhysicalState()
+			@"I call Shared Step 81468 \(Physical and Chemical Properties - Solid only available - without secondary physical state\)")]
+		public void SharedStep_81468_PhysicalandChemicalProperties_SolidOnlyAvailable_WithoutSecondaryPhysicalState()
 		{
 			// By default solid should be the selected Primary Physical State - and the only state shown
 			// Select either of the buttons for the "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?" question
@@ -7833,8 +7833,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			var newProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			stepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep(
 				"The option available for Primary Physical State is Solid - which is selected by default");
 			stepsNewProduct.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
@@ -7870,7 +7870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("I click continue");
-			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 42759a \(Portal - UPC Page - add UPC saved as: (.*)\)")]
