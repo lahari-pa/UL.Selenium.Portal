@@ -216,7 +216,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87917
 	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	#Given I call Shared Step 74981 (Product Characteristics - gas)
 	#| Secondary Physical State      | Select the best Water Solubility description         |
 	#| Compressed gas                | Low                                                  |

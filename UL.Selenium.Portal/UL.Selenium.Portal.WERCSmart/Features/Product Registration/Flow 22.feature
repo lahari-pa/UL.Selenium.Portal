@@ -22,7 +22,7 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Weld-Through Primer - Aerosol
 	Then I save the product information as: TestCase60544
-	#Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -121,7 +121,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Then I save the product information as: TestCase60547
-	#Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I click continue

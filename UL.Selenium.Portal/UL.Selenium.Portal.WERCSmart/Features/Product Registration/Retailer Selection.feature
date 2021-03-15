@@ -195,7 +195,7 @@ Then I save the product information as: TestCase96708
 # I Record the entry you select for Water Solubility
 #: WAS NOT USED
 
-And I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
+And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 
 # [Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL]  
 Then I call Shared Step 69687 (Additional Product Information - US, No(PL))

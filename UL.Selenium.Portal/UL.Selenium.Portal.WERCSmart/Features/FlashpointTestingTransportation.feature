@@ -18,7 +18,7 @@ Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -70,7 +70,7 @@ Scenario: [74349] Flash Point = 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 38
 And I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -125,7 +125,7 @@ Scenario: [74357] Flash Point < 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -172,7 +172,7 @@ Scenario: [74346] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -229,7 +229,7 @@ Scenario: [74364] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -283,7 +283,7 @@ Scenario: [74365] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -340,7 +340,7 @@ Scenario: [74366] Flash Point = 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 45
 Given I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -392,7 +392,7 @@ Scenario: [74368] Flash Point Range < 23 - Testing method shows closed cup only,
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 45
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: <23C
@@ -446,7 +446,7 @@ Scenario: [74372] Flash Point Range >=23 and <38 - Testing method shows closed c
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=23C and <38C
@@ -500,7 +500,7 @@ Scenario: [74374] Flash Point Range >=38 and <=60  - Testing method shows closed
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=38C and <=60C
@@ -554,7 +554,7 @@ Scenario: [74376] Flash Point Range > 60 and < 93 - Testing method shows all, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >60C and <=93C
@@ -611,7 +611,7 @@ Scenario: [74379] Flash Point Range >=93 and <=815 - Testing method shows all, T
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >93C and <=815C
@@ -668,7 +668,7 @@ Scenario: [74380] Flash Point Range Not Tested - Testing method shows Not Applic
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: Not Tested/Unknown
@@ -723,7 +723,7 @@ Scenario: [74382] Flash Point Range None, No Flash Point- Testing method shows N
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: None, No Flash Point
