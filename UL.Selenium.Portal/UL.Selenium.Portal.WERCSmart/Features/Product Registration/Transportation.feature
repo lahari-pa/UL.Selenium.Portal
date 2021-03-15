@@ -519,7 +519,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286
-Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No

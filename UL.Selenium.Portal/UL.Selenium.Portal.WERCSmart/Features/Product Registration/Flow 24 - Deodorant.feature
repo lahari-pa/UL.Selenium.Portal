@@ -21,7 +21,7 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 	Then I save the product information as: TestCase60617
-	And I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+	And I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |

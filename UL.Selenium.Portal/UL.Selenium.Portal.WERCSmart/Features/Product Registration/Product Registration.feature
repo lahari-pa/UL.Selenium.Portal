@@ -694,7 +694,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
 Given I generate a random UPC number and save as: UPC128144
-Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Select countries the product may be sold in option to: Canada
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No

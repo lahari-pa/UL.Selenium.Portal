@@ -188,7 +188,7 @@ Scenario: [57529] Pesticide question shows in Additional Product Information for
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Given I save the product information as: TestCase57529
-	Given I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path)
+	Given I call Shared Step 57532 (Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path)
 	Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529

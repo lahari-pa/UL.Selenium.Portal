@@ -491,7 +491,7 @@ Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Helium tank
 	Then I save the product information as: TestCase58810
-	Given I call Shared Step 74981 (Product Characteristics - gas)
+	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
@@ -522,7 +522,7 @@ Scenario: [58815] Lighters(RU000000) - 8G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lighters
 	Then I save the product information as: TestCase58815
-	Given I call Shared Step 74981 (Product Characteristics - gas)
+	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)

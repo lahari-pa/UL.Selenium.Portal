@@ -971,7 +971,6 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
 		Then I save the product information as: Mode45S5
-		#And I call Shared Step 57454 (Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)

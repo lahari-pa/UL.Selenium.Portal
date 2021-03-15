@@ -22,7 +22,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Given I save the product information as: TestCase56593
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 81468 (Product Characteristics - Solid only available - without secondary physical state)
+Given I call Shared Step 81468 (Physical and Chemical Properties - Solid only available - without secondary physical state)
 #Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide

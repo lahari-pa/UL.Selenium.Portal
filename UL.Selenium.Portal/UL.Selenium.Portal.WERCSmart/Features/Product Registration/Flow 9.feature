@@ -234,7 +234,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
 	Then I save the product information as: TestCase58075
-	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -267,7 +267,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 	Then I save the product information as: TestCase58089
-	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -316,7 +316,7 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Laxative, Stool-Softener
 	Then I save the product information as: TestCase58094
 	# Missing from TFS test case
-	#Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+	#Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
