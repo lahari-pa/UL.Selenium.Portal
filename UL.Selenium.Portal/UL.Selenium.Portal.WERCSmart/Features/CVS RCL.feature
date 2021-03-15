@@ -30,7 +30,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74208
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -139,7 +139,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74253
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -188,7 +188,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74254
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -239,7 +239,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74255
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -292,7 +292,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74256
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -357,7 +357,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74257
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -412,7 +412,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74259
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -471,7 +471,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74260
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -543,7 +543,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74188
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -640,7 +640,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74207
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -698,7 +698,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74270
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -748,7 +748,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74272
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -800,7 +800,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 
 Then I save the product information as: TestCase74261
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -847,7 +847,7 @@ Given if the save button is visible, I save changes and close the popup dialog
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 # Use Lip Balm for the RU in the shared step below
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
-Then I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Then I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Then I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 # Common Ingredients of Lip Balm: paraffin / menthol / camphor
 Then I call Shared Step 29181 (Ingredients - add any chemical) with name: paraffin

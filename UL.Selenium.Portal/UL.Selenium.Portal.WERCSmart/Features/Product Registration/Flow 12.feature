@@ -83,7 +83,7 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Medicinal
 	Then I save the product information as: TestCase58605
 	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	#Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients

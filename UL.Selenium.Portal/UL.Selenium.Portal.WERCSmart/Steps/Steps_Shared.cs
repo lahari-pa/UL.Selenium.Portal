@@ -2181,13 +2181,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
-		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
+		[StepDefinition(@"I call Shared Step 57501 \(Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
+		public void ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyNewProductSteps.SetTheSectionOptionTo("Primary Physical State", "Solid");
