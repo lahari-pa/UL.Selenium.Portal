@@ -57,7 +57,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
+And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 #And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
@@ -87,7 +87,7 @@ Scenario: [65706] Transportation - Confirm Copy information from my U.S. Departm
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
+And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 #And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine

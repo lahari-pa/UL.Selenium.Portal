@@ -87,7 +87,7 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Then I save the product information as: TestCase57439
 	#CLF 18/6/2019 removing this step because it appears to have been replaced by 73629
 	#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	#CLF 18/6/2019 removing this step because it appears to have been replaced by 57502

@@ -161,7 +161,7 @@ Scenario: [63684] Walmart Private label product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
 	Then I save the product information as: TestCase63684
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)

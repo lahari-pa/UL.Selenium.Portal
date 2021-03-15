@@ -56,7 +56,7 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Penetrants
 	Then I save the product information as: TestCase57924
-	Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+	Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)	
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California's Cleaning Product Right to Know Act | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                                              | No                     | No                  |
@@ -88,7 +88,7 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Maintenance Product - Non-Aerosol
 	Then I save the product information as: TestCase57925
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))	
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
@@ -186,7 +186,7 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I save the product information as: TestCase57933
-	Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+	Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -218,7 +218,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
 	Then I save the product information as: TestCase57950
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
@@ -317,7 +317,7 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Then I save the product information as: TestCase57977
-	Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+	Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -349,7 +349,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
-	Given I call Shared Step 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
+	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)	
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -447,7 +447,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	Then I save the product information as: TestCase57986
-	Given I call Shared Step 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
+	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -479,10 +479,10 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Non-Aerosol
 	Then I save the product information as: TestCase57988
-	#Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	#Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 	#| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
 	#| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
-	And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
+	And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 63804 (Additional Product Information - enter options)
 	#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 	#| No                                                             | No                            | No                         | No                         |

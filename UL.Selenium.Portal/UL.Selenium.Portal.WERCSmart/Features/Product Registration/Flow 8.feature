@@ -206,7 +206,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 #
 #Then I save the product information as: TestCase57088
 #
-#Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+#Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 #| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
 #| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
 #
@@ -277,7 +277,7 @@ Scenario: [57344] Artists Solvent-Thinner - 8-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Artist's Solvent/Thinner
 	Then I save the product information as: TestCase57344
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
@@ -339,7 +339,7 @@ Scenario: [58282] Dental Whitening Gel - 8-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Dental whitening gel
 	Then I save the product information as: TestCase58282
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
@@ -400,7 +400,7 @@ Scenario: [58390] Paint,Model - RU000333
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint, Model
 	Then I save the product information as: TestCase58390
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
@@ -429,7 +429,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Correction fluid
 	Then I save the product information as: TestCase58401
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
@@ -553,7 +553,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
 	Then I save the product information as: TestCase57088
-	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
@@ -618,7 +618,7 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I save the product information as: TestCase75840
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-	#Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+	#Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
