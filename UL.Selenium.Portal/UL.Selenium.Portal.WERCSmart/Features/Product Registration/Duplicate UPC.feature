@@ -36,7 +36,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91076
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -238,7 +238,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91798
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -285,7 +285,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91741
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -307,7 +307,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91100
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -388,7 +388,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91077
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -411,7 +411,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91101
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

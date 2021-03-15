@@ -33,7 +33,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87640
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -65,7 +65,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87643
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -160,7 +160,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87676
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -212,7 +212,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87685
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -263,7 +263,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87686
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -360,7 +360,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I generate a random UPC number and save as: UPC87835-2
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -400,7 +400,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC87631
 Then I save the product information as: TestCase87631
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -505,7 +505,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I should see the Additional Product Information Page
 And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
@@ -533,7 +533,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87821
 Then I save the product information as: TestCase87821
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I should see the Additional Product Information Page
 And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine

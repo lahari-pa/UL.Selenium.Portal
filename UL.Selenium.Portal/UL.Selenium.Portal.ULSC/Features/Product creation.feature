@@ -34,7 +34,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 And I In the shared step below select Chalk as your product type
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): (.*)
 And I Make a note of the WPS ID shown at the top of the screen
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I In the shared step below add Chlorine (CAS Number 7782-50-5) to your formulation, this will ensure we have data from WPS to push down to ULSC.
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)

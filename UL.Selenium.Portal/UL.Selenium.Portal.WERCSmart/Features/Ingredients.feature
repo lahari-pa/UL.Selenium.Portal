@@ -284,7 +284,7 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80728
 	Then I should see the Product Characteristics Page
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then I should see the Ingredients Page
 	And I verify the Transparency Score displays 0%
@@ -307,7 +307,7 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80720
 	Then I should see the Product Characteristics Page
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then I should see the Ingredients Page
 	And I verify the Transparency Score displays 0%
@@ -331,7 +331,7 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -451,7 +451,7 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase80800
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
@@ -473,7 +473,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase109230
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
@@ -560,7 +560,7 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Then I save the product information as: TestCase110368
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368

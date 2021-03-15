@@ -328,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase85965");
 			new StepsNewProduct().SaveProductInformation("TestCase85965");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Report.StartStep("I call Shared Step 63860 (Additional Product Information - US, No(Child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))");
 			new Steps_Shared().SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
@@ -434,7 +434,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase86187");
 			new StepsNewProduct().SaveProductInformation("TestCase86187");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Report.StartStep("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
 			new Steps_Shared().ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
@@ -1491,7 +1491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase86187");
 			new StepsNewProduct().SaveProductInformation("TestCase86187");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Report.StartStep("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
 			new Steps_Shared().ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
@@ -1598,7 +1598,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I save the product Information as: TestCase87685");
 			stepsNewProduct.SaveProductInformation("TestCase87685");
 
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Report.StartStep("I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();

@@ -57,7 +57,7 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Cleaning (with Chemical)
 	Then I save the product information as: TestCase75081
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Then I add the following ingredients:
 		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |

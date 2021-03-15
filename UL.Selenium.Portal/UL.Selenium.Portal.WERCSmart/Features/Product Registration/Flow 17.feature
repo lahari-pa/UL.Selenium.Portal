@@ -209,7 +209,7 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I save the product information as: TestCase103572
 	# In the shared step below select Lithium Primary/Metal Batteries as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Primary/Metal Batteries
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	# Use Lithium in the shared step below
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Lithium

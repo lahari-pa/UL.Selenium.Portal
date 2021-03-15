@@ -515,7 +515,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid- (RU000745) - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Solid
 	Then I save the product information as: TestCase57990
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -547,7 +547,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glue sticks for glue guns
 	Then I save the product information as: TestCase57991
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |

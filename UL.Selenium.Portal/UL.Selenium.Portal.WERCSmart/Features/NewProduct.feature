@@ -59,7 +59,7 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase87295
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: WPS
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
@@ -107,7 +107,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC149421
 Then I save the product information as: TestCase149421
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
@@ -189,7 +189,7 @@ Then I save the product information as: TestCase120820
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC120820
 Then I save the product information as: TestCase120820
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

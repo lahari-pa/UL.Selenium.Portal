@@ -124,7 +124,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase78937
 
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
@@ -222,7 +222,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
 Then I save the product information as: TestCase1234
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Calcium
 And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
@@ -273,7 +273,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |

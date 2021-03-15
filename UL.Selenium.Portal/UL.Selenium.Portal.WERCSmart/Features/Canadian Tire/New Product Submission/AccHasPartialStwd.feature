@@ -23,7 +23,7 @@ Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Re
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86114
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
@@ -68,7 +68,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86115
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
@@ -112,7 +112,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86452
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -149,7 +149,7 @@ Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86117
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -190,7 +190,7 @@ Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86116
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -238,7 +238,7 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86454
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	#And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -290,7 +290,7 @@ Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86455
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
@@ -341,7 +341,7 @@ Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86458
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
