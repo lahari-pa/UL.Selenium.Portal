@@ -23,7 +23,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 Then I save the product information as: TestCase31352
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 And I should see the Additional Product Information Page
@@ -40,7 +40,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 Then I save the product information as: TestCase31359
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 When I click continue
@@ -124,7 +124,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 Then I save the product information as: TestCase85488
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 And I set the Product has been classified using OSHA (US) option to: No
@@ -142,7 +142,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 Then I save the product information as: TestCase85489
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 3                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 And I set the Product has been classified using OSHA (US) option to: No
@@ -159,7 +159,7 @@ Scenario: [133161] Fertilizer - P, N, or K question
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 Given I should see the Additional Product Information Page

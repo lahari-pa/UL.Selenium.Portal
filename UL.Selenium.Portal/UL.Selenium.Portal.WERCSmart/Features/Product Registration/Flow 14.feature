@@ -56,7 +56,7 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer for Use on Domesticated Animals
 	Then I save the product information as: TestCase58738
 	Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
-	#Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	#Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 	#	| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 	#	| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)

@@ -38,7 +38,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122305
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -76,7 +76,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122382
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 2                          | 55                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -137,7 +137,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122428
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -225,7 +225,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122940
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -253,7 +253,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122971
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -302,7 +302,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122984
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -360,7 +360,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase123125
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
