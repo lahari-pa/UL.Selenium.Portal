@@ -178,7 +178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
-		public void GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		public void GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -190,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 90477 - Additional Product Information - US, \(NO\) Retailer's PL")]
-		public void ICallSharedStep90477AdditionalProductInformation_US_NoRetailersPL()
+		public void ICallSharedStep90477ProductInformation_US_NoRetailersPL()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -202,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
-		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
+		public void GivenICallSharedStep60726ProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -222,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
-		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
+		public void GivenICallSharedStepProductInformationWithCountryAndEveryOption()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -244,7 +244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformationUSNoDSVNoPLNoGNFR()
+		public void GivenICallSharedStepProductInformationUSNoDSVNoPLNoGNFR()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -264,7 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
 		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		//public void GivenICallSharedStepAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		//public void GivenICallSharedStepProductInformation_US_DirectShip_PrivateLabelOnly()
 		//{
 		//	StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 		//	NewProduct myNewProduct = new NewProduct();
@@ -295,7 +295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		public void SharedAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		public void SharedProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -319,7 +319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
+			GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -1297,7 +1297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
+		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1333,7 +1333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
+		public void GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1663,7 +1663,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		// Shared Step was updated to include 'which one best describes your product'. This breaks a couple of tests, which has been raised to Bug Triage (incorrect step called)
 		[StepDefinition(@"I call Shared Step 60310 \(Additional Product Information - Without Child question\)")]
-		public void GivenICallSharedAdditionalProductInformation_WithoutChildQuestion()
+		public void GivenICallSharedProductInformation_WithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1694,7 +1694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question")]
-		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1742,7 +1742,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 57865 \(Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
+			GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -2085,7 +2085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
+		public void ICallSharedProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -2210,13 +2210,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
+		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
@@ -2260,8 +2260,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
@@ -2342,13 +2342,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
-		public void ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
+		[StepDefinition(@"I call Shared Step 62678 \(Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
+		public void ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
@@ -2396,8 +2396,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I confirm that the default selected retailer is: (.*) then click Continue")]
@@ -2418,7 +2418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 59922 \(Additional Product Information - Private Label or Brand only\)")]
-		public void SharedAdditionalProductInformation_PrivateLabelOrBrandOnly()
+		public void SharedProductInformation_PrivateLabelOrBrandOnly()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -2512,7 +2512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 69687 \(Additional Product Information - US, No\(PL\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
+		public void GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -2535,7 +2535,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
-		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
+		public void ICallSharedProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -2751,7 +2751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 60026 \(Additional Product Information - US - Battery - No to all\)")]
-		public void SharedAdditionalProductInformation_US_Battery_NoToAll()
+		public void SharedProductInformation_US_Battery_NoToAll()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -2902,7 +2902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		// Duplicate of Shared step 60026
 		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
-		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
+		public void SharedProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -3074,7 +3074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
-		public void SharedAdditionalProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
+		public void SharedProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -3271,7 +3271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
+		public void GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -3606,7 +3606,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterOptions(Table table)
+		public void ICallSharedStepProductInformationEnterOptions(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -3822,7 +3822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 74123 \(Additional Product Information - Grocery - US - Random Country - No\(PL\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_Grocery_US_RandomCountry_NoPL()
+		public void GivenICallSharedStepProductInformation_Grocery_US_RandomCountry_NoPL()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -3907,7 +3907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 56799 \(Confirm Additional Product Information shows Pesticide question and its radio buttons\)")]
-		public void ICallSharedConfirmAdditionalProductInformationShowsPesticideQuestion()
+		public void ICallSharedConfirmProductInformationShowsPesticideQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -3958,7 +3958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
+		public void GivenICallSharedStepProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -3996,7 +3996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
@@ -4038,7 +4038,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
@@ -4509,7 +4509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 63860 \(Additional Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
-		public void SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
+		public void SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
 		{
 			ReportSettings.UseSubSteps = true;
 			var selNewProductSteps = new StepsNewProduct();
@@ -6082,7 +6082,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 77872 \(Additional Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
-		public void Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
+		public void Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -6187,7 +6187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 60648 \(Additional Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
-		public void Shared60648_AdditionalProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
+		public void Shared60648_ProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -6207,7 +6207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 77883 \(Additional Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
-		public void Shared7783_AdditionalProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
+		public void Shared7783_ProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -7024,12 +7024,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 85284 - Additional Product Information - US & Canada, Child \(No\), OSHA \(No\), DSV \(No\), PLP \(YES\), GNFR \(No\), Continue")]
+			@"I call Shared Step 85284 - Product Information - US & Canada, Child \(No\), OSHA \(No\), DSV \(No\), PLP \(YES\), GNFR \(No\), Continue")]
 		public void
-			ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue()
+			ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -8088,7 +8088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 85730 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
 		public void
-			ThenICallSharedStep85730AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue()
+			ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -8472,7 +8472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 					@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
 		public void
-					ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
+					ThenICallSharedStep78879ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8502,7 +8502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 62681 - Additional Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
-			ThenICallSharedStep62681AdditionalProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
+			ThenICallSharedStep62681ProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8529,7 +8529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
-					ThenICallSharedStep62681AdditionalProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
+					ThenICallSharedStep62681ProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8551,7 +8551,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
-		public void CallSharedStep9674_AdditionalProductInformation_RuWine()
+		public void CallSharedStep9674_ProductInformation_RuWine()
 		{
 			Report.StartStep(
 				"If the selected option is not United States by default then report error and select it");
@@ -9071,18 +9071,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 102767 \(Additional Product Information \(Battery flow - not Lithium\) - OSHA \(No\), DSV \(No\), PLP \(No\), GNFR \(No\)\)")]
-		public void Shared_102767_AdditionalProductInformation_BatteryFlowNotLithium()
+		public void Shared_102767_ProductInformation_BatteryFlowNotLithium()
 		{
-			var stepsAdditionalProductInformation = new Steps_AdditionalProductInformation();
+			var stepsProductInformation = new Steps_AdditionalProductInformation();
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I set 'Classified using OSHA' to No");
-			stepsAdditionalProductInformation.SetProductHasBeenClassifiedOSHATo("No");
+			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartStep("I set 'Product is shipped directly' to No");
-			stepsAdditionalProductInformation.SetProductIsShippedDirectlyTo("No");
+			stepsProductInformation.SetProductIsShippedDirectlyTo("No");
 			Report.StartStep("I set 'Is Retailers Private Brand' to No'");
-			stepsAdditionalProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
+			stepsProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
 			Report.StartStep("I set 'Solely for the retailers use' to No'");
-			stepsAdditionalProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
+			stepsProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
 			Report.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}
@@ -10215,7 +10215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 118064 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
+		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -10251,7 +10251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 118085 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNoCACleaningNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSEverythingElseNoCACleaningNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
@@ -10288,7 +10288,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 118091 \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterOptionsCACleaning(Table table)
+		public void ICallSharedStepProductInformationEnterOptionsCACleaning(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -10369,7 +10369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step - \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterAllOptions(Table table)
+		public void ICallSharedStepProductInformationEnterAllOptions(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -10393,7 +10393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 118138 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
-		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion()
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -11003,7 +11003,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 158144 \(Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
+		public void GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
