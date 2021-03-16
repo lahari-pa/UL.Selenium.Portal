@@ -497,7 +497,7 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
-Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787 do not click continue
+Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
 Given I click continue
 Given I click continue
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

@@ -226,7 +226,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info("Searching for product with ID: '" + id + "'");
+				Report.Info("Searching for product with ID: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
 					ProductSkuField = sku
 				};
