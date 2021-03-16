@@ -346,7 +346,7 @@ Then I save the product information as: TestCase59273
 Given Primary Physical State should be showing the value: Solid
 Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given in the Product Characteristics page I click Continue
+Given in the Physical and Chemical Properties page I click Continue
 Given I should see the Additional Product Information Page
 Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

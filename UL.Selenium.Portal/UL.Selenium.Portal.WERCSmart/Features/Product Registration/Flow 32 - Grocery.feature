@@ -42,7 +42,7 @@ And in the The Product page I click Continue
 Then I save the product information as: TestCase60774
 
 # ====== Following the steps from 'Shared Step' 60778 ====== #
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
 And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
@@ -53,7 +53,7 @@ And I set the Product is manufactured in a facility that processes, or contains 
 And I set the Product is verified and sold as field to: None of the Above
 And I set the Product contains the following sweeteners field to: None of the Above
 And I set the Product contains the following artificial dye(s) option to: None of the Above
-And in the Product Characteristics page I click Continue
+And in the Physical and Chemical Properties page I click Continue
 
 # ====== Following the steps from 'Shared Step' 60756 ====== #
 And I should see the Additional Product Information Page

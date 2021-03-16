@@ -110,7 +110,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given At the UPC level, I set IMDG to Shipping fully regulated
 	Given At the UPC level, I set TDG to Shipping fully regulated
 	Given I click continue
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Transportation Details 1
 	Given In the Transportation Details 1 screen, I unselect all transportation options for DOT
 	Given In the Transportation Details 1 screen, I unselect all transportation options for IATA
@@ -415,7 +415,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -473,7 +473,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
@@ -500,7 +500,7 @@ Scenario: [125533] UPC Transportation - Recertification - iRules
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -570,7 +570,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -640,7 +640,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -710,7 +710,7 @@ Scenario: [125703] UPC transportation - Recertification - Upgrade and Downgrade 
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |

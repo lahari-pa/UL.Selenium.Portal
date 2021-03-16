@@ -21,7 +21,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Then I save the product information as: TestCase31834
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
 | State |
@@ -38,7 +38,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Then I save the product information as: TestCase31837
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
 And When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? should be showing the error messages: This is a required field.
@@ -53,7 +53,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
 Then I save the product information as: TestCase31827
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
 | State  |
@@ -74,7 +74,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
 Then I save the product information as: TestCase31833
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
 And Specific Gravity should be showing the error messages: This is a required field.
@@ -93,7 +93,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 Then I save the product information as: TestCase31786
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
 | State   |
@@ -116,7 +116,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 Then I save the product information as: TestCase31789
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
 And pH should be showing the error messages: This is a required field.
@@ -131,7 +131,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31804
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
 | State   |
@@ -148,7 +148,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31826
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
 And Select the best Water Solubility description should be showing the error messages: This is a required field.
@@ -162,7 +162,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 Then I save the product information as: TestCase85157
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
 | State       |
@@ -182,7 +182,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 Then I save the product information as: TestCase85158
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 When I click continue
 And Primary Physical State should be showing the error messages: This is a required field.
 And Secondary Physical State should be showing the error messages: This is a required field.

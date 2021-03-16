@@ -300,7 +300,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set 'Type of Product' to: Deodorant - Non-aerosol
 	And in the New Product page I click Continue
 	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase67661
 	And in the New Product page I click Continue
 	And Primary Physical State should be showing the error messages: This is a required field.

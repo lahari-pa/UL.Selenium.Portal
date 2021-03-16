@@ -127,7 +127,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set 'Type of Product' to: Charcoal Lighter Material
 	And in the New Product page I click Continue
 	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56477
 	And I should only see the following options for Primary Physical State:
 		| State  |
@@ -316,7 +316,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set 'Type of Product' to: Antiperspirants - Non-aerosol
 	And in the New Product page I click Continue
 	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56483
 	And I should only see the following options for Primary Physical State:
 		| State  |
@@ -431,7 +431,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set 'Type of Product' to: Clear Coating - Aerosol
 	And in the New Product page I click Continue
 	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56484
 	And I should only see the following options for Primary Physical State:
 		| State   |

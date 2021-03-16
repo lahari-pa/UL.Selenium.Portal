@@ -26,7 +26,8 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Then I save the product information as: TestCase71985
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
-	Then in the Product Characteristics page I click Continue
+	Then in the Physical and Chemical Properties page I click Continue
+	##Product Characteristics
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -67,7 +68,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	Then I save the product information as: TestCase71987
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
-	Then in the Product Characteristics page I click Continue
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -93,7 +94,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
-	Then I save the product information as: TestCase65469
+	Then I save the product information as: TestCase65469	
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
@@ -212,7 +213,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I save the product information as: TestCase71291
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
-	Then in the Product Characteristics page I click Continue
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -253,7 +254,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I save the product information as: TestCase69796
-	Then I should see the Product Characteristics Page
+	Then I should see the Physical and Chemical Properties Page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
 	Given I set the pH option to: 5
@@ -271,7 +272,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
 	Then I should see the Waste Classification Data Page
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
@@ -283,7 +284,7 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80728
-	Then I should see the Product Characteristics Page
+	Then I should see the Physical and Chemical Properties Page
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then I should see the Ingredients Page
@@ -306,7 +307,7 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80720
-	Then I should see the Product Characteristics Page
+	Then I should see the Physical and Chemical Properties Page
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then I should see the Ingredients Page
@@ -543,7 +544,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I filter for the product saved as: TestCase109230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And I confirm that the ingredients table looks as follows:
 		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
@@ -603,7 +604,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
-	And In the New Product page I click tab: Product Characteristics
+	And In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
 

@@ -1012,7 +1012,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
 	And I click continue
 	Then I should see the Regulatory Information 1 Page for the New Product
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And I confirm that the ingredients table looks as follows:
 		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
@@ -1076,7 +1076,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 	And I filter for the product saved as: TestCase109230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And I confirm that the ingredients table looks as follows:
 		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
@@ -1574,7 +1574,7 @@ Scenario: [StagingRecertUPCTransportation] Recertification and Transporation 1 c
 	And I filter for the product saved as: TestCase845073
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 
 Scenario: [StagingRecertUPCTransportation] Using a non complete product
@@ -1582,7 +1582,7 @@ Scenario: [StagingRecertUPCTransportation] Using a non complete product
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -1640,7 +1640,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
@@ -1785,7 +1785,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click on the Row Action: Update Required
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
-	And In the New Product page I click tab: Product Characteristics
+	And In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
 	And I set the Lead option to: Yes
 	And I set the Mercury option to: Yes

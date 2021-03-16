@@ -990,7 +990,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//#And if you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			//And I should see the The Product Page
 			newProductSteps.GivenIShouldSeeXPage("The Product");
-			//And In the New Product page I click tab: Product Characteristics
+			//And In the New Product page I click tab: Physical and Chemical Properties
 			newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
 			//And in the New Product page I click section: Toxicity Characteristic Leaching Procedure(TCLP)
 			newProductSteps.ClickPageHeading("Toxicity Characteristic Leaching Procedure (TCLP)");

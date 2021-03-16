@@ -1235,7 +1235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection(
 				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -1511,7 +1511,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var thisNewProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
 			Report.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             ReportSettings.UseSubSteps = true;
             var MyNewProductSteps = new StepsNewProduct();
             var thisNewProduct = new NewProduct();
-            Report.StartStep("I should see the Product Characteristics Page");
+            Report.StartStep("I should see the Physical and Chemical Properties Page");
             MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
             Report.StartStep("There should only be one option available for Primary Physical State");
             MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
@@ -2454,7 +2454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics page");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
@@ -2507,7 +2507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Product contains the following artificial dye(s) option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)",
 				"None of the Above");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -2657,7 +2657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -3352,7 +3352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Select the best Water Solubility description",
 				"100g/100ml"));
 			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
@@ -3413,7 +3413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Secondary Physical State",
 				"Liquid"));
 			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -3777,41 +3777,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			//Product Characteristics
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
 			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				"In the Physical and Chemical tab of the New Product Page for Primary Physical State I select: " +
 				table.Rows[0]["Primary Physical State"]);
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
 				table.Rows[0]["Primary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				"In the Physical and Chemical tab of the New Product Page for Secondary Physical State I select: " +
 				table.Rows[0]["Secondary Physical State"]);
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Specific Gravity I enter: " +
 				table.Rows[0]["Specific Gravity"]);
 			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
 				table.Rows[0]["Specific Gravity"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
 			MyNewProduct.SetTheSectionOptionTo("pH",
 				table.Rows[0]["pH"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
 				table.Rows[0]["Boiling Point (in Celsius)"]);
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
 				table.Rows[0]["Boiling Point (in Celsius)"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Flash Point (in Celsius) I enter: " +
 				table.Rows[0]["Flash Point (in Celsius)"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
 				table.Rows[0]["Flash Point (in Celsius)"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Flash Point Testing Method Used I enter: " +
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);

@@ -89,7 +89,7 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	And I click on the Row Action: Update Required
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
-	And In the New Product page I click tab: Product Characteristics
+	And In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
 	And I set the Lead option to: Yes
 	And I set the Mercury option to: Yes

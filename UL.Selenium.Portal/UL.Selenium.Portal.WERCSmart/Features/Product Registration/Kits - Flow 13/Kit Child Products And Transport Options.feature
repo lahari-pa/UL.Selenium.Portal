@@ -31,7 +31,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
 	Given I set the Select the best Water Solubility description field to: Decomposes
-	Then in the Product Characteristics page I click Continue
+	Then in the Physical and Chemical Properties page I click Continue
 	#Given I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
@@ -79,7 +79,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
 	Given I set the Select the best Water Solubility description field to: Decomposes
-	Then in the Product Characteristics page I click Continue
+	Then in the Physical and Chemical Properties page I click Continue
 	#Given I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
