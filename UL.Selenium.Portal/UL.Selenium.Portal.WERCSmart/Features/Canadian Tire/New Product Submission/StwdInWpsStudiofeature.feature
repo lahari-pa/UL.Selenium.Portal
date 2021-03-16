@@ -146,8 +146,8 @@ Given I login into the WERCSmart Portal - Canada has all data account
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 Then I save the product information as: TestCase86019
+And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |

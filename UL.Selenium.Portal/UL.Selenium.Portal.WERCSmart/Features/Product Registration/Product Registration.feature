@@ -734,8 +734,8 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
 Given I generate a random UPC number and save as: UPC128140
+And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
-And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 56-85-9   | L-Glutamine   | 100     |                     |            |             |
