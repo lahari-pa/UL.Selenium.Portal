@@ -19,9 +19,9 @@ Given I delete all products with UPC Number: saved as UPC59273
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Then I save the product information as: TestCase59273
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 Given I should see the Additional Product Information Page
-Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | Potassium hydroxide | 20.5    | false               |            | false       |
@@ -47,8 +47,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Given I generate a random UPC number and save as: UPC142371
 Then I save the product information as: ThisProduct
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | false       |            |

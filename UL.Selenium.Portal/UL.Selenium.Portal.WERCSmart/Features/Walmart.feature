@@ -62,7 +62,7 @@ Scenario: [74133] Walmart Product Type Electronics
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Electronic Equipment with Circuit Board Only
 	Then I save the product information as: TestCase74133
 	#Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I should see the Electronic Equipment Page

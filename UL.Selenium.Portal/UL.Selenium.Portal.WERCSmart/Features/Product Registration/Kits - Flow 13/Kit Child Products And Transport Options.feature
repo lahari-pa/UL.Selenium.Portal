@@ -26,6 +26,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit1
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
@@ -33,7 +34,6 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Select the best Water Solubility description field to: Decomposes
 	Then in the Physical and Chemical Properties page I click Continue
 	#Given I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -74,6 +74,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit2
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
@@ -81,7 +82,6 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Select the best Water Solubility description field to: Decomposes
 	Then in the Physical and Chemical Properties page I click Continue
 	#Given I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page

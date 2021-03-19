@@ -30,7 +30,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60642
 
-Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+Given I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
