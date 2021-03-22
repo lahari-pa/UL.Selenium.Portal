@@ -189,11 +189,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 90477 - Additional Product Information - US, \(NO\) Retailer's PL")]
+		[StepDefinition(@"I call Shared Step 90477 - Product Information - US, \(NO\) Retailer's PL")]
 		public void ICallSharedStep90477ProductInformation_US_NoRetailersPL()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -221,12 +221,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
+		[StepDefinition(@"I call Shared Step 60756 \(Product Information with Country and every option\)")]
 		public void GivenICallSharedStepProductInformationWithCountryAndEveryOption()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			if (myNewProduct.CountryofOriginExists())
@@ -243,12 +243,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
+		[StepDefinition(@"I call Shared Step 63704 \(Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
 		public void GivenICallSharedStepProductInformationUSNoDSVNoPLNoGNFR()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			if (myNewProduct.CountryofOriginExists())
@@ -317,13 +317,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
+			@"I call Shared Step 70393 \(Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
 		public void
 			GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists("Select countries the product may be sold in"))
 			{
@@ -349,7 +349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			}
 
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 57569 \(Enter Product Details for Aerosol\)")]
@@ -1296,7 +1296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
-		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57401 \(Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;

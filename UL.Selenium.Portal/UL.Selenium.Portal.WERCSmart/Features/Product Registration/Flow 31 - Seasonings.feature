@@ -27,8 +27,8 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts - Solid
 	Then I save the product information as: TestCase60737
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
@@ -60,8 +60,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid)
 	Then I save the product information as: TestCase60738
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |

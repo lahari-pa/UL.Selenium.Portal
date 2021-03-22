@@ -252,7 +252,7 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	# And I Enter "Camera w/Battery" in Type of Product smart search field
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
-	And I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	And I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I In the below step, choose the battery you added to the BATTREF table in the Manufacturer drop down.
 	And [Shared Step 103977 - Product Includes Battery > Lithium]

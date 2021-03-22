@@ -54,8 +54,8 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Photograph Coating - Aerosol
 	Then I save the product information as: TestCase60545
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -87,8 +87,8 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glass Coating - Aerosol
 	Then I save the product information as: TestCase60546
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -122,8 +122,8 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Then I save the product information as: TestCase60547
 	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)

@@ -20,8 +20,8 @@ Scenario: [74825] Flow 4-A - Engine Degreaser - Aerosol - RU000647
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	# And I Enter "Engine Degreaser - Aerosol" in Type of Product smart search field
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine Degreaser - Aerosol
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	And I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
-	And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	And I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)

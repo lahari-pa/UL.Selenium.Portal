@@ -236,7 +236,7 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
 	Then I save the product information as: TestCase74142
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Chlorine      | 100     | false               | false       |            |
@@ -261,7 +261,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Select the best Water Solubility option to: Appreciable
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I click continue
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I add the following ingredients:

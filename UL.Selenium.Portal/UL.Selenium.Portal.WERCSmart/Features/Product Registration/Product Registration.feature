@@ -252,8 +252,8 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase65392
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Formaldehyde  | 100     | false               | false       |            |
@@ -626,7 +626,7 @@ Given I delete all products with UPC Number: saved as UPC128754
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 Then I save the product information as: TestCase128754
-Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |

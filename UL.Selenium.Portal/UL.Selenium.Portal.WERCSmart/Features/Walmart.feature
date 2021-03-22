@@ -24,8 +24,8 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candle and/or Wax
 	Then I save the product information as: TestCase73917
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium chloride | 100     | false               | false       |            |
@@ -194,7 +194,7 @@ Scenario: [96705] Light Bulbs - No Walmart
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 	Then I save the product information as: TestCase96705
-	Then I call Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL
+	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then In the 'Select retailers' window I should not see the following retailers:

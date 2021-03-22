@@ -149,9 +149,10 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60775
 
+Given I call Shared Step 60756 (Product Information with Country and every option)
+
 Given I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aerosol)
 
-Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

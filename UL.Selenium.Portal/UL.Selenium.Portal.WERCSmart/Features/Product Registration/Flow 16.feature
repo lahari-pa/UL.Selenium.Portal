@@ -566,7 +566,7 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
 	Then I save the product information as: TestCase122366
 	#Given I call Shared Step 60756 (Additional Product Information with Country and every option)
-	Then I call Shared Step 63704 (Additional Product Information - US, No(DSV), No(PL), No(GNFR))
+	Then I call Shared Step 63704 (Product Information - US, No(DSV), No(PL), No(GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.

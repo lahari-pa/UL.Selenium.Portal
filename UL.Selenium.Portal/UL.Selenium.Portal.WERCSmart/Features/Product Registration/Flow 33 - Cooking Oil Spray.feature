@@ -20,8 +20,8 @@ Given I generate a random UPC number and save as: UPC69577
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cooking Oil Spray - Aerosol
+Given I call Shared Step 60756 (Product Information with Country and every option)
 And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
-And I call Shared Step 60756 (Additional Product Information with Country and every option)
 Given I click continue
 Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
