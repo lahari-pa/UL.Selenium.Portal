@@ -214,21 +214,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//do nothing
 				}
 
-				//if we didn't get the id try a different object type
-				if (id == "")
-				{
-					try
-					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
-
-				}
-
 				if (id == "")
 				{
 					try
@@ -295,7 +280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info("Searching for product with ID: '" + sku + "'");
+				Report.Info("Searching for product with SKU: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
 					ProductSkuField = sku
 				};

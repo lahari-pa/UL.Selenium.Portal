@@ -482,15 +482,13 @@ Scenario: [55796] Navigate to Home Page
 
 
 
-
-	Scenario: [158930] Home Page Search - Internal Information
+Scenario: [158930] Home Page Search - Internal Information
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I generate a random UPC number and save as: UPC158930
 Given I generate a random Product ID and save as: ProductID158930
 Then Generate a random SKU number (12 random digits) and save as: RandomSKU158930
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I set the Product Identification (Optional) field to: ProductID158930
 Given I set the Product Identification (Optional) field to Proudct ID saved as: ProductID158930
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I save the product information as: TestCase158930
@@ -519,11 +517,14 @@ Given I navigate to the home page
 Given I click More Filters in the products grid
 Given I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: ProductID158930
+Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: IngID
+Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: RandomSKU158930
+Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
