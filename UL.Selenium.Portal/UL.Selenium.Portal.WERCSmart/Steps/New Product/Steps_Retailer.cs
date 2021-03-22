@@ -52,6 +52,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I confirm the following retailer cannot be deselected: (.*)")]
+		public void ConfirmRetailerCannotBeDeselected(string retailer)
+		{
+			var actualRetailers = new Retailer();
+			actualRetailers.ConfirmRetailerCannotBeDeselected(retailer);
+		}
+
 		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
 		public void ClickAddRetailers()
 		{

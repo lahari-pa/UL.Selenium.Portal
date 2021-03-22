@@ -80,6 +80,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool ConfirmRetailerCannotBeDeselected(string retailer)
+		{
+			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//td[text()='" + retailer + "']/preceding-sibling::td//input"), 2);
+
+			if (retailerEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		/// Select Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown.
 		/// </summary>

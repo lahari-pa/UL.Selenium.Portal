@@ -3325,6 +3325,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I confirm SKU field is blank")]
+		public void GivenIConfirmSKUFieldIsBlank()
+		{
+			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to confirm SKU field was blank", "Confirmed SKU field was blank");
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
