@@ -651,6 +651,7 @@ Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC804879551225
 Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
+Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 Given I set the Primary Physical State option to: Liquid
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
@@ -662,7 +663,6 @@ Given I set the Flash Point (in Celsius) option to: None, No Flash Point
 Given I set the Select the best Water Solubility description option to: Soluble in water
 Given I click continue
 Given I click continue
-Then I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
       	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |

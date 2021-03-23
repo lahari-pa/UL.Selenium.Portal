@@ -262,7 +262,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Incandescent Bulbs
 	Then I save the product information as: TestCase108254Lightbulb
-	And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens

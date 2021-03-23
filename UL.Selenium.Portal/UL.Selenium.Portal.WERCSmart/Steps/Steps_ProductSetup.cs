@@ -762,10 +762,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+
+			//And I call Shared Step 57401 (Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+			sharedSteps.GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			//And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			//And I call Shared Step 57401 (Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-			sharedSteps.GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

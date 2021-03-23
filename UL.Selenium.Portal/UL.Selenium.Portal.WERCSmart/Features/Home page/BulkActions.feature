@@ -248,10 +248,10 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
 		| Flaked                   | Soluble in water |
-	And I call Shared Step 60310 (Additional Product Information - Without Child question)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua          | 100     | false               | false       |            |

@@ -31,9 +31,10 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60116
 
+Given I call Shared Step 60310 (Product Information - Without Child question)
+
 Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
-Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 
 Given I click continue
 

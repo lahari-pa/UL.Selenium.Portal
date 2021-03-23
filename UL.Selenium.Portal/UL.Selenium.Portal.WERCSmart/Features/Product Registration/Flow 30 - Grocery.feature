@@ -55,8 +55,8 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces
 	Then I save the product information as: TestCase60724
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
-	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
@@ -82,8 +82,8 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Jelly, Jam or Preserves
 	Then I save the product information as: TestCase60723
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens

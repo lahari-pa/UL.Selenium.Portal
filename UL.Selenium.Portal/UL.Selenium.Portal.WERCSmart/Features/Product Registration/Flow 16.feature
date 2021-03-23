@@ -65,7 +65,6 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Then I save the product information as: TestCase59274
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -107,7 +106,6 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Then I save the product information as: TestCase59276
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -147,7 +145,6 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I save the product information as: TestCase59277
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -187,7 +184,6 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Given I save the product information as: TestCase59278
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -228,7 +224,6 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I save the product information as: TestCase59279
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -269,7 +264,6 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I save the product information as: TestCase59280
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -311,7 +305,6 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I save the product information as: TestCase59281
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -353,7 +346,6 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I save the product information as: TestCase59282
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -394,7 +386,6 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I save the product information as: TestCase59275
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

@@ -30,7 +30,6 @@ Then I save the product information as: TestCase78933
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 # Failing on 'child' question
-#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -82,7 +81,6 @@ Then I save the product information as: TestCase78936
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 # Failing on 'child' question
-#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
@@ -196,10 +194,10 @@ Then I save the product information as: TestCase96708
 # I Record the entry you select for Water Solubility
 #: WAS NOT USED
 
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
 And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 
 # [Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL]  
-Then I call Shared Step 69687 (Additional Product Information - US, No(PL))
 # I think this was the step that was needed.
 
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)

@@ -22,7 +22,7 @@ Given I delete all products with UPC Number: saved as UPC58760
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 Then I save the product information as: TestCase58760
-And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+And I call Shared Step 69687 (Product Information - US, No(PL))
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon

@@ -32,7 +32,6 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87913
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Then I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
@@ -162,7 +161,6 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87916
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)		
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
@@ -215,7 +213,6 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87917
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	#Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 	#| Secondary Physical State      | Select the best Water Solubility description         |

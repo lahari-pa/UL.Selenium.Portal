@@ -24,11 +24,11 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71985
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
 	##Product Characteristics
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Wood dust     | 50.0    | false               | false       |            |
@@ -66,10 +66,10 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71987
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Wood dust     | 70.0    | false               | false       |            |
@@ -214,7 +214,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 57865 ( Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Wood dust     | 75.0    | false               | false       |            |
@@ -641,6 +641,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
 Then I save the product information as: TestCase133335
+	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	And I set the Primary Physical State option to: Aerosol
 	And I set the Secondary Physical State option to: Liquid spray
 	And I check the 'I do not have exact' checkbox for field: pH
@@ -649,7 +650,6 @@ Then I save the product information as: TestCase133335
 	And in the New Product page I click Continue
 	# Additional Product Information page
 	And I should see the Additional Product Information Page
-	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:

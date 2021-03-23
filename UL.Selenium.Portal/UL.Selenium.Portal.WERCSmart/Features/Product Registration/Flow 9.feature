@@ -56,7 +56,6 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then I save the product information as: TestCase58098
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 	Given I add the following ingredients:
 		| ComponentName    | Percent |
 		| Aqua             | 50      |
@@ -78,10 +77,10 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Bars
 	Then I save the product information as: TestCase58078
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility     |
 		| Grainy                   | Soluble in hot water |
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
@@ -376,8 +375,8 @@ Scenario: [58604] Condom - RU000937
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condom with or without Spermicide
 	Then I save the product information as: TestCase58604
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Polyisoprene  | 90      | false               | false       |            |

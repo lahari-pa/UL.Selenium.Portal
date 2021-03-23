@@ -153,8 +153,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: Mode6S3
 	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -297,8 +297,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: Mode45S4	
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)

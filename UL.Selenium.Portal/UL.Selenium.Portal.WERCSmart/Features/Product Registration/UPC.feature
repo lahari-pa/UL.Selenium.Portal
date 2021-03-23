@@ -84,8 +84,8 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87588
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -115,10 +115,10 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87593
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Very slight                                  |
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -170,7 +170,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
-	And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	And I call Shared Step 69687 (Product Information - US, No(PL))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)

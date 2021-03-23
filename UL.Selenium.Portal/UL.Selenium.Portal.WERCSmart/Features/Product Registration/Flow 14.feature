@@ -23,8 +23,8 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer Wipes for Use on Domesticated Animals
 	Then I save the product information as: TestCase58736
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Triclosan        | 24.94   | false               | false       |            |
@@ -55,11 +55,11 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer for Use on Domesticated Animals
 	Then I save the product information as: TestCase58738
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)		
 	#Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 	#	| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 	#	| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Triclosan        | 24.94   | false               | false       |            |

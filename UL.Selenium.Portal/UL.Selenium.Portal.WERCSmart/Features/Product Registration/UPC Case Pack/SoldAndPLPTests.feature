@@ -119,7 +119,6 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87969
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
@@ -179,8 +178,6 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase88198
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))	
 	Then In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected
 	Given I set the Select countries the product may be sold in option to: Canada
 	And I set the Product is shipped directly by supplier to the consumer field to: No
