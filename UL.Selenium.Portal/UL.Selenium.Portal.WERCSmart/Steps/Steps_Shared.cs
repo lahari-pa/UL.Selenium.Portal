@@ -11123,7 +11123,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailers.AddRow("No Retailer/No UPC Product");
 			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
 
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Canadian Tire", "This Private Label");
 
 			Report.StartStep("In the Retailer page I click Continue");
