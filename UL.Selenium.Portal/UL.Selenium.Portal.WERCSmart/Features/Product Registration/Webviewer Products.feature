@@ -99,6 +99,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
+@ScenarioId:10758
 Scenario: [145842] Canada Only, Non Authoring Product - No Label Uploaded, PLP = No, GENDOC = 0
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -133,4 +134,5 @@ Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish 
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase145842)
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145842) for
-| Retailer |
+| Retailer      |
+| Canadian Tire |
