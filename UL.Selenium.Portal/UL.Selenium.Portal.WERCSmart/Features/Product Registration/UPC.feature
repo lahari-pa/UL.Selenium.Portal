@@ -993,11 +993,11 @@ Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > 
 #Given In the New Product page I click tab: Recipient and UPC Details
 #Given I click the page heading: Universal Product Code (UPC)
 #Given I delete UPC: saved as UPC156789
-#Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 12345!@#$%12
+#Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 package type: Package Type and SKU: 12345!@#$%12
 #Given In the Universal Product Code (UPC) page I click Save
 #Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
 #Given I delete UPC: saved as UPC156789
-#Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
+#Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 package tyoe: Package Type and SKU: 123456
 #Given In the Universal Product Code (UPC) page I click Save
 #Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase

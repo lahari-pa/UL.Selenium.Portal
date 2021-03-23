@@ -241,12 +241,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Delay.Seconds(1);
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
@@ -2749,9 +2743,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) package type: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string sku)
+			string size, string packageType, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2773,6 +2767,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			upcTable.AddRow(new string[] {
 				"ContainerType",
 				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"PackageType",
+				packageType
 			});
 			upcTable.AddRow(new string[] {
 				"Size",
@@ -11087,7 +11085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call shared step 144794 \(Login to WS as supplier with feed to Web viewers\)")]
+		[StepDefinition(@"I call shared step 144974 \(Login to WS as supplier with feed to Web viewers\)")]
 		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
 		{
 			var selGlobalSteps = new GlobalSteps();
@@ -11104,6 +11102,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselected("No Retailer/No UPC Product");
 
 			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
 			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
