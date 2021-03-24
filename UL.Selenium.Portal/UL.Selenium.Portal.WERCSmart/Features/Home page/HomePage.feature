@@ -482,7 +482,8 @@ Scenario: [55796] Navigate to Home Page
 
 
 
-	Scenario: [156787] Home Page Search - Internal SKU field
+@ScenarioId:10736
+Scenario: [156787] Home Page Search - Internal SKU field
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I generate a random UPC number and save as: UPC156787
@@ -497,7 +498,7 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
-Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
+Given I call Shared Step 162053 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
 Given I click continue
 Given I click continue
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
