@@ -565,13 +565,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Fireworks");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
 			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
-
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Propane", "100", "false", "false", "");
 
@@ -666,21 +665,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
 			newProductSteps.SaveProductInformation(savedAs);
-			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
-			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
-			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
-			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "California's Cleaning Product Right to Know Act", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No","No");
 
 			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+			newProductSteps.ClickContinue();
 
-			
+			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
+			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
+			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
-			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
 
@@ -751,14 +750,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
 			newProductSteps.SaveProductInformation(savedAs);
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
-			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
 			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+
+			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+
+			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
+			
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Butane", "100", "false", "false", "");
@@ -997,13 +999,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Lighters");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			Table table74981 = new Table("Secondary Physical State", "Select the best Water Solubility description");
-			table74981.AddRow("Compressed gas", "Low");
-			sharedSteps.ICallSharedPhysicalandChemicalProperties_Gas(table74981);
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
 			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+
+			Table table74981 = new Table("Secondary Physical State", "Select the best Water Solubility description");
+			table74981.AddRow("Compressed gas", "Low");
+			sharedSteps.ICallSharedPhysicalandChemicalProperties_Gas(table74981);
+			
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 

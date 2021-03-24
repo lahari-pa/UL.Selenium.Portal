@@ -24,8 +24,8 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baked Goods, Crackers
 	Then I save the product information as: TestCase60725
+	Given I call Shared Step 74123 (Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)	
-	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then I click 'Add Retailers' in the Retailers page
 	Then In the 'Select retailers' window I should not see the following retailers:
@@ -110,8 +110,8 @@ Scenario: [60722] Nut Butters - RU001455
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nut Butters
 	Then I save the product information as: TestCase60722
+	Given I call Shared Step 74123 (Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
@@ -138,8 +138,8 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cereals
 	Then I save the product information as: TestCase73041
+	Given I call Shared Step 74123 (Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Then I click 'Add Retailers' in the Retailers page
 	Then In the 'Select retailers' window I should see the following retailers:

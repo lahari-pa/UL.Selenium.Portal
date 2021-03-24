@@ -161,13 +161,13 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87916
-	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)		
-		| Secondary Physical State | Select the best Water Solubility description |
-		| Compressed gas           | Low                                          |
-	Given I call Shared Step 63804 (Additional Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		Given I call Shared Step 74981 (Physical and Chemical Properties - gas)		
+		| Secondary Physical State | Select the best Water Solubility description |
+		| Compressed gas           | Low                                          |
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -213,14 +213,14 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87917
+	Given I call Shared Step 63804 (Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	#Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 	#| Secondary Physical State      | Select the best Water Solubility description         |
 	#| Compressed gas                | Low                                                  |
-	Given I call Shared Step 63804 (Additional Product Information - enter options)
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
-	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#| Cocoa butter  | 100     | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)

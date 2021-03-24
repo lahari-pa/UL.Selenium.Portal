@@ -312,11 +312,11 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	#20 June 2019 changed product name from Pest repellant for Use on Animals - liquid to Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 	And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 	Then I save the product information as: TestCase71274
+	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                 | Liquid                   | 2                | 8  | 100                        | 80                       | Not applicable/available        | Appreciable                                  |
-	And I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
 	#CLF 26 Feb 2019. This appears to  be the wrong step so changed it to: 57865
 	# JS 13/03 - TFS test case changed to use shared 57865
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

@@ -128,7 +128,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
 	Then I save the product information as: TestCase63521
-	Given I call Shared Step 63460 (Additional Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
+	Given I call Shared Step 63460 (Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Create the Kit Page
 	Given In the Create the kit page I search for and select: saved as Kit1
