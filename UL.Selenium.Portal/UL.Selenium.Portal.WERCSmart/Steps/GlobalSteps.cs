@@ -122,8 +122,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
-		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
+		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewer Account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewer Account)")]
 		public void LoginToWERCSmart(string type)
 		{
 			//if alredy logged in, logout
@@ -145,6 +145,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("Canada has all data account"):
 					this.LoginToAccount("CanadaHasAllData");
+					break;
+				case ("WebViewer Account"):
+					this.LoginToAccount("FeedToWebViewers");
 					break;
 			}
 		}
