@@ -4261,12 +4261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
 		}
-
-		[StepDefinition(@"In the SHA manager grid I right click first product")]
-		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
-		{
-			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
-		}
+		
 
 	}
 
