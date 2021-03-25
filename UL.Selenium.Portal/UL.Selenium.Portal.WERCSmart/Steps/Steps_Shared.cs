@@ -6081,13 +6081,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 77872 \(Additional Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
+			@"I call Shared Step 77872 \(Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
 		public void Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information page");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I confirm 'United States' is selected for the SOLD question");
 			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
 			Report.StartStep("I should only see the SOLD and Direct ship questions");
@@ -6186,7 +6186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 60648 \(Additional Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
+			@"I call Shared Step 60648 \(Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
 		public void Shared60648_ProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -6206,13 +6206,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 77883 \(Additional Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
+			@"I call Shared Step 77883 \(Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
 		public void Shared7783_ProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information page");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I confirm 'United States' is selected for the SOLD question");
 			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
 			Report.StartStep("I should only see the SOLD and Direct ship questions");
@@ -8086,12 +8086,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 85730 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
+			@"I call Shared Step 85730 - Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
 		public void
 			ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question

@@ -328,10 +328,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase85965");
 			new StepsNewProduct().SaveProductInformation("TestCase85965");
-			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
-			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			Report.StartStep("I call Shared Step 63860 (Additional Product Information - US, No(Child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))");
+			Report.StartStep("I call Shared Step 63860 (Product Information - US, No(Child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))");
 			new Steps_Shared().SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();			
 			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
 			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			Report.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");

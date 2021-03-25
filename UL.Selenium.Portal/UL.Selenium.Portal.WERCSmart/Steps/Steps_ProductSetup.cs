@@ -3991,7 +3991,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep($"The Product- Enter name: {productName}, select product type, Enter TestBrand - Continue - Happy Path): Hair Color Kit");
 			new Steps_TheProduct().SetProductNameProductTypeProductLine(productName, "Hair Color Kit", "TestBrand");
 			new StepsNewProduct().SaveProductInformation(savedAs);
-			Report.StartStep("And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))");
+			Report.StartStep("And I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))");
 			sharedSteps.Shared60648_ProductInformation_Us_NoDirectShip_NoPl_NoGnfr();
 			Report.StartStep("And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
