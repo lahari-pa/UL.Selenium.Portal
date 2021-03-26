@@ -85,8 +85,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -200,7 +198,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -233,9 +230,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
@@ -415,8 +409,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 			Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -487,8 +479,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -561,7 +551,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: 1-Pentene
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -619,7 +608,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S3
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -679,8 +667,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -743,7 +729,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode23S2
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -829,7 +814,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -909,7 +893,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -973,7 +956,6 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		Then I save the product information as: Mode45S5
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1042,7 +1024,6 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Acridine
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -1107,7 +1088,6 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page

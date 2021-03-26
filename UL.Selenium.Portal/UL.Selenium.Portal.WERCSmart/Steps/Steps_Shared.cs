@@ -10249,14 +10249,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 118085 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue\)")]
+			@"I call Shared Step 118085 \(Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue\)")]
 		public void
 			GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSEverythingElseNoCACleaningNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -10283,16 +10283,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 118091 \(Additional Product Information - enter options\)")]
+		[StepDefinition(@"I call Shared Step 118091 \(Product Information - enter options\)")]
 		public void ICallSharedStepProductInformationEnterOptionsCACleaning(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
@@ -10364,8 +10364,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step - \(Additional Product Information - enter options\)")]
@@ -10392,7 +10392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 118138 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
+		[StepDefinition(@"I call Shared Step 118138 Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
 		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -10432,8 +10432,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 
@@ -10539,14 +10539,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
-		[StepDefinition(@"I call Shared Step 135134 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 135134 \(Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
 		public void IcallSharedStep135134()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
@@ -10583,8 +10583,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 100974 \(Regulatory Documents to Provide - Canada only - Upload documents > Continue\)")]
@@ -10674,14 +10674,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 140562 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 140562 \(Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
 		public void IcallSharedStep140562()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
@@ -10727,8 +10727,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 
@@ -11002,13 +11002,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 158144 \(Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
+		[StepDefinition(@"I call Shared Step 158144 \(Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
 		public void GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not considered a pesticide product");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -11038,8 +11038,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue")]

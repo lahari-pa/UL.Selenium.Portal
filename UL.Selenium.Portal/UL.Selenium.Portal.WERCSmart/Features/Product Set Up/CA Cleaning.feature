@@ -268,8 +268,8 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I save the product information as: TestCase158172
 Given I call Shared Step 57561a (The Product - Enter Product Name: Trade Secret Validation Product and select Type of Product): General Purpose Cleaner - Non-aerosol
+Given I call Shared Step 158144 (Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE)
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given I call Shared Step 158144 (Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE)
 Given I should see the California Cleaning Product Disclosure Page
 Given I set the Who is publicly identified on the product label as responsible for the product? option to: Manufacturer
 Given In the California Cleaning Product Disclosure tab, I enter: NONE in the Final Domestic Distributor

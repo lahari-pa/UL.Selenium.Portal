@@ -1214,7 +1214,6 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page

@@ -28,7 +28,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -80,7 +79,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -135,7 +133,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -184,7 +181,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -241,7 +237,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -295,7 +290,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -350,7 +344,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -403,7 +396,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -457,7 +449,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -511,7 +502,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -567,7 +557,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -624,7 +613,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -679,7 +667,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -734,7 +721,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page

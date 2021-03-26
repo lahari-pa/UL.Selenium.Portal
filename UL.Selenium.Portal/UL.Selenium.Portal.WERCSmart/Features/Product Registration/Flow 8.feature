@@ -619,7 +619,6 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 	#Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
-	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
