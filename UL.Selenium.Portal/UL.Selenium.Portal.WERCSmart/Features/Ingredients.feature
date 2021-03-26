@@ -608,7 +608,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
 
-	#Looks like th issue is with the ingredients page not showing, instead its the additional product information page
+	#Looks like th issue is with the ingredients page not showing, instead its the product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
@@ -641,6 +641,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
 Then I save the product information as: TestCase133335
+Given I should see the Product Information Page
 	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	And I set the Primary Physical State option to: Aerosol
 	And I set the Secondary Physical State option to: Liquid spray
@@ -648,8 +649,6 @@ Then I save the product information as: TestCase133335
 	And I set the pH option to: 4 - 6.9 
 	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
 	# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
@@ -731,12 +730,7 @@ And I set 'Type of Product' to: Chalk
 Then I save the product information as: TestCase133610
 Then I click continue
 Then I click continue
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Soluble in water
-Then I click continue
-And I should see the Additional Product Information Page
+And I should see the Product Information Page
 And I see the following sections
 | Section                               |
 | Select countries the product may be sold in |
@@ -749,6 +743,11 @@ Given I set the Product is marketed for use by, or on, a child (US is 12 and und
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 Given I set the Product is a Retailer's Private Label or Brand option to: No
 Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Then I click continue
+Given I set the Primary Physical State option to: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given I set the Select the best Water Solubility description option to: Soluble in water
 Then I click continue
 And I should see the Ingredients Page
 Then I click the 'x' button for component number 1

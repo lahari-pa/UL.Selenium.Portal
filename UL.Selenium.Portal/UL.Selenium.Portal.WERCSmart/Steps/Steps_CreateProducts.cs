@@ -1251,7 +1251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Create new version of this step to Answer CA cleaning question
 			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-			this.AdditionalProductInformation_YesToCACleaning();
+			this.ProductInformation_YesToCACleaning();
 			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 
 			newProductSteps.ClickContinue();
@@ -1342,12 +1342,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
-		public void AdditionalProductInformation_YesToCACleaning()
+		[StepDefinition(@"In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
+		public void ProductInformation_YesToCACleaning()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))

@@ -3090,7 +3090,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
 		}
 
-		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Additional Product Information with the following text: (.*)")]
+		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Product Information with the following text: (.*)")]
 		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
 		{
 			NewProduct newProductObject = new NewProduct();
