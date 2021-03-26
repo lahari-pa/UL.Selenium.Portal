@@ -119,10 +119,10 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87969
+	Given I call Shared Step 89286 - Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
-	Given I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
 	#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
 	#| No                                                             | No                            | No                         | No              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

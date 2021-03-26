@@ -8500,7 +8500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 62681 - Additional Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+			@"I call Shared Step 62681 - Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
 			ThenICallSharedStep62681ProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
@@ -8527,7 +8527,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+					@"I call Shared Step 62681 - Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
 					ThenICallSharedStep62681ProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
@@ -8550,7 +8550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
+		[StepDefinition(@"I call Shared Step 94674 \(Product Information - RU Wine\)")]
 		public void CallSharedStep9674_ProductInformation_RuWine()
 		{
 			Report.StartStep(
@@ -9821,13 +9821,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA \(NO\), DSV \(NO\), PLP \(YES\), GNFR \(NO\), Continue")]
+		[StepDefinition(@"I call Shared Step 89286 - Product Information - US and Canada - OSHA \(NO\), DSV \(NO\), PLP \(YES\), GNFR \(NO\), Continue")]
 		public void
 			USandCanadaPLPYes()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
@@ -10214,7 +10214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 118064 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 118064 \(Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;

@@ -89,7 +89,7 @@ Scenario: [73950] Kit Document merge - Canada only
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
 	Then I save the product information as: TestCase73950
-	And I call Shared Step 62681 - Additional Product Information - Canada, No(DSV), No(PLP), No(GNFR), Continue - Happy Path
+	And I call Shared Step 62681 - Product Information - Canada, No(DSV), No(PLP), No(GNFR), Continue - Happy Path
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73950_KitProduct1 and product 2: 73950_KitProduct2)
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
