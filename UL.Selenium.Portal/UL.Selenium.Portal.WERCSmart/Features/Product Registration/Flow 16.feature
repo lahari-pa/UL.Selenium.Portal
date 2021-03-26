@@ -222,9 +222,9 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel-Cadmium Battery
 	Given I save the product information as: TestCase59279
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Nickel          | 11.12   | false               | false       |            |
@@ -262,9 +262,9 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Silver Battery
 	Given I save the product information as: TestCase59280
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Silver Oxide  | 19.52   | false               | false       |            |
@@ -303,9 +303,9 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
 	Given I save the product information as: TestCase59281
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium chloride | 33.33   | false               | false       |            |
@@ -344,9 +344,9 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
 	Given I save the product information as: TestCase59282
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Zinc          | 30      | false               | false       |            |
@@ -384,9 +384,9 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
 	Given I save the product information as: TestCase59275
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Zinc          | 30      | false               | false       |            |
@@ -422,9 +422,9 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
@@ -461,9 +461,9 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
 	Then I save the product information as: TestCase97470
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
@@ -500,9 +500,9 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 	Then I save the product information as: TestCase59273
+	Given I should see the Product Information Page
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Potassium hydroxide | 20.5    | false               | false       |            |
@@ -556,7 +556,6 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
 	Then I save the product information as: TestCase122366
-	#Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Then I call Shared Step 63704 (Product Information - US, No(DSV), No(PL), No(GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
