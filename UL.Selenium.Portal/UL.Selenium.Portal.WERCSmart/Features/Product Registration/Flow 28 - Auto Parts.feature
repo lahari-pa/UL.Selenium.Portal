@@ -24,7 +24,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Gasoline Container, Portable
 	Then I save the product information as: TestCase60673
-	Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+	Given I call Shared Step 60726 (Product Information - Country and Private Label or Brand - Yes)
 	Given I call Shared Step 56808 Regulatory Information - Prop 65 - No - Continue
 	Given I call Shared Step 60685 Fuel Container Regulatory Details - Yes
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Harbor Freight Tools and enter the name: Private Label Gasoline

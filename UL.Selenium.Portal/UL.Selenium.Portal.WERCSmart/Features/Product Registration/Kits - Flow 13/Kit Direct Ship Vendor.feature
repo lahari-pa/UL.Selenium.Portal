@@ -128,7 +128,6 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	And I click on the Row Action: Update Required
 	#And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
 	And I should see the The Product Page
-	#And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
 	#And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 	And I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
@@ -183,7 +182,6 @@ Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM
 	#And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
 	And I should see the The Product Page
 	And I click Save in The Product Page
-	#And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
 	#And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 	And I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit

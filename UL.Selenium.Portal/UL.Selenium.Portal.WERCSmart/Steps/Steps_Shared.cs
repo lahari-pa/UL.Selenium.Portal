@@ -201,11 +201,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
+			@"I call Shared Step 60726 \(Product Information - Country and Private Label or Brand - Yes\)")]
 		public void GivenICallSharedStep60726ProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 

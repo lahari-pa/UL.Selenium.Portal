@@ -41,6 +41,16 @@ And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy To
 And in the The Product page I click Continue
 Then I save the product information as: TestCase60774
 
+# ====== Following the steps from 'Shared Step' 60756 ====== #
+And I should see the Product Information Page
+And Select countries the product may be sold in should be showing the value: United States
+And I set the Select the product's Country of Origin field to: United Kingdom
+And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
+And I set the Product is shipped directly by supplier to the consumer. field to: No
+And I set the Product is a Retailer's Private Label or Brand field to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
+And in the Product Information page I click Continue
+
 # ====== Following the steps from 'Shared Step' 60778 ====== #
 And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
@@ -55,15 +65,6 @@ And I set the Product contains the following sweeteners field to: None of the Ab
 And I set the Product contains the following artificial dye(s) option to: None of the Above
 And in the Physical and Chemical Properties page I click Continue
 
-# ====== Following the steps from 'Shared Step' 60756 ====== #
-And I should see the Additional Product Information Page
-And Select countries the product may be sold in should be showing the value: United States
-And I set the Select the product's Country of Origin field to: United Kingdom
-And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
-And I set the Product is shipped directly by supplier to the consumer. field to: No
-And I set the Product is a Retailer's Private Label or Brand field to: No
-And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
-And in the Additional Product Information page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57570 ====== #
 And I should see the Ingredients Page
