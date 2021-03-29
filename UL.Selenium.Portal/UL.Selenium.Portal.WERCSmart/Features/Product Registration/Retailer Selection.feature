@@ -153,16 +153,14 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
-
-Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-
-And I should see the Additional Product Information Page
+And I should see the Product Information Page
 And I should see following statement: Select countries the product may be sold in
 And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I set all additional product information options to No
-Given in the Additional Product Information page I click Continue
+Given in the Product Information page I click Continue
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -175,7 +173,7 @@ Given I click 'Add Retailers' in the Retailers page
 Given I click the Select all retailers option in the Select Retailers popup
 Then all retailers are selected in the Select Retailers window
 Given I click Done in the Select Retailers popup
-Given in the Additional Product Information page I click Continue
+Given I click continue
 Then I confirm I see error messages for the following retailers
 | Retailer            |
 | O'Reilly            |
@@ -197,7 +195,6 @@ Then I save the product information as: TestCase96708
 	Given I call Shared Step 69687 (Product Information - US, No(PL))
 And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 
-# [Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL]  
 # I think this was the step that was needed.
 
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -312,7 +309,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
 Then I save the product information as: TestCase128920
-Given I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 Given I set the Contains Circuit Board option to: No
@@ -342,12 +339,12 @@ Given I delete all products with UPC Number: saved as UPC59273
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Then I save the product information as: TestCase59273
-	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I should see the Product Information Page
+Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given Primary Physical State should be showing the value: Solid
 Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 Given in the Physical and Chemical Properties page I click Continue
-Given I should see the Additional Product Information Page
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | Potassium hydroxide | 20.5    | false               |            | false       |

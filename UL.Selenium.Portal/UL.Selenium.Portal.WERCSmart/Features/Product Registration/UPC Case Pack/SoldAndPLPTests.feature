@@ -180,7 +180,7 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I set the Select countries the product may be sold in option to: Canada
 	And I set the Product is shipped directly by supplier to the consumer field to: No
 	And I set the Product is a Retailer's Private Label or Brand field to: No
-	And in the Additional Product Information page I click Continue
+	And in the Product Information page I click Continue
 
 	#Updated to use 57911 instead of 57503 to match test case, now failing?
 	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
