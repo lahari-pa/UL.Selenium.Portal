@@ -100,9 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			Report.StartStep("Then I save the product information as: TestCase84109");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			//Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
-			//MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
-			Report.StartStep("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only");				
+			Report.StartStep("I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only");				
 			MyStepsShared.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
 
 
@@ -239,7 +237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit", $"Kit Product {savedAs}");
 
 			new Steps_TheProduct().SetProductNameProductTypeProductLine($"Kit Product {savedAs}", "Hair Color Kit", "TestBrand");
-			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			//And I call Shared Step 77872(Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
 			// fix
 			sharedSteps.Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
@@ -1247,7 +1245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 
 			//Create new version of this step to Answer CA cleaning question
 			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
@@ -1496,7 +1494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase86187");
 			new StepsNewProduct().SaveProductInformation("TestCase86187");
-			Report.StartStep("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
+			Report.StartStep("I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
 			new Steps_Shared().ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
 			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();

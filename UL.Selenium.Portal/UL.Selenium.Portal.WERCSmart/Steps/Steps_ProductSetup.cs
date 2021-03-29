@@ -43,10 +43,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -338,12 +338,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			Report.StartStep("Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			Report.StartStep("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			Report.StartStep("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			Report.StartStep("(Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
@@ -494,12 +494,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			Report.Info("Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			Report.Info("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			Report.Info("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			Report.Info("(Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
@@ -855,9 +855,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Answering machine, No battery included", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
-			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
-			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
-			//And I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+			//And I call Shared Step 69687(Product Information - US, No(PL))
+			//sharedSteps.GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//And I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 			sharedSteps.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
@@ -1618,7 +1618,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
 				"Emergency Road kit", "Kit" + System.DateTime.Now.DayOfWeek + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second);
-			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			//And I call Shared Step 77872(Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation(saveAs);
 			sharedSteps.Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1687,10 +1687,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1997,10 +1997,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", "ingredient test");
 			// Save product to context
 			new StepsNewProduct().SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+
 		}
 
 
@@ -2045,10 +2046,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -2211,10 +2212,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

@@ -260,38 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		}
-
-		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		//public void GivenICallSharedStepProductInformation_US_DirectShip_PrivateLabelOnly()
-		//{
-		//	StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-		//	NewProduct myNewProduct = new NewProduct();
-		//	MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-		//	Delay.Seconds(1);
-		//	if (myNewProduct.SectionExists("Select countries the product may be sold in"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-		//	}
-		//	if (myNewProduct.SectionExists("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is sold to the Retailer solely for the Retailer's use"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use", "No");
-		//	}
-		//	MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		//}
+		}	
 
 		[StepDefinition(
 			@"I call Shared Step 60935 \(Product Information - US - Direct Ship - Private Label Only\)")]
@@ -1332,7 +1301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57401 \(Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -10368,12 +10337,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step - \(Additional Product Information - enter options\)")]
+		[StepDefinition(@"I call Shared Step - \(Product Information - enter options\)")]
 		public void ICallSharedStepProductInformationEnterAllOptions(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			foreach (var thisRow in table.Rows)
 			{
@@ -10388,8 +10357,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 118138 Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
