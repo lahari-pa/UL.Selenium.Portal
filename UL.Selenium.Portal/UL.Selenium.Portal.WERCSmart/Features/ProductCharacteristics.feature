@@ -12,14 +12,15 @@
 @SummaryPage
 @run_ProductCharacteristics
 
-Feature: Product Characteristics
+Feature: Physical and Chemical Properties
 
 @ScenarioId:1155
-Scenario: [31834] Product Characteristics - Solid only navigation
+Scenario: [31834] Physical and Chemical Properties - Solid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I save the product information as: TestCase31834
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
@@ -32,11 +33,12 @@ And I should see following statement: Select the best Water Solubility descripti
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31834
 
 @ScenarioId:1156
-Scenario: [31837] Product Characteristics - Solid only validation
+Scenario: [31837] Physical and Chemical Properties - Solid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I save the product information as: TestCase31837
 And I should see the Physical and Chemical Properties Page
 When I click continue
@@ -47,11 +49,14 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1153
-Scenario: [31827] Product Characteristics - Liquid only navigation
+Scenario: [31827] Physical and Chemical Properties - Liquid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
+Given I call Shared Step 63804 (Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
 Then I save the product information as: TestCase31827
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
@@ -68,7 +73,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1154
-Scenario: [31833] Product Characteristics - Liquid only validation
+Scenario: [31833] Physical and Chemical Properties - Liquid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -87,7 +92,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1149
-Scenario: [31786] Product Characteristics - Aerosol only navigation
+Scenario: [31786] Physical and Chemical Properties - Aerosol only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -110,7 +115,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1150
-Scenario: [31789] Product Characteristics - Aerosol only validation
+Scenario: [31789] Physical and Chemical Properties - Aerosol only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -125,7 +130,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1151
-Scenario: [31804] Product Characteristics - Gas only navigation
+Scenario: [31804] Physical and Chemical Properties - Gas only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -142,7 +147,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1152
-Scenario: [31826] Product Characteristics - Gas only validation
+Scenario: [31826] Physical and Chemical Properties - Gas only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -156,7 +161,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1157
-Scenario: [85157] Product Characteristics - All navigation
+Scenario: [85157] Physical and Chemical Properties - All navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -176,7 +181,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1158
-Scenario: [85158] Product Characteristics - All validation
+Scenario: [85158] Physical and Chemical Properties - All validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

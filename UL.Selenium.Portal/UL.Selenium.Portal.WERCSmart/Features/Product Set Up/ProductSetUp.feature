@@ -101,7 +101,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	And I click on the Row Action: Update Required
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
-	And I click the page heading: Product Characteristics
+	And I click the page heading: Physical and Chemical Properties
 	And I Change the Secondary Physical State drop down from its current selection to a new selection
 	Then I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit

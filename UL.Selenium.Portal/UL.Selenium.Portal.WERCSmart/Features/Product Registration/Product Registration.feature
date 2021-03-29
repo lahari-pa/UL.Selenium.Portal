@@ -128,7 +128,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
-	# Setting Product Characteristics
+	# Setting Physical and Chemical Properties
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	# Setting Ingredient Information
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -220,7 +220,6 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	#Transportation details 1 - not regulated - continue - happy path
 	And I should see the Transportation Details 1 Page
 	And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: Not Regulated
-	#And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(a)(2), 173.120(a)(3)
 	#And I set the Other DOT Exception field to: None
 	And in the New Product page I click Continue
 	#Retailer association - select a retailer - continue-happy path
@@ -308,7 +307,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the Product is a Retailer's Private Label or Brand option to: No
 	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
-	# Product Characteristics Page
+	# Physical and Chemical Properties Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase67661
 	And in the New Product page I click Continue

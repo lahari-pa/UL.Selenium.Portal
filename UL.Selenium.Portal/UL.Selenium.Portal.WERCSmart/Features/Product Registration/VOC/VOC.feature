@@ -133,7 +133,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Product is a Retailer's Private Label or Brand option to: No
 	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
-	# Product Characteristics Page
+	# Physical and Chemical Properties Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56477
 	And I should only see the following options for Primary Physical State:
@@ -321,7 +321,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Product is a Retailer's Private Label or Brand option to: No
 	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
-	# Product Characteristics Page
+	# Physical and Chemical Properties Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56483
 	And I should only see the following options for Primary Physical State:
@@ -436,7 +436,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set the Product is a Retailer's Private Label or Brand option to: No
 	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
-	# Product Characteristics Page
+	# Physical and Chemical Properties Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56484
 	And I should only see the following options for Primary Physical State:
