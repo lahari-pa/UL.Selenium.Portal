@@ -158,7 +158,7 @@ And I should see following statement: Select countries the product may be sold i
 And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-Given I set all additional product information options to No
+Given I set all product information options to No
 Given in the Product Information page I click Continue
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 

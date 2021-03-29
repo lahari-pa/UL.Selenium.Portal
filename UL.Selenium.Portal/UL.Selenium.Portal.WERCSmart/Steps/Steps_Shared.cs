@@ -9849,14 +9849,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step - Additional Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only")]
+			@"I call Shared Step - Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only")]
 		public void
 			CanadaOnlyNoPL()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			List<string> countrySold = myNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			if (countrySold.Contains("United States"))

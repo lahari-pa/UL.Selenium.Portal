@@ -125,6 +125,14 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	#And In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Material in the Type of Product select field
 	And I set 'Type of Product' to: Charcoal Lighter Material
 	And in the New Product page I click Continue
+# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
 	# Product Characteristics Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56477
@@ -139,15 +147,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
-	# Ingredient Page
+		# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

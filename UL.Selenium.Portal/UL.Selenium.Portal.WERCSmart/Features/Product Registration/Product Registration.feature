@@ -48,13 +48,12 @@ Scenario: [63705] New Product - BCP
 	And I Select the Create a New Registration radio button
 	And in the New Product page I click Continue
 	And I set 'Product Name' to: Answering Machine, Battery Included
-	#And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
 	And I set 'Type of Product' to: Answering Machine, Battery Included
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63705
 	# Shared step 63704
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
@@ -122,15 +121,15 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Then I save the product information as: TestCase63724
-	# Setting Product Characteristics
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	# Setting Additional Product Information
-	And I should see the Additional Product Information Page
+	# Setting Product Information
+	And I should see the Product Information Page
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
+	# Setting Product Characteristics
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	# Setting Ingredient Information
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -191,14 +190,9 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set 'Type of Product' to: Abrasive
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase65441
-	And I set the Primary Physical State to be: Solid
-	And I set the Secondary Physical State to be: Granular
-	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
-	Given in the New Product page I click Continue
-	# Setting Additional Product Information
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	# Setting Product Information
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
 	# CA Cleaning question commented out, uncomment when CA Cleaning is re-added
@@ -206,6 +200,14 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
+
+	And I set the Primary Physical State to be: Solid
+	And I set the Secondary Physical State to be: Granular
+	And I set the water mixture question to: Yes
+	And I set the water solubility description to: Completely soluble
+	Given in the New Product page I click Continue
+	
+
 	#Enter ingredients
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -299,6 +301,13 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	#And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Deodorant - Non-aerosol
 	And in the New Product page I click Continue
+	# Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
 	# Product Characteristics Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase67661
@@ -309,14 +318,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the When mixed with an equal amount of water option to: No
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And in the New Product page I click Continue
-	# Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
-	# Ingredients Page
+# Ingredients Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -431,8 +433,8 @@ Scenario: [105352] Product Comments screen Max input length
 	And I set 'Type of Product' to: Answering Machine, Battery Included
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase105352
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
