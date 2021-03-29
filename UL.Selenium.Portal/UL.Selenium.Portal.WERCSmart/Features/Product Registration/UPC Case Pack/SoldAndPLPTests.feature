@@ -176,7 +176,7 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase88198
-	Then In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected
+	Then In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected
 	Given I set the Select countries the product may be sold in option to: Canada
 	And I set the Product is shipped directly by supplier to the consumer field to: No
 	And I set the Product is a Retailer's Private Label or Brand field to: No
