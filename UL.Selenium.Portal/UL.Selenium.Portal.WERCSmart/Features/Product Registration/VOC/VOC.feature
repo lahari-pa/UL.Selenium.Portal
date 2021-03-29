@@ -313,6 +313,14 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	#And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Antiperspirants - Non-aerosol
 	And in the New Product page I click Continue
+	# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
 	# Product Characteristics Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56483
@@ -324,14 +332,6 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
 	And I set the Select the best Water Solubility description option to: Very soluble
-	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page
@@ -428,6 +428,14 @@ Scenario: [56484] VOC - Aero checks
 	#And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Clear Coating - Aerosol
 	And in the New Product page I click Continue
+	# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
 	# Product Characteristics Page
 	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56484
@@ -438,14 +446,6 @@ Scenario: [56484] VOC - Aero checks
 	And I set the pH option to: 2
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
-	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page

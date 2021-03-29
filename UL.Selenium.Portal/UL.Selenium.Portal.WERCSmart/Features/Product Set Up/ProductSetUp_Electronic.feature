@@ -23,7 +23,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
 	Then I save the product information as: TestCase84109
-	Then I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+	Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
