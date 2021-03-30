@@ -10819,6 +10819,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I call shared step 147290 \(Retailers - Add Retailers for Web viewers - for PLP - Not WM or Sears \(for upload doc flows\)\)")]
+		public void GivenICallSharedStepRetailers_AddRetailersForWebViewers_ForPLP_NotWMOrSearsForUploadDocFlows()
+		{
+			{
+				ReportSettings.UseSubSteps = true;
+
+				var selSelectRetailers = new SelectRetailers();
+
+				Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+				var retailerTable = new Table("Retailer");
+				retailerTable.AddRow("Ace Hardware");
+				retailerTable.AddRow("Albertsons");
+				retailerTable.AddRow("Autozone");
+				retailerTable.AddRow("Dicks");
+				retailerTable.AddRow("Genuine Parts");
+				retailerTable.AddRow("Kroger");
+				retailerTable.AddRow("Office Depot");
+				retailerTable.AddRow("Sears");
+				retailerTable.AddRow("Smart & Final");
+				retailerTable.AddRow("Staples");
+				retailerTable.AddRow("Target");
+				retailerTable.AddRow("Walmart");
+				retailerTable.AddRow("Winco");
+				new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+				var allRetailers = selSelectRetailers.AllRetailers();
+				if (allRetailers.Contains($"Canadian Tire"))
+				{
+					Report.Info($"Canadian Tire was found as an option, selecting it as a retailer");
+					new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+				}
+				else
+				{
+					Report.Info($"Canadian Tire was not found as an option, moving on.");
+				}
+				Report.StartStep("Click Done");
+				new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
+				Report.StartStep("Click Continue");
+				new StepsNewProduct().ClickContinue();
+
+			}
+		}
+
 
 		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
@@ -10879,6 +10922,79 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+
+		[StepDefinition(@"I call shared step 145356  \(Universal Product Code \(UPC\) - Add UPC for Web viewers Retailers - US & Canada - Continue\)")]
+		public void GivenICallSharedStepUniversalProductCodeUPC_AddUPCForWebViewersRetailers_USCanada_Continue(string upc, string containerType, string size, string quantity, string packageType)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
+			Report.StartStep("I add the following into the UPC Fields");
+
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					Quantity = quantity,
+					PackageType = packageType,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+				//Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Quantity", quantity);
+				upcTable.AddRow("PackageType", packageType);
+
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			}
+
+			IWebElement itemNumberTextField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'Item Number')]/..//input"), 2);
+
+			if (itemNumberTextField == null)
+			{
+				Report.Info(@"itemNumberTextField was not found");
+				return;
+			}
+			itemNumberTextField.EnterText("111-1111");
+
+			IWebElement partNameTextField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/..//input"), 2);
+
+			if (partNameTextField == null)
+			{
+				Report.Info(@"partNameTextField was not found");
+				return;
+			}
+			partNameTextField.EnterText("A0001");
+
+			IWebElement dpciField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'DPCI')]/..//input"), 2);
+			if (dpciField == null)
+			{
+				Report.Info(@"dpciField was not found");
+				return;
+			}
+			dpciField.EnterText("111-22-0001");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+
+		}
+
 
 		[StepDefinition(@"I call Shared Step 145300 \(SHA - Submitted Status - Process BCP product - Close warning message\) for product saved as: (.*)")]
 		public void GivenICallShared145300SHASubmittedStatusProcessBCPProductCloseWarningMessage(string savedAs)
@@ -10985,5 +11101,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"I call shared step 72414 \(Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path\)")]
+		public void GivenICallSharedStepRetailer_CanadaOnlySelectCanadianTireContinue_HappyPath()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var WarningPopup = new NoRetailerWarningPopup();
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselected("No Retailer/No UPC Product");
+			Report.Info("testing123");
+			var opened = new Retailer().ClickAddRetailers();
+			if (!opened)
+			{ 
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
+			}
+
+			var retailerTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"Canadian Tire",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			new StepsSelectRetailers().ConfirmDislayedRetailers("should", retailerTable);
+
+			Report.StartStep("In the 'Select Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.InTheSelectRetailersTableConfirmRetailerCannotBeDeselected("No Retailer/No UPC Product");
+			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
+			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselected("No Retailer/No UPC Product");
+			Report.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartStep("In the Retailer page I click Continue");
+			new StepsNewProduct().ClickContinue();
+			Report.StartStep("In the UPCs Warning popup I click Ok");
+			WarningPopup.ClickChoice("Ok");
+		}
+
+		[StepDefinition(@"I call shared step 144794 \(Login to WS as supplier with feed to Web viewers\)")]
+		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
+		{
+			var selGlobalSteps = new GlobalSteps();
+
+			selGlobalSteps.GivenILogInWithEmailXAndPasswordY("purple-shape.kxxyxunf@mailosaur.io", "Thewercs3!");
+			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
+		}
+	
 	}
 }
