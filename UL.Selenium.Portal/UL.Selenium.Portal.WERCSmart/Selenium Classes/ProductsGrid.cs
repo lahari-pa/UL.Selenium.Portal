@@ -215,6 +215,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public string ProductSkuField {
+			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
+			set
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2);
+				el.EnterText(value);
+				el.SendKeys(Keys.Return);
+				GeneralUtilities.Wait_for_load_finish();
+			}
+		}
+
 		public bool ClickActionsForFirstResultInGrid()
 		{
 			try
@@ -1066,6 +1077,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool AtLeastOneRetailerPerProductShowingStatus(string expectedStatus)
+		{
+			ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']"));
+			foreach (var row in listOfRows)
+			{
+
+				ReadOnlyCollection<IWebElement> listOfRetailers = row.FindElements(By.XPath(".//li"));
+				bool oneExpectedFound = false;
+				foreach (IWebElement thisItem in listOfRetailers)
+				{
+					string borderColour = thisItem.GetCssValue("border-color");
+					string foundStatus = "";
+					switch (borderColour)
+					{
+						case "rgb(30, 143, 31)":
+							foundStatus = "Accepted by Retailers";
+							break;
+						case "rgb(239, 157, 14)":
+							foundStatus = "Assessment in Progress";
+							break;
+						case "rgb(75, 82, 87)":
+							foundStatus = "Not Yet Submitted";
+							break;
+						case "rgb(0, 152, 255)":
+							foundStatus = "Sending to Retailers";
+							break;
+						case "rgb(207, 58, 83)":
+							foundStatus = "Needs Your Attention";
+							break;
+						default:
+							foundStatus = "";
+							break;
+					}
+
+					if (foundStatus != expectedStatus)
+					{
+						Report.Info($"The retailer was not the expected status");
+					}
+					else
+					{
+						Report.Info($"The retailer was in the expected status");
+						oneExpectedFound = true;
+					}
+				}
+
+				if (oneExpectedFound == false)
+				{
+					Report.Info($"No retailers in row contained the expected status/color...");
+					return false;
+				}				
+			}
+
+			return true;
+		}
+
+
 		public bool ClickRetailerFirstRow(string retailer)
 		{
 			IWebElement row = this.containerElement.FindElement(By.XPath("//tbody/tr[position() = 1]"), 2);
@@ -1565,6 +1632,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public class FilterInformation
+		{
+			public string Name { get; set; }
+
+			public string Id { get; set; }
+
+			public string UPC { get; set; }
+
+			public string Brand { get; set; }
+
+
+			//public List<string> Retailers { get; set; }
+			public string Retailer { get; set; }
+
+
+			public string AdditionalPrograms { get; set; }
+
+
+			public string Status { get; set; }
+
+
+			
+
+
+		}
 	}
 
 	class RemoveUpcUpdate : ModalDialog
