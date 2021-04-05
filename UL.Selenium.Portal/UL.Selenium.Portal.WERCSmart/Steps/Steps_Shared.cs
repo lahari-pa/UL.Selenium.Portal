@@ -10985,15 +10985,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I call shared step 144974 \(Login to WS as supplier with feed to Web viewers\)")]
-		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
-		{
-			var selGlobalSteps = new GlobalSteps();
-
-			selGlobalSteps.GivenILogInWithEmailXAndPasswordY("purple-shape.kxxyxunf@mailosaur.io", "Thewercs3!");
-			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
-		}
-
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
 		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
 		{
@@ -11005,7 +10996,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Lowe's");
-			retailerTable.AddRow("Home Depot");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("The Home Depot");
 			retailerTable.AddRow("Publix");
 			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
 			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
@@ -11173,10 +11165,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("No options selected for section: Is this product intended to be ingested?");
 				Report.StartStep(
-				"I set the Is this product intended to be ingested? option to: No");
+				"I set the Is this product intended to be ingested? option to: Yes");
 				selNewProductSteps.SetTheSectionOptionTo(
 					"Is this product intended to be ingested?",
-					"No");
+					"Yes");
 			}
 
 			Report.StartStep(
