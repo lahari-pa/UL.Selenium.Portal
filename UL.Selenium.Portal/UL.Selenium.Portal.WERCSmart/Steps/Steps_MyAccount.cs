@@ -50,6 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
+		
 			try
 			{
 				if (username.ToLower().Contains("saved as"))
@@ -57,6 +58,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var savedUser = (User)Context
 						.GetFromContext(username.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 					username = savedUser.Username;
+				}
+				if (username == "<RandomString>")
+				{
+					string randomStringSaved = (string)Context.GetFromContext(username);
+					username = randomStringSaved;
+					Report.Info($"The username was expected to be: '{username}'");
 				}
 				var thisTopMenuBar = new TopMenuBar();
 				Report.Info("Looking for username: " + username);
@@ -166,19 +173,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
+			if(replacedBy== "<RandomString>")
+			{
+				string randomStringSaved = (string)Context.GetFromContext(replacedBy);
+				replacedBy = randomStringSaved;
+				Report.Info($"The replaced by string was expected to be: '{replacedBy}'");
+			}
+
+
 			try
 			{
 				Delay.Seconds(20);
 				var selMyAccount = new MyAccount();
 				Report.IsTrue(selMyAccount.SaveUserGrid("userGridNew"), "Failed to save users in the user Grid", "Successfully saved users in the User grid");
 				Delay.Seconds(2);
+				Report.Info($"Original Grid");
 				var originalGrid = (List<User>)Context.GetFromContext("userGrid");
+				Report.Info($"New Grid");
 				var newGrid = (List<User>)Context.GetFromContext("userGridNew");
+				Report.Info($"Saved User");
 				var savedUser = (User)Context.GetFromContext(savedAs);
 
 				var matching = originalGrid.Where(y => newGrid.Any(z => z.Username == y.Username)).ToList();
 
-
+				
 
 				User inOriginalButNotNew = originalGrid.Where(y => !newGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
 				User inNewButNotOriginal = newGrid.Where(y => !originalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
@@ -205,6 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			//get name of currently signed in
 			string username = selTopMenuBar.GetCurrentUser();
+			selMyAccount.EnterSearchTextAndClickFind(username);
 			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
 				"Failed to click action: " + action + " for user: " + username,
 				"Successfully clicked action: " + action + " for user: " + username);
@@ -276,6 +295,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					name = user.Username;
 				}
+				if(name=="<RandomString>")
+				{
+					string newRandom = GeneralUtilities.GenerateRandomString(12);
+					name = newRandom;
+					Context.AddToContext("<RandomString>", newRandom);
+				}
+
+
 				Report.Info("Inputting name: " + name);
 				myUserDetails.Name = name;
 				Report.IsTrue(myUserDetails.Name == name, "Failed to set user details name to: " + name,

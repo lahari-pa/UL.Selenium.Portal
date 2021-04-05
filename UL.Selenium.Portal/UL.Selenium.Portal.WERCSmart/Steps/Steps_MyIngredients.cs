@@ -27,6 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MyIngredients().ClickSearchResult(name, cas),
 				"Failed to select search result with name: " + name + " and CAS: " + cas,
 				"Successully selected search result with name: " + name + " and CASL " + cas);
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"I add the following ingredients and save them to context as: (.*)")]

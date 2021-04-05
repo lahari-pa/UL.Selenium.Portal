@@ -515,14 +515,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//New Subscription Button
-		[FindsBy(How = How.XPath, Using = ".//div/a[text()='New Subscription']")]
+		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Enroll']")]
+		//New Subscription Enroll
 		private IWebElement _btnNewSub;
 
 		public bool New_Subscription_click()
 		{
 			Report.Info("Attempting to Click New Subscription Button");
-			this._btnNewSub.Click();
-			return true;
+			var testel = this.containerElement.FindElement(By.XPath($".//div[contains(@data-bind,'subscriptionModel.isSubscription()==false')]/a[text()='Enroll']"), 2);
+			return testel.TryClick();
 		}
 
 		public bool ConfirmSubscriptionLevel(string subscription)
@@ -1331,6 +1332,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool EnterSearchTextAndClickFind(string value)
+		{
+			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']"), 2);
+			IWebElement searchButton = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
+
+			bool textEntered = searchBar.TryEnterText(value);
+			bool searchClicked = searchButton.TryClick();
+			Delay.Seconds(5);
+			return searchClicked && textEntered;
 		}
 
 	}
