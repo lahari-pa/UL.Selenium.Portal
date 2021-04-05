@@ -500,9 +500,10 @@ Given In the Ingredient Reference Number field I enter the following text: Ingre
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I should see the Waste Classification Data Page
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
+#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+#| Retailer  |
+#| Walgreens |
+Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
 
 #Package Field Missing
 #Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC158930 with container type: Metal Container size: 2 package type: Package Type and SKU: RandomSKU158930
