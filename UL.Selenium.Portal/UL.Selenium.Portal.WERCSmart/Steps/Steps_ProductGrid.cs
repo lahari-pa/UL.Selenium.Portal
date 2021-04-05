@@ -499,10 +499,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string searchId = productDetails.Id;
+			string id = "";
 
-			if (searchId == null)
+			if (id == "")
+			{
+				try
+				{
+					var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+					id = productDetails.Id;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+			}
+
+			if (id == "")
+			{
+				try
+				{
+					id = Context.GetFromContext(savedAs).ToString();
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			if (id == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
@@ -510,9 +535,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string firstId = selProductsGrid.GetIdInFirstGridRow();
 			int productsCount = selProductsGrid.ProductsCount();
 	
-			Report.IsTrue(productsCount == 1 && firstId == searchId,
-				"Product with ID: " + searchId + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
-				"Product with ID: " + searchId + " was the only result returned as expected");
+			Report.IsTrue(productsCount == 1 && firstId == id,
+				"Product with ID: " + id + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
+				"Product with ID: " + id + " was the only result returned as expected");
 		}
 
 		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
