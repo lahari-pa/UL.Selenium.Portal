@@ -496,7 +496,7 @@ Given I save the product information as: TestCase158930
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I generate a random Ingredient ID and save as: IngredientID158930
-Given In the Ingredient Reference Number field I enter the following text: IngredientID158930 and saved as: IngID1
+Given In the Ingredient Reference Number field I enter the following text: IngredientID158930 and saved as: IngID
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I should see the Waste Classification Data Page
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
