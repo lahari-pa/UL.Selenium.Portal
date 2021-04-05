@@ -140,7 +140,8 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	Given I navigate to the landing page
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I filter the products by: Accepted by Retailers
-	And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+	#And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+	And I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers
 	And I filter for the product saved as: TestCase75321
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window

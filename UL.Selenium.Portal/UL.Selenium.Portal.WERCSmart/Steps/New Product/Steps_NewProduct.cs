@@ -176,6 +176,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickPageHeading(string section)
 		{
 			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
+
 			//if current section == section return
 			if (NewProduct.ActivePanelHeadingText() == section)
 			{
@@ -2940,8 +2942,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");

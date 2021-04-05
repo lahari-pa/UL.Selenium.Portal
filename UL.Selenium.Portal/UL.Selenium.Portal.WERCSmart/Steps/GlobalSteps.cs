@@ -2442,6 +2442,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Update the TestUser: (.*) to include the name of the product saved as: (.*)")]
+		public void UpdateTestVariableWithProductName(string testVariable, string savedAs)
+		{
+			ProductInformation myProduct = (ProductInformation)Context.GetFromContext(savedAs);
+			string myproductName = myProduct.Name;
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(testVariable);
+			string currentProductList = user.Username;
+			string updatedProductList = currentProductList + "*" + myproductName;
+			TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(testVariable, updatedProductList);
+			TestUsers.RefreshUsers();
+			//Webviewer Products
+		}
+
+
 		[StepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
 		public void SwitchToUPCRetailerAndFeedTab()
 		{
@@ -2463,6 +2477,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Delay.Seconds(10);
 		}
+
 
 	}
 }
