@@ -1060,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("Up to 10 Product(s)", "Up to 10 Product(s)", "Up to 10 Product(s)", "Limited", "General Support");
+			subEnrollTable.AddRow("Up to 10 Product(s)", "Up to 10 Product(s)", "Up to 10 Product(s)", "Limited", "No additional Agent Support Service");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
