@@ -2442,6 +2442,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Update the TestUser: (.*) to include the name of the product saved as: (.*)")]
+		public void UpdateTestVariableWithProductName(string testVariable, string savedAs)
+		{
+			ProductInformation myProduct = (ProductInformation)Context.GetFromContext(savedAs);
+			string myproductName = myProduct.Name;
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(testVariable);
+			string currentProductList = user.Username;
+			string updatedProductList = currentProductList + "*" + myproductName;
+			TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(testVariable, updatedProductList);
+			TestUsers.RefreshUsers();
+			//Webviewer Products
+		}
+
+
+		[StepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
+		public void SwitchToUPCRetailerAndFeedTab()
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h1[contains(text(), 'WERCSmart Product ID')]"), 2) != null)
+				{
+					Report.Success("The UPC Retailer and Feed page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+			Report.Screenshot();
+			Delay.Seconds(10);
+		}
 
 
 	}

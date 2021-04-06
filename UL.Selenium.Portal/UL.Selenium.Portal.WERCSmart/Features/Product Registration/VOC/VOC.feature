@@ -467,7 +467,6 @@ Scenario: [56484] VOC - Aero checks
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
 	Given in the New Product page I click Continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
