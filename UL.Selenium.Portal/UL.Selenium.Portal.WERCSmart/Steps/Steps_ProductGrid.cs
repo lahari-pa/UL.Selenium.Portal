@@ -507,7 +507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				try
 				{
-					if (savedAs.Contains("ProductInformation"))
+					if (Context.GetFromContext(savedAs).ToString().Contains("ProductInformation"))
 					{
 						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 						id = productDetails.Id;

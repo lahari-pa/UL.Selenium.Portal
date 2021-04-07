@@ -500,16 +500,11 @@ Given In the Ingredient Reference Number field I enter the following text: Ingre
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I should see the Waste Classification Data Page
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-#| Retailer  |
-#| Walgreens |
-Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
-
-#Package Field Missing
-#Given I call Shared Step 158500 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - Do Not Click Continue) for UPC saved as: UPC158930 with container type: Metal Container size: 2 package type: Package Type and SKU: RandomSKU158930
-#Given in the Universal Product Code (UPC) page I click Continue
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC158930, container type: Metal Container and size: 2
-
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC158930 with container type: Metal Container size: 2 and SKU: RandomSKU158930
+Given in the Universal Product Code (UPC) page I click Continue
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -523,14 +518,14 @@ Given I navigate to the home page
 Given I click More Filters in the products grid
 Given I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: ProductID158930
-Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
+Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: IngID
-Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
+Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
 Given In the Product ID, Ingredient ID, SKU filter field I search for: RandomSKU158930
-Given I should only see one product in the grid, with Product ID matching that saved as: ProductID158930
+Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
