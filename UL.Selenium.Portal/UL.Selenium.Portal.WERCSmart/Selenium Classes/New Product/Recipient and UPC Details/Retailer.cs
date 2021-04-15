@@ -57,6 +57,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool SelectRetailsPopupIsDisplayed()
+		{
+			try
+			{
+				IWebElement poup = this.containerElement.FindElement(By.XPath(".//h4[contains(text(),'Select Retailers')]"), 2);
+
+				if (poup != null)
+				{
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public List<string> SelectedRetailers()
 		{
 			try

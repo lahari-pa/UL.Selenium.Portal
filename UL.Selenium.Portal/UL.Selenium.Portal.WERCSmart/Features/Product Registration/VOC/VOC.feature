@@ -153,6 +153,14 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
+
+
+	#Philip - Change
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	#
+
+
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
@@ -339,6 +347,14 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
+
+
+	#Philip - Change
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	#
+
+
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
@@ -453,6 +469,14 @@ Scenario: [56484] VOC - Aero checks
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
+
+
+	#Philip - Change
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	#
+
+
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant

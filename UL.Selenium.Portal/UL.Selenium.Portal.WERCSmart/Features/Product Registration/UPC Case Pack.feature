@@ -100,7 +100,13 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
+
+
+	#Philip - Change
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
+	#
+
+
 	Then I save the product information as: TestCase87650
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
@@ -409,21 +415,29 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Walgreens |
 And I should see the Universal Product Code Page
 Given I click the 'Add Case UPC' button
+
+
+
+#Philip - Change
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | abc      |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
 Then I click continue
 Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
 
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | 32.101   |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | 32.101   |                          | 4A: steel box         |
 Then I click continue
 Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
 
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | 32       |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | 32       |                          | 4A: steel box         |
+#
+
+
+
 Then I click continue
 Then I check for the appropriate alert: No error
 And I should see the Regulatory Documents to Provide Page

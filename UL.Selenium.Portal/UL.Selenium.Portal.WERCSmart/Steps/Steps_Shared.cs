@@ -141,7 +141,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+
+
+			//Philip - Change
+			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			//Report.StartStep("Primary Physical State should be showing the value: Liquid");
 			//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
@@ -378,6 +384,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+
+			//Philip- Change
+			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			{
+				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+			}
+			//
+
 		}
 
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
@@ -436,6 +452,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(otherIngredients);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			{
+				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+			}
+
 		}
 
 		[StepDefinition(@"I call Shared Step 60685 Fuel Container Regulatory Details - Yes")]
@@ -2247,8 +2270,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(table);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+
+
+			//Philip - Change
+			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			{
+				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+
+				Report.StartStep("I should see the Waste Classification Data Page");
+				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			}
+			else
+			{
+			//
+
+
+				Report.StartStep("I should see the Waste Classification Data Page");
+				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			}
+
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -2424,7 +2465,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+
+
+			//Philip - Change
+			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
 			Report.StartStep("I set the Secondary Physical State option to: Cream");
@@ -3156,12 +3203,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Restrict - Customers should contact my organization for an access code"));
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" - Customers should contact my organization for an access code"), "Failed to select restriction option", "Successfully selected restriction option");
+
+
+
+			//Philip - Change
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Access Code",
-				"1234"));
+				"12345678"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Access Code",
-				"1234");
+				"12345678");
+			//
+
+
+
 			Report.StartStep("in the Restrict Use page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
@@ -3947,7 +4002,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Propertiess");
+
+
+			//Philip - Change
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			// From TFS - Note: In local only the Liquid option is shown - in staging and production we show Liquid and Sold hence the presence of this step
 			if (TReVorSettings.SoftwareBranch == "Development")
 			{

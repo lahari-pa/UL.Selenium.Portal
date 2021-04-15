@@ -535,6 +535,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
+@ScenarioId:10800
 	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -542,7 +543,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode1S6
 		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 100
 		And I set the Flash Point (in Celsius) field to: 50
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -563,7 +564,16 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
+		
+
+
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
+
+
+
+		
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -594,7 +604,14 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 66                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked			
+
+
+
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked			
+		#
+
+
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
@@ -621,7 +638,15 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
+
+
+
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
+
+
+
 		#And in the Product Characteristics tab of the New Product Page, I enter: 14188 in the Provide Special Permit numbers text field
 		And I set the Provide Special Permit numbers (if applicable) field to: 14188
 		# 20464 || 14188 
@@ -684,7 +709,15 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
+
+
+
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
+
+
+
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -714,7 +747,15 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 7                 |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+
+
+
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+		#
+
+
+
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
@@ -827,8 +868,17 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| IATA                             |
 		| Shipping with limited quantity   |
-		| DOT                              |
-		| Shipping with limited quantity   |
+		
+
+
+		#Philip - Change
+		#| DOT                              |
+		#| Shipping with consumer commodity |
+		#
+
+
+
+		
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -906,8 +956,17 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| IATA                             |
 		| Shipping with consumer commodity |
-		| DOT                              |
-		| Shipping with consumer commodity |		
+		
+
+
+		#Philip - Change
+		#| DOT                              |
+		#| Shipping with consumer commodity |
+		#
+
+
+
+			
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -942,7 +1001,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 32                |
 
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
+
+
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
+		#
+
+
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S34

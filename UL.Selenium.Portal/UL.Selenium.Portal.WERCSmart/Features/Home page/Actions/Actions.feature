@@ -63,6 +63,18 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	And I set 'Type of Product' to: Soap (Bar, Liquid) for Body
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63663
+
+
+	#Philip - Changes
+	Given I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No
+    Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+    Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
+	#
+
+
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
@@ -148,7 +160,6 @@ Scenario: [56218] My Products grid Actions - View Navigation
 
 #actions/documents
 @ScenarioId:434
-
 Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -184,6 +195,11 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+	#Philip Change
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#
+
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -192,7 +208,11 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
 	Given I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+
+	#Philip Change
+	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
@@ -219,6 +239,13 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+
+	#Philip Change
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#
+
+
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -227,7 +254,13 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
 	Given I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+
+	
+	#Philip Change
+	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#
+
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
@@ -304,7 +337,11 @@ Given I click the Home navigation icon
 Given I search for the product saved as: TestCase125144
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Access Code
-Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 1234
+
+#Philip - Change
+Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 12345678
+#
+
 Given I click close on the Save Changes popup dialog
 
 
