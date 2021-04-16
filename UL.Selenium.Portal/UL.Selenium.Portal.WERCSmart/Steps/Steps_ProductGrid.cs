@@ -1070,14 +1070,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'More Filters' in the products grid");
 		}
 
-		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
-		public void GivenIConfirmISeeTheProductIDIngredientIDSKUFieldAboveTheProductGrid()
-		{ 
-			Report.IsTrue(new ProductsGrid().ConfirmProductIDIngredientIDSKUFieldIsDisplayed(),
-				"Failed to find 'Product ID, Ingredient ID, SKU' above the products grid",
-				"Successfully found 'Product ID, Ingredient ID, SKU' above the products grid");
-		}
-
 		[StepDefinition(@"I select the (.*) option in the (Brand|Retailer|Additional Programs) More Filters drop down")]
 		public void SetMoreFilterOption(string option, string filter)
 		{
@@ -2985,83 +2977,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-
-		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
-		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
-		{
-
-			try
-			{
-				Report.Info("Searching for Product Saved as " + savedAs);
-
-				if (!Context.Contains(savedAs))
-				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
-
-				string id = "";
-
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					id = productToSearch.ProductId;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-
-				//if we didn't get the id try a different object type
-				if (id == "")
-				{
-					try
-					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
-
-				}
-
-				if (id == "")
-				{
-					try
-					{
-						id = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
-
-					}
-				}
-
-				Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
-				"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
-				"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
-				Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
-					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
-					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
-
-				GeneralUtilities.Wait_for_load_finish();
-				Delay.Seconds(10);
-
-				Report.Info("ID searched for: '" + id + "'");
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-
-		}
-
+		
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
 		{
