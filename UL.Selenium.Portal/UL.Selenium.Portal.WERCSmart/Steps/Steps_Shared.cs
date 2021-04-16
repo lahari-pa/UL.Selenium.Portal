@@ -2752,8 +2752,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 
-			//Report.StartStep("I select a Package Type from the drop down list");
-			//new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 163416 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
