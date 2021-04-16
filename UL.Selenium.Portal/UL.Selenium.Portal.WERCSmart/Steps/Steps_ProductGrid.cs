@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				try
 				{
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					sku = productToSearch.ProductSkuField;
+					sku = productToSearch.ProductId;
 				}
 				catch (Exception)
 				{

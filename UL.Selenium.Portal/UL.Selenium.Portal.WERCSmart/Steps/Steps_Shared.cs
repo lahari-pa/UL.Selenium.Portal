@@ -2703,6 +2703,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select Package Type from drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+
 			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
