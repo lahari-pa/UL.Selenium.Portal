@@ -986,6 +986,7 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Retailer  |
 | Walgreens |
 Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC156789, container type: Plastic Container and size: 2 do not click continue
+Given I confirm SKU field is blank
 Given I click continue
 Then I should see the Regulatory Documents to Provide Page
 Given In the New Product page I click tab: Recipient and UPC Details

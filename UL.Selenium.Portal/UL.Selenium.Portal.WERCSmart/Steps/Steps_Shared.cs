@@ -2732,10 +2732,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"ContainerType",
 				containerType
 			});
-			//upcTable.AddRow(new string[] {
-			//	"PackageType",
-			//	packageType
-			//});
+			upcTable.AddRow(new string[] {
+				"PackageType",
+				packageType
+			});
 			upcTable.AddRow(new string[] {
 				"Size",
 				size
