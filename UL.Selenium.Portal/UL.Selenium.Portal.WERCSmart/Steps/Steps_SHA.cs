@@ -4261,7 +4261,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
 		}
-		
 
 	}
 
