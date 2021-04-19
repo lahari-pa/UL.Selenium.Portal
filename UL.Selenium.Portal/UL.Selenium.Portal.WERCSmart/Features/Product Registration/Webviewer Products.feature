@@ -102,7 +102,6 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@philtag7
 @ScenarioId:10705
 Scenario: [145783] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 1, Alias published = No
 
