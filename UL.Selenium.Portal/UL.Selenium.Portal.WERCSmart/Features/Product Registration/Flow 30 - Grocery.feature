@@ -86,7 +86,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
-	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
 	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
