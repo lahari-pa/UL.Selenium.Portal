@@ -2250,24 +2250,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
 		{
 
-				IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"), 2);
-				IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
-				IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+			IWebElement fullTextEl = this.FindElement(By.XPath("//span[contains(@data-bind,'maxLength')]"), 2);
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
 
-			if (maxCharacters == null || charactersRemain == null || commentBox == null)
+
+			if (fullTextEl == null || commentBox == null)
 			{
 				remainDisplayed = 0;
 				return false;
 			}
 
-			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
-				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
+			string fullText = fullTextEl.Text;
+			string[] splitFull = fullText.Split('/');
+
+			string maxCharactersText = splitFull[1];
+			string charactersRemainText = splitFull[0];
+
+			Report.IsTrue(int.TryParse(maxCharactersText, out int maxDisplayed),
+				"Maximum Characters is displaying " + maxCharactersText + " which cannot be parsed into an integer",
 				"The maximum allowed caharacters is able to be represented as an integer: " + maxDisplayed);
-			Report.IsTrue(int.TryParse(charactersRemain.Text, out remainDisplayed),
-				"Remaining Characters is displaying " + charactersRemain.Text + " which cannot be parsed into an integer",
+			Report.IsTrue(int.TryParse(charactersRemainText, out remainDisplayed),
+				"Remaining Characters is displaying " + charactersRemainText + " which cannot be parsed into an integer",
 				"The maximum allowed caharacters is able to be represented as an integer: " + remainDisplayed);
 
 			return remainDisplayed == expected;
+
+
 		}
 
 		// ========= Add Ingredient Functions ========= //
@@ -2694,6 +2702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//By.XPath(
 			//	".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
 			//2);
+			
 			IWebElement el = this.containerElement.FindElement(	By.XPath(".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//a[text()='Browse']"),
 				2);
 			if (el == null)
