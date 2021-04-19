@@ -11044,54 +11044,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I call shared step 145969 \(Additional Product Information > SOLD \(Canada\), PLP \(YES\), Continue\)")]
-		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPYESContinue()
-		{
-
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-
-		}
-
-		[StepDefinition(@"I call shared step 145844 \(Additional Product Information > SOLD \(Canada\), PLP \(No\), Continue\)")]
-		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPNoContinue()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-		}
-
 		[StepDefinition(@"I call shared step 144794 \(Login to WS as supplier with feed to Web viewers\)")]
 		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
 		{
@@ -11123,35 +11075,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
-		}
-
-		[StepDefinition(@"I call shared step 72414 \(Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path\)")]
-		public void GivenICallSharedStepRetailer_CanadaOnlySelectCanadianTireContinue_HappyPath()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
-			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
-			Report.StartStep("I should see the Retailer Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
-			Report.StartStep("In the Retailer page I click Continue");
-			new StepsNewProduct().ClickContinue();
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickChoice("Ok");
-		}
-
-		[StepDefinition(@"I call shared step 65961 \(Additional Documents to Provide - Upload Full Product Label - Continue\.")]
-		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadFullProductLabel_Continue_()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("Upload Product Label");
-			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.Screenshot();
-			MyNewProductSteps.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
-			Report.StartStep("In the Additional Documents to Provide page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
 		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]

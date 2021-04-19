@@ -545,6 +545,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
+@ScenarioId:10800
 	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
