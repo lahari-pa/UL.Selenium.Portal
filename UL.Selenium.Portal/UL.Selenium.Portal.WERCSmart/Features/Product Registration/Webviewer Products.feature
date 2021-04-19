@@ -135,6 +135,7 @@ Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessR
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase145852)
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145852) for
-| Retailer |
+| Retailer      |
+| Canadian Tire |
 
 
