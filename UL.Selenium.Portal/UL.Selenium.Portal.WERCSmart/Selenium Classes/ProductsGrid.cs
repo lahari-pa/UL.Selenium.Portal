@@ -215,17 +215,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ProductSkuField {
-			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
-			set
-			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2);
-				el.EnterText(value);
-				el.SendKeys(Keys.Return);
-				GeneralUtilities.Wait_for_load_finish();
-			}
-		}
-
 		public bool ClickActionsForFirstResultInGrid()
 		{
 			try
@@ -1340,29 +1329,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
-		}
-
-		public bool ConfirmProductIDIngredientIDSKUFieldIsDisplayed()
-		{
-			IWebElement field = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
-			if (field != null)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
-		public bool InProductIDIngredientIDSKUFilterFieldSearchFollowingText(string text)
-		{
-			IWebElement field = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
-			return field.TryEnterText(text);
-		}
-
-		public bool SelectSearchButtonNextToProductIDIngredientIDSKUFilterField()
-		{
-			IWebElement searchButton = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']/following-sibling::span"), 2);
-			return searchButton.TryClick();
 		}
 
 	}
