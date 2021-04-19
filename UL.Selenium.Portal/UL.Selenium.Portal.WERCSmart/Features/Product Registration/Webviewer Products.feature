@@ -106,7 +106,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Scenario: [145852] Canada Only, Non Authoring Product - No Label Uploaded, PLP = No, GENDOC = 0, User Uploads SDS on Additional Documents to Provide
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
-Given I call shared step 144794 (Login to WS as supplier with feed to Web viewers)
+Given I login into the WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 # In the shared step below use "Halogen  lights"  as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs TC 145852 - Canada Only, Non Authoring Product - No Label Uploaded, PLP No, GENDOC 0, User Uploads SDS on Additional Documents to Provide
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Halogen lights
