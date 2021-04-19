@@ -526,8 +526,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Conditioner", name);
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue();
+
+
+			//Philip - Change
 			sharedSteps.SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			sharedSteps.SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue();
+			//
+
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();

@@ -3017,8 +3017,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Crayon");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+
+			//Philip - Change
 			sharedSteps.ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//
+
+
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			var retailerTable = new Table("Retailer");
