@@ -77,3 +77,6 @@ Given I populate the password input field with: ccccc
 When I click the Login button
 Then I should see a server error with message: Your account is locked and will unlock after 30 minutes.
 #TODO: need to find a better way to manage click when error is displayed
+
+
+
