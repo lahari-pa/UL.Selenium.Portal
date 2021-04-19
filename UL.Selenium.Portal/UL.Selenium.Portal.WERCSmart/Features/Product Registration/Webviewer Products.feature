@@ -28,7 +28,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 
-# Given I call shared step 144974 (Login to WS as supplier with feed to Web viewers)
+Given I login into the WERCSmart Portal - WebViewers Account
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC146792
