@@ -13,9 +13,11 @@
 @DocumentAcceptance
 @DeleteActiveProducts
 @Solutions
+@ProductSetUp
 @UPC
 @ReviewDocuments
 @SHA
+@CreateProducts
 @MyMessages
 @run_MyMessages
 Feature: MyMessages
@@ -106,3 +108,4 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
 	Given In the SHA Manager grid I click Message Center
 	And In the Message Center I go to the last page of messages
+

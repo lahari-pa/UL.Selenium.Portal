@@ -365,9 +365,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
 
-			if (myNewProduct.SectionExists("Which one best describes your product"))
+			if (myNewProduct.SectionExists("Which best describes your product, including when FIFRA 25(b) Exempt"))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 					"Regulates Plant Growth");
 			}
 
@@ -1056,41 +1056,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
-
-		[StepDefinition(
-			@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
-		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc,
-			string containerType, string size)
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Quantity Header");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Quantity");
-			Report.StartStep("I click the 'Add UPC' button");
-			MyStepsNewProduct.ThenIClickTheAddUpcButton();
-			var upcTable = new Table(new string[] {
-				"Field",
-				"Value"
-			});
-			upcTable.AddRow(new string[] {
-				"UPCNumber",
-				"saved as UPC" + upc
-			});
-			upcTable.AddRow(new string[] {
-				"ContainerType",
-				containerType
-			});
-			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
-			Report.StartStep("I add the following into the UPC Fields");
-			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
-		}
-
 		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\)")]
 		public void GivenICallSharedUploadProductLabelOnly()
 		{
@@ -1236,7 +1201,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=93C and <=815C");
+			//Ticket 54725 indicates flash point change from ">=93C and <=815C"
+			Report.StartStep("I set the Flash Point (in Celsius) field to: >93C and <=815C");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
 			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
@@ -1540,6 +1506,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 					"Solid");
 			}
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 
 		}
 
@@ -1737,15 +1705,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set any option for: 'Which one best describes your product'");
+			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
-			if (new NewProduct().GetAllOptionsForSection("Which one best describes your product").Contains("Product is not considered a pesticide product"))
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
-				MyNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Product is not considered a pesticide product");
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
 			}
 			else
 			{
-				MyNewProduct.SelectFirstOptionInSection("Which one best describes your product");
+				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
 			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -1788,8 +1756,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -1857,11 +1825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Select all modes of transport that you've classified the product for field to: Shipping with limited quantity");
 			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
-				"Shipping with limited quantity");
-			Report.StartStep(
-				"I set the Select all modes of transport that you've classified the product for field to: Shipping with consumer commodity");
-			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
-				"Shipping with consumer commodity");
+				"Shipping with limited quantity");			
 			Report.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
@@ -2134,8 +2098,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
@@ -2713,7 +2677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
 		public void SharedEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc, string containerType,
 			string size, string quantity)
 		{
@@ -2745,13 +2709,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select Package Type from drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+
 			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) package type: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string sku)
+			string size, string packageType, string sku)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			if (Context.Contains(sku))
+			{
+				sku = Context.GetFromContext(sku).ToString();
+			}
+
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"PackageType",
+				packageType
+			});
+			upcTable.AddRow(new string[] {
+				"Internal SKU",
+				sku
+			});
+
+			Report.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+		}
+
+		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
+			string size, string packageType, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2785,8 +2798,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
-		
+
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
 		public void SharedDataAcceptance_ClickSummaryButton()
 		{
@@ -3140,8 +3156,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyStepsNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -3962,8 +3978,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			var sections = new Table("Section");
-			sections.AddRow("Which one best describes your product");
-			Report.StartStep("I confirm the 'Which one best describes your product' question is shown");
+			sections.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			Report.StartStep("I confirm the 'Which best describes your product, including when FIFRA 25(b) Exempt' question is shown");
 			MyNewProduct.CheckDisplayedSections("see", sections);
 			var buttons = new Table("Button");
 			buttons.AddRow(
@@ -3973,7 +3989,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			buttons.AddRow("Product is not considered a pesticide product");
 			Report.StartStep(
 				"I confirm the radios showing in order are: Prevents, Destroys Repels Pests..', 'Regulates Plant Growth, Defoliates..', 'Product is not considered a pesticide product'");
-			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which one best describes your product", buttons);
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which best describes your product, including when FIFRA 25(b) Exempt", buttons);
 		}
 
 		[StepDefinition(
@@ -4052,8 +4068,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -4081,6 +4097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
+		
 
 		[StepDefinition(
 			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
@@ -4093,8 +4110,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
 				"I set the Does the product contain fertilizer (N, P, K) field to: No");
@@ -4539,7 +4556,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioShaManager = new StudioSHAManager();
 			Delay.Seconds(5);
 			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", showSuccessScreenshot: false);
-			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish", showSuccessScreenshot: false);
+			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(120), "Loading did not finish", showSuccessScreenshot: false);
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
@@ -8122,6 +8139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.StartStep("In the Universal Product Code (UPC) page I click Save");
 				MyNewProduct.ClickSaveButton();
+				GeneralUtilities.Wait_for_load_finish();
 			}
 			else
 			{
@@ -9261,7 +9279,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Requires a Company Name saved to context as: " + companySavedAs);
 				return;
 			}
-			var expectedText = "Hello " + name + ", Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: ";
+			var expectedText = "Hello " + name + ", Recently the Data Usage permissions for Wal-Mart/SAM'S CLUB were updated to include: ";
 			foreach (var row in dataUsage.Rows)
 			{
 				switch (row["Data Tier"])
@@ -9283,7 +9301,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 				}
 			}
-			expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
+
+			string userName = new TopMenuBar().GetCurrentUser();
+
+			expectedText += $" The update to the Data Usage permissions on your WERCSmart account were performed by the Administrator, {userName}";
+			expectedText += " For questions regarding Data Usage permissions, please contact WERCSmart Support’s Solution Center, or contact a Support Representative for further assistance. Thank you, Your WERCSmart Team";
 			Report.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
 			Delay.Seconds(8);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
@@ -10300,8 +10322,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -10439,15 +10461,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set any option for: 'Which one best describes your product'");
+			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
-			if (new NewProduct().GetAllOptionsForSection("Which one best describes your product").Contains("Product is not considered a pesticide product"))
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
-				MyNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Product is not considered a pesticide product");
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
 			}
 			else
 			{
-				MyNewProduct.SelectFirstOptionInSection("Which one best describes your product");
+				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
 			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -10590,7 +10612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductObject = new NewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
@@ -10725,7 +10747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductObject = new NewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
@@ -10828,8 +10850,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers\)")]
+		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers & RPS\)")]
 		public void GivenICallSharedStep144968Retailers_AddRetailersForWebViewers()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Ace Hardware Corporation");
+			retailerTable.AddRow("Albertsons Companies");
+			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Dick's Sporting Goods");
+			retailerTable.AddRow("Genuine Parts");
+			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("McLane");
+			retailerTable.AddRow("Meijer");
+			retailerTable.AddRow("Office Depot");
+			retailerTable.AddRow("Sears/K-Mart");
+			retailerTable.AddRow("Smart & Final");
+			retailerTable.AddRow("Staples");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			retailerTable.AddRow("WinCo Foods");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			var allRetailers = selSelectRetailers.AllRetailers();
+			if (allRetailers.Contains($"Canadian Tire"))
+			{
+				Report.Info($"Canadian Tire was found as an option, selecting it as a retailer");
+				new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			}
+			else
+			{
+				Report.Info($"Canadian Tire was not found as an option, moving on.");
+			}
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144968b \(Retailers - Add Retailers for Web viewers & RPS\) for a non PL Product")]
+		public void GivenICallSharedStep144968BRetailers_AddRetailersForWebViewersNonPL()
 		{
 			ReportSettings.UseSubSteps = true;
 
@@ -10840,9 +10911,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("Ace Hardware");
 			retailerTable.AddRow("Albertsons");
 			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Dicks");
 			retailerTable.AddRow("Genuine Parts");
 			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("McLean");
+			retailerTable.AddRow("Meijer");
 			retailerTable.AddRow("Office Depot");
 			retailerTable.AddRow("Sears");
 			retailerTable.AddRow("Smart & Final");
@@ -11044,6 +11119,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click continue");
 			newProduct.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 144970 \(Go To Bulk Actions - Accept Documents\)")]
+		public void GivenICallShared144970GoToBulkActionsAcceptDocuments()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"From the Main Products page in WERCSmart, Click the Bulk Actions button");
+			new StepsProductGrid().GivenIClickBulkActionsInTheProductsGrid();
+			Report.StartStep($"Click the Accept documents button");
+			new StepsProductGrid().GivenIClickForwardProductRegistrationInTheBulkActionsWindow("Accept Documents");
+			Report.StartStep($"I should see the header: Document Acceptance on the Document Acceptance window");
+			new StepsProductGrid().GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow();
+		}
+
+		[StepDefinition(@"I call Shared Step 57561b \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*) and add a Random Identifier")]
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProductAndAddRandomIdentifier(string name, string type)
+		{
+			var randomID = GeneralUtilities.GenerateRandomString(6);
+			this.Step57561(type, name+" "+randomID);
 		}
 
 		[StepDefinition(@"I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR")]
@@ -11342,6 +11436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.ICloseAlert();
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
+
 
 	}
 }

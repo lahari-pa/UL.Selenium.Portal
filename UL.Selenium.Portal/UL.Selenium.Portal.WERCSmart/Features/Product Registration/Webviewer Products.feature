@@ -18,7 +18,9 @@
 
 Feature: Webviewer Products
 
-
+#Want to run feature using the config point that forces test end on first failure
+#Last step of test will save successfull products and their unique IDs to TReVor (as Variable?)
+#These Product names containing unique IDs give to Bev or add to devops ticket in some way?
 
 @ScenarioId:10454
 Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test Batteries (Lithium Ion) with all document types
@@ -46,7 +48,7 @@ Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium I
 
 Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 60096 (Lithium Battery Transportation)
-Given I call Shared Step 144968 (Retailers - Add Retailers for Web viewers)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
 Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC146792, container type: Plastic Container and size: 50
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -54,7 +56,7 @@ Given I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home

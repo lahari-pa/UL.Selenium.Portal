@@ -13,6 +13,9 @@
 @run_TransparencyRationCalculation
 Feature: Transparency Ration Calculation
 
+@tfs_desgin
+#Outdated test case (now showing a %)
+#May need reworking for change from "x/y" to "%"
 @ScenarioId:6047
 Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd party product included in formulation
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.

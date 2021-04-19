@@ -11,6 +11,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2556,6 +2558,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIConfirmTheProductsShownAreGreen()
 		{
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
+		}
+
+
+		[StepDefinition(@"I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers")]
+		public void GivenIConfirmTheProductsShownHaveAtLeastOneGreen()
+		{
+			Report.IsTrue(new ProductsGrid().AtLeastOneRetailerPerProductShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers for at least one of their retailers", "All products are showing as Accepted By Retailers for at least one of their retailers");
 		}
 
 		[StepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]

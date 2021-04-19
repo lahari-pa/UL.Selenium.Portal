@@ -1429,6 +1429,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
 		{
 			IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
+			if(title.IsNullOrEmpty())
+			{
+				Report.Info($"The title element was found to be null or empty");
+				return false;
+			}
 			Report.Info("found '" + title.Text + "' expected '" + popupTitle + "'");
 			if (title.Text != popupTitle)
 			{
