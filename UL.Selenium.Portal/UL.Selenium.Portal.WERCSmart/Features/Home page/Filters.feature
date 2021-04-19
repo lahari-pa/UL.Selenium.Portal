@@ -39,36 +39,26 @@ Scenario: [68388] More Filters - Brand
 	Then Product Line or Brand (optional) should be showing the value: ~saved as BrandName68388
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
-@morefilters
+
+@tfs_design
 @ScenarioId:5956
-Scenario: [56829] More Filters
+Scenario: [56829] More Filters	
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
-	And I create a Kit product and save details as: Kit_56829
-	And I navigate to the landing page
-	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	And I should see an option for More Filters
-	Given I click More Filters in the products grid
-	Given I confirm the product exists with Product ID: Kit_56829_ID and Name: Kit Product 56829
-	Given I enter combinations of More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
-		| Filter              | Match               |
-		| UPC                 | %Kit_56829_UPC%     |
-		| Brand               | TestBrand           |
-		| Retailer            | Wal-Mart/SAM'S CLUB |
-		| Additional Programs | Kit Registrations   |
-	Given I enter combinations of Status and More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
-		| Filter              | Match                  |
-		| Status              | Assessment in Progress |
-		| Brand               | TestBrand              |
-		| Retailer            | Wal-Mart/SAM'S CLUB    |
-		| Additional Programs | Kit Registrations      |
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are not displayed
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are displayed
-	#Given I click More Filters in the products grid
-	#Then the 'More Filters' options are not displayed
+	Then I Search the Products Grid for the kit product with name: KitProductMoreFilters56829, and create the kit if it is not found
+	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
+	Then I create a object of FilterInformation from the table below: and save it as: MoreFiltersInformation56829
+	| FilterType          | Variable                    |
+	| Brand               | TestBrand                   |
+	| Retailer            | CVS                         |
+	| Additional Programs | Kit Registrations           |
+	| UPC                 | UPC Saved As UPC58753       |
+	| ID                  | ID Saved As KitProduct56829 |
+	| Status              | Assessment in Progress      |
+	| Name                | KitProductMoreFilters56829  |
+	Then I enter 3 differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: MoreFiltersInformation56829 each time
+	#+Remaining steps from Dev Ops Test Case
 
 # Assigned to Amanda Coutant
 # Created by Amanda Coutant
@@ -81,6 +71,7 @@ Scenario: [68413] More Filters - Retailer
 	And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
 	And I Select the check box next to Show Archived Retailers
 	And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
+
 
 
 

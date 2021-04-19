@@ -1429,6 +1429,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
 		{
 			IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
+			if(title.IsNullOrEmpty())
+			{
+				Report.Info($"The title element was found to be null or empty");
+				return false;
+			}
 			Report.Info("found '" + title.Text + "' expected '" + popupTitle + "'");
 			if (title.Text != popupTitle)
 			{
@@ -1700,6 +1705,70 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
 			return closeButton.TryClick();
+		}
+
+		public bool CheckGenericNameFieldIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
+		{
+			IWebElement genericNameField = this.ContainerElement.FindElement(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../following-sibling::td//input[@data-bind='value: GenericName.field']"), 2);
+
+			if (displayedOrNotDisplayed == "displayed")
+			{
+				if (genericNameField != null)
+				{
+					return true;
+				}
+			}
+			else if (displayedOrNotDisplayed == "not displayed")
+			{
+				if (genericNameField == null)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool CheckIngredientTypeDropDownIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
+		{
+
+			IList <IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../../preceding-sibling::thead//th"), 2);
+			int ingredientIndex = -1;
+
+			foreach (IWebElement el in thList)
+			{
+				if (el.Text == "Ingredient Type")
+				{
+					ingredientIndex = thList.IndexOf(el);
+				}
+			}
+
+			if (ingredientIndex < 0)
+			{
+				Report.Info("Failed to find Ingredient Type index");
+				return false;
+			}
+
+			ingredientIndex += 1;
+
+			IList <IWebElement> ingredientTypeDropDownList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../td[" + ingredientIndex + "]//select//option"), 2);
+
+			if (displayedOrNotDisplayed == "displayed")
+			{
+				if (ingredientTypeDropDownList.Count > 0)
+				{
+					return true;
+				}
+			}
+			else if (displayedOrNotDisplayed == "not displayed")
+			{
+				if (ingredientTypeDropDownList.Count == 0)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 	}

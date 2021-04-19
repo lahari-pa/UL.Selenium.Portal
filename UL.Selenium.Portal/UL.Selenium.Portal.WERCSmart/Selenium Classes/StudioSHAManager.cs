@@ -1799,6 +1799,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		//public bool RightClickFirstProduct()
+		//{
+		//	Delay.Seconds(3);
+		//	Report.Info("Attemping to rightclick first product");
+		//	//int index = SeleniumBrowser.WebBrowser
+		//	//	.FindElements(By.XPath(
+		//	//		"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+		//	//	.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+		//	//IWebElement matchingTD = SeleniumBrowser.WebBrowser
+		//	//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+		//	//	.FirstOrDefault(x => x.GetValue().Trim() == id);
+		//	IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product']//span"), 5);
+		//	if (matchingTD2 != null)
+		//	{
+		//		Report.Info("Found matching cell");
+		//		var thisContextMenu = new RightClickProductMenu();
+
+		//		//matchingTD2.RightClick();
+		//		//This below is to handle the Right click clicking below the element.
+		//		//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
+		//		Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+		//		int i = 0;
+		//		while (i < 70)
+		//		{
+		//			Delay.Seconds(2);
+		//			actions.MoveToElement(matchingTD2);
+		//			actions.MoveByOffset(0, i);
+		//			actions.ContextClick();
+		//			actions.Perform();
+		//			if (thisContextMenu.MenuExists())
+		//			{
+		//				return true;
+		//			}
+		//			i = i - 10;
+		//		}
+		//		return false;
+		//	}
+		//	else
+		//	{
+		//		Report.Info("Failed to find matching table cell for first product");
+		//	}
+
+		//	return false;
+		//}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -3238,6 +3284,95 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'validate-pasword')]");
 
 		public string ValidationPopupHeaderText => this.FindElement(By.XPath(".//span[@class='ui-dialog-title']"), 2).Text;
+
+	}
+
+	class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//body");
+
+		public bool SelectFirstUPCInUPCRetailerAndFeed()
+		{
+			IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
+
+			if (firstUPC == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return firstUPC.TryClick();
+		}
+
+		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
+		{
+			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
+
+			if (retailerEl == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return retailerEl.TryClick();
+		}
+
+		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
+		{
+			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
+			List<string> itemsNotFound = new List<string>();
+
+			bool propertyFound = false;
+			bool valueFound = false;
+
+			foreach (TableRow row in table.Rows)
+			{
+				propertyFound = false;
+				valueFound = false;
+
+				foreach (IWebElement el in columnOneList)
+				{
+					if (el.Text == row["Property"])
+					{
+						propertyFound = true;
+					}
+
+					if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+					{
+						valueFound = true;
+					}
+					if (valueFound && propertyFound)
+					{
+						break;
+					}
+				}
+				if (!propertyFound)
+				{
+					Report.Info("The following property was not found:" + row["Property"]);
+					itemsNotFound.Add("Property Not Found: " + row["Property"]);
+				}
+				if (!valueFound)
+				{
+					Report.Info("The following value was not found:" + row["Value"]);
+					itemsNotFound.Add("Value Not Found: " + row["Value"]);
+				}
+			}
+
+			return itemsNotFound;
+		}
+
+		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
+
+			if (closeButton == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return closeButton.TryClick();
+		}
 
 	}
 
