@@ -49,9 +49,10 @@ Given I click the List view retailers option in the Select Retailers popup
 Then I confirm that retailers are displayed in list view with checkboxes next to each
 
 Given I select the following retailers in the Select Retailers popup list view:
-| Retailer |
-| CVS      |
-| Staples  |
+| Retailer                   |
+| CVS                        |
+| Staples                    |
+| No Retailer/No UPC Product |
 
 Given I click Done in the Select Retailers popup
 
@@ -59,6 +60,8 @@ Then The selected retailers on the Retailer page should be:
 | Retailer |
 | CVS      |
 | Staples  |
+| No Retailer/No UPC Product |
+
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 
@@ -100,8 +103,10 @@ Then I confirm that retailers are displayed in tile view with checkboxes next to
 Given In the 'Select Retailers' window I select the retailer: Petco
 
 Then The selected retailers on the Retailer page should be:
-| Retailer     |
-| Petco        |
+| Retailer                   |
+| Petco                      |
+| No Retailer/No UPC Product |
+
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78936
 
@@ -166,6 +171,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I click 'Add Retailers' in the Retailers page
 
 Given I click the Select all retailers option in the Select Retailers popup
 Then all retailers are selected in the Select Retailers window
@@ -200,6 +206,7 @@ And I call Shared Step 49818 (Beverage Regulatory Details)
 
 # I Confirm on the Select Retailer popup that Walmart is not available.
 # I Close popup
+Given I click 'Add Retailers' in the Retailers page
 Then I check that Walmart and all of its affiliates are not available
 
 Then I navigate to the home page
@@ -229,13 +236,15 @@ Given I select the following retailers in the Select Retailers popup list view:
 | Best Buy              |
 Given I click Done in the Select Retailers popup
 And The selected retailers on the Retailer page should be:
-| Retailer              |
-| CVS                   |
-| Dollar General        |
-| Family Dollar         |
-| Dick's Sporting Goods |
-| Amazon                |
-| Best Buy              |
+| Retailer                   |
+| CVS                        |
+| Dollar General             |
+| Family Dollar              |
+| Dick's Sporting Goods      |
+| Amazon                     |
+| Best Buy                   |
+| No Retailer/No UPC Product |
+
 Then I select the following retailers in the Retailer page
 | Retailers      |
 | CVS            |
@@ -286,11 +295,12 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
 Then I save the product information as: TestCase125130
+And Select countries the product may be sold in should be showing the value: United States
 And I set the Select countries the product may be sold in field to: Canada
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Then I click continue
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Canadian Tire and enter the name: Test
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
 
 
@@ -318,6 +328,7 @@ Then I confirm the following retailers are showing in the Retailer page
 		| Retailer												   |
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
+		| No Retailer/No UPC Product							   |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
 
 

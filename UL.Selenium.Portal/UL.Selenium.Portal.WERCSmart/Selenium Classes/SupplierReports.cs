@@ -415,6 +415,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectDownloadButtonForTheMostRecentReport(string reportName, string type, string requestedBy)
 		{
+			Delay.Seconds(10);
+
 			IList<IWebElement> rowList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr"), 2);
 
 			for (int i = 1; i < rowList.Count; i++)
@@ -437,8 +439,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var columnValueFirstHalf = dateRequestedStr.Replace(columnValueSecondHalf, "").Trim();
 
-				Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
-
 				//TimeSpan convertedValue;
 				bool isTimeFormat = false;
 
@@ -453,13 +453,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					isTimeFormat = false;
 				}
 
-				Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+				Report.Info($"Checking if current row matches expected report details...");
 
 				if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy && (columnValueFirstHalf == datePart && isTimeFormat))
 				{
+					//return true;
+					Report.Info($"The row found matched the report data.");
+
+					Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+
+					Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+
 					IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[" + i + "]//td[@data-bind='text:DateRequested']/..//button"), 2);
 					return downloadButton.TryClick();
+
+
 				}
+
+				Report.Info($"Row details did not match.");
 
 				if (i == rowList.Count - 1)
 				{
@@ -513,8 +525,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var columnValueFirstHalf = dateRequestedStr.Replace(columnValueSecondHalf, "").Trim();
 
-				Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
-
 				//TimeSpan convertedValue;
 				bool isTimeFormat = false;
 
@@ -529,12 +539,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					isTimeFormat = false;
 				}
 
-				Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+				Report.Info($"Checking if current row matches expected report details...");
 
 				if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy && (columnValueFirstHalf == datePart && isTimeFormat))
 				{
+					//return true;
+					Report.Info($"The row found matched the report data.");
+
+					Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+
+					Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+
 					return true;
+
+
 				}
+
+				Report.Info($"Row details did not match.");
 
 				if (i == rowList.Count - 1)
 				{
