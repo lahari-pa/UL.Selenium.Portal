@@ -127,7 +127,9 @@ Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Cli
 
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+
+Given In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label (required)'
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 

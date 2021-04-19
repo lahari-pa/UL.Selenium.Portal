@@ -1547,6 +1547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the phrase selector screen I click button: Save
 			studioSteps.ThenInThePhraseSelectorScreenIClickButton("Save");
 
+			//42196 Issue In below step -> "Failed to find menu item: Home" -> "Power designer plus has not loaded"
 			//Given I click on home to navigate back to editing specific product saved as TestCase80821
 			studioSteps.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
 
@@ -3955,6 +3956,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 		}
+
+		[StepDefinition(@"I create a Hair Color Kit using test case 58753 with product name: (.*) and save as: (.*)")]
+		public void CreateHairColorKitUsing58753AndSaveAs(string productName, string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			Report.StartStep("I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1");
+			this.GivenICreateProductUsingTestCase75335("58753_KitProduct1");			
+			Report.StartStep("I navigate to the landing page");
+			thisGlobalSteps.NavigateToLandingPage();
+			Report.StartStep("I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct2");
+			this.GivenICreateProductUsingTestCase75335("58753_KitProduct2");
+			Report.StartStep("I navigate to the landing page");
+			thisGlobalSteps.NavigateToLandingPage();
+			Report.StartStep("I generate a random UPC number and save as: UPC58753");
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC58753");
+			Report.StartStep("And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			Report.StartStep("And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))");
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			
+			Report.StartStep($"The Product- Enter name: {productName}, select product type, Enter TestBrand - Continue - Happy Path): Hair Color Kit");
+			new Steps_TheProduct().SetProductNameProductTypeProductLine(productName, "Hair Color Kit", "TestBrand");
+			new StepsNewProduct().SaveProductInformation(savedAs);
+			Report.StartStep("And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))");
+			sharedSteps.Shared60648_AdditionalProductInformation_Us_NoDirectShip_NoPl_NoGnfr();
+			Report.StartStep("And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			Report.StartStep("And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 58753_KitProduct1 and product 2: 58753_KitProduct2)");
+			sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts("58753_KitProduct1", "58753_KitProduct2");
+			Report.StartStep("And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)");
+			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+			Report.StartStep("And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)");
+			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+			Report.StartStep("And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
+			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
+			Report.StartStep("And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58753, container type: Plastic Container and size: 100");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("58753", "Plastic Container", "100");
+			Report.StartStep("And I should see the Additional Documents to Provide Page");
+			newProductSteps.ProductEditorShouldBeLoaded();
+			Report.StartStep("And I click continue");
+			newProductSteps.ClickContinue();
+			Report.StartStep("And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment Kit 58753");
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment Kit 58753");
+			Report.StartStep("And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+
+		}
+
 	}
 
 }
