@@ -285,13 +285,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the 'Select Retailers' table I confirm the following retailer cannot be deselected: (.*)")]
-		public void InTheSelectRetailersTableConfirmRetailerCannotBeDeselected(string retailer)
-		{
-			var actualRetailers = new Retailer();
-			actualRetailers.InTheSelectRetailersTableConfirmRetailerCannotBeDeselected(retailer);
-		}
-
-
 	}
 }
