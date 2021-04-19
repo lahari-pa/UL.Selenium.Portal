@@ -1097,7 +1097,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
 
 
-
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
@@ -1114,14 +1113,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					}
 
 				}
-				upcNumberField.EnterText(info.UpcNumber);
 
+				upcNumberField.EnterText(info.UpcNumber);
 
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
 				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
+
 				if (productNameDataBind != null)
 				{
+
 					if (!productNameDataBind.Contains("form-group has-success"))
 					{
 						ProductNameOnlabel.EnterText("UPCName PlaceHolder");
@@ -1129,6 +1130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					}
 					else
 					{
+
 						Report.Info("The Field was not empty, Checking for UPCName in the table");
 						if (!info.UPCName.IsNullOrEmpty())
 						{
@@ -1161,7 +1163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					Report.Failure("The UPC Name field was not present");
 				}
-
+				
 				//if (ProductNameOnlabel != null)
 				//{
 				//	if (ProductNameOnlabel.Text.IsNullOrEmpty())
@@ -1206,13 +1208,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				//}
 
 
-
+				
 				if (info.ContainerType.ToLower() != "none")
 				{
 					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 					containsType.Select(info.ContainerType);
 				}
-
+				
 				string regex = @"(.*)\((.*)\)";
 				IWebElement sizeField = (from input in textInputs
 										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -1234,7 +1236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
 					quantityField.EnterText(info.Quantity);
 				}
-
+				
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
@@ -1250,7 +1252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					}
 					packageField.Select(info.PackageType);
 				}
-
+		
 				if (info.CapsuleCount.Length > 0)
 				{
 					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
@@ -1261,7 +1263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					}
 					capsuleCountField.EnterText(info.CapsuleCount);
 				}
-
+				
 				if (info.ItemNumber.Length > 0)
 				{
 					IWebElement ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
@@ -1271,6 +1273,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						return false;
 					}
 					ItemNumberField.EnterText(info.ItemNumber);
+				}
+				
+				if (info.InternalSKU.Length > 0)
+				{
+					IWebElement InternalSKUNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Internal SKU')]//following-sibling::input"), 2);
+				
+					if (InternalSKUNumberField == null)
+					{
+						return false;
+					}
+					InternalSKUNumberField.EnterText(info.InternalSKU);
 				}
 
 
@@ -2201,24 +2214,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
 		{
 
-				IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"), 2);
-				IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
-				IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+			IWebElement fullTextEl = this.FindElement(By.XPath("//span[contains(@data-bind,'maxLength')]"), 2);
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
 
-			if (maxCharacters == null || charactersRemain == null || commentBox == null)
+
+			if (fullTextEl == null || commentBox == null)
 			{
 				remainDisplayed = 0;
 				return false;
 			}
 
-			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
-				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
+			string fullText = fullTextEl.Text;
+			string[] splitFull = fullText.Split('/');
+
+			string maxCharactersText = splitFull[1];
+			string charactersRemainText = splitFull[0];
+
+			Report.IsTrue(int.TryParse(maxCharactersText, out int maxDisplayed),
+				"Maximum Characters is displaying " + maxCharactersText + " which cannot be parsed into an integer",
 				"The maximum allowed caharacters is able to be represented as an integer: " + maxDisplayed);
-			Report.IsTrue(int.TryParse(charactersRemain.Text, out remainDisplayed),
-				"Remaining Characters is displaying " + charactersRemain.Text + " which cannot be parsed into an integer",
+			Report.IsTrue(int.TryParse(charactersRemainText, out remainDisplayed),
+				"Remaining Characters is displaying " + charactersRemainText + " which cannot be parsed into an integer",
 				"The maximum allowed caharacters is able to be represented as an integer: " + remainDisplayed);
 
 			return remainDisplayed == expected;
+
+
 		}
 
 		// ========= Add Ingredient Functions ========= //
@@ -2645,6 +2666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//By.XPath(
 			//	".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
 			//2);
+			
 			IWebElement el = this.containerElement.FindElement(	By.XPath(".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//a[text()='Browse']"),
 				2);
 			if (el == null)
@@ -5709,6 +5731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string PackageType { get; set; } = "";
 		public string UPCName { get; set; } = "";
 		public string ItemNumber { get; set; } = "";
+		public string InternalSKU { get; set; } = "";
 
 	}
 
