@@ -120,10 +120,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(saveAs, email);
 		}
 
-
-
-		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
-		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
+		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		public void LoginToWERCSmart(string type)
 		{
 			//if alredy logged in, logout
@@ -145,6 +143,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("Canada has all data account"):
 					this.LoginToAccount("CanadaHasAllData");
+					break;
+				case ("WebViewers Account"):
+					this.LoginToAccount("FeedToWebViewers");
 					break;
 			}
 		}
