@@ -1017,7 +1017,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
 
-			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSubjectMessage();
 			Report.Screenshot();
 
 			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
