@@ -41,6 +41,7 @@ Given In SHA Manager I select the first product
 And In SHA Manager I click on bottom menu item: Reject Submission
 And In the Reject Submission dialog I Select Subject: Ingredient Issue - Document and Ingredients Do Not Match
 And In the Reject Submission dialog in the Supplier Message field I should see: During our assessment and data creation we have found a discrepancy between the formulation submitted to WERCSmart and the document (Label or Safety Data Sheet). The document includes a missing/incorrect ingredient missing from the formulation. Please update the ingredient(s) below. (Assessment Team to insert ingredients) Please update the formulation to reflect the ingredients found on the documentation provided with this product. All ingredients found on a GHS SDS should be present in the WERCSmart submission, and they need to match the percentage, or within the range, found on the document.
+And In the Reject Submission dialog in the Supplier Message field I replace the following text: (Assessment Team to insert ingredients) with: (Water)
 Given In the Reject Submission dialog in the Subject field I should see: Ingredient Issue - Document and Ingredients Do Not Match
 Given In the Reject Submission dialog I click Save
 Given For product saved as: ID I should see an alert with the following message: Product Message for product <ID> has been created succesfully.
