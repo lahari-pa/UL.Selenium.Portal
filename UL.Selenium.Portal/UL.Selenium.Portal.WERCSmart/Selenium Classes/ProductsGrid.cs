@@ -1398,17 +1398,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productList.Count;
 		}
 
-		public bool ConfirmProductIDIngredientIDSKUFieldIsDisplayed()
-		{
-			IWebElement field = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
-			if (field != null)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
 		public bool InProductIDIngredientIDSKUFilterFieldSearchFollowingText(string text)
 		{
 			IWebElement field = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
