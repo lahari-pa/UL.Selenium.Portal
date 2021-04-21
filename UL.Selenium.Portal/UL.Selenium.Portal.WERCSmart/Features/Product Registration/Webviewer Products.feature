@@ -28,7 +28,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 
-#Given I Login into WERCSmart Portal - WebViewers Account
+Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC146792
@@ -105,7 +105,7 @@ Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: TC 120815 - for RPS - Assigned Status and select Type of Product): Chalk
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120815 - for RPS - Assigned Status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120815
 Then I save the product information as: TestCase120815
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
