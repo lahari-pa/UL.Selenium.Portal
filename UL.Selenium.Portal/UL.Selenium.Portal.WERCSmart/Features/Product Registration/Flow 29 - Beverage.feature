@@ -49,6 +49,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
+	Then I click 'Add Retailers' in the Retailers page
 	Then In the 'Select retailers' window I should not see the following retailers:
 		| Retailer |
 		| Autozone |

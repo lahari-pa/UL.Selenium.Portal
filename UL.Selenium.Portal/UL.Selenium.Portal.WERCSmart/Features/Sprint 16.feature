@@ -43,9 +43,8 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 		| Glycerin      | 30      | false               | false       |            |
 		| Glucose       | 30      | false               | false       |            |
 		| Aqua          | 40      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
