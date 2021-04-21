@@ -678,7 +678,12 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 55                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+
+
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+
+
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S3
@@ -837,6 +842,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S2
 
 
+@ScenarioId:10815
 	Scenario:  [122289] UPC Transportation Error - Mode 2/3 - 16
 		#If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -881,14 +887,15 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
-		And I set the UN Number field to: UN1439
-		And I set the Proper Shipping Name field to: Ammonium dichromate
-		And I set the Technical Name (if applicable) field to: My Safe Product
-		And I set the Hazard Class (select) field to: 5.1
-		And I set the Packing Group (select) field to: II
-		Given in the New Product page I click Continue
+		#Philip - Change
+		## U. S. Department of Transportation (DOT) Classification Page
+		#Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		#And I set the UN Number field to: UN1439
+		#And I set the Proper Shipping Name field to: Ammonium dichromate
+		#And I set the Technical Name (if applicable) field to: My Safe Product
+		#And I set the Hazard Class (select) field to: 5.1
+		#And I set the Packing Group (select) field to: II
+		#Given in the New Product page I click Continue
 
 		# International Air Transport (IATA) Classification Page
 		Then I should see the International Air Transport (IATA) Classification Page
@@ -916,8 +923,14 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| UPCNumber     | saved as UPC20016 |
 		| ContainerType | Glass Container   |
 		| Size          | 7                 |
-		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
+
+
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
+		#
+
+
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with limited quantity is checked
 		
@@ -925,6 +938,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
+@ScenarioId:10816
 	Scenario:  [122291] UPC Transportation Error - Mode 2/3 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -969,13 +983,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 			
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
-		And I set the UN Number field to: UN1990		
-		And I set the Technical Name (if applicable) field to: My Safe Product
-		And I set the Hazard Class (select) field to: 9
-		And I set the Packing Group (select) field to: III
-		Given in the New Product page I click Continue
+		## U. S. Department of Transportation (DOT) Classification Page
+		#Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		#And I set the UN Number field to: UN1990		
+		#And I set the Technical Name (if applicable) field to: My Safe Product
+		#And I set the Hazard Class (select) field to: 9
+		#And I set the Packing Group (select) field to: III
+		#Given in the New Product page I click Continue
 
 		# International Air Transport (IATA) Classification Page
 		Then I should see the International Air Transport (IATA) Classification Page
@@ -1000,10 +1014,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| ContainerType | Glass Container   |
 		| Size          | 32                |
 
-		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-
 
 		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
 		#
 

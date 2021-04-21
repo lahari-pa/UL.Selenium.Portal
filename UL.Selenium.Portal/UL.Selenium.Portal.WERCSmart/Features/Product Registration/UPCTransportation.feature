@@ -62,7 +62,12 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I ensure that there is a column in the Add UPC table called Transportation
 	Given I ensure that DOT is listed as Shipping with limited quantity
 	Given I ensure that IATA is listed as Shipping with limited quantity
+
+
+	#Philip - Change
 	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+	#
+
 	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
@@ -92,12 +97,27 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
@@ -110,19 +130,28 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given At the UPC level, I set IMDG to Shipping fully regulated
 	Given At the UPC level, I set TDG to Shipping fully regulated
 	Given I click continue
-	Given In the New Product page I click tab: Physical and Chemical Properties
+	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Transportation Details 1
 	Given In the Transportation Details 1 screen, I unselect all transportation options for DOT
 	Given In the Transportation Details 1 screen, I unselect all transportation options for IATA
-	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+
+	#Philip - Changed
+	#And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+
+
 	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
 	Given I click Save in The Product Page
 	Given I confirm that I see the following text in the modal window popup: You have updated the transportation classification for this product registration. This impacts the UPC-level data for Transportation and the defaults have been adjusted. Be sure to review the UPC-Level transportation settings and update as needed before submitting your registration.
 	Given in the modal dialog I click the "OK" button
 	Given In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
-	Given I ensure that DOT is listed as Shipping with consumer commodity
-	Given I ensure that IATA is listed as Shipping with consumer commodity
+
+
+	#Philip - Changed
+	#Given I ensure that DOT is listed as Shipping with consumer commodity
+	#Given I ensure that IATA is listed as Shipping with consumer commodity
+
+
 	Given I ensure that IMDG is listed as Shipping with limited quantity
 	Given I ensure that TDG is listed as Shipping with limited quantity
 	Given I navigate to the home page
@@ -153,12 +182,27 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+
+	#Philip - Change
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	#
+
 	Given I click continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
@@ -202,7 +246,11 @@ Scenario: [122428] UPC Transportation - Forwarding
 	And In the Forwarding Edit popup, I confirm that IATA is listed at Shipping with limited quantity
 	And In the Forwarding Edit popup, I confirm that IMDG is listed at Shipping with limited quantity
 	And In the Forwarding Edit popup, I confirm that TDG is listed at Shipping with limited quantity
-	And In the Forwarding Edit popup, I confirm that I cannot downgrade DOT to Shipping with consumer commodity
+
+	#Philip - Change
+	#And In the Forwarding Edit popup, I confirm that I cannot downgrade DOT to Shipping with consumer commodity
+
+
 	And In the Forwarding Edit popup, I confirm that I cannot downgrade IATA to Shipping with consumer commodity
 	And In the Forwarding Edit popup, I upgrade DOT to Shipping fully regulated
 	And In the Forwarding Edit popup, I upgrade IATA to Shipping fully regulated
@@ -473,7 +521,11 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Physical and Chemical Properties
+
+	#Philip - Change
+	Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
+
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
@@ -519,9 +571,15 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: DOT
-	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+
+
+	#Phliip - Change
+	#And I set the Product is Regulated for Transport field to: Yes
+	#And I set the Select all modes of transport that you've classified the product for field to: DOT
+	#And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	#
+
+
 	And I click continue
 	And I should see the U. S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
