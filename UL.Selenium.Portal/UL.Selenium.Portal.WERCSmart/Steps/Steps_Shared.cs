@@ -11153,14 +11153,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call shared step 144794 \(Login to WS as supplier with feed to Web viewers\)")]
-		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
-		{
-			var selGlobalSteps = new GlobalSteps();
-
-			selGlobalSteps.GivenILogInWithEmailXAndPasswordY("purple-shape.kxxyxunf@mailosaur.io", "Thewercs3!");
-			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
-		}
-	
 	}
 }
