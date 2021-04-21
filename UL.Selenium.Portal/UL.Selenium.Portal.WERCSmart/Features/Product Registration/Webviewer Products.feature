@@ -496,7 +496,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
-Given I call shared step 144794 (Login to WS as supplier with feed to Web viewers)
+Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): TC 120811 - For RPS - Submitted to SHA and rejected, Status is New
 Given I generate a random UPC number and save as: UPC120811
