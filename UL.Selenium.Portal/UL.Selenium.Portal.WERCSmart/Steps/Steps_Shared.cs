@@ -1866,6 +1866,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(
