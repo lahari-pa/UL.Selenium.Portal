@@ -2782,9 +2782,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-
-			Report.StartStep("I select a Package Type from the drop down list");
-			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
