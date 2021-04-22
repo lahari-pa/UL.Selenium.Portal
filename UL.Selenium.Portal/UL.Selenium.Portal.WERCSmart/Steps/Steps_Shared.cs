@@ -241,12 +241,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Delay.Seconds(1);
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
@@ -2716,7 +2710,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
-		
+
+		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) package type: (.*) and SKU: (.*)")]
+		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
+			string size, string packageType, string sku)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			if (Context.Contains(sku))
+			{
+				sku = Context.GetFromContext(sku).ToString();
+			}
+
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"PackageType",
+				packageType
+			});
+			upcTable.AddRow(new string[] {
+				"Internal SKU",
+				sku
+			});
+
+			Report.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+		}
+
+		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
+			string size, string packageType, string sku)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			if (Context.Contains(sku))
+			{
+				sku = Context.GetFromContext(sku).ToString();
+			}
+
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Internal SKU",
+				sku
+			});
+
+			Report.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartStep("I select a Package Type from the drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+		}
+
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
 		public void SharedDataAcceptance_ClickSummaryButton()
 		{

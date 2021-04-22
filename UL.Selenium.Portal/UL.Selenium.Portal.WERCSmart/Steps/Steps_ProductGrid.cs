@@ -776,7 +776,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 
 		}
-		
+
+		[StepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
+		public void ThenGenerateARandomSKUNumberRandomDigitsAndSaveAsRandomSKU_(string savedAs)
+		{
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs, uPCNo);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
+		}
+
 		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
 		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
 		{
