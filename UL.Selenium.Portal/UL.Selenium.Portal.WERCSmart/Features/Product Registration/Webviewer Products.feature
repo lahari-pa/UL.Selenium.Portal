@@ -28,8 +28,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 
-# Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC146792
 #In 57561a enter the name for final product run to be "Test Case 146792 - BCP, PLP No, Authoring requested, contains test batteries"
@@ -123,6 +122,45 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: te
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120814)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120814 and its status is: Submitted
+
+
+@Missing_Steps
+@Rename_Product
+@ScenarioId:10637
+Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
+#Need access to WebViewer Feed Account + Add to TReVor?
+
+
+#Login to WS as supplier with feed to Web viewers
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC144967
+#In 57561b enter the name for final product run to be "Test Case 144697 - US Only, PLP No, Gendoc 1, Doc Accepted Yes"
+Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144967 and select Type of Product): Chalk and add a Random Identifier
+Then I save the product information as: TestCase144967
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product
+Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC144967, container type: Plastic Container and size: 50
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I should see the Additional Documents to Provide Page
+Given I click continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+#~~~~~~~~SHA~~~~~~~#
+
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase144967)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase144967)
@@ -462,33 +500,3 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase145074
-
-
-Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
-
-# This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
-Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120811 - For RPS - Submitted to SHA and rejected, Status is New and select Type of Product): Chalk and add a Random Identifier
-Given I generate a random UPC number and save as: UPC120811
-Then I save the product information as: TestCase120811
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call shared step 120812 (Retailer - Add retailers for RPS)
-Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Cardboard and size: 10.0)
-Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
-Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
-Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-iven in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given If purchase details are showing click confirm order
-Given In the Thank You screen I click Home
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120811)
-Given In SHA Manager Page I select status: Submitted
-Given I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase120811)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in New Status for saved as: TestCase120811)
