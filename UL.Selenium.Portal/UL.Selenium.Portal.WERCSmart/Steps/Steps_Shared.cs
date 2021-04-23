@@ -11162,6 +11162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("Target");
 			retailerTable.AddRow("Home Depot");
 			retailerTable.AddRow("Publix");
 			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
@@ -11330,10 +11331,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("No options selected for section: Is this product intended to be ingested?");
 				Report.StartStep(
-				"I set the Is this product intended to be ingested? option to: No");
+				"I set the Is this product intended to be ingested? option to: Yes");
 				selNewProductSteps.SetTheSectionOptionTo(
 					"Is this product intended to be ingested?",
-					"No");
+					"Yes");
 			}
 
 			Report.StartStep(
