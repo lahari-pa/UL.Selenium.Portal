@@ -11177,32 +11177,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
-		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
-		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
-		{
-			ReportSettings.UseSubSteps = true;
-
-			var selSelectRetailers = new SelectRetailers();
-
-			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			retailerTable.AddRow("Lowe's");
-			retailerTable.AddRow("Home Depot");
-			retailerTable.AddRow("Publix");
-			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
-			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
-			Report.StartStep("Click Done");
-			new StepsSelectRetailers().ClickDone();
-
-			Report.StartStep("I set the Vendor as: Testing");
-			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
-
-			Report.StartStep("Click Continue");
-			new StepsNewProduct().ClickContinue();
-		}
-
-
 		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
 		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
 			string size)
@@ -11356,10 +11330,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("No options selected for section: Is this product intended to be ingested?");
 				Report.StartStep(
-				"I set the Is this product intended to be ingested? option to: No");
+				"I set the Is this product intended to be ingested? option to: Yes");
 				selNewProductSteps.SetTheSectionOptionTo(
 					"Is this product intended to be ingested?",
-					"No");
+					"Yes");
 			}
 
 			Report.StartStep(
