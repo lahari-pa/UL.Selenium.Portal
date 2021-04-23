@@ -11209,14 +11209,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call shared step 144974 \(Login to WS as supplier with feed to Web viewers\)")]
-		public void GivenICallSharedStep144974LoginToWSAsSupplierWithFeedToWebViewers()
-		{
-			var MyGlobalSteps = new GlobalSteps();
-			MyGlobalSteps.LoginToWERCSmart("WebViewer Account");
-			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
-		}
-
 		[StepDefinition(@"I call shared step 86009 \(Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue\)")]
 		public void GivenICallSharedStepRetailer_PLPCanadaOnlySelectCanadianTireAddPLPData_Continue()
 		{
