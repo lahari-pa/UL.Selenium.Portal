@@ -11150,7 +11150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 
 		}
-
+		
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
 		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
 		{
@@ -11163,7 +11163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Lowe's");
 			retailerTable.AddRow("Target");
-			retailerTable.AddRow("The Home Depot");
+			retailerTable.AddRow("Home Depot");
 			retailerTable.AddRow("Publix");
 			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
 			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
