@@ -26,8 +26,6 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 
-
-
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC146792
@@ -500,3 +498,33 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase145074
+
+
+Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
+
+# This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120815 - for RPS - Assigned Status and select Type of Product): Chalk and add a Random Identifier
+Given I generate a random UPC number and save as: UPC120815
+Then I save the product information as: TestCase120815
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call shared step 120812 (Retailer - Add retailers for RPS)
+Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I navigate to the home page
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120815)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120815)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120815)

@@ -11163,7 +11163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Lowe's");
 			retailerTable.AddRow("Target");
-			retailerTable.AddRow("Home Depot");
+			retailerTable.AddRow("The Home Depot");
 			retailerTable.AddRow("Publix");
 			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
 			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
@@ -11176,7 +11176,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Click Continue");
 			new StepsNewProduct().ClickContinue();
 		}
-
 
 		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
 		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
