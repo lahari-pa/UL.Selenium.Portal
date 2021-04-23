@@ -936,7 +936,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Download button for the most recent report with Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReportWithReportNameFileTypeRequestedBy(string reportName, string type, string requestedBy)
 		{
-			Delay.Seconds(9999);
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
