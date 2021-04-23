@@ -11163,7 +11163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("CVS");
 			retailerTable.AddRow("Lowe's");
 			retailerTable.AddRow("Target");
-			retailerTable.AddRow("Home Depot");
+			retailerTable.AddRow("The Home Depot");
 			retailerTable.AddRow("Publix");
 			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
 			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
