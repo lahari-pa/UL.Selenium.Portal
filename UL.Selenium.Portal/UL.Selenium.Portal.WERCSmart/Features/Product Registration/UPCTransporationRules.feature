@@ -545,6 +545,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
+@ScenarioId:10800
 	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -811,6 +812,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S2
 
 
+@ScenarioId:10815
 	Scenario:  [122289] UPC Transportation Error - Mode 2/3 - 16
 		#If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -891,6 +893,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
+@ScenarioId:10816
 	Scenario:  [122291] UPC Transportation Error - Mode 2/3 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
