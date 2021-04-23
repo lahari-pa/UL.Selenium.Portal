@@ -62,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset|WERCs Web Viewers)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -84,6 +84,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("Password Reset"):
 					this.LoginToAccount("PasswordResetAccount");
+					break;
+				case ("WERCs Web Viewers"):
+					this.LoginToAccount("FeedToWebViewers");
 					break;
 			}
 		}
@@ -119,6 +122,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Context.AddToContext(saveAs, email);
 		}
+
+
 
 		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]

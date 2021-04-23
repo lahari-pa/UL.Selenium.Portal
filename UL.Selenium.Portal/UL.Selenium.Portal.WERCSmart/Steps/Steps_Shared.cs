@@ -2782,9 +2782,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-
-			Report.StartStep("I select a Package Type from the drop down list");
-			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
@@ -11152,6 +11149,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 
+		}
+
+		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
+		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("The Home Depot");
+			retailerTable.AddRow("Publix");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().ClickDone();
+
+			Report.StartStep("I set the Vendor as: Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
 		}
 
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
