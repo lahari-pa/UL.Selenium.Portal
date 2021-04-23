@@ -466,6 +466,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked the Regulated button for ingredient: " + name);
 		}
 
+		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
+		{
+			var newProductIngredients = new Ingredients();
+			string id = "";
+			if (Context.Contains(savedAs))
+			{
+				var thisProduct = (ProductInformation)Context.GetFromContext(savedAs);
+				id = thisProduct.Id;
+			}
+			var thisIngredient = new Ingredients.Ingredient {
+				CASNumber = "WPS" + id
+			};
+			newProductIngredients.AddIngredient(thisIngredient);
+		}
+
 		[StepDefinition(@"I enter text: (.*) in the component search box")]
 		public void EnterTextComponentSearchBox(string value)
 		{
