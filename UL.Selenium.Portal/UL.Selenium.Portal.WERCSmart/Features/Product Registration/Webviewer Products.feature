@@ -29,8 +29,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 
-#Given I Login into WERCSmart Portal - Admin Role - WERCs Web Viewers
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC146792
 #In 57561a enter the name for final product run to be "Test Case 146792 - BCP, PLP No, Authoring requested, contains test batteries"
