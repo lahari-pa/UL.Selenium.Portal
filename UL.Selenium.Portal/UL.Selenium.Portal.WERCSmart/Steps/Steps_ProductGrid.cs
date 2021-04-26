@@ -1618,7 +1618,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"HD Supply"
 			});
 				productTable.AddRow(new string[] {
-				"HEB "
+				"HEB"
 			});
 				productTable.AddRow(new string[] {
 				"HyVee"
@@ -1651,7 +1651,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Office Depot"
 			});
 				productTable.AddRow(new string[] {
-				"Optoro "
+				"Optoro"
 			});
 				productTable.AddRow(new string[] {
 				"O'Reilly"
@@ -1660,10 +1660,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Petco"
 			});
 				productTable.AddRow(new string[] {
-				"Price Chopper "
+				"Price Chopper"
 			});
 				productTable.AddRow(new string[] {
-				"Publix "
+				"Publix"
 			});
 				productTable.AddRow(new string[] {
 				"Rite Aid"
@@ -1781,7 +1781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"HD Supply"
 			});
 				productTable.AddRow(new string[] {
-				"HEB "
+				"HEB"
 			});
 				productTable.AddRow(new string[] {
 				"HyVee"
@@ -1814,7 +1814,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Office Depot"
 			});
 				productTable.AddRow(new string[] {
-				"Optoro "
+				"Optoro"
 			});
 				productTable.AddRow(new string[] {
 				"O'Reilly"
@@ -1823,10 +1823,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Petco"
 			});
 				productTable.AddRow(new string[] {
-				"Price Chopper "
+				"Price Chopper"
 			});
 				productTable.AddRow(new string[] {
-				"Publix "
+				"Publix"
 			});
 				productTable.AddRow(new string[] {
 				"Rite Aid"

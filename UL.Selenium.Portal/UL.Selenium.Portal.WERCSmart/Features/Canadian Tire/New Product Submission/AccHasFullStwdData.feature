@@ -78,6 +78,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @ScenarioId:1421
+@philtag1
 Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Chalk) and submit thru to Completed status
 	#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)
 	Given I login into the WERCSmart Portal - Canada has all data account
