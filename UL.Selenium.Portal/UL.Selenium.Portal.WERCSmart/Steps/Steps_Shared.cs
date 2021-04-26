@@ -11289,7 +11289,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
-
+		
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
 		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
 		{
@@ -11315,7 +11315,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Click Continue");
 			new StepsNewProduct().ClickContinue();
 		}
-
 
 		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
 		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
