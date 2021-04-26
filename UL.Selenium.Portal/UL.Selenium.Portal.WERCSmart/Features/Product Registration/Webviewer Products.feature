@@ -145,3 +145,21 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 | Canadian Tire |
 
 
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145074)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase145074)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Assigned
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase145074)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase145074)
+And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase145074	
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145074)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Accepted
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145074) for
+| Retailer |
+| <All>    |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase145074)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase145074 and its status is: Completed
+Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase145074
