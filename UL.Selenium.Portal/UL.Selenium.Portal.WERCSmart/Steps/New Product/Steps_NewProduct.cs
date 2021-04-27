@@ -586,7 +586,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Success("Product Information saved!");
 		}
 
-
 		//[StepDefinition(@"I save the product Id as: (.*)")]
 		//public void SaveProductId(string savedas)
 		//{
@@ -3311,27 +3310,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
-		public void InTheAdditionalProductInformationPageUnselectUS()
+		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
 		{
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
+			string id = "";
+
+			if (Context.Contains(savedAs))
 			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+				var MyNewProduct = new StepsNewProduct();
+				id = Context.GetFromContext(savedAs).ToString();
+				MyNewProduct.SetTheSectionOptionTo("Product Identification (Optional)", id);
+			}
+			else
+			{
+				Report.Failure("Product ID saved as: " + savedAs + " was not found in context");
 			}
 		}
 
-		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
-		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
+		[StepDefinition(@"I confirm SKU field is blank")]
+		public void GivenIConfirmSKUFieldIsBlank()
 		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();			
-			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.StartStep("In the Additional Documents to Provide page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to confirm SKU field was blank", "Confirmed SKU field was blank");
 		}
 
 
