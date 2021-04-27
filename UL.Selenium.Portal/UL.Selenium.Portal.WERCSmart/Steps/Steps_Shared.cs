@@ -11357,9 +11357,134 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					}
 
+					// not returning...
+					if (new NewProduct().FormError().IsNullOrEmpty())
+					{
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+					{
+						Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+						Report.Screenshot();
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					// delete upc that failed
+					stepsNewProduct.GivenIDeleteUPC(upc);
+					Report.Info("An error was showing! on click continue! Attempting a different UPC");
+
+				}
+
+			}
+
+		}
+
+
+		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
+		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			Report.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 52131 \(CVS RCL Information - add Other where available and all other data\)")]
+		public void GivenICallSharedStepCVSRCLInformation_AddOtherWhereAvailableAndAllOtherData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS RCL");
+			Report.StartStep(
+				"I set the What is the CVS Store Brand associated to this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS Store Brand associated to this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate the brand option to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate the brand", "Other");
+			Report.StartStep(
+				"I set the Who is the Product Development Manager (PDM) for this product? option to: Canady, Cory Cory.Canady@CVSHealth.com");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Who is the Product Development Manager (PDM) for this product?",
+				"Canady, Cory Cory.Canady@CVSHealth.com");
+			Report.StartStep(
+				"I set the What is the CVS merchandising category for this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS merchandising category for this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate your Product Category to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate your Product Category", "Other");
+			Report.StartStep(
+				"I set the Is this product specifically designed, marketed or labeled for infants, babies, or children? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product specifically designed, marketed or labeled for infants, babies, or children?",
+				"Yes");
+			Report.StartStep(
+				"I set the Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?",
+				"No");
+			Report.StartStep(
+				"I set the Product contains microbeads option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product contains microbeads",
+				"No");
+			Report.StartStep(
+				"I set the Is this product intended to be rinsed off after use? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product intended to be rinsed off after use?",
+				"Yes");
+			Report.StartStep(
+				"I set the Refer to your Product Label. Select the options that appear on the label. option to: Drug Facts Panel");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Refer to your Product Label. Select the options that appear on the label.",
+				"Drug Facts Panel");
+
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Is this product intended to be ingested?");
+			if (showing.Count == 0)
+			{
+				Report.Info("No options selected for section: Is this product intended to be ingested?");
+				Report.StartStep(
+				"I set the Is this product intended to be ingested? option to: Yes");
+				selNewProductSteps.SetTheSectionOptionTo(
+					"Is this product intended to be ingested?",
+					"Yes");
+			}
+
+			Report.StartStep(
+				"I set the Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?",
+				"No");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
 		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(
-				string savedAs)
+		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
 			{
@@ -11512,31 +11637,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
 			thisStepsStudio.ICloseAlert();
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
-		}
-
-		[StepDefinition(@"I call shared step 145969 \(Additional Product Information > SOLD \(Canada\), PLP \(YES\), Continue\)")]
-		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPYESContinue()
-		{
-
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-
 		}
 
 	}
