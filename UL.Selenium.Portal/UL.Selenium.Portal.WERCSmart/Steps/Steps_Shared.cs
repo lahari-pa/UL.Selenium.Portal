@@ -242,11 +242,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Delay.Seconds(1);
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
