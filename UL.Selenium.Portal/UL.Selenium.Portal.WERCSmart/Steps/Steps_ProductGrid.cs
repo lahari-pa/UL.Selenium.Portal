@@ -189,6 +189,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I filter for the ingredient saved as: (.*)")]
+		[StepDefinition(@"I search for the ingredient saved as: (.*)")]
+		public void GivenISearchForTheIngredientSavedAs(string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Searching for Ingredient Saved as " + savedAs);
+			try
+			{
+				Report.Info("Searching for Ingredient Saved as " + savedAs);
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("Searching for Ingredient with ID: '" + id + "'");
+				var selProdGrid = new ProductsGrid {
+					ProductIdField = id
+				};
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No ingredients were returned for ID: '" + id + "'!", "Product was returned!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I filter for the product with SKU saved as: (.*)")]
 		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
 		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
@@ -228,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info("Searching for product with ID: '" + sku + "'");
+				Report.Info("Searching for product with SKU: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
 					ProductSkuField = sku
 				};
@@ -447,17 +501,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			string searchId = Context.GetFromContext(savedAs)?.ToString();
-			if (searchId == null)
+			string id = "";
+
+			if (id == "")
+			{
+				try
+				{
+					if (Context.GetFromContext(savedAs).ToString().Contains("ProductInformation"))
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+			}
+
+			if (id == "")
+			{
+				try
+				{
+					id = Context.GetFromContext(savedAs).ToString();
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			if (id == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
 			string firstId = selProductsGrid.GetIdInFirstGridRow();
 			int productsCount = selProductsGrid.ProductsCount();
-			Report.IsTrue(productsCount == 1 && firstId == searchId,
-				"Product with ID: " + searchId + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
-				"Product with ID: " + searchId + " was the only result returned as expected");
+	
+			Report.IsTrue(productsCount == 1 && firstId == id,
+				"Product with ID: " + id + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
+				"Product with ID: " + id + " was the only result returned as expected");
 		}
 
 		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
@@ -2886,7 +2971,83 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		
+
+		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
+		{
+
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+				"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+				"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
+				Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
+					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+
+				Report.Info("ID searched for: '" + id + "'");
+				var selProdGrid = new ProductsGrid();
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
 		{
