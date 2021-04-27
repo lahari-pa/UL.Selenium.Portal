@@ -868,6 +868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
 		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
@@ -3063,6 +3064,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var selProdGrid = new ProductsGrid();
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
 
+			}
+			catch (Exception ex)
+			{
 				Report.Failure(ex.Message);
 				throw;
 			}
