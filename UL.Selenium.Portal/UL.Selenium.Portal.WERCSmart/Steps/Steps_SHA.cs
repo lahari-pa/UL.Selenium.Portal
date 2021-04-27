@@ -1090,6 +1090,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I replace the following text: (.*) with: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIReplaceTheFollowingTextWith(string textToReplace, string newText)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			Report.IsTrue(thisStudioSHAManagerProductRejectSubmission.ReplaceSupplierMessage(textToReplace, newText),
+					"Failed to replace: " + textToReplace + " with: " + newText, "Successfully replaced: " + textToReplace + " with: " + newText);
+		}
+
 		[StepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
 		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
 		{
