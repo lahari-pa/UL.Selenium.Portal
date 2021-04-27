@@ -11288,54 +11288,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
-
-		[StepDefinition(@"I call shared step 145969 \(Additional Product Information > SOLD \(Canada\), PLP \(YES\), Continue\)")]
-		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPYESContinue()
-		{
-
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-
-		}
-
-		[StepDefinition(@"I call shared step 145844 \(Additional Product Information > SOLD \(Canada\), PLP \(No\), Continue\)")]
-		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPNoContinue()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-
-			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-		}
 		
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
 		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
