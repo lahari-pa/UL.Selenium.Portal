@@ -11336,60 +11336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
-
-		[StepDefinition(@"I call shared step 86009 \(Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue\)")]
-		public void GivenICallSharedStepRetailer_PLPCanadaOnlySelectCanadianTireAddPLPData_Continue()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-
-			Report.StartStep("I should see the Retailer Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
-
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
-			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
-
-			var retailers = new Table("Retailer");
-			retailers.AddRow("Canadian Tire");
-			retailers.AddRow("No Retailer/No UPC Product");
-			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
-
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Canadian Tire", "This Private Label");
-
-			Report.StartStep("In the Retailer page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
-		}
-
-		[StepDefinition(@"I call shared step 72414 \(Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path\)")]
-		public void GivenICallSharedStepRetailer_CanadaOnlySelectCanadianTireContinue_HappyPath()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
-			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
-			Report.StartStep("I should see the Retailer Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
-			Report.StartStep("In the Retailer page I click Continue");
-			new StepsNewProduct().ClickContinue();
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickChoice("Ok");
-		}
-
-		[StepDefinition(@"I call shared step 65961 \(Additional Documents to Provide - Upload Full Product Label - Continue\.")]
-		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadFullProductLabel_Continue_()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep(
-					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.StartStep("In the Additional Documents to Provide page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
-		}
-
+		
 		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
 		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
 		{
