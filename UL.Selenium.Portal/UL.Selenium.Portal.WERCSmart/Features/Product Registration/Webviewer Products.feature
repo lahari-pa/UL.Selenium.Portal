@@ -548,7 +548,7 @@ Scenario: [145971] Canada Only, Non Authoring Product - No Label Uploaded, PLP =
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): For WVs TC 145971 - Canada Only, Non Authoring Product - No Label Uploaded, PLP Yes, GENDOC 0
+Given I call Shared Step 57561b (The Product - Enter Product Name: For WVs TC 145971 - Canada Only, Non Authoring Product - No Label Uploaded, PLP Yes, GENDOC 0 and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC145971
 Given I save the product information as: TestCase145971
 Given I call shared step 145969 (Additional Product Information > SOLD (Canada), PLP (YES), Continue)

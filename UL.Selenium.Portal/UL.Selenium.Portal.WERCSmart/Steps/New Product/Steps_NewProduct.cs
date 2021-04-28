@@ -3333,18 +3333,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-			if (Context.Contains(savedAs))
-			{
-				var MyNewProduct = new StepsNewProduct();
-				id = Context.GetFromContext(savedAs).ToString();
-				MyNewProduct.SetTheSectionOptionTo("Product Identification (Optional)", id);
-			}
-			else
-			{
-				Report.Failure("Product ID saved as: " + savedAs + " was not found in context");
-			}
-		}
-
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
