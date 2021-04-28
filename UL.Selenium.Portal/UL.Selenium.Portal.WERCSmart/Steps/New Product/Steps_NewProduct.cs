@@ -1947,7 +1947,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
 				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
-				
+
 
 				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
@@ -3380,32 +3380,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//{
 	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+		//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-	//	public bool ClickUPCWarningButton(string choice)
-	//	{
-	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+		//	public bool ClickUPCWarningButton(string choice)
+		//	{
+		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-	//		if (modalWindow is null || modalTitle is null)
-	//		{
-	//			Report.Failure("Could not locate UPC Warning modal window.");
-	//			return false;
-	//		}
+		//		if (modalWindow is null || modalTitle is null)
+		//		{
+		//			Report.Failure("Could not locate UPC Warning modal window.");
+		//			return false;
+		//		}
 
-	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-	//		switch (choice)
-	//		{
-	//			case "ok":
-	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-	//				return deleteBtn.TryClick();
-	//			case "cancel":
-	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-	//				return cancelBtn.TryClick();
-	//		}
-	//		return false;
-	//	}
-	//}
+		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+		//		switch (choice)
+		//		{
+		//			case "ok":
+		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+		//				return deleteBtn.TryClick();
+		//			case "cancel":
+		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+		//				return cancelBtn.TryClick();
+		//		}
+		//		return false;
+		//	}
+		//}
+
+	}
 }
 
 

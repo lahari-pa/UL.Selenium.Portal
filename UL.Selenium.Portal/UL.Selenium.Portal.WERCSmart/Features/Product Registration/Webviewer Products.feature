@@ -413,7 +413,6 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 
 
-
 @Missing_Steps
 @Rename_Product
 Scenario: [144992] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 0, Processed to Complete
@@ -565,6 +564,45 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Statu
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120815)
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120815)
+
+
+
+@ScenarioId:10758
+Scenario: [145842] Canada Only, Non Authoring Product - No Label Uploaded, PLP = No, GENDOC = 0
+
+# This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
+Given I login into the WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+# In the shared step below use "Halogen  lights"  as your product type  If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs 145842 - Canada Only, Non Authoring Product - No Label Uploaded, PLP No, GENDOC 0
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Halogen lights
+Given I generate a random UPC number and save as: UPC145842
+Given I save the product information as: TestCase145842
+Given I call shared step 145844 (Additional Product Information > SOLD (Canada), PLP (No), Continue)
+Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
+Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
+Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145842, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
+Given I click continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given In the Thank You screen I click Home
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145842)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase145842)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase145842)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase145842)
+# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 31
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase145842)
+Given I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase145842
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145842)
+# IN SHA manager
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase145842)
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145842) for
+| Retailer      |
+| Canadian Tire |
 
 
 

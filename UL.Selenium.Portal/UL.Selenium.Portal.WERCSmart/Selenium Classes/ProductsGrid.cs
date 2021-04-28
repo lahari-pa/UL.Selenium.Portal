@@ -215,7 +215,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ProductSkuField {
+		public string ProductSkuField
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
 			set
 			{
