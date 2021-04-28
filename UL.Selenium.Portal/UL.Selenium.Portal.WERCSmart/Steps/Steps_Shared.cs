@@ -11281,10 +11281,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("Upload Product Label");
-			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.Screenshot();
-			MyNewProductSteps.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
+			Report.StartStep(
+					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -11386,12 +11386,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					stepsNewProduct.GivenIDeleteUPC(upc);
 					Report.Info("An error was showing! on click continue! Attempting a different UPC");
 
-
 				}
 
 			}
 
 		}
+
 
 		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
 		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
@@ -11484,8 +11484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(
-				string savedAs)
+		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
 			{
