@@ -503,6 +503,8 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase145074
 
 
+
+Scenario: [145971] Canada Only, Non Authoring Product - No Label Uploaded, PLP = Yes, GENDOC = 0
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -671,48 +673,5 @@ Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish 
 # IN SHA manager
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase145970)
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145970) for
-| Retailer      |
-| Canadian Tire |
-
-
-
-
-@ScenarioId:10707
-Scenario: [145793] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 0
-
-# This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
-Given I login into the WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-# In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name:  For WVs Test case 145793 - Canada Only, PLP Yes, PLP Upload allowed Yes, Gen
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I generate a random UPC number and save as: UPC145793
-Given I save the product information as: TestCase145793
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
-Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
-Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145793, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
-Given I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
-Given I click continue
-Given I click continue
-Given I click continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given If purchase details are showing click confirm order
-Given In the Thank You screen I click Home
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145793)
-Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase145793)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase145793)
-Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase145793)
-Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase145793)
-Given I call shared step 144993 (WPS Studio - PD+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: TestCase145793)
-Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145793)
-# IN SHA manager
-Given I call Shared Step 59066 (Go to SHA Manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase145793)
-Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase145793) for
 | Retailer      |
 | Canadian Tire |
