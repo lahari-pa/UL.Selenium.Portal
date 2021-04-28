@@ -867,6 +867,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
+		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
+		{
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs, uPCNo);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"I generate a random Ingredient ID and save as: (.*)")]
+		public void GivenIGenerateARandomIngredientIDAndSaveAs(string savedAs)
+		{
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs, uPCNo);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
+		}
+
 		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
 		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
 		{
