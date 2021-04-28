@@ -251,15 +251,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
-
 				if (!Context.Contains(savedAs))
 				{
 					Report.Failure("The reference: " + savedAs + " was not found in context");
 					return;
 				}
-
 				string sku = "";
-
 				try
 				{
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
@@ -269,7 +266,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					//do nothing
 				}
-
 				if (sku == "")
 				{
 					try
@@ -278,7 +274,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					catch (Exception)
 					{
-
 					}
 				}
 
@@ -3075,14 +3070,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			//Andrew - This step is currently not finished 
 			//1566006
-			
+
 			//Using our product filter data saved in context (valid filters that will find the product) enter in valid filter data for each of the randomly selected filters in the array.
 			//once filters entered, wait for grid to load fully
 			//search the results displayed for our product ID (from context), may need to check all pages etc.
 			//If found, Report a success and continue the remaining loops. If not  = fail but dont return at this point.
 
 			int x = 0;
-			while(x<totalCombinations)
+			while (x < totalCombinations)
 			{
 				Random random = new Random();
 				int filtersToUse = random.Next(2, 5);
@@ -3096,17 +3091,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Retailer",
 				"Additional Programs"};
 
-				for(int b = 0; b<filtersToUse; b++)
+				for (int b = 0; b < filtersToUse; b++)
 				{
 					bool addedToArray = false;
 					int y = 0;
-					while(addedToArray==false&& y<30)
+					while (addedToArray == false && y < 30)
 					{
 						//if filtersToUse == possibleFilters.Count() then just grab all filters (no point being randomly selected)
 						//remove +1 from randomInt as possible filters is zero base? 0-3
 						int randomInt = random.Next(0, possibleFilters.Count());
 						bool foundInArray = chosenFilters.Contains(possibleFilters[randomInt]);
-						if(foundInArray==false)
+						if (foundInArray == false)
 						{
 							chosenFilters[b] = possibleFilters[randomInt];
 							addedToArray = true;
@@ -3115,12 +3110,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						y++;
 
 					}
-					if (addedToArray==false)
+					if (addedToArray == false)
 					{
 						Report.Failure($"Failed to add filter to the array of filters");
 						return;
 					}
-					
+
 
 				}
 
@@ -3131,9 +3126,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var obj = (MoreFilters.FilterInformation)Context.GetFromContext(savedAs);
 				filterInfo = obj;
 
-				
 
-				foreach ( var item in chosenFilters)
+
+				foreach (var item in chosenFilters)
 				{
 					string optionSelected = "";
 					switch (item)
@@ -3188,13 +3183,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
 			foreach (var row in table.Rows)
 			{
-				if(row["FilterType"] == "Brand")
+				if (row["FilterType"] == "Brand")
 				{
 					filterInfo.Brand = row["Variable"];
 				}
 			}
 			Report.IsTrue(filterInfo.Brand != null, "did not set filter: 'Brand'", "Succesffully set filter: 'Brand'");
-		
+
 			foreach (var row in table.Rows)
 			{
 				if (row["FilterType"] == "Retailer")
@@ -3212,7 +3207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			Report.IsTrue(filterInfo.AdditionalPrograms != null, "did not set filter: 'Additional Programs'", "Succesffully set filter: 'Additional Programs'");
-									
+
 			foreach (var row in table.Rows)
 			{
 				if (row["FilterType"] == "UPC")
@@ -3222,7 +3217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						string UPCSavedAs = row["Variable"];
 						string edited = UPCSavedAs.Replace("UPC Saved As", "").Trim();
 						string foundUPC = (string)Context.GetFromContext(edited);
-						if(foundUPC.IsNullOrEmpty())
+						if (foundUPC.IsNullOrEmpty())
 						{
 							Report.Failure($"The UPC was not found in context...");
 							return;
@@ -3325,8 +3320,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selProdGrid.ProductIdField = string.Empty;
 		}
 	}
-
-
-
 
 }
