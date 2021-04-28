@@ -3040,7 +3040,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					}
 				}
+				Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+				"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+				"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
+				Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
+					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
 
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+
+				Report.Info("ID searched for: '" + id + "'");
+				var selProdGrid = new ProductsGrid();
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+
+			}
+			catch (Exception ex)
+			{
 				Report.Failure(ex.Message);
 				throw;
 			}
