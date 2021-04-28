@@ -11386,12 +11386,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					stepsNewProduct.GivenIDeleteUPC(upc);
 					Report.Info("An error was showing! on click continue! Attempting a different UPC");
 
-
 				}
 
 			}
 
 		}
+
 
 		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
 		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
@@ -11481,6 +11481,162 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
+		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
+		{
+			if (Context.Contains("ElectronicProduct"))
+			{
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
+			}
+
+			ReportSettings.UseSubSteps = true;
+			Report.Info("In power tools workspace setting edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			var table3 = new Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+
+			Report.Info("Going to do publishing");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Delay.Seconds(3);
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			GeneralUtilities.StudioWaitForSpinner();
+			var table4 = new Table(new string[] {
+				"Text",
+				"Should Show"
+			});
+			table4.AddRow(new string[] {
+				"CKLT",
+				"False"
+			});
+			table4.AddRow(new string[] {
+				"SBCS",
+				"False"
+			});
+			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			thisStepsStudio.GivenICloseCurrentDocument();
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			var tblCheckDocument = new Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"Language",
+				"DocType"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			thisStepsStudio.ICloseAlert();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
 
 	}
