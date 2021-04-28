@@ -3310,9 +3310,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		//public class UPCWarning : SeleniumBaseObject
-		//{
-		//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
+		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
+		{
+			string id = "";
+
+			if (Context.Contains(savedAs))
+			{
+				var MyNewProduct = new StepsNewProduct();
+				id = Context.GetFromContext(savedAs).ToString();
+				MyNewProduct.SetTheSectionOptionTo("Product Identification (Optional)", id);
+			}
+			else
+			{
+				Report.Failure("Product ID saved as: " + savedAs + " was not found in context");
+			}
+		}
+
+		[StepDefinition(@"I confirm SKU field is blank")]
+		public void GivenIConfirmSKUFieldIsBlank()
+		{
+			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to confirm SKU field was blank", "Confirmed SKU field was blank");
+		}
+
+
+	}
+
+	//public class UPCWarning : SeleniumBaseObject
+	//{
+	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
 		//	protected override By ContainerElementLocator => By.XPath(BasePath);
 

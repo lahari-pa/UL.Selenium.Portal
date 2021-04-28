@@ -2763,6 +2763,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return supplierMessage.GetValue();
 		}
 
+		public bool ReplaceSupplierMessage(string textToReplace, string newText)
+		{
+			IWebElement supplierMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			if (supplierMessage == null)
+			{
+				Report.Failure("Supplier Message text was null");
+				return false;
+			}
+
+			string currentSupplierMessageText = supplierMessage.GetValue();
+			string newSupplierMessageText = null;
+
+			if (!currentSupplierMessageText.Contains(textToReplace))
+			{
+				return false;
+			}
+
+			newSupplierMessageText = currentSupplierMessageText.Replace(textToReplace, newText);
+
+			return supplierMessage.TryEnterText(newSupplierMessageText);
+		}
+
 		public bool RejectSubmissionDialogClickSaveOrCancel(string button)
 		{
 			IWebElement buttonEl = this.containerElement.FindElement(By.XPath(".//span[text()='Product Submission Rejection']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//span[text()='" + button + "']"));

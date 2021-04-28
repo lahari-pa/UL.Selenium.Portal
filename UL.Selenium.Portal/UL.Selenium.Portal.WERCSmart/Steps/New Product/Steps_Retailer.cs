@@ -52,6 +52,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I confirm the following retailer cannot be deselected in Retailer Table: (.*)")]
+		public void ConfirmRetailerCannotBeDeselectedInRetailersTable(string retailer)
+		{
+			var actualRetailers = new Retailer();
+			actualRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable(retailer);
+		}
+		[StepDefinition(@"I confirm the following retailer cannot be deselected in Selected Retailer Popup: (.*)")]
+		public void ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(string retailer)
+		{
+			var actualRetailers = new Retailer();
+			actualRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(retailer);
+		}
 		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
 		public void ClickAddRetailers()
 		{
@@ -284,6 +296,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 
 		}
-		
+
 	}
 }
