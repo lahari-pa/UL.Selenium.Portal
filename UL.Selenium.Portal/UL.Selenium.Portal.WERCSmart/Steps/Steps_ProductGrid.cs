@@ -515,17 +515,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			string searchId = Context.GetFromContext(savedAs)?.ToString();
-			if (searchId == null)
+			string id = "";
+
+			if (id == "")
+			{
+				try
+				{
+					if (Context.GetFromContext(savedAs).ToString().Contains("ProductInformation"))
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+			}
+
+			if (id == "")
+			{
+				try
+				{
+					id = Context.GetFromContext(savedAs).ToString();
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			if (id == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
 			string firstId = selProductsGrid.GetIdInFirstGridRow();
 			int productsCount = selProductsGrid.ProductsCount();
-			Report.IsTrue(productsCount == 1 && firstId == searchId,
-				"Product with ID: " + searchId + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
-				"Product with ID: " + searchId + " was the only result returned as expected");
+	
+			Report.IsTrue(productsCount == 1 && firstId == id,
+				"Product with ID: " + id + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
+				"Product with ID: " + id + " was the only result returned as expected");
 		}
 
 		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
@@ -2970,6 +3001,65 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			catch (Exception ex)
 			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+
+		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
+		{
+
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
 
 				Report.Failure(ex.Message);
 				throw;
