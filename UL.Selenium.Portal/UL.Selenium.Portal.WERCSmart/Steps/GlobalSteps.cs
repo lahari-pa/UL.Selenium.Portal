@@ -124,7 +124,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-
 		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		public void LoginToWERCSmart(string type)

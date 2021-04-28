@@ -3326,12 +3326,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();			
+			var MyNewProduct = new StepsNewProduct();
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
+
+		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
+		{
+			string id = "";
 
 			if (Context.Contains(savedAs))
 			{
