@@ -15,18 +15,25 @@ namespace UL.Selenium.Portal.RPS.Classes
 {
     public static class GeneralUtilities
     {
+
         public static void WaitForLoadingToFinish()
         {
-            int i = 0;           
+            int i = 0;
 
             while (i < 10)
-            {               
+            {
+                IWebElement PaceLoadingBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='pace pace-active']"), 2);
+                IWebElement PaceLoadingBar_Inactive = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[contains(@class,'pace-inactive')]"), 2);
 
-                if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@class='pace pace-active']"), 1) != null)
+                if (PaceLoadingBar == null && PaceLoadingBar_Inactive != null)
                 {
-                    SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@class='pace pace-active']"), 30);
+                    break;
                 }
-                i++;
+                else
+                {
+                    i++;
+                    Delay.Seconds(1);
+                }
             }
         }
 
@@ -120,10 +127,10 @@ namespace UL.Selenium.Portal.RPS.Classes
         public static bool LoadingBarShowing()
         {
             int i = 0;
-            while (i <50)
+            while (i < 50)
             {
-                
-                if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("pace pace-active"),0) != null)
+
+                if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("pace pace-active"), 0) != null)
                 {
                     return true;
                 }
@@ -131,7 +138,7 @@ namespace UL.Selenium.Portal.RPS.Classes
                 Delay.Seconds(0.1);
             }
             return false;
-               
+
         }
 
         public static string SelectRandomFromListOfStrings(List<string> list)
