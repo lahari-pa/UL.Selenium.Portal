@@ -480,7 +480,7 @@ Scenario: [55796] Navigate to Home Page
 	And I should see the Subheading Announcements expanded in the main window
 
 
-
+	       
 
 	@ScenarioId:10736
 Scenario: [156787] Home Page Search - Internal SKU field
