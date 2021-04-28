@@ -1086,14 +1086,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'More Filters' in the products grid");
 		}
 
-		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
-		public void GivenIConfirmISeeTheProductIDIngredientIDSKUFieldAboveTheProductGrid()
-		{ 
-			Report.IsTrue(new ProductsGrid().ConfirmProductIDIngredientIDSKUFieldIsDisplayed(),
-				"Failed to find 'Product ID, Ingredient ID, SKU' above the products grid",
-				"Successfully found 'Product ID, Ingredient ID, SKU' above the products grid");
-		}
-
 		[StepDefinition(@"I select the (.*) option in the (Brand|Retailer|Additional Programs) More Filters drop down")]
 		public void SetMoreFilterOption(string option, string filter)
 		{
