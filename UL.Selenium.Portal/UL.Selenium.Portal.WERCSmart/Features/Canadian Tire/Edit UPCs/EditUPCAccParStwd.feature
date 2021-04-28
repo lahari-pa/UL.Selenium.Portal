@@ -58,7 +58,9 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86258, container type: Cardboard and size: 2 and packaging type: Package Type
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
-	Given In the Data Acceptance page I click on the Accept button
+
+	#Given In the Data Acceptance page I click on the Accept button
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86258)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86258 and its status is: Recertification
@@ -81,7 +83,9 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	#Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86259, container type: Cardboard and size: 2 and packaging type: Package Type
 	##And I Select a package type from the drop down list
 	#And I click Save in The Product Page
-	Given In the Data Acceptance page I click on the Accept button
+
+	#Given In the Data Acceptance page I click on the Accept button
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86259)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86259 and its status is: Recertification
@@ -102,7 +106,9 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86260, container type: Cardboard and size: 2 and packaging type: Package Type
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
-	Given In the Data Acceptance page I click on the Accept button
+
+	#Given In the Data Acceptance page I click on the Accept button
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86260)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86260 and its status is: Recertification
