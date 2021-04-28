@@ -2439,12 +2439,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
 			Report.StartStep("I set the Contains Circuit Board option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Contains Circuit Board", "No");
-			Report.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
-			Report.StartStep("I set the Has a LCD for Plasma Display option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
+
+			if (MyNewProduct.SectionExists(
+				"Has a Cathode Ray Tube (CRT)"))
+			{
+				Report.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
+				MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
+			}
+			if (MyNewProduct.SectionExists(
+				"Has a LCD or Plasma Display"))
+			{
+				Report.StartStep("I set the Has a LCD or Plasma Display option to: No");
+				MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
+			}
 			Report.StartStep("In the Answer Electronic Equipment questions page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
@@ -2727,12 +2737,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				containerType
 			});
 			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
-			upcTable.AddRow(new string[] {
 				"PackageType",
 				packageType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
 			});
 			upcTable.AddRow(new string[] {
 				"Internal SKU",
@@ -2746,9 +2756,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
-		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		[StepDefinition(@"I call Shared Step 163416 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string packageType, string sku)
+			string size, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2782,9 +2792,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-
-			Report.StartStep("I select a Package Type from the drop down list");
-			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
@@ -10931,7 +10938,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
 		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
 		{
@@ -11151,9 +11157,331 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+			
+		}
+
+		[StepDefinition(@"I call shared step 145969 \(Additional Product Information > SOLD \(Canada\), PLP \(YES\), Continue\)")]
+		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPYESContinue()
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 
 		}
 
+		[StepDefinition(@"I call shared step 145844 \(Additional Product Information > SOLD \(Canada\), PLP \(No\), Continue\)")]
+		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPNoContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call shared step 86009 \(Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue\)")]
+		public void GivenICallSharedStepRetailer_PLPCanadaOnlySelectCanadianTireAddPLPData_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+	
+			Report.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
+
+			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
+			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			var retailers = new Table("Retailer");
+			retailers.AddRow("Canadian Tire");
+			retailers.AddRow("No Retailer/No UPC Product");
+			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Canadian Tire", "This Private Label");
+
+			Report.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+		[StepDefinition(@"I call shared step 72414 \(Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path\)")]
+		public void GivenICallSharedStepRetailer_CanadaOnlySelectCanadianTireContinue_HappyPath()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var WarningPopup = new NoRetailerWarningPopup();
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+		
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
+			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
+			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+			Report.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartStep("In the Retailer page I click Continue");
+			new StepsNewProduct().ClickContinue();
+			Report.StartStep("In the UPCs Warning popup I click Ok");
+			WarningPopup.ClickChoice("Ok");
+		}
+
+		[StepDefinition(@"I call shared step 65961 \(Additional Documents to Provide - Upload Full Product Label - Continue\.")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadFullProductLabel_Continue_()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartStep(
+					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+		
+		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
+		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("The Home Depot");
+			retailerTable.AddRow("Publix");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().ClickDone();
+
+			Report.StartStep("I set the Vendor as: Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
+		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
+			string size)
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+			for (int k = 0; k < 2; k++)
+			{
+
+				for (int i = 0; i < 100; i++)
+				{
+					Report.Info("Entering UPC information. Attempt: " + (i + 1));
+					Report.StartStep("I click the 'Add UPC' button");
+					stepsNewProduct.ThenIClickTheAddUpcButton();
+					Report.StartStep("I add the following into the UPC Fields");
+					string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+					Report.Info("UPC number: " + upc);
+					var upcInfo = new UpcInformation {
+						ContainerType = containerType,
+						Size = size,
+						UpcNumber = upc
+					};
+					Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+						"Successfully inputted UPC information!");
+
+					var newProductPage = new NewProduct();
+					Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(upc, "Collapse"), "Failed to select dropdown arrow with the UPC: " + upc, "Succesfully selected dropdown arrow with the UPC: " + upc);
+
+
+					if (k == 1)
+					{
+
+						Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
+						stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+						GeneralUtilities.Wait_for_load_finish();
+
+					}
+
+					// not returning...
+					if (new NewProduct().FormError().IsNullOrEmpty())
+					{
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+					{
+						Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+						Report.Screenshot();
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					// delete upc that failed
+					stepsNewProduct.GivenIDeleteUPC(upc);
+					Report.Info("An error was showing! on click continue! Attempting a different UPC");
+
+
+				}
+
+			}
+
+		}
+
+		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
+		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			Report.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 52131 \(CVS RCL Information - add Other where available and all other data\)")]
+		public void GivenICallSharedStepCVSRCLInformation_AddOtherWhereAvailableAndAllOtherData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS RCL");
+			Report.StartStep(
+				"I set the What is the CVS Store Brand associated to this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS Store Brand associated to this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate the brand option to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate the brand", "Other");
+			Report.StartStep(
+				"I set the Who is the Product Development Manager (PDM) for this product? option to: Canady, Cory Cory.Canady@CVSHealth.com");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Who is the Product Development Manager (PDM) for this product?",
+				"Canady, Cory Cory.Canady@CVSHealth.com");
+			Report.StartStep(
+				"I set the What is the CVS merchandising category for this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS merchandising category for this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate your Product Category to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate your Product Category", "Other");
+			Report.StartStep(
+				"I set the Is this product specifically designed, marketed or labeled for infants, babies, or children? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product specifically designed, marketed or labeled for infants, babies, or children?",
+				"Yes");
+			Report.StartStep(
+				"I set the Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?",
+				"No");
+			Report.StartStep(
+				"I set the Product contains microbeads option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product contains microbeads",
+				"No");
+			Report.StartStep(
+				"I set the Is this product intended to be rinsed off after use? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product intended to be rinsed off after use?",
+				"Yes");
+			Report.StartStep(
+				"I set the Refer to your Product Label. Select the options that appear on the label. option to: Drug Facts Panel");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Refer to your Product Label. Select the options that appear on the label.",
+				"Drug Facts Panel");
+
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Is this product intended to be ingested?");
+			if (showing.Count == 0)
+			{
+				Report.Info("No options selected for section: Is this product intended to be ingested?");
+				Report.StartStep(
+				"I set the Is this product intended to be ingested? option to: Yes");
+				selNewProductSteps.SetTheSectionOptionTo(
+					"Is this product intended to be ingested?",
+					"Yes");
+			}
+
+			Report.StartStep(
+				"I set the Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?",
+				"No");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
 
 	}
 }

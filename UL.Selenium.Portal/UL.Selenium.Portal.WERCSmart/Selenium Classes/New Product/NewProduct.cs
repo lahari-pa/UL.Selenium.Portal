@@ -5734,6 +5734,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool ConfirmSKUFieldWasBlank()
+		{
+			IWebElement skuField = this.containerElement.FindElement(By.XPath(@"//input[@data-bind='textInput: sku.field']"), 2);
+			return skuField.Text.Length == 0;
+		}
+
 	}
 
 	public class ProductInformation
