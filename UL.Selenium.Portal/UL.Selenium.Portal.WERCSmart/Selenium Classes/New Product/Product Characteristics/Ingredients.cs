@@ -1777,5 +1777,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return field.TryEnterText(text);
 		}
 
+
 	}
 }

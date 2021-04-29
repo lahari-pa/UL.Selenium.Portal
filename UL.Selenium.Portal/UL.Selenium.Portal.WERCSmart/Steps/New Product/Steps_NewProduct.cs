@@ -3349,29 +3349,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
-		public void InTheAdditionalProductInformationPageUnselectUS()
-		{
-			var MyNewProduct = new NewProduct();
-			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
-		}
-
-		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
-		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.StartStep("In the Additional Documents to Provide page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
-		}
-
 		[StepDefinition(@"I Select a height from the drop down list")]
 		public void GivenISelectAHeightFromTheDropDownList()
 		{

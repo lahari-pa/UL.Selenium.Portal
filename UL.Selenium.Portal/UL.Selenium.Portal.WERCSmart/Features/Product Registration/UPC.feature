@@ -964,12 +964,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 	And I navigate to the home page
 
 
-
-
-
-
-
-@ScenarioId:10662
+	@ScenarioId:10662
 Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
