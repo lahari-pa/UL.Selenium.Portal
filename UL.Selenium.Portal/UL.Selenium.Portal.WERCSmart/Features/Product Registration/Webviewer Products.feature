@@ -751,9 +751,9 @@ Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessR
 Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase145743)
 Given I call Shared Step 78888 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, HGHS (EN and CF) and SBCS for product saved as TestCase145743
 Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145743)
-Given I call Shared Step 49742 - WPS - Check In Product saved as: TestCase145743
-Given I call shared step 149691 (WPS Studio - PD+ - PLP product for Canada - publish alias HGHS documents for product saved as: TestCase145743)
-Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145743)
+#Given I call Shared Step 49742 - WPS - Check In Product saved as: TestCase145743
+#Given I call shared step 149691 (WPS Studio - PD+ - PLP product for Canada - publish alias HGHS documents for product saved as: TestCase145743)
+#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase145743)
 # Because we are working with a PLP and we need the alias products to have published HGHS documents we need the following steps to so thi.
 # In Power Designer.
 # IN SHA manager
