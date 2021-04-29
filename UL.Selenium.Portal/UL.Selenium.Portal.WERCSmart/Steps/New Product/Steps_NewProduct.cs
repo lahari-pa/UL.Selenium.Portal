@@ -1947,7 +1947,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
 				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
-				
+
 
 				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
@@ -3310,6 +3310,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		public void InTheAdditionalProductInformationPageUnselectUS()
+		{
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+		}
+
 		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
@@ -3338,10 +3350,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm SKU field is blank")]
-		public void GivenIConfirmSKUFieldIsBlank()
+		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		public void InTheAdditionalProductInformationPageUnselectUS()
 		{
-			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to confirm SKU field was blank", "Confirmed SKU field was blank");
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+		}
+
+		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
+				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
 		[StepDefinition(@"I Select a height from the drop down list")]
@@ -3366,32 +3395,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//{
 	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+		//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-	//	public bool ClickUPCWarningButton(string choice)
-	//	{
-	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+		//	public bool ClickUPCWarningButton(string choice)
+		//	{
+		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-	//		if (modalWindow is null || modalTitle is null)
-	//		{
-	//			Report.Failure("Could not locate UPC Warning modal window.");
-	//			return false;
-	//		}
+		//		if (modalWindow is null || modalTitle is null)
+		//		{
+		//			Report.Failure("Could not locate UPC Warning modal window.");
+		//			return false;
+		//		}
 
-	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-	//		switch (choice)
-	//		{
-	//			case "ok":
-	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-	//				return deleteBtn.TryClick();
-	//			case "cancel":
-	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-	//				return cancelBtn.TryClick();
-	//		}
-	//		return false;
-	//	}
-	//}
+		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+		//		switch (choice)
+		//		{
+		//			case "ok":
+		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+		//				return deleteBtn.TryClick();
+		//			case "cancel":
+		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+		//				return cancelBtn.TryClick();
+		//		}
+		//		return false;
+		//	}
+		//}
+
+	}
 }
 
 
