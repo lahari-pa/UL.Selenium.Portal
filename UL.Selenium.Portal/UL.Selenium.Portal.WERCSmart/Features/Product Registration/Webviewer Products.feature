@@ -483,7 +483,7 @@ Scenario: [145852] Canada Only, Non Authoring Product - No Label Uploaded, PLP =
 Given I login into the WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 # In the shared step below use "Halogen  lights"  as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs TC 145852 - Canada Only, Non Authoring Product - No Label Uploaded, PLP No, GENDOC 0, User Uploads SDS on Additional Documents to Provide
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Halogen lights
+Given I call Shared Step 57561b (The Product - Enter Product Name: Halogen lights Test Product 145852 and select Type of Product): Halogen lights and add a Random Identifier
 Given I generate a random UPC number and save as: UPC145852
 Given I save the product information as: TestCase145852
 Given I call shared step 145844 (Additional Product Information > SOLD (Canada), PLP (No), Continue)
