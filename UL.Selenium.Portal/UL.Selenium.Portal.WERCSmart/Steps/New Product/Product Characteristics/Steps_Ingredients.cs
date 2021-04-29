@@ -84,14 +84,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenForIngredient_TheGenericName_FieldIs_(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
-			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected");
+			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " as expected");
 		}
 
 		[StepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
 		public void GivenForIngredient_TheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
-			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected");
+			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " as expected");
 		}
 
 		[StepDefinition(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
@@ -466,7 +466,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked the Regulated button for ingredient: " + name);
 		}
 
-		[StepDefinition(@"In the ingredients page I search for and select product saved as: (.*)")]
 		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -985,7 +984,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
 		}
-
 
 	}
 }
