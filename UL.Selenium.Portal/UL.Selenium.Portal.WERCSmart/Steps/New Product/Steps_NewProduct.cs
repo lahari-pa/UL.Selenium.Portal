@@ -3321,7 +3321,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
 			}
 		}
-
 		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
