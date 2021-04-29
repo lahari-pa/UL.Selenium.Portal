@@ -62,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset|WERCs Web Viewers)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -84,6 +84,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("Password Reset"):
 					this.LoginToAccount("PasswordResetAccount");
+					break;
+				case ("WERCs Web Viewers"):
+					this.LoginToAccount("FeedToWebViewers");
 					break;
 			}
 		}
@@ -119,6 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Context.AddToContext(saveAs, email);
 		}
+
 
 		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
@@ -982,7 +986,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
-
+			
 					if (title.Contains(productSavedAs) || title.Contains("<" + productSavedAs + ">"))
 					{
 						if (!Context.Contains(productSavedAs))
@@ -1079,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string actualTrimmed = "";
 
-				foreach (char c in emailBody.ToCharArray())
+				foreach (char c in bodyText.ToCharArray())
 				{
 					if (c != '<')
 					{
@@ -1087,21 +1091,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				actualTrimmed = actualTrimmed.Replace(@"/p>", @" ");
-				actualTrimmed = actualTrimmed.Replace(@"p>", @"");
+				string expectedTrimmed = emailBody;
 
-				string expectedTrimmed = bodyText;
+				foreach (char c in emailBody.ToCharArray())
+				{
+					if (c != '<')
+					{
+						expectedTrimmed = expectedTrimmed + c;
+					}
+				}
 
 				actualTrimmed = actualTrimmed.TrimStart();
 				actualTrimmed = actualTrimmed.TrimEnd();
+				actualTrimmed = actualTrimmed.Replace(@" ", @"");
 
+				expectedTrimmed = Regex.Replace(emailBody, @"<[^>]*>", string.Empty);
+				expectedTrimmed = Regex.Replace(expectedTrimmed, @"\s+", "");
 				expectedTrimmed = expectedTrimmed.TrimStart();
 				expectedTrimmed = expectedTrimmed.TrimEnd();
+				expectedTrimmed = expectedTrimmed.Replace(@" ", @"");
 
-				actualTrimmed = actualTrimmed.Replace(@" ", @"");
-				expectedTrimmed = actualTrimmed.Replace(@" ", @"");
-
-				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+				Report.IsTrue(expectedTrimmed.Contains(actualTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{

@@ -2737,12 +2737,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				containerType
 			});
 			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
-			upcTable.AddRow(new string[] {
 				"PackageType",
 				packageType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
 			});
 			upcTable.AddRow(new string[] {
 				"Internal SKU",
@@ -2756,9 +2756,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
-		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		[StepDefinition(@"I call Shared Step 163416 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string packageType, string sku)
+			string size, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2792,9 +2792,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-
-			Report.StartStep("I select a Package Type from the drop down list");
-			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
@@ -10941,7 +10938,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
 		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
 		{
@@ -11217,9 +11213,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-
+	
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
 
 			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
 			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
@@ -11229,7 +11240,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailers.AddRow("No Retailer/No UPC Product");
 			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
 
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Canadian Tire", "This Private Label");
 
 			Report.StartStep("In the Retailer page I click Continue");
@@ -11242,6 +11252,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+		
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
 			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
 			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
 			Report.StartStep("I should see the Retailer Page");
@@ -11257,17 +11281,210 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("Upload Product Label");
-			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			Report.Screenshot();
-			MyNewProductSteps.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
+			Report.StartStep(
+					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
+		
+		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
+		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("The Home Depot");
+			retailerTable.AddRow("Publix");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().ClickDone();
+
+			Report.StartStep("I set the Vendor as: Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
+		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
+			string size)
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+			for (int k = 0; k < 2; k++)
+			{
+
+				for (int i = 0; i < 100; i++)
+				{
+					Report.Info("Entering UPC information. Attempt: " + (i + 1));
+					Report.StartStep("I click the 'Add UPC' button");
+					stepsNewProduct.ThenIClickTheAddUpcButton();
+					Report.StartStep("I add the following into the UPC Fields");
+					string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+					Report.Info("UPC number: " + upc);
+					var upcInfo = new UpcInformation {
+						ContainerType = containerType,
+						Size = size,
+						UpcNumber = upc
+					};
+					Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+						"Successfully inputted UPC information!");
+
+					var newProductPage = new NewProduct();
+					Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(upc, "Collapse"), "Failed to select dropdown arrow with the UPC: " + upc, "Succesfully selected dropdown arrow with the UPC: " + upc);
+
+
+					if (k == 1)
+					{
+
+						Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
+						stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+						GeneralUtilities.Wait_for_load_finish();
+
+					}
+
+					// not returning...
+					if (new NewProduct().FormError().IsNullOrEmpty())
+					{
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+					{
+						Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+						Report.Screenshot();
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					// delete upc that failed
+					stepsNewProduct.GivenIDeleteUPC(upc);
+					Report.Info("An error was showing! on click continue! Attempting a different UPC");
+
+				}
+
+			}
+
+		}
+
+
+		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
+		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			Report.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 52131 \(CVS RCL Information - add Other where available and all other data\)")]
+		public void GivenICallSharedStepCVSRCLInformation_AddOtherWhereAvailableAndAllOtherData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS RCL");
+			Report.StartStep(
+				"I set the What is the CVS Store Brand associated to this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS Store Brand associated to this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate the brand option to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate the brand", "Other");
+			Report.StartStep(
+				"I set the Who is the Product Development Manager (PDM) for this product? option to: Canady, Cory Cory.Canady@CVSHealth.com");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Who is the Product Development Manager (PDM) for this product?",
+				"Canady, Cory Cory.Canady@CVSHealth.com");
+			Report.StartStep(
+				"I set the What is the CVS merchandising category for this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS merchandising category for this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate your Product Category to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate your Product Category", "Other");
+			Report.StartStep(
+				"I set the Is this product specifically designed, marketed or labeled for infants, babies, or children? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product specifically designed, marketed or labeled for infants, babies, or children?",
+				"Yes");
+			Report.StartStep(
+				"I set the Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?",
+				"No");
+			Report.StartStep(
+				"I set the Product contains microbeads option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product contains microbeads",
+				"No");
+			Report.StartStep(
+				"I set the Is this product intended to be rinsed off after use? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product intended to be rinsed off after use?",
+				"Yes");
+			Report.StartStep(
+				"I set the Refer to your Product Label. Select the options that appear on the label. option to: Drug Facts Panel");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Refer to your Product Label. Select the options that appear on the label.",
+				"Drug Facts Panel");
+
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Is this product intended to be ingested?");
+			if (showing.Count == 0)
+			{
+				Report.Info("No options selected for section: Is this product intended to be ingested?");
+				Report.StartStep(
+				"I set the Is this product intended to be ingested? option to: Yes");
+				selNewProductSteps.SetTheSectionOptionTo(
+					"Is this product intended to be ingested?",
+					"Yes");
+			}
+
+			Report.StartStep(
+				"I set the Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?",
+				"No");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
 
 		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(
-				string savedAs)
+		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
 			{
@@ -11419,466 +11636,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.StudioWaitForSpinner();
 			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
 			thisStepsStudio.ICloseAlert();
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
-		}
-
-		[StepDefinition(@"I call shared step 145791 \(WPS Studio - PD\+ - PLP - Publish CKLT, HGHS and SBCS for main product only - not the aliases for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_PLP_PublishCKLTHGHSAndSBCSForMainProductOnly_NotTheAliasesForProductSavedAs(string savedAs)
-		{
-			Report.StartStep("Beginning shared step 78888");
-			ReportSettings.UseSubSteps = true;
-			Report.StartStep(
-				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
-			Report.Info("In power tools workspace I set edit to true");
-			var thisStudioPowerDesignerPlusDesignMode =
-				new StudioPowerDesignerPlusDesignMode();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
-				"Power designer has opened");
-			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
-			Delay.Seconds(1);
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
-				"Document options panel has not opened",
-				"Document options panel has opened");
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
-				"Successfully set edit to true");
-			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
-			var table2 = new Table(new string[] {
-				"datacode",
-				"value"
-			});
-			table2.AddRow(new string[] {
-				"DPQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"DCQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"VCQA",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"RSQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"RSQHADPF",
-				"pass"
-			});
-			var thisStepsStudio = new Steps_Studio();
-			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
-			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
-			var table3 = new Table(new string[] {
-				"Item"
-			});
-			table3.AddRow(new string[] {
-				"Current Document (Publish)"
-			});
-			table3.AddRow(new string[] {
-				"Formulation"
-			});
-			table3.AddRow(new string[] {
-				"Document Queue"
-			});
-			table3.AddRow(new string[] {
-				"Apply rules"
-			});
-			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
-			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-			//this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
-
-			Report.StartStep("I open the Current Document pop up using the tool bar icons");
-			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
-			Report.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
-			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
-			GeneralUtilities.StudioWaitForSpinner();
-			Report.StartStep("Select the Apply to all subformats check box ");
-			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
-			Report.Info("Clicked apply, waiting");
-			Delay.Seconds(60);
-			Report.Info("Now going to wait for spinner");
-			if (!GeneralUtilities.StudioWaitForSpinner(30))
-			{
-				if (SeleniumBrowser.Alert.WaitForAlert())
-				{
-					Report.Info("Spinner is still showing but alert is there.");
-				}
-			}
-
-			//And I Confirm CKLT,  HGHS and SBCS are not shownin the pop up messageand click OK
-			Report.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
-			var table4 = new Table(new string[] {
-				"Text",
-				"Should Show"
-			});
-			table4.AddRow(new string[] {
-				"CKLT",
-				"False"
-			});
-			table4.AddRow(new string[] {
-				"NGHS",
-				"False"
-			});
-			table4.AddRow(new string[] {
-				"SBCS",
-				"False"
-			});
-
-			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
-			Report.StartStep("I close the current document pop up");
-			thisStepsStudio.GivenICloseCurrentDocument();
-			Report.StartStep("I select the Apply Rules icon from the tool bar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
-			Report.StartStep("I select the Single rule radio button");
-			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
-			Report.StartStep("I click the three ... icon to open the Select Rule pop up");
-			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
-			Report.StartStep("I click the filter icon");
-			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
-			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-
-			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
-			Report.StartStep("I select the rule  by clicking on it");
-			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
-			Report.StartStep("I click Apply");
-			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
-			Delay.Seconds(10);
-			if (SeleniumBrowser.Alert.IsAlertPresent())
-			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				Delay.Seconds(1);
-			}
-
-			Report.StartStep("I close the Apply Rules pop up");
-			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-			Delay.Seconds(3);
-			if (new ApplyRulesPage().Wait_for_load(1))
-			{
-				Delay.Seconds(3);
-				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
-				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-				Report.Screenshot();
-				Delay.Seconds(3);
-				if (new ApplyRulesPage().Wait_for_load(1))
-				{
-					Report.Error("Apply rules popup did not close after two attempts");
-					SeleniumBrowser.WebBrowser.Close();
-				}
-			}
-
-			Report.StartStep("I click the Document queue icon in the tool bar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
-			Report.StartStep("I click the filter icon");
-			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = productDetails.Id;
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
-			Report.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
-
-			for (int i = 0; i < 5; i++)
-			{
-				Delay.Seconds(5);
-				Report.Screenshot();
-				var newDocumentQueuePage = new DocumentQueuePage();
-				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
-					"Document queue page loaded");
-				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
-				if (listOfDocuments.Count > 0)
-				{
-					break;
-				}
-			}
-			// And I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF,
-			// HGHS CF PDF CKLT EN PDF. If your product is a PL product you will also see an entry for the product alias
-			// Note: as we are working with HGHS only, we should see CKLT and SBCS for the alias products
-
-			Report.StartStep(
-				"I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF, HGHS CF PDF CKLT EN PDF");
-			var tblCheckDocument = new Table(new string[] {
-				"ProductOrAlias",
-				"Subformat",
-				"Language",
-				"DocType"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"EN",
-				"RTF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"EN",
-				"PDF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"CF",
-				"RTF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"CF",
-				"PDF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"CKLT",
-				"EN",
-				"PDF"
-			});
-			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
-			Delay.Seconds(3);
-			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
-			Delay.Seconds(3);
-			Report.Screenshot();
-
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
-			Report.Screenshot();
-			Report.StartStep("I click Process Documents");
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-			Delay.Seconds(2);
-			Report.Screenshot();
-			GeneralUtilities.StudioWaitForSpinner(60);
-			Report.StartStep(
-				"I confirm a pop up shows with message indicating queued documents were sent for publishing");
-			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
-			Report.StartStep("I click OK ");
-			thisStepsStudio.ICloseAlert();
-			Report.StartStep("I close the Document queue window");
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
-		}
-
-
-		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)
-		{
-			Report.StartStep("Beginning shared step 78888");
-			ReportSettings.UseSubSteps = true;
-			Report.StartStep(
-				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
-			Report.Info("In power tools workspace I set edit to true");
-			var thisStudioPowerDesignerPlusDesignMode =
-				new StudioPowerDesignerPlusDesignMode();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
-				"Power designer has opened");
-			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
-			Delay.Seconds(1);
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
-				"Document options panel has not opened",
-				"Document options panel has opened");
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
-				"Successfully set edit to true");
-			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
-			var table2 = new Table(new string[] {
-				"datacode",
-				"value"
-			});
-			table2.AddRow(new string[] {
-				"DPQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"DCQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"VCQA",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"RSQAPF",
-				"pass"
-			});
-			table2.AddRow(new string[] {
-				"RSQHADPF",
-				"pass"
-			});
-			var thisStepsStudio = new Steps_Studio();
-			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
-			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
-			var table3 = new Table(new string[] {
-				"Item"
-			});
-			table3.AddRow(new string[] {
-				"Current Document (Publish)"
-			});
-			table3.AddRow(new string[] {
-				"Formulation"
-			});
-			table3.AddRow(new string[] {
-				"Document Queue"
-			});
-			table3.AddRow(new string[] {
-				"Apply rules"
-			});
-			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
-			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-			//this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
-
-			Report.StartStep("I open the Current Document pop up using the tool bar icons");
-			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
-			Report.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
-			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
-			GeneralUtilities.StudioWaitForSpinner();
-			Report.StartStep("Select the Apply to all subformats check box ");
-			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
-			Report.Info("Clicked apply, waiting");
-			Delay.Seconds(60);
-			Report.Info("Now going to wait for spinner");
-			if (!GeneralUtilities.StudioWaitForSpinner(30))
-			{
-				if (SeleniumBrowser.Alert.WaitForAlert())
-				{
-					Report.Info("Spinner is still showing but alert is there.");
-				}
-			}
-
-			//And I Confirm CKLT,  HGHS and SBCS are not shownin the pop up messageand click OK
-			Report.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
-			var table4 = new Table(new string[] {
-				"Text",
-				"Should Show"
-			});
-			table4.AddRow(new string[] {
-				"HGHS",
-				"False"
-			});
-			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
-			Report.StartStep("I close the current document pop up");
-			thisStepsStudio.GivenICloseCurrentDocument();
-			Report.StartStep("I select the Apply Rules icon from the tool bar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
-			Report.StartStep("I select the Single rule radio button");
-			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
-			Report.StartStep("I click the three ... icon to open the Select Rule pop up");
-			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
-			Report.StartStep("I click the filter icon");
-			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
-			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-
-			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
-			Report.StartStep("I select the rule  by clicking on it");
-			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
-			Report.StartStep("I click Apply");
-			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
-			Delay.Seconds(10);
-			if (SeleniumBrowser.Alert.IsAlertPresent())
-			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				Delay.Seconds(1);
-			}
-
-			Report.StartStep("I close the Apply Rules pop up");
-			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-			Delay.Seconds(3);
-			if (new ApplyRulesPage().Wait_for_load(1))
-			{
-				Delay.Seconds(3);
-				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
-				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-				Report.Screenshot();
-				Delay.Seconds(3);
-				if (new ApplyRulesPage().Wait_for_load(1))
-				{
-					Report.Error("Apply rules popup did not close after two attempts");
-					SeleniumBrowser.WebBrowser.Close();
-				}
-			}
-
-			Report.StartStep("I click the Document queue icon in the tool bar");
-			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
-			Report.StartStep("I click the filter icon");
-			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = productDetails.Id;
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
-			Report.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
-
-			for (int i = 0; i < 5; i++)
-			{
-				Delay.Seconds(5);
-				Report.Screenshot();
-				var newDocumentQueuePage = new DocumentQueuePage();
-				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
-					"Document queue page loaded");
-				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
-				if (listOfDocuments.Count > 0)
-				{
-					break;
-				}
-			}
-			// And I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF,
-			// HGHS CF PDF CKLT EN PDF. If your product is a PL product you will also see an entry for the product alias
-			// Note: as we are working with HGHS only, we should see CKLT and SBCS for the alias products
-
-			Report.StartStep(
-				"I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF, HGHS CF PDF CKLT EN PDF");
-			var tblCheckDocument = new Table(new string[] {
-				"ProductOrAlias",
-				"Subformat",
-				"Language",
-				"DocType"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"EN",
-				"RTF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"EN",
-				"PDF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"CF",
-				"RTF"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"HGHS",
-				"CF",
-				"PDF"
-			});
-			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
-			Delay.Seconds(3);
-			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
-			Delay.Seconds(3);
-			Report.Screenshot();
-
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
-			Report.Screenshot();
-			Report.StartStep("I click Process Documents");
-			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-			Delay.Seconds(2);
-			Report.Screenshot();
-			GeneralUtilities.StudioWaitForSpinner(60);
-			Report.StartStep(
-				"I confirm a pop up shows with message indicating queued documents were sent for publishing");
-			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
-			Report.StartStep("I click OK ");
-			thisStepsStudio.ICloseAlert();
-			Report.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
 
