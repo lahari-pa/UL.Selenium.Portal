@@ -332,7 +332,6 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
 
 
-@philtag1
 @ScenarioId:10275
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 
