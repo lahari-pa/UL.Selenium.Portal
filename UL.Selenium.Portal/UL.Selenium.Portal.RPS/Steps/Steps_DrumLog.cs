@@ -96,7 +96,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheDrumLogPageMoreFiltersPopupCheckThatFieldIsADropDown(string label)
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().FieldIsADropDown(label), "The field was not a drop down", "The field was a drop down");
-                       
+
 
         }
 
@@ -221,7 +221,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"I confirm that the Drum Log page headings row has a grey background color")]
         public void IConfirmThatDrumLogPageHeadingsShowGrey()
         {
-            string expectedColorString = "rgba(229, 232, 236, 1)";
+            string expectedColorString = "rgba(240, 243, 245, 1)";
             Report.Info($"The expected rbga color for the text is: {expectedColorString}");
             string foundColorCode = new DrumLog().GetHeadingsRowBackgroundColor();
             Report.IsTrue(expectedColorString == foundColorCode, "The found color was not as expected", "The color found was as expected");
@@ -653,7 +653,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
         /// <summary>
-        /// This is for the expanded column called 'Name', if 
+        /// This is for the expanded column called 'Name', if
         /// </summary>
         /// <param name="name"></param>
         [StepDefinition(@"In the Drum Log Page, In the table I search for the drum with Name: (.*) for the expanded row in postion: (.*)")]
@@ -792,8 +792,8 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.Failure("Could not find a row with the Drum Name");
                 return;
             }
-            DrumLog.DrumLogData currentData = new DrumLog().GetAllDrumDataByDrumName(drumName);            
-            if(!currentData.IsNullOrEmpty())
+            DrumLog.DrumLogData currentData = new DrumLog().GetAllDrumDataByDrumName(drumName);
+            if (!currentData.IsNullOrEmpty())
             {
                 Context.AddToContext(savedAs, currentData);
                 Report.Success("Data added to context");
@@ -804,7 +804,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.Failure("The data was empty");
                 return;
             }
-          
+
         }
 
         [StepDefinition(@"In the Drum Log page, I check that the Data Saved As: (.*) contains the Manufacturer saved as: (.*)")]
@@ -831,16 +831,16 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"In the Drum Log page More Filters Popup I check for a scroll bar if the Date Removed Filter Option is not displayed on screen")]
         public void InTheDrumLogPageMoreFilterPopupCheckDateRemovedFilterIsDisplayed()
         {
-            if(new DrumLog.MoreFiltersPopup().DateRemovedOnScreen())
+            if (new DrumLog.MoreFiltersPopup().DateRemovedOnScreen())
             {
                 Report.Success("The Date Removed filter option was visible on scree, no scroll bar is expected");
                 return;
             }
-            Report.IsTrue(new DrumLog.MoreFiltersPopup().ScrollToTopFilter(),"Failed to scroll to the top filter", "Sucessfully scrolled to the top filter");
-            Report.IsTrue(!new DrumLog.MoreFiltersPopup().DateRemovedOnScreen(),"Date Removed Filter was visible which was not expected","The data removed filter was not on screen, as expected");
-            Report.IsTrue(new DrumLog.MoreFiltersPopup().ScrollToBottomFilter(),"Failed to scroll to the bottom filter", "Successfully scrolled to the top filter");
             Report.IsTrue(new DrumLog.MoreFiltersPopup().ScrollToTopFilter(), "Failed to scroll to the top filter", "Sucessfully scrolled to the top filter");
-            
+            Report.IsTrue(!new DrumLog.MoreFiltersPopup().DateRemovedOnScreen(), "Date Removed Filter was visible which was not expected", "The data removed filter was not on screen, as expected");
+            Report.IsTrue(new DrumLog.MoreFiltersPopup().ScrollToBottomFilter(), "Failed to scroll to the bottom filter", "Successfully scrolled to the top filter");
+            Report.IsTrue(new DrumLog.MoreFiltersPopup().ScrollToTopFilter(), "Failed to scroll to the top filter", "Sucessfully scrolled to the top filter");
+
 
 
         }
@@ -891,7 +891,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
             var differences = filtersExpected.Except(foundOptions);
 
-            if(differences.Any())
+            if (differences.Any())
             {
                 Report.Info($"Differences found: {string.Join(",", differences)}");
 
@@ -900,7 +900,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(differences.IsNullOrEmpty() && filtersExpected.Count() == foundOptions.Count(), "The Filters found were not as expected", "The Filters found matched the expected headings");
 
         }
-       
-       
+
+
     }
 }
