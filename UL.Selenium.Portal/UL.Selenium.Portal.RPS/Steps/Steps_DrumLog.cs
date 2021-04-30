@@ -471,9 +471,10 @@ namespace UL.Selenium.Portal.RPS.Steps
             //go back to first page (last page not displaying total products?
             new DrumLog().ClickFirstPageButton();
             this.HomeTabLoaded();
-            int itemsPerPage = new DrumLog().GetCurrentItemsPerPage();
-            int totalDisplayedProducts = new DrumLog().GetTotalProducts();
-            bool pageCountMatches = Int32.Parse(finalNumber) == (totalDisplayedProducts / itemsPerPage);
+            double itemsPerPage = Convert.ToDouble(new DrumLog().GetCurrentItemsPerPage());
+            double totalDisplayedProducts = Convert.ToDouble(new DrumLog().GetTotalProducts());
+            double temp = totalDisplayedProducts / itemsPerPage;
+            bool pageCountMatches = Int32.Parse(finalNumber) == Convert.ToInt32(Math.Ceiling(totalDisplayedProducts / itemsPerPage));
             Report.Info($"Items per page: {itemsPerPage}");
             Report.Info($"total displayed products: {totalDisplayedProducts}");
             Report.Info($"Displayed pages: {Int32.Parse(finalNumber)}");
