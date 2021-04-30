@@ -180,6 +180,8 @@ Scenario: [64532] Remove UPC Update - Remove
 	Then I click on the Row Action: Remove UPC Update
 	And in the modal dialog I click the "REMOVE" button
 	And I confirm the Remove UPC Update popup has closed
+	#Andrew Fix - Adding in step for reopening actions menu before checking for the removal of options.
+	And I click Row Actions for the first product returned
 	And I should not see the following Actions options
 		| Option             |
 		| Process UPC Update |
