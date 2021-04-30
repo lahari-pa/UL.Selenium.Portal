@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement OptionButtonsSection => this.containerElement.FindElement(By.XPath(".//div[@class='row search-row']"), 2);
 
-        private IWebElement MoreFiltersOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//li//a[@id='btnMoreFilters']"), 2);
+        private IWebElement MoreFiltersOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//div//button[@id='btnMoreFilters']"), 2);
 
         private IWebElement BreadCrumbArea => this.containerElement.FindElement(By.XPath(".//div[@id='filterList']"), 2);
 
@@ -1656,7 +1656,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 List<string> optionsStrings = new List<string>();
                 foreach (var option in dropDownOptions)
                 {
-                    optionsStrings.Add(option.Text);
+                    optionsStrings.Add(option.Text.ToLower());
 
                 }
                 return optionsStrings;

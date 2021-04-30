@@ -879,7 +879,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             List<string> filtersExpected = new List<string>();
             foreach (TableRow thisRow in table.Rows)
             {
-                filtersExpected.Add(thisRow["Filter"]);
+                filtersExpected.Add(thisRow["Filter"].ToLower());
             }
             var foundOptions = new DrumLog.MoreFiltersPopup().GetFilterOptions(filter);
 
