@@ -1454,11 +1454,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 			//Wait for top n items to be status Assigned
 			int n = 5;
-			for (int i = 0; i < 30; i++)
+			bool correct = false;
+			for (int i = 0; i < 60; i++)
 			{
 				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
 				if (topN.Select(x => x.Status == status).ToList().Count == topN.Count)
 				{
+					correct = true;
 					break;
 				}
 
@@ -1466,6 +1468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.Screenshot();
+			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
 		}
 
 		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
