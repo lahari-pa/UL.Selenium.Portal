@@ -1445,47 +1445,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter(status);
 			Report.Info("Status has been set");
+			Report.Screenshot();
 			Report.Info("Pressing Enter Key");
+			Report.Screenshot();
 			myStudioShaManager.PressEnterOnStatusFilter();			
 			myStudioShaManager.SelectFromStatusFilter(status);
 			Report.Info("Status Selected again");
+			Report.Screenshot();
+
 
 			//This query is often very slow. Sometimes the results appear to have loaded but then several seconds later the
 			//spinner appears and the results change.
 			Delay.Seconds(10);
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.StudioWaitForSpinner(30);
 			myStudioShaManager.WaitForProductList(60);
 			//GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(10);
 			//Wait for top n items to be status Assigned
 			int n = 5;
+			int x = 0;
+			Report.Info($"Searching for status to match: {status}");
 			bool correct = false;
-			for (int i = 0; i < 60; i++)
-			{
-				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
-				List<Product> correctStatusItems = new List<Product>();
-				foreach(var item in topN)
+			while(correct==false && x<60)
 				{
-					if(item.Status==status)
+					List<Product> topN = myStudioShaManager.GetTopXProducts(n);
+					List<Product> correctStatusItems = new List<Product>();
+					foreach (var item in topN)
 					{
-						correctStatusItems.Add(item);
+						Report.Info($"Status found was: {item.Status}");
+						if (item.Status == status)
+						{
+							correctStatusItems.Add(item);
+						}
 					}
+					Report.Screenshot();
+					Report.Info($"n is {n}");
+					Report.Info($"Count found was: {correctStatusItems.Count()}");
+					if (correctStatusItems.Count == n)
+					{
+						correct = true;
+						Report.Info($"{n} items with correct status were found");						
+					}		
+					Delay.Seconds(1);
+					x++;					
 				}
-				Report.Screenshot();
-				if(correctStatusItems.Count==n)
-				{
-					correct = true;
-					break;
-				}
-
-				//if (topn.select(x => x.status == status).tolist().count == topn.count)
-				//{
-				//	correct = true;
-				//	break;
-				//}
-
-				Delay.Seconds(1);
-			}
+			
 
 			Report.Screenshot();
 			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
