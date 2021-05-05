@@ -1206,6 +1206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public void PressEnterOnStatusFilter()
+		{
+			IWebElement statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
+			statusSelect.SendKeys(Keys.Enter);
+		}
+
 		//Delete, Search (Srch), Status, Reject Submission, Create Group, Review
 		public bool ClickBottomMenuOption(string option)
 		{

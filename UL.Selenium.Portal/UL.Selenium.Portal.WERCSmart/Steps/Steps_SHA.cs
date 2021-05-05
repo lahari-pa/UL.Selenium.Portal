@@ -1445,6 +1445,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter(status);
 			Report.Info("Status has been set");
+			Report.Info("Pressing Enter Key");
+			myStudioShaManager.PressEnterOnStatusFilter();			
+			myStudioShaManager.SelectFromStatusFilter(status);
+			Report.Info("Status Selected again");
+
 			//This query is often very slow. Sometimes the results appear to have loaded but then several seconds later the
 			//spinner appears and the results change.
 			Delay.Seconds(10);
@@ -1466,7 +1471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						correctStatusItems.Add(item);
 					}
 				}
-
+				Report.Screenshot();
 				if(correctStatusItems.Count==n)
 				{
 					correct = true;
