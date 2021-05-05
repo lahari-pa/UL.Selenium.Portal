@@ -1458,11 +1458,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 60; i++)
 			{
 				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
-				if (topN.Select(x => x.Status == status).ToList().Count == topN.Count)
+				List<Product> correctStatusItems = new List<Product>();
+				foreach(var item in topN)
+				{
+					if(item.Status==status)
+					{
+						correctStatusItems.Add(item);
+					}
+				}
+
+				if(correctStatusItems.Count==n)
 				{
 					correct = true;
 					break;
 				}
+
+				//if (topn.select(x => x.status == status).tolist().count == topn.count)
+				//{
+				//	correct = true;
+				//	break;
+				//}
 
 				Delay.Seconds(1);
 			}
