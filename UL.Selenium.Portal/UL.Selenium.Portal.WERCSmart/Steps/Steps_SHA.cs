@@ -2690,7 +2690,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
-		}
+		}				
 
 		[StepDefinition(@"I switch to the Product List UPC Window")]
 		public void SwitchToProductListUpcWindow()
@@ -4287,6 +4287,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
+		}
+
+		[StepDefinition(@"In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.")]
+		public void SHAFindFirstUPCProductNavigateToUPCRetailersAndFeed(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("Getting all product ids from the table");
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			for (int i = 0; i < ids.Count; i++)
+			{
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = ids[i];
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Success($"Was able to succesfully navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
+					return;
+
+				}
+
+			}
+			Report.Failure($"Was unable to navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
+			return;					
+			
+			
 		}
 
 	}
