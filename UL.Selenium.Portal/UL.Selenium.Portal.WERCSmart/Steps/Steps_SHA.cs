@@ -1481,7 +1481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					Report.Info($"n is {n}");
 					Report.Info($"Count found was: {correctStatusItems.Count()}");
-					if (correctStatusItems.Count == n)
+					if (correctStatusItems.Count() == topN.Count())
 					{
 						correct = true;
 						Report.Info($"{n} items with correct status were found");						
