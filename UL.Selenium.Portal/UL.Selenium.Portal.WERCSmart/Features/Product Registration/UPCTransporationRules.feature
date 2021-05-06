@@ -617,6 +617,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
 
 
+@ScenarioId:10883
 	Scenario:  [122287] UPC Transportation Error - Mode 1 - 3 
 		#If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
