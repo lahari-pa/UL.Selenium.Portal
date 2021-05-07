@@ -1486,7 +1486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						correct = true;
 						Report.Info($"{n} items with correct status were found");						
 					}		
-					Delay.Seconds(1);
+					Delay.Seconds(10);
 					x++;					
 				}
 			
