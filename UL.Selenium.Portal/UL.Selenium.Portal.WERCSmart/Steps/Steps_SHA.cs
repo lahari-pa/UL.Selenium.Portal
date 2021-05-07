@@ -4290,7 +4290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.")]
-		public void SHAFindFirstUPCProductNavigateToUPCRetailersAndFeed(string savedAs)
+		public void SHAFindFirstUPCProductNavigateToUPCRetailersAndFeed(string savedAs = "temp")
 		{
 			ReportSettings.UseSubSteps = true;
 			var shaSteps = new Steps_SHA();

@@ -258,6 +258,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
+
+		[StepDefinition(@"I wait (.*) seconds for the (.*) Page to load")]
+		public void IWaitXSecondsForYPageToLoad(int seconds, string page)
+		{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page,seconds), page + " is not showing when it was expected to", page + " is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
+
 		[StepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)
 		{
