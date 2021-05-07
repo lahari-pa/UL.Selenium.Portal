@@ -1448,10 +1448,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Report.Info("Pressing Enter Key");
 			Report.Screenshot();
-			myStudioShaManager.PressEnterOnStatusFilter();			
-			myStudioShaManager.SelectFromStatusFilter(status);
-			Report.Info("Status Selected again");
-			Report.Screenshot();
+			//myStudioShaManager.PressEnterOnStatusFilter();			
+			//myStudioShaManager.SelectFromStatusFilter(status);
+			//Report.Info("Status Selected again");
+			//Report.Screenshot();
 
 
 			//This query is often very slow. Sometimes the results appear to have loaded but then several seconds later the
