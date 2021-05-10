@@ -3326,7 +3326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
 		{
 
-			IWebElement bodyEl = this.containerElement.WaitUntilElementVisible(By.XPath("/table[@class='upcDetails']//tbody//tr//td"), 180);
+			IWebElement bodyEl = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
 			if(bodyEl.IsNullOrEmpty())
 			{
 				Report.Info($"body el was not found in the popup or did not load in time.");
