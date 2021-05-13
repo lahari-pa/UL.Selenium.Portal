@@ -2325,9 +2325,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 
 
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+
+
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 			//Philip - Change
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			if (popupCausing.Contains(name))
 			{
+				new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide");
 				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 

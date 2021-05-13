@@ -1771,5 +1771,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public List<string> IngredientsFIFRAPopup()
+		{
+
+			//This acts as a hardcoded list of ingredient namest that cause a check for the Pesticide popup after pressing continue on the ingredients page
+			//Items in this list of currently consists of ingredients used in automation that currently reside in the SHA FIFRA or FIFRAR list of components.
+			//As it stands this list does not dynamically update to any changes to these component lists will need to manually input. 
+			List<string> ingredients = new List<string>();
+			ingredients.Add("Chlorine");
+
+
+			return ingredients;
+		}
 	}
 }
