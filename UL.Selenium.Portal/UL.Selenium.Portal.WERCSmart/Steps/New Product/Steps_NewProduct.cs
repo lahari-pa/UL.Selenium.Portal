@@ -586,7 +586,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Success("Product Information saved!");
 		}
 
-
 		//[StepDefinition(@"I save the product Id as: (.*)")]
 		//public void SaveProductId(string savedas)
 		//{
@@ -1948,7 +1947,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
 				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
-				
+
 
 				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
@@ -3322,18 +3321,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
 			}
 		}
-
 		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();			
+			var MyNewProduct = new StepsNewProduct();
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
+		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
+		{
+			string id = "";
+
+			if (Context.Contains(savedAs))
+			{
+				var MyNewProduct = new StepsNewProduct();
+				id = Context.GetFromContext(savedAs).ToString();
+				MyNewProduct.SetTheSectionOptionTo("Product Identification (Optional)", id);
+			}
+			else
+			{
+				Report.Failure("Product ID saved as: " + savedAs + " was not found in context");
+			}
+		}
+
+		[StepDefinition(@"I Select a height from the drop down list")]
+		public void GivenISelectAHeightFromTheDropDownList()
+		{
+			List<string> HeightList = new NewProduct().GetHeightOptions();
+			// the container type count must be greater than 1 or random number will throw argument out of range exception (cannot have a range between 1 and 0)
+			if (HeightList.Count <= 1)
+			{
+				Report.Failure("Expected > 1 options to appear under the height select");
+				return;
+			}
+			var random = new Random();
+			int randomNumber = random.Next(1, HeightList.Count - 1);
+			Report.IsTrue(new NewProduct().SelectHeight(HeightList[randomNumber]),
+				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
+		}
 
 	}
 
@@ -3341,32 +3371,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//{
 	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+		//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-	//	public bool ClickUPCWarningButton(string choice)
-	//	{
-	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+		//	public bool ClickUPCWarningButton(string choice)
+		//	{
+		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-	//		if (modalWindow is null || modalTitle is null)
-	//		{
-	//			Report.Failure("Could not locate UPC Warning modal window.");
-	//			return false;
-	//		}
+		//		if (modalWindow is null || modalTitle is null)
+		//		{
+		//			Report.Failure("Could not locate UPC Warning modal window.");
+		//			return false;
+		//		}
 
-	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-	//		switch (choice)
-	//		{
-	//			case "ok":
-	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-	//				return deleteBtn.TryClick();
-	//			case "cancel":
-	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-	//				return cancelBtn.TryClick();
-	//		}
-	//		return false;
-	//	}
-	//}
+		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+		//		switch (choice)
+		//		{
+		//			case "ok":
+		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+		//				return deleteBtn.TryClick();
+		//			case "cancel":
+		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+		//				return cancelBtn.TryClick();
+		//		}
+		//		return false;
+		//	}
+		//}
+
+	}
 }
 
 
