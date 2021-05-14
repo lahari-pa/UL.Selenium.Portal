@@ -673,6 +673,7 @@ Given I should see the Product Information Page
 	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
 	| Button  |
+	| Button  |
 	| Go back |
 	| Confirm |
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button

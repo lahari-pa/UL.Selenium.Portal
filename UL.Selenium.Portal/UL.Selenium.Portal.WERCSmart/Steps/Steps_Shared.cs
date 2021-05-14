@@ -2325,9 +2325,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 
 
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+
+
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 			//Philip - Change
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			if (popupCausing.Contains(name))
 			{
+				new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide");
 				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 
@@ -2342,6 +2349,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I should see the Waste Classification Data Page");
 				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 			}
+
+		}
+
+		[StepDefinition(@"I call Shared Step 29181b \(Ingredients - add any chemical - Confirm Pesticide Popup\) with name: (.*)")]
+		public void ICallSharedIngredients_AddAnyChemicalAndConfirmPesticdePopup(string name)
+		{
+			//This step should be used over 29181 if the ingredients are part of FIFRA list which will cause the popup to appear
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartStep("I should see the Ingredients Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+			Report.StartStep("I add the ingredient " + name + " at 100%");
+			var table = new Table("ComponentName", "Percent");
+			table.AddRow(name, "100");
+			stepsNewProductIngredients.AddIngredients(table);
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide");
+			new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			
 
 		}
 
