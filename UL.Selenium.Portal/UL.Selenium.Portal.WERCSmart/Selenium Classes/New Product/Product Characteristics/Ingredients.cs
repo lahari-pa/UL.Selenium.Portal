@@ -1779,6 +1779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//As it stands this list does not dynamically update to any changes to these component lists will need to manually input. 
 			List<string> ingredients = new List<string>();
 			ingredients.Add("Chlorine");
+			ingredients.Add("Sodium hydroxide");
 
 
 			return ingredients;
