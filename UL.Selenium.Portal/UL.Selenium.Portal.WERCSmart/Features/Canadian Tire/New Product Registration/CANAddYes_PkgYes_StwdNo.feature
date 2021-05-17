@@ -102,10 +102,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @ScenarioId:1239
 Scenario: [85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, packaging type is required
 
-#Andrew-Undo this Acc change (only for debug)
-#Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
+Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 Given I generate a random UPC number and save as: UPC85743
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution

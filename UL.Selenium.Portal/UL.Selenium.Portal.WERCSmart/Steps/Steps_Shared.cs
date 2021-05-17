@@ -2323,27 +2323,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(table);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-
-
+			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
 
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
-			//Philip - Change
+			
 			if (popupCausing.Contains(name))
 			{
-				Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup");
-				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+				if(Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup"))
+				{
+					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+					Report.StartStep("I should see the Waste Classification Data Page");
+					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				}
+				else
+				{
+					Report.Failure("Popup not found");
+					Report.Screenshot();
+					return;
+				}
 
-				Report.StartStep("I should see the Waste Classification Data Page");
-				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				
 			}
 			else
 			{
-			//
+			
 
 
 				Report.StartStep("I should see the Waste Classification Data Page");
@@ -8272,7 +8280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
 				"No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
