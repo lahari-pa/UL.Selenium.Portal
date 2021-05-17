@@ -98,7 +98,7 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 Then I save the product information as: TestCase85728
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85728, container type: Plastic Container and size: 12 click continue
