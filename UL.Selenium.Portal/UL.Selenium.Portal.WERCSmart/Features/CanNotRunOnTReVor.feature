@@ -253,7 +253,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	Then I save the product information as: TestCase90002
 	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Water
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer      |
