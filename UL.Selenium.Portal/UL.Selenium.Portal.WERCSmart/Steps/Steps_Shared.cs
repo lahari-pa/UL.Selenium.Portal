@@ -8265,12 +8265,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
-			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			//if (countrySold.Contains("United States"))
-			//{
-			//	MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			//}
-
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
