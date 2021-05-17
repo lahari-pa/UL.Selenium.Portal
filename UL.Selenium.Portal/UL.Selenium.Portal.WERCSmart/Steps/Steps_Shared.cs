@@ -8265,11 +8265,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
-			if (countrySold.Contains("United States"))
-			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
-			}
+			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			//if (countrySold.Contains("United States"))
+			//{
+			//	MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			//}
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -8280,7 +8280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
 				"No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
