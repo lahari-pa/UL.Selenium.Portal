@@ -20,12 +20,8 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65512
 
-
-	#Philip - Change
-	#Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
-	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-	#
-
+	#Andrew - 65511 should be swapped for 159304
+	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
