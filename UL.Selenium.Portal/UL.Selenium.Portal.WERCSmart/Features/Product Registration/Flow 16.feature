@@ -180,10 +180,10 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I generate a random UPC number and save as: UPC59278
 	Given I delete all products with UPC Number: saved as UPC59278
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
-	Given I save the product information as: TestCase59278
 	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I save the product information as: TestCase59278
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

@@ -28,11 +28,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 	Given I call Shared Step 164954 (Enter Physical Property - Solid - Without Secondary Physical State - Without Water Solubility Question)
-	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	#Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
-	#
-
 
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
