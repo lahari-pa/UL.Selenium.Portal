@@ -1402,7 +1402,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productList.Count;
 		}
 
-
 	}
 
 	public class ProductGridItem : ProductsGrid

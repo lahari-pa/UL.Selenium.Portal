@@ -142,3 +142,47 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60619
+
+
+
+	@ScenarioId:10716
+Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol)
+Given I save the product information as: TestProduct
+Given in the Product Characteristics page I click Continue
+And Primary Physical State should be showing the error messages: This is a required field.
+Given I set the Primary Physical State option to: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given I set the Select the best Water Solubility description option to: Decomposes
+Given I click continue
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+Given I set the Product has been granted an Alternative Control Plan option to: No
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: abc
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: !@
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 123.456
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 12.34
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: abc
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: !@
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 123.456
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 12.34
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct

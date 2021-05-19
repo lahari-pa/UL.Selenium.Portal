@@ -305,3 +305,31 @@ Given I clear 'Type of Product'
 Given I set non-existent 'Type of Product': For Research and Development use only
 Given I confirm no results are returned
 Given I clear 'Type of Product'
+
+
+
+@ScenarioId:10715
+Scenario: [159942] Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use RU001423
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use
+Given I save the product information as: TestCase159942
+Given I set the Select countries the product may be sold in option to: United States
+Given I set the Select countries the product may be sold in option to: Canada
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I click continue
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given in the Tire Regulatory Details page I click Continue
+And Product is intended for agricultural use only should be showing the error messages: This is a required field.
+And Weight in kilograms (single unit) should be showing the error messages: This is a required field.
+And Height in inches (single unit) should be showing the error messages: This is a required field.
+Given I set the Product is intended for agricultural use only option to: No
+Given I set the Weight in kilograms (single unit) field to: abc
+And Weight in kilograms (single unit) should be showing the error messages: Enter a valid number
+Given I set the Weight in kilograms (single unit) field to: !@#
+And Weight in kilograms (single unit) should be showing the error messages: Enter a valid number
+Given I set the Weight in kilograms (single unit) field to: 12
+Given I Select a height from the drop down list
+Given I click continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase159942
