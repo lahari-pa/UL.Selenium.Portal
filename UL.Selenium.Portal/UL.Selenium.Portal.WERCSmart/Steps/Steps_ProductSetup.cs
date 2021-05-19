@@ -3655,13 +3655,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 
 
-
-			//Philip - Change
-			sharedSteps.Shared78080_RegulatoryDocumentsToProvide_UploadOshsSds();
-			//
-
-
-
 			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 
@@ -3682,37 +3675,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//stepsSharedUPC.UPCCaseInformation("876851", "Paper bag", "2", "4", "4A: steel box");
 
 			Report.StartStep("I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC (.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)");
-			stepsSharedUPC.UPCCaseAddInformation("876851", "Paper bag", "2", "4", "UPC87685", "4A: steel box");
-
-
-
-			//Philip Change
-			//Report.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
-			//sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
-			//
-
-
-
+			stepsSharedUPC.UPCCaseAddInformation("876851", "Paper bag", "2", "4", "UPC87685", "4A: steel box");			
+			Report.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();	
 			Report.StartStep("in the Additional Documents to Provide page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue(" Additional Documents to Provide");
 			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
-
-
-
-
-			//Philip Change
-			//Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
-
-			//var additionalData = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
-			//additionalData.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
-
-			//sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(additionalData);
-			//
-
-
-
-
+			Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
+			var additionalData = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			additionalData.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(additionalData);
 			Report.StartStep("I call Shared Step 57883");
 			sharedSteps.GivenICallSharedCommentsHappyPath(@"User added Comments Text 57863. !""�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
