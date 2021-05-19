@@ -517,7 +517,7 @@ Given I call Shared Step 118064 (Product Information - US only - No GHS, Not Dir
 Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 
 
-#Philip - Change
+#Philip - Change~
 #Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 #Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 #Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No

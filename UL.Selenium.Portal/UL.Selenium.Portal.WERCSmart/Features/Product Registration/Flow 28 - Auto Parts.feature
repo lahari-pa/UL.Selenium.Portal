@@ -30,7 +30,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Harbor Freight Tools and enter the name: Private Label Gasoline
 
 
-	#Philip - Change
+	#Philip - Change~
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Cardboard and size: 20
 	#
 
