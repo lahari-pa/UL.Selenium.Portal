@@ -107,18 +107,30 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC149421
 Then I save the product information as: TestCase149421
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+
+
 Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | Chalk         | 50      |                     |            |             |
 | 1244582   |               | 50      |                     |            |             |
-Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
-Given I click the link in the CBD Registration Guidance popup
-Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
-Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
-Given I close the current tab
-Given I close the CBD Registration Guidance popup in the Ingredients Page
+
+
+#Philip - Change
+#Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
+#Given I click the link in the CBD Registration Guidance popup
+#Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+#Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+#Given I close the current tab
+#Given I close the CBD Registration Guidance popup in the Ingredients Page
+#
+
+
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer |

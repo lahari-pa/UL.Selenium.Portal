@@ -1918,7 +1918,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
-			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(
@@ -2324,25 +2323,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-
-			//Philip - Change
+			//Philip- Change
 			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 			{
 				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-
-				Report.StartStep("I should see the Waste Classification Data Page");
-				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 			}
-			else
-			{
 			//
 
-
-				Report.StartStep("I should see the Waste Classification Data Page");
-				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
-			}
-
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -2817,7 +2807,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string packageType, string sku)
+			string size, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -3735,9 +3725,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
+			Report.Info("testing1");
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
 			{
+				Report.Info("testing2");
 				Report.StartStep(
 					"In the Product Type tab of the New Product Page for Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) I select:" +
 					table.Rows[0]["Product is marketed for use"]);
@@ -3745,11 +3737,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
 					table.Rows[0]["Product is marketed for use"]);
 			}
-
+			Report.Info("testing3");
 			if (myNewProduct.SectionExists(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)")
 			)
 			{
+				Report.Info("testing3");
 				Report.StartStep(
 					"In the Product Type tab of the New Product Page for Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) I select:" +
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
@@ -3757,11 +3750,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
 			}
-
+			Report.Info("testing4");
 			if (myNewProduct.SectionExists(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.")
 			)
 			{
+				Report.Info("testing5");
 				Report.StartStep(
 					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." +
 					table.Rows[0]["Shipped directly by supplier"]);
@@ -3769,11 +3763,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 					table.Rows[0]["Shipped directly by supplier"]);
 			}
-
+			Report.Info("testing6");
 			if (myNewProduct.SectionExists(
 				"Cleaning products must comply with California's Cleaning Product Right to Know Act.")
 			)
 			{
+				Report.Info("testing7");
 				Report.StartStep(
 					"Cleaning products must comply with California's Cleaning Product Right to Know Act." +
 					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
@@ -3791,11 +3786,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand",
 					table.Rows[0]["Private Label or Brand"]);
 			}
-
+			Report.Info("testing8");
 			if (myNewProduct.SectionExists(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)")
 			)
 			{
+				Report.Info("testing10");
 				Report.StartStep(
 					"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)" +
 					table.Rows[0]["Good Not for resale"]);
@@ -3803,7 +3799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 					table.Rows[0]["Good Not for resale"]);
 			}
-
+			Report.Info("testing11");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			Report.StartStep("In the Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
@@ -9230,7 +9226,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ProductName = productType
 				};
 				newProdSteps.ClickContinue();
-				newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
+
+				//Philip - Change
+				newProdSteps.GivenIShouldSeeXPage("Product Information");
+				//newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
+				//
 				newProdSteps.ClickPageHeading("The Product");
 				newProdSteps.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
 			}
@@ -10364,7 +10364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
-				"Cleaning products must comply with California's Cleaning Product Right to Know Act.  I would like to provide the additional information needed for this program during registration.",
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.",
 				"No");
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");

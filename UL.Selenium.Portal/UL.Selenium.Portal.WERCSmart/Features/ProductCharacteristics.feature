@@ -54,9 +54,16 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
-Given I call Shared Step 63804 (Product Information - enter options)
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
+
+
+#Philip - Change
+#Given I call Shared Step 63804 (Product Information - enter options)
+#		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+#		| No                                                             | No                           | No                     | No                  |
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+#
+
+
 Then I save the product information as: TestCase31827
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
@@ -79,6 +86,9 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
 Then I save the product information as: TestCase31833
+
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
@@ -98,6 +108,14 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 Then I save the product information as: TestCase31786
+
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+#
+
+
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
@@ -121,6 +139,14 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 Then I save the product information as: TestCase31789
+
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+#
+
+
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
@@ -136,6 +162,12 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31804
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#
+
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
@@ -153,6 +185,14 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31826
+
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#
+
+
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
@@ -167,6 +207,12 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 Then I save the product information as: TestCase85157
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#
+
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
@@ -187,6 +233,12 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 Then I save the product information as: TestCase85158
+
+#Philip - Change
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#
+
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Primary Physical State should be showing the error messages: This is a required field.

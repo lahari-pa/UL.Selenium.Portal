@@ -195,11 +195,6 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
-	#Philip Change
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	#
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -208,11 +203,7 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
 	Given I click continue
-
-	#Philip Change
-	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	#
-
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
@@ -239,13 +230,6 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
-
-	#Philip Change
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	#
-
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -254,13 +238,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
 	Given I click continue
-
-	
-	#Philip Change
-	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	#
-
-
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test

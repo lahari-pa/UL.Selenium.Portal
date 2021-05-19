@@ -44,7 +44,8 @@ And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click 
 
 
 #Philip - Change
-And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+And I set the OSHA-compliant Safety Data Sheet, English option to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+And I click the browse button for label: OSHA SDS and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 And I click continue
 #

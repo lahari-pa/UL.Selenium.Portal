@@ -228,10 +228,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info("Searching for product with ID: '" + sku + "'");
+
+                //Philip - Change
+				bool expanded = new ProductsGrid().MoreFiltersExpanded();
+				if (!expanded)
+				{
+					Report.Info("More Filters was collapsed so expanding it");
+					new ProductsGrid().ClickMoreFilters();
+				}
+				//
+
+
+				Report.Info("Searching for product with SKU: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
 					ProductSkuField = sku
 				};
+
 				GeneralUtilities.Wait_for_load_finish();
 				Delay.Seconds(10);
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + sku + "'!", "Product was returned!");

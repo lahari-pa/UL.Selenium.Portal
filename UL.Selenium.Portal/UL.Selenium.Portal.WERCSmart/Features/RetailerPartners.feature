@@ -47,7 +47,9 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Bed Bath and Beyond    | BB    |
 		| Canadian Tire          | CT    |		
 		| CVS                    | CV    |
-		| Delhaize               | DA    |
+		#Philip - Change
+		#| Delhaize               | DA    |
+		#
 		| Dick's Sporting Goods  | DI    |
 		| Dollar General         | DG    |
 		| Dollar Tree            | DT    |
@@ -72,7 +74,9 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Sears K Mart           | SE    |
 		| Smart & Final          | SF    |
 		| Staples                | SP    |
-		| SuperValue             | SV    |
+		#Philip - Change
+		#| SuperValue             | SV    |
+		#
 		| Target                 | TG    |
 		| The Home Depot         | HD    |
 		| Topco                  | TP    |

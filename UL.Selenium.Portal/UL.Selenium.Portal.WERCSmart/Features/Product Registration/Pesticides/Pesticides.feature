@@ -256,7 +256,14 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase56500
-	Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+
+
+	#Philip - Change
+	#Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
+	#
+
+
 	And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
@@ -268,26 +275,51 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	# 'field exists' only passes on a data entry element
 	Then in the Pesticide Details - Canada page I click Continue
 	# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
-	Then For every field in the table I should see the following error: This is a required field.
-		| Field                |
-		| Provide Canada       |
-		| Product              |
-		| Alberta              |
-		| British Columbia     |
-		| Labrador             |
-		| New Brunswick        |
-		| New Foundland        |
-		| Nova Scotia          |
-		| Ontario              |
-		| Prince Edward Island |
-		| Quebec               |
-		| Yukon Territory      |
 
+
+#Philip - Change
+#	Then For every field in the table I should see the following error: This is a required field.
+#		| Field                |
+#		| Provide Canada       |
+#		| Product              |
+#		| Alberta              |
+#		| British Columbia     |
+#		| Labrador             |
+#		| New Brunswick        |
+#		| New Foundland        |
+#		| Nova Scotia          |
+#		| Ontario              |
+#		| Prince Edward Island |
+#		| Quebec               |
+#		| Yukon Territory      |
+#
+#	Then For every field in the table I should not see the following error: This is a required field.
+#		| Field               |
+#		| Manitoba            |
+#		| Saskatchewan        |
+#		| Northwest Territory |
+
+
+		Then For every field in the table I should see the following error: This is a required field.
+		| Field                      |
+		| Provide Canada             |
+		| Product                    |
+		| Alberta                    |
+		| British Columbia           |
+		| New Brunswick              |
+		| New Foundland and Labrador |
+		| Nova Scotia                |
+		| Ontario                    |
+		| Prince Edward Island       |
+		| Quebec                     |
+		| Yukon Territory            |
+		| Saskatchewan               |
+		| Manitoba                   |
 	Then For every field in the table I should not see the following error: This is a required field.
 		| Field               |
-		| Manitoba            |
-		| Saskatchewan        |
 		| Northwest Territory |
+
+#
 
 	# Type in a Canadian Pest Control Products (PCP) Registration Number with more than 5 digits and less than 8 digits
 	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
@@ -318,28 +350,84 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I set the Product's packaging includes a Poison Danger symbol field to: No
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Given I set the Alberta field to: Choose...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Philip - Change
+	#Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
+	#	| Field                |
+	#	| Alberta              |
+	#	| British Columbia     |
+	#	| Labrador             |
+	#	| New Brunswick        |
+	#	| New Foundland        |
+	#	| Nova Scotia          |
+	#	| Ontario              |
+	#	| Prince Edward Island |
+	#	| Quebec               |
+	#	| Yukon Territory      |
+	## Confirm the Manitoba question shows N/A as already selected
+	#And Manitoba should be showing the value: N/A
+	##Confirm "None" is shown as already selected for the Saskatchewan question
+	#And Saskatchewan should be showing the value: None
+	##Confirm N/A is shown as already selected for the Northwest Territory question
+	#And Northwest Territory should be showing the value: N/A
+
+
+
+
+
+
+
+
+
+
 	Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field                |
-		| Alberta              |
-		| British Columbia     |
-		| Labrador             |
-		| New Brunswick        |
-		| New Foundland        |
-		| Nova Scotia          |
-		| Ontario              |
-		| Prince Edward Island |
-		| Quebec               |
-		| Yukon Territory      |
+		| Field					     |
+		| Alberta                    |
+		| British Columbia           |
+		| New Brunswick              |
+		| New Foundland and Labrador |
+		| Nova Scotia                |
+		| Ontario                    |
+		| Prince Edward Island       |
+		| Quebec                     |
+		| Yukon Territory            |
+		| Saskatchewan               |
+		| Manitoba                   |
 	# Confirm the Manitoba question shows N/A as already selected
-	And Manitoba should be showing the value: N/A
-	#Confirm "None" is shown as already selected for the Saskatchewan question
+	And Manitoba should be showing the value: None
+	# Confirm "None" is shown as already selected for the Saskatchewan question
 	And Saskatchewan should be showing the value: None
-	#Confirm N/A is shown as already selected for the Northwest Territory question
-	And Northwest Territory should be showing the value: N/A
+	# Confirm N/A is shown as already selected for the Northwest Territory question
+	And Northwest Territory should be showing the value: Not Applicable
+#
+
+
+
+
 	Then in the Pesticide Details - Canada page I click Continue
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
-	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+
+
+	#Philip - Change
+	# Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
+	#
+
+
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
@@ -535,6 +623,13 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
+
+
+	#Philip - Change
+	Given I set the Product has a State Registration option to: No
+	#
+
+
 	Given I see the following sections
 		| Section                         |
 		| Select the applicable exemption |

@@ -310,7 +310,14 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see a small icon with three lines in the upper left hand corner
 	Then In the Live Help dialog I should see an x in the upper right hand corner
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
-	Then In the Live Help dialog I should see the description text: Currently replying in under 2 hours at the top of the chat window
+
+
+	#Philip - Change
+	Then In the Live Help dialog I should see the description text: Currently replying in under a minute at the top of the chat window
+	#Then In the Live Help dialog I should see the description text: Currently replying in under 2 hours at the top of the chat window
+	#
+
+
 	Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
 	#Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
 	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
@@ -491,8 +498,13 @@ Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1567
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I save the product information as: TestCase
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+
+#Philip - Change
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+
+
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for

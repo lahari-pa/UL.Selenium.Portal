@@ -62,12 +62,6 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I ensure that there is a column in the Add UPC table called Transportation
 	Given I ensure that DOT is listed as Shipping with limited quantity
 	Given I ensure that IATA is listed as Shipping with limited quantity
-
-
-	#Philip - Change
-	Given I ensure that I cannot select DOT at Shipping with consumer commodity
-	#
-
 	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
@@ -571,15 +565,9 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
-
-
-	#Phliip - Change
-	#And I set the Product is Regulated for Transport field to: Yes
-	#And I set the Select all modes of transport that you've classified the product for field to: DOT
-	#And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
-	#
-
-
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
 	And I should see the U. S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
@@ -721,7 +709,11 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the below options for field: Select all modes of transport that you've classified the product for
 		| Option                           |
 		| DOT                              |
-		| Shipping with consumer commodity |
+		| Shipping with limited quantity   |
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
+
 	And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
@@ -737,31 +729,31 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	Given I click continue
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page
-	And I click continue
-	And I should see the Optional Reports and Documents Available for Purchase Page
-	And I click continue
-	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
-	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
-	Then I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: TestCase65947
-	Given I navigate to the landing page
-	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	And I filter for the product saved as: TestCase65947
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Universal Product Code (UPC)
-	Given I ensure that DOT is listed as Shipping with consumer commodity
-	Given I ensure that I can select DOT at Shipping with limited quantity
-	Given I ensure that I can select DOT at Shipping fully regulated
+	#And I click continue
+	#And I should see the Optional Reports and Documents Available for Purchase Page
+	#And I click continue
+	#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	#	| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+	#And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	#And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
+	#Then I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: TestCase65947
+	#Given I navigate to the landing page
+	#And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#And I filter for the product saved as: TestCase65947
+	#And I click Row Actions for the first product returned
+	#And I click on the Row Action: Update Required
+	#Given In the New Product page I click tab: Recipient and UPC Details
+	#And I click the page heading: Universal Product Code (UPC)
+	#Given I ensure that DOT is listed as Shipping with consumer commodity
+	#Given I ensure that I can select DOT at Shipping with limited quantity
+	#Given I ensure that I can select DOT at Shipping fully regulated
 
 @ScenarioId:6703
 Scenario: [125703] UPC transportation - Recertification - Upgrade and Downgrade - Shipping fully regulated
