@@ -2323,25 +2323,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(table);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-
-
-			//Philip - Change
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
-			{
-				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-
-				Report.StartStep("I should see the Waste Classification Data Page");
-				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
-			}
-			else
-			{
-			//
-
-
-				Report.StartStep("I should see the Waste Classification Data Page");
-				MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
-			}
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 
 		}
 
