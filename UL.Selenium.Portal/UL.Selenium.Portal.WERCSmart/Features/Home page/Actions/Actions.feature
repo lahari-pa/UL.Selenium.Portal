@@ -65,7 +65,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Then I save the product information as: TestCase63663
 
 
-	#Philip - Changes
+	#Philip - Changes~
 	Given I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No
     Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
@@ -316,7 +316,7 @@ Given I search for the product saved as: TestCase125144
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Access Code
 
-#Philip - Change
+#Philip - Change~
 Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 12345678
 #
 

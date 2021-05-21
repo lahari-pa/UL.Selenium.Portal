@@ -155,7 +155,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given in the New Product page I click Continue
 
 
-	#Philip - Change
+	#Philip - Change~
 	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#
@@ -349,7 +349,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	Given in the New Product page I click Continue
 
 
-	#Philip - Change
+	#Philip - Change~
 	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#
@@ -471,7 +471,7 @@ Scenario: [56484] VOC - Aero checks
 	Given in the New Product page I click Continue
 
 
-	#Philip - Change
+	#Philip - Change~
 	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#

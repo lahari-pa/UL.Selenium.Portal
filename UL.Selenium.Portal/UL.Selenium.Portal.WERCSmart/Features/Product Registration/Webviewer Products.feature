@@ -648,6 +648,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
+@ScenarioId:10788
 Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
@@ -665,7 +666,7 @@ Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL an
 Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
 Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-iven in the Additional Documents to Provide page I click Continue
+Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

@@ -50,7 +50,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 
 
-#Philip - Change
+#Philip - Change~
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
 #
 
@@ -99,7 +99,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 
 
-#Philip - Change
+#Philip - Change~
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Cardboard and size: 33
 #
 

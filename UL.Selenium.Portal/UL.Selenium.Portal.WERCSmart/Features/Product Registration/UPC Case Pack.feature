@@ -102,7 +102,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 
-	#Philip - Change
+	#Philip - Change~
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
 	#
 
@@ -419,7 +419,7 @@ Given I click the 'Add Case UPC' button
 
 
 
-#Philip - Change
+#Philip - Change~
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |

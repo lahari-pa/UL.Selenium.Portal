@@ -30,8 +30,8 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 
-#Philip - Change
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor + Desktop)
+#Philip - Change~
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor Desktop)
 #
 
 
@@ -58,7 +58,7 @@ Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Cli
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 
-#Philip - Change
+#Philip - Change~
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor + Desktop)
 #
 
