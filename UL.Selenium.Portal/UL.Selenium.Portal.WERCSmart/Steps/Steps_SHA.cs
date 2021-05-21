@@ -2419,8 +2419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSupplierManagerPopupIClickOnTheCloseButton()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.ClickClose(), "Failed to click close button",
-				"Clicked close button");
+			Report.IsTrue(thisStudioSupplierManager.CloseSupplierManager(), "Failed to click close button","Clicked close button");
 		}
 
 		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
