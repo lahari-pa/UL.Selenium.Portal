@@ -31,7 +31,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 
 #Philip - Change
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor + Desktop)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor Desktop)
 #
 
 
