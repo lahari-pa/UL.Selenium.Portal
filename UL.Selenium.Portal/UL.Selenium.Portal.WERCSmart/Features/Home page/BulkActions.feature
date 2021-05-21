@@ -447,7 +447,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Make Obsolete popup I click on the Accept button
 	Then I make sure product saved as: TestCase93366b should missing from the product list
 
-	Then In the Delete Active Products page I click the Clear Filter button
+
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366c
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase93366c should not missing from the product list

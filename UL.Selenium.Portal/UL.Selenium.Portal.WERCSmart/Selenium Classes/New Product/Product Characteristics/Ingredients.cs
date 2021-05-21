@@ -1781,6 +1781,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Chlorine");
 			ingredients.Add("Chlorine dioxide");
 			ingredients.Add("Sodium hydroxide");
+			ingredients.Add("Lanolin");
+			ingredients.Add("Glycerin");
+
+
 
 
 			return ingredients;
