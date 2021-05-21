@@ -183,6 +183,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
+	#Philip - Working
 @ScenarioId:1196
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -190,26 +191,31 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
+
+	#Philip - Change
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	#And I call Shared Step 69687 (Product Information - US, No(PL))
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
-	#And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
-	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	#Given I click the 'Add Case UPC' button
-	#Then I should see the following UPC options:
-	#	| Option                            |
-	#	| UPC Number                        |
-	#	| Quantity of Units within the Case |
-	#	| Size (Weight Ounces)              |
+	#
 
-		#Philip - Change
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I click the 'Add Case UPC' button
+	Then I should see the following UPC options:
+		| Option                            |
+		| UPC Number                        |
+		| Quantity of Units within the Case |
+		| Size (Weight Ounces)              |
+
+	#Philip - Change
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Fluid Ounces) |
 	#
+	
 
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
 @ScenarioId:8260
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)

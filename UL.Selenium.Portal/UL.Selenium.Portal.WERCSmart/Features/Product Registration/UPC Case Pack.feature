@@ -310,6 +310,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
+	#Philip - Working
 @singlerun
 @ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC
@@ -343,21 +344,21 @@ Given I Use Test case 87685 to create a product which has a Case UPC and a regul
 		| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation Options              |
 		| Paper bag      | 2    | 4        | <UPC87685>                                | 4A:  steel box                      |
 		| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1:  non-removable head steel drum |
-	Then I confirm the active Forward Product Registration tab is: Product Results
-	And I confirm that there are NO Errors displayed for the Product
-	And I click continue on the Forward Product Registration page
-	Then I confirm the active Forward Product Registration tab is: Review & Submit
-	Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
-	And I click continue on the Forward Product Registration page
-	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-	Then In the Thank You screen I click Home
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
-	Then I Check that the product under the retailer: Amazon is under the status: Accepted
-	Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87894
-	Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
+	#Then I confirm the active Forward Product Registration tab is: Product Results
+	#And I confirm that there are NO Errors displayed for the Product
+	#And I click continue on the Forward Product Registration page
+	#Then I confirm the active Forward Product Registration tab is: Review & Submit
+	#Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	#And I click continue on the Forward Product Registration page
+	#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	#Then In the Thank You screen I click Home
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+	#Then I Check that the product under the retailer: Amazon is under the status: Accepted
+	#Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
+	#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87894
+	#Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
 @ScenarioId:1535
 Scenario: [87835] View UPCs shows Case UPC Data
@@ -540,9 +541,18 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
+
+#Philip - Change
+And I should see the Product Information Page
+#
+
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-And I should see the Product Information Page
+
+#Philip - Nagel
+#And I should see the Product Information Page
+#
+
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)

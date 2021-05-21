@@ -232,7 +232,10 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88199, container type: Paper bag and size: 2 do not click continue
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
+	#Philip - Working
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: <first>
+	#Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
+	#
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order

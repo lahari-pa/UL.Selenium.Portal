@@ -86,7 +86,12 @@ Scenario: [62852] Pesticide - Product Label is required
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (Random) - Continue - Happy Path)
+
+	#Philip - Working
+	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	#Given I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (Random) - Continue - Happy Path)
+	#
+
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -231,8 +236,13 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting
 	Given I save the product information as: TestCase66344
-	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
+
+	#Philip - Working
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	#And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
+	#
+
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
@@ -243,8 +253,13 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
-	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
+
+	#Philip - Working
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	#And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
+	#
+
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
