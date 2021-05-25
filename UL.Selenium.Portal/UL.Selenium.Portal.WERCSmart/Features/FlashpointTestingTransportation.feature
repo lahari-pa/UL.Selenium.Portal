@@ -18,7 +18,8 @@ Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -27,8 +28,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -70,7 +69,8 @@ Scenario: [74349] Flash Point = 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 38
 And I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -79,8 +79,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -125,7 +123,8 @@ Scenario: [74357] Flash Point < 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -134,8 +133,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -172,7 +169,8 @@ Scenario: [74346] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -183,8 +181,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -229,7 +225,8 @@ Scenario: [74364] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -240,8 +237,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -283,7 +278,8 @@ Scenario: [74365] Flash Point > 60°C - Testing method shows all, Transportation
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -294,8 +290,6 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -340,7 +334,8 @@ Scenario: [74366] Flash Point = 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 Given I set the Boiling Point (in Celsius) field to: 45
 Given I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -349,8 +344,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -392,7 +385,8 @@ Scenario: [74368] Flash Point Range < 23 - Testing method shows closed cup only,
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 45
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: <23C
@@ -402,8 +396,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -446,7 +438,8 @@ Scenario: [74372] Flash Point Range >=23 and <38 - Testing method shows closed c
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=23C and <38C
@@ -456,8 +449,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -500,7 +491,8 @@ Scenario: [74374] Flash Point Range >=38 and <=60  - Testing method shows closed
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=38C and <=60C
@@ -510,8 +502,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -554,7 +544,8 @@ Scenario: [74376] Flash Point Range > 60 and < 93 - Testing method shows all, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >60C and <=93C
@@ -566,8 +557,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -611,7 +600,8 @@ Scenario: [74379] Flash Point Range >=93 and <=815 - Testing method shows all, T
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >93C and <=815C
@@ -623,8 +613,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -668,7 +656,8 @@ Scenario: [74380] Flash Point Range Not Tested - Testing method shows Not Applic
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: Not Tested/Unknown
@@ -678,8 +667,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -723,7 +710,8 @@ Scenario: [74382] Flash Point Range None, No Flash Point- Testing method shows N
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: None, No Flash Point
@@ -733,8 +721,6 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page

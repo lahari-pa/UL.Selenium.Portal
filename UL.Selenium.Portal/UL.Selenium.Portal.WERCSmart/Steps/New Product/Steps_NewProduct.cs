@@ -126,11 +126,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		// * 'Tab' is the major step on the progress wizard [html: 'prog-step']
 		//		eg. Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit
 		// * 'Page' is the minor step within a Tab [html: 'step-panel']
-		//		eg. The Product, Additional Product Information, Ingredients, Retailers...
+		//		eg. The Product, Product Information, Ingredients, Retailers...
 		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
 		//		eg. 'Product name', 'Type of product', pH...
 
-		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Physical and Chemical Properties|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
 			try
@@ -2933,14 +2933,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
 
-		[StepDefinition(@"In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
+		[StepDefinition(@"In the Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
 		public void GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -2967,8 +2967,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"In the Restict Use page I select Do Not Restrict")]
@@ -3089,7 +3089,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
 		}
 
-		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Additional Product Information with the following text: (.*)")]
+		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Product Information with the following text: (.*)")]
 		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -3310,8 +3310,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
-		public void InTheAdditionalProductInformationPageUnselectUS()
+		[StepDefinition(@"In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		public void InTheProductInformationPageUnselectUS()
 		{
 			var MyNewProduct = new NewProduct();
 			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
@@ -3399,6 +3399,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//}
 
 	}
-}
+
 
 

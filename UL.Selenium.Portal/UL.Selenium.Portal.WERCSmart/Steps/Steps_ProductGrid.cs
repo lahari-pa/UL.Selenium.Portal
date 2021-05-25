@@ -241,55 +241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-
-		[StepDefinition(@"I filter for the product with SKU saved as: (.*)")]
-		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
-		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
-		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
-			try
-			{
-				Report.Info("Searching for Product Saved as " + savedAs);
-				if (!Context.Contains(savedAs))
-				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
-				string sku = "";
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					sku = productToSearch.ProductId;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-				if (sku == "")
-				{
-					try
-					{
-						sku = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
-					}
-				}
-
-				Report.Info("Searching for product with SKU: '" + sku + "'");
-				var selProdGrid = new ProductsGrid {
-					ProductSkuField = sku
-				};
-				GeneralUtilities.Wait_for_load_finish();
-				Delay.Seconds(10);
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + sku + "'!", "Product was returned!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
+		
 		
 		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
@@ -1719,7 +1671,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"HD Supply"
 			});
 				productTable.AddRow(new string[] {
-				"HEB "
+				"HEB"
 			});
 				productTable.AddRow(new string[] {
 				"HyVee"
@@ -1752,7 +1704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Office Depot"
 			});
 				productTable.AddRow(new string[] {
-				"Optoro "
+				"Optoro"
 			});
 				productTable.AddRow(new string[] {
 				"O'Reilly"
@@ -1761,10 +1713,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Petco"
 			});
 				productTable.AddRow(new string[] {
-				"Price Chopper "
+				"Price Chopper"
 			});
 				productTable.AddRow(new string[] {
-				"Publix "
+				"Publix"
 			});
 				productTable.AddRow(new string[] {
 				"Rite Aid"
@@ -1882,7 +1834,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"HD Supply"
 			});
 				productTable.AddRow(new string[] {
-				"HEB "
+				"HEB"
 			});
 				productTable.AddRow(new string[] {
 				"HyVee"
@@ -1915,7 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Office Depot"
 			});
 				productTable.AddRow(new string[] {
-				"Optoro "
+				"Optoro"
 			});
 				productTable.AddRow(new string[] {
 				"O'Reilly"
@@ -1924,10 +1876,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Petco"
 			});
 				productTable.AddRow(new string[] {
-				"Price Chopper "
+				"Price Chopper"
 			});
 				productTable.AddRow(new string[] {
-				"Publix "
+				"Publix"
 			});
 				productTable.AddRow(new string[] {
 				"Rite Aid"
@@ -2988,80 +2940,80 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
-		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
-		{
+		//[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		//public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
+		//{
 
-			try
-			{
-				Report.Info("Searching for Product Saved as " + savedAs);
+		//	try
+		//	{
+		//		Report.Info("Searching for Product Saved as " + savedAs);
 
-				if (!Context.Contains(savedAs))
-				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
+		//		if (!Context.Contains(savedAs))
+		//		{
+		//			Report.Failure("The reference: " + savedAs + " was not found in context");
+		//			return;
+		//		}
 
-				string id = "";
+		//		string id = "";
 
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					id = productToSearch.ProductId;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
+		//		try
+		//		{
+		//			var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+		//			id = productToSearch.ProductId;
+		//		}
+		//		catch (Exception)
+		//		{
+		//			//do nothing
+		//		}
 
-				//if we didn't get the id try a different object type
-				if (id == "")
-				{
-					try
-					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
+		//		//if we didn't get the id try a different object type
+		//		if (id == "")
+		//		{
+		//			try
+		//			{
+		//				var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+		//				id = productDetails.Id;
+		//			}
+		//			catch (Exception)
+		//			{
+		//				//do nothing
+		//			}
 
-				}
+		//		}
 
-				if (id == "")
-				{
-					try
-					{
-						id = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
+		//		if (id == "")
+		//		{
+		//			try
+		//			{
+		//				id = Context.GetFromContext(savedAs).ToString();
+		//			}
+		//			catch (Exception)
+		//			{
 
-					}
-				}
-				Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
-				"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
-				"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
-				Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
-					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
-					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+		//			}
+		//		}
+		//		Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+		//		"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+		//		"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
+		//		Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
+		//			"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+		//			"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
 
-				GeneralUtilities.Wait_for_load_finish();
-				Delay.Seconds(10);
+		//		GeneralUtilities.Wait_for_load_finish();
+		//		Delay.Seconds(10);
 
-				Report.Info("ID searched for: '" + id + "'");
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+		//		Report.Info("ID searched for: '" + id + "'");
+		//		var selProdGrid = new ProductsGrid();
+		//		Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
 
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Report.Failure(ex.Message);
+		//		throw;
+		//	}
 
-		}
+		//}
 
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)

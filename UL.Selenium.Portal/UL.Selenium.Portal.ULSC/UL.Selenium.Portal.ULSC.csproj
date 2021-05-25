@@ -160,11 +160,11 @@
     <Reference Include="TReVor.Api.Wrapper, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Reporting, Version=2.1.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\lib\net461\UL.Automation.Reporting.dll</HintPath>
+    <Reference Include="UL.Automation.Reporting, Version=2.1.132.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Reporting.SpecFlow, Version=2.1.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.119\lib\net461\UL.Automation.Reporting.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.Reporting.SpecFlow, Version=2.1.132.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\lib\net461\UL.Automation.Reporting.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Selenium, Version=2.2.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Selenium.SpecFlow.2.2.19\lib\net461\UL.Automation.Selenium.dll</HintPath>
@@ -252,22 +252,22 @@
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.3.4.3\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.3.4.3\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.2.19\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.2.2.19\build\UL.Automation.Selenium.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.2.4\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.2.2.4\build\UL.Automation.Utilities.SpecFlow.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.3.4.3\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.4.3\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.4.3\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.4.3\build\SpecFlow.NUnit.targets')" />
+  <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.2.1.132\build\UL.Automation.Reporting.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.2.2.19\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.2.2.19\build\UL.Automation.Selenium.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.2.3.11\build\UL.Automation.TReVor.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.2.2.4\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.2.2.4\build\UL.Automation.Utilities.SpecFlow.targets')" />

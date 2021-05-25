@@ -31,8 +31,8 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#In the shared step below use Chalk as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase80854
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	#The Ingredients step is shown - Confirm the Transparency ratio (the numbers below the Publicly Disclosed column) shows in red background and shows 0/0
 	#And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
 	And I verify the Transparency Score displays 0.00%

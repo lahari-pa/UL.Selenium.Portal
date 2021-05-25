@@ -141,7 +141,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
 	#Given I edit the product with ID: 1470688
 	Given I create a product and take it to the ingredients page and save as: TestCase70539
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I click the 'Use My Ingredients' button
@@ -177,7 +177,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	#Given I edit the product with ID: 1470688
 	#
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I create a product and take it to the ingredients page and save as: TestCase70556
@@ -219,7 +219,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	#Given I edit the product with ID: 1470688
 	#
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I create a product and take it to the ingredients page and save as: TestCase70567
