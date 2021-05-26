@@ -18,7 +18,6 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium battery vehicle
 And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 	| Battery Type   | Manufacturer | Number of batteries per package | How many batteries required to run |
@@ -50,7 +49,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 
-#Philip - Change
+#Philip - Change~
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Magnesium Battery
 Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 #Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
@@ -142,7 +141,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 
 
 
-#Philip - Change
+#Philip - Change~
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
 Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 #Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))

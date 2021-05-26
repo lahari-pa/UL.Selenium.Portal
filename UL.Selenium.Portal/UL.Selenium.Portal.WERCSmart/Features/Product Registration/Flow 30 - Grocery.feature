@@ -34,7 +34,7 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 
-	#Philip - Change
+	#Philip - Change~
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Cardboard and size: 20
 	#
 
@@ -68,7 +68,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 
-	#Philip - Change
+	#Philip - Change~
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Cardboard and size: 20
 	#
 
@@ -103,7 +103,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 
-	#Philip - Change
+	#Philip - Change~
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Cardboard and size: 20
 	#
 

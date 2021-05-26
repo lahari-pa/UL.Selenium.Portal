@@ -73,7 +73,20 @@ And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only ava
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Walgreens and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+#Philip - Change
+#And I call Shared Step  (Select Retailers Walgreens and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+And In the 'Select Retailers' window I select the retailer: Walgreens
 And I click continue
+#
+
+
+#Philip - Change
+#And I call Shared Step  (Select Retailers Walgreens and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+And In the 'Select Retailers' window I select the retailer: Walgreens
+And I click continue
+#
+
+
 And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC85778, container type: Plastic Container and size: 12 click continue
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85778
