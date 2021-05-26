@@ -1775,11 +1775,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement field = this.ContainerElement.FindElement(By.XPath(@"//input[@data-bind='textInput: field.field, attr: { placeholder: placeholder }, enable: isReadonly() === false']"), 2);
 			return field.TryEnterText(text);
-		}
-
-
-	}
-}
+		}	
 
 		public List<string> IngredientsFIFRAPopup()
 		{
