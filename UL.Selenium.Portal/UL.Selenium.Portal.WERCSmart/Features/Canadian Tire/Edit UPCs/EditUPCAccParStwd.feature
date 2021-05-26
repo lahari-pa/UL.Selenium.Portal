@@ -59,7 +59,7 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 
-	#Given In the Data Acceptance page I click on the Accept button
+	Given In the Data Acceptance page I click on the Accept button
 
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86258)
