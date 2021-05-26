@@ -1783,6 +1783,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Sodium hydroxide");
 			ingredients.Add("Lanolin");
 			ingredients.Add("Glycerin");
+			ingredients.Add("Vitamin E");
+			ingredients.Add("Propane");
 
 
 
