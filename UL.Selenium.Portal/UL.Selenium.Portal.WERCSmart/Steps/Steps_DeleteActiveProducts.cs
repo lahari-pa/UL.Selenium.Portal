@@ -35,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheDeleteActiveProductsPageIClickTheClearFilterButton()
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
-			Report.IsTrue(deleteActiveProductsObject.ClickFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+			Report.IsTrue(deleteActiveProductsObject.ClickClearFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
 			Delay.Seconds(10);
 		}
 
