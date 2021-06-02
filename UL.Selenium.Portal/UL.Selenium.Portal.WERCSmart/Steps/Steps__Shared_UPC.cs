@@ -736,13 +736,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (baseData == false)
 			{
-				Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+				Report.Failure("ERROR: Package reference 'Microsoft.Office.Interop.Excel' has been removed. Please find an alternative solution.");
+				// TODO: Replace this with something that doesn't use 'Microsoft.Office.Interop.Excel' - the test agents will not have Microsoft Office installed.
 
-				var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
-				excelWorkBook.Activate();
-				excelWorkBook.Save();
-				excelWorkBook.Close();
-				excelApp.Quit();
+				//Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+				//var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+				//excelWorkBook.Activate();
+				//excelWorkBook.Save();
+				//excelWorkBook.Close();
+				//excelApp.Quit();
 			}
 
 			//XSSFWorkbook hssfwb;
