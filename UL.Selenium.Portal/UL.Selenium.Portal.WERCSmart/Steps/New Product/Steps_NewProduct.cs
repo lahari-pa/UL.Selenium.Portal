@@ -1,7 +1,7 @@
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
@@ -2523,7 +2523,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{

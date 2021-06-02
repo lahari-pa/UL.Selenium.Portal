@@ -8,7 +8,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -255,9 +255,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					case "User":
 						string user = value;
-						if (UL.Automation.Reporting.SpecFlow.Classes.Context.Contains(value))
+						if (UL.Automation.SpecFlow.Classes.Context.Contains(value))
 						{
-							user = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+							user = UL.Automation.SpecFlow.Classes.Context.GetFromContext(value).ToString();
 						}
 						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
