@@ -11,7 +11,7 @@ using System.Linq;
 using UL.Automation.Utilities.Functions;
 using System.IO;
 using System.Text.RegularExpressions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using System.Net;
 using System.Drawing;
 using TechTalk.SpecFlow;

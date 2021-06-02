@@ -3,7 +3,7 @@ using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Automation.TReVor.Classes;
@@ -627,7 +627,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
 			account.Email = MailosaurFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
 			Report.Success("Account details saved!");
 			var mySignUp = new StepsSignup();
 			var myLogin = new StepsLogin();
