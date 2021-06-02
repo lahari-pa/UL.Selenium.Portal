@@ -71,7 +71,6 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Sears K Mart               | SE    |
 		| Smart & Final              | SF    |
 		| Staples                    | SP    |
-		| SuperValue                 | SV    |
 		| Target                     | TG    |
 		| The Home Depot             | HD    |
 		| Topco                      | TP    |
