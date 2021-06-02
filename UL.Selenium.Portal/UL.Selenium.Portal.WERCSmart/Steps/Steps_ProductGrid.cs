@@ -1898,10 +1898,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				productTable.AddRow(new string[] {
 				"Staples"
-			});
-				productTable.AddRow(new string[] {
-				"SuperValu"
-			});
+			});				
 				productTable.AddRow(new string[] {
 				"Target"
 			});
@@ -1919,6 +1916,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				productTable.AddRow(new string[] {
 				"Unified"
+			});
+				productTable.AddRow(new string[] {
+				"United Natural Foods, Inc."
 			});
 				productTable.AddRow(new string[] {
 				"Wakefern"

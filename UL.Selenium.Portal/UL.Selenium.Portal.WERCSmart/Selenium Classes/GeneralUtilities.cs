@@ -417,7 +417,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{"Ace Hardware Corporation", "AC" },
 				{ "Best Buy", "BE" },
 				{ "Albertsons Companies", "SW" },
-				{ "Enterprise license", "EL" }
+				{ "Enterprise license", "EL" },
+				{"United Natural Foods, Inc.","UN"}
+
 			};
 		}
 

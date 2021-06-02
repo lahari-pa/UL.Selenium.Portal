@@ -39,58 +39,58 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 	# And I confirm that if an image is not present, then the retailer name is displayed
 	# And I confirm that the available retailers match those in the database
 	And I check that the following retailers are showing:
-		| Retailer               | Code  |
-		| Ahold                  | AH    |
-		| Albertsons Companies   | SW    |
-		| Amazon                 | AM    |
-		| Autozone               | AZ    |
-		| Bed Bath and Beyond    | BB    |
-		| Canadian Tire          | CT    |		
-		| CVS                    | CV    |
-		| Delhaize               | DA    |
-		| Dick's Sporting Goods  | DI    |
-		| Dollar General         | DG    |
-		| Dollar Tree            | DT    |
-		| Essendant              | US    |
-		| Family Dollar          | FD    |
-		| Genuine Parts          | GP    |
-		| Harbor Freight Tools   | HF    |
-		| HD Supply              | HS    |
-		| HyVee                  | HV    |
-		| Kroger                 | KG    |
-		| Lowes                  | LW    |
-		| McLane                 | ML    |
-		| Meijer                 | MJ    |
-		| Northgate Market       | NM    |
-		| Office Depot           | OD    |
-		| O'Reilly Auto Parts    | OR    |
-		| Petco                  | PC    |
-		| Price Chopper          | PR    |
-		| Rite Aid               | RA    |
-		| Save Mart Supermarkets | SM    |
-		| Schnucks               | SC    |
-		| Sears K Mart           | SE    |
-		| Smart & Final          | SF    |
-		| Staples                | SP    |
-		| SuperValue             | SV    |
-		| Target                 | TG    |
-		| The Home Depot         | HD    |
-		| Topco                  | TP    |
-		| Tractor Value Supply   | TS    |
-		| Ultra Standard         | ST    |
-		| Unified                | UF    |
-		| Wakefren               | WF    |
-		| Walgreens              | WG    |
-		| BONBONS                | WM-BO |
-		| Walmart.com            | WM-CO |
-		| Hayneedle              | WM-HN |
-		| Jet                    | WM-JE |
-		| MODCLOTH               | WM-MC |
-		| Moosejaw               | WM-MJ |
-		| Shoes.com              | WM-SC |
-		| Walmart                | WM    |
-		| Winco Foods            | WC    |
-		| NewEgg                 | NE    |
+		| Retailer                   | Code  |
+		| Ahold DelHaize USA         | AH    |
+		| Albertsons Companies       | SW    |
+		| Amazon                     | AM    |
+		| Autozone                   | AZ    |
+		| Bed Bath and Beyond        | BB    |
+		| Canadian Tire              | CT    |
+		| CVS                        | CV    |
+		| Dick's Sporting Goods      | DI    |
+		| Dollar General             | DG    |
+		| Dollar Tree                | DT    |
+		| Essendant                  | US    |
+		| Family Dollar              | FD    |
+		| Genuine Parts              | GP    |
+		| Harbor Freight Tools       | HF    |
+		| HD Supply                  | HS    |
+		| HyVee                      | HV    |
+		| Kroger                     | KG    |
+		| Lowes                      | LW    |
+		| McLane                     | ML    |
+		| Meijer                     | MJ    |
+		| Northgate Market           | NM    |
+		| Office Depot               | OD    |
+		| O'Reilly Auto Parts        | OR    |
+		| Petco                      | PC    |
+		| Price Chopper              | PR    |
+		| Rite Aid                   | RA    |
+		| Save Mart Supermarkets     | SM    |
+		| Schnucks                   | SC    |
+		| Sears K Mart               | SE    |
+		| Smart & Final              | SF    |
+		| Staples                    | SP    |
+		| SuperValue                 | SV    |
+		| Target                     | TG    |
+		| The Home Depot             | HD    |
+		| Topco                      | TP    |
+		| Tractor Value Supply       | TS    |
+		| Ultra Standard             | ST    |
+		| Unified                    | UF    |
+		| Wakefren                   | WF    |
+		| Walgreens                  | WG    |
+		| BONBONS                    | WM-BO |
+		| Walmart.com                | WM-CO |
+		| Hayneedle                  | WM-HN |
+		| Jet                        | WM-JE |
+		| MODCLOTH                   | WM-MC |
+		| Moosejaw                   | WM-MJ |
+		| Shoes.com                  | WM-SC |
+		| United Natural Foods, Inc. | UN    |
+		| Walmart                    | WM    |
+		| Winco Foods                | WC    |
+		| NewEgg                     | NE    |
 
 @ScenarioId:742
 Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
