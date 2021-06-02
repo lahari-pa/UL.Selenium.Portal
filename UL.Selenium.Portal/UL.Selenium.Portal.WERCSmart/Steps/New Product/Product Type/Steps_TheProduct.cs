@@ -1,6 +1,6 @@
 using System;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using NUnit.Framework.Internal;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;

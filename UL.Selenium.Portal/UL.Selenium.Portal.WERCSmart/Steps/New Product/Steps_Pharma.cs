@@ -20,7 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {

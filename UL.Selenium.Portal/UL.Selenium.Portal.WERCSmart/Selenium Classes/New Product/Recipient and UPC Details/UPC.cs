@@ -6,7 +6,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using TechTalk.SpecFlow;
 using System.IO;
