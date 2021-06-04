@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;

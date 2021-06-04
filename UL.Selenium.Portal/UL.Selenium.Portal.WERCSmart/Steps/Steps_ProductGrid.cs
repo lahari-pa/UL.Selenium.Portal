@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
@@ -1898,10 +1898,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				productTable.AddRow(new string[] {
 				"Staples"
-			});
-				productTable.AddRow(new string[] {
-				"SuperValu"
-			});
+			});				
 				productTable.AddRow(new string[] {
 				"Target"
 			});
@@ -1919,6 +1916,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				productTable.AddRow(new string[] {
 				"Unified"
+			});
+				productTable.AddRow(new string[] {
+				"United Natural Foods, Inc."
 			});
 				productTable.AddRow(new string[] {
 				"Wakefern"

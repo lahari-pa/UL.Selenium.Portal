@@ -11,7 +11,7 @@ using System;
 using TechTalk.SpecFlow;
 using NPOI.SS.UserModel;
 using Gherkin.Events.Args.Pickle;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using Newtonsoft.Json;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 
 

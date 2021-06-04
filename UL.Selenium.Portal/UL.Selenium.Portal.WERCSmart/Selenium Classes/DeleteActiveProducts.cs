@@ -2,7 +2,7 @@ using UL.Automation.Selenium.BaseClasses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.Generic;
 using UL.Automation.Selenium.Extensions;
