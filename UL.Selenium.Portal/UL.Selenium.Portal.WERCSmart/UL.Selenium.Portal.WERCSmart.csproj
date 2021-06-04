@@ -265,6 +265,7 @@
     <Compile Include="Selenium Classes\New Product\Product Type\TheProduct.cs" />
     <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\Retailer.cs" />
     <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\SelectRetailers.cs" />
+    <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\UPCValidationLogic.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\PackagingType.cs" />
     <Compile Include="Selenium Classes\PasswordExpired.cs" />
@@ -545,6 +546,7 @@
     </None>
     <None Include="Features\Product Registration\UPC Case Pack\SoldAndPLPTests.feature">
     </None>
+    <None Include="Features\Product Registration\UPC CheckDigit Validation\UPCCheckDigit.feature" />
     <None Include="Features\Product Registration\UPCTransportation.feature" />
     <None Include="Features\Product Registration\UPCTransporationRules.feature" />
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
