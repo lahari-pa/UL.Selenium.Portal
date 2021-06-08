@@ -34,6 +34,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return filterButton.TryClick();
 		}
 
+		public bool ClickClearFilterButtonInDeleteActiveProductsPage()
+		{
+			IWebElement clearFilterButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: clearFilters']"), 2);
+			return clearFilterButton.TryClick();
+		}
+
 		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string wpsID)
 		{
 			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@data-bind='textInput: wpsID']"), 2);

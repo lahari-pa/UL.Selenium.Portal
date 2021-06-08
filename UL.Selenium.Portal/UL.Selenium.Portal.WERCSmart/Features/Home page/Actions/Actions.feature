@@ -329,8 +329,7 @@ Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given In SHA Manager I set the filter for status to : Assigned
-Given I call Shared Step 157868 (SHA > Select First Product > UPC Retailer and Feed)
-Given I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it
+Then In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.
 Given I click the first UPC in the UPC Retailer and Feed page
 Given In UPC Details popup in UPC Retailer and Feed page I select retailer: 99 Cents
 Given In UPC Details popup in Retailer and UPC Feed page I see the following properties and values

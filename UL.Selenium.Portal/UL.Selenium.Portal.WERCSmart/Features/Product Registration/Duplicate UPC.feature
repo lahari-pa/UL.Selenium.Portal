@@ -200,8 +200,8 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as ExistingUPC | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| UPC Number           | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+		| saved as ExistingUPC | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. 
 	
@@ -224,8 +224,8 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add UPC button under the Select UPCs tab
 	And In the Add UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Ounces) | Retailer |
-		| saved as UPC91801_2 | Aerosol Can | 32            | WG       |
+		| UPC Number          | Type      | Size (Ounces) | Retailer |
+		| saved as UPC91801_2 | Cardboard | 32            | WG       |
 	And In the UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
@@ -248,7 +248,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I click the 'Add Case UPC' button
 	Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC91801_2 | Aerosol Can    | 32   | 32       |                          | 4A: steel box         |
+		| saved as UPC91801_2 | Cardboard      | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
@@ -272,8 +272,8 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as UPC91800_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| UPC Number          | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+		| saved as UPC91800_2 | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 

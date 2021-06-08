@@ -31,6 +31,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
+		[StepDefinition(@"In the Delete Active Products page I click the Clear Filter button")]
+		public void ThenInTheDeleteActiveProductsPageIClickTheClearFilterButton()
+		{
+			var deleteActiveProductsObject = new DeleteActiveProducts();
+			Report.IsTrue(deleteActiveProductsObject.ClickClearFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+			Delay.Seconds(10);
+		}
+
+
 		[StepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
 		public void ThenInTheDeleteActiveProductsPageISearchForWPSIDSavedAs(string wpsID)
 		{

@@ -1206,6 +1206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public void PressEnterOnStatusFilter()
+		{
+			IWebElement statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
+			statusSelect.SendKeys(Keys.Enter);
+		}
+
 		//Delete, Search (Srch), Status, Reject Submission, Create Group, Review
 		public bool ClickBottomMenuOption(string option)
 		{
@@ -3295,6 +3301,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
 		{
+
+			IWebElement bodyEl = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
+			if(bodyEl.IsNullOrEmpty())
+			{
+				Report.Info($"body el was not found in the popup or did not load in time.");
+				Report.Screenshot();
+				return null;
+			}
+			
 			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
 			List<string> itemsNotFound = new List<string>();
 
