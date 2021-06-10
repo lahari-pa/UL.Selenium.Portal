@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 
 			//if (opened)
 			//{
@@ -178,7 +178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			var popupIsDisplayed = new Retailer().SelectRetailsPopupIsDisplayed();
 			var opened = false;
 
@@ -213,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			else
 			{
 				Report.Failure($"Failed to click the 'Add Retailers Button'");

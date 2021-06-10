@@ -27,7 +27,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 
 
-#Philip - Change
+#Philip - Change - Checked
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 #
 

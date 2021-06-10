@@ -312,7 +312,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
 
 
-	#Philip - Change
+	#Philip - Change-
 	Then In the Live Help dialog I should see the description text: Currently replying in under a minute at the top of the chat window
 	#Then In the Live Help dialog I should see the description text: Currently replying in under 2 hours at the top of the chat window
 	#
@@ -549,7 +549,7 @@ Given I call Shared Step 57500 (The Product- Enter name, select product type - C
 Given I save the product information as: TestCase
 
 
-#Philip - Change
+#Philip - Change - Checked
 Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 

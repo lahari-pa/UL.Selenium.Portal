@@ -84,7 +84,7 @@ Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Then I save the product information as: TestCase58184
 	Given I call Shared Step 63804 (Product Information - enter options)
 
-		#Philip - Change
+		#Philip - Change - Checked
 		| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
 		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -153,7 +153,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 		| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
 		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -477,7 +477,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Then I save the product information as: TestCase57339
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given I call Shared Step 63804 (Product Information - enter options)
 		| Product is marketed for use   | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No							| No                                                             | No                           | No                     | No                  |
@@ -619,7 +619,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Cardboard and size: 1
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Aerosol Can and size: 1
 	#

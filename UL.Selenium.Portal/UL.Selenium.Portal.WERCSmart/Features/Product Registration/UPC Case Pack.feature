@@ -102,7 +102,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
 	#
 
@@ -419,7 +419,7 @@ Given I click the 'Add Case UPC' button
 
 
 
-#Philip - Change~
+#Philip - Change-
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
@@ -455,7 +455,7 @@ Given I generate a random UPC number and save as: UPC87633
 Then I save the product information as: TestCase87633
 
 
-#Philip - Change
+#Philip - Change - Checking
 Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
 Given I call Shared Step 118064 (Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 #
@@ -464,7 +464,7 @@ Given I call Shared Step 118064 (Product Information - US only - No GHS, Not Dir
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
-#Philip - Change
+#Philip - Change - Checking
 #Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
 #
 
@@ -497,14 +497,14 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
 
-#Philip - Change
+#Philip - Change - Checked
 And I should see the Product Information Page
 #
 
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 
-#Philip - Change
+#Philip - Change - Checked
 #And I should see the Product Information Page
 #
 
@@ -542,14 +542,14 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
 
-#Philip - Change
+#Philip - Change - Checked
 And I should see the Product Information Page
 #
 
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 
-#Philip - Nagel
+#Philip - Change - Checked
 #And I should see the Product Information Page
 #
 

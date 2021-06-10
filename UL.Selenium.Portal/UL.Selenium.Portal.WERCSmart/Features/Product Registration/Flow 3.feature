@@ -23,7 +23,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Then I save the product information as: TestCase74992
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 74995 (Liquid Core product - Select Yes - Continue)
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -64,7 +64,7 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Then I save the product information as: TestCase75081
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)

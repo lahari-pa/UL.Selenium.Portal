@@ -194,59 +194,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
-
-			try
-			{
-				Report.Info("Searching for Product Saved as " + savedAs);
-
-				if (!Context.Contains(savedAs))
-				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
-				string sku = "";
-
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					sku = productToSearch.ProductId;
-
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-				if (sku == "")
-
-				{
-					try
-					{
-						sku = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
-					}
-				}
-				Report.Info("Searching for product with ID: '" + sku + "'");
-				var selProdGrid = new ProductsGrid {
-					ProductSkuField = sku
-				};
-				GeneralUtilities.Wait_for_load_finish();
-				Delay.Seconds(10);
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + sku + "'!", "Product was returned!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"I filter for the product with SKU saved as: (.*)")]
-		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
-		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
-		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
@@ -277,7 +224,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 
-                //Philip - Change
+				//Philip - Change - Checked
 				bool expanded = new ProductsGrid().MoreFiltersExpanded();
 				if (!expanded)
 				{
@@ -2937,6 +2884,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
+	
 			RetailPartners retailPartnersObject = new RetailPartners();
 			string savedAs = productID;
 			try

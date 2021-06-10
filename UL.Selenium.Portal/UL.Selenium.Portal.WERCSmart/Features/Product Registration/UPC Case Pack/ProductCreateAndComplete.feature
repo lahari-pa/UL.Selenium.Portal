@@ -384,7 +384,7 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	#Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 	#Given I click continue
 	#
@@ -392,7 +392,7 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 	Given I click continue
 	#

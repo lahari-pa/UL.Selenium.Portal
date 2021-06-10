@@ -24,7 +24,7 @@ Scenario: [68420] List of Supplier Reports
 	Given I click the My Reports icon in the QuickLinks Pane
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	And In the Supplier Reports screen the page title should be: My Reports
 	#And In the Supplier Reports screen the page title should be: Available Reports
 	#

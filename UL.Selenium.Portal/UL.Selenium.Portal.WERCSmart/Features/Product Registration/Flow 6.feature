@@ -30,8 +30,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase78731
 
-Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-
+#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
 Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -59,23 +59,23 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 
-#Philip - Change
-Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
-#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+#Philip - Change - Checking
+#Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
+Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 #
 
 
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-
-Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
+#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+#
+#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+#
+#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+#
+#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+#
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
 
 @ScenarioId:1203

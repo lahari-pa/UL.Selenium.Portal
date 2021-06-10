@@ -24,7 +24,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Then I save the product information as: TestCase58736
 
 
-	#Philip - Change*
+	#Philip - Change - Checked
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 	Given I call Shared Step 164954 (Enter Physical Property - Solid - Without Secondary Physical State - Without Water Solubility Question)
@@ -43,7 +43,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Cardboard and size: 33
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33
 	#
@@ -87,7 +87,7 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Cardboard and size: 33
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: 33
 	#

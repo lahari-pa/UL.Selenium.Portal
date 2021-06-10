@@ -528,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
 			sharedSteps.SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue();
 			//
@@ -619,7 +619,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			//
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
 			//sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
@@ -816,7 +816,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
@@ -860,7 +860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table37857.AddRow("Grainy", "Soluble in hot water");
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
 			//sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
@@ -899,7 +899,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Latex gloves");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
 			//sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
@@ -944,7 +944,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
 			sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
 			//sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
@@ -992,7 +992,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Photograph Coating - Aerosol");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformationWithCountryAndEveryOption();
 			sharedSteps.GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly();
 			//sharedSteps.GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly();
@@ -1088,7 +1088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
@@ -1240,7 +1240,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");

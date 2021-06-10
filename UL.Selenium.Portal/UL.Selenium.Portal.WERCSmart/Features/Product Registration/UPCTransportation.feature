@@ -483,7 +483,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Given In the New Product page I click tab: Product Characteristics
 	#Given In the New Product page I click tab: Physical and Chemical Properties
 
@@ -677,7 +677,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		#Philip - Change
+		#Philip - Change - Checked
 		#| Shipping with consumer commodity |
 		#
 

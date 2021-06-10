@@ -21,7 +21,7 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Then I save the product information as: TestCase57922
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	#
@@ -37,7 +37,7 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	#Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	#
 
@@ -52,8 +52,8 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 
-	#Philip - Change
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Philip - Change - Checking
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 	#
 

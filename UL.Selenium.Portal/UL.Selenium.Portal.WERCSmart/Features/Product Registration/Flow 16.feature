@@ -183,7 +183,6 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 
 
 	#Philip - Change
-	Given I should see the Product Information Page
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 

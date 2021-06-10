@@ -49,7 +49,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 
-#Philip - Change~
+#Philip - Change - Checked
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Magnesium Battery
 Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 #Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
@@ -141,7 +141,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 
 
 
-#Philip - Change~
+#Philip - Change - Checked
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
 Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 #Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))

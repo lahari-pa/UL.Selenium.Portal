@@ -50,17 +50,18 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 
 
-#Philip - Change~
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
+#Philip - Change - Checking - Bug 167615
+Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60642 with container type: Cardboard size: 33 and quantity: 100
+#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
 #
 
 
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
+#
+#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
+#
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
 
 
 
@@ -99,7 +100,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 
 
-#Philip - Change~
+#Philip - Change - Checked
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Cardboard and size: 33
 #
 

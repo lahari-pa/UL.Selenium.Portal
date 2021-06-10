@@ -43,11 +43,11 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
+		#| UPC Number                        |
+		#| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
 
-	#Philip - Change
+	#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Weight Ounces) |
@@ -75,9 +75,9 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Option                            |
 		| UPC Number                        |
 		| Quantity of Units within the Case |
-		| Size (Fluid Ounces)
+		| Size (Fluid Ounces)               |
 
-	#Philip - Change
+	#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Weight Ounces) |
@@ -112,7 +112,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
 
-		#Philip - Change
+		#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Weight Ounces) |
@@ -145,7 +145,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
 
-		#Philip - Change
+		#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Weight Ounces) |
@@ -175,7 +175,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
 
-		#Philip - Change
+		#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Fluid Ounces) |
@@ -192,9 +192,8 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
 
-	#Philip - Change
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#And I call Shared Step 69687 (Product Information - US, No(PL))
+	#Philip - Change - Checked
+	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 	#
 
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -206,9 +205,8 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 		| Option                            |
 		| UPC Number                        |
 		| Quantity of Units within the Case |
-		| Size (Weight Ounces)              |
 
-	#Philip - Change
+	#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Fluid Ounces) |
@@ -242,7 +240,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
 
-		#Philip - Change
+		#Philip - Change-
 	#Then I should not see the following UPC options:
 	#	| Option               |
 	#	| Size (Fluid Ounces) |

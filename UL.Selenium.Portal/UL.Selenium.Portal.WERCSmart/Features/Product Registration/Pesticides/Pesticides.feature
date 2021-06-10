@@ -87,7 +87,7 @@ Scenario: [62852] Pesticide - Product Label is required
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-	#Philip - Working
+	#Philip - Change - Checked
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	#Given I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (Random) - Continue - Happy Path)
 	#
@@ -236,14 +236,14 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting
 	Given I save the product information as: TestCase66344
+    Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
-	#Philip - Working
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	#Philip - Change - Checked
 	#And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
 	#
 
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
@@ -253,14 +253,14 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
+	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
-	#Philip - Working
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	#Philip - Change - Checked-
 	#And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
 	#
 
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
@@ -273,7 +273,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I save the product information as: TestCase56500
 
 
-	#Philip - Change
+	#Philip - Change - Checked -
 	#Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
 	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
 	#
@@ -292,7 +292,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
 
 
-#Philip - Change
+#Philip - Change-
 #	Then For every field in the table I should see the following error: This is a required field.
 #		| Field                |
 #		| Provide Canada       |
@@ -379,7 +379,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 
 
 
-#Philip - Change
+#Philip - Change-
 	#Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
 	#	| Field                |
 	#	| Alberta              |
@@ -437,7 +437,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 
 
-	#Philip - Change
+	#Philip - Change-
 	# Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
 	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
 	#
@@ -640,7 +640,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Given I set the Product has a State Registration option to: No
 	#
 

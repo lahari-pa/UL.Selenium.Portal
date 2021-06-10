@@ -87,7 +87,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 
-	@ScenarioId:10283
+@ScenarioId:10283
 Scenario: [144468] Alcoholic Beverages - With DOT Exception
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -96,7 +96,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase144468
 
 
-#Philip - Change
+#Philip - Change - Checked
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
@@ -107,7 +107,7 @@ Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water
 
 
 
-#Philip - Change
+#Philip - Change - Checked
 #Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 #Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 #Given I click continue

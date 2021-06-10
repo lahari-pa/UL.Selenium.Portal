@@ -117,18 +117,16 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 1244-58-2 |               | 50      |                     |            |             |
 |           | Chalk         | 50      |                     |            |             |
-| 1244582   |               | 50      |                     |            |             |
 
 
-#Philip - Change
-#Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
-#Given I click the link in the CBD Registration Guidance popup
-#Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
-#Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
-#Given I close the current tab
-#Given I close the CBD Registration Guidance popup in the Ingredients Page
-#
+Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
+Given I click the link in the CBD Registration Guidance popup
+Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
+Given I close the current tab
+Given I close the CBD Registration Guidance popup in the Ingredients Page
 
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

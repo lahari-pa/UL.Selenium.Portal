@@ -143,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			//
 
@@ -386,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
 
-			//Philip- Change
+			//Philip - Change-
 			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 			{
 				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
@@ -2323,7 +2323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-			//Philip- Change
+			//Philip- Change-
 			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 			{
 				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
@@ -2520,7 +2520,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			//
 
@@ -3305,7 +3305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Access Code",
 				"12345678"));
@@ -4109,7 +4109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
 
 
-			//Philip - Change
+			//Philip - Change - Checked
 			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			//
 
@@ -9237,7 +9237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				};
 				newProdSteps.ClickContinue();
 
-				//Philip - Change
+				//Philip - Change - Checked
 				newProdSteps.GivenIShouldSeeXPage("Product Information");
 				//newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
 				//
@@ -10268,7 +10268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Ingredients");
 
 			//Philip - Working
-			this.GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue
+			this.GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue();
 			//Report.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
 			//this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
 			//

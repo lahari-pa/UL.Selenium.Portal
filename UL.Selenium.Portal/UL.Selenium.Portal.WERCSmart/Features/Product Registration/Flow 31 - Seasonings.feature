@@ -37,7 +37,7 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Cardboard and size: 20
 	#
 
@@ -78,7 +78,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 
-	#Philip - Change~
+	#Philip - Change - Checked
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Cardboard and size: 20
 	#
 

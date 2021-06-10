@@ -50,7 +50,7 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Cardboard and size: 14
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Aerosol Can and size: 14
 	#

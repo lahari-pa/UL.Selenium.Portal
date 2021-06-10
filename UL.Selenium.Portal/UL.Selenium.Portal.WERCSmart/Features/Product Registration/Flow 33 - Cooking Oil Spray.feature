@@ -29,7 +29,7 @@ Then I should not see an error message: ALERT! The ingredient table does not inc
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 
-#Philip - Change
+#Philip - Change - Checked
 #And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 #
 
@@ -43,11 +43,8 @@ And I click continue
 And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 
 
-#Philip - Change
-And I set the OSHA-compliant Safety Data Sheet, English option to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
-And I click the browse button for label: OSHA SDS and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
-And I click continue
+#Philip - Change - Checked
+And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 #
 
 

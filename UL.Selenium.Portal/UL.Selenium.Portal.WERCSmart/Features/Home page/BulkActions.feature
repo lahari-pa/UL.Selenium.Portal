@@ -265,7 +265,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 77535 (Retailer Association - Walmart)
 
 
-	#Philip - Change
+	#Philip - Change - Checked
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
 	#And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
 
