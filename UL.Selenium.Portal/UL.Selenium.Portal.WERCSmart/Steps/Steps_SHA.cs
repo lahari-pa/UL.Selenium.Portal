@@ -8,7 +8,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -255,9 +255,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					case "User":
 						string user = value;
-						if (UL.Automation.Reporting.SpecFlow.Classes.Context.Contains(value))
+						if (UL.Automation.SpecFlow.Classes.Context.Contains(value))
 						{
-							user = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+							user = UL.Automation.SpecFlow.Classes.Context.GetFromContext(value).ToString();
 						}
 						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
@@ -1453,27 +1453,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter(status);
 			Report.Info("Status has been set");
+			Report.Screenshot();
+			Report.Info("Pressing Enter Key");
+			Report.Screenshot();			
+
 			//This query is often very slow. Sometimes the results appear to have loaded but then several seconds later the
 			//spinner appears and the results change.
 			Delay.Seconds(10);
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.StudioWaitForSpinner(30);
 			myStudioShaManager.WaitForProductList(60);
 			//GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(10);
 			//Wait for top n items to be status Assigned
 			int n = 5;
-			for (int i = 0; i < 30; i++)
-			{
-				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
-				if (topN.Select(x => x.Status == status).ToList().Count == topN.Count)
+			int x = 0;
+			Report.Info($"Searching for status to match: {status}");
+			bool correct = false;
+			while(correct==false && x<60)
 				{
-					break;
+					List<Product> topN = myStudioShaManager.GetTopXProducts(n);
+					List<Product> correctStatusItems = new List<Product>();
+					foreach (var item in topN)
+					{
+						Report.Info($"Status found was: {item.Status}");
+						if (item.Status == status)
+						{
+							correctStatusItems.Add(item);
+						}
+					}
+					Report.Screenshot();
+					Report.Info($"n is {n}");
+					Report.Info($"Count found was: {correctStatusItems.Count()}");
+					if (correctStatusItems.Count() == topN.Count())
+					{
+						correct = true;
+						Report.Info($"{n} items with correct status were found");						
+					}		
+					Delay.Seconds(10);
+					x++;					
 				}
-
-				Delay.Seconds(1);
-			}
+			
 
 			Report.Screenshot();
+			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
 		}
 
 		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
@@ -2400,8 +2422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSupplierManagerPopupIClickOnTheCloseButton()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.ClickClose(), "Failed to click close button",
-				"Clicked close button");
+			Report.IsTrue(thisStudioSupplierManager.CloseSupplierManager(), "Failed to click close button","Clicked close button");
 		}
 
 		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
@@ -2671,7 +2692,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
-		}
+		}				
 
 		[StepDefinition(@"I switch to the Product List UPC Window")]
 		public void SwitchToProductListUpcWindow()
@@ -4268,6 +4289,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
+		}
+
+		[StepDefinition(@"In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.")]
+		public void SHAFindFirstUPCProductNavigateToUPCRetailersAndFeed()
+		{
+			ReportSettings.UseSubSteps = true;
+			string savedAs = "temp";
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("Getting all product ids from the table");
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			for (int i = 0; i < ids.Count; i++)
+			{
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = ids[i];
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Success($"Was able to succesfully navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
+					return;
+
+				}
+
+			}
+			Report.Failure($"Was unable to navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
+			return;					
+			
+			
 		}
 
 	}

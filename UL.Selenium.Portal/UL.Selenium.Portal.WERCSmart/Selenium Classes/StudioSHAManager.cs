@@ -9,7 +9,7 @@ using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -1205,6 +1205,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
+		}
+
+		public void PressEnterOnStatusFilter()
+		{
+			IWebElement statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
+			statusSelect.SendKeys(Keys.Enter);
 		}
 
 		//Delete, Search (Srch), Status, Reject Submission, Create Group, Review
@@ -3296,6 +3302,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
 		{
+
+			IWebElement bodyEl = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
+			if(bodyEl.IsNullOrEmpty())
+			{
+				Report.Info($"body el was not found in the popup or did not load in time.");
+				Report.Screenshot();
+				return null;
+			}
+			
 			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
 			List<string> itemsNotFound = new List<string>();
 

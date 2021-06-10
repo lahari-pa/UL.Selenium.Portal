@@ -30,7 +30,7 @@ Then I save the product information as: TestCase78933
 Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-# Failing on 'child' question
+# Failing on 'child' question.
 
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

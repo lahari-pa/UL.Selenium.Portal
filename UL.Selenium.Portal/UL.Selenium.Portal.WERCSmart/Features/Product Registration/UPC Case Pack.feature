@@ -581,7 +581,7 @@ Then I save the product information as: TestCase87821
 And I should see the Product Information Page
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue

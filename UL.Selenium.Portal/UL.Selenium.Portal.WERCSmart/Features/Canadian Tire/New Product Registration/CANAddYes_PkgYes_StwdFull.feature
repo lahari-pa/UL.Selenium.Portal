@@ -99,7 +99,7 @@ Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada O
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium Hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: Canadian Tire
 	And For retailer: Canadian Tire I add additional requirements: Additional requirements: Canadian Tire

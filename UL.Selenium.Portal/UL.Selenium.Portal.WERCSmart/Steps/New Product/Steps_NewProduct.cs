@@ -1,7 +1,7 @@
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
@@ -252,6 +252,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
 				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
+
+
+		[StepDefinition(@"I wait (.*) seconds for the (.*) Page to load")]
+		public void IWaitXSecondsForYPageToLoad(int seconds, string page)
+		{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page,seconds), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -2523,7 +2536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{

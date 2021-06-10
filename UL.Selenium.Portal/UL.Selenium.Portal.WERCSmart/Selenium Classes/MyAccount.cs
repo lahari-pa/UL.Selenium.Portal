@@ -8,7 +8,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
 using TechTalk.SpecFlow;

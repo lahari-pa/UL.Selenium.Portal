@@ -46,6 +46,7 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I wait 300 seconds for the Comments Page to load
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baked Goods, Crackers
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60725
@@ -79,6 +80,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	And I click continue	
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I wait 300 seconds for the Comments Page to load
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724

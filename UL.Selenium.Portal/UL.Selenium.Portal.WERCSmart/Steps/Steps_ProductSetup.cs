@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
@@ -1926,7 +1926,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
 			//And I call Shared Step 57911(Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			//And I call Shared Step 29206(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -2166,7 +2166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 			sharedSteps.ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Canadian Tire");
@@ -3025,7 +3025,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//
 
 
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Canadian Tire");
@@ -3131,7 +3131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//
 
 
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
 			var retailerTable = new Table("Retailer");

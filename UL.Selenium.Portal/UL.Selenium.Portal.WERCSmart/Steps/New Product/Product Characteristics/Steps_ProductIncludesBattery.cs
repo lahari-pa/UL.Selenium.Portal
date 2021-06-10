@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Automation.Selenium.Classes;

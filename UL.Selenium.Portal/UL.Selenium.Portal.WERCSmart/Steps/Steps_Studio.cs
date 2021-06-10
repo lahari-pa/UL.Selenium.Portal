@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -1182,7 +1182,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			thisPowerDesignerPlus.Wait_for_load(120);
 			Report.Screenshot();
-			thispd.ClickMenuAndSubmenuOptions("Home");
+			//thispd.ClickMenuAndSubmenuOptions("Home");
+
+			Report.Info("Trying new loading code to fix 42196 issue...");
+
+			var thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+			Delay.Seconds(3);
+
+
+
+
+
 			Delay.Seconds(10);
 			
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(120), "Power designer plus has not loaded",
