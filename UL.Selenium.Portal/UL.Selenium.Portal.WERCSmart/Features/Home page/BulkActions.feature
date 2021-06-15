@@ -263,14 +263,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	And I click continue
 	And I call Shared Step 77535 (Retailer Association - Walmart)
-
-
-	#Philip - Change - Checked
-	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
-	#And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
-
-
-
+    And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
