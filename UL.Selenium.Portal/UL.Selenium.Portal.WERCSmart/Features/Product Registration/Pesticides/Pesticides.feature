@@ -243,7 +243,7 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
-	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
     Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page

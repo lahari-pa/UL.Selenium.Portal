@@ -54,16 +54,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
-
-
-#Philip - Change - Checked
-#Given I call Shared Step 63804 (Product Information - enter options)
-#		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-#		| No                                                             | No                           | No                     | No                  |
 Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-#
-
-
 Then I save the product information as: TestCase31827
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State

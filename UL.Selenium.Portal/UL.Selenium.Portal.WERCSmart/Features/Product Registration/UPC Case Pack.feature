@@ -100,14 +100,8 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-
-	#Philip - Change - Checked
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
-	#
-
-
-	Then I save the product information as: TestCase87650
+    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
+    Then I save the product information as: TestCase87650
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -496,18 +490,9 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
-
-#Philip - Change - Checked
 And I should see the Product Information Page
-#
-
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-
-#Philip - Change - Checked
-#And I should see the Product Information Page
-#
-
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
@@ -541,18 +526,9 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
-
-#Philip - Change - Checked
 And I should see the Product Information Page
-#
-
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-
-#Philip - Change - Checked
-#And I should see the Product Information Page
-#
-
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)

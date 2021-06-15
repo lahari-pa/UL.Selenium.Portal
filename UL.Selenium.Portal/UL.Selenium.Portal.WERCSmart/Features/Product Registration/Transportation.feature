@@ -529,11 +529,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286
-
-#Philip - Change - Checked
 Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#
-
 Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |

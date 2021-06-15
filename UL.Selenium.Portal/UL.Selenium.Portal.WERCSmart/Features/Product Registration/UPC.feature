@@ -175,12 +175,8 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
-
-	#Philip - Change - Checked
-	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
-	#
-
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+    Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+    And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon

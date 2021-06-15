@@ -235,15 +235,8 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
 	Then I save the product information as: TestCase74142
-
-
-	#Philip - Change - Checked
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+    Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
-	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
-	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-
-
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Chlorine      | 100     | false               | false       |            |
@@ -261,11 +254,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I save the product information as: TestCase69796
-
-	#Philip - Change - Checked
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#
-
+    Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I should see the Physical and Chemical Properties Page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
@@ -273,9 +262,6 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Select the best Water Solubility option to: Appreciable
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
-	#Philip - Change - Checked
-	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#
 	Given I click continue
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I add the following ingredients:
@@ -298,12 +284,6 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80728
-
-
-	#Philip - Change - Checked
-	#Then I should see the Physical and Chemical Properties Page
-
-
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Then I should see the Ingredients Page
@@ -508,17 +488,9 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
 		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
 	And I click continue
-
-
-
-	#Philip - Change - Checked
-	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+    Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	#
-
-
-
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+    And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |

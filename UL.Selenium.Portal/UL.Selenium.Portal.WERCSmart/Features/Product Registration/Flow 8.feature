@@ -83,16 +83,9 @@ Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Craft kits containing clays or plasters
 	Then I save the product information as: TestCase58184
 	Given I call Shared Step 63804 (Product Information - enter options)
-
-		#Philip - Change - Checked
 		| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
-		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		#| No                                                             | No                           | No                     | No                  |
-		#
-
-
-		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -150,18 +143,9 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engines for Model Rockets
 	Then I save the product information as: TestCase58293
 	Given I call Shared Step 63804 (Product Information - enter options)
-
-
-
-	#Philip - Change - Checked
-		| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+        | Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
-		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		#| No                                                             | No                           | No                     | No                  |
-	#
-
-
-		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -475,21 +459,13 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Craft kits containing paints and glues
 	Then I save the product information as: TestCase57339
-
-
-	#Philip - Change - Checked
-	Given I call Shared Step 63804 (Product Information - enter options)
+    Given I call Shared Step 63804 (Product Information - enter options)
 		| Product is marketed for use   | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No							| No                                                             | No                           | No                     | No                  |
-		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		#| No                                                             | No                           | No                     | No                  |
-	#
-
-
 		Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+    Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -617,15 +593,8 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-
-
-	#Philip - Change - Checked
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Cardboard and size: 1
-	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Aerosol Can and size: 1
-	#
-
-
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Cardboard and size: 1
+    Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))

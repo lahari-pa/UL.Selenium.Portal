@@ -40,9 +40,7 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 	# And I confirm that the available retailers match those in the database
 	And I check that the following retailers are showing:
 		| Retailer               | Code  |
-		#Philip - Change - Checked
-		| ACE                    | AC    |
-		#
+        | ACE                    | AC    |
 		| Ahold                  | AH    |
 		| Albertsons Companies   | SW    |
 		| Amazon                 | AM    |
@@ -50,9 +48,6 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Bed Bath and Beyond    | BB    |
 		| Canadian Tire          | CT    |		
 		| CVS                    | CV    |
-		#Philip - Change - Checked
-		#| Delhaize               | DA    |
-		#
 		| Dick's Sporting Goods  | DI    |
 		| Dollar General         | DG    |
 		| Dollar Tree            | DT    |
@@ -61,9 +56,7 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Genuine Parts          | GP    |
 		| Harbor Freight Tools   | HF    |
 		| HD Supply              | HS    |
-		#Philip - Change - Checked
-		| H-E-B                  | HE    |
-		#
+        | H-E-B                  | HE    |
 		| HyVee                  | HV    |
 		| Kroger                 | KG    |
 		| Lowes                  | LW    |
@@ -80,18 +73,13 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Sears K Mart           | SE    |
 		| Smart & Final          | SF    |
 		| Staples                | SP    |
-		#Philip - Change - Checked
-		#| SuperValue             | SV    |
-		#
 		| Target                 | TG    |
 		| The Home Depot         | HD    |
 		| Topco                  | TP    |
 		| Tractor Value Supply   | TS    |
 		| Ultra Standard         | ST    |
 		| Unified                | UF    |
-		#Philip - Change - Checked
 		| UNFI                   | UN    |
-		#
 		| Wakefren               | WF    |
 		| Walgreens              | WG    |
 		| BONBONS                | WM-BO |

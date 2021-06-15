@@ -151,7 +151,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page

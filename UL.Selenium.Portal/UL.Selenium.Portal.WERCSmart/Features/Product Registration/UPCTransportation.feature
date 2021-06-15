@@ -490,12 +490,8 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-
-	#Philip - Change - Checked
-	Given In the New Product page I click tab: Product Characteristics
-	#Given In the New Product page I click tab: Physical and Chemical Properties
-
-	And I click the page heading: Transportation Details 1
+    Given In the New Product page I click tab: Product Characteristics
+    And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
 	And I unselect the option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
@@ -689,11 +685,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		#Philip - Change - Checked
-		#| Shipping with consumer commodity |
-		#
-
-	And I click continue
+    And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702

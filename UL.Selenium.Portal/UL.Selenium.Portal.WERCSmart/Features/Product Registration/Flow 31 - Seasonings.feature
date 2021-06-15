@@ -35,14 +35,8 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 	#Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-
-
-	#Philip - Change - Checked
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Cardboard and size: 20
-	#
-
-
-	Given I call Shared Step 60567 (Upload Product Label only)
+    Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Cardboard and size: 20
+    Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	#And I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
@@ -76,14 +70,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-
-
-	#Philip - Change - Checked
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Cardboard and size: 20
-	#
-
-
-	Given I call Shared Step 60567 (Upload Product Label only)
+    Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Cardboard and size: 20
+    Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
