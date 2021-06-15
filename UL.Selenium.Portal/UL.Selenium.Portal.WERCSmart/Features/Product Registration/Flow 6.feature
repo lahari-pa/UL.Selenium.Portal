@@ -58,24 +58,19 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-
-#Philip - Change - Checking
-#Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
-#
 
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-#Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#
-#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-#
-#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
-#
-#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
-#
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
 
 @ScenarioId:1203

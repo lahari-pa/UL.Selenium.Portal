@@ -342,15 +342,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then in the Pesticide Details - Canada page I click Continue
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
-
-
-	#Philip - Change-
-	# Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
-	#
-
-
-	Then I should see the Additional Documents to Provide Page
+    Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue

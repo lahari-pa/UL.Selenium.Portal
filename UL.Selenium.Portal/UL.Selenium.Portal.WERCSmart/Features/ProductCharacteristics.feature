@@ -108,14 +108,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 Then I save the product information as: TestCase31786
-
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
-#
-
-
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
@@ -131,68 +124,13 @@ And The following radio buttons should be displayed for section: When the produc
 | This product is not classified as D001 or D003 Hazardous Waste under RCRA      |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31786
 
-
-@ScenarioId:1150
-Scenario: [31789] Physical and Chemical Properties - Aerosol only validation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
-Then I save the product information as: TestCase31789
-
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
-#
-
-
-And I should see the Physical and Chemical Properties Page
-When I click continue
-And Secondary Physical State should be showing the error messages: This is a required field.
-And pH should be showing the error messages: This is a required field.
-And When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then should be showing the error messages: This is a required field.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31789
-
-
-@ScenarioId:1151
-Scenario: [31804] Physical and Chemical Properties - Gas only navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
-Then I save the product information as: TestCase31804
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#
-
-And I should see the Physical and Chemical Properties Page
-And I should see following statement: Primary Physical State
-And I should only see the following options for Primary Physical State:
-| State   |
-| Gas     |
-And I should see following statement: Secondary Physical State
-And I should see following statement: Select the best Water Solubility description
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31804
-
-
-@ScenarioId:1152
 Scenario: [31826] Physical and Chemical Properties - Gas only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31826
-
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#
-
-
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
@@ -207,12 +145,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 Then I save the product information as: TestCase85157
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#
-
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:
@@ -224,24 +157,3 @@ And I should only see the following options for Primary Physical State:
 And I should see following statement: Secondary Physical State
 And I should see following statement: Select the best Water Solubility description
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85157
-
-
-@ScenarioId:1158
-Scenario: [85158] Physical and Chemical Properties - All validation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
-Then I save the product information as: TestCase85158
-
-#Philip - Change - Checking
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#
-
-And I should see the Physical and Chemical Properties Page
-When I click continue
-And Primary Physical State should be showing the error messages: This is a required field.
-And Secondary Physical State should be showing the error messages: This is a required field.
-And Select the best Water Solubility description should be showing the error messages: This is a required field.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85158

@@ -43,15 +43,12 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		#| UPC Number                        |
-		#| Quantity of Units within the Case |
-		| Size (Weight Ounces)              |
+		| UPC Number                        |
+		| Size (Fluid Ounces)               |
 
-	#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Weight Ounces) |
-	#
+	Then I should not see the following UPC options:
+		| Option               |
+		| Size (Weight Ounces) |
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
@@ -74,14 +71,11 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
 
-	#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Weight Ounces) |
-	#
+	Then I should not see the following UPC options:
+		| Option               |
+		| Size (Weight Ounces) |
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
@@ -109,14 +103,12 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
 
-		#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Weight Ounces) |
-	#
+	Then I should not see the following UPC options:
+		| Option               |
+		| Size (Weight Ounces) |
+	
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
@@ -141,16 +133,11 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
 
-		#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Weight Ounces) |
-	#
-
+	Then I should not see the following UPC options:
+		| Option               |
+		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
 @ScenarioId:1195
@@ -171,15 +158,12 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
 
-		#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Fluid Ounces) |
-	#
+	Then I should not see the following UPC options:
+		| Option              |
+		| Size (Fluid Ounces) |
+	
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
@@ -203,14 +187,12 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
+		| Size (Weight Ounces)              |
 
-	#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Fluid Ounces) |
-	#
+	Then I should not see the following UPC options:
+		| Option               |
+		| Size (Fluid Ounces) |
+	
 	
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
@@ -236,16 +218,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
-
-		#Philip - Change-
-	#Then I should not see the following UPC options:
-	#	| Option               |
-	#	| Size (Fluid Ounces) |
-	#
-
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 
 @ScenarioId:1198
