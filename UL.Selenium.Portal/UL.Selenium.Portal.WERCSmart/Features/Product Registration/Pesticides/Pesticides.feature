@@ -257,9 +257,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase56500
     Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
-    And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+    And I call Shared Step 102750 (Physical and Chemical Properties - Select primary physical state (liquid), flash point (above 60), and all other required data)
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium hydroxide
 	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Then I should see the Pesticide Details - Canada Page

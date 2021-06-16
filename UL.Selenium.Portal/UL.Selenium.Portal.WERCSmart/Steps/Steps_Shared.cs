@@ -3933,6 +3933,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 102750 \(Physical and Chemical Properties - Select primary physical state \(liquid\), flash point \(above 60\), and all other required data\)")]
+		public void GivenICallSharedStepPhysicalAndChemicalProperties_SelectPrimaryPhysicalStateLiquidFlashPointAboveAndAllOtherRequiredData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			Delay.Seconds(1);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				"Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
+				"Liquid");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				"Cream");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				 "Cream");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("pH",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				"61");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
+				"61");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				"Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
+				"Closed cup method");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
+				"Appreciable");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				"Appreciable");
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 132110 \(Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
 		public void ICallSharedProductCharacteristics_PharmaFlow_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
