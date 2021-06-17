@@ -217,7 +217,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -407,7 +407,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -535,7 +535,7 @@ Scenario: [56484] VOC - Aero checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page

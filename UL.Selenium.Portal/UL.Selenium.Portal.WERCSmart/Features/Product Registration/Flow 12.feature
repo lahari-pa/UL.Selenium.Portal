@@ -130,7 +130,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	# Regulatory Documents to Provide page is showing
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	#Given I call Shared Step 60567 (Upload Product Label only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))

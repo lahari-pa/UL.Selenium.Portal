@@ -110,7 +110,7 @@ And in the Universal Product Code (UPC) page I click Continue
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
-And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Regulatory Documents to Provide page I click Continue
 
 # Additional Documents to Provide Page

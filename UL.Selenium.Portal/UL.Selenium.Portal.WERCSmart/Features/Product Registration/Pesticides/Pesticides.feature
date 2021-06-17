@@ -96,7 +96,7 @@ Scenario: [62852] Pesticide - Product Label is required
 		| Provide Full Product Label (required) |
 	Given in the Additional Documents to Provide page I click Continue
 	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	# Click continue confirm no error
 	Given I click continue
 	Given I navigate to the home page
@@ -556,7 +556,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	Then I should see the Additional Documents to Provide Page
 	And I click continue
 	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	And I click continue

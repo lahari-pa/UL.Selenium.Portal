@@ -778,9 +778,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
 			//newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
 				//"I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen(
-				"Technical Data Sheet (TDS), Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Technical Data Sheet (TDS), Battery Data Sheet (BDS)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			newProductSteps.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards",
 				"I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.");
 			newProductSteps.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
@@ -1276,12 +1276,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
@@ -1485,12 +1485,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
@@ -2868,7 +2868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
 				"Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.");
-			newProductSteps.UploadPDFFile("OSHA SDS", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			newProductSteps.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			//newProductSteps.ICheckTheCheckboxWithDescription("check","I confirm that I have provided the most up-to-date, OSHA-compliant SDS in this product registration.");
 			newProductSteps.ICheckTheCheckboxWithDescription("check", "I confirm I am providing the most current Safety Data Sheet");
 			newProductSteps.ClickContinue();
