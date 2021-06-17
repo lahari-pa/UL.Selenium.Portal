@@ -1619,6 +1619,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success("The Section was already active");
 				return;
 			}
+			if (new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("Walmart Transportation Information"))
+			{
+				Report.Success("The Section was already active");
+				return;
+			}
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 								"Studio power designer is open");
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT0077] Walmart Transportation Information", click),
