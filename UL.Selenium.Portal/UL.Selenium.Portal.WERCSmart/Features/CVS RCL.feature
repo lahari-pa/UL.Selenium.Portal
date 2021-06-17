@@ -524,7 +524,7 @@ Then The home screen should load
 
 Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
@@ -621,7 +621,7 @@ Then The home screen should load
 
 Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
@@ -679,7 +679,7 @@ Then The home screen should load
 
 Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
@@ -727,7 +727,7 @@ Then The home screen should load
 
 Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
@@ -781,7 +781,7 @@ Then The home screen should load
 
 Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
@@ -839,7 +839,7 @@ Scenario: [74278] CVS Brand Registration section and Data Tier validation
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 57205 (Go to Retail Partners - Select CVS)
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | Off   |
 | 2.2  | Off   |
@@ -865,7 +865,7 @@ Then I click on the Row Action: Edit
 Then I should not see the CVS Page
 
 Then I call Shared Step 57205 (Go to Retail Partners - Select CVS)
-Then I ensure the Data Consent Tier Sliders are set as follows:
+Then I ensure the CVS Data Consent Tier Sliders are showing and set as follows:
 | Tier | State |
 | 2.1  | On    |
 | 2.2  | On    |
