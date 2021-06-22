@@ -99,11 +99,8 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propane       | 100     | false               | false       |            |
 
 
-#Philip - Change
-#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I set 'Prop65' to: No
 Given in the Waste Classification Data page I click Continue
-#
 
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
