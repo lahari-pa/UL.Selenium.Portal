@@ -274,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"I delete the value in the (.*) field")]
+		[StepDefinition(@"I delete the value in the (.*) field")]
 		public void GivenIDeleteTheValueInTheUPCNameField(string field)
 		{
 			Report.IsTrue(new UPC().DeleteValueInField(field), "Unable to remove data from " + field + " field", "Deleted value in field " + field);

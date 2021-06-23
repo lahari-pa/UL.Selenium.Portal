@@ -226,6 +226,7 @@
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />
     <Compile Include="Selenium Classes\GeneralUtilities.cs" />
+    <Compile Include="Selenium Classes\GenerateIntentionallyBadData\GenerateBadUPC.cs" />
     <Compile Include="Selenium Classes\Homepage.cs" />
     <Compile Include="Selenium Classes\InactivityPopup.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
