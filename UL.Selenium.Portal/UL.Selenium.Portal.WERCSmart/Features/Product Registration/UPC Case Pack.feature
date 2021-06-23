@@ -305,6 +305,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
 	#Philip - Working
+	@tfs_design
 @singlerun
 @ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC
@@ -338,15 +339,15 @@ Given I Use Test case 87685 to create a product which has a Case UPC and a regul
 		| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation Options              |
 		| Paper bag      | 2    | 4        | <UPC87685>                                | 4A:  steel box                      |
 		| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1:  non-removable head steel drum |
-	#Then I confirm the active Forward Product Registration tab is: Product Results
-	#And I confirm that there are NO Errors displayed for the Product
-	#And I click continue on the Forward Product Registration page
-	#Then I confirm the active Forward Product Registration tab is: Review & Submit
-	#Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
-	#And I click continue on the Forward Product Registration page
-	#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-	#Then In the Thank You screen I click Home
+	Then I confirm the active Forward Product Registration tab is: Product Results
+	And I confirm that there are NO Errors displayed for the Product
+	And I click continue on the Forward Product Registration page
+	Then I confirm the active Forward Product Registration tab is: Review & Submit
+	Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue on the Forward Product Registration page
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	Then In the Thank You screen I click Home
 	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
 	#Then I Check that the product under the retailer: Amazon is under the status: Accepted
@@ -410,10 +411,6 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Walgreens |
 And I should see the Universal Product Code Page
 Given I click the 'Add Case UPC' button
-
-
-
-#Philip - Change-
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
@@ -429,10 +426,6 @@ Given I check for the appropriate alert: Enter a valid number (no decimals allow
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | 32       |                          | 4A: steel box         |
-#
-
-
-
 Then I click continue
 Then I check for the appropriate alert: No error
 And I should see the Regulatory Documents to Provide Page
@@ -493,7 +486,7 @@ Then I save the product information as: TestCase87718
 And I should see the Product Information Page
 And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
