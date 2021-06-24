@@ -223,16 +223,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-
-				//Philip - Change - Checked
 				bool expanded = new ProductsGrid().MoreFiltersExpanded();
 				if (!expanded)
 				{
 					Report.Info("More Filters was collapsed so expanding it");
 					new ProductsGrid().ClickMoreFilters();
 				}
-				//
-
 
 				Report.Info("Searching for product with SKU: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {

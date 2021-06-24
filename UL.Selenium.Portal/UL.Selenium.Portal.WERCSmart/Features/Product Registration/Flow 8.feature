@@ -22,7 +22,7 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Absorbent Solid
 	Then I save the product information as: TestCase57295
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -52,7 +52,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Automotive Accessories containing Gel (Seat Cushions, etc.)
 	Then I save the product information as: TestCase57332
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -82,7 +82,7 @@ Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Craft kits containing clays or plasters
 	Then I save the product information as: TestCase58184
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
     Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -112,7 +112,7 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Matches
 	Then I save the product information as: TestCase58187
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -142,7 +142,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engines for Model Rockets
 	Then I save the product information as: TestCase58293
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
         | Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                          | No                                                             | No                           | No                     | No                  |
     Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -172,7 +172,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fireworks
 	Then I save the product information as: TestCase58297
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -428,7 +428,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Correction fluid
 	Then I save the product information as: TestCase58401
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
@@ -488,7 +488,7 @@ Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Helium tank
 	Then I save the product information as: TestCase58810
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
@@ -519,7 +519,7 @@ Scenario: [58815] Lighters(RU000000) - 8G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lighters
 	Then I save the product information as: TestCase58815
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
@@ -550,7 +550,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
 	Then I save the product information as: TestCase57088
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
@@ -644,7 +644,7 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fireworks
 	Then I save the product information as: TestCase117894
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)

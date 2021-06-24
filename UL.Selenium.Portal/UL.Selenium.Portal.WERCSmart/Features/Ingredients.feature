@@ -668,7 +668,7 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
-	| 106-97-8   | Butane                 | Inert           |
+	| 106-97-8   | Butane                 | Active          |
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
@@ -722,7 +722,6 @@ Then I add the following ingredients:
 | Glutens, corn       | 100     | false         | false       |            |
 Then I click continue
 Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The registration ingredient contains information that typically is included in a product that is considered a pesticide under U.S. E.P.A. guidelines or Canada Pest guidelines. The product type you've selected for this registration is not within the scope of pesticide registrations and the ingredient(s) which are typically used in Pesticide or Herbicide registrations is/are:
 Then I confirm the table in the popup view has following column data
 | CAS Number | Name                   | Active or Inert |
 | 66071-96-3 | Glutens, corn          | Active          |

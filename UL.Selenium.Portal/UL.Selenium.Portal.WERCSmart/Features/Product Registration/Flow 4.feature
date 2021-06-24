@@ -41,7 +41,7 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Odor Remover/Eliminator - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57922
-
+	
 @ScenarioId:988
 Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -49,7 +49,7 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Penetrants
 	Then I save the product information as: TestCase57924
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California's Cleaning Product Right to Know Act | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                                              | No                     | No                  |
 	Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)	
@@ -81,7 +81,7 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Maintenance Product - Non-Aerosol
 	Then I save the product information as: TestCase57925
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California's Cleaning Product Right to Know Act | Private Label or Brand | Good Not for resale |
 	| No                                                             | No                           | No                                              | No                     | No                  |
 	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))	
@@ -115,7 +115,7 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
 	Then I save the product information as: TestCase57927
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California's Cleaning Product Right to Know Act | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                                              | No                     | No                  |
 		Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
@@ -147,7 +147,7 @@ Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Mousse
 	Then I save the product information as: TestCase57931
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
@@ -179,7 +179,7 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I save the product information as: TestCase57933
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
@@ -211,7 +211,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
 	Then I save the product information as: TestCase57950
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
@@ -245,7 +245,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Gel
 	Then I save the product information as: TestCase57952
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
@@ -307,7 +307,7 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Then I save the product information as: TestCase57977
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 57539 (Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path)
@@ -339,7 +339,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)	
@@ -371,7 +371,7 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lubricant, Multi-Purpose, Not for Personal Use
 	Then I save the product information as: TestCase57983
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
@@ -405,7 +405,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol - (RU000744) - 4A
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol
 	Then I save the product information as: TestCase57985
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
@@ -437,7 +437,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	Then I save the product information as: TestCase57986
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)
@@ -496,7 +496,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid- (RU000745) - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Solid
 	Then I save the product information as: TestCase57990
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -528,7 +528,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glue sticks for glue guns
 	Then I save the product information as: TestCase57991
-	Given I call Shared Step 63804 (Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)

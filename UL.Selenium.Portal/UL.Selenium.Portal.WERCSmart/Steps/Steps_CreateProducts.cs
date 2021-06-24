@@ -526,13 +526,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Conditioner", name);
 			newProductSteps.SaveProductInformation(savedAs);
-
-
-			//Philip - Change - Checked
 			sharedSteps.SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
 			sharedSteps.SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue();
-			//
-
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
@@ -571,7 +566,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Propane", "100", "false", "false", "");
@@ -617,15 +612,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Appreciable");
 
-
-			//
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
-			//sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
-			//sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-			//
-
 
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Water", "100", "false", "false", "");
@@ -680,7 +668,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "California's Cleaning Product Right to Know Act", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No","No");
 
-			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 			newProductSteps.ClickContinue();
 
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
@@ -763,7 +751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 
 			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
@@ -815,13 +803,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Candle and/or Wax");
 			newProductSteps.SaveProductInformation(savedAs);
 
-
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			//sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
-
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
@@ -859,13 +842,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table37857 = new Table("Secondary Physical State", "Water Solubility");
 			table37857.AddRow("Grainy", "Soluble in hot water");
 
-
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
-			//sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
-			//sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
-
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
@@ -899,11 +877,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Latex gloves");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
-			//sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
-			//sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
@@ -944,11 +920,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
 			sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
-			//sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
-			//sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
@@ -992,11 +965,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Photograph Coating - Aerosol");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change - Checked
 			sharedSteps.GivenICallSharedStepProductInformationWithCountryAndEveryOption();
 			sharedSteps.GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly();
-			//sharedSteps.GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly();
-			//sharedSteps.GivenICallSharedStepProductInformationWithCountryAndEveryOption();
 
 			newProduct.ClickContinue();
 			sharedSteps.GivenICallSharedEnterIngrediebtsForAerosolPropellant();
@@ -1038,7 +1008,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 
 			Table table74981 = new Table("Secondary Physical State", "Select the best Water Solubility description");
 			table74981.AddRow("Compressed gas", "Low");
@@ -1088,11 +1058,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			//Philip - Change - Checked
 			sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
-			//sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
 
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
@@ -1239,22 +1206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Digestive Aid");
 			newProductSteps.SaveProductInformation(savedAs);
 
-
-			//Philip - Change - Checked
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			//stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
-			//stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
-			//newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			//stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
-			//newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			////sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
-			//sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
-
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");

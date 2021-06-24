@@ -2238,9 +2238,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(30), "The Modal did not appear", "The modal appeared");
 		}
 		[StepDefinition(@"I Wait for a modal popup to disappear")]
-		public void IWaitForModalPopupToBeInVisible()
+		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
-			int timeout = 30;
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing", "The modal was gone");
 		}
 
