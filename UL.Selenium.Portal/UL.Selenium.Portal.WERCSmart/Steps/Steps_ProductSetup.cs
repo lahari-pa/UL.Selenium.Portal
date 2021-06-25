@@ -3665,6 +3665,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC (.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)");
 			stepsSharedUPC.UPCCaseAddInformation("876851", "Paper bag", "2", "4", "UPC87685", "4A: steel box");
 
+			Report.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 
 			Report.StartStep("in the Additional Documents to Provide page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue(" Additional Documents to Provide");

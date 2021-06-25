@@ -10339,8 +10339,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808211", ing1);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
@@ -10350,8 +10350,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808212", ing2);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10370,8 +10370,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808214", ing4);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -10381,8 +10381,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808215", ing5);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -10392,8 +10392,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808216", ing6);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10403,8 +10403,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808217", ing7);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10414,8 +10414,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808218", ing8);
 			//Philip - Working
-			//Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
-			//stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10425,8 +10425,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Philip - Working
 			this.GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue();
-			//Report.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
-			//this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+			Report.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
+			this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
 			//
 
 			Report.StartStep("Enter Regulatory Information - Not Prop 65");

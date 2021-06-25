@@ -880,8 +880,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
 
-			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
-			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
