@@ -1215,6 +1215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
+			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
 			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(1);
