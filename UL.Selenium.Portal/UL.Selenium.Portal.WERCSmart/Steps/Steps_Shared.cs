@@ -7462,6 +7462,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(2);
+			Report.Screenshot();
+			Report.Info($"hard wait, 25 seconds...");
+			Delay.Seconds(25);
+			Report.Screenshot();
+
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			//And I Check that the Product group radio button is selected

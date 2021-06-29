@@ -391,7 +391,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSelectRulesPageIClickOnFirstRecord()
 		{
 			var thisSelectRulesPage = new SelectRulesPage();
+			Report.Info($"Wait for select rules page...");
 			thisSelectRulesPage.Wait_for_load(30);
+			Report.Info($"Finished waiting for select rules page");
 			Report.IsTrue(thisSelectRulesPage.SelectTopRule(), "Failed to select first rule", "Selected first rule");
 			Delay.Seconds(3);
 			try
