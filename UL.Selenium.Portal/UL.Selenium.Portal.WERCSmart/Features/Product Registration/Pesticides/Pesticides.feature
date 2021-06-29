@@ -339,20 +339,23 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 
 	Then in the Pesticide Details - Canada page I click Continue
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-#	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
-#    Then I should see the Additional Documents to Provide Page
-#	Then in the Additional Documents to Provide page I click Continue
-#	Then I should see the Optional Reports and Documents Available for Purchase Page
-#	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-#	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-#	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-#		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-#	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
-#	Then In the Data Acceptance page I select Yes, Agreed
-#	And I should not see any error messages
-#	Given I navigate to the home page
-#	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
+	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
+	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+	Given I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+	Given I click continue
+	Then I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	Then I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+	Then In the Data Acceptance page I select Yes, Agreed
+	And I should not see any error messages
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 
 @ScenarioId:643
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)

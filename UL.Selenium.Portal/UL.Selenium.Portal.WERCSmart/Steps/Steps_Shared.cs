@@ -10323,7 +10323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808211", ing1);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("100.00%", "100.00%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
@@ -10334,7 +10334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808212", ing2);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("50.00%", "50.00%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10344,7 +10344,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808213", ing3);
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("33.33%", "33.33%");
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
@@ -10354,7 +10354,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808214", ing4);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("25.00%", "25.00%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -10365,7 +10365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808215", ing5);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("20.00%", "20.00%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -10376,7 +10376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808216", ing6);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("33.33%", "33.33%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10387,7 +10387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808217", ing7);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("28.57%", "28.57%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -10398,7 +10398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808218", ing8);
 			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("37.59%", "37.50%");
 			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
