@@ -5504,7 +5504,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
 			Delay.Seconds(4);
 			//Report.Screenshot();
+			Report.Info($"waiting for spinner...");
 			GeneralUtilities.StudioWaitForSpinner(60);
+			Report.Info($"fFinished waiting for spinner...");
 			Report.StartStep(
 				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
 			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
