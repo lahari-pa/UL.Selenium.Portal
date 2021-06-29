@@ -110,7 +110,10 @@ Scenario: [64530] Process UPC Update
 	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
-	Given In the SHA Manager Grid I run a search for product saved as: ProductSetup64530 and its status is: Recertification
+
+	Given In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64530 and its status is: Recertification
+	#Given In the SHA Manager Grid I run a search for product saved as: ProductSetup64530 and its status is: Recertification
+
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: ProductSetup64530
 	And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
 	And I close the window that opened
