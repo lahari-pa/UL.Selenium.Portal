@@ -207,9 +207,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ISetTheAuthoringCompleteCodeTo(string setTo)
 		{
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
+			Delay.Seconds(10);
+			GeneralUtilities.StudioWaitForSpinner(30);
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 			thisStudioPowerDesignerPlusDesignMode.SetAUTHCinPowerAuthorPlus(setTo);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
 			Delay.Seconds(10);
+			GeneralUtilities.StudioWaitForSpinner(30);
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 		}
 
 
