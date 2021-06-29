@@ -728,6 +728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CVSDataConsentTiersAreShowingAndSet(Table expected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders are set");
+			Report.Info($"Starting...");
 			try
 			{
 
