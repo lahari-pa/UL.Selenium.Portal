@@ -1422,6 +1422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickSectionsTab(), "Failed to click on Sections Tab", "Succesfully clicked on the sections tab");
+			Delay.Seconds(10);
 			Report.IsTrue(selStudioPowerDesignerPlus.IsSectionsTabOpen(), "The sections tab was not opened", "The sections tab was opened");	
 								
 						

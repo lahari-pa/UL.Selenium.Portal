@@ -5176,6 +5176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStudioPowerDesignerPlus.Wait_for_load(60);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
