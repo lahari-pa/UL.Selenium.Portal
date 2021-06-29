@@ -1319,16 +1319,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", buttonTable);
 
-			Report.StartStep("I set the Secondary Physical State field to: Liquid spray");
-			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
-			Report.StartStep("I set the pH field to: 10.4");
-			stepsProductCharacteristics.SetPHTo("10.4");
-			Report.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
-			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57401 \(Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
@@ -3855,7 +3845,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
 			{
-				Report.Info("testing2");
 				Report.StartStep(
 					"In the Product Type tab of the New Product Page for Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) I select:" +
 					table.Rows[0]["Product is marketed for use"]);
@@ -3863,12 +3852,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
 					table.Rows[0]["Product is marketed for use"]);
 			}
-			Report.Info("testing3");
 			if (myNewProduct.SectionExists(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)")
 			)
 			{
-				Report.Info("testing3");
 				Report.StartStep(
 					"In the Product Type tab of the New Product Page for Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) I select:" +
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
@@ -3876,12 +3863,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
 			}
-			Report.Info("testing4");
 			if (myNewProduct.SectionExists(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.")
 			)
 			{
-				Report.Info("testing5");
 				Report.StartStep(
 					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." +
 					table.Rows[0]["Shipped directly by supplier"]);
@@ -3889,12 +3874,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 					table.Rows[0]["Shipped directly by supplier"]);
 			}
-			Report.Info("testing6");
 			if (myNewProduct.SectionExists(
 				"Cleaning products must comply with California's Cleaning Product Right to Know Act.")
 			)
 			{
-				Report.Info("testing7");
 				Report.StartStep(
 					"Cleaning products must comply with California's Cleaning Product Right to Know Act." +
 					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
@@ -10996,8 +10979,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I set the product description option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");

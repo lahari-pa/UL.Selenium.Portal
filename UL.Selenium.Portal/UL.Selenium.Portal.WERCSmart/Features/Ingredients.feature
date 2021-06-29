@@ -140,8 +140,8 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | true        |            |
-	Then for ingredient: Butane the Publicly Disclosed field is disabled
-	Then for ingredient: Butane the Public Name field is disabled
+	Then for ingredient: Water the Publicly Disclosed field is disabled
+	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
@@ -157,7 +157,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | true                | false       |            |
-	Then for ingredient: Butane the Trade Secret field is disabled
+	Then for ingredient: Water the Trade Secret field is disabled
 	Then in the Ingredients page I click Continue
 	Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
 	Then for ingredient: Butane I select Public Name: Butane

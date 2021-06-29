@@ -88,13 +88,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
-	Given I should see the International Air Transport (IATA) Classification Page
-	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
-
-	#Philip - Change
-	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
-    #
+	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
@@ -158,17 +152,9 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
-	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
-	Given I should see the International Air Transport (IATA) Classification Page
-	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 
-	#Philip - Change
-	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
-    #
-
-	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 
@@ -611,6 +597,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Option                           |	
 		| DOT                              |
 		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
 	And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
@@ -685,6 +672,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
     And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
@@ -722,12 +710,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I click on the Row Action: Update Required
 	Given In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
-
-	#Philip - Change
-	#Given I ensure that DOT is listed as Shipping with consumer commodity
-	#
-
-	Given I ensure that I can select DOT at Shipping with limited quantity
+    Given I ensure that I can select DOT at Shipping with limited quantity
 	Given I ensure that I can select DOT at Shipping fully regulated
 
 @ScenarioId:6703
