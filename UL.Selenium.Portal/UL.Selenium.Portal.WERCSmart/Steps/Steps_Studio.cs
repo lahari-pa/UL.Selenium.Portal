@@ -647,6 +647,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+				//Reporting error not failure as text match was failing but docs did get processed (regression blocker handle for QA int)
 				Report.Error($"Alert text is showing as expected: " + expectedAlertText);
 				//Maybe add a check on the documents queue history (job queue) to see if docs did get sent for publishing?
 			}
