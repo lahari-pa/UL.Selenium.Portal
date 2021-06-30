@@ -7600,6 +7600,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
 			Delay.Seconds(3);
+			Report.Screenshot();
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
 			Delay.Seconds(3);
 			Report.Screenshot();

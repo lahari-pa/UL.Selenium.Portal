@@ -499,6 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IClickOnPublishThisDocumentToOpenDocumentQueuePopup()
 		{
 			Report.Info($"Starting I click on document queue to open document queue popup");
+			Report.Screenshot();
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
@@ -570,8 +571,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on select all checkbox")]
 		public void InDocumentQueueFilterPageIClickOnSelectAllCheckbox()
 		{
+			Report.Info($"starting In document queue filter page I click on select all checkbox");
+			Report.Screenshot();
 			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
+			Report.Info($"starting select all checkbox selection...");
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
 				"Clicked select all checkbox");
 		}
@@ -760,6 +764,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				else
 				{
 					Report.Success("All documents match.");
+					Report.Screenshot();
+
 				}
 			}
 		}
