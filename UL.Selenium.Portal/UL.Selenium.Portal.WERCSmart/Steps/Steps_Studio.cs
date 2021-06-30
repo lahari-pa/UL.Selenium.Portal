@@ -498,6 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on document queue to open document queue popup")]
 		public void IClickOnPublishThisDocumentToOpenDocumentQueuePopup()
 		{
+			Report.Info($"Starting I click on document queue to open document queue popup");
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",

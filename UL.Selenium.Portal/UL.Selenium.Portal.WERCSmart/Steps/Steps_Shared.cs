@@ -7528,6 +7528,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Failed to close apply rules popup");
 			}
 
+
+			//Document queue
 			Report.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			Report.StartStep("I click the filter icon");
