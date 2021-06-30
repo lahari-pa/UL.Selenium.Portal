@@ -634,14 +634,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = thisCurrentDocument.GetAlertText("");
 			if (alertText == null)
 			{
+				//If fails here incorrectly will need to investigate further or update.
 				Report.Failure("Could not find alert text!");
 				Report.Screenshot();
 				return;
 			}
 
-			Report.IsTrue(alertText.Contains(expectedAlertText),
-				"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText,
-				"Alert text is showing as expected: " + expectedAlertText, false, false);
+			if(alertText.Contains(expectedAlertText))
+			{
+				Report.Screenshot();
+				Report.Success($"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText);
+			}
+			else
+			{
+				Report.Error($"Alert text is showing as expected: " + expectedAlertText);
+				//Maybe add a check on the documents queue history (job queue) to see if docs did get sent for publishing?
+			}
+
+			//Report.IsTrue(alertText.Contains(expectedAlertText),
+			//	"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText,
+			//	"Alert text is showing as expected: " + expectedAlertText, false, false);
 		}
 
 		[StepDefinition(@"For product saved as: (.*) I should see an alert with the following message: (.*)")]
