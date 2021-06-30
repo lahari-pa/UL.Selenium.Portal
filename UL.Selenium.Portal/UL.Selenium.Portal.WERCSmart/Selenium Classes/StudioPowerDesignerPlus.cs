@@ -1845,12 +1845,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			Report.Info($"Getting Urls from window handles...");
 			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info($"Finished getting urls");
 			for (int i = 0; i < 30; i++)
 			{
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
 				if (urls.Count > 1)
 				{
+					Report.Info($"urls count is more than 1");
 					break;
 				}
 
@@ -1859,15 +1862,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (urls.Count < 2)
 			{
+				Report.Info($"Url count was less than 2");
 				return false;
 			}
 
+			Report.Info($"Starting: Get current windows handle");
 			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
+			Report.Info($"Finished get current window handle");
 			foreach (string handle in urls)
 			{
+				Report.Info($"Attempting to find window with title 'Select Rule'");
+
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
 				{
+					Report.Info($"Title was select rule... starting switch to....");
 					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Select Rule");
 					Report.Screenshot();

@@ -333,7 +333,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
 			//	"Clicked single rules ellipsis");
 			Delay.Seconds(3);
+			Report.Info($"Starting select rules load wait...");
 			var thisSelectRulesPage = new SelectRulesPage();
+			Report.Info($"var thisSelectRulesPage set");
 			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",
 				"Select rules page has loaded");
 		}
