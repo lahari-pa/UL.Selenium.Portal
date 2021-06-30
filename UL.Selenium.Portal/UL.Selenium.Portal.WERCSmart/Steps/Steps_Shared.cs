@@ -7452,6 +7452,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			Report.StartStep("I close the current document pop up");
 			thisStepsStudio.GivenICloseCurrentDocument();
+
+			//ApplyRules
 			Report.StartStep("I select the Apply Rules icon from the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
 			Report.StartStep("I select the Single rule radio button");
@@ -7469,6 +7471,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"hard wait, 25 seconds...");
 			Delay.Seconds(25);
 			Report.Screenshot();
+			var thisSelectRulesPage = new SelectRulesPage();
+			Report.Info($"Checking to see if rules page is open...");
+			if(thisSelectRulesPage.Wait_for_load(30)==false)
+			{
+				Report.Info($"Rules page not open, looping apply button click");
+				thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+				Delay.Seconds(2);
+				Report.Screenshot();
+				Report.Info($"hard wait, 25 seconds...");
+				Delay.Seconds(25);
+				Report.Screenshot();
+				Report.Info($"Checking to see if rules page is open...");
+				if (thisSelectRulesPage.Wait_for_load(30) == false)
+				{
+					Report.Info($"Rules page not open, looping apply button click");
+					thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+					Delay.Seconds(2);
+					Report.Screenshot();
+					Report.Info($"hard wait, 25 seconds...");
+					Delay.Seconds(25);
+					Report.Screenshot();
+				}
+			}
+
+
 
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
