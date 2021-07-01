@@ -2601,6 +2601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					int i = 0;
 					if (checkbox == null && i < 10)
 					{
+						Report.Info($"was null...");
 						checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 						Delay.Seconds(2);
 						Report.Screenshot();
