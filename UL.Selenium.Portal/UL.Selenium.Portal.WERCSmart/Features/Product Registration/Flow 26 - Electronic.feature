@@ -56,9 +56,7 @@ Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Cli
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 
-#Philip - Change~
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor + Desktop)
-#
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop)
 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
