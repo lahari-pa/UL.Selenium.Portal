@@ -2582,37 +2582,45 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckSelectAllCheckbox()
 		{
-			Report.Info($"Getting checkbox el");
-			IWebElement checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-			Report.Info($"Checking if el is null or not...");
+			try
+			{
+				Report.Info($"Getting checkbox el");
+				IWebElement checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+				Report.Info($"Checking if el is null or not...");
 
-			if (checkbox != null)
-			{
-				Report.Info($"checkbox was not null.");
-				Report.Info($"Starting checkbox check...");
-				checkbox.Check(true);
-				Report.Info($"checkbox check finished");
-				Delay.Seconds(1);
-				Report.Info($"Trying to regrab checkbox el?");
-				//checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-				checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-				int i = 0;
-				if(checkbox==null&&i<10)
+				if (checkbox != null)
 				{
+					Report.Info($"checkbox was not null.");
+					Report.Info($"Starting checkbox check...");
+					checkbox.Check(true);
+					Report.Info($"checkbox check finished");
+					Delay.Seconds(1);
+					Report.Info($"Trying to regrab checkbox el?");
+					//checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 					checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-					Delay.Seconds(2);
-					Report.Screenshot();
-					i++;
+					int i = 0;
+					if (checkbox == null && i < 10)
+					{
+						checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+						Delay.Seconds(2);
+						Report.Screenshot();
+						i++;
+					}
+					if (checkbox == null)
+					{
+						Report.Failure($"Could not find the checkbox element to see if it was correctly checked...");
+					}
+					return checkbox.Checked();
 				}
-				if(checkbox==null)
+				else
 				{
-					Report.Failure($"Could not find the checkbox element to see if it was correctly checked...");
+					Report.Failure("Did not find checkbox to click");
+					return false;
 				}
-				return checkbox.Checked();
 			}
-			else
+			catch
 			{
-				Report.Failure("Did not find checkbox to click");
+				Report.Info($"do nothing");
 				return false;
 			}
 		}
