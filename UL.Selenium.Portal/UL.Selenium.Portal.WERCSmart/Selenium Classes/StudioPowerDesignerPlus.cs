@@ -2596,13 +2596,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"checkbox check finished");
 					Delay.Seconds(1);
 					Report.Info($"Trying to regrab checkbox el?");
-					//checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-					checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+					checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+					//checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 					int i = 0;
 					if (checkbox == null && i < 10)
 					{
 						Report.Info($"was null...");
-						checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+						checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+						//checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 						Delay.Seconds(2);
 						Report.Screenshot();
 						i++;
