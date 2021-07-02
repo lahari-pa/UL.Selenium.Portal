@@ -2612,6 +2612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"Trying to regrab checkbox el?");
 					checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 					//checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+					////input[@type='checkbox' and contains(@name,'All')]
 					int i = 0;
 					while (checkbox == null && i < 10)
 					{
@@ -2624,9 +2625,71 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					if (checkbox == null)
 					{
-						Report.Failure($"Could not find the checkbox element to see if it was correctly checked...");
-						return false;
+						Delay.Seconds(10);
+						Report.Screenshot();
+						Report.Info($"new checkbox finding...");
+						IWebElement newCheckbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='checkbox' and contains(@name,'All')]"), 2);
+						Report.Info($"new checkbox finding finished");
+
+						if (newCheckbox == null)
+						{
+							Report.Info($"newCheckbox was null");
+
+
+							Report.Info($"Trying to go for a refresh of the page...");
+							IWebElement refreshButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='DocumentQueue_cmdRefresh']"), 2);
+
+							if(refreshButton==null)
+							{
+								Report.Info($"refreshButton was null...");
+								Report.Failure($"Could not find the checkbox or refresh element to see if it was correctly checked...");
+								return false;
+							}
+
+							if(refreshButton.TryClick())
+							{
+								Report.Info($"cliced the refresh button");
+								IWebElement finalCheckbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+
+								if (finalCheckbox == null)
+								{
+									Report.Info($"FinalCheckbox was null...");
+									Report.Info($"Updating xpath for final try...");
+									finalCheckbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='checkbox' and contains(@name,'All')]"), 2);
+
+
+									if(finalCheckbox==null)
+									{
+										Report.Info($"final checkbox was still null");
+										Report.Failure($"Could not find the checkbox or refresh element to see if it was correctly checked...");
+										return false;
+									}
+
+									Report.Info($"final over....");									
+								}
+
+							}
+							else
+							{
+								Report.Info($"Tryclick of refresh button was not clicked...");
+								Report.Info($"last chance check...");
+								checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+								if(checkbox==null)
+								{
+									Report.Info($"was null");
+									return false;
+								}	
+
+							}
+
+
+
+
+
+
+						}						
 					}
+					Report.Info($"starting check check");
 					return checkbox.Checked();
 				}
 				else
