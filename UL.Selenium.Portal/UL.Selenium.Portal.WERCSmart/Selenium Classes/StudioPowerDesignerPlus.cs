@@ -2608,6 +2608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"Starting checkbox check...");
 					checkbox.Check(true);
 					Report.Info($"checkbox check finished");
+					Report.Screenshot();
 					Delay.Seconds(1);
 					Report.Info($"Trying to regrab checkbox el?");
 					checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
@@ -2617,6 +2618,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					while (checkbox == null && i < 10)
 					{
 						Report.Info($"was null...");
+
+						Report.Info($"Trying the wait for load...");
+						var thisDocumentQueuePage = new DocumentQueuePage();
+						thisDocumentQueuePage.Wait_for_load();
+
+						Report.Info($"wait for load over, trying regrab");
 						checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 						//checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 						Delay.Seconds(2);

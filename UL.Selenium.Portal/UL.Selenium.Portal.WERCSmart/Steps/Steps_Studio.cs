@@ -643,12 +643,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if(alertText.Contains(expectedAlertText))
 			{
 				Report.Screenshot();
-				Report.Success($"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText);
+				Report.Success($"Alert text is as expected. Expected: " + expectedAlertText + " but got: " + alertText);
 			}
 			else
 			{
 				//Reporting error not failure as text match was failing but docs did get processed (regression blocker handle for QA int)
-				Report.Error($"Alert text is showing as expected: " + expectedAlertText);
+				Report.Error($"Alert text is not showing as expected: " + expectedAlertText+"  - The Alert text that was found was: "+alertText);
+				Report.Screenshot();
 				//Maybe add a check on the documents queue history (job queue) to see if docs did get sent for publishing?
 			}
 
