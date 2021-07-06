@@ -88,6 +88,8 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
+	Given I should see the International Air Transport (IATA) Classification Page
+    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 
 	Given I click continue
@@ -152,8 +154,13 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
-	Given I click continue
-	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
+    Given I click continue
+    Given I enter UN1993 - Select data - Continue - Happy Path
+    Given I should see the International Air Transport (IATA) Classification Page
+    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+    And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+   	Given I click continue
 
 	Given I should see the International Marine (IMDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
@@ -597,7 +604,6 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Option                           |	
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
 	And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
@@ -637,12 +643,14 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I click the page heading: Universal Product Code (UPC)
 	Given I ensure that DOT is listed as Shipping with limited quantity
 
-	#Philip - Change
-	#Given I ensure that I cannot select DOT at Shipping with consumer commodity
-	#
+#	Philip - Change
+#	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+	
 
 	Given I ensure that I can select DOT at Shipping fully regulated
 
+@tfs_design
+@obsolete
 @ScenarioId:6702
 Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade - Shipping with consumer commodity
 	Given I log in with the account saved in TReVor as: ProductAccount

@@ -326,13 +326,11 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Yukon Territory            |
 		| Saskatchewan               |
 		| Manitoba                   |
-	# Confirm the Manitoba question shows N/A as already selected
-	And Manitoba should be showing the value: None
 	# Confirm "None" is shown as already selected for the Saskatchewan question
 	And Saskatchewan should be showing the value: None
 	# Confirm N/A is shown as already selected for the Northwest Territory question
-	And Northwest Territory should be showing the value: Not Applicable
-#
+  	And Northwest Territory should be showing the value: Not Applicable
+    #
 
 
 
