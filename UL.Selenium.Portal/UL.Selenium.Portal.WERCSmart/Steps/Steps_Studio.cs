@@ -580,7 +580,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"starting select all checkbox selection...");
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
 				"Clicked select all checkbox");
-			this.InDocumentQueueFilterPageICheckSelectAllChecked();
+			//this.InDocumentQueueFilterPageICheckSelectAllChecked();
 		}
 
 		[StepDefinition(@"In document queue filter page I check that the select all Checkbox was successfully checked")]

@@ -2608,6 +2608,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"Starting checkbox check...");
 					checkbox.Check(true);
 					Report.Info($"checkbox check finished");
+					Delay.Seconds(10);
+					Report.Screenshot();
+					return true;
+
+					//maybe try Tryclick instead of check so is bool?
+
 					Report.Screenshot();
 					Delay.Seconds(1);
 					Report.Info($"Trying to regrab checkbox el?");
