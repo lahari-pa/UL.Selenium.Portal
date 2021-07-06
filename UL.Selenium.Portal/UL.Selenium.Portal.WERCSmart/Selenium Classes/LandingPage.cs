@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.SharpZipLib.Tar;
 using UL.Automation.Selenium.BaseClasses;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
