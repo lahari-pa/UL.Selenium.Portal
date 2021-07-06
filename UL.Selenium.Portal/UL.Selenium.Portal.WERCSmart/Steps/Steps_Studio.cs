@@ -580,6 +580,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"starting select all checkbox selection...");
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
 				"Clicked select all checkbox");
+			this.InDocumentQueueFilterPageICheckSelectAllChecked();
+		}
+
+		[StepDefinition(@"In document queue filter page I check that the select all Checkbox was successfully checked")]
+		public void InDocumentQueueFilterPageICheckSelectAllChecked()
+		{
+			Report.Info("Beginning: In document queue filter page I click on process documents");
+			var thisDocumentQueuePage = new DocumentQueuePage();
+			thisDocumentQueuePage.Wait_for_load();
+
+			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllChecked(), "Failed to check if the select all box was checked", "Select all box was checked", showSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"In document queue filter page I click on process documents")]
