@@ -1469,7 +1469,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int x = 0;
 			Report.Info($"Searching for status to match: {status}");
 			bool correct = false;
-			while(correct==false && x<60)
+
+			//Addition
+			Report.Info("first try check...");
+			List<Product> topN2 = myStudioShaManager.GetTopXProducts(n);
+			List<Product> correctStatusItems2 = new List<Product>();
+			foreach (var item in topN2)
+			{
+				Report.Info($"Status found was: {item.Status}");
+				if (item.Status == status)
+				{
+					correctStatusItems2.Add(item);
+				}
+			}
+			Report.Screenshot();
+			Report.Info($"n is {n}");
+			Report.Info($"Count found was: {correctStatusItems2.Count()}");
+			if (correctStatusItems2.Count() == topN2.Count())
+			{
+				correct = true;
+				Report.Info($"{n} items with correct status were found");
+			}
+			Delay.Seconds(10);
+			Report.Info("end of first try check...");
+
+			if (correct == false)
+			{
+				Report.Info($"was false...");
+				Report.StartStep("I set the status filter to " + status);
+				myStudioShaManager.WaitForProductList(60);
+				myStudioShaManager.SelectFromStatusFilter(status);
+				Report.Info("Status has been set");
+				Report.Screenshot();
+				Report.Info("Pressing Enter Key");
+				Report.Screenshot();
+				Delay.Seconds(10);
+				GeneralUtilities.StudioWaitForSpinner(30);
+				myStudioShaManager.WaitForProductList(60);
+				Delay.Seconds(10);
+			}
+			//End of Addition
+
+
+			Report.Info($"Going into wait loop...");
+			while (correct==false && x<60)
 				{
 					List<Product> topN = myStudioShaManager.GetTopXProducts(n);
 					List<Product> correctStatusItems = new List<Product>();
