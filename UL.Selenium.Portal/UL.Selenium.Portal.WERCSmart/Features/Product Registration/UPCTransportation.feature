@@ -62,7 +62,6 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I ensure that there is a column in the Add UPC table called Transportation
 	Given I ensure that DOT is listed as Shipping with limited quantity
 	Given I ensure that IATA is listed as Shipping with limited quantity
-	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
 	Given I navigate to the home page
