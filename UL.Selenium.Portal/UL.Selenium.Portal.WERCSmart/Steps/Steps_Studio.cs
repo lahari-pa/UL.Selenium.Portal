@@ -311,6 +311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			int i = 0;
 			bool successClick = false;
+			Report.Info($"starting loop...");
 			while (i < 5 && !successClick)
 			{
 				if (thisApplyRulesPage.ClickSingleRuleEllipsis())
@@ -330,6 +331,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("Failed to click single rules ellipsis after 5 tries");
 			}
+
+			Report.Info($"Going into a wait for load...");
 			//Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
 			//	"Clicked single rules ellipsis");
 			Delay.Seconds(3);
