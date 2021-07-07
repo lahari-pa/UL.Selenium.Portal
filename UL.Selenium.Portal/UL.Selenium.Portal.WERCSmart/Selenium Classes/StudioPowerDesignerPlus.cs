@@ -1846,11 +1846,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			Report.Info($"Getting Urls from window handles...");
+			Report.Screenshot();
 			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			Report.Info($"Finished getting urls");
 			for (int i = 0; i < 30; i++)
 			{
+				Report.Info($"In loop: starting urls grab...");
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info($"In loop: Finished urls grab.");
+				Report.Screenshot();
+				Report.Info($" The urls count found was: {urls.Count()}");
+
 				if (urls.Count > 1)
 				{
 					Report.Info($"urls count is more than 1");
@@ -1869,9 +1875,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Starting: Get current windows handle");
 			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Report.Info($"Finished get current window handle");
+			Report.Screenshot();
 			foreach (string handle in urls)
 			{
 				Report.Info($"Attempting to find window with title 'Select Rule'");
+				Report.Screenshot();
+
+				//Failure point for http error...
+				//Must find window with title, does it fail switch to? split up?
 
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
 				{
@@ -1897,6 +1908,123 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 
 			Report.Info($"going for wait load...");
+
+			if (base.Wait_for_load(30))
+			{
+				Report.Info($"waited... now clicking filter button");
+				if (this.WaitForClickFilterButton(30))
+				{
+					return true;
+				}
+
+			}
+
+			Report.Info($"base did not load...");
+			return false;
+		}
+
+
+
+
+
+
+		public bool Wait_for_loadLatestVersion(int secondsToWait = 60)
+		{
+			Report.Info($"Getting Urls from window handles...");
+			Report.Screenshot();
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info($"Finished getting urls");
+			Report.Info($"Entering Wait x for Loop");
+			int secondsPassed = 0;
+			bool successBreakout = false;
+			while (secondsPassed < secondsToWait + 1 || successBreakout == false)
+			{
+
+
+				for (int i = 0; i < 30; i++)
+				{
+					Report.Info($"In loop: starting urls grab...");
+					urls = SeleniumBrowser.WebBrowser.WindowHandles;
+					Report.Info($"In loop: Finished urls grab.");
+					Report.Screenshot();
+					Report.Info($" The urls count found was: {urls.Count()}");
+
+					if (urls.Count > 1)
+					{
+						Report.Info($"urls count is more than 1");
+						break;
+					}
+
+					Delay.Seconds(1);
+				}
+
+				if (urls.Count < 2)
+				{
+					Report.Info($"Url count was less than 2");
+					return false;
+				}
+
+				Report.Info($"Starting: Get current windows handle");
+				string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Report.Info($"Finished get current window handle");
+				Report.Screenshot();
+				Report.Info($" The urls count used is: {urls.Count()}");
+				foreach (string handle in urls)
+				{
+					Report.Info($"Attempting to find window with title 'Select Rule'");
+					Report.Screenshot();
+					try
+					{
+						if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
+						{
+							Report.Info($"Title was select rule... starting switch to....");
+							SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+							Report.Success("Found window containing title: Select Rule");
+							Report.Screenshot();
+							successBreakout = true;
+							break;
+						}
+					}
+					catch
+					{
+						Report.Info($"When going to the switch to method... and error was thrown.");
+						Report.Screenshot();
+					}
+
+				}
+
+				secondsPassed = secondsPassed + 10;
+				Report.Info($"Waiting for 10 seconds...");
+				Delay.Seconds(10);
+			}
+
+			if(successBreakout==false)
+			{
+				Report.Screenshot();
+				Report.Info($"successBreakout was false. Either the windows did not load, or errors were thrown on every loop...");
+				return false;
+			}
+
+			Report.Info($"Going to rest of method, successBreakout was true...");
+			Report.Screenshot();
+
+
+			Report.Info($"setting Iframe...");
+
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+
+			Report.Info($"Switching to Iframe...");
+
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+
+			Report.Info($"looking for container element from basePath");
+
+
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+
+			Report.Info($"going for wait load...");
+
+			//why are we clicking filter button here?
 
 			if (base.Wait_for_load(30))
 			{
