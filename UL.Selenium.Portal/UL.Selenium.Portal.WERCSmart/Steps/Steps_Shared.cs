@@ -7473,7 +7473,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			var thisSelectRulesPage = new SelectRulesPage();
 			Report.Info($"Checking to see if rules page is open...");
-			if(thisSelectRulesPage.Wait_for_load(30)==false)
+			if(thisSelectRulesPage.Wait_for_loadLatestVersion(30)==false)
 			{
 				Report.Info($"Rules page not open, looping apply button click");
 				thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
@@ -7483,7 +7483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(25);
 				Report.Screenshot();
 				Report.Info($"Checking to see if rules page is open...");
-				if (thisSelectRulesPage.Wait_for_load(30) == false)
+				if (thisSelectRulesPage.Wait_for_loadLatestVersion(30) == false)
 				{
 					Report.Info($"Rules page not open, looping apply button click");
 					thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");

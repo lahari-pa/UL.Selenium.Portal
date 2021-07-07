@@ -1965,6 +1965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				Report.Info($"Starting: Get current windows handle");
+				//not used (current window handle?)
 				string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 				Report.Info($"Finished get current window handle");
 				Report.Screenshot();
@@ -1982,6 +1983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Success("Found window containing title: Select Rule");
 							Report.Screenshot();
 							successBreakout = true;
+							Report.Info($"break...");
 							break;
 						}
 					}
@@ -1998,6 +2000,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(10);
 			}
 
+			Report.Info($"successBreakout checking...");
 			if(successBreakout==false)
 			{
 				Report.Screenshot();
@@ -2006,6 +2009,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info($"Going to rest of method, successBreakout was true...");
+			//no changes
+
 			Report.Screenshot();
 
 

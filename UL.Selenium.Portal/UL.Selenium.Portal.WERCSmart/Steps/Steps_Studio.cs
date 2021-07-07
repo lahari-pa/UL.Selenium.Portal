@@ -339,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Starting select rules load wait...");
 			var thisSelectRulesPage = new SelectRulesPage();
 			Report.Info($"var thisSelectRulesPage set");
-			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",
+			Report.IsTrue(thisSelectRulesPage.Wait_for_loadLatestVersion(120), "Select rules page has not loaded",
 				"Select rules page has loaded");
 		}
 
@@ -403,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisSelectRulesPage = new SelectRulesPage();
 			Report.Info($"Wait for select rules page...");
-			thisSelectRulesPage.Wait_for_load(30);
+			thisSelectRulesPage.Wait_for_loadLatestVersion(30);
 			Report.Info($"Finished waiting for select rules page");
 			Report.IsTrue(thisSelectRulesPage.SelectTopRule(), "Failed to select first rule", "Selected first rule");
 			Delay.Seconds(3);
