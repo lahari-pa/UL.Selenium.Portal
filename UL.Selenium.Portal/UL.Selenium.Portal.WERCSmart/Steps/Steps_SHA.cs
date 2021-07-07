@@ -1449,9 +1449,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			var myStudioShaManager = new StudioSHAManager();
+			Report.Screenshot();
 			Report.StartStep("I set the status filter to " + status);
 			myStudioShaManager.WaitForProductList(60);
+			Report.Screenshot();
 			myStudioShaManager.SelectFromStatusFilter(status);
+			Report.Screenshot();
 			Report.Info("Status has been set");
 			Report.Screenshot();
 			Report.Info("Pressing Enter Key");
@@ -1464,6 +1467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			//GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(10);
+			Report.Screenshot();
 			//Wait for top n items to be status Assigned
 			int n = 5;
 			int x = 0;
@@ -1492,8 +1496,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(10);
 					x++;					
 				}
-			
 
+			Report.Info($"Going to final check...");
+
+			if (correct == false)
+			{
+				Report.Info($"Final Filter try...");
+				Report.Screenshot();
+				myStudioShaManager.SelectFromStatusFilter(status);
+				Report.Screenshot();
+				Report.Info("Status has been set");
+				Report.Screenshot();
+				Report.Info("Pressing Enter Key");
+				Report.Screenshot();
+				Delay.Seconds(10);
+				GeneralUtilities.StudioWaitForSpinner(30);
+				myStudioShaManager.WaitForProductList(60);
+				Report.Screenshot();
+
+				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
+				List<Product> correctStatusItems = new List<Product>();
+				foreach (var item in topN)
+				{
+					Report.Info($"Status found was: {item.Status}");
+					if (item.Status == status)
+					{
+						correctStatusItems.Add(item);
+					}
+				}
+				Report.Screenshot();
+				Report.Info($"n is {n}");
+				Report.Info($"Count found was: {correctStatusItems.Count()}");
+				if (correctStatusItems.Count() == topN.Count())
+				{
+					correct = true;
+					Report.Info($"{n} items with correct status were found");
+				}
+			}
+			Report.Info($"Going to check...");
 			Report.Screenshot();
 			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
 		}
