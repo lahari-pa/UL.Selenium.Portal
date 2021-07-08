@@ -1937,7 +1937,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Entering Wait x for Loop");
 			int secondsPassed = 0;
 			bool successBreakout = false;
-			while (secondsPassed < secondsToWait + 1 || successBreakout == false)
+			while (secondsPassed < secondsToWait + 1 && successBreakout == false)
 			{
 
 
@@ -2202,16 +2202,59 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickApply()
 		{
-			IWebElement button = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
-			if (button != null)
+			int i = 0;
+			while(i<5)
 			{
-				return button.TryClick();
+				Report.Screenshot();
+				IWebElement applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+				if(applyButton!=null)
+				{
+					if(applyButton.TryClick()==true)
+					{
+						Report.Success($"Successfully clicked the apply button");
+						Report.Screenshot();
+						Delay.Seconds(2);
+						IWebElement containerEl = this.containerElement;
+						int x = 0;
+						while(containerEl!=null && x <20)
+						{
+							Delay.Seconds(5);
+							containerEl = this.containerElement;
+							x++; 
+						}
+
+						if(containerEl == null)
+						{
+							Report.Screenshot();
+							Report.Success($"The filter popup was closed or not found");
+							return true;
+						}
+						
+					
+					}
+					else
+					{
+						Report.Info($"failed the try click of the apply button...")
+						Report.Screenshot();
+					}
+				}
+				else
+				{
+					Report.Info($"The applyButton was null");
+				}
+
+				Report.Info($"The filter popup was still showing, retrying apply click...");
+				Report.Screenshot();
+				i++;
+				Delay.Seconds(5);
+				Report.Screenshot();
+
 			}
-			else
-			{
-				Report.Error("Did not find button to click");
-				return false;
-			}
+
+			Report.Info($"failed to click apply and close the filters popup.");
+			Report.Screenshot();
+			return false;
+
 
 		}
 
