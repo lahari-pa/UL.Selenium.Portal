@@ -2234,7 +2234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else
 					{
-						Report.Info($"failed the try click of the apply button...")
+						Report.Info($"failed the try click of the apply button...");
 						Report.Screenshot();
 					}
 				}
