@@ -1976,10 +1976,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Screenshot();
 					try
 					{
+
 						if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
 						{
 							Report.Info($"Title was select rule... starting switch to....");
-							SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+							//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 							Report.Success("Found window containing title: Select Rule");
 							Report.Screenshot();
 							successBreakout = true;
