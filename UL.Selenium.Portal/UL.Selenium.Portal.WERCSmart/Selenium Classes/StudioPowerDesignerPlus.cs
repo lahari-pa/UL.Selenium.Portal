@@ -1997,6 +1997,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				secondsPassed = secondsPassed + 10;
 				Report.Info($"Waiting for 10 seconds...");
+				Report.Info($"successBreakout was: {successBreakout}");
 				Delay.Seconds(10);
 			}
 
