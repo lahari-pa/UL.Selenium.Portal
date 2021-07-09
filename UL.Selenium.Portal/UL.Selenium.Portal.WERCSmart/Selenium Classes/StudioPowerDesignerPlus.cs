@@ -2204,7 +2204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickApply()
 		{
-			int i = 0;
+			int i = 0;			
 			while(i<5)
 			{
 				Report.Screenshot();
@@ -2216,16 +2216,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Success($"Successfully clicked the apply button");
 						Report.Screenshot();
 						Delay.Seconds(2);
-						IWebElement containerEl = this.containerElement;
+						IWebElement applycontainerEl = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
 						int x = 0;
-						while(containerEl!=null && x <20)
+						while(applycontainerEl != null && x <20)
 						{
 							Delay.Seconds(5);
-							containerEl = this.containerElement;
+							applycontainerEl = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+							Report.Info($"Attempt: {x}");
+							Report.Screenshot();
 							x++; 
 						}
 
-						if(containerEl == null)
+						if(applycontainerEl == null)
 						{
 							Report.Screenshot();
 							Report.Success($"The filter popup was closed or not found");
@@ -2245,7 +2247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"The applyButton was null");
 				}
 
-				Report.Info($"The filter popup was still showing, retrying apply click...");
+				Report.Info($"The filter popup was still showing or apply could not be clicked, retrying apply click...");
 				Report.Screenshot();
 				i++;
 				Delay.Seconds(5);
