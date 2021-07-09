@@ -2209,6 +2209,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				Report.Screenshot();
 				IWebElement applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+				bool applyButtonFound = applyButton.Displayed;
+				Report.Info($"applyButtonFound was {applyButtonFound}");
 				if(applyButton!=null)
 				{
 					if(applyButton.TryClick()==true)
