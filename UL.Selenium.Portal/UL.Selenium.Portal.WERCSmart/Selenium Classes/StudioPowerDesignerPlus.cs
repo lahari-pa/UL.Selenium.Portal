@@ -2201,6 +2201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+		
 
 		public bool ClickApply()
 		{
@@ -2218,18 +2219,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Success($"Successfully clicked the apply button");
 						Report.Screenshot();
 						Delay.Seconds(2);
-						IWebElement applycontainerEl = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+						applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+						applyButtonFound = applyButton.Displayed;
+						Report.Info($"applyButtonFound was {applyButtonFound}");
 						int x = 0;
-						while(applycontainerEl != null && x <20)
+						while(applyButtonFound==true && x <20)
 						{
 							Delay.Seconds(5);
-							applycontainerEl = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+							applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+							applyButtonFound = applyButton.Displayed;
+							Report.Info($"applyButtonFound was {applyButtonFound}");
 							Report.Info($"Attempt: {x}");
 							Report.Screenshot();
 							x++; 
 						}
 
-						if(applycontainerEl == null)
+						if(applyButtonFound == false)
 						{
 							Report.Screenshot();
 							Report.Success($"The filter popup was closed or not found");
