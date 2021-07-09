@@ -5057,7 +5057,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Running a search: " + count);
 				myStudioShaManager.ClickBottomMenuOption("search");
-				myProductSearch.Wait_for_load(5);
+				myProductSearch.Wait_for_load(20);
+				Report.Screenshot();
 				Report.Info("Clicking find");
 				if (!myProductSearch.ClickButton("Find"))
 				{
@@ -5065,6 +5066,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Delay.Seconds(5);
+				Report.Screenshot();
 				GeneralUtilities.StudioWaitForSpinner();
 				if (myStudioShaManager.WaitForProductList(30))
 				{
