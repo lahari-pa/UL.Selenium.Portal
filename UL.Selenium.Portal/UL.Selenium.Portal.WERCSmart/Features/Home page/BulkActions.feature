@@ -200,6 +200,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
 	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
