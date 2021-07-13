@@ -7513,13 +7513,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 3; i++)
 			{
 				var thisApplyRulesPage = new ApplyRulesPage();
-				if (thisApplyRulesPage.Wait_for_load(1))
+				if (thisApplyRulesPage.Wait_for_load(10))
 				{
+					Report.Info($"The wait for load was true");
+					Report.Screenshot();
+					Report.Info($"Attempting to click button: Close");
 					thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 					Delay.Seconds(3);
+					Report.Info($"waited 3 seconds...");
+					Report.Screenshot();
 				}
 				else
 				{
+					Report.Info($"The wait for load was false, the apply rules page is already closed?");
+					Report.Screenshot();
 					closedApplyRules = true;
 					break;
 				}
@@ -7529,6 +7536,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Failed to close apply rules popup");
 			}
+
+			Report.Info($"End of apply rules code.");
+			Report.Screenshot();
 
 
 			//Document queue

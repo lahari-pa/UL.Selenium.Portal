@@ -1502,6 +1502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (urls.Count > 1)
 				{
 					Report.Info("The number of urls was > 1");
+					Report.Screenshot();
 					break;
 				}
 				Report.Info("Waiting 1 second");
@@ -1514,7 +1515,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Report.Info("Looking for the Apply rules window"); 
+			Report.Info("Looking for the Apply rules window");
+			Report.Screenshot();
 			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Apply Rules"))

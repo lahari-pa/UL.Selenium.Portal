@@ -438,6 +438,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Delay.Seconds(1);
 			Report.IsTrue(thisApplyRulesPage.ClickButton(button), "Failed to click " + button, "Clicked " + button);
+
 			if (button.ToLower() == "apply")
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
@@ -470,34 +471,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-
-				//if (!thisApplyRulesPage.WaitForSpinner(300))
-				//{
-				//	if (SeleniumBrowser.Alert.WaitForAlert(300))
-				//	{
-				//		Report.Info($"Attempting to switch to alert 1");
-				//		SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				//	}
-				//	else
-				//	{
-				//		if (!thisApplyRulesPage.WaitForSpinner())
-				//		{
-				//			if (SeleniumBrowser.Alert.WaitForAlert(180))
-				//			{
-				//				Report.Info($"Attempting to switch to alert 2");
-				//				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				//			}
-				//			else
-				//			{
-				//				Report.Info($"Throwing exception");
-				//				throw new Exception("Spinner is still showing");
-				//			}
-				//		}
-				//	}
-				//}
-
-
 			}
+			Report.Info($"End of click apply rules button method...");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I click on document queue to open document queue popup")]
