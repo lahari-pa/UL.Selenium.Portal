@@ -2826,6 +2826,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Test for users already ran for this feature, skipping.");
 			}
+			Report.Info($"Navigating to WS Landing page...");
+			new GlobalSteps().NavigateToLandingPage();
 		}
+
 	}
 }

@@ -4929,6 +4929,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenICallSharedStep59066GoToSHAManager();
 		}
 
+		[StepDefinition(@"I call Shared Step 65080b \(Login to Studio as user saved as: (.*) and Open SHA manager\)")]
+		public void GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartStep("I navigate to Studio");
+			myStepsSha.GivenINavigateToStudio();
+			Report.StartStep("I log in to studio as administrator");
+			myStepsSha.GivenILoginToStudioAsTReVorUser(savedAs);
+			this.GivenICallSharedStep59066GoToSHAManager();
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)

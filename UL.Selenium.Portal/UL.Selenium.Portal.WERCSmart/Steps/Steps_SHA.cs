@@ -78,6 +78,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
+
+		[StepDefinition(@"I login to Studio as (.*)")]
+		public void GivenILoginToStudioAsTReVorUser(string savedAs)
+		{
+			var thisStudioLogin = new StudioLogin();
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs(savedAs);
+			Report.Info("Entering username: " + shaUser.Username);
+			thisStudioLogin.Username = shaUser.Username;
+			Report.Info("Entering password: " + shaUser.Password);
+			thisStudioLogin.Password = shaUser.Password;
+			Report.Info("Clicking 'sign in'");
+			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
+			Delay.Seconds(3);
+			var thisStudioDesktop = new StudioDesktop();
+			if (new PasswordExpireNotice().WaitForLoad())
+			{
+				Report.Info("The Password Expire Notice appeared, so clicking ignore");
+				if (!new PasswordExpireNotice().ClickButton("Ignore"))
+				{
+					Report.Failure("Failed to Click Ignore");
+				}
+			}
+			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
+				"Studio desktop is showing as expected");
+			Report.Info("Studio desktop is loaded");
+			var thisStudioTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
+		}
+
 		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
