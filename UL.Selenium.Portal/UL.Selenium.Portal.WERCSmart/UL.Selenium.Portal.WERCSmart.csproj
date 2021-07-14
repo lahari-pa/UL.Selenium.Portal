@@ -263,6 +263,7 @@
     <Compile Include="Selenium Classes\RegulatoryDocumentsToProvide.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ReviewDocuments.cs" />
+    <Compile Include="Selenium Classes\SecurityManager.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\SHAAdvancedReporting.cs" />
     <Compile Include="Selenium Classes\SHADocumentList.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Selenium Classes\SHAWasteClassification.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
+    <Compile Include="Selenium Classes\StudioDashboardPage.cs" />
     <Compile Include="Selenium Classes\StudioDesktop.cs" />
     <Compile Include="Selenium Classes\StudioFilterProduct.cs" />
     <Compile Include="Selenium Classes\StudioJobQueue.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="Selenium Classes\StudioLogin.cs" />
     <Compile Include="Selenium Classes\StudioLoginScreen.cs" />
     <Compile Include="Selenium Classes\StudioManageGlobalMessages.cs" />
+    <Compile Include="Selenium Classes\StudioNavBar.cs" />
     <Compile Include="Selenium Classes\StudioPowerDesignerPlus.cs" />
     <Compile Include="Selenium Classes\StudioProductAttributeSceen.cs" />
     <Compile Include="Selenium Classes\StudioSHAManager.cs" />
@@ -359,6 +362,7 @@
     <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Steps\Studio\Steps_Header.cs" />
+    <Compile Include="Steps\Studio\Steps_SecurityManager.cs" />
     <Compile Include="Steps\TestCreatingSupplierAccount.cs" />
   </ItemGroup>
   <ItemGroup>

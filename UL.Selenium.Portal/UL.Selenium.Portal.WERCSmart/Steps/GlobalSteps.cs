@@ -2487,7 +2487,100 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I switch to the '(.*)' tab")]
+		public void WhenISwitchToTheTab(string tabName)
+		{
+			GeneralUtilities.SwitchToDefaultContent();
+			Delay.Seconds(Delay.SpeedFactor * 1);
+			StudioNavBar SNB = new StudioNavBar();
+			bool success = SNB.GetTabNum(tabName, out int index);
+			if (success)
+			{
+				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
+				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
+			}
+			else
+			{
+				Report.Failure($"There was no such Tab named {tabName}");
+			}
+		}
 
+		[StepDefinition(@"the Security Manager page should load")]
+		public void ThenTheSecurityManagerPageShouldLoad()
+		{
+			SecurityManager sm = new SecurityManager();
+			Delay.Seconds(1);
+			Report.IsTrue(sm.WaitForContainerToBeVisible(), "Failed, could not find the Security Manager page.", "Successfully found the Security Manager page.", true);
+		}
+
+		[StepDefinition(@"the Material Management Dashboard page should load")]
+		public void ThenTheDashboardPageShouldLoad()
+		{
+			DashboardPage dashboardPage = new DashboardPage();
+
+			int i = 0;
+			while (dashboardPage.ContainerElement == null && i < 20)
+			{
+				dashboardPage = new DashboardPage();
+				i++;
+				Delay.Seconds(1);
+			}
+			Report.IsTrue(dashboardPage.WaitForContainerToBeVisible(timeout: 30), "Failed to find the Dashboard page", "Successfully found the Dashboard page.", true);
+		}
+
+		[StepDefinition(@"the '(.*)' window (should|should not) load")]
+		public void ThenTheWindowShouldLoad(string windowName, string shouldOrShouldNot)
+		{
+			windowName = GeneralUtilities.ReplaceWithContext(windowName);
+			if (shouldOrShouldNot == "should")
+			{
+				Report.IsTrue(StudioUtilites.SwitchToWindow(windowName), "Failed to switch Windows", "Successfully switched windows", throwException: true);
+				Report.IsTrue(StudioUtilites.SwitchToWindow("UL Wercs Studio", false), "Failed to switch Windows", "Successfully switched windows");
+			}
+			else
+			{
+				Report.IsFalse(StudioUtilites.SwitchToWindow(windowName), "Failed, the window did exist.", "Successfully could not switch windows", throwException: true);
+				Report.IsTrue(StudioUtilites.SwitchToWindow("UL Wercs Studio", false), "Failed to switch Windows", "Successfully switched windows");
+			}
+		}
+
+		[StepDefinition(@"I switch to the '(.*)' window")]
+		public void GivenISwitchToTheWindow(string windowName)
+		{
+			windowName = GeneralUtilities.ReplaceWithContext(windowName);
+			Report.IsTrue(StudioUtilites.SwitchToWindow(windowName), "Failed to switch Windows", "Successfully switched windows", true);
+		}
+
+
+		[StepDefinition(@"I close the '(.*)' window")]
+		public void ThenCloseTheSpecifiedWindow(string windowName)
+		{
+			try
+			{
+				string mainWindowHandle = (string)Context.GetFromContext("BaseWindow");
+				if (mainWindowHandle == null)
+				{
+					throw new Exception("No Main Window Handle found in context!");
+				}
+				windowName = GeneralUtilities.ReplaceWithContext(windowName);
+				bool found = StudioUtilites.SwitchToWindow(windowName);
+				Report.IsTrue(found, "Failed to switch Windows", "Successfully switched windows");
+				if (found)
+				{
+					Report.Info("Attempting to close the current window");
+					WebDriver.CurrentDriver.Close();
+					Report.Info("Current window closed, switching to the BaseWindow");
+					WebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
+					Report.Success("Browser window switched successfully!");
+					Report.Screenshot();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 		[StepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
 		public void WhenIVerifyTheFollowingUsersExist(string savedAs, Table table)
@@ -2513,12 +2606,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				foreach (var iuser in table.Rows)
 				{
 					var user = iuser["username"];
-					bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(user, out var credentials2);
+
+					TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
+					bool credentialsFound = trevuser != null;
+
+
+
+
 					if (credentialsFound)
 					{
 						Report.StartSubStep($"Given I attempt to login as stored user {user}");
 
-						Report.IsTrue(LS.LoginAsUser(credentials2), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
+						Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
 
 						if (LS.DispayErrorMessage("Invalid login"))
 						{
@@ -2530,7 +2629,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("User already created, logging out.");
 
 							Report.StartSubStep("Then I switch to the 'Material Management' tab");
-							WhenISwitchToTheTab("Material Management");
+							this.WhenISwitchToTheTab("Material Management");
 							Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
 
 							header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
@@ -2546,36 +2645,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (usersToCreate.Count > 0)
 				{
 					Report.StartSubStep($"Attempt to log in as {savedAs}");
-					bool success = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
-					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(credentials), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
+					//bool success = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+					TReVorTestUsers trevuser2 = TestUsers.GetUserSavedAs(savedAs);
+					bool success = trevuser2 != null;
+
+					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(savedAs), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
 					{
 						Report.StartSubStep("Then I switch to the 'Material Management' tab");
-						WhenISwitchToTheTab("Material Management");
+						this.WhenISwitchToTheTab("Material Management");
 
 						Report.StartSubStep("Then the Material Management Dashboard page should load");
-						ThenTheDashboardPageShouldLoad();
+						this.ThenTheDashboardPageShouldLoad();
 
 						Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
 						header.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
 
 						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-						WhenISwitchToTheTab("Security Manager");
+						this.WhenISwitchToTheTab("Security Manager");
 
 						Report.StartSubStep("Then the Security Manager page should load");
-						ThenTheSecurityManagerPageShouldLoad();
+						this.ThenTheSecurityManagerPageShouldLoad();
 
 						Report.StartSubStep("When In Security Manager, I click the 'Users and roles' button");
 						S_SM.WhenInSecurityManagerIClickTheButton("Users and roles");
 
 						Report.StartSubStep("Then the 'Users and Roles' window should load");
-						ThenTheWindowShouldLoad("Users and Roles", "should");
+						this.ThenTheWindowShouldLoad("Users and Roles", "should");
 
 						foreach (var iuser in usersToCreate)
 						{
 							var user = iuser["username"];
 
 							Report.StartSubStep($"Given I switch to the 'Users and Roles' window");
-							GivenISwitchToTheWindow("Users and Roles");
+							this.GivenISwitchToTheWindow("Users and Roles");
 
 
 							Report.StartSubStep($"When Under 'User Name' I search for the username stored in '{user}'");
@@ -2583,16 +2686,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 							Report.StartSubStep($"Then Under 'User Name' I double click the username stored in '{user}'");
 							SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
-							bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(user, out var credentials2);
 
+							TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
+							bool credentialsFound = trevuser != null;
 
 							if (credentialsFound)
 							{
-								if (SM_UAR.DoubleClickUserName("User Name", credentials2.UserName))
+								if (SM_UAR.DoubleClickUserName("User Name", user))
 								{
 									//Case where the user exists
 									Report.StartSubStep($"Then I close the 'Edit' window");
-									ThenCloseTheSpecifiedWindow("Edit");
+									this.ThenCloseTheSpecifiedWindow("Edit");
 									continue;
 								}
 								else
@@ -2602,10 +2706,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									S_SM.ThenInTheWindowIClickTheAddEditDeleteButton("Users and Roles", "Add Row");
 
 									Report.StartSubStep("Then the 'Add' window should load");
-									ThenTheWindowShouldLoad("Add", "should");
+									this.ThenTheWindowShouldLoad("Add", "should");
 
 									Report.StartSubStep("Given I switch to the 'Add' window");
-									GivenISwitchToTheWindow("Add");
+									this.GivenISwitchToTheWindow("Add");
 
 									var first = iuser["FirstName"];
 									var last = iuser["LastName"];
@@ -2619,8 +2723,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.StartSubStep($"Then in the 'Add' window, I enter the Last Name '{last}'");
 									Report.IsTrue(SM_AU.EnterLastName(last), "Failed to enter the last name.", "successfully entered the last name.");
 
-									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{credentials2.UserName}'");
-									Report.IsTrue(SM_AU.EnterUserName(credentials2.UserName), "Failed to enter the username.", "successfully entered the username.");
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{trevuser.Username}'");
+									Report.IsTrue(SM_AU.EnterUserName(trevuser.Username), "Failed to enter the username.", "successfully entered the username.");
 
 									Report.StartSubStep($"Then in the 'Add' window, I enter the Email Address '{EmailAdd}'");
 									Report.IsTrue(SM_AU.EnterEmail(EmailAdd), "Failed to enter the email address.", "Successfully entered the email address.");
@@ -2633,10 +2737,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.IsTrue(SM_AU.ClickBackupUserBttn(), "Failed, could not click the back up user button.", "Success, could click the back up user button.");
 
 									Report.StartSubStep("Then the 'Select user' window should load");
-									ThenTheWindowShouldLoad("Select user", "should");
+									this.ThenTheWindowShouldLoad("Select user", "should");
 
 									Report.StartSubStep("Given I switch to the 'Select user' window");
-									GivenISwitchToTheWindow("Select user");
+									this.GivenISwitchToTheWindow("Select user");
 
 									Report.StartSubStep("When in the 'Select user' window, I click the filter button");
 									SecurityManager_SelectUser SM_SU = new SecurityManager_SelectUser();
@@ -2644,44 +2748,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 									Report.StartSubStep($"Then in the 'Select user' window, I filter for 'User Name' 'Starts with...' '{savedAs}'");
 									Report.IsTrue(SM_SU.SelectFilterType("User Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
-									Report.IsTrue(SM_SU.EnterFilterText("User Name", credentials.UserName), $"Failed to enter the user {credentials.UserName}");
+									Report.IsTrue(SM_SU.EnterFilterText("User Name", trevuser.Username), $"Failed to enter the user {trevuser.Username}");
 
 									Report.StartSubStep("Then in the 'Select user' window, I click to apply the filter.");
 									Report.IsTrue(SM_SU.ClickApplyFilterBtn(), "Could not click to apply the filter.");
 
 									Report.StartSubStep($"Then in the 'Select user' window, I select the 'User Name' stored in '{savedAs}'");
-									Report.IsTrue(SM_SU.SelectItem("User Name", credentials.UserName), "Failed to select the 'User Name' stored in '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectItem("User Name", trevuser.Username), "Failed to select the 'User Name' stored in '{savedAs}'");
 
 									Report.StartSubStep("Given I switch to the 'Add' window");
-									GivenISwitchToTheWindow("Add");
+									this.GivenISwitchToTheWindow("Add");
 
 									Report.StartSubStep($"Then in the 'Add' window, I click to select the plant for the user");
 									Report.IsTrue(SM_AU.ClickPlantBttn(), "Failed, could not click the plant button.", "Success, could click the plant button.");
 
 									Report.StartSubStep("Then the 'Select location' window should load");
-									ThenTheWindowShouldLoad("Select location", "should");
+									this.ThenTheWindowShouldLoad("Select location", "should");
 
 									Report.StartSubStep("Given I switch to the 'Select location' window");
-									GivenISwitchToTheWindow("Select location");
+									this.GivenISwitchToTheWindow("Select location");
 
 									Report.StartSubStep("When in the 'Select location' window, I select the 'Plant ID' 'WERCS'");
 									SecurityManager_SelectLocation SM_SL = new SecurityManager_SelectLocation();
 									Report.IsTrue(SM_SL.SelectItem("Plant ID", "WERCS"), "Failed to select the item 'WERCS' under 'Plant ID'", "Successfully selected the item 'WERCS' under 'Plant ID'");
 
 									Report.StartSubStep("Given I switch to the 'Add' window");
-									GivenISwitchToTheWindow("Add");
+									this.GivenISwitchToTheWindow("Add");
 
 									Report.StartSubStep($"Then in the 'Add' window, I enter the password saved in '{user}'");
-									Report.IsTrue(SM_AU.EnterPassword(credentials2.Password), $"Failed to enter the password for {user}", $"Successfully entered the password for {user}");
+									Report.IsTrue(SM_AU.EnterPassword(trevuser.Password), $"Failed to enter the password for {user}", $"Successfully entered the password for {user}");
 
 									Report.StartSubStep($"Then in the 'Add' window, I confirm the password saved in '{user}'");
-									Report.IsTrue(SM_AU.ConfirmPassword(credentials2.Password), $"Failed to confirm the password for {user}", $"Successfully confirmed the password for {user}");
+									Report.IsTrue(SM_AU.ConfirmPassword(trevuser.Password), $"Failed to confirm the password for {user}", $"Successfully confirmed the password for {user}");
 
 									Report.StartSubStep("Then in the 'Add' window, I click the Save button");
 									Report.IsTrue(SM_AU.ClickSaveBttn(), $"Failed to click the save button", $"Successfully clicked the save button.", throwException: true);
 
 									Report.StartSubStep("Then the 'Add' window should not load");
-									ThenTheWindowShouldLoad("Add", "should not");
+									this.ThenTheWindowShouldLoad("Add", "should not");
 								}
 
 
@@ -2694,13 +2798,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							}
 						}
 						Report.StartSubStep("Given I close the 'Users and Roles' Window");
-						ThenCloseTheSpecifiedWindow("Users and Roles");
+						this.ThenCloseTheSpecifiedWindow("Users and Roles");
 
 						Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
-						GivenISwitchToTheWindow("UL Wercs Studio");
+						this.GivenISwitchToTheWindow("UL Wercs Studio");
 
 						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-						WhenISwitchToTheTab("Security Manager");
+						this.WhenISwitchToTheTab("Security Manager");
 
 						Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
 						header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");

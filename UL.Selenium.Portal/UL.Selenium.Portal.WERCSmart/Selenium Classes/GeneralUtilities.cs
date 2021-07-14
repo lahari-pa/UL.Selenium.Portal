@@ -41,7 +41,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+		public static string ReplaceWithContext(string input)
+		{
+			string pattern = @"<context:(\w+)>";
+			Match match = Regex.Match(input, pattern);
+			if (match.Success)
+			{
+				string contextVar = match.Groups[1].Value;
+				input = Regex.Replace(input, pattern, (string)Context.GetFromContext(contextVar));
 
+			}
+			return input;
+
+		}
 		public static bool StudioWaitForSpinner(int maxSecondsToWait)
 		{
 			try
@@ -293,6 +305,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
 		}
+		public static bool SwitchToFrame(string frame = "Widget1FRAME")
+		{
+			string[] values = frame.Split(',');
+			bool output = true;
+			Regex regex = new Regex("<(.+)>");
+			string teststring = "";
+			foreach (var val in values)
+			{
+				try
+				{
+					if (teststring.StartsWith("<"))
+					{
+						teststring = $"{teststring},{val}";
+					}
+					else
+					{
+						teststring = val;
+					}
+					if (teststring.StartsWith("<") && !teststring.EndsWith(">"))
+					{
+						continue;
+					}
+					Match match = regex.Match(teststring);
+					if (!match.Success)
+					{
+						output = WebDriver.CurrentDriver.SwitchToIFrame(val) || (WebDriver.CurrentDriver.ExitIFrame() && WebDriver.CurrentDriver.SwitchToIFrame(val));
+						teststring = "";
+					}
+					else
+					{
+						string position = match.Groups[1].Value;
+						IWebElement iFrame = WebDriver.CurrentDriver.FindElement(By.XPath($"//iframe[{position}]"), 2);
+						WebDriver.CurrentDriver.SwitchTo().Frame(iFrame);
+						output = true;
+						teststring = "";
+					}
+				}
+				catch (Exception ex)
+				{
+					WebDriver.CurrentDriver.SwitchTo().DefaultContent();
+					Report.Error($"Failed to switch frame {frame}. Exception was thrown: " + ex.Message);
+					return false;
+				}
+			}
+			return output;
+		}
+
 
 		public static bool CheckCBAOrder(List<string> list)
 		{
