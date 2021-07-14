@@ -282,6 +282,7 @@
     <Compile Include="Selenium Classes\StudioProductAttributeSceen.cs" />
     <Compile Include="Selenium Classes\StudioSHAManager.cs" />
     <Compile Include="Selenium Classes\StudioSupplierManager.cs" />
+    <Compile Include="Selenium Classes\StudioTopHeader.cs" />
     <Compile Include="Selenium Classes\StudioTopMenu.cs" />
     <Compile Include="Selenium Classes\StudioUtilities.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
@@ -356,6 +357,7 @@
     <Compile Include="Steps\Steps_ViewUpcs.cs" />
     <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
+    <Compile Include="Steps\Studio\Steps_Header.cs" />
     <Compile Include="Steps\TestCreatingSupplierAccount.cs" />
   </ItemGroup>
   <ItemGroup>

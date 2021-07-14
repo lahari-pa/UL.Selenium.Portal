@@ -316,6 +316,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public static void SwitchToDefaultContent()
+		{
+			WebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
+
 		public static void OpenNewTabAndNavigateTo(string url)
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
@@ -520,7 +525,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		
+	
+
+
 
 
 

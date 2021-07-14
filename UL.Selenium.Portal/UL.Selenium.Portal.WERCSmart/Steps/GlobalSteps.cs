@@ -2487,5 +2487,238 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+
+
+		[StepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
+		public void WhenIVerifyTheFollowingUsersExist(string savedAs, Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			bool found = Context.FeatureContext.TryGetValue("TryGetUsers", out var result);
+			bool TestFinished = result != null && (bool)result == false;
+			if (!found || TestFinished)
+			{
+				if (!Context.FeatureContext.ContainsKey("TryGetUsers"))
+				{
+					Context.FeatureContext.Add("TryGetUsers", false);
+				}
+				else
+				{
+					Context.FeatureContext["TryGetUsers"] = false;
+				}
+				//Attempt to log in as each user in the table, and if they cant log in create them.
+				List<TableRow> usersToCreate = new List<TableRow>();
+				var header = new Steps_Header();
+				var LS = new LoginScreen();
+				var S_SM = new Steps_SecurityManager();
+				foreach (var iuser in table.Rows)
+				{
+					var user = iuser["username"];
+					bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(user, out var credentials2);
+					if (credentialsFound)
+					{
+						Report.StartSubStep($"Given I attempt to login as stored user {user}");
+
+						Report.IsTrue(LS.LoginAsUser(credentials2), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
+
+						if (LS.DispayErrorMessage("Invalid login"))
+						{
+							Report.Info($"Need to create user: {user}");
+							usersToCreate.Add(iuser);
+						}
+						else
+						{
+							Report.Info("User already created, logging out.");
+
+							Report.StartSubStep("Then I switch to the 'Material Management' tab");
+							WhenISwitchToTheTab("Material Management");
+							Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+
+							header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+						}
+					}
+					else
+					{
+						Report.Error($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
+						Report.EndScenario();
+						return;
+					}
+				}
+				if (usersToCreate.Count > 0)
+				{
+					Report.StartSubStep($"Attempt to log in as {savedAs}");
+					bool success = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(credentials), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
+					{
+						Report.StartSubStep("Then I switch to the 'Material Management' tab");
+						WhenISwitchToTheTab("Material Management");
+
+						Report.StartSubStep("Then the Material Management Dashboard page should load");
+						ThenTheDashboardPageShouldLoad();
+
+						Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
+						header.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
+
+						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
+						WhenISwitchToTheTab("Security Manager");
+
+						Report.StartSubStep("Then the Security Manager page should load");
+						ThenTheSecurityManagerPageShouldLoad();
+
+						Report.StartSubStep("When In Security Manager, I click the 'Users and roles' button");
+						S_SM.WhenInSecurityManagerIClickTheButton("Users and roles");
+
+						Report.StartSubStep("Then the 'Users and Roles' window should load");
+						ThenTheWindowShouldLoad("Users and Roles", "should");
+
+						foreach (var iuser in usersToCreate)
+						{
+							var user = iuser["username"];
+
+							Report.StartSubStep($"Given I switch to the 'Users and Roles' window");
+							GivenISwitchToTheWindow("Users and Roles");
+
+
+							Report.StartSubStep($"When Under 'User Name' I search for the username stored in '{user}'");
+							S_SM.WhenISearchForTheUserNameForTheStoredUserSCREENSECURITY("User Name", user);
+
+							Report.StartSubStep($"Then Under 'User Name' I double click the username stored in '{user}'");
+							SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
+							bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(user, out var credentials2);
+
+
+							if (credentialsFound)
+							{
+								if (SM_UAR.DoubleClickUserName("User Name", credentials2.UserName))
+								{
+									//Case where the user exists
+									Report.StartSubStep($"Then I close the 'Edit' window");
+									ThenCloseTheSpecifiedWindow("Edit");
+									continue;
+								}
+								else
+								{
+									//Case where the user doesnt exist
+									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
+									S_SM.ThenInTheWindowIClickTheAddEditDeleteButton("Users and Roles", "Add Row");
+
+									Report.StartSubStep("Then the 'Add' window should load");
+									ThenTheWindowShouldLoad("Add", "should");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									GivenISwitchToTheWindow("Add");
+
+									var first = iuser["FirstName"];
+									var last = iuser["LastName"];
+									var role = iuser["Role"];
+									var EmailAdd = iuser["EmailAddress"];
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the First Name '{first}'");
+									SecurityManager_AddUser SM_AU = new SecurityManager_AddUser();
+									Report.IsTrue(SM_AU.EnterFirstName(first), "Failed to enter the first name.", "Successfully entyered the first name.");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Last Name '{last}'");
+									Report.IsTrue(SM_AU.EnterLastName(last), "Failed to enter the last name.", "successfully entered the last name.");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{credentials2.UserName}'");
+									Report.IsTrue(SM_AU.EnterUserName(credentials2.UserName), "Failed to enter the username.", "successfully entered the username.");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Email Address '{EmailAdd}'");
+									Report.IsTrue(SM_AU.EnterEmail(EmailAdd), "Failed to enter the email address.", "Successfully entered the email address.");
+									Delay.Seconds(5);
+
+									Report.StartSubStep($"Then in the 'Add' window, I select the role '{role}'");
+									var roleSelected = Report.IsTrue(SM_AU.SelectRole(role), $"Failed to select the role {role}", $"Successfully selected the role {role}", throwException: true);
+
+									Report.StartSubStep($"Then in the'Add' window, I click to select the back up user");
+									Report.IsTrue(SM_AU.ClickBackupUserBttn(), "Failed, could not click the back up user button.", "Success, could click the back up user button.");
+
+									Report.StartSubStep("Then the 'Select user' window should load");
+									ThenTheWindowShouldLoad("Select user", "should");
+
+									Report.StartSubStep("Given I switch to the 'Select user' window");
+									GivenISwitchToTheWindow("Select user");
+
+									Report.StartSubStep("When in the 'Select user' window, I click the filter button");
+									SecurityManager_SelectUser SM_SU = new SecurityManager_SelectUser();
+									Report.IsTrue(SM_SU.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+									Report.StartSubStep($"Then in the 'Select user' window, I filter for 'User Name' 'Starts with...' '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectFilterType("User Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+									Report.IsTrue(SM_SU.EnterFilterText("User Name", credentials.UserName), $"Failed to enter the user {credentials.UserName}");
+
+									Report.StartSubStep("Then in the 'Select user' window, I click to apply the filter.");
+									Report.IsTrue(SM_SU.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+
+									Report.StartSubStep($"Then in the 'Select user' window, I select the 'User Name' stored in '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectItem("User Name", credentials.UserName), "Failed to select the 'User Name' stored in '{savedAs}'");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									GivenISwitchToTheWindow("Add");
+
+									Report.StartSubStep($"Then in the 'Add' window, I click to select the plant for the user");
+									Report.IsTrue(SM_AU.ClickPlantBttn(), "Failed, could not click the plant button.", "Success, could click the plant button.");
+
+									Report.StartSubStep("Then the 'Select location' window should load");
+									ThenTheWindowShouldLoad("Select location", "should");
+
+									Report.StartSubStep("Given I switch to the 'Select location' window");
+									GivenISwitchToTheWindow("Select location");
+
+									Report.StartSubStep("When in the 'Select location' window, I select the 'Plant ID' 'WERCS'");
+									SecurityManager_SelectLocation SM_SL = new SecurityManager_SelectLocation();
+									Report.IsTrue(SM_SL.SelectItem("Plant ID", "WERCS"), "Failed to select the item 'WERCS' under 'Plant ID'", "Successfully selected the item 'WERCS' under 'Plant ID'");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									GivenISwitchToTheWindow("Add");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the password saved in '{user}'");
+									Report.IsTrue(SM_AU.EnterPassword(credentials2.Password), $"Failed to enter the password for {user}", $"Successfully entered the password for {user}");
+
+									Report.StartSubStep($"Then in the 'Add' window, I confirm the password saved in '{user}'");
+									Report.IsTrue(SM_AU.ConfirmPassword(credentials2.Password), $"Failed to confirm the password for {user}", $"Successfully confirmed the password for {user}");
+
+									Report.StartSubStep("Then in the 'Add' window, I click the Save button");
+									Report.IsTrue(SM_AU.ClickSaveBttn(), $"Failed to click the save button", $"Successfully clicked the save button.", throwException: true);
+
+									Report.StartSubStep("Then the 'Add' window should not load");
+									ThenTheWindowShouldLoad("Add", "should not");
+								}
+
+
+							}
+							else
+							{
+								Report.Error($"Could not find the Credentials for {user}");
+								Report.EndScenario();
+								return;
+							}
+						}
+						Report.StartSubStep("Given I close the 'Users and Roles' Window");
+						ThenCloseTheSpecifiedWindow("Users and Roles");
+
+						Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+						GivenISwitchToTheWindow("UL Wercs Studio");
+
+						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
+						WhenISwitchToTheTab("Security Manager");
+
+						Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+						header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+					}
+				}
+				if (!Context.FeatureContext.ContainsKey("TryGetUsers"))
+				{
+					Context.FeatureContext.Add("TryGetUsers", true);
+				}
+				else
+				{
+					Context.FeatureContext["TryGetUsers"] = true;
+				}
+			}
+			else
+			{
+				Report.Info("Test for users already ran for this feature, skipping.");
+			}
+		}
 	}
 }
