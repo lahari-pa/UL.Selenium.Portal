@@ -18,6 +18,12 @@
 
 Feature: AccHasFullStwdData
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username   | FirstName | LastName   | Role         | EmailAddress                 |
+		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxxyxunf@mailosaur.io |
+		
+
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @ScenarioId:1424

@@ -277,9 +277,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.WaitForContainerToBeVisible(8))
+			if (!selLandingPage.WaitForContainerToBeVisible(120))
 			{
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 8) != null)
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 120) != null)
 				{
 					throw new Exception("HTTP Server error 503 was thrown!");
 				}
@@ -2610,8 +2610,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
 					bool credentialsFound = trevuser != null;
 
-
-
+					//navigate to SHA
+					ReportSettings.UseSubSteps = true;
+					var myStepsSha = new Steps_SHA();
+					Report.StartStep("I navigate to Studio");
+					myStepsSha.GivenINavigateToStudio();
 
 					if (credentialsFound)
 					{
@@ -2652,11 +2655,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(savedAs), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
 					{
-						Report.StartSubStep("Then I switch to the 'Material Management' tab");
-						this.WhenISwitchToTheTab("Material Management");
+						
 
-						Report.StartSubStep("Then the Material Management Dashboard page should load");
-						this.ThenTheDashboardPageShouldLoad();
 
 						Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
 						header.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
@@ -2702,6 +2702,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								else
 								{
 									//Case where the user doesnt exist
+
+									
 									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
 									S_SM.ThenInTheWindowIClickTheAddEditDeleteButton("Users and Roles", "Add Row");
 
@@ -2723,6 +2725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.StartSubStep($"Then in the 'Add' window, I enter the Last Name '{last}'");
 									Report.IsTrue(SM_AU.EnterLastName(last), "Failed to enter the last name.", "successfully entered the last name.");
 
+									//15 char limit on user name
 									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{trevuser.Username}'");
 									Report.IsTrue(SM_AU.EnterUserName(trevuser.Username), "Failed to enter the username.", "successfully entered the username.");
 
@@ -2748,13 +2751,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 									Report.StartSubStep($"Then in the 'Select user' window, I filter for 'User Name' 'Starts with...' '{savedAs}'");
 									Report.IsTrue(SM_SU.SelectFilterType("User Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
-									Report.IsTrue(SM_SU.EnterFilterText("User Name", trevuser.Username), $"Failed to enter the user {trevuser.Username}");
+									Report.IsTrue(SM_SU.EnterFilterText("User Name", trevuser2.Username), $"Failed to enter the user {trevuser2.Username}");
 
 									Report.StartSubStep("Then in the 'Select user' window, I click to apply the filter.");
 									Report.IsTrue(SM_SU.ClickApplyFilterBtn(), "Could not click to apply the filter.");
 
 									Report.StartSubStep($"Then in the 'Select user' window, I select the 'User Name' stored in '{savedAs}'");
-									Report.IsTrue(SM_SU.SelectItem("User Name", trevuser.Username), "Failed to select the 'User Name' stored in '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectItem("User Name", trevuser2.Username), "Failed to select the 'User Name' stored in '{savedAs}'");
 
 									Report.StartSubStep("Given I switch to the 'Add' window");
 									this.GivenISwitchToTheWindow("Add");

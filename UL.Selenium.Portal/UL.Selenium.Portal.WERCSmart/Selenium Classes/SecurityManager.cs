@@ -373,7 +373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private string _buttonName;
 
-		private IWebElement TargetButton => this.TableHeaderContainer.FindElement(By.XPath($".//div[contains(@title,'{_buttonName}')]"), 2);
+		private IWebElement TargetButton => this.TableHeaderContainer.FindElement(By.XPath($".//td[contains(@title,'{_buttonName}')]"), 2);
 
 		private IWebElement AllRolesBtn => this.ContainerElement.FindElement(By.XPath($".//input[@title='All Roles']"), 2);
 
@@ -572,7 +572,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		internal bool ClickButton(string buttonName)
 		{
 			_buttonName = buttonName;
-			return TargetButton != null ? TargetButton.TryClick() : false;
+			var test = this.TargetButton;
+			return this.TargetButton != null ? this.TargetButton.TryClick() : false;
 		}
 	}
 	public class SecurityManager_EditUser : SeleniumBaseObject
