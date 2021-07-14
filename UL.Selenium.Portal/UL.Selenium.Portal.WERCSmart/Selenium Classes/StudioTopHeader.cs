@@ -8,7 +8,7 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.Selenium.BaseClasses;
 using UL.Automation.Selenium.Extensions;
 
-namespace Authoring.Studio.Selenium.SeleniumClasses
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class StudioTopHeader : SeleniumBaseObject
 	{

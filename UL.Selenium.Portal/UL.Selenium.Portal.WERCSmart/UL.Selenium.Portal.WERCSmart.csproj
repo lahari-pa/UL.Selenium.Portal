@@ -277,6 +277,7 @@
     <Compile Include="Selenium Classes\StudioJobQueue.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\StudioLogin.cs" />
+    <Compile Include="Selenium Classes\StudioLoginScreen.cs" />
     <Compile Include="Selenium Classes\StudioManageGlobalMessages.cs" />
     <Compile Include="Selenium Classes\StudioPowerDesignerPlus.cs" />
     <Compile Include="Selenium Classes\StudioProductAttributeSceen.cs" />

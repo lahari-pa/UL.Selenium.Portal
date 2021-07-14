@@ -3,7 +3,7 @@ using System;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
 
-namespace Authoring.Studio.Selenium.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Studio_Header")]
 	public class Steps_Header
@@ -18,12 +18,12 @@ namespace Authoring.Studio.Selenium.Steps
 		}
 
 		[StepDefinition(@"I click to open the '(.*)' menu, and under '(.*)' and select '(.*)'")]
-		public void WhenIClickToOpenTheMenuAndUnderAndSelect(string Menu, string subMenu, string SubItem)
+		public void WhenIClickToOpenTheMenuAndUnderAndSelect(string menu, string subMenu, string subItem)
 		{
 			GeneralUtilities.SwitchToDefaultContent();
 			var topHeader = new StudioTopHeader();
-			Report.IsTrue(topHeader.ClickMenu(Menu), $"Failed to open the {Menu} menu.", $"Successfully clicked to open the {Menu} menu");
-			Report.IsTrue(topHeader.ClickTriMenuItem(Menu, subMenu, SubItem), $"Failed to click the {SubItem} button under {subMenu}.", $"Successfully clicked the {SubItem} button under {subMenu}.");
+			Report.IsTrue(topHeader.ClickMenu(menu), $"Failed to open the {menu} menu.", $"Successfully clicked to open the {menu} menu");
+			Report.IsTrue(topHeader.ClickTriMenuItem(menu, subMenu, subItem), $"Failed to click the {subItem} button under {subMenu}.", $"Successfully clicked the {subItem} button under {subMenu}.");
 		}
 
 		[StepDefinition(@"I click to open the '(.*)' menu, and under the '(.*)' sub-menu, '(.*)' (should|should not) be available")]
