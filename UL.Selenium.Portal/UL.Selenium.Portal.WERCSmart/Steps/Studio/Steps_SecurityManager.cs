@@ -7,6 +7,8 @@ using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Reporting.Classes;
+using TReVor.Api.Wrapper.Classes;
+using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -14,10 +16,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	public class Steps_SecurityManager
 	{
 		[StepDefinition(@"I select '(.*)' from the Security Manager drop down")]
-		public void WhenISelectFromTheSecurityManagerDropDown(string Option)
+		public void WhenISelectFromTheSecurityManagerDropDown(string option)
 		{
 			SecurityManager SM = new SecurityManager();
-			Report.IsTrue(SM.SelectObjectDropDown(Option), $"Failed to select {Option} from the drop down menu", $"Successfully selected {Option} from the drop down menu");
+			Report.IsTrue(SM.SelectObjectDropDown(option), $"Failed to select {option} from the drop down menu", $"Successfully selected {option} from the drop down menu");
 		}
 
 		[StepDefinition(@"I select module '(.*)' under '(.*)'")]
@@ -38,341 +40,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"in the '(.*)' window, I select role '(.*)' under '(.*)'")]
-		public void WhenInTheWindowISelectUnder(string WindowName, string Role, string Column)
+		public void WhenInTheWindowISelectUnder(string windowName, string role, string column)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
-			Report.IsTrue(SM_SAW.SelectItemUnderHeader(Role, Column), $"Failed to select item {Role} under column {Column}", $"Successfully selected item {Role} under column {Column}");
+			Report.IsTrue(SM_SAW.SelectItemUnderHeader(role, column), $"Failed to select item {role} under column {column}", $"Successfully selected item {role} under column {column}");
 		}
 
 		[StepDefinition(@"in the '(.*)' window, I set the access level to '(.*)'")]
-		public void WhenInTheWindowISetTheAccessLevelTo(string WindowName, string AccessLevel)
+		public void WhenInTheWindowISetTheAccessLevelTo(string windowName, string accessLevel)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
-			Report.IsTrue(SM_SAW.SelectAccessLevel(AccessLevel), $"Failed to select the access level '{AccessLevel}'", $"Successfully selected the access level '{AccessLevel}'");
+			Report.IsTrue(SM_SAW.SelectAccessLevel(accessLevel), $"Failed to select the access level '{accessLevel}'", $"Successfully selected the access level '{accessLevel}'");
 		}
 		[StepDefinition(@"in the '(.*)' window, I click to set the access level")]
-		public void ThenInTheWindowIClickToSetTheAccessLevel(string WindowName)
+		public void ThenInTheWindowIClickToSetTheAccessLevel(string windowName)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
 			Report.IsTrue(SM_SAW.ClickToSetAccessLevel(), "Failed to click the Change Multiple button.", "Successfully clicked the Change Multiple button.", showSuccessScreenshot: false);
-		}
+		}	
 
-		[StepDefinition(@"I run the Module Security test with the following parameters")]
-		public void GivenIRunTheSecurityTestWithTheFollowingParameters(Table table)
-		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
-			if (table.RowCount > 1)
-			{
-				throw new ArgumentException("Table had too many rows");
-			}
-			string moduleName = table.Rows[0]["ModuleName"], windowName = table.Rows[0]["WindowName"], menu = table.Rows[0]["Menu"], subMenu = table.Rows[0]["SubMenu"];
-			Steps_Login Login = new Steps_Login();
-			GlobalSteps GS = new GlobalSteps();
-			Steps_Header S_H = new Steps_Header();
-
-			//SETUP For No Access to module
-			Report.StartSubStep("Given I login as stored user MANAGER1");
-			Login.GivenILogInAsStoredUser("MANAGER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("Then the Security Manager page should load");
-			GS.ThenTheSecurityManagerPageShouldLoad();
-
-			Report.StartSubStep("When I select '" +
-				"Modules' from the Security Manager drop down");
-			WhenISelectFromTheSecurityManagerDropDown("Modules");
-
-			Report.StartSubStep($"Then I select module '{moduleName}' under 'Object Name'");
-			ThenISelectModuleUnder(moduleName, "Object Name");
-
-			Report.StartSubStep("Then I click to edit the selected module");
-			ThenIClickToEditTheSelectedModule();
-
-			Report.StartSubStep($"Then the '{windowName}' window should load");
-			GS.ThenTheWindowShouldLoad(windowName, "should");
-
-			Report.StartSubStep($"Given I switch to the '{windowName}' window");
-			GS.GivenISwitchToTheWindow(windowName);
-
-			Report.StartSubStep($"When in the '{windowName}' window, I select role 'Security Testing' under 'Role Name'");
-			WhenInTheWindowISelectUnder(windowName, "Security Testing", "Role Name");
-
-			Report.StartSubStep($"And in the '{windowName}' window, I set the access level to 'No access'");
-			WhenInTheWindowISetTheAccessLevelTo(windowName, "No access");
-
-			Report.StartSubStep($"Then in the '{windowName}' window, I click to set the access level");
-			ThenInTheWindowIClickToSetTheAccessLevel(windowName);
-
-			Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
-			GS.GivenISwitchToTheWindow("UL Wercs Studio");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//TEST For No Access to Module
-			Report.StartSubStep("Given I login as stored user TESTER1");
-			Login.GivenILogInAsStoredUser("TESTER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			string[] values = subMenu.Split(',');
-			foreach (var val in values)
-			{
-				Report.StartSubStep($"When I click to open the '{menu}' menu, '{val}' should not be available");
-				S_H.WhenIClickToOpenTheMenuShouldNotBeAvailable(menu, val, "should not");
-
-				Report.StartSubStep("Then I switch to the 'Material Management' tab");
-				GS.WhenISwitchToTheTab("Material Management");
-			}
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//SETUP For Full Access to module
-			Report.StartSubStep("Given I login as stored user MANAGER1");
-			Login.GivenILogInAsStoredUser("MANAGER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("Then the Security Manager page should load");
-			GS.ThenTheSecurityManagerPageShouldLoad();
-
-			Report.StartSubStep("When I select 'Modules' from the Security Manager drop down");
-			WhenISelectFromTheSecurityManagerDropDown("Modules");
-
-			Report.StartSubStep($"Then I select module '{moduleName}' under 'Object Name'");
-			ThenISelectModuleUnder(moduleName, "Object Name");
-
-			Report.StartSubStep("Then I click to edit the selected module");
-			ThenIClickToEditTheSelectedModule();
-
-			Report.StartSubStep($"Then the '{windowName}' window should load");
-			GS.ThenTheWindowShouldLoad(windowName, "should");
-
-			Report.StartSubStep($"Given I switch to the '{windowName}' window");
-			GS.GivenISwitchToTheWindow(windowName);
-
-			Report.StartSubStep($"When in the '{windowName}' window, I select role 'Security Testing' under 'Role Name'");
-			WhenInTheWindowISelectUnder(windowName, "Security Testing", "Role Name");
-
-			Report.StartSubStep($"And in the '{windowName}' window, I set the access level to 'Full access'");
-			WhenInTheWindowISetTheAccessLevelTo(windowName, "Full access");
-
-			Report.StartSubStep($"Then in the '{windowName}' window, I click to set the access level");
-			ThenInTheWindowIClickToSetTheAccessLevel(windowName);
-
-			Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
-			GS.GivenISwitchToTheWindow("UL Wercs Studio");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//TEST For Full Access to module
-			Report.StartSubStep("Given I login as stored user TESTER1");
-			Login.GivenILogInAsStoredUser("TESTER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			foreach (var val in values)
-			{
-				Report.StartSubStep($"When I click to open the '{menu}' menu, '{val}' should be available");
-				S_H.WhenIClickToOpenTheMenuShouldNotBeAvailable(menu, val, "should");
-
-				Report.StartSubStep("Then I switch to the 'Material Management' tab");
-				GS.WhenISwitchToTheTab("Material Management");
-			}
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-		}
-
-		[StepDefinition(@"I run the Hover Module Security test with the following parameters")]
-		public void GivenIRunTheHoverModuleSecurityTestWithTheFollowingParameters(Table table)
-		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
-			string moduleName = table.Rows[0]["ModuleName"], windowName = table.Rows[0]["WindowName"], menu = table.Rows[0]["Menu"], subMenu = table.Rows[0]["SubMenu"], subSubMenu = table.Rows[0]["SubSubMenu"];
-			Steps_Login Login = new Steps_Login();
-			GlobalSteps GS = new GlobalSteps();
-			Steps_Header S_H = new Steps_Header();
-
-			//SETUP For No Access to module
-			Report.StartSubStep("Given I login as stored user MANAGER1");
-			Login.GivenILogInAsStoredUser("MANAGER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("Then the Security Manager page should load");
-			GS.ThenTheSecurityManagerPageShouldLoad();
-
-			Report.StartSubStep("When I select 'Modules' from the Security Manager drop down");
-			WhenISelectFromTheSecurityManagerDropDown("Modules");
-
-			Report.StartSubStep($"Then I select module '{moduleName}' under 'Object Name'");
-			ThenISelectModuleUnder(moduleName, "Object Name");
-
-			Report.StartSubStep("Then I click to edit the selected module");
-			ThenIClickToEditTheSelectedModule();
-
-			Report.StartSubStep($"Then the '{windowName}' window should load");
-			GS.ThenTheWindowShouldLoad(windowName, "should");
-
-			Report.StartSubStep($"Given I switch to the '{windowName}' window");
-			GS.GivenISwitchToTheWindow(windowName);
-
-			Report.StartSubStep($"When in the '{windowName}' window, I select role 'Security Testing' under 'Role Name'");
-			WhenInTheWindowISelectUnder(windowName, "Security Testing", "Role Name");
-
-			Report.StartSubStep($"And in the '{windowName}' window, I set the access level to 'No access'");
-			WhenInTheWindowISetTheAccessLevelTo(windowName, "No access");
-
-			Report.StartSubStep($"Then in the '{windowName}' window, I click to set the access level");
-			ThenInTheWindowIClickToSetTheAccessLevel(windowName);
-
-			Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
-			GS.GivenISwitchToTheWindow("UL Wercs Studio");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//TEST For No Access to Module
-			Report.StartSubStep("Given I login as stored user TESTER1");
-			Login.GivenILogInAsStoredUser("TESTER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			string[] values = subSubMenu.Split(',');
-			foreach (var val in values)
-			{
-				Report.StartSubStep($"When I click to open the '{menu}' menu, and under the '{subMenu}' sub-menu, '{val}' should not be available");
-				S_H.WhenIClickToOpenTheMenuAndUnderTheSub_MenuShouldNotBeAvailable(menu, subMenu, val, "should not");
-
-				Report.StartSubStep("Then I switch to the 'Material Management' tab");
-				GS.WhenISwitchToTheTab("Material Management");
-			}
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//SETUP For Full Access to module
-			Report.StartSubStep("Given I login as stored user MANAGER1");
-			Login.GivenILogInAsStoredUser("MANAGER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("Then the Security Manager page should load");
-			GS.ThenTheSecurityManagerPageShouldLoad();
-
-			Report.StartSubStep("When I select 'Modules' from the Security Manager drop down");
-			WhenISelectFromTheSecurityManagerDropDown("Modules");
-
-			Report.StartSubStep($"Then I select module '{moduleName}' under 'Object Name'");
-			ThenISelectModuleUnder(moduleName, "Object Name");
-
-			Report.StartSubStep("Then I click to edit the selected module");
-			ThenIClickToEditTheSelectedModule();
-
-			Report.StartSubStep($"Then the '{windowName}' window should load");
-			GS.ThenTheWindowShouldLoad(windowName, "should");
-
-			Report.StartSubStep($"Given I switch to the '{windowName}' window");
-			GS.GivenISwitchToTheWindow(windowName);
-
-			Report.StartSubStep($"When in the '{windowName}' window, I select role 'Security Testing' under 'Role Name'");
-			WhenInTheWindowISelectUnder(windowName, "Security Testing", "Role Name");
-
-			Report.StartSubStep($"And in the '{windowName}' window, I set the access level to 'Full access'");
-			WhenInTheWindowISetTheAccessLevelTo(windowName, "Full access");
-
-			Report.StartSubStep($"Then in the '{windowName}' window, I click to set the access level");
-			ThenInTheWindowIClickToSetTheAccessLevel(windowName);
-
-			Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
-			GS.GivenISwitchToTheWindow("UL Wercs Studio");
-
-			Report.StartSubStep("Then I switch to the 'Security Manager' tab");
-			GS.WhenISwitchToTheTab("Security Manager");
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-			//TEST For Full Access to module
-			Report.StartSubStep("Given I login as stored user TESTER1");
-			Login.GivenILogInAsStoredUser("TESTER1");
-
-			Report.StartSubStep("Then I switch to the 'Material Management' tab");
-			GS.WhenISwitchToTheTab("Material Management");
-
-			Report.StartSubStep("Then the Material Management Dashboard page should load");
-			GS.ThenTheDashboardPageShouldLoad();
-
-			foreach (var val in values)
-			{
-				Report.StartSubStep($"When I click to open the '{menu}' menu, and under the '{subMenu}' sub-menu, '{val}' should be available");
-				S_H.WhenIClickToOpenTheMenuAndUnderTheSub_MenuShouldNotBeAvailable(menu, subMenu, val, "should");
-
-				Report.StartSubStep("Then I switch to the 'Material Management' tab");
-				GS.WhenISwitchToTheTab("Material Management");
-			}
-
-			Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
-			S_H.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
-		}
+		
 
 		[StepDefinition(@"I select screen '(.*)' under '(.*)'")]
 		public void ThenISelectScreenUnder(string item, string columnName)
@@ -391,12 +78,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.ExitIFrame();
 		}
 		[StepDefinition(@"I filter for the screens '(.*)' that '(.*)' '(.*)'")]
-		public void ThenIFilterForTheScreensThat(string filterName, string FilterType, string FilterText)
+		public void ThenIFilterForTheScreensThat(string filterName, string filterType, string filterText)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
 			SecurityManager_Screens SM_S = new SecurityManager_Screens();
-			Report.IsTrue(SM_S.SelectFilterTypeDropDown(filterName, FilterType), $"Failed to select filter type {FilterType}", "Successfully selected filter type");
-			Report.IsTrue(SM_S.EnterFilterText(filterName, FilterText), $"Failed enter search text {FilterText}", "Successfully entered search text");
+			Report.IsTrue(SM_S.SelectFilterTypeDropDown(filterName, filterType), $"Failed to select filter type {filterType}", "Successfully selected filter type");
+			Report.IsTrue(SM_S.EnterFilterText(filterName, filterText), $"Failed enter search text {filterText}", "Successfully entered search text");
 			GeneralUtilities.ExitIFrame();
 		}
 
@@ -415,39 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SecurityManager_Screens SM_S = new SecurityManager_Screens();
 			Report.IsTrue(SM_S.ClickEditBtn(), "Failed to click the edit button.", "Successfully clicked the edit button.");
 			GeneralUtilities.ExitIFrame();
-		}
-
-		[StepDefinition(@"on the Administrators page, the '(.*)' page (can|can not) be accessed")]
-		public void ThenOnTheAdministratorsPageThePageCanBeClickedOn(string pageName, string canOrCanNot)
-		{
-			AdminPage AP = new AdminPage();
-			if (canOrCanNot == "can")
-			{
-				Report.IsTrue(AP.PageExist(pageName), $"Failed, could not find a page called {pageName}", $"Successfully found a page called {pageName}");
-				Report.IsTrue(AP.OpenPage(pageName), $"Failed, could not open a page called {pageName}.", $"Successfully opened a page called {pageName}.");
-			}
-			else
-			{
-				Report.IsFalse(AP.PageExist(pageName), $"Failed, found a page called {pageName}", $"Success, could not find a page called {pageName}");
-				Report.IsFalse(AP.OpenPage(pageName), $"Failed, could open a page called {pageName}.", $"Successfully could not open a page called {pageName}.");
-			}
-		}
-
-		[StepDefinition(@"on the Administrators page, under '(.*)', the '(.*)' page (can|can not) be accessed")]
-		public void ThenOnTheAdministratorsPageUnderThePageCanNotBeAccessed(string header, string pageName, string canOrCanNot)
-		{
-			AdminPage AP = new AdminPage();
-			if (canOrCanNot == "can")
-			{
-				Report.IsTrue(AP.PageUnderHeaderExist(header, pageName), $"Failed, could not find a page called {pageName} under header {header}", $"Successfully found a page called {pageName} under header {header}");
-				Report.IsTrue(AP.OpenPageUnderHeader(header, pageName), $"Failed, could not find a page called {pageName} under header {header}", $"Successfully opened a page called {pageName} under header {header}");
-			}
-			else
-			{
-				Report.IsFalse(AP.PageUnderHeaderExist(header, pageName), $"Failed, found a page called {pageName} under header {header}", $"Success, could not find a page called {pageName} under header {header}");
-				Report.IsFalse(AP.OpenPageUnderHeader(header, pageName), $"Failed, could open a page called {pageName} under header {header}", $"Successfully could not open a page called {pageName} under header {header}");
-			}
-		}
+		}		
 
 		[StepDefinition(@"I apply the following Screen security settings to '(.*)'")]
 		public void ThenIApplyTheFollowingSecuritySettings(string role, Table table)
@@ -507,10 +162,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void WhenISearchForTheUserNameForTheStoredUserSCREENSECURITY(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
-			bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+			//bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(savedAs);
+			bool credentialsFound = trevuser != null;
+
 			if (credentialsFound)
 			{
-				Report.IsTrue(SM_UAR.UserNameSearch(searchType, credentials.UserName), $"Failed to enter the username", $"Successfully entered the username");
+				Report.IsTrue(SM_UAR.UserNameSearch(searchType, trevuser.Username), $"Failed to enter the username", $"Successfully entered the username");
 				Delay.Seconds(5);
 			}
 			else
@@ -524,10 +183,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenUnderIRightClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
-			bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+			//bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(savedAs);
+			bool credentialsFound = trevuser != null;
 			if (credentialsFound)
 			{
-				Report.IsTrue(SM_UAR.RightClickUserName(searchType, credentials.UserName), $"Failed to right click the username", $"Successfully right cliked the username");
+				Report.IsTrue(SM_UAR.RightClickUserName(searchType, trevuser.Username), $"Failed to right click the username", $"Successfully right cliked the username");
 			}
 			else
 			{
@@ -539,10 +201,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenUnderIDoubleClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
-			bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+			//bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(savedAs);
+			bool credentialsFound = trevuser != null;
 			if (credentialsFound)
 			{
-				Report.IsTrue(SM_UAR.DoubleClickUserName(searchType, credentials.UserName), $"Failed to click the username", $"Successfully clicked the username");
+				Report.IsTrue(SM_UAR.DoubleClickUserName(searchType, trevuser.Username), $"Failed to click the username", $"Successfully clicked the username");
 			}
 			else
 			{
@@ -554,10 +219,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenUnderIClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
-			bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+			//bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(savedAs);
+			bool credentialsFound = trevuser != null;
 			if (credentialsFound)
 			{
-				Report.IsTrue(SM_UAR.ClickUserName(searchType, credentials.UserName), $"Failed to click the username", $"Successfully clicked the username");
+				Report.IsTrue(SM_UAR.ClickUserName(searchType, trevuser.Username), $"Failed to click the username", $"Successfully clicked the username");
 			}
 			else
 			{
@@ -589,7 +257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"in the '(Edit)' window, I click the '(Change password)' button")]
-		public void WhenInTheWindowIClickTheButton(string WindowName, string buttonName)
+		public void WhenInTheWindowIClickTheButton(string windowName, string buttonName)
 		{
 			SecurityManager_EditUser SM_EU = new SecurityManager_EditUser();
 			Report.IsTrue(SM_EU.ClickChangePass(), $"Could not click the {buttonName} button", $"Successfully clicked the {buttonName} button.");
@@ -598,10 +266,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenThePasswordResetPageDisplaysTheUsernameSavedAs(string savedAs)
 		{
 			SecurityManager_ResetYourPassword SM_RYP = new SecurityManager_ResetYourPassword();
-			bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+			//bool credentialsFound = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(savedAs);
+			bool credentialsFound = trevuser != null;
 			if (credentialsFound)
 			{
-				Report.IsTrue(SM_RYP.VerifyUserName(credentials.UserName), $"Failed find the username {credentials.UserName} on the page", $"Successfully found the username {credentials.UserName} on the page");
+				Report.IsTrue(SM_RYP.VerifyUserName(trevuser.Username), $"Failed find the username {trevuser.Username} on the page", $"Successfully found the username {trevuser.Username} on the page");
 			}
 			else
 			{

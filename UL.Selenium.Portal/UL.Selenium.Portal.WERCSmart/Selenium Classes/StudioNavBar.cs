@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private string _tabName;
 
 		private List<IWebElement> TabsList => this.ContainerElement.FindElements(By.XPath("./div"), 10).ToList();
-		private IWebElement Tab => this.ContainerElement/.FindElement(By.XPath($".//div[contains(text(),'{_tabName}')]"), 10);
+		private IWebElement Tab => this.ContainerElement.FindElement(By.XPath($".//div[contains(text(),'{_tabName}')]"), 10);
 		internal bool ClickSwitchTabs(string tabName)
 		{
 			_tabName = tabName;

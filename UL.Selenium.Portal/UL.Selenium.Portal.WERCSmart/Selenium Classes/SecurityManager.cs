@@ -460,19 +460,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DoubleClickUserName(string searchType, string userName)
 		{
-			if (searchTitles.Count != searchInputs.Count)
+			if (SearchTitles.Count != SearchInputs.Count)
 			{
 				Report.Error("Search titles and inputs count did not match");
 				return false;
 			}
-			if (searchTitles.Count == 0)
+			if (SearchTitles.Count == 0)
 			{
 				Report.Error("There were no search titles or inputs.");
 				return false;
 			}
 			string ToMatch = $@"^(\* |! |){Regex.Escape(searchType)}";
 			int index = 0;
-			foreach (var titles in searchTitles)
+			foreach (var titles in SearchTitles)
 			{
 				index++;
 				Match match = Regex.Match(titles.Text.Trim(), ToMatch);
@@ -505,19 +505,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickUserName(string searchType, string userName)
 		{
-			if (searchTitles.Count != searchInputs.Count)
+			if (SearchTitles.Count != SearchInputs.Count)
 			{
 				Report.Error("Search titles and inputs count did not match");
 				return false;
 			}
-			if (searchTitles.Count == 0)
+			if (SearchTitles.Count == 0)
 			{
 				Report.Error("There were no search titles or inputs.");
 				return false;
 			}
 			string ToMatch = $@"^(\* |! |){Regex.Escape(searchType)}";
 			int index = 0;
-			foreach (var titles in searchTitles)
+			foreach (var titles in SearchTitles)
 			{
 				index++;
 				Match match = Regex.Match(titles.Text.Trim(), ToMatch);
@@ -550,7 +550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ButtonIsAvialable(string buttonName)
 		{
-			ButtonName = buttonName;
+			_buttonName = buttonName;
 			return TargetButton != null;
 		}
 
@@ -571,7 +571,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		internal bool ClickButton(string buttonName)
 		{
-			ButtonName = buttonName;
+			_buttonName = buttonName;
 			return TargetButton != null ? TargetButton.TryClick() : false;
 		}
 	}
@@ -704,9 +704,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srUsers_tblFilter']"), 2);
 
-		private string SearchHeader;
+		private string _searchHeader;
 
-		private IWebElement SearchRow => FilterTable.FindElement(By.XPath($".//table//tr[td/span[contains(text(),'{SearchHeader}')]]"), 2);
+		private IWebElement SearchRow => FilterTable.FindElement(By.XPath($".//table//tr[td/span[contains(text(),'{_searchHeader}')]]"), 2);
 
 		private IWebElement SearchDropDown => SearchRow.FindElement(By.XPath($".//select"), 2);
 
@@ -725,7 +725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		internal bool SelectFilterType(string filterName, string searchType)
 		{
-			SearchHeader = filterName;
+			_searchHeader = filterName;
 			if (SearchRow == null)
 			{
 				Report.Error($"Could not find the filter for {filterName}");
@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		internal bool EnterFilterText(string searchHeader, string searchText)
 		{
-			SearchHeader = searchHeader;
+			_searchHeader = searchHeader;
 			if (SearchRow == null)
 			{
 				Report.Error($"Could not find the filter for {searchHeader}");
@@ -931,22 +931,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement CommandButtonsContainer => ContainerElement.FindElement(By.XPath(".//div[@id='srRoles_cmdButtons']"), 2);
 
-		private string ButtonName;
+		private string _buttonName;
 
-		private IWebElement TargetButton => CommandButtonsContainer.FindElement(By.XPath($"./a[contains(@title,'{ButtonName}')]"), 2);
+		private IWebElement TargetButton => CommandButtonsContainer.FindElement(By.XPath($"./a[contains(@title,'{_buttonName}')]"), 2);
 
 		private IWebElement RoleTableContainer => ContainerElement.FindElement(By.XPath(".//table[@id='srRoles_grdSR']"), 2);
 
 		private List<IWebElement> RoleData => RoleTableContainer.FindElements(By.XPath(".//tr[contains(@class,'Item')]/td[2]"), 2).ToList();
 		public bool ButtonAvilable(string buttonName)
 		{
-			ButtonName = buttonName;
+			_buttonName = buttonName;
 			return TargetButton != null;
 		}
 
 		public bool DoubleClickRole(string roleName)
 		{
-			var role2select = RoleData.Where(R => R.Text.Contains(roleName));
+			var role2select = RoleData.Where(r => r.Text.Contains(roleName));
 			if (role2select.Count() != 1)
 			{
 				Report.Error($"Could not find a unique Role with the name {roleName}");
@@ -962,12 +962,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//form[@name='Rights']");
 
-		private string DropDownName;
+		private string _dropDownName;
 
-		private IWebElement TargetDropDown => ContainerElement.FindElement(By.XPath($".//td[span[contains(text(),'{DropDownName}')]]//select"), 2);
+		private IWebElement TargetDropDown => ContainerElement.FindElement(By.XPath($".//td[span[contains(text(),'{_dropDownName}')]]//select"), 2);
 		public bool SelectFromDropDown(string dropDownString, string dropDownName)
 		{
-			DropDownName = dropDownName;
+			_dropDownName = dropDownName;
 			List<IWebElement> dropDownOptions = TargetDropDown.FindElements(By.XPath(".//option"), 2).ToList();
 			var query = from options in dropDownOptions
 						where options.Text.Contains(dropDownString)

@@ -40,6 +40,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public static bool ExitIFrame()
+		{
+			try
+			{
+				return WebDriver.CurrentDriver.ExitIFrame();
+			}
+			catch (Exception ex)
+			{
+				Report.Error("Failed to switch frame. Exception was thrown: " + ex.Message);
+				return false;
+			}
+		}
 
 		public static string ReplaceWithContext(string input)
 		{
