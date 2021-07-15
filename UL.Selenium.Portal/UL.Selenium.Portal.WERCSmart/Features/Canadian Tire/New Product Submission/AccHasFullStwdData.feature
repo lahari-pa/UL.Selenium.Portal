@@ -20,7 +20,7 @@ Feature: AccHasFullStwdData
 
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
-		| username   | FirstName | LastName   | Role         | EmailAddress                 |
+		| username   | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		
 
