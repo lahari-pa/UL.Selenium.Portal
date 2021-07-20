@@ -142,14 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 
-
-			//Philip - Change
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
-			//
 
-
-			//Report.StartStep("Primary Physical State should be showing the value: Liquid");
-			//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
@@ -384,16 +378,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
-
-
-			//Philip- Change
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
-			{
-				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-			}
-			//
-
 		}
 
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
@@ -1288,6 +1272,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 168070 \(Physical and Chemical Properties - Aerosol Only - Validation for Algicide Aerosol Type of Product\)")]
+		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_ValidationForAlgicideAerosolTypeOfProduct()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			// Primary Physical State is Aerosol which is the only option available
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			Report.StartStep(
+				"Primary Physical State should be showing the value: Aerosol");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Aerosol");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("Secondary Physical State", "should", "This is a required field");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("pH", "should", "This is a required field");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("Select the best Water Solubility description", "should", "This is a required field");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "should", "This is a required field");
+
+			var buttonTable = new Table(new string[] {
+				"Button"
+			});
+			buttonTable.AddRow(new string[] {
+				"This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS)."
+			});
+
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", buttonTable);
+
+			buttonTable = new Table(new string[] {
+				"Button"
+			});
+			buttonTable.AddRow(new string[] {
+				"This product is classified as a D003 Hazardous Waste under RCRA."
+			});
+
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", buttonTable);
+
+			buttonTable = new Table(new string[] {
+				"Button"
+			});
+			buttonTable.AddRow(new string[] {
+				"This product is not classified as D001 or D003 Hazardous Waste under RCRA"
+			});
+
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", buttonTable);
+
+		}
+
 		[StepDefinition(@"I call Shared Step 57401 \(Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
@@ -1737,6 +1770,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I call Shared Step 101692 Product Information - Pesticide Question - Happy Path")]
+		public void GivenICallSharedStepProductInformation_PesticideQuestion_HappyPath()
+		{
+			ReportSettings.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
+			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+			}
+			else
+			{
+				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+			}
+			Report.StartStep(
+				"For the section: Select countries the product may be sold in select: United States");
+			MyNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
 		[StepDefinition(@"I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question")]
 		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
 		{
@@ -1918,7 +1991,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
-			Delay.Seconds(10);
 		}
 
 		[StepDefinition(
@@ -2563,11 +2635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
 
-
-			//Philip - Change
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
-			//
-
 
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
@@ -3347,18 +3415,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" - Customers should contact my organization for an access code"), "Failed to select restriction option", "Successfully selected restriction option");
 
-
-
-			//Philip - Change
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Access Code",
 				"12345678"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Access Code",
 				"12345678");
-			//
-
-
 
 			Report.StartStep("in the Restrict Use page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
@@ -3772,13 +3834,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 63804 \(Product Information - enter options\)")]
-		public void ICallSharedStepProductInformationEnterOptions(Table table)
+		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR)\)")]
+		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
+	
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
 			{
@@ -3789,7 +3852,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
 					table.Rows[0]["Product is marketed for use"]);
 			}
-
 			if (myNewProduct.SectionExists(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)")
 			)
@@ -3801,7 +3863,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
 			}
-
 			if (myNewProduct.SectionExists(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.")
 			)
@@ -3813,7 +3874,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 					table.Rows[0]["Shipped directly by supplier"]);
 			}
-
 			if (myNewProduct.SectionExists(
 				"Cleaning products must comply with California's Cleaning Product Right to Know Act.")
 			)
@@ -3835,7 +3895,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand",
 					table.Rows[0]["Private Label or Brand"]);
 			}
-
 			if (myNewProduct.SectionExists(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)")
 			)
@@ -3847,7 +3906,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 					table.Rows[0]["Good Not for resale"]);
 			}
-
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			Report.StartStep("In the Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
@@ -3934,6 +3992,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Select the best Water Solubility description"]);
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
 				table.Rows[0]["Select the best Water Solubility description"]);
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 102750 \(Physical and Chemical Properties - Select primary physical state \(liquid\), flash point \(above 60\), and all other required data\)")]
+		public void GivenICallSharedStepPhysicalAndChemicalProperties_SelectPrimaryPhysicalStateLiquidFlashPointAboveAndAllOtherRequiredData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			Delay.Seconds(1);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				"Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
+				"Liquid");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				"Cream");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				 "Cream");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("pH",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				"1.0");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
+				"1.0");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				"61");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
+				"61");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				"Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
+				"Closed cup method");
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
+				"Appreciable");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				"Appreciable");
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -4146,11 +4256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProductSteps = new StepsNewProduct();
 			Report.StartStep("I should see the Physical and Chemical Properties Page");
 
-
-			//Philip - Change
 			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
-			//
-
 
 			// From TFS - Note: In local only the Liquid option is shown - in staging and production we show Liquid and Sold hence the presence of this step
 			if (TReVorSettings.SoftwareBranch == "Development")
@@ -4177,9 +4283,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not considered a pesticide product");
+				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -4219,9 +4325,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not considered a pesticide product");
+				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			Report.StartStep(
 				"I set the Does the product contain fertilizer (N, P, K) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -5742,9 +5848,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var thisMyIngredients = new Steps_MyIngredients();
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
-			Delay.Seconds(3);
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Granted");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Granted");
 			var thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
@@ -9273,7 +9379,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ProductName = productType
 				};
 				newProdSteps.ClickContinue();
-				newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
+
+				newProdSteps.GivenIShouldSeeXPage("Product Information");
 				newProdSteps.ClickPageHeading("The Product");
 				newProdSteps.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
 			}
@@ -9878,14 +9985,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-
+			//Philip - Working
 			Report.IsTrue(editUPC.IndividualUPCContainedInTheCasePack == individualUPCValue, "The Individual UPC option did not match expected", "The Individual UPC option matched the expected value");
-
+			Report.Info("testing expected: -" + row["Transportation Options"].ToString() + "- got: -" + editUPC.TransportationOptions + "-");
 			Report.StartStep("I confirm the Transportation Options field is shown and is populated with the correct Case UPC");
 			string transportationOptionsValue = row["Transportation Options"].ToString();
 			Report.IsTrue(editUPC.TransportationOptions == transportationOptionsValue, "The Transportation Option did not match expected", "The Transportation Option matched the expected value");
 
 			Report.StartStep("I change the Container Type");
+			Report.Info(table.Rows[1]["Container type"].ToString());
 			TableRow secondRow = table.Rows[1];
 			string secondContainerValue = secondRow["Container type"].ToString();
 			editUPC.Type = secondContainerValue;
@@ -10213,8 +10321,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing1.AddRow("100-41-4", "Ethylbenzene", "25", "Yes", "Undisclosed Ingredient");
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808211", ing1);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("100.00%", "100.00%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
 
@@ -10222,8 +10332,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing2.AddRow("37334-84-2", "Cellolyn 21", "15", "No");
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808212", ing2);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("50.00%", "50.00%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
@@ -10232,7 +10344,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808213", ing3);
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("33.33%", "33.33%");
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
@@ -10240,8 +10352,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing4.AddRow("RR-38213-8", "FRAGRANCE-BANANA", "10");
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808214", ing4);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("25.00%", "25.00%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 
@@ -10249,8 +10363,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing5.AddRow("FLAVOR", "611 Grape Flavor", "10", "No");
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808215", ing5);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("20.00%", "20.00%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 
@@ -10258,8 +10374,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing6.AddRow("NA519", "Black Cherry - Natural Flavor", "10", "Yes", "Undisclosed Ingredient");
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808216", ing6);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("33.33%", "33.33%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
@@ -10267,8 +10385,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing7.AddRow("FRAGRANCE", "Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2", "10");
 			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
 			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808217", ing7);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("28.57%", "28.57%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
@@ -10276,16 +10396,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ing8.AddRow("7732-18-5", "Water", "10", "Yes", "Undisclosed Ingredient");
 			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218");
 			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808218", ing8);
+			//Philip - Working
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
-			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("37.59%", "37.50%");
+			//
 			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
 			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 
 			Report.StartStep("In the Ingredients page I click continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Ingredients");
 
+			//Philip - Working
+			this.GivenICallSharedStep145355FormulationBatteries_SelectGranted_Continue();
 			Report.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
 			this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+			//
 
 			Report.StartStep("Enter Regulatory Information - Not Prop 65");
 			this.GivenICallSharedEnterRegulatoryInformation_NotProp();
@@ -10407,7 +10532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
-				"Cleaning products must comply with California's Cleaning Product Right to Know Act.  I would like to provide the additional information needed for this program during registration.",
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.",
 				"No");
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -10459,8 +10584,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 118091 \(Product Information - enter options\)")]
-		public void ICallSharedStepProductInformationEnterOptionsCACleaning(Table table)
+		[StepDefinition(@"I call Shared Step 118091 \(Product Information - US, No(OSHA), No(DSV), No(CA Cleaning),Yes (PLP), No(GNFR)\)")]
+		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_NoCACleaning_YesPLP_NoGNFR(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
@@ -10854,8 +10979,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I set the product description option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");

@@ -48,13 +48,7 @@ Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without 
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
 
-
-
-#Philip - Change~
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
-#
-
-
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
@@ -97,13 +91,7 @@ Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cat
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-
-
-#Philip - Change~
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Cardboard and size: 33
-#
-
-
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60643. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 

@@ -87,33 +87,17 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 
-	@ScenarioId:10283
+@ScenarioId:10283
 Scenario: [144468] Alcoholic Beverages - With DOT Exception
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
-
-
-#Philip - Change
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
-#
-
-
 Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-
-
-
-#Philip - Change
-#Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-#Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
-#Given I click continue
-#
-
-
 And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 49818 (Beverage Regulatory Details)

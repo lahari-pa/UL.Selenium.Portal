@@ -86,8 +86,8 @@ Scenario: [62852] Pesticide - Product Label is required
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (Random) - Continue - Happy Path)
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+    Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+    Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
@@ -231,9 +231,9 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting
 	Given I save the product information as: TestCase66344
+    Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
@@ -243,9 +243,9 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
@@ -256,10 +256,8 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase56500
-	Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
-	And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+    Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
+    And I call Shared Step 102750 (Physical and Chemical Properties - Select primary physical state (liquid), flash point (above 60), and all other required data)
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium hydroxide
 	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Then I should see the Pesticide Details - Canada Page
@@ -269,26 +267,23 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then in the Pesticide Details - Canada page I click Continue
 	# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
 	Then For every field in the table I should see the following error: This is a required field.
-		| Field                |
-		| Provide Canada       |
-		| Product              |
-		| Alberta              |
-		| British Columbia     |
-		| Labrador             |
-		| New Brunswick        |
-		| New Foundland        |
-		| Nova Scotia          |
-		| Ontario              |
-		| Prince Edward Island |
-		| Quebec               |
-		| Yukon Territory      |
-
+		| Field                      |
+		| Provide Canada             |
+		| Product                    |
+		| Alberta                    |
+		| British Columbia           |
+		| New Brunswick              |
+		| New Foundland              |
+		| Nova Scotia                |
+		| Ontario                    |
+		| Prince Edward Island       |
+		| Quebec                     |
+		| Yukon Territory            |
+		| Saskatchewan               |
+		| Manitoba                   |
 	Then For every field in the table I should not see the following error: This is a required field.
 		| Field               |
-		| Manitoba            |
-		| Saskatchewan        |
 		| Northwest Territory |
-
 	# Type in a Canadian Pest Control Products (PCP) Registration Number with more than 5 digits and less than 8 digits
 	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
 	Then in the Pesticide Details - Canada page I click Continue
@@ -318,28 +313,31 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I set the Product's packaging includes a Poison Danger symbol field to: No
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Given I set the Alberta field to: Choose...
-	Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field                |
-		| Alberta              |
-		| British Columbia     |
-		| Labrador             |
-		| New Brunswick        |
-		| New Foundland        |
-		| Nova Scotia          |
-		| Ontario              |
-		| Prince Edward Island |
-		| Quebec               |
-		| Yukon Territory      |
-	# Confirm the Manitoba question shows N/A as already selected
-	And Manitoba should be showing the value: N/A
-	#Confirm "None" is shown as already selected for the Saskatchewan question
-	And Saskatchewan should be showing the value: None
-	#Confirm N/A is shown as already selected for the Northwest Territory question
-	And Northwest Territory should be showing the value: N/A
+    Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
+		| Field					     |
+		| Alberta                    |
+		| British Columbia           |
+		| New Brunswick              |
+		| New Foundland              |
+		| Nova Scotia                |
+		| Ontario                    |
+		| Prince Edward Island       |
+		| Quebec                     |
+		| Yukon Territory            |
+		| Manitoba                   |
+	# Confirm N/A is shown as already selected for the Northwest Territory question
+  	And Northwest Territory should be showing the value: Not Applicable
+    #
+
+
+
+
 	Then in the Pesticide Details - Canada page I click Continue
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+	Given I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
@@ -535,7 +533,8 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
-	Given I see the following sections
+    Given I set the Product has a State Registration option to: No
+    Given I see the following sections
 		| Section                         |
 		| Select the applicable exemption |
 	And The following radio buttons should be displayed for section: Select the applicable exemption

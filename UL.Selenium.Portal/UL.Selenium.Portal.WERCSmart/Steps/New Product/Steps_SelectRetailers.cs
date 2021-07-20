@@ -49,11 +49,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
+
 			var opened = new Retailer().ClickAddRetailers();
-			if (opened)
+
+			var selectRetailerPopupIsDisplayed = new Retailer().SelectRetailsPopupIsDisplayed();
+
+			if (!selectRetailerPopupIsDisplayed)
 			{
-
-
+				if (opened)
+				{
+					Delay.Seconds(1);
+					retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
+					foreach (string retailer in retailersToSelect)
+					{
+						Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
+					}
+				}
+				else
+				{
+					Report.Failure($"Failed to click the 'Add Retailers Button'");
+				}
+			} else
+			{
 				Delay.Seconds(1);
 				retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
 				foreach (string retailer in retailersToSelect)
@@ -61,10 +78,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
 				}
 			}
-			else
-			{
-				Report.Failure($"Failed to click the 'Add Retailers Button'");
-			}
+			//
+
+			
+
+
 
 		}
 
@@ -141,8 +159,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmDislayedRetailers(string should, Table expected)
 		{
 
-
-			//Philip - Change
 			var popupIsDisplayed = new Retailer().SelectRetailsPopupIsDisplayed();
 			var opened = false;
 
@@ -153,8 +169,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			if (opened || popupIsDisplayed)
 			{
-			//
-
 
 				var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
 				List<string> checkedRetailers = showing;
@@ -176,14 +190,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 			}
 
-
-			//Philip - Change
 			else
 			{
 				Report.Failure($"Failed to click the 'Add Retailers Button'");
 			}
-			//
-
 
 		}
 
