@@ -266,14 +266,14 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	# 'field exists' only passes on a data entry element
 	Then in the Pesticide Details - Canada page I click Continue
 	# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
-		Then For every field in the table I should see the following error: This is a required field.
+	Then For every field in the table I should see the following error: This is a required field.
 		| Field                      |
 		| Provide Canada             |
 		| Product                    |
 		| Alberta                    |
 		| British Columbia           |
 		| New Brunswick              |
-		| New Foundland and Labrador |
+		| New Foundland              |
 		| Nova Scotia                |
 		| Ontario                    |
 		| Prince Edward Island       |
@@ -318,16 +318,13 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Alberta                    |
 		| British Columbia           |
 		| New Brunswick              |
-		| New Foundland and Labrador |
+		| New Foundland              |
 		| Nova Scotia                |
 		| Ontario                    |
 		| Prince Edward Island       |
 		| Quebec                     |
 		| Yukon Territory            |
-		| Saskatchewan               |
 		| Manitoba                   |
-	# Confirm "None" is shown as already selected for the Saskatchewan question
-	And Saskatchewan should be showing the value: None
 	# Confirm N/A is shown as already selected for the Northwest Territory question
   	And Northwest Territory should be showing the value: Not Applicable
     #
