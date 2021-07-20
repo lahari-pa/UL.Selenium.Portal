@@ -180,6 +180,8 @@ Scenario: [64532] Remove UPC Update - Remove
 	Then I click on the Row Action: Remove UPC Update
 	And in the modal dialog I click the "REMOVE" button
 	And I confirm the Remove UPC Update popup has closed
+	#Andrew Fix - Adding in step for reopening actions menu before checking for the removal of options.
+	And I click Row Actions for the first product returned
 	And I should not see the following Actions options
 		| Option             |
 		| Process UPC Update |
@@ -218,8 +220,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120790
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: Walgreens

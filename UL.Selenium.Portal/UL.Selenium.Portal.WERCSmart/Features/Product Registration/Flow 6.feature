@@ -30,9 +30,9 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase78731
 
-Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
-Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -90,9 +90,9 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57711
 
-Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
-Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -153,11 +153,11 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	Then I generate a random UPC number and save as: UPC87914
 	Then I save the product information as: TestCase87914
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	Given I click continue
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 	|           | Potassium hydroxide | 100     | false               |            | false       |

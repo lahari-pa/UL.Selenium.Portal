@@ -57,6 +57,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool SelectRetailsPopupIsDisplayed()
+		{
+			try
+			{
+				IWebElement poup = this.containerElement.FindElement(By.XPath(".//h4[contains(text(),'Select Retailers')]"), 2);
+
+				if (poup != null)
+				{
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public List<string> SelectedRetailers()
 		{
 			try
@@ -78,6 +97,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				return null;
 			}
+		}
+
+		public bool ConfirmRetailerCannotBeDeselectedInRetailersTable(string retailer)
+		{
+			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//td[text()='" + retailer + "']/preceding-sibling::td//input[@disabled='disabled']"), 2);
+
+			if (retailerEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(string retailer)
+		{
+			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(".//div[@class='row retailers-list']//span[text()='" + retailer + "']/preceding-sibling::input[@checked][@disabled='disabled']"), 2);
+
+			if (retailerEl != null)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>

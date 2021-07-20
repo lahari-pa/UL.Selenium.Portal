@@ -27,15 +27,21 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts - Solid
 	Then I save the product information as: TestCase60737
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
 	#Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: 20
+
+
+	#Philip - Change~
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Cardboard and size: 20
+	#
+
+
 	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	#And I should see the Additional Documents to Provide Page
@@ -60,8 +66,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid)
 	Then I save the product information as: TestCase60738
+	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
-	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Butane        | 100     | false               | false       |            |
@@ -70,7 +76,13 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20
+
+
+	#Philip - Change~
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Cardboard and size: 20
+	#
+
+
 	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page

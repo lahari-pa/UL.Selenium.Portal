@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -140,24 +140,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
 		public void ConfirmDislayedRetailers(string should, Table expected)
 		{
-			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
-			List<string> checkedRetailers = showing;
-			Report.Info("Retailers showing were: " + string.Join(", ", showing));
-			bool expectedOrNot = should != "should not";
-			foreach (TableRow row in expected.Rows)
+
+
+			//Philip - Change
+			var popupIsDisplayed = new Retailer().SelectRetailsPopupIsDisplayed();
+			var opened = false;
+
+			if (popupIsDisplayed == false)
 			{
-				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
-				if (showing.Contains(row["Retailer"]))
+				opened = new Retailer().ClickAddRetailers();
+			}
+
+			if (opened || popupIsDisplayed)
+			{
+			//
+
+
+				var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
+				List<string> checkedRetailers = showing;
+				Report.Info("Retailers showing were: " + string.Join(", ", showing));
+				bool expectedOrNot = should != "should not";
+				foreach (TableRow row in expected.Rows)
 				{
-					checkedRetailers.Remove(row["Retailer"]);
+					Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
+					if (showing.Contains(row["Retailer"]))
+					{
+						checkedRetailers.Remove(row["Retailer"]);
+					}
+				}
+				if (should == "should only")
+				{
+					Report.IsTrue(checkedRetailers.Count == 0,
+						"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
+						"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
 				}
 			}
-			if (should == "should only")
+
+
+			//Philip - Change
+			else
 			{
-				Report.IsTrue(checkedRetailers.Count == 0,
-					"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
-					"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
+				Report.Failure($"Failed to click the 'Add Retailers Button'");
 			}
+			//
+
+
 		}
 
 		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]

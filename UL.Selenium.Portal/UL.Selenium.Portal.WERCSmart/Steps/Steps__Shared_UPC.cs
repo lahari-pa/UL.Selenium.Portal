@@ -5,7 +5,7 @@ using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -274,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"I delete the value in the (.*) field")]
+		[StepDefinition(@"I delete the value in the (.*) field")]
 		public void GivenIDeleteTheValueInTheUPCNameField(string field)
 		{
 			Report.IsTrue(new UPC().DeleteValueInField(field), "Unable to remove data from " + field + " field", "Deleted value in field " + field);
@@ -736,13 +736,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (baseData == false)
 			{
-				Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+				Report.Failure("ERROR: Package reference 'Microsoft.Office.Interop.Excel' has been removed. Please find an alternative solution.");
+				// TODO: Replace this with something that doesn't use 'Microsoft.Office.Interop.Excel' - the test agents will not have Microsoft Office installed.
 
-				var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
-				excelWorkBook.Activate();
-				excelWorkBook.Save();
-				excelWorkBook.Close();
-				excelApp.Quit();
+				//Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+				//var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+				//excelWorkBook.Activate();
+				//excelWorkBook.Save();
+				//excelWorkBook.Close();
+				//excelApp.Quit();
 			}
 
 			//XSSFWorkbook hssfwb;
@@ -1363,12 +1365,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
-		[StepDefinition(@"I set all additional product information options to (.*)")]
+		[StepDefinition(@"I set all product information options to (.*)")]
 		public void GivenSetUnderadgeChildToNo(string yesOrNoOption)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			if (myNewProduct.CountryofOriginExists())

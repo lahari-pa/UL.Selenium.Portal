@@ -8,7 +8,7 @@ using System.Threading;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -62,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset|WERCs Web Viewers)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -84,6 +84,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("Password Reset"):
 					this.LoginToAccount("PasswordResetAccount");
+					break;
+				case ("WERCs Web Viewers"):
+					this.LoginToAccount("FeedToWebViewers");
 					break;
 			}
 		}
@@ -119,6 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Context.AddToContext(saveAs, email);
 		}
+
 
 		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
@@ -444,7 +448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 			string myEmail = MailosaurFunctions.CreateEmail(myDate);
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(saveAs, myEmail);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
 
@@ -467,7 +471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
 					account.Email = MailosaurFunctions.CreateEmail(account.Email);
 					account.Identifier = savedAs;
-					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
+					UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
 					Report.Success("Account details saved!");
 
 					var mySignUp = new StepsSignup();
@@ -709,7 +713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
-				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+				object mainWindowHandle = UL.Automation.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
 
 				if (mainWindowHandle == null)
 				{
@@ -759,7 +763,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				string emailAddress = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedas).ToString();
+				string emailAddress = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedas).ToString();
 				Report.Info("Storing inbox for address: " + emailAddress);
 				MailosaurFunctions.StoreCurrentInbox(emailAddress);
 				Report.Success("Inbox stored successfully!");
@@ -809,7 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				string email = MailosaurFunctions.CreateEmail(createdEmail);
-				UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, email);
+				UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, email);
 				Report.Info("Email address created: " + email);
 			}
 			catch (Exception ex)
@@ -894,12 +898,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
 				Delay.Seconds(10);
 
@@ -968,12 +972,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
 				Delay.Seconds(10);
 
@@ -982,7 +986,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
-
+			
 					if (title.Contains(productSavedAs) || title.Contains("<" + productSavedAs + ">"))
 					{
 						if (!Context.Contains(productSavedAs))
@@ -1079,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string actualTrimmed = "";
 
-				foreach (char c in emailBody.ToCharArray())
+				foreach (char c in bodyText.ToCharArray())
 				{
 					if (c != '<')
 					{
@@ -1087,21 +1091,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				actualTrimmed = actualTrimmed.Replace(@"/p>", @" ");
-				actualTrimmed = actualTrimmed.Replace(@"p>", @"");
+				string expectedTrimmed = emailBody;
 
-				string expectedTrimmed = bodyText;
+				foreach (char c in emailBody.ToCharArray())
+				{
+					if (c != '<')
+					{
+						expectedTrimmed = expectedTrimmed + c;
+					}
+				}
 
 				actualTrimmed = actualTrimmed.TrimStart();
 				actualTrimmed = actualTrimmed.TrimEnd();
+				actualTrimmed = actualTrimmed.Replace(@" ", @"");
 
+				expectedTrimmed = Regex.Replace(emailBody, @"<[^>]*>", string.Empty);
+				expectedTrimmed = Regex.Replace(expectedTrimmed, @"\s+", "");
 				expectedTrimmed = expectedTrimmed.TrimStart();
 				expectedTrimmed = expectedTrimmed.TrimEnd();
+				expectedTrimmed = expectedTrimmed.Replace(@" ", @"");
 
-				actualTrimmed = actualTrimmed.Replace(@" ", @"");
-				expectedTrimmed = actualTrimmed.Replace(@" ", @"");
-
-				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+				Report.IsTrue(expectedTrimmed.Contains(actualTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
@@ -1240,7 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Switch to Tab: " + url);
 				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+				UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				foreach (string handle in allHandles)
 				{
@@ -1267,13 +1277,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveTheCurrentWindowAs(string savedAs)
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, currentHandle);
 		}
 
 		[StepDefinition(@"I close the window saved as: (.*)")]
 		public void SwitchBackToMainWindow(string savedAs)
 		{
-			string handleToClose = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs)?.ToString();
+			string handleToClose = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs)?.ToString();
 			if (handleToClose == null)
 			{
 				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
@@ -1298,7 +1308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToDataSumaryTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1319,7 +1329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenISwitchToDataAcceptancePage()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1337,7 +1347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CloseDataSummaryTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			string mainHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle").ToString();
+			string mainHandle = UL.Automation.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle").ToString();
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
@@ -1401,7 +1411,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToTermsOfUseTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1438,9 +1448,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
 			string testCaseId = TReVorSettings.TestCaseId;
-			if (testCaseId != null && UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}") != null)
+			if (testCaseId != null && UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}").ToString());
 			}
 		}
 
@@ -1453,7 +1463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
 				return;
 			}
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
 		}
 
 		[StepDefinition(@"I update the password for the following TReVor test users:")]
@@ -1682,7 +1692,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(name, value);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext(name, value);
 		}
 
 		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]
@@ -2458,7 +2468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToUPCRetailerAndFeedTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{

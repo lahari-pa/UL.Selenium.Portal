@@ -23,9 +23,8 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: TestCase80089
-	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
 		| CASNumber | ComponentName | Percentage |
 		| 100-41-4  | Ethylbenzene  | 35         |
@@ -102,7 +101,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	And I click on the Row Action: Update Required
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
-	And I click the page heading: Product Characteristics
+	And I click the page heading: Physical and Chemical Properties
 	And I Change the Secondary Physical State drop down from its current selection to a new selection
 	Then I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
@@ -169,9 +168,9 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase100969
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I generate a random UPC number and save as: UPC100969

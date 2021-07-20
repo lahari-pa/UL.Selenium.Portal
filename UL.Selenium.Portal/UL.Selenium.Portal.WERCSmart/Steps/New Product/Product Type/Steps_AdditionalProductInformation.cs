@@ -70,8 +70,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set California Cleaning value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
-		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
+		[StepDefinition(@"In the Information Page the check box for: (.*) should be: (checked|unchecked)")]
+		public void GivenInTheInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			bool expected = checkedOrUnchecked == "checked";

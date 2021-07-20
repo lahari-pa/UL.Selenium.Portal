@@ -39,7 +39,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode7S4
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 1
 	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -48,7 +49,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -83,10 +83,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
 		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -153,8 +151,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: Mode6S3
 	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -193,14 +191,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode6S28
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -231,11 +228,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
 		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
-
+		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
@@ -297,8 +291,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: Mode45S4	
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -338,13 +332,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S15
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -376,13 +370,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S20
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -413,10 +407,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
 		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+			Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -485,10 +477,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
 		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -552,7 +542,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode1S6
-		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 100
 		And I set the Flash Point (in Celsius) field to: 50
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -561,8 +552,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: 1-Pentene
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -576,6 +565,10 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| DOT                              |
 		| Shipping with limited quantity   |
 		| Shipping with consumer commodity |
+
+
+
+		
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -606,21 +599,21 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 66                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked			
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
 
 
+@ScenarioId:10883
 	Scenario:  [122287] UPC Transportation Error - Mode 1 - 3 
 		#If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
 		Then I save the product information as: Mode1S3
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -635,6 +628,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| DOT                              |
 		| Shipping with limited quantity   |
 		| Shipping with consumer commodity |
+
+
+
 		#And in the Product Characteristics tab of the New Product Page, I enter: 14188 in the Provide Special Permit numbers text field
 		And I set the Provide Special Permit numbers (if applicable) field to: 14188
 		# 20464 || 14188 
@@ -665,7 +661,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| ContainerType | Aerosol Can       |
 		| Size          | 55                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked		
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
@@ -678,10 +674,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
 		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
@@ -700,6 +694,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| DOT                              |
 		| Shipping with limited quantity   |
 		| Shipping with consumer commodity |
+
+
+
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -729,7 +726,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 7                 |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
@@ -742,9 +739,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
 		Then I save the product information as: Mode23S2
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -819,7 +815,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S16
-		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -830,8 +827,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -847,9 +842,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Shipping with limited quantity   |
 		| DOT                              |
 		| Shipping with limited quantity   |
+
+
+
+		
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
+		## U. S. Department of Transportation (DOT) Classification Page
 		Then I should see the U. S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1439
 		And I set the Proper Shipping Name field to: Ammonium dichromate
@@ -884,8 +883,11 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| UPCNumber     | saved as UPC20016 |
 		| ContainerType | Glass Container   |
 		| Size          | 7                 |
+
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
+
+
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with limited quantity is checked
 		
@@ -900,7 +902,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S34
-		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -911,8 +914,6 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -927,10 +928,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| IATA                             |
 		| Shipping with consumer commodity |
 		| DOT                              |
-		| Shipping with consumer commodity |		
+		| Shipping with consumer commodity |
+
+
+			
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
+		## U. S. Department of Transportation (DOT) Classification Page
 		Then I should see the U. S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1990		
 		And I set the Technical Name (if applicable) field to: My Safe Product
@@ -961,8 +965,11 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| ContainerType | Glass Container   |
 		| Size          | 32                |
 
+		
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+
+
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S34
@@ -974,10 +981,8 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
 		Then I save the product information as: Mode45S5
-		#And I call Shared Step 57454 (Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1034,7 +1039,8 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S21
-		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1045,8 +1051,6 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Acridine
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
@@ -1099,7 +1103,8 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S34
-		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1110,8 +1115,6 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page

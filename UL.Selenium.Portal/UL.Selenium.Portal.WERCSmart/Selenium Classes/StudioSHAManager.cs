@@ -9,7 +9,7 @@ using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -1206,6 +1206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public void PressEnterOnStatusFilter()
+		{
+			IWebElement statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
+			statusSelect.SendKeys(Keys.Enter);
+		}
+
 		//Delete, Search (Srch), Status, Reject Submission, Create Group, Review
 		public bool ClickBottomMenuOption(string option)
 		{
@@ -1798,52 +1804,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
-
-		//public bool RightClickFirstProduct()
-		//{
-		//	Delay.Seconds(3);
-		//	Report.Info("Attemping to rightclick first product");
-		//	//int index = SeleniumBrowser.WebBrowser
-		//	//	.FindElements(By.XPath(
-		//	//		"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
-		//	//	.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
-
-		//	//IWebElement matchingTD = SeleniumBrowser.WebBrowser
-		//	//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
-		//	//	.FirstOrDefault(x => x.GetValue().Trim() == id);
-		//	IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product']//span"), 5);
-		//	if (matchingTD2 != null)
-		//	{
-		//		Report.Info("Found matching cell");
-		//		var thisContextMenu = new RightClickProductMenu();
-
-		//		//matchingTD2.RightClick();
-		//		//This below is to handle the Right click clicking below the element.
-		//		//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
-		//		Actions actions = new Actions(SeleniumBrowser.WebBrowser);
-		//		int i = 0;
-		//		while (i < 70)
-		//		{
-		//			Delay.Seconds(2);
-		//			actions.MoveToElement(matchingTD2);
-		//			actions.MoveByOffset(0, i);
-		//			actions.ContextClick();
-		//			actions.Perform();
-		//			if (thisContextMenu.MenuExists())
-		//			{
-		//				return true;
-		//			}
-		//			i = i - 10;
-		//		}
-		//		return false;
-		//	}
-		//	else
-		//	{
-		//		Report.Info("Failed to find matching table cell for first product");
-		//	}
-
-		//	return false;
-		//}
 
 	}
 
@@ -2809,6 +2769,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return supplierMessage.GetValue();
 		}
 
+		public bool ReplaceSupplierMessage(string textToReplace, string newText)
+		{
+			IWebElement supplierMessage = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			if (supplierMessage == null)
+			{
+				Report.Failure("Supplier Message text was null");
+				return false;
+			}
+
+			string currentSupplierMessageText = supplierMessage.GetValue();
+			string newSupplierMessageText = null;
+
+			if (!currentSupplierMessageText.Contains(textToReplace))
+			{
+				return false;
+			}
+
+			newSupplierMessageText = currentSupplierMessageText.Replace(textToReplace, newText);
+
+			return supplierMessage.TryEnterText(newSupplierMessageText);
+		}
+
 		public bool RejectSubmissionDialogClickSaveOrCancel(string button)
 		{
 			IWebElement buttonEl = this.containerElement.FindElement(By.XPath(".//span[text()='Product Submission Rejection']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//span[text()='" + button + "']"));
@@ -3319,6 +3301,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
 		{
+
+			IWebElement bodyEl = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
+			if(bodyEl.IsNullOrEmpty())
+			{
+				Report.Info($"body el was not found in the popup or did not load in time.");
+				Report.Screenshot();
+				return null;
+			}
+			
 			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
 			List<string> itemsNotFound = new List<string>();
 

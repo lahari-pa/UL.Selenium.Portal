@@ -8,9 +8,8 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using OpenQA.Selenium.DevTools.DOM;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -215,7 +214,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ProductSkuField {
+		public string ProductSkuField
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
 			set
 			{
@@ -1397,7 +1397,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
 		}
-
 
 	}
 

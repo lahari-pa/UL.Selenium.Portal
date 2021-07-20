@@ -30,7 +30,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60642
 
-Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+Given I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -48,7 +48,13 @@ Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without 
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
 
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Aerosol Can and size: 33
+
+
+#Philip - Change~
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
+#
+
+
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
@@ -75,7 +81,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60643
 
-Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -91,7 +97,13 @@ Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cat
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: 33
+
+
+#Philip - Change~
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Cardboard and size: 33
+#
+
+
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60643. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 

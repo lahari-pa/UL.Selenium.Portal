@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.TReVor.Classes;
@@ -141,7 +141,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+
+
+			//Philip - Change
+			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			//Report.StartStep("Primary Physical State should be showing the value: Liquid");
 			//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
@@ -177,11 +183,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
-		public void GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		[StepDefinition(@"I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only")]
+		public void GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
@@ -189,11 +195,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 90477 - Additional Product Information - US, \(NO\) Retailer's PL")]
-		public void ICallSharedStep90477AdditionalProductInformation_US_NoRetailersPL()
+		[StepDefinition(@"I call Shared Step 90477 - Product Information - US, \(NO\) Retailer's PL")]
+		public void ICallSharedStep90477ProductInformation_US_NoRetailersPL()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -201,11 +207,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
-		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
+			@"I call Shared Step 60726 \(Product Information - Country and Private Label or Brand - Yes\)")]
+		public void GivenICallSharedStep60726ProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 
@@ -221,12 +227,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
-		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
+		[StepDefinition(@"I call Shared Step 60756 \(Product Information with Country and every option\)")]
+		public void GivenICallSharedStepProductInformationWithCountryAndEveryOption()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			if (myNewProduct.CountryofOriginExists())
@@ -243,12 +249,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformationUSNoDSVNoPLNoGNFR()
+		[StepDefinition(@"I call Shared Step 63704 \(Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
+		public void GivenICallSharedStepProductInformationUSNoDSVNoPLNoGNFR()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			if (myNewProduct.CountryofOriginExists())
@@ -260,47 +266,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		}
-
-		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		//public void GivenICallSharedStepAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
-		//{
-		//	StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-		//	NewProduct myNewProduct = new NewProduct();
-		//	MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-		//	Delay.Seconds(1);
-		//	if (myNewProduct.SectionExists("Select countries the product may be sold in"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-		//	}
-		//	if (myNewProduct.SectionExists("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-		//	}
-		//	if (myNewProduct.SectionExists("Product is sold to the Retailer solely for the Retailer's use"))
-		//	{
-		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use", "No");
-		//	}
-		//	MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		//}
+		}	
 
 		[StepDefinition(
-			@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		public void SharedAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+			@"I call Shared Step 60935 \(Product Information - US - Direct Ship - Private Label Only\)")]
+		public void SharedProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -312,18 +287,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
+			@"I call Shared Step 70393 \(Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
+			GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists("Select countries the product may be sold in"))
 			{
@@ -349,7 +324,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			}
 
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 57569 \(Enter Product Details for Aerosol\)")]
@@ -409,6 +384,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+
+			//Philip- Change
+			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			{
+				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+			}
+			//
+
 		}
 
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
@@ -467,6 +452,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(otherIngredients);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			{
+				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+			}
+
 		}
 
 		[StepDefinition(@"I call Shared Step 60685 Fuel Container Regulatory Details - Yes")]
@@ -1174,8 +1166,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57441 \(Product Characteristics - Primary Physical Property - Liquid\)")]
-		public void GivenICallSharedProductCharacteristics_PrimaryPhysicalProperty_Liquid()
+		[StepDefinition(@"I call Shared Step 57441 \(Physical and Chemical Properties - Primary Physical Property - Liquid\)")]
+		public void GivenICallSharedPhysicalandChemicalProperties_PrimaryPhysicalProperty_Liquid()
 		{
 			// Secondary Physical State, Specific Gravity (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
 			// Add a variable table in the future if specific data is required.
@@ -1204,8 +1196,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57111 \(Enter Product Data for Physical State - Aerosol only\)")]
@@ -1235,12 +1227,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection(
 				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared Step 57454 \(Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
-		public void ThenICallSharedStepProductCharacteristics_AerosolGasAvailable_SelectAerosol_Continue_HappyPath()
+		[StepDefinition(@"I call Shared Step 57454 \(Physical and Chemical Properties - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
+		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasAvailable_SelectAerosol_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1263,12 +1255,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
-		[StepDefinition(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
+		[StepDefinition(@"I call Shared Step 57528 \(Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_AddData_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1292,12 +1284,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
-		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
+		[StepDefinition(@"I call Shared Step 57401 \(Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1332,8 +1324,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
+		[StepDefinition(@"I call Shared Step 57401 \(Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		public void GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1511,7 +1503,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var thisNewProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
 			Report.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
@@ -1560,8 +1552,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             ReportSettings.UseSubSteps = true;
             var MyNewProductSteps = new StepsNewProduct();
             var thisNewProduct = new NewProduct();
-            Report.StartStep("I should see the Product Characteristics Page");
-            MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+            Report.StartStep("I should see the Physical and Chemical Properties Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
             Report.StartStep("There should only be one option available for Primary Physical State");
             MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
             Report.StartStep("Primary Physical State should be showing the value: Solid");
@@ -1618,6 +1610,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
         }
 
+		[StepDefinition(@"I call Shared Step 164954 \(Enter Physical Property - Solid - Without Secondary Physical State - Without Water Solubility Question\)")]
+		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState_WithoutWaterSolubilityQuestion()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var thisNewProduct = new NewProduct();
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			Report.StartStep("There should only be one option available for Primary Physical State");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			Report.StartStep("Primary Physical State should be showing the value: Solid");
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
+			}
+
+			Report.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.Failure("The Secondary Physical State option was displayed");
+				Report.StartStep(
+					"I set the Secondary Physical State option to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Success("The Secondary Physical State option was not displayed");
+				Report.Screenshot();
+			}
+
+			//Report.StartStep("I set the Secondary Physical State option to: Solid");
+			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
 		{
@@ -1662,8 +1706,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		// Shared Step was updated to include 'which one best describes your product'. This breaks a couple of tests, which has been raised to Bug Triage (incorrect step called)
-		[StepDefinition(@"I call Shared Step 60310 \(Additional Product Information - Without Child question\)")]
-		public void GivenICallSharedAdditionalProductInformation_WithoutChildQuestion()
+		[StepDefinition(@"I call Shared Step 60310 \(Product Information - Without Child question\)")]
+		public void GivenICallSharedProductInformation_WithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -1688,13 +1732,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 
-		[StepDefinition(@"I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question")]
-		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
+		[StepDefinition(@"I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question")]
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
@@ -1735,20 +1779,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57865 \(Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path\)")]
+			@"I call Shared Step 57865 \(Product Information - Pesticide shown, US only, select No for everything else - Happy Path\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
+			GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -1776,8 +1820,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(
@@ -1874,6 +1918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(
@@ -2084,13 +2129,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[StepDefinition(@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
+		[StepDefinition(@"I call Shared Step 57502 \(Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
+		public void ICallSharedProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -2116,8 +2161,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		// Duplicate with Shared Step 57884
@@ -2181,13 +2226,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
-		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
+		[StepDefinition(@"I call Shared Step 57501 \(Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
+		public void ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyNewProductSteps.SetTheSectionOptionTo("Primary Physical State", "Solid");
@@ -2210,13 +2255,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
+		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
@@ -2260,8 +2305,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
@@ -2278,9 +2323,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(table);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.Screenshot();
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+
+
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+			
+			if (popupCausing.Contains(name))
+			{
+				if(Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup"))
+				{
+					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+					Report.StartStep("I should see the Waste Classification Data Page");
+					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				}
+				else
+				{
+					Report.Failure("Popup not found");
+					Report.Screenshot();
+					return;
+				}
+
+				
+			}
+			else
+			{
+			
+
 		}
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
+		public void ICallSharedIngredients_AddAnyChemical_CanadaOnly(string name)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartStep("I should see the Ingredients Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+			Report.StartStep("I add the ingredient " + name + " at 100%");
+			var table = new Table("ComponentName", "Percent");
+			table.AddRow(name, "100");
+			stepsNewProductIngredients.AddIngredients(table);
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.Screenshot();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");			
+
+		}
+
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
@@ -2342,13 +2439,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
-		public void ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
+		[StepDefinition(@"I call Shared Step 62678 \(Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
+		public void ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
@@ -2396,8 +2493,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I confirm that the default selected retailer is: (.*) then click Continue")]
@@ -2417,21 +2514,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-		[StepDefinition(@"I call Shared Step 59922 \(Additional Product Information - Private Label or Brand only\)")]
-		public void SharedAdditionalProductInformation_PrivateLabelOrBrandOnly()
+		[StepDefinition(@"I call Shared Step 59922 \(Product Information - Private Label or Brand only\)")]
+		public void SharedProductInformation_PrivateLabelOrBrandOnly()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
 				"United States");
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
@@ -2439,12 +2536,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
 			Report.StartStep("I set the Contains Circuit Board option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Contains Circuit Board", "No");
-			Report.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
-			Report.StartStep("I set the Has a LCD for Plasma Display option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
+
+			if (MyNewProduct.SectionExists(
+				"Has a Cathode Ray Tube (CRT)"))
+			{
+				Report.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
+				MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
+			}
+			if (MyNewProduct.SectionExists(
+				"Has a LCD or Plasma Display"))
+			{
+				Report.StartStep("I set the Has a LCD or Plasma Display option to: No");
+				MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
+			}
 			Report.StartStep("In the Answer Electronic Equipment questions page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
@@ -2454,8 +2561,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+
+
+			//Philip - Change
+			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
 			Report.StartStep("I set the Secondary Physical State option to: Cream");
@@ -2507,15 +2620,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Product contains the following artificial dye(s) option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)",
 				"None of the Above");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared Step 69687 \(Additional Product Information - US, No\(PL\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
+		[StepDefinition(@"I call Shared Step 69687 \(Product Information - US, No\(PL\)\)")]
+		public void GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			// was failing on country of origin so adding if statement.
@@ -2534,8 +2647,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
-		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
+		[StepDefinition(@"I call Shared Step 65511 \(Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
+		public void ICallSharedProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -2560,8 +2673,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
 
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
@@ -2657,7 +2770,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -2727,12 +2840,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				containerType
 			});
 			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
-			upcTable.AddRow(new string[] {
 				"PackageType",
 				packageType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
 			});
 			upcTable.AddRow(new string[] {
 				"Internal SKU",
@@ -2746,9 +2859,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
-		[StepDefinition(@"I call Shared Step 162053 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
+		[StepDefinition(@"I call Shared Step 163416 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - No Package Type - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and SKU: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmSKU_NoPackageType_DoNotClickContinueForUPCSavedAsUPCWithContainerTypeSizeAndSKU(string upc, string containerType,
-			string size, string packageType, string sku)
+			string size, string sku)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2782,9 +2895,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-
-			Report.StartStep("I select a Package Type from the drop down list");
-			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
@@ -2799,8 +2909,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Close new tab
 		}
 
-		[StepDefinition(@"I call Shared Step 60026 \(Additional Product Information - US - Battery - No to all\)")]
-		public void SharedAdditionalProductInformation_US_Battery_NoToAll()
+		[StepDefinition(@"I call Shared Step 60026 \(Product Information - US - Battery - No to all\)")]
+		public void SharedProductInformation_US_Battery_NoToAll()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
@@ -2827,8 +2937,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 73282 \(Lithium Battery Characteristics - Weight in Grams\)")]
@@ -2950,13 +3060,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		// Duplicate of Shared step 60026
-		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
-		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
+		[StepDefinition(@"I call Shared Step 65493 \(Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
+		public void SharedProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the Select one option below field to: Battery is packaged for Retail Sale");
 			MyNewProductSteps.SetTheSectionOptionTo("Select one option below", "Battery is packaged for Retail Sale");
 			Report.StartStep(
@@ -2976,8 +3086,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 56808 Regulatory Information - Prop 65 - No - Continue")]
@@ -3026,14 +3136,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I call Shared Step 26897 \(Product Characteristics - Solid only available - continue\)")]
-		public void SharedProductCharacteristics_SolidOnlyAvailable_Continue()
+		[StepDefinition(@"I call Shared Step 26897 \(Physical and Chemical Properties - Solid only available - continue\)")]
+		public void SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var thisNewProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			Report.StartStep("Primary Physical State should be showing the value: Solid");
@@ -3078,7 +3188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("Clicking continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57590 \(Enter Pesticide Data - United States \(with EPA number\)\)")]
@@ -3122,14 +3232,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC) for California Air District(s) and Canada");
 		}
 
-		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
-		public void SharedAdditionalProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
+		[StepDefinition(@"I call Shared Step 57798 \(Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
+		public void SharedProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
 			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			if (countrySold.Contains("United States"))
@@ -3160,8 +3270,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 48948 \(Formulation > 3rd Party - Select all\)")]
@@ -3236,12 +3346,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Restrict - Customers should contact my organization for an access code"));
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" - Customers should contact my organization for an access code"), "Failed to select restriction option", "Successfully selected restriction option");
+
+
+
+			//Philip - Change
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Access Code",
-				"1234"));
+				"12345678"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Access Code",
-				"1234");
+				"12345678");
+			//
+
+
+
 			Report.StartStep("in the Restrict Use page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
@@ -3269,13 +3387,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			WarningPopup.ClickChoice("Ok");
 		}
 
-		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
-		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
+		[StepDefinition(@"I call Shared Step 73629 \(Physical and Chemical Properties - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		public void ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("Confirm that  you see only Liquid option for Physical state");
 			var option = new Table("Option");
 			option.AddRow("Liquid");
@@ -3319,12 +3437,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
+		[StepDefinition(@"I call Shared Step 73748 \(Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
+		public void GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
@@ -3364,12 +3482,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
-		public void SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
+		[StepDefinition(@"I call Shared Step 70675 \(Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
+		public void SharedPhysicalandChemicalProperties_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
@@ -3401,8 +3519,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Select the best Water Solubility description",
 				"100g/100ml"));
 			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
@@ -3462,7 +3580,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Secondary Physical State",
 				"Liquid"));
 			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("In the Product Characteristics page I click Continue");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
@@ -3561,8 +3679,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
-		public void SharedProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue()
+			@"I call Shared Step 57514 \(Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path\)")]
+		public void SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
@@ -3602,8 +3720,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			}
 
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -3654,12 +3772,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterOptions(Table table)
+		[StepDefinition(@"I call Shared Step 63804 \(Product Information - enter options\)")]
+		public void ICallSharedStepProductInformationEnterOptions(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
@@ -3731,8 +3849,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(
@@ -3768,13 +3886,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
-		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
+			@"I call Shared Step 74760 \(Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data\)")]
+		public void ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
@@ -3821,46 +3939,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 132110 \(Product Characteristics - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
+			@"I call Shared Step 132110 \(Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
 		public void ICallSharedProductCharacteristics_PharmaFlow_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			//Product Characteristics
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				"In the Physical and Chemical tab of the New Product Page for Primary Physical State I select: " +
 				table.Rows[0]["Primary Physical State"]);
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
 				table.Rows[0]["Primary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				"In the Physical and Chemical tab of the New Product Page for Secondary Physical State I select: " +
 				table.Rows[0]["Secondary Physical State"]);
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Specific Gravity I enter: " +
 				table.Rows[0]["Specific Gravity"]);
 			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
 				table.Rows[0]["Specific Gravity"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
 			MyNewProduct.SetTheSectionOptionTo("pH",
 				table.Rows[0]["pH"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
 				table.Rows[0]["Boiling Point (in Celsius)"]);
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
 				table.Rows[0]["Boiling Point (in Celsius)"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Flash Point (in Celsius) I enter: " +
 				table.Rows[0]["Flash Point (in Celsius)"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
 				table.Rows[0]["Flash Point (in Celsius)"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				"In the Physical and Chemical tab of the New Product Page for Flash Point Testing Method Used I enter: " +
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
@@ -3869,13 +3988,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74123 \(Additional Product Information - Grocery - US - Random Country - No\(PL\)\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_Grocery_US_RandomCountry_NoPL()
+			@"I call Shared Step 74123 \(Product Information - Grocery - US - Random Country - No\(PL\)\)")]
+		public void GivenICallSharedStepProductInformation_Grocery_US_RandomCountry_NoPL()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 
@@ -3892,13 +4011,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
-		public void ICallSharedProductCharacteristics_Gas(Table table)
+		[StepDefinition(@"I call Shared Step 74981 \(Physical and Chemical Properties - gas\)")]
+		public void ICallSharedPhysicalandChemicalProperties_Gas(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
@@ -3954,13 +4073,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 56799 \(Confirm Additional Product Information shows Pesticide question and its radio buttons\)")]
-		public void ICallSharedConfirmAdditionalProductInformationShowsPesticideQuestion()
+			@"I call Shared Step 56799 \(Confirm Product Information shows Pesticide question and its radio buttons\)")]
+		public void ICallSharedConfirmProductInformationShowsPesticideQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			var sections = new Table("Section");
 			sections.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			Report.StartStep("I confirm the 'Which best describes your product, including when FIFRA 25(b) Exempt' question is shown");
@@ -3977,8 +4096,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57532 \(Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolAndGasAvailable_SelectGas_Continue()
+			@"I call Shared Step 57532 \(Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AerosolAndGasAvailable_SelectGas_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -3986,8 +4105,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Gas");
 			Report.StartStep("I set the Secondary Physical State option to: Gas");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -4005,11 +4124,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
+			@"I call Shared Step 63460 \(Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
+		public void GivenICallSharedStepProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
@@ -4020,13 +4139,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74339 \(Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
-		public void GivenICallSharedStepProductCharacteristics_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
+			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+		public void GivenICallSharedStepPhysicalandChemicalProperties_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+
+
+			//Philip - Change
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			//
+
+
 			// From TFS - Note: In local only the Liquid option is shown - in staging and production we show Liquid and Sold hence the presence of this step
 			if (TReVorSettings.SoftwareBranch == "Development")
 			{
@@ -4042,15 +4167,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
-		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 74340 \(Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -4078,21 +4203,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 		
 
 		[StepDefinition(
-			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
+			@"I call Shared Step 143418 \(Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -4125,8 +4250,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		/*
@@ -4160,8 +4285,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
+			@"I call Shared Step 57539 \(Physical and Chemical Properties - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -4192,8 +4317,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			//Report.StartStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: The product is classified as a D003 Hazardous Waste under RCRA.");
 			//MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "The product is classified as a D003 Hazardous Waste under RCRA.");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -4287,8 +4412,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 57978 \(Product Characteristics - All select Gas - Continue - Happy Path\)")]
-		public void ICallSharedProductCharacteristics_AllSelectGas_Continue_HappyPath()
+			@"I call Shared Step 57978 \(Physical and Chemical Properties - All select Gas - Continue - Happy Path\)")]
+		public void ICallSharedPhysicalandChemicalProperties_AllSelectGas_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -4318,8 +4443,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"If Section: Select the best Water Solubility description is visible, I select the first option");
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
 				"Insoluble");
-			Report.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(
@@ -4417,15 +4542,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
 		public void
-			GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
+			GivenICallSharedStep57501PhysicalandChemicalProperties_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
-			Report.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep("There should be at least 2 options for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
 			Report.StartStep("I set the Primary Physical State to: Solid");
@@ -4450,7 +4575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("Clicking continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
@@ -4556,13 +4681,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 63860 \(Additional Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
-		public void SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
+			@"I call Shared Step 63860 \(Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
+		public void SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
 		{
 			ReportSettings.UseSubSteps = true;
 			var selNewProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			selNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			selNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			selNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -4588,8 +4713,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			selNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			selNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 74201 \(Select Retailers - CVS\)")]
@@ -6129,13 +6254,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 77872 \(Additional Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
-		public void Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
+			@"I call Shared Step 77872 \(Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
+		public void Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information page");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I confirm 'United States' is selected for the SOLD question");
 			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
 			Report.StartStep("I should only see the SOLD and Direct ship questions");
@@ -6234,8 +6359,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 60648 \(Additional Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
-		public void Shared60648_AdditionalProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
+			@"I call Shared Step 60648 \(Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
+		public void Shared60648_ProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -6254,13 +6379,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 77883 \(Additional Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
-		public void Shared7783_AdditionalProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
+			@"I call Shared Step 77883 \(Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
+		public void Shared7783_ProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information page");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I confirm 'United States' is selected for the SOLD question");
 			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
 			Report.StartStep("I should only see the SOLD and Direct ship questions");
@@ -6398,8 +6523,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 84554 \(Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path\)")]
-		public void Shared84554_ProductCharacteristics_LiquidAndSolid_EnterAllData_Continue()
+			@"I call Shared Step 84554 \(Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path\)")]
+		public void Shared84554_PhysicalandChemicalProperties_LiquidAndSolid_EnterAllData_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
@@ -6748,7 +6873,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			upcTable.AddRow("Size", size);
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			//If shown select an entry from the Packaging type drop down
-			//If needed add any Retailer specific UPC data (for example OMSID, DPCI, part number etc)
+			//If needed add any Retailer specific UPC data (for example OMSID, DPCI, part number etc)		
 			Report.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 		}
@@ -7072,12 +7197,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 85284 - Additional Product Information - US & Canada, Child \(No\), OSHA \(No\), DSV \(No\), PLP \(YES\), GNFR \(No\), Continue")]
+			@"I call Shared Step 85284 - Product Information - US & Canada, Child \(No\), OSHA \(No\), DSV \(No\), PLP \(YES\), GNFR \(No\), Continue")]
 		public void
-			ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue()
+			ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -7872,8 +7997,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 81468 \(Product Characteristics - Solid only available - without secondary physical state\)")]
-		public void SharedStep_81468_ProductCharacteristics_SolidOnlyAvailable_WithoutSecondaryPhysicalState()
+			@"I call Shared Step 81468 \(Physical and Chemical Properties - Solid only available - without secondary physical state\)")]
+		public void SharedStep_81468_PhysicalandChemicalProperties_SolidOnlyAvailable_WithoutSecondaryPhysicalState()
 		{
 			// By default solid should be the selected Primary Physical State - and the only state shown
 			// Select either of the buttons for the "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?" question
@@ -7882,8 +8007,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			var newProduct = new NewProduct();
-			Report.StartStep("I should see the Product Characteristics Page");
-			stepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Report.StartStep(
 				"The option available for Primary Physical State is Solid - which is selected by default");
 			stepsNewProduct.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
@@ -7919,7 +8044,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("I click continue");
-			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 42759a \(Portal - UPC Page - add UPC saved as: (.*)\)")]
@@ -8134,12 +8259,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 85730 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
+			@"I call Shared Step 85730 - Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
 		public void
-			ThenICallSharedStep85730AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue()
+			ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
@@ -8148,7 +8273,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
 			}
-
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
@@ -8518,9 +8642,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-					@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
+					@"I call Shared Step 78879 - Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
 		public void
-					ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
+					ThenICallSharedStep78879ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8548,9 +8672,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 62681 - Additional Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+			@"I call Shared Step 62681 - Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
-			ThenICallSharedStep62681AdditionalProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
+			ThenICallSharedStep62681ProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8575,9 +8699,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+					@"I call Shared Step 62681 - Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
 		public void
-					ThenICallSharedStep62681AdditionalProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
+					ThenICallSharedStep62681ProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8598,8 +8722,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
-		public void CallSharedStep9674_AdditionalProductInformation_RuWine()
+		[StepDefinition(@"I call Shared Step 94674 \(Product Information - RU Wine\)")]
+		public void CallSharedStep9674_ProductInformation_RuWine()
 		{
 			Report.StartStep(
 				"If the selected option is not United States by default then report error and select it");
@@ -9118,19 +9242,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
 		}
 
-		[StepDefinition(@"I call Shared Step 102767 \(Additional Product Information \(Battery flow - not Lithium\) - OSHA \(No\), DSV \(No\), PLP \(No\), GNFR \(No\)\)")]
-		public void Shared_102767_AdditionalProductInformation_BatteryFlowNotLithium()
+		[StepDefinition(@"I call Shared Step 102767 \(Product Information \(Battery flow - not Lithium\) - OSHA \(No\), DSV \(No\), PLP \(No\), GNFR \(No\)\)")]
+		public void Shared_102767_ProductInformation_BatteryFlowNotLithium()
 		{
-			var stepsAdditionalProductInformation = new Steps_AdditionalProductInformation();
+			var stepsProductInformation = new Steps_AdditionalProductInformation();
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I set 'Classified using OSHA' to No");
-			stepsAdditionalProductInformation.SetProductHasBeenClassifiedOSHATo("No");
+			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartStep("I set 'Product is shipped directly' to No");
-			stepsAdditionalProductInformation.SetProductIsShippedDirectlyTo("No");
+			stepsProductInformation.SetProductIsShippedDirectlyTo("No");
 			Report.StartStep("I set 'Is Retailers Private Brand' to No'");
-			stepsAdditionalProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
+			stepsProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
 			Report.StartStep("I set 'Solely for the retailers use' to No'");
-			stepsAdditionalProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
+			stepsProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
 			Report.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}
@@ -9869,13 +9993,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA \(NO\), DSV \(NO\), PLP \(YES\), GNFR \(NO\), Continue")]
+		[StepDefinition(@"I call Shared Step 89286 - Product Information - US and Canada - OSHA \(NO\), DSV \(NO\), PLP \(YES\), GNFR \(NO\), Continue")]
 		public void
 			USandCanadaPLPYes()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			var MyNewProduct = new NewProduct();
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
@@ -9897,14 +10021,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step - Additional Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only")]
+			@"I call Shared Step - Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only")]
 		public void
 			CanadaOnlyNoPL()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			List<string> countrySold = myNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			if (countrySold.Contains("United States"))
@@ -10262,8 +10386,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 118064 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
-		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
+		[StepDefinition(@"I call Shared Step 118064 \(Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
+		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -10297,14 +10421,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 118085 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue\)")]
+			@"I call Shared Step 118085 \(Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNoCACleaningNo_Continue()
+			GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSEverythingElseNoCACleaningNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -10331,16 +10455,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 118091 \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterOptionsCACleaning(Table table)
+		[StepDefinition(@"I call Shared Step 118091 \(Product Information - enter options\)")]
+		public void ICallSharedStepProductInformationEnterOptionsCACleaning(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
@@ -10412,16 +10536,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step - \(Additional Product Information - enter options\)")]
-		public void ICallSharedStepAdditionalProductInformationEnterAllOptions(Table table)
+		[StepDefinition(@"I call Shared Step - \(Product Information - enter options\)")]
+		public void ICallSharedStepProductInformationEnterAllOptions(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			foreach (var thisRow in table.Rows)
 			{
@@ -10436,12 +10560,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 118138 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
-		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion()
+		[StepDefinition(@"I call Shared Step 118138 Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -10480,8 +10604,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 
@@ -10587,14 +10711,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
-		[StepDefinition(@"I call Shared Step 135134 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 135134 \(Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
 		public void IcallSharedStep135134()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
@@ -10631,8 +10755,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 100974 \(Regulatory Documents to Provide - Canada only - Upload documents > Continue\)")]
@@ -10722,14 +10846,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 140562 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 140562 \(Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
 		public void IcallSharedStep140562()
 		{
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			var newProductObject = new NewProduct();
-			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
@@ -10775,8 +10899,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 
@@ -10931,7 +11055,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
 		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
 		{
@@ -11050,13 +11173,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 158144 \(Additional Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
+		[StepDefinition(@"I call Shared Step 158144 \(Product Information - Pesticide=Not Considered, SOLD=US, OSHA=NO, Shipped Directly=NO, CA Cleaning=YES, Private Label=YES, Sold to Retailer=NO - CONTINUE\)")]
+		public void GivenICallSharedStepProductInformation_PesticideNotConsideredSOLDUSOSHANOShippedDirectlyNOCACleaningYESPrivateLabelYESSoldToRetailerNO_CONTINUE()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not considered a pesticide product");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
@@ -11086,8 +11209,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue")]
@@ -11151,8 +11274,787 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+			
+		}
+
+		[StepDefinition(@"I call shared step 145969 \(Additional Product Information > SOLD \(Canada\), PLP \(YES\), Continue\)")]
+		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPYESContinue()
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 
 		}
+
+		[StepDefinition(@"I call shared step 145844 \(Additional Product Information > SOLD \(Canada\), PLP \(No\), Continue\)")]
+		public void GivenICallSharedStepAdditionalProductInformationSOLDCanadaPLPNoContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call shared step 86009 \(Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue\)")]
+		public void GivenICallSharedStepRetailer_PLPCanadaOnlySelectCanadianTireAddPLPData_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+	
+			Report.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
+
+			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
+			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			var retailers = new Table("Retailer");
+			retailers.AddRow("Canadian Tire");
+			retailers.AddRow("No Retailer/No UPC Product");
+			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Canadian Tire", "This Private Label");
+
+			Report.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+		[StepDefinition(@"I call shared step 72414 \(Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path\)")]
+		public void GivenICallSharedStepRetailer_CanadaOnlySelectCanadianTireContinue_HappyPath()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var WarningPopup = new NoRetailerWarningPopup();
+			var MyStepsRetailers = new Steps_Retailer();
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			Report.StartStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			MyStepsRetailers.SelectedRetailersShouldBe("should", newTable);
+			Report.StartStep("In the 'Retailers' table No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable("No Retailer/No UPC Product");
+		
+			Report.StartStep("In the 'Select Retailers' popup No Retailer/No UPC Product cannot be deselected");
+			MyStepsRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup("No Retailer/No UPC Product");
+			Report.StartStep("In the 'Select Retailers' window I select the retailer: Canadian Tire");
+			new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+			Report.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartStep("In the Retailer page I click Continue");
+			new StepsNewProduct().ClickContinue();
+			Report.StartStep("In the UPCs Warning popup I click Ok");
+			WarningPopup.ClickChoice("Ok");
+		}
+
+		[StepDefinition(@"I call shared step 65961 \(Additional Documents to Provide - Upload Full Product Label - Continue\.")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadFullProductLabel_Continue_()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartStep(
+					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
+		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)
+		{
+			Report.StartStep("Beginning shared step 78888");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep(
+				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
+			Report.Info("In power tools workspace I set edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			var table3 = new Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Formulation"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+			//this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
+
+			Report.StartStep("I open the Current Document pop up using the tool bar icons");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			Report.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			GeneralUtilities.StudioWaitForSpinner();
+			Report.StartStep("Select the Apply to all subformats check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Info("Clicked apply, waiting");
+			Delay.Seconds(60);
+			Report.Info("Now going to wait for spinner");
+			if (!GeneralUtilities.StudioWaitForSpinner(30))
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert())
+				{
+					Report.Info("Spinner is still showing but alert is there.");
+				}
+			}
+
+		}
+		
+		[StepDefinition(@"I call shared step 120812 \(Retailer - Add retailers for RPS\)")]
+		public void GivenICallSharedStepRetailer_AddRetailersForRPS()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			retailerTable.AddRow("Lowe's");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("The Home Depot");
+			retailerTable.AddRow("Publix");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().ClickDone();
+
+			Report.StartStep("I set the Vendor as: Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 120813 \(UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: (.*) and size: (.*)\)")]
+		public void GivenICallSharedStepUPC_AddUPCs_IncludingOneForCVSRCLAndAddHomeDepotOMSIDForUPCSavedAsAndUPCSavedAsUPC(string containerType,
+			string size)
+		{
+
+			ReportSettings.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+			for (int k = 0; k < 2; k++)
+			{
+
+				for (int i = 0; i < 100; i++)
+				{
+					Report.Info("Entering UPC information. Attempt: " + (i + 1));
+					Report.StartStep("I click the 'Add UPC' button");
+					stepsNewProduct.ThenIClickTheAddUpcButton();
+					Report.StartStep("I add the following into the UPC Fields");
+					string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+					Report.Info("UPC number: " + upc);
+					var upcInfo = new UpcInformation {
+						ContainerType = containerType,
+						Size = size,
+						UpcNumber = upc
+					};
+					Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+						"Successfully inputted UPC information!");
+
+					var newProductPage = new NewProduct();
+					Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(upc, "Collapse"), "Failed to select dropdown arrow with the UPC: " + upc, "Succesfully selected dropdown arrow with the UPC: " + upc);
+
+
+					if (k == 1)
+					{
+
+						Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
+						stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+						GeneralUtilities.Wait_for_load_finish();
+
+					}
+
+					// not returning...
+					if (new NewProduct().FormError().IsNullOrEmpty())
+					{
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+					{
+						Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+						Report.Screenshot();
+						if (k == 1)
+						{
+							return;
+						}
+						else
+						{
+							break;
+						}
+					}
+					// delete upc that failed
+					stepsNewProduct.GivenIDeleteUPC(upc);
+					Report.Info("An error was showing! on click continue! Attempting a different UPC");
+
+				}
+
+			}
+
+		}
+
+
+		[StepDefinition(@"I call shared step 51609 \(CVS RCL - Yes I wish to continue with registration - Continue\)")]
+		public void GivenICallSharedStepCVSRCL_YesIWishToContinueWithRegistration_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			Report.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 52131 \(CVS RCL Information - add Other where available and all other data\)")]
+		public void GivenICallSharedStepCVSRCLInformation_AddOtherWhereAvailableAndAllOtherData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			Report.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS RCL");
+			Report.StartStep(
+				"I set the What is the CVS Store Brand associated to this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS Store Brand associated to this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate the brand option to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate the brand", "Other");
+			Report.StartStep(
+				"I set the Who is the Product Development Manager (PDM) for this product? option to: Canady, Cory Cory.Canady@CVSHealth.com");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Who is the Product Development Manager (PDM) for this product?",
+				"Canady, Cory Cory.Canady@CVSHealth.com");
+			Report.StartStep(
+				"I set the What is the CVS merchandising category for this product? option to: Other");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"What is the CVS merchandising category for this product?",
+				"Other");
+			Report.StartStep(
+				"I set the Indicate your Product Category to: Other");
+			selNewProductSteps.SetTheSectionOptionToExactlyMatch("Indicate your Product Category", "Other");
+			Report.StartStep(
+				"I set the Is this product specifically designed, marketed or labeled for infants, babies, or children? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product specifically designed, marketed or labeled for infants, babies, or children?",
+				"Yes");
+			Report.StartStep(
+				"I set the Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?",
+				"No");
+			Report.StartStep(
+				"I set the Product contains microbeads option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product contains microbeads",
+				"No");
+			Report.StartStep(
+				"I set the Is this product intended to be rinsed off after use? option to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product intended to be rinsed off after use?",
+				"Yes");
+			Report.StartStep(
+				"I set the Refer to your Product Label. Select the options that appear on the label. option to: Drug Facts Panel");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Refer to your Product Label. Select the options that appear on the label.",
+				"Drug Facts Panel");
+
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Is this product intended to be ingested?");
+			if (showing.Count == 0)
+			{
+				Report.Info("No options selected for section: Is this product intended to be ingested?");
+				Report.StartStep(
+				"I set the Is this product intended to be ingested? option to: Yes");
+				selNewProductSteps.SetTheSectionOptionTo(
+					"Is this product intended to be ingested?",
+					"Yes");
+			}
+
+			Report.StartStep(
+				"I set the Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? option to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?",
+				"No");
+			Report.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
+		public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
+		{
+			if (Context.Contains("ElectronicProduct"))
+			{
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
+			}
+
+			ReportSettings.UseSubSteps = true;
+			Report.Info("In power tools workspace setting edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			var table3 = new Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+
+			Report.Info("Going to do publishing");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Delay.Seconds(3);
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			GeneralUtilities.StudioWaitForSpinner();
+			var table4 = new Table(new string[] {
+				"Text",
+				"Should Show"
+			});
+			table4.AddRow(new string[] {
+				"CKLT",
+				"False"
+			});
+			table4.AddRow(new string[] {
+				"SBCS",
+				"False"
+			});
+			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			thisStepsStudio.GivenICloseCurrentDocument();
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			var tblCheckDocument = new Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"Language",
+				"DocType"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			thisStepsStudio.ICloseAlert();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+
+		//[StepDefinition(@"I call shared step 144993 \(WPS Studio - PD\+ - Set all data and publish using rule and doc queue - CKLT and SBCS for PLP for product saved as: (.*)\)")]
+		//public void GivenICallSharedStepWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSForPLPForProductSavedAs(string savedAs)
+		//{
+		//	if (Context.Contains("ElectronicProduct"))
+		//	{
+		//		if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+		//		{
+		//			Report.Info("Skipping step because this is an electronic product");
+		//			return;
+		//		}
+
+		//	}
+
+		//	ReportSettings.UseSubSteps = true;
+		//	Report.Info("In power tools workspace setting edit to true");
+		//	var thisStudioPowerDesignerPlusDesignMode =
+		//		new StudioPowerDesignerPlusDesignMode();
+		//	Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+		//		"Power designer has opened");
+		//	thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+		//	Delay.Seconds(1);
+		//	Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+		//		"Document options panel has not opened",
+		//		"Document options panel has opened");
+		//	Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+		//		"Successfully set edit to true");
+		//	thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+		//	new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+		//	var table2 = new Table(new string[] {
+		//		"datacode",
+		//		"value"
+		//	});
+		//	table2.AddRow(new string[] {
+		//		"DPQAPF",
+		//		"pass"
+		//	});
+		//	table2.AddRow(new string[] {
+		//		"DCQAPF",
+		//		"pass"
+		//	});
+		//	table2.AddRow(new string[] {
+		//		"VCQA",
+		//		"pass"
+		//	});
+		//	table2.AddRow(new string[] {
+		//		"RSQAPF",
+		//		"pass"
+		//	});
+		//	table2.AddRow(new string[] {
+		//		"RSQHADPF",
+		//		"pass"
+		//	});
+		//	var thisStepsStudio = new Steps_Studio();
+		//	thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+		//	thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+		//	thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+		//	var table3 = new Table(new string[] {
+		//		"Item"
+		//	});
+		//	table3.AddRow(new string[] {
+		//		"Current Document (Publish)"
+		//	});
+		//	table3.AddRow(new string[] {
+		//		"Document Queue"
+		//	});
+		//	table3.AddRow(new string[] {
+		//		"Apply rules"
+		//	});
+		//	thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+		//	thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+
+		//	Report.Info("Going to do publishing");
+		//	thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+		//	thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+		//	Delay.Seconds(3);
+		//	GeneralUtilities.StudioWaitForSpinner();
+		//	thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+		//	GeneralUtilities.StudioWaitForSpinner();
+		//	var table4 = new Table(new string[] {
+		//		"Text",
+		//		"Should Show"
+		//	});
+		//	table4.AddRow(new string[] {
+		//		"HGHS",
+		//		"False"
+		//	});
+		//	thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+		//	Report.StartStep("I close the current document pop up");
+		//	thisStepsStudio.GivenICloseCurrentDocument();
+		//	Report.StartStep("I select the Apply Rules icon from the tool bar");
+		//	thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+		//	Report.StartStep("I select the Single rule radio button");
+		//	thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+		//	Report.StartStep("I click the three ... icon to open the Select Rule pop up");
+		//	thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+		//	Report.StartStep("I click the filter icon");
+		//	thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+		//	thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+
+		//	Report.StartStep("In the rule name filter box I enter the studio user name");
+		//	thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+		//	thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+		//	Report.StartStep("I select the rule  by clicking on it");
+		//	thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+		//	Report.StartStep("I click Apply");
+		//	thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+		//	Delay.Seconds(10);
+		//	if (SeleniumBrowser.Alert.IsAlertPresent())
+		//	{
+		//		SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+		//		Delay.Seconds(1);
+		//	}
+
+		//	Report.StartStep("I close the Apply Rules pop up");
+		//	thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+		//	Delay.Seconds(3);
+		//	if (new ApplyRulesPage().Wait_for_load(1))
+		//	{
+		//		Delay.Seconds(3);
+		//		Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
+		//		thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+		//		Report.Screenshot();
+		//		Delay.Seconds(3);
+		//		if (new ApplyRulesPage().Wait_for_load(1))
+		//		{
+		//			Report.Error("Apply rules popup did not close after two attempts");
+		//			SeleniumBrowser.WebBrowser.Close();
+		//		}
+		//	}
+
+		//	Report.StartStep("I click the Document queue icon in the tool bar");
+		//	thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+		//	Report.StartStep("I click the filter icon");
+		//	thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+		//	var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+		//	string id = productDetails.Id;
+		//	thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+		//	Report.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
+		//	thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
+		//	thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+
+		//	for (int i = 0; i < 5; i++)
+		//	{
+		//		Delay.Seconds(5);
+		//		Report.Screenshot();
+		//		var newDocumentQueuePage = new DocumentQueuePage();
+		//		Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+		//			"Document queue page loaded");
+		//		List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+		//		if (listOfDocuments.Count > 0)
+		//		{
+		//			break;
+		//		}
+		//	}
+		//	// And I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF,
+		//	// HGHS CF PDF CKLT EN PDF. If your product is a PL product you will also see an entry for the product alias
+		//	// Note: as we are working with HGHS only, we should see CKLT and SBCS for the alias products
+
+		//	Report.StartStep(
+		//		"I Confirm your product is shown with entries for SBCS EN PDF, HGHS EN RTF, HGHS EN PDF, HGHS CF RTF, HGHS CF PDF CKLT EN PDF");
+		//	var tblCheckDocument = new Table(new string[] {
+		//		"ProductOrAlias",
+		//		"Subformat",
+		//		"Language",
+		//		"DocType"
+		//	});
+		//	tblCheckDocument.AddRow(new string[] {
+		//		"saved as " + savedAs,
+		//		"HGHS",
+		//		"EN",
+		//		"RTF"
+		//	});
+		//	tblCheckDocument.AddRow(new string[] {
+		//		"saved as " + savedAs,
+		//		"HGHS",
+		//		"EN",
+		//		"PDF"
+		//	});
+		//	tblCheckDocument.AddRow(new string[] {
+		//		"saved as " + savedAs,
+		//		"HGHS",
+		//		"CF",
+		//		"RTF"
+		//	});
+		//	tblCheckDocument.AddRow(new string[] {
+		//		"saved as " + savedAs,
+		//		"HGHS",
+		//		"CF",
+		//		"PDF"
+		//	});
+		//	thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+		//	Delay.Seconds(3);
+		//	thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+		//	Delay.Seconds(3);
+		//	Report.Screenshot();
+
+		//	thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+		//	Report.Screenshot();
+		//	Report.StartStep("I click Process Documents");
+		//	thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+		//	Delay.Seconds(2);
+		//	Report.Screenshot();
+		//	GeneralUtilities.StudioWaitForSpinner(60);
+		//	Report.StartStep(
+		//		"I confirm a pop up shows with message indicating queued documents were sent for publishing");
+		//	thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+		//	Report.StartStep("I click OK ");
+		//	thisStepsStudio.ICloseAlert();
+		//	Report.StartStep("I close the Document queue window");
+		//	thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		//}
 
 
 	}
