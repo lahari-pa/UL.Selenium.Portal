@@ -84,7 +84,7 @@ Scenario: [59658] UL Solution Center shows correct entries - GOODGUIDE for CONSU
 	Given I switch to the GoodGuide for Consumers information tab
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
-
+#Philip - Working
 @ScenarioId:1101
 Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPLIERS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

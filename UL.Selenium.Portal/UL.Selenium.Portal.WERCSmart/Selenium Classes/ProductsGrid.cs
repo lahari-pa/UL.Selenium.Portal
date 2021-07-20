@@ -214,14 +214,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ProductSkuField
-		{
-			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
+		public string ProductSkuField {
+			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2).GetValue();
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2);
+
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
+
 				el.EnterText(value);
+
 				el.SendKeys(Keys.Return);
+
 				GeneralUtilities.Wait_for_load_finish();
 			}
 		}

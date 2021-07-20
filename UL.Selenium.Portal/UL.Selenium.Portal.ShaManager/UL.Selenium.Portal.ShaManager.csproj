@@ -176,8 +176,7 @@
     <None Include="Features\SHA Manager\Home Page\Actions\Advanced Reporting.feature" />
     <None Include="Features\SHA Manager\Home Page\Home-Page.feature" />
     <None Include="Features\SHA Manager\Home Page\Suppliers.feature" />
-    <None Include="Features\SHA Manager\Home Page\Suspended.feature">
-    </None>
+    <None Include="Features\SHA Manager\Home Page\Suspended.feature" />
     <None Include="Features\SHA Manager\LowerOptions.feature">
     </None>
     <None Include="Features\SHA Manager\Recertification.feature">

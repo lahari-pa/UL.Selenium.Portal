@@ -1,8 +1,3 @@
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -13,12 +8,18 @@ using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1105,6 +1106,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add UPC' button!", "Successfully clicked the 'Add UPC' button");
 		}
+
+		[StepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
+		public void ThenIEnterAnIntentionallyBadUPCWithContainerSizeAndContainerTypeCardboard(Table table)
+		{
+			string badUPC = GenerateBadUPC.Generate();
+			Context.AddToContext("badUPC", badUPC);
+			Report.Info($"Bad UPC: {0}", badUPC);
+			this.ThenIAddTheFollowingIntoTheUpcFields(table);
+		}
+
 
 		[StepDefinition(@"I add the following into the UPC Fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)

@@ -38,17 +38,21 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
+	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
-		| Quantity of Units within the Case |
+		| Container Type                    |
 		| Size (Weight Ounces)              |
+
 	Then I should not see the following UPC options:
-		| Option              |
-		| Size (Fluid Ounces) |
+		| Option               |
+		| Size (Fluid Ounces)  |
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
 @ScenarioId:1192
@@ -70,11 +74,12 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
+
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
 @ScenarioId:1193
@@ -101,11 +106,13 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
+
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
+	
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
 @ScenarioId:1194
@@ -129,9 +136,8 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Fluid Ounces)               |
+
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
@@ -155,14 +161,16 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
+
 	Then I should not see the following UPC options:
 		| Option              |
 		| Size (Fluid Ounces) |
+	
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
+	#Philip - Working
 @ScenarioId:1196
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -170,20 +178,22 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
-	And I call Shared Step 69687 (Product Information - US, No(PL))
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+    Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+    And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
 		| Size (Weight Ounces)              |
+
 	Then I should not see the following UPC options:
-		| Option              |
-		| Size (Fluid Ounces) |
+		| Option               |
+		| Size (Fluid Ounces)  |
+	
+	
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
 @ScenarioId:8260
@@ -206,13 +216,11 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Case UPC' button
 	Then I should see the following UPC options:
-		| Option                            |
-		| UPC Number                        |
-		| Quantity of Units within the Case |
-		| Size (Weight Ounces)              |
+		| Option          |
+		| Weight (Ounces) |
 	Then I should not see the following UPC options:
-		| Option              |
-		| Size (Fluid Ounces) |
+		| Option        |
+		| Size (Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 
 @ScenarioId:1198
@@ -985,8 +993,9 @@ Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I save the product information as: TestCase156789
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
