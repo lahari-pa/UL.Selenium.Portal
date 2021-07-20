@@ -366,6 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
 			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -378,6 +379,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.Screenshot();
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+			List<string> allIngredientsNames = new List<string>();
+			ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+			bool fifraItemFound = false;
+
+			foreach( var item in allIngredientsNames)
+			{
+				if(popupCausing.Contains(item))
+				{
+					Report.Info($"The component name: {item} was found fifra list");
+					fifraItemFound = true;
+				}
+			}
+			if (fifraItemFound=true)
+			{
+				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+				{
+					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+					Report.StartStep("I should see the Waste Classification Data Page");
+					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				}
+				else
+				{
+					Report.Failure("Popup not found");
+					Report.Screenshot();
+					return;
+				}
+
+
+			}
+			else
+			{
+				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+				Report.Screenshot();
+
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
@@ -2402,10 +2446,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
-			
+
 			if (popupCausing.Contains(name))
 			{
-				if(Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup"))
+				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 				{
 					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
@@ -2419,15 +2463,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				
+
 			}
 			else
 			{
-			
+				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+				Report.Screenshot();
+
+			}
 
 		}
 
-		}
+		
 
 
 		[StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
