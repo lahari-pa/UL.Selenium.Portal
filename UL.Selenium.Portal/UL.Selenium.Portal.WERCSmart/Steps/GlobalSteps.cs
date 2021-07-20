@@ -2631,8 +2631,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.Info("User already created, logging out.");
 
-							Report.StartSubStep("Then I switch to the 'Material Management' tab");
-							this.WhenISwitchToTheTab("Material Management");
+							//Report.StartSubStep("Then I switch to the 'Material Management' tab");
+							//this.WhenISwitchToTheTab("Material Management");
 							Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
 
 							header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
