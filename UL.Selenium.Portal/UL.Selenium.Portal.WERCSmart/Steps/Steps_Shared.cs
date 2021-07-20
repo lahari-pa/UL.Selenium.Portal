@@ -5133,6 +5133,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
 
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+
 			if (Context.Contains("ElectronicProduct"))
 			{
 				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
@@ -5154,8 +5157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			if (!thisPowerDesignerPlus.Wait_for_load(120))
 			{
-				var thisStudioPowerDesignerPlusDesignMode =
-					new StudioPowerDesignerPlusDesignMode();
+				
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
 				Delay.Seconds(3);
@@ -5186,6 +5188,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(3);
+			thisPowerDesignerPlus.Wait_for_load(60);
+
+			//HERE ADD EDITMODE
+
+			Report.Info("In power tools workspace I set edit to true");
+			
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+
+
+			//End Editmode
+
+
 			Report.Info("Now going to click the sections side tab if its not open");
 			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
