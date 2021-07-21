@@ -134,7 +134,7 @@ Given I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
@@ -172,7 +172,7 @@ Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145400)
 And In SHA Manager I select the first product
 And I click the following option in the bottom menu: Review
@@ -204,7 +204,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: te
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120820)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
