@@ -20,9 +20,15 @@
 @run_Forwarding
 Feature: Forwarding
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:6325
 Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not required/shown
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup86003
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup86003
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto11 and save as: ProductSetup86003
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I filter the products by: Accepted by Retailers
@@ -43,7 +49,8 @@ Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not requir
 
 @ScenarioId:6946
 Scenario: [115393] Forward Product - Target - Does not require DPCI
-	Then I create a Chalk product for Amazon and Proccess it through to Accepted
+	#Then I create a Chalk product for Amazon and Proccess it through to Accepted
+	Then I create a Chalk product for Amazon and Proccess it through to Accepted Using Sha Account: SHAQAAuto11
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Then I save the following text: 1621940 as TestCase87685
