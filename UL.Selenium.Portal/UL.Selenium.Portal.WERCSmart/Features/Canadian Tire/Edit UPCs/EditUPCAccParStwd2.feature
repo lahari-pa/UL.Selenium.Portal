@@ -23,11 +23,18 @@
 @ProductSetUp
 Feature: Edit UPC Account has partial Stewardship information 2
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto8  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		
+
 @ScenarioId:1477
 Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86462
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	Given I create a Crayon product and take to completed using Test Case 86455 and save as: TestCase86462
+	#Given I create a Crayon product and take to completed using Test Case 86455 and save as: TestCase86462
+	Given I create a Crayon product and take to completed using Test Case 86455 using SHA account: SHAQAAuto8 and save as: TestCase86462
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
@@ -38,7 +45,7 @@ Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto8 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86462)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86462 and its status is: Recertification
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86462
@@ -49,7 +56,8 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 	Given I generate a random UPC number and save as: UPC86463
 	Given I generate a random UPC number and save as: UPC864631
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	Given I create a Chalk product and take to completed using Test Case 86115 and save as: TestCase86463
+	#Given I create a Chalk product and take to completed using Test Case 86115 and save as: TestCase86463
+	Given I create a Chalk product and take to completed using Test Case 86115 using SHA Acc: SHAQAAuto8 and save as: TestCase86463
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
@@ -61,7 +69,7 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 	#And I Select a package type from the drop down list
 	#And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto8 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86463)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86463 and its status is: Recertification
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86463
@@ -71,7 +79,8 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canadian Tire  - Package type required
 	Given I generate a random UPC number and save as: UPC86264
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-	Given I create a Chalk product and take to completed using Test Case 86419 and save as: TestCase86264
+	#Given I create a Chalk product and take to completed using Test Case 86419 and save as: TestCase86264
+	Given I create a Chalk product and take to completed using Test Case 86419 using Sha Account: SHAQAAuto8 and save as: TestCase86264
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 	Then the WERCSmart homepage should load
@@ -82,7 +91,7 @@ Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canad
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto8 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86264)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86264 and its status is: Recertification
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86264
@@ -92,7 +101,8 @@ Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canad
 Scenario: [86261] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86261
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-	Given I create a Crayon product and take to completed using Test Case 86116 and save as: TestCase86261 with upc: UPC86261
+	#Given I create a Crayon product and take to completed using Test Case 86116 and save as: TestCase86261 with upc: UPC86261
+	Given I create a Crayon product and take to completed using Test Case 86116 using SHA Account: SHAQAAuto8 and save as: TestCase86261 with upc: UPC86261
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 	Then the WERCSmart homepage should load
@@ -103,7 +113,7 @@ Scenario: [86261] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto8 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86261)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86261 and its status is: Recertification
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86261
