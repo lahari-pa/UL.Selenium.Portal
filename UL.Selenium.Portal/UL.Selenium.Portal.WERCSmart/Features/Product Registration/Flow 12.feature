@@ -15,6 +15,10 @@
 
 Feature: Flow 12
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
@@ -151,8 +155,11 @@ Scenario: [58606] Medicinal Liquids - RU001188
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
-	And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 and save as: TestCase42196
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 and save as: TestCase42196
+
+	And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 using SHA Acc: SHAQAAuto10 and save as: TestCase42196
+
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto10 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Completed
 	And I call Shared Step 80488 - SHA Manager > completed 3rd party > Add to recert 40 for product saved as: TestCase42196
@@ -205,7 +212,7 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	Given If purchase details are showing click confirm order
 	#Scenario: test
 	#Given I save to context name: TestCase42196 and value: 1548654
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto10 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Recertification
 	And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase42196
