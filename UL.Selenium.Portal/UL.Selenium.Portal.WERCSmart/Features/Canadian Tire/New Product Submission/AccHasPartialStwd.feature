@@ -15,6 +15,12 @@
 @run_AccHasPartialStwd
 Feature: Account has Partial Stewardship Data
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto4  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1330
 Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -41,7 +47,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86114 and value: 1559223
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86114)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86114 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86114)
@@ -86,7 +92,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86115 and value: 1559223
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86115)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86115 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86115)
@@ -129,7 +135,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86452 and value: 1559223
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86452)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86452)
@@ -166,7 +172,7 @@ Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product 
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86124 and value: 1506402
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86117)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86117 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86117)
@@ -208,7 +214,7 @@ Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86116)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86116 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86116)
@@ -258,7 +264,7 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86454)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86454 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86454)
@@ -310,7 +316,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86121 and value: 1506402
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86455)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86455 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86455)
@@ -358,7 +364,7 @@ Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86458)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86458 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86458)
