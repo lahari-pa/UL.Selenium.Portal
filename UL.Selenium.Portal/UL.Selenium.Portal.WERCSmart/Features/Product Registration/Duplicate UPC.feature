@@ -24,6 +24,13 @@
 @run_DuplicateUPC
 Feature: Duplicate UPC
 
+
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto7  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 # Assigned to Abbie Zullo
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
@@ -173,7 +180,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 
 @ScenarioId:1406
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
@@ -209,7 +216,9 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ScenarioId:1412
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product1
+	#Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product1
+	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
+
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
@@ -232,7 +241,9 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ScenarioId:1404
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
-	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
+	#Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
+	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
+
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -256,10 +267,14 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 @ScenarioId:1405
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product1
+	#Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product1
+	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
+
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product2
+	#Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product2
+	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
+
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
@@ -319,7 +334,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:
@@ -348,7 +363,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 
 @ScenarioId:1411
 	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
@@ -427,7 +442,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	#Looks like there is a bug failing this test that does not auto fill product name if using bulk upload file, in testing we can use below method with sample file data+ names to stop this being an issue, but needs to be raised.
 	#And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988, (Base Data Only: true)
 
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:
