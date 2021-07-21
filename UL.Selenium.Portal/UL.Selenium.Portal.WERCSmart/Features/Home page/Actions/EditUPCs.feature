@@ -49,7 +49,7 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Then I click on the Row Action: Edit UPCs
 	And I should see the Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64528)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64528 and its font is red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64528
@@ -62,7 +62,9 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 
 @ScenarioId:439
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64529
+
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64529
@@ -70,7 +72,7 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 	Then I click on the Row Action: Edit UPCs
 	And I should see the Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64529)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64529 and its font is red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64529
@@ -93,7 +95,9 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 
 @ScenarioId:440
 Scenario: [64530] Process UPC Update
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64530
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64530
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64530
+
 	Given I generate a random UPC number and save as: UPC64530
 	Given I navigate to the landing page
 	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -114,7 +118,7 @@ Scenario: [64530] Process UPC Update
 	And In the Data Acceptance page I click on the Accept button
 	And the Purchase Summary should load
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
 
 	Given In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64530 and its status is: Recertification
@@ -126,7 +130,8 @@ Scenario: [64530] Process UPC Update
 
 @ScenarioId:441
 Scenario: [64531] Remove UPC Update - Cancel
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64531
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64531
@@ -135,7 +140,7 @@ Scenario: [64531] Remove UPC Update - Cancel
 	And I should see the Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64531)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64531 and its font is red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64531
@@ -164,7 +169,9 @@ Scenario: [64531] Remove UPC Update - Cancel
 
 @ScenarioId:442
 Scenario: [64532] Remove UPC Update - Remove
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64532
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64532
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64532
+
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64532
@@ -173,7 +180,7 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I should see the Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64532)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64532 and its font is red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
@@ -195,7 +202,7 @@ Scenario: [64532] Remove UPC Update - Remove
 		| Option             |
 		| Process UPC Update |
 		| Remove UPC Update  |
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64532)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64532 and its font is not red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
@@ -247,7 +254,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-	 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	 And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
     Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
     Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
 	Given I navigate to the landing page
@@ -263,7 +270,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given In the Data Acceptance page I click on the Accept button
 	Given I navigate to the home page
 	
-    And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+    And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
     Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
     Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120790
