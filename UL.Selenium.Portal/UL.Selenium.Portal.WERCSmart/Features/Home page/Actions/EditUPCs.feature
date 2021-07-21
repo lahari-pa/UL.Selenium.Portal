@@ -23,6 +23,11 @@
 @ViewUpcs
 Feature: EditUPCs
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @tfs_design
 Scenario: [56220] My Products grid Actions - Edit UPCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -35,7 +40,8 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 
 @ScenarioId:438
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
-	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
+	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64528
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64528
