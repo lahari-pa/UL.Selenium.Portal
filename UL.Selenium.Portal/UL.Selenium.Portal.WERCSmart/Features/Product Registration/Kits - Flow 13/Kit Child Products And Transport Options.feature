@@ -17,6 +17,11 @@
 
 Feature: Kit Child Products And Transport Options
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto13 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 #And I The Purchase summary step is shown with the success message
 #Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
 
@@ -58,7 +63,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto13 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: Kit1)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: Kit1)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Kit1)
@@ -106,7 +111,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto13 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: Kit2)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: Kit2)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Kit2)
