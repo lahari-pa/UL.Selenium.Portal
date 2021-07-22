@@ -194,30 +194,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
-
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
-
 				if (!Context.Contains(savedAs))
 				{
 					Report.Failure("The reference: " + savedAs + " was not found in context");
 					return;
 				}
 				string sku = "";
-
 				try
 				{
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
 					sku = productToSearch.ProductId;
-
 				}
 				catch (Exception)
 				{
 					//do nothing
 				}
 				if (sku == "")
-
 				{
 					try
 					{
@@ -227,10 +222,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 					}
 				}
-				Report.Info("Searching for product with ID: '" + sku + "'");
+
+				bool expanded = new ProductsGrid().MoreFiltersExpanded();
+				if (!expanded)
+				{
+					Report.Info("More Filters was collapsed so expanding it");
+					new ProductsGrid().ClickMoreFilters();
+				}
+
+				Report.Info("Searching for product with SKU: '" + sku + "'");
 				var selProdGrid = new ProductsGrid {
 					ProductSkuField = sku
 				};
+
 				GeneralUtilities.Wait_for_load_finish();
 				Delay.Seconds(10);
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + sku + "'!", "Product was returned!");
@@ -241,7 +245,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		
 		
 		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
@@ -2877,6 +2880,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
+	
 			RetailPartners retailPartnersObject = new RetailPartners();
 			string savedAs = productID;
 			try

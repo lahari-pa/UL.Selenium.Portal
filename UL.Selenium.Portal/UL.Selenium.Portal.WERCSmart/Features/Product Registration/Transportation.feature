@@ -151,8 +151,6 @@ And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm d
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
 #Confirm that ^ checkbox is selected (failing currently)?
-And UN Number should be showing the value: UN1950
-And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN1966
 And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
@@ -256,6 +254,7 @@ And The following options should be displayed exclusively for section: Packing G
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+
 And UN Number should be showing the value: UN1975
 And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
@@ -309,7 +308,7 @@ And I click continue
 And I should see the U. S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN2762
 And The following options should be displayed exclusively for section: Proper Shipping Name
-| Option                                               |
+| Option                                              |
 | Organochlorine pesticides, liquid, flammable, toxic |
 And I set the Technical Name field to: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
@@ -350,7 +349,6 @@ And Packing Group (select) should be showing the value: II
 And I confirm that: II is not the only option for section: Packing Group (select)
 And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 And I click continue
-
 And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
@@ -520,20 +518,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286
-Given I call Shared Step 118064 (Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
-
-
-#Philip - Change~
-#Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-#Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-#Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-#Given I set the Product is a Retailer's Private Label or Brand option to: No
-#Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-#Then I click continue
-#
-
-
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |

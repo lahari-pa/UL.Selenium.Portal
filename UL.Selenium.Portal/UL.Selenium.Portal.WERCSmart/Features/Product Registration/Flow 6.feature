@@ -30,8 +30,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase78731
 
-Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-
+#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
 Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -98,7 +98,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I set 'Prop65' to: No
+Given in the Waste Classification Data page I click Continue
 
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
@@ -166,7 +168,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87914, container type: Aerosol Can and size: 33
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87914, container type: Cardboard and size: 33
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	And in the Optional Reports and Documents Available for Purchase page I click Continue

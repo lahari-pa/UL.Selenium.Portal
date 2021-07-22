@@ -336,6 +336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(3);
 			Report.Info("Attemping to select first product");
 			Report.Screenshot();
+			
 			IWebElement checkbox = SeleniumBrowser.WebBrowser
 				.FindElements(By.XPath("//table[@id='list']//tr//input"))
 				.FirstOrDefault(x => x != null);

@@ -61,10 +61,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC112305, container type: Plastic Container and size: 2 do not click continue
 	Given I ensure that there is a column in the Add UPC table called Transportation
 	Given I ensure that DOT is listed as Shipping with limited quantity
-	Given I ensure that IATA is listed as Shipping with limited quantity	
-	Given I ensure that I cannot select DOT at Shipping with consumer commodity
-	
-
+	Given I ensure that IATA is listed as Shipping with limited quantity
 	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
@@ -91,9 +88,9 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
-	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
+    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
@@ -158,12 +155,13 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
-	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
-	Given I should see the International Air Transport (IATA) Classification Page
-	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-	
-	Given I click continue
+    Given I click continue
+    Given I enter UN1993 - Select data - Continue - Happy Path
+    Given I should see the International Air Transport (IATA) Classification Page
+    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+    And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+   	Given I click continue
+
 	Given I should see the International Marine (IMDG) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 
@@ -485,12 +483,8 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-
-	#Philip - Change~
-	Given In the New Product page I click tab: Product Characteristics
-	#Given In the New Product page I click tab: Physical and Chemical Properties
-
-	And I click the page heading: Transportation Details 1
+    Given In the New Product page I click tab: Product Characteristics
+    And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
 	And I unselect the option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
@@ -535,15 +529,9 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
-
-
-	#Phliip - Change
-	#And I set the Product is Regulated for Transport field to: Yes
-	#And I set the Select all modes of transport that you've classified the product for field to: DOT
-	#And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
-	#
-
-
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
 	And I should see the U. S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
@@ -654,9 +642,15 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	Given In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
 	Given I ensure that DOT is listed as Shipping with limited quantity
-	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+
+#	Philip - Change
+#	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+	
+
 	Given I ensure that I can select DOT at Shipping fully regulated
 
+@tfs_design
+@obsolete
 @ScenarioId:6702
 Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade - Shipping with consumer commodity
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -685,8 +679,9 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the below options for field: Select all modes of transport that you've classified the product for
 		| Option                           |
 		| DOT                              |
+		| Shipping with limited quantity   |
 		| Shipping with consumer commodity |
-	And I click continue
+    And I click continue
 	# U. S. Department of Transportation (DOT) Classification Page
 	Then I should see the U. S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
@@ -723,8 +718,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I click on the Row Action: Update Required
 	Given In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
-	Given I ensure that DOT is listed as Shipping with consumer commodity
-	Given I ensure that I can select DOT at Shipping with limited quantity
+    Given I ensure that I can select DOT at Shipping with limited quantity
 	Given I ensure that I can select DOT at Shipping fully regulated
 
 @ScenarioId:6703
@@ -795,7 +789,10 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Universal Product Code (UPC)
 	Given I ensure that DOT is listed as Shipping fully regulated
 	Given I ensure that I cannot select DOT at Shipping with limited quantity
-	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+
+	#Philip - Change
+	#Given I ensure that I cannot select DOT at Shipping with consumer commodity
+	#
 
 
 

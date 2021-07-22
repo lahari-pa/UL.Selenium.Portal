@@ -122,13 +122,13 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | true        |            |
-	Then for ingredient: Butane the Publicly Disclosed field is disabled
-	Then for ingredient: Butane the Public Name field is disabled
-	Given for ingredient: Butane I set Trade Secret checkbox to checked: false
-	Then for ingredient: Butane the Publicly Disclosed field is enabled
-	Then for ingredient: Butane the Public Name field is enabled
-	Then for ingredient: Butane I confirm the Public Name selectbox contains names for selection
+		| Water         | 100     | false               | true        |            |
+	Then for ingredient: Water the Publicly Disclosed field is disabled
+	Then for ingredient: Water the Public Name field is disabled
+	Given for ingredient: Water I set Trade Secret checkbox to checked: false
+	Then for ingredient: Water the Publicly Disclosed field is enabled
+	Then for ingredient: Water the Public Name field is enabled
+	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
@@ -144,9 +144,9 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | true        |            |
-	Then for ingredient: Butane the Publicly Disclosed field is disabled
-	Then for ingredient: Butane the Public Name field is disabled
+		| Water         | 100     | false               | true        |            |
+	Then for ingredient: Water the Publicly Disclosed field is disabled
+	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
@@ -161,8 +161,8 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | true                | false       |            |
-	Then for ingredient: Butane the Trade Secret field is disabled
+		| Water         | 100     | true                | false       |            |
+	Then for ingredient: Water the Trade Secret field is disabled
 	Then in the Ingredients page I click Continue
 	Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
 	Then for ingredient: Butane I select Public Name: Butane
@@ -180,7 +180,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | true        |            |
+		| Water         | 100     | false               | true        |            |
 	Given I confirm the following column titles and inputs are displayed in the ingredients table
 		| Column              | Input    |
 		| Percent             | textbox  |
@@ -203,7 +203,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| WPS1434087    | 50      | false               | true        |            |
-		| Butane        | 50      | false               | true        |            |
+		| Water         | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	And I should see the Waste Classification Data Page
@@ -219,7 +219,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	And I set the Secondary Physical State option to: Pellets
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I call Shared Step 57865 ( Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Wood dust     | 75.0    | false               | false       |            |
@@ -230,7 +230,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
-	And I should see the Waste Classification Data Page
+    And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
 @ScenarioId:913
@@ -240,8 +240,8 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
 	Then I save the product information as: TestCase74142
+    Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Chlorine      | 100     | false               | false       |            |
@@ -259,6 +259,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I save the product information as: TestCase69796
+    Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I should see the Physical and Chemical Properties Page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
@@ -266,7 +267,6 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Select the best Water Solubility option to: Appreciable
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I click continue
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I add the following ingredients:
@@ -289,7 +289,6 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80728
-	Then I should see the Physical and Chemical Properties Page
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Then I should see the Ingredients Page
@@ -494,7 +493,9 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
 		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
 	And I click continue
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+    Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+    And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
@@ -657,14 +658,14 @@ Given I should see the Product Information Page
 	# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
-		| ComponentName			     	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glutens, corn    | 50      | false               | false       |            |
-		| Butane             | 0.1     | false               | false       |            |
-		| Oils, cedarwood, Texan    | 49.9    | false               | false       |            |
+		| ComponentName	         | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn          | 50      | false               | false       |            |
+		| Butane                 | 0.1     | false               | false       |            |
+		| Oils, cedarwood, Texan | 49.9    | false               | false       |            |
 	Given in the New Product page I click Continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The registration ingredient contains information that typically is included in a product that is considered a pesticide under U.S. E.P.A. guidelines or Canada Pest guidelines. The product type you've selected for this registration is not within the scope of pesticide registrations and the ingredient(s) which are typically used in Pesticide or Herbicide registrations is/are:
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm the table in the popup view has the following column titles
 	| Titles          |
 	| CAS Number      |
@@ -672,6 +673,7 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
+	| 106-97-8   | Butane                 | Active          |
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
@@ -684,7 +686,7 @@ Given I should see the Product Information Page
 	And I should see the Ingredients Page
 	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
 	Then I click continue
-	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+    Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	## Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
@@ -702,10 +704,8 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Then I click continue
+
+
 And I see the following sections
 | Section                                                              |
 | Which best describes your product, including when FIFRA 25(b) Exempt |
@@ -716,12 +716,17 @@ Given I set the Product is shipped directly by supplier to the consumer.  Retail
 Given I set the Product is a Retailer's Private Label or Brand option to: No
 Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
 Then I click continue
+
+Given I set the Primary Physical State option to: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Then I click continue
+
 Then I add the following ingredients:
 | ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Glutens, corn       | 100     | false         | false       |            |
 Then I click continue
 Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
 Then I confirm the table in the popup view has following column data
 | CAS Number | Name                   | Active or Inert |
 | 66071-96-3 | Glutens, corn          | Active          |

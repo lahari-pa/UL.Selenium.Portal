@@ -564,8 +564,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
-
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
 
 
 		
@@ -599,7 +600,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 66                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
+	    #
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
@@ -627,8 +630,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
-
+		#Philip - Change
+		#| Shipping with consumer commodity |
+		#
 
 
 		#And in the Product Characteristics tab of the New Product Page, I enter: 14188 in the Provide Special Permit numbers text field
@@ -661,8 +665,10 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| ContainerType | Aerosol Can       |
 		| Size          | 55                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked		
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+		#
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S3
@@ -693,7 +699,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| DOT                              |
 		| Shipping with limited quantity   |
-		| Shipping with consumer commodity |
+		#| Shipping with consumer commodity |
 
 
 
@@ -726,7 +732,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Size          | 7                 |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
@@ -927,9 +933,10 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Option                           |
 		| IATA                             |
 		| Shipping with consumer commodity |
-		| DOT                              |
-		| Shipping with consumer commodity |
-
+		#Philip - Change
+		#| DOT                              |
+		#| Shipping with consumer commodity |
+		#
 
 			
 		And I click continue
@@ -965,10 +972,11 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| ContainerType | Glass Container   |
 		| Size          | 32                |
 
-		
-		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
 
+		#Philip - Change
+		#Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
+		#Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
+        #
 
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.

@@ -27,8 +27,8 @@ Background:
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
-	Given under the supplier Reports menu I should see the following options
+    And In the Supplier Reports screen the page title should be: My Reports
+    Given under the supplier Reports menu I should see the following options
 		| Reports                                |
 		| Battery-Containing Products            |
 		| California Proposition 65              |
