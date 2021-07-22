@@ -29,13 +29,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement searching =
 						this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
-					while (searching != null && i < 10)
+					Report.Info($"Pre-Search");
+					Report.Screenshot();
+					while (searching != null && i < 30)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
 						searching = this.containerElement.FindElement(
 							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					}
+					Report.Info($"After Search");
+					Report.Screenshot();
 
 					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 					// If no elements match this, then we will simply take the first element in the list
