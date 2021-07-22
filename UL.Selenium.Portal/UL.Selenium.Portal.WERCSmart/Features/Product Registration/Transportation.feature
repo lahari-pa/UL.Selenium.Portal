@@ -18,6 +18,13 @@
 
 Feature: Transportation
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto28 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @ScenarioId:1106
@@ -373,7 +380,7 @@ And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto28 and Open SHA manager)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase65947)
@@ -381,7 +388,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 ##Scenario: Test
 #Given I save to context name: TestCase65947 and value: 1549266 
-#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto28 and Open SHA manager)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
 Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase65947)
 And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
