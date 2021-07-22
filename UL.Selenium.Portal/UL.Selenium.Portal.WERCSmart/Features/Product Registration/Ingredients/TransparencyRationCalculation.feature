@@ -13,6 +13,10 @@
 @run_TransparencyRationCalculation
 Feature: Transparency Ration Calculation
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto27 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 @tfs_desgin
 #Outdated test case (now showing a %)
 #May need reworking for change from "x/y" to "%"
@@ -21,7 +25,9 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.
 	#Use test case 80821 to create this third party product and get it to completed status.
 	#You will need to know the WPSxxxxxxx ID associated to the 3rd party product
-	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
+	#Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
+	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing using SHA Account: SHAQAAuto27 and save as: TestCase80854Component
+
 	#Given I create a product with name: 80854 and take to completed using Test Case 80821 and save as: TestCase80854Component
 	And I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
