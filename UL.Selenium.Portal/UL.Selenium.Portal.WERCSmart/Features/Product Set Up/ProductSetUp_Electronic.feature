@@ -17,6 +17,11 @@
 
 Feature: ProductSetUp_Electronic
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto22 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1413
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -34,7 +39,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto22 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase84109)
@@ -69,7 +74,7 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	Then I click Save in The Product Page
 	#Scenario: Test
 	#Given I save to context name: TestCase84511 and value: 1524214
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto22 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
@@ -101,7 +106,7 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	And I navigate to the home page
 	And I search for the product saved as: TestCase84511
 	Given For product saved as: TestCase84511 the status is: Assessment in Progress
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto22 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
 	#And I Confirm your product is shown in the Recertification status without the red recertification font color

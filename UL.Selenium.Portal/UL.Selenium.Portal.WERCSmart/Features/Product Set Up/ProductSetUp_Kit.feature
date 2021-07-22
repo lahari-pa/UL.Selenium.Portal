@@ -16,14 +16,22 @@
 
 Feature: ProductSetUp_Kit
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto23 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:9701
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 	#For this test case you will need two input products in completed status which have SOLD set to US only
 	#and make sure to add any retailer except Walmart as the retailer for these products.
 	#Use the test case 75335 to create these products - test case is linked to this one.
 	#Note: these input products do not have to be direct ship vendor products
-	Given I create a product with name: 778591 and take to completed using Test Case 75335 and save as: TestCase778591
-	Given I create a product with name: 778592 and take to completed using Test Case 75335 and save as: TestCase778592
+	#Given I create a product with name: 778591 and take to completed using Test Case 75335 and save as: TestCase778591
+	Given I create a product with name: 778591 and take to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778591
+	#Given I create a product with name: 778592 and take to completed using Test Case 75335 and save as: TestCase778592
+	Given I create a product with name: 778592 and take to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778592
 	Given I navigate to the landing page
 	#Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status
 	#Given I save to context name: TestCase778591 and value: 1525307
