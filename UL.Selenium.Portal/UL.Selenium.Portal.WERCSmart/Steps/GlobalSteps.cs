@@ -2829,11 +2829,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Navigating to WS Landing page...");
 			new GlobalSteps().NavigateToLandingPage();
 
-			Report.StartStep($"Setting the current SHA User to feature context...");
+			Report.StartStep($"Setting the current SHA User to feature context...");		
 
-			string firstuser = table.Rows[0]["username"];				
+			string firstuser = table.Rows[0]["username"];
+
+			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
+			{
+			Report.Info($"key QASHAAccount did not exist...");
 			Context.FeatureContext.Add("QASHAAccount", firstuser);
-			//SHAQAAuto24- additional doc
+			}
+			else
+			{
+				Report.Info($"key QASHAAccount did  exist, updating instead");
+				Context.FeatureContext["QASHAAccount"] = firstuser;
+
+			}			
 
 			Report.Info($"Finished setting the Feature SHA user");
 		}
