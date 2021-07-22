@@ -14,6 +14,12 @@
 @run_Walmart
 Feature: Walmart
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto31 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @tfs_design
 @ScenarioId:10443
 Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
@@ -127,6 +133,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I create a product with name: Chalk and UPC: UPC73918 and take to completed using Test Case 75335 with no login step and save as: TestCase73918
+	Given I create a product with name: Chalk and UPC: UPC73918 and take to completed using Test Case 75335and SHA account: SHAQAAuto31 with no login step and save as: TestCase73918
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
