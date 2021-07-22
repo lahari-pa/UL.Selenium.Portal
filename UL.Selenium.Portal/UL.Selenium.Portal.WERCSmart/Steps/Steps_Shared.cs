@@ -5596,7 +5596,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+
+
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -6076,7 +6081,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(3);
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -6911,7 +6918,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	And I Click Apply
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -7654,7 +7663,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			//Processing Rule For Change
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(2);
 			Report.Screenshot();
@@ -8697,7 +8710,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -12246,7 +12261,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(3);
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
