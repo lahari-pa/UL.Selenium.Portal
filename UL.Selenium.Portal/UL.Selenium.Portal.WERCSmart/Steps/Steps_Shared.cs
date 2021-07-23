@@ -5354,6 +5354,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
 				"Document options panel has not opened",
 				"Document options panel has opened");
+			Report.Info($"spinner wait...");
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner(120);
+			Report.Info($"spinner wait end.");
+			Report.Screenshot();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
