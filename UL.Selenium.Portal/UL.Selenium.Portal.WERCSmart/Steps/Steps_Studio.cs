@@ -358,6 +358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSelectRulesFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
 			var thisSelectRulesFilter = new SelectRulesFilter();
+			value = value + "- additional doc";
 			Report.IsTrue(thisSelectRulesFilter.EnterInTextBox(textbox, value),
 				"Failed to enter value: " + value + " in textbox: " + textbox,
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
