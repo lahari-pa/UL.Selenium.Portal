@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement searching =
 						this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
-					while (searching != null && i < 10)
+					while (searching != null && i < 30)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
