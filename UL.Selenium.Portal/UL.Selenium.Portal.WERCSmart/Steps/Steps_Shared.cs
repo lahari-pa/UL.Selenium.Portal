@@ -404,8 +404,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-					Report.StartStep("I should see the Waste Classification Data Page");
-					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+					Delay.Seconds(10);
+					Report.Screenshot();
+					//Report.StartStep("I should see the Waste Classification Data Page");
+					//MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 				}
 				else
 				{
