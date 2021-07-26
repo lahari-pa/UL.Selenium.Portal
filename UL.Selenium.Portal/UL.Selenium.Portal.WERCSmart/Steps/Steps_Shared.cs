@@ -398,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					fifraItemFound = true;
 				}
 			}
-			if (fifraItemFound=true)
+			if (fifraItemFound==true)
 			{
 				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 				{
