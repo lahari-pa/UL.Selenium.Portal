@@ -3883,7 +3883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR)\)")]
+		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
