@@ -736,7 +736,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var selRetailDetails = new RetailPartnersDetails();
 				foreach (TableRow row in expected.Rows)
 				{
-					if (selRetailDetails.GetDataConsentTier("Tier " + row["Tier"]) == false)
+					if (selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]) == false)
 					{
 						Report.Info($"The tier {row["Tier"]} was not showing");
 						Report.Info($"Creating and submitting CVS product...");
