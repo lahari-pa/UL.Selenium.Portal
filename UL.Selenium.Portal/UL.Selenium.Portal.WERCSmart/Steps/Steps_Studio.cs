@@ -81,7 +81,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
+			Report.Screenshot();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
 				"Failed to click document queue button",
 				"Clicked document queue button");

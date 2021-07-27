@@ -5624,7 +5624,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I close the Apply Rules pop up");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 			Delay.Seconds(3);
-			if (new ApplyRulesPage().Wait_for_load(1))
+			if (new ApplyRulesPage().Wait_for_load(20))
 			{
 				Delay.Seconds(3);
 				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
@@ -5640,6 +5640,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+
 			Report.StartStep("I click the filter icon");
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
