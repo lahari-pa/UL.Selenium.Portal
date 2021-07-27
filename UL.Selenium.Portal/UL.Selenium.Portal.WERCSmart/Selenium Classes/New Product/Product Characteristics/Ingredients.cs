@@ -1795,6 +1795,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Glycerin");
 			ingredients.Add("Vitamin E");
 			ingredients.Add("Propane");
+			//butane may be only on fifra for staging?
+			ingredients.Add("Butane");
+
 
 
 
