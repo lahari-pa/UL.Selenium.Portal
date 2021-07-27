@@ -1797,9 +1797,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Propane");
 			//The following may be only on fifra for staging AZ?
 			ingredients.Add("Butane");
-			ingredients.Add("Sodium Chloride");
+			ingredients.Add("Sodium chloride");
+			ingredients.Add("Ethanol");
 
-			
+
+
 
 
 
