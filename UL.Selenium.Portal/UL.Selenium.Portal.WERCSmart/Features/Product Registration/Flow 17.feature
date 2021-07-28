@@ -202,6 +202,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 @tfs_design
 # Test case can be found at the following path:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 17 - Lith bat
+@ScenarioId:11164
 Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	Given I generate a random UPC number and save as: UPC103572
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
