@@ -1914,8 +1914,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");		
 
 
-			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests(including insects, rodents, mold, virus, bacteria, and other micro - organisms)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests(including insects, rodents, mold, virus, bacteria, and other micro - organisms)");
+			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
