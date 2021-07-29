@@ -1799,6 +1799,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Butane");
 			ingredients.Add("Sodium chloride");
 			ingredients.Add("Ethanol");
+			ingredients.Add("Cocoa butter");
+			ingredients.Add("Alcohol");
+
 
 
 
