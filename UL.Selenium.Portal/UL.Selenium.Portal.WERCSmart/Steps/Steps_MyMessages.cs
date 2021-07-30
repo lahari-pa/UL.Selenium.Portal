@@ -52,9 +52,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string date = today.ToString("M'-'dd'-'yyyy");
 				string path = date + "*.xlsx";
 				var downloads = new DirectoryInfo(downloadsFolder);
-				while (count < 120)
+				while (count < 400)
 				{
-					Delay.Seconds(1);
+					Delay.Seconds(2);
 					FileInfo[] dir = downloads.GetFiles(path);
 					if (dir.Any())
 					{
