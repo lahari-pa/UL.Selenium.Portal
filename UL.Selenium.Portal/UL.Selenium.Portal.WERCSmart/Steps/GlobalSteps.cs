@@ -27,6 +27,7 @@ using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -2884,6 +2885,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartSubStep("Then the 'Rules Editor' window should load");
 			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWrtier_RulesEditor RW_RE = new RuleWrtier_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' 'BevB -'");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", "BevB -"), $"Failed to enter the user 'BevB -'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: 'BevB -' ");
+			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
+			//right click the rule
+
+			var baseRuleRow= RW_RE.GetRuleRowFromTable("Name", "BevB -");
+
+			if (baseRuleRow.IsNullOrEmpty())
+			{
+				Report.Failure($"The base rule row element was null");
+				Report.Screenshot();
+				return;
+			}
+
+
+			
+
 
 		}
 
