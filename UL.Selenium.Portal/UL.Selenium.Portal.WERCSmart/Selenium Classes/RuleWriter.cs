@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 //using OpenQA.Selenium.DevTools.Performance;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]");
 
-		private string _buttonString;
+		public string _buttonString;
 
 		private IWebElement Button => ContainerElement.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]//div[@class='widgetStyleContents']//iframe[@id='Widget1FRAME']"), 2);
 
@@ -49,7 +51,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public class RuleWrtier_RulesEditor : SeleniumBaseObject
+		public class RightClickRuleMenu : BaseObject
+		{
+			public const string BasePath = "//div[@id='srSelectRules_Panel1']";
+
+			[FindsBy(How = How.XPath, Using = BasePath)]
+			protected override IWebElement containerElement { get; set; }
+
+			public bool MenuExists()
+			{
+				return this.containerElement.Displayed;
+			}
+
+			public List<string> GetAllOptions()
+			{
+				return this.containerElement.FindElements(By.XPath(".//tr")).Select(x => x.GetValue()).ToList();
+			}
+
+			public bool SelectOption(string selectOption)
+			{
+				ReadOnlyCollection<IWebElement> listOfOptions = this.containerElement.FindElements(By.XPath(".//tr"));
+				IWebElement matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().Contains(selectOption));
+				if (matchingOption == null)
+				{
+					List<string> Options = this.GetAllOptions();
+					Report.Error("No matching option was found. Options were: " + string.Join(",", Options));
+					return false;
+				}
+
+				return matchingOption.TryClick();
+			}
+
+
+		}
+
+		public class RuleWriter_RulesEditor : SeleniumBaseObject
 		{
 			protected override By ContainerElementLocator => By.XPath("//form[@name='form1']//table[@id='srSelectRules_divRounded']");
 
@@ -216,6 +252,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Error($"Could not find the username {userName}");
 				return null;
 			}
+
+
 		}
 		}
 }

@@ -2890,7 +2890,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenISwitchToTheWindow("Rules Editor");
 
 			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
-			RuleWrtier_RulesEditor RW_RE = new RuleWrtier_RulesEditor();
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
 			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
 
 			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' 'BevB -'");
@@ -2900,7 +2900,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
 			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: 'BevB -' ");
 			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
-			//right click the rule
 
 			var baseRuleRow= RW_RE.GetRuleRowFromTable("Name", "BevB -");
 
@@ -2911,8 +2910,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
+			//right click the base rule -> see sha right click code
+			//select new from list
 
-			
+
+
+
 
 
 		}
