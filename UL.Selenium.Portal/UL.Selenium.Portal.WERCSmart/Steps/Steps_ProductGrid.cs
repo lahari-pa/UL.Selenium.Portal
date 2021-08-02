@@ -180,6 +180,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				};
 				GeneralUtilities.Wait_for_load_finish();
 				Delay.Seconds(10);
+
+				bool oneFound = false;
+				int x = 0;
+				while (oneFound==false && x<20)
+				{
+					oneFound = selProdGrid.ProductsCount() == 1;
+					Report.Info($"Number of products found was: {selProdGrid.ProductsCount()}");
+					Delay.Seconds(5);
+					x++;
+				}
+
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
 			catch (Exception ex)
