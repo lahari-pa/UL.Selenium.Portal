@@ -2513,6 +2513,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sm.WaitForContainerToBeVisible(), "Failed, could not find the Security Manager page.", "Successfully found the Security Manager page.", true);
 		}
 
+		[StepDefinition(@"the Rule Writer page should load")]
+		public void ThenTheRuleWriterPageShouldLoad()
+		{
+			RuleWriter rw = new RuleWriter();
+			Delay.Seconds(1);
+			Report.IsTrue(rw.WaitForContainerToBeVisible(), "Failed, could not find the Security Manager page.", "Successfully found the Security Manager page.", true);
+		}
+
 		[StepDefinition(@"the Material Management Dashboard page should load")]
 		public void ThenTheDashboardPageShouldLoad()
 		{
@@ -2848,5 +2856,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Finished setting the Feature SHA user");
 		}
 
+		[StepDefinition(@"I Create SHA processing Rules for the accounts listed in the table: (.*)")]
+		public void ICreateProcessingRulesForSHAAccountsListed(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+			//do a foreach user in table (create list of strings from table etc)
+
+			string exampleUser = "test";
+
+			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
+			header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
+
+			Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+			this.WhenISwitchToTheTab("Rule Writer");
+
+			Report.StartSubStep("Then the Rule Writer page should load");
+			this.ThenTheRuleWriterPageShouldLoad();
+
+			// Click all rules
+
+			Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
+			S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+		}
+
 	}
+
+
 }
