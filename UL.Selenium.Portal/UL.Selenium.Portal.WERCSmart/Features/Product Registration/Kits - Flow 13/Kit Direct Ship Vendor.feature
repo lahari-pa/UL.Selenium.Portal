@@ -164,6 +164,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
+@ScenarioId:11183
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1552743
 	#Given I save to context name: 77862_KitProduct2 and value: 1552746
