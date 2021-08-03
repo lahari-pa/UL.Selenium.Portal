@@ -269,13 +269,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return FilterButton != null && FilterButton.TryClick();
 			}
 
-			internal bool SelectGivenRuleType()
+			internal bool SelectGivenRuleType(string type)
 			{
 				//return FilterButton != null && FilterButton.TryClick();
 
 				//Get all rule options
 				//Check the given rule
 				//Check el is checked
+				return true;
 			}
 
 
