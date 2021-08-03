@@ -54,6 +54,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (thisContextMenu.MenuExists())
 			{
 				//click 'new' next (check new is option available?)
+				var optionsList = thisContextMenu.GetAllOptions();
+				if (Report.IsTrue(optionsList.Contains("New"), "failed to find 'New' in context menu'", "Found 'New' in the context menu"))
+				{
+					if(Report.IsTrue(thisContextMenu.SelectOption("New"),"Failed to click option","Clicked option"))
+					{
+
+					}
+					else
+					{
+						return;
+					}
+				}
+				else
+				{
+					return;
+				}
 			}
 
 		}
