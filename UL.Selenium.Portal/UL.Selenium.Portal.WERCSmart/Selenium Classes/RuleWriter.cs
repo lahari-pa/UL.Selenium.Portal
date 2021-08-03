@@ -255,5 +255,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
+
+		public class RuleWriter_NewRule : SeleniumBaseObject
+		{
+			protected override By ContainerElementLocator => By.XPath("//form[@name='form1']//tbody");
+
+			private IWebElement FilterButton => ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
+
+			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srUsers_tblFilter']"), 2);
+
+			internal bool ClickFilterBtn()
+			{
+				return FilterButton != null && FilterButton.TryClick();
+			}
+
+			internal bool SelectGivenRuleType()
+			{
+				//return FilterButton != null && FilterButton.TryClick();
+
+				//Get all rule options
+				//Check the given rule
+				//Check el is checked
+			}
+
+
+
+
+
 		}
+	}
 }

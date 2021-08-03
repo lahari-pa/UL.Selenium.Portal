@@ -31,9 +31,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(wr.ClickAllRulesButton(), $"Failed to click the button All Rules", $"Successfully clicked the button All Rules");
 		}
 
+
+
 		
-		[StepDefinition(@"In Rule Writer, I right click the Rule with name: (.*)")]
-		public void WhenInRuleWriterIRightClickTheRule(string ruleName)
+		[StepDefinition(@"In Rule Writer, I right click the Rule with name: (.*) and select 'New'")]
+		public void WhenInRuleWriterIRightClickTheRulAndSelectNew(string ruleName)
 		{
 			RuleWriter wr = new RuleWriter();
 			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
@@ -59,6 +61,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					if(Report.IsTrue(thisContextMenu.SelectOption("New"),"Failed to click option","Clicked option"))
 					{
+						var globalSteps = new GlobalSteps();
+						globalSteps.ThenTheWindowShouldLoad("New Rule", "should");
+						return;
 
 					}
 					else

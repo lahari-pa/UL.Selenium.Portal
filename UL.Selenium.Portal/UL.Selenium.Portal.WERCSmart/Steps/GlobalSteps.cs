@@ -2910,8 +2910,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			//right click the base rule -> see sha right click code
-			//select new from list
+			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
+
+
+
+			//switch to 'New Rule' popup
+			//select type d
+			//do we copy?
+
+			Report.StartSubStep($"Given I switch to the 'New Rule' window");
+			this.GivenISwitchToTheWindow("New Rule");
+
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the 'Type D' Option");
+			RuleWriter_NewRule RW_NR = new RuleWriter_NewRule();
+			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
+
 
 
 
