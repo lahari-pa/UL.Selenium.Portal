@@ -2911,12 +2911,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
-
-
-
-			//switch to 'New Rule' popup
-			//select type d
-			//do we copy?
+				
 
 			Report.StartSubStep($"Given I switch to the 'New Rule' window");
 			this.GivenISwitchToTheWindow("New Rule");
@@ -2929,15 +2924,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("When in the 'New Rule' window, I click the Copy selected rule button");
 			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
 			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
-			Report.StartSubStep($"When in the 'New Rule' window, I enter the value {exampleUser} into the Name text box");
-			Report.IsTrue(RW_NR.EnterNameText(exampleUser), "Failed to enter text", "Successfully entered text");
+			Report.StartSubStep($"When in the 'New Rule' window, I enter the value '{exampleUser}- additional doc' into the Name text box");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser+"- additional doc"), "Failed to enter text", "Successfully entered text");
 			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
 			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
+
+			Report.StartSubStep("Then the 'Rule View' window should load");
+			this.ThenTheWindowShouldLoad("Rule View", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rule View' window");
+			this.GivenISwitchToTheWindow("Rule View");
+			RuleWriter_RuleView RW_RV = new RuleWriter_RuleView();
+
+			Report.StartSubStep($"In the Rule View popup I get the text found in the 'Will contain the results of' box");
+			string foundText= RW_RV.GetContainedResultsText();
+			Report.Info($"Found Text was {foundText}");
+			if(Report.IsTrue(foundText== "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')","Found text was not as expected","The found text was as expected"))
+			{
+				string newText = foundText.Replace("BEVB", exampleUser);
+				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
+				//click save, close and logout.(end same way the acc creation does?)
+			}
+			else
+			{
+				Report.Info($"The found text was not as expected so the rule will not be valid");
+			}
+
+
 			
 
-			//popup close/gone check
-			//check for edit popup to appear
-			//switch to edit popup
 
 
 		}

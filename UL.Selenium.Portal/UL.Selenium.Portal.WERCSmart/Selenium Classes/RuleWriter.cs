@@ -13,6 +13,7 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.Selenium.BaseClasses;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -357,6 +358,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return el.TryClick();
 			}
+
+
+
+
+		}
+
+
+		public class RuleWriter_RuleView : SeleniumBaseObject
+		{
+			protected override By ContainerElementLocator => By.XPath("//form[@name='Form1']//tbody");
+
+			private IWebElement WillContainResultBox => ContainerElement.FindElement(By.XPath("//textarea[@name='EditCalculation']"), 2);
+
+
+
+			internal string GetContainedResultsText()
+			{
+				var el = this.WillContainResultBox;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return null;
+				}
+
+				return el.Text;
+				
+			}
+
+			internal bool ClearThenEnterTextIntoContainedResultsBox(string value)
+			{
+				var el = this.WillContainResultBox;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+				el.ClearTextBox();
+				var foundText = el.Text;
+				if(foundText.IsNullOrEmpty())
+				{
+					return el.TryEnterText(value);
+				}
+				else
+				{
+					Report.Info($"The text was not cleared succesfully, returning");
+					return false;
+				}
+				
+
+			}
+
+
 
 
 
