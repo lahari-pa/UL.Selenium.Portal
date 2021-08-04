@@ -264,6 +264,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srUsers_tblFilter']"), 2);
 
+			public List<IWebElement> RuleBoxElements => this.ContainerElement.FindElements(By.XPath($"//table[@id='rblRuleType']//tr"), 2).ToList();
+
 			internal bool ClickFilterBtn()
 			{
 				return FilterButton != null && FilterButton.TryClick();
@@ -276,6 +278,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//Get all rule options
 				//Check the given rule
 				//Check el is checked
+
+				var ruleEls = this.RuleBoxElements;
+
+				IWebElement wantedRule = null;
+				bool wantedRuleFound = false;
+
+				foreach(var item in ruleEls)
+				{
+					if (item.GetAttribute("text") == type)
+					{
+						wantedRule = item;
+						wantedRuleFound = true;
+					}
+				}
+
+				if (wantedRuleFound == false)
+				{
+					Report.Info($"The wanted rule was not found.");
+					return false;
+
+				}
+
+				wantedRule.TryCheck();
+			
+
 				return true;
 			}
 
