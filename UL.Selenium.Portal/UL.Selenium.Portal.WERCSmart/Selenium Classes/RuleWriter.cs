@@ -262,9 +262,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			private IWebElement FilterButton => ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
 
-			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srUsers_tblFilter']"), 2);
-
 			public List<IWebElement> RuleBoxElements => this.ContainerElement.FindElements(By.XPath($"//table[@id='rblRuleType']//tr"), 2).ToList();
+
+			private IWebElement CopySelectedRuleButton => ContainerElement.FindElement(By.XPath("//input[@id='chkCopyRule']"), 2);
+			
+
+			private IWebElement CopyRuleLabelText => ContainerElement.FindElement(By.XPath("//span[@id='lblCopyRule']"), 2);
+
+
+
 
 			internal bool ClickFilterBtn()
 			{
@@ -301,7 +307,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 
+			internal bool ClickCopySelectedRule()
+			{
+				var el = this.CopySelectedRuleButton;
+				if(el==null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
 
+				return el.TryClick();
+			}
+
+			internal bool CopyRuleActive()
+			{
+				var el = this.CopyRuleLabelText;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+				return el != null;
+			}
 
 
 		}

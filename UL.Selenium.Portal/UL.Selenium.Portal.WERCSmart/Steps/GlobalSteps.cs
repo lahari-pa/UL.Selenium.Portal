@@ -2927,9 +2927,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
 
 
+			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
+			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
 
-
-
+			//enter name into box
+			//click ok button
+			//popup close/gone check
+			//check for edit popup to appear
+			//switch to edit popup
 
 
 		}
