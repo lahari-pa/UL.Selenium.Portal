@@ -2926,12 +2926,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			RuleWriter_NewRule RW_NR = new RuleWriter_NewRule();
 			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
 
-
+			Report.StartSubStep("When in the 'New Rule' window, I click the Copy selected rule button");
 			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
 			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
+			Report.StartSubStep($"When in the 'New Rule' window, I enter the value {exampleUser} into the Name text box");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser), "Failed to enter text", "Successfully entered text");
+			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
+			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
+			
 
-			//enter name into box
-			//click ok button
 			//popup close/gone check
 			//check for edit popup to appear
 			//switch to edit popup

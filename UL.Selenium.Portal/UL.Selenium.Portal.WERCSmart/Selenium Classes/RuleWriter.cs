@@ -265,7 +265,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public List<IWebElement> RuleBoxElements => this.ContainerElement.FindElements(By.XPath($"//table[@id='rblRuleType']//tr"), 2).ToList();
 
 			private IWebElement CopySelectedRuleButton => ContainerElement.FindElement(By.XPath("//input[@id='chkCopyRule']"), 2);
-			
+
+			private IWebElement EnterNameBox => ContainerElement.FindElement(By.XPath("//input[@name='txtRuleName']"), 2);
+
+			private IWebElement OKButton => ContainerElement.FindElement(By.XPath("//input[@name='btnOk']"), 2);
+
+
 
 			private IWebElement CopyRuleLabelText => ContainerElement.FindElement(By.XPath("//span[@id='lblCopyRule']"), 2);
 
@@ -329,6 +334,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				return el != null;
 			}
+			 internal bool EnterNameText(string value)
+			{
+				var el = this.EnterNameBox;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+				return el.TryEnterText(value);
+			}
+
+
+			internal bool ClickOKButton()
+			{
+				var el = this.OKButton;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+
+				return el.TryClick();
+			}
+
+
 
 
 		}
