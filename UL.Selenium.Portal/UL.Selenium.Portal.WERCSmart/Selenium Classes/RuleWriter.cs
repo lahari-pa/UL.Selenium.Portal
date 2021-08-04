@@ -273,12 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			internal bool SelectGivenRuleType(string type)
 			{
-				//return FilterButton != null && FilterButton.TryClick();
-
-				//Get all rule options
-				//Check the given rule
-				//Check el is checked
-
+				
 				var ruleEls = this.RuleBoxElements;
 
 				IWebElement wantedRule = null;
@@ -301,9 +296,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				wantedRule.TryCheck();
-			
-
-				return true;
+				bool isChecked = wantedRule.Checked();
+				return isChecked;
 			}
 
 
