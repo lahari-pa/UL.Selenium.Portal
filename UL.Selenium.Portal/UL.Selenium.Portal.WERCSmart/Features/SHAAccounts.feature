@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -48,6 +48,7 @@ Given I search for the first product in the table
 Then I should see the product returned in the search results
 
 
+@ScenarioId:11189
 Scenario: [888888] SHA Acc Test Debug
 
 Given I Create SHA processing Rules for the accounts listed in the table:
