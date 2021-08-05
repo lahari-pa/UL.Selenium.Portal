@@ -2857,7 +2857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Finished setting the Feature SHA user");
 		}
 
-		[StepDefinition(@"I Create SHA processing Rules for the accounts listed in the table: (.*)")]
+		[StepDefinition(@"I Create SHA processing Rules for the accounts listed in the table:")]
 		public void ICreateProcessingRulesForSHAAccountsListed(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2867,7 +2867,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var S_RW = new Steps_RuleWriter();
 			//do a foreach user in table (create list of strings from table etc)
 
-			string exampleUser = "test";
+
+			var exampleUser = table.Rows[0]["username"];
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;
+
+			//navigate to SHA
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartStep("I navigate to Studio");
+			myStepsSha.GivenINavigateToStudio();
+
+			Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
+
+
+			//string exampleUser = "test";
 
 			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
 			header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
