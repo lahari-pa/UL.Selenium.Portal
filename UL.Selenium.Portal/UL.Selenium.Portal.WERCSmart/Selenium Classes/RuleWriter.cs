@@ -110,7 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			private IWebElement FilterButton => ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
 
-			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srUsers_tblFilter']"), 2);
+			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srSelectRules_tblFilter']"), 2);
 
 			private string _searchHeader;
 
@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			private IWebElement ApplyBtn => FilterTable.FindElement(By.XPath(".//input[@type='submit'][@title='Apply']"), 2);
 
-			private IWebElement DataTable => ContainerElement.FindElement(By.XPath(".//div[@id='srUsers_divSRData']//table"), 2);
+			private IWebElement DataTable => ContainerElement.FindElement(By.XPath(".//div[@id='srSelectRules_divSRData']//table"), 2);
 
 			private List<IWebElement> ColHeaders => DataTable.FindElements(By.XPath($".//tr[contains(@class,'Header')]//a"), 2).ToList();
 
@@ -220,11 +220,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				foreach (var row in rows)
 				{
 					Match match = Regex.Match(row.Text.Trim(), ToMatch);
-					if (match.Success)
+					if(row.Text.Trim().Contains(userName))
 					{
 						Report.Info($"Row was found...");
 						return true;
-					}
+					}			
+
+					
 				}
 				Report.Error($"Could not find the username {userName}");
 				return false;
@@ -262,7 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				foreach (var row in rows)
 				{
 					Match match = Regex.Match(row.Text.Trim(), ToMatch);
-					if (match.Success)
+					if (row.Text.Trim().Contains(userName))
 					{
 						Report.Info($"Row was found...");
 						return row;
@@ -311,10 +313,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				foreach(var item in ruleEls)
 				{
-					if (item.GetAttribute("text") == type)
+					if (item.Text!=null)
 					{
-						wantedRule = item;
-						wantedRuleFound = true;
+						if(item.Text.Contains(type))
+						{
+							wantedRule = item;
+							wantedRuleFound = true;
+						}
+						
 					}
 				}
 
@@ -325,9 +331,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				}
 
-				wantedRule.TryCheck();
-				bool isChecked = wantedRule.Checked();
-				return isChecked;
+				try
+				{
+					wantedRule.TryClick();
+
+					ruleEls = this.RuleBoxElements;
+
+					IWebElement checkedRule = null;
+					bool checkedRuleFound = false;
+
+					foreach (var item in ruleEls)
+					{
+						if (item.Text != null)
+						{
+							if (item.Text.Contains(type))
+							{
+								checkedRule = item;
+								checkedRuleFound = true;
+							}
+
+						}
+					}
+
+					var checkedEl = checkedRule.FindElement(By.XPath($".//input[@checked='checked']"), 2);
+					return checkedEl != null;
+					
+				}
+				catch
+				{
+					//do nothing
+					Report.Info($"");
+					return false;
+				}
+				
 			}
 
 
@@ -416,8 +452,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				el.ClearTextBox();
-				var foundText = el.Text;
-				if(foundText.IsNullOrEmpty())
+				var foundText = this.WillContainResultBox.GetValue();				
+				if (foundText.IsNullOrEmpty())
 				{
 					return el.TryEnterText(value);
 				}
