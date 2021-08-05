@@ -51,5 +51,5 @@ Then I should see the product returned in the search results
 Scenario: [888888] SHA Acc Test Debug
 
 Given I Create SHA processing Rules for the accounts listed in the table:
-| username   | FirstName | LastName   | Role         | EmailAddress                |
-| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+| username   |
+| SHAQAAuto1 |
