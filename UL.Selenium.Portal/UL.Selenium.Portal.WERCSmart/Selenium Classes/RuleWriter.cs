@@ -25,6 +25,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement Button => ContainerElement.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]//div[@class='widgetStyleContents']//iframe[@id='Widget1FRAME']"), 2);
 
+		public bool FoundContainerEl()
+		{
+			var el = this.containerElement;
+			//var thing = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
+			if (el!=null)
+			{
+				Report.Info($"The el was found as expected...");
+				return true;
+			}
+			int x = 0;
+			while (el == null & x < 20)
+			{
+				el = this.containerElement;
+				Delay.Seconds(5);
+				x++;
+			}
+			return el != null;
+		}
 		public bool ClickButton(string buttonName)
 		{
 			_buttonString = buttonName;

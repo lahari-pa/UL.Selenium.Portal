@@ -2519,7 +2519,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			RuleWriter rw = new RuleWriter();
 			Delay.Seconds(1);
-			Report.IsTrue(rw.WaitForContainerToBeVisible(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
+			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
+			
+			
 		}
 
 		[StepDefinition(@"the Material Management Dashboard page should load")]
