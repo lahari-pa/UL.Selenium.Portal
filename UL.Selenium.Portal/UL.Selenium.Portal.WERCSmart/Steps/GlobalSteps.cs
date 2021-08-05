@@ -2943,7 +2943,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				string newText = foundText.Replace("BEVB", exampleUser);
 				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
-				//click save, close and logout.(end same way the acc creation does?)
+
+				Report.IsTrue(RW_RV.ClickSaveButton(), "Failed to click save", "Successfully clicked save");
+				Report.IsTrue(RW_RV.WaitForRulesEditorToBeGone(), "The Rule view was still showing...", "The rule view was no longer showing.");
+
+				Report.StartSubStep("Then the 'Rules Editor' window should load");
+				this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+				Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+				this.GivenISwitchToTheWindow("Rules Editor");
+
+				Report.StartSubStep("Given I close the 'Rules Editor' Window");
+				this.ThenCloseTheSpecifiedWindow("Rules Editor");
+				
+
+				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+				this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+				this.WhenISwitchToTheTab("Rule Writer");
+
+				Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+				header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+				return;
 			}
 			else
 			{

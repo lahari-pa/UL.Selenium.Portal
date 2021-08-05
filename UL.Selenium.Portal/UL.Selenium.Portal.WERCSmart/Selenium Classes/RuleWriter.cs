@@ -371,6 +371,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			private IWebElement WillContainResultBox => ContainerElement.FindElement(By.XPath("//textarea[@name='EditCalculation']"), 2);
 
+			private IWebElement SaveButton => ContainerElement.FindElement(By.XPath("//input[@name='btnSave']"), 2);
+
+
 
 
 			internal string GetContainedResultsText()
@@ -408,6 +411,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				
 
 			}
+
+			internal bool ClickSaveButton()
+			{
+				var el = this.SaveButton;
+				if (el == null)
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+
+				return el.TryClick();
+			}
+
+			internal bool WaitForRulesEditorToBeGone()
+			{
+				var el = this.containerElement;
+				if(el.IsNullOrEmpty())
+				{
+					Report.Info($"The el was not found as expected...");
+					return true;
+				}
+				int x = 0;
+				while(el!=null & x<20)
+				{
+					el = this.containerElement;
+					Delay.Seconds(5);
+					x++;
+				}
+				return el == null;
+			}
+
 
 
 
