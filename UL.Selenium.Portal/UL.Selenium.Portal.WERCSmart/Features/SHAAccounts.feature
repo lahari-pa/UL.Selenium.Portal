@@ -23,8 +23,8 @@ Background:
 		| username   | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto2 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto3 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto4 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto5 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAut06 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 		

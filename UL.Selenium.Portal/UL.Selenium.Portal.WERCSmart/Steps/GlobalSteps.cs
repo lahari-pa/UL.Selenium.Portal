@@ -3337,7 +3337,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myStepsSha = new Steps_SHA();
 			
-			Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
+			//Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
 
 
 			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
