@@ -24,7 +24,7 @@ Background:
 		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto2 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto5 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAut06 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto6 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 		
