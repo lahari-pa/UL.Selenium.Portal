@@ -20,13 +20,19 @@ Feature: AccHasFullStwdData
 
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto1  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| username   | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto2 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto3 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto4 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
 		
 		
 
 
 
+@ScenarioId:11198
 Scenario: [999999] Basic Test For Running Feature Outline
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
