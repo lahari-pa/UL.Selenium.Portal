@@ -12,11 +12,11 @@
 @CreateProducts
 @Studio
 @ProductSetUp
-@run_AccHasFullStwdData
+@run_SHAAccountDebug
 @UPC
 
 
-Feature: AccHasFullStwdData
+Feature: SHAAccountDebug
 
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
