@@ -287,7 +287,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 Then I save the product information as: TestCase125144
 Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-|           | Sodium chloride | 33.33   | false               |            | false       |
+| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
 |           | Copper sulfate  | 11.67   | false               |            | false       |
 |           | Nitric acid     | 55      | false               |            | false       |
 Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
