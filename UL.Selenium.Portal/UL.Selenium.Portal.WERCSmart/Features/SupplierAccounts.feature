@@ -127,5 +127,6 @@ Given I create a new supplier NO products account with the following parameters 
 Scenario: Create new account with supplier settings for Cart No Products 
 Given I create a new supplier NO products account with the following parameters and update TReVor information for: CartNoProducts
 
+@ScenarioId:11212
 Scenario: Create new account with a subscription but no products accounts
 Given I create a new supplier NO products account with the following parameters and update TReVor information for: SubCart
