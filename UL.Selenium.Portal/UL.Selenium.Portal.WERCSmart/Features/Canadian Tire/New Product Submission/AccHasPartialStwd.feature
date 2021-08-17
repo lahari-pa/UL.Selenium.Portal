@@ -246,7 +246,7 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	Then I save the product information as: TestCase86454
 	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	Given I call Shared Step 57570c (Enter Ingredients) and add the following ingredients for Canda Only:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	#And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)

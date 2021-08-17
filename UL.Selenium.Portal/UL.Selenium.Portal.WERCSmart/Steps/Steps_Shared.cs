@@ -426,6 +426,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
+		public void GivenICallSharedStepEnterIngredientsCanandaOnly(Table ingredientsTable)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartStep("I should see the Ingredients Page");
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartStep("I should see the ingredients error message");
+			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
+			Report.StartStep("I add the following ingredients:");
+			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.Screenshot();	
+			
+		}
+
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
 		public void GivenICallSharedEnterIngrediebtsForAerosolPropellant()
 		{
