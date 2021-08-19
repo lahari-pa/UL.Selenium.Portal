@@ -657,18 +657,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
 			new Steps_Shared().GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
-			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
-			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+
+
+
+
+
+			//Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			//new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
 			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Submitted");
 			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
 				"TestCase86187", "Submitted");
 			Report.StartStep("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86187)");
 			new Steps_Shared().GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData("TestCase86187");
+
 			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase86187)");
 			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Assigned", "TestCase86187");
-			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Assigned");
-			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
-				"TestCase86187", "Assigned");
+
+			//Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Assigned");
+			//new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase86187", "Assigned");
+
 			Report.StartStep("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase86187)");
 			new Steps_Shared().GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete("TestCase86187");
 
