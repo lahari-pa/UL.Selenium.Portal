@@ -35,7 +35,8 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	Given I generate a random UPC number and save as: UPC86257
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	#Given I create a Crayon product and take to completed using Test Case 86116 and save as: TestCase86257 with upc: UPC86257
-	Given I create a Crayon product and take to completed using Test Case 86116 and SHA account: SHAQAAuto2 and save as: TestCase86257 with upc: UPC86257
+	#Given I create a Crayon product and take to completed using Test Case 86116 and SHA account: SHAQAAuto2 and save as: TestCase86257 with upc: UPC86257
+	Given I create a Crayon product and force it to completed using Test Case 86116 and SHA account: SHAQAAuto2 and save as: TestCase86257 with upc: UPC86257
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
@@ -59,7 +60,8 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Given I generate a random UPC number and save as: UPC86258
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	#Given I create a Crayon product and take to completed using Test Case 86454 and save as: TestCase86258
-	Given I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86258
+	#Given I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: SHAQAAuto2 and save as: SHAQAAuto2
+	Given I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: SHAQAAuto2 and save as: SHAQAAuto2
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
@@ -83,7 +85,8 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	Given I generate a random UPC number and save as: UPC862591
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	#Given I create a Chalk product and take to completed using Test Case 86114 and save as: TestCase86259
-	Given I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86259
+	#Given I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86259
+	Given I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86259
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
@@ -106,7 +109,8 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Given I generate a random UPC number and save as: UPC86260
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	#Given I create a Crayon product and take to completed using Test Case 86458 and save as: TestCase86260
-	Given I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: SHAQAAuto2 and save as: TestCase86260
+	#Given I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: SHAQAAuto2 and save as: TestCase86260
+	Given I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: SHAQAAuto2 and save as: TestCase86260
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load

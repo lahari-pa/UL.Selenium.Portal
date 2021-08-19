@@ -4235,6 +4235,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
+		[StepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
+		public void CreateForcedProductUsingTestCase86114UsingShaAccount(string shaAccountSavedAs, string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
+			newProductSteps.SaveProductInformation(savedAs);
+
+
+			//Philip - Change
+			sharedSteps.ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//sharedSteps.ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			//
+
+
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			sharedSteps.SelectRetailers("Amazon");
+			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86259", "Metal Container", "5");
+			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccountSavedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Amazon");
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailerTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailerTable);
+		}
+
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and save as: (.*)")]
 		public void CreateProductUsingTestCase86458(string savedAs)
 		{
@@ -4349,6 +4415,76 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+
+		}
+
+
+		[StepDefinition(@"I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
+		public void CreateForcedProductUsingTestCase86458(string shaAccount, string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Crayon");
+			newProductSteps.SaveProductInformation(savedAs);
+
+
+			//Philip - Change
+			sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			//
+
+
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
+			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86260", "Metal Container", "5");
+			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccount);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailerTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailerTable);
+
+
 
 		}
 
@@ -5447,6 +5583,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
+		public void CreateForcedProductUsingTestCase86116UsingGivenSHAAccount(string shaAccSavedAs, string savedAs, string upc)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC86116");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Crayon");
+			newProductSteps.SaveProductInformation(savedAs);
+
+
+			//Philip - Change
+			sharedSteps.ThenICallSharedStep85730ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPYESGNFRNOContinue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//
+
+
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
+			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as " + upc, "Metal Container", "5");
+			sharedSteps.ThenICallSharedStep78884RegulatoryDocumentsToProvide_CanadaOnly_RequestAuthoringUploadLabel_Continue();
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 86116");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			//sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccSavedAs);
+
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			//new
+
+
+		
+
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+			
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailerTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailerTable);
+
+
+
+		}
+
 
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
@@ -5508,6 +5720,74 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 
 			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+		}
+
+		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
+		public void CreateForcedProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Crayon");
+			newProductSteps.SaveProductInformation(savedAs);
+
+
+
+			//Philip - Change
+			sharedSteps.ThenICallSharedStep78879ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			//sharedSteps.ThenICallSharedStep78879ProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue();
+			//
+
+
+			sharedSteps.ICallSharedIngredients_AddAnyChemical_CanadaOnly("Sodium hydroxide");
+			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
+			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
+			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86258", "Metal Container", "5");
+			sharedSteps.ThenICallSharedStep78884RegulatoryDocumentsToProvide_CanadaOnly_RequestAuthoringUploadLabel_Continue();
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccountSavedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			//new
+
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailerTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailerTable);
 		}
 
 	}
