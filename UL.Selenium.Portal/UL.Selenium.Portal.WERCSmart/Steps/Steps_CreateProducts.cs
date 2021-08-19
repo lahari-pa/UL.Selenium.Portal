@@ -679,6 +679,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailersTable = new Table("Retailer");
 			//retailersTable.AddRow("CVS");
 			retailersTable.AddRow("Canadian Tire");
+			retailersTable.AddRow("No Retailer/No UPC Product");
+
 			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailersTable);
 			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
 			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
