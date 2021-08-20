@@ -26,11 +26,13 @@ Background:
 @ScenarioId:1510
 Scenario: [73949] Kit - Document merge - US only
 	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
-	Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 
 	Given I navigate to the landing page
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 
 	Given I navigate to the landing page
 	#Given I save product 1520182 to context as 73949_KitProduct1
@@ -90,10 +92,13 @@ Scenario: [73949] Kit - Document merge - US only
 Scenario: [73950] Kit Document merge - Canada only
 	#Given I Use Test case 78865 to create a new product which is for NR and Canada only, and get it to completed status.  You will need to run this twice as you need two products to add to the kit.
 	#Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 and save as: 73950_KitProduct1
-	Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
+	#Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
+	Given I create a product with name: Kit product 1 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
 	Given I navigate to the landing page
 	#Given I create a product with name: Kit product 2 and take to completed using Test Case 78865 and save as: 73950_KitProduct2
-	Given I create a product with name: Kit product 2 and take to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
+	#Given I create a product with name: Kit product 2 and take to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
+	Given I create a product with name: Kit product 2 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
+
 
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC73949
