@@ -2599,6 +2599,91 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I use Forced Test case 77862 to create a kit using SHA Acc: (.*) and save as (.*)")]
+		public void GivenIUseForcedTestCaseToCreateAKitAndSaveAsTestCaseUsingSHA(string shaAcc, string saveAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+
+			//For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add
+			//Walmart as the retailer for these products.
+			//Use the test case 75335 to create these products - test case is linked to this one.Note: these input
+			//products do not have to be direct ship vendor products
+			if (!Context.Contains("77862_KitProduct1"))
+			{
+				Report.StartStep("Beginning create kit 1");
+				this.CreateForcedProductUsingTestCase75335WalmartusingShaAcc(shaAcc,"77862_KitProduct1");
+				thisGlobalSteps.NavigateToLandingPage();
+			}
+
+			if (!Context.Contains("77862_KitProduct2"))
+			{
+				Report.StartStep("Beginning create kit 2");
+				this.CreateForcedProductUsingTestCase75335WalmartusingShaAcc(shaAcc,"77862_KitProduct2");
+				thisGlobalSteps.NavigateToLandingPage();
+			}
+
+			//And I call Shared Step 67823(Login to WERCSmart - Products Automation Account)
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC77862");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC77862");
+
+
+			//And I call Shared Step 57753(Create a New Registration via Register New Product(expanded menu))
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
+			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
+				"Emergency Road kit", "Kit" + System.DateTime.Now.DayOfWeek + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second);
+			//And I call Shared Step 77872(Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			newProductSteps.SaveProductInformation(saveAs);
+			sharedSteps.Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
+			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I In the shared step below add the two completed products that you are working with
+			//And I call Shared Step 31427(Create the Kit - Adding two products: product 1: (.*) and product 2: (.*))
+			sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts("77862_KitProduct1", "77862_KitProduct2");
+			//And I call Shared Step 57506(Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+			sharedSteps
+				.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+			//And I call Shared Step 62536(Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+			//And I call Shared Step 77845(Retailer - Select WM, Done, Select Vendor ID, Continue)
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			//And I call Shared Step 42759(Portal - UPC Page - add 1 UPC)
+			sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs("UPC77862");
+			//And I click continue
+			newProductSteps.ClickContinue();
+			//And the comments field should appear
+			newProductSteps.ThenTheCommentsFieldShouldAppear();
+			//And I click continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			//And I Click Home
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs,
+				"Submitted");
+			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+
+			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(saveAs);
+
+		}
+
+
 
 
 		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75651 and save as: (.*)")]
