@@ -6017,8 +6017,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
 			Report.StartStep($"I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: {savedAs})");
-			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+		
 
 
 
