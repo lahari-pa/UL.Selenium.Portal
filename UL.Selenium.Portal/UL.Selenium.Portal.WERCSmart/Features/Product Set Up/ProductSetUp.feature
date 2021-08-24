@@ -17,6 +17,11 @@
 @run_ProductSetUp
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto31  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1074
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -70,7 +75,8 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 		| No Retailer/No UPC Product |
 @ScenarioId:1073
 Scenario: [75410] Product from Completed status to Recertification
-	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
+	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto31 and save as: TestCase75410
 	#Scenario: Test
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410
@@ -123,11 +129,14 @@ Scenario: [75410] Product from Completed status to Recertification
 
 @ScenarioId:6186
 Scenario: [84507] Recertification > Process recertification > Process multiple products
-	Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
+	#Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
+	Given I create a product with name: 8450712 and force it to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
-	Given I create a product with name: 8450711 and take to completed using Test Case 75335 and save as: TestCase845071
+	#Given I create a product with name: 8450711 and take to completed using Test Case 75335 and save as: TestCase845071
+	Given I create a product with name: 8450711 and force it to completed using Test Case 75335 and save as: TestCase845071
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845071
-	Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
+	#Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
+	Given I create a product with name: 8450713 and Force it to completed using Test Case 84109 and save as: TestCase845073
 	Given I take a product from completed to recertification using Test Case 84511 saved: TestCase845073
 	#Scenario: Test
 	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)

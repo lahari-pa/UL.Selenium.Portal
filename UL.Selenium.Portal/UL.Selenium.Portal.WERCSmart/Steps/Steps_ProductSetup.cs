@@ -319,6 +319,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CreateProductUsingTestCase75335(savedAs, name);
 		}
 
+		[StepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 75335 and save as: (.*)")]
+		public void GivenICreateForcedProductUsingTestCase75335(string name, string savedAs)
+		{
+			this.CreateForcedProductUsingTestCase75335(savedAs, name);
+		}
+
 
 		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335UsingSHAAcc(string name, string shaAcc, string savedAs)
@@ -493,6 +499,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenITakeProductFromCompletedToRecertification84109(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84109(savedAs, name);
+		}
+
+		[StepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 84109 and save as: (.*)")]
+		public void GivenITakeForcedProductFromCompletedToRecertification84109(string name, string savedAs)
+		{
+			this.TakeForcedProductFromCompletedToRecertification84109(savedAs, name);
 		}
 
 		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
@@ -678,6 +690,112 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("Failed to create product and process through to completed.");
 			}
+
+		}
+
+		public void CreateForcedProductUsingTestCase75335(string savedAs, string name)
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			Report.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			// Generate UPC number and delete duplicates
+			Report.Info("Generating UPC");
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
+			Report.Info("Removing all refernces to the UPC generated");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
+			// 57408 (Create a New Registration via Register New Product icon)
+			Report.StartStep("Create a New Registration via Register New Product icon");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			Report.StartStep("The Product- Enter name, select product type - Continue - Happy Path");
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			// 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			Report.StartStep("Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			// 26897 (Product Characteristics - Solid only available - continue)
+			Report.StartStep("Product Characteristics - Solid only available - continue");
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			Report.StartStep("(Ingredients - add any chemical) with name: Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			Report.StartStep("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
+			Report.StartStep("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
+			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
+
+			Context.AddToContext("retailer", "CVS");
+			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
+			Report.StartStep("(Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
+				"Metal Container", "40");
+			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+			Report.StartStep("Regulatory Documents to Provide - US only - request authoring - Happy Path");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			Report.StartStep("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Comments - Happy Path");
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			Report.StartStep("If purchase details are showing click confirm order");
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			//********************
+			//SHA Manager
+			//********************
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
+			
+
 
 		}
 
@@ -1480,6 +1598,95 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 84108 and save as: (.*)")]
+		public void TakeProductFromForcedCompletedToRecertification84108(string name, string savedAs)
+		{
+			if (Context.Contains("ElectronicProduct"))
+			{
+				Context.AddToContext("ElectronicProduct", "false");
+			}
+
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			Report.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC84108");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC84108");
+			//And I call Shared Step 57753 (Create a New Registration via Register New Product(expanded menu))
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery",
+				name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+
+			//And I call Shared Step 57401 (Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+			sharedSteps.GivenICallSharedProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			//And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			//sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
+			//newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
+			//"I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen(
+				"Technical Data Sheet (TDS), Battery Data Sheet (BDS)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			newProductSteps.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards",
+				"I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.");
+			newProductSteps.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
+				"I don't need a WHMIS Compliant SDS");
+			//Given in the Regulatory Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Additional Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Optional Reports and Dcouments Available For Purchase page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Comments page I click Continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("No Retailer/No UPC Product");
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
+
+		}
+
 		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
 		public void TakeProductFromCompletedToRecertification84109(string savedAs,
 			string name = "Answering machine, No battery included")
@@ -1563,6 +1770,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
+
+		}
+
+		[StepDefinition(@"I create a product and Force it to completed using Test Case 84109 and save as: (.*)")]
+		public void TakeForcedProductFromCompletedToRecertification84109(string savedAs,
+			string name = "Answering machine, No battery included")
+		{
+			ReportSettings.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var stepsStudio = new Steps_Studio();
+			var thisGlobalSteps = new GlobalSteps();
+
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
+				"Answering machine, No battery included", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			//And I call Shared Step 69687(Product Information - US, No(PL))
+			//sharedSteps.GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//And I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+			sharedSteps.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
+			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)
+			sharedSteps.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
+			//And I call Shared Step 71955(Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
+			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+
+			//And I should see the Additional Documents to Provide Page
+			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
+			//Given in the Additional Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Optional Reports and Documents Available for Purchase page I click Continue
+			newProductSteps.ClickContinue();
+			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			sharedSteps.GivenICallSharedCommentsHappyPath("test");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("No Retailer/No UPC Product");
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
 
 		}
 
