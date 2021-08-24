@@ -454,19 +454,26 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109516)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109516)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109516
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109516)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Accepted or Completed
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109516) for
-		| Retailer  |
-		| Amazon    |
-		| Walgreens |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Amazon                     |
+		| Walgreens                  |
+
+
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109516)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109516
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109516)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Accepted or Completed
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109516) for
+	#	| Retailer  |
+	#	| Amazon    |
+	#	| Walgreens |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I filter for the product saved as: TestCase109516
