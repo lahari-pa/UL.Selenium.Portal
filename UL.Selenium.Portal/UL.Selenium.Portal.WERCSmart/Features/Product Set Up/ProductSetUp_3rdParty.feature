@@ -121,26 +121,30 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase80768)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase80768)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80768)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80768)
-	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
-	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
-	And In Power Desginer, fill in SECT2318 if it is present
-	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
-	And In Power Designer I double click on category: Water Soluble?
-	Then In Power Designer the phrase selector screen should open
-	And In the phrase selector screen I select phrases:
-		| Text |
-		| Y    |
-	And In the phrase selector screen I click button: Save
-	And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
-		| Component CAS          | Component ID | Chemical Name               |
-		| saved as TestCase80768 | MIXTURE      | AAA WERCS Test Raw Material |
-	Given I click on home to navigate back to editing specific product saved as TestCase80768
-	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80768
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80768)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80768)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 and its status is: Completed
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: Kit1) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80768)
+	##And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	##And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	#And In Power Desginer, fill in SECT2318 if it is present
+	#And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
+	#And In Power Designer I double click on category: Water Soluble?
+	#Then In Power Designer the phrase selector screen should open
+	#And In the phrase selector screen I select phrases:
+	#	| Text |
+	#	| Y    |
+	#And In the phrase selector screen I click button: Save
+	#And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
+	#	| Component CAS          | Component ID | Chemical Name               |
+	#	| saved as TestCase80768 | MIXTURE      | AAA WERCS Test Raw Material |
+	#Given I click on home to navigate back to editing specific product saved as TestCase80768
+	#And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80768
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80768)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80768)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 and its status is: Completed
 
 @ScenarioId:1419
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
@@ -181,25 +185,28 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80763)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
-	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
-	And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
-	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
-	And In Power Designer I double click on category: Water Soluble?
-	Then In Power Designer the phrase selector screen should open
-	And In the phrase selector screen I select phrases:
-		| Text |
-		| Y    |
-	And In the phrase selector screen I click button: Save
-	And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
-		| Component CAS          | Component ID | Chemical Name               |
-		| saved as TestCase80763 | MIXTURE      | AAA WERCS Test Raw Material |
-	Given I click on home to navigate back to editing specific product saved as TestCase80763
-	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80763
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80763)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Completed
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: Kit1) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
+	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	#And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
+	#And In Power Designer I double click on category: Water Soluble?
+	#Then In Power Designer the phrase selector screen should open
+	#And In the phrase selector screen I select phrases:
+	#	| Text |
+	#	| Y    |
+	#And In the phrase selector screen I click button: Save
+	#And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
+	#	| Component CAS          | Component ID | Chemical Name               |
+	#	| saved as TestCase80763 | MIXTURE      | AAA WERCS Test Raw Material |
+	#Given I click on home to navigate back to editing specific product saved as TestCase80763
+	#And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80763
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80763)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Completed
 
 @ScenarioId:1562
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
@@ -271,22 +278,26 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)	
-	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
-	And In Power Designer I double click on category: Water Soluble?
-	Then In Power Designer the phrase selector screen should open
-	And In the phrase selector screen I select phrases:
-		| Text |
-		| Y    |
-	And In the phrase selector screen I click button: Save	
-	And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
-		| Component CAS          | Component ID | Chemical Name               |
-		| saved as TestCase80821 | MIXTURE      | AAA WERCS Test Raw Material |
-	#switch to checklist section?
-	Given I click on home to navigate back to editing specific product saved as TestCase80821
-	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)	
+	#And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
+	#And In Power Designer I double click on category: Water Soluble?
+	#Then In Power Designer the phrase selector screen should open
+	#And In the phrase selector screen I select phrases:
+	#	| Text |
+	#	| Y    |
+	#And In the phrase selector screen I click button: Save	
+	#And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
+	#	| Component CAS          | Component ID | Chemical Name               |
+	#	| saved as TestCase80821 | MIXTURE      | AAA WERCS Test Raw Material |
+	##switch to checklist section?
+	#Given I click on home to navigate back to editing specific product saved as TestCase80821
+	#And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: Kit1) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
 
 
