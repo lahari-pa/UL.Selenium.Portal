@@ -55,7 +55,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase75335) for	
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| CVS                        |
@@ -168,7 +168,7 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase85965)	
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase85965) for	
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| CVS                        |

@@ -173,6 +173,78 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I create a Forced to Completed electronic product and save it as: (.*)")]
+		public void GivenIForceCreateAnElectronicProductAndSaveItAs(string saveAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsShared = new Steps_Shared();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsSHA = new Steps_SHA();
+			var MyStepsStudio = new Steps_Studio();
+
+			Report.StartStep("I call Shared Step 67823(Login to WERCSmart - Products Automation Account)");
+			MyStepsShared.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			Report.StartStep("I call Shared Step 57408(Create a New Registration via Register New Product icon)");
+			MyStepsShared.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): Answering machine, No battery included");
+			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
+			Report.StartStep("Then I save the product information as: TestCase84109");
+			MyStepsNewProduct.SaveProductInformation(saveAs);
+			Report.StartStep("I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only");
+			MyStepsShared.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
+
+
+			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			Report.StartStep("I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)");
+			MyStepsShared.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
+			Report.StartStep("I call Shared Step 71955(Answer Electronic Equipment questions - Without Cathode Ray - No to all)");
+			MyStepsShared.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
+			MyStepsShared.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			Report.StartStep("I should see the Additional Documents to Provide Page");
+			//Given in the Additional Documents to Provide page I click Continue
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			Report.StartStep("I should see Optional Reports and Documents Available for Purchase page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("In the new products page, I hit continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
+			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
+			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			MyStepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			Report.StartStep("I call Shared Step 65080(Login to Studio and Open SHA manager)");
+			MyStepsShared.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			Report.StartStep(
+				"Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Submitted", saveAs);
+			Report.StartStep(
+				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Submitted");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Submitted");
+			Report.StartStep(
+				"Given I call Shared Step 40657(SHA Manager - Submitted - Select product > process product data for product saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(saveAs);
+			Report.StartStep(
+				"Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
+			Report.StartStep(
+				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Assigned");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Assigned");
+			Report.StartStep(
+				"And I call Shared Step 55662(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(saveAs);
+			//# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("No Retailer/No UPC Product");
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(saveAs, retailerTable);
+
+
+		}
+
 		[StepDefinition(@"I create a kit component in completed status")]
 		public void CreateKitComponentInCompletedStatus()
 		{
