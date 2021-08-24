@@ -332,6 +332,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CreateProductUsingTestCase75335UsingShaAcc(savedAs, name, shaAcc);
 		}
 
+		[StepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
+		public void GivenICreateForcedProductUsingTestCase75335UsingSHAAcc(string name, string shaAcc, string savedAs)
+		{
+			this.CreateProductForcedUsingTestCase75335UsingShaAcc(savedAs, name, shaAcc);
+		}
+
 		[StepDefinition(@"I create a product and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string savedAs)
 		{
