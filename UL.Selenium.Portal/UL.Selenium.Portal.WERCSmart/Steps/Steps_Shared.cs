@@ -2563,6 +2563,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
+			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+
 			new NewProduct().UploadFileForSection(type, pdfFile);
 
 		}
