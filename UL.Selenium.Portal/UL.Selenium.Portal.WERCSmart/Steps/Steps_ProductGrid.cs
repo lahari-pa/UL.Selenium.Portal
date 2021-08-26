@@ -2861,6 +2861,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
 		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
+			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
 			MoreFilters moreFiltersObject = new MoreFilters();
 			DeleteActiveProducts deleteActiveProductsObject = new DeleteActiveProducts();
 			savedAs = deleteActiveProductsObject.GetProductIDFromContext(savedAs);
