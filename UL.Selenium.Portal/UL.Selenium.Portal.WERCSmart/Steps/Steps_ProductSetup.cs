@@ -300,7 +300,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
 			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("Walmart");
+			//retailerTable.AddRow("Walmart");
+			retailerTable.AddRow("Wal-Mart/SAM'S CLUB");
 			retailerTable.AddRow("No Retailer/No UPC Product");
 
 			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
