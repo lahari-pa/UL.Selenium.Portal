@@ -1075,6 +1075,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue(!expectedRadioButtons.Any(x => radioButtonsShowing.Contains(x)),
 					"The actual radio buttons for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Should not be showing: " + string.Join(", ", expectedRadioButtons),
 					"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+
+				//debug code - remove
+				if(Report.IsTrue(expectedRadioButtons.Count()==radioButtonsShowing.Count(),"counts did not match","counts matched"))
+				{
+					int i = expectedRadioButtons.Count();
+					int x = 0;
+					while(x<i)
+					{
+						bool match = false;
+
+						match = expectedRadioButtons[x] == radioButtonsShowing[x];
+
+						Report.IsTrue(match, "the radio button at position: " + x + " did not match", "the radio button at position: " + x + " matched");
+						x++;
+					}
+				}
 			}
 
 		}
