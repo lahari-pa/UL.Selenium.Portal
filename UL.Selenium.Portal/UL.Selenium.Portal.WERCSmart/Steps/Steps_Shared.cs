@@ -4271,8 +4271,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			buttons.AddRow(
 				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			buttons.AddRow(
-				"Product is intended for use as a plant regulator (control growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)");
-			buttons.AddRow("Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. Kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+				"Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)");
+			buttons.AddRow("Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			Report.StartStep(
 				"I confirm the radios showing in order are: Product is intended for preventing, destroying...', 'Product is intended for use as a plant regulator...', 'Product is not a pesticide...'");
 			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which best describes your product, including when FIFRA 25(b) Exempt", buttons);
