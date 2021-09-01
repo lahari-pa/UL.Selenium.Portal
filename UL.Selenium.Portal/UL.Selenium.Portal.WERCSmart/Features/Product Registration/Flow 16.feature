@@ -306,11 +306,11 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 33.33   | false               | false       |            |
-		| Copper          | 4.70    | false               | false       |            |
-		| Magnesium       | 5.30    | false               | false       |            |
-		| Aqua            | 56.67   | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 33.33   | false               | false       |            |
+		| Copper        | 4.70    | false               | false       |            |
+		| Magnesium     | 5.30    | false               | false       |            |
+		| Aqua          | 56.67   | false               | false       |            |
 	And I should see the Formulation > Batteries Page
 	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
 	Given I click continue

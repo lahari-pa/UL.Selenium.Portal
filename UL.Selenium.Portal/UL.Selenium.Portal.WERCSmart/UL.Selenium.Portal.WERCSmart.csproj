@@ -265,6 +265,7 @@
     <Compile Include="Selenium Classes\RegulatoryDocumentsToProvide.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ReviewDocuments.cs" />
+    <Compile Include="Selenium Classes\RuleWriter.cs" />
     <Compile Include="Selenium Classes\SecurityManager.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\SHAAdvancedReporting.cs" />
@@ -364,6 +365,7 @@
     <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Steps\Studio\Steps_Header.cs" />
+    <Compile Include="Steps\Studio\Steps_RuleWriter.cs" />
     <Compile Include="Steps\Studio\Steps_SecurityManager.cs" />
     <Compile Include="Steps\TestCreatingSupplierAccount.cs" />
   </ItemGroup>
@@ -578,6 +580,7 @@
     </None>
     <None Include="Features\SHA Manager Supplier Records.feature" />
     <None Include="Features\SHA Search.feature" />
+    <None Include="Features\SHAAccounts.feature" />
     <None Include="Features\SHASubscriptionStatus.feature" />
     <None Include="Features\Signup.feature">
     </None>

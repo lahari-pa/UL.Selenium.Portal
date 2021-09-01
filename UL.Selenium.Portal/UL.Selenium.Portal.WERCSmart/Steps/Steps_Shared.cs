@@ -426,6 +426,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
+		public void GivenICallSharedStepEnterIngredientsCanandaOnly(Table ingredientsTable)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartStep("I should see the Ingredients Page");
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartStep("I should see the ingredients error message");
+			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
+			Report.StartStep("I add the following ingredients:");
+			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.Screenshot();	
+			
+		}
+
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
 		public void GivenICallSharedEnterIngrediebtsForAerosolPropellant()
 		{
@@ -1914,8 +1936,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");		
 
 
-			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests(including insects, rodents, mold, virus, bacteria, and other micro - organisms)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests(including insects, rodents, mold, virus, bacteria, and other micro - organisms)");
+			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2541,6 +2563,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
+			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+
 			new NewProduct().UploadFileForSection(type, pdfFile);
 
 		}
@@ -3367,9 +3391,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -4245,12 +4269,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.CheckDisplayedSections("see", sections);
 			var buttons = new Table("Button");
 			buttons.AddRow(
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			buttons.AddRow(
-				"Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth");
-			buttons.AddRow("Product is not considered a pesticide product");
+				"Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)");
+			buttons.AddRow("Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			Report.StartStep(
-				"I confirm the radios showing in order are: Prevents, Destroys Repels Pests..', 'Regulates Plant Growth, Defoliates..', 'Product is not considered a pesticide product'");
+				"I confirm the radios showing in order are: Product is intended for preventing, destroying...', 'Product is intended for use as a plant regulator...', 'Product is not a pesticide...'");
 			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which best describes your product, including when FIFRA 25(b) Exempt", buttons);
 		}
 
@@ -5854,6 +5878,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			thisProcessProducts.SelectNewStatus("Accepted");
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
+		}
+
+		[StepDefinition(@"I call Shared Step \(SHA - Assgined Product - set Retailers to Completed for saved as: (.*)\) for")]
+		public void GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(string savedAs, Table retailers)
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			var thisProcessProducts = new ProcessProducts();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisProcessProducts.SelectNewStatus("Assigned");
 			thisStepsStudio.InSHAManagerISelectProductById(id);
 			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);

@@ -30,10 +30,12 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
 
-	Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
 	Given I navigate to the landing page
 	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
-	Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
 
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC77862
@@ -67,12 +69,14 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
-	Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
+	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
 
 	#Given I create a product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
 	Given I navigate to the landing page
 	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
-	Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
+	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
 
 	#Given I create a product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
 	Given I navigate to the landing page
@@ -111,7 +115,8 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	#Given I save to context name: 77862_KitProduct1 and value: 1549414
 	#Given I save to context name: 77862_KitProduct2 and value: 1549415
 	#Given I use Test case 77862 to create a kit and save as TestCase77857
-	Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77857
+	#Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77857
+	Given I use Forced Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77857
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77857)
@@ -164,12 +169,15 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
+@ScenarioId:11183
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1552743
 	#Given I save to context name: 77862_KitProduct2 and value: 1552746
 	#Given I Use Test case 77862 to create a kit which has Direct Ship set to Yes and is for WM only.Test case is linked.  This leaves the kit product in Submitted status in SHA manager
 	#Given I use Test case 77862 to create a kit and save as TestCase77858
-	Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77858
+	#Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77858
+	Given I use Forced Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77858
+
 
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)

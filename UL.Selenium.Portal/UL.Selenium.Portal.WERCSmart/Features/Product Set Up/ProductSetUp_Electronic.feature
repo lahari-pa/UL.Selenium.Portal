@@ -46,19 +46,24 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase84109)
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase84109) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
 	#Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
-	And I check whether the current environment is Staging or Production and if it is I skip the next three steps
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase84109)
-	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase84109
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase84109)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Completed
+	#And I check whether the current environment is Staging or Production and if it is I skip the next three steps
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase84109)
+	#And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase84109
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase84109)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Completed
 
 @ScenarioId:5970
 Scenario: [84511] Electronic Product from Completed status to Recertification
 	#If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.
-	Given I create an electronic product and save it as: TestCase84511
+	#Given I create an electronic product and save it as: TestCase84511
+	Given I create a Forced to Completed electronic product and save it as: TestCase84511
 	Given I navigate to the landing page
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I search for the product saved as: TestCase84511

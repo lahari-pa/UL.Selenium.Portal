@@ -1075,6 +1075,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue(!expectedRadioButtons.Any(x => radioButtonsShowing.Contains(x)),
 					"The actual radio buttons for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Should not be showing: " + string.Join(", ", expectedRadioButtons),
 					"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+
 			}
 
 		}

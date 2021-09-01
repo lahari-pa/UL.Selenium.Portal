@@ -33,8 +33,8 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 100     | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	# Not currently showing Reg 3 page - requires specific product type or ingredient present?
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
@@ -159,6 +159,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
+@ScenarioId:11181
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

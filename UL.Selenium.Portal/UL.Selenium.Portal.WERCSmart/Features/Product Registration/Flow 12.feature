@@ -46,10 +46,10 @@ And I call Shared Step 57753 (Create a New Registration via Register New Product
 And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
 Then I save the product information as: TestCase58430
 And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Sodium chloride | 33.33   | false               | false       |            |
-| Copper sulfate  | 11.67   | false               | false       |            |
-| Nitric acid     | 55      | false               | false       |            |
+| ComponentName  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| 7647-14-5      | 33.33   | false               | false       |            |
+| Copper sulfate | 11.67   | false               | false       |            |
+| Nitric acid    | 55      | false               | false       |            |
 And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
