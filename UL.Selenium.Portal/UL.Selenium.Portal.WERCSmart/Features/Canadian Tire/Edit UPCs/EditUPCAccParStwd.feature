@@ -33,9 +33,7 @@ Background:
 @ScenarioId:1472
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86257
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Crayon product and take to completed using Test Case 86116 and save as: TestCase86257 with upc: UPC86257
-	#Given I create a Crayon product and take to completed using Test Case 86116 and SHA account: SHAQAAuto2 and save as: TestCase86257 with upc: UPC86257
+	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
 	Given I create a Crayon product and force it to completed using Test Case 86116 and SHA account: SHAQAAuto2 and save as: TestCase86257 with upc: UPC86257
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -47,7 +45,6 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto2 and Open SHA manager)
 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86257)
@@ -58,9 +55,7 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 @ScenarioId:1473
 Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86258
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Crayon product and take to completed using Test Case 86454 and save as: TestCase86258
-	#Given I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: SHAQAAuto2 and save as: SHAQAAuto2
+	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
 	Given I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: SHAQAAuto2 and save as: SHAQAAuto2
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -72,7 +67,6 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto2 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86258)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86258 and its status is: Recertification
@@ -83,9 +77,7 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
 	Given I generate a random UPC number and save as: UPC862591
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Chalk product and take to completed using Test Case 86114 and save as: TestCase86259
-	#Given I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86259
+	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
 	Given I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: SHAQAAuto2 and save as: TestCase86259
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -94,9 +86,6 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
 	Then I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: saved as UPC862591
-	#Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86259, container type: Cardboard and size: 2 and packaging type: Package Type
-	##And I Select a package type from the drop down list
-	#And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto2 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86259)
@@ -108,8 +97,6 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86260
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Crayon product and take to completed using Test Case 86458 and save as: TestCase86260
-	#Given I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: SHAQAAuto2 and save as: TestCase86260
 	Given I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: SHAQAAuto2 and save as: TestCase86260
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship

@@ -141,7 +141,6 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 @test75321
 @ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto6 and save as: TestCase75321
 	Given I navigate to the landing page
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

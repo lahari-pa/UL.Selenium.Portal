@@ -32,9 +32,7 @@ Background:
 @ScenarioId:1477
 Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86462
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Crayon product and take to completed using Test Case 86455 and save as: TestCase86462
-	#Given I create a Crayon product and take to completed using Test Case 86455 using SHA account: SHAQAAuto8 and save as: TestCase86462
+	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
 	Given I create a Crayon product and force it to completed using Test Case 86455 using SHA account: SHAQAAuto8 and save as: TestCase86462
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -56,9 +54,7 @@ Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT CT - Package type not required
 	Given I generate a random UPC number and save as: UPC86463
 	Given I generate a random UPC number and save as: UPC864631
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	#Given I create a Chalk product and take to completed using Test Case 86115 and save as: TestCase86463
-	#Given I create a Chalk product and take to completed using Test Case 86115 using SHA Acc: SHAQAAuto8 and save as: TestCase86463
+	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
 	Given I create a Chalk product and Force it to completed using Test Case 86115 using SHA Acc: SHAQAAuto8 and save as: TestCase86463
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -67,9 +63,6 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
 	Then I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: saved as UPC864631
-	#Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86463, container type: Cardboard and size: 2 and packaging type: Package Type
-	#And I Select a package type from the drop down list
-	#And I click Save in The Product Page
 	Given In the Data Acceptance page I click on the Accept button
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto8 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86463)
@@ -81,8 +74,6 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canadian Tire  - Package type required
 	Given I generate a random UPC number and save as: UPC86264
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-	#Given I create a Chalk product and take to completed using Test Case 86419 and save as: TestCase86264
-	#Given I create a Chalk product and take to completed using Test Case 86419 using Sha Account: SHAQAAuto8 and save as: TestCase86264
 	Given I create a Chalk product and force it to completed using Test Case 86419 using Sha Account: SHAQAAuto8 and save as: TestCase86264
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
@@ -104,7 +95,6 @@ Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canad
 Scenario: [86261] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86261
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-	#Given I create a Crayon product and take to completed using Test Case 86116 and save as: TestCase86261 with upc: UPC86261
 	Given I create a Crayon product and Force it to completed using Test Case 86116 using SHA Account: SHAQAAuto8 and save as: TestCase86261 with upc: UPC86261
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging

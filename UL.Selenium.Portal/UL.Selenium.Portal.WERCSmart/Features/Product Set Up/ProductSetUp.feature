@@ -129,13 +129,10 @@ Scenario: [75410] Product from Completed status to Recertification
 
 @ScenarioId:6186
 Scenario: [84507] Recertification > Process recertification > Process multiple products
-	#Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 	Given I create a product with name: 8450712 and force it to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
-	#Given I create a product with name: 8450711 and take to completed using Test Case 75335 and save as: TestCase845071
 	Given I create a product with name: 8450711 and force it to completed using Test Case 75335 and save as: TestCase845071
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845071
-	#Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
 	Given I create a product with name: 8450713 and Force it to completed using Test Case 84109 and save as: TestCase845073
 	Given I take a product from completed to recertification using Test Case 84511 saved: TestCase845073
 	#Scenario: Test

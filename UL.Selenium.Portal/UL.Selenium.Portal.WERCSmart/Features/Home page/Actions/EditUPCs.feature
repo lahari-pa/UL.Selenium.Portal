@@ -41,7 +41,6 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 
 @ScenarioId:438
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
-	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64528
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -63,9 +62,7 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 
 @ScenarioId:439
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
-	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64529
-
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64529
@@ -96,12 +93,9 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 
 @ScenarioId:440
 Scenario: [64530] Process UPC Update
-	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64530
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64530
-
 	Given I generate a random UPC number and save as: UPC64530
 	Given I navigate to the landing page
-	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
@@ -120,18 +114,13 @@ Scenario: [64530] Process UPC Update
 	And the Purchase Summary should load
 	And I navigate to the home page
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
-
 	Given In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64530 and its status is: Recertification
-	#Given In the SHA Manager Grid I run a search for product saved as: ProductSetup64530 and its status is: Recertification
-
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: ProductSetup64530
 	And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
 @ScenarioId:441
 Scenario: [64531] Remove UPC Update - Cancel
-	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64531
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -170,9 +159,7 @@ Scenario: [64531] Remove UPC Update - Cancel
 
 @ScenarioId:442
 Scenario: [64532] Remove UPC Update - Remove
-	#Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64532
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64532
-
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64532
