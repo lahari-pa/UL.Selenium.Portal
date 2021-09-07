@@ -169,8 +169,8 @@
     <Reference Include="UL.Automation.Reporting, Version=2.3.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.2.3.18\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Selenium, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Selenium.Selenium-v3.3.0.2\lib\net461\UL.Automation.Selenium.dll</HintPath>
+    <Reference Include="UL.Automation.Selenium, Version=3.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Selenium.Selenium-v3.3.0.12\lib\net461\UL.Automation.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.SpecFlow, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.SpecFlow.2.3.13\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
