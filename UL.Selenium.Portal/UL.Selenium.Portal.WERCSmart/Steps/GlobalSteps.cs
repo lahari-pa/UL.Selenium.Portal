@@ -2488,6 +2488,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		//The below is a studio tab switching step
 		[StepDefinition(@"I switch to the '(.*)' tab")]
 		public void WhenISwitchToTheTab(string tabName)
 		{
