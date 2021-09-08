@@ -152,6 +152,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
+@ScenarioId:11181
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -161,7 +162,7 @@ Scenario: [63684] Walmart Private label product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
 	Then I save the product information as: TestCase63684
-Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+    Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | Yes                    | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
@@ -194,8 +195,9 @@ Scenario: [96705] Light Bulbs - No Walmart
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 	Then I save the product information as: TestCase96705
 	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)	
-	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+    Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+    Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then In the 'Select retailers' window I should not see the following retailers:
 		| Retailer            |
 		| Wal-Mart/SAM'S CLUB |

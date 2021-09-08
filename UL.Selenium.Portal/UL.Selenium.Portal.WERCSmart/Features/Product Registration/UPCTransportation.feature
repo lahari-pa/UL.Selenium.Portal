@@ -52,6 +52,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	Given I click continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
@@ -83,14 +84,13 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
-	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
+
 	Given I should see the International Air Transport (IATA) Classification Page
-    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+    And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
@@ -789,11 +789,6 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Universal Product Code (UPC)
 	Given I ensure that DOT is listed as Shipping fully regulated
 	Given I ensure that I cannot select DOT at Shipping with limited quantity
-
-	#Philip - Change
-	#Given I ensure that I cannot select DOT at Shipping with consumer commodity
-	#
-
 
 
 	

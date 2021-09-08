@@ -25,7 +25,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71985
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	And I set the Secondary Physical State option to: Pellets
+	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
 	##Product Characteristics
@@ -67,7 +67,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71987
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	And I set the Secondary Physical State option to: Pellets
+	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
@@ -104,6 +104,8 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given for ingredient: Butane I set Public Disclosure checkbox to checked: false
 	Then for ingredient: Butane the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
+	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
@@ -159,8 +161,8 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 		| Water         | 100     | true                | false       |            |
 	Then for ingredient: Water the Trade Secret field is disabled
 	Then in the Ingredients page I click Continue
-	Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
-	Then for ingredient: Butane I select Public Name: Butane
+	Then for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	Then for ingredient: Water I select Public Name: Water
 	Then in the Ingredients page I click Continue
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
@@ -211,10 +213,10 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71291
-	And I set the Secondary Physical State option to: Pellets
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Wood dust     | 75.0    | false               | false       |            |
@@ -668,7 +670,7 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
-	| 106-97-8   | Butane                 | Active          |
+	| 106-97-8   | Butane                 | Inert           |
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
@@ -699,12 +701,10 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-
-
 And I see the following sections
 | Section                                                              |
 | Which best describes your product, including when FIFRA 25(b) Exempt |
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
+Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No

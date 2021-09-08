@@ -25,16 +25,15 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Given I see the following sections
 		| Section                               |
 		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	Given I should see a total of 4 radio buttons for the section: Which best describes your product, including when FIFRA 25(b) Exempt
+	Given I should see a total of 3 radio buttons for the section: Which best describes your product, including when FIFRA 25(b) Exempt
 	Then I should see the following radio buttons:
-		| Button                                                                                                                                       |
-		| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                                           |
-		| Claims to sterilize, disinfect, sanitize or otherwise rid of bacteria, viruses or microorganisms that are infectious or pathogenic to humans. |
-		| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth                      |
-		| Product is not considered a pesticide product                                                                                                |
+		| Button                                                                                                                                                                               |
+		| Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)                        |
+		| Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)                                   |
+		| Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
 	And in the New Product page I click Continue
 	Then I should see an error message: This is a required field.
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)
+	And I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 	Then Which best describes your product, including when FIFRA 25(b) Exempt should not be showing the error messages: This is a required field.
 	And in the New Product page I click Continue
 	Then Which best describes your product, including when FIFRA 25(b) Exempt should not be showing the error messages: This is a required field.
@@ -61,16 +60,16 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I should see the Pesticide Details - State Registration Details Page
 	Then I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2020-12-01 for the State: NY on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2020-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2020-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
@@ -630,7 +629,7 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	And I should see the Pesticide Details - State Registration Details Page
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
 	Then I click the page heading: Pesticide Details - U.S.
 	And I should see the Pesticide Details - U.S. Page
@@ -698,15 +697,15 @@ And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Conti
 Then I should see the Pesticide Details - Canada Page
 Then I check the options in the dropdown menus for the following sections
 | Section                    | Options                                                                                                                                                                                                                       |
-| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
+| Alberta                    | None,1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
 | British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
 | Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
 | New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
 | New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
 | Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
 | Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
-| Prince Edward Island       | Banned,Controlled Purchase,Exempt: Schedule 2,Exempt: Schedule 7,Non-Domestic,None,Self-Select: Schedule 8                                                                                                                    |
+| Prince Edward Island       | None,Banned,Controlled Purchase,Exempt: Schedule 7,Exempt: Schedule 2,Non-Domestic,Self-Select: Schedule 8                                                                                                                    |
 | Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
 | Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
 | Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-| Yukon Territory            | None,Commercial,Domestic,Restricted,Use Permit                                                                                                                                                                                |       
+| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                               |       

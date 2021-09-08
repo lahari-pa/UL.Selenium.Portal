@@ -21,7 +21,7 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then I save the product information as: TestCase65512
 
 	#Andrew - 65511 should be swapped for 159304
-	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
@@ -86,7 +86,7 @@ Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Bat
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65516	
-	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
@@ -150,7 +150,7 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65520	
-	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: Installed in the product
@@ -214,7 +214,7 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65523	
-	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product

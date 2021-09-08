@@ -83,7 +83,7 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
 	Given I add the following batteries:
 		| Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
-		| Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+		| Lithium Ion      | <any>        | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)

@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @wercsmart
 @run_ActionsEditUPCs
 @Login
@@ -24,6 +24,7 @@
 Feature: EditUPCs
 
 @tfs_design
+@ScenarioId:11200
 Scenario: [56220] My Products grid Actions - Edit UPCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load

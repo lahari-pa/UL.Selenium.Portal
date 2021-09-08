@@ -61,7 +61,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I generate a random UPC number and save as: UPC60018
 	Given I delete all products with UPC Number: saved as UPC60018
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Ion Batteries
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Ion Battery
 	Then I save the product information as: TestCase60018
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
@@ -90,7 +90,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Batteries
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
 
 @ScenarioId:699
@@ -202,6 +202,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 @tfs_design
 # Test case can be found at the following path:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 17 - Lith bat
+@ScenarioId:11164
 Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	Given I generate a random UPC number and save as: UPC103572
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
