@@ -102,6 +102,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Packing Group field to: None
 	Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#KitProdCreation
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
