@@ -41,7 +41,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| 66                         | 61                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Decomposes                                   | 52               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page

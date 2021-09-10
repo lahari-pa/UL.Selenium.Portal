@@ -559,9 +559,9 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
-	Given I add the following batteries:
-	 | Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
-	 | Lithium Ion      | <any>        | 4                               | 4                                  | lithiumbattery |
+		Given I add the following batteries:
+	 | Battery Type    | Manufacturer                                                  | Number of batteries per package | How many batteries required to run | Saved As       |
+	 | Lithium Primary | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I set 'Product has had TCLP; Report is available' to: No
 	And I set the Lead option to: No
