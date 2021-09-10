@@ -28,8 +28,10 @@ Background:
 @ScenarioId:6005
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
+	#KitProdCreation
 	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
 	Given I navigate to the landing page
+	#KitProdCreation
 	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
 
 	Given I navigate to the landing page
@@ -63,9 +65,11 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 @ScenarioId:5943
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
+	#KitProdCreation
 	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
 
 	Given I navigate to the landing page
+	#KitProdCreation
 	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
 
 	Given I navigate to the landing page
