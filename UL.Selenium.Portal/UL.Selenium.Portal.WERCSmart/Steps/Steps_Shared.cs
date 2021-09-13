@@ -2411,31 +2411,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-			////Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 
-			//if (popupCausing.Contains(name))
-			//{
-
-			//	if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup"))
-			//	{
-			//		new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-			//		new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-			//		Report.StartStep("I should see the Waste Classification Data Page");
-			//		MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
-			//	}
-			//	else
-			//	{
-			//		Report.Failure("Popup not found");
-			//		Report.Screenshot();
-			//		return;
-			//	}
-
-			//}
-
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			if (popupCausing.Contains(name))
 			{
-				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+				{
+					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+					Report.StartStep("I should see the Waste Classification Data Page");
+					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				}
+				else
+				{
+					Report.Failure("Popup not found");
+					Report.Screenshot();
+					return;
+				}
+
+
+			}
+			else
+			{
+
+
 			}
 
 		}
@@ -3870,7 +3869,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
+		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();

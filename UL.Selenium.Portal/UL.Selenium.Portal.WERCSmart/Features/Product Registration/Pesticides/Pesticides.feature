@@ -697,7 +697,7 @@ And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Conti
 Then I should see the Pesticide Details - Canada Page
 Then I check the options in the dropdown menus for the following sections
 | Section                    | Options                                                                                                                                                                                                                       |
-| Alberta                    | None,1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
+| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
 | British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
 | Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
 | New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |

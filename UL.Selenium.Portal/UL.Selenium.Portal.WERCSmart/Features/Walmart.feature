@@ -196,7 +196,6 @@ Scenario: [96705] Light Bulbs - No Walmart
 	Then I save the product information as: TestCase96705
 	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-    Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
     Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then In the 'Select retailers' window I should not see the following retailers:
 		| Retailer            |
