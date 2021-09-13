@@ -545,7 +545,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 		| Select the applicable exemption |
 	And The following radio buttons should be displayed for section: Select the applicable exemption
 		| Button                                               |
-| Product is FIFRA 25(b) Exempt.                       |
+		| Product is FIFRA 25(b) Exempt.                       |
 		| Food Based Pesticides - Exempt from EPA Registration |
 		| Device based products - Exempt from EPA Registration |
 		| Pheromone Traps – Exempt from EPA Registration       |

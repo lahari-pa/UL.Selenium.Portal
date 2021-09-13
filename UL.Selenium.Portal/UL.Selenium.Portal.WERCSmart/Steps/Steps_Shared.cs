@@ -332,6 +332,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 					"Regulates Plant Growth");
+				
+				//bool expect;
+				//Context.AddToContext("FifraPopupExpected", expect);
+			}
+			else
+			{
+				//bool expect; ^Opposite to above?
+				//Context.AddToContext("FifraPopupExpected", expect);
 			}
 
 			Report.StartStep(
@@ -1849,10 +1857,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+				//"FifraPopupExpected"
 			}
 			else
 			{
 				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+				//"FifraPopupExpected"
+
 			}
 			Report.StartStep(
 				"For the section: Select countries the product may be sold in select: United States");
@@ -1889,10 +1900,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+				//"FifraPopupExpected"
+
 			}
 			else
 			{
 				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+				//"FifraPopupExpected"
+
 			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -1938,6 +1953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			//"FifraPopupExpected"
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2280,6 +2296,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			//"FifraPopupExpected"
+
 			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -3394,6 +3412,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			//"FifraPopupExpected"
+
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -3875,6 +3895,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is FIFRA 25(b) Exempt."));
 			myStepsNewProduct.SetTheSectionOptionTo("Select the applicable exemption",
 				"Product is FIFRA 25(b) Exempt.");
+			//"FifraPopupExpected"
+
 			Report.StartStep("In the Pesticide Details - U.S. page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
@@ -4359,6 +4381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			//"FifraPopupExpected"
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -4401,6 +4424,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			//"FifraPopupExpected"
+
 			Report.StartStep(
 				"I set the Does the product contain fertilizer (N, P, K) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -10958,6 +10983,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not considered a pesticide product");
+			//"FifraPopupExpected"
+
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -11099,10 +11126,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+				//"FifraPopupExpected"
+
 			}
 			else
 			{
 				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+				//"FifraPopupExpected"
+
 			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -11246,6 +11277,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			//"FifraPopupExpected"
+
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
@@ -11381,6 +11414,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep("I set the product description option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			//"FifraPopupExpected"
+
 			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
 			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
@@ -11709,6 +11744,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not considered a pesticide product");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not considered a pesticide product");
+			//"FifraPopupExpected"
+
 			Report.StartStep(
 				"I set the Select countries the product may be sold in field to: United States");
 			MyNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
