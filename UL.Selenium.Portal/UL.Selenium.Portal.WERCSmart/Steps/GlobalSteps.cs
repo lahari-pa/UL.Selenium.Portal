@@ -3470,6 +3470,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
+
+
+		}
+
+
+		[StepDefinition(@"I set the value 'FIFRAPopupExpected' to be: (.*)")]
+		public void ISetTagFIFRAPopupExpectedToBeX(bool expected)
+		{
+
+			bool FifraValue = expected;
+			Context.AddToContext("FIFRAPopupExpected", FifraValue);
+
+
 		}
 
 	}
