@@ -710,8 +710,7 @@ And I see the following sections
 | Section                                                              |
 | Which best describes your product, including when FIFRA 25(b) Exempt |
 Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
-#"FifraPopupExpected"
-
+Then I set the value 'FIFRAPopupExpected' to be: true
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No

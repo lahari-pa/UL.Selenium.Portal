@@ -332,14 +332,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 					"Regulates Plant Growth");
-				
-				//bool expect;
-				//Context.AddToContext("FifraPopupExpected", expect);
+
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
+
 			}
 			else
 			{
-				//bool expect; ^Opposite to above?
-				//Context.AddToContext("FifraPopupExpected", expect);
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
 			}
 
 			Report.StartStep(
@@ -1857,12 +1857,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
-				//"FifraPopupExpected"
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
 			}
 			else
 			{
 				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
-				//"FifraPopupExpected"
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);				
 
 			}
 			Report.StartStep(
