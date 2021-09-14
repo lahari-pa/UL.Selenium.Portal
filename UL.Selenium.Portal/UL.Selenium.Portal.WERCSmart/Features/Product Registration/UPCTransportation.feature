@@ -40,8 +40,8 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I save the product information as: TestCase122305
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 61                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Decomposes                                   | 52               |
+          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -49,10 +49,9 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
+	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	Given I click continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
@@ -79,11 +78,12 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 55                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
+	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
@@ -91,6 +91,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 
 	Given I should see the International Air Transport (IATA) Classification Page
     And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page

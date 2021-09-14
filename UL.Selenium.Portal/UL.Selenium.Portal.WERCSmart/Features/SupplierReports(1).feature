@@ -24,28 +24,23 @@ Scenario: [68420] List of Supplier Reports
 	Given I click the My Reports icon in the QuickLinks Pane
     And In the Supplier Reports screen the page title should be: My Reports
     Given under the supplier Reports menu I should see the following options
-		| Reports                                                            |
-		| Battery-Containing Products                                        |
-		| California Proposition 65 - Registrations Prior to August 30, 2018 |
-		| Kit Registration Details                                           |
-		| Kits Containing a Specific Registration                            |
-		| Pesticide Certificate Report                                       |
-		| Pesticide Report                                                   |
-		| Product Types Registered                                           |
-		| Registrations Revised - Not Yet Submitted                          |
-		| Registrations with Retailer Chemicals of Concern                   |
-		| Retailer Chemicals of Concern                                      |
-		| Subscription Renewal (Formulated, Enhanced, Articles)              |
-		| Subscription Renewal (Registrations Eligible for Deletion)         |
-		| Sustainability Survey Eligibility - Health & Beauty                |
-		| UPC and Retailer (All)                                             |
-		| UPC and Retailer (Product Specific)                                |
-		| UPC Error Details                                                  |
-		| UPCs (Active) for all Registrations                                |
-		| UPCs Duplicated within Account                                     |
-		| UPCs to Retailer via Item Sync                                     |
-		| VOC-related Registrations                                          |
-		| Waste Classification Summary for All Registrations                 |
+		| Reports                                |
+		| Battery-Containing Products            |
+		| California Proposition 65              |
+		| Chemicals of Concern                   |
+		| Eligible to Obsolete                   |
+		| Kit Registrations                      |
+		| Kits Containing a Registration         |
+		| Pesticide Registrations                |
+		| Product Types Registered               |
+		| Registration Updates Not Submitted     |
+		| Subscription Product Types             |
+		| UPC and Retailer (All)                 |
+		| UPC and Retailer (Single Registration) |
+		| UPC Duplication                        |
+		| UPC Errors for The Home Depot          |
+		| Volatile Organic Compounds             |
+		| Waste Classification Summary           |
 
 @tfs_design
 @Obsolete
@@ -87,7 +82,7 @@ Scenario: [68422] Battery-containing products report
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Battery-Containing Products
 	Then In the Supplier Reports screen the current sub-page should be: Battery-Containing Products
-	Then In the Supplier Reports screen the current page description should be: Battery-containing products with associated battery manufacturer information
+	Then In the Supplier Reports screen the current page description should be: For Battery-containing product registrations, the report includes details on the battery selected within the registration, including manufacturer of the battery.
 	Then I Delete the file with name: BatteryContaining Products.xlsx from the downloads folder
 	Then I Delete the file with name: Battery-Containing Products.xlsx from the downloads folder
 	Given In the Supplier Reports screen I click on the Download button	
@@ -366,12 +361,12 @@ Scenario: [73226] Pesticide Certificate Report
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: VOC-related Registrations
-	Then In the Supplier Reports screen the current sub-page should be: VOC-related Registrations
-	Given In the Supplier Reports screen the current page description should be: Products with VOCs
+	Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
+	Then In the Supplier Reports screen the current sub-page should be: Volatile Organic Compounds
+	Given In the Supplier Reports screen the current page description should be: Registrations within the Account that have VOC data. Report includes the VOC information and other data for each registration.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called VOCrelated Registrations.xlsx and save as 73229
+	Given I confirm that an excel file is produced called Volatile Organic Compounds.xlsx and save as 73229
 	Then I confirm that the excel file saved as: 73229 contains the following columns:
 		| Column       |
 		| Supplier     |
@@ -398,25 +393,6 @@ Scenario: [73229] Products with VOCs
 		| VA           |
 		| VT           |
 	And I delete the excel file saved as 73229
-
-@ScenarioId:983
-Scenario: [73227] Products and Recommended Use Report
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Product Types Registered
-	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: Products and Recommended Use Report
-	Given In the Supplier Reports screen I click on the Download button
-	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
-	Then I confirm that the excel file saved as: 73227 contains the following columns:
-		| Column         |
-		| Supplier       |
-		| RU Description |
-		| RU Category    |
-		| WPSID          |
-		| Product Name   |
-	And I delete the excel file saved as 73227
 
 @ScenarioId:985
 Scenario: [73230] UPC Report for Specific Product with Retailer
@@ -495,14 +471,14 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 #fails because of a bug 106613
 @ScenarioId:986
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+    Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
-	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65 - Registrations Prior to August 30, 2018
+	Given Under the Supplier Reports menu I choose: California Proposition 65
+	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65
 	And In the Supplier Report page I should see the report description should be showing with text: For items submitted prior to August 30, 2018. The report will list registrations that are active and not updated with the current Prop 65 data. Regulation was revised in mid-2018.
 	Given In the Supplier Reports screen I click on the Download button
-	Given I confirm that a file is downloaded with file name: California Proposition 65 - Registrations Prior to August 30, 2018.xlsx then close the Report Download popup. I save the file as excel76551
+	Given I confirm that a file is downloaded with file name: California Proposition 65.xlsx then close the Report Download popup. I save the file as excel76551
 	Then I confirm that the excel file saved as: excel76551 contains the following columns:
 		| Column                    |
 		| WERCSmart ID              |
