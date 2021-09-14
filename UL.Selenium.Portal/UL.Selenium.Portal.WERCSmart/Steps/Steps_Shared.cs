@@ -408,20 +408,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (fifraItemFound==true)
 			{
-				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+				bool fifraTag= (bool)Context.GetFromContext("FIFRAPopupExpected");
+				if (fifraTag == true)
 				{
-					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-					Delay.Seconds(10);
-					Report.Screenshot();
-					//Report.StartStep("I should see the Waste Classification Data Page");
-					//MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+					Report.Info($"The fifra tag was set a true, popup is expected");
+					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					{
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+						Delay.Seconds(10);
+						Report.Screenshot();
+						//Report.StartStep("I should see the Waste Classification Data Page");
+						//MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+					}
+					else
+					{
+						Report.Failure("Popup not found");
+						Report.Screenshot();
+						return;
+					}
 				}
 				else
 				{
-					Report.Failure("Popup not found");
-					Report.Screenshot();
-					return;
+					Report.Info($"The fifra tag was set a false, popup is not expected");
 				}
 
 
@@ -2490,18 +2499,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (popupCausing.Contains(name))
 			{
-				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+				bool fifraTag = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				if (fifraTag == true)
 				{
-					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-					Report.StartStep("I should see the Waste Classification Data Page");
-					MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+					Report.Info($"The fifra tag was set a true, popup is expected");
+
+
+					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					{
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+						Report.StartStep("I should see the Waste Classification Data Page");
+						MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+					}
+					else
+					{
+						Report.Failure("Popup not found");
+						Report.Screenshot();
+						return;
+					}
 				}
 				else
 				{
-					Report.Failure("Popup not found");
-					Report.Screenshot();
-					return;
+					Report.Info($"The fifra tag was set a false, popup is not expected");
 				}
 
 
