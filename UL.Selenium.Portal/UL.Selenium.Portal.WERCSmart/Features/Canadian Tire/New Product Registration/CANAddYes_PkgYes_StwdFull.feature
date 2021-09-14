@@ -92,7 +92,6 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
 @ScenarioId:1233
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
-	#Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 	Given I login into the WERCSmart Portal - Canada has all data account
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	#And I In the shared step below use Bubble solution as your product type

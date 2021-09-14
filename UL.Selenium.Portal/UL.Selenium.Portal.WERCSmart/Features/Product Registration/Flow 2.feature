@@ -335,7 +335,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	# JS 13/03 Additonal Documents To Provide steps were added to tfs test case
 	Then I should see the Additional Documents to Provide Page
 	# TFS test case change - added shared step
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))

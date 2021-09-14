@@ -14,6 +14,12 @@
 @UPC
 Feature: Pesticides
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
 @ScenarioId:655
 Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -96,7 +102,7 @@ Scenario: [62852] Pesticide - Product Label is required
 		| Provide Full Product Label (required) |
 	Given in the Additional Documents to Provide page I click Continue
 	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	# Click continue confirm no error
 	Given I click continue
 	Given I navigate to the home page
@@ -555,7 +561,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	Then I should see the Additional Documents to Provide Page
 	And I click continue
 	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	And I click continue
@@ -569,7 +575,7 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 	Given If purchase details are showing click confirm order
 	#And I Confirm the Purchase summary step is shown, depending on your subscription you will see either the success message or the product details and the Confirm order button.  If the product is shown click Confirm order
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto17 and Open SHA manager)
 	#And I Use the shared step below to search for your product - you may have to wait a few minutes for the product to show in submitted (the Zuora process)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase56502)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Submitted

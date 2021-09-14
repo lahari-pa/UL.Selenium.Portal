@@ -1125,12 +1125,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool InputUpcInformation(UpcInformation info)
 		{
+			Delay.Seconds(5);
+
 			try
 			{
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
+
+				if(container.IsNullOrEmpty())
+				{
+					Report.Info($"Container el was null");
+					return false;
+				}
+				if(textInputs.IsNullOrEmpty()||upcNumberField.IsNullOrEmpty()||ProductNameOnlabel.IsNullOrEmpty())
+				{
+					Report.Info($"One of the base els was null or empty...");
+					return false;
+				}
 
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
@@ -1149,8 +1162,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					}
 
 				}
+				Report.Info($"Going to enter upc number");
 
 				upcNumberField.EnterText(info.UpcNumber);
+
+				Report.Info($"entered upc number...");
 
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
@@ -1200,49 +1216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Failure("The UPC Name field was not present");
 				}
 				
-				//if (ProductNameOnlabel != null)
-				//{
-				//	if (ProductNameOnlabel.Text.IsNullOrEmpty())
-				//	{
-				//		ProductNameOnlabel.EnterText("UPCName PlaceHolder");
-				//		Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
-				//	}
-				//	else
-				//	{
-				//		Report.Info("The Field was not empty, Checking for UPCName in the table");
-				//		if (!info.UPCName.IsNullOrEmpty())
-				//		{
-				//			if (info.UPCName.ToLower().Contains("saved as"), 2)
-				//			{
-				//				try
-				//				{
-				//					string savedUPC = Context
-				//						.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-				//						.ToString();
-				//					info.UPCName = savedUPC;
-				//				}
-				//				catch (Exception e)
-				//				{
-				//					Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
-				//					throw;
-				//				}
-
-				//			}
-
-				//			upcNumberField.EnterText(info.UPCName);
-				//		}
-				//		else
-				//		{
-				//			Report.Info("UPC Name was not found in the table, leaving default UPC Name");
-				//		}
-
-				//	}
-				//}
-				//else
-				//{
-				//	Report.Failure("The UPC Name field was not present");
-				//}
-
+				
 
 				
 				if (info.ContainerType.ToLower() != "none")
@@ -2692,7 +2666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.IsTrue(UploadDialog.UploadFile(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
 			string viewPath = "//span[contains(text(),'" + section + "')]//..//span[@class='dz-uploaded-doc']//..//a";
-			IWebElement viewEl = this.containerElement.WaitUntilElementVisible(By.XPath(viewPath), 10);
+			IWebElement viewEl = this.containerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
 			return viewEl != null;
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)

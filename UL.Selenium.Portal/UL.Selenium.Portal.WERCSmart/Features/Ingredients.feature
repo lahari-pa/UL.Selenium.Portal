@@ -18,6 +18,11 @@
 Feature: Ingredients
 (Suite ID: 64740)
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:911
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -510,7 +515,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I close the window that opened
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto12 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)

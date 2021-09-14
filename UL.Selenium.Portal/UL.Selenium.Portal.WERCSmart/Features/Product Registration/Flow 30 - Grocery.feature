@@ -36,7 +36,7 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
     Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
-	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -93,7 +93,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
-	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -121,7 +121,7 @@ Scenario: [60722] Nut Butters - RU001455
 Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
-	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue

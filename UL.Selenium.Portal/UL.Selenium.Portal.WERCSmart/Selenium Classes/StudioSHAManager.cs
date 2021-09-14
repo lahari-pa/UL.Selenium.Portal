@@ -477,7 +477,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
-					Report.Info("Failed to find matching table cell for id: " + id);
+					Report.Failure("Failed to find matching table cell for id: " + id);
+					Report.Screenshot();
 				}
 			}
 			catch (Exception e)

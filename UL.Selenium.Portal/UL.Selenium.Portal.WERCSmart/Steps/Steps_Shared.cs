@@ -366,6 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
 			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -378,6 +379,73 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.Screenshot();
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+			List<string> allIngredientsNames = new List<string>();
+			ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+
+			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+			bool fifraItemFound = false;
+
+			foreach( var item in allIngredientsNames)
+			{
+				if(popupCausing.Contains(item))
+				{
+					Report.Info($"The component name: {item} was found fifra list");
+					fifraItemFound = true;
+				}
+			}
+			if (fifraItemFound==true)
+			{
+				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+				{
+					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+					Delay.Seconds(10);
+					Report.Screenshot();
+					//Report.StartStep("I should see the Waste Classification Data Page");
+					//MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+				}
+				else
+				{
+					Report.Failure("Popup not found");
+					Report.Screenshot();
+					return;
+				}
+
+
+			}
+			else
+			{
+				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+				Report.Screenshot();
+
+			}
+		}
+
+		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
+		public void GivenICallSharedStepEnterIngredientsCanandaOnly(Table ingredientsTable)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartStep("I should see the Ingredients Page");
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartStep("I should see the ingredients error message");
+			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
+			Report.StartStep("I add the following ingredients:");
+			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.Screenshot();	
+			
 		}
 
 		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
@@ -1411,13 +1479,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("Upload exemption letter");
 			MyNewProduct.UploadPDFFileSectionAndType("Exemption Letter",
-				"Transportation Exemption Letter or Special Permit", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Transportation Exemption Letter or Special Permit", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Upload special permit letter");
 			MyNewProduct.UploadPDFFileSectionAndType("Special Permit",
-				"Transportation Exemption Letter or Special Permit", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Transportation Exemption Letter or Special Permit", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Upload product label");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.Screenshot();
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
@@ -1865,11 +1933,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Information");
-			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");		
+
+
+			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2402,10 +2470,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
-			
+
 			if (popupCausing.Contains(name))
 			{
-				if(Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"),"Failed to find popup","Found popup"))
+				if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 				{
 					new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 					new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
@@ -2419,15 +2487,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				
+
 			}
 			else
 			{
-			
+				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+				Report.Screenshot();
+
+			}
 
 		}
 
-		}
+		
 
 
 		[StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
@@ -2492,6 +2563,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
+			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+
 			new NewProduct().UploadFileForSection(type, pdfFile);
 
 		}
@@ -2502,10 +2575,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(
-				@"I click the browse button for document: Flash Point Document and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for document: Flash Point Document and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Flash Point Document", docPath);
 			Report.StartStep(
-				@"I click the browse button for document: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for document: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", docPath);
 			Report.StartStep(@"in the Additional Documents to Provide page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
@@ -3107,9 +3180,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			Report.StartStep(
-				@"I click the browse button for label: Please upload a PDF of the product. in section: Product Photo and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for label: Please upload a PDF of the product. in section: Product Photo and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyNewProductSteps.UploadPDFFileSectionAndType("Please upload a PDF of the product.", "Product Photo",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -3192,14 +3265,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Additional Documents To Provide Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Additional Documents To Provide");
 			Report.StartStep(
-				@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyNewProductSteps.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("Product Label", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep(
-				@"I click the browse button for label: OSHA SDS and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyNewProductSteps.UploadPDFFile("OSHA SDS", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep(
-				@"I click the browse button for label: Executive Order from the CARB and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyNewProductSteps.UploadPDFFile("Executive Order from the CARB", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"I click the browse button for label: Executive Order from the CARB and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("Executive Order from the CARB", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Clicking continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -3318,9 +3391,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -3391,12 +3464,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(string.Format("I click the browse button for label: '{0} and upload PDF: '{1}'",
 				"Product Label",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf"));
-			MyStepsNewProduct.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf"));
+			MyStepsNewProduct.UploadPDFFile("Product Label", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep(string.Format("I click the browse button for label: '{0} and upload PDF: '{1}'",
 				"OSHA SDS",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf"));
-			MyStepsNewProduct.UploadPDFFile("OSHA SDS", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf"));
+			MyStepsNewProduct.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("in the Additional Documents to Provide page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -3834,7 +3907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR)\)")]
+		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -4196,12 +4269,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.CheckDisplayedSections("see", sections);
 			var buttons = new Table("Button");
 			buttons.AddRow(
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			buttons.AddRow(
-				"Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth");
-			buttons.AddRow("Product is not considered a pesticide product");
+				"Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)");
+			buttons.AddRow("Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			Report.StartStep(
-				"I confirm the radios showing in order are: Prevents, Destroys Repels Pests..', 'Regulates Plant Growth, Defoliates..', 'Product is not considered a pesticide product'");
+				"I confirm the radios showing in order are: Product is intended for preventing, destroying...', 'Product is intended for use as a plant regulator...', 'Product is not a pesticide...'");
 			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which best describes your product, including when FIFRA 25(b) Exempt", buttons);
 		}
 
@@ -4745,7 +4818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -5035,6 +5108,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenICallSharedStep59066GoToSHAManager();
 		}
 
+		[StepDefinition(@"I call Shared Step 65080b \(Login to Studio as user saved as: (.*) and Open SHA manager\)")]
+		public void GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartStep("I navigate to Studio");
+			myStepsSha.GivenINavigateToStudio();
+			Report.StartStep("I log in to studio as administrator");
+			myStepsSha.GivenILoginToStudioAsTReVorUser(savedAs);
+			this.GivenICallSharedStep59066GoToSHAManager();
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
@@ -5163,7 +5248,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Running a search: " + count);
 				myStudioShaManager.ClickBottomMenuOption("search");
-				myProductSearch.Wait_for_load(5);
+				myProductSearch.Wait_for_load(20);
+				Report.Screenshot();
 				Report.Info("Clicking find");
 				if (!myProductSearch.ClickButton("Find"))
 				{
@@ -5171,6 +5257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Delay.Seconds(5);
+				Report.Screenshot();
 				GeneralUtilities.StudioWaitForSpinner();
 				if (myStudioShaManager.WaitForProductList(30))
 				{
@@ -5225,6 +5312,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
 
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+
 			if (Context.Contains("ElectronicProduct"))
 			{
 				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
@@ -5246,8 +5336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			if (!thisPowerDesignerPlus.Wait_for_load(120))
 			{
-				var thisStudioPowerDesignerPlusDesignMode =
-					new StudioPowerDesignerPlusDesignMode();
+				
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
 				Delay.Seconds(3);
@@ -5278,10 +5367,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(3);
+			thisPowerDesignerPlus.Wait_for_load(60);
+
+			//HERE ADD EDITMODE
+
+			Report.Info("In power tools workspace I set edit to true");
+			
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.Info($"spinner wait...");
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner(120);
+			Report.Info($"spinner wait end.");
+			Report.Screenshot();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+
+
+			//End Editmode
+
+
 			Report.Info("Now going to click the sections side tab if its not open");
 			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStudioPowerDesignerPlus.Wait_for_load(60);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
@@ -5306,9 +5422,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
-				"Volatile Organic Compounds", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -5511,7 +5627,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+
+
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -5527,7 +5648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I close the Apply Rules pop up");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 			Delay.Seconds(3);
-			if (new ApplyRulesPage().Wait_for_load(1))
+			if (new ApplyRulesPage().Wait_for_load(20))
 			{
 				Delay.Seconds(3);
 				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
@@ -5543,6 +5664,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+
 			Report.StartStep("I click the filter icon");
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -5610,7 +5732,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
 			Delay.Seconds(4);
 			//Report.Screenshot();
+			Report.Info($"waiting for spinner...");
 			GeneralUtilities.StudioWaitForSpinner(60);
+			Report.Info($"fFinished waiting for spinner...");
 			Report.StartStep(
 				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
 			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
@@ -5754,6 +5878,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			thisProcessProducts.SelectNewStatus("Accepted");
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
+		}
+
+		[StepDefinition(@"I call Shared Step \(SHA - Assgined Product - set Retailers to Completed for saved as: (.*)\) for")]
+		public void GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(string savedAs, Table retailers)
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			var thisProcessProducts = new ProcessProducts();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisProcessProducts.SelectNewStatus("Assigned");
 			thisStepsStudio.InSHAManagerISelectProductById(id);
 			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
@@ -5989,7 +6130,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(3);
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -6824,7 +6967,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	And I Click Apply
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -7387,7 +7532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		
 			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
 			{
@@ -7412,13 +7557,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenFieldExists("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.");
 			MyNewProduct.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.", "I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a PDF document into the UN38.3 Testing Results field.");
-			MyNewProduct.UploadPDFFile("Upload UN38.3 Test Document (Required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Upload UN38.3 Test Document (Required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
 			{
 				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
@@ -7555,6 +7700,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			Report.StartStep("I close the current document pop up");
 			thisStepsStudio.GivenICloseCurrentDocument();
+
+			//ApplyRules
 			Report.StartStep("I select the Apply Rules icon from the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
 			Report.StartStep("I select the Single rule radio button");
@@ -7565,9 +7712,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			//Processing Rule For Change
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(2);
+			Report.Screenshot();
+			Report.Info($"hard wait, 25 seconds...");
+			Delay.Seconds(25);
+			Report.Screenshot();
+			var thisSelectRulesPage = new SelectRulesPage();
+			Report.Info($"Checking to see if rules page is open...");
+			if(thisSelectRulesPage.Wait_for_loadLatestVersion(30)==false)
+			{
+				Report.Info($"Rules page not open, looping apply button click");
+				thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+				Delay.Seconds(2);
+				Report.Screenshot();
+				Report.Info($"hard wait, 25 seconds...");
+				Delay.Seconds(25);
+				Report.Screenshot();
+				Report.Info($"Checking to see if rules page is open...");
+				if (thisSelectRulesPage.Wait_for_loadLatestVersion(30) == false)
+				{
+					Report.Info($"Rules page not open, looping apply button click");
+					thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+					Delay.Seconds(2);
+					Report.Screenshot();
+					Report.Info($"hard wait, 25 seconds...");
+					Delay.Seconds(25);
+					Report.Screenshot();
+				}
+			}
+
+
+
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			//And I Check that the Product group radio button is selected
@@ -7582,13 +7763,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 3; i++)
 			{
 				var thisApplyRulesPage = new ApplyRulesPage();
-				if (thisApplyRulesPage.Wait_for_load(1))
+				if (thisApplyRulesPage.Wait_for_load(10))
 				{
+					Report.Info($"The wait for load was true");
+					Report.Screenshot();
+					Report.Info($"Attempting to click button: Close");
 					thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 					Delay.Seconds(3);
+					Report.Info($"waited 3 seconds...");
+					Report.Screenshot();
 				}
 				else
 				{
+					Report.Info($"The wait for load was false, the apply rules page is already closed?");
+					Report.Screenshot();
 					closedApplyRules = true;
 					break;
 				}
@@ -7599,6 +7787,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Failed to close apply rules popup");
 			}
 
+			Report.Info($"End of apply rules code.");
+			Report.Screenshot();
+
+
+			//Document queue
 			Report.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			Report.StartStep("I click the filter icon");
@@ -7669,6 +7862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
 			Delay.Seconds(3);
+			Report.Screenshot();
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
 			Delay.Seconds(3);
 			Report.Screenshot();
@@ -8433,7 +8627,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
 			{
 				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
@@ -8565,7 +8759,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 
 			Report.StartStep("In the rule name filter box I enter the studio user name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
@@ -10511,6 +10707,210 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+
+		[StepDefinition(@"I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing using SHA Account: (.*) and save as: (.*)")]
+		public void ICallSharedStep80821_CreateA3rdPartyProductusingSHAAcc(string savedAs,string shaAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			var stepsProdGrid = new StepsProductGrid();
+			var stepsNewProd = new StepsNewProduct();
+			var stepsIngredients = new StepsIngredients();
+			var stepsSHA = new Steps_SHA();
+			var stepsStudio = new Steps_Studio();
+
+			Report.StartStep("I generate a random UPC number and save as: UPC80821");
+			stepsProdGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC80821");
+
+			Report.StartStep("I log into WercSmart - Products Automation Account");
+			this.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+
+			Report.StartStep("Create a New Registration via Register New Product (expanded menu)");
+			this.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+
+			Report.StartStep("The Product - Enter Product Name and select Type of Product");
+			this.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Raw material");
+
+			Report.StartStep("I save the product information as");
+			stepsNewProd.SaveProductInformation(savedAs);
+
+			var ing1 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing1.AddRow("100-41-4", "Ethylbenzene", "25", "Yes", "Undisclosed Ingredient");
+			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808211", ing1);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
+
+			var ing2 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed");
+			ing2.AddRow("37334-84-2", "Cellolyn 21", "15", "No");
+			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808212", ing2);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing3 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing3.AddRow("RR-38384-6", "FRAGRANCE-HERBAL", "10");
+			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808213", ing3);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing4 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing4.AddRow("RR-38213-8", "FRAGRANCE-BANANA", "10");
+			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808214", ing4);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+
+			var ing5 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed");
+			ing5.AddRow("FLAVOR", "611 Grape Flavor", "10", "No");
+			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808215", ing5);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+
+			var ing6 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing6.AddRow("NA519", "Black Cherry - Natural Flavor", "10", "Yes", "Undisclosed Ingredient");
+			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808216", ing6);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing7 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing7.AddRow("FRAGRANCE", "Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2", "10");
+			Report.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808217", ing7);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing8 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing8.AddRow("7732-18-5", "Water", "10", "Yes", "Undisclosed Ingredient");
+			Report.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808218", ing8);
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			Report.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			Report.StartStep("In the Ingredients page I click continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			Report.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
+			this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+
+			Report.StartStep("Enter Regulatory Information - Not Prop 65");
+			this.GivenICallSharedEnterRegulatoryInformation_NotProp();
+
+			Report.StartStep("Regulatory Information 2 - Microbeads - No");
+			this.SharedRegulatoryInformation2_Microbeads_No();
+
+			Report.StartStep("I should see the Additional Documents to Provide Page");
+			stepsNewProd.GivenIShouldSeeXPage("Additional Documents to Provide");
+
+			Report.StartStep("(Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+			this.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)", "C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+
+			Report.StartStep("(Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+			this.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)", "C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+
+			Report.StartStep("in the Additional Documents to Provide page I click Continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+
+			Report.StartStep("in the Product Aliases page I click Continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
+
+			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			this.GivenICallSharedCommentsHappyPath("test");
+
+			Report.StartStep("Confirm Restrict Use - Restrict");
+			this.SharedConfirmRestrictUse_Restrict();
+
+			Report.StartStep("(Go to Summary and verify data) with product type: Raw material");
+			this.SharedGoToSummaryAndVerifyData("Raw material");
+
+			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
+			this.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+
+			Report.StartStep("If purchase details are showing click confirm order");
+			stepsNewProd.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			Report.StartStep("Login to Studio and Open SHA manager");
+			this.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
+
+			Report.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Submitted");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Submitted");
+
+			Report.StartStep("SHA Manager - Submitted - Select product > process product data for product saved as: " + savedAs);
+			this.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+
+			Report.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Assigned");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Assigned");
+
+			Report.StartStep("WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: " + savedAs);
+			this.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			Report.StartStep("WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: " + savedAs);
+			this.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+
+			Report.StartStep("In Power Designer I left click on section: [SECT0077] Walmart Transportation Information");
+			stepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
+
+			Report.StartStep("In Power Designer I double click on category: Water Soluble?");
+			stepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Water Soluble?");
+
+			Report.StartStep("In Power Designer the phrase selector screen should open");
+			stepsStudio.ThenInPowerDesignerThePhraseSelectorScreenShouldOpen();
+
+			var table = new Table("Text");
+			table.AddRow("Y");
+			Report.StartStep("In the phrase selector screen I select phrases");
+			stepsStudio.ThenInThePhraseSelectorScreenISelectPhrases(table);
+
+			Report.StartStep("In the phrase selector screen I click button: Save");
+			stepsStudio.ThenInThePhraseSelectorScreenIClickButton("Save");
+
+			var table2 = new Table("Component CAS", "Component ID", "Chemical Name");
+			table2.AddRow("saved as " + savedAs, "MIXTURE", "AAA WERCS Test Raw Material");
+			Report.StartStep("WPS Studio - PD+ - Create Component for 3rd party product");
+			this.GivenICallSharedStep79501WPSStudio_PD_CreateComponentForRdPartyProduct(table2);
+
+			Report.StartStep("I click on home to navigate back to editing specific product saved as " + savedAs);
+			stepsStudio.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
+
+			Report.StartStep("WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only for product saved as: " + savedAs);
+			this.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+
+			Report.StartStep("Go to SHA Manager");
+			this.GivenICallSharedStep59066GoToSHAManager();
+
+			Report.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Completed");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Completed");
+
+		}
+
+
 		[StepDefinition(@"I call Shared Step 118064 \(Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue()
 		{
@@ -10894,13 +11294,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the WHMIS SDS question");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
-			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			DateTime currentDate = DateTime.Today;
 			string currentDateString = currentDate.ToString("yyyy-MM-dd");
 			MyNewProduct.InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(currentDateString);
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -10962,7 +11362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.StartStep("Upload Product Label");
-			MyNewProduct.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.Screenshot();
 			MyNewProduct.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
 			MyNewProduct.ThenFieldExists("Toxicity Characteristic Leaching Procedure (TCLP)");
@@ -11524,9 +11924,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			Report.StartStep(
-					@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+					@"I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Product Photo",
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+				@"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -11910,7 +12310,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Delay.Seconds(3);
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();

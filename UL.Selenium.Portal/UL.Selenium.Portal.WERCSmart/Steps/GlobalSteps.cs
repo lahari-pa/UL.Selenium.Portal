@@ -27,6 +27,7 @@ using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -277,9 +278,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.WaitForContainerToBeVisible(8))
+			if (!selLandingPage.WaitForContainerToBeVisible(120))
 			{
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 8) != null)
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 120) != null)
 				{
 					throw new Exception("HTTP Server error 503 was thrown!");
 				}
@@ -2487,5 +2488,991 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		//The below is a studio tab switching step
+		[StepDefinition(@"I switch to the '(.*)' tab")]
+		public void WhenISwitchToTheTab(string tabName)
+		{
+			GeneralUtilities.SwitchToDefaultContent();
+			Delay.Seconds(Delay.SpeedFactor * 1);
+			StudioNavBar SNB = new StudioNavBar();
+			bool success = SNB.GetTabNum(tabName, out int index);
+			if (success)
+			{
+				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
+				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
+			}
+			else
+			{
+				Report.Failure($"There was no such Tab named {tabName}");
+			}
+		}
+
+		[StepDefinition(@"the Security Manager page should load")]
+		public void ThenTheSecurityManagerPageShouldLoad()
+		{
+			SecurityManager sm = new SecurityManager();
+			Delay.Seconds(1);
+			Report.IsTrue(sm.WaitForContainerToBeVisible(), "Failed, could not find the Security Manager page.", "Successfully found the Security Manager page.", true);
+		}
+
+		[StepDefinition(@"the Rule Writer page should load")]
+		public void ThenTheRuleWriterPageShouldLoad()
+		{
+			RuleWriter rw = new RuleWriter();
+			Delay.Seconds(1);
+			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
+			
+			
+		}
+
+		[StepDefinition(@"the Material Management Dashboard page should load")]
+		public void ThenTheDashboardPageShouldLoad()
+		{
+			DashboardPage dashboardPage = new DashboardPage();
+
+			int i = 0;
+			while (dashboardPage.ContainerElement == null && i < 20)
+			{
+				dashboardPage = new DashboardPage();
+				i++;
+				Delay.Seconds(1);
+			}
+			Report.IsTrue(dashboardPage.WaitForContainerToBeVisible(timeout: 30), "Failed to find the Dashboard page", "Successfully found the Dashboard page.", true);
+		}
+
+		[StepDefinition(@"the '(.*)' window (should|should not) load")]
+		public void ThenTheWindowShouldLoad(string windowName, string shouldOrShouldNot)
+		{
+			windowName = GeneralUtilities.ReplaceWithContext(windowName);
+			if (shouldOrShouldNot == "should")
+			{
+				Report.IsTrue(StudioUtilites.SwitchToWindow(windowName), "Failed to switch Windows", "Successfully switched windows", throwException: true);
+				Report.IsTrue(StudioUtilites.SwitchToWindow("UL Wercs Studio", false), "Failed to switch Windows", "Successfully switched windows");
+			}
+			else
+			{
+				Report.IsFalse(StudioUtilites.SwitchToWindow(windowName), "Failed, the window did exist.", "Successfully could not switch windows", throwException: true);
+				Report.IsTrue(StudioUtilites.SwitchToWindow("UL Wercs Studio", false), "Failed to switch Windows", "Successfully switched windows");
+			}
+		}
+
+		[StepDefinition(@"I switch to the '(.*)' window")]
+		public void GivenISwitchToTheWindow(string windowName)
+		{
+			windowName = GeneralUtilities.ReplaceWithContext(windowName);
+			Report.IsTrue(StudioUtilites.SwitchToWindow(windowName), "Failed to switch Windows", "Successfully switched windows", true);
+		}
+
+
+		[StepDefinition(@"I close the '(.*)' window")]
+		public void ThenCloseTheSpecifiedWindow(string windowName)
+		{
+			try
+			{
+				string mainWindowHandle = (string)Context.GetFromContext("BaseWindow");
+				if (mainWindowHandle == null)
+				{
+					throw new Exception("No Main Window Handle found in context!");
+				}
+				windowName = GeneralUtilities.ReplaceWithContext(windowName);
+				bool found = StudioUtilites.SwitchToWindow(windowName);
+				Report.IsTrue(found, "Failed to switch Windows", "Successfully switched windows");
+				if (found)
+				{
+					Report.Info("Attempting to close the current window");
+					WebDriver.CurrentDriver.Close();
+					Report.Info("Current window closed, switching to the BaseWindow");
+					WebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
+					Report.Success("Browser window switched successfully!");
+					Report.Screenshot();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
+		public void WhenIVerifyTheFollowingUsersExist(string savedAs, Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			bool found = Context.FeatureContext.TryGetValue("TryGetUsers", out var result);
+			bool TestFinished = result != null && (bool)result == false;
+			if (!found || TestFinished)
+			{
+				if (!Context.FeatureContext.ContainsKey("TryGetUsers"))
+				{
+					Context.FeatureContext.Add("TryGetUsers", false);
+				}
+				else
+				{
+					Context.FeatureContext["TryGetUsers"] = false;
+				}
+				//Attempt to log in as each user in the table, and if they cant log in create them.
+				List<TableRow> usersToCreate = new List<TableRow>();
+				var header = new Steps_Header();
+				var LS = new LoginScreen();
+				var S_SM = new Steps_SecurityManager();
+				var S_RW = new Steps_RuleWriter();
+				foreach (var iuser in table.Rows)
+				{
+					var user = iuser["username"];
+
+					TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
+					bool credentialsFound = trevuser != null;
+
+					//navigate to SHA
+					ReportSettings.UseSubSteps = true;
+					var myStepsSha = new Steps_SHA();
+					Report.StartStep("I navigate to Studio");
+					myStepsSha.GivenINavigateToStudio();
+
+					if (credentialsFound)
+					{
+						Report.StartSubStep($"Given I attempt to login as stored user {user}");
+
+						Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
+
+						if (LS.DispayErrorMessage("Invalid login"))
+						{
+							Report.Info($"Need to create user: {user}");
+							usersToCreate.Add(iuser);
+						}
+						else
+						{
+							Report.Info("Checking for processing rule...");
+
+							this.ICheckForSHARuleForAccount(user);
+
+							Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+
+							header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+						}
+					}
+					else
+					{
+						Report.Error($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
+						Report.EndScenario();
+						return;
+					}
+				}
+				if (usersToCreate.Count > 0)
+				{
+					Report.StartSubStep($"Attempt to log in as {savedAs}");
+					//bool success = TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var credentials);
+
+					TReVorTestUsers trevuser2 = TestUsers.GetUserSavedAs(savedAs);
+					bool success = trevuser2 != null;
+
+					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(savedAs), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
+					{
+						
+
+
+						Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
+						header.WhenIClickToOpenTheMenuAndSelect("Management", "Security Manager");
+
+						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
+						this.WhenISwitchToTheTab("Security Manager");
+
+						Report.StartSubStep("Then the Security Manager page should load");
+						this.ThenTheSecurityManagerPageShouldLoad();
+
+						Report.StartSubStep("When In Security Manager, I click the 'Users and roles' button");
+						S_SM.WhenInSecurityManagerIClickTheButton("Users and roles");
+
+						Report.StartSubStep("Then the 'Users and Roles' window should load");
+						this.ThenTheWindowShouldLoad("Users and Roles", "should");
+
+						foreach (var iuser in usersToCreate)
+						{
+							var user = iuser["username"];
+
+							Report.StartSubStep($"Given I switch to the 'Users and Roles' window");
+							this.GivenISwitchToTheWindow("Users and Roles");
+
+
+							Report.StartSubStep($"When Under 'User Name' I search for the username stored in '{user}'");
+							S_SM.WhenISearchForTheUserNameForTheStoredUserSCREENSECURITY("User Name", user);
+
+							Report.StartSubStep($"Then Under 'User Name' I double click the username stored in '{user}'");
+							SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
+
+							TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
+							bool credentialsFound = trevuser != null;
+
+							if (credentialsFound)
+							{
+								if (SM_UAR.DoubleClickUserName("User Name", user))
+								{
+									//Case where the user exists
+									Report.StartSubStep($"Then I close the 'Edit' window");
+									this.ThenCloseTheSpecifiedWindow("Edit");
+
+									
+									continue;
+								}
+								else
+								{
+									//Case where the user doesnt exist								
+
+									
+									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
+									S_SM.ThenInTheWindowIClickTheAddEditDeleteButton("Users and Roles", "Add Row");
+
+									Report.StartSubStep("Then the 'Add' window should load");
+									this.ThenTheWindowShouldLoad("Add", "should");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									this.GivenISwitchToTheWindow("Add");
+
+									var first = iuser["FirstName"];
+									var last = iuser["LastName"];
+									var role = iuser["Role"];
+									var EmailAdd = iuser["EmailAddress"];
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the First Name '{first}'");
+									SecurityManager_AddUser SM_AU = new SecurityManager_AddUser();
+									Report.IsTrue(SM_AU.EnterFirstName(first), "Failed to enter the first name.", "Successfully entyered the first name.");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Last Name '{last}'");
+									Report.IsTrue(SM_AU.EnterLastName(last), "Failed to enter the last name.", "successfully entered the last name.");
+
+									//15 char limit on user name
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{trevuser.Username}'");
+									Report.IsTrue(SM_AU.EnterUserName(trevuser.Username), "Failed to enter the username.", "successfully entered the username.");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Email Address '{EmailAdd}'");
+									Report.IsTrue(SM_AU.EnterEmail(EmailAdd), "Failed to enter the email address.", "Successfully entered the email address.");
+									Delay.Seconds(5);
+
+									Report.StartSubStep($"Then in the 'Add' window, I select the role '{role}'");
+									var roleSelected = Report.IsTrue(SM_AU.SelectRole(role), $"Failed to select the role {role}", $"Successfully selected the role {role}", throwException: true);
+
+									Report.StartSubStep($"Then in the'Add' window, I click to select the back up user");
+									Report.IsTrue(SM_AU.ClickBackupUserBttn(), "Failed, could not click the back up user button.", "Success, could click the back up user button.");
+
+									Report.StartSubStep("Then the 'Select user' window should load");
+									this.ThenTheWindowShouldLoad("Select user", "should");
+
+									Report.StartSubStep("Given I switch to the 'Select user' window");
+									this.GivenISwitchToTheWindow("Select user");
+
+									Report.StartSubStep("When in the 'Select user' window, I click the filter button");
+									SecurityManager_SelectUser SM_SU = new SecurityManager_SelectUser();
+									Report.IsTrue(SM_SU.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+									Report.StartSubStep($"Then in the 'Select user' window, I filter for 'User Name' 'Starts with...' '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectFilterType("User Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+									Report.IsTrue(SM_SU.EnterFilterText("User Name", trevuser2.Username), $"Failed to enter the user {trevuser2.Username}");
+
+									Report.StartSubStep("Then in the 'Select user' window, I click to apply the filter.");
+									Report.IsTrue(SM_SU.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+
+									Report.StartSubStep($"Then in the 'Select user' window, I select the 'User Name' stored in '{savedAs}'");
+									Report.IsTrue(SM_SU.SelectItem("User Name", trevuser2.Username), "Failed to select the 'User Name' stored in '{savedAs}'");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									this.GivenISwitchToTheWindow("Add");
+
+									Report.StartSubStep($"Then in the 'Add' window, I click to select the plant for the user");
+									Report.IsTrue(SM_AU.ClickPlantBttn(), "Failed, could not click the plant button.", "Success, could click the plant button.");
+
+									Report.StartSubStep("Then the 'Select location' window should load");
+									this.ThenTheWindowShouldLoad("Select location", "should");
+
+									Report.StartSubStep("Given I switch to the 'Select location' window");
+									this.GivenISwitchToTheWindow("Select location");
+
+									Report.StartSubStep("When in the 'Select location' window, I select the 'Plant ID' 'WERCS'");
+									SecurityManager_SelectLocation SM_SL = new SecurityManager_SelectLocation();
+									Report.IsTrue(SM_SL.SelectItem("Plant ID", "WERCS"), "Failed to select the item 'WERCS' under 'Plant ID'", "Successfully selected the item 'WERCS' under 'Plant ID'");
+
+									Report.StartSubStep("Given I switch to the 'Add' window");
+									this.GivenISwitchToTheWindow("Add");
+
+									Report.StartSubStep($"Then in the 'Add' window, I enter the password saved in '{user}'");
+									Report.IsTrue(SM_AU.EnterPassword(trevuser.Password), $"Failed to enter the password for {user}", $"Successfully entered the password for {user}");
+
+									Report.StartSubStep($"Then in the 'Add' window, I confirm the password saved in '{user}'");
+									Report.IsTrue(SM_AU.ConfirmPassword(trevuser.Password), $"Failed to confirm the password for {user}", $"Successfully confirmed the password for {user}");
+
+									Report.StartSubStep("Then in the 'Add' window, I click the Save button");
+									Report.IsTrue(SM_AU.ClickSaveBttn(), $"Failed to click the save button", $"Successfully clicked the save button.", throwException: true);
+
+									Report.StartSubStep("Then the 'Add' window should not load");
+									this.ThenTheWindowShouldLoad("Add", "should not");
+								}
+
+
+							}
+							else
+							{
+								Report.Error($"Could not find the Credentials for {user}");
+								Report.EndScenario();
+								return;
+							}
+						}
+						Report.StartSubStep("Given I close the 'Users and Roles' Window");
+						this.ThenCloseTheSpecifiedWindow("Users and Roles");
+
+						Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+						this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+						Report.StartSubStep("Then I switch to the 'Security Manager' tab");
+						this.WhenISwitchToTheTab("Security Manager");
+
+						//Processing Rule check for all users in table. Create a list of any not found, and then loop that list to create the processing rules (login/logouts etc)
+
+
+						Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
+						header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
+
+						Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+						this.WhenISwitchToTheTab("Rule Writer");
+
+						Report.StartSubStep("Then the Rule Writer page should load");
+						this.ThenTheRuleWriterPageShouldLoad();
+						// Click all rules
+
+						Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
+						S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+
+						Report.StartSubStep("Then the 'Rules Editor' window should load");
+						this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+						Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+						this.GivenISwitchToTheWindow("Rules Editor");
+
+						List<string> noRuleAccs = new List<string>();
+
+						foreach (var thing in usersToCreate)
+						{
+							var user = thing["username"];
+							//give username, from secuity manager, go in and check
+
+							if(this.ICheckForSHARuleForAccountOnly(user))
+							{
+								Report.Info($"Found rule, not adding user to list...");
+							}
+							else
+							{
+								Report.Info($"Did not find the rule, adding user to the list.");
+								noRuleAccs.Add(user);
+							}
+
+						}
+
+						//create rules for each item in the no rules accs list.
+
+						Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+						header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+
+						foreach(var ruleAcc in noRuleAccs )
+						{
+							this.ICreateProcessingRulesForSingleSHAAccount(ruleAcc);
+						}
+
+					}
+				}
+				if (!Context.FeatureContext.ContainsKey("TryGetUsers"))
+				{
+					Context.FeatureContext.Add("TryGetUsers", true);
+				}
+				else
+				{
+					Context.FeatureContext["TryGetUsers"] = true;
+				}
+			}
+			else
+			{
+				Report.Info("Test for users already ran for this feature, skipping.");
+			}
+			Report.Info($"Navigating to WS Landing page...");
+			new GlobalSteps().NavigateToLandingPage();
+
+			Report.StartStep($"Setting the current SHA User to feature context...");		
+
+			string firstuser = table.Rows[0]["username"];
+
+			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
+			{
+			Report.Info($"key QASHAAccount did not exist...");
+			Context.FeatureContext.Add("QASHAAccount", firstuser);
+			}
+			else
+			{
+				Report.Info($"key QASHAAccount did  exist, updating instead");
+				Context.FeatureContext["QASHAAccount"] = firstuser;
+
+			}			
+
+			Report.Info($"Finished setting the Feature SHA user");
+		}
+
+		[StepDefinition(@"I Create SHA processing Rules for the accounts listed in the table:")]
+		public void ICreateProcessingRulesForSHAAccountsListed(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+			//do a foreach user in table (create list of strings from table etc)
+
+
+			var exampleUser = table.Rows[0]["username"];
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;
+
+			//navigate to SHA
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartStep("I navigate to Studio");
+			myStepsSha.GivenINavigateToStudio();
+
+			Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
+
+
+			//string exampleUser = "test";
+
+			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
+			header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
+
+			Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+			this.WhenISwitchToTheTab("Rule Writer");
+
+			Report.StartSubStep("Then the Rule Writer page should load");
+			this.ThenTheRuleWriterPageShouldLoad();
+
+			// Click all rules
+
+			Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
+			S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' 'BevB -'");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", "BevB -"), $"Failed to enter the user 'BevB -'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.Screenshot();
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+			Report.Screenshot();
+
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: 'BevB -' ");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
+
+			var baseRuleRow= RW_RE.GetRuleRowFromTable("Name", "BevB -");
+
+			if (baseRuleRow.IsNullOrEmpty())
+			{
+				Report.Failure($"The base rule row element was null");
+				Report.Screenshot();
+				return;
+			}
+
+			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
+				
+
+			Report.StartSubStep($"Given I switch to the 'New Rule' window");
+			this.GivenISwitchToTheWindow("New Rule");
+
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the 'Type D' Option");
+			RuleWriter_NewRule RW_NR = new RuleWriter_NewRule();
+			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the Copy selected rule button");
+			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
+			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
+			Report.StartSubStep($"When in the 'New Rule' window, I enter the value '{exampleUser}- additional doc' into the Name text box");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser+"- additional doc"), "Failed to enter text", "Successfully entered text");
+			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
+			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
+
+			Report.StartSubStep("Then the 'Rule View' window should load");
+			this.ThenTheWindowShouldLoad("Rule View", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rule View' window");
+			this.GivenISwitchToTheWindow("Rule View");
+			RuleWriter_RuleView RW_RV = new RuleWriter_RuleView();
+
+			Report.StartSubStep($"In the Rule View popup I get the text found in the 'Will contain the results of' box");
+			string foundText= RW_RV.GetContainedResultsText();
+			Report.Info($"Found Text was {foundText}");
+			if(Report.IsTrue(foundText== "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')","Found text was not as expected","The found text was as expected"))
+			{
+				string newText = foundText.Replace("BEVB", exampleUser);
+				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
+
+				Report.IsTrue(RW_RV.ClickSaveButton(), "Failed to click save", "Successfully clicked save");
+				Report.IsTrue(RW_RV.WaitForRulesEditorToBeGone(), "The Rule view was still showing...", "The rule view was no longer showing.");
+
+				Report.StartSubStep("Then the 'Rules Editor' window should load");
+				this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+				Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+				this.GivenISwitchToTheWindow("Rules Editor");
+
+				Report.StartSubStep("Given I close the 'Rules Editor' Window");
+				this.ThenCloseTheSpecifiedWindow("Rules Editor");
+				
+
+				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+				this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+				this.WhenISwitchToTheTab("Rule Writer");
+
+				Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+				header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+				return;
+			}
+			else
+			{
+				Report.Info($"The found text was not as expected so the rule will not be valid");
+			}
+
+
+			
+
+
+
+		}
+
+
+
+		[StepDefinition(@"I Create SHA processing Rules for the account: (.*)")]
+		public void ICreateProcessingRulesForSHAAccount(string userAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+
+
+			var exampleUser = userAcc;
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;
+
+			//navigate to SHA
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			
+			Report.Screenshot();
+			
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' 'BevB -'");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", "BevB -"), $"Failed to enter the user 'BevB -'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.Screenshot();
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+			Report.Screenshot();
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: 'BevB -' ");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
+
+			var baseRuleRow = RW_RE.GetRuleRowFromTable("Name", "BevB -");
+
+			if (baseRuleRow.IsNullOrEmpty())
+			{
+				Report.Failure($"The base rule row element was null");
+				Report.Screenshot();
+				return;
+			}
+
+			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
+
+
+			Report.StartSubStep($"Given I switch to the 'New Rule' window");
+			this.GivenISwitchToTheWindow("New Rule");
+
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the 'Type D' Option");
+			RuleWriter_NewRule RW_NR = new RuleWriter_NewRule();
+			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the Copy selected rule button");
+			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
+			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
+			Report.StartSubStep($"When in the 'New Rule' window, I enter the value '{exampleUser}- additional doc' into the Name text box");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser + "- additional doc"), "Failed to enter text", "Successfully entered text");
+			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
+			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
+
+			Report.StartSubStep("Then the 'Rule View' window should load");
+			this.ThenTheWindowShouldLoad("Rule View", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rule View' window");
+			this.GivenISwitchToTheWindow("Rule View");
+			RuleWriter_RuleView RW_RV = new RuleWriter_RuleView();
+
+			Report.StartSubStep($"In the Rule View popup I get the text found in the 'Will contain the results of' box");
+			string foundText = RW_RV.GetContainedResultsText();
+			Report.Info($"Found Text was {foundText}");
+			if (Report.IsTrue(foundText == "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')", "Found text was not as expected", "The found text was as expected"))
+			{
+				string newText = foundText.Replace("BEVB", exampleUser);
+				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
+
+				Report.IsTrue(RW_RV.ClickSaveButton(), "Failed to click save", "Successfully clicked save");
+				Report.IsTrue(RW_RV.WaitForRulesEditorToBeGone(), "The Rule view was still showing...", "The rule view was no longer showing.");
+
+				Report.StartSubStep("Then the 'Rules Editor' window should load");
+				this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+				Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+				this.GivenISwitchToTheWindow("Rules Editor");
+
+				Report.StartSubStep("Given I close the 'Rules Editor' Window");
+				this.ThenCloseTheSpecifiedWindow("Rules Editor");
+
+
+				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+				this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+				this.WhenISwitchToTheTab("Rule Writer");				
+				return;
+			}
+			else
+			{
+				Report.Failure($"The found text was not as expected so the rule will not be valid");
+			}
+
+
+
+
+
+
+		}
+
+		[StepDefinition(@"I Create SHA processing Rules for the single account: (.*)")]
+		public void ICreateProcessingRulesForSingleSHAAccount(string shaAccName)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+			//do a foreach user in table (create list of strings from table etc)
+
+
+			var exampleUser = shaAccName;
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;
+
+			//navigate to SHA
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartStep("I navigate to Studio");
+			myStepsSha.GivenINavigateToStudio();
+
+			Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
+
+
+			//string exampleUser = "test";
+
+			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
+			header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
+
+			Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+			this.WhenISwitchToTheTab("Rule Writer");
+
+			Report.StartSubStep("Then the Rule Writer page should load");
+			this.ThenTheRuleWriterPageShouldLoad();
+
+			// Click all rules
+
+			Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
+			S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' 'BevB -'");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", "BevB -"), $"Failed to enter the user 'BevB -'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+			Report.Screenshot();
+
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: 'BevB -' ");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
+
+			var baseRuleRow = RW_RE.GetRuleRowFromTable("Name", "BevB -");
+
+			if (baseRuleRow.IsNullOrEmpty())
+			{
+				Report.Failure($"The base rule row element was null");
+				Report.Screenshot();
+				return;
+			}
+
+			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
+
+
+			Report.StartSubStep($"Given I switch to the 'New Rule' window");
+			this.GivenISwitchToTheWindow("New Rule");
+
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the 'Type D' Option");
+			RuleWriter_NewRule RW_NR = new RuleWriter_NewRule();
+			Report.IsTrue(RW_NR.SelectGivenRuleType("Type D"), "Failed to click the Rule Type", "Successfully clicked the Rule Type");
+
+			Report.StartSubStep("When in the 'New Rule' window, I click the Copy selected rule button");
+			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
+			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
+			Report.StartSubStep($"When in the 'New Rule' window, I enter the value '{exampleUser}- additional doc' into the Name text box");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser + "- additional doc"), "Failed to enter text", "Successfully entered text");
+			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
+			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
+
+			Report.StartSubStep("Then the 'Rule View' window should load");
+			this.ThenTheWindowShouldLoad("Rule View", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rule View' window");
+			this.GivenISwitchToTheWindow("Rule View");
+			RuleWriter_RuleView RW_RV = new RuleWriter_RuleView();
+
+			Report.StartSubStep($"In the Rule View popup I get the text found in the 'Will contain the results of' box");
+			string foundText = RW_RV.GetContainedResultsText();
+			Report.Info($"Found Text was {foundText}");
+			if (Report.IsTrue(foundText == "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')", "Found text was not as expected", "The found text was as expected"))
+			{
+				string newText = foundText.Replace("BEVB", exampleUser);
+				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
+
+				Report.IsTrue(RW_RV.ClickSaveButton(), "Failed to click save", "Successfully clicked save");
+				Report.IsTrue(RW_RV.WaitForRulesEditorToBeGone(), "The Rule view was still showing...", "The rule view was no longer showing.");
+
+				Report.StartSubStep("Then the 'Rules Editor' window should load");
+				this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+				Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+				this.GivenISwitchToTheWindow("Rules Editor");
+
+				Report.StartSubStep("Given I close the 'Rules Editor' Window");
+				this.ThenCloseTheSpecifiedWindow("Rules Editor");
+
+
+				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+				this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+				this.WhenISwitchToTheTab("Rule Writer");
+
+				Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
+				header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
+				return;
+			}
+			else
+			{
+				Report.Info($"The found text was not as expected so the rule will not be valid");
+			}
+
+
+
+
+
+
+		}
+
+
+		[StepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
+		public void ICheckForSHARuleForAccount(string userAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+
+
+			var exampleUser = userAcc;
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;
+
+			//navigate to SHA
+			ReportSettings.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			
+			//Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
+
+
+			Report.StartSubStep("When I click to open the 'Management' menu and select 'Rule Writer'");
+			header.WhenIClickToOpenTheMenuAndSelect("Management", "Rule Writer");
+
+			Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+			this.WhenISwitchToTheTab("Rule Writer");
+
+			Report.StartSubStep("Then the Rule Writer page should load");
+			this.ThenTheRuleWriterPageShouldLoad();
+
+			// Click all rules
+
+			Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
+			S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' '{exampleUser}- additional doc");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", exampleUser + "- additional doc"), $"Failed to enter the user '{exampleUser}- additional doc'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+
+			Report.Screenshot();
+
+
+
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: '{exampleUser}- additional doc' ");
+			if(RW_RE.FindItem("Name", exampleUser + "- additional doc"))
+			{
+				Report.Info($"The rule was found.");
+
+				Report.StartSubStep("Given I close the 'Rules Editor' Window");
+				this.ThenCloseTheSpecifiedWindow("Rules Editor");
+
+
+				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+				this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+				this.WhenISwitchToTheTab("Rule Writer");
+
+
+			}
+			else
+			{
+				Report.Info($"As the rule was not found, we need to create it.");
+				
+
+				this.ICreateProcessingRulesForSHAAccount(userAcc);
+			}
+
+			
+
+
+
+
+
+
+		}
+
+
+		[StepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
+		public bool ICheckForSHARuleForAccountOnly(string userAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			var header = new Steps_Header();
+			var LS = new LoginScreen();
+			var S_SM = new Steps_SecurityManager();
+			var S_RW = new Steps_RuleWriter();
+
+
+			var exampleUser = userAcc;
+
+			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
+			bool credentialsFound = trevuser != null;		
+			var myStepsSha = new Steps_SHA();		
+
+			Report.StartSubStep("Then the 'Rules Editor' window should load");
+			this.ThenTheWindowShouldLoad("Rules Editor", "should");
+
+			Report.StartSubStep($"Given I switch to the 'Rules Editor' window");
+			this.GivenISwitchToTheWindow("Rules Editor");
+
+			Report.StartSubStep("When in the 'Rules Editor' window, I click the filter button");
+			RuleWriter_RulesEditor RW_RE = new RuleWriter_RulesEditor();
+			Report.IsTrue(RW_RE.ClickFilterBtn(), "Failed to click the filter button", "Successfully clicked the filter button");
+
+			Report.StartSubStep($"Then in the 'Rules Editor' window, I filter for 'Name' 'Starts with...' '{exampleUser}- additional doc");
+			Report.IsTrue(RW_RE.SelectFilterType("Name", "Starts with..."), "Failed could not select the dropdown.", "Success, could select the dropdown");
+			Report.IsTrue(RW_RE.EnterFilterText("Name", exampleUser + "- additional doc"), $"Failed to enter the user '{exampleUser}- additional doc'");
+			Report.StartSubStep("Then in the 'Rules Editor' window, I click to apply the filter.");
+			Report.Screenshot();
+
+			Report.IsTrue(RW_RE.ClickApplyFilterBtn(), "Could not click to apply the filter.");
+			Report.Screenshot();
+
+
+
+
+			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: '{exampleUser}- additional doc' ");
+			if (Report.IsTrue(RW_RE.FindItem("Name", exampleUser + "- additional doc"), "Failed to find the 'Name' " + exampleUser + "- additional doc"))
+			{
+				Report.Info($"The rule was found.");
+				return true;
+
+			}
+			else
+			{
+				Report.Info($"The rule was not found");
+				return false;
+			}
+
+
+
+
+
+
+
+
+		}
+
 	}
+
+
 }
