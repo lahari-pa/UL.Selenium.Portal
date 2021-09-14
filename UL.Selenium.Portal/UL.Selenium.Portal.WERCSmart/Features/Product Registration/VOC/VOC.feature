@@ -209,7 +209,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -391,7 +391,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -511,7 +511,7 @@ Scenario: [56484] VOC - Aero checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -596,8 +596,8 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I call Shared Step 57532 (Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 100     | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 100     | false               | false       |            |
 	And I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue
 	And I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)

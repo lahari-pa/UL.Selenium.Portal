@@ -694,7 +694,7 @@ Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
 Then I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145970, container type: Paper bag, size: 2, package type: <First> and Item Number: 111-1111 then click continue
-Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Given I click continue
 Given I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -732,7 +732,7 @@ Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
 Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145852, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
-Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Given I click continue
 Given I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

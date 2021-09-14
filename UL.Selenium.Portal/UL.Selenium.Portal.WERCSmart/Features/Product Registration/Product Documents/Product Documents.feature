@@ -49,8 +49,8 @@ And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then Volatile Organic Compounds should be showing the error messages: Document is required: VOC Exemption Letter
 Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Given in the New Product page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -81,8 +81,8 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then International Fragrance Association (IFRA) should be showing the error messages: Document is required: IFRA Certificate (Perfumery Products)
-And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -112,7 +112,7 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then Generally Recognized as Safe (GRAS) should be showing the error messages: Document is required: GRAS Certificate (Flavor Products)
-And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:

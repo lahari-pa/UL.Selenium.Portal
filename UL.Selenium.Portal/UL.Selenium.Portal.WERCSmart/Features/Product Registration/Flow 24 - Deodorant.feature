@@ -143,6 +143,7 @@ Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 Given I save the product information as: TestProduct
 Given in the Product Characteristics page I click Continue
 And Primary Physical State should be showing the error messages: This is a required field.
@@ -151,7 +152,6 @@ Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 Given I set the Select the best Water Solubility description option to: Decomposes
 Given I click continue
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)

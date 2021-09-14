@@ -23,6 +23,11 @@
 @run_BulkActions
 Feature: BulkActions
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto6  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1086
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -136,7 +141,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 @test75321
 @ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto6 and save as: TestCase75321
 	Given I navigate to the landing page
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I filter the products by: Accepted by Retailers
@@ -163,7 +168,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Given If purchase details are showing click confirm order
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
@@ -200,7 +205,9 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
 	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
 	And I save a product which blue and has retailers and at least 1 UCP as TestCase75129
@@ -231,7 +238,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	And I click continue
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Given I navigate to the home page
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75129)
 	Then I Confirm the Product shows status: Submitted for retailer: saved as TestCase75129Retailer
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase75129
@@ -263,7 +270,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	And I click continue
 	And I call Shared Step 77535 (Retailer Association - Walmart)
-    And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
+	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue

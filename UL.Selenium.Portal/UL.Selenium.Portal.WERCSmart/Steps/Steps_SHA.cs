@@ -78,6 +78,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
+
+		[StepDefinition(@"I login to Studio as (.*)")]
+		public void GivenILoginToStudioAsTReVorUser(string savedAs)
+		{
+			var thisStudioLogin = new StudioLogin();
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs(savedAs);
+			Report.Info("Entering username: " + shaUser.Username);
+			thisStudioLogin.Username = shaUser.Username;
+			Report.Info("Entering password: " + shaUser.Password);
+			thisStudioLogin.Password = shaUser.Password;
+			Report.Info("Clicking 'sign in'");
+			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
+			Delay.Seconds(3);
+			var thisStudioDesktop = new StudioDesktop();
+			if (new PasswordExpireNotice().WaitForLoad())
+			{
+				Report.Info("The Password Expire Notice appeared, so clicking ignore");
+				if (!new PasswordExpireNotice().ClickButton("Ignore"))
+				{
+					Report.Failure("Failed to Click Ignore");
+				}
+			}
+			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
+				"Studio desktop is showing as expected");
+			Report.Info("Studio desktop is loaded");
+			var thisStudioTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
+		}
+
 		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
@@ -1449,9 +1478,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			var myStudioShaManager = new StudioSHAManager();
+			Report.Screenshot();
 			Report.StartStep("I set the status filter to " + status);
 			myStudioShaManager.WaitForProductList(60);
+			Report.Screenshot();
 			myStudioShaManager.SelectFromStatusFilter(status);
+			Report.Screenshot();
 			Report.Info("Status has been set");
 			Report.Screenshot();
 			Report.Info("Pressing Enter Key");
@@ -1464,12 +1496,56 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			//GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(10);
+			Report.Screenshot();
 			//Wait for top n items to be status Assigned
 			int n = 5;
 			int x = 0;
 			Report.Info($"Searching for status to match: {status}");
 			bool correct = false;
-			while(correct==false && x<60)
+
+			//Addition
+			Report.Info("first try check...");
+			List<Product> topN2 = myStudioShaManager.GetTopXProducts(n);
+			List<Product> correctStatusItems2 = new List<Product>();
+			foreach (var item in topN2)
+			{
+				Report.Info($"Status found was: {item.Status}");
+				if (item.Status == status)
+				{
+					correctStatusItems2.Add(item);
+				}
+			}
+			Report.Screenshot();
+			Report.Info($"n is {n}");
+			Report.Info($"Count found was: {correctStatusItems2.Count()}");
+			if (correctStatusItems2.Count() == topN2.Count())
+			{
+				correct = true;
+				Report.Info($"{n} items with correct status were found");
+			}
+			Delay.Seconds(10);
+			Report.Info("end of first try check...");
+
+			if (correct == false)
+			{
+				Report.Info($"was false...");
+				Report.StartStep("I set the status filter to " + status);
+				myStudioShaManager.WaitForProductList(60);
+				myStudioShaManager.SelectFromStatusFilter(status);
+				Report.Info("Status has been set");
+				Report.Screenshot();
+				Report.Info("Pressing Enter Key");
+				Report.Screenshot();
+				Delay.Seconds(10);
+				GeneralUtilities.StudioWaitForSpinner(30);
+				myStudioShaManager.WaitForProductList(60);
+				Delay.Seconds(10);
+			}
+			//End of Addition
+
+
+			Report.Info($"Going into wait loop...");
+			while (correct==false && x<60)
 				{
 					List<Product> topN = myStudioShaManager.GetTopXProducts(n);
 					List<Product> correctStatusItems = new List<Product>();
@@ -1492,8 +1568,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(10);
 					x++;					
 				}
-			
 
+			Report.Info($"Going to final check...");
+
+			if (correct == false)
+			{
+				Report.Info($"Final Filter try...");
+				Report.Screenshot();
+				myStudioShaManager.SelectFromStatusFilter(status);
+				Report.Screenshot();
+				Report.Info("Status has been set");
+				Report.Screenshot();
+				Report.Info("Pressing Enter Key");
+				Report.Screenshot();
+				Delay.Seconds(10);
+				GeneralUtilities.StudioWaitForSpinner(30);
+				myStudioShaManager.WaitForProductList(60);
+				Report.Screenshot();
+
+				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
+				List<Product> correctStatusItems = new List<Product>();
+				foreach (var item in topN)
+				{
+					Report.Info($"Status found was: {item.Status}");
+					if (item.Status == status)
+					{
+						correctStatusItems.Add(item);
+					}
+				}
+				Report.Screenshot();
+				Report.Info($"n is {n}");
+				Report.Info($"Count found was: {correctStatusItems.Count()}");
+				if (correctStatusItems.Count() == topN.Count())
+				{
+					correct = true;
+					Report.Info($"{n} items with correct status were found");
+				}
+			}
+			Report.Info($"Going to check...");
 			Report.Screenshot();
 			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
 		}

@@ -18,6 +18,11 @@
 @run_SupplierReports1
 Feature: Supplier Reports 1
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto26 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -208,7 +213,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	Then I confirm that the Data Summary section Provide the product's UPC(s), including container type and size (ounces) shows the value for Container Type saved as: TestCase73082Container for UPC saved as: TestCase73082UPC
 	Then I confirm that the Data Summary section Provide the product's UPC(s), including container type and size (ounces) shows the value for Size (Ounces) saved as: TestCase73082Ounces for UPC saved as: TestCase73082UPC
 	And I close the window that opened
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73082)
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
@@ -456,7 +461,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Then I switch to the Data Summary page
 	And I confirm that the Transparency Ratio underneath Ingredients equals: TestCase75391TransRatio
 	And I close the window that opened
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75391)
 	Given I confirm that the Current Submission date in SHA Manager matches the date saved as: TestCase75391Date
 	Given I navigate to the WERCSmart site
@@ -567,7 +572,7 @@ Scenario: [76759] Waste Classification Summary Report
 		| Wyoming        |
 	Then I get the excel row data file saved as: SupplierReport76759 and save the data to context
 	And I delete the Supplier Report file saved as SupplierReport76759
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Then In the Authoring menu I select Power Designer Plus
 	Then I filter subformat SWST and open checklist [SECT0150] Waste Checklist
 	Then I check if the excel data matches the checklist data
@@ -596,7 +601,7 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 		| Number of Active UPCs  |
 	Then I Check that in the excel file saved as: 79635 the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.
 	Then I get a value for WERCSmart ID from the excel file saved as: 79635 and save it to context as: WERCSmartProduct79635
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: WERCSmartProduct79635)
 	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635

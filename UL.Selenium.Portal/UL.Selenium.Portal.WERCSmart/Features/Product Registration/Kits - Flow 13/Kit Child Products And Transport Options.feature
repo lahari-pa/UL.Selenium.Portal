@@ -17,6 +17,11 @@
 
 Feature: Kit Child Products And Transport Options
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto13 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 #And I The Purchase summary step is shown with the success message
 #Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
 
@@ -36,15 +41,8 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
-	Given I set the Product is Regulated for Transport field to: Not Regulated
-	#Given I set the Select all modes of transport field to: DOT
-	#Given I set the Select all modes of transport field to: Shipping fully regulated
-	Then in the Transport Details 1 page I click Continue
-	#And I should see the U. S. Department of Transportation (DOT) Classification Page
-	#Given I set the UN Number field to: UN1950
-	#Given I set the Proper Shipping Name field to: Aerosols
-	#Given I set the Hazard Class field to: 2.1	#Given I set the Packing Group field to: None
-	#Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
+	Given I set the Product is Regulated for Transport field to: Not Regulated	
+	Then in the Transport Details 1 page I click Continue	
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
@@ -58,16 +56,25 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto13 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: Kit1)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: Kit1)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Kit1)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Kit1)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Kit1
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Kit1)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: Kit1)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: Kit1 and its status is: Completed
+
+
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Kit1)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Kit1
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Kit1)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: Kit1)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: Kit1 and its status is: Completed
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: Kit1) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
+
+
+
 	And I navigate to the landing page
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -106,23 +113,26 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto13 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: Kit2)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: Kit2)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Kit2)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Kit2)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Kit2
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Kit2)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: Kit2)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: Kit2 and its status is: Completed
+
+
+
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Kit2)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Kit2
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Kit2)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: Kit2)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: Kit2 and its status is: Completed
+
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: Kit2) for	
+		| Retailer                   |		
+		| No Retailer/No UPC Product |
+
 	And I navigate to the landing page
-	Given I login into the WERCSmart Portal - Administrator Role
-	#The previous steps just create the kit items
-	#Scenario: Test
-	#Given I login into the WERCSmart Portal - Administrator Role
-	#Given I save to context name: Kit1 and value: 1502868
-	#Given I save to context name: Kit2 and value: 1502793
+	Given I login into the WERCSmart Portal - Administrator Role	
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
 	Then I save the product information as: TestCase63521

@@ -105,7 +105,7 @@ Scenario: [70533] Edit Packaging Type
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
 	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	And I click the CONEG browse button and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the CONEG browse button and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Given In the Data Acceptance page I click on the Accept button
 	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
@@ -382,7 +382,7 @@ Scenario: [70516] Add and Remove Packaging Type
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
 	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	And I click the browse button for label: CONEG Certificate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: CONEG Certificate and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	#And I Verify the 'VIEW' and 'REMOVE' Buttons become active
 	#And I Click the 'VIEW BUTTON'
 	#And I Confirm the file opens for viewing in a new window

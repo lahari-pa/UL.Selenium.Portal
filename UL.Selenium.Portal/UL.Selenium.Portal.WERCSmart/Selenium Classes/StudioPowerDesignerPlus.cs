@@ -1502,6 +1502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (urls.Count > 1)
 				{
 					Report.Info("The number of urls was > 1");
+					Report.Screenshot();
 					break;
 				}
 				Report.Info("Waiting 1 second");
@@ -1514,7 +1515,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Report.Info("Looking for the Apply rules window"); 
+			Report.Info("Looking for the Apply rules window");
+			Report.Screenshot();
 			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Apply Rules"))
@@ -1845,12 +1847,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			Report.Info($"Getting Urls from window handles...");
+			Report.Screenshot();
 			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info($"Finished getting urls");
 			for (int i = 0; i < 30; i++)
 			{
+				Report.Info($"In loop: starting urls grab...");
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info($"In loop: Finished urls grab.");
+				Report.Screenshot();
+				Report.Info($" The urls count found was: {urls.Count()}");
+
 				if (urls.Count > 1)
 				{
+					Report.Info($"urls count is more than 1");
 					break;
 				}
 
@@ -1859,15 +1870,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (urls.Count < 2)
 			{
+				Report.Info($"Url count was less than 2");
 				return false;
 			}
 
+			Report.Info($"Starting: Get current windows handle");
 			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
+			Report.Info($"Finished get current window handle");
+			Report.Screenshot();
 			foreach (string handle in urls)
 			{
+				Report.Info($"Attempting to find window with title 'Select Rule'");
+				Report.Screenshot();
+
+				//Failure point for http error...
+				//Must find window with title, does it fail switch to? split up?
+
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
 				{
+					Report.Info($"Title was select rule... starting switch to....");
 					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Select Rule");
 					Report.Screenshot();
@@ -1875,11 +1896,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
+			Report.Info($"setting Iframe...");
+
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+
+			Report.Info($"Switching to Iframe...");
+
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+
+			Report.Info($"looking for container element from basePath");
+
+
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+
+			Report.Info($"going for wait load...");
+
 			if (base.Wait_for_load(30))
 			{
+				Report.Info($"waited... now clicking filter button");
 				if (this.WaitForClickFilterButton(30))
 				{
 					return true;
@@ -1887,6 +1921,131 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 
+			Report.Info($"base did not load...");
+			return false;
+		}
+
+
+
+
+
+
+		public bool Wait_for_loadLatestVersion(int secondsToWait = 60)
+		{
+			Report.Info($"Getting Urls from window handles...");
+			Report.Screenshot();
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info($"Finished getting urls");
+			Report.Info($"Entering Wait x for Loop");
+			int secondsPassed = 0;
+			bool successBreakout = false;
+			while (secondsPassed < secondsToWait + 1 && successBreakout == false)
+			{
+
+
+				for (int i = 0; i < 30; i++)
+				{
+					Report.Info($"In loop: starting urls grab...");
+					urls = SeleniumBrowser.WebBrowser.WindowHandles;
+					Report.Info($"In loop: Finished urls grab.");
+					Report.Screenshot();
+					Report.Info($" The urls count found was: {urls.Count()}");
+
+					if (urls.Count > 1)
+					{
+						Report.Info($"urls count is more than 1");
+						break;
+					}
+
+					Delay.Seconds(1);
+				}
+
+				if (urls.Count < 2)
+				{
+					Report.Info($"Url count was less than 2");
+					return false;
+				}
+
+				Report.Info($"Starting: Get current windows handle");
+				//not used (current window handle?)
+				string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Report.Info($"Finished get current window handle");
+				Report.Screenshot();
+				Report.Info($" The urls count used is: {urls.Count()}");
+				foreach (string handle in urls)
+				{
+					Report.Info($"Attempting to find window with title 'Select Rule'");
+					Report.Screenshot();
+					try
+					{
+
+						if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select Rule"))
+						{
+							Report.Info($"Title was select rule... starting switch to....");
+							//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+							Report.Success("Found window containing title: Select Rule");
+							Report.Screenshot();
+							successBreakout = true;
+							Report.Info($"break...");
+							break;
+						}
+					}
+					catch
+					{
+						Report.Info($"When going to the switch to method... and error was thrown.");
+						Report.Screenshot();
+					}
+
+				}
+
+				secondsPassed = secondsPassed + 10;
+				Report.Info($"Waiting for 10 seconds...");
+				Report.Info($"successBreakout was: {successBreakout}");
+				Delay.Seconds(10);
+			}
+
+			Report.Info($"successBreakout checking...");
+			if(successBreakout==false)
+			{
+				Report.Screenshot();
+				Report.Info($"successBreakout was false. Either the windows did not load, or errors were thrown on every loop...");
+				return false;
+			}
+
+			Report.Info($"Going to rest of method, successBreakout was true...");
+			//no changes
+
+			Report.Screenshot();
+
+
+			Report.Info($"setting Iframe...");
+
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+
+			Report.Info($"Switching to Iframe...");
+
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+
+			Report.Info($"looking for container element from basePath");
+
+
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+
+			Report.Info($"going for wait load...");
+
+			//why are we clicking filter button here?
+
+			if (base.Wait_for_load(30))
+			{
+				Report.Info($"waited... now clicking filter button");
+				if (this.WaitForClickFilterButton(30))
+				{
+					return true;
+				}
+
+			}
+
+			Report.Info($"base did not load...");
 			return false;
 		}
 
@@ -2044,19 +2203,71 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+		
 
 		public bool ClickApply()
 		{
-			IWebElement button = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
-			if (button != null)
+			int i = 0;			
+			while(i<5)
 			{
-				return button.TryClick();
+				Report.Screenshot();
+				IWebElement applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+				bool applyButtonFound = applyButton.Displayed;
+				Report.Info($"applyButtonFound was {applyButtonFound}");
+				if(applyButton!=null)
+				{
+					if(applyButton.TryClick()==true)
+					{
+						Report.Success($"Successfully clicked the apply button");
+						Report.Screenshot();
+						Delay.Seconds(2);
+						applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+						applyButtonFound = applyButton.Displayed;
+						Report.Info($"applyButtonFound was {applyButtonFound}");
+						int x = 0;
+						while(applyButtonFound==true && x <20)
+						{
+							Delay.Seconds(5);
+							applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+							applyButtonFound = applyButton.Displayed;
+							Report.Info($"applyButtonFound was {applyButtonFound}");
+							Report.Info($"Attempt: {x}");
+							Report.Screenshot();
+							x++; 
+						}
+
+						if(applyButtonFound == false)
+						{
+							Report.Screenshot();
+							Report.Success($"The filter popup was closed or not found");
+							return true;
+						}
+						
+					
+					}
+					else
+					{
+						Report.Info($"failed the try click of the apply button...");
+						Report.Screenshot();
+					}
+				}
+				else
+				{
+					Report.Info($"The applyButton was null");
+				}
+
+				Report.Info($"The filter popup was still showing or apply could not be clicked, retrying apply click...");
+				Report.Screenshot();
+				i++;
+				Delay.Seconds(5);
+				Report.Screenshot();
+
 			}
-			else
-			{
-				Report.Error("Did not find button to click");
-				return false;
-			}
+
+			Report.Info($"failed to click apply and close the filters popup.");
+			Report.Screenshot();
+			return false;
+
 
 		}
 
@@ -2412,6 +2623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (urls.Count < 2)
 			{
+				Report.Info($"url count was < 2");
 				return false;
 			}
 
@@ -2573,17 +2785,71 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckSelectAllCheckbox()
 		{
-			IWebElement checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-			if (checkbox != null)
+			try
 			{
-				checkbox.Check(true);
-				Delay.Seconds(1);
-				checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-				return checkbox.Checked();
+				Report.Info($"Getting checkbox el");
+				IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+				Report.Info($"Checking if el is null or not...");
+
+				if (checkbox != null)
+				{
+					Report.Info($"checkbox was not null.");
+					Report.Info($"Starting checkbox check...");
+					checkbox.Check(true);
+					Report.Info($"checkbox check finished");
+					Delay.Seconds(10);
+					Report.Screenshot();
+					return true;
+
+					//maybe try Tryclick instead of check so is bool?
+
+					Report.Screenshot();
+					Delay.Seconds(1);
+					Report.Info($"Trying to regrab checkbox el?");
+					checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);					
+					int i = 0;
+					while (checkbox == null && i < 10)
+					{
+						Report.Info($"was null...");
+						Report.Info($"Trying the wait for load...");
+						var thisDocumentQueuePage = new DocumentQueuePage();
+						thisDocumentQueuePage.Wait_for_load();
+						Report.Info($"wait for load over, trying regrab");
+						checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+						Delay.Seconds(2);
+						Report.Screenshot();
+						i++;
+					}
+					if (checkbox == null)
+					{
+						Delay.Seconds(10);
+						Report.Screenshot();
+						Report.Info($"Trying alternative step...");
+
+
+						var thisDocumentQueuePage = new DocumentQueuePage();
+						thisDocumentQueuePage.Wait_for_load();
+
+						return Report.IsTrue(thisDocumentQueuePage.CheckSelectAllChecked(), "Failed to check if the select all box was checked", "Select all box was checked", showSuccessScreenshot: false);
+
+
+
+
+
+					}
+					Report.Info($"starting check check");
+					return checkbox.Checked();
+				}
+				else
+				{
+					Report.Failure("Did not find checkbox to click");
+					return false;
+				}
 			}
-			else
+			catch
 			{
-				Report.Error("Did not find checkbox to click");
+				Report.Info($"exception thrown...");
+				Report.Screenshot();
 				return false;
 			}
 		}
@@ -2630,6 +2896,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		public bool CheckSelectAllChecked()
+		{
+			Report.Info("Beginning Check...");
+			Report.Info($"Getting checkbox el");
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+			Report.Info($"Checking if el is null or not...");		
+			if (checkbox != null)
+			{
+				Report.Info($"checkbox was not null.");
+				Report.Info($"Starting checkbox check...");
+
+				Report.Info($"starting check check");
+				return checkbox.Checked();
+
+			}
+			else
+			{
+				Report.Error("Did not find button to Check");
+				return false;
+			}
+		}
+
 
 		public void ClickClose()
 		{
