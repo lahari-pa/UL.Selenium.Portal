@@ -42,6 +42,7 @@ Then I Confirm the Item Sync Results Page shows the Buttons: in order
 | Export to Excel |
 Given I call Shared Step 106194 (RPS Sign out)
 
+@ScenarioId:11236
 Scenario: [125717] Base functionality - ItemSync - Results Screen -  Results grid columns
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded

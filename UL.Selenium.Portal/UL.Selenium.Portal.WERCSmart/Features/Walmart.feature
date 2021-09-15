@@ -152,6 +152,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
+@ScenarioId:11181
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

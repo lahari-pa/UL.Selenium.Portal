@@ -198,6 +198,7 @@
   <ItemGroup>
     <Compile Include="Classes\GeneralUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selenium Classes\SuperTable.cs" />
     <Compile Include="Selenium Classes\Dashboard.cs" />
     <Compile Include="Selenium Classes\DemoStatus.cs" />
     <Compile Include="Selenium Classes\DemoViewer.cs" />

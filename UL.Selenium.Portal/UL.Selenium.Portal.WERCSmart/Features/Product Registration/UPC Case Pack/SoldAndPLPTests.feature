@@ -24,6 +24,7 @@
 @run_SoldAndPLPTests
 Feature: Sold and PLP Tests
 
+@ScenarioId:11196
 Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87957
