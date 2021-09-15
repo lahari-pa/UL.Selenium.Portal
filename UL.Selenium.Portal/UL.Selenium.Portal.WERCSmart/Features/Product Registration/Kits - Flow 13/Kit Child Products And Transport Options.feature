@@ -45,7 +45,8 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Then in the Transport Details 1 page I click Continue	
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	#KitProdCreation
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
