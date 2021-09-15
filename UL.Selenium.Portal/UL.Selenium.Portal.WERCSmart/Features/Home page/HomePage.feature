@@ -491,8 +491,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I set the Product Identification (Optional) field to Proudct ID saved as: ProductID158930
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I save the product information as: TestCase158930
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I generate a random Ingredient ID and save as: IngredientID158930
 Given In the Ingredient Reference Number field I enter the following text: IngredientID158930 and saved as: IngID
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -546,7 +546,7 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
-Given I call Shared Step 162053 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
+Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
 Given I click continue
 Given I click continue
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

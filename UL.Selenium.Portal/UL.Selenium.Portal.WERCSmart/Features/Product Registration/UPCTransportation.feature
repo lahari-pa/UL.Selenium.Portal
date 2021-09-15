@@ -40,8 +40,8 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I save the product information as: TestCase122305
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -49,7 +49,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	Given I click continue
-	Given I enter UN1993 - Select data - Continue - Happy Path
+	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	Given I click continue
@@ -78,7 +78,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 55                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -88,9 +88,10 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
 	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
+
 	Given I should see the International Air Transport (IATA) Classification Page
-    Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-	And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+    And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 
 	Given I click continue
 	Given I should see the International Marine (IMDG) Classification Page
@@ -789,11 +790,6 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Universal Product Code (UPC)
 	Given I ensure that DOT is listed as Shipping fully regulated
 	Given I ensure that I cannot select DOT at Shipping with limited quantity
-
-	#Philip - Change
-	#Given I ensure that I cannot select DOT at Shipping with consumer commodity
-	#
-
 
 
 	
