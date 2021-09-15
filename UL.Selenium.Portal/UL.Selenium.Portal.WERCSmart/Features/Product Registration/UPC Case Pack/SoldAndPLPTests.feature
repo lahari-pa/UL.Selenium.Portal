@@ -24,6 +24,11 @@
 @run_SoldAndPLPTests
 Feature: Sold and PLP Tests
 
+Background:
+Given I verify the following users exist and if not I create them using SHAUser
+| username    | FirstName | LastName   | Role         | EmailAddress                |
+| SHAQAAuto24 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:11196
 Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
