@@ -399,6 +399,25 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
+	@ScenarioId:983
+Scenario: [73227] Products and Recommended Use Report
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Product Types Registered
+Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
+Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
+Then I confirm that the excel file saved as: 73227 contains the following columns:
+        | Column         |
+     	| Supplier       |
+		| RU Description |
+		| RU Category    |
+		| WPSID          |
+		| Product Name   |
+And I delete the excel file saved as 73227
+
 @ScenarioId:985
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
