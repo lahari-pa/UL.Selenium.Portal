@@ -2494,8 +2494,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
             else
             {
-
-
+                Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+                Report.Screenshot();
             }
 
         }
