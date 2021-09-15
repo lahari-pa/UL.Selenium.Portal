@@ -408,7 +408,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (fifraItemFound==true)
 			{
-				bool fifraTag= (bool)Context.GetFromContext("FIFRAPopupExpected");
+				Report.Info($"Looking in context for the fifra tag...");
+				bool fifraTag;
+				if (Context.Contains("FIFRAPopupExpected"))
+				{
+					Report.Info($"Tag was found in context, settting value to match");
+
+					 fifraTag = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				}
+				else
+				{
+					Report.Info($"Tag was not found in context, default value of true/expected being set as no FIFRA question has been answered");
+					fifraTag = true;
+				}
 				if (fifraTag == true)
 				{
 					Report.Info($"The fifra tag was set a true, popup is expected");
@@ -2499,7 +2511,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (popupCausing.Contains(name))
 			{
-				bool fifraTag = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				Report.Info($"Looking in context for the fifra tag...");
+				bool fifraTag;
+				if (Context.Contains("FIFRAPopupExpected"))
+				{
+					Report.Info($"Tag was found in context, settting value to match");
+
+					fifraTag = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				}
+				else
+				{
+					Report.Info($"Tag was not found in context, default value of true/expected being set as no FIFRA question has been answered");
+					fifraTag = true;
+				}
 				if (fifraTag == true)
 				{
 					Report.Info($"The fifra tag was set a true, popup is expected");
