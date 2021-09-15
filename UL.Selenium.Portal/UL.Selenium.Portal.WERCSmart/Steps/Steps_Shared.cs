@@ -2500,6 +2500,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
         }
 
+
+        [StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
+        public void ICallSharedIngredients_AddAnyChemical_CanadaOnly(string name)
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var stepsNewProductIngredients = new StepsIngredients();
+            Report.StartStep("I should see the Ingredients Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+            Report.StartStep("I add the ingredient " + name + " at 100%");
+            var table = new Table("ComponentName", "Percent");
+            table.AddRow(name, "100");
+           stepsNewProductIngredients.AddIngredients(table);
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+            Report.Screenshot();
+            Report.StartStep("I should see the Waste Classification Data Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+
+        }
+
+    }
+
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		 {
