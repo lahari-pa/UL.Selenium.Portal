@@ -2521,8 +2521,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
         }
 
-    }
-
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		 {
