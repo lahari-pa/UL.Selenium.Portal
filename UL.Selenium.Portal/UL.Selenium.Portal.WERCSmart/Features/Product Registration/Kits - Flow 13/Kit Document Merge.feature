@@ -25,11 +25,9 @@ Background:
 @73949
 @ScenarioId:1510
 Scenario: [73949] Kit - Document merge - US only
-	#KitProdCreation
-	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 	Given I navigate to the landing page
-	#KitProdCreation
-	Given I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 	Given I navigate to the landing page	
 	Given I generate a random UPC number and save as: UPC73949
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -84,11 +82,10 @@ Scenario: [73949] Kit - Document merge - US only
 @73950
 @ScenarioId:5946
 Scenario: [73950] Kit Document merge - Canada only
-	#KitProdCreation
-	Given I create a product with name: Kit product 1 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
-	Given I navigate to the landing page
-	#KitProdCreation
-	Given I create a product with name: Kit product 2 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
+	
+	Given I create a product for a Kit with name: Kit product 1 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
+	Given I navigate to the landing page	
+	Given I create a product for a Kit with name: Kit product 2 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC73949
 	Given I login into the WERCSmart Portal - Canada has all data account

@@ -43,8 +43,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	And I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Not Regulated	
 	Then in the Transport Details 1 page I click Continue	
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	#KitProdCreation
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)	
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
@@ -102,9 +101,10 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Hazard Class field to: 2.1
 	Given I set the Packing Group field to: None
 	Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	#KitProdCreation
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)	
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
