@@ -988,10 +988,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selProductsGrid = new ProductsGrid();
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
-			Context.AddToContext(savedAs, prodIDs);
 			if(prodIDs.Count()==0)
 			{
-				Report.Failure("There was no products IDs found to be displayed");
+				Report.Info("There was no products IDs found to be displayed");
+				//SHA Acc update to match per feature needed
+				new Steps_ProductSetup().GivenICreateReleasedForDistProductUsingTestCase75335UsingShaAcc("SHAQAAuto6","ReleasedProd1");
+				List<string> prodIDsbackup = selProductsGrid.AllIDsInGrid();
+				Report.Info("Saving a total of: " + prodIDsbackup.Count + " to context saved as: " + savedAs);
+				Context.AddToContext(savedAs, prodIDsbackup);
+				if (prodIDsbackup.Count() == 0)
+				{
+					Report.Failure("There was still no product IDs found to be displayed");
+
+				}
+			}
+			else
+			{
+				Report.Info($"Count was not 0...");
+				Context.AddToContext(savedAs, prodIDs);
+
 			}
 		}
 
