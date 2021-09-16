@@ -1011,11 +1011,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new GlobalSteps().LoginToWERCSmartAdmin("WERCs Product Account");
 				new GlobalSteps().ThenTheHomeScreenShouldLoad();
 				new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Sending to Retailers");
-				List<string> prodIDsbackup = selProductsGrid.AllIDsInGrid();				
+				var selProductsGrid2 = new ProductsGrid();
+				List<string> prodIDsbackup = selProductsGrid2.AllIDsInGrid();				
 				if (prodIDsbackup.Count() == 0)
 				{
 					Report.Failure("There was still no product IDs found to be displayed");
 
+				}
+				else
+				{
+					Report.Success("There was at least one product id found in the grid.");
 				}
 			}
 			else
