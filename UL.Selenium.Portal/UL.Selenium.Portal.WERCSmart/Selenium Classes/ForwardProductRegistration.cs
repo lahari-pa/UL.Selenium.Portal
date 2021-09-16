@@ -578,7 +578,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					currentIcon = row.FindElement(By.XPath(".//i[@class='fa fa-truck']"), 2).Displayed;
 				}
-				catch (NullReferenceException e)
+				catch
 				{
 					currentIcon = false;
 				}
