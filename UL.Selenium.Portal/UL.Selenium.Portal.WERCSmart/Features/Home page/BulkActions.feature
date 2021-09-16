@@ -70,6 +70,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	Then The home screen should load
 	Given I filter the products by: Sending to Retailers
 	Given I save the list of Product IDs displayed on the page as: ProductInProgressList74634
+	#^if no products found, create a product that is in "sending to retailers" -> need criteria
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
