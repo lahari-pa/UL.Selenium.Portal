@@ -350,13 +350,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
-				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
-				"Partition Coefficient");
-			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
-			sharedSteps
-				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
-					sdsTable);
+			//var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+			//	"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+			//	"Partition Coefficient");
+			//sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			//sharedSteps
+			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+			//		sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -3731,13 +3731,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			//And I call Shared Step 64097 - Additional Documents->Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
-			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
-				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
-				"Partition Coefficient");
-			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
-			sharedSteps
-				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
-					sdsTable);
+			//var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+			//	"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+			//	"Partition Coefficient");
+			//sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			//sharedSteps
+			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+			//		sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
