@@ -26,7 +26,6 @@ Background:
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\Forwarding\Account has Stewardship information\Select Existing UPC - no edit
 @ScenarioId:1402
 Scenario: [87217] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
-#Given I create a Completed product using Test Case 86187 and SHA account saved as: SHAQAAuto5 (SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product)
 Given I create a product and force it into Completed using Test Case 86187 and SHA account saved as: SHAQAAuto5 (SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product)
 Given I navigate to the landing page
 Given I call Shared Step 85328 (Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full))

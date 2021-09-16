@@ -141,7 +141,6 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 @test75321
 @ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto6 and save as: TestCase75321
 	Given I navigate to the landing page
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -271,8 +270,6 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	And I click continue
 	And I call Shared Step 77535 (Retailer Association - Walmart)
-
-	#Andrew Change -> check update from Aersol can matches devops (solid/non aerosol)
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds

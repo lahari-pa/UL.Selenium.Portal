@@ -118,16 +118,11 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I generate a random UPC number and save as: UPC87915
-	#Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: Product1
 	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: SHAQAAuto18 and save the product as: Product1
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: ProductAccount
-	#Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: Product2
 	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: SHAQAAuto18 and save the product as: Product2
-
-	Given I navigate to the landing page
-	#Given I save to context name: Product1 and value: 1514519
-	#Given I save to context name: Product2 and value: 1514520
+	Given I navigate to the landing page	
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -30,8 +30,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase78731
 
-#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+Given I call Shared Step 57502 (Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+
 Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

@@ -216,7 +216,6 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ScenarioId:1412
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product1
 	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
 
 	Given I navigate to the landing page
@@ -241,9 +240,7 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ScenarioId:1404
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
-	#Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
-
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -267,14 +264,10 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 @ScenarioId:1405
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product1
 	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
-
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	#Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product2
 	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
-
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid

@@ -28,8 +28,6 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#You will need to know the WPSxxxxxxx ID associated to the 3rd party product
 	#Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
 	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing using SHA Account: SHAQAAuto27 and save as: TestCase80854Component
-
-	#Given I create a product with name: 80854 and take to completed using Test Case 80821 and save as: TestCase80854Component
 	And I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#Use the shared step below to confirm the Transparency ratio for the third party product you are working with

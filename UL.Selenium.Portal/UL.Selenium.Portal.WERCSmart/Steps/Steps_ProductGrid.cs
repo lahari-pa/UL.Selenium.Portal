@@ -2504,8 +2504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheArchiveRetailersPopupClickOn(string buttonToClick)
 		{
 			var thisModalDialog = new ModalDialog();
-			Report.IsTrue(thisModalDialog.ClickButton(buttonToClick), "Failed to click: " + buttonToClick,
-				"Clicked: " + buttonToClick);
+			Report.IsTrue(thisModalDialog.ClickButton(buttonToClick), "Failed to click " + buttonToClick, "Successfully clicked " + buttonToClick, showSuccessScreenshot: false);
 			Delay.Seconds(3);
 		}
 

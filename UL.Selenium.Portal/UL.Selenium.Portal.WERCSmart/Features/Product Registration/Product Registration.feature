@@ -134,6 +134,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Formaldehyde  | 100     | false               | false       |            |
+	Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
@@ -195,6 +196,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
+	And I set 'California's Cleaning Product' to: No
 	# CA Cleaning question commented out, uncomment when CA Cleaning is re-added
 	#And I set 'California's Cleaning Product' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
@@ -608,7 +610,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 		| 50-00-0   | Formaldehyde  | 30         |
 	Then in the Ingredients page I click Continue 
 	Then The Formulation 3rd Party Step is shown
-    Then I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue)
+    Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 	When I click continue
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
@@ -643,11 +645,13 @@ Given I select the following retailers in the Select Retailers popup list view:
 | Retailer												   |
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 | Family Dollar                                            |
+| No Retailer/No UPC Product                                           |
 Then I click Done on Select Retailers window
 Then I confirm the following retailers are showing in the Retailer page
 | Retailer												   |
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 | Family Dollar                                           |
+| No Retailer/No UPC Product                                           |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
@@ -700,6 +704,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
 Given I generate a random UPC number and save as: UPC128144
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Select countries the product may be sold in option to: Canada

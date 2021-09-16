@@ -47,7 +47,6 @@ Scenario: [56829] More Filters
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Then I Search the Products Grid for the kit product with name: KitProductMoreFilters56829, and create the kit if it is not found
-	#Given I create a Hair Color Kit using test case 58753 with product name: KitProductMoreFilters56829 and save as: KitProduct56829
 	Then I create a object of FilterInformation from the table below: and save it as: MoreFiltersInformation56829
 	| FilterType          | Variable                    |
 	| Brand               | TestBrand                   |

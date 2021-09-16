@@ -24,13 +24,9 @@ Background:
 
 @ScenarioId:1095
 Scenario: [58753] Hair Color Kit - RU000724
-	#Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
-	#Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1
 
 	Given I navigate to the landing page
-	#Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct2
-	#Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct2
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct2
 
 
