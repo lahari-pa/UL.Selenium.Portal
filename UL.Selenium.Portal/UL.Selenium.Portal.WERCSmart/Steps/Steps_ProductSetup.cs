@@ -1228,14 +1228,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-			Report.StartStep("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
-			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
-				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
-				"Partition Coefficient");
-			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
-			sharedSteps
-				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
-					sdsTable);
+			//Report.StartStep("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
+			//var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+			//	"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+			//	"Partition Coefficient");
+			//sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			//sharedSteps
+			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+			//		sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
 			Report.StartStep("Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
