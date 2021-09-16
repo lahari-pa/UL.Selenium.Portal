@@ -5982,9 +5982,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InSHAManagerISelectProductById(id);
 			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
-			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Release for distribution");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Release for Distribution");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
-			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Release for distribution", savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Release for Distribution", savedAs);
 		}
 
 		[StepDefinition(@"I call Shared Step 155714 \(SHA - Accepted Product - set Retailers to Cancelled for saved as: (.*)\) for")]

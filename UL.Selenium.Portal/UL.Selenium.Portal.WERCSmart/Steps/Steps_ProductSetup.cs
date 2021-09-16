@@ -1272,11 +1272,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 
-			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Release For Distribution for saved as: TestCase86187) for");
 
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("CVS");
-
 			retailerTable.AddRow("No Retailer/No UPC Product");
 
 			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToReleaseForDistributionForSavedAs(savedAs, retailerTable);
