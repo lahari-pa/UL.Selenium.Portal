@@ -44,11 +44,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				foreach (TableRow row in expected.Rows)
 				{
-					string option = row["Option"];
-					Report.Info("Checking that I see the option '" + option + "'");
-					Report.IsTrue(upcOptions.Contains(option.Trim()),
-						"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", upcOptions) + "'!",
-						"Option was showing: '" + option + "', as expected!");
+					string option = row["Option"].Trim();
+					Report.Info($"Checking that I see the option '{option}'");
+					Report.IsTrue(upcOptions.Any(e => e.Contains(option)),
+						$"Option was not showing as expected! <br />Expected: '{option}', but found: '" + string.Join("<br /><br />", upcOptions) + "'!",
+						$"Option was showing: '{option}', as expected!");
 				}
 			}
 			if (condition == "not see")
