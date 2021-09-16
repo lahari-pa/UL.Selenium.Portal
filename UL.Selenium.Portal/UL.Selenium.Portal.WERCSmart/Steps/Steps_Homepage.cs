@@ -988,14 +988,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selProductsGrid = new ProductsGrid();
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
-			if(prodIDs.Count()==0)
+			Context.AddToContext(savedAs, prodIDs);
+			if (prodIDs.Count()==0)
+			{
+				Report.Failure("There was no products IDs found to be displayed");				
+				
+			}
+			
+		}
+
+		[StepDefinition(@"If there are no Products in the status 'Sending to Retailers' I create one with SHA account: (.*)")]
+		public void IfNoProductsInSendingToRetailersCreateProduct(string shaAcc)
+		{
+			var selProductsGrid = new ProductsGrid();
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();			
+			if (prodIDs.Count() == 0)
 			{
 				Report.Info("There was no products IDs found to be displayed");
-				//SHA Acc update to match per feature needed
-				new Steps_ProductSetup().GivenICreateReleasedForDistProductUsingTestCase75335UsingShaAcc("SHAQAAuto6","ReleasedProd1");
-				List<string> prodIDsbackup = selProductsGrid.AllIDsInGrid();
-				Report.Info("Saving a total of: " + prodIDsbackup.Count + " to context saved as: " + savedAs);
-				Context.AddToContext(savedAs, prodIDsbackup);
+				new Steps_ProductSetup().GivenICreateReleasedForDistProductUsingTestCase75335UsingShaAcc(shaAcc, "ReleasedProd1");
+				// Then return to grid and filter by status...
+				new GlobalSteps().NavigateToLandingPage();
+				new GlobalSteps().LoginToWERCSmartAdmin("WERCs Product Account");
+				new GlobalSteps().ThenTheHomeScreenShouldLoad();
+				new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Sending to Retailers");
+				List<string> prodIDsbackup = selProductsGrid.AllIDsInGrid();				
 				if (prodIDsbackup.Count() == 0)
 				{
 					Report.Failure("There was still no product IDs found to be displayed");
@@ -1004,11 +1020,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Info($"Count was not 0...");
-				Context.AddToContext(savedAs, prodIDs);
+				Report.Info($"Count was not 0... No need to create a product, moving on...");				
 
 			}
 		}
+
 
 		[StepDefinition(@"I navigate to the WERCSmart site")]
 		public void INavigateToWERCSmart()
