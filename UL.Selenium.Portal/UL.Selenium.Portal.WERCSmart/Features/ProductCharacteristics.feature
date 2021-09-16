@@ -125,6 +125,7 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 Then I save the product information as: TestCase31804
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 And I should see the Physical and Chemical Properties Page
 And I should see following statement: Primary Physical State
 And I should only see the following options for Primary Physical State:

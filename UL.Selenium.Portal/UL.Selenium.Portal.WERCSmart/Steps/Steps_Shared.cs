@@ -370,33 +370,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57570 \(Enter Ingredients\) and add the following ingredients:")]
-		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsIngredients();
-			Report.StartStep("I should see the Ingredients Page");
-			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.StartStep("I should see the ingredients error message");
-			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
-			Report.StartStep("I add the following ingredients:");
-			stepsNewProductIngredients.AddIngredients(ingredientsTable);
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+        [StepDefinition(@"I call Shared Step 57570 \(Enter Ingredients\) and add the following ingredients:")]
+        public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var stepsNewProductIngredients = new StepsIngredients();
+            Report.StartStep("I should see the Ingredients Page");
+            var MyStepsNewProduct = new StepsNewProduct();
+            MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+            Report.StartStep("I should see the ingredients error message");
+            stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
+            Report.StartStep("I add the following ingredients:");
+            stepsNewProductIngredients.AddIngredients(ingredientsTable);
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-			Report.Screenshot();
-			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+            Report.Screenshot();
+            List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
 
-			List<string> allIngredientsNames = new List<string>();
-			ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+            List<string> allIngredientsNames = new List<string>();
+            ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
 
-			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
-			bool fifraItemFound = false;
+            //Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+            bool fifraItemFound = false;
 
 			foreach( var item in allIngredientsNames)
 			{
@@ -446,38 +446,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 
-			}
-			else
-			{
-				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
-				Report.Screenshot();
+            }
+            else
+            {
+                Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+                Report.Screenshot();
 
-			}
-		}
+            }
+        }
 
-		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
-		public void GivenICallSharedStepEnterIngredientsCanandaOnly(Table ingredientsTable)
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsIngredients();
-			Report.StartStep("I should see the Ingredients Page");
-			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.StartStep("I should see the ingredients error message");
-			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
-			Report.StartStep("I add the following ingredients:");
-			stepsNewProductIngredients.AddIngredients(ingredientsTable);
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+        [StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
+        public void GivenICallSharedStepEnterIngredientsCanandaOnly(Table ingredientsTable)
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var stepsNewProductIngredients = new StepsIngredients();
+            Report.StartStep("I should see the Ingredients Page");
+            var MyStepsNewProduct = new StepsNewProduct();
+            MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+            Report.StartStep("I should see the ingredients error message");
+            stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
+            Report.StartStep("I add the following ingredients:");
+            stepsNewProductIngredients.AddIngredients(ingredientsTable);
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-			Report.Screenshot();	
-			
-		}
+            Report.Screenshot();
 
-		[StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
+        }
+
+        [StepDefinition(@"I call Shared Step 69557 \(Enter Ingredients for Aerosol Propellent\)")]
 		public void GivenICallSharedEnterIngrediebtsForAerosolPropellant()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1919,16 +1919,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
-			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
-			{
-				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
-				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
-			}
-			else
-			{
-				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
-				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
-			}
+
+			//Philip - Change-
+			//if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not a pesticide"))
+			//{
+			//	MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide");
+			//}
+			//else
+			//{
+			//	MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+			//}
+			//
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
@@ -1968,10 +1971,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Information");		
-
-
-			Report.StartStep("I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
+			Report.StartStep("I set the product description option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			Report.StartStep(
@@ -2313,11 +2314,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
-
 			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2507,7 +2507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
+            //Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 
 			if (popupCausing.Contains(name))
 			{
@@ -2549,39 +2549,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 
-			}
-			else
-			{
-				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
-				Report.Screenshot();
+            }
+            else
+            {
+                Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+                Report.Screenshot();
+            }
 
-			}
-
-		}
-
-		
+        }
 
 
-		[StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
-		public void ICallSharedIngredients_AddAnyChemical_CanadaOnly(string name)
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsIngredients();
-			Report.StartStep("I should see the Ingredients Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
-			Report.StartStep("I add the ingredient " + name + " at 100%");
-			var table = new Table("ComponentName", "Percent");
-			table.AddRow(name, "100");
-			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.Screenshot();
-			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");			
+        [StepDefinition(@"I call Shared Step 29181c \(Ingredients - add any chemical - For Canada Only\) with name: (.*)")]
+        public void ICallSharedIngredients_AddAnyChemical_CanadaOnly(string name)
+        {
+            ReportSettings.UseSubSteps = true;
+            var MyNewProductSteps = new StepsNewProduct();
+            var stepsNewProductIngredients = new StepsIngredients();
+            Report.StartStep("I should see the Ingredients Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+            Report.StartStep("I add the ingredient " + name + " at 100%");
+            var table = new Table("ComponentName", "Percent");
+            table.AddRow(name, "100");
+           stepsNewProductIngredients.AddIngredients(table);
+            Report.StartStep("In the Ingredients page I click Continue");
+            MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+            Report.Screenshot();
+            Report.StartStep("I should see the Waste Classification Data Page");
+            MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 
-		}
-
+        }
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
@@ -2875,6 +2871,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
 
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 159304 \(Product Information - US, No\(Child\), No \(DSV\), No \(PLP\)\)")]
+		public void GivenICallSharedStepProductInformation_USNoChildNoDSVNoPLP()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep(
+				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			//Report.StartStep(
+			//	"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			//MyNewProduct.SetTheSectionOptionTo(
+			//	"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+			//	"No");			
 			Report.StartStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
@@ -3978,7 +3999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
-	
+
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
 			{
@@ -5492,6 +5513,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared Step 130960 \(Additional Documents to Provide - VOC Product Label Upload\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_VOCProductLabelUpload()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
+				"Volatile Organic Compounds", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -11041,7 +11073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not considered a pesticide product");
+				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
@@ -11056,7 +11088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
-				"Cleaning products must comply with California's Cleaning Product Right to Know Act.  I would like to provide the additional information needed for this program during registration.",
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.",
 				"No");
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");

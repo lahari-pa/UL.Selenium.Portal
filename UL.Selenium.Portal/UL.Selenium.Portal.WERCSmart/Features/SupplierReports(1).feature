@@ -46,24 +46,6 @@ Scenario: [68420] List of Supplier Reports
 		| UPC Errors for The Home Depot          |
 		| Volatile Organic Compounds             |
 		| Waste Classification Summary           |
-		#| Kit Registration Details                                           |
-		#| Kits Containing a Specific Registration                            |
-		#| Pesticide Certificate Report                                       |
-		#| Pesticide Report                                                   |
-		#| Product Types Registered                                           |
-		#| Registrations Revised - Not Yet Submitted                          |
-		#| Registrations with Retailer Chemicals of Concern                   |
-		#| Retailer Chemicals of Concern                                      |
-		#| Subscription Renewal (Formulated, Enhanced, Articles)              |
-		#| Subscription Renewal (Registrations Eligible for Deletion)         |
-		#| Sustainability Survey Eligibility - Health & Beauty                |
-		#| UPC and Retailer (Product Specific)                                |
-		#| UPC Error Details                                                  |
-		#| UPCs (Active) for all Registrations                                |
-		#| UPCs and Registrations (Retailer Specific)                         |
-		#| UPCs Duplicated within Account                                     |
-		#| VOC-related Registrations                                          |
-		#| Waste Classification Summary for All Registrations                 |
 
 @tfs_design
 @Obsolete
@@ -71,7 +53,7 @@ Scenario: [68420] List of Supplier Reports
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
+	And In the Supplier Reports screen the page title should be: My Reports
 	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
 	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
 	Given In the Supplier Reports screen I click on the Download button
@@ -417,24 +399,24 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
-@ScenarioId:983
+	@ScenarioId:983
 Scenario: [73227] Products and Recommended Use Report
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Product Types Registered
-	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
-	Given In the Supplier Reports screen I click on the Download button
-	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
-	Then I confirm that the excel file saved as: 73227 contains the following columns:
-		| Column         |
-		| Supplier       |
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Product Types Registered
+Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
+Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
+Then I confirm that the excel file saved as: 73227 contains the following columns:
+        | Column         |
+     	| Supplier       |
 		| RU Description |
 		| RU Category    |
 		| WPSID          |
 		| Product Name   |
-	And I delete the excel file saved as 73227
+And I delete the excel file saved as 73227
 
 @ScenarioId:985
 Scenario: [73230] UPC Report for Specific Product with Retailer
@@ -513,7 +495,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 #fails because of a bug 106613
 @ScenarioId:986
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+    Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: California Proposition 65

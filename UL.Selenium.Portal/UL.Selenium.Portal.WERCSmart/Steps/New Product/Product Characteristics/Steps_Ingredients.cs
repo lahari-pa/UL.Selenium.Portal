@@ -899,7 +899,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
-			Delay.Seconds(5);
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
 		}
 
 
@@ -913,16 +914,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
 
 
 		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
 		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
+			Report.IsTrue(new Ingredients().ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
 		}
 
 
