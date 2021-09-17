@@ -3480,10 +3480,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 
 			bool FifraValue = expected;
-			Context.AddToContext("FIFRAPopupExpected", FifraValue);
-
-
-		}
+			if(Context.Contains("FIFRAPopupExpected"))
+			{
+				Report.Info($"The value 'FIFRAPopupExpected' was already found in context... Replacing with new value");
+				Context.AddToContext("FIFRAPopupExpected", FifraValue);
+				var foundInContext = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				Report.IsTrue(foundInContext == FifraValue, $"The value found in context now matches the expected FIFRA tag value", "The found FIFRA tag value does not match the expected value");
+								
+			}
+			else
+			{
+				Report.Info($"There was not FIFRA tag found saved in Context, Add expected value to context as 'FIFRAPopupExpected'");
+				Context.AddToContext("FIFRAPopupExpected", FifraValue);
+			}
+			
+			if (Context.Contains("FIFRAPopupExpected"))
+			{
+				Report.Success("The FIFRA tag value was added to context successfully.");
+			}
 
 	}
 
