@@ -989,11 +989,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
-			if(prodIDs.Count()==0)
+			if (prodIDs.Count()==0)
 			{
-				Report.Failure("There was no products IDs found to be displayed");
+				Report.Failure("There was no products IDs found to be displayed");				
+				
+			}
+			
+		}
+
+		[StepDefinition(@"If there are no Products in the status 'Sending to Retailers' I create one with SHA account: (.*)")]
+		public void IfNoProductsInSendingToRetailersCreateProduct(string shaAcc)
+		{
+			var selProductsGrid = new ProductsGrid();
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();			
+			if (prodIDs.Count() == 0)
+			{
+				Report.Info("There was no products IDs found to be displayed");
+				new Steps_ProductSetup().GivenICreateReleasedForDistProductUsingTestCase75335UsingShaAcc(shaAcc, "ReleasedProd1");
+				// Then return to grid and filter by status...
+				new GlobalSteps().NavigateToLandingPage();
+				new GlobalSteps().LoginToWERCSmartAdmin("WERCs Product Account");
+				new GlobalSteps().ThenTheHomeScreenShouldLoad();
+				new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Sending to Retailers");
+				var selProductsGrid2 = new ProductsGrid();
+				List<string> prodIDsbackup = selProductsGrid2.AllIDsInGrid();				
+				if (prodIDsbackup.Count() == 0)
+				{
+					Report.Failure("There was still no product IDs found to be displayed");
+
+				}
+				else
+				{
+					Report.Success("There was at least one product id found in the grid.");
+				}
+			}
+			else
+			{
+				Report.Info($"Count was not 0... No need to create a product, moving on...");				
+
 			}
 		}
+
 
 		[StepDefinition(@"I navigate to the WERCSmart site")]
 		public void INavigateToWERCSmart()

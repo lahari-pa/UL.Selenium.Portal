@@ -28,9 +28,9 @@ Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to
 	#and make sure to add any retailer except Walmart as the retailer for these products.
 	#Use the test case 75335 to create these products - test case is linked to this one.
 	#Note: these input products do not have to be direct ship vendor products
-	Given I create a product with name: 778591 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778591
-	Given I create a product with name: 778592 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778592
 
+	Given I create a product for a Kit with name: 778591 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778591
+	Given I create a product for a Kit with name: 778592 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778592
 	Given I navigate to the landing page
 	#Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status
 	#Given I save to context name: TestCase778591 and value: 1525307

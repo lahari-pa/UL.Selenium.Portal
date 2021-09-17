@@ -24,12 +24,10 @@ Background:
 
 @ScenarioId:1095
 Scenario: [58753] Hair Color Kit - RU000724
-	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1
 
+	Given I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1
 	Given I navigate to the landing page
-	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct2
-
-
+	Given I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC58753
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
