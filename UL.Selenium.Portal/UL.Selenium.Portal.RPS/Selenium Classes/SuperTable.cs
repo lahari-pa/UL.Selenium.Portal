@@ -32,6 +32,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         #region Methods
         // Nav Text
+        #region Nav Text
         public bool NavLabelExists()
         {
             Report.Info("Attempting to confirm the Nav Label exists.");
@@ -43,8 +44,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             Report.Info("Attempting to get the Nav Label text.");
             return NavLabel.Text;
         }
+        #endregion
 
-        //Nav Buttons
+        // Nav Buttons
+        #region Nav Buttons
         private IWebElement NavButtonGet(string buttonLabel)
         {
             Report.Info($"Attempting to get '{buttonLabel}' Button.");
@@ -88,8 +91,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             return result;
         }
+        #endregion
 
         // Breadcrumbs
+        #region Breadcrumbs
         private bool BreadcrumbListExists()
         {
             Report.Info("Attempting to confirm breadcrumb list exists.");
@@ -158,8 +163,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             return result;
         }
+        #endregion
 
         // Cards
+        #region Cards
         private bool CardListExists()
         {
             Report.Info("Attempting to confirm card list exists.");
@@ -280,6 +287,8 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return result;
         }
         #endregion
+
+        #endregion
     }
     /*
     class SuperTableBreadcrumb : SeleniumBaseObject
@@ -309,6 +318,93 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     {
         #region Page Objects
         protected override By ContainerElementLocator => By.XPath("tfoot");
+        private IWebElement RowsPerPageSelector => ContainerElement.FindElement(By.XPath(".//select[@title]"), 1);
+        private List<IWebElement> RowsPerPageSelectorOptionsList => RowsPerPageSelector.FindElements(By.XPath(".//option"), 1).ToList();
+        #endregion
+
+        #region Methods
+        #region Rows Per Page Selector
+        public bool RowsPerPageSelectorExists()
+        {
+            Report.Info($"Attempting to confirm Rows Per Page Selector exists.");
+            return RowsPerPageSelector != null;
+        }
+
+        public bool RowsPerPageSelectorClick()
+        {
+            Report.Info($"Attempting to click Rows Per Page Selector.");
+            bool result = false;
+            if (RowsPerPageSelectorExists())
+            {
+                result = RowsPerPageSelector.TryClick();
+            }
+            return result;
+        }
+
+        private IWebElement RowsPerPageSelectorOptionGet(string optionLabel)
+        {
+            Report.Info($"Attempting to get Rows Per Page selector '{optionLabel}' option.");
+            return RowsPerPageSelector.FindElement(By.XPath($".//option[@text = {optionLabel}]"), 1);
+        }
+        #endregion
+
+        #region Pagiator Buttons
+        private IWebElement PagiatorButtonGet(string buttonLabel)
+        {
+            Report.Info($"Attempting to get '{buttonLabel}' pagiator button.");
+            return ContainerElement.FindElement(By.XPath($".//button[@title = {buttonLabel}]"), 1);
+        }
+
+        public bool PagiatorButtonExists(string buttonLabel)
+        {
+            Report.Info($"Attempting to confirm '{buttonLabel}' pagiator button exists.");
+            return PagiatorButtonGet(buttonLabel) != null;
+        }
+
+        public bool PagiatorButtonClick(string buttonLabel)
+        {
+            Report.Info($"Attempting to click '{buttonLabel}' pagiator button.");
+            bool result = false;
+            if(PagiatorButtonExists(buttonLabel))
+            {
+                result = PagiatorButtonGet(buttonLabel).TryClick();
+            }
+            return result;
+        }
+        #endregion
+
+        #region Page Indicies
+        private IWebElement PagiatorPageIndicySpanGet(string spanLabel)
+        {
+            Report.Info($"Attempting to get '{spanLabel}' Page Indicy span.");
+            return ContainerElement.FindElement(By.XPath($".//span[contains(@data-bind,'{spanLabel}')]"), 1);
+        }
+
+        public bool PagiatorPageIndicySpanExists(string spanLabel)
+        {
+            Report.Info($"Attempting to confirm '{spanLabel}' Page Indicy span exists.");
+            return PagiatorPageIndicySpanGet(spanLabel) != null;
+        }
+
+        public string PagiatorPageIndicySpanGetValue(string spanLabel)
+        {
+            Report.Info($"Attempting to get '{spanLabel}' Page Indicy span value.");
+            string result = null;
+            if (PagiatorPageIndicySpanExists(spanLabel))
+            {
+                result = PagiatorPageIndicySpanGet(spanLabel).Text;
+            }
+            return result;
+        }
+        #endregion
+
+        #endregion
+    }
+
+    class SuperTableDataGrid : SeleniumBaseObject
+    {
+        #region Page Objects
+        protected override By ContainerElementLocator => By.Id("gview_dataGrid");
         #endregion
 
         #region Methods
