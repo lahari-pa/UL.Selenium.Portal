@@ -3498,6 +3498,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Success("The FIFRA tag value was added to context successfully.");
 			}
+			else
+			{
+				Report.Failure($"The FIFRA tag was not saved to context.")
+			}
 		}
 	}
 
