@@ -3500,7 +3500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Failure($"The FIFRA tag was not saved to context.")
+				Report.Failure($"The FIFRA tag was not saved to context.");
 			}
 		}
 	}
