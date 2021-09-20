@@ -1,6 +1,6 @@
 using System;
 using System.Configuration;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Database_Functions

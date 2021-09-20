@@ -9,12 +9,13 @@ using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
+using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
@@ -101,11 +102,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+			if (WercSmartSettings.TestCaseId == 0)
+			{
+				throw new Exception("ERROR: Failed to find TestCaseId!");
+			}
 
-
-
-			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+			Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
+			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
@@ -1042,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.com
+		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.comUpcFunctions.GetRandomUpcNumber(
 		[StepDefinition(
 			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: CVS, container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType,
@@ -1058,7 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				string upc = UpcFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -6511,16 +6514,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
 			GeneralUtilities.StudioWaitForSpinner();
 			Report.StartStep("I filter by product ID");
-			if (TReVorSettings.TestCaseId.IsNullOrEmpty())
+
+			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("Needs the test case ID to fetch the product ID to continue!");
 			}
 
-			string id = Context.GetFromContext("TestCase" + TReVorSettings.TestCaseId).ToString();
+			string id = Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId).ToString();
 			if (id == null)
 			{
-				throw new Exception(
-					$"Needs the product ID to be saved to context as 'TestCase{TReVorSettings.TestCaseId}'!");
+				throw new Exception($"Needs the product ID to be saved to context as 'TestCase{WercSmartSettings.TestCaseId}'!");
 			}
 
 			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
@@ -6696,7 +6699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ThenIClickTheAddUpcButton();
 			Report.StartStep("I set the UPC Number, Container Type and Size");
 			var upcTable = new Table("Field", "Value");
-			upcTable.AddRow("UPCNumber", $"saved as UPC{TReVorSettings.TestCaseId}");
+			upcTable.AddRow("UPCNumber", $"saved as UPC{WercSmartSettings.TestCaseId}");
 			upcTable.AddRow("ContainerType", "Aerosol Can");
 			upcTable.AddRow("Size", "20");
 			//upcTable.AddRow("DPCI", "087 - 16 - 0238");
@@ -11352,9 +11355,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+			Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
 
-			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 135134 \(Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
@@ -12191,7 +12194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.StartStep("I click the 'Add UPC' button");
 					stepsNewProduct.ThenIClickTheAddUpcButton();
 					Report.StartStep("I add the following into the UPC Fields");
-					string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+					string upc = UpcFunctions.GetRandomUpcNumber("CVS");
 					Report.Info("UPC number: " + upc);
 					var upcInfo = new UpcInformation {
 						ContainerType = containerType,

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Mailosaur;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;

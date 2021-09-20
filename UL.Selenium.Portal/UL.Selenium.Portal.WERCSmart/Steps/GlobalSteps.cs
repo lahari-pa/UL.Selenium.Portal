@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using NUnit.Framework;
@@ -27,6 +27,7 @@ using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using UL.Selenium.Portal.WERCSmart.Extensions;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 
 [assembly: Apartment(ApartmentState.STA)]
@@ -36,12 +37,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding]
 	public class GlobalSteps
 	{
-		[BeforeFeature(Order = 1)]
-		public static void SetTestURL()
-		{
-			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
-		}
-
 		[BeforeFeature(Order = 2)]
 		public static void BeforeTestKillChrome()
 		{
@@ -55,6 +50,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
 		}
 
+
+		[BeforeScenario(Order = 1)]
+		public static void BeforeScenario()
+		{
+			WercSmartSettings.TestCaseId = Context.ScenarioContext.GetTestCaseId();
+		}
 
 
 		[StepDefinition(@"I login as the administrator")]
@@ -1448,10 +1449,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete Products with the UPC number if one has been created for this test")]
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
-			string testCaseId = TReVorSettings.TestCaseId;
-			if (testCaseId != null && UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}") != null)
+			if (WercSmartSettings.TestCaseId != 0 && Context.GetFromContext($"UPC{WercSmartSettings.TestCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{WercSmartSettings.TestCaseId}").ToString());
 			}
 		}
 
@@ -2230,7 +2230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a upc number for CVS")]
 		public void CreateCVSUPC()
 		{
-			string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+			string upc = UpcFunctions.GetRandomUpcNumber("CVS");
 		}
 
 		[StepDefinition(@"I Wait for a modal popup to appear")]
@@ -2581,9 +2581,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (found)
 				{
 					Report.Info("Attempting to close the current window");
-					WebDriver.CurrentDriver.Close();
+					SeleniumWebDriver.CurrentDriver.Close();
 					Report.Info("Current window closed, switching to the BaseWindow");
-					WebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
 					Report.Success("Browser window switched successfully!");
 					Report.Screenshot();
 				}

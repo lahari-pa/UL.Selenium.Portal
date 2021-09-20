@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes

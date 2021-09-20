@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
+using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -484,26 +486,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			Report.StartStep("I should see the The Product Page");
 			newProductSteps.GivenIShouldSeeXPage("The Product");
-			string testCaseId = TReVorSettings.TestCaseId;
-			if (testCaseId == null)
+
+			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
 			}
 
-			Report.StartStep(
-				"In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
+			Report.StartStep("In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
 			//newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
 			new Steps_TheProduct().SetProductNameTo("Bleach");
-			Report.StartStep(
-				"I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
+			Report.StartStep("I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + WercSmartSettings.TestCaseId);
 			newProductSteps.SelectFirstOptionInBrandDropDown();
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartStep("I click Continue");
 			newProductSteps.ClickContinue();
-			Report.StartStep("I save the product information as TestCase" + testCaseId);
+			Report.StartStep("I save the product information as TestCase" + WercSmartSettings.TestCaseId);
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			Context.AddToContext($"TestCase{testCaseId}", prodDetails);
+			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 			Report.StartStep("Navigate to the home page");
 			new StepsHomepage().ThenINavigateToTheHomePage();
 		}

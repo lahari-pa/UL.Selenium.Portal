@@ -12,11 +12,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UL.Selenium.Portal.ShaManager</RootNamespace>
     <AssemblyName>UL.Selenium.Portal.ShaManager</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +44,7 @@
       <HintPath>..\packages\Cucumber.Messages.6.0.1\lib\net45\Cucumber.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Flurl.3.0.2\lib\net461\Flurl.dll</HintPath>
+      <HintPath>..\packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
     </Reference>
     <Reference Include="Gherkin, Version=19.0.3.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851, processorArchitecture=MSIL">
       <HintPath>..\packages\Gherkin.19.0.3\lib\net45\Gherkin.dll</HintPath>
@@ -54,14 +55,14 @@
     <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Mailosaur, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mailosaur.3.0.2\lib\Mailosaur.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Edge.SeleniumTools, Version=3.141.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Edge.SeleniumTools.3.141.2\lib\net45\Microsoft.Edge.SeleniumTools.dll</HintPath>
+    <Reference Include="Meziantou.Framework.Win32.CredentialManager, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Meziantou.Framework.Win32.CredentialManager.1.3.5\lib\net461\Meziantou.Framework.Win32.CredentialManager.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -90,39 +91,66 @@
     <Reference Include="nunit.framework, Version=3.13.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.13.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="SpecFlow.Internal.Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.Internal.Json.1.0.8\lib\net45\SpecFlow.Internal.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -134,35 +162,38 @@
     <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.NUnit.3.9.8\lib\net461\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+    <Reference Include="Thomas.Agent.Api.Wrapper, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
+    <Reference Include="Thomas.Core.Classes, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\Thomas.Core.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Api.Wrapper, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
+    <Reference Include="TReVor.Api.Client, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Api.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TReVor.Core.Classes, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Core.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="TReVor.Integrations, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Integrations.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Reporting, Version=2.3.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.2.3.18\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Selenium, Version=3.0.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Selenium.Selenium-v3.3.0.12\lib\net461\UL.Automation.Selenium.dll</HintPath>
-    </Reference>
     <Reference Include="UL.Automation.SpecFlow, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.SpecFlow.2.3.13\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.TReVor, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\UL.Automation.TReVor.dll</HintPath>
-    </Reference>
     <Reference Include="UL.Automation.Utilities, Version=2.3.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.2.3.6\lib\net461\UL.Automation.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="UL.Automation.WebDriver, Version=27.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.WebDriver.3.0.27\lib\net472\UL.Automation.WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="UL.WERCSmart.Library.Testing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.WERCSmart.Library.Testing.1.0.0\lib\UL.WERCSmart.Library.Testing.dll</HintPath>
     </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
-      <HintPath>..\packages\Utf8Json.1.3.7\lib\net45\Utf8Json.dll</HintPath>
+      <HintPath>..\packages\Utf8Json.1.3.7\lib\net47\Utf8Json.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
@@ -194,18 +225,19 @@
       <Project>{0244aa85-2c15-420d-a151-2e72ed04a5dc}</Project>
       <Name>UL.Selenium.Portal.WERCSmart</Name>
     </ProjectReference>
+    <Content Include="Icon.png" />
     <Content Include="ReportFiles\UL.Selenium.Portal.ShaManager.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem ##### UL.Automation.Vanessa Post-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.2.3.13\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rem ##### UL.Automation.Vanessa Pre-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.2.3.13\tools\Apps\UL.Automation.TReVor.BuildOperations.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Target Name="AfterUpdateFeatureFilesInProject">
     <ItemGroup>
@@ -222,8 +254,10 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets'))" />
+    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.3.9.8\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" />
+  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets')" />
 </Project>

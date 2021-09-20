@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product

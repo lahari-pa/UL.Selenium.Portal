@@ -19,7 +19,7 @@ using System.Globalization;
 using Newtonsoft.Json.Converters;
 using System.Xml;
 using UL.Automation.Reporting;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.API

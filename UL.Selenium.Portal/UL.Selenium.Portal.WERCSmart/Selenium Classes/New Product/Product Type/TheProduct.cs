@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.SpecFlow.Classes;
 using OpenQA.Selenium;
 

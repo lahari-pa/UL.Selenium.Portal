@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
@@ -10,7 +10,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps

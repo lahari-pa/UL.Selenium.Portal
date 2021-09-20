@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;

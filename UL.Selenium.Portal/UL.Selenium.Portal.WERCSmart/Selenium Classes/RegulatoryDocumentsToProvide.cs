@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;

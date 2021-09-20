@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BoDi;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
 

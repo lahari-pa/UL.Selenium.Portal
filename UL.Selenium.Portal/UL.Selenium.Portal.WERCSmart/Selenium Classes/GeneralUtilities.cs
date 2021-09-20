@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using System.Text;
@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				return WebDriver.CurrentDriver.ExitIFrame();
+				return SeleniumWebDriver.CurrentDriver.ExitIFrame();
 			}
 			catch (Exception ex)
 			{
@@ -342,21 +342,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Match match = regex.Match(teststring);
 					if (!match.Success)
 					{
-						output = WebDriver.CurrentDriver.SwitchToIFrame(val) || (WebDriver.CurrentDriver.ExitIFrame() && WebDriver.CurrentDriver.SwitchToIFrame(val));
+						output = SeleniumWebDriver.CurrentDriver.SwitchToIFrame(val) || (SeleniumWebDriver.CurrentDriver.ExitIFrame() && SeleniumWebDriver.CurrentDriver.SwitchToIFrame(val));
 						teststring = "";
 					}
 					else
 					{
 						string position = match.Groups[1].Value;
-						IWebElement iFrame = WebDriver.CurrentDriver.FindElement(By.XPath($"//iframe[{position}]"), 2);
-						WebDriver.CurrentDriver.SwitchTo().Frame(iFrame);
+						IWebElement iFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//iframe[{position}]"), 2);
+						SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(iFrame);
 						output = true;
 						teststring = "";
 					}
 				}
 				catch (Exception ex)
 				{
-					WebDriver.CurrentDriver.SwitchTo().DefaultContent();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 					Report.Error($"Failed to switch frame {frame}. Exception was thrown: " + ex.Message);
 					return false;
 				}
@@ -389,7 +389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static void SwitchToDefaultContent()
 		{
-			WebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 		}
 
 		public static void OpenNewTabAndNavigateTo(string url)
