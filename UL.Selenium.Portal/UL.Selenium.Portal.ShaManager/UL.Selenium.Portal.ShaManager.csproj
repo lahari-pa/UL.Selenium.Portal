@@ -254,10 +254,10 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets'))" />
-    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.52\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.52\build\TReVor.Integrations.BuildOperations.targets'))" />
+    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.3.9.8\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" />
-  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.52\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.52\build\TReVor.Integrations.BuildOperations.targets')" />
+  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.61\build\TReVor.Integrations.BuildOperations.targets')" />
 </Project>
