@@ -170,6 +170,7 @@ And I confirm that the recent activities page bread crumb area does not contain 
 Then In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays in date order, newest first
 And I call Shared Step 106194 (RPS Sign out)
 
+@ScenarioId:11067
 Scenario: [104961] Base Functionality - Recent Activities - Most Recent Activity Column shows date only (not time)
 Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
@@ -188,6 +189,7 @@ Then I confirm that a loading bar icon is shown
 
 @tfs_design
 #The loading period for the bar is too short to be able to perfomr robust automation on 
+@ScenarioId:11068
 Scenario: [92215] Base Functionality - Recent Activities - More Filters is unavailable when page is loading
 
 

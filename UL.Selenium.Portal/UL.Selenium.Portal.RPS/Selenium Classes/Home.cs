@@ -2,8 +2,8 @@
 using System.Linq;
 using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {

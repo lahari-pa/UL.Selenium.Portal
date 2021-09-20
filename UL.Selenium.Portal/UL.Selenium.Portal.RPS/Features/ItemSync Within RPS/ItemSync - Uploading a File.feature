@@ -73,6 +73,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @tfs_design
 #Can not automate, includes a file drag and drop
+@ScenarioId:11239
 Scenario: [125588]Base functionality - ItemSync - Upload a file - File Upload area - File selected from drag and drop
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded

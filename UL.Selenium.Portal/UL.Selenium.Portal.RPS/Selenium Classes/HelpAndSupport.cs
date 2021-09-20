@@ -4,9 +4,9 @@ using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes

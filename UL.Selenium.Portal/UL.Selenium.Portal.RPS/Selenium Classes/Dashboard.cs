@@ -3,7 +3,7 @@ using System.Linq;
 using Castle.Core.Internal;
 using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
