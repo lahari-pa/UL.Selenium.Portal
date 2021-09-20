@@ -44,11 +44,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				foreach (TableRow row in expected.Rows)
 				{
-					string option = row["Option"].Trim();
-					Report.Info($"Checking that I see the option '{option}'");
-					Report.IsTrue(upcOptions.Any(e => e.Contains(option)),
-						$"Option was not showing as expected! <br />Expected: '{option}', but found: '" + string.Join("<br /><br />", upcOptions) + "'!",
-						$"Option was showing: '{option}', as expected!");
+					string option = row["Option"];
+					Report.Info("Checking that I see the option '" + option + "'");
+					Report.IsTrue(upcOptions.Contains(option.Trim()),
+						"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", upcOptions) + "'!",
+						"Option was showing: '" + option + "', as expected!");
 				}
 			}
 			if (condition == "not see")
@@ -1537,7 +1537,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
+				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -1585,7 +1586,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
+				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 
 				var upcInfo = new UpcInformation();

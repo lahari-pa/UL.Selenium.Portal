@@ -1042,7 +1042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.com
+		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.comUpcFunctions.GetRandomUpcNumber(
 		[StepDefinition(
 			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: CVS, container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType,
@@ -1058,7 +1058,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				string upc = UpcFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -12191,7 +12191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.StartStep("I click the 'Add UPC' button");
 					stepsNewProduct.ThenIClickTheAddUpcButton();
 					Report.StartStep("I add the following into the UPC Fields");
-					string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+					string upc = UpcFunctions.GetRandomUpcNumber("CVS");
 					Report.Info("UPC number: " + upc);
 					var upcInfo = new UpcInformation {
 						ContainerType = containerType,
