@@ -1,4 +1,4 @@
-using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using System;

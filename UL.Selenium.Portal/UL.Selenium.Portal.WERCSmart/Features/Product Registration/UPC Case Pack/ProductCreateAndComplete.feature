@@ -25,6 +25,13 @@
 @run_ProductCreateAndComplete
 Feature: Product Create and Process to Completed
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto18 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
 @ScenarioId:1503
 Scenario: [87913] Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -32,8 +39,7 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87913
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Then I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+	Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
@@ -44,7 +50,7 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87913)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87913 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87913)
@@ -73,7 +79,7 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase87914
-	Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
 		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
@@ -86,7 +92,7 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87914)
@@ -112,19 +118,17 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I generate a random UPC number and save as: UPC87915
-	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: Product1
+	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: SHAQAAuto18 and save the product as: Product1
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: Product2
-	Given I navigate to the landing page
-	#Given I save to context name: Product1 and value: 1514519
-	#Given I save to context name: Product2 and value: 1514520
+	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: SHAQAAuto18 and save the product as: Product2
+	Given I navigate to the landing page	
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Color Kit
 	Then I save the product information as: TestCase87915
-	And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
+	And I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: Product1 and product 2: Product2)
 	#And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -135,7 +139,7 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87915)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87915 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87915)
@@ -162,14 +166,13 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87916
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Given I call Shared Step 74981 (Product Characteristics - gas)
-		| Secondary Physical State | Select the best Water Solubility description |
-		| Compressed gas           | Low                                          |
-	Given I call Shared Step 63804 (Additional Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		Given I call Shared Step 74981 (Physical and Chemical Properties - gas)		
+		| Secondary Physical State | Select the best Water Solubility description |
+		| Compressed gas           | Low                                          |
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -186,7 +189,7 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87916)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87916 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87916)
@@ -215,15 +218,14 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87917
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
-	#Given I call Shared Step 74981 (Product Characteristics - gas)
-	#| Secondary Physical State      | Select the best Water Solubility description         |
-	#| Compressed gas                | Low                                                  |
-	Given I call Shared Step 63804 (Additional Product Information - enter options)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
+	#Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
+	#| Secondary Physical State      | Select the best Water Solubility description         |
+	#| Compressed gas                | Low                                                  |
+#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#| Cocoa butter  | 100     | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -261,7 +263,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87917)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87917 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87917)
@@ -290,12 +292,12 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase87922
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Aerosol Can and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+    Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Cardboard and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -305,7 +307,7 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87922)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87922 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87922)
@@ -334,9 +336,9 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87923
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	#And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -350,7 +352,7 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87923)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87923)
@@ -379,12 +381,11 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I generate a random UPC number and save as: UPC118139
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
 	Then I save the product information as: TestCase118139
-	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
-	Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+	Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+    Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 	Given I click continue
-	#
-	Given I add the following CA Cleaning ingredients:  
+    Given I add the following CA Cleaning ingredients:  
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
 		| Water         | 100     | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 	And in the Ingredients page I click Continue
@@ -409,7 +410,7 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase118139)

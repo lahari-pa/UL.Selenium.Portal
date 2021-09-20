@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using NPOI.OpenXmlFormats.Spreadsheet;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using Context = UL.Automation.Reporting.SpecFlow.Classes.Context;
+using Context = UL.Automation.SpecFlow.Classes.Context;
 using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
@@ -150,6 +150,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 						}
 						Report.Info("Entering text: " + alpha[count] + " into the search input");
 						this.EnterManufacturer.TryEnterText(thisBattery.Manufacturer == "<any>" ? alpha[count].ToString() : thisBattery.Manufacturer);
+
+						//possible update needed to get all results then select random or one without error? or just move to next alpha if error?
 						IWebElement result = this.EnterManufacturer.FindElement(By.XPath("./parent::span/following-sibling::span/ul/li[not(contains(@class,'loading-results'))]"), 10);
 						foundResult = result != null;
 						if (foundResult)

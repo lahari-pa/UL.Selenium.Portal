@@ -16,22 +16,26 @@
 @run_KitsFlow13DocumentMerge
 Feature: Kit Document Merge
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto15 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @73949
 @ScenarioId:1510
 Scenario: [73949] Kit - Document merge - US only
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 	Given I navigate to the landing page
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
-	Given I navigate to the landing page
-	#Given I save product 1520182 to context as 73949_KitProduct1
-	#Given I save product 1520183 to context as 73949_KitProduct2
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+	Given I navigate to the landing page	
 	Given I generate a random UPC number and save as: UPC73949
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
 	Then I save the product information as: TestCase73949
-	And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
+	And I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73949_KitProduct1 and product 2: 73949_KitProduct2)
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -42,11 +46,11 @@ Scenario: [73949] Kit - Document merge - US only
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase73949)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
@@ -78,10 +82,10 @@ Scenario: [73949] Kit - Document merge - US only
 @73950
 @ScenarioId:5946
 Scenario: [73950] Kit Document merge - Canada only
-	#Given I Use Test case 78865 to create a new product which is for NR and Canada only, and get it to completed status.  You will need to run this twice as you need two products to add to the kit.
-	Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 and save as: 73950_KitProduct1
-	Given I navigate to the landing page
-	Given I create a product with name: Kit product 2 and take to completed using Test Case 78865 and save as: 73950_KitProduct2
+	
+	Given I create a product for a Kit with name: Kit product 1 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct1
+	Given I navigate to the landing page	
+	Given I create a product for a Kit with name: Kit product 2 and Force it to completed using Test Case 78865 Using SHA Acc: SHAQAAuto15 and save as: 73950_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC73949
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -89,7 +93,7 @@ Scenario: [73950] Kit Document merge - Canada only
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
 	Then I save the product information as: TestCase73950
-	And I call Shared Step 62681 - Additional Product Information - Canada, No(DSV), No(PLP), No(GNFR), Continue - Happy Path
+	And I call Shared Step 62681 - Product Information - Canada, No(DSV), No(PLP), No(GNFR), Continue - Happy Path
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73950_KitProduct1 and product 2: 73950_KitProduct2)
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -100,11 +104,11 @@ Scenario: [73950] Kit Document merge - Canada only
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: yrdy
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73950)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73950 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase73950)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73950)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73950 and its status is: Assigned
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73950

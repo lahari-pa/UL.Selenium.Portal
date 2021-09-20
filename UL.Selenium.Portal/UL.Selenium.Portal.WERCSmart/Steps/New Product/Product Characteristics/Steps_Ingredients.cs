@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -84,14 +84,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenForIngredient_TheGenericName_FieldIs_(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
-			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected");
+			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " as expected");
 		}
 
 		[StepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
 		public void GivenForIngredient_TheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
-			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected");
+			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " as expected");
 		}
 
 		[StepDefinition(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
@@ -466,7 +466,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked the Regulated button for ingredient: " + name);
 		}
 
-		[StepDefinition(@"In the ingredients page I search for and select product saved as: (.*)")]
 		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -900,7 +899,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
-			Delay.Seconds(5);
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
 		}
 
 
@@ -914,16 +914,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
 
 
 		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
 		{
-			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
+			Report.IsTrue(new Ingredients().ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
 		}
 
 

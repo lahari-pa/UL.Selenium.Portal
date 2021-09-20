@@ -16,7 +16,7 @@ Feature: [64732] Flow 26 - Electronic
 
 
 @ScenarioId:710
-Scenario: [60671] Computer (Combination of Monitor + Desktop) - RU001177
+Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -33,7 +33,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60671
 
-Given I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using System.Text;
@@ -11,7 +11,7 @@ using System.Linq;
 using UL.Automation.Utilities.Functions;
 using System.IO;
 using System.Text.RegularExpressions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using System.Net;
 using System.Drawing;
 using TechTalk.SpecFlow;
@@ -40,8 +40,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public static bool ExitIFrame()
+		{
+			try
+			{
+				return SeleniumWebDriver.CurrentDriver.ExitIFrame();
+			}
+			catch (Exception ex)
+			{
+				Report.Error("Failed to switch frame. Exception was thrown: " + ex.Message);
+				return false;
+			}
+		}
 
+		public static string ReplaceWithContext(string input)
+		{
+			string pattern = @"<context:(\w+)>";
+			Match match = Regex.Match(input, pattern);
+			if (match.Success)
+			{
+				string contextVar = match.Groups[1].Value;
+				input = Regex.Replace(input, pattern, (string)Context.GetFromContext(contextVar));
 
+			}
+			return input;
+
+		}
 		public static bool StudioWaitForSpinner(int maxSecondsToWait)
 		{
 			try
@@ -293,6 +317,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
 		}
+		public static bool SwitchToFrame(string frame = "Widget1FRAME")
+		{
+			string[] values = frame.Split(',');
+			bool output = true;
+			Regex regex = new Regex("<(.+)>");
+			string teststring = "";
+			foreach (var val in values)
+			{
+				try
+				{
+					if (teststring.StartsWith("<"))
+					{
+						teststring = $"{teststring},{val}";
+					}
+					else
+					{
+						teststring = val;
+					}
+					if (teststring.StartsWith("<") && !teststring.EndsWith(">"))
+					{
+						continue;
+					}
+					Match match = regex.Match(teststring);
+					if (!match.Success)
+					{
+						output = SeleniumWebDriver.CurrentDriver.SwitchToIFrame(val) || (SeleniumWebDriver.CurrentDriver.ExitIFrame() && SeleniumWebDriver.CurrentDriver.SwitchToIFrame(val));
+						teststring = "";
+					}
+					else
+					{
+						string position = match.Groups[1].Value;
+						IWebElement iFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//iframe[{position}]"), 2);
+						SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(iFrame);
+						output = true;
+						teststring = "";
+					}
+				}
+				catch (Exception ex)
+				{
+					SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+					Report.Error($"Failed to switch frame {frame}. Exception was thrown: " + ex.Message);
+					return false;
+				}
+			}
+			return output;
+		}
+
 
 		public static bool CheckCBAOrder(List<string> list)
 		{
@@ -314,6 +385,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 			return true;
+		}
+
+		public static void SwitchToDefaultContent()
+		{
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 		}
 
 		public static void OpenNewTabAndNavigateTo(string url)
@@ -417,7 +493,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{"Ace Hardware Corporation", "AC" },
 				{ "Best Buy", "BE" },
 				{ "Albertsons Companies", "SW" },
-				{ "Enterprise license", "EL" }
+				{ "Enterprise license", "EL" },
+				{"United Natural Foods, Inc.","UN"}
+
 			};
 		}
 
@@ -518,7 +596,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		
+	
+
+
 
 
 

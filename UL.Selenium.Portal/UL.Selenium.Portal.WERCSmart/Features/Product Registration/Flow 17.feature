@@ -24,8 +24,8 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase60017
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium perchlorate | 50      | false               | false       |            |
@@ -39,9 +39,9 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60017 with container type: Plastic Container size: 50.0 and quantity: 1000
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
@@ -63,8 +63,8 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Ion Battery
 	Then I save the product information as: TestCase60018
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -100,8 +100,8 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase104222
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -123,13 +123,13 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Label in both French and English is shown as Red
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Red
 	Then UN38.3 Testing Results should be showing the error messages with no special characters: The U.S.Department of Transportation, as of January 1, 2020, requires that lithium batteries have testing performed in relation to UN38.3.Please provide the testing document from the successful UN38.3 test performed on this battery.If you do not have a test document to provide, you are unable to submit this registration for assessment and your battery will not be available for selection by other suppliers. Should you have further questions regarding this requirement, please contact the WERCSmart Support team for assistance.Or you may refer to the Solution Center article outlining the regulatory requirement.
-	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I click continue	
 	Then Article Information Sheet (AIS) should not be showing the error messages: Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.
 	Then Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should be showing the error messages: Select at least one of the options
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	Then Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should not be showing the error messages: Select at least one of the options
-	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I click continue
 	Then UN38.3 Testing Results should not be showing the error messages with no special characters: The U.S.Department of Transportation, as of January 1, 2020, requires that lithium batteries have testing performed in relation to UN38.3.Please provide the testing document from the successful UN38.3 test performed on this battery.If you do not have a test document to provide, you are unable to submit this registration for assessment and your battery will not be available for selection by other suppliers. Should you have further questions regarding this requirement, please contact the WERCSmart Support team for assistance.Or you may refer to the Solution Center article outlining the regulatory requirement.
 	Then WHMIS-compliant Safety Data Sheet, English and French-Canadian should be showing the error messages: Select at least one of the options
@@ -150,8 +150,8 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase104227
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -168,14 +168,14 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 	Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
-	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
-	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
 	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
-	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then in the Additional Documents to Provide page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	#And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
@@ -202,6 +202,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 @tfs_design
 # Test case can be found at the following path:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 17 - Lith bat
+@ScenarioId:11164
 Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	Given I generate a random UPC number and save as: UPC103572
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -209,8 +210,8 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I save the product information as: TestCase103572
 	# In the shared step below select Lithium Primary/Metal Batteries as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Primary/Metal Batteries
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	# Use Lithium in the shared step below
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Lithium
 	And I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
@@ -218,12 +219,12 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I call Shared Step 60096 (Lithium Battery Transportation)
 	And in the Retailer page I click Continue
 	And I choose ok in the UPCs Warning modal window
-	And I click the browse button for label: I have an Article Information Sheet and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: I have an Article Information Sheet and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	#I On the Regulatory Documents to Provide screen, upload a document into the Article Information Sheet (AIS) section.
 	And in Regulatory Documents to Provide I select: I don't need an OSHA-Compliant Safety Data Sheet for the: Batteries are considered Articles under Global Harmonized Standards question
-	And I click the browse button for label: Upload UN38.3 Test Document and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Upload UN38.3 Test Document and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in Regulatory Documents to Provide I select: Request to author for the: WHMIS-compliant Safety Data Sheet, English and French-Canadian question
-	And I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the Regulatory Documents page I click Continue
 	And I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -252,7 +253,7 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	# And I Enter "Camera w/Battery" in Type of Product smart search field
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
-	And I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	And I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I In the below step, choose the battery you added to the BATTREF table in the Manufacturer drop down.
 	And [Shared Step 103977 - Product Includes Battery > Lithium]

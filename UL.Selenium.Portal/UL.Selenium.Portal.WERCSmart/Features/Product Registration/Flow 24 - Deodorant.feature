@@ -21,8 +21,8 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 	Then I save the product information as: TestCase60617
-	And I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	And I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Triclosan        | 24.94   | false               | false       |            |
@@ -47,7 +47,7 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Then I should see the Volatile Organic Compound Summary Page
 	And in the New Product page I click Continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Aerosol Can and size: 14
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Cardboard and size: 14
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -65,10 +65,10 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	# And I Enter "Deodorant - Non-Aerosol" in Type of Product smart search field
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	And I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Water Solubility     | Secondary Physical State |
 		| Soluble in hot water | Solid                    |
-	And I call Shared Step 60310 (Additional Product Information - Without Child question)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium hydroxide | 80      | false               | false       |            |
@@ -109,8 +109,8 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase60619
-	Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
+	Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)	
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -134,3 +134,47 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60619
+
+
+
+	@ScenarioId:10716
+Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I save the product information as: TestProduct
+Given in the Product Characteristics page I click Continue
+And Primary Physical State should be showing the error messages: This is a required field.
+Given I set the Primary Physical State option to: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given I set the Select the best Water Solubility description option to: Decomposes
+Given I click continue
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+Given I set the Product has been granted an Alternative Control Plan option to: No
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: abc
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: !@
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 123.456
+And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 12.34
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: abc
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: !@
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 123.456
+And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
+Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 12.34
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct

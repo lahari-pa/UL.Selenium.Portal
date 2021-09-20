@@ -28,9 +28,8 @@ Scenario: [63323] Remove single product from cart
        Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
        Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
        Then I save the product information as: TestCase63323
-       Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-       #Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-       Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	   Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+       Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
        Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
              | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
              | Propane       | 100     | false               | false       |            |

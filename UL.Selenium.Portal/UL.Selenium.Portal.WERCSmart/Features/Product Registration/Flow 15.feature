@@ -22,8 +22,9 @@ Given I delete all products with UPC Number: saved as UPC58760
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 Then I save the product information as: TestCase58760
-And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+And I call Shared Step 69687 (Product Information - US, No(PL))
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22
@@ -44,7 +45,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
 Then I save the product information as: TestCase58759
 # Shared 60935 replacing 57865 in test case
-Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |

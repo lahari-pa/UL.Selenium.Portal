@@ -16,6 +16,11 @@
 @run_KitsFlow13DirectShipVendor
 Feature: Kit Direct Ship Vendor
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto14 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 # Needs two products in completed status with SOLD set to US only. test case #75335
 # Waiting for this test to be finished ^^^
 # Assigned to Beverly Barrett
@@ -23,16 +28,16 @@ Feature: Kit Direct Ship Vendor
 @ScenarioId:6005
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
 	Given I navigate to the landing page
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC77862
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
-	And I call Shared Step 77872 (Additional Product Information - Kit flow - US only, Direct Ship (yes), Continue)
+	And I call Shared Step 77872 (Product Information - Kit flow - US only, Direct Ship (yes), Continue)
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	#And I In the shared step below add the two completed products that you are working with
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 77862_KitProduct1 and product 2: 77862_KitProduct2)
@@ -49,7 +54,7 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	#And I The Purchase summary step is shown with the success message
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77862)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
 	And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
@@ -57,18 +62,16 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 @ScenarioId:5943
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
-	#Given I create a product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
 	Given I navigate to the landing page
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
-	#Given I create a product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto14 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC77837
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
-	Given I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
+	Given I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	#And I In the shared step below add the two completed products that you are working with
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 77837_KitProduct1 and product 2: 77837_KitProduct2)
@@ -83,7 +86,7 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	#And I The Purchase summary step is shown with the success message
 	And I navigate to the home page
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77837)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77837 and its status is: Submitted
 	And I Confirm the Product ID: saved as TestCase77837 is not highlited yellow indicating that this is not an e-comm/direct ship product
@@ -97,8 +100,10 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1549414
 	#Given I save to context name: 77862_KitProduct2 and value: 1549415
-	Given I use Test case 77862 to create a kit and save as TestCase77857
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given I use Test case 77862 to create a kit and save as TestCase77857
+	#Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77857
+	Given I use Forced Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77857
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77857)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
@@ -117,7 +122,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its font is red indicating a recertification
 	#Scenario: test
 	#Given I save to context name: TestCase77857 and value: 1549382
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -128,14 +133,13 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	And I click on the Row Action: Update Required
 	#And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
 	And I should see the The Product Page
-	#And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
 	#And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 	And I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
 	And I click the page heading: Data Acceptance
 	And In the Data Acceptance page I click on the Accept button
 	And If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 	And I Confirm the Product ID: saved as TestCase77857 is not highlited yellow indicating that this is not an e-comm/direct ship product
 	#And I Confirm that your product is shown in the Recertification status with the red font no longer shown
@@ -151,12 +155,17 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
+@ScenarioId:11183
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1552743
 	#Given I save to context name: 77862_KitProduct2 and value: 1552746
 	#Given I Use Test case 77862 to create a kit which has Direct Ship set to Yes and is for WM only.Test case is linked.  This leaves the kit product in Submitted status in SHA manager
-	Given I use Test case 77862 to create a kit and save as TestCase77858
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given I use Test case 77862 to create a kit and save as TestCase77858
+	#Given I use Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77858
+	Given I use Forced Test case 77862 to create a kit using SHA Acc: SHAQAAuto14 and save as TestCase77858
+
+
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77858)
 	#And I Use the shared step below to search for your product
@@ -183,14 +192,13 @@ Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM
 	#And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
 	And I should see the The Product Page
 	And I click Save in The Product Page
-	#And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
 	#And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 	And I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
 	And I click the page heading: Data Acceptance
 	And In the Data Acceptance page I click on the Accept button
 	And If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto14 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)
 	And I Confirm the Product ID: saved as TestCase77858 is not highlited yellow indicating that this is not an e-comm/direct ship product
 	#And I Confirm that your product is shown in the Recertification status with the red font no longer shown

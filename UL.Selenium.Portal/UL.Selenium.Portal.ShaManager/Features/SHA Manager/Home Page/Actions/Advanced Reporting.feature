@@ -36,8 +36,8 @@ Scenario: [105329] PM Monthly Status Report - Target
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Shampoo (Liquid)
 	Then I save the product information as: TestCase105329
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
@@ -147,8 +147,8 @@ Scenario: [87182] 3rd Party Formula Use in Registrations
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I enter text: WPS in the component search box
 	And I select the component search result with CAS matching text: WPS and save ingredient as: Ingredient87182
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -962,8 +962,8 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: Product113706
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Chalk         | 80.5    | false               | false       |            |
@@ -995,8 +995,8 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: Product114216
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Chalk         | 20      | false               | false       |            |
@@ -1035,7 +1035,8 @@ Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packin
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -1050,7 +1051,6 @@ Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packin
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page

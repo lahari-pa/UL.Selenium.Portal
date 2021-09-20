@@ -19,9 +19,9 @@ Given I delete all products with UPC Number: saved as UPC59273
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Then I save the product information as: TestCase59273
+Given I should see the Product Information Page
+Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-Given I should see the Additional Product Information Page
-Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | Potassium hydroxide | 20.5    | false               |            | false       |
@@ -34,7 +34,7 @@ Given I should see the Regulatory Documents to Provide Page
 Then I check if AIS is not uploaded
 Then I should not see radio option: I don't need a WHMIS Compliant SDS
 Then I should not see radio option: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product
-And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then I should see radio option: need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 Then I should see radio option: need a WHMIS Compliant SDS
 
@@ -47,8 +47,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Given I generate a random UPC number and save as: UPC142371
 Then I save the product information as: ThisProduct
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | false       |            |
@@ -64,10 +64,10 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Walgreens |
 Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC142371 with container type: Plastic Container size: 2 and quantity: 2 do not click continue
 Given I click continue
-Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Given I click continue
 Given in the Additional Documents to Provide page I click Continue

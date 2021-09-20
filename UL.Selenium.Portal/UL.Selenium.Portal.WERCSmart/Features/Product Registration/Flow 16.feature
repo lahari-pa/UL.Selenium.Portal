@@ -22,9 +22,9 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 	Then I save the product information as: TestCase59273
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Potassium hydroxide | 20.5    | false               | false       |            |
@@ -41,7 +41,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -63,10 +63,9 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery Containing Mercury
 	Then I save the product information as: TestCase59274
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Mercury oxide | 15.2    | false               | false       |            |
@@ -83,7 +82,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -105,10 +104,9 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid Battery - No Acid Included
 	Then I save the product information as: TestCase59276
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
@@ -123,7 +121,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -145,10 +143,9 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Magnesium Battery
 	Given I save the product information as: TestCase59277
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Magnesium     | 50      | false               | false       |            |
@@ -163,7 +160,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -183,12 +180,10 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I generate a random UPC number and save as: UPC59278
 	Given I delete all products with UPC Number: saved as UPC59278
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
+    Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I save the product information as: TestCase59278
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Nickel        | 9       | false               | false       |            |
@@ -204,7 +199,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
     Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -226,10 +221,9 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel-Cadmium Battery
 	Given I save the product information as: TestCase59279
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Nickel          | 11.12   | false               | false       |            |
@@ -245,7 +239,7 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -267,10 +261,9 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Silver Battery
 	Given I save the product information as: TestCase59280
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Silver Oxide  | 19.52   | false               | false       |            |
@@ -287,7 +280,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -309,16 +302,15 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
 	Given I save the product information as: TestCase59281
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 33.33   | false               | false       |            |
-		| Copper          | 4.70    | false               | false       |            |
-		| Magnesium       | 5.30    | false               | false       |            |
-		| Aqua            | 56.67   | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 33.33   | false               | false       |            |
+		| Copper        | 4.70    | false               | false       |            |
+		| Magnesium     | 5.30    | false               | false       |            |
+		| Aqua          | 56.67   | false               | false       |            |
 	And I should see the Formulation > Batteries Page
 	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
 	Given I click continue
@@ -329,7 +321,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -351,10 +343,9 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
 	Given I save the product information as: TestCase59282
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Zinc          | 30      | false               | false       |            |
@@ -370,7 +361,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -392,10 +383,9 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
 	Given I save the product information as: TestCase59275
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Zinc          | 30      | false               | false       |            |
@@ -411,7 +401,7 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
@@ -431,9 +421,9 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
@@ -450,7 +440,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -470,9 +460,9 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
 	Then I save the product information as: TestCase97470
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
@@ -487,7 +477,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -509,9 +499,9 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 	Then I save the product information as: TestCase59273
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Potassium hydroxide | 20.5    | false               | false       |            |
@@ -544,7 +534,7 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I verify the error messaging in Regulatory Documents to Provide:
 		| Question                                     | Expected Answer                                        |
 		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
@@ -565,14 +555,13 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
 	Then I save the product information as: TestCase122366
-	#Given I call Shared Step 60756 (Additional Product Information with Country and every option)
-	Then I call Shared Step 63704 (Additional Product Information - US, No(DSV), No(PL), No(GNFR))
+	Then I call Shared Step 63704 (Product Information - US, No(DSV), No(PL), No(GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
-	Given I add the following batteries:
-	 | Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
-	 | Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+		Given I add the following batteries:
+	 | Battery Type    | Manufacturer                                                  | Number of batteries per package | How many batteries required to run | Saved As       |
+	 | Lithium Primary | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I set 'Product has had TCLP; Report is available' to: No
 	And I set the Lead option to: No

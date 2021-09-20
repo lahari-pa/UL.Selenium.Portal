@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Automation.Reporting;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -708,6 +709,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Ensure the Data Consent Tier Sliders are set");
 				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.Info("Setting Tier " + row["Tier"] + " to be in the " + row["State"] + " position");
+					Report.IsTrue(selRetailDetails.SetDataConsentTier("Tier " + row["Tier"], row["State"] == "On"),
+						"Failed to set Tier " + row["Tier"] + " to be in the " + row["State"] + " position!",
+						"Successfully set Tier " + row["Tier"] + " to be in the " + row["State"] + " position!");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I ensure the CVS Data Consent Tier Sliders are showing and set as follows:")]
+		public void CVSDataConsentTiersAreShowingAndSet(Table expected)
+		{
+			Report.Info($"Ensure the Data Consent Tier Sliders are set");
+			Report.Info($"Starting...");
+			try
+			{
+
+				Report.Info("Ensure the Data Consent Tier Sliders exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					if (selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]) == false)
+					{
+						Report.Info($"The tier {row["Tier"]} was not showing");
+						Report.Info($"Creating and submitting CVS product...");
+
+						new Steps_CreateProduct().ForCVSICreateProductOfTypeHomeImprovmentAndLeaveAsNew("temp");
+
+						//navigate back to this page...
+						new StepsHomepage().ThenINavigateToTheHomePage();
+						new Steps_Shared().SharedGoToRetailPartners_SelectCVS();
+						foreach (TableRow item in expected.Rows)
+						{
+							Report.IsTrue(selRetailDetails.GetDataConsentTier("Tier " + item["Tier"]),
+								"Failed to find slider for Tier " + item["Tier"],
+								"Successfully found slider for Tier " + item["Tier"]);
+						}
+					}
+					else
+					{
+						Report.Info($"The tier {row["Tier"]} was showing");
+					}
+						
+				}
+
+
+
+				Report.Info("Ensure the Data Consent Tier Sliders are set");
 				foreach (TableRow row in expected.Rows)
 				{
 					Report.Info("Setting Tier " + row["Tier"] + " to be in the " + row["State"] + " position");

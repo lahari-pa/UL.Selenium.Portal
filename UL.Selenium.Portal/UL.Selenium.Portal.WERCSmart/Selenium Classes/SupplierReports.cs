@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
@@ -10,8 +10,7 @@ using UL.Automation.Reporting.Functions;
 using System;
 using TechTalk.SpecFlow;
 using NPOI.SS.UserModel;
-using Gherkin.Events.Args.Pickle;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

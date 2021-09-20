@@ -23,6 +23,11 @@
 @run_BulkActions
 Feature: BulkActions
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto6  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1086
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -64,7 +69,8 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I filter the products by: Sending to Retailers
-	Given I save the list of Product IDs displayed on the page as: ProductInProgressList74634
+	Then If there are no Products in the status 'Sending to Retailers' I create one with SHA account: SHAQAAuto6
+	Given I save the list of Product IDs displayed on the page as: ProductInProgressList74634	
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
@@ -136,7 +142,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 @test75321
 @ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto6 and save as: TestCase75321
 	Given I navigate to the landing page
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I filter the products by: Accepted by Retailers
@@ -163,7 +169,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Given If purchase details are showing click confirm order
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
@@ -200,7 +206,9 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
 	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
 	And I save a product which blue and has retailers and at least 1 UCP as TestCase75129
@@ -231,7 +239,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	And I click continue
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Given I navigate to the home page
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto6 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75129)
 	Then I Confirm the Product shows status: Submitted for retailer: saved as TestCase75129Retailer
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase75129
@@ -248,10 +256,10 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
 		| Flaked                   | Soluble in water |
-	And I call Shared Step 60310 (Additional Product Information - Without Child question)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua          | 100     | false               | false       |            |
@@ -263,7 +271,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	And I click continue
 	And I call Shared Step 77535 (Retailer Association - Walmart)
-	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
+	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Cardboard and size: 10
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
@@ -298,8 +306,8 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366a
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -316,13 +324,13 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 
 	And I navigate to the home page
-Given I generate a random UPC number and save as: UPC93366b
+	Given I generate a random UPC number and save as: UPC93366b
 	Given I delete all products with UPC Number: saved as UPC93366b
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366b
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -340,13 +348,13 @@ Given I generate a random UPC number and save as: UPC93366b
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
-Given I generate a random UPC number and save as: UPC93366c
+	Given I generate a random UPC number and save as: UPC93366c
 	Given I delete all products with UPC Number: saved as UPC93366c
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366c
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -364,13 +372,13 @@ Given I generate a random UPC number and save as: UPC93366c
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
-Given I generate a random UPC number and save as: UPC93366d
+	Given I generate a random UPC number and save as: UPC93366d
 	Given I delete all products with UPC Number: saved as UPC93366d
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366d
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -388,13 +396,13 @@ Given I generate a random UPC number and save as: UPC93366d
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
-Given I generate a random UPC number and save as: UPC93366e
+	Given I generate a random UPC number and save as: UPC93366e
 	Given I delete all products with UPC Number: saved as UPC93366e
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366e
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -433,6 +441,7 @@ Given I generate a random UPC number and save as: UPC93366e
 	Then In the Make Obsolete popup I click on the Accept button
 	Then I make sure product saved as: TestCase93366a should missing from the product list
 
+	Then In the Delete Active Products page I click the Clear Filter button
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366b
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase93366b should not missing from the product list
@@ -445,6 +454,7 @@ Given I generate a random UPC number and save as: UPC93366e
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Accept button
 	Then I make sure product saved as: TestCase93366b should missing from the product list
+
 
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366c
 	Then In the Delete Active Products page I click the Filter button
@@ -467,8 +477,8 @@ Given I generate a random UPC number and save as: UPC93366e
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase88826
 	Then I generate a random UPC number and save as: UPC88826
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: CVS

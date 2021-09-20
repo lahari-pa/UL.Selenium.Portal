@@ -21,9 +21,9 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): ABS Welding
 	Then I save the product information as: TestCase57863
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	#Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
@@ -60,9 +60,8 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Automotive Coating - SCAQMD any other coating type
 	Then I save the product information as: TestCase57905
-	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	#Given I call Shared Step 57798 (Additional Product Information- Pesticide, Canada Only - No to everything else, Continue)
-	Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
 	# Wrong step. CEPA question is displayed because previous step set the countries sold in to only Canada
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -91,7 +90,7 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	#
 	#Given I click continue
 	#
@@ -111,8 +110,8 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Grout
 	Then I save the product information as: TestCase63623
-	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)

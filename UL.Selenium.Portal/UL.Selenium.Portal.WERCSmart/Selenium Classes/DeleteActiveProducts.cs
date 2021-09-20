@@ -1,11 +1,11 @@
-using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.WebDriver.BaseClasses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.Generic;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -32,6 +32,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement filterButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: searchProducts']"), 2);
 			return filterButton.TryClick();
+		}
+
+		public bool ClickClearFilterButtonInDeleteActiveProductsPage()
+		{
+			IWebElement clearFilterButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: clearFilters']"), 2);
+			return clearFilterButton.TryClick();
 		}
 
 		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string wpsID)

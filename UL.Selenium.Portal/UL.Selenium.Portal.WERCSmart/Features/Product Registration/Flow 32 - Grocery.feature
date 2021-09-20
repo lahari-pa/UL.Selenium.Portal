@@ -41,8 +41,18 @@ And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy To
 And in the The Product page I click Continue
 Then I save the product information as: TestCase60774
 
+# ====== Following the steps from 'Shared Step' 60756 ====== #
+And I should see the Product Information Page
+And Select countries the product may be sold in should be showing the value: United States
+And I set the Select the product's Country of Origin field to: United Kingdom
+And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
+And I set the Product is shipped directly by supplier to the consumer. field to: No
+And I set the Product is a Retailer's Private Label or Brand field to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
+And in the Product Information page I click Continue
+
 # ====== Following the steps from 'Shared Step' 60778 ====== #
-And I should see the Product Characteristics Page
+And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
 And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
@@ -53,17 +63,8 @@ And I set the Product is manufactured in a facility that processes, or contains 
 And I set the Product is verified and sold as field to: None of the Above
 And I set the Product contains the following sweeteners field to: None of the Above
 And I set the Product contains the following artificial dye(s) option to: None of the Above
-And in the Product Characteristics page I click Continue
+And in the Physical and Chemical Properties page I click Continue
 
-# ====== Following the steps from 'Shared Step' 60756 ====== #
-And I should see the Additional Product Information Page
-And Select countries the product may be sold in should be showing the value: United States
-And I set the Select the product's Country of Origin field to: United Kingdom
-And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
-And I set the Product is shipped directly by supplier to the consumer. field to: No
-And I set the Product is a Retailer's Private Label or Brand field to: No
-And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
-And in the Additional Product Information page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57570 ====== #
 And I should see the Ingredients Page
@@ -109,7 +110,7 @@ And in the Universal Product Code (UPC) page I click Continue
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
-And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Regulatory Documents to Provide page I click Continue
 
 # Additional Documents to Provide Page
@@ -149,9 +150,10 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60775
 
+Given I call Shared Step 60756 (Product Information with Country and every option)
+
 Given I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aerosol)
 
-Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

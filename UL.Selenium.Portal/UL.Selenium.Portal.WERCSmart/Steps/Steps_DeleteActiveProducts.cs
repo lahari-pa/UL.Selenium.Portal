@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -30,6 +30,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(deleteActiveProductsObject.ClickFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
 			Delay.Seconds(10);
 		}
+
+		[StepDefinition(@"In the Delete Active Products page I click the Clear Filter button")]
+		public void ThenInTheDeleteActiveProductsPageIClickTheClearFilterButton()
+		{
+			var deleteActiveProductsObject = new DeleteActiveProducts();
+			Report.IsTrue(deleteActiveProductsObject.ClickClearFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+			Delay.Seconds(10);
+		}
+
 
 		[StepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
 		public void ThenInTheDeleteActiveProductsPageISearchForWPSIDSavedAs(string wpsID)

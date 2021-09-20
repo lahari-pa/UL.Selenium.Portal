@@ -24,6 +24,13 @@
 @run_DuplicateUPC
 Feature: Duplicate UPC
 
+
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto7  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 # Assigned to Abbie Zullo
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
@@ -36,8 +43,8 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91076
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -62,8 +69,8 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase82536
 	And I click continue
-	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
@@ -127,8 +134,8 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	#And I click continue
-	#And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	#And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	#And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
@@ -173,7 +180,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 
 @ScenarioId:1406
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
@@ -200,8 +207,8 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as ExistingUPC | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| UPC Number           | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+		| saved as ExistingUPC | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. 
 	
@@ -209,7 +216,8 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ScenarioId:1412
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product1
+	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
+
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
@@ -224,22 +232,22 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add UPC button under the Select UPCs tab
 	And In the Add UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Ounces) | Retailer |
-		| saved as UPC91801_2 | Aerosol Can | 32            | WG       |
+		| UPC Number          | Type      | Size (Ounces) | Retailer |
+		| saved as UPC91801_2 | Cardboard | 32            | WG       |
 	And In the UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
 @ScenarioId:1404
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
-	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
+	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91798
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -248,7 +256,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I click the 'Add Case UPC' button
 	Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC91801_2 | Aerosol Can    | 32   | 32       |                          | 4A: steel box         |
+		| saved as UPC91801_2 | Cardboard      | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
@@ -256,10 +264,10 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 @ScenarioId:1405
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product1
+	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product2
+	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
@@ -272,8 +280,8 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
-		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as UPC91800_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| UPC Number          | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+		| saved as UPC91800_2 | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
@@ -285,8 +293,8 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91741
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -307,8 +315,8 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91100
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -319,7 +327,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:
@@ -348,7 +356,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 
 @ScenarioId:1411
 	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
@@ -388,8 +396,8 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91077
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -411,8 +419,8 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91101
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -427,7 +435,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	#Looks like there is a bug failing this test that does not auto fill product name if using bulk upload file, in testing we can use below method with sample file data+ names to stop this being an issue, but needs to be raised.
 	#And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988, (Base Data Only: true)
 
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:

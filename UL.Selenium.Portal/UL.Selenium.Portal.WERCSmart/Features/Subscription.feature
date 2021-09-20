@@ -53,8 +53,8 @@ Given If not already created, I create a user: TC63297User with the following pa
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: TestCase63297
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -661,7 +661,7 @@ Then In the Thank You screen I click Home
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
 Then I save the product information as: TestCase105063
-Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
@@ -838,8 +838,8 @@ Given I navigate to the home page
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: TestCase63224Product2
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
