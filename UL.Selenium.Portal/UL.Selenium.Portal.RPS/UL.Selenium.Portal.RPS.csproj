@@ -220,6 +220,7 @@
     <Compile Include="Selenium Classes\HelpAndSupport.cs" />
     <Compile Include="Selenium Classes\Home.cs" />
     <Compile Include="Selenium Classes\ItemSync.cs" />
+    <Compile Include="Selenium Classes\SuperTable.cs" />
     <Compile Include="Selenium Classes\WidgetPage.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
     <Compile Include="Selenium Classes\Modals.cs" />
