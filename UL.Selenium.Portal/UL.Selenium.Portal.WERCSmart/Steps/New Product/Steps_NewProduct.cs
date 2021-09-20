@@ -15,6 +15,7 @@ using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -2666,12 +2667,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
 		{
-			string testCaseId = TReVorSettings.TestCaseId;
-			if (testCaseId == null)
+			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
 			}
-			Report.Info("Current test case ID: " + testCaseId);
+			Report.Info("Current test case ID: " + WercSmartSettings.TestCaseId);
+
 			var newProduct = new NewProduct();
 			List<MyBrands.Brand> options = newProduct.AllProductLineOrBrandOptions();
 			if (options.Count == 0)
@@ -2686,9 +2687,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProduct.SetOptionInSectionByValue("Product Line or Brand (optional)", brand.ID, brand.Name),
 				$"Failed to set the Product Line or Brand option to: {brand.Name} ({brand.ID})!",
 				$"Successfully set the Product Line or Brand option to: {brand.Name} ({brand.ID})");
-			Report.Info($@"Saving brand ""{brand.Name}"" to context as: Brand{testCaseId}");
-			Context.AddToContext($"Brand{testCaseId}", brand);
-			Context.AddToContext($"BrandName{testCaseId}", brand.Name);
+			Report.Info($@"Saving brand ""{brand.Name}"" to context as: Brand{WercSmartSettings.TestCaseId}");
+			Context.AddToContext($"Brand{WercSmartSettings.TestCaseId}", brand);
+			Context.AddToContext($"BrandName{WercSmartSettings.TestCaseId}", brand.Name);
 		}
 
 		[StepDefinition(@"Data Acceptance page should not show")]
