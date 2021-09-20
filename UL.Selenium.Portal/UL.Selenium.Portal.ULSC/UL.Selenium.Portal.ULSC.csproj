@@ -64,9 +64,6 @@
     <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -154,15 +151,6 @@
     <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.NUnit.3.9.8\lib\net461\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="TReVor.Api.Wrapper, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
-    </Reference>
     <Reference Include="TReVor.Integrations">
       <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Integrations.dll</HintPath>
     </Reference>
@@ -171,9 +159,6 @@
     </Reference>
     <Reference Include="UL.Automation.SpecFlow, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.SpecFlow.2.3.13\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
-    </Reference>
-    <Reference Include="UL.Automation.TReVor, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.2.3.13\lib\net461\UL.Automation.TReVor.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Utilities, Version=2.3.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.2.3.6\lib\net461\UL.Automation.Utilities.dll</HintPath>
