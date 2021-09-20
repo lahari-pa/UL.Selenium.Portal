@@ -1,5 +1,5 @@
 using System;
-using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.WebDriver.BaseClasses;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes

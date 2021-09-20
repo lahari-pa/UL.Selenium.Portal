@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using NUnit.Framework;
@@ -2581,9 +2581,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (found)
 				{
 					Report.Info("Attempting to close the current window");
-					WebDriver.CurrentDriver.Close();
+					SeleniumWebDriver.CurrentDriver.Close();
 					Report.Info("Current window closed, switching to the BaseWindow");
-					WebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainWindowHandle);
 					Report.Success("Browser window switched successfully!");
 					Report.Screenshot();
 				}

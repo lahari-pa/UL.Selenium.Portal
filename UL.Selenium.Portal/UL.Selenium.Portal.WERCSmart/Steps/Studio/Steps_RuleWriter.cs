@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Classes;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.TReVor.Classes;

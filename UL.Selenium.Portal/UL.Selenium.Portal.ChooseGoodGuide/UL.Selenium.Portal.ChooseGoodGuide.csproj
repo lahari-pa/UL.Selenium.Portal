@@ -64,9 +64,6 @@
     <Reference Include="Meziantou.Framework.Win32.CredentialManager, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Meziantou.Framework.Win32.CredentialManager.1.3.5\lib\net461\Meziantou.Framework.Win32.CredentialManager.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Edge.SeleniumTools, Version=3.141.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Edge.SeleniumTools.3.141.2\lib\net45\Microsoft.Edge.SeleniumTools.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -183,14 +180,14 @@
     <Reference Include="UL.Automation.Reporting, Version=2.3.18.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.2.3.18\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.Selenium, Version=3.0.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Selenium.Selenium-v3.3.0.12\lib\net461\UL.Automation.Selenium.dll</HintPath>
-    </Reference>
     <Reference Include="UL.Automation.SpecFlow, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.SpecFlow.2.3.13\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Utilities, Version=2.3.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.2.3.6\lib\net461\UL.Automation.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="UL.Automation.WebDriver, Version=27.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.WebDriver.3.0.27\lib\net472\UL.Automation.WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="UL.WERCSmart.Library.Testing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.WERCSmart.Library.Testing.1.0.0\lib\UL.WERCSmart.Library.Testing.dll</HintPath>
@@ -225,6 +222,7 @@
       <Project>{0244aa85-2c15-420d-a151-2e72ed04a5dc}</Project>
       <Name>UL.Selenium.Portal.WERCSmart</Name>
     </ProjectReference>
+    <Content Include="Icon.png" />
     <Content Include="ReportFiles\UL.Selenium.Portal.ChooseGoodGuide.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

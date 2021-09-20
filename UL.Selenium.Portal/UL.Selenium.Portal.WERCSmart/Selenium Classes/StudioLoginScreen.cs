@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
 using System;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Classes;
 using System.Configuration;
 using System.Collections.Specialized;
 using TReVor.Api.Wrapper.Classes;

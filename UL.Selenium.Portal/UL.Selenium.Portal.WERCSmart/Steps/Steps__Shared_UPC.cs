@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using UL.Automation.SpecFlow.Classes;
@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting;
-using UL.Automation.Selenium.Functions;
+using UL.Automation.WebDriver.Functions;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
