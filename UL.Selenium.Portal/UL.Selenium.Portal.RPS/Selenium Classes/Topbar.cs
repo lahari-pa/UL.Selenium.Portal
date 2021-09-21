@@ -10,9 +10,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     class TopBar : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//div[@class='bar-top']");
+        protected override By ContainerElementLocator => By.XPath("//nav[contains(concat(' ',normalize-space(@class),' '),' bar-top ')]");
 
-        private IWebElement RightToolBar => FindElement(By.XPath(".//div[@class='btn-toolbar pull-right']"), 1);
+        private IWebElement RightToolBar => FindElement(By.XPath(".//ul[@class='nav navbar-nav ml-auto']"), 1);
 
         private IWebElement UserAccount => this.RightToolBar.FindElement(By.Id("dAcccount"), 1);
 
@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement SignOut => this.RightToolBar.FindElement(By.Id("logoutDialog"), 1);
 
-        private IWebElement BrandNameLeft=> FindElement(By.XPath(".//a[@class='brand pull-left']"), 1);
+        private IWebElement BrandNameLeft => FindElement(By.XPath(".//a[@class='navbar-brand brand']"), 1);
         #endregion
 
         #region Methods
@@ -42,7 +42,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetBrandName()
         {
-            
+
             string fullStr = this.BrandNameLeft.Text;
             return fullStr;
         }
@@ -50,12 +50,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public string GetBradNameFontColor()
         {
             IWebElement brandNameElement = this.BrandNameLeft;
-            if(brandNameElement==null)
+            if (brandNameElement == null)
             {
                 Report.Error("The Brand Name Element was null");
                 return null;
             }
-            
+
             string rbgaCssValue = brandNameElement.GetCssValue("color");
             return rbgaCssValue;
         }
@@ -68,7 +68,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Error("The User Account Element was null");
                 return null;
             }
-            
+
             string rbgaCssValue = userAccountElement.GetCssValue("color");
             return rbgaCssValue;
         }

@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     class NavBar : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//ul[@class='nav navbar-nav']");
+        protected override By ContainerElementLocator => By.XPath("//ul[contains(@class,'nav subheader')]");
 
         //Tab Links
         private IWebElement HomeLink => FindElement(By.Id("home-link"), 1);
@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     Report.Error("tabName parameter did not match any expected case");
                     return false;
             }
-            return !thisClass.IsNullOrEmpty() && thisClass == "active";
+            return !thisClass.IsNullOrEmpty() && thisClass.Contains("active");
         }
 
         public bool ClickTab(string tabName)
@@ -97,7 +97,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 case "web viewers":
                     return WebViewersLink.TryClick();
                 case "itemsync":
-                    return ItemSyncLink.TryClick();                    ;
+                    return ItemSyncLink.TryClick(); ;
                 case "product lookup":
                     return ProductLookupsLink.TryClick();
                 case "help & support":
@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     return ManualEntryLink.TryClick();
                 case "upload a file":
                     return UploadAFileLink.TryClick();
-                
+
                 default:
                     Report.Error("tabName parameter did not match any expected case");
                     return false;
@@ -175,9 +175,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             List<IWebElement> listOfTabEls = this.containerElement.FindElements(By.XPath($"//li[@id]"), 2).ToList();
             List<IWebElement> editedTabEls = new List<IWebElement>();
-            foreach(var el in listOfTabEls)
+            foreach (var el in listOfTabEls)
             {
-                if(el.Text!=expectTabName)
+                if (el.Text != expectTabName)
                 {
                     editedTabEls.Add(el);
                 }
@@ -185,10 +185,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             bool tabNotGrey = true;
 
-            foreach(var tab in editedTabEls)
+            foreach (var tab in editedTabEls)
             {
                 string rbgaCssValue = tab.GetCssValue("background-color");
-                if(rbgaCssValue == "rgba(229, 232, 236, 1)")
+                if (rbgaCssValue == "rgba(229, 232, 236, 1)")
                 {
                     Report.Info($"The tab with title: {tab.Text} was grey");
                     tabNotGrey = false;
@@ -197,7 +197,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 else
                 {
                     Report.Info($"The tab with title: {tab.Text} was not grey");
-                    
+
 
                 }
             }
@@ -227,13 +227,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement DropDownContainer => FindElement(By.Id("widget-ul"), 1);
 
-        private IWebElement ResetDashboard => DropDownContainer.FindElement(By.Id("dashboard-reset"), 1);        
+        private IWebElement ResetDashboard => DropDownContainer.FindElement(By.Id("dashboard-reset"), 1);
 
         private IWebElement RefreshWidgets => DropDownContainer.FindElement(By.Id("dashboard-refresh"), 1);
 
         private List<IWebElement> VisibleDropDownOptions => DropDownContainer.FindElements(By.XPath(".//li[not(@style='display: none;')]//a"), 2).ToList();
 
-       
+
 
         private IWebElement WidgetTitleOption => DropDownContainer.FindElement(By.Id(""), 1);
 
@@ -246,7 +246,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public bool ClickGauge() => this.Gauge.TryClick();
 
         public bool GaugeDisplayed() => this.Gauge.NotNullAndDisplayed();
-        
+
         public string ResetDashboardText() => this.ResetDashboard?.Text;
 
         public string RefreshWidgetsText() => this.RefreshWidgets?.Text;
@@ -274,17 +274,17 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public List<string> GetListOfDropDownOptions()
         {
-           
-            List<IWebElement> allOptions = this.VisibleDropDownOptions;            
+
+            List<IWebElement> allOptions = this.VisibleDropDownOptions;
             List<string> optionsAsText = new List<string>();
-            foreach(var option in allOptions)
+            foreach (var option in allOptions)
             {
                 optionsAsText.Add(option.Text);
             }
             return optionsAsText;
         }
 
-       
+
 
         #endregion
     }

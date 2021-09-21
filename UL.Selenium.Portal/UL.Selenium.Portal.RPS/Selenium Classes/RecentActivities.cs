@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     {
         #region Page Objects
 
-        protected override By ContainerElementLocator => By.XPath("//div[@class='main-wrapper-nosidebar']");
+        protected override By ContainerElementLocator => By.XPath("//div[@id='supertable_main']");
 
         private IWebElement SearchBox => FindElement(By.XPath(".//input[@name='name']"), 2);
 
@@ -84,7 +84,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         #endregion
 
-        #region Methods   
+        #region Methods
         public bool WaitRecentActivitiesWidgetSpinnerFinish()
         {
             if (this.containerElement.WaitUntilElementVisible(By.XPath(".//div[@id='load_tblNewProducts']"), 5) != null)
@@ -153,7 +153,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
         }
 
-        public bool ClickActionForGivenProductInResultsGrid(string productID,string action)
+        public bool ClickActionForGivenProductInResultsGrid(string productID, string action)
         {
             try
             {
@@ -164,15 +164,15 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     Report.Info("no rows of products were found in the table");
                     return false;
                 }
-                
+
                 IWebElement wantedRow = rows.First(x => x.Text.Contains(productID));
                 IWebElement wantedColum = wantedRow.FindElement(By.XPath(".//td[@aria-describedby='tblNewProducts_Actions']"), 2);
                 List<IWebElement> actionsOptionsEls = wantedColum.FindElements(By.XPath(".//a"), 2).ToList();
                 var wantedOptionEl = actionsOptionsEls.FirstOrDefault(x => x.Text == action);
-                if (wantedOptionEl==null)
+                if (wantedOptionEl == null)
                 {
                     Report.Info($"The option link was not found in the actions column for the product with ID:{productID}");
-                }                              
+                }
                 return wantedOptionEl.TryClick();
             }
             catch (Exception)
@@ -1641,10 +1641,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 IWebElement wantedColum = item.FindElement(By.XPath(".//td[@aria-describedby='tblNewProducts_Actions']"), 2);
                 List<IWebElement> actionsOptionsEl = wantedColum.FindElements(By.XPath(".//a"), 2).ToList();
                 bool optionFound = false;
-                foreach(var option in actionsOptionsEl)
+                foreach (var option in actionsOptionsEl)
                 {
                     Report.Info($"Current Option Text Is: {option.Text}");
-                    if(option.Text=="Contact Supplier")
+                    if (option.Text == "Contact Supplier")
                     {
                         Report.Info($"The Text: 'Contact Supplier' was found for row: {i}");
                         optionFound = true;
@@ -1652,12 +1652,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
                     }
                 }
-                if(optionFound==false)
+                if (optionFound == false)
                 {
                     Report.Info($"The text: 'Contact Supplier' was not found for any of the options on row:{i}");
                     textFound = false;
                 }
-                i++;              
+                i++;
 
             }
             return textFound;
@@ -1682,7 +1682,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 {
                     Report.Info($"Current Option Text Is: {option.Text}");
                     string link = option.GetAttribute("href");
-                    if(link.IsNullOrEmpty())
+                    if (link.IsNullOrEmpty())
                     {
                         Report.Failure($"The option did not contain a link");
                     }
@@ -1722,8 +1722,8 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 bool optionNotFound = true;
                 foreach (var option in actionsOptionsEl)
                 {
-                    Report.Info($"Current Option Text Is: {option.Text}");                   
-                   
+                    Report.Info($"Current Option Text Is: {option.Text}");
+
                     if (option.Text == value)
                     {
                         Report.Info($"The Text: '{value}' was found for row: {i}");
@@ -2109,11 +2109,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 var el = this.FooterEl;
                 List<IWebElement> footerButtons = el.FindElements(By.XPath(".//button"), 2).ToList();
                 return footerButtons;
-            
+
             }
             public bool ClickCloseButton()
             {
-                var el = this.CloseButton;                
+                var el = this.CloseButton;
                 return el.TryClick();
             }
 
@@ -2177,7 +2177,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 return this.headerCross.TryClick();
             }
-          
+
 
             public List<IWebElement> GetAllFooterButtons()
             {
@@ -2203,7 +2203,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             public IWebElement GetElementForStatusSection(string section)
             {
                 var allSectionEls = this.GetAllStatusTitleSections();
-                return allSectionEls.First(x => x.Text==section);
+                return allSectionEls.First(x => x.Text == section);
             }
 
             public string GetDescriptionForStatusSection(string section)
