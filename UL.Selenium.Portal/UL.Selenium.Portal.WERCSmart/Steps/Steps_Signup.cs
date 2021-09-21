@@ -568,9 +568,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						sw.Close();
 					}
 				}
-				catch
+				catch(Exception ex)
 				{
-					Report.Info($"");
+					Report.Info(ex.Message);
 				}
 			}
 
