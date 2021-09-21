@@ -559,11 +559,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (matchingEmail != null)
 			{
-				using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+				try
 				{
-					sw.Write(matchingEmail.Html.Body);
-					sw.Flush();
-					sw.Close();
+					using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+					{
+						sw.Write(matchingEmail.Html.Body);
+						sw.Flush();
+						sw.Close();
+					}
+				}
+				catch
+				{
+					Report.Info($"");
 				}
 			}
 
