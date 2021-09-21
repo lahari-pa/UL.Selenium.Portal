@@ -121,6 +121,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I navigate to the home page
 
 @tfs_design
+@ignore
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I login as the administrator
 	Then The home screen should load

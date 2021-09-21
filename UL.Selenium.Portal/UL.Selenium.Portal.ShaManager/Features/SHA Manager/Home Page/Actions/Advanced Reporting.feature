@@ -117,6 +117,7 @@ Scenario:[96174] Daily Report - WERCSmart Additional Reports Published
 	And I verify the file saved as: 96174 against the specific requirements for Daily Report - WERCSmart Additional Reports Published
 	Then I delete the excel file saved as 96174
 
+@ignore
 @tfs_design
 @ScenarioId:5961
 Scenario: [78452] Retailer Products in Recertification Report
@@ -140,6 +141,7 @@ Scenario: [78452] Retailer Products in Recertification Report
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProdInfo78452
 
 #Incomplete: waiting for bug 111856 to complete.
+@ignore
 @tfs_design
 @ScenarioId:5974
 Scenario: [87182] 3rd Party Formula Use in Registrations

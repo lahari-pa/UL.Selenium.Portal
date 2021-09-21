@@ -318,6 +318,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 
 @tfs_design
+@ignore
 #Bug ticket placed for the error that is not displaying - Philip
 	@ScenarioId:9324
 Scenario: [56652] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)

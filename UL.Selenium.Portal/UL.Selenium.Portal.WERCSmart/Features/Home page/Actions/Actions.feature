@@ -240,6 +240,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
+@ignore
 @tfs_design
 @CACleaning
 @ScenarioId:5984

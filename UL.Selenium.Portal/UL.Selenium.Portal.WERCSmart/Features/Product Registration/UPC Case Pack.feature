@@ -313,6 +313,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 
 	#Philip - Working
 	@tfs_design
+	@ignore
 @singlerun
 @ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC

@@ -13,6 +13,7 @@
 Feature: Flow 29 - Beverage
 
 @tfs_design
+@ignore
 @TReVorId:11622
 Scenario: [60694] Wine - RU001418
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -61,6 +62,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
 
 @tfs_design
+@ignore
 #Retailers section needs to be confirmed!
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

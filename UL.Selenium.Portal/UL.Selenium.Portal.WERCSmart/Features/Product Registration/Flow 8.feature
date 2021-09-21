@@ -274,6 +274,7 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
 
 @tfs_design
+@ignore
 Scenario: [57344] Artists Solvent-Thinner - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -609,6 +610,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 @ScenarioId:733
 @ScenarioId:733
 @tfs_design
+@ignore
 Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

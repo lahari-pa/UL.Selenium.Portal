@@ -45,6 +45,7 @@ Scenario: [72582] Active Export Report
 
 # Need to check how to archive messages - there are none archived in the products account
 @tfs_design
+@ignore
 @ScenarioId:9410
 Scenario: [72586] Archive Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -69,6 +70,7 @@ Scenario: [72586] Archive Export Report
 	And I delete the excel file saved as excel72586
 
 @tfs_design
+@ignore
 @ScenarioId:1541
 Scenario: [109503] Message Center - Suspended message stays in Message Center for entirety of processing product - Formula - Document Issue
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

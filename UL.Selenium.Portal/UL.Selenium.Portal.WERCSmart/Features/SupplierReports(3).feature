@@ -156,6 +156,7 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the do
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @tfs_design
+@ignore
 @ScenarioId:10343
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
 

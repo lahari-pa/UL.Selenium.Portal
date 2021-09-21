@@ -73,6 +73,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #	Then Under the Supplier Reports menu I choose: UPC Error Details
 #Incomplete: waiting for bug 114335 to resolve to complete.
 @tfs_design
+@ignore
 @ScenarioId:5947
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 	Given I log in with the account saved in TReVor as: ProductAccount

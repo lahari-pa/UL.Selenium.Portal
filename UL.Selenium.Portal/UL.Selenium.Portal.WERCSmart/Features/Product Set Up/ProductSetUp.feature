@@ -170,6 +170,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
 
 @tfs_design
+@ignore
 @ScenarioId:8268
 	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
