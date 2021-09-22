@@ -1156,23 +1156,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public bool SaveUserToTReVor(string savedAs, WERCSmartUser account)
 		{
-			//var user = TestUsers.GetUserSavedAs(savedAs);
+			
 			var user = TReVorSettings.GetCredential(savedAs);
 
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
-				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
-
-				//TReVor.Integrations.Classes.TReVorSettings
-				//TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email);				
-				//TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password);
+				
 				TReVorSettings.UpdateCredential(user.Alias,account.Email,account.Password);
-				TReVorSettings.Refresh.SoftwareCredentials();
-				//TestUsers.RefreshUsers();
-				//var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();				
-				//var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
+				TReVorSettings.Refresh.SoftwareCredentials();				
 				var foundUser = TReVorSettings.GetCredential(user.Alias);
 				Report.Info($"founduser.username = '{foundUser.UserName}'");
 				Report.Info($"account.email = '{account.Email}'");
@@ -1196,11 +1188,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"founduser.username = '{foundUser.UserName}'");
 					Report.Info($"account.email = '{account.Email}'");
 					Report.IsTrue(foundUser.UserName == account.Email, "Not able to update username", "Successfully updated username");
-				}
-
-							
-				//string branch = TReVorSettings.SoftwareBranch;				
-				//user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
+				}						
+				
 				string userpass = foundUser.Password;
 				Report.IsTrue(userpass == account.Password, "Not able to update password", "Successfully updated password");	
 				
