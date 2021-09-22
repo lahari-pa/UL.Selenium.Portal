@@ -428,8 +428,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109516
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -483,6 +482,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I click on the Row Action: Archive Retailers
 	And In the Archive Retailers popup, I select the checkbox next to the retailer Walgreens
 	And In the Archive Retailers popup click on: ARCHIVE
+	And I handle the Alert for Archive by answering Ok
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	And I confirm that the retailer Walgreens is archived for product saved as: TestCase109516

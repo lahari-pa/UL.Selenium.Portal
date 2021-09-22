@@ -2506,6 +2506,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
+		[StepDefinition(@"I handle the Alert for Archive by answering (Ok|Cancel)")]
+		public void HandleTheAlertForArchiveByAnswering(string response)
+		{
+			Report.IsTrue(new ProductsGrid().ArchiveAlert(response),$"Selected {response} in Archive Alert.",$"Unable to select {response} in Archive alert.");
+			string s = response;
+		}
+
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
 		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{
