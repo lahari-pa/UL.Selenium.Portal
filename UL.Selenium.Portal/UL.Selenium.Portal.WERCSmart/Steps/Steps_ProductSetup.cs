@@ -3909,7 +3909,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random UPC number for Amazon data tiers and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberForAmazon(string savedAs)
 		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			string uPCNo = new UpcFunctions().GenerateUPC();
 			var amUpc = "0192233" + uPCNo.Substring(7);
 			var checkDigit = UpcCheckDigit(amUpc);
 			var finalUpc = amUpc + checkDigit;

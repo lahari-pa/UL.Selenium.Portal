@@ -772,7 +772,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 6; i++)
 			{
 				Report.Info("Generating upc attempt " + (i + 1));
-				string uPCNo = GeneralFunctions.GenerateUPCNumber();
+				string uPCNo = new UpcFunctions().GenerateUPC();
 				Report.Info("Generated UPC No: " + uPCNo);
 				Report.Info("Searching for generated upc number");
 				grid.UpcNumber = uPCNo;
@@ -813,7 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			string uPCNo = new UpcFunctions().GenerateUPC();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
@@ -825,7 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
 		public void ThenGenerateARandomSKUNumberRandomDigitsAndSaveAsRandomSKU_(string savedAs)
 		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			string uPCNo = new UpcFunctions().GenerateUPC();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
@@ -836,7 +836,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
 		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
 		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			string uPCNo = new UpcFunctions().GenerateUPC();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
@@ -847,7 +847,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random Ingredient ID and save as: (.*)")]
 		public void GivenIGenerateARandomIngredientIDAndSaveAs(string savedAs)
 		{
-			string uPCNo = GeneralFunctions.GenerateUPCNumber();
+			string uPCNo = new UpcFunctions().GenerateUPC();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
@@ -2750,7 +2750,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 1;
 			while (i <= numbersWanted)
 			{
-				string uPCNo = GeneralFunctions.GenerateUPCNumber();
+				string uPCNo = new UpcFunctions().GenerateUPC();
 				Context.AddToContext(savedAs + i, uPCNo);
 				Report.Info("Generated UPC No " + i + ": " + uPCNo);
 				Delay.Seconds(0.5);
