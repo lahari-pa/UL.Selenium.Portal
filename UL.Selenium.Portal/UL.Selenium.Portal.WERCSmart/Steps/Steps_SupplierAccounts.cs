@@ -1173,7 +1173,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//TestUsers.RefreshUsers();
 				//var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();				
 				//var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
-				var foundUser = TReVorSettings.GetCredential(user.Alias);				
+				var foundUser = TReVorSettings.GetCredential(user.Alias);
+				Report.Info($"founduser.username = '{foundUser.UserName}'");
+				Report.Info($"account.email = '{account.Email}'");
+
 				Report.IsTrue(foundUser.UserName == account.Email, "Not able to update username", "Successfully updated username");				
 				//string branch = TReVorSettings.SoftwareBranch;				
 				//user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
