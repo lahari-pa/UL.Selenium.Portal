@@ -456,7 +456,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109516)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase109516) for	
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Amazon                     |
