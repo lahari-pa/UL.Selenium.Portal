@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes.UPCValidation;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Classes
 {
 	public class UpcFunctions
