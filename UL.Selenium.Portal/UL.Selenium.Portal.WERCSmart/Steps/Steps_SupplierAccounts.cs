@@ -1177,7 +1177,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info($"founduser.username = '{foundUser.UserName}'");
 				Report.Info($"account.email = '{account.Email}'");
 
-				Report.IsTrue(foundUser.UserName == account.Email, "Not able to update username", "Successfully updated username");				
+				if(foundUser.UserName == account.Email)
+				{
+					Report.IsTrue(foundUser.UserName == account.Email, "Not able to update username", "Successfully updated username");
+				}
+				else
+				{
+					int x = 0;
+					while(foundUser.UserName != account.Email && x<10)
+					{
+						Report.Info($"did not match the username to email... waiting 5 seconds then checking again");
+						Delay.Seconds(5);
+						x++;
+					}
+
+					Report.Info($"founduser.username = '{foundUser.UserName}'");
+					Report.Info($"account.email = '{account.Email}'");
+					Report.IsTrue(foundUser.UserName == account.Email, "Not able to update username", "Successfully updated username");
+				}
+
+							
 				//string branch = TReVorSettings.SoftwareBranch;				
 				//user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
 				string userpass = foundUser.Password;
