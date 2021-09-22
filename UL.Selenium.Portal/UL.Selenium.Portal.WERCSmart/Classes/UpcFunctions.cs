@@ -31,6 +31,9 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 					case "cvs":
 						prefix = "050428";
 						break;
+					case "amazon":
+						prefix = "0192233";
+						break;
 					default:
 						throw new Exception("UPC Prefix is empty. This will generate a completely random UPC which will not be prefixed.");
 				}

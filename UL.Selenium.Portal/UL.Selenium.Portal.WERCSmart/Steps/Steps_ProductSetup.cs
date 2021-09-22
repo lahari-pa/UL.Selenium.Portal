@@ -16,6 +16,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -3909,28 +3910,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random UPC number for Amazon data tiers and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberForAmazon(string savedAs)
 		{
-			string uPCNo = new UpcFunctions().GenerateUPC();
-			var amUpc = "0192233" + uPCNo.Substring(7);
-			var checkDigit = UpcCheckDigit(amUpc);
-			var finalUpc = amUpc + checkDigit;
-			Context.AddToContext(savedAs, finalUpc);
-			Report.Info("Generated UPC No: " + finalUpc);
+			string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("Amazon");
+
+			//string uPCNo = new UpcFunctions().GenerateUPC();
+			//var amUpc = "0192233" + uPCNo.Substring(7);
+			//var checkDigit = UpcCheckDigit(amUpc);
+			//var finalUpc = amUpc + checkDigit;
+			Context.AddToContext(savedAs, upc); //replaced finalUpc with upc
+			Report.Info("Generated UPC No: " + upc); //replaced finalUpc with upc
 		}
 
-		public static int UpcCheckDigit(string code)
-		{
-			int sum = 0;
-			for (int i = 0; i < code.Length; i++)
-			{
-				int n = int.Parse(code.Substring(code.Length - 1 - i, 1));
-				sum += i % 2 == 0 ? n * 3 : n;
-			}
-			return sum % 10 == 0 ? 0 : 10 - sum % 10;
-		}
+		//public static int UpcCheckDigit(string code)
+		//{
+		//	int sum = 0;
+		//	for (int i = 0; i < code.Length; i++)
+		//	{
+		//		int n = int.Parse(code.Substring(code.Length - 1 - i, 1));
+		//		sum += i % 2 == 0 ? n * 3 : n;
+		//	}
+		//	return sum % 10 == 0 ? 0 : 10 - sum % 10;
+		//}
 
 		public void CreateProductAndTakeToSubmitted(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -3999,7 +4002,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a product and save as: (.*) and name as: (.*)")]
 		public void CreateProductConditionerAndTakeToSubmitted(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4052,7 +4055,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductChalkWithCanadianTierAndPLAndGoToSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4097,7 +4100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductChalkAndClickAcceptOnDataAcceptance(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4150,7 +4153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForCVSAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4206,7 +4209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForTargetAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4263,7 +4266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForCostcoAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4320,7 +4323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForDollarTreeAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4376,7 +4379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForFamilyDollarAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4428,7 +4431,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForAmazonAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4481,7 +4484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForWalgreensAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4533,7 +4536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void CreateProductConditionerForRiteAidAndTakeToDataSummary(string savedAs, string name)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4586,7 +4589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA")]
 		public void IUseTestCase75142ToCreateANEWPRODUCTAndGetItToSubmittedStatusInSHA()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -4659,7 +4662,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA for the Products Automation Account")]
 		public void IUseTestCase75142ToCreateANEWPRODUCTAndGetItToSubmittedStatusInSHAForProductsAutomationAccount()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -4732,7 +4735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void TaketoProductTypeandSave(string name, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4748,7 +4751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a product with sds upload and name as: (.*) then take to data acceptance and save as: (.*)")]
 		public void TakeProductWithSDSUploadToDataAcceptance(string name, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -4780,7 +4783,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status")]
 		public void IUseTestCase87685ToCreateAProductWhichHasACaseUPCAndARegularUPCProcessedToCompletedStatus()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -4905,7 +4908,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116(string savedAs, string upc)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5006,7 +5009,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116UsingSHAAcc(string shaAcc, string savedAs, string upc)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5110,7 +5113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and Force it to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateForcedProductUsingTestCase86116UsingSHAAcc(string shaAcc, string savedAs, string upc)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5176,7 +5179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and save as: (.*)")]
 		public void CreateProductUsingTestCase86454(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5231,7 +5234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and save as: (.*)")]
 		public void CreateProductUsingTestCase86114(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5297,7 +5300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86114UsingShaAccount(string shaAccountSavedAs, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5369,7 +5372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86114UsingShaAccount(string shaAccountSavedAs, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5434,7 +5437,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and save as: (.*)")]
 		public void CreateProductUsingTestCase86458(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5489,7 +5492,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86458(string shaAccount, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5552,7 +5555,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86458(string shaAccount, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5620,7 +5623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 and save as: (.*)")]
 		public void CreateProductUsingTestCase86455(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5679,7 +5682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86455UsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5743,7 +5746,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86455UsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5808,7 +5811,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 and save as: (.*)")]
 		public void CreateProductUsingTestCase86115(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5872,7 +5875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86115UsingSHAAcc(string shaAcc,string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -5942,7 +5945,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86115UsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6003,7 +6006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 and save as: (.*)")]
 		public void CreateProductUsingTestCase86419(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6058,7 +6061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86419UsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6120,7 +6123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and force it to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86419UsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6182,7 +6185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)")]
 		public void ChalkCaseUPCToCompleted(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -6283,7 +6286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: (.*) and save the product as: (.*)")]
 		public void ChalkCaseUPCToCompletedUsingSHAAcc(string shaAcc, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -6384,7 +6387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
 		public void IEnterAnIngredientAndCheckTopOptionMatches(string myIngredient)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var ingredients = new Ingredients();
 			var selNewProduct = new UPC();
 			Report.StartStep("I Check I am on the Ingredients page");
@@ -6403,7 +6406,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Submit a new product which has a Case UPC and a regular UPC")]
 		public void ISubmitANewProductWhichHasACaseUPCAndARegularUPC()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -6473,7 +6476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA")]
 		public void ICreateANewProductSelectAllCertificationsAndGetItToSubmittedStatusInSHA()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -6546,7 +6549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product for WalMart and Proccess it to completed and save it as: (.*)")]
 		public void ICreateAChalkProductForWalmartAndProccessItToCompleted(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6565,7 +6568,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
 			
 			var retailerSelectionSteps = new StepsSelectRetailers();
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("I should see the Select Retailers Popup");
 			retailerSelectionSteps.GivenIShouldSeeTheSelectRetailersPopUp();
 			Report.StartStep("I select the retailer: Wal-Mart/SAM'S CLUB and click Done");
@@ -6629,7 +6632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Completed status in SHA")]
 		public void ICreateANewProductSelectAllCertificationsAndGetItToCompletedStatusInSHA()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 
 			var globalSteps = new GlobalSteps();
 			var sharedSteps = new Steps_Shared();
@@ -6719,7 +6722,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Chalk product and take to completed for distributor and save as: (.*)")]
 		public void CreateProductForDistributor(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6781,7 +6784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Hair Color Kit using test case 58753 with product name: (.*) and save as: (.*)")]
 		public void CreateHairColorKitUsing58753AndSaveAs(string productName, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6834,7 +6837,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116UsingGivenSHAAccount(string shaAccSavedAs, string savedAs, string upc)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6901,7 +6904,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateForcedProductUsingTestCase86116UsingGivenSHAAccount(string shaAccSavedAs, string savedAs, string upc)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -6977,7 +6980,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -7039,7 +7042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
