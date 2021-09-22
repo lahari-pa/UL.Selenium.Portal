@@ -10,7 +10,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 	{
 		private int _last;
 
-		public string GenerateUPC(bool good)
+		public string GenerateUPC(bool good = true)
 		{
 			var digits = this.GetRandomDigits();
 

@@ -1537,8 +1537,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
-				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
+				string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -1586,8 +1585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				Report.StartStep("I add the following into the UPC Fields");
-				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
-				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
+				string upc = new UpcFunctions().GenerateUPC();
 				Report.Info("UPC number: " + upc);
 
 				var upcInfo = new UpcInformation();
