@@ -1186,9 +1186,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					int x = 0;
 					while(foundUser.UserName != account.Email && x<10)
 					{
+
 						Report.Info($"did not match the username to email... waiting 5 seconds then checking again");
 						Delay.Seconds(5);
 						x++;
+						foundUser = TReVorSettings.GetCredential(user.Alias);
 					}
 
 					Report.Info($"founduser.username = '{foundUser.UserName}'");
