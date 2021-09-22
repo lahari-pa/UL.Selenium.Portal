@@ -1061,7 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = UpcFunctions.GetRandomUpcNumber("CVS");
+				string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -12194,7 +12194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.StartStep("I click the 'Add UPC' button");
 					stepsNewProduct.ThenIClickTheAddUpcButton();
 					Report.StartStep("I add the following into the UPC Fields");
-					string upc = UpcFunctions.GetRandomUpcNumber("CVS");
+					string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 					Report.Info("UPC number: " + upc);
 					var upcInfo = new UpcInformation {
 						ContainerType = containerType,

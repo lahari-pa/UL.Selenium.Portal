@@ -235,6 +235,7 @@
   <ItemGroup>
     <Compile Include="Classes\Methods.cs" />
     <Compile Include="Classes\UpcFunctions.cs" />
+    <Compile Include="Classes\UPCValidation\UPCValidationLogic.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\WercSmartSettings.cs" />
     <Compile Include="Classes\WERCSmartUser.cs" />
