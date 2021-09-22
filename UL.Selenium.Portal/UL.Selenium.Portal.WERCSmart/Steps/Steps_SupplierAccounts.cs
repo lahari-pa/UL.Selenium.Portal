@@ -1161,7 +1161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (user != null)
 			{
-				Report.Info("User found!, Updating the password in TReVor");
+				Report.Info("User found!, Updating the password and email in TReVor");
 				
 				TReVorSettings.UpdateCredential(user.Alias,account.Email,account.Password);
 				TReVorSettings.Refresh.SoftwareCredentials();				
