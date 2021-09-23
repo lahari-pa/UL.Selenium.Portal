@@ -20,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.WebDriver.Functions;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -176,7 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
@@ -1537,8 +1538,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
-				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
-				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
+				string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -1586,8 +1586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				Report.StartStep("I add the following into the UPC Fields");
-				throw new Exception("Getting Random UPC Number functionality is not yet implemented");
-				string upc = "";//UpcFunctions.GetRandomUpcNumber("CVS");
+				string upc = new UpcFunctions().GenerateUPC();
 				Report.Info("UPC number: " + upc);
 
 				var upcInfo = new UpcInformation();

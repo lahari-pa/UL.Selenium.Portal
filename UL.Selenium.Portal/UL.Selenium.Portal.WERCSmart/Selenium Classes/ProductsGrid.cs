@@ -1401,6 +1401,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productList.Count;
 		}
 
+		public bool ArchiveAlert(string response)
+		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+			if (response.ToLower() == "ok")
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+			}
+			else if (response.ToLower() == "cancel")
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
+			}
+			return !SeleniumWebDriver.CurrentDriver.WaitForAlert(10);
+		}
 	}
 
 	public class ProductGridItem : ProductsGrid

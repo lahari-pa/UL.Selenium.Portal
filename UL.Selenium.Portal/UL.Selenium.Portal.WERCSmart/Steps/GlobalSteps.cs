@@ -2230,7 +2230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a upc number for CVS")]
 		public void CreateCVSUPC()
 		{
-			string upc = UpcFunctions.GetRandomUpcNumber("CVS");
+			string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 		}
 
 		[StepDefinition(@"I Wait for a modal popup to appear")]
