@@ -523,6 +523,7 @@ Scenario: [101023] UPC Step - Add Part Number
 
 
 @tfs_design
+@ignore
 #In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @ScenarioId:6025
 Scenario: [84510] Select Retailers in UPC screen
@@ -629,6 +630,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC fi
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
 
 @tfs_design
+@ignore
 @ScenarioId:6054
 Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -745,6 +747,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 
 #JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
 @tfs_design
+@ignore
 @ScenarioId:6399
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

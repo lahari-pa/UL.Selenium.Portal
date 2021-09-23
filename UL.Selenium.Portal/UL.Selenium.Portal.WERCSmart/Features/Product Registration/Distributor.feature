@@ -25,6 +25,7 @@ Feature: Distributor
 #In order to manually create a distributor use query - update t_product set F_STATUS = 8 where F_PRODUCT = ''
 
 @tfs_design
+@ignore
 @ScenarioId:6479
 Scenario: [122365] Create a distributor request and process it to completed
 	Given I generate a random UPC number and save as: UPC86463

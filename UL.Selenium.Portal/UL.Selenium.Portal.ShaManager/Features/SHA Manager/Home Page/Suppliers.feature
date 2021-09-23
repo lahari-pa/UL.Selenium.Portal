@@ -30,6 +30,7 @@
 Feature: Suppliers
 
 @tfs_design
+@ignore
 #Need to confirm with Amanda which retailers should be expected - Philip
 Scenario: [74786] Data Tier Consent Tab Layout
 

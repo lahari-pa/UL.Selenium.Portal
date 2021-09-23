@@ -48,6 +48,7 @@ Scenario: [68420] List of Supplier Reports
 		| Waste Classification Summary           |
 
 @tfs_design
+@ignore
 @Obsolete
 @ScenarioId:979
 Scenario: [68421] Active UPCs for Products Report
@@ -599,6 +600,7 @@ Scenario: [76759] Waste Classification Summary Report
 
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
+@ignore
 @ScenarioId:6619
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

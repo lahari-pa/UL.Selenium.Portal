@@ -21,6 +21,7 @@ Scenario: [API]ItemSync
 		| UPC2         | 0               |
 
 @tfs_design
+@ignore
 # uses 16793FA3-452C-45B6-AF48-969AFDF58216(TG) as the requesting retailer
 @ScenarioId:9791
 Scenario: [108810]ItemSync

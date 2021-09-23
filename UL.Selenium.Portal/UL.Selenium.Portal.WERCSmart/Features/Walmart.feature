@@ -21,6 +21,7 @@ Background:
 		| SHAQAAuto31 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @tfs_design
+@ignore
 @ScenarioId:10443
 Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -79,6 +80,7 @@ And I call Shared Step 60935 (Product Information - US - Direct Ship - Private L
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74133
 
 @tfs_design
+@ignore
 Scenario: [74017] Walmart Affiliates when Adding a UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -108,6 +110,7 @@ Scenario: [74017] Walmart Affiliates when Adding a UPC
 # select Wal-mart/ SAMs CLUB
 # confirm WM under Destination Retailers
 @tfs_design
+@ignore
 Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

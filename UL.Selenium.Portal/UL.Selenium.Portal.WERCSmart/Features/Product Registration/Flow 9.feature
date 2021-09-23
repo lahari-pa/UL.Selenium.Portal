@@ -324,6 +324,7 @@ Scenario: [58097] Ingredient Search in Registration
 	Then I delete the product: TestCase58097
 
 @tfs_design
+@ignore
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -356,6 +357,7 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58094
 
 @tfs_design
+@ignore
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

@@ -363,6 +363,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Then An alert is displayed with the message: UPC failing Transportation Rules. Review your Transport overrides.
 
 @tfs_design
+@ignore
 @ScenarioId:6740
 Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -651,6 +652,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	Given I ensure that I can select DOT at Shipping fully regulated
 
 @tfs_design
+@ignore
 @obsolete
 @ScenarioId:6702
 Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade - Shipping with consumer commodity

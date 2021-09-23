@@ -199,6 +199,7 @@ Given I click Close in the Report Download popup
 Given I delete the excel file saved as Waste Classification Summary
 
 @tfs_design
+@ignore
 @ScenarioId:10259
 Scenario: [140309] Chemicals of Concern - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -525,6 +526,7 @@ Then I Delete the file with name: Waste Classification Summary.csv from the down
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @tfs_design
+@ignore
 @ScenarioId:10318
 Scenario: [141799] Chemicals of Concern - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

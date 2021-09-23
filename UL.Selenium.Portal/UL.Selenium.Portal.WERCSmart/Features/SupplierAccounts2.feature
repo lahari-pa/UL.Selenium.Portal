@@ -22,7 +22,7 @@
 Feature: SupplierAccounts2
 
 @ScenarioId:1397
-Scenario: Create new account with supplier settings for Products Account
+Scenario: [1234501] Create new account with supplier settings for Products Account
 #Given I go to the WERCSmart Log in
 #Given I log in with email: User_3ab3da3f9fa8.kxxyxunf@mailosaur.io and password: Welcome1!
 #Given I log in with email: User_06e12fc25a59.kxxyxunf@mailosaur.io and password: Welcome1!

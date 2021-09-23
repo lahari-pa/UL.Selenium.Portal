@@ -101,7 +101,9 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Jelly, Jam or Preserves
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
 
+@ignore
 @tfs_design
+
 Scenario: [60722] Nut Butters - RU001455
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -117,7 +119,7 @@ Scenario: [60722] Nut Butters - RU001455
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Aerosol Can and size: 20
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Cardboard and size: 20
 Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page

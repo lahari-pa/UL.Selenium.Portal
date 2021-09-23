@@ -160,6 +160,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 @tfs_design
+@ignore
 @ScenarioId:10619
 Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
 
@@ -190,6 +191,7 @@ And I click the following option in the bottom menu: Review
 
 
 @tfs_design
+@ignore
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

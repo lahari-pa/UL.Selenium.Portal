@@ -37,6 +37,7 @@ Scenario: [57206] Retailer specific - CVS
 	Then I should see the Retail Partners page
 
 @tfs_design
+@ignore
 @CostcoRemoval
 @ScenarioId:466
 #Obsolete test case after costco removal (4/30/2020)
@@ -210,6 +211,7 @@ Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included C
 	#Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSGroceryExcelFile and check that is shows the expected product saved as: CVSGroceryProduct1
 
 	@tfs_design
+	@ignore
 	#Waiting for Fabiola to get back to me on why only one switch is displaying - Philip
 @ScenarioId:8261
 	Scenario: [128141] Verification that 'Bed Bath and Beyond' Displays under 'My Retailers' and its Data Consent Tiers
