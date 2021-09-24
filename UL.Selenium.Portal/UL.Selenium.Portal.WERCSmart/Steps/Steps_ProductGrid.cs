@@ -812,6 +812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = new UpcFunctions().GenerateUPC();
+			//string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
