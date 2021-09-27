@@ -907,6 +907,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				};
 				Report.IsTrue(user.Pin == thisNewUser.Pin, "Pin was not entered correctly!", "Pin was entered successfully!");
 				Report.Screenshot();
+				thisNewUser.ClickPinBox();
+
+
+
 			}
 			catch (Exception ex)
 			{
@@ -914,6 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
 
 		[StepDefinition(@"I create a user account with the following parameters saved as: (.*)")]
 		[StepDefinition(@"\[WERCSmart] I create a user account with the following parameters saved as: (.*)")]
