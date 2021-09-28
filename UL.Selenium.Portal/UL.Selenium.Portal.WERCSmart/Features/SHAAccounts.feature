@@ -24,7 +24,7 @@ Background:
 		| SHAQAAuto1 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto2 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto5 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto6 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		
 
 
 		
@@ -60,3 +60,25 @@ Scenario: [888888] SHA Acc Test Debug
 Given I Create SHA processing Rules for the accounts listed in the table:
 | username   |
 | SHAQAAuto1 |
+
+
+Scenario:  [755435] Account Lockout and Account Issue Testing
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
