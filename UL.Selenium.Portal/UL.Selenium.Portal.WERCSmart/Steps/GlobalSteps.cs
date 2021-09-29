@@ -306,7 +306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
+				Report.Info("Entering Password: '*********'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
@@ -389,7 +389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
-			Report.Info("Entering Password: '" + password + "'");
+			Report.Info("Entering Password: '*********'");
 			selLogin.PasswordField = password;
 			Report.Info("Clicking login");
 			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
