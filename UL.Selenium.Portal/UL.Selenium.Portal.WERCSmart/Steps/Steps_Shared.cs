@@ -2310,8 +2310,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[StepDefinition(@"I call Shared Step 57502 \(Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
-		public void ICallSharedProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
+		[StepDefinition(@"I call Shared Step 57502 \(Product Information - Preventing, Destroying, Repelling, Mitigating Pests, US only, NO to everything else - Continue - Happy Path\)")]
+		public void ICallSharedProductInformation_PesticidePreventing_USOnly_NoToEverythingElse()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
@@ -2321,11 +2321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
-			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
-			Report.StartStep(
-				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);			
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
