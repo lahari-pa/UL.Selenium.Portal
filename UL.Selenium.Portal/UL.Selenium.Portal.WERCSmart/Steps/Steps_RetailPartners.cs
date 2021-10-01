@@ -431,7 +431,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Page failed to load!");
 			}
 
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			string downloadsFolder = AutomationSettings.DownloadsFolder;
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
@@ -475,7 +476,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Delay.Seconds(10);
 				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
-				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				string downloadsFolder = AutomationSettings.DownloadsFolder;
 				Report.Info("Downloads folder: " + downloadsFolder);
 				string[] dir2 = Directory.GetFiles(downloadsFolder, "*", SearchOption.AllDirectories);
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
@@ -2062,7 +2064,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Page failed to load!");
 			}
 
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			string downloadsFolder = AutomationSettings.DownloadsFolder;
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
@@ -2113,7 +2116,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Page failed to load!");
 			}
 
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			string downloadsFolder = AutomationSettings.DownloadsFolder;
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
