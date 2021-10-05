@@ -14,6 +14,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
+using TReVor.Integrations.Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1729,7 +1731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var finalPassword = (string)Context.GetFromContext("contextPassword");
 			if (acceptedPass)
 			{
-				var user = TestUsers.GetUserSavedAs(accountSavedAs);
+				var user = TReVor.Integrations.Classes.TReVorSettings.GetCredential(accountSavedAs);
 				if (user == null)
 				{
 					Report.Info("TReVor user does not exist");
@@ -1740,28 +1742,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				//if (Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
-				TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword);
-				TestUsers.RefreshUsers();
-				var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();
-				var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
-				string branch = TReVorSettings.SoftwareBranch;
-				user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
-				string userpass = user.Password;
+				//TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword);
+				string accountUsername = user.UserName;
+				TReVor.Integrations.Classes.TReVorSettings.UpdateCredential(user.Alias, accountUsername, finalPassword);
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+				var foundUser = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user.Alias);
+				string userpass = foundUser.Password;
+				Report.IsTrue(userpass == finalPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
 
-				if (userpass == finalPassword)
-				{
 
-					Report.Success("Successfully updated password in TReVor");				
-					
-					TestUsers.RefreshUsers();
-					user.Password = finalPassword;
-				}
-				else
-				{
-					Report.Failure("Not able to update password in TReVor");
-				}
-				
-				TestUsers.RefreshUsers();
+				//var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();
+				//var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
+				//string branch = TReVorSettings.SoftwareBranch;
+				//user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
+				//string userpass = user.Password;
+
+				//if (userpass == finalPassword)
+				//{
+
+				//	Report.Success("Successfully updated password in TReVor");				
+
+				//	TestUsers.RefreshUsers();
+				//	user.Password = finalPassword;
+				//}
+				//else
+				//{
+				//	Report.Failure("Not able to update password in TReVor");
+				//}
+
+				//TestUsers.RefreshUsers();
+
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+
 
 			}
 		}
