@@ -254,13 +254,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				case ("email"):
 					value = user.Username;
 					selLogin.EmailField = value;
+					Report.Success("Text: '" + value + "' was inputted into the input field: '" + inputField + "'");
 					break;
 				case ("password"):
 					value = user.Password;
 					selLogin.PasswordField = value;
+					Report.Success("Text: '******' was inputted into the input field: '" + inputField + "'");
 					break;
 			}
-			Report.Success("Text: '" + value + "' was inputted into the input field: '" + inputField + "'");
 		}
 
 		[StepDefinition(@"on the Login page I log in as test user: (.*)")]
