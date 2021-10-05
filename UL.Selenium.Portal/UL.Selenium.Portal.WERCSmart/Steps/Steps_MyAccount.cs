@@ -1094,7 +1094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
+					Automation.TReVor.Classes.TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");
