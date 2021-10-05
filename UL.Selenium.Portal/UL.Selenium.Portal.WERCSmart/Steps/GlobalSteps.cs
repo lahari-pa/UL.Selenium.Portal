@@ -1539,7 +1539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("The password expired after 90 days.");
 							Report.Info("Attempting to reset password");
 							string currentPassword = user.Password;
-							Report.Info("Entering original password: " + currentPassword);
+							Report.Info("Entering original password: *******");
 							passwordExpired.OriginalPassword = currentPassword;
 							string newPassword = "";
 							// If the current password ends in a character, append with a 1 for the new password
@@ -1553,9 +1553,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 								newPassword = currentPassword.TrimEnd(result.ToCharArray()) + (Convert.ToInt32(result) + 1);
 							}
-							Report.Info("Entering New Password: " + newPassword);
+							Report.Info("Entering New Password: *******");
 							passwordExpired.NewPassword = newPassword;
-							Report.Info("Entering Verify Password: " + newPassword);
+							Report.Info("Entering Verify Password: *******");
 							passwordExpired.VerifyPassword = newPassword;
 							Report.Info("Clicking continue");
 							passwordExpired.ClickContinue();

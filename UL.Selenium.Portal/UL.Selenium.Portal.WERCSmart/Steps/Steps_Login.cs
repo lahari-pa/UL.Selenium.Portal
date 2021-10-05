@@ -197,7 +197,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 				}
 			}
-			Report.Info("Entering text: '" + text + "'");
+			Report.Info("Entering text");
 			switch (inputField)
 			{
 				case ("email"):
@@ -207,7 +207,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					selLogin.PasswordField = text;
 					break;
 			}
-			Report.Success("Entered text: '" + text + "' in the input field: '" + inputField + "'");
+			if(inputField == "password")
+			{
+				Report.Success("Entered text: ' ******** ' in the input field: '" + inputField + "'");
+
+			}
+			else
+			{
+				Report.Success("Entered text: '" + text + "' in the input field: '" + inputField + "'");
+
+			}
 			Report.Screenshot();
 		}
 
