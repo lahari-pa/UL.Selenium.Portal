@@ -2660,11 +2660,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								}
 								else
 								{
-									Report.StartSubStep("Then the 'Reset Your Password' window should load");
-									this.ThenTheWindowShouldLoad("Reset Your Password", "should");
+									//Report.StartSubStep("Then the 'Reset your Password' window should load");
+									//this.ThenTheWindowShouldLoad("Reset your Password", "should");
 
-									Report.StartSubStep($"Given I switch to the 'Reset Your Password' window");
-									this.GivenISwitchToTheWindow("Reset Your Password");
+									Report.StartSubStep($"Given I switch to the 'Reset your Password' window");
+									this.GivenISwitchToTheWindow("Reset your Password");
 								}
 							}
 
