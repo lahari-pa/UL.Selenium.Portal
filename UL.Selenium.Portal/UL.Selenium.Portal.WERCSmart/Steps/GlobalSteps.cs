@@ -2660,11 +2660,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								}
 								else
 								{
-									//Report.StartSubStep("Then the 'Reset your Password' window should load");
-									//this.ThenTheWindowShouldLoad("Reset your Password", "should");
+									Report.StartSubStep("Then the 'Reset your Password' window should load");
+									this.ThenTheWindowShouldLoad("Reset your Password", "should");
 
 									Report.StartSubStep($"Given I switch to the 'Reset your Password' window");
 									this.GivenISwitchToTheWindow("Reset your Password");
+
+									//updating password +1 logic etc here (see other areas for examples)
+
+									var PassResetPopup = new ResetYourPasswordPopup();
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", "VALUE"), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", "VALUE"), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", "VALUE"), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
+									//^ Replace value with correct value (old/new pass)
+
+									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
+
+
 								}
 							}
 
