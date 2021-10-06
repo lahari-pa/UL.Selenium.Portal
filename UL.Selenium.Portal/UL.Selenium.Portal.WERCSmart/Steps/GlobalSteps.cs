@@ -2668,21 +2668,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 									//updating password +1 logic etc here (see other areas for examples)
 
+									Report.Info("Attempting to reset password");
+									string currentPassword = trevuser.Password;									
+									string newPassword = "";
+									// If the current password ends in a character, append with a 1 for the new password
+									if (!char.IsDigit(currentPassword.Last()))
+									{
+										newPassword = currentPassword + "1";
+									}
+									else
+									{
+										char[] passwordChr = currentPassword.ToCharArray();
+										string resulting = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 1);
+									}
+									
 									var PassResetPopup = new ResetYourPasswordPopup();
-									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", "VALUE"), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
-									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", "VALUE"), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
-									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", "VALUE"), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 									//^ Replace value with correct value (old/new pass)
 
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
 
+									//save pass update in trevor if success/popupcloses?
+									//returns to sha login screen ^ if appears save in trevor then relogin until back into studio screen
+
+									if(LS.Wait_for_load(30))
+									{
+										Report.Success($"The login screen was loaded, password has been reset");
+										var trevAcc = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user);
+										if (trevAcc == null)
+										{
+											Report.Info("TReVor user does not exist");
+										}
+										else
+										{
+											Report.Info("TReVor user does exist");
+										}
+										string accountUsername = trevAcc.UserName;
+										TReVor.Integrations.Classes.TReVorSettings.UpdateCredential(trevAcc.Alias, accountUsername, newPassword);
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+										var foundUser = TReVor.Integrations.Classes.TReVorSettings.GetCredential(trevAcc.Alias);
+										string userpass = foundUser.Password;
+										Report.IsTrue(userpass == newPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+									}
+									else
+									{
+										Report.Failure($"The login screen did no appear, failed to reset password...");
+										return;
+									}
+
+
+									Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
 
 								}
 							}
-
-
-
-
 
 							Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 								"Studio desktop is showing as expected");
