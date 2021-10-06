@@ -2647,6 +2647,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.Info("Checking for processing rule...");
 
+							//Add Sha pass reset code - expired password
+
+							var thisStudioDesktop = new StudioDesktop();
+							if (new PasswordExpireNotice().WaitForLoad())
+							{
+								Report.Info("The Password Expire Notice appeared, clicking Reset Password");
+
+								if (!new PasswordExpireNotice().ClickButton("Reset Password"))
+								{
+									Report.Failure("Failed to Click Reset Password");
+								}
+								else
+								{
+									Report.StartSubStep("Then the 'Reset Your Password' window should load");
+									this.ThenTheWindowShouldLoad("Reset Your Password", "should");
+
+									Report.StartSubStep($"Given I switch to the 'Reset Your Password' window");
+									this.GivenISwitchToTheWindow("Reset Your Password");
+								}
+							}
+
+
+
+
+
+							Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
+								"Studio desktop is showing as expected");
+
+							//end pass expire code
+
+
+
 							this.ICheckForSHARuleForAccount(user);
 
 							Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");

@@ -42,4 +42,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2).TryClick();
 		}
 	}
+
+	public class ResetYourPasswordPopup : StudioDesktop
+	{
+
+		public bool WaitForLoad()
+		{
+			var el = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='modal-title' and text()='Password Expiration Notice']"), 2);
+			return el != null;
+		}
+
+		public bool ClickButton(string buttonName)
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2).TryClick();
+		}
+	}
+
+
 }
