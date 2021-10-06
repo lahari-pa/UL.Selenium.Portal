@@ -1635,6 +1635,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ProductIDIngredientIDSKUFieldIsFound()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 15);
+			if (el ==null)
+			{
+				Report.Info($"el was null");
+				return false;
+			}
+			Report.Info($"el was found");
+			return true;
+		}
+
+
 		public bool MoreFiltersDisplayed()
 		{
 			var moreFilters = new List<IWebElement>() {

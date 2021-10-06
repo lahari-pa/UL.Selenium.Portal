@@ -520,7 +520,7 @@ Given In the Product ID, Ingredient ID, SKU filter field I search for: ProductID
 Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid
-Given In the Product ID, Ingredient ID, SKU filter field I search for: IngID
+Given In the Product ID, Ingredient ID, SKU filter field I search for: IngredientID158930
 Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
 Given I clear the Search Criteria
 Given I click More Filters in the products grid

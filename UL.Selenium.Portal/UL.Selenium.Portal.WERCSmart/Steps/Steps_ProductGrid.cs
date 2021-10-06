@@ -2970,7 +2970,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
 		public void IConfirmProductIDIngredientIDSKUFieldIsFound()
 		{
+			var selProductGridMoreFilters = new MoreFilters();
 
+			Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKUFieldIsFound(), "The field was not found", "The field was found");
 		}
 
 
