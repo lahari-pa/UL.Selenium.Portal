@@ -499,7 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickProductIDIngredientIDSKUSearchButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU'']/..//span[contains(@data-bind,'searchProducts')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']/..//span[contains(@data-bind,'searchProducts')]"), 2);
 			if (el == null)
 			{
 				Report.Error("Search button in Product ID, Ingredient ID, SKU' Field could not be found!");
