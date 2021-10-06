@@ -2687,12 +2687,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
-									//^ Replace value with correct value (old/new pass)
-
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
-
-									//save pass update in trevor if success/popupcloses?
-									//returns to sha login screen ^ if appears save in trevor then relogin until back into studio screen
+																		
 
 									if(LS.Wait_for_load(30))
 									{
