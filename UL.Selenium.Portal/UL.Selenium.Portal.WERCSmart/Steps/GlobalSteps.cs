@@ -2647,8 +2647,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.Info("Checking for processing rule...");
 
-							//Add Sha pass reset code - expired password
-
 							var thisStudioDesktop = new StudioDesktop();
 							if (new PasswordExpireNotice().WaitForLoad())
 							{
@@ -2725,9 +2723,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 								"Studio desktop is showing as expected");
 
-							//end pass expire code
-
-
+							
 
 							this.ICheckForSHARuleForAccount(user);
 

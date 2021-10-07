@@ -1750,29 +1750,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string userpass = foundUser.Password;
 				Report.IsTrue(userpass == finalPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
 				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
-
-
-				//var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();
-				//var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
-				//string branch = TReVorSettings.SoftwareBranch;
-				//user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
-				//string userpass = user.Password;
-
-				//if (userpass == finalPassword)
-				//{
-
-				//	Report.Success("Successfully updated password in TReVor");				
-
-				//	TestUsers.RefreshUsers();
-				//	user.Password = finalPassword;
-				//}
-				//else
-				//{
-				//	Report.Failure("Not able to update password in TReVor");
-				//}
-
-				//TestUsers.RefreshUsers();
-
 				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
 
 
