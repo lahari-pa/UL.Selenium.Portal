@@ -1044,6 +1044,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click More Filters in the products grid")]
 		public void ClickMoreFilters()
 		{
+			Delay.Seconds(4);
 			Report.IsTrue(new ProductsGrid().ClickMoreFilters(),
 				"Failed to click 'More Filters' in the products grid",
 				"Successfully clicked 'More Filters' in the products grid");
