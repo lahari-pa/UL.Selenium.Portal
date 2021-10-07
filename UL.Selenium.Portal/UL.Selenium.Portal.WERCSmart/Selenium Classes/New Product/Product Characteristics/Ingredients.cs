@@ -1804,6 +1804,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Cocoa butter");
 			ingredients.Add("Alcohol");
 			ingredients.Add("Glycerol");
+			ingredients.Add("Hydrogen peroxide");
 
 
 

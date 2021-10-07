@@ -722,5 +722,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).EnterText(value);
 		}
 
+		public bool ClickPinBox()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"));
+			if(el ==null)
+			{
+				Report.Info($"el was null");
+				return false;
+					
+			}
+			return el.TryClick();
+		}
 	}
 }

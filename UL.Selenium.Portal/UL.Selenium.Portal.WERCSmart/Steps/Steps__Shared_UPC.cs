@@ -1586,7 +1586,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				Report.StartStep("I add the following into the UPC Fields");
-				string upc = new UpcFunctions().GenerateUPC();
+				//string upc = new UpcFunctions().GenerateUPC();
+				string upc = GeneralFunctions.GenerateUPCNumber();
 				Report.Info("UPC number: " + upc);
 
 				var upcInfo = new UpcInformation();

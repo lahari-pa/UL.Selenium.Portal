@@ -510,7 +510,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void GetFile(string file, string savedAs)
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			string downloadsFolder = AutomationSettings.DownloadsFolder;
 			Report.Info("Downloads folder: " + downloadsFolder);
 			int counter = 0;
 			while (counter <= 5)

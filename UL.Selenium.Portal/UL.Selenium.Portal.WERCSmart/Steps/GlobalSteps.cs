@@ -306,7 +306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
+				Report.Info("Entering Password: '*********'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
@@ -389,7 +389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
-			Report.Info("Entering Password: '" + password + "'");
+			Report.Info("Entering Password: '*********'");
 			selLogin.PasswordField = password;
 			Report.Info("Clicking login");
 			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
@@ -2296,7 +2296,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Delay.Seconds(10);
 				Report.Info("Confirm a file is downloaded with name: " + file);
-				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				string downloadsFolder= AutomationSettings.DownloadsFolder;
+
 				Report.Info("Downloads folder: " + downloadsFolder);
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
