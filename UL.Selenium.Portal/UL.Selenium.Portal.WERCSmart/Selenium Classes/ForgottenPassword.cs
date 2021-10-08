@@ -296,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Enter_New_Password(string newPw)
 		{
-			Report.Info("Entering New Password: " + newPw);
+			Report.Info("Entering New Password: *******");
 			this._txtNewPw.EnterText(newPw);
 			return true;
 		}
@@ -307,24 +307,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Enter_Verify_Password(string verifyPw)
 		{
-			Report.Info("Entering Verify Password: " + verifyPw);
+			Report.Info("Entering Verify Password: *******");
 			this._txtVerifyPw.EnterText(verifyPw);
 			return true;
 		}
 
 		public bool New_Password_Form(string newPassword, string verifyPw)
 		{
-			Report.Info("Beginning New_Password_Form: " + newPassword + " / " + verifyPw);
+			Report.Info("Beginning New_Password_Form: ******** / ********");
 
 			if (!this.Enter_New_Password(newPassword))
 			{
-				Report.Info("Failed to Enter New Password: " + newPassword);
+				Report.Info("Failed to Enter New Password: *******");
 				Report.Screenshot();
 				return false;
 			}
 			if (!this.Enter_Verify_Password(verifyPw))
 			{
-				Report.Info("Failed to Enter Verify Password: " + verifyPw);
+				Report.Info("Failed to Enter Verify Password:  *******");
 				Report.Screenshot();
 				return false;
 			}

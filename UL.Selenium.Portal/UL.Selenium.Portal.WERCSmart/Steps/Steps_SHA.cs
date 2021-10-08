@@ -57,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Report.Info("Entering username: " + shaUser.Username);
 			thisStudioLogin.Username = shaUser.Username;
-			Report.Info("Entering password: " + shaUser.Password);
+			Report.Info("Entering password: ******* ");
 			thisStudioLogin.Password = shaUser.Password;
 			Report.Info("Clicking 'sign in'");
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs(savedAs);
 			Report.Info("Entering username: " + shaUser.Username);
 			thisStudioLogin.Username = shaUser.Username;
-			Report.Info("Entering password: " + shaUser.Password);
+			Report.Info("Entering password: ****** ");
 			thisStudioLogin.Password = shaUser.Password;
 			Report.Info("Clicking 'sign in'");
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");

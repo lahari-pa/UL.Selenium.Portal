@@ -889,7 +889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selPaypal.EmailField = username;
 			selPaypal.Click_Next();
 
-			Report.Info("Entering Password: '" + password + "'");
+			Report.Info("Entering Password: '********'");
 			selPaypal.PasswordField = password;
 
 			Report.Info("Clicking login");
