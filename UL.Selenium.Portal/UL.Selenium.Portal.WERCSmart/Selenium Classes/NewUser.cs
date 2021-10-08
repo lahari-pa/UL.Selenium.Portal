@@ -719,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Pin {
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).GetValue();
-			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).EnterText(value);
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).TryEnterTextAndTab(value);
 		}
 
 		public bool ClickPinBox()
