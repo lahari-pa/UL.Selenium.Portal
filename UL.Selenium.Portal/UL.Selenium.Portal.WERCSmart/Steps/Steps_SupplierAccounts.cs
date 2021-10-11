@@ -251,11 +251,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ClickItemInNavigationPanel("Retail Partners");
 			myRetailPartner.SelectRetailer("Amazon");
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
-			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
-			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.SetDataConsentTier("Tier 3", "on");
-			myRetailPartner.GivenClickTheSaveChangesButton();
-			myRetailPartner.ClickCloseOnSavePopupDialog();
+			//myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			//myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			//myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			//myRetailPartner.GivenClickTheSaveChangesButton();
+			//myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//data tiers fot CT
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product10", "Crayon");

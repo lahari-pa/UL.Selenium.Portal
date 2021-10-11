@@ -1539,7 +1539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("The password expired after 90 days.");
 							Report.Info("Attempting to reset password");
 							string currentPassword = user.Password;
-							Report.Info("Entering original password: " + currentPassword);
+							Report.Info("Entering original password: *******");
 							passwordExpired.OriginalPassword = currentPassword;
 							string newPassword = "";
 							// If the current password ends in a character, append with a 1 for the new password
@@ -1553,9 +1553,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 								newPassword = currentPassword.TrimEnd(result.ToCharArray()) + (Convert.ToInt32(result) + 1);
 							}
-							Report.Info("Entering New Password: " + newPassword);
+							Report.Info("Entering New Password: *******");
 							passwordExpired.NewPassword = newPassword;
-							Report.Info("Entering Verify Password: " + newPassword);
+							Report.Info("Entering Verify Password: *******");
 							passwordExpired.VerifyPassword = newPassword;
 							Report.Info("Clicking continue");
 							passwordExpired.ClickContinue();
@@ -2647,8 +2647,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.Info("Checking for processing rule...");
 
-							//Add Sha pass reset code - expired password
-
 							var thisStudioDesktop = new StudioDesktop();
 							if (new PasswordExpireNotice().WaitForLoad())
 							{
@@ -2660,24 +2658,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								}
 								else
 								{
-									Report.StartSubStep("Then the 'Reset Your Password' window should load");
-									this.ThenTheWindowShouldLoad("Reset Your Password", "should");
+									Report.StartSubStep("Then the 'Reset your Password' window should load");
+									this.ThenTheWindowShouldLoad("Reset your Password", "should");
 
-									Report.StartSubStep($"Given I switch to the 'Reset Your Password' window");
-									this.GivenISwitchToTheWindow("Reset Your Password");
+									Report.StartSubStep($"Given I switch to the 'Reset your Password' window");
+									this.GivenISwitchToTheWindow("Reset your Password");
+
+									//updating password +1 logic etc here (see other areas for examples)
+
+									Report.Info("Attempting to reset password");
+									string currentPassword = trevuser.Password;									
+									string newPassword = "";
+									// If the current password ends in a character, append with a 1 for the new password
+									if (!char.IsDigit(currentPassword.Last()))
+									{
+										newPassword = currentPassword + "1";
+									}
+									else
+									{
+										char[] passwordChr = currentPassword.ToCharArray();
+										string resulting = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 1);
+									}
+									
+									var PassResetPopup = new ResetYourPasswordPopup();
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
+									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
+																		
+
+									if(LS.Wait_for_load(30))
+									{
+										Report.Success($"The login screen was loaded, password has been reset");
+										var trevAcc = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user);
+										if (trevAcc == null)
+										{
+											Report.Info("TReVor user does not exist");
+										}
+										else
+										{
+											Report.Info("TReVor user does exist");
+										}
+										string accountUsername = trevAcc.UserName;
+										TReVor.Integrations.Classes.TReVorSettings.UpdateCredential(trevAcc.Alias, accountUsername, newPassword);
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+										var foundUser = TReVor.Integrations.Classes.TReVorSettings.GetCredential(trevAcc.Alias);
+										string userpass = foundUser.Password;
+										Report.IsTrue(userpass == newPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+									}
+									else
+									{
+										Report.Failure($"The login screen did no appear, failed to reset password...");
+										return;
+									}
+
+
+									Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
+
 								}
 							}
-
-
-
-
 
 							Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 								"Studio desktop is showing as expected");
 
-							//end pass expire code
-
-
+							
 
 							this.ICheckForSHARuleForAccount(user);
 
