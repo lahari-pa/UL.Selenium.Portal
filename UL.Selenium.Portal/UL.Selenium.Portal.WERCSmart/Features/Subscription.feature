@@ -473,11 +473,7 @@ Given If not already created, I create a user: New_VC with the following paramet
 | CollegeQuestion       | CollegeQuestion |
 | CollegeHint           | CollegeHint     |
 | Pin                  | 1234           |
-#Login to WERCSmart Portal - Visaul Automation Accou
-#Given I populate the email input field with: User_9a6761333718.kxxyxunf@mailosaur.io
-#Given I populate the password input field with: Pa4*ytuufnn
-#Given I select the Login button
-#Given If terms of use page appears I accept
+
 Then the WERCSmart homepage should load
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
@@ -738,7 +734,6 @@ Then In the Payment Methods screen I enter Credit Card details
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
-#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Given I click on My Account
 #Then In the My Account screen I navigate to the Subscription Information page
 #Then In the Subscription Information screen I confirm the Status has the correct information: 5 Formulated, 5 Articles, 5 Enhanced Articles
@@ -774,7 +769,6 @@ Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I check the Header is correct
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 #Then In the Thank You screen I click Home
-#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 15 Formulated, 15 Articles, 15 Enhanced Articles
@@ -975,7 +969,6 @@ Then In the Payment Methods screen I select Payment Method: Wire Transfer
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I check the Header is correct
-#Given I log in with email: User_4b44c15b958d.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 0 Articles, 0 Enhanced Articles
@@ -1044,7 +1037,6 @@ Then In the Payment Methods screen I enter Credit Card details
 | Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
-#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
 Scenario: [119192] Subscription - Articles/Enhanced Articles/Formulated Products Drop Down Menus - Show/Select Options

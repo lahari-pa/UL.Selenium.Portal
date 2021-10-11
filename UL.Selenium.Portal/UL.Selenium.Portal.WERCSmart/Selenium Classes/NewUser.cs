@@ -522,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set
 			{
 				this._iPassword.EnterText(value);
-				Report.Success("Entered password: " + value);
+				Report.Success("Entered password: *******");
 			}
 		}
 
@@ -531,7 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set
 			{
 				this._iConfirmPassword.EnterText(value);
-				Report.Success("Entered confirm password: " + value);
+				Report.Success("Entered confirm password: *******");
 			}
 		}
 

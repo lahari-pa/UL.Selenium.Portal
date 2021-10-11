@@ -31,7 +31,6 @@ Given I create a new supplier lockout account with the following parameters and 
 
 @ScenarioId:1383
 Scenario: [1234504] Create new account with supplier settings for Canada Address only
-#Given I log in with email: User_4b44c15b958d.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I create a new supplier Canada address only account with the following parameters and update TReVor information for: Canada Address Only
 
 @ScenarioId:1399
@@ -41,21 +40,17 @@ Given I create a new supplier Stewardship only account with the following parame
 
 @ScenarioId:1384
 Scenario: [1234506] Create new account with supplier settings for Canada Has Address Packaging
-#Given I log in with email: User_ea0759ff5975.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: CanadaHasAddressPackaging
 
 
 @ScenarioId:1386
 Scenario: [1234507] Create new account with supplier settings for Canada Has pack and partial stewardship
 Given I go to the WERCSmart Log in
-#Given I log in with email: User_c062d3b9f22e.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: CanadaHasPackandPartialStewardship
 
 
 @ScenarioId:1387
 Scenario: [1234508] Create new account with supplier settings for Canada no pkg partial stewardship
-#Given I go to the WERCSmart Log in
-#Given I log in with email: User_7d26bd270428.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I create a new supplier no pkg stewardship partial and update TReVor information for: CanadaNoPkgStwdPartial
 
 
