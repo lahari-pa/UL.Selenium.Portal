@@ -17,7 +17,6 @@ Given I go to the WERCSmart Log in
 
 @ScenarioId:476
 Scenario: [52962] Forgot Password - Registered Email
-#Given I create an email automatedcompany1 and save it as automatedcompany1
 Given I Save the email for the TReVor: NoProductsAccount Test user as: automatedcompany1
 Given I save the current emails in the inbox for address saved as: automatedcompany1
 Given I click on the Forgot Your Password Link

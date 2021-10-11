@@ -262,7 +262,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisConflictMinerals = new ConflictMinerals {
 				Password = password
 			};
-			Report.IsTrue(thisConflictMinerals.Password == password, "Failed to input the password: " + password, "Successfully entered the password: " + password);
+			Report.IsTrue(thisConflictMinerals.Password == password, "Failed to input the password: ********", "Successfully entered the password: ********");
 
 		}
 
