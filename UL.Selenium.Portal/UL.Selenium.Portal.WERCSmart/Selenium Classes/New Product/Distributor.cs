@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using TechTalk.SpecFlow;
 using System.IO;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.BaseClasses;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 

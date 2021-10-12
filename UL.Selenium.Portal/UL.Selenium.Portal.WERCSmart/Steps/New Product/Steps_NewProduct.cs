@@ -1,8 +1,3 @@
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
-using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -13,12 +8,19 @@ using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
+using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -126,11 +128,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		// * 'Tab' is the major step on the progress wizard [html: 'prog-step']
 		//		eg. Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit
 		// * 'Page' is the minor step within a Tab [html: 'step-panel']
-		//		eg. The Product, Additional Product Information, Ingredients, Retailers...
+		//		eg. The Product, Product Information, Ingredients, Retailers...
 		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
 		//		eg. 'Product name', 'Type of product', pH...
 
-		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Physical and Chemical Properties|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
 			try
@@ -252,6 +254,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
 				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
+
+
+		[StepDefinition(@"I wait (.*) seconds for the (.*) Page to load")]
+		public void IWaitXSecondsForYPageToLoad(int seconds, string page)
+		{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page,seconds), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -470,14 +485,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
 		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
 		{
-			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
 		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
 		public void UploadPDFFileEmbedded(string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
@@ -585,7 +600,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(idname, prodDetails.Id);
 			Report.Success("Product Information saved!");
 		}
-
 
 		//[StepDefinition(@"I save the product Id as: (.*)")]
 		//public void SaveProductId(string savedas)
@@ -1062,6 +1076,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue(!expectedRadioButtons.Any(x => radioButtonsShowing.Contains(x)),
 					"The actual radio buttons for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Should not be showing: " + string.Join(", ", expectedRadioButtons),
 					"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+
 			}
 
 		}
@@ -1093,6 +1108,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add UPC' button!", "Successfully clicked the 'Add UPC' button");
 		}
+
+		[StepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
+		public void ThenIEnterAnIntentionallyBadUPCWithContainerSizeAndContainerTypeCardboard(Table table)
+		{
+			string badUPC = GenerateBadUPC.Generate();
+			Context.AddToContext("badUPC", badUPC);
+			Report.Info($"Bad UPC: {0}", badUPC);
+			this.ThenIAddTheFollowingIntoTheUpcFields(table);
+		}
+
 
 		[StepDefinition(@"I add the following into the UPC Fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
@@ -1203,6 +1228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
+			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
 			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(1);
@@ -1948,7 +1974,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
 				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
-				
+
 
 				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
@@ -2524,7 +2550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -2641,12 +2667,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
 		{
-			string testCaseId = TReVorSettings.TestCaseId;
-			if (testCaseId == null)
+			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
 			}
-			Report.Info("Current test case ID: " + testCaseId);
+			Report.Info("Current test case ID: " + WercSmartSettings.TestCaseId);
+
 			var newProduct = new NewProduct();
 			List<MyBrands.Brand> options = newProduct.AllProductLineOrBrandOptions();
 			if (options.Count == 0)
@@ -2661,9 +2687,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProduct.SetOptionInSectionByValue("Product Line or Brand (optional)", brand.ID, brand.Name),
 				$"Failed to set the Product Line or Brand option to: {brand.Name} ({brand.ID})!",
 				$"Successfully set the Product Line or Brand option to: {brand.Name} ({brand.ID})");
-			Report.Info($@"Saving brand ""{brand.Name}"" to context as: Brand{testCaseId}");
-			Context.AddToContext($"Brand{testCaseId}", brand);
-			Context.AddToContext($"BrandName{testCaseId}", brand.Name);
+			Report.Info($@"Saving brand ""{brand.Name}"" to context as: Brand{WercSmartSettings.TestCaseId}");
+			Context.AddToContext($"Brand{WercSmartSettings.TestCaseId}", brand);
+			Context.AddToContext($"BrandName{WercSmartSettings.TestCaseId}", brand.Name);
 		}
 
 		[StepDefinition(@"Data Acceptance page should not show")]
@@ -2934,18 +2960,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
 
-		[StepDefinition(@"In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
+		[StepDefinition(@"In the Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
 		public void GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2968,8 +2995,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(@"In the Restict Use page I select Do Not Restrict")]
@@ -3090,7 +3117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
 		}
 
-		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Additional Product Information with the following text: (.*)")]
+		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Product Information with the following text: (.*)")]
 		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -3311,8 +3338,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
-		public void InTheAdditionalProductInformationPageUnselectUS()
+		[StepDefinition(@"In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		public void InTheProductInformationPageUnselectUS()
 		{
 			var MyNewProduct = new NewProduct();
 			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
@@ -3322,18 +3349,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
 			}
 		}
-
 		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();			
+			var MyNewProduct = new StepsNewProduct();
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
+		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
+		{
+			string id = "";
+
+			if (Context.Contains(savedAs))
+			{
+				var MyNewProduct = new StepsNewProduct();
+				id = Context.GetFromContext(savedAs).ToString();
+				MyNewProduct.SetTheSectionOptionTo("Product Identification (Optional)", id);
+			}
+			else
+			{
+				Report.Failure("Product ID saved as: " + savedAs + " was not found in context");
+			}
+		}
+
+		[StepDefinition(@"I Select a height from the drop down list")]
+		public void GivenISelectAHeightFromTheDropDownList()
+		{
+			List<string> HeightList = new NewProduct().GetHeightOptions();
+			// the container type count must be greater than 1 or random number will throw argument out of range exception (cannot have a range between 1 and 0)
+			if (HeightList.Count <= 1)
+			{
+				Report.Failure("Expected > 1 options to appear under the height select");
+				return;
+			}
+			var random = new Random();
+			int randomNumber = random.Next(1, HeightList.Count - 1);
+			Report.IsTrue(new NewProduct().SelectHeight(HeightList[randomNumber]),
+				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
+		}
 
 	}
 
@@ -3341,32 +3399,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//{
 	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+		//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-	//	public bool ClickUPCWarningButton(string choice)
-	//	{
-	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+		//	public bool ClickUPCWarningButton(string choice)
+		//	{
+		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-	//		if (modalWindow is null || modalTitle is null)
-	//		{
-	//			Report.Failure("Could not locate UPC Warning modal window.");
-	//			return false;
-	//		}
+		//		if (modalWindow is null || modalTitle is null)
+		//		{
+		//			Report.Failure("Could not locate UPC Warning modal window.");
+		//			return false;
+		//		}
 
-	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-	//		switch (choice)
-	//		{
-	//			case "ok":
-	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-	//				return deleteBtn.TryClick();
-	//			case "cancel":
-	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-	//				return cancelBtn.TryClick();
-	//		}
-	//		return false;
-	//	}
-	//}
-}
+		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+		//		switch (choice)
+		//		{
+		//			case "ok":
+		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+		//				return deleteBtn.TryClick();
+		//			case "cancel":
+		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+		//				return cancelBtn.TryClick();
+		//		}
+		//		return false;
+		//	}
+		//}
+
+	}
+
 
 

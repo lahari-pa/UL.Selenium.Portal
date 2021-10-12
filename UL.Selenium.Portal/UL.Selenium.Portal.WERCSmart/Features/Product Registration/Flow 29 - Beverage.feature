@@ -22,8 +22,8 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase60694
+	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
 	Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-	Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
@@ -34,7 +34,6 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
-# no product characteristics step has been added to the test case!
 #Retailers section needs to be confirmed!
 @TReVorId:22293
 Scenario: [60695] Juice and Juice Drinks - RU001413
@@ -45,8 +44,8 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
 	Then I save the product information as: TestCase60695
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
 	Then I click 'Add Retailers' in the Retailers page
@@ -69,8 +68,8 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase73085
+	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
 	Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-	Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
@@ -88,17 +87,17 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 
-	@ScenarioId:10283
+@ScenarioId:10283
 Scenario: [144468] Alcoholic Beverages - With DOT Exception
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
-Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
+Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 49818 (Beverage Regulatory Details)

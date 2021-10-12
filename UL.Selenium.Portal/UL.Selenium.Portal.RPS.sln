@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.RPS", "UL.Selenium.Portal.RPS\UL.Selenium.Portal.RPS.csproj", "{D5E1C2C3-F49C-447F-A90F-B8C3ED729051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.RPS", "UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj", "{0244AA85-2C15-420D-A151-2E72ED04A5DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.WERCSmart", "UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj", "{0244AA85-2C15-420D-A151-2E72ED04A5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

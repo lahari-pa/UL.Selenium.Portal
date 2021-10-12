@@ -19,8 +19,8 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Then I save the product information as: TestCase74626
-	Then I call Shared Step 57454 (Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
-	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Then I call Shared Step 57454 (Physical and Chemical Properties - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
@@ -57,9 +57,8 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 	Then I save the product information as: TestCase56475
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
@@ -126,8 +125,16 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	#And In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Material in the Type of Product select field
 	And I set 'Type of Product' to: Charcoal Lighter Material
 	And in the New Product page I click Continue
-	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
+	# Physical and Chemical Properties Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56477
 	And I should only see the following options for Primary Physical State:
 		| State  |
@@ -140,19 +147,11 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
-	# Ingredient Page
+		# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
@@ -210,7 +209,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -237,9 +236,8 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase56481
-	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -315,8 +313,16 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	#And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Antiperspirants - Non-aerosol
 	And in the New Product page I click Continue
-	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
+	# Physical and Chemical Properties Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56483
 	And I should only see the following options for Primary Physical State:
 		| State  |
@@ -327,19 +333,11 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the When mixed with an equal amount of water option to: No
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
@@ -393,7 +391,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -430,8 +428,16 @@ Scenario: [56484] VOC - Aero checks
 	#And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Clear Coating - Aerosol
 	And in the New Product page I click Continue
-	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	# Product Information page
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
+	# Physical and Chemical Properties Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase56484
 	And I should only see the following options for Primary Physical State:
 		| State   |
@@ -441,19 +447,11 @@ Scenario: [56484] VOC - Aero checks
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 	And in the New Product page I click Continue
-	# Additional Product Information page
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | false               | false       |            |
+		| Air           | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
 	And I should see the Waste Classification Data Page
@@ -513,7 +511,7 @@ Scenario: [56484] VOC - Aero checks
 	And I should see the Additional Documents to Provide Page
 	And in the New Product page I click Continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -543,8 +541,8 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
 	Then I save the product information as: TestCase56476
-	Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -595,11 +593,11 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Then I save the product information as: TestCase73503
-	And I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path)
-	And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	And I call Shared Step 57532 (Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 100     | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 100     | false               | false       |            |
 	And I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue
 	And I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)

@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

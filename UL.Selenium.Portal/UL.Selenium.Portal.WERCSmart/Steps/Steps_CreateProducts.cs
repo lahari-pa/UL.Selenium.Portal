@@ -1,6 +1,6 @@
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using System.Collections.Generic;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			MyStepsShared.GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No();
 			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			MyStepsShared.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
 			MyStepsShared.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
@@ -100,10 +100,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			Report.StartStep("Then I save the product information as: TestCase84109");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			//Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
-			//MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
-			Report.StartStep("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only");				
-			MyStepsShared.GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly();
+			Report.StartStep("I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only");				
+			MyStepsShared.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
 
 
 			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
@@ -175,6 +173,78 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I create a Forced to Completed electronic product and save it as: (.*)")]
+		public void GivenIForceCreateAnElectronicProductAndSaveItAs(string saveAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsShared = new Steps_Shared();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsSHA = new Steps_SHA();
+			var MyStepsStudio = new Steps_Studio();
+
+			Report.StartStep("I call Shared Step 67823(Login to WERCSmart - Products Automation Account)");
+			MyStepsShared.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			Report.StartStep("I call Shared Step 57408(Create a New Registration via Register New Product icon)");
+			MyStepsShared.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): Answering machine, No battery included");
+			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
+			Report.StartStep("Then I save the product information as: TestCase84109");
+			MyStepsNewProduct.SaveProductInformation(saveAs);
+			Report.StartStep("I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only");
+			MyStepsShared.GivenICallSharedStep60935ProductInformation_US_DirectShip_PrivateLabelOnly();
+
+
+			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			Report.StartStep("I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)");
+			MyStepsShared.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
+			Report.StartStep("I call Shared Step 71955(Answer Electronic Equipment questions - Without Cathode Ray - No to all)");
+			MyStepsShared.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
+			MyStepsShared.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			Report.StartStep("I should see the Additional Documents to Provide Page");
+			//Given in the Additional Documents to Provide page I click Continue
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			Report.StartStep("I should see Optional Reports and Documents Available for Purchase page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("In the new products page, I hit continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
+			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
+			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			MyStepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			Report.StartStep("I call Shared Step 65080(Login to Studio and Open SHA manager)");
+			MyStepsShared.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			Report.StartStep(
+				"Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Submitted", saveAs);
+			Report.StartStep(
+				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Submitted");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Submitted");
+			Report.StartStep(
+				"Given I call Shared Step 40657(SHA Manager - Submitted - Select product > process product data for product saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(saveAs);
+			Report.StartStep(
+				"Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
+			Report.StartStep(
+				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Assigned");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Assigned");
+			Report.StartStep(
+				"And I call Shared Step 55662(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: " + saveAs + ")");
+			MyStepsShared.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(saveAs);
+			//# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("No Retailer/No UPC Product");
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(saveAs, retailerTable);
+
+
+		}
+
 		[StepDefinition(@"I create a kit component in completed status")]
 		public void CreateKitComponentInCompletedStatus()
 		{
@@ -239,10 +309,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit", $"Kit Product {savedAs}");
 
 			new Steps_TheProduct().SetProductNameProductTypeProductLine($"Kit Product {savedAs}", "Hair Color Kit", "TestBrand");
-			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			//And I call Shared Step 77872(Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
 			// fix
-			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
+			sharedSteps.Shared77872_ProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			//And I In the shared step below add the two completed products that you are working with
@@ -328,10 +398,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase85965");
 			new StepsNewProduct().SaveProductInformation("TestCase85965");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
-			new Steps_Shared().SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			Report.StartStep("I call Shared Step 63860 (Additional Product Information - US, No(Child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))");
-			new Steps_Shared().SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			Report.StartStep("I call Shared Step 63860 (Product Information - US, No(Child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))");
+			new Steps_Shared().SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();			
 			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
 			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			Report.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
@@ -434,10 +504,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase86187");
 			new StepsNewProduct().SaveProductInformation("TestCase86187");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
-			new Steps_Shared().SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			Report.StartStep("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
-			new Steps_Shared().ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
+			new Steps_Shared().ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
 			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			Report.StartStep("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)");
@@ -511,6 +581,192 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+
+		[StepDefinition(@"I create a Completed product using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
+		public void CreateProductUsing86187AndShaAccount(string shaAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I login into the WERCSmart Portal - Canada has all data account");
+			new GlobalSteps().LoginToWERCSmart("Canada has all data account");
+			Report.StartStep("I generate a random UPC number and save as: UPC86187");
+			new StepsProductGrid().GivenIGenerateARandomUPCNumberAndSaveAs("UPC86187");
+			Report.StartStep("I delete all products with UPC Number: saved as UPC86187");
+			new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC86187");
+			Report.StartStep("I call Shared Step 57408 (Create a New Registration via Register New Product icon)");
+			new Steps_Shared().GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
+			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
+			Report.StartStep("I save the product information as: TestCase86187");
+			new StepsNewProduct().SaveProductInformation("TestCase86187");
+			Report.StartStep("I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
+			new Steps_Shared().ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
+			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)");
+			new Steps_Shared().ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			Report.StartStep("I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue");
+			var retailers = new Table("Retailer");
+			retailers.AddRow("Canadian Tire");
+			new Steps_Shared().ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailers);
+			Report.StartStep("I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86187, container type: Metal Container and size: 40");
+			new Steps_Shared().ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue(
+				"saved as UPC86187", "Metal Container", "40");
+			Report.StartStep("I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both");
+			new Steps_Shared().ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
+			Report.StartStep("in the Additional Documents to Provide page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path");
+			new Steps_Shared().GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
+			var tableSds = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+				tableSds);
+			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
+			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			new StepsNewProduct().GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
+			new Steps_Shared().GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Submitted");
+			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
+				"TestCase86187", "Submitted");
+			Report.StartStep("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData("TestCase86187");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Assigned", "TestCase86187");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Assigned");
+			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
+				"TestCase86187", "Assigned");
+			Report.StartStep("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete("TestCase86187");
+			Report.StartStep("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue("TestCase86187");
+			Report.StartStep("I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS for saved as: TestCase86187");
+			new Steps_Shared().GivenICallSharedStep_WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSHSGHENAndCFAndSBCS(
+				"TestCase86187");
+			Report.StartStep("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete("TestCase86187");
+			Report.StartStep("I call Shared Step 59066 (Go to SHA Manager)");
+			new Steps_Shared().GivenICallSharedStep59066GoToSHAManager();
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Accepted or Completed");
+			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
+				"TestCase86187", "Accepted or Completed");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase86187) for");
+			var retailersTable = new Table("Retailer");
+			//retailersTable.AddRow("CVS");
+			retailersTable.AddRow("Canadian Tire");
+			new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailersTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailersTable);
+
+		}
+
+
+
+		[StepDefinition(@"I create a product and force it into Completed using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
+		public void CreateForcedProductUsing86187AndShaAccount(string shaAcc)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I login into the WERCSmart Portal - Canada has all data account");
+			new GlobalSteps().LoginToWERCSmart("Canada has all data account");
+			Report.StartStep("I generate a random UPC number and save as: UPC86187");
+			new StepsProductGrid().GivenIGenerateARandomUPCNumberAndSaveAs("UPC86187");
+			Report.StartStep("I delete all products with UPC Number: saved as UPC86187");
+			new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC86187");
+			Report.StartStep("I call Shared Step 57408 (Create a New Registration via Register New Product icon)");
+			new Steps_Shared().GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
+			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
+			Report.StartStep("I save the product information as: TestCase86187");
+			new StepsNewProduct().SaveProductInformation("TestCase86187");
+			Report.StartStep("I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
+			new Steps_Shared().ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
+			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)");
+			new Steps_Shared().ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			Report.StartStep("I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue");
+			var retailers = new Table("Retailer");
+			retailers.AddRow("Canadian Tire");
+			new Steps_Shared().ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailers);
+			Report.StartStep("I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86187, container type: Metal Container and size: 40");
+			new Steps_Shared().ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue(
+				"saved as UPC86187", "Metal Container", "40");
+			Report.StartStep("I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both");
+			new Steps_Shared().ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
+			Report.StartStep("in the Additional Documents to Provide page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			Report.StartStep("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path");
+			new Steps_Shared().GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
+			var tableSds = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+				tableSds);
+			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
+			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			new StepsNewProduct().GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
+			new Steps_Shared().GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
+
+
+
+
+
+			//Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			//new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Submitted");
+			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
+				"TestCase86187", "Submitted");
+			Report.StartStep("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData("TestCase86187");
+
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Assigned", "TestCase86187");
+
+			//Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Assigned");
+			//new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase86187", "Assigned");
+
+			Report.StartStep("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase86187)");
+			new Steps_Shared().GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete("TestCase86187");
+
+		
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+			var retailersTable = new Table("Retailer");
+			//retailersTable.AddRow("CVS");
+			retailersTable.AddRow("Canadian Tire");
+			retailersTable.AddRow("No Retailer/No UPC Product");
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailersTable);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailersTable);
+
+		}
+
 		[StepDefinition(@"For CVS I create a product of type: Health & Beauty \(RUCC0392\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeHealthBeautyAndLeaveAsNew(string savedAs)
 		{
@@ -528,8 +784,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Conditioner", name);
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue();
-			sharedSteps.SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			sharedSteps.SharedProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
+			sharedSteps.SharedPhysicalandChemicalProperties_LiquidOnlyAvailable_EnterAllData_Continue();
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
@@ -564,13 +820,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Fireworks");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
-
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Propane", "100", "false", "false", "");
 
@@ -615,8 +870,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Appreciable");
 
-			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
 
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Water", "100", "false", "false", "");
@@ -665,21 +920,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
 			newProductSteps.SaveProductInformation(savedAs);
+			
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
+
+			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "California's Cleaning Product Right to Know Act", "Private Label or Brand", "Good Not for resale");
+			table63804.AddRow("No", "No", "No", "No","No");
+
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
+			newProductSteps.ClickContinue();
+
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 
-			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "California's Cleaning Product Right to Know Act", "Private Label or Brand", "Good Not for resale");
-			table63804.AddRow("No", "No", "No", "No","No");
-
-			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
-
-			
-
-			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
 
@@ -718,7 +973,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Light Bulbs - Incandescent Bulbs");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			sharedSteps.GivenICallSharedStepProductInformation_CountryAndPrivateLabelOrBrand_No();
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallShared61449ToxicityCharacteristicLeachingProcedureTCLP_SelectNoToAll_ClickContinue_HappyPath();
 			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
@@ -750,14 +1005,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
 			newProductSteps.SaveProductInformation(savedAs);
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
-			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
+
+			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+
+			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
+			
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Butane", "100", "false", "false", "");
@@ -802,8 +1060,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Candle and/or Wax");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+
+			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -839,8 +1099,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Table table37857 = new Table("Secondary Physical State", "Water Solubility");
 			table37857.AddRow("Grainy", "Soluble in hot water");
+
+			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
-			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -873,8 +1135,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Latex gloves");
 			newProductSteps.SaveProductInformation(savedAs);
 
+			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
-			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -913,8 +1176,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
-			sharedSteps.ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
+			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
+			sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
+
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -957,8 +1221,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Photograph Coating - Aerosol");
 			newProductSteps.SaveProductInformation(savedAs);
 
+			sharedSteps.GivenICallSharedStepProductInformationWithCountryAndEveryOption();
 			sharedSteps.GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly();
-			sharedSteps.GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption();
+
 			newProduct.ClickContinue();
 			sharedSteps.GivenICallSharedEnterIngrediebtsForAerosolPropellant();
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
@@ -996,13 +1261,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Lighters");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			Table table74981 = new Table("Secondary Physical State", "Select the best Water Solubility description");
-			table74981.AddRow("Compressed gas", "Low");
-			sharedSteps.ICallSharedProductCharacteristics_Gas(table74981);
 			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
 			table63804.AddRow("No", "No", "No", "No");
 
-			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
+			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
+
+			Table table74981 = new Table("Secondary Physical State", "Select the best Water Solubility description");
+			table74981.AddRow("Compressed gas", "Low");
+			sharedSteps.ICallSharedPhysicalandChemicalProperties_Gas(table74981);
+			
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -1046,8 +1313,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			sharedSteps.ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+
+			sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 
@@ -1081,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 			sharedSteps.SharedPrimaryPhysicalStateSolidOnlyAvailable_WithoutWaterSolubilityQuestion();
-			sharedSteps.SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse();
+			sharedSteps.SharedProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse();
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
@@ -1121,7 +1390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Cereals");
 			newProductSteps.SaveProductInformation(savedAs);
 			sharedSteps.GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients();
-			sharedSteps.GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes();
+			sharedSteps.GivenICallSharedStep60726ProductInformation_CountryAndPrivateLabelOrBrand_Yes();
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -1192,13 +1461,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Digestive Aid");
 			newProductSteps.SaveProductInformation(savedAs);
+
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			//sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
-			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
@@ -1242,11 +1512,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
 
 			//Create new version of this step to Answer CA cleaning question
 			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-			this.AdditionalProductInformation_YesToCACleaning();
+			this.ProductInformation_YesToCACleaning();
 			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 
 			newProductSteps.ClickContinue();
@@ -1337,12 +1607,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
-		public void AdditionalProductInformation_YesToCACleaning()
+		[StepDefinition(@"In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
+		public void ProductInformation_YesToCACleaning()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
@@ -1463,8 +1733,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selectRetailers = new StepsSelectRetailers();
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			sharedSteps.ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			sharedSteps.ICallSharedProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 
@@ -1491,10 +1761,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 			Report.StartStep("I save the product information as: TestCase86187");
 			new StepsNewProduct().SaveProductInformation("TestCase86187");
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
-			new Steps_Shared().SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			Report.StartStep("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
-			new Steps_Shared().ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue");
+			new Steps_Shared().ThenICallSharedStep85284_ProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			new Steps_Shared().SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			
 			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
 			new Steps_Shared().ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			Report.StartStep("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)");
@@ -1597,11 +1868,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I save the product Information as: TestCase87685");
 			stepsNewProduct.SaveProductInformation("TestCase87685");
-
-			Report.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			Report.StartStep("I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");
-			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			Report.StartStep("I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+			
 			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			Report.StartStep("Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
@@ -1669,6 +1940,207 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Accepted");
 			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87685)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", "TestCase87685");
+
+		}
+
+		[StepDefinition(@"I create a Chalk product for Amazon and Proccess it through to Accepted Using Sha Account: (.*)")]
+		public void CreateAcceptedProductAmazonusingShaAccount(string shaAccount)
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var globalSteps = new GlobalSteps();
+			var sharedSteps = new Steps_Shared();
+			var stepsProductGrid = new StepsProductGrid();
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsSHA = new Steps_SHA();
+			var stepsSharedUPC = new StepsUPC();
+
+			Report.StartStep("I login into the WERCSmart Portal - Administrator Role");
+			new GlobalSteps().LoginToWERCSmart("Administrator Role");
+			Report.StartStep("I generate a random UPC number and save as: UPC87685");
+			stepsProductGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC87685");
+			Delay.Seconds(2);
+			Report.StartStep("I generate a random UPC number and save as: UPC876851");
+			stepsProductGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC876851");
+			Report.StartStep("I call Shared Step 57408 (Create a New Registration via Register New Product icon)");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
+
+			Report.StartStep("I save the product Information as: TestCase87685");
+			stepsNewProduct.SaveProductInformation("TestCase87685");
+			Report.StartStep("I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
+
+			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			retailerTable.AddRow("Amazon");
+
+			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
+			Report.StartStep("I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87685, container type: Paper bag and size: 2 do not click continue");
+			stepsSharedUPC.EnterUPCInfoDoNotClickContinue("87685", "Paper bag", "2");
+			stepsNewProduct.ClickContinue();
+
+
+
+
+
+			Report.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			Report.StartStep("in the Additional Documents to Provide page I click Continue");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue(" Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+
+			Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
+
+			var additionalData = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			additionalData.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+
+			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(additionalData);
+			Report.StartStep("I call Shared Step 57883");
+			sharedSteps.GivenICallSharedCommentsHappyPath(@"User added Comments Text 57863. !""�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.");
+			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			stepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccount);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Submitted");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Submitted");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87685)");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData("TestCase87685");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Assigned");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Assigned");
+			Report.StartStep("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87685)");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete("TestCase87685");
+			Report.StartStep("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87685)");
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue("TestCase87685");
+			Report.StartStep("I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87685");
+			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS("TestCase87685");
+			Report.StartStep("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87685)");
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete("TestCase87685");
+			Report.StartStep("I call Shared Step 59066 (Go to SHA Manager)");
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Accepted");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Accepted");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", "TestCase87685");
+
+		}
+
+
+
+		[StepDefinition(@"I create a Chalk product for Amazon and Force it into to Completed Using Sha Account: (.*)")]
+		public void CreateForcedCompletedProductAmazonusingShaAccount(string shaAccount)
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var globalSteps = new GlobalSteps();
+			var sharedSteps = new Steps_Shared();
+			var stepsProductGrid = new StepsProductGrid();
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsSHA = new Steps_SHA();
+			var stepsSharedUPC = new StepsUPC();
+
+			Report.StartStep("I login into the WERCSmart Portal - Administrator Role");
+			new GlobalSteps().LoginToWERCSmart("Administrator Role");
+			Report.StartStep("I generate a random UPC number and save as: UPC87685");
+			stepsProductGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC87685");
+			Delay.Seconds(2);
+			Report.StartStep("I generate a random UPC number and save as: UPC876851");
+			stepsProductGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC876851");
+			Report.StartStep("I call Shared Step 57408 (Create a New Registration via Register New Product icon)");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			Report.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
+
+			Report.StartStep("I save the product Information as: TestCase87685");
+			stepsNewProduct.SaveProductInformation("TestCase87685");
+			Report.StartStep("I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");
+			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
+
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
+
+			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			retailerTable.AddRow("Amazon");
+
+			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
+			Report.StartStep("I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87685, container type: Paper bag and size: 2 do not click continue");
+			stepsSharedUPC.EnterUPCInfoDoNotClickContinue("87685", "Paper bag", "2");
+			stepsNewProduct.ClickContinue();
+
+
+
+
+
+			Report.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			Report.StartStep("in the Additional Documents to Provide page I click Continue");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue(" Additional Documents to Provide");
+			Report.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+
+			Report.StartStep("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:");
+
+			var additionalData = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			additionalData.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+
+			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(additionalData);
+			Report.StartStep("I call Shared Step 57883");
+			sharedSteps.GivenICallSharedCommentsHappyPath(@"User added Comments Text 57863. !""�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.");
+			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			Report.StartStep("If purchase details are showing click confirm order");
+			stepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
+			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAccount);
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Submitted");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Submitted");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87685)");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData("TestCase87685");
+			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
+			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Assigned");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Assigned");
+			Report.StartStep("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87685)");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete("TestCase87685");
+
+			Report.StartStep("I call Shared Step (SHA - Assigned Product - set Retailers to Completed for saved as: TestCase86187) for");
+			string savedAs = "TestCase87685";
+			retailerTable.AddRow("No Retailer/No UPC Product");
+
+			
+
+			new Steps_Shared().GivenICallSharedSHA_AssignedProduct_SetRetailersToCompletedForSavedAs(savedAs, retailerTable);
+			Report.StartStep($"I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: {savedAs})");
+			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
 
 		}
 

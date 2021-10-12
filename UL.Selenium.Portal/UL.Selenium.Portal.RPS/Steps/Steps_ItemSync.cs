@@ -3,7 +3,7 @@ using System.Linq;
 using Castle.Core.Internal;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.RPS.Classes;

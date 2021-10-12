@@ -25,6 +25,13 @@
 @run_UPCCasePack
 Feature: UPC Case Pack
 
+
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:1455
 Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
@@ -33,8 +40,8 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87640
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -50,7 +57,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87640)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87640 and its status is: Submitted
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87640
@@ -65,8 +72,8 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87643
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -83,7 +90,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87643)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87643 and its status is: Submitted
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87643
@@ -100,10 +107,10 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
-	Then I save the product information as: TestCase87650
+    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
+    Then I save the product information as: TestCase87650
+	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -141,7 +148,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87650)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87650 and its status is: Submitted
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87650
@@ -160,8 +167,8 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87676
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -175,7 +182,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87676 and its status is: New
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
@@ -194,7 +201,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	And I click the 'Add Case UPC' button
 	#And I switch to tab: UL Wercs Studio
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
 	Then In the SHA list of UPCs I should not see UPC: saved as UPC87676
@@ -212,8 +219,8 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87685
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -230,7 +237,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Submitted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
@@ -263,8 +270,8 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87686
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -280,7 +287,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Submitted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
@@ -304,6 +311,8 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
+	#Philip - Working
+	@tfs_design
 @singlerun
 @ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC
@@ -346,7 +355,7 @@ Given I Use Test case 87685 to create a product which has a Case UPC and a regul
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	Then In the Thank You screen I click Home
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
 	Then I Check that the product under the retailer: Amazon is under the status: Accepted
 	Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
@@ -360,8 +369,8 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I generate a random UPC number and save as: UPC87835-2
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -400,8 +409,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC87631
 Then I save the product information as: TestCase87631
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -411,19 +420,19 @@ And I should see the Universal Product Code Page
 Given I click the 'Add Case UPC' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | abc      |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
 Then I click continue
 Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
 
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | 32.101   |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | 32.101   |                          | 4A: steel box         |
 Then I click continue
 Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
 
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Aerosol Can    | 6    | 32       |                          | 4A: steel box         |
+		| saved as UPC87631   | Cardboard      | 6    | 32       |                          | 4A: steel box         |
 Then I click continue
 Then I check for the appropriate alert: No error
 And I should see the Regulatory Documents to Provide Page
@@ -435,12 +444,11 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 Scenario: [87633] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87633
 Then I save the product information as: TestCase87633
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
-Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
@@ -469,10 +477,10 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-And I should see the Additional Product Information Page
-And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I should see the Product Information Page
+And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
@@ -499,16 +507,17 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ScenarioId:11137
 Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I should see the Additional Product Information Page
-And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I should see the Product Information Page
+And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
@@ -533,10 +542,10 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC87821
 Then I save the product information as: TestCase87821
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I should see the Additional Product Information Page
-And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I should see the Product Information Page
+And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue

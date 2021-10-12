@@ -48,13 +48,12 @@ Scenario: [63705] New Product - BCP
 	And I Select the Create a New Registration radio button
 	And in the New Product page I click Continue
 	And I set 'Product Name' to: Answering Machine, Battery Included
-	#And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
 	And I set 'Type of Product' to: Answering Machine, Battery Included
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63705
 	# Shared step 63704
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
@@ -122,19 +121,20 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Then I save the product information as: TestCase63724
-	# Setting Product Characteristics
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	# Setting Additional Product Information
-	And I should see the Additional Product Information Page
+	# Setting Product Information
+	And I should see the Product Information Page
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
+	# Setting Physical and Chemical Properties
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	# Setting Ingredient Information
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Formaldehyde  | 100     | false               | false       |            |
+	Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
@@ -152,7 +152,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	And I should see the Regulatory Documents to Provide Page
 	And I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	And I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	And I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then I click continue
 	#SaDS authoring - additional data
 	And I should see the Additional Documents to Provide Page
@@ -191,21 +191,25 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set 'Type of Product' to: Abrasive
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase65441
-	And I set the Primary Physical State to be: Solid
-	And I set the Secondary Physical State to be: Granular
-	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
-	Given in the New Product page I click Continue
-	# Setting Additional Product Information
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	# Setting Product Information
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
+	And I set 'California's Cleaning Product' to: No
 	# CA Cleaning question commented out, uncomment when CA Cleaning is re-added
 	#And I set 'California's Cleaning Product' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
+
+	And I set the Primary Physical State to be: Solid
+	And I set the Secondary Physical State to be: Granular
+	And I set the water mixture question to: Yes
+	And I set the water solubility description to: Completely soluble
+	Given in the New Product page I click Continue
+	
+
 	#Enter ingredients
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -218,7 +222,6 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	#Transportation details 1 - not regulated - continue - happy path
 	And I should see the Transportation Details 1 Page
 	And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: Not Regulated
-	#And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(a)(2), 173.120(a)(3)
 	#And I set the Other DOT Exception field to: None
 	And in the New Product page I click Continue
 	#Retailer association - select a retailer - continue-happy path
@@ -252,8 +255,8 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase65392
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Formaldehyde  | 100     | false               | false       |            |
@@ -299,8 +302,15 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	#And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
 	And I set 'Type of Product' to: Deodorant - Non-aerosol
 	And in the New Product page I click Continue
-	# Product Characteristics Page
-	And I should see the Product Characteristics Page
+	# Product Information Page
+	And In the Information Page the check box for: United States should be: checked
+	And I set the Product has been classified using OSHA (US) option to: No
+	And I set the Product is shipped directly by supplier to the consumer option to: No
+	And I set the Product is a Retailer's Private Label or Brand option to: No
+	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	And in the New Product page I click Continue
+	# Physical and Chemical Properties Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase67661
 	And in the New Product page I click Continue
 	And Primary Physical State should be showing the error messages: This is a required field.
@@ -309,14 +319,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the When mixed with an equal amount of water option to: No
 	And I set the Select the best Water Solubility description option to: Very soluble
 	And in the New Product page I click Continue
-	# Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
-	And I set the Product has been classified using OSHA (US) option to: No
-	And I set the Product is shipped directly by supplier to the consumer option to: No
-	And I set the Product is a Retailer's Private Label or Brand option to: No
-	And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-	And in the New Product page I click Continue
-	# Ingredients Page
+# Ingredients Page
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -378,7 +381,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	Then in the New Product page I click Continue
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
-	And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then in the New Product page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -431,8 +434,8 @@ Scenario: [105352] Product Comments screen Max input length
 	And I set 'Type of Product' to: Answering Machine, Battery Included
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase105352
-	And I should see the Additional Product Information Page
-	And In the Additional Information Page the check box for: United States should be: checked
+	And I should see the Product Information Page
+	And In the Information Page the check box for: United States should be: checked
 	And I set 'Product is shipped directly' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
@@ -508,13 +511,18 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
 		| CASNumber | ComponentName | Percentage |
 		| 7726-95-6   | 6Bromine  | 30         |
-	Then in the Ingredients page I click Continue 
+	Then in the Ingredients page I click Continue
+
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then in the Additional documents page I click Continue
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
@@ -602,13 +610,13 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 		| 50-00-0   | Formaldehyde  | 30         |
 	Then in the Ingredients page I click Continue 
 	Then The Formulation 3rd Party Step is shown
-    Then I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue)
+    Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 	When I click continue
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then in the Additional documents page I click Continue
 	When I click continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
@@ -626,7 +634,7 @@ Given I delete all products with UPC Number: saved as UPC128754
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 Then I save the product information as: TestCase128754
-Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |
@@ -637,11 +645,13 @@ Given I select the following retailers in the Select Retailers popup list view:
 | Retailer												   |
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 | Family Dollar                                            |
+| No Retailer/No UPC Product                                           |
 Then I click Done on Select Retailers window
 Then I confirm the following retailers are showing in the Retailer page
 | Retailer												   |
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 | Family Dollar                                           |
+| No Retailer/No UPC Product                                           |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
@@ -651,6 +661,7 @@ Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC804879551225
 Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
+Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 Given I set the Primary Physical State option to: Liquid
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
@@ -662,7 +673,6 @@ Given I set the Flash Point (in Celsius) option to: None, No Flash Point
 Given I set the Select the best Water Solubility description option to: Soluble in water
 Given I click continue
 Given I click continue
-Then I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
       	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -694,7 +704,8 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
 Given I generate a random UPC number and save as: UPC128144
-Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Select countries the product may be sold in option to: Canada
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
@@ -734,8 +745,8 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
 Given I generate a random UPC number and save as: UPC128140
+And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
-And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 56-85-9   | L-Glutamine   | 100     |                     |            |             |
@@ -762,8 +773,8 @@ Given I call Shared Step 57753 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC147446
 Given I save the product information as: testcase147446
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
@@ -786,8 +797,8 @@ Given I call Shared Step 57753 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC147447
 Given I save the product information as: testcase147447
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Sears/K-Mart and enter the name: TestBrand

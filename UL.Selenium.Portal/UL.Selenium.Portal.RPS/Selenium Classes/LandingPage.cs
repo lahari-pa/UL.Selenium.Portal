@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
@@ -12,20 +12,20 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         protected override By ContainerElementLocator => By.XPath(BasePath);
 
-        private IWebElement ToolbarRight => FindElement(By.XPath(".//div[@class='btn-toolbar pull-right']"), 1);
+        private IWebElement ToolbarRight => FindElement(By.XPath(".//div[@id='navbarSupportedContent']"), 1);
 
         private IWebElement UlLogo => this.ToolbarRight.FindElement(By.XPath(".//a[@class = 'pull-right ul-logo']"), 1);
 
         private IWebElement OfferingsRequestMoreInfoButton(string section) => FindElement(By.XPath($".//div[@class = 'row offerings'][last()]/div[(./h3[contains(text(),'{section}')])]/button"), 1);
 
-        private IWebElement LetsTalkLearnMoreButton =>FindElement(By.XPath(@".//div[./h2[contains(text(),""Let's talk"")]]/button"), 2);
+        private IWebElement LetsTalkLearnMoreButton => FindElement(By.XPath(@".//div[./h2[contains(text(),""Let's talk"")]]/button"), 2);
 
         private IWebElement SignIn => this.ToolbarRight.FindElement(By.XPath(".//button[contains(text(),'Sign In')]"), 1);
         #endregion
 
         #region Methods
         public bool ClickUlLogoInTopRight() => this.UlLogo.TryClick();
-        
+
         public string SubjectLineRequestMoreInformationLink(string section)
         {
             var el = this.OfferingsRequestMoreInfoButton(section);
@@ -75,7 +75,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             private IWebElement UlLogo() => FindElement(By.XPath(".//div[contains(@class,'footer-logo')]"), 2);
 
             private IWebElement AboutUlWercSmart() => FindElement(By.XPath(".//a[text() = 'About UL WERCSmart']"), 2);
-            
+
             private IWebElement ContactUs() => FindElement(By.XPath(".//a[text() = 'Contact Us']"), 2);
 
             private IWebElement SignIn() => FindElement(By.XPath(".//button[contains(text(), 'Sign In')]"), 2);

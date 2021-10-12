@@ -16,14 +16,21 @@
 
 Feature: ProductSetUp_Kit
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto23 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:9701
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 	#For this test case you will need two input products in completed status which have SOLD set to US only
 	#and make sure to add any retailer except Walmart as the retailer for these products.
 	#Use the test case 75335 to create these products - test case is linked to this one.
 	#Note: these input products do not have to be direct ship vendor products
-	Given I create a product with name: 778591 and take to completed using Test Case 75335 and save as: TestCase778591
-	Given I create a product with name: 778592 and take to completed using Test Case 75335 and save as: TestCase778592
+
+	Given I create a product for a Kit with name: 778591 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778591
+	Given I create a product for a Kit with name: 778592 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto23 and save as: TestCase778592
 	Given I navigate to the landing page
 	#Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status
 	#Given I save to context name: TestCase778591 and value: 1525307
@@ -35,7 +42,7 @@ Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to
 	#In the shared step below use any of the kit product types - these are Cosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Personal Care kit
 	Then I save the product information as: TestCase77859
-	And I call Shared Step 77872 (Additional Product Information - Kit flow - US only, Direct Ship (yes), Continue)
+	And I call Shared Step 77872 (Product Information - Kit flow - US only, Direct Ship (yes), Continue)
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	# In the shared step below add the two completed products that you are working with
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: TestCase778591  and product 2: TestCase778592)

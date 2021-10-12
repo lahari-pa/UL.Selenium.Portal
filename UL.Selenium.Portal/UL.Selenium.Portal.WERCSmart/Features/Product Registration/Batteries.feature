@@ -16,8 +16,8 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium battery vehicle
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 	| Battery Type   | Manufacturer | Number of batteries per package | How many batteries required to run |
@@ -48,8 +48,8 @@ Scenario: [97489] Stand alone Magnesium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Magnesium Battery
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Magnesium
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -88,8 +88,8 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel-cadmium battery
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Nickel        | 100     | false               | false       |            |
@@ -130,10 +130,9 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-#And I In the shared step below select nickel metal hydride as your product type
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Nickel        | 100     | false               | false       |            |

@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using OpenQA.Selenium.DevTools.DOM;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -216,12 +215,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string ProductSkuField {
-			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2).GetValue();
+			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2).GetValue();
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='skuNumberAddOn']"), 2);
+
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
+
 				el.EnterText(value);
+
 				el.SendKeys(Keys.Return);
+
 				GeneralUtilities.Wait_for_load_finish();
 			}
 		}
@@ -1397,7 +1400,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
 		}
-
 
 	}
 

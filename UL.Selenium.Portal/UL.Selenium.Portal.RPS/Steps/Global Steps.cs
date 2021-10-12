@@ -11,7 +11,7 @@ using NUnit.Framework;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;

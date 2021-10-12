@@ -1,4 +1,4 @@
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using System;
 using TechTalk.SpecFlow;
 using UL.Automation.Utilities;

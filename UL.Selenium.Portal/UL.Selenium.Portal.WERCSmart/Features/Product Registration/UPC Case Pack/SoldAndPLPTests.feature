@@ -24,6 +24,12 @@
 @run_SoldAndPLPTests
 Feature: Sold and PLP Tests
 
+Background:
+Given I verify the following users exist and if not I create them using SHAUser
+| username    | FirstName | LastName   | Role         | EmailAddress                |
+| SHAQAAuto24 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+@ScenarioId:11196
 Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87957
@@ -31,9 +37,9 @@ Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87957
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	#And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -48,25 +54,31 @@ Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87957)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87957)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87957)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87957
-	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87957)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Accepted
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87957)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87957) for
-		| Retailer |
-		| Amazon   |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase87957) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Amazon                     |
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87957)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87957
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87957)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Accepted
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87957)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87957) for
+	#	| Retailer |
+	#	| Amazon   |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87957)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Completed
+
+
 
 @ScenarioId:6259
 Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with Case UPC - Process to Completed
@@ -75,8 +87,8 @@ Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with C
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase87959
-	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -92,25 +104,29 @@ Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with C
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87959)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87959)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87959)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87959
-	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87959)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Accepted
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87959)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87959) for
-		| Retailer |
-		| Amazon   |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase87959) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Amazon                     |
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87959)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87959
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87959)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Accepted
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87959)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87959) for
+	#	| Retailer |
+	#	| Amazon   |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Completed
 
 @ScenarioId:8195
 Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case UPC - Process to Completed
@@ -119,13 +135,10 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87969
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	Given I call Shared Step 74981 (Product Characteristics - gas)
+	Given I call Shared Step 89286 - Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
+	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
-	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	Given I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
-	#Given I call Shared Step 63804 (Additional Product Information - enter options)
 	#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
 	#| No                                                             | No                            | No                         | No              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -151,25 +164,29 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87969)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87969)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87969)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87969
-	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87969)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Accepted
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87969)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87969) for
-		| Retailer |
-		| Amazon   |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase87969) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Amazon                     |
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87969)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87969
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87969)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Accepted
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87969)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87969) for
+	#	| Retailer |
+	#	| Amazon   |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
 
 @ScenarioId:8196
 Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
@@ -179,13 +196,11 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase88198
-	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))	
-	Then In the Additional Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected
+	Then In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected
 	Given I set the Select countries the product may be sold in option to: Canada
 	And I set the Product is shipped directly by supplier to the consumer field to: No
 	And I set the Product is a Retailer's Private Label or Brand field to: No
-	And in the Additional Product Information page I click Continue
+	And in the Product Information page I click Continue
 
 	#Updated to use 57911 instead of 57503 to match test case, now failing?
 	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -203,22 +218,27 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase88198)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase88198)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88198)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88198
-	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88198)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Accepted or Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase88198) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Canadian Tire              |
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88198)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88198
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88198)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Accepted or Completed
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+@ScenarioId:11088
 Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with Case UPC - process to  Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC88199
@@ -226,8 +246,7 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase88199
-	Given I call Shared Step - Additional Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only
-	#Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	Given I call Shared Step - Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
@@ -238,20 +257,26 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88199, container type: Paper bag and size: 2 do not click continue
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+    Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: <first>
+	Given I Select a package type from the drop down list
+	Given I click continue
+    Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase88199)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase88199)
-	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88199)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88199
-	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88199)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Accepted or Completed
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase88199) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Canadian Tire              |
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88199)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88199
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88199)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Accepted or Completed

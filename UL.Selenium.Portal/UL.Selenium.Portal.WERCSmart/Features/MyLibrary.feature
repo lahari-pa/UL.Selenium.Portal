@@ -105,7 +105,7 @@ Scenario: [70533] Edit Packaging Type
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
 	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	And I click the CONEG browse button and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the CONEG browse button and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Given In the Data Acceptance page I click on the Accept button
 	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
@@ -141,7 +141,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
 	#Given I edit the product with ID: 1470688
 	Given I create a product and take it to the ingredients page and save as: TestCase70539
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I click the 'Use My Ingredients' button
@@ -177,7 +177,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	#Given I edit the product with ID: 1470688
 	#
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I create a product and take it to the ingredients page and save as: TestCase70556
@@ -219,7 +219,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	#Given I edit the product with ID: 1470688
 	#
-	#Given In the New Product page I click tab: Product Characteristics
+	#Given In the New Product page I click tab: Physical and Chemical Properties
 	#
 	#And in the New Product page I click section: Ingredients
 	Given I create a product and take it to the ingredients page and save as: TestCase70567
@@ -301,6 +301,24 @@ Scenario: [73329] Edit Ingredient
 	Then I confirm that all changes in edited ingredients: My Library Ingredients Edited 2 were saved
 	And I remove all ingredients in the list saved as: My Library New Ingredients
 
+	Scenario: [73227] Products and Recommended Use Report
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I click the My Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Product Types Registered
+	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
+	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+	Given In the Supplier Reports screen I click on the Download button
+	Given I click on close in the Report Download dialog
+	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
+	Then I confirm that the excel file saved as: 73227 contains the following columns:
+		| Column         |
+		| Supplier       |
+		| RU Description |
+		| RU Category    |
+		| WPSID          |
+		| Product Name   |
+	And I delete the excel file saved as 73227
+
 @ScenarioId:805
 Scenario: [73328] Pagination functionality
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -364,7 +382,7 @@ Scenario: [70516] Add and Remove Packaging Type
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
 	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	And I click the browse button for label: CONEG Certificate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: CONEG Certificate and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	#And I Verify the 'VIEW' and 'REMOVE' Buttons become active
 	#And I Click the 'VIEW BUTTON'
 	#And I Confirm the file opens for viewing in a new window

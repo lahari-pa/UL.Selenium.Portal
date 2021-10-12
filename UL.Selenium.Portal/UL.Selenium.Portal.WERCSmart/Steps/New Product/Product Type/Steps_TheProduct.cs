@@ -1,12 +1,12 @@
 using System;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using NUnit.Framework.Internal;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 {

@@ -22,20 +22,20 @@ Feature: Supplier Reports 2
 Scenario: [140261] California Proposition 65 - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: California Proposition 65
+Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
 Then I select CSV from the Select File Type
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
-Then I select the Request Report button csv file is produced called California Proposition 65.csv and save as California Proposition 65
-Given I confirm that an csv file is produced called California Proposition 65.csv and save as California Proposition 65
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
+Then I select the Request Report button csv file is produced called California Proposition 65  Registrations Prior to August 30 2018.csv and save as California Proposition 65 - Registrations Prior to August 30, 2018
+Given I confirm that an csv file is produced called California Proposition 65  Registrations Prior to August 30 2018.csv and save as California Proposition 65 - Registrations Prior to August 30, 2018
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as California Proposition 65 can be opened and contains data
-Given I delete the excel file saved as California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as California Proposition 65 - Registrations Prior to August 30, 2018 can be opened and contains data
+Given I delete the excel file saved as California Proposition 65 - Registrations Prior to August 30, 2018
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 - Registrations Prior to August 30, 2018 File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: California Proposition 65 File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
-And I confirm the csv file saved as California Proposition 65 can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: California Proposition 65 - Registrations Prior to August 30, 2018 File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as California Proposition 65 - Registrations Prior to August 30, 2018 can be opened and contains data
 Given I click Close in the Report Download popup
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
 
 @ScenarioId:10294
 Scenario: [140260] Battery-Containing Products - CSV File
@@ -102,21 +102,21 @@ Given I delete the excel file saved as Pesticide Registrations
 Scenario: [140289] Registration Updates Not Submitted - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
+Given Under the Supplier Reports menu I choose: Registrations Revised - Not Yet Submitted
 Then I select CSV from the Select File Type
-Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
-Then I select the Request Report button excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
-Given I confirm that an excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.csv from the downloads folder
+Then I select the Request Report button excel file is produced called Registrations Revised - Not Yet Submitted.csv and save as Registrations Revised - Not Yet Submitted
+Given I confirm that an excel file is produced called Registrations Revised  Not Yet Submitted.csv and save as Registrations Revised - Not Yet Submitted
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
-Given I delete the excel file saved as Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as Registrations Revised - Not Yet Submitted can be opened and contains data
+Given I delete the excel file saved as Registrations Revised - Not Yet Submitted
+Then I confirm the most recent file has the following information Report Name: Registrations Revised - Not Yet Submitted File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Registration Updates Not Submitted File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an csv file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
-And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: Registrations Revised - Not Yet Submitted File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an csv file is produced called Registrations Revised - Not Yet Submitted.csv and save as Registrations Revised - Not Yet Submitted
+And I confirm the csv file saved as Registrations Revised - Not Yet Submitted can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the excel file saved as Registration Updates Not Submitted
+Given I delete the excel file saved as Registrations Revised - Not Yet Submitted
 
 @ScenarioId:10311
 Scenario: [140290] Subscription Product Types - CSV File
@@ -142,21 +142,21 @@ Given I delete the excel file saved as Subscription Product Types
 Scenario: [140291] UPC Duplication - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: UPC Duplication
+Given Under the Supplier Reports menu I choose: UPCs Duplicated within Account
 Then I select CSV from the Select File Type
-Then I Delete the file with name: UPC Duplication.csv from the downloads folder
-Then I select the Request Report button excel file is produced called UPC Duplication.csv and save as UPC Duplication
-Given I confirm that an excel file is produced called UPC Duplication.csv and save as UPC Duplication
+Then I Delete the file with name: UPCs Duplicated within Account.csv from the downloads folder
+Then I select the Request Report button excel file is produced called UPCs Duplicated within Account.csv and save as UPCs Duplicated within Account
+Given I confirm that an excel file is produced called UPCs Duplicated within Account.csv and save as UPCs Duplicated within Account
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as UPC Duplication can be opened and contains data
-Given I delete the excel file saved as UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as UPCs Duplicated within Account can be opened and contains data
+Given I delete the excel file saved as UPCs Duplicated within Account
+Then I confirm the most recent file has the following information Report Name: UPCs Duplicated within Account File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: UPC Duplication File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an csv file is produced called UPC Duplication.csv and save as UPC Duplication
-And I confirm the csv file saved as UPC Duplication can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: UPCs Duplicated within Account File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an csv file is produced called UPCs Duplicated within Account.csv and save as UPCs Duplicated within Account
+And I confirm the csv file saved as UPCs Duplicated within Account can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the excel file saved as UPC Duplication
+Given I delete the excel file saved as UPCs Duplicated within Account
 
 @ScenarioId:10313
 Scenario: [140292] Volatile Organic Compounds - CSV File
@@ -388,28 +388,28 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 Scenario: [141028] Registration Updates Not Submitted - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
+Given Under the Supplier Reports menu I choose: Registrations Revised - Not Yet Submitted
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Registration Updates Not Submitted.zip from the downloads folder
-Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Registration Updates Not Submitted.zip and save as Registration Updates Not Submitted
-Given I confirm that an zip file is produced called Registration Updates Not Submitted.zip and save as Registration Updates Not Submitted
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.zip from the downloads folder
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.csv from the downloads folder
+Then I select the Request Report button zip file is produced called Registrations Revised  Not Yet Submitted.zip and save as Registrations Revised  Not Yet Submitted
+Given I confirm that an zip file is produced called Registrations Revised  Not Yet Submitted.zip and save as Registrations Revised  Not Yet Submitted
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Registration Updates Not Submitted can be opened and contains data
-Given I delete the excel file saved as Registration Updates Not Submitted
-Then I Delete the file with name: Registration Updates Not Submitted.zip from the downloads folder
-Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as Registrations Revised  Not Yet Submitted can be opened and contains data
+Given I delete the excel file saved as Registrations Revised  Not Yet Submitted
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.zip from the downloads folder
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: Registrations Revised - Not Yet Submitted
+Then I confirm the most recent file has the following information Report Name: Registrations Revised - Not Yet Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Registration Updates Not Submitted.zip and save as Registration Updates Not Submitted
-And I confirm the zip csv file saved as Registration Updates Not Submitted can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: Registrations Revised - Not Yet Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an zip file is produced called Registrations Revised - Not Yet Submitted.zip and save as Registrations Revised - Not Yet Submitted
+And I confirm the zip csv file saved as Registrations Revised - Not Yet Submitted can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Registration Updates Not Submitted
-Then I Delete the file with name: Registration Updates Not Submitted.zip from the downloads folder
-Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
+Given I delete the file saved as Registrations Revised - Not Yet Submitted
+Then I Delete the file with name: Registrations Revised - Not Yet Submitted.zip from the downloads folder
+Then I Delete the file with name: Registrations Revised - Not Yet Submitted.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10311
@@ -444,28 +444,28 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 Scenario: [141034] UPC Duplication - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: UPC Duplication
+Given Under the Supplier Reports menu I choose: UPCs Duplicated within Account
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: UPC Duplication.zip from the downloads folder
-Then I Delete the file with name: UPC Duplication.csv from the downloads folder
-Then I select the Request Report button zip file is produced called UPC Duplication.zip and save as UPC Duplication
-Given I confirm that an zip file is produced called UPC Duplication.zip and save as UPC Duplication
+Then I Delete the file with name: UPCs Duplicated within Account.zip from the downloads folder
+Then I Delete the file with name: UPCs Duplicated within Account.csv from the downloads folder
+Then I select the Request Report button zip file is produced called UPCs Duplicated within Account.zip and save as UPCs Duplicated within Account
+Given I confirm that an zip file is produced called UPCs Duplicated within Account.zip and save as UPCs Duplicated within Account
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as UPC Duplication can be opened and contains data
-Given I delete the excel file saved as UPC Duplication
-Then I Delete the file with name: UPC Duplication.zip from the downloads folder
-Then I Delete the file with name: UPC Duplication.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as UPCs Duplicated within Account can be opened and contains data
+Given I delete the excel file saved as UPCs Duplicated within Account
+Then I Delete the file with name: UPCs Duplicated within Account.zip from the downloads folder
+Then I Delete the file with name: UPCs Duplicated within Account.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: UPCs Duplicated within Account
+Then I confirm the most recent file has the following information Report Name: UPCs Duplicated within Account File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: UPC Duplication File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called UPC Duplication.zip and save as UPC Duplication
-And I confirm the zip csv file saved as UPC Duplication can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: UPCs Duplicated within Account File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an zip file is produced called UPCs Duplicated within Account.zip and save as UPCs Duplicated within Account
+And I confirm the zip csv file saved as UPCs Duplicated within Account can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as UPC Duplication
-Then I Delete the file with name: UPC Duplication.zip from the downloads folder
-Then I Delete the file with name: UPC Duplication.csv from the downloads folder
+Given I delete the file saved as UPCs Duplicated within Account
+Then I Delete the file with name: UPCs Duplicated within Account.zip from the downloads folder
+Then I Delete the file with name: UPCs Duplicated within Account.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10313

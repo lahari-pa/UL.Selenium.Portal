@@ -28,8 +28,8 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 # And I In the Shared step below select "Personal Fragrance Product (more than 20 percent fragrance)" as your product type
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
 Then I save the product information as: TestCase59322
-And I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
-And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -49,8 +49,8 @@ And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then Volatile Organic Compounds should be showing the error messages: Document is required: VOC Exemption Letter
 Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Given in the New Product page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -68,8 +68,9 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon 
 Then I save the product information as: TestCase59320
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
 | CASNumber | ComponentName                                                                  | Percentage |
 | FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 100        |
@@ -80,8 +81,8 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then International Fragrance Association (IFRA) should be showing the error messages: Document is required: IFRA Certificate (Perfumery Products)
-And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -98,8 +99,9 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon 
 Then I save the product information as: TestCase59321
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
 | CASNumber | ComponentName | Percentage |
 | FLAVOR    | FLAVOR        | 100        |
@@ -110,7 +112,7 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then Generally Recognized as Safe (GRAS) should be showing the error messages: Document is required: GRAS Certificate (Flavor Products)
-And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:

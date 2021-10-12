@@ -4,8 +4,8 @@ using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps

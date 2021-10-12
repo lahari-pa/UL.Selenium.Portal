@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -52,9 +52,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string date = today.ToString("M'-'dd'-'yyyy");
 				string path = date + "*.xlsx";
 				var downloads = new DirectoryInfo(downloadsFolder);
-				while (count < 120)
+				while (count < 400)
 				{
-					Delay.Seconds(1);
+					Delay.Seconds(2);
 					FileInfo[] dir = downloads.GetFiles(path);
 					if (dir.Any())
 					{

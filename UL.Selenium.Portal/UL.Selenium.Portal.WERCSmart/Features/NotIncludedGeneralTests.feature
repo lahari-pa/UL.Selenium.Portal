@@ -39,45 +39,13 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasiona
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase95988
 	And I click continue
-	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
-
-Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasionally from the user-- test 2
-	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
-	Given I generate a random UPC number and save as: UPC87650
-	Given I generate a random UPC number and save as: UPC876501
-	Given I generate a random UPC number and save as: UPC876502
-	Given I generate a random UPC number and save as: UPC876503
-	Given I generate a random UPC number and save as: UPC876504
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LITHIUM ION BATTERIES
-	Then I save the product information as: TestCase87650
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Lithium hydroxide  | 6.7     | false               | false       |            |
-		| Graphite           | 33.2    | false               | false       |            |
-		| Ethylene carbonate | 60.1    | false               | false       |            |
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
-	Given I call Shared Step 60096 (Lithium Battery Transportation)
-	Then I should see the following retailers:
-		| Retailers                  |
-		| No Retailer/No UPC Product |
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
-	Then I should see lithium battery message: Lithium battery registrations have a maximum of five (5) UPCs per registration. If you have additional UPCs, please create a new registration.
-	Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC87650 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
-	Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876501 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
-	Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876502 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
-	Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876503 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
-	Given I call Shared Step(Enter Universal Product Code - case information) for UPC: saved as UPC876504, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box do not click continue
 
 Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC
 	Given I navigate to the landing page
@@ -158,8 +126,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase91076
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -178,57 +146,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 
-Scenario: [NOTINCLUDEDGENERALTEST] ADAPTED VERSION OF Lithium Battery UN38.3 Regulatory Documents to Provide FOR ADDING COLOUR OF INPUT FIELDS CHECK
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
-	Then I save the product information as: TestCase104222
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Lithium hydroxide  | 6.7     | false               | false       |            |
-		| Graphite           | 33.2    | false               | false       |            |
-		| Ethylene carbonate | 60.1    | false               | false       |            |
-	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
-	Given I call Shared Step 60096 (Lithium Battery Transportation)
-	Then I should see the Retailer Page Page for the New Product
-	And The selected retailers on the Retailer page should be:
-		| Retailer                   |
-		| No Retailer/No UPC Product |
-	Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
-	Given in the Regulatory Documents to Provide page I click Continue
 
-Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry documents provided
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I generate a random UPC number and save as: UPC60018
-	Given I delete all products with UPC Number: saved as UPC60018
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium ion batteries
-	Then I save the product information as: TestCase60018
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Lithium hydroxide  | 6.7     | false               | false       |            |
-		| Graphite           | 33.2    | false               | false       |            |
-		| Ethylene carbonate | 60.1    | false               | false       |            |
-	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
-	Given I call Shared Step 60096 (Lithium Battery Transportation)
-	Then I should see the Retailer Page Page for the New Product
-	And The selected retailers on the Retailer page should be:
-		| Retailer                   |
-		| No Retailer/No UPC Product |
-	Given I click continue
-	Then If the UPCs Warning popup is displayed I click OK
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Red
-	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 
 Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -347,8 +265,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] product submit upc info entry
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -820,8 +738,8 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: TestCase105352
-And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given the 'Select Retailers' window appears
@@ -885,8 +803,8 @@ Scenario: [UPCCOLUMNS] UPCCOLUMNS after grid
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -920,8 +838,8 @@ Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -956,8 +874,8 @@ Scenario: [IngredientsTableCheck] Non Cleaning Product Ingredients Check
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase56214
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName   |
 	| Propane       | 25      | false               | false       |              |
@@ -996,8 +914,8 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase109230
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
 		| Water         | 100     | true                | false       | Aqua (Water, Eau) |
@@ -1012,7 +930,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
 	And I click continue
 	Then I should see the Regulatory Information 1 Page for the New Product
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And I confirm that the ingredients table looks as follows:
 		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
@@ -1076,7 +994,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 	And I filter for the product saved as: TestCase109230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 	And I confirm that the ingredients table looks as follows:
 		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
@@ -1171,8 +1089,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | false       |            |		
@@ -1207,8 +1125,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -1248,8 +1166,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -1286,7 +1204,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65
 	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1295,8 +1214,6 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -1331,8 +1248,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Ammonium dichromate | 100     | false               | false       |            |		
@@ -1368,8 +1285,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
 	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
@@ -1407,13 +1324,13 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -1443,13 +1360,13 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -1481,8 +1398,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I should see the Product Information Page
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| water  | 100     | false               | false       |            |		
@@ -1515,9 +1432,9 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
 	Then I save the product information as: TestCase97484
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I should see the Product Information Page
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Benzaldehyde  | 100     | false               | false       |            |		
@@ -1574,7 +1491,7 @@ Scenario: [StagingRecertUPCTransportation] Recertification and Transporation 1 c
 	And I filter for the product saved as: TestCase845073
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Ingredients
 
 Scenario: [StagingRecertUPCTransportation] Using a non complete product
@@ -1582,7 +1499,7 @@ Scenario: [StagingRecertUPCTransportation] Using a non complete product
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-	And I should see the Product Characteristics Page
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |
@@ -1597,7 +1514,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -1640,7 +1557,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Product Characteristics
+	Given In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
@@ -1737,7 +1654,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
 	Then I save the product information as: TestCase63521
-	Given I call Shared Step 63460 (Additional Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
+	Given I call Shared Step 63460 (Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Create the Kit Page
 	Given In the Create the kit page I search for and select: saved as Kit1
@@ -1785,7 +1702,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click on the Row Action: Update Required
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
-	And In the New Product page I click tab: Product Characteristics
+	And In the New Product page I click tab: Physical and Chemical Properties
 	And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
 	And I set the Lead option to: Yes
 	And I set the Mercury option to: Yes

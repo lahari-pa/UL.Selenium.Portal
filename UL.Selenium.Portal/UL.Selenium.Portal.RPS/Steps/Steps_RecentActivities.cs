@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;

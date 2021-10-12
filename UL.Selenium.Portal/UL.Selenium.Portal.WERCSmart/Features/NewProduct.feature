@@ -59,8 +59,8 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase87295
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: WPS
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -77,13 +77,13 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase74944
-	And I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	And I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
 	Given I add the following batteries:
-		| Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
-		| Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+		| Battery Type     | Manufacturer                                                  | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Lithium Primary  | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
@@ -107,18 +107,28 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC149421
 Then I save the product information as: TestCase149421
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 1244-58-2 |               | 50      |                     |            |             |
 |           | Chalk         | 50      |                     |            |             |
-| 1244582   |               | 50      |                     |            |             |
+
+
 Given I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text
 Given I click the link in the CBD Registration Guidance popup
 Given I switch to the tab: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
 Given I check that the current URL contains: https://www.fda.gov/news-events/public-health-focus/fda-regulation-cannabis-and-cannabis-derived-products-including-cannabidiol-cbd
 Given I close the current tab
 Given I close the CBD Registration Guidance popup in the Ingredients Page
+
+
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer |
@@ -134,7 +144,7 @@ Given I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
@@ -158,8 +168,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery Containing Mercury
 Given I generate a random UPC number and save as: UPC145400
 Then I save the product information as: TestCase145400
+	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | mercury       | 100     |                     |            |             |
@@ -172,7 +182,7 @@ Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145400)
 And In SHA Manager I select the first product
 And I click the following option in the bottom menu: Review
@@ -189,8 +199,8 @@ Then I save the product information as: TestCase120820
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC120820
 Then I save the product information as: TestCase120820
-Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -204,7 +214,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: te
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120820)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
@@ -293,3 +303,31 @@ Given I clear 'Type of Product'
 Given I set non-existent 'Type of Product': For Research and Development use only
 Given I confirm no results are returned
 Given I clear 'Type of Product'
+
+
+
+@ScenarioId:10715
+Scenario: [159942] Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use RU001423
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use
+Given I save the product information as: TestCase159942
+Given I set the Select countries the product may be sold in option to: United States
+Given I set the Select countries the product may be sold in option to: Canada
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I click continue
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given in the Tire Regulatory Details page I click Continue
+And Product is intended for agricultural use only should be showing the error messages: This is a required field.
+And Weight in kilograms (single unit) should be showing the error messages: This is a required field.
+And Height in inches (single unit) should be showing the error messages: This is a required field.
+Given I set the Product is intended for agricultural use only option to: No
+Given I set the Weight in kilograms (single unit) field to: abc
+And Weight in kilograms (single unit) should be showing the error messages: Enter a valid number
+Given I set the Weight in kilograms (single unit) field to: !@#
+And Weight in kilograms (single unit) should be showing the error messages: Enter a valid number
+Given I set the Weight in kilograms (single unit) field to: 12
+Given I Select a height from the drop down list
+Given I click continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase159942

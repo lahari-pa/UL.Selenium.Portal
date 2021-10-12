@@ -18,12 +18,17 @@
 @run_SupplierReports1
 Feature: Supplier Reports 1
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto26 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
-	Given under the supplier Reports menu I should see the following options
+    And In the Supplier Reports screen the page title should be: My Reports
+    Given under the supplier Reports menu I should see the following options
 		| Reports                                |
 		| Battery-Containing Products            |
 		| California Proposition 65              |
@@ -41,24 +46,6 @@ Scenario: [68420] List of Supplier Reports
 		| UPC Errors for The Home Depot          |
 		| Volatile Organic Compounds             |
 		| Waste Classification Summary           |
-		#| Kit Registration Details                                           |
-		#| Kits Containing a Specific Registration                            |
-		#| Pesticide Certificate Report                                       |
-		#| Pesticide Report                                                   |
-		#| Product Types Registered                                           |
-		#| Registrations Revised - Not Yet Submitted                          |
-		#| Registrations with Retailer Chemicals of Concern                   |
-		#| Retailer Chemicals of Concern                                      |
-		#| Subscription Renewal (Formulated, Enhanced, Articles)              |
-		#| Subscription Renewal (Registrations Eligible for Deletion)         |
-		#| Sustainability Survey Eligibility - Health & Beauty                |
-		#| UPC and Retailer (Product Specific)                                |
-		#| UPC Error Details                                                  |
-		#| UPCs (Active) for all Registrations                                |
-		#| UPCs and Registrations (Retailer Specific)                         |
-		#| UPCs Duplicated within Account                                     |
-		#| VOC-related Registrations                                          |
-		#| Waste Classification Summary for All Registrations                 |
 
 @tfs_design
 @Obsolete
@@ -66,7 +53,7 @@ Scenario: [68420] List of Supplier Reports
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
+	And In the Supplier Reports screen the page title should be: My Reports
 	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
 	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
 	Given In the Supplier Reports screen I click on the Download button
@@ -226,7 +213,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	Then I confirm that the Data Summary section Provide the product's UPC(s), including container type and size (ounces) shows the value for Container Type saved as: TestCase73082Container for UPC saved as: TestCase73082UPC
 	Then I confirm that the Data Summary section Provide the product's UPC(s), including container type and size (ounces) shows the value for Size (Ounces) saved as: TestCase73082Ounces for UPC saved as: TestCase73082UPC
 	And I close the window that opened
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73082)
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
@@ -239,8 +226,8 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase108254Chalk
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: Walgreens
@@ -262,7 +249,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Incandescent Bulbs
 	Then I save the product information as: TestCase108254Lightbulb
-	And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
@@ -278,7 +265,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase108254BCP
-	And I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	And I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
@@ -412,24 +399,24 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
-@ScenarioId:983
+	@ScenarioId:983
 Scenario: [73227] Products and Recommended Use Report
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Product Types Registered
-	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
-	Given In the Supplier Reports screen I click on the Download button
-	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
-	Then I confirm that the excel file saved as: 73227 contains the following columns:
-		| Column         |
-		| Supplier       |
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Product Types Registered
+Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
+Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
+Then I confirm that the excel file saved as: 73227 contains the following columns:
+        | Column         |
+     	| Supplier       |
 		| RU Description |
 		| RU Category    |
 		| WPSID          |
 		| Product Name   |
-	And I delete the excel file saved as 73227
+And I delete the excel file saved as 73227
 
 @ScenarioId:985
 Scenario: [73230] UPC Report for Specific Product with Retailer
@@ -493,7 +480,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Then I switch to the Data Summary page
 	And I confirm that the Transparency Ratio underneath Ingredients equals: TestCase75391TransRatio
 	And I close the window that opened
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75391)
 	Given I confirm that the Current Submission date in SHA Manager matches the date saved as: TestCase75391Date
 	Given I navigate to the WERCSmart site
@@ -508,7 +495,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 #fails because of a bug 106613
 @ScenarioId:986
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+    Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: California Proposition 65
@@ -604,7 +591,7 @@ Scenario: [76759] Waste Classification Summary Report
 		| Wyoming        |
 	Then I get the excel row data file saved as: SupplierReport76759 and save the data to context
 	And I delete the Supplier Report file saved as SupplierReport76759
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Then In the Authoring menu I select Power Designer Plus
 	Then I filter subformat SWST and open checklist [SECT0150] Waste Checklist
 	Then I check if the excel data matches the checklist data
@@ -633,7 +620,7 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 		| Number of Active UPCs  |
 	Then I Check that in the excel file saved as: 79635 the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.
 	Then I get a value for WERCSmart ID from the excel file saved as: 79635 and save it to context as: WERCSmartProduct79635
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto26 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: WERCSmartProduct79635)
 	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635

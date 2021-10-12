@@ -1,7 +1,7 @@
 using System;
-using UL.Automation.Selenium.BaseClasses;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class]"), 2);
 			var textFound = elem.Text;
-			return elem != null && elem.Text == "INBOX";
+			return elem != null && elem.Text == "Inbox";
 		}
 
 		public bool VerifyDescText(string expectedDesc)
@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifyPlaceholder(string text)
 		{
 			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"), 5);
-			return elem != null && elem.GetAttribute("data-placeholder") == text;
+			return elem != null && elem.GetAttribute("placeholder") == text;
 		}
 
 		public bool VerifyIcon(string icon)

@@ -18,6 +18,14 @@
 
 Feature: AccHasFullStwdData
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto1  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
+		
+
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @ScenarioId:1424
@@ -31,8 +39,8 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86187
 	#And I Make a note of the WPS ID shown at the top of the screen
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#And I In the shared step below  be sure to select Canadian Tire as the retailer
@@ -51,7 +59,12 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#Depending on your subscription you will either see the Purchase summary success message or you will see the Purchase summary with you product details shown.  If the product details are shown click Confirm order
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86187)
@@ -78,6 +91,7 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @ScenarioId:1421
+@philtag1
 Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Chalk) and submit thru to Completed status
 	#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -86,8 +100,8 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase78864
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#In the shared step below DO NOT select Canadian Tire as your retailer
@@ -105,7 +119,9 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Some test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78864)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase78864)
@@ -132,9 +148,9 @@ Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	#And I In the shared step below use Crayon as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Crayon
 	Then I save the product information as: TestCase85286
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium Hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
 	And I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
@@ -147,7 +163,9 @@ Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase85286)
 	#And I Confirm your product is shown in the Submitted status.Note this may take a few minutes for the Zuora process to process your product, if it is not shown in Submitted wait a minute or two and re-search for your product
@@ -173,9 +191,9 @@ Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product 
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase78865
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium hydroxide	
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
@@ -194,7 +212,9 @@ Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product 
 		| Additional document Canada GHS SDS ENGLISH (USA)            |
 		| Additional document language Canada GHS SDS FRENCH (CANADA) |
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
 
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Submitted
@@ -221,8 +241,8 @@ Scenario: [86067] Create a new simple product SOLD = US and Canada, PL = Yes, (C
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86067
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -239,7 +259,8 @@ Scenario: [86067] Create a new simple product SOLD = US and Canada, PL = Yes, (C
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86067)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86067 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86067)
@@ -267,8 +288,8 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase86171
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -285,7 +306,9 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86171)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86171)
@@ -310,9 +333,9 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86170
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium hydroxide
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer      |
@@ -328,7 +351,8 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86170)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86170 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86170)
@@ -352,8 +376,8 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase86395
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -370,7 +394,8 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86395)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86395 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86395)
@@ -394,8 +419,8 @@ Scenario:[120866] UPC Retailer and Feed
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120866
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: CVS
@@ -413,7 +438,9 @@ Scenario:[120866] UPC Retailer and Feed
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
+
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120866)
 	Then I save all clients for product saved as: TestCase120866
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase120866

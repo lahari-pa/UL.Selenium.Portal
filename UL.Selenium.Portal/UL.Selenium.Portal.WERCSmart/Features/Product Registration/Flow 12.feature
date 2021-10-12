@@ -15,6 +15,10 @@
 
 Feature: Flow 12
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
@@ -42,10 +46,10 @@ And I call Shared Step 57753 (Create a New Registration via Register New Product
 And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
 Then I save the product information as: TestCase58430
 And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Sodium chloride | 33.33   | false               | false       |            |
-| Copper sulfate  | 11.67   | false               | false       |            |
-| Nitric acid     | 55      | false               | false       |            |
+| ComponentName  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| 7647-14-5      | 33.33   | false               | false       |            |
+| Copper sulfate | 11.67   | false               | false       |            |
+| Nitric acid    | 55      | false               | false       |            |
 And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
@@ -83,10 +87,9 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Medicinal
 	Then I save the product information as: TestCase58605
 	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	#Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+	#Given I check the new page has loaded with no required field error. Navigating from: Product Information to: Ingredients
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glycerin      | 30      | false               | false       |            |
@@ -113,10 +116,9 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
 	Then I save the product information as: TestCase58606
-	Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
-	#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	#Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
+	#Given I check the new page has loaded with no required field error. Navigating from: Product Information to: Ingredients
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Ethanol       | 20      | false               | false       |            |
@@ -132,7 +134,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	# Regulatory Documents to Provide page is showing
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	#Given I call Shared Step 60567 (Upload Product Label only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
@@ -153,8 +155,11 @@ Scenario: [58606] Medicinal Liquids - RU001188
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
-	And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 and save as: TestCase42196
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 and save as: TestCase42196
+
+	And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 using SHA Acc: SHAQAAuto10 and save as: TestCase42196
+
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto10 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Completed
 	And I call Shared Step 80488 - SHA Manager > completed 3rd party > Add to recert 40 for product saved as: TestCase42196
@@ -207,7 +212,7 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	Given If purchase details are showing click confirm order
 	#Scenario: test
 	#Given I save to context name: TestCase42196 and value: 1548654
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto10 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Recertification
 	And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase42196

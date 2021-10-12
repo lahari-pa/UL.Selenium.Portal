@@ -5,8 +5,8 @@ using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -48,7 +48,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition("I confirm the widget: '(.*) (is|is not) displayed'")]
         public void ConfirmWidgetDisplayedOrNot(string widget, string displayedOrNot)
         {
-           
+
             bool displayed = false;
             if (displayedOrNot == "is")
             {
@@ -68,7 +68,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             int i = 0;
             var widgets = new Home().WidgetTitles;
             Report.Info("Expected widget title is: " + widget);
-            while (widgets.Contains(widget) != displayed && i<5 )
+            while (widgets.Contains(widget) != displayed && i < 5)
             {
                 Report.Info($"Widget with title '{widget}' {(displayedOrNot == "is" ? "is not" : "is")} displayed!, waiting 5 seconds and checking again");
                 Delay.Seconds(5);
@@ -215,7 +215,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             var widgets = new Home().Widgets();
             var actualDistinctX = widgets.Select(x => x.X).Distinct().Count();
             var actualDisctinctY = widgets.Select(x => x.Y).Distinct().Count();
-            Report.IsTrue(actualDistinctX == expectedDistinctX && actualDisctinctY == expectedDistinctY,$"The widgets were not displayed in a {expectedDistinctX} x {expectedDistinctY} grid! They were displayed in a {actualDistinctX} x {actualDisctinctY} grid", $"The widgets were displayed in a {expectedDistinctX} x {expectedDistinctY} grid");
+            Report.IsTrue(actualDistinctX == expectedDistinctX && actualDisctinctY == expectedDistinctY, $"The widgets were not displayed in a {expectedDistinctX} x {expectedDistinctY} grid! They were displayed in a {actualDistinctX} x {actualDisctinctY} grid", $"The widgets were displayed in a {expectedDistinctX} x {expectedDistinctY} grid");
         }
 
         [StepDefinition(@"I verify each widget displays the correct data")]
@@ -459,36 +459,36 @@ namespace UL.Selenium.Portal.RPS.Steps
                     return;
                 }
             }
-                new TopBar().RefocusGraph();
-                if (currentGraphSections[i].TryClick())
-                {
+            new TopBar().RefocusGraph();
+            if (currentGraphSections[i].TryClick())
+            {
 
                 Report.Success("Succesfully single clicked the section");
                 Delay.Seconds(5);
-                }
-                else
+            }
+            else
+            {
+                bool clickedSuccessfully = false;
+                int x = 1;
+                while (x < 6 && clickedSuccessfully == false)
                 {
-                    bool clickedSuccessfully = false;
-                    int x = 1;
-                    while (x < 6 && clickedSuccessfully == false)
+                    Report.Info("Trying to click the section");
+                    if (currentGraphSections[i].TryDoubleClick())
                     {
-                        Report.Info("Trying to click the section");
-                        if (currentGraphSections[i].TryDoubleClick())
-                        {
-                            clickedSuccessfully = true;
-                            Delay.Seconds(5);
-                            Report.Info($"Successfully clicked section on attempt: {x}");
-                            break;
-                        }
-                        Report.Info($"Attempt: {x} at clicking section failed");
-                        Delay.Seconds(2);
-                        x++;
+                        clickedSuccessfully = true;
+                        Delay.Seconds(5);
+                        Report.Info($"Successfully clicked section on attempt: {x}");
+                        break;
                     }
-                    Report.IsTrue(clickedSuccessfully, "Failed to double click the section", "Succesfully double clicked the section");
-                Delay.Seconds(5);
+                    Report.Info($"Attempt: {x} at clicking section failed");
+                    Delay.Seconds(2);
+                    x++;
                 }
-            
-            if (finalChart=="Yes")
+                Report.IsTrue(clickedSuccessfully, "Failed to double click the section", "Succesfully double clicked the section");
+                Delay.Seconds(5);
+            }
+
+            if (finalChart == "Yes")
             {
                 int x = 0;
                 if (widgetTitle == "Supplier Subscription Status")
@@ -544,7 +544,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 new TopBar().RefocusGraph();
                 this.ForWidgetISwitchToView(widgetTitle, "Data");
-                List<string> newDataTitles = new Home.Widget(widgetTitle).GetCurrentDataTitles();                
+                List<string> newDataTitles = new Home.Widget(widgetTitle).GetCurrentDataTitles();
                 var differences = currentTitles.Except(newDataTitles);
                 diffFound = differences.Any();
                 Report.Info("Wating for 5 seconds...");
@@ -562,7 +562,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"In the widget with title: (.*), I confirm that when I select the Back button that the titles saved as: (.*) no longer appear")]
         public void InWidgetIConfirmWhenISelectBackButtonThatUpperLevelDataIsShown(string widgetTitle, string savedAs)
         {
-           
+
 
             var currentTitles = (List<string>)Context.GetFromContext(savedAs);
             Report.IsTrue(new Home.Widget(widgetTitle).ClickGraphViewBackButton(), "Failed to click the graph view back button", "Successfully clicked the graph view back button");
@@ -648,7 +648,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        
+
         [StepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the titles change")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionTheTitlesChange(string widgetTitle, string savedAs, string sectionTitle)
         {
@@ -660,11 +660,11 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.StartStep("Attempting to switch to the graph view");
             this.ForWidgetISwitchToView(widgetTitle, "Graph");
             Report.StartStep("Checking that when a section is clicked, a lower level of data is shown");
-            this.InWidgetIConfirmWhenISelectTitleThatLowerLevelDataIsShown(widgetTitle, sectionTitle, savedAs,finalChart:"No");
+            this.InWidgetIConfirmWhenISelectTitleThatLowerLevelDataIsShown(widgetTitle, sectionTitle, savedAs, finalChart: "No");
 
         }
 
-        [StepDefinition(@"I save the current titles as: (.*) and check that when I Click Back that the titles change for the (.*) widget")]      
+        [StepDefinition(@"I save the current titles as: (.*) and check that when I Click Back that the titles change for the (.*) widget")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickBackTheTitlesChange(string savedAs, string widgetTitle)
         {
             ReportSettings.UseSubSteps = true;
@@ -682,7 +682,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"I Click the hamburger menu for the widget: (.*) and select the option: (.*)")]
         public void IClickTheHamburgerMenuForTheWidgetAndSelectOption(string widgetTitle, string option)
         {
-            if(option.ToLower()=="print")
+            if (option.ToLower() == "print")
             {
                 Report.Error("Due to limitations with selenium we can not handle the print dialog, so skipping this check");
                 return;
@@ -696,8 +696,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"I Check that the Hamburger menu dropdown for widget: (.*) is displayed")]
         public void ICheckTheHamburgerMenuIsDisplayed(string widgetTitle)
         {
-            Report.IsTrue(new Home.Widget(widgetTitle).GraphHamburgerMenuDisplayed(),"The Hamburger menu dropdown was not displayed", "The Hamburger menu dropdown was displayed");
-            
+            Report.IsTrue(new Home.Widget(widgetTitle).GraphHamburgerMenuDisplayed(), "The Hamburger menu dropdown was not displayed", "The Hamburger menu dropdown was displayed");
+
         }
 
         [StepDefinition(@"I Check that the Options displayed in the Hamburger menu for widget: (.*) are as follows:")]
@@ -712,7 +712,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             bool pass = true;
             foreach (var option in optionsStrings)
             {
-                if(!expectedOptions.Contains(option))
+                if (!expectedOptions.Contains(option))
                 {
                     Report.Failure($"The expected option: {option} was not found");
                     pass = false;
@@ -725,7 +725,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-      
+
 
 
 
@@ -960,8 +960,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"I wait for the all widgets to finish loading")]
         public void WaitForAllWidgets()
         {
-            Report.IsTrue(new Home().WaitWidgetSpinnerFinish(),"The widgets did not finish loading","The widgets have finished loading");
-        }        
+            Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
+        }
 
         [StepDefinition(@"I get the current Legend Items for the widget: (.*) and save them as: (.*)")]
         public void IGetCurrentLegendItemsForAndSaveThemAs(string widgetTitle, string savedAs)
@@ -976,7 +976,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheWidgetConfirmLegendIsShownn(string widgetTitle)
         {
             var LegendItemList = new WidgetPage.Widget(widgetTitle).GetCurrentLegendItems();
-            Report.IsTrue(!LegendItemList.IsNullOrEmpty(), "There was no legend", "The Legend was shown");        
+            Report.IsTrue(!LegendItemList.IsNullOrEmpty(), "There was no legend", "The Legend was shown");
 
         }
 
@@ -984,7 +984,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheWidgetConfirmLegendIsNotShownn(string widgetTitle)
         {
             var LegendItemList = new WidgetPage.Widget(widgetTitle).GetCurrentLegendItems();
-            Report.IsTrue(LegendItemList.IsNullOrEmpty(),"The Legend was shown", "There was no legend");
+            Report.IsTrue(LegendItemList.IsNullOrEmpty(), "The Legend was shown", "There was no legend");
 
         }
 
@@ -994,21 +994,21 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void IClickOnTheLegendItemForWidget(string legendTitle, string savedAs, string widget)
         {
 
-           if(!Context.Contains(savedAs))
+            if (!Context.Contains(savedAs))
             {
                 Report.Failure($"Could not find the legend list saved as: {savedAs} in context");
                 return;
             }
-           var legendList = (List<WidgetPage.Widget.LegendItem>)Context.GetFromContext(savedAs);
-           Report.IsTrue(new WidgetPage.Widget(widget).ClickLegendSection(legendTitle, legendList),"Failed to Click the Legend Section","Successfully clicked the legend section");
-           
+            var legendList = (List<WidgetPage.Widget.LegendItem>)Context.GetFromContext(savedAs);
+            Report.IsTrue(new WidgetPage.Widget(widget).ClickLegendSection(legendTitle, legendList), "Failed to Click the Legend Section", "Successfully clicked the legend section");
+
         }
 
         [StepDefinition(@"I confirm the (.*) widget is refreshed and the section with title: (.*) is (removed|not removed) from the pie chart")]
-        public void WidgetIsRefreshedAndPieChartSectionRemoved(string widget, string sectionTitle,string presence)
+        public void WidgetIsRefreshedAndPieChartSectionRemoved(string widget, string sectionTitle, string presence)
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
-            Report.IsTrue(new Home.Widget(widget).GraphContentDisplayed(), "The Graph Content was not displayed", "The Graph Content was being displayed");            
+            Report.IsTrue(new Home.Widget(widget).GraphContentDisplayed(), "The Graph Content was not displayed", "The Graph Content was being displayed");
             int i = 0;
             while (i < 10)
             {
@@ -1039,7 +1039,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                         Delay.Seconds(3);
                     }
                 }
-                if(presence=="not removed")
+                if (presence == "not removed")
                 {
                     if (!new WidgetPage.Widget(widget).CheckPieChartSectionRemoved(sectionTitle))
                     {
@@ -1062,55 +1062,55 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
             Report.IsTrue(new Home.Widget(widget).GraphContentDisplayed(), "The Graph Content was not displayed", "The Graph Content was being displayed");
-            
-            
-                int i = 0;
-                while (i < 10)
+
+
+            int i = 0;
+            while (i < 10)
+            {
+
+                this.IGetCurrentLegendItemsForAndSaveThemAs(widget, "RefreshedLengedItems");
+                var refreshedLegendItem = (List<WidgetPage.Widget.LegendItem>)Context.GetFromContext("RefreshedLengedItems");
+                WidgetPage.Widget.LegendItem wantedItem = refreshedLegendItem.FirstOrDefault(x => x.ItemTitle.Contains(sectionTitle));
+                if (wantedItem != null)
                 {
 
-                    this.IGetCurrentLegendItemsForAndSaveThemAs(widget, "RefreshedLengedItems");
-                    var refreshedLegendItem = (List<WidgetPage.Widget.LegendItem>)Context.GetFromContext("RefreshedLengedItems");
-                    WidgetPage.Widget.LegendItem wantedItem = refreshedLegendItem.FirstOrDefault(x => x.ItemTitle.Contains(sectionTitle));
-                    if (wantedItem != null)
+                    Report.Success("The legend item we are looking for was found in the legend chart");
+                    Report.IsTrue(wantedItem.ItemElement.GetAttribute("class").Contains("hidden"), "The element class was not showing as hidden", "The element class was showing as hidden");
+                    new TopBar().RefocusGraph();
+                    IWebElement textEl = wantedItem.ItemElement.FindElement(By.XPath(".//*[name()='text']"), 2);
+                    IWebElement dotEl = wantedItem.ItemElement.FindElement(By.XPath(".//*[name()='rect']"), 2);
+                    string textElColor = textEl.GetCssValue("color");
+                    string dotElColor = dotEl.GetCssValue("fill");
+                    if (textElColor == "rgba(204, 204, 204, 1)" && dotElColor == "rgb(204, 204, 204)")
                     {
-
-                        Report.Success("The legend item we are looking for was found in the legend chart");
-                        Report.IsTrue(wantedItem.ItemElement.GetAttribute("class").Contains("hidden"), "The element class was not showing as hidden", "The element class was showing as hidden");
-                        new TopBar().RefocusGraph();
-                        IWebElement textEl = wantedItem.ItemElement.FindElement(By.XPath(".//*[name()='text']"), 2);
-                        IWebElement dotEl = wantedItem.ItemElement.FindElement(By.XPath(".//*[name()='rect']"), 2);
-                        string textElColor = textEl.GetCssValue("color");
-                        string dotElColor = dotEl.GetCssValue("fill");
-                        if (textElColor == "rgba(204, 204, 204, 1)" && dotElColor == "rgb(204, 204, 204)")
-                        {
-                            Report.Success("The Legend Items color was grey");
-                            return;
-                        }
-                        else
-                        {
-                            Report.Info("The Legend Items color was not Grey");
-                            Delay.Seconds(3);
-                        }
+                        Report.Success("The Legend Items color was grey");
+                        return;
                     }
                     else
                     {
-                     Report.Failure("The Legend item was was not found in the legend Chart");
-                     return;
+                        Report.Info("The Legend Items color was not Grey");
+                        Delay.Seconds(3);
                     }
-
-
-                
                 }
-                Report.Failure("The legend item was not grey after 30 seconds");        
+                else
+                {
+                    Report.Failure("The Legend item was was not found in the legend Chart");
+                    return;
+                }
 
-                                 
+
+
+            }
+            Report.Failure("The legend item was not grey after 30 seconds");
+
+
         }
 
         [StepDefinition(@"I click the three dots menu icon and select the Export option for the widget: (.*)")]
         public void ForWidgetISelectThreeDotsMenuAndClickExport(string widget)
         {
             new Steps_Home().ClickDropDownToggle(widget);
-            new Steps_Home().ClickDropdownOptionWidget("Export", widget);        
+            new Steps_Home().ClickDropdownOptionWidget("Export", widget);
         }
 
         [StepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the products data view is seen.")]
@@ -1146,21 +1146,21 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
             Report.Info("Getting all the product numbers being shown in the Product List");
             bool expectedStatus = true;
-            if(status=="shown")
+            if (status == "shown")
             {
                 expectedStatus = true;
             }
-            if(status=="not shown")
+            if (status == "not shown")
             {
                 expectedStatus = false;
             }
             List<string> currentProductsNumbers = new Home.Widget(widgetTitle).GetCurrentProductNumbers();
-            if(productID=="<first>")
+            if (productID == "<first>")
             {
                 var firstEl = currentProductsNumbers.First();
                 IWebElement firstProduct = new Home.Widget(widgetTitle).GetGivenProductLink(firstEl);
                 Report.IsTrue(firstProduct.TryClick(), "Failed to click the product", "Successfully clicked the product");
-                Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible()== expectedStatus, "The product Information popup did not load", "The Product Information popup was loaded");
+                Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible() == expectedStatus, "The product Information popup did not load", "The Product Information popup was loaded");
             }
             foreach (var number in currentProductsNumbers)
             {
@@ -1168,7 +1168,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 {
                     IWebElement wantedProduct = new Home.Widget(widgetTitle).GetGivenProductLink(number);
                     Report.IsTrue(wantedProduct.TryClick(), "Failed to click the product", "Successfully clicked the product");
-                    Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible()== expectedStatus, "The product Information popup did not load", "The Product Information popup was loaded");
+                    Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible() == expectedStatus, "The product Information popup did not load", "The Product Information popup was loaded");
                 }
             }
         }
@@ -1193,7 +1193,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [StepDefinition(@"For the Supplier Subscription Status widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the supplier list view is seen.")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionThatSupplierListSeen(string savedAs, string sectionTitle)
         {
-            
+
             ReportSettings.UseSubSteps = true;
             Report.StartStep("Attempting to switch to the data view");
             this.ForWidgetISwitchToView("Supplier Subscription Status", "Data");

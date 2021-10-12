@@ -13,16 +13,21 @@
 @run_TransparencyRationCalculation
 Feature: Transparency Ration Calculation
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto27 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 @tfs_desgin
 #Outdated test case (now showing a %)
 #May need reworking for change from "x/y" to "%"
 @ScenarioId:6047
+#Philip - Working
 Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd party product included in formulation
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.
 	#Use test case 80821 to create this third party product and get it to completed status.
 	#You will need to know the WPSxxxxxxx ID associated to the 3rd party product
-	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
-	#Given I create a product with name: 80854 and take to completed using Test Case 80821 and save as: TestCase80854Component
+	#Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
+	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing using SHA Account: SHAQAAuto27 and save as: TestCase80854Component
 	And I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#Use the shared step below to confirm the Transparency ratio for the third party product you are working with
@@ -31,8 +36,8 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#In the shared step below use Chalk as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase80854
-	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	#The Ingredients step is shown - Confirm the Transparency ratio (the numbers below the Publicly Disclosed column) shows in red background and shows 0/0
 	#And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
 	And I verify the Transparency Score displays 0.00%
@@ -101,8 +106,8 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then in the Additional documents page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:

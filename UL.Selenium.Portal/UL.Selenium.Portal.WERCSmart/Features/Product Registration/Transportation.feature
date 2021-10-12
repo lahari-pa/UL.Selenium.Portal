@@ -18,6 +18,13 @@
 
 Feature: Transportation
 
+
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto28 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
+
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @ScenarioId:1106
@@ -25,11 +32,10 @@ Scenario: [65702] Transportation - Confirm Copy information from my U.S. Departm
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -57,9 +63,8 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -87,9 +92,8 @@ Scenario: [65706] Transportation - Confirm Copy information from my U.S. Departm
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -117,9 +121,8 @@ Scenario: [65754] Transportation - Copy information from my U.S. Department of T
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -148,8 +151,6 @@ And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm d
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
 #Confirm that ^ checkbox is selected (failing currently)?
-And UN Number should be showing the value: UN1950
-And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN1966
 And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
@@ -166,11 +167,10 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -194,7 +194,8 @@ And The following options should be displayed exclusively for section: Packing G
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And UN Number should be showing the value: UN1950
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1966
 And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN1966
@@ -212,11 +213,10 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -255,7 +255,8 @@ And The following options should be displayed exclusively for section: Packing G
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And UN Number should be showing the value: UN1975
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1966
 And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN1966
@@ -275,7 +276,8 @@ Scenario: [65947] Transportation - Copy information from DOT for all modes - con
 Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-And I should see the Product Characteristics Page
+Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
+And I should see the Physical and Chemical Properties Page
 And The following options should be displayed for section: Primary Physical State  
 | Option |
 | Liquid |
@@ -289,7 +291,6 @@ And I set the Flash Point (in Celsius) option to: 23
 And I set the Flash Point Testing Method Used option to: Closed cup method
 And I set the Select the best Water Solubility description option to: Insoluble
 And I click continue
-Then I call Shared Step 143418 (Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
@@ -308,7 +309,7 @@ And I click continue
 And I should see the U. S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN2762
 And The following options should be displayed exclusively for section: Proper Shipping Name
-| Option                                               |
+| Option                                              |
 | Organochlorine pesticides, liquid, flammable, toxic |
 And I set the Technical Name field to: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
@@ -349,7 +350,6 @@ And Packing Group (select) should be showing the value: II
 And I confirm that: II is not the only option for section: Packing Group (select)
 And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 And I click continue
-
 And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
@@ -379,7 +379,7 @@ And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto28 and Open SHA manager)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase65947)
@@ -387,7 +387,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 ##Scenario: Test
 #Given I save to context name: TestCase65947 and value: 1549266 
-#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto28 and Open SHA manager)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
 Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase65947)
 And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
@@ -519,13 +519,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286
-Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
-Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
+Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
