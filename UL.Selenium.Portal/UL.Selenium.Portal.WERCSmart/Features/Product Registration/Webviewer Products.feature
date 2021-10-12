@@ -668,7 +668,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Completed
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Pending
-
+	
 Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru to Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
