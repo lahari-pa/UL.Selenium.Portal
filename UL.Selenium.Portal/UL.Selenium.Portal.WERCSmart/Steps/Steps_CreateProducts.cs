@@ -1543,25 +1543,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableFunctionalPurpose1.AddRow("NA");
 			Table tableFunctionalPurpose2 = new Table("Functional Purpose");
 			tableFunctionalPurpose2.AddRow("Abrasive");
+			tableFunctionalPurpose2.AddRow("Adhesive");
+			tableFunctionalPurpose2.AddRow("Antifreeze");
 			Table tableFunctionalPurpose3 = new Table("Functional Purpose");
-			tableFunctionalPurpose3.AddRow("Abrasive");
-			tableFunctionalPurpose3.AddRow("Adhesive");
-			tableFunctionalPurpose3.AddRow("Antifreeze");
+			tableFunctionalPurpose3.AddRow("NA");
+			Table tableFunctionalPurpose4 = new Table("Functional Purpose");
+			tableFunctionalPurpose4.AddRow("NA");
+			tableFunctionalPurpose2.AddRow("Abrasive");
+			tableFunctionalPurpose2.AddRow("Adhesive");
+			tableFunctionalPurpose2.AddRow("Antifreeze");
 
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);			
 			var selectedOptionsStr = new List<string>();
 			selectedOptionsStr.Add("Fragrance Component");
 			Context.AddToContext("Formaldehyde" + "FunctionalPurposesList", selectedOptionsStr);
 
-
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Nonfunctional Constituent", tableFunctionalPurpose3);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Nonfunctional Constituent");
 
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Nonfunctional Constituent", tableFunctionalPurpose3);
+			var selectedOptionsStr2 = new List<string>();
+			selectedOptionsStr2.Add("Non-Functional Ingredient");
+			Context.AddToContext("Sodium chlorideFunctionalPurposesList", selectedOptionsStr2);
+
+			//stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Nonfunctional Constituent");
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Butane", "Nonfunctional Constituent", tableFunctionalPurpose4);
+			var selectedOptionsStr3 = new List<string>();
+			selectedOptionsStr3.Add("Non-Functional Ingredient");
+			Context.AddToContext("ButaneFunctionalPurposesList ", selectedOptionsStr3);
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			//popup fifrahandle
+			Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup");			
+			new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+				
+			
+
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
 			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
