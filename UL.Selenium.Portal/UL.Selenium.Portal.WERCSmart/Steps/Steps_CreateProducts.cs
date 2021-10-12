@@ -1549,8 +1549,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableFunctionalPurpose3.AddRow("Antifreeze");
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Non-functional Byproduct", tableFunctionalPurpose3);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Non-functional Contaminant");
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Nonfunctional Constituent", tableFunctionalPurpose3);
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Nonfunctional Constituent");
 
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
