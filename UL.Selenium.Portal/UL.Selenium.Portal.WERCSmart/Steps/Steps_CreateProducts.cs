@@ -1525,19 +1525,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Create Updated/New version for CA cleaning product ingredient entry.
 			Table tableIngredients1 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients1.AddRow("Formaldehyde", "25", "false", "false", "");
+			tableIngredients1.AddRow("Formaldehyde", "25", "true", "false", "Formaldehyde");
 			stepsIngredients.AddIngredients(tableIngredients1);
 
 			Table tableIngredients2 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients2.AddRow("Water", "25", "false", "false", "");
+			tableIngredients2.AddRow("Water", "25", "true", "false", "Water");
 			stepsIngredients.AddIngredients(tableIngredients2);
 
 			Table tableIngredients3 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients3.AddRow("Sodium chloride", "25", "false", "false", "");
+			tableIngredients3.AddRow("Sodium chloride", "25", "true", "false", "Sodium chloride");
 			stepsIngredients.AddIngredients(tableIngredients3);
 
 			Table tableIngredients4 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients4.AddRow("Butane", "25", "false", "false", "");
+			tableIngredients4.AddRow("Butane", "25", "true", "false", "Butane");
 			stepsIngredients.AddIngredients(tableIngredients4);
 			Table tableFunctionalPurpose1 = new Table("Functional Purpose");
 			tableFunctionalPurpose1.AddRow("NA");
@@ -1547,13 +1547,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableFunctionalPurpose3.AddRow("Abrasive");
 			tableFunctionalPurpose3.AddRow("Adhesive");
 			tableFunctionalPurpose3.AddRow("Antifreeze");
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);
+
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);			
+			var selectedOptionsStr = new List<string>();
+			selectedOptionsStr.Add("Fragrance Component");
+			Context.AddToContext("Formaldehyde" + "FunctionalPurposesList", selectedOptionsStr);
+
+
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Nonfunctional Constituent", tableFunctionalPurpose3);
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Nonfunctional Constituent");
 
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+			//popup fifrahandle
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
 			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");

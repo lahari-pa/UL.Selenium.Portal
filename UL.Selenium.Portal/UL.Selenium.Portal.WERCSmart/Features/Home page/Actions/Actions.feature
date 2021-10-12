@@ -260,11 +260,11 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Ingredient Type    |
 		| Functional Purpose |
 	Then For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:
-		| Ingredient      | Ingredient Type            | Functional Purpose                    |
-		| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
-		| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
-		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
-		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
+		| Ingredient      | Ingredient Type           | Functional Purpose                    |
+		| Formaldehyde    | Fragrance                 | FormaldehydeFunctionalPurposesList    |
+		| Water           | Intentionally Added       | WaterFunctionalPurposesList           |
+		| Sodium chloride | Nonfunctional Constituent | Sodium chlorideFunctionalPurposesList |
+		| Butane          | Nonfunctional Constituent | ButaneFunctionalPurposesList          |
 	
 
 @ScenarioId:6866

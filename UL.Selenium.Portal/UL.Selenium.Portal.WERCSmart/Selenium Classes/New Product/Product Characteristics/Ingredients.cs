@@ -1221,7 +1221,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			if (functionalPurpose == "NA")
 			{
-				Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
+				Report.Info("The Option to Choose was set to NA, No Functional Purpose will be selected");
 				return selectedOptionSuccessfull = true;
 
 			}
