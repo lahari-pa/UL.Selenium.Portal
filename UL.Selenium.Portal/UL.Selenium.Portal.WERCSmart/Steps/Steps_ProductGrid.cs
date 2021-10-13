@@ -1044,6 +1044,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click More Filters in the products grid")]
 		public void ClickMoreFilters()
 		{
+			Delay.Seconds(4);
 			Report.IsTrue(new ProductsGrid().ClickMoreFilters(),
 				"Failed to click 'More Filters' in the products grid",
 				"Successfully clicked 'More Filters' in the products grid");
@@ -2967,80 +2968,99 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		//[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
-		//public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
-		//{
+		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
+		public void IConfirmProductIDIngredientIDSKUFieldIsFound()
+		{
+			var selProductGridMoreFilters = new MoreFilters();
 
-		//	try
-		//	{
-		//		Report.Info("Searching for Product Saved as " + savedAs);
+			Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKUFieldIsFound(), "The field was not found", "The field was found");
+		}
 
-		//		if (!Context.Contains(savedAs))
-		//		{
-		//			Report.Failure("The reference: " + savedAs + " was not found in context");
-		//			return;
-		//		}
 
-		//		string id = "";
 
-		//		try
-		//		{
-		//			var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-		//			id = productToSearch.ProductId;
-		//		}
-		//		catch (Exception)
-		//		{
-		//			//do nothing
-		//		}
+		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
+		{
 
-		//		//if we didn't get the id try a different object type
-		//		if (id == "")
-		//		{
-		//			try
-		//			{
-		//				var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-		//				id = productDetails.Id;
-		//			}
-		//			catch (Exception)
-		//			{
-		//				//do nothing
-		//			}
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
 
-		//		}
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
 
-		//		if (id == "")
-		//		{
-		//			try
-		//			{
-		//				id = Context.GetFromContext(savedAs).ToString();
-		//			}
-		//			catch (Exception)
-		//			{
+				string id = "";
 
-		//			}
-		//		}
-		//		Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
-		//		"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
-		//		"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
-		//		Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
-		//			"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
-		//			"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
 
-		//		GeneralUtilities.Wait_for_load_finish();
-		//		Delay.Seconds(10);
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
 
-		//		Report.Info("ID searched for: '" + id + "'");
-		//		var selProdGrid = new ProductsGrid();
-		//		Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+				}
 
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Report.Failure(ex.Message);
-		//		throw;
-		//	}
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
 
-		//}
+					}
+				}
+
+				var selProductGridMoreFilters = new MoreFilters();
+
+				selProductGridMoreFilters.ProductIDIngredientIDSKU = id;
+				Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKU == id,
+				"Value: " + id + " was not inputted into the Product ID, Ingredient ID, SKU field correctly!",
+				"Value: " + id + " was correctly inputted into the Product ID, Ingredient ID, SKU field", false, false);
+
+				//Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+				//"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+				//"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
+
+				Report.IsTrue(new ProductsGrid().ClickProductIDIngredientIDSKUSearchButton(),
+					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+
+				Report.Info("ID searched for: '" + id + "'");
+				var selProdGrid = new ProductsGrid();
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
 
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
