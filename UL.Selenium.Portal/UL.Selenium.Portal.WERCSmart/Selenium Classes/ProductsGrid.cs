@@ -497,6 +497,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//a[contains(@class,'clear-filters')]"), 2).TryClick();
 		}
 
+		public bool ClickProductIDIngredientIDSKUSearchButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']/..//span[contains(@data-bind,'searchProducts')]"), 2);
+			if (el == null)
+			{
+				Report.Error("Search button in Product ID, Ingredient ID, SKU' Field could not be found!");
+				return false;
+			}
+
+			return el.TryClick();
+		}
 		public bool ClickUpcNumberSearchButton()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']/..//span[contains(@data-bind,'searchProducts')]"), 2);
@@ -1602,6 +1613,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				el?.Select(value);
 			}
 		}
+
+
+		public string ProductIDIngredientIDSKU
+		{
+			get
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
+				return el == null ? "" : el.GetValue();
+			}
+			set
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
+				if (el == null)
+				{
+					Report.Error("Product ID, Ingredient ID, SKU field could not be found!");
+					return;
+				}
+
+				el.EnterText(value);
+			}
+		}
+
+		public bool ProductIDIngredientIDSKUFieldIsFound()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 15);
+			if (el ==null)
+			{
+				Report.Info($"el was null");
+				return false;
+			}
+			Report.Info($"el was found");
+			return true;
+		}
+
 
 		public bool MoreFiltersDisplayed()
 		{

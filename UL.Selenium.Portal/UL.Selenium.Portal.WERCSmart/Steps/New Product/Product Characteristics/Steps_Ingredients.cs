@@ -990,7 +990,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			if(refValue.Contains("savedas"))
 			{
-				refValue.Replace("savedas", "");
+				refValue = refValue.Replace("savedas", "");
 				refValue = (string)Context.GetFromContext(refValue);
 			}
 			Report.Info($"Entering: {refValue} into the Ingredient Reference Number field");
