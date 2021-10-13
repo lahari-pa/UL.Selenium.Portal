@@ -1549,9 +1549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableFunctionalPurpose3.AddRow("NA");
 			Table tableFunctionalPurpose4 = new Table("Functional Purpose");
 			tableFunctionalPurpose4.AddRow("NA");
-			tableFunctionalPurpose2.AddRow("Abrasive");
-			tableFunctionalPurpose2.AddRow("Adhesive");
-			tableFunctionalPurpose2.AddRow("Antifreeze");
+			
 
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);			
 			var selectedOptionsStr = new List<string>();
