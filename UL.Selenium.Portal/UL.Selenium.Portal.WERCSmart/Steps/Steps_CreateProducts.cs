@@ -1569,7 +1569,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Butane", "Nonfunctional Constituent", tableFunctionalPurpose4);
 			var selectedOptionsStr3 = new List<string>();
 			selectedOptionsStr3.Add("Non-Functional Ingredient");
-			Context.AddToContext("ButaneFunctionalPurposesList ", selectedOptionsStr3);
+			Context.AddToContext("ButaneFunctionalPurposesList", selectedOptionsStr3);
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
