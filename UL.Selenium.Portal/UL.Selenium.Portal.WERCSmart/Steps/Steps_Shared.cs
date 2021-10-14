@@ -579,8 +579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Delay.Seconds(10);
 						Report.Screenshot();
-						//Report.StartStep("I should see the Waste Classification Data Page");
-						//MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+						
 					}
 					else
 					{
@@ -602,14 +601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 			}
-
-
-
-			//if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
-			//{
-			//	new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-			//	new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
-			//}
+			
 
 		}
 

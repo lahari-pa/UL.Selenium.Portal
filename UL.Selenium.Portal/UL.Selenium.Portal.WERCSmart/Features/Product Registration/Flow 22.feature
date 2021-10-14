@@ -87,7 +87,6 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glass Coating - Aerosol
 	Then I save the product information as: TestCase60546
-	#Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I click continue
