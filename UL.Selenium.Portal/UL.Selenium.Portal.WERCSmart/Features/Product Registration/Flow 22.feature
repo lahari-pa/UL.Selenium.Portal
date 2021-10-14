@@ -44,8 +44,8 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
 
-@tfs_design
-@ignore
+#@tfs_design
+#@ignore
 @ScenarioId:5972
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
