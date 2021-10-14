@@ -189,48 +189,6 @@ And I click the following option in the bottom menu: Review
 
 
 
-@tfs_design
-Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I generate a random UPC number and save as: UPC120820
-Then I save the product information as: TestCase120820
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I generate a random UPC number and save as: UPC120820
-Then I save the product information as: TestCase120820
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120820, container type: Plastic Container and size: 15.2
-Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-Given I click continue
-Given I click continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given If purchase details are showing click confirm order
-Given In the Thank You screen I click Home
-Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120820)
-And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
-Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120820)
-Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120820)
-Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase120820
-And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120820)
-Given I call Shared Step 59066 (Go to SHA Manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase120820)
-Given I call Shared Step 155714 (SHA - Accepted Product - set Retailers to Cancelled for saved as: TestCase120820) for
-| Retailer |
-| Walgreens|
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Status for saved as: TestCase120820)
-
-
-
 
 @ScenarioId:10108
 Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162

@@ -13231,6 +13231,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
+		[StepDefinition(@"I call Shared Step 92580 \(Click \.\.\. in Actions > Update Data > Summary Page - Edit Product\)")]
+		public void GivenICallSharedStepClick_InActionsUpdateDataSummaryPage_EditProduct()
+		{
+			new StepsProductGrid().WhenIClickRowActionsForTheFirstProductReturned();
+			new StepsProductGrid().ClickRowAction("Update Data");
+			new Steps_Summary().IWaitForTheSummaryScreenToLoad();
+			new Steps_Summary().InTheSummaryScreenIClick();
+			new StepsProductGrid().IShouldSeeTheUpdateRegistrationPopup();
+			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
+		}
 
 	}
 }
