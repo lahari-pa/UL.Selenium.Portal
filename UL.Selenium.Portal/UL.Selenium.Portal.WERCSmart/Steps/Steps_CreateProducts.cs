@@ -1507,16 +1507,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
 			newProductSteps.SaveProductInformation(savedAs);
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
+			this.ProductInformation_YesToCACleaning();
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Product Information");
+			
 
-			//Create new version of this step to Answer CA cleaning question
-			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-			this.ProductInformation_YesToCACleaning();
+			
 			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 
 			newProductSteps.ClickContinue();
