@@ -78,8 +78,7 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Photograph Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
 
-@tfs_design
-@ignore
+
 Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -88,7 +87,8 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glass Coating - Aerosol
 	Then I save the product information as: TestCase60546
-	Given I call Shared Step 60756 (Product Information with Country and every option)
+	#Given I call Shared Step 60756 (Product Information with Country and every option)
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
