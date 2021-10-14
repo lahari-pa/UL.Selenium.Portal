@@ -11424,6 +11424,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+			
+			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
