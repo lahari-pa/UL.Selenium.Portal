@@ -537,11 +537,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-			if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
+			Report.Screenshot();
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
+
+
+			List<string> allIngredientsNames = new List<string>();
+			aerosolIngredients.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+			otherIngredients.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+
+			bool fifraItemFound = false;
+
+			foreach (var item in allIngredientsNames)
 			{
-				new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
-				new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+				if (popupCausing.Contains(item))
+				{
+					Report.Info($"The component name: {item} was found fifra list");
+					fifraItemFound = true;
+				}
 			}
+			if (fifraItemFound == true)
+			{
+				Report.Info($"Looking in context for the fifra tag...");
+				bool fifraTag;
+				if (Context.Contains("FIFRAPopupExpected"))
+				{
+					Report.Info($"Tag was found in context, settting value to match");
+
+					fifraTag = (bool)Context.GetFromContext("FIFRAPopupExpected");
+				}
+				else
+				{
+					Report.Info($"Tag was not found in context, default value of true/expected being set as no FIFRA question has been answered");
+					fifraTag = true;
+				}
+				if (fifraTag == true)
+				{
+					Report.Info($"The fifra tag was set a true, popup is expected");
+					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					{
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+						Delay.Seconds(10);
+						Report.Screenshot();
+						
+					}
+					else
+					{
+						Report.Failure("Popup not found");
+						Report.Screenshot();
+						return;
+					}
+				}
+				else
+				{
+					Report.Info($"The fifra tag was set a false, popup is not expected");
+				}
+
+
+			}
+			else
+			{
+				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
+				Report.Screenshot();
+
+			}
+			
 
 		}
 
