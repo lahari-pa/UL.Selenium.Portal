@@ -58,8 +58,8 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 54796 (Purchase Summary)
 
-#tfs_design
-#ignore
+@tfs_design
+@ignore
 Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	Given I generate a random UPC number and save as: UPC60637
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -102,8 +102,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	#And I Click the "X" to close the Summary screen
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
-#@tfs_design
-#@ignore
+
 Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
