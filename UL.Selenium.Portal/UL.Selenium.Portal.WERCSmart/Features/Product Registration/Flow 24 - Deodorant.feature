@@ -78,9 +78,11 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	#See Transport 2 page
 	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	And I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+	#Need to click continue here
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: (.*)
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60637, container type: (.*) and size: (.*)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -100,8 +102,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	#And I Click the "X" to close the Summary screen
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
-@tfs_design
-@ignore
+
 Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
