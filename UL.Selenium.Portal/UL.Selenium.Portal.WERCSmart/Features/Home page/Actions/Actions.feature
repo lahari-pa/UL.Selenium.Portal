@@ -240,8 +240,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
-@ignore
-@tfs_design
+
 @CACleaning
 @ScenarioId:5984
 Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)
@@ -260,11 +259,11 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Ingredient Type    |
 		| Functional Purpose |
 	Then For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:
-		| Ingredient      | Ingredient Type            | Functional Purpose                    |
-		| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
-		| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
-		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
-		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
+		| Ingredient      | Ingredient Type           | Functional Purpose                    |
+		| Formaldehyde    | Fragrance                 | FormaldehydeFunctionalPurposesList    |
+		| Water           | Intentionally Added       | WaterFunctionalPurposesList           |
+		| Sodium chloride | Nonfunctional Constituent | Sodium chlorideFunctionalPurposesList |
+		| Butane          | Nonfunctional Constituent | ButaneFunctionalPurposesList          |
 	
 
 @ScenarioId:6866
