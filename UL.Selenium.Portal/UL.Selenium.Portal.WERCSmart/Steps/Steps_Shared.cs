@@ -9725,6 +9725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var stepsProductInformation = new Steps_AdditionalProductInformation();
 			ReportSettings.UseSubSteps = true;
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			Report.StartStep("I set 'Classified using OSHA' to No");
 			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartStep("I set 'Product is shipped directly' to No");
