@@ -185,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
-			Delay.Seconds(1);
+			Delay.Seconds(1);			
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -297,6 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
 			Delay.Seconds(1);
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			if (myNewProduct.SectionExists("Select countries the product may be sold in"))
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
@@ -9725,6 +9726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var stepsProductInformation = new Steps_AdditionalProductInformation();
 			ReportSettings.UseSubSteps = true;
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			Report.StartStep("I set 'Classified using OSHA' to No");
 			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartStep("I set 'Product is shipped directly' to No");
