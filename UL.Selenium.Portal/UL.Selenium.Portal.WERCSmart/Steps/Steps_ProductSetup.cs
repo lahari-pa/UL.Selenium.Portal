@@ -4438,7 +4438,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
-			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			//this.GivenIGenerateARandomUPCNumberForAmazon("UPC75335");
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
