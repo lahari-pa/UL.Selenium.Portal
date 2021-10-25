@@ -220,8 +220,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Statu
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120820)
-#cancelled not completed version
-Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase120820) for	
+Given I call Shared Step (SHA - Assgined Product - set Retailers to Cancelled for saved as: TestCase120820) for	
 		| Retailer  |
 		| Walgreens |
 		
