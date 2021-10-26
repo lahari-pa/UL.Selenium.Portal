@@ -486,7 +486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else
 					{
-						string ToMatch2 = $@"^{Regex.Escape(userName)}$";
+						string ToMatch2 = $@"^{Regex.Escape(userName.ToUpper())}$";
 						foreach (var name in UserNamesList)
 						{
 							Match match2 = Regex.Match(name.Text.Trim(), ToMatch2);
@@ -616,6 +616,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement PlantBtn => ContainerElement.FindElement(By.XPath(".//input[@type='submit'][@name='ucSelectPlant$cmdSelect']"), 2);
 
+		private IWebElement ChangePassBtn => ContainerElement.FindElement(By.XPath(".//input[@name='cmdPasswordReset']"), 2);
+
 		private IWebElement SaveBtn => ContainerElement.FindElement(By.XPath(".//a[@id='btnSave']"), 2);
 
 		public bool EnterEmail(string emailAdd)
@@ -687,6 +689,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return BackupUserBtn != null && BackupUserBtn.TryClick();
 		}
 
+		internal bool ClickChangePasswordBttn()
+		{
+			return this.ChangePassBtn != null && this.ChangePassBtn.TryClick();
+		}
+
 		internal bool ClickPlantBttn()
 		{
 			return PlantBtn != null && PlantBtn.TryClick();
@@ -697,6 +704,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return SaveBtn != null && SaveBtn.TryClick();
 		}
 	}
+
+
+
+
 	public class SecurityManager_SelectUser : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//form[@name='Form1']//table[@id='srUsers_tblSelectRecord']");
