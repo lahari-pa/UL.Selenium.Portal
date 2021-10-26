@@ -2815,17 +2815,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									// If the current password ends in a character, append with a 1 for the new password
 									if (!char.IsDigit(currentPassword.Last()))
 									{
-										newPassword = currentPassword + "1";
+										newPassword = currentPassword + "2";
 									}
 									else
 									{
 										char[] passwordChr = currentPassword.ToCharArray();
 										string resulting = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
-										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 1);
+										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 2);
 									}
 
 									var PassResetPopup = new ResetYourPasswordPopup();
-									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									//Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
@@ -2851,6 +2851,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 										string userpass = foundUser.Password;
 										Report.IsTrue(userpass == newPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
 										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+									}
+									else
+									{
+										Report.Failure($"The password was not successfully reset.");
+										return;
 									}
 
 									Report.StartSubStep($"Then I close the 'Edit' window");
