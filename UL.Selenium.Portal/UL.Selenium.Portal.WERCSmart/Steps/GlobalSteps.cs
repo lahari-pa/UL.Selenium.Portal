@@ -2788,6 +2788,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							{
 								if (SM_UAR.DoubleClickUserName("User Name", user))
 								{
+									//Case where the user exists
 
 									Report.StartSubStep("Then the 'Edit' window should load");
 									this.ThenTheWindowShouldLoad("Edit", "should");
@@ -2797,22 +2798,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 										
 									Report.StartSubStep("Then I click the 'Change Password' button.");
 									new SecurityManager_AddUser().ClickChangePasswordBttn();
-									//Case where the user exists
-									//SHA ACCOUNT PASSWORD RESET NEEDED HERE
-									//0.Switch to the edit window
-									//1.Click Change password
+								
 									Report.StartSubStep("Then the 'Reset your Password' window should load");
 									this.ThenTheWindowShouldLoad("Reset your Password", "should");
 
 									Report.StartSubStep($"Given I switch to the 'Reset your Password' window");
 									this.GivenISwitchToTheWindow("Reset your Password");
 
-									//updating password +1 logic etc here (see other areas for examples)
-
 									Report.Info("Attempting to reset password");
 									string currentPassword = trevuser.Password;
 									string newPassword = "";
-									// If the current password ends in a character, append with a 1 for the new password
 									if (!char.IsDigit(currentPassword.Last()))
 									{
 										newPassword = currentPassword + "2";
@@ -2830,8 +2825,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
 
-
-									//check to see pass reset box is closed or not
 									if (PassResetPopup.ContainerElement == null)
 									{
 										Report.Success($"Password reset popup was closed, password has been reset");
@@ -2866,7 +2859,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								}
 								else
 								{
-									//Case where the user doesnt exist								
+									//Case where the user doesnt exist						
 
 									
 									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
