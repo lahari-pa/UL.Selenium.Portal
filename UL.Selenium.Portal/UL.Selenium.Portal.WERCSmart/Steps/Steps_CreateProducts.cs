@@ -1507,51 +1507,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
 			newProductSteps.SaveProductInformation(savedAs);
+			newProductSteps.GivenIShouldSeeXPage("Product Information");
+			this.ProductInformation_YesToCACleaning();
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			newProductSteps.GivenIShouldSeeXPage("Product Information");
+			
 
-			//Create new version of this step to Answer CA cleaning question
-			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-			this.ProductInformation_YesToCACleaning();
+			
 			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 
 			newProductSteps.ClickContinue();
 
 			//Create Updated/New version for CA cleaning product ingredient entry.
 			Table tableIngredients1 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients1.AddRow("Formaldehyde", "25", "false", "false", "");
+			tableIngredients1.AddRow("Formaldehyde", "25", "true", "false", "Formaldehyde");
 			stepsIngredients.AddIngredients(tableIngredients1);
 
 			Table tableIngredients2 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients2.AddRow("Water", "25", "false", "false", "");
+			tableIngredients2.AddRow("Water", "25", "true", "false", "Water");
 			stepsIngredients.AddIngredients(tableIngredients2);
 
 			Table tableIngredients3 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients3.AddRow("Sodium chloride", "25", "false", "false", "");
+			tableIngredients3.AddRow("Sodium chloride", "25", "true", "false", "Sodium chloride");
 			stepsIngredients.AddIngredients(tableIngredients3);
 
 			Table tableIngredients4 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients4.AddRow("Butane", "25", "false", "false", "");
+			tableIngredients4.AddRow("Butane", "25", "true", "false", "Butane");
 			stepsIngredients.AddIngredients(tableIngredients4);
 			Table tableFunctionalPurpose1 = new Table("Functional Purpose");
 			tableFunctionalPurpose1.AddRow("NA");
 			Table tableFunctionalPurpose2 = new Table("Functional Purpose");
 			tableFunctionalPurpose2.AddRow("Abrasive");
+			tableFunctionalPurpose2.AddRow("Adhesive");
+			tableFunctionalPurpose2.AddRow("Antifreeze");
 			Table tableFunctionalPurpose3 = new Table("Functional Purpose");
-			tableFunctionalPurpose3.AddRow("Abrasive");
-			tableFunctionalPurpose3.AddRow("Adhesive");
-			tableFunctionalPurpose3.AddRow("Antifreeze");
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Non-functional Byproduct", tableFunctionalPurpose3);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Non-functional Contaminant");
+			tableFunctionalPurpose3.AddRow("NA");
+			Table tableFunctionalPurpose4 = new Table("Functional Purpose");
+			tableFunctionalPurpose4.AddRow("NA");
+			
 
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance", tableFunctionalPurpose1);			
+			var selectedOptionsStr = new List<string>();
+			selectedOptionsStr.Add("Fragrance Component");
+			Context.AddToContext("Formaldehyde" + "FunctionalPurposesList", selectedOptionsStr);
+
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
+
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Nonfunctional Constituent", tableFunctionalPurpose3);
+			var selectedOptionsStr2 = new List<string>();
+			selectedOptionsStr2.Add("Non-Functional Ingredient");
+			Context.AddToContext("Sodium chlorideFunctionalPurposesList", selectedOptionsStr2);
+
+			//stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Nonfunctional Constituent");
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Butane", "Nonfunctional Constituent", tableFunctionalPurpose4);
+			var selectedOptionsStr3 = new List<string>();
+			selectedOptionsStr3.Add("Non-Functional Ingredient");
+			Context.AddToContext("ButaneFunctionalPurposesList", selectedOptionsStr3);
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+			//popup fifrahandle
+			Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup");			
+			new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
+				
+			
+
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
 			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");

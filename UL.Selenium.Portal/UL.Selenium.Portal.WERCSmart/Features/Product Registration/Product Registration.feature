@@ -16,6 +16,7 @@
 Feature: Product Registration
 
 @tfs_design
+@ignore
 #Non-important scenario - Philip
 Scenario: [130389] Demo Scenario
 Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -284,6 +285,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 
 
 @tfs_design
+@ignore
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens / removing existing products
@@ -420,6 +422,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 
 @jacob
 @tfs_design
+@ignore
 @ScenarioId:482
 Scenario: [105352] Product Comments screen Max input length
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

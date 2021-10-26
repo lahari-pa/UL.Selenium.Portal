@@ -14,6 +14,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
+using TReVor.Integrations.Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1051,7 +1053,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// If the password has expired, the old password is required. Else it isn't.
 			if (selModal.LoginPasswordFieldPresent())
 			{
-				Report.Info("Entering current password in the input: " + oldPassword);
+				Report.Info("Entering current password in the input: *******");
 				selModal.EnterLoginPassword(oldPassword);
 			}
 
@@ -1059,9 +1061,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int attempt = 0;
 			while (attempt < 10)
 			{
-				Report.Info("Entering new password in New Password input: " + newPassword);
+				Report.Info("Entering new password in New Password input: *******");
 				selModal.EnterNewPassword(newPassword);
-				Report.Info("Entering new password in Verify Password input: " + newPassword);
+				Report.Info("Entering new password in Verify Password input: *******");
 				selModal.EnterVerifyPassword(newPassword);
 				Report.Info("Clicking save in the Change Password popup");
 				Report.IsTrue(selModal.ClickSave(),
@@ -1071,11 +1073,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.GetAllText().Any(x => x.Contains("used too recently")))
 				{
 					Report.Info("The test attempted to assign a previously used password! Iterating the password suffix...");
-					Report.Info($"Current attempted password is: {newPassword}");
+					Report.Info($"Current attempted password is: *******");
 					char[] passwordChr = newPassword.ToCharArray();
 					string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 					newPassword = newPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
-					Report.Info($"New attempted password is: {newPassword}");
+					Report.Info($"New attempted password is: *******");
 					if (selModal.Click_Close())
 					{
 						Report.Info($"Attempt {attempt}. Trying again...");
@@ -1092,7 +1094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
+					Automation.TReVor.Classes.TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");
@@ -1218,16 +1220,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (selModal.LoginPasswordFieldPresent())
 			{
-				Report.Info("Entering Admin password in the input: " + adminPassword);
+				Report.Info("Entering Admin password in the input: *******");
 				selModal.EnterLoginPassword(adminPassword);
 			}
 
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking Continue");
 			selModal.ClickContinue();
-			Report.Info("Entering new password in New Password input: " + adminPassword);
+			Report.Info("Entering new password in New Password input: *******");
 			selModal.EnterNewPassword(adminPassword);
-			Report.Info("Entering new password in Verify Password input: " + adminPassword);
+			Report.Info("Entering new password in Verify Password input: *******");
 			selModal.EnterVerifyPassword(adminPassword);
 			Report.Info("Clicking save in the Change Password popup");
 			Report.IsTrue(selModal.ClickSave(),
@@ -1729,7 +1731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var finalPassword = (string)Context.GetFromContext("contextPassword");
 			if (acceptedPass)
 			{
-				var user = TestUsers.GetUserSavedAs(accountSavedAs);
+				var user = TReVor.Integrations.Classes.TReVorSettings.GetCredential(accountSavedAs);
 				if (user == null)
 				{
 					Report.Info("TReVor user does not exist");
@@ -1740,28 +1742,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				//if (Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
-				TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword);
-				TestUsers.RefreshUsers();
-				var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();
-				var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
-				string branch = TReVorSettings.SoftwareBranch;
-				user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
-				string userpass = user.Password;
+				//TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword);
+				string accountUsername = user.UserName;
+				TReVor.Integrations.Classes.TReVorSettings.UpdateCredential(user.Alias, accountUsername, finalPassword);
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+				var foundUser = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user.Alias);
+				string userpass = foundUser.Password;
+				Report.IsTrue(userpass == finalPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+				TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
 
-				if (userpass == finalPassword)
-				{
-
-					Report.Success("Successfully updated password in TReVor");				
-					
-					TestUsers.RefreshUsers();
-					user.Password = finalPassword;
-				}
-				else
-				{
-					Report.Failure("Not able to update password in TReVor");
-				}
-				
-				TestUsers.RefreshUsers();
 
 			}
 		}

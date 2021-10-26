@@ -522,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set
 			{
 				this._iPassword.EnterText(value);
-				Report.Success("Entered password: " + value);
+				Report.Success("Entered password: *******");
 			}
 		}
 
@@ -531,7 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set
 			{
 				this._iConfirmPassword.EnterText(value);
-				Report.Success("Entered confirm password: " + value);
+				Report.Success("Entered confirm password: *******");
 			}
 		}
 
@@ -719,8 +719,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Pin {
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).GetValue();
-			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).EnterText(value);
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).TryEnterTextAndTab(value);
 		}
 
+		public bool ClickPinBox()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"));
+			if(el ==null)
+			{
+				Report.Info($"el was null");
+				return false;
+					
+			}
+			return el.TryClick();
+		}
 	}
 }

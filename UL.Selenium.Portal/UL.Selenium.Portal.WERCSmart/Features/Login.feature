@@ -12,6 +12,7 @@ Background:
 Given I go to the WERCSmart Log in
 
 @tfs_design
+@ignore
 @ScenarioId:5965
 Scenario: [50820] Language Selector - Japanese
 
@@ -30,6 +31,7 @@ Then The element: login button should display text: Login
 
 
 @tfs_design
+@ignore
 @ScenarioId:5966
 Scenario: [50828] Language Selector - Chinese
 

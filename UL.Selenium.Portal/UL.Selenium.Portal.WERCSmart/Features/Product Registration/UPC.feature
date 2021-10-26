@@ -428,8 +428,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109516
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -456,7 +455,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109516)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase109516) for	
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Amazon                     |
@@ -483,6 +482,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I click on the Row Action: Archive Retailers
 	And In the Archive Retailers popup, I select the checkbox next to the retailer Walgreens
 	And In the Archive Retailers popup click on: ARCHIVE
+	And I handle the Alert for Archive by answering Ok
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	And I confirm that the retailer Walgreens is archived for product saved as: TestCase109516
@@ -523,6 +523,7 @@ Scenario: [101023] UPC Step - Add Part Number
 
 
 @tfs_design
+@ignore
 #In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @ScenarioId:6025
 Scenario: [84510] Select Retailers in UPC screen
@@ -629,6 +630,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC fi
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
 
 @tfs_design
+@ignore
 @ScenarioId:6054
 Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -745,6 +747,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 
 #JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
 @tfs_design
+@ignore
 @ScenarioId:6399
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

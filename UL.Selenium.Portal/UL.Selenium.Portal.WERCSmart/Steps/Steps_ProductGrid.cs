@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
-using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
-
+using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -22,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
 		public void GivenIShouldSeeAnOptionFor(string field)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking that option " + field + " is present");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking that option " + field + " is present");
 			try
 			{
 				Report.Info("Checking that option " + field + " is present");
@@ -52,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Product Grid should have the following headers:")]
 		public void GivenTheProductGridShouldHaveTheFollowingHeaders(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking Product Grid Headers");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking Product Grid Headers");
 			try
 			{
 				Report.Info("Checking Product Grid Headers");
@@ -71,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I can navigate between pages using the pagniation buttons at the bottom of the grid")]
 		public void GivenICanNavigateBetweenPagesUsingThePagniationButtonsAtTheBottomOfTheGrid()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking Pagniation");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking Pagniation");
 			try
 			{
 				Report.Info("Checking Pagniation");
@@ -99,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the first product in the table")]
 		public void GivenISearchForTheFirstProductInTheTable()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for First Product In Grid");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for First Product In Grid");
 			try
 			{
 				Report.Info("Searching for First Product In Grid");
@@ -124,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the product saved as: (.*)")]
 		public void GivenISearchForTheProductSavedAs(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
@@ -204,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
 		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
@@ -260,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
@@ -538,7 +536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Row Actions for the most recent product returned")]
 		public void WhenIClickRowActionsForTheFirstProductReturned()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Row Actions' for first product returned");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Clicking 'Row Actions' for first product returned");
 			try
 			{
 				Report.Info("Clicking 'Row Actions' for first product returned");
@@ -563,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Row Actions for product saved as: (.*)")]
 		public void IClickRowActionsForTheProductSavedAs(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
 			try
 			{
 				var product = (ProductGridItem)Context.GetFromContext(savedAs);
@@ -588,7 +586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the Row Action: (.*)")]
 		public void ClickRowAction(string action)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Clicking on Row Action: " + action);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Clicking on Row Action: " + action);
 			try
 			{
 				Report.Info("Clicking on Row Action: " + action);
@@ -653,7 +651,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Bulk Actions in the Products Grid")]
 		public void GivenIClickBulkActionsInTheProductsGrid()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Clicking Bulk Actions in Products Grid");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Clicking Bulk Actions in Products Grid");
 			try
 			{
 				Report.Info("Clicking Bulk Actions in Products Grid");
@@ -672,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see a popup with header Bulk Actions")]
 		public void ThenIShouldSeeAPopupWithHeaderBulkActions()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking Bulk Actions popup appears");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking Bulk Actions popup appears");
 			try
 			{
 				Report.Info("Checking Bulk Actions popup appears");
@@ -690,7 +688,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following options available in the Bulk Actions window")]
 		public void ThenIShouldSeeTheFollowingOptionsAvailableInTheBulkActionsWindow(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking Bulk Actions Options");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking Bulk Actions Options");
 			try
 			{
 
@@ -719,7 +717,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the close button on Bulk Actions")]
 		public void ClickCloseOnBulkActions()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I click the close button");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I click the close button");
 			var selBulkActions = new BulkActions();
 			selBulkActions.ClickClose();
 
@@ -732,7 +730,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the cancel button on the ULSC Sync popup")]
 		public void ClickCancelUlscSyncPopup()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I click the cancel button");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I click the cancel button");
 			var selUlscSyncPopup = new SyncUlscProductsDialog();
 			selUlscSyncPopup.ClickCancel();
 
@@ -746,7 +744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Sync Products to ULSC window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Sync Products to ULSC window should appear");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Sync Products to ULSC window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -772,6 +770,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 6; i++)
 			{
 				Report.Info("Generating upc attempt " + (i + 1));
+				//string uPCNo = new UpcFunctions().GenerateUPC();
 				string uPCNo = GeneralFunctions.GenerateUPCNumber();
 				Report.Info("Generated UPC No: " + uPCNo);
 				Report.Info("Searching for generated upc number");
@@ -800,7 +799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
 		{
 			bool delete = keepOrDelete == "delete";
-			ReportSettings.UseSubSteps = delete;
+			ReportDetails.CurrentDetails.UseSubSteps = delete;
 			Report.StartStep("I generate a random UPC number and save as: " + savedAs);
 			this.GivenIGenerateARandomUPCNumberAndSaveAs(savedAs);
 			if (delete)
@@ -813,6 +812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
+			//string uPCNo = new UpcFunctions().GenerateUPC();
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
@@ -825,6 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
 		public void ThenGenerateARandomSKUNumberRandomDigitsAndSaveAsRandomSKU_(string savedAs)
 		{
+			//string uPCNo = new UpcFunctions().GenerateUPC();
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
@@ -836,6 +837,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
 		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
 		{
+			//string uPCNo = new UpcFunctions().GenerateUPC();
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
@@ -847,6 +849,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random Ingredient ID and save as: (.*)")]
 		public void GivenIGenerateARandomIngredientIDAndSaveAs(string savedAs)
 		{
+			//string uPCNo = new UpcFunctions().GenerateUPC();
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			//Report.Info("Generated UPC No: " + uPCNo);
@@ -1021,14 +1024,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("The Navigation Input was not showing");
 			}
-			Report.StartStep(ReportSettings.StepCounter + " - I enter the " + direction + " arrow into the page navigation box");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I enter the " + direction + " arrow into the page navigation box");
 			Report.Info("Entering the " + direction + " arrow key to the products grid page navigation input");
 			selProductsGrid.KeyToGridNavigationInput(direction);
 			Report.Info("Pressing the enter key");
 			selProductsGrid.KeyToGridNavigationInput("enter");
 			string iteration = direction == "up" ? "increased" : "decreased";
-			ReportSettings.StepCounter++;
-			Report.StartStep(ReportSettings.StepCounter + " - I confirm the page number has " + iteration + " by 1");
+			ReportDetails.CurrentDetails.StepCounter++;
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I confirm the page number has " + iteration + " by 1");
 			int currentPage = Convert.ToInt32(selProductsGrid.ActivePage());
 			int difference = direction == "up" ? 1 : -1;
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
@@ -1041,6 +1044,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click More Filters in the products grid")]
 		public void ClickMoreFilters()
 		{
+			Delay.Seconds(4);
 			Report.IsTrue(new ProductsGrid().ClickMoreFilters(),
 				"Failed to click 'More Filters' in the products grid",
 				"Successfully clicked 'More Filters' in the products grid");
@@ -1286,7 +1290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Getting ID from context: " + id);
 				id = test.ToString();
 			}
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var selProductsGrid = new ProductsGrid();
 			var selMoreFilters = new MoreFilters();
 			var filters = new List<KeyValuePair<string, string>>();
@@ -1624,7 +1628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			if (TReVorSettings.SoftwareBranch == "Development")
 			{
-				ReportSettings.UseSubSteps = true;
+				ReportDetails.CurrentDetails.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
 				var productTable = new TechTalk.SpecFlow.Table(new string[] {
@@ -1787,7 +1791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (TReVorSettings.SoftwareBranch == "QA")
 			{
-				ReportSettings.UseSubSteps = true;
+				ReportDetails.CurrentDetails.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
 				var productTable = new TechTalk.SpecFlow.Table(new string[] {
@@ -1950,7 +1954,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
-				ReportSettings.UseSubSteps = true;
+				ReportDetails.CurrentDetails.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
 				var productTable = new TechTalk.SpecFlow.Table(new string[] {
@@ -2113,7 +2117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (TReVorSettings.SoftwareBranch == "Local Production")
 			{
-				ReportSettings.UseSubSteps = true;
+				ReportDetails.CurrentDetails.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
 				var productTable = new TechTalk.SpecFlow.Table(new string[] {
@@ -2508,6 +2512,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
+		[StepDefinition(@"I handle the Alert for Archive by answering (Ok|Cancel)")]
+		public void HandleTheAlertForArchiveByAnswering(string response)
+		{
+			Report.IsTrue(new ProductsGrid().ArchiveAlert(response),$"Selected {response} in Archive Alert.",$"Unable to select {response} in Archive alert.");
+			string s = response;
+		}
+
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
 		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{
@@ -2716,7 +2727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If my products grid does not contain enough products then I add them until it displays '...' grid navigation option")]
 		public void AddProductsInMyProductsGrid()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var selProdGrid = new ProductsGrid();
 			var newStepsProd = new Steps_ProductSetup();
 			var homePage = new StepsHomepage();
@@ -2750,6 +2761,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 1;
 			while (i <= numbersWanted)
 			{
+				//string uPCNo = new UpcFunctions().GenerateUPC();
 				string uPCNo = GeneralFunctions.GenerateUPCNumber();
 				Context.AddToContext(savedAs + i, uPCNo);
 				Report.Info("Generated UPC No " + i + ": " + uPCNo);
@@ -2956,80 +2968,99 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		//[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
-		//public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
-		//{
+		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
+		public void IConfirmProductIDIngredientIDSKUFieldIsFound()
+		{
+			var selProductGridMoreFilters = new MoreFilters();
 
-		//	try
-		//	{
-		//		Report.Info("Searching for Product Saved as " + savedAs);
+			Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKUFieldIsFound(), "The field was not found", "The field was found");
+		}
 
-		//		if (!Context.Contains(savedAs))
-		//		{
-		//			Report.Failure("The reference: " + savedAs + " was not found in context");
-		//			return;
-		//		}
 
-		//		string id = "";
 
-		//		try
-		//		{
-		//			var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-		//			id = productToSearch.ProductId;
-		//		}
-		//		catch (Exception)
-		//		{
-		//			//do nothing
-		//		}
+		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
+		{
 
-		//		//if we didn't get the id try a different object type
-		//		if (id == "")
-		//		{
-		//			try
-		//			{
-		//				var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-		//				id = productDetails.Id;
-		//			}
-		//			catch (Exception)
-		//			{
-		//				//do nothing
-		//			}
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
 
-		//		}
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
 
-		//		if (id == "")
-		//		{
-		//			try
-		//			{
-		//				id = Context.GetFromContext(savedAs).ToString();
-		//			}
-		//			catch (Exception)
-		//			{
+				string id = "";
 
-		//			}
-		//		}
-		//		Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
-		//		"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
-		//		"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
-		//		Report.IsTrue(new ProductsGrid().SelectSearchButtonNextToProductIDIngredientIDSKUFilterField(),
-		//			"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
-		//			"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
 
-		//		GeneralUtilities.Wait_for_load_finish();
-		//		Delay.Seconds(10);
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
 
-		//		Report.Info("ID searched for: '" + id + "'");
-		//		var selProdGrid = new ProductsGrid();
-		//		Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+				}
 
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Report.Failure(ex.Message);
-		//		throw;
-		//	}
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
 
-		//}
+					}
+				}
+
+				var selProductGridMoreFilters = new MoreFilters();
+
+				selProductGridMoreFilters.ProductIDIngredientIDSKU = id;
+				Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKU == id,
+				"Value: " + id + " was not inputted into the Product ID, Ingredient ID, SKU field correctly!",
+				"Value: " + id + " was correctly inputted into the Product ID, Ingredient ID, SKU field", false, false);
+
+				//Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+				//"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+				//"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
+
+				Report.IsTrue(new ProductsGrid().ClickProductIDIngredientIDSKUSearchButton(),
+					"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+					"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+
+				Report.Info("ID searched for: '" + id + "'");
+				var selProdGrid = new ProductsGrid();
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
 
 		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
@@ -3252,15 +3283,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search the Products grid for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
 		public void SearchProductsGridForProductByNameAndSaveIDAndUPC(string name, string iDSavedAs, string uPCSavedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("Searching for product: " + name);
 			var selProdGrid = new ProductsGrid {
 				ProductIdField = name
 			};
 			GeneralUtilities.Wait_for_load_finish();
 			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
-			ProductInformation productInfo = new ProductInformation();
-			productInfo.Id = productElement.ProductId;
+			ProductInformation productInfo = new ProductInformation {
+				Id = productElement.ProductId
+			};
 			if (productElement != null)
 			{
 				Report.StartStep("Saving the top product as: " + iDSavedAs);
@@ -3291,7 +3323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the ingredient saved as: (.*)")]
 		public void GivenISearchForTheIngredientSavedAs(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Searching for Ingredient Saved as " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Ingredient Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Ingredient Saved as " + savedAs);

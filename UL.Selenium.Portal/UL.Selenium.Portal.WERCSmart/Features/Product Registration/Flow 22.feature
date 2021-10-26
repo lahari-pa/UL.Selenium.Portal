@@ -44,7 +44,7 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
 
-@tfs_design
+
 @ScenarioId:5972
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -63,7 +63,7 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question shown  - Select No - Happy Path)
+	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 0.5
 	Given I click continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
@@ -78,7 +78,7 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Photograph Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
 
-@tfs_design
+
 Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -87,7 +87,7 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glass Coating - Aerosol
 	Then I save the product information as: TestCase60546
-	Given I call Shared Step 60756 (Product Information with Country and every option)
+	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.

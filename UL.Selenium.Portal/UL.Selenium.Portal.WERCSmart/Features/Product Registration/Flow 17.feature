@@ -200,6 +200,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
 
 @tfs_design
+@ignore
 # Test case can be found at the following path:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 17 - Lith bat
 @ScenarioId:11164
