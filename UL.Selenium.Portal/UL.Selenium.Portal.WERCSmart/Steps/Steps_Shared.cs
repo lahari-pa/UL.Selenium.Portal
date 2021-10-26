@@ -6063,6 +6063,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
 		}
 
+		[StepDefinition(@"I call Shared Step \(SHA - Assgined Product - set Retailers to Cancelled for saved as: (.*)\) for")]
+		public void GivenICallSharedSHA_AssignedProduct_SetRetailersToCancelledForSavedAs(string savedAs, Table retailers)
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			var thisProcessProducts = new ProcessProducts();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisProcessProducts.SelectNewStatus("Assigned");
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(retailers);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Cancelled");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Cancelled", savedAs);
+		}
+
 		[StepDefinition(@"I call Shared Step \(SHA - Assgined Product - set Retailers to Release for distribution for saved as: (.*)\) for")]
 		public void GivenICallSharedSHA_AssignedProduct_SetRetailersToReleaseForDistributionForSavedAs(string savedAs, Table retailers)
 		{
