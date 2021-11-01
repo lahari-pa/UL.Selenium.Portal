@@ -27,8 +27,8 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
 	#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-	Given I call Shared Step 49818 (Beverage Regulatory Details)
+	Given I call Shared Step 92964 (Beverage Regulatory Details Less < 70%)
+	#Given I call Shared Step 49818 (Beverage Regulatory Details)
 
 
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)

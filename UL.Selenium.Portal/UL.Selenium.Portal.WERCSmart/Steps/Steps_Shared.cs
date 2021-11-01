@@ -3914,6 +3914,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
 
+		[StepDefinition(@"I call Shared Step 92964 \(Beverage Regulatory Details Less < 70%\)")]
+		public void Shared92954BeverageRegulatoryDetailsLessThan70()
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				"No"));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");		
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				"55"));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "55");
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol \(Packaging III\)\)")]
 		public void SharedUSDepartmentOfTransportationDOTClassification_ForAlcoholPackagingiii()
