@@ -29,9 +29,8 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 92964 (Beverage Regulatory Details Less < 70%)
 	#Given I call Shared Step 49818 (Beverage Regulatory Details)
-
-
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
