@@ -3864,6 +3864,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
+		[StepDefinition(@"I call Shared Step 92950 \(Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol\)")]
+		public void Shared92950EnterPhysicalProperty_Liquid_ForWineLessThan70()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartStep("I set the Specific Gravity option to: 68");
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "68");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartStep("I set the pH field to: 2.1 - 3.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "2.1 - 3.9");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartStep("I set the Boiling Point (in Celsius) field to: <=20C (68F)");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<=20C (68F)");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
+			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
 		[StepDefinition(@"I call Shared Step 49818 \(Beverage Regulatory Details\)")]
 		public void SharedBeverageRegulatoryDetails()
 		{
