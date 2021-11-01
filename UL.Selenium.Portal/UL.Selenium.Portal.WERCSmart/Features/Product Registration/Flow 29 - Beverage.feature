@@ -24,12 +24,13 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase60694
 	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
-	#Need 92950
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
 	#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
+
+
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
