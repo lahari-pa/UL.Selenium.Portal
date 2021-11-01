@@ -3879,8 +3879,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("pH", "2.1 - 3.9");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartStep("I set the Boiling Point (in Celsius) field to: <=20C (68F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<=20C (68F)");
+			Report.StartStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
@@ -3963,9 +3963,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.");
 			myStepsNewProduct.CheckDisplayedSections("see", table);
 			Report.StartStep(
-				"Setting 'Packing Group' error question to: 'The UN# classification assigned to this product has a specific Packaging Group required.'");
+				"Setting 'Packing Group' error question to: 'Based on defined viscosity parameters, this product is classified as PG III'");
 			myStepsNewProduct.SetTheSectionOptionTo("Product has a boiling point of",
-				"The UN# classification assigned to this product has a specific Packaging Group required.");
+				"Based on defined viscosity parameters, this product is classified as PG III");
 			Report.StartStep(
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue(
