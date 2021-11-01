@@ -71,8 +71,8 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
+
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Then the 'Select Retailers' window appears
