@@ -20,10 +20,13 @@ Feature: SHAAccountDebug
 
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |		
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto7  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto13 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 		
 
 

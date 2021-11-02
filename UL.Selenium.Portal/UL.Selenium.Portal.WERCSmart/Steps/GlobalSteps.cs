@@ -2502,6 +2502,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
 				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
+				//RuleWriter rw = new RuleWriter();
+				//bool thing = rw.FoundContainerEl();
+
 			}
 			else
 			{
@@ -2522,7 +2525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			RuleWriter rw = new RuleWriter();
 			Delay.Seconds(1);
-			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
 			
 			

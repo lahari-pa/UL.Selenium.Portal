@@ -27,6 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FoundContainerEl()
 		{
+			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			var el = this.containerElement;
 			//var thing = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
 			if (el!=null)
