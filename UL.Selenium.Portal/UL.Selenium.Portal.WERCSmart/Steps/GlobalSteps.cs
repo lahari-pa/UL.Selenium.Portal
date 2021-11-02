@@ -2726,7 +2726,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 										return;
 									}
 
-
+									Report.StartStep("I navigate to Studio");
+									myStepsSha.GivenINavigateToStudio();
 									Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
 
 								}
