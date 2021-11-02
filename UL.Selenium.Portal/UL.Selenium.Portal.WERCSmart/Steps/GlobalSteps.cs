@@ -2798,6 +2798,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								if (SM_UAR.DoubleClickUserName("User Name", user))
 								{
 									//Case where the user exists
+
+									Report.StartSubStep("Then the 'Edit' window should load");
+									this.ThenTheWindowShouldLoad("Edit", "should");
+
+									Report.StartSubStep("Given I switch to the 'Edit' window");
+									this.GivenISwitchToTheWindow("Edit");
+										
+									Report.StartSubStep("Then I click the 'Change Password' button.");
+									new SecurityManager_AddUser().ClickChangePasswordBttn();
+								
+									Report.StartSubStep("Then the 'Reset your Password' window should load");
+									this.ThenTheWindowShouldLoad("Reset your Password", "should");
+
+									Report.StartSubStep($"Given I switch to the 'Reset your Password' window");
+									this.GivenISwitchToTheWindow("Reset your Password");
+
+									Report.Info("Attempting to reset password");
+									string currentPassword = trevuser.Password;
+									string newPassword = "";
+									if (!char.IsDigit(currentPassword.Last()))
+									{
+										newPassword = currentPassword + "2";
+									}
+									else
+									{
+										char[] passwordChr = currentPassword.ToCharArray();
+										string resulting = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 2);
+									}
+
+									var PassResetPopup = new ResetYourPasswordPopup();
+									//Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
+									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
+
+									if (PassResetPopup.ContainerElement == null)
+									{
+										Report.Success($"Password reset popup was closed, password has been reset");
+										var trevAcc = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user);
+										if (trevAcc == null)
+										{
+											Report.Info("TReVor user does not exist");
+										}
+										else
+										{
+											Report.Info("TReVor user does exist");
+										}
+										string accountUsername = trevAcc.UserName;
+										TReVor.Integrations.Classes.TReVorSettings.UpdateCredential(trevAcc.Alias, accountUsername, newPassword);
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+										var foundUser = TReVor.Integrations.Classes.TReVorSettings.GetCredential(trevAcc.Alias);
+										string userpass = foundUser.Password;
+										Report.IsTrue(userpass == newPassword, "Not able to update password in TReVor", "Successfully updated password in TReVor");
+										TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+									}
+									else
+									{
+										Report.Failure($"The password was not successfully reset.");
+										return;
+									}
+
 									Report.StartSubStep($"Then I close the 'Edit' window");
 									this.ThenCloseTheSpecifiedWindow("Edit");
 
@@ -2806,7 +2868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								}
 								else
 								{
-									//Case where the user doesnt exist								
+									//Case where the user doesnt exist						
 
 									
 									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
