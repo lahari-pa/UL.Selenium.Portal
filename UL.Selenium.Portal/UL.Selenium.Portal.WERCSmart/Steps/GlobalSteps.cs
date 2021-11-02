@@ -2501,9 +2501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (success)
 			{
 				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
-				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
-				//RuleWriter rw = new RuleWriter();
-				//bool thing = rw.FoundContainerEl();
+				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");			
 
 			}
 			else

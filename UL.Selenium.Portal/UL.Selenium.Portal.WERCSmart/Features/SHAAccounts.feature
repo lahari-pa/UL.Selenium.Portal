@@ -21,11 +21,12 @@ Feature: SHAAccountDebug
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto1  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto2  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto4  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto7  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto13 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 		
 
