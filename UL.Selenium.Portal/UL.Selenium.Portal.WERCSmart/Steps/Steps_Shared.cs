@@ -5335,8 +5335,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step \(SHA - Search for Contains UPC (.*) in (.*) Status and Check the product saved as: (.*) is found\)")]
-		public void GivenICallSharedSHA_SearchForContainsUPCInStatusAndProductMatches(string upc, string status, string savedAs)
+		[StepDefinition(@"I call Shared Step \(SHA - Search for (.*) UPC (.*) in (.*) Status and Check the product saved as: (.*) is found\)")]
+		public void GivenICallSharedSHA_SearchForContainsUPCInStatusAndProductMatches(string pattern, string upc, string status, string savedAs)
 		{
 
 			ReportSettings.UseSubSteps = true;
@@ -5375,7 +5375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			table.AddRow(new string[] {
 				"SearchPattern",
-				"...Contains..."
+				pattern
 			});
 			table.AddRow(new string[] {
 				"UPC",

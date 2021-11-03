@@ -75,9 +75,10 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCFirst5Digits
 	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCMiddle5Digits
 	Then I Get the last 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCLast5Digits
+	Given I call Shared Step (SHA - Search for ...Contains... UPC savedAsUPCMiddle5Digits in All Status and Check the product saved as: TestCase160937 is found)
+	Given I call Shared Step (SHA - Search for Starts With... UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160937 is found)
+	Given I call Shared Step (SHA - Search for ...Ends With UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160937 is found)
+	Given I call Shared Step (SHA - Search for Exact UPC savedAsUPC160937A in All Status and Check the product saved as: TestCase160937 is found)
 
-	Given I call Shared Step (SHA - Search for Contains UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160937 is found)
-	Given I call Shared Step (SHA - Search for Contains UPC savedAsUPCMiddle5Digits in All Status and Check the product saved as: TestCase160937 is found)
-	Given I call Shared Step (SHA - Search for Contains UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160937 is found)
 
 
