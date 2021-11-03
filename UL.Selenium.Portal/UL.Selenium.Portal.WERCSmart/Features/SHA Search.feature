@@ -8,6 +8,29 @@
 @wercsmart
 @DocumentAcceptance
 @run_SHASearch
+@Shared
+@wercsmart
+@Login
+@UlSolutionCenter
+@Homepage
+@ProductGrid
+@ForwardProductRegistration
+@NewProduct
+@RetailPartners
+@MessageCenter
+@MyAccount
+@LandingPage
+@DocumentAcceptance
+@DeleteActiveProducts
+@Solutions
+@ReviewDocuments
+@SHA
+@SummaryPage
+@PaymentMethods
+@ProductSetUp
+@UPC
+@DeleteActiveProducts
+
 Feature: SHA Search
 	Limited to functions which only search SHA Manager
 
@@ -20,3 +43,36 @@ Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify P
 	Given I verify the popup message displays with the title "Archived Product / Archived UPC"
 	Then I close the Archived Product popup
 	Then SHA Search for Archived UPC. This uses environment variable for know archived product
+
+
+Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Primary UPC Field Test
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC160937A
+	Given I generate a random UPC number and save as: UPC160937B
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase160937
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer  |
+		| Walgreens |		
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC160937A, container type: Paper bag and size: 2 do not click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC160937B, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86171)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Submitted
