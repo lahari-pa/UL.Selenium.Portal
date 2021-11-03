@@ -5341,25 +5341,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the status filter to All");
 			Report.Screenshot();
 			var myStudioShaManager = new StudioSHAManager();
-			//myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
-			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", showSuccessScreenshot: false);
-			Report.Info("Getting saved product: " + savedAs);
+
+
+			Report.Info("Getting saved UPC: " + savedAs);
 			if (!Context.Contains(savedAs))
 			{
 				Report.Error("Context does not contain: " + savedAs);
 			}
-			var product = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = product.Id;
-			Report.Info("Looking for id: " + id);
+			var upc = (string)Context.GetFromContext(savedAs);
+			
+
+
+
+
+
+			Report.Info("Looking for upc: " + upc);
 			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
 			});
 			table.AddRow(new string[] {
-				"ProductID",
-				id
+				"UPC",
+				upc
+			});
+			table.AddRow(new string[] {
+				"SearchPattern",
+				"...Contains..."
 			});
 			table.AddRow(new string[] {
 				"Status",
@@ -5373,24 +5382,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
 				Report.Screenshot();
-				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
-				Report.Info("Searching for: " + id);
+				Report.StartStep($"I enter upc: {upc} in the Product ID box, change Status drop down to {status}, Click find");
+				Report.Info("Searching for: " + upc);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 				Report.Screenshot();
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
-				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
-					"Product list is showing", showSuccessScreenshot: false);
-				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
-				{
-					counter++;
-				}
-				else
+				if(myStudioShaManager.WaitForProductList(120))
 				{
 					Found = true;
 				}
+				else
+				{
+					counter++;
+				}					
+
+				//if (!myStudioShaManager.TopRowProductsTableMatchesId(upc))
+				//{
+				//	counter++;
+				//}
+				//else
+				//{
+				//	Found = true;
+				//}
 			}
-			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
+			Report.IsTrue(Found, "Product list not found", "Product list is showing");
 
 		}
 
