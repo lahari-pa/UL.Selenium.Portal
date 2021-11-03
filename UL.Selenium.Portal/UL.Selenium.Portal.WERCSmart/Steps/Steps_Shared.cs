@@ -5331,6 +5331,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
 
 		}
+		[StepDefinition(
+			@"I call Shared Step 49841UPC \(SHA - Search for Contains With UPC in (.*) Status for saved as: (.*)\)")]
+		public void GivenICallShared49841UPCSHA_SearchForContainsWithUPCInALLStatus(string status, string savedAs)
+		{
+
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 49841");
+			Report.StartStep("I set the status filter to All");
+			Report.Screenshot();
+			var myStudioShaManager = new StudioSHAManager();
+			//myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", showSuccessScreenshot: false);
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			Report.Info("Looking for id: " + id);
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"ProductID",
+				id
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			bool Found = false;
+			int counter = 0;
+			while (!Found && counter < 10)
+			{
+				Report.StartStep("I click Srch in the bottom menu list");
+				myStudioShaManager.ClickBottomMenuOption("Search");
+				var myStepsSha = new Steps_SHA();
+				Report.Screenshot();
+				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
+				Report.Info("Searching for: " + id);
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+				Report.Screenshot();
+				Delay.Seconds(1);
+				Report.Info("Waiting for product list");
+				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
+					"Product list is showing", showSuccessScreenshot: false);
+				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
+				{
+					counter++;
+				}
+				else
+				{
+					Found = true;
+				}
+			}
+			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
+
+		}
 
 		[StepDefinition(
 			@"I call Shared Step 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
