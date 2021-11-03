@@ -3645,6 +3645,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure($"The FIFRA tag was not saved to context.");
 			}
 		}
+
+		[StepDefinition(@"I Get the (first|middle|last) 5 Digits of the UPC Number Saved as: (.*), and save them as: (.*)")]
+		public void Get5DigitsFromUPCAndSaveAs(string pattern, string upcSavedAs,string editedUpcSavedAs)
+		{
+			if(!Context.Contains(upcSavedAs))
+			{
+				Report.Failure($"There was not upc saved as: {upcSavedAs} in context");
+				return;
+			}
+			string upc = (string)Context.GetFromContext(upcSavedAs);
+			switch (pattern)
+			{
+				case ("first"):
+					GeneralUtilities.SaveFirst5DigitsOfUPCAS(upc, editedUpcSavedAs);
+					break;
+				case ("middle"):
+					GeneralUtilities.SaveMiddle5DigitsOfUPCAS(upc, editedUpcSavedAs);
+					break;
+				case ("last"):
+					GeneralUtilities.SaveLast5DigitsOfUPCAS(upc, editedUpcSavedAs);
+					break;
+				default:
+					Report.Failure($"The pattern must be 'first', 'midddle' or 'last'");
+					return;
+
+				
+			}
+		}
 	}
 
 

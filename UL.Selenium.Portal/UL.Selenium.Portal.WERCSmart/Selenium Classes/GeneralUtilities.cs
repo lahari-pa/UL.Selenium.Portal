@@ -406,21 +406,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		public static bool IsValidDate(string value, string dateFormats)
-		{
-			DateTime tempDate;
-			bool validDate = DateTime.TryParseExact(value, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out tempDate);
-			if (validDate)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-
-		}
-
 		public static void SaveMiddle5DigitsOfUPCAS(string upc, string savedAs)
 		{
 			if (upc.Contains("savedAs"))
@@ -442,7 +427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info($"The UPC was an even number");
 				int skipNum = ((upcTotalLength - 5) - 1) / 2;
 				string finalTerm = null;
-				for(int i = skipNum; i < skipNum + 5; i++)
+				for (int i = skipNum; i < skipNum + 5; i++)
 				{
 					var chars = upc.ToCharArray();
 					finalTerm = finalTerm + chars[i];
@@ -457,7 +442,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info($"The UPC was an odd number");
 				int skipNum = ((upcTotalLength - 5)) / 2;
 				string finalTerm = null;
-				for (int i = skipNum; i < skipNum+5; i++)
+				for (int i = skipNum; i < skipNum + 5; i++)
 				{
 					var chars = upc.ToCharArray();
 					finalTerm = finalTerm + chars[i];
@@ -493,8 +478,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info($"The final term to be used is: {finalTerm}, saving to context as: {savedAs}");
 			Context.AddToContext(savedAs, finalTerm);
-			
-			
+
+
 		}
 		public static void SaveLast5DigitsOfUPCAS(string upc, string savedAs)
 		{
@@ -513,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string finalTerm = null;
 			int totalLength = upc.Length;
 
-			for (int i = totalLength-6; i < totalLength; i++)
+			for (int i = totalLength - 6; i < totalLength; i++)
 			{
 				var chars = upc.ToCharArray();
 				finalTerm = finalTerm + chars[i];
@@ -525,11 +510,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public static bool IsValidDate(string value, string dateFormats)
+		{
+			DateTime tempDate;
+			bool validDate = DateTime.TryParseExact(value, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out tempDate);
+			if (validDate)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
 	}
 
-}
 
-	}
 
 	public class RetailerAbbreviations
 	{
@@ -704,7 +702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-	
+
 
 
 
@@ -717,5 +715,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 	}
-
 }
+
+
