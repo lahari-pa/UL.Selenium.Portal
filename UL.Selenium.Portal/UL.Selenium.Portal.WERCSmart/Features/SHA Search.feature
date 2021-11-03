@@ -72,7 +72,6 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I call Shared Step 49841UPC (SHA - Search for Contains With UPC in All Status for saved as: TestCase160937)
+	#Update to search by x digits instead of full upc
+	Given I call Shared Step (SHA - Search for Contains UPC savedAsUPC160937A in All Status and Check the product saved as: TestCase160937 is found)
 
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86171)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Submitted

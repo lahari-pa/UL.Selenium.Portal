@@ -5331,44 +5331,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
 
 		}
-		[StepDefinition(
-			@"I call Shared Step 49841UPC \(SHA - Search for Contains With UPC in (.*) Status for saved as: (.*)\)")]
-		public void GivenICallShared49841UPCSHA_SearchForContainsWithUPCInALLStatus(string status, string savedAs)
+
+
+
+
+		[StepDefinition(@"I call Shared Step \(SHA - Search for Contains UPC (.*) in (.*) Status and Check the product saved as: (.*) is found\)")]
+		public void GivenICallSharedSHA_SearchForContainsUPCInStatusAndProductMatches(string upc, string status, string savedAs)
 		{
 
 			ReportSettings.UseSubSteps = true;
-			Report.StartStep("Beginning shared step: 49841");
+			Report.StartStep("Beginning shared step");
 			Report.StartStep("I set the status filter to All");
 			Report.Screenshot();
 			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 
-
-			Report.Info("Getting saved UPC: " + savedAs);
+			Report.Info("Getting saved product: " + savedAs);
 			if (!Context.Contains(savedAs))
 			{
 				Report.Error("Context does not contain: " + savedAs);
 			}
-			var upc = (string)Context.GetFromContext(savedAs);
-			
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
 
 
+			if(upc.Contains("savedAs"))
+			{
+				if(!Context.Contains(upc.Replace("savedAs", "")))
+				{
+					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
+				}
+				else
+				{
+					upc = (string)Context.GetFromContext(upc.Replace("savedAs", ""));
 
-
-
-			Report.Info("Looking for upc: " + upc);
+				}
+			}
+			Report.Info("Looking for UPC: " + upc);
 			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
 			});
 			table.AddRow(new string[] {
-				"UPC",
-				upc
-			});
-			table.AddRow(new string[] {
 				"SearchPattern",
 				"...Contains..."
+			});
+			table.AddRow(new string[] {
+				"UPC",
+				upc
 			});
 			table.AddRow(new string[] {
 				"Status",
@@ -5382,33 +5393,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
 				Report.Screenshot();
-				Report.StartStep($"I enter upc: {upc} in the Product ID box, change Status drop down to {status}, Click find");
+				Report.StartStep($"I enter UPC: {upc} in the Product ID box, change Status drop down to {status}, Click find");
 				Report.Info("Searching for: " + upc);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 				Report.Screenshot();
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
-				if(myStudioShaManager.WaitForProductList(120))
+				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
+					"Product list is showing", showSuccessScreenshot: false);
+				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
 				{
-					Found = true;
+					counter++;
 				}
 				else
 				{
-					counter++;
-				}					
-
-				//if (!myStudioShaManager.TopRowProductsTableMatchesId(upc))
-				//{
-				//	counter++;
-				//}
-				//else
-				//{
-				//	Found = true;
-				//}
+					Found = true;
+				}
 			}
-			Report.IsTrue(Found, "Product list not found", "Product list is showing");
+			Report.IsTrue(Found, "The Top row in the Products table did not match the expected product ID", "The Top row in products table matched the expected product ID");
 
 		}
+
+
+
+
+
+
 
 		[StepDefinition(
 			@"I call Shared Step 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
