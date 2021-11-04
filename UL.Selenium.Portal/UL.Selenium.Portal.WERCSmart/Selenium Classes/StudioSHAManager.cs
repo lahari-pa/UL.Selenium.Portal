@@ -966,6 +966,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return products.FirstOrDefault().ID == id;
 		}
 
+		public bool ProductsTableResultsContainsId(string id)
+		{
+			// JS. possible null exception - GetTopXProducts() can return a list with 0 items
+			//return GetTopXProducts(1).FirstOrDefault().ID == id;
+			List<Product> products = this.GetTopXProducts(99);
+			if (products == null || products.Count == 0)
+			{
+				return false;
+			}
+			var foundProd = products.Find(x => x.ID == id);
+			return foundProd != null;
+		}
+
 		public bool ClickProcessProductData()
 		{
 			try

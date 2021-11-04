@@ -5401,7 +5401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Waiting for product list");
 				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
 					"Product list is showing", showSuccessScreenshot: false);
-				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
+				if (!myStudioShaManager.ProductsTableResultsContainsId(id))
 				{
 					counter++;
 				}
