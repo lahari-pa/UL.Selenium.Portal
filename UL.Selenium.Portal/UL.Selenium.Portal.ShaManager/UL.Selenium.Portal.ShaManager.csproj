@@ -163,20 +163,20 @@
     <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.NUnit.3.9.8\lib\net461\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Agent.Api.Wrapper, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
+    <Reference Include="Thomas.Agent.Api.Wrapper, Version=2.1.125.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.125\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Core.Classes, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\Thomas.Core.Classes.dll</HintPath>
+    <Reference Include="Thomas.Core.Classes, Version=2.1.125.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.125\lib\net472\Thomas.Core.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Api.Client, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Api.Client.dll</HintPath>
+    <Reference Include="TReVor.Api.Client, Version=2.1.125.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.125\lib\net472\TReVor.Api.Client.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Core.Classes, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Core.Classes.dll</HintPath>
+    <Reference Include="TReVor.Core.Classes, Version=2.1.125.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.125\lib\net472\TReVor.Core.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Integrations, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Integrations.dll</HintPath>
+    <Reference Include="TReVor.Integrations, Version=2.1.125.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.125\lib\net472\TReVor.Integrations.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Reporting, Version=2.3.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.2.3.19\lib\net461\UL.Automation.Reporting.dll</HintPath>
