@@ -968,8 +968,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ProductsTableResultsContainsId(string id)
 		{
-			// JS. possible null exception - GetTopXProducts() can return a list with 0 items
-			//return GetTopXProducts(1).FirstOrDefault().ID == id;
 			List<Product> products = this.GetTopXProducts(99);
 			if (products == null || products.Count == 0)
 			{

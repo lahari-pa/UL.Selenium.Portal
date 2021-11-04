@@ -3678,7 +3678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					GeneralUtilities.SaveLast5DigitsOfUPCAS(upc, editedUpcSavedAs);
 					break;
 				default:
-					Report.Failure($"The pattern must be 'first', 'midddle' or 'last'");
+					Report.Failure($"The pattern must be 'first', 'middle' or 'last'");
 					return;
 
 				
