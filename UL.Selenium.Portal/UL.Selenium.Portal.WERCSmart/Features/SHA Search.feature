@@ -79,6 +79,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Given I call Shared Step (SHA - Search for Starts With... UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160937 is found)
 	Given I call Shared Step (SHA - Search for ...Ends With UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160937 is found)
 	Given I call Shared Step (SHA - Search for Exact UPC savedAsUPC160937A in All Status and Check the product saved as: TestCase160937 is found)
-
+	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160937
+	And I confirm the Product UPC window has opened
 
 
