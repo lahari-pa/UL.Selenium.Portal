@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
@@ -192,26 +193,26 @@
     <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.NUnit.3.9.8\lib\net461\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Agent.Api.Wrapper, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
+    <Reference Include="Thomas.Agent.Api.Wrapper, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="Thomas.Core.Classes, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\Thomas.Core.Classes.dll</HintPath>
+    <Reference Include="Thomas.Core.Classes, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\Thomas.Core.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Api.Client, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Api.Client.dll</HintPath>
+    <Reference Include="TReVor.Api.Client, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Api.Client.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Core.Classes, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Core.Classes.dll</HintPath>
+    <Reference Include="TReVor.Core.Classes, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Core.Classes.dll</HintPath>
     </Reference>
-    <Reference Include="TReVor.Integrations, Version=2.1.105.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.105\lib\net472\TReVor.Integrations.dll</HintPath>
+    <Reference Include="TReVor.Integrations, Version=2.1.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TReVor.Integrations.2.1.116\lib\net472\TReVor.Integrations.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Reporting, Version=2.3.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.2.3.19\lib\net461\UL.Automation.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="UL.Automation.SpecFlow, Version=2.3.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.SpecFlow.2.3.13\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
+    <Reference Include="UL.Automation.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.SpecFlow.2.3.21\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Utilities, Version=2.3.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.2.3.6\lib\net461\UL.Automation.Utilities.dll</HintPath>
@@ -695,11 +696,14 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets'))" />
-    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.63\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.63\build\TReVor.Integrations.BuildOperations.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\SpecFlow.3.9.8\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" />
-  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.63\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.63\build\TReVor.Integrations.BuildOperations.targets')" />
+  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets')" />
+  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets')" />
 </Project>
