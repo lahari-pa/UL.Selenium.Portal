@@ -61,7 +61,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
 
 
-#Retailers section needs to be confirmed!
+
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -72,7 +72,6 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
-
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Then the 'Select Retailers' window appears
@@ -84,7 +83,6 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 		| Optoro                     |
 		| Office Depot               |
 	Given I click Close in the Select Retailers popup
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
 
 
