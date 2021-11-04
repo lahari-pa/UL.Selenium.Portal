@@ -2501,7 +2501,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (success)
 			{
 				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
-				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
+				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");			
+
 			}
 			else
 			{
@@ -2522,7 +2523,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			RuleWriter rw = new RuleWriter();
 			Delay.Seconds(1);
-			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
 			
 			
@@ -2682,13 +2683,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									}
 									
 									var PassResetPopup = new ResetYourPasswordPopup();
-									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									//Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
-																		
 
-									if(LS.Wait_for_load(30))
+									bool loginScreenFound = false;
+									int t = 0;
+									while(t<30&&loginScreenFound==false)
+									{
+										loginScreenFound = !LS.IsNullOrEmpty();
+										Delay.Seconds(1);
+										t++;
+									}
+
+
+									if(loginScreenFound)
 									{
 										Report.Success($"The login screen was loaded, password has been reset");
 										var trevAcc = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user);
@@ -2714,7 +2724,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 										return;
 									}
 
-
+									Report.StartStep("I navigate to Studio");
+									myStepsSha.GivenINavigateToStudio();
 									Report.IsTrue(LS.LoginAsUser(user), "Failed to enter login information for user: " + user, "Successfully entered login information for  user: " + user);
 
 								}
