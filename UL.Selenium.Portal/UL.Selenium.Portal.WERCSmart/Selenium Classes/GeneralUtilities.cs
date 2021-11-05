@@ -498,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string finalTerm = null;
 			int totalLength = upc.Length;
 
-			for (int i = totalLength - 6; i < totalLength; i++)
+			for (int i = totalLength - 5; i < totalLength; i++)
 			{
 				var chars = upc.ToCharArray();
 				finalTerm = finalTerm + chars[i];
