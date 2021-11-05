@@ -6063,8 +6063,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
 		}
 
-		[StepDefinition(@"I call Shared Step \(SHA - Assgined Product - set Retailers to Cancelled for saved as: (.*)\) for")]
-		public void GivenICallSharedSHA_AssignedProduct_SetRetailersToCancelledForSavedAs(string savedAs, Table retailers)
+		[StepDefinition(@"I call Shared Step 75669 \(SHA - Assigned Status - Set to Cancelled for product saved as: (.*)\)")]
+		public void GivenICallSharedSHA_AssignedStatus_SetToCancelledForProductSavedAs(string savedAs, Table retailers)
 		{
 			ReportSettings.UseSubSteps = true;
 			var thisStepsStudio = new Steps_Studio();
