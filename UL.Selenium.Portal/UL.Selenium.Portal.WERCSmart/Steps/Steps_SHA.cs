@@ -2066,6 +2066,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in the First Row of the UPC table")]
+		public void ShaUPCListFirstItemCheck(string condition, string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				SHAManagerProdcutUPC displayedUpcs = new StudioSHAManager().GetFirstUPC();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info($"The first found displayed UPC was: {displayedUpcs.UPCNumber}");
+
+				Report.Info($"Checking if the UPC needed is saved in context");
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.UPCNumber==upc, "UPC: " + upc + " does not display",
+						"UPC: " + upc + " displays as expected");
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(displayedUpcs.UPCNumber != upc, "UPC: " + upc + " was not found in the first position.",
+						"UPC: " + upc + " was still found in the first position.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+
 
 		[StepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()
