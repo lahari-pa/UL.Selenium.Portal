@@ -1282,17 +1282,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public SHAManagerProdcutUPC GetFirstUPC()
 		{
 			var foundfirstItem = new SHAManagerProdcutUPC();
-			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr"), 2);
-			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']//following-sibling::tr"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
 			if (headerRow == null)
 			{
 				Report.Info("Could not locate 'dark black' header row");
 				return null;
 			}
 
-			IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
-			int upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath(".//th[contains(text(),'UPC Number')]"))) +
-							  1;
+			//IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
+			
 			var row = rows[0];
 			
 			var upcText = row.Text.Split(' ')[0];
