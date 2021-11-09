@@ -1900,6 +1900,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool SearchPopupFound()
+		{
+			try
+			{
+				var el = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]"),5);
+				if (el.IsNullOrEmpty())
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+				Report.Info($"The el was found");
+				return true;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
 		public bool SelectFromStatusFilter(string option)
 		{
 			try
