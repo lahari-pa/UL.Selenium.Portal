@@ -1310,10 +1310,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetUPCScreenWSProductID()
 		{
-			var foundProductID = null;
-			IWebElement titleElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
-			
-			return foundProductID;
+			IWebElement titleElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='main']//h1"), 2);
+			string titleElFullString = titleElement.Text;
+			string editedString = titleElFullString.Replace("WERCSmart Product ID", "").Trim();
+			var editedStringArray = editedString.ToArray();
+			string finalString = null;
+			foreach(char character in editedStringArray)
+			{
+				Report.Info($"Character found was: {character}");
+				if(char.IsDigit(character))
+				{
+					Report.Info($"The character found was a digit");
+					finalString= finalString+ character;
+				}
+				else
+				{
+					Report.Info($"Character was not a digit, end of ID found");
+					Report.Info($"final string: {finalString.Trim()}");
+					return finalString.Trim();
+					
+				}
+			}
+
+
+			return finalString.Trim();
 		}
 
 		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
