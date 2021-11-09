@@ -4513,15 +4513,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click Search in the bottom menu list");
 			myStudioShaManager.ClickBottomMenuOption("Search");
 			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded","Product search page has loaded as expected", false, false);
+			Report.Screenshot();
 			Report.Info("Going to click 'Cancel'");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Cancel"), "Failed to click cancel", "Clicked cancel", false, false);
 			Report.Info("Waiting for loading bar");
 			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Screenshot();
 			Report.Info("Finished waiting for loading");
 			Delay.Seconds(1);
 			Report.Screenshot();
-			Report.IsTrue(thisProductSearch.IsNullOrEmpty(), "The Product Search Popup was found", "The product search popup was closed");
+			var thisProductSearch2 = new StudioSHAManagerProductSearch();
+			Report.IsTrue(thisProductSearch2.IsNullOrEmpty(), "The Product Search Popup was found", "The product search popup was closed");
 		}
 
 		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
