@@ -2073,7 +2073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				// Switch to window
 				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", currentHandle);
+				//Context.AddToContext("MainWindowHandle", currentHandle);
 				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				Report.Info("Looking for SHA Manager Product UPC window");
 				bool foundWindow = false;
