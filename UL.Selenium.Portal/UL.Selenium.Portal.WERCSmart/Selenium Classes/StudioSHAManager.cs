@@ -1308,6 +1308,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return foundfirstItem;
 		}
 
+		public string GetUPCScreenWSProductID()
+		{
+			var foundProductID = null;
+			IWebElement titleElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
+			
+			return foundProductID;
+		}
+
 		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
 		{
 			if (!Context.Contains(savedAs))

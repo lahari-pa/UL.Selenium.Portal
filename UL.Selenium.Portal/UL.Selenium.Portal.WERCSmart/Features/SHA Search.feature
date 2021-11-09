@@ -84,5 +84,6 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	#Prod ID match check first in the UPC Screen
 	Then In the SHA UPC list I should see UPC: saved as UPC160937A in the First Row of the UPC table
 	#Close UPC screen and navigate back to products grid
+	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
 
