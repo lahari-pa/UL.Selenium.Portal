@@ -4504,6 +4504,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes")]
+		public void OpenSHAProductsGridClickCancelConfirmCloses()
+		{
+			var thisProductSearch = new StudioSHAManagerProductSearch();
+			var myStudioShaManager = new StudioSHAManager();
+
+			Report.StartStep("I click Search in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded","Product search page has loaded as expected", false, false);
+			Report.Info("Going to click 'Cancel'");
+			Delay.Seconds(1);
+			Report.IsTrue(thisProductSearch.ClickButton("Cancel"), "Failed to click cancel", "Clicked cancel", false, false);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
+			Report.Screenshot();
+			Report.IsTrue(thisProductSearch.IsNullOrEmpty(), "The Product Search Popup was found", "The product search popup was closed");
+		}
+
 	}
 
 }

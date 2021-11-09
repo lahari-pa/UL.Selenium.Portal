@@ -3408,6 +3408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return closeButton.TryClick();
 		}
 
+
 	}
 
 }
