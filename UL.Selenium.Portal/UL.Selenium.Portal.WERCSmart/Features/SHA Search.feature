@@ -81,7 +81,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Given I call Shared Step (SHA - Search for Exact UPC savedAsUPC160937A in All Status and Check the product saved as: TestCase160937 is found)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160937
 	And I confirm the Product UPC window has opened
-	#Prod ID match check first in the UPC Screen
+	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160937
 	Then In the SHA UPC list I should see UPC: saved as UPC160937A in the First Row of the UPC table
 	#Close UPC screen and navigate back to products grid
 	And I close the current window and switch to the main window in Studio

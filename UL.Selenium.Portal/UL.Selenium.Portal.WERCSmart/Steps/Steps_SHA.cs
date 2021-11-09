@@ -4524,6 +4524,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisProductSearch.IsNullOrEmpty(), "The Product Search Popup was found", "The product search popup was closed");
 		}
 
+		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
+		public void InUPCAssessmentScreenConfrimISeeUPCSavedAs(string savedAs)
+		{
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			string idfound = new StudioSHAManager().GetUPCScreenWSProductID();
+			Report.Info($"id from context = {id}");
+			Report.Info($"id found on page = {idfound}");
+			Report.IsTrue(id == idfound, "The id found was not equal to the produc ID in context", "The Product ID's matched!");
+		}
+
 	}
 
 }
