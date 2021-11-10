@@ -4524,7 +4524,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			Report.Screenshot();
 			var thisProductSearch2 = new StudioSHAManagerProductSearch();
-			Report.IsTrue(thisProductSearch2.SearchPopupFound(), "The Product Search Popup was found", "The product search popup was closed");
+			Report.IsTrue(!thisProductSearch2.SearchPopupFound(), "The Product Search Popup was found", "The product search popup was closed");
 		}
 
 		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
