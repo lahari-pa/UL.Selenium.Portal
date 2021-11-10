@@ -2168,7 +2168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 				}
 
-				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().UPCAssessmentScreenGetUPCs();
 				if (displayedUpcs == null)
 				{
 					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");

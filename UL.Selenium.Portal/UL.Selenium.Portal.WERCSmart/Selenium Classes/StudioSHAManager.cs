@@ -1279,6 +1279,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
+		public List<SHAManagerProdcutUPC> UPCAssessmentScreenGetUPCs()
+		{
+			var rList = new List<SHAManagerProdcutUPC>();
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']//following-sibling::tr"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
+			if (headerRow == null)
+			{
+				Report.Info("Could not locate 'dark black' header row");
+				return null;
+			}
+
+			IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
+			int upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath(".//th[contains(text(),'UPC Number')]"))) +
+							  1;
+
+			foreach (IWebElement row in rows)
+			{
+				var upcText = row.Text.Split(' ')[0];
+				Report.Info("UPC row text: " + upcText);
+				var thisUpc = new SHAManagerProdcutUPC {
+
+					UPCNumber = upcText
+				};
+
+				rList.Add(thisUpc);
+			}
+
+			Report.Info($"Found {rList.Count} UPCs");
+			return rList;
+		}
+
 		public SHAManagerProdcutUPC GetFirstUPC()
 		{
 			var foundfirstItem = new SHAManagerProdcutUPC();
