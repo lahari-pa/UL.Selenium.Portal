@@ -119,10 +119,10 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Given I call Shared Step (SHA - Search by ...Contains... Case Pack UPC savedAsUPCMiddle5Digits in All Status and Check the product saved as: TestCase160940 is found)
 	Given I call Shared Step (SHA - Search by Starts With... Case Pack UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160940 is found)
 	Given I call Shared Step (SHA - Search by ...Ends With Case Pack UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160940 is found)
-	Given I call Shared Step (SHA - Search by  Exact Case Pack UPC savedAsUPC160940 in All Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by Exact Case Pack UPC savedAsUPC160940 in All Status and Check the product saved as: TestCase160940 is found)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160940
 	And I confirm the Product UPC window has opened
 	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160940
-	Then In the SHA UPC list I should see the case pack asterisk for the UPC: UPC160940
+	Then In the SHA UPC list I should see the case pack asterisk for the UPC: saved as UPC160940
 	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
