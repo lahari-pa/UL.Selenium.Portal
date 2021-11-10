@@ -91,7 +91,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Scenario: [160940] SHA Manager - Search - Product Search - SEARCH PATTERN - CASE UPC Field Test
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I generate a random UPC number and save as: 160940
+	Given I generate a random UPC number and save as: UPC160940
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase160940
@@ -101,5 +101,26 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer  |
-		| Walgreens |		
+		| Walgreens |
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87640, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCFirst5Digits
+	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCMiddle5Digits
+	Then I Get the last 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCLast5Digits
+	Given I call Shared Step (SHA - Search by ...Contains... Case Pack UPC savedAsUPCMiddle5Digits in All Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by Starts With... Case Pack UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by ...Ends With Case Pack UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search for Exact UPC savedAsUPC160940 in All Status and Check the product saved as: TestCase160940 is found)
+	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160937
+	And I confirm the Product UPC window has opened
+	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160940
 

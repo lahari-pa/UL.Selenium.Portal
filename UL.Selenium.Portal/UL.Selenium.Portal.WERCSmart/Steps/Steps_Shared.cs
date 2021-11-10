@@ -5461,6 +5461,86 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I call Shared Step \(SHA - Search by (.*) Case Pack UPC (.*) in (.*) Status and Check the product saved as: (.*) is found\)")]
+		public void GivenICallSharedSHA_SearchForContainsCasePackUPCInStatusAndProductMatches(string pattern, string upc, string status, string savedAs)
+		{
+
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step");
+			Report.StartStep("I set the status filter to All");
+			Report.Screenshot();
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+
+
+			if (upc.Contains("savedAs"))
+			{
+				if (!Context.Contains(upc.Replace("savedAs", "")))
+				{
+					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
+				}
+				else
+				{
+					upc = (string)Context.GetFromContext(upc.Replace("savedAs", ""));
+
+				}
+			}
+			Report.Info("Looking for UPC: " + upc);
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"SearchPattern",
+				pattern
+			});
+			table.AddRow(new string[] {
+				"ParentUPC",
+				upc
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			bool Found = false;
+			int counter = 0;
+			while (!Found && counter < 10)
+			{
+				Report.StartStep("I click Srch in the bottom menu list");
+				myStudioShaManager.ClickBottomMenuOption("Search");
+				var myStepsSha = new Steps_SHA();
+				Report.Screenshot();
+				Report.StartStep($"I enter UPC: {upc} in the Product ID box, change Status drop down to {status}, Click find");
+				Report.Info("Searching for: " + upc);
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+				Report.Screenshot();
+				Delay.Seconds(1);
+				Report.Info("Waiting for product list");
+				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
+					"Product list is showing", showSuccessScreenshot: false);
+				if (!myStudioShaManager.ProductsTableResultsContainsId(id))
+				{
+					counter++;
+				}
+				else
+				{
+					Found = true;
+				}
+			}
+			Report.IsTrue(Found, "The Top row in the Products table did not match the expected product ID", "The Top row in products table matched the expected product ID");
+
+		}
+
+
 
 
 
