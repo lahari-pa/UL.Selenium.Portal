@@ -102,7 +102,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer  |
 		| Walgreens |
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87640, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC160940, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -120,7 +120,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Given I call Shared Step (SHA - Search by Starts With... Case Pack UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160940 is found)
 	Given I call Shared Step (SHA - Search by ...Ends With Case Pack UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160940 is found)
 	Given I call Shared Step (SHA - Search for Exact UPC savedAsUPC160940 in All Status and Check the product saved as: TestCase160940 is found)
-	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160937
+	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160940
 	And I confirm the Product UPC window has opened
 	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160940
 
