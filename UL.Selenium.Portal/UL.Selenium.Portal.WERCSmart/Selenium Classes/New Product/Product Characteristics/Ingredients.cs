@@ -1808,6 +1808,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Glycerol");
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
+			ingredients.Add("Citric acid");
+
 
 
 
