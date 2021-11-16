@@ -2529,6 +2529,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"the Rule Writer page should be loaded")]
+		public void ThenTheRuleWriterPageShouldBeLoaded()
+		{
+			RuleWriter rw = new RuleWriter();
+			Delay.Seconds(1);
+			Report.IsTrue(rw.FoundContainerElAlt(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
+
+		}
+
 		[StepDefinition(@"the Material Management Dashboard page should load")]
 		public void ThenTheDashboardPageShouldLoad()
 		{
@@ -2626,6 +2635,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
 					bool credentialsFound = trevuser != null;
+
+					if (credentialsFound == false)
+					{
+						Report.Info($"Looks like there was not user in TReVor for that username, using TReVor 2.0 to create the template user first...");
+						TestUsers.AddTestUser(user, user, "Welcome1!");
+						TReVor.Integrations.Classes.TReVorSettings.Refresh.SoftwareCredentials();
+						trevuser = TestUsers.GetUserSavedAs(user);
+						credentialsFound = trevuser != null;
+
+					}
 
 					//navigate to SHA
 					ReportSettings.UseSubSteps = true;
@@ -2745,7 +2764,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					else
 					{
-						Report.Error($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
+						Report.Failure($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
 						Report.EndScenario();
 						return;
 					}
@@ -2988,11 +3007,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						this.WhenISwitchToTheTab("Rule Writer");
 
 						Report.StartSubStep("Then the Rule Writer page should load");
-						this.ThenTheRuleWriterPageShouldLoad();
+						this.ThenTheRuleWriterPageShouldBeLoaded();
 						// Click all rules
 
 						Report.StartSubStep("When In Security Manager, I click the 'All Rules' button");
-						S_RW.WhenInRuleWriterIClickTheAllRulesButton();
+						S_RW.WhenInRuleWriterAttemptToClickTheAllRulesButton();
 
 						Report.StartSubStep("Then the 'Rules Editor' window should load");
 						this.ThenTheWindowShouldLoad("Rules Editor", "should");
@@ -3018,6 +3037,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							}
 
 						}
+
+						Report.StartSubStep("Given I close the 'Rules Editor' Window");
+						this.ThenCloseTheSpecifiedWindow("Rules Editor");
+
+
+						Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
+						this.GivenISwitchToTheWindow("UL Wercs Studio");
+
+						Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
+						this.WhenISwitchToTheTab("Rule Writer");
 
 						//create rules for each item in the no rules accs list.
 
@@ -3604,7 +3633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: '{exampleUser}- additional doc' ");
-			if (Report.IsTrue(RW_RE.FindItem("Name", exampleUser + "- additional doc"), "Failed to find the 'Name' " + exampleUser + "- additional doc"))
+			if (RW_RE.FindItem("Name", exampleUser + "- additional doc"))
 			{
 				Report.Info($"The rule was found.");
 				return true;
