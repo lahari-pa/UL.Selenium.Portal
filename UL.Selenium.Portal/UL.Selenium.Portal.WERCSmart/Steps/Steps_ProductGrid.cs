@@ -2469,19 +2469,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the Archive Retailers Popup")]
-		public void GivenIShouldSeeTheArchiveRetailersPopup()
+		[StepDefinition(@"I should (see|not see) the Archive Retailers Popup")]
+		public void GivenIShouldSeeTheArchiveRetailersPopup(string condition)
 		{
 			var thisModalDialog = new ModalDialog();
-			if (thisModalDialog.Wait_for_load(5))
+			if (condition == "see")
 			{
-				Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
-					"Dialog is showing as expected");
+				if (thisModalDialog.Wait_for_load(5))
+				{
+					Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
+						"Dialog is showing as expected");
+					return;
+				}
+				else
+				{
+					Report.Failure("Archive Retailers dialog is not showing");
+					return;
+				}
 			}
-			else
+			if(condition=="not see")
 			{
-				Report.Failure("Archive Retailers dialog is not showing");
+				if (thisModalDialog.Wait_for_load(5))
+				{
+					Report.IsTrue(thisModalDialog.GetTitle() != "Archive Retailers",
+						"Dialog is showing", "Dialog is not showing");
+					return;
+				}
+				else
+				{
+					Report.Success("Archive Retailers dialog is not showing");
+					return;
+				}
 			}
+		
 		}
 
 		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer")]
@@ -2517,6 +2537,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ProductsGrid().ArchiveAlert(response),$"Selected {response} in Archive Alert.",$"Unable to select {response} in Archive alert.");
 			string s = response;
+		}
+
+		[StepDefinition(@"I check that the Alert for Archiving a Retailers shows the text: (.*)")]
+		public void CheckArchiveRetailerAlertText(string val)
+		{
+			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match");
 		}
 
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]

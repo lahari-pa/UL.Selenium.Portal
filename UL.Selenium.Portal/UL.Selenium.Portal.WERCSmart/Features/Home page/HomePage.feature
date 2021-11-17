@@ -416,6 +416,9 @@ Scenario: [71230] Archived Retailers - My Products View
 	And I should see the Archive Retailers Popup
 	And In the Archive Retailers popup, I select the the checkbox next to the the first retailer
 	And In the Archive Retailers popup click on: ARCHIVE
+	And I check that the Alert for Archiving a Retailers shows the text: Are you sure you want to archive these retailers from your product?
+	And I handle the Alert for Archive by answering Ok
+	And I should not see the Archive Retailers Popup
 	And I search for the product saved as: TestCase71230
 	And I Select the check box next to Show Archived Retailers
 	And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display

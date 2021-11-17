@@ -1425,6 +1425,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return !SeleniumWebDriver.CurrentDriver.WaitForAlert(10);
 		}
+
+		public string GetArchiveAlertText()
+		{
+			if(!SeleniumWebDriver.CurrentDriver.WaitForAlert(30))
+			{
+				Report.Info($"Alert did not appear!");
+				return null;
+			}
+			string alertTextFound = SeleniumWebDriver.CurrentDriver.GetAlertText();
+			return alertTextFound;
+
+
+
+		}
 	}
 
 	public class ProductGridItem : ProductsGrid
