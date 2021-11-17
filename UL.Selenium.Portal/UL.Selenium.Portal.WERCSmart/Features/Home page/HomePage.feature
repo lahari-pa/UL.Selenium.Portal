@@ -420,7 +420,6 @@ Scenario: [71230] Archived Retailers - My Products View
 	And I handle the Alert for Archive by answering Ok
 	And I should not see the Archive Retailers Popup
 	And I search for the product saved as: TestCase71230
-	#confirm retailer that was archieved does not show now
 	And I Confirm that the retailer(s) saved as: savedRetailer are not displayed for the first product in the grid.
 	And I Select the check box next to Show Archived Retailers
 	And I Confirm that two asterisks are visible in the retailer(s) saved as: savedRetailer that are archived icons that display
