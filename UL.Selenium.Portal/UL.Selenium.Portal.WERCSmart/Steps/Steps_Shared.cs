@@ -9504,10 +9504,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sections.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
 			sections.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			new StepsNewProduct().CheckDisplayedSections("see", sections);
-			Report.StartStep("I confirm the TSCA question shows 2 Radio Buttons 'COMPLIANT' and 'EXEMPT'");
+			Report.StartStep("I confirm the TSCA question shows 3 Radio Buttons 'COMPLIANT','EXEMPT' and 'One or more substances in this product are either not listed on, and/or not otherwise exempted from the requirement to be listed on the U.S. TSCA Inventory.'");
 			var options = new Table("Option");
 			options.AddRow("Compliant");
 			options.AddRow("Exempt");
+			options.AddRow("One or more substances in this product are either not listed on, and/or not otherwise exempted from the requirement to be listed on the U.S. TSCA Inventory.");
 			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "U.S. Toxic Substances Control Act (TSCA) status", options);
 			Report.StartStep("Confirm the Prop 65 question displays a 'YES' and 'NO' Buttons");
 			options = new Table("Option");
