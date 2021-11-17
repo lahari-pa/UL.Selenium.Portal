@@ -2504,16 +2504,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		
 		}
 
-		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer")]
-		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive()
+		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: (.*)")]
+		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive(string savedAs)
 		{
 			var thisModalDialog = new ModalDialog();
 			List<string> retailers = thisModalDialog.GetRetailers();
 			string retailerToArchive = retailers[0];
 			Report.IsTrue(thisModalDialog.SelectRetailer(retailerToArchive), "Failed to select: " + retailerToArchive,
 				"Selected: " + retailerToArchive);
-
-			Context.AddToContext("retailer", retailerToArchive);
+			Context.AddToContext(savedAs, retailerToArchive);
 		}
 
 		[StepDefinition(@"In the Archive Retailers popup, I select the checkbox next to the retailer (.*)")]
@@ -2630,12 +2629,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
-		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay()
+		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) saved as: (.*) that are archived icons that display")]
+		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay(string savedAs)
 		{
-			if (Context.Contains("retailer"))
+			if (Context.Contains(savedAs))
 			{
-				string archivedRetailer = Context.GetFromContext("retailer").ToString();
+				string archivedRetailer = Context.GetFromContext(savedAs).ToString();
 				var selProdGrid = new ProductsGrid();
 				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
 				List<string> retailers = productElement.Retailers;
@@ -2668,6 +2667,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"I Confirm that the retailer\(s\) saved as: (.*) are not displayed for the first product in the grid.")]
+		public void ConfirmRetailersNotDisplayedForFirstProductInGrid(string savedAs)
+		{
+			if (Context.Contains(savedAs))
+			{
+				string archivedRetailer = Context.GetFromContext(savedAs).ToString();
+				var selProdGrid = new ProductsGrid();
+				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+				List<string> retailers = productElement.Retailers;				
+				if (retailers.Contains(archivedRetailer))
+				{
+					Report.Failure($"The archieved retailer was still found under the product.");
+					return;
+				}
+				Report.Success($"The arhcieved retailer was not found for the product in the product.");
+				return;
+
+				
+
+			}
+			else
+			{
+				Report.Error("No retailer is saved into context");
+			}
+
+		}
+
+
 
 		[StepDefinition(@"I should see the View UPCs page")]
 		public void WhenIShouldSeeTheViewUPCsPage()
