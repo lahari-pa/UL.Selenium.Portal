@@ -2542,7 +2542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the Alert for Archiving a Retailers shows the text: (.*)")]
 		public void CheckArchiveRetailerAlertText(string val)
 		{
-			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match");
+			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match", showSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
