@@ -5616,8 +5616,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("In the Additional Documents to Provide page I Upload File for: Volatile Organic Compounds");
 			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
 				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartStep("In the Additional Documents to Provide page I Upload File for: Provide Full Product Label (required) ");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
