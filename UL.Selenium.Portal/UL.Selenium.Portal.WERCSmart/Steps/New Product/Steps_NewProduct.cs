@@ -2615,7 +2615,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			//debug code remove
 
-			Delay.Seconds(100);
+			GeneralUtilities.Wait_for_load_finish();
+
 			//end of debug
 
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
