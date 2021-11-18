@@ -2613,12 +2613,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
 		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
-			//debug code remove
 
 			GeneralUtilities.Wait_for_load_finish();
-
-			//end of debug
-
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
 
 			if (isOrIsNot.ToLower() == "is not")
