@@ -397,7 +397,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			List<string> allIngredientsNames = new List<string>();
-			ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+			var tableCast = ingredientsTable.Rows.Cast<TableRow>().ToList();
+			var headerRow = tableCast[0];
+			if(headerRow.Keys.Contains("ComponentName"))
+			{
+				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
+
+			}
+			if(headerRow.Keys.Contains("CASNumber"))
+			{
+				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
+
+			}
+
+
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 			bool fifraItemFound = false;
