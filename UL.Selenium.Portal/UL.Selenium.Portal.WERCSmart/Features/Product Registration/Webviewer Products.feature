@@ -848,3 +848,261 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 | Retailer      |
 | Canadian Tire |
 
+
+
+
+
+Scenario: [120816] WERCSmart product - Submitted to SHA, Status = Accepted
+
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120816 - for RPS - Status Accepted and select Type of Product): Chalk and add a Random Identifier
+Given I generate a random UPC number and save as: UPC120816
+Then I save the product information as: TestCase120816
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call shared step 120812 (Retailer - Add retailers for RPS)
+Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I navigate to the home page
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120816)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120816)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120816)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120816)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120816)
+And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase120816	
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120816)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120816)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120816 and its status is: Accepted
+
+
+
+Scenario: [120817] WERCSmart product - Submitted to SHA, Status = Completed
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 210817 - For RPS - Completed Status and select Type of Product): Chalk and add a Random Identifier
+Given I generate a random UPC number and save as: UPC120815
+Then I save the product information as: TestCase120817
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call shared step 120812 (Retailer - Add retailers for RPS)
+Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I navigate to the home page
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120817)
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120817)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120817)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120817)
+Given I call Shared Step 107012 (WPS Studio - Open PD+ with MTR/RPS subformat for product saved as: TestCase120817)
+Given I call Shared Step 107013 (WPS PD+ - select your product for product saved as: TestCase120817)
+Given I call Shared Step 120826 (WPS Studio - PD+ - Add RPS specific data for product saved as: TestCase120817)
+Given I call Shared Step 120845 (WPS Studio - PD+ - change to MTR/CKLT for product saved as: TestCase120817)
+And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase120817	
+Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120817)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120817)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120817 and its status is: Completed
+
+
+
+Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Safety Data Sheet (SDS) or Label Mismatch due to 3rd-Party Formula)
+
+	Given I Login into WERCSmart Portal - WebViewers Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120848 - For RPS - Suspended Status - Formula - Document Issue and select Type of Product): Chalk and add a Random Identifier
+	Then I save the product information as: TestCase120848
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call shared step 120812 (Retailer - Add retailers for RPS)
+	Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+	Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+	Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120848)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120848)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase144967)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Assigned
+	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120848)
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120848)
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase120848	
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120848)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120848)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Accepted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120848)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Pending
+
+
+Scenario: [120858] WERCSmart Product - from Completed status to Recertification
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I search for the product saved as: TestCase120817
+Given For product saved as: TestCase120817 the status is: Completed
+Given I call Shared Step 92580 (Click ... in Actions > Update Data > Summary Page - Edit Product)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120817)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120817 and its status is: Completed
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProdInfo120817
+And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                           |
+		| saved as TestCase84511 | true   | Recertification of Product by WERCSmart Customer |
+And I Close the Product Recertification History pop up
+Given In the New Product page I click tab: Product Type
+And I click the page heading: Physical and Chemical Properties
+And I click Save in The Product Page
+Given In the New Product page I click tab: Review and Submit
+Then I click the page heading: Data Acceptance
+And In the Data Acceptance page I click on the Accept button
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Given If purchase details are showing click confirm order
+Given In the Thank You screen I click Home
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120817)
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProdInfo120817
+And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                            |
+		| saved as TestCase120817| false   | Recertification of Product by WERCSmart Customer |
+And I Close the Product Recertification History pop up
+
+Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC120820
+Then I save the product information as: TestCase120820
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Given I generate a random UPC number and save as: UPC120820
+Then I save the product information as: TestCase120820
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120820, container type: Plastic Container and size: 15.2
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given I click continue
+Given I click continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given In the Thank You screen I click Home
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120820)
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120820)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase120820)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120820)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120820)
+Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase120820
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120820)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase120820)
+Given I call Shared Step 155714 (SHA - Accepted Product - set Retailers to Cancelled for saved as: TestCase120820) for
+| Retailer |
+| Walgreens|
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Status for saved as: TestCase120820)
+
+Scenario: [126691] WERCSmart product - Pesticide - processed from New to Suspended-Pesiticde
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 126691 - For RPS - Status is Suspended-Pesticide and select Type of Product): Chalk and add a Random Identifier
+	Then I save the product information as: TestCase126691
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call shared step 120812 (Retailer - Add retailers for RPS)
+	Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+	Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+	Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase126691)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144967 and its status is: Assigned
+	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase126691)
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase126691)
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase126691	
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase126691)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Accepted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Pending
+	
+Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru to Status = Completed
+Given I Login into WERCSmart Portal - WebViewers Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 121986 - for RPS - Fails CVS Audit Palm oil and select Type of Product): Chalk and add a Random Identifier
+	Then I save the product information as: TestCase121986
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call shared step 120812 (Retailer - Add retailers for RPS)
+	Given I call shared step 120813 (UPC - Add 2 UPCs - including one for CVS RCL and Add Home Depot OMSID for UPC: CVS, container type: Metal Container and size: 40)
+	Given I call shared step 51609 (CVS RCL - Yes I wish to continue with registration - Continue)
+	Given I call shared step 52131 (CVS RCL Information - add Other where available and all other data)
+	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase121986)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase121986 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase121986)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase121986)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase121986 and its status is: Assigned
+	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase121986)
+	Given I call Shared Step 107012 (WPS Studio - Open PD+ with MTR/RPS subformat for product saved as: TestCase121986)
+	Given I call Shared Step 107013 (WPS PD+ - select your product for product saved as: TestCase121986)
+	Given I call Shared Step 120845 (WPS Studio - PD+ - change to MTR/CKLT for product saved as: TestCase121986)
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase121986	
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase121986)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase121986)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase121986 and its status is: Accepted
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase121986) for
+	| Retailer |
+	| CVS      |

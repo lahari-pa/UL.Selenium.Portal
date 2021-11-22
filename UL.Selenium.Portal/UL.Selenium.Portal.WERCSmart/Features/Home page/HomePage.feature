@@ -414,11 +414,15 @@ Scenario: [71230] Archived Retailers - My Products View
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Archive Retailers
 	And I should see the Archive Retailers Popup
-	And In the Archive Retailers popup, I select the the checkbox next to the the first retailer
+	And In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: savedRetailer
 	And In the Archive Retailers popup click on: ARCHIVE
+	And I check that the Alert for Archiving a Retailers shows the text: Are you sure you want to archive these retailers from your product?
+	And I handle the Alert for Archive by answering Ok
+	And I should not see the Archive Retailers Popup
 	And I search for the product saved as: TestCase71230
+	And I Confirm that the retailer(s) saved as: savedRetailer are not displayed for the first product in the grid.
 	And I Select the check box next to Show Archived Retailers
-	And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display
+	And I Confirm that two asterisks are visible in the retailer(s) saved as: savedRetailer that are archived icons that display
 	And I Deselect the check box next to Show Archived Retailers
 
 @ScenarioId:454

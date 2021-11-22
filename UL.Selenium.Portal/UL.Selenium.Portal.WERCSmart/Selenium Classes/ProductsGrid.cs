@@ -389,6 +389,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < productRows.Count; i++)
 			{
 				IWebElement row = productRows[i];
+
+				//check more than 1 retailer (not just NR)
+
+				IWebElement masterEl = row.FindElement(By.XPath(".//ul[@class='list-inline retailers']"), 2);
+				List<IWebElement> nonArchRetailers = masterEl.FindElements(By.XPath(".//li[not(@class='abr archived hidden')]"), 2).ToList();
+				if(nonArchRetailers.Count()==1)
+				{
+					string retailerFound = nonArchRetailers.First().Text;
+					if(retailerFound=="NR")
+					{
+						continue;
+					}
+				}
+
 				IWebElement retElem = row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li"), 2);
 				if (retElem == null)
 				{
@@ -1424,6 +1438,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
 			}
 			return !SeleniumWebDriver.CurrentDriver.WaitForAlert(10);
+		}
+
+		public string GetArchiveAlertText()
+		{
+			if(!SeleniumWebDriver.CurrentDriver.WaitForAlert(30))
+			{
+				Report.Info($"Alert did not appear!");
+				return null;
+			}
+			string alertTextFound = SeleniumWebDriver.CurrentDriver.GetAlertText();
+			return alertTextFound;
+
+
+
 		}
 	}
 

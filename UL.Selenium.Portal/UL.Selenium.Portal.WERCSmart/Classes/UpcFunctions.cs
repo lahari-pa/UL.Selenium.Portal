@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes.UPCValidation;
 
 
@@ -81,21 +82,21 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 		{
 			string val = string.Empty;
 
-			for (int i = 0; i < len; i++)
-			{
-				if (i == 0)
-				{
-					val += startswith;
-				}
+			val += startswith;
 
-				var next = new Random().Next(10);
-				while (this.NextNumberIsNotRandom(next))
-				{
-					next = new Random().Next(10);
-				};
-				_last = next;
-				val += next;
+
+			int end = 10;
+			for (int x = 1; x < len; x++)
+			{
+				end = end * 10;
 			}
+
+
+			int randomNum = new Random().Next(000000000000, end);
+			Delay.Seconds(0.05);
+
+			val = val + randomNum.ToString();
+			int counted = val.Length;
 			return val;
 		}
 
