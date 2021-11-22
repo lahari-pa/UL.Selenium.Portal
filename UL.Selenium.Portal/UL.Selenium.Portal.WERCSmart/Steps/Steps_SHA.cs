@@ -2125,8 +2125,80 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (condition == "not see")
 				{
-					Report.IsTrue(displayedUpcs.UPCNumber != upc, "UPC: " + upc + " was not found in the first position.",
-						"UPC: " + upc + " was still found in the first position.");
+					Report.IsTrue(displayedUpcs.UPCNumber != upc, "UPC: " + upc + " was found in the first position.",
+						"UPC: " + upc + " was not found in the first position.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in Any Row of the UPC table")]
+		public void ShaUPCListAllItemsCheck(string condition, string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				//Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				List<string> displayedUpcs = new StudioSHAManager().UPCAssessmentScreenGetUPCStringList();
+
+
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				Report.Info($"The list of dispayed UPCs was: {string.Join(", ",displayedUpcs)}");
+
+				Report.Info($"Checking if the UPC needed is saved in context");
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.Contains(upc), "UPC: " + upc + " does not display", "UPC: " + upc + " displays as expected");
+
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(!displayedUpcs.Contains(upc), "UPC: " + upc + " was still found.","UPC: " + upc + " was not found");
 				}
 			}
 			catch (Exception ex)

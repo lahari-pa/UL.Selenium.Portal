@@ -1310,6 +1310,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
+		public List<string> UPCAssessmentScreenGetUPCStringList()
+		{
+			List<string> foundUPCStrings = new List<string>();
+
+			var rawUPCSFound = this.UPCAssessmentScreenGetUPCs();
+			if(rawUPCSFound.IsNullOrEmpty())
+			{
+				Report.Info($"The list of Raw UPC data was null or empty");
+				return null;
+			}	
+			foreach(var item in rawUPCSFound)
+			{
+				foundUPCStrings.Add(item.UPCNumber);
+			}
+			return foundUPCStrings;
+
+
+		}
+
 		public SHAManagerProdcutUPC GetFirstUPC()
 		{
 			var foundfirstItem = new SHAManagerProdcutUPC();
