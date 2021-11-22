@@ -22,8 +22,8 @@ Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto1  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto45 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-		| SHAQAAuto46 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto48 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto49 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		
 
 		

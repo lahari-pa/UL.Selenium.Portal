@@ -126,7 +126,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Error($"Could not find a button with the name All Rules");
 				return false;
 			}
-			return el.TryClick();
+			bool clicked = el.TryClick();
+			GeneralUtilities.ExitIFrame();
+			return clicked;
 
 		}
 
