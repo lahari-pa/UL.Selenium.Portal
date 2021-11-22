@@ -1340,10 +1340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 
-			//IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
-			
-			var row = rows[0];
-			
+			var row = rows[0];			
 			var upcText = row.Text.Split(' ')[0];
 			Report.Info("UPC row text: " + upcText);
 			var thisUpc = new SHAManagerProdcutUPC {
