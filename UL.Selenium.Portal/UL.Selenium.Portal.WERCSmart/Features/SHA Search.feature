@@ -11,20 +11,11 @@
 @Shared
 @wercsmart
 @Login
-@UlSolutionCenter
 @Homepage
 @ProductGrid
-@ForwardProductRegistration
 @NewProduct
-@RetailPartners
-@MessageCenter
 @MyAccount
-@LandingPage
-@DocumentAcceptance
-@DeleteActiveProducts
-@Solutions
-@ReviewDocuments
-@SHA
+@LandingPage@SHA
 @SummaryPage
 @PaymentMethods
 @ProductSetUp
@@ -127,11 +118,10 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCFirst5Digits
 	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCMiddle5Digits
 	Then I Get the last 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCLast5Digits
-	#Update to be subitted status checks
-	Given I call Shared Step (SHA - Search by ...Contains... Case Pack UPC savedAsUPCMiddle5Digits in All Status and Check the product saved as: TestCase160940 is found)
-	Given I call Shared Step (SHA - Search by Starts With... Case Pack UPC savedAsUPCFirst5Digits in All Status and Check the product saved as: TestCase160940 is found)
-	Given I call Shared Step (SHA - Search by ...Ends With Case Pack UPC savedAsUPCLast5Digits in All Status and Check the product saved as: TestCase160940 is found)
-	Given I call Shared Step (SHA - Search by Exact Case Pack UPC savedAsUPC160940 in All Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by ...Contains... Case Pack UPC savedAsUPCMiddle5Digits in Submitted Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by Starts With... Case Pack UPC savedAsUPCFirst5Digits in Submitted Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by ...Ends With Case Pack UPC savedAsUPCLast5Digits in Submitted Status and Check the product saved as: TestCase160940 is found)
+	Given I call Shared Step (SHA - Search by Exact Case Pack UPC savedAsUPC160940 in Submitted Status and Check the product saved as: TestCase160940 is found)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase160940
 	And I confirm the Product UPC window has opened
 	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160940

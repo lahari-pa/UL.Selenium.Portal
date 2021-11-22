@@ -28,10 +28,7 @@ Background:
 		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-		
 
-
-		#I have discussed this with Tim and we believe this password reset popup occurrence is not a bug in this instance. I have also checked that entering an invalid password (not an expired one) does still cause the "invalid login" message to show. I have updated the code to allow the before features to correctly reset the sha passwords in these cases. This code will be pushed as part of a pull request including test case 160937
 		
 
 
