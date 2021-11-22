@@ -75,7 +75,6 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCFirst5Digits
 	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCMiddle5Digits
 	Then I Get the last 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCLast5Digits
-	#Update to be subitted status checks
 	Given I call Shared Step (SHA - Search for ...Contains... UPC savedAsUPCMiddle5Digits in Submitted Status and Check the product saved as: TestCase160937 is found)
 	Given I call Shared Step (SHA - Search for Starts With... UPC savedAsUPCFirst5Digits in Submitted Status and Check the product saved as: TestCase160937 is found)
 	Given I call Shared Step (SHA - Search for ...Ends With UPC savedAsUPCLast5Digits in Submitted Status and Check the product saved as: TestCase160937 is found)
@@ -97,8 +96,6 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I confirm the Product UPC window has opened
 	Given In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: TestCase160937
 	Then In the SHA UPC list I should see UPC: saved as UPC160937B in Any Row of the UPC table
-
-
 	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
 
