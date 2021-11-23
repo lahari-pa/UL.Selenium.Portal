@@ -44,6 +44,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return el != null;
 		}
+
+		public bool FoundContainerElAlt()
+		{
+
+			GeneralUtilities.SwitchToDefaultContent();
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			var containerEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA']]"), 5);
+			if (containerEl != null)
+			{
+				Report.Info($"Container Found");
+
+				string containerElStr = containerEl.Text;
+				if (containerElStr.Contains("Rule Writer"))
+				{
+					Report.Info($"Container Found with text: 'Rule Writer'");
+					return true;
+				}
+			}
+			int x = 0;
+			while (containerEl == null & x < 20)
+			{
+				containerEl = this.containerElement;
+				Delay.Seconds(5);
+				x++;
+			}
+			if (containerEl != null)
+			{
+				Report.Info($"Container Found");
+
+				string containerElStr = containerEl.Text;
+				if (containerElStr.Contains("Rule Writer"))
+				{
+					Report.Info($"Container Found with text: 'Rule Writer'");
+
+					return true;
+				}
+			}
+			return false;
+
+
+		}
 		public bool ClickButton(string buttonName)
 		{
 			_buttonString = buttonName;
@@ -68,6 +109,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return el.TryClick();
+
+		}
+
+
+		public bool ClickAllRulesButtonAlt()
+		{
+
+			Report.Info("Switching to iFrame");
+			GeneralUtilities.SwitchToDefaultContent();
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
+			if (el == null)
+			{
+				Report.Error($"Could not find a button with the name All Rules");
+				return false;
+			}
+			bool clicked = el.TryClick();
+			GeneralUtilities.ExitIFrame();
+			return clicked;
 
 		}
 
