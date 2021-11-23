@@ -37,7 +37,7 @@ Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify P
 
 
 Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Primary UPC Field Test
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account	
 	Given I generate a random UPC number and save as: UPC160937A
 	Given I generate a random UPC number and save as: UPC160937B
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -61,6 +61,8 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+
 	And I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCFirst5Digits
@@ -113,6 +115,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCFirst5Digits
