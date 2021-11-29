@@ -2151,6 +2151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						Report.Info($"placeholderEl was null");
 						return false;
 					}
+					Report.Info($"placeholderEl was found... Attempting to click placeholderEl");
 					placeholderEl.TryClick();
 					IWebElement MatchedEntry = null;
 					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
@@ -2159,6 +2160,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						Report.Info($"inputEl was null");
 						return false;
 					}
+					Report.Info($"inputEl was found... Attempting to enter product id");
+					Report.Info($"Entering product id: {product.Id}");
 					inputEl.EnterText(product.Id);
 					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
@@ -2169,16 +2172,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					}
 					IList<IWebElement> Matches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					if(Matches.IsNullOrEmpty())
+					{
+						Report.Info($"There was not matches found, 'Matches' was null or empty");
+						//If this is hit, we need to update this method
+					}
+					Report.Info($"Looking for matching id's");
 					IWebElement MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
 					if (MatchingByID == null)
 					{
 						// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
+						Report.Info($"no matching name entry found, taking first match incase partial match expected.");
 						MatchedEntry = Matches.FirstOrDefault();
 					}
 					else
 					{
+						Report.Info($"There was a matching name entry found. Setting 'MatchedEntry' to that value");
 						MatchedEntry = MatchingByID;
 					}
+
+					Report.Info($"checking if 'MatchedEntry' is null...");
 
 
 					if (MatchedEntry != null)
@@ -2186,10 +2199,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						Report.Info("Found matching search item, attempting to click");
 						MatchedEntry.TryClick();
 						Delay.Seconds(1);
+						Report.Info($"Looking for 'listOfSelected'...");
 						ReadOnlyCollection<IWebElement> listOfSelected = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
 							"//div[contains(text(), 'Select Existing Registrations')]/../..//table/tbody/tr//input/../..//span"));
+						Report.Info($"Looking for 'matchingProduct'...");
 
 						IWebElement matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Id));
+						Report.Info($"Checking if 'matchingProduct' is null");
 
 						if (matchingProduct != null)
 						{
