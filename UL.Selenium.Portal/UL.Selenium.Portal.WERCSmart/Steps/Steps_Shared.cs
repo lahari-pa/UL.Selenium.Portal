@@ -6838,7 +6838,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the UPC Number, Container Type and Size");
 			var upcTable = new Table("Field", "Value");
 			upcTable.AddRow("UPCNumber", $"saved as UPC{WercSmartSettings.TestCaseId}");
-			upcTable.AddRow("ContainerType", "Aerosol Can");
+			upcTable.AddRow("ContainerType", "Cardboard");
 			upcTable.AddRow("Size", "20");
 			//upcTable.AddRow("DPCI", "087 - 16 - 0238");
 			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
