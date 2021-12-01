@@ -58,7 +58,7 @@ And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
 And I set the Select the best Water Solubility description field to: Decomposes
 And I set the When the product has a flammable propellant field to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
-And I set the Select all ingredients included in this product field to: Dairy
+And I set the Select all potential allergens included in this product field to: Dairy
 And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
 And I set the Product is verified and sold as field to: None of the Above
 And I set the Product contains the following sweeteners field to: None of the Above
@@ -75,6 +75,8 @@ Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false               | false       |            |
 And in the Ingredients page I click Continue
+Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
@@ -94,7 +96,7 @@ And I set the Proper Shipping Name field to: Aerosols
 And I set the Technical Name (if applicable) field to: My Safe Product
 And I set the Hazard Class (select) field to: 2
 And I set the Packing Group (select) field to: None
-Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+Given in the International Marine (IMDG) Classification page I click Continue
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
@@ -111,6 +113,7 @@ And in the Universal Product Code (UPC) page I click Continue
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
 And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Then in the Regulatory Documents to Provide page I click Continue
 
 # Additional Documents to Provide Page
