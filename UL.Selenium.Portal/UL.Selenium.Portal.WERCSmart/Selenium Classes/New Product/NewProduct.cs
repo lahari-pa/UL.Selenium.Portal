@@ -2175,7 +2175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					if(Matches.IsNullOrEmpty())
 					{
 						Report.Info($"There was not matches found, 'Matches' was null or empty");
-						//If this is hit, we need to update this method
+						
 					}
 					Report.Info($"Looking for matching id's");
 					IWebElement MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
