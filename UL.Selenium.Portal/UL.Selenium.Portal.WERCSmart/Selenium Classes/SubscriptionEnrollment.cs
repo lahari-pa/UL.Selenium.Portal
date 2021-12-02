@@ -769,7 +769,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-md-12 nopadding']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
