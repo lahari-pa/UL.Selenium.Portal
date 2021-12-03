@@ -2600,7 +2600,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"The fifra tag was set a true, popup is expected");
 
 					Report.StartStep("In the Ingredients page I click Continue");
-					MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+					var selNewProduct = new NewProduct();
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
 					Report.Screenshot();
 
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
