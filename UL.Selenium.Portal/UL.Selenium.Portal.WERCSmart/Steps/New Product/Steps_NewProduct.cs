@@ -2376,8 +2376,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			// if subscription upgrade - Proceed ?
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
+			Report.Info($"Looking for the purchase summary header...");
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			GeneralUtilities.Wait_for_load_finish();
+			Report.Info($"In the purchase summary screem I go to click 'Confirm order'...");
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 		}
 

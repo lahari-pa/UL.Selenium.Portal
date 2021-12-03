@@ -4646,8 +4646,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedCommentsHappyPath(@"User added Comments Text 57863. !""�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+
 			Report.StartStep("If purchase details are showing click confirm order");
 			stepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+
 			Report.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)");
