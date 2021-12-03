@@ -2573,13 +2573,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.Screenshot();
-			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
-
-
-
+			//Report.StartStep("In the Ingredients page I click Continue");
+			//MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+			//Report.Screenshot();
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();	
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 
@@ -2602,6 +2599,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info($"The fifra tag was set a true, popup is expected");
 
+					Report.StartStep("In the Ingredients page I click Continue");
+					MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+					Report.Screenshot();
 
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
@@ -2620,6 +2620,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				else
 				{
 					Report.Info($"The fifra tag was set a false, popup is not expected");
+					Report.StartStep("In the Ingredients page I click Continue");
+					MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+					Report.Screenshot();
 				}
 
 
@@ -2628,6 +2631,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
 				Report.Screenshot();
+				Report.StartStep("In the Ingredients page I click Continue");
+				MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+				Report.Screenshot();
+
 			}
 
 		}
