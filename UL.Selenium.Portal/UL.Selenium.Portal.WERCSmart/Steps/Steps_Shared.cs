@@ -5060,7 +5060,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioShaManager = new StudioSHAManager();
 			Delay.Seconds(5);
 			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", showSuccessScreenshot: false);
+
 			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(120), "Loading did not finish", showSuccessScreenshot: false);
+
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
