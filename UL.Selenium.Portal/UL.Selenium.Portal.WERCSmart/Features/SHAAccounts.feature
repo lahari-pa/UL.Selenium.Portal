@@ -74,15 +74,17 @@ Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted stat
 Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 
+Scenario:  [755437] Product Creation Speed Test
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
