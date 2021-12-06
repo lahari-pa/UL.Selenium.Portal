@@ -966,6 +966,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return products.FirstOrDefault().ID == id;
 		}
 
+		public bool ProductsTableResultsContainsId(string id)
+		{
+			List<Product> products = this.GetTopXProducts(99);
+			if (products == null || products.Count == 0)
+			{
+				return false;
+			}
+			var foundProd = products.Find(x => x.ID == id);
+			return foundProd != null;
+		}
+
 		public bool ClickProcessProductData()
 		{
 			try
@@ -1266,6 +1277,110 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info($"Found {rList.Count} UPCs");
 			return rList;
+		}
+
+		public List<SHAManagerProdcutUPC> UPCAssessmentScreenGetUPCs()
+		{
+			var rList = new List<SHAManagerProdcutUPC>();
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']//following-sibling::tr"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
+			if (headerRow == null)
+			{
+				Report.Info("Could not locate 'dark black' header row");
+				return null;
+			}
+
+			IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
+			int upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath(".//th[contains(text(),'UPC Number')]"))) +
+							  1;
+
+			foreach (IWebElement row in rows)
+			{
+				var upcText = row.Text.Split(' ')[0];
+				Report.Info("UPC row text: " + upcText);
+				var thisUpc = new SHAManagerProdcutUPC {
+
+					UPCNumber = upcText
+				};
+
+				rList.Add(thisUpc);
+			}
+
+			Report.Info($"Found {rList.Count} UPCs");
+			return rList;
+		}
+
+		public List<string> UPCAssessmentScreenGetUPCStringList()
+		{
+			List<string> foundUPCStrings = new List<string>();
+
+			var rawUPCSFound = this.UPCAssessmentScreenGetUPCs();
+			if(rawUPCSFound.IsNullOrEmpty())
+			{
+				Report.Info($"The list of Raw UPC data was null or empty");
+				return null;
+			}	
+			foreach(var item in rawUPCSFound)
+			{
+				foundUPCStrings.Add(item.UPCNumber);
+			}
+			return foundUPCStrings;
+
+
+		}
+
+		public SHAManagerProdcutUPC GetFirstUPC()
+		{
+			var foundfirstItem = new SHAManagerProdcutUPC();
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']//following-sibling::tr"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
+			if (headerRow == null)
+			{
+				Report.Info("Could not locate 'dark black' header row");
+				return null;
+			}
+
+			var row = rows[0];			
+			var upcText = row.Text.Split(' ')[0];
+			Report.Info("UPC row text: " + upcText);
+			var thisUpc = new SHAManagerProdcutUPC {
+
+				UPCNumber = upcText
+			};
+			foundfirstItem = thisUpc;
+			if(!foundfirstItem.IsNullOrEmpty())
+			{
+				Report.Info($"Found first UPC: {foundfirstItem.UPCNumber}");
+			}
+			return foundfirstItem;
+		}
+
+		public string GetUPCScreenWSProductID()
+		{
+			IWebElement titleElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='main']//h1"), 2);
+			string titleElFullString = titleElement.Text;
+			string editedString = titleElFullString.Replace("WERCSmart Product ID", "").Trim();
+			var editedStringArray = editedString.ToArray();
+			string finalString = null;
+			foreach(char character in editedStringArray)
+			{
+				Report.Info($"Character found was: {character}");
+				if(char.IsDigit(character))
+				{
+					Report.Info($"The character found was a digit");
+					finalString= finalString+ character;
+				}
+				else
+				{
+					Report.Info($"Character was not a digit, end of ID found");
+					Report.Info($"final string: {finalString.Trim()}");
+					return finalString.Trim();
+					
+				}
+			}
+
+
+			return finalString.Trim();
 		}
 
 		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
@@ -1829,6 +1944,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			catch (Exception)
 			{
 				return false;
+			}
+		}
+
+		public bool SearchPopupFound()
+		{
+			try
+			{
+				var el = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]"),5);
+				if (el.IsNullOrEmpty())
+				{
+					Report.Info($"The el was null");
+					return false;
+				}
+				Report.Info($"The el was found");
+				return true;
+			}
+			catch (Exception)
+			{
+				throw;
 			}
 		}
 
@@ -3367,6 +3501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return closeButton.TryClick();
 		}
+
 
 	}
 
