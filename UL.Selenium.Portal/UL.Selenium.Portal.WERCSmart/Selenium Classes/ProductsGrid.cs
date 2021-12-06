@@ -551,11 +551,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			if (rows.Count == 0)
 			{
-				int x = 0;
 				bool rowsFound = false;
-				while (x<5&&rowsFound==false)
+				if(rowsFound==false)
 				{
-					Delay.Seconds(10);
+					GeneralUtilities.Wait_for_load_finish();
 					IList<IWebElement> newrows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 					if(newrows.Count==0)
 					{
@@ -566,14 +565,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info("Rows were found");
 						rowsFound = true;
-					}
-					x++;
-					
+					}					
 				}
 
 				if(rowsFound == false)
 				{
-					Report.Info("After 1 minute No rows were found to delete! Moving on.");
+					Report.Info("Afterwaiting for loading to finish No rows were found to delete! Moving on.");
 					return true;
 				}	
 				
