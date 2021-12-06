@@ -5055,7 +5055,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
-			//Delay.Seconds(5);
 			Report.Info($"Going to iframe swap");
 			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", showSuccessScreenshot: false);
 			Report.Info($"Waiting for loading to finish...");

@@ -73,7 +73,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				//Delay.Seconds(15);
 				// wait up to 5 seconds for the loading bar to become visible
 				Report.Info($"Starting Loading bar wait.");
 				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
