@@ -6962,12 +6962,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Failed to find product: " + inputProduct1);
 			}
+			Report.Info($"product1 was not null. It was found in context.");
 
 			var product2 = (ProductInformation)Context.GetFromContext(inputProduct2.Trim());
 			if (product2 == null)
 			{
 				throw new Exception("Failed to find product: " + inputProduct2);
 			}
+			Report.Info($"product2 was not null. It was found in context.");
 
 			Report.StartStep($"I add {product1.Id} to the kit");
 			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectByIdSavedAs(product1);
@@ -7004,7 +7006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the UPC Number, Container Type and Size");
 			var upcTable = new Table("Field", "Value");
 			upcTable.AddRow("UPCNumber", $"saved as UPC{WercSmartSettings.TestCaseId}");
-			upcTable.AddRow("ContainerType", "Aerosol Can");
+			upcTable.AddRow("ContainerType", "Cardboard");
 			upcTable.AddRow("Size", "20");
 			//upcTable.AddRow("DPCI", "087 - 16 - 0238");
 			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
