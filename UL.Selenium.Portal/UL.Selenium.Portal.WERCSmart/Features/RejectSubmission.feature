@@ -115,8 +115,8 @@ Given For product saved as: ID the html of the email should show: Your product a
 
 
 Scenario: [143390] Reject Submission - Flash Point - Safety Data Sheet (SDS) or Article Information Sheet (AIS) Discrepancy
-#Then Using Test case 75142, I create a NEW PRODUCT and move it into Submitted status in SHA
-#Given I navigate to the landing page
+Then Using Test case 75142, I create a NEW PRODUCT and move it into Submitted status in SHA
+Given I navigate to the landing page
 Given I Save the email for the TReVor: ProductAccount Test user as: AdminEmailAddress
 Given I save the current emails in the inbox for address saved as: AdminEmailAddress
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
