@@ -1008,6 +1008,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
+
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
 
 					if (shouldOrNot == "should")
