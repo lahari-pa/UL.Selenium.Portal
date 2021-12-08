@@ -115,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepEnterLiquid_CookingOil_Non_Aerosol()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
