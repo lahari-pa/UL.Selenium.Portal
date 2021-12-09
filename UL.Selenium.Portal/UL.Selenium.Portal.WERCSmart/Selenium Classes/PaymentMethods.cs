@@ -1633,7 +1633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Confirm Order Button
 		[FindsBy(How = How.Id, Using = "ConfirmOrder")]
-		private IWebElement _btn_confirm;
+		public IWebElement _btn_confirm;
 
 		public bool Confirm_Order_click()
 		{

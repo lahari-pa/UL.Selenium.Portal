@@ -73,11 +73,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				Delay.Seconds(15);
 				// wait up to 5 seconds for the loading bar to become visible
-				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 20);
+				Report.Info($"Starting Loading bar wait.");
+				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
+				Report.Info($"Loading bar wait over.");
 				// waits up to timeout (30) seconds for the loading bar to then become invisible
-				return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+				Report.Info($"Starting Loading bar wait to become invisible.");
+				bool invs= SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+				Report.Info($"Loading bar wait to become invisible is finished");
+				return invs;
 			}
 			catch (Exception ex)
 			{
