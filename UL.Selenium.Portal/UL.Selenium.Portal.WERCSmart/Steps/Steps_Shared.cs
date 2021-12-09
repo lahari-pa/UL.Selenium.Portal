@@ -2572,14 +2572,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I add the ingredient " + name + " at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
-			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
-			Report.Screenshot();
-			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
-
-
-
+			stepsNewProductIngredients.AddIngredients(table);			
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();	
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 
@@ -2602,6 +2596,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info($"The fifra tag was set a true, popup is expected");
 
+					Report.StartStep("In the Ingredients page I click Continue");
+					var selNewProduct = new NewProduct();
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
+					Report.Screenshot();
 
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
@@ -2620,6 +2618,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				else
 				{
 					Report.Info($"The fifra tag was set a false, popup is not expected");
+					Report.StartStep("In the Ingredients page I click Continue");
+					MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+					Report.Screenshot();
 				}
 
 
@@ -2628,6 +2629,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info($"Ingredient name used was not found in the list of hardcoded FIFRA ingredients...");
 				Report.Screenshot();
+				Report.StartStep("In the Ingredients page I click Continue");
+				MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+				Report.Screenshot();
+
 			}
 
 		}
@@ -5050,9 +5055,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
-			Delay.Seconds(5);
+			Report.Info($"Going to iframe swap");
 			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", showSuccessScreenshot: false);
+			Report.Info($"Waiting for loading to finish...");
 			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(120), "Loading did not finish", showSuccessScreenshot: false);
+
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
