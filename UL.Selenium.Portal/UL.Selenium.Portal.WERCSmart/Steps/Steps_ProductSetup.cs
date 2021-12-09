@@ -4586,6 +4586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 		}
 
+		[StepDefinition("Using Test case 75142, I create a NEW PRODUCT and move it into Submitted status in SHA")]
 		[StepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA")]
 		public void IUseTestCase75142ToCreateANEWPRODUCTAndGetItToSubmittedStatusInSHA()
 		{
