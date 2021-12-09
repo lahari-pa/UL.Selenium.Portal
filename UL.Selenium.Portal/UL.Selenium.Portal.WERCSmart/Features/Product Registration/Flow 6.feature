@@ -58,7 +58,7 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
