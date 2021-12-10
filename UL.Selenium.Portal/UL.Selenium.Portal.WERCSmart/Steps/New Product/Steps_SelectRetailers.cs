@@ -184,9 +184,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				if (should == "should only")
 				{
-
-					//var thing = expected.Rows[1].Keys;
-
 					var itemList= expected.Rows.Select(x => x["Retailer"].ToList());
 					var stringList = new List<string>();
 					foreach(var item in itemList)
@@ -198,20 +195,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 							emptystring = emptystring + item.ElementAt(i);
 						}
 						stringList.Add(emptystring);
-
-						//var testjoin = item.ToString();
-						//var testArrayConvert = item.ToArray();						
-					}
-					//var things = expected.Rows;
-					//var things2 = things.Select(x => x.Values);
-					//var items = things.Where(x => x.Keys.Contains("Retailer")).ToList();
-					//var items3 = items.Select(x => x.Values).ToList();
-					//var final = items3[1];
-					//var finalSolo = final.ElementAt(0);
-
-					//Report.IsTrue(checkedRetailers.Count == 0,
-					//	"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
-					//	"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
+											
+					}	
 
 					Report.IsTrue(checkedRetailers.Count == 0,"There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList),"As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList));
 				}
