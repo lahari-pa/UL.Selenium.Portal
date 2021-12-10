@@ -352,6 +352,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productElement;
 		}
 
+		public bool IsShowArchivedRetailersChecked()
+		{
+			IWebElement inputShowArchivedRetailers =this.containerElement.FindElement(By.XPath(".//input[@id='show-archived-retailers']"), 3);
+			if (inputShowArchivedRetailers == null)
+			{
+				Report.Info("Could not find show archived retailers input box to check it's status");
+				return false;
+			}
+
+			return inputShowArchivedRetailers.Checked();
+		}
+
 		public bool SelectShowArchivedRetailers()
 		{
 			IWebElement inputShowArchivedRetailers =
