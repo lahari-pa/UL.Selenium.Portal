@@ -213,9 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					//	"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
 					//	"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
 
-					Report.IsTrue(checkedRetailers.Count == 0,
-						"There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList),
-						"As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList);
+					Report.IsTrue(checkedRetailers.Count == 0,"There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList),"As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList));
 				}
 			}
 
