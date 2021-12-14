@@ -2543,27 +2543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match", showSuccessScreenshot: false);
 		}
-
-		[StepDefinition(@"I ensure that the check box next to Show Archived Retailers is unselected")]
-		public void EnsureShowArchivedRetailersCheckboxIsUnchecked()
-		{
-			var thisProductsGrid = new ProductsGrid();
-			bool status = thisProductsGrid.IsShowArchivedRetailersChecked();
-			if(status)
-			{
-				Report.Info($"The checkbox was checked, we need to uncheck it now");
-				Report.Screenshot();
-				this.GivenISelectTheCheckBoxNextToShowArchivedRetailers("Select");
-				Report.IsTrue(thisProductsGrid.IsShowArchivedRetailersChecked(), "The checkbox was still checked", "The checkbox was unchecked");
-			}
-			else
-			{
-				Report.Success($"The checkbox was already unchecked. No action needed");
-				Report.Screenshot();
-			}
-
-		}
-
+				
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
 		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{

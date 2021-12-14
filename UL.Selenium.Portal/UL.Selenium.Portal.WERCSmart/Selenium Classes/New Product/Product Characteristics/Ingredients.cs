@@ -113,7 +113,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					Report.Info(
 						"No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
-					//products account debug
 					inputEl.EnterText(ingredient.ComponentName);
 					IWebElement searching =
 						this.ContainerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);

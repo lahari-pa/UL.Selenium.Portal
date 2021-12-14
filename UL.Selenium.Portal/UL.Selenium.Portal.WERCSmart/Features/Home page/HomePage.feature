@@ -410,9 +410,6 @@ Scenario: [71230] Archived Retailers - My Products View
 	#And I should see an option for More Filters
 	#Given I click More Filters in the products grid
 	#And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
-
-	#Make sure 'Show Archived Retailers' Checkbox is unselected at start of test
-	And I ensure that the check box next to Show Archived Retailers is unselected
 	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase71230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Archive Retailers

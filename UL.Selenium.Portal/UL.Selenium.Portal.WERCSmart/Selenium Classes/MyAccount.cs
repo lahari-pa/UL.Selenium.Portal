@@ -1887,7 +1887,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning Status_Information_Correct");
 
 			IWebElement myText = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-4']/p[@class='spaced-text']"), 2);
-			//Products account debug
 
 			Report.Info(myText.Text.Trim());
 
