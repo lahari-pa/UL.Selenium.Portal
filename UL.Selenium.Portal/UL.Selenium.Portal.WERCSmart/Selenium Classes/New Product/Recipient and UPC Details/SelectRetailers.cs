@@ -60,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> GetListOfRetailers()
 		{
-			return this.containerElement.FindElements(By.XPath("//label/span")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//label/span")).Select(x => x.Text).ToList();
 		}
 
 		public bool ClickSelectAll()
