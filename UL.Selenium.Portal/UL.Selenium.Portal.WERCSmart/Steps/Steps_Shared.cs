@@ -4050,10 +4050,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
 			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
 			{
+				//prod acc debug temp
 				Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 					"Select the best Water Solubility description",
-					"100g/100ml"));
-				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+					"Soluble in water"));
+				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
 			}
 
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
