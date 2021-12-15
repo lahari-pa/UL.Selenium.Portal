@@ -23,6 +23,11 @@
 @Homepage
 Feature: Home Page
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto33 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 #pass - staging 4.10
 @ScenarioId:421
 Scenario: [55817] Product Information Panel - No Alerts/No Products
@@ -404,14 +409,11 @@ Scenario: [85275] Select All - Popup closes
 
 @ScenarioId:453
 Scenario: [71230] Archived Retailers - My Products View
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto33 and save as: ProductSetup71230
+	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
-	Given I filter the products by: Accepted by Retailers	
-	#And I should see an option for More Filters
-	#Given I click More Filters in the products grid
-	#And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
-
-	#Make sure 'Show Archived Retailers' Checkbox is unselected at start of test
+	Given I filter the products by: Accepted by Retailers		
 	And I ensure that the check box next to Show Archived Retailers is unselected
 	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase71230
 	And I click Row Actions for the first product returned
