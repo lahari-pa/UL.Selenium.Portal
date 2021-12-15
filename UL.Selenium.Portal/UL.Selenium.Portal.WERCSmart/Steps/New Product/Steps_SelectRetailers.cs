@@ -184,9 +184,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				if (should == "should only")
 				{
-					Report.IsTrue(checkedRetailers.Count == 0,
-						"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
-						"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
+					var itemList= expected.Rows.Select(x => x["Retailer"].ToList());
+					var stringList = new List<string>();
+					foreach(var item in itemList)
+					{
+						var intMax= item.Count();
+						var emptystring = string.Empty;
+						for(int i=0; i<intMax;i++)
+						{
+							emptystring = emptystring + item.ElementAt(i);
+						}
+						stringList.Add(emptystring);
+											
+					}	
+
+					Report.IsTrue(checkedRetailers.Count == 0,"There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList),"As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList));
 				}
 			}
 

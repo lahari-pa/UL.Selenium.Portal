@@ -49,6 +49,8 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74992
 
 @ScenarioId:1006
+@ignore
+@PestDetailsStateRework
 #Need to Review the Updates to this test case.
 Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

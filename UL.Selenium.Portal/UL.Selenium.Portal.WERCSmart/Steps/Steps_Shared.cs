@@ -1350,8 +1350,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
 			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
-			Report.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
-			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+			Report.StartStep("I set the Select the best Water Solubility description field to: Soluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
@@ -3815,8 +3815,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Select the best Water Solubility description",
-				"100g/100ml"));
-			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+				"Soluble in water"));
+			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
 			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
@@ -4052,8 +4052,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 					"Select the best Water Solubility description",
-					"100g/100ml"));
-				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+					"Soluble in water"));
+				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
 			}
 
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
