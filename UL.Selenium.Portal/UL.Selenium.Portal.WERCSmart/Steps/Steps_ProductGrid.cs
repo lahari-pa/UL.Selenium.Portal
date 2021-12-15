@@ -2554,7 +2554,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info($"The checkbox was checked, we need to uncheck it now");
 				Report.Screenshot();
 				this.GivenISelectTheCheckBoxNextToShowArchivedRetailers("Select");
-				Report.IsTrue(thisProductsGrid.IsShowArchivedRetailersChecked(), "The checkbox was still checked", "The checkbox was unchecked");
+				Report.IsTrue(!thisProductsGrid.IsShowArchivedRetailersChecked(), "The checkbox was still checked", "The checkbox was unchecked");
 			}
 			else
 			{
