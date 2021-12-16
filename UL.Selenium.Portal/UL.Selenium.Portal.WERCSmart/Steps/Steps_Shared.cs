@@ -1439,7 +1439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the pH field to: 10.4");
 			stepsProductCharacteristics.SetPHTo("10.4");
 			Report.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");

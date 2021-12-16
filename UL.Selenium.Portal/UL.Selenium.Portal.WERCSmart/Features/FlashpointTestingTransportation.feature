@@ -26,7 +26,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -77,7 +77,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -131,7 +131,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -179,7 +179,7 @@ And The following options should be displayed for section: Flash Point Testing M
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Open cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
