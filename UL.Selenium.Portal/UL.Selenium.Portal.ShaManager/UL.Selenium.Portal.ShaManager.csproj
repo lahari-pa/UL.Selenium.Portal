@@ -56,8 +56,8 @@
     <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Mailosaur, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mailosaur.3.0.2\lib\Mailosaur.dll</HintPath>
@@ -255,13 +255,13 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets'))" />
+    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.props'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.3.9.8\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" />
-  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets')" />
   <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.68\build\TReVor.Integrations.BuildOperations.targets')" />
+  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.21\build\UL.Automation.SpecFlow.targets')" />
 </Project>
