@@ -215,12 +215,12 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 Then I save the product information as: TestCase139193
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
+Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 Then I set the value 'FIFRAPopupExpected' to be: true
 Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
-Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given I confirm there is a message displayed at the top of the Ingredients page
 Given I confirm there is a checkbox with the following text: Don't show this again in the message displayed at the top of the Ingredients page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139193
