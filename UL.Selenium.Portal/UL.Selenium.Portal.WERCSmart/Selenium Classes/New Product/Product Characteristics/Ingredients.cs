@@ -1524,6 +1524,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
+			IWebElement testEl = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind]"), 2);
+
+
+
 			return true;
 		}
 
