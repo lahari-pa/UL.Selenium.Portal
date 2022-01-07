@@ -206,7 +206,7 @@ Then I confirm I see the error message with text: and of type: Percent in the po
 | ErrorSections                                                                       |
 | Percentages must total a minimum of 100%. Please check your ingredient percentages. |
 
-Then I confirm I see the error message with text: and of type: PublicDisclosureOrTradeSecretIssue in the popup with the following title: California Cleaning Right to Know
+Then I confirm I see the error message with text: and of type: Publicly Disclosed or Trade Secret in the popup with the following title: California Cleaning Right to Know
 | ErrorSections                                                                                                                                                                                                                                                                                                                                                                      |
 | Participation in the California Cleaning Right to Know requires that all ingredients either be Publicly Disclosed or be a valid Trade Secret ingredient. Some information on claiming a trade secret is available on the U.S. Food and Drug Administration (FDA) website. Even when indicating a Trade Secret, you must provide a generic name for the ingredient where indicated. |
 | Publicly Disclosed ingredients must have a selection made under the Public Name options for the listed name of the ingredient as it appears on the product label                                                                                                                                                                                                                   |
