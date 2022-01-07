@@ -182,30 +182,40 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 Then I save the product information as: TestCase139205
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not considered a pesticide product
+Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 Then I set the value 'FIFRAPopupExpected' to be: true
 Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
-Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given I add the following CA Cleaning ingredients:  
 		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| RR-05150-3 | 10      | false               | false       |            |             | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| RR-39229-0 | 10      | false               | false       |            |             | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
+
+#Full error msg text check for each
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
 | Generic                                 |
 | Percent                                 |
 | Publicly Disclosed or Trade Secret      |
+
+
+
 Then I click the close button for the CA Cleaning Ingredients Popup
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
-Then I click continue
-And I should see the Waste Classification Data Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139205
+# Check for -> Please fix all errors related to California Cleaning Right to Know before proceeding.
+
+Given I click the Home navigation icon
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase139205
+
+#Then I click the 'x' button for component number 1
+#Given I click: YES in the 'Remove Component from My Ingredients' pop up
+#Given I add the following CA Cleaning ingredients:  
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose | Clean | Certified |
+#		| Water         | 100     | false               | false       | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+#Then I click continue
+#And I should see the Waste Classification Data Page
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139205
 
 
 @ScenarioId:10106
