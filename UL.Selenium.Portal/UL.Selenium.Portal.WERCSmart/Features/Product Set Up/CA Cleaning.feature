@@ -188,9 +188,10 @@ Given In the Product Information Screen I answer the questions as follows - US o
 Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
-Given I add the following CA Cleaning ingredients:  
-		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose | Clean | Certified |
-		| RR-39229-0 | 10      | false               | false       |            |             |                |                   |       |           |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| RR-39229-0    | 10      | false               | false       |            |
+
 Given I click continue
 
 Then I confirm I see the error message with text: and of type: Generic in the popup with the following title: California Cleaning Right to Know
