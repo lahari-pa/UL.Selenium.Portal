@@ -1525,8 +1525,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			IWebElement testEl = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind]"), 2);
+			string thing = testEl.GetAttribute("style");
+
+			
+
+			IWebElement errorEl2 = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.LessThan100Percent']"), 2);
+			if(errorEl2.GetAttribute("style").IsNullOrEmpty())
+			{
+				Report.Info("correct error type found, going to text check");
+				string fullString = errorEl2.Text;
+			}
 
 
+			IWebElement errorEl3 = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.PublicDisclosureOrTradeSecretIssue']"), 2);
+			if (errorEl3.GetAttribute("style").IsNullOrEmpty())
+			{
+				Report.Info("correct error type found, going to text check");
+				string fullString = errorEl3.Text;
+				// \r\n is being used to paragraph split. For comparing text found text needs this removing first. or use table row for each para and split string on \r\n instead. + check number of rows matches number of found paragraphs etc.
+			}
+
+			//1 call of step per each error
+			//call step (4) times to check all errors
+			//new step to check that number of errors found matches x (expected number of errors)
 
 			return true;
 		}
