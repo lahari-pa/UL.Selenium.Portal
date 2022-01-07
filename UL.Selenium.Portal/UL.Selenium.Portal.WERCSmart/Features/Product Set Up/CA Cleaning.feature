@@ -189,33 +189,40 @@ Given I call Shared Step 57501 (Physical and Chemical Properties - More than one
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| RR-39229-0 | 10      | false               | false       |            |             | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose | Clean | Certified |
+		| RR-39229-0 | 10      | false               | false       |            |             |                |                   |       |           |
 Given I click continue
 
-#Full error msg text check for each
-Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
-| Error                                   |
-| Generic                                 |
-| Percent                                 |
-| Publicly Disclosed or Trade Secret      |
+Then I confirm I see the error message with text: and of type: Generic in the popup with the following title: California Cleaning Right to Know
+| ErrorSections                                                                                                                                                                                                                                     |
+| Generic ingredients are not permitted as they cannot be screened for Chemicals of Concern. Each ingredient must use any of the following:                                                                                                         |
+| Valid Chemical Abstract Service identifier (CAS number); or                                                                                                                                                                                       |
+| Valid 3rd-Party Formula registration (CAS begins with "WPS"); or                                                                                                                                                                                  |
+| Valid CAS Addition (CAS begins with NA)                                                                                                                                                                                                           |
+| Please note that use of an ingredient with a CAS beginning with NA may result in a suspension of the registration requiring more information or details. You should always use a valid CAS number or 3rd-Party Formula before using an NA option. |
 
+Then I confirm I see the error message with text: and of type: Percent in the popup with the following title: California Cleaning Right to Know
+| ErrorSections                                                                       |
+| Percentages must total a minimum of 100%. Please check your ingredient percentages. |
 
+Then I confirm I see the error message with text: and of type: PublicDisclosureOrTradeSecretIssue in the popup with the following title: California Cleaning Right to Know
+| ErrorSections                                                                                                                                                                                                                                                                                                                                                                      |
+| Participation in the California Cleaning Right to Know requires that all ingredients either be Publicly Disclosed or be a valid Trade Secret ingredient. Some information on claiming a trade secret is available on the U.S. Food and Drug Administration (FDA) website. Even when indicating a Trade Secret, you must provide a generic name for the ingredient where indicated. |
+| Publicly Disclosed ingredients must have a selection made under the Public Name options for the listed name of the ingredient as it appears on the product label                                                                                                                                                                                                                   |
+| Ingredients present on the California Chemicals of Concern list under this regulation require public disclosure of the ingredient and you are unable to adjust this setting within the registration. See our Terms of Service for more information regarding disclosure of ingredients per regulatory requirement.                                                                 |
+| Please update the information as needed to proceed.                                                                                                                                                                                                                                                                                                                                |
 
+Then I confirm I see the error message with text: and of type: Ingredient Type in the popup with the following title: California Cleaning Right to Know
+| ErrorSections                                                                                                                                                                                                                                       |
+| Participation in the California Cleaning Right to Know requires that each ingredient have an indication of the type of ingredient it is within the product. Please include, for each ingredient, the Ingredient Type from the selections available. |
+
+#Check that the expect total error count matches diplayed number of errors
 Then I click the close button for the CA Cleaning Ingredients Popup
 # Check for -> Please fix all errors related to California Cleaning Right to Know before proceeding.
-
 Given I click the Home navigation icon
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase139205
 
-#Then I click the 'x' button for component number 1
-#Given I click: YES in the 'Remove Component from My Ingredients' pop up
-#Given I add the following CA Cleaning ingredients:  
-#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose | Clean | Certified |
-#		| Water         | 100     | false               | false       | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
-#Then I click continue
-#And I should see the Waste Classification Data Page
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139205
+
 
 
 @ScenarioId:10106

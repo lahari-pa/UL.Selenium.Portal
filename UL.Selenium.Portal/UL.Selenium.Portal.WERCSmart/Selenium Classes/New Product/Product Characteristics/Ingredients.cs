@@ -1524,32 +1524,107 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
-			IWebElement testEl = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind]"), 2);
-			string thing = testEl.GetAttribute("style");
-
-			
-
-			IWebElement errorEl2 = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.LessThan100Percent']"), 2);
-			if(errorEl2.GetAttribute("style").IsNullOrEmpty())
-			{
-				Report.Info("correct error type found, going to text check");
-				string fullString = errorEl2.Text;
-			}
-
-
-			IWebElement errorEl3 = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.PublicDisclosureOrTradeSecretIssue']"), 2);
-			if (errorEl3.GetAttribute("style").IsNullOrEmpty())
-			{
-				Report.Info("correct error type found, going to text check");
-				string fullString = errorEl3.Text;
-				// \r\n is being used to paragraph split. For comparing text found text needs this removing first. or use table row for each para and split string on \r\n instead. + check number of rows matches number of found paragraphs etc.
-			}
-
-			//1 call of step per each error
-			//call step (4) times to check all errors
-			//new step to check that number of errors found matches x (expected number of errors)
-
 			return true;
+		}
+
+
+		public bool CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(Table table,string errorType, string popupTitle)
+		{
+
+			string errorTypeID = null;
+			
+			if (errorType == "Generic")
+			{
+				errorTypeID = "GenericInUse";
+			}
+			else if (errorType == "Percent")
+			{
+				errorTypeID = "LessThan100Percent";
+			}
+			else if (errorType == "Publicly Disclosed or Trade Secret")
+			{
+				errorTypeID = "PublicDisclosureOrTradeSecretIssue";
+			}
+			else if (errorType == "Ingredient Type")
+			{
+				errorTypeID = "IngredientTypeMissing";
+			}
+			else if (errorType == "Functional Purpose")
+			{
+				errorTypeID = "FragranceComponentFunctionalPurposeMismatch";
+			}
+			else if (errorType == "Publicly Disclosed")
+			{
+				errorTypeID = "NonFunctionalIngredientDisclosureIssue";
+			}
+			else if (errorType == "Public Name")
+			{
+				errorTypeID = "CAHCPPublicDisclosureIssues";
+			}
+			else if (errorType == "Ingredient Type with Functional Purpose")
+			{
+				errorTypeID = "NonFunctionalIngredientTypeOrFunctionalPurposeMismatch";
+			}
+			else if (errorType == "Third Party")
+			{
+				errorTypeID = "PVBOTThirdPartyError";
+			}
+			else
+			{
+				Report.Info($"errorType was not one of the expected options, could not assign errorTypeID");
+				return false;
+			}			
+
+			IWebElement errorEl = this.ContainerElement.FindElement(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.{errorTypeID}']"), 2);
+			if(errorEl.IsNullOrEmpty())
+			{
+				Report.Info($"The error was found to not be displayed");
+				return false;
+			}
+			if (errorEl.GetAttribute("style").IsNullOrEmpty())
+			{
+				Report.Info("correct error type found, going to text check");
+				string fullString = errorEl.Text;
+				var foundStringList = fullString.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+				if(table.RowCount==foundStringList.Count())
+				{
+					Report.Info($"The number of rows in the table containg the expected error matched the number of sections in the found error message");
+
+				}
+				else
+				{
+					Report.Info($"The number of sections betweent the found and expected error did not match");
+					return false;
+				}
+				int i = 0;
+				bool allSectionsmatch = true;
+				foreach (TableRow thisRow in table.Rows)
+				{
+					string expectedString = thisRow["ErrorSections"];
+					string foundString = foundStringList[i];
+					Report.Info($"The found error section {i + 1} was: {foundString}");
+					Report.Info($"The expected error section {i + 1} was: {expectedString}");
+					if(expectedString==foundString)
+					{
+						Report.Info($"The found sections in postion {i+1} matched");
+					}
+					else
+					{
+						Report.Info($"The found sections in postion {i+1} did not match");
+						allSectionsmatch = false;
+					}
+					i++;
+
+				}
+				return allSectionsmatch;
+			}
+			else
+			{
+				Report.Info($"The error was found to not be displayed");
+				return false;
+
+			}
+			
 		}
 
 		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
