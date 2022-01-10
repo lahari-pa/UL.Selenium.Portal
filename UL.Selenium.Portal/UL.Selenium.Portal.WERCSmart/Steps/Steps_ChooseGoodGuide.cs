@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"in the GoodGuide site I click the 'Add UPC' button")]
+		[StepDefinition(@"in the GoodGuide site I click the 'Add' button")]
 		public void GivenInTheGoodGuideSiteIClickTheAddUPCButton()
 		{
 			Report.IsTrue(new GGNewProduct().ClickAddUPC(), "Failed to click Add UPC button",

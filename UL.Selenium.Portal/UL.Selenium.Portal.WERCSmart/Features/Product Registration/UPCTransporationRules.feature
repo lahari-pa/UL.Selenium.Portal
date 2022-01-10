@@ -65,7 +65,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -118,7 +118,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -173,7 +173,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -210,7 +210,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -262,7 +262,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -314,7 +314,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -351,7 +351,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -389,7 +389,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -442,7 +442,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -511,7 +511,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -583,7 +583,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10006
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -643,7 +643,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10003
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -706,7 +706,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -777,7 +777,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20002
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		
 
@@ -865,7 +865,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20016
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -946,7 +946,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20034
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC20034 |
@@ -998,7 +998,7 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40005
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1063,7 +1063,7 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1127,7 +1127,7 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		# Universal Product Code (UPC) Page
 		And I should see the Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 

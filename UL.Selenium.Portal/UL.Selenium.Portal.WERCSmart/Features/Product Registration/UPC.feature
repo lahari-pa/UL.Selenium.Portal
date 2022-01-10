@@ -328,7 +328,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	And I click Row Actions for product saved as: TestCase96071
 	Then I click on the Row Action: Process UPC Update
 	Then I delete UPC saved as: UPC96071
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC96071_2
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -346,7 +346,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC96071
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -437,7 +437,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 		| Amazon    |
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109516, container type: Paper bag and size: 2 do not click continue
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC109516_2
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -567,7 +567,7 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	And I click continue
 
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
 
@@ -607,7 +607,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC fi
 	And I select the following retailers in the 'Select Retailers' window
 		| Retailer |
 		| Amazon   |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:ABCDEF, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
@@ -657,7 +657,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 		| Best Buy       |
 		| CVS            |
 		| Dollar General |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:0667539048202, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
 	Given I click the 'Add Retailers' button
@@ -733,7 +733,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 		| Target   |
 	Then I click Done on Select Retailers window
 	Then I click continue
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	Then I click continue
 	Then I confirm that DPCI label text for retailer Target UPC item 1 matches: DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.
 	Then I confirm that DPCI for retailer Target UPC should not be required

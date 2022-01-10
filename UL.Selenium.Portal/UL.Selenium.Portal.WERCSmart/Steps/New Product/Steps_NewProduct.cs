@@ -1103,10 +1103,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the 'Add UPC' button")]
+		[StepDefinition(@"I click the 'Add' button")]
 		public void ThenIClickTheAddUpcButton()
 		{
-			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add UPC' button!", "Successfully clicked the 'Add UPC' button");
+			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add' button!", "Successfully clicked the 'Add' button");
 		}
 
 		[StepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
@@ -2857,7 +2857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))

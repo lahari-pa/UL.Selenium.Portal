@@ -49,7 +49,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then  I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
 		| saved as ExistingUPC_ProductAccount_1 | Plastic Container | 1    |      |          |
@@ -402,7 +402,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then  I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
 		| saved as ExistingUPC_ProductAccount_1 | Plastic Container | 1    |      |          |

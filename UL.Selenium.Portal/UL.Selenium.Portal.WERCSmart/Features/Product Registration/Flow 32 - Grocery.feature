@@ -102,7 +102,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 # ====== Following the steps from 'Shared Step' 57960 ====== #
 And I should see the Universal Product Code (UPC) Page
-Given I click the 'Add UPC' button
+Given I click the 'Add' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
 | UPCNumber     | saved as UPC60774 |

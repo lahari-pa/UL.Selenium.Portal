@@ -23,7 +23,7 @@ Scenario: [169528] UPC Check Digit validations - With Recert
 		| Retailer      |
 		| Canadian Tire |
 	Then I should see the Universal Product Code (UPC) Page
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	Then I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC
 	| UPC Number      | Container Type | Size | Package Type |
 	| saved as badUPC | Cardboard      | 10   | myPkg        |

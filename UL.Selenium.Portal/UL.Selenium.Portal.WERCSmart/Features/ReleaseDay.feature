@@ -80,10 +80,10 @@ Then I call Shared Step 75146 (Retailer - Select one or more retailers that do n
 Then I generate a random UPC number and save as: UPC99052
 Then I generate a random UPC number and save as: UPC99052-2
 # I Enter the "UPC Number" you generated in step 11
-Then I click the 'Add UPC' button
+Then I click the 'Add' button
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC99052, container type: Cardboard, size: 10, Do not click continue
 # I Click the "Add UPC" button again
-Then I click the 'Add UPC' button
+Then I click the 'Add' button
 # In the UPC Number field enter the same UPC as you used in step 13
 Then I enter UPC Number: saved as UPC99052
 # I Confirm a warning message is shown above the UPC table that reads:"You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please either remove the instances of duplicate UPC(s) from the necessary registration data."

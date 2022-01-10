@@ -1086,7 +1086,7 @@ And I should see the Physical and Chemical Properties Page
 	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
