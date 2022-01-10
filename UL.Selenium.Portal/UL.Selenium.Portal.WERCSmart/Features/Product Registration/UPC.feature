@@ -49,7 +49,7 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option               |
 		| UPC Number           |
@@ -77,7 +77,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Propane       | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
@@ -108,7 +108,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	Given in the Volatile Organic Compound Summary page I click Continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
@@ -140,7 +140,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 		#| Option                            |
 		#| Size (Fluid Ounces)               |
@@ -166,7 +166,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option                            |
 	#	| Size (Weight Ounces)              |
@@ -191,7 +191,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option                            |
 	#	| Size (Weight Ounces)              |
@@ -222,7 +222,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option          |
 	#	| Weight (Ounces) |
@@ -586,7 +586,7 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
 
 @ScenarioId:6058
-Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC field validation
+Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -682,7 +682,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87305
 
 @ScenarioId:6064
-Scenario: [87598]- Universal Product Code (UPC) Step - Add Case UPC - fields required
+Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields required
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -703,7 +703,7 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Case UPC - fields req
 		| Retailer |
 		| Amazon   |
 		| CVS      |
-	Given I click Add Case UPC
+	Given I click Add Casepack
 	Given in the Universal Product Code (UPC) page I click Continue
 	Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
 		| Placeholder                       |

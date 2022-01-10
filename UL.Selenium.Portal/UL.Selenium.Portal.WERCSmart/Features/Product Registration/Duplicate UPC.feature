@@ -204,9 +204,9 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
 	And I click continue on the Forward Product Registration page	
 	Given I select the first product under the Select UPCs tab
-	Given I click the Add Case UPC button under the Select UPCs tab
-	Then I wait for the Add Case UPC popup to appear
-	And In the Add Case UPC modal window I enter the following information:
+	Given I click the Add Casepack button under the Select UPCs tab
+	Then I wait for the Add Casepack popup to appear
+	And In the Add Casepack modal window I enter the following information:
 		| UPC Number           | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
 		| saved as ExistingUPC | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
@@ -253,7 +253,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| Amazon   |
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC91801_2 | Cardboard      | 32   | 32       |                          | 4A: steel box         |
@@ -277,9 +277,9 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
 	Given I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
-	Given I click the Add Case UPC button under the Select UPCs tab
-	Then I wait for the Add Case UPC popup to appear
-	And In the Add Case UPC modal window I enter the following information:
+	Given I click the Add Casepack button under the Select UPCs tab
+	Then I wait for the Add Casepack popup to appear
+	And In the Add Casepack modal window I enter the following information:
 		| UPC Number          | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
 		| saved as UPC91800_2 | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
@@ -299,7 +299,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then  I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	And in the UPC Window, I click the Add Case UPC button
+	And in the UPC Window, I click the Add Casepack button
 	Given I add the following into the UPC case fields
 		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as ExistingUPC_ProductAccount_1 | <first>        | 1    | 1        |                          | <first>               |

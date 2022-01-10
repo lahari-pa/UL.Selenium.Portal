@@ -613,7 +613,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Add UPC button");
 		}
 
-		[StepDefinition(@"I click the Add Case UPC button under the Select UPCs tab")]
+		[StepDefinition(@"I click the Add Casepack button under the Select UPCs tab")]
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
@@ -884,8 +884,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var modal = new AddUPCModal();
 			TableRow row = table.Rows[0];
-			Report.IsTrue(modal.EnterUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
-							"Successfully entered information into the Add Case UPC modal window.");
+			Report.IsTrue(modal.EnterUPCInformation(row), "Failed to enter information into the Add Casepack modal window.",
+							"Successfully entered information into the Add Casepack modal window.");
 		}
 
 		[StepDefinition(@"In the UPC modal window I click Save")]
@@ -895,31 +895,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (modal.ClickSave())
 			{
-				Report.Success("Successfully clicked Save in the Add Case UPC modal window.", false);
+				Report.Success("Successfully clicked Save in the Add Casepack modal window.", false);
 			}
 			else
 			{
-				Report.Failure("Failed to click Save in the Add Case UPC modal window.", false);
+				Report.Failure("Failed to click Save in the Add Casepack modal window.", false);
 			}
 
 		}
 
 
-		[StepDefinition(@"In the Add Case UPC modal window I enter the following information:")]
+		[StepDefinition(@"In the Add Casepack modal window I enter the following information:")]
 		public void InTheAddCaseUPCWindowIEnterTheFollowingInfo(Table table)
 		{
 			var modal = new AddCaseUPCModal();
 			TableRow row = table.Rows[0];
-			Report.IsTrue(modal.EnterCaseUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
-				"Successfully entered information into the Add Case UPC modal window.");
+			Report.IsTrue(modal.EnterCaseUPCInformation(row), "Failed to enter information into the Add Casepack modal window.",
+				"Successfully entered information into the Add Casepack modal window.");
 		}
 
 		[StepDefinition(@"In the Case UPC modal window I click Save")]
 		public void InTheCaseUPCModalWindowIClickSave()
 		{
 			var modal = new AddCaseUPCModal();
-			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
-			"Successfully clicked Save in the Add Case UPC modal window.");
+			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Casepack modal window.",
+			"Successfully clicked Save in the Add Casepack modal window.");
 		}
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
 		public void ISelectTheProductSavedAsUnderSelectProductsRightPanel(string savedAs)
@@ -1120,11 +1120,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click Add Case UPC")]
+		[StepDefinition(@"I click Add Casepack")]
 		public void GivenIClickAddCaseUPC()
 		{
 			UPC UPCObject = new UPC();
-			Report.IsTrue(UPCObject.ClickAddCaseUPCButton(), "Failed to click the 'Add Case UPC' button", "Successfully clicked the 'Add Case UPC' button");
+			Report.IsTrue(UPCObject.ClickAddCaseUPCButton(), "Failed to click the 'Add Casepack' button", "Successfully clicked the 'Add Casepack' button");
 		}
 
 		[StepDefinition(@"I confirm no error is shown below the Individual UPC contained in the Case Pack field")]
@@ -1200,10 +1200,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I wait for the Add Case UPC popup to appear")]
+		[StepDefinition(@"I wait for the Add Casepack popup to appear")]
 		public void IWaitForTheAddCaseUPCPopupToAppear()
 		{
-			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
+			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Casepack modal did not appear", "The Add case upc modal appeared");
 		}
 
 		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
