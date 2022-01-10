@@ -116,7 +116,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
 		Given I click the 'Add' button
 
@@ -260,7 +260,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
 		Given I click the 'Add' button
 
@@ -440,7 +440,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
 		Given I click the 'Add' button
 
@@ -509,7 +509,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
 		Given I click the 'Add' button
 
@@ -581,7 +581,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10006
 		Given I click the 'Add' button
 
@@ -641,7 +641,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10003
 		Given I click the 'Add' button
 
@@ -704,7 +704,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
 		Given I click the 'Add' button
 
@@ -775,7 +775,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20002
 		Given I click the 'Add' button
 
@@ -863,7 +863,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20016
 		Given I click the 'Add' button
 
@@ -944,7 +944,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20034
 		Given I click the 'Add' button
 		Then I add the following into the UPC Fields
@@ -996,7 +996,7 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40005
 		Given I click the 'Add' button
 
@@ -1061,7 +1061,7 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
 		Given I click the 'Add' button
 
@@ -1125,7 +1125,7 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
 		Given I click the 'Add' button
 

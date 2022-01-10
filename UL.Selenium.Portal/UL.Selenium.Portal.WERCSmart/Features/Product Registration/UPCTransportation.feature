@@ -501,7 +501,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	#may need to update the below if inludes line breaks etc in the text
 	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
 	And I click continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

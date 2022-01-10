@@ -485,7 +485,7 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
-Given I should see the Universal Product Code (UPC) Page
+Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 Given I click the 'Add Case UPC' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |

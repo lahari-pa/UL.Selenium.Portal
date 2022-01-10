@@ -369,7 +369,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I should see the Retailer Page
 	Given in the New Product page I click Continue
 	# Universal Product Code (UPC) Page
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |

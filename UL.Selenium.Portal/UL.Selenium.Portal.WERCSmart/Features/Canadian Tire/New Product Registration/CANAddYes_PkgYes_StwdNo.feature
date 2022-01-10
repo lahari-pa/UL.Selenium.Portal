@@ -28,7 +28,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And I click continue
-#And I should see the Universal Product Code (UPC) Page
+#And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 And In the UPC page I should see Add new Packaging Type link
 Given I generate a random UPC number and save as: UPC85325
 And I click the 'Add' button

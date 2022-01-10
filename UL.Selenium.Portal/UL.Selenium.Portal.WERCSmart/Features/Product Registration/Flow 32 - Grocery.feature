@@ -101,7 +101,7 @@ Given in the International Marine (IMDG) Classification page I click Continue
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 # ====== Following the steps from 'Shared Step' 57960 ====== #
-And I should see the Universal Product Code (UPC) Page
+And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 Given I click the 'Add' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
