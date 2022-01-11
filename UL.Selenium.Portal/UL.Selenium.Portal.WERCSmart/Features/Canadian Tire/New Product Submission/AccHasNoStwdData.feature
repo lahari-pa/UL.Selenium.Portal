@@ -16,10 +16,10 @@
 Feature: Account has No Stewardship Data
 
 
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username   | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto3 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username   | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto3 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ScenarioId:1322
 Scenario: [86121] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
@@ -288,9 +288,7 @@ Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer
 
 @ScenarioId:1328
 Scenario: [86418] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
-	#Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-Given I log in with the account saved in TReVor as: ProductAccount
-
+	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 	Given I generate a random UPC number and save as: UPC86418
 	#Given I delete all products with UPC Number: saved as UPC86418
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
