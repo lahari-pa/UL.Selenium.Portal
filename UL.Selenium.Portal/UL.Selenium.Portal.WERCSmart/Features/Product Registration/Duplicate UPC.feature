@@ -62,7 +62,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 @singlerun
 @ScenarioId:1547
-Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
+Scenario: [82536] Mass Upload File, Checking for Duplicate UPCs
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -92,7 +92,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| %RandomUPC3% | MySoap5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC4% | MySoap6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC5% | MySoap7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |                         |            |                  |                  |            |              |            |          |                              |
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest82536
+	Then I click the 'Upload File' button and upload the file saved as: Bulktest82536
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
@@ -156,7 +156,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	#	| UPC_D | 91       | 4    | 9.06               | 00DD04          | 2004            | 5678            | I0004           | 456-78-9012 | 200000006 | 223-1234,123-1233 |
 	##And I Create your own document with UPCs, use the following site to get UPCs https://www.upcdatabase.com/click on the Random Item link and copy and p123-1234,123-1234aste the UPCs that appear on the textbox
 	#And I In the UPC document add some duplicate UPCs, save the document
-	#And I Click on the Upload UPCs button
+	#And I Click on the Upload File button
 	#And I Search for the document that contains the UPCs you will upload, click Open button
 	#And I Confirm that the Add Multiple window openswith the UPCs that were added in the document
 	#And I Confirm that the size is also the same as from what is in the UPC document
@@ -342,7 +342,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
 	Then  I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91100
+	And I click the 'Upload File' button and upload the file saved as: test91100
 	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
@@ -449,7 +449,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I search for the product saved as: TestCase91101
 	Given I edit the first product in results
 	Then  I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91101 with data:
+	And I click the 'Upload File' button and upload the file saved as: test91101 with data:
 	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>

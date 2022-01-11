@@ -555,7 +555,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the 'Upload UPCs' button and upload the file saved as: (.*)")]
+		[StepDefinition(@"I click the 'Upload File' button and upload the file saved as: (.*)")]
 		public void ThenIClickTheUploadUpcsButtonAndUploadSavedAs(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -945,14 +945,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (!upc.UploadUpcButton())
 			{
-				Report.Failure("The Upload UPCs Button was not found");
+				Report.Failure("The Upload File Button was not found");
 				Report.Screenshot();
 				allFound = false;
 			}
 
 			if (allFound)
 			{
-				Report.Success("The UPC Buttons (+Add UPC, + Add Casepack, & ↑ Upload UPCs were all found");
+				Report.Success("The UPC Buttons (+Add UPC, + Add Casepack, & ↑ Upload File were all found");
 				Report.Screenshot();
 			}
 
