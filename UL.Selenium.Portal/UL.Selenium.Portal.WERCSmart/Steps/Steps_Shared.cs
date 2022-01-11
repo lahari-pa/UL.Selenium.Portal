@@ -1237,7 +1237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57883 \(Comments - Happy Path\) and enter the comment: (.*)")]
+		[StepDefinition(@"I call Shared Step 57883 \(Optional Comments - Happy Path\) and enter the comment: (.*)")]
 		public void GivenICallSharedCommentsHappyPath(string comments)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -11063,7 +11063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");
@@ -11266,7 +11266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");

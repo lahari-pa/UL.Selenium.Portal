@@ -64,7 +64,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 # Subscription Enrollment - Section 1 Checks
@@ -665,7 +665,7 @@ Given I call Shared Step 48367 (Product Includes Battery > any type)
 Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Upgrade
 And I see the alert message with text: Subscription upgrade is required to submit your registration for assessment. Please upgrade at this time. Once you purchase your subscription, the registration data will transfer for assessment. Upgrades are pro-rated for the remainder of the subscription term and your default payment method will be used. under Subscription Enrollment
@@ -843,7 +843,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Upgrade
 And I see the alert message with text: Subscription upgrade is required to submit your registration for assessment. Please upgrade at this time. Once you purchase your subscription, the registration data will transfer for assessment. Upgrades are pro-rated for the remainder of the subscription term and your default payment method will be used. under Subscription Enrollment

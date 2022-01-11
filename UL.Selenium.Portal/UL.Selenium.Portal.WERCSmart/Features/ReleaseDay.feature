@@ -133,7 +133,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Case 99502
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Case 99502
 
 # I Confirm the Data Acceptance step is shown with No errors
 Then I should see the Data Acceptance Page

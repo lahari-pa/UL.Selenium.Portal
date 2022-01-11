@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -175,7 +175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -278,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -360,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps
 			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 			//		sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -705,8 +705,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -865,8 +865,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -972,8 +972,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -1132,8 +1132,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -1242,8 +1242,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -1351,8 +1351,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps
 			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 			//		sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.StartStep("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.StartStep("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
@@ -1465,8 +1465,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.Info("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.Info("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.Info("Data Acceptance - Click Accept - Happy Path");
@@ -1631,8 +1631,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.Info("Comments - Happy Path");
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.Info("Optional Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			Report.Info("Data Acceptance - Click Accept - Happy Path");
@@ -1781,7 +1781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			//	And I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("test");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -2057,7 +2057,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			//Given in the Optional Reports and Documents Available for Purchase page I click Continue
 			newProductSteps.ClickContinue();
-			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			//	And I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("test");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -2143,7 +2143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			//Given in the Optional Reports and Documents Available for Purchase page I click Continue
 			newProductSteps.ClickContinue();
-			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			//	And I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("test");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -2540,7 +2540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Formulation Names");
-			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+			//And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 			sharedSteps.SharedConfirmRestrictUse_Restrict();
@@ -2753,7 +2753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.SharedConfirmRestrictUse_Restrict();			
 			//In the Sustainability page I click Continue
 			newProductSteps.ClickContinue();
-			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+			//And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");			
 			//And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 			sharedSteps.SharedGoToSummaryAndVerifyData("Raw material");
@@ -2961,7 +2961,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.SharedConfirmRestrictUse_Restrict();
 			//In the Sustainability page I click Continue
 			newProductSteps.ClickContinue();
-			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+			//And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 			sharedSteps.SharedGoToSummaryAndVerifyData("Raw material");
@@ -3352,7 +3352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -3599,7 +3599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -3685,7 +3685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -3771,7 +3771,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -3853,7 +3853,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//sharedSteps
 			//	.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 			//		sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -3974,7 +3974,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4045,7 +4045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4094,7 +4094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 		}
 
@@ -4145,7 +4145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4199,7 +4199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4256,7 +4256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4313,7 +4313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4369,7 +4369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4421,7 +4421,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4474,7 +4474,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4526,7 +4526,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -4578,7 +4578,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
-			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			// 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
 			//sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -6828,7 +6828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ProductEditorShouldBeLoaded();
 			Report.StartStep("And I click continue");
 			newProductSteps.ClickContinue();
-			Report.StartStep("And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment Kit 58753");
+			Report.StartStep("And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment Kit 58753");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment Kit 58753");
 			Report.StartStep("And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
