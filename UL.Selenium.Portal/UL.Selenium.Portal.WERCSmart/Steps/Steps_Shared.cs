@@ -1242,7 +1242,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Comments Page");
+			Report.StartStep("I should see the Optional Comments Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Comments");
 			Report.StartStep("I enter the following into the Optional Comments field: " + comments);
 			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(comments);

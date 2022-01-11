@@ -42,8 +42,8 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I filter for the product saved as: TestCase75142
 And I edit the product saved as: TestCase75142
 Given In the New Product page I click tab: Review and Submit
-Then I click the page heading: Comments
-And I should see the Comments Page
+Then I click the page heading: Optional Comments
+And I should see the Optional Comments Page
 Then I click continue
 And I should see the Data Acceptance Page
 And In the Data Acceptance page I click on the Accept button

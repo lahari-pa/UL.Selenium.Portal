@@ -125,7 +125,7 @@ And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57883 ====== #
-And I should see the Comments Page
+And I should see the Optional Comments Page
 And I enter the following into the comments field: Comments Field Text
 Then in the Comments page I click Continue
 

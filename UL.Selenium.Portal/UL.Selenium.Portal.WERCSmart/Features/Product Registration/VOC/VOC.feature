@@ -222,7 +222,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Partition Coefficient field to: 5
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
@@ -404,7 +404,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Partition Coefficient field to: 5
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
@@ -527,7 +527,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set the Product's Dispensing Method field to: Pump
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
