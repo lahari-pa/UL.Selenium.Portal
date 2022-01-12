@@ -118,7 +118,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SectExatcDataNotKnown("pH");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7 (Neutral)");
 			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
@@ -149,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
@@ -1327,14 +1327,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 57441 \(Physical and Chemical Properties - Primary Physical Property - Liquid\)")]
 		public void GivenICallSharedPhysicalandChemicalProperties_PrimaryPhysicalProperty_Liquid()
 		{
-			// Secondary Physical State, Specific Gravity (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
+			// Secondary Physical State, Relative Density (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
 			// Add a variable table in the future if specific data is required.
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 20");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			Report.StartStep("I set the Relative Density option to: 20");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
 			MyNewProduct.SectExatcDataNotKnown("pH");
 			Report.StartStep("I set the pH field to: 7.1 - 9.9");
@@ -3702,10 +3702,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
@@ -3794,9 +3794,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Liquid"));
 			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"1.0"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "1.0");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "1.0");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"10.2"));
@@ -3855,9 +3855,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Primary Physical State to: 'Liquid'");
 			myStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"10"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "10");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"8"));
@@ -3889,8 +3889,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 68");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "68");
+			Report.StartStep("I set the Relative Density option to: 68");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "68");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
 			MyNewProduct.SectExatcDataNotKnown("pH");
 			Report.StartStep("I set the pH field to: 2.1 - 3.9");
@@ -4029,9 +4029,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"15.0"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "15.0");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "15.0");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"9.5"));
@@ -4298,9 +4298,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				 "Cream");
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
 				"1.0");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
 				"1.0");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
@@ -4352,10 +4352,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Physical and Chemical tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Physical and Chemical tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Physical and Chemical tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
@@ -4552,7 +4552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyNewProductSteps.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyNewProductSteps.SetTheSectionOptionTo("Relative Density", "20");
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
@@ -4653,7 +4653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
@@ -5266,8 +5266,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			stepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 10");
-			stepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			Report.StartStep("I set the Relative Density option to: 10");
+			stepsNewProduct.SetTheSectionOptionTo("Relative Density", "10");
 			Report.StartStep("I set the pH option to: 5");
 			stepsNewProduct.SetTheSectionOptionTo("pH", "5");
 			Report.StartStep("I set the pH option to: 5");
@@ -7213,8 +7213,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			newProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity field to: 1");
-			newProductSteps.SetTheSectionOptionTo("Specific Gravity", "1");
+			Report.StartStep("I set the Relative Density field to: 1");
+			newProductSteps.SetTheSectionOptionTo("Relative Density", "1");
 			Report.StartStep("I set the pH option to: 10");
 			newProductSteps.SetTheSectionOptionTo("pH", "10");
 			Report.StartStep("I set the Boiling Point option to: '30'");

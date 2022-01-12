@@ -825,7 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Relative Density text field");
 			try
 			{
 				var selNewProduct = new NewProduct();
