@@ -4246,10 +4246,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
