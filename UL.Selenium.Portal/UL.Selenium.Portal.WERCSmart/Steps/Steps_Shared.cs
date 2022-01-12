@@ -10344,11 +10344,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
 			Report.StartStep("I upload a PDF file to section: OSHA SDS");
-			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			//MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
-			MyNewProduct.ICheckTheCheckboxWithDescription("check",
-							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
+			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");			
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
