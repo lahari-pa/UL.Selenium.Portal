@@ -69,7 +69,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 	And I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Water Solubility     | Secondary Physical State |
-		| Soluble in hot water | Solid                    |
+		| Dispersible | Solid                    |
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium hydroxide | 80      | false               | false       |            |

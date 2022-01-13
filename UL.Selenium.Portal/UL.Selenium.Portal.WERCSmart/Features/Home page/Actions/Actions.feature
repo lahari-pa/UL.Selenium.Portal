@@ -67,7 +67,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Very soluble
+	And I set the Select the best Water Solubility description to be: Dispersible
 	And in the New Product page I click Continue
 	Given I navigate to the home page
 	Then I delete the product: TestCase63663

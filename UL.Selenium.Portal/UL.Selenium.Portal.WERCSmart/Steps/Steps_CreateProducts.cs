@@ -1012,7 +1012,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 
 			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
 			
@@ -1098,7 +1098,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 			Table table37857 = new Table("Secondary Physical State", "Water Solubility");
-			table37857.AddRow("Grainy", "Soluble in hot water");
+			table37857.AddRow("Grainy", "Dispersible");
 
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
@@ -1174,7 +1174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
 			sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
