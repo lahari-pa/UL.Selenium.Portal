@@ -56,7 +56,7 @@ And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
 And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
-And I set the Select the best Water Solubility description field to: Decomposes
+And I set the Select the best Water Solubility description field to: Dispersible
 And I set the When the product has a flammable propellant field to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 And I set the Select all potential allergens included in this product field to: Dairy
 And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk

@@ -207,7 +207,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Granular
 	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
+	And I set the water solubility description to: Dispersible
 	Given in the New Product page I click Continue
 	
 

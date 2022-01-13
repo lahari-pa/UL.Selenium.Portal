@@ -932,7 +932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
@@ -1466,7 +1466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
@@ -1512,7 +1512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			
 

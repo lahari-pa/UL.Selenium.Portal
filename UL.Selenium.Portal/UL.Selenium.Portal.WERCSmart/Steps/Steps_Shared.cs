@@ -129,7 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
 
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
@@ -167,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (MyNewProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
@@ -4659,7 +4659,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "63");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 		*/
@@ -8768,7 +8768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else ignore this step");
 			if (newProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 			else
 			{

@@ -36,7 +36,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
-	Given I set the Select the best Water Solubility description field to: Decomposes
+	Given I set the Select the best Water Solubility description field to: Dispersible
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -86,7 +86,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
-	Given I set the Select the best Water Solubility description field to: Decomposes
+	Given I set the Select the best Water Solubility description field to: Dispersible
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

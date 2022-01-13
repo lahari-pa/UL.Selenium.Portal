@@ -153,7 +153,7 @@ And Primary Physical State should be showing the error messages: This is a requi
 Given I set the Primary Physical State option to: Solid
 Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Decomposes
+Given I set the Select the best Water Solubility description option to: Dispersible
 Given I click continue
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
