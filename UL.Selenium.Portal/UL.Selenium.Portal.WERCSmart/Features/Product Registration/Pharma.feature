@@ -409,7 +409,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 Given I set the Secondary Physical State field to: Liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description field to: Appreciable
+Given I set the Select the best Water Solubility description field to: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen

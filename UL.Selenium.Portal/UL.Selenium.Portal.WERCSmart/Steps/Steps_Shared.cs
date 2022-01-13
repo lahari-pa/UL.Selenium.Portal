@@ -4324,9 +4324,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Closed cup method");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
-				"Appreciable");
+				"Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-				"Appreciable");
+				"Dispersible");
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
