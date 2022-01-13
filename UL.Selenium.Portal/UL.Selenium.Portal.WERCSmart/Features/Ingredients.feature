@@ -266,7 +266,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
 	Given I set the pH option to: 5
-	Given I set the Select the best Water Solubility option to: Appreciable
+	Given I set the Select the best Water Solubility option to: Dispersible
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
 	Given I click continue
