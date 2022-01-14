@@ -1213,13 +1213,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//60723 uses this on the reulatory docs to provide screen, but also on the additional docs to provide screen in 57950
 			//If keep sds confirm step in does this brake the step if used on the other screen?
 
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				//Should this show on this page? this step is for the additional docs page? Any examples?
-				Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-				//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
-			}
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	//Should this show on this page? this step is for the additional docs page? Any examples?
+			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			//}
 
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
@@ -7966,11 +7966,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//}
 
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
@@ -7995,12 +7995,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");		
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -9060,11 +9055,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -11739,11 +11729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			var MyStepsNewProduct = new StepsNewProduct();
-			var newProdClass = new NewProduct();
-			
-			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			
+			var newProdClass = new NewProduct();			
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -12240,10 +12226,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
-			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			MyNewProduct.ICheckTheCheckboxWithDescription("check",
-							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
-
+			
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 

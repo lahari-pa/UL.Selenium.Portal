@@ -623,7 +623,6 @@ Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Con
 Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
 Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145793, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
 Given I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I click continue
 Given I click continue

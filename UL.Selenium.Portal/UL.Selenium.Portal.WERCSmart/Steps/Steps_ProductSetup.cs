@@ -4773,7 +4773,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.");
 			newProductSteps.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			//newProductSteps.ICheckTheCheckboxWithDescription("check","I confirm that I have provided the most up-to-date, OSHA-compliant SDS in this product registration.");
-			newProductSteps.ICheckTheCheckboxWithDescription("check", "I confirm I am providing the most current Safety Data Sheet");
 			newProductSteps.ClickContinue();
 			newProductSteps.ClickContinue();
 			newProductSteps.ClickContinue();
