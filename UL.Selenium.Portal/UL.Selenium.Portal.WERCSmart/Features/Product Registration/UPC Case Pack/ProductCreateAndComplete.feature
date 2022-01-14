@@ -403,7 +403,6 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC118139, container type: Metal Container and size: 32
 	Given I set the OSHA-compliant Safety Data Sheet, English option to: Yes
 	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue

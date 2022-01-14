@@ -341,7 +341,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Given I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue

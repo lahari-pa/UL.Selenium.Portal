@@ -42,7 +42,6 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -138,7 +137,6 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Label in both French and English is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Green
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
@@ -172,7 +170,6 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf

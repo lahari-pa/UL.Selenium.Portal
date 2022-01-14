@@ -113,7 +113,6 @@ And in the Universal Product Code (UPC) page I click Continue
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
 And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Then in the Regulatory Documents to Provide page I click Continue
 
 # Additional Documents to Provide Page
