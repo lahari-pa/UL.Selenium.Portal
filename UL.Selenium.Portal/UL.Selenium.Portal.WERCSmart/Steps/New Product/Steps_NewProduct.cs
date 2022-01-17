@@ -1210,7 +1210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
+		[StepDefinition(@"In the Data Acceptance page I select Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			var thisNewProduct = new NewProduct();

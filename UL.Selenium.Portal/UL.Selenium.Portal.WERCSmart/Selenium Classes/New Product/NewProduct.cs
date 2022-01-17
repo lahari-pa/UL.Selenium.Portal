@@ -1536,7 +1536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectYesAgreedRadio()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 			if (el == null)
 			{
 				return false;
@@ -1548,7 +1548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool YesAgreedIsSelected()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 			if (el == null)
 			{
 				return false;
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 				if (el == null)
 				{
 					return false;

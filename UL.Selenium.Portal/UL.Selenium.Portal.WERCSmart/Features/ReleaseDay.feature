@@ -146,7 +146,7 @@ Then I check that the Select Option warning is visible
 
 Then I confirm the email registered: ProductAccount is populated in the field under the Statement
 
-Then In the Data Acceptance page I select Yes, Agreed
+Then In the Data Acceptance page I select Agreed
 
 Then I check that the Select Option warning is not visible
 
