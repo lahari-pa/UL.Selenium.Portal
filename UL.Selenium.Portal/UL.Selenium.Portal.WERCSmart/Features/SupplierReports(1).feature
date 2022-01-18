@@ -270,7 +270,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)

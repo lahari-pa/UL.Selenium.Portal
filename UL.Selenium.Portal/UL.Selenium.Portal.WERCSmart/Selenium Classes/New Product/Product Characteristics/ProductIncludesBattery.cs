@@ -94,8 +94,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//tbody//tr"));
 				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 				int manufacturerIndex = th.FirstOrDefault(x => x.Value == "Manufacturer").Key;
-				int perPackageIndex = th.FirstOrDefault(x => x.Value.Contains("per package")).Key;
-				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("required")).Key;
+				int perPackageIndex = th.FirstOrDefault(x => x.Value.Contains("per Package")).Key;
+				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("Operate Product")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
 					string batteryType = thisRow.FindElement(By.XPath(".//td[" + batteryTypeIndex.ToString() + "]//selected"), 2).SelectedOption();
@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				int batteryCount = 1;
 				foreach (Battery thisBattery in value)
 				{
-					IWebElement addRowButton = this.containerElement.FindElements(By.XPath(".//button"), 2).FirstOrDefault(x => x.Text.Contains("Add Row"));
+					IWebElement addRowButton = this.containerElement.FindElements(By.XPath(".//button"), 2).FirstOrDefault(x => x.Text.Contains("Add Another Battery"));
 					if (addRowButton != null)
 					{
 						addRowButton.Click();

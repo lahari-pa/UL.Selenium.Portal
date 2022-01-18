@@ -704,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		/// <summary>
-		/// Requires a table with headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+		/// Requires a table with headings: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 		/// </summary>
 		/// <param name="table"></param>
 		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\) : Setting how the battery is packaged option to (.*)")]
@@ -715,21 +715,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
 			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", option);
-			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |");
 			try
 			{
 				var listOfBatteries = new List<Battery>();
 				foreach (TableRow thisRow in table.Rows)
 				{
-					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					if (!int.TryParse(thisRow["Quantity of Batteries per Package"], out int batteriesPerPackage))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries per Package' column of the step table must be an integer value");
 					}
-					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					if (!int.TryParse(thisRow["Quantity of Batteries to Operate Product"], out int batteriesRequired))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries to Operate Product' column of the step table must be an integer value");
 					}
 					var thisBattery = new Battery {
 						BatteryType = thisRow["Battery Type"],
@@ -768,21 +768,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
 			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
-			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |");
 			try
 			{
 				var listOfBatteries = new List<Battery>();
 				foreach (TableRow thisRow in table.Rows)
 				{
-					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					if (!int.TryParse(thisRow["Quantity of Batteries per Package"], out int batteriesPerPackage))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries per Package' column of the step table must be an integer value");
 					}
-					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					if (!int.TryParse(thisRow["Quantity of Batteries to Operate Product"], out int batteriesRequired))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries to Operate Product' column of the step table must be an integer value");
 					}
 					var thisBattery = new Battery {
 						BatteryType = thisRow["Battery Type"],
@@ -11886,21 +11886,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
 			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
-			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |");
 			try
 			{
 				var listOfBatteries = new List<Battery>();
 				foreach (TableRow thisRow in table.Rows)
 				{
-					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					if (!int.TryParse(thisRow["Quantity of Batteries per Package"], out int batteriesPerPackage))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries per Package' column of the step table must be an integer value");
 					}
-					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					if (!int.TryParse(thisRow["Quantity of Batteries to Operate Product"], out int batteriesRequired))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries to Operate Product' column of the step table must be an integer value");
 					}
 					var thisBattery = new Battery {
 						BatteryType = thisRow["Battery Type"],
