@@ -50,7 +50,7 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -110,7 +110,7 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given in the Comments page I click Continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -173,7 +173,7 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -267,7 +267,7 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order

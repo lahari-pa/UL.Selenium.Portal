@@ -22,8 +22,8 @@ Scenario: [169528] UPC Check Digit validations - With Recert
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer      |
 		| Canadian Tire |
-	Then I should see the Universal Product Code (UPC) Page
-	And I click the 'Add UPC' button
+	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And I click the 'Add' button
 	Then I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC
 	| UPC Number      | Container Type | Size | Package Type |
 	| saved as badUPC | Cardboard      | 10   | myPkg        |
@@ -40,7 +40,7 @@ Scenario: [169528] UPC Check Digit validations - With Recert
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)

@@ -506,7 +506,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:

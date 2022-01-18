@@ -49,7 +49,7 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option               |
 		| UPC Number           |
@@ -77,7 +77,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Propane       | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
@@ -108,7 +108,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	Given in the Volatile Organic Compound Summary page I click Continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
 		| UPC Number                        |
@@ -140,7 +140,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 		#| Option                            |
 		#| Size (Fluid Ounces)               |
@@ -166,7 +166,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option                            |
 	#	| Size (Weight Ounces)              |
@@ -191,7 +191,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option                            |
 	#	| Size (Weight Ounces)              |
@@ -222,7 +222,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I click the 'Add Case UPC' button
+	Given I click the 'Add Casepack' button
 	#Then I should see the following UPC options:
 	#	| Option          |
 	#	| Weight (Ounces) |
@@ -257,7 +257,7 @@ Scenario: [87832] View Shows Case UPC Data
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
@@ -295,7 +295,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
@@ -328,7 +328,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	And I click Row Actions for product saved as: TestCase96071
 	Then I click on the Row Action: Process UPC Update
 	Then I delete UPC saved as: UPC96071
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC96071_2
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -346,7 +346,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC96071
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -437,7 +437,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 		| Amazon    |
 		| Walgreens |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109516, container type: Paper bag and size: 2 do not click continue
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC109516_2
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -449,7 +449,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
@@ -512,7 +512,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Then I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
@@ -567,7 +567,7 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	And I click continue
 
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
 
@@ -586,7 +586,7 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
 
 @ScenarioId:6058
-Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC field validation
+Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -607,7 +607,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC fi
 	And I select the following retailers in the 'Select Retailers' window
 		| Retailer |
 		| Amazon   |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:ABCDEF, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
@@ -657,7 +657,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 		| Best Buy       |
 		| CVS            |
 		| Dollar General |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:0667539048202, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
 	Given I click the 'Add Retailers' button
@@ -673,7 +673,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		|                               |                          |                         |           | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#Given If purchase details are showing click confirm order
 	#And I navigate to the home page
@@ -682,7 +682,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87305
 
 @ScenarioId:6064
-Scenario: [87598]- Universal Product Code (UPC) Step - Add Case UPC - fields required
+Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields required
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -703,7 +703,7 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Case UPC - fields req
 		| Retailer |
 		| Amazon   |
 		| CVS      |
-	Given I click Add Case UPC
+	Given I click Add Casepack
 	Given in the Universal Product Code (UPC) page I click Continue
 	Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
 		| Placeholder                       |
@@ -733,7 +733,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 		| Target   |
 	Then I click Done on Select Retailers window
 	Then I click continue
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	Then I click continue
 	Then I confirm that DPCI label text for retailer Target UPC item 1 matches: DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.
 	Then I confirm that DPCI for retailer Target UPC should not be required
@@ -781,7 +781,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
@@ -914,7 +914,7 @@ Scenario:[120798] "U" for UPC Update for Suspended Status
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
@@ -978,7 +978,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page

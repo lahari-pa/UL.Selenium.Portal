@@ -351,7 +351,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
 	Then In the Data Acceptance page I select Yes, Agreed
 	And I should not see any error messages
 	Given I navigate to the home page
@@ -567,7 +567,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
 	Then In the Data Acceptance page I select Yes, Agreed
 	And In the Data Acceptance page I click on the Accept button
@@ -675,7 +675,7 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 

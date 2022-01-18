@@ -30,7 +30,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED)
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
@@ -56,7 +56,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58759, container type: Plastic Container and size: 10.00
 #Given in the Additional Documents to Provide page I click Continue
 #Given in the Other Product Document Uploads page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Servers, Small-Scale
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58759

@@ -101,8 +101,8 @@ Given in the International Marine (IMDG) Classification page I click Continue
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 # ====== Following the steps from 'Shared Step' 57960 ====== #
-And I should see the Universal Product Code (UPC) Page
-Given I click the 'Add UPC' button
+And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+Given I click the 'Add' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
 | UPCNumber     | saved as UPC60774 |
@@ -125,7 +125,7 @@ And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57883 ====== #
-And I should see the Comments Page
+And I should see the Optional Comments Page
 And I enter the following into the comments field: Comments Field Text
 Then in the Comments page I click Continue
 
@@ -188,7 +188,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking oil - Non-Aerosol
 

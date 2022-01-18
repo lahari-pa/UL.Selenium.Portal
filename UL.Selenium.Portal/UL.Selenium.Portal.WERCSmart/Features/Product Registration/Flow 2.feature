@@ -42,7 +42,7 @@ Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Spill Clean Up Agent (Mitigation Agent)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57367
 
@@ -72,7 +72,7 @@ Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57403
 
@@ -107,7 +107,7 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
 
@@ -141,7 +141,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 
@@ -171,7 +171,7 @@ Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Trap and/or Bait Station
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57648
 
@@ -200,7 +200,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
 
@@ -233,7 +233,7 @@ Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57708
 
@@ -264,7 +264,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
 
@@ -296,7 +296,7 @@ Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57910
 
@@ -341,6 +341,6 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274

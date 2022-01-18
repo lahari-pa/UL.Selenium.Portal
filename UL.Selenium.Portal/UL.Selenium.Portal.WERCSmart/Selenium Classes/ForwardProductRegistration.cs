@@ -1295,7 +1295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement upcNumber = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'UPC Number')]"), 2);
 			if (upcNumber == null || !upcNumber.TryEnterText(row["UPC Number"]))
 			{
-				Report.Info("Failed to enter the UPC Number in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the UPC Number in the Add Casepack modal window.");
 				return false;
 			}
 
@@ -1313,14 +1313,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement size = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Size (Weight Ounces)')]"), 2);
 			if (size == null || !size.TryEnterText(row["Size (Weight Ounces)"]))
 			{
-				Report.Info("Failed to enter the Size (Weight Ounces) in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the Size (Weight Ounces) in the Add Casepack modal window.");
 				return false;
 			}
 
 			IWebElement quantity = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Quantity')]"), 2);
 			if (quantity == null || !quantity.TryEnterText(row["Quantity"]))
 			{
-				Report.Info("Failed to enter the Quantity in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the Quantity in the Add Casepack modal window.");
 				return false;
 			}
 

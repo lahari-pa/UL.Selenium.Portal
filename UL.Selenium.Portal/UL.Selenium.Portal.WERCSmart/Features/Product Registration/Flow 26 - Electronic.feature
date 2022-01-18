@@ -51,7 +51,7 @@ Given I call Shared Step 58189 Answer Electronic Equipment questions - With Cath
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop)
 

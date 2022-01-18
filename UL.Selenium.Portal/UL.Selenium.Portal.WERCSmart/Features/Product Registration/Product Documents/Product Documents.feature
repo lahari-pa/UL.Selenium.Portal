@@ -56,7 +56,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59322
 
@@ -88,7 +88,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59320
 
@@ -118,7 +118,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59321
 

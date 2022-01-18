@@ -131,12 +131,12 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add UPC' button
+	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Given I click the 'Add' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
 		| saved as ExistingUPC_ProductAccount_1 | Plastic Container | 1    |      |          |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -277,7 +277,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] product submit upc info entry
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 Scenario: [NOTINCLUDEDGENERALTEST] UL Solution Center - Shows Updated Navigator Logo
@@ -752,7 +752,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Then I should see the Data Acceptance Page	
 Given I click the Summary button in the Data Acceptance window
 Given I switch to the Data Summary page
@@ -815,7 +815,7 @@ Scenario: [UPCCOLUMNS] UPCCOLUMNS after grid
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -850,7 +850,7 @@ Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -897,7 +897,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	And I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
@@ -948,7 +948,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:
@@ -1105,7 +1105,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1146,7 +1146,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -1188,7 +1188,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -1230,7 +1230,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1264,7 +1264,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1308,7 +1308,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -1343,7 +1343,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1379,7 +1379,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1414,7 +1414,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1449,7 +1449,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1529,7 +1529,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1543,7 +1543,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -1573,7 +1573,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#may need to update the below if inludes line breaks etc in the text
 	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
 	And I click continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

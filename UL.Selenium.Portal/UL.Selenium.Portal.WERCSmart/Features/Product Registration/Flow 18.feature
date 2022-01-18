@@ -68,7 +68,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
 

@@ -120,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
 			Report.StartStep("In the new products page, I hit continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
-			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test");
 			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
 			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
 			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
 			Report.StartStep("In the new products page, I hit continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
-			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test");
 			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
 			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
 			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -425,7 +425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -626,7 +626,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -721,7 +721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -1814,7 +1814,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
