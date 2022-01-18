@@ -207,7 +207,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Granular
 	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
+	And I set the water solubility description to: Dispersible
 	Given in the New Product page I click Continue
 	
 
@@ -319,7 +319,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the Primary Physical State option to: Solid
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 # Ingredients Page
 	And I should see the Ingredients Page

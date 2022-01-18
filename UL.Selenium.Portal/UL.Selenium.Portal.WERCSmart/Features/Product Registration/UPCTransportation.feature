@@ -41,7 +41,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
           | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -78,7 +78,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -147,7 +147,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -239,7 +239,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -267,7 +267,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -316,7 +316,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -375,7 +375,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page

@@ -30,7 +30,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Aerosol
 And I set the pH field to: 5
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
 Then I click continue
 Then I click continue
@@ -84,7 +84,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -125,7 +125,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -177,7 +177,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -232,7 +232,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -273,7 +273,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid containing liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -315,7 +315,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -359,7 +359,7 @@ Then I click continue
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -409,7 +409,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 Given I set the Secondary Physical State field to: Liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description field to: Appreciable
+Given I set the Select the best Water Solubility description field to: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
@@ -452,7 +452,7 @@ Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen

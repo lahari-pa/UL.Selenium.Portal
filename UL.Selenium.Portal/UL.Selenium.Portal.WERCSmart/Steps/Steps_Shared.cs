@@ -129,7 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
 
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
@@ -167,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (MyNewProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
@@ -1439,7 +1439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the pH field to: 10.4");
 			stepsProductCharacteristics.SetPHTo("10.4");
 			Report.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
@@ -4324,9 +4324,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Closed cup method");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
-				"Appreciable");
+				"Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-				"Appreciable");
+				"Dispersible");
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -4532,7 +4532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH\)")]
 		public void GivenICallSharedStepPhysicalandChemicalProperties_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -4659,7 +4659,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "63");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 		*/
@@ -8768,7 +8768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else ignore this step");
 			if (newProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 			else
 			{

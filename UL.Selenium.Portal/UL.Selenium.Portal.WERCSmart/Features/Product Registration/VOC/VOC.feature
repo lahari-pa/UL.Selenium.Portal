@@ -145,7 +145,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Boiling Point (in Celsius) option to: 2
 	And I set the Flash Point (in Celsius) option to: 2
 	And I set the Flash Point Testing Method Used option to: Closed cup method
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 		# Ingredient Page
 	And I should see the Ingredients Page
@@ -331,7 +331,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Primary Physical State option to: Solid
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page
@@ -444,7 +444,7 @@ Scenario: [56484] VOC - Aero checks
 		| Aerosol |
 	And I set the Secondary Physical State option to: Solid spray
 	And I set the pH option to: 2
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 	And in the New Product page I click Continue
 	# Ingredient Page

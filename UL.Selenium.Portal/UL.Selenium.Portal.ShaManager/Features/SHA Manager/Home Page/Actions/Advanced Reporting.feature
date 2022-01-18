@@ -1051,7 +1051,7 @@ And I should see the Physical and Chemical Properties Page
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
 	And I set the Flash Point Testing Method Used option to: Closed cup method
-	And I set the Select the best Water Solubility description option to: Insoluble
+	And I set the Select the best Water Solubility description option to: Soluble in water
 	And I click continue
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
