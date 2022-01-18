@@ -292,7 +292,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 		| Gloves                        | 100                      | 250                     | 1200      | Black      | Odorless | No data available | 50                    |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then The Data Acceptance page should appear
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 

@@ -1662,7 +1662,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("In the Data Acceptance page I select Yes, Agreed");
+			Report.StartStep("In the Data Acceptance page I select Agreed");
 			MyNewProduct.GivenInTheDataAcceptancePageISelectYesAgreed();
 			Report.StartStep("In the Data Acceptance page I click on the Accept button");
 			MyNewProduct.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();

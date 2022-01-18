@@ -110,7 +110,7 @@ Scenario: [64530] Process UPC Update
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I call Shared Step 75307 (Edit UPC - Add UPC and all data - Click Save) for UPC Number saved as: "UPC64530", container type: "Plastic Container", size: "10"
 	And I should see the Data Acceptance Page
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	And the Purchase Summary should load
 	And I navigate to the home page

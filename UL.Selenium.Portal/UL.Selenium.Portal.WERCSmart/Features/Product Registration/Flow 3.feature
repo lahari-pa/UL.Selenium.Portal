@@ -40,7 +40,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	And I should see the Data Acceptance Page
 	Then The Data Acceptance page should appear
 	Then I should see an error message: Select at least one of the options
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Baby/infant/Adult Care/Cleansing Wipes
@@ -99,7 +99,7 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	And I should see the Data Acceptance Page
 	Then The Data Acceptance page should appear
 	Then I should see an error message: Select at least one of the options
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Wipes, Cleaning (with Chemical)
