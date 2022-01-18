@@ -29,7 +29,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85329
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -54,7 +54,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85750
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -76,7 +76,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85750
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -103,10 +103,10 @@ And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), G
 	And In the 'Select Retailers' window I select the retailer: Canadian Tire
 	And For retailer: Canadian Tire I add additional requirements: Additional requirements: Canadian Tire
 	And I click continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And In the UPC page I should see Add new Packaging Type link
 	Given I generate a random UPC number and save as: UPC85752
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC85752
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12

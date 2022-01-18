@@ -181,7 +181,7 @@ Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - C
 Given I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase145400)
@@ -211,7 +211,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home

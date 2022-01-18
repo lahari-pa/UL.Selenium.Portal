@@ -59,7 +59,7 @@ Scenario: [85764] Account all Canada data - Partial stewardship, SOLD = Canada O
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 	And In the UPC page I should see Add new Packaging Type link
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC85764
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -81,7 +81,7 @@ Scenario: [85765] Account all Canada data - Partial stewardship, SOLD = Canada O
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	And In the UPC page I should see Add new Packaging Type link
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC85765
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -107,7 +107,7 @@ And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only ava
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 	And In the UPC page I should see Add new Packaging Type link
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC85766
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12
@@ -130,7 +130,7 @@ Scenario: [85767] Account has Canada address and packaging, SOLD US & Canada, PL
 	And I click continue
 	And In the UPC page I should see Add new Packaging Type link
 	Given I generate a random UPC number and save as: UPC85767
-	And I click the 'Add UPC' button
+	And I click the 'Add' button
 	And I enter UPC Number: saved as UPC85767
 	And I Select a container type from the drop down list
 	And I enter Size Value: 12

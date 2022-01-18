@@ -518,7 +518,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -564,7 +564,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I click the Home navigation icon

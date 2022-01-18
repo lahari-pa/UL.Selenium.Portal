@@ -40,7 +40,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode7S4
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 1
 	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -65,7 +65,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -116,9 +116,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -173,7 +173,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -192,7 +192,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode6S28
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -210,7 +210,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -260,9 +260,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -314,7 +314,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -333,7 +333,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S15
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -351,7 +351,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -371,7 +371,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S20
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -389,7 +389,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -440,9 +440,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -509,9 +509,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -543,7 +543,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode1S6
 		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 100
 		And I set the Flash Point (in Celsius) field to: 50
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -581,9 +581,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10006
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -641,9 +641,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10003
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -704,9 +704,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -775,9 +775,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20002
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		
 
@@ -807,7 +807,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S16
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -863,9 +863,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20016
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -894,7 +894,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S34
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -944,9 +944,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20034
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC20034 |
@@ -996,9 +996,9 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40005
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1022,7 +1022,7 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S21
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1061,9 +1061,9 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1086,7 +1086,7 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S34
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1125,9 +1125,9 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 

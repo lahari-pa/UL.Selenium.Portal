@@ -49,7 +49,7 @@ And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No t
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85726, container type: Plastic Container and size: 12 click continue
 #And I confirm that UPC page contains link for: Add new Packaging Type
-#Given I click the 'Add UPC' button
+#Given I click the 'Add' button
 #Then I should see the following UPC options:
 #| Option                          |
 #| UPC Number                                 |
@@ -76,7 +76,7 @@ And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Conti
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85727, container type: Plastic Container and size: 12 click continue
 #And I confirm that UPC page contains link for: Add new Packaging Type
-#Given I click the 'Add UPC' button
+#Given I click the 'Add' button
 #Then I should see the following UPC options:
 #| Option                          |
 #| UPC Number                                 |

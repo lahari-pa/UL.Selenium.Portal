@@ -101,7 +101,7 @@ Given in the GoodGuide New Product page I click button: Save and Next
 Then in the GoodGuide site the UPC List page should load
 #Enter UPC
 Given I generate a random UPC number and save as: UPC68913
-Given in the GoodGuide site I click the 'Add UPC' button
+Given in the GoodGuide site I click the 'Add' button
 Then In the GoodGuide site I add the following into the UPC Fields
 | Field         | Value             |
 | UPCNumber     | saved as UPC68913 |

@@ -46,7 +46,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto25 and Open SHA manager)
@@ -86,7 +86,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 #And I save to context name: TestCase86008 and value: 1511929
@@ -129,7 +129,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto25 and Open SHA manager)
@@ -168,7 +168,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto25 and Open SHA manager)

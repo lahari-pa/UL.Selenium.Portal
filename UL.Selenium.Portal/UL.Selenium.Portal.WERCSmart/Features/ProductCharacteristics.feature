@@ -62,7 +62,7 @@ And I should only see the following options for Primary Physical State:
 | State  |
 | Liquid |
 And I should see following statement: Secondary Physical State
-And I should see following statement: Specific Gravity
+And I should see following statement: Relative Density
 And I should see following statement: pH
 And I should see following statement: Boiling Point (in Celsius)
 And I should see following statement: Flash Point (in Celsius)
@@ -83,7 +83,7 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
-And Specific Gravity should be showing the error messages: This is a required field.
+And Relative Density should be showing the error messages: This is a required field.
 And pH should be showing the error messages: This is a required field.
 And Boiling Point (in Celsius) should be showing the error messages: This is a required field.
 And Flash Point (in Celsius) should be showing the error messages: This is a required field.

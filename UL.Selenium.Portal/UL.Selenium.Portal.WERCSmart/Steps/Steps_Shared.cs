@@ -118,7 +118,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SectExatcDataNotKnown("pH");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7 (Neutral)");
 			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
@@ -129,7 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
 
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
@@ -149,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
@@ -167,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (MyNewProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
@@ -1039,7 +1039,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 
 			// below step was throwing error when selected No-retailer so  need to remove
-			//Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 		}
 
@@ -1051,9 +1051,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -1078,8 +1078,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -1089,9 +1089,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -1114,8 +1114,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -1127,12 +1127,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			for (int i = 0; i < 100; i++)
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
-				Report.StartStep("I click the 'Add UPC' button");
+				Report.StartStep("I click the 'Add' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
 				string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
@@ -1144,8 +1144,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
-				Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();
 				// not returning...
 				if (new NewProduct().FormError().IsNullOrEmpty())
@@ -1172,9 +1172,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -1213,13 +1213,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//60723 uses this on the reulatory docs to provide screen, but also on the additional docs to provide screen in 57950
 			//If keep sds confirm step in does this brake the step if used on the other screen?
 
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				//Should this show on this page? this step is for the additional docs page? Any examples?
-				Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-				//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
-			}
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	//Should this show on this page? this step is for the additional docs page? Any examples?
+			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			//}
 
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
@@ -1237,14 +1237,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57883 \(Comments - Happy Path\) and enter the comment: (.*)")]
+		[StepDefinition(@"I call Shared Step 57883 \(Optional Comments - Happy Path\) and enter the comment: (.*)")]
 		public void GivenICallSharedCommentsHappyPath(string comments)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Comments Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Comments");
-			Report.StartStep("I enter the following into the comments field: " + comments);
+			Report.StartStep("I should see the Optional Comments Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Comments");
+			Report.StartStep("I enter the following into the Optional Comments field: " + comments);
 			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(comments);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Comments");
@@ -1327,14 +1327,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 57441 \(Physical and Chemical Properties - Primary Physical Property - Liquid\)")]
 		public void GivenICallSharedPhysicalandChemicalProperties_PrimaryPhysicalProperty_Liquid()
 		{
-			// Secondary Physical State, Specific Gravity (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
+			// Secondary Physical State, Relative Density (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
 			// Add a variable table in the future if specific data is required.
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 20");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			Report.StartStep("I set the Relative Density option to: 20");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
 			MyNewProduct.SectExatcDataNotKnown("pH");
 			Report.StartStep("I set the pH field to: 7.1 - 9.9");
@@ -1439,7 +1439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the pH field to: 10.4");
 			stepsProductCharacteristics.SetPHTo("10.4");
 			Report.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
 			Report.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
@@ -3084,7 +3084,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I confirm 'Quantity' is visible in the UPC header");
 			MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			var upcTable = new Table(new string[] {
 				"Field",
@@ -3112,8 +3112,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I select Package Type from drop down list");
 			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"I call Shared Step 158500 \(Enter Universal Product Code \(UPC\) - Battery - Confirm SKU - Do Not Click Continue\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) package type: (.*) and SKU: (.*)")]
@@ -3122,7 +3122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			if (Context.Contains(sku))
 			{
@@ -3167,7 +3167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			if (Context.Contains(sku))
 			{
@@ -3702,10 +3702,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
@@ -3794,9 +3794,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Liquid"));
 			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"1.0"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "1.0");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "1.0");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"10.2"));
@@ -3855,9 +3855,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the Primary Physical State to: 'Liquid'");
 			myStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"10"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "10");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"8"));
@@ -3889,8 +3889,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 68");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "68");
+			Report.StartStep("I set the Relative Density option to: 68");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "68");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
 			MyNewProduct.SectExatcDataNotKnown("pH");
 			Report.StartStep("I set the pH field to: 2.1 - 3.9");
@@ -4029,9 +4029,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Specific Gravity",
+				"Relative Density",
 				"15.0"));
-			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "15.0");
+			myStepsNewProduct.SetTheSectionOptionTo("Relative Density", "15.0");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"pH",
 				"9.5"));
@@ -4246,10 +4246,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
@@ -4298,9 +4298,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				 "Cream");
 			Report.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
 				"1.0");
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
 				"1.0");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
@@ -4324,9 +4324,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Closed cup method");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
-				"Appreciable");
+				"Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-				"Appreciable");
+				"Dispersible");
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -4352,10 +4352,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 				table.Rows[0]["Secondary Physical State"]);
 			Report.StartStep(
-				"In the Physical and Chemical tab of the New Product Page for Specific Gravity I enter: " +
-				table.Rows[0]["Specific Gravity"]);
-			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
-				table.Rows[0]["Specific Gravity"]);
+				"In the Physical and Chemical tab of the New Product Page for Relative Density I enter: " +
+				table.Rows[0]["Relative Density"]);
+			MyNewProduct.SetTheSectionOptionTo("Relative Density",
+				table.Rows[0]["Relative Density"]);
 			Report.StartStep(
 				"In the Physical and Chemical tab of the New Product Page for pH I enter: " +
 				table.Rows[0]["pH"]);
@@ -4532,7 +4532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+			@"I call Shared Step 74339 \(Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH\)")]
 		public void GivenICallSharedStepPhysicalandChemicalProperties_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -4552,7 +4552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyNewProductSteps.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyNewProductSteps.SetTheSectionOptionTo("Relative Density", "20");
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
@@ -4653,13 +4653,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("Relative Density", "20");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "63");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 		*/
@@ -5266,8 +5266,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			stepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity option to: 10");
-			stepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			Report.StartStep("I set the Relative Density option to: 10");
+			stepsNewProduct.SetTheSectionOptionTo("Relative Density", "10");
 			Report.StartStep("I set the pH option to: 5");
 			stepsNewProduct.SetTheSectionOptionTo("pH", "5");
 			Report.StartStep("I set the pH option to: 5");
@@ -7213,8 +7213,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			newProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Specific Gravity field to: 1");
-			newProductSteps.SetTheSectionOptionTo("Specific Gravity", "1");
+			Report.StartStep("I set the Relative Density field to: 1");
+			newProductSteps.SetTheSectionOptionTo("Relative Density", "1");
 			Report.StartStep("I set the pH option to: 10");
 			newProductSteps.SetTheSectionOptionTo("pH", "10");
 			Report.StartStep("I set the Boiling Point option to: '30'");
@@ -7545,9 +7545,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			var upcTable = new Table("Field", "Value");
@@ -7910,9 +7910,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 
@@ -7945,8 +7945,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 				"Successfully inputted UPC information!");
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(
@@ -7966,11 +7966,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//}
 
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
@@ -7995,12 +7995,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");		
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -8768,7 +8763,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else ignore this step");
 			if (newProduct.OptionExists("Select the best Water Solubility description"))
 			{
-				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
 			else
 			{
@@ -8955,9 +8950,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var MyNewProduct = new NewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 
@@ -8984,8 +8979,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();
 			}
 		}
@@ -9060,11 +9055,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -10344,11 +10334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
 			Report.StartStep("I upload a PDF file to section: OSHA SDS");
-			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			//MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
-			MyNewProduct.ICheckTheCheckboxWithDescription("check",
-							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
+			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");			
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -10360,7 +10346,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 
 
@@ -11063,7 +11049,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");
@@ -11266,7 +11252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");
@@ -11743,11 +11729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			var MyStepsNewProduct = new StepsNewProduct();
-			var newProdClass = new NewProduct();
-			
-			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			
+			var newProdClass = new NewProduct();			
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -12034,9 +12016,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Delay.Seconds(3);
 			Report.StartStep("I add the following into the UPC Fields");
@@ -12244,10 +12226,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
-			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			MyNewProduct.ICheckTheCheckboxWithDescription("check",
-							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
-
+			
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 
@@ -12503,7 +12482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 
 			for (int k = 0; k < 2; k++)
@@ -12512,7 +12491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				for (int i = 0; i < 100; i++)
 				{
 					Report.Info("Entering UPC information. Attempt: " + (i + 1));
-					Report.StartStep("I click the 'Add UPC' button");
+					Report.StartStep("I click the 'Add' button");
 					stepsNewProduct.ThenIClickTheAddUpcButton();
 					Report.StartStep("I add the following into the UPC Fields");
 					string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
@@ -12532,8 +12511,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (k == 1)
 					{
 
-						Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-						stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+						Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+						stepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 						GeneralUtilities.Wait_for_load_finish();
 
 					}

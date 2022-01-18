@@ -976,7 +976,7 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then In the 'Select Retailers' window I select the retailer: Target
 	Then in the Retailer page I click Continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC113706, container type: Cardboard and size: 5
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
@@ -1046,12 +1046,12 @@ And I should see the Physical and Chemical Properties Page
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
 	And I set the Flash Point Testing Method Used option to: Closed cup method
-	And I set the Select the best Water Solubility description option to: Insoluble
+	And I set the Select the best Water Solubility description option to: Soluble in water
 	And I click continue
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1086,7 +1086,7 @@ And I should see the Physical and Chemical Properties Page
 	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -1101,7 +1101,7 @@ And I should see the Physical and Chemical Properties Page
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
