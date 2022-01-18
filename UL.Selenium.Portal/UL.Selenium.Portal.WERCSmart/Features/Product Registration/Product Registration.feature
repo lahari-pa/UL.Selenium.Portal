@@ -669,7 +669,7 @@ Given I set the Primary Physical State option to: Liquid
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
 Given I set the Secondary Physical State option to: Liquid
-Given I set the Specific Gravity option to: 0.1
+Given I set the Relative Density option to: 0.1
 Given I set the pH option to: 11.5
 Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
 Given I set the Flash Point (in Celsius) option to: None, No Flash Point
