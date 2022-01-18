@@ -867,7 +867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Artist's Solvent/Thinner");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table73629 = new Table("Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
@@ -1011,7 +1011,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table73629 = new Table("Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
@@ -1173,7 +1173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();

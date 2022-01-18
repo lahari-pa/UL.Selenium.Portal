@@ -32,7 +32,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit1
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
@@ -82,7 +82,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit2
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup

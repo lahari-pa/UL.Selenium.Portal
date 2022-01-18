@@ -23,7 +23,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase88022
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -52,7 +52,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase88644
 Given I call Shared Step 60310 (Product Information - Without Child question)
 Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

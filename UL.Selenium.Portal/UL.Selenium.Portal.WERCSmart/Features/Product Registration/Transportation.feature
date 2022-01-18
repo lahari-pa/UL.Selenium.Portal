@@ -34,7 +34,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -169,7 +169,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -215,7 +215,7 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -284,7 +284,7 @@ And The following options should be displayed for section: Primary Physical Stat
 | Solid  |
 And I set the Primary Physical State option to: Liquid
 And I set the Secondary Physical State option to: Liquid
-And I set the Specific Gravity option to: 10
+And I set the Relative Density option to: 10
 And I set the pH option to: 10.5
 And I set the Boiling Point (in Celsius) option to: 120
 And I set the Flash Point (in Celsius) option to: 23

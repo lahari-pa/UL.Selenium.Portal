@@ -140,7 +140,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 		| State  |
 		| Liquid |
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 2
+	And I set the Relative Density option to: 2
 	And I set the pH option to: 2
 	And I set the Boiling Point (in Celsius) option to: 2
 	And I set the Flash Point (in Celsius) option to: 2

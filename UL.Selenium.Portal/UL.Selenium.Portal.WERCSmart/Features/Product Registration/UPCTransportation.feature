@@ -40,7 +40,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I save the product information as: TestCase122305
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
           | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -77,7 +77,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I save the product information as: TestCase122382
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
         | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -146,7 +146,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I save the product information as: TestCase122428
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -238,7 +238,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I save the product information as: TestCase122940
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -266,7 +266,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I save the product information as: TestCase122971
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -315,7 +315,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I save the product information as: TestCase122984
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -374,7 +374,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I save the product information as: TestCase123125
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -436,7 +436,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
@@ -521,7 +521,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -591,7 +591,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -668,7 +668,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -738,7 +738,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70

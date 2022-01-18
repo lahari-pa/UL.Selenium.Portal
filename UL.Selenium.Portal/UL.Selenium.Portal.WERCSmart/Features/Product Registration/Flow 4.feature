@@ -86,7 +86,7 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California's Cleaning Product Right to Know Act | Private Label or Brand | Good Not for resale |
 	| No                                                             | No                           | No                                              | No                     | No                  |
 	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))	
-		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -214,7 +214,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
-		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -374,7 +374,7 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 		Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
