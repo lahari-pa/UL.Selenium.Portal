@@ -55,7 +55,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -106,7 +106,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -155,7 +155,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -208,7 +208,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -264,7 +264,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -317,7 +317,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -367,7 +367,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74366
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74366
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -423,7 +423,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74368
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74368
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -476,7 +476,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74372
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74372
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -529,7 +529,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74374
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74374
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -585,7 +585,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74376
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74376
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -641,7 +641,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74379
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74379
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -695,7 +695,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74380
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74380
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -749,7 +749,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74382
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74382
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page

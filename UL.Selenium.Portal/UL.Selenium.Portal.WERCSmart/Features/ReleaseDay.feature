@@ -42,8 +42,8 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I filter for the product saved as: TestCase75142
 And I edit the product saved as: TestCase75142
 Given In the New Product page I click tab: Review and Submit
-Then I click the page heading: Comments
-And I should see the Comments Page
+Then I click the page heading: Optional Comments
+And I should see the Optional Comments Page
 Then I click continue
 And I should see the Data Acceptance Page
 And In the Data Acceptance page I click on the Accept button
@@ -133,7 +133,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Case 99502
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Case 99502
 
 # I Confirm the Data Acceptance step is shown with No errors
 Then I should see the Data Acceptance Page

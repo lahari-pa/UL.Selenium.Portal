@@ -1237,14 +1237,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 57883 \(Comments - Happy Path\) and enter the comment: (.*)")]
+		[StepDefinition(@"I call Shared Step 57883 \(Optional Comments - Happy Path\) and enter the comment: (.*)")]
 		public void GivenICallSharedCommentsHappyPath(string comments)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Comments Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Comments");
-			Report.StartStep("I enter the following into the comments field: " + comments);
+			Report.StartStep("I should see the Optional Comments Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Comments");
+			Report.StartStep("I enter the following into the Optional Comments field: " + comments);
 			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(comments);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Comments");
@@ -11063,7 +11063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");
@@ -11266,7 +11266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Product Aliases page I click Continue");
 			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
 
-			Report.StartStep("(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("(Optional Comments - Happy Path) and enter the comment: test");
 			this.GivenICallSharedCommentsHappyPath("test");
 
 			Report.StartStep("Confirm Restrict Use - Restrict");
