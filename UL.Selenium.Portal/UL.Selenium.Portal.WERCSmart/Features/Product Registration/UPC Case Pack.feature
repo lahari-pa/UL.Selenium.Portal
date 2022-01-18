@@ -136,7 +136,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	And I should not see the following UPC buttons:
 		| Option       |
 		| Add UPC      |
-		| Add Case UPC |
+		| Add Casepack |
 	Given in the Universal Product Code (UPC) page I click Continue
 	Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
@@ -198,7 +198,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	And I delete UPC: saved as UPC87676
 	Then In the list of UPCs I should not see UPC: saved as UPC87676
 	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC876761, container type: Plastic Container and size: 25 - do not click continue
-	And I click the 'Add Case UPC' button
+	And I click the 'Add Casepack' button
 	#And I switch to tab: UL Wercs Studio
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -378,7 +378,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 		| Retailer |
 		| Amazon   |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87835, container type: Paper bag and size: 2 do not click continue
-	And I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
+	And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
@@ -404,7 +404,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 
 
 @ScenarioId:10103
-	Scenario: [87631] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+	Scenario: [87631] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -418,7 +418,7 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Retailer  |
 | Walgreens |
 And I should see the Universal Product Code Page
-Given I click the 'Add Case UPC' button
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
@@ -442,7 +442,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 
 @ScenarioId:10153
-Scenario: [87633] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -485,8 +485,8 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
-Given I should see the Universal Product Code (UPC) Page
-Given I click the 'Add Case UPC' button
+Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87718   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
@@ -522,7 +522,7 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
-Given I click the 'Add Case UPC' button
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87818   | Plastic Container | 32   | 123      |                          | 4A: steel box         |

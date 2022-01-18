@@ -976,7 +976,7 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then In the 'Select Retailers' window I select the retailer: Target
 	Then in the Retailer page I click Continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC113706, container type: Cardboard and size: 5
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
@@ -1086,7 +1086,7 @@ And I should see the Physical and Chemical Properties Page
 	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |

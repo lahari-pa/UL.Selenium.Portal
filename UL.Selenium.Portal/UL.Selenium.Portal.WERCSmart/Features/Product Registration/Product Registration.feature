@@ -90,7 +90,7 @@ Scenario: [63705] New Product - BCP
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value        |
 		| UPCNumber     | 630509667031 |
@@ -140,7 +140,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC63724 |
@@ -230,7 +230,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
 	#Enter UPC
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC65441 |
@@ -369,8 +369,8 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I should see the Retailer Page
 	Given in the New Product page I click Continue
 	# Universal Product Code (UPC) Page
-	And I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add UPC' button
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC67661 |
@@ -470,7 +470,7 @@ Scenario: [105352] Product Comments screen Max input length
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value        |
 		| UPCNumber     | 630509667031 |

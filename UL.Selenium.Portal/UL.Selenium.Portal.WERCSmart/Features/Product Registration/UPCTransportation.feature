@@ -457,7 +457,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -501,7 +501,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	#may need to update the below if inludes line breaks etc in the text
 	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
 	And I click continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -541,7 +541,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -613,7 +613,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -691,7 +691,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -760,7 +760,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |

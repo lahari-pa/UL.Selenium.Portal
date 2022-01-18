@@ -332,7 +332,7 @@ And The selected retailers on the Retailer page should be:
 		| Wal-Mart/SAM'S CLUB        | 
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Given I click the 'Add UPC' button
+Given I click the 'Add' button
 And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
 

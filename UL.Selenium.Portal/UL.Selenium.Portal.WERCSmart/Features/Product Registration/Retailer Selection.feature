@@ -257,7 +257,7 @@ Then The following retailers in the Select Retailers popup list view should not 
 | Dollar General |
 Given I click Done in the Select Retailers popup
 Given I click continue
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
 And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
