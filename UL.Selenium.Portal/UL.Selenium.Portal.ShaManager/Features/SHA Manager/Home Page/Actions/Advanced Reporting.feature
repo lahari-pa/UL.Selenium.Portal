@@ -1046,12 +1046,12 @@ And I should see the Physical and Chemical Properties Page
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
 	And I set the Flash Point Testing Method Used option to: Closed cup method
-	And I set the Select the best Water Solubility description option to: Insoluble
+	And I set the Select the best Water Solubility description option to: Soluble in water
 	And I click continue
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1101,7 +1101,7 @@ And I should see the Physical and Chemical Properties Page
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

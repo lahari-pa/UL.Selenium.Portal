@@ -207,7 +207,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Granular
 	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
+	And I set the water solubility description to: Dispersible
 	Given in the New Product page I click Continue
 	
 
@@ -319,7 +319,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the Primary Physical State option to: Solid
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 # Ingredients Page
 	And I should see the Ingredients Page
@@ -592,7 +592,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	Then I close the retailer modal
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 
 
 	@ScenarioId:6674
@@ -669,7 +669,7 @@ Given I set the Primary Physical State option to: Liquid
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
 Given I set the Secondary Physical State option to: Liquid
-Given I set the Specific Gravity option to: 0.1
+Given I set the Relative Density option to: 0.1
 Given I set the pH option to: 11.5
 Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
 Given I set the Flash Point (in Celsius) option to: None, No Flash Point
@@ -690,7 +690,7 @@ Given I click continue
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Then I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
@@ -731,7 +731,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
@@ -759,7 +759,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB

@@ -36,7 +36,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto22 and Open SHA manager)

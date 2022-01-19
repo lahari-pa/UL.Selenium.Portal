@@ -277,7 +277,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] product submit upc info entry
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 Scenario: [NOTINCLUDEDGENERALTEST] UL Solution Center - Shows Updated Navigator Logo
@@ -752,7 +752,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Then I should see the Data Acceptance Page	
 Given I click the Summary button in the Data Acceptance window
 Given I switch to the Data Summary page
@@ -815,7 +815,7 @@ Scenario: [UPCCOLUMNS] UPCCOLUMNS after grid
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -850,7 +850,7 @@ Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -897,7 +897,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	And I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
@@ -948,7 +948,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:
@@ -1205,7 +1205,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65
 	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1325,7 +1325,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -1360,7 +1360,7 @@ And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid a
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -1507,7 +1507,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
@@ -1543,7 +1543,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

@@ -40,8 +40,8 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I save the product information as: TestCase122305
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -77,8 +77,8 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I save the product information as: TestCase122382
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -146,8 +146,8 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I save the product information as: TestCase122428
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -183,7 +183,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I wait for 5 seconds
@@ -238,8 +238,8 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I save the product information as: TestCase122940
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -266,8 +266,8 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I save the product information as: TestCase122971
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -294,7 +294,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
@@ -315,8 +315,8 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I save the product information as: TestCase122984
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -337,7 +337,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
@@ -374,8 +374,8 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I save the product information as: TestCase123125
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -396,7 +396,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
@@ -436,7 +436,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
@@ -471,7 +471,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -521,7 +521,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -555,7 +555,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -591,7 +591,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -627,7 +627,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -668,7 +668,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -705,7 +705,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -738,7 +738,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -774,7 +774,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

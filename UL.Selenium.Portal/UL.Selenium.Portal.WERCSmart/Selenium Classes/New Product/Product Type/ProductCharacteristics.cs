@@ -3,11 +3,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	class ProductCharacteristics : NewProduct
 	{
 		/// <summary>
-		/// Specific Gravity text box
+		/// Relative Density text box
 		/// </summary>
 		public string SpecificGravity {
-			get => this.TextInputValueForLabel("Specific Gravity");
-			set => this.SetOptionInSection("Specific Gravity", value);
+			get => this.TextInputValueForLabel("Relative Density");
+			set => this.SetOptionInSection("Relative Density", value);
 		}
 
 		/// <summary>

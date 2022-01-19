@@ -45,7 +45,7 @@ Scenario: [63323] Remove single product from cart
        Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
              | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
              | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-       Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+       Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
        Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
        Given In the Purchase Summary screen I click Remove for product saved as TestCase63323
 	   Then I wait for a modal dialog to open

@@ -43,7 +43,7 @@ Scenario: [73949] Kit - Document merge - US only
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
@@ -101,7 +101,7 @@ Scenario: [73950] Kit Document merge - Canada only
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: yrdy
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: yrdy
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)

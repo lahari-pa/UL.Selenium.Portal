@@ -825,7 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Relative Density text field");
 			try
 			{
 				var selNewProduct = new NewProduct();
@@ -1170,7 +1170,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
-			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the Optional Comments field!", "Text: " + text + " was successfully inputted into the Optional Comments field!");
 		}
 
 		[StepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
@@ -1210,7 +1210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
+		[StepDefinition(@"In the Data Acceptance page I select Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			var thisNewProduct = new NewProduct();

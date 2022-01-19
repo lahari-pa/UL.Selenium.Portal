@@ -56,7 +56,7 @@ And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
 And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
-And I set the Select the best Water Solubility description field to: Decomposes
+And I set the Select the best Water Solubility description field to: Dispersible
 And I set the When the product has a flammable propellant field to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 And I set the Select all potential allergens included in this product field to: Dairy
 And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
@@ -113,7 +113,6 @@ And in the Universal Product Code (UPC) page I click Continue
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
 And I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Then in the Regulatory Documents to Provide page I click Continue
 
 # Additional Documents to Provide Page
@@ -125,7 +124,7 @@ And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57883 ====== #
-And I should see the Comments Page
+And I should see the Optional Comments Page
 And I enter the following into the comments field: Comments Field Text
 Then in the Comments page I click Continue
 
@@ -188,7 +187,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking oil - Non-Aerosol
 

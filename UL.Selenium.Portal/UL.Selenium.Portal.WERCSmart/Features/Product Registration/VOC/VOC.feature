@@ -104,7 +104,7 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
@@ -140,12 +140,12 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 		| State  |
 		| Liquid |
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 2
+	And I set the Relative Density option to: 2
 	And I set the pH option to: 2
 	And I set the Boiling Point (in Celsius) option to: 2
 	And I set the Flash Point (in Celsius) option to: 2
 	And I set the Flash Point Testing Method Used option to: Closed cup method
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 		# Ingredient Page
 	And I should see the Ingredients Page
@@ -222,7 +222,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And I set the Partition Coefficient field to: 5
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
@@ -290,9 +290,9 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 100                      | 250                     | 1200      | Black      | Odorless | No data available | 50                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then The Data Acceptance page should appear
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
@@ -331,7 +331,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Primary Physical State option to: Solid
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 	# Ingredient Page
 	And I should see the Ingredients Page
@@ -404,7 +404,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Partition Coefficient field to: 5
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
@@ -444,7 +444,7 @@ Scenario: [56484] VOC - Aero checks
 		| Aerosol |
 	And I set the Secondary Physical State option to: Solid spray
 	And I set the pH option to: 2
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
 	And in the New Product page I click Continue
 	# Ingredient Page
@@ -527,7 +527,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set the Product's Dispensing Method field to: Pump
 	And in the New Product page I click Continue
 	# Comments Page
-	And I should see the Comments Page
+	And I should see the Optional Comments Page
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
@@ -582,7 +582,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 

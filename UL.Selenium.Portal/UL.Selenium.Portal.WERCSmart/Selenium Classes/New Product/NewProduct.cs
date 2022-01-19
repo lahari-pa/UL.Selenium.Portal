@@ -1350,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CommentsAreaShowing()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Optional Comments']/../../../..//textarea"), 2);
 			return el != null;
 		}
 
@@ -1363,7 +1363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Optional Comments']/../../../..//textarea"), 2);
 				
 				if (el == null)
 				{
@@ -1536,7 +1536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectYesAgreedRadio()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 			if (el == null)
 			{
 				return false;
@@ -1548,7 +1548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool YesAgreedIsSelected()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 			if (el == null)
 			{
 				return false;
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Agreed')]/../input"), 2);
 				if (el == null)
 				{
 					return false;

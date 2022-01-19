@@ -19,14 +19,14 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -55,7 +55,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -70,14 +70,14 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 38
 And I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -106,7 +106,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -124,14 +124,14 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -155,7 +155,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -170,7 +170,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -179,7 +179,7 @@ And The following options should be displayed for section: Flash Point Testing M
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Open cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -208,7 +208,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -226,7 +226,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -264,7 +264,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -279,7 +279,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -317,7 +317,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -335,7 +335,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 45
 Given I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -367,7 +367,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74366
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74366
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -386,7 +386,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 45
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: <23C
@@ -423,7 +423,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74368
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74368
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -439,7 +439,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=23C and <38C
@@ -476,7 +476,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74372
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74372
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -492,7 +492,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=38C and <=60C
@@ -529,7 +529,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74374
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74374
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -545,7 +545,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >60C and <=93C
@@ -585,7 +585,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74376
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74376
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -601,7 +601,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >93C and <=815C
@@ -641,7 +641,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74379
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74379
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -657,7 +657,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: Not Tested/Unknown
@@ -695,7 +695,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74380
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74380
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -711,7 +711,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: None, No Flash Point
@@ -749,7 +749,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74382
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74382
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page

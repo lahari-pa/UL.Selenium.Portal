@@ -67,7 +67,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Very soluble
+	And I set the Select the best Water Solubility description to be: Dispersible
 	And in the New Product page I click Continue
 	Given I navigate to the home page
 	Then I delete the product: TestCase63663
@@ -126,7 +126,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	And I navigate to the home page
 	And I filter the products by: Not Yet Submitted
 	And I search for the product saved as: TestCase56214
@@ -195,7 +195,7 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -230,7 +230,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
@@ -298,7 +298,7 @@ Then I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 Then I should see the Sustainability Page
 Given in the Sustainability page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I click the Home navigation icon
 Given I search for the product saved as: TestCase125144

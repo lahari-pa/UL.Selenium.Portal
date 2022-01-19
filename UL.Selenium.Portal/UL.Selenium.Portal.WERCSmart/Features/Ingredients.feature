@@ -266,7 +266,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
 	Given I set the pH option to: 5
-	Given I set the Select the best Water Solubility option to: Appreciable
+	Given I set the Select the best Water Solubility option to: Dispersible
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
 	Given I click continue
@@ -506,7 +506,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:
