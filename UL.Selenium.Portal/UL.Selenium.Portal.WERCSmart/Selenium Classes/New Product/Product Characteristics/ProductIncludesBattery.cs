@@ -112,8 +112,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 				int manufacturerIndex = th.FirstOrDefault(x => x.Value == "Manufacturer").Key;
-				int perPackageIndex = th.FirstOrDefault(x => x.Value.Contains("per package")).Key;
-				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("required")).Key;
+				int perPackageIndex = th.FirstOrDefault(x => x.Value.Contains("per Package")).Key;
+				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("Operate Product")).Key;
 				int batteryCount = 1;
 				foreach (Battery thisBattery in value)
 				{
