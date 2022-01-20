@@ -1527,6 +1527,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public int GetTotalErrorMessagesCountFromPopup()
+		{
+			List<IWebElement> errorEls = this.ContainerElement.FindElements(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[contains(@data-bind,'visible: model.')]"), 2).ToList();
+			if(errorEls.IsNullOrEmpty())
+			{
+				Report.Error($"The errorEls list was null or empty");
+				return 0;
+			}
+			return errorEls.Count();
+
+		}
+
 
 		public bool CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(Table table,string errorType, string popupTitle)
 		{

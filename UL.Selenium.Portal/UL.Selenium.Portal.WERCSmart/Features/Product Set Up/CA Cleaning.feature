@@ -217,7 +217,7 @@ Then I confirm I see the error message with text: and of type: Ingredient Type i
 | ErrorSections                                                                                                                                                                                                                                       |
 | Participation in the California Cleaning Right to Know requires that each ingredient have an indication of the type of ingredient it is within the product. Please include, for each ingredient, the Ingredient Type from the selections available. |
 
-#Check that the expect total error count matches diplayed number of errors
+Then I confirm that the number of errors found in the Ingredients Popup matches the expectation of: 4
 Then I click the close button for the CA Cleaning Ingredients Popup
 # Check for -> Please fix all errors related to California Cleaning Right to Know before proceeding.
 Given I click the Home navigation icon
