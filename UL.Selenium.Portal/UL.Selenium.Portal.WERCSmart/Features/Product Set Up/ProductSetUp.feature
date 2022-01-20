@@ -52,7 +52,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -186,7 +186,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Then I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page

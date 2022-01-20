@@ -13,13 +13,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 	{
 		private ProductCharacteristics ProductCharacteristics => new ProductCharacteristics();
 
-		[StepDefinition(@"I set 'Specific Gravity' to: (.*)")]
+		[StepDefinition(@"I set 'Relative Density' to: (.*)")]
 		public void SetSpecificGravityTo(string specificGravity)
 		{
 			Report.IsTrue(this.ProductCharacteristics.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product Type tab is loaded.");
-			Report.Info("Entering text: " + specificGravity + " to the Specific Gravity field");
+			Report.Info("Entering text: " + specificGravity + " to the Relative Density field");
 			this.ProductCharacteristics.SpecificGravity = specificGravity;
-			Report.IsTrue(this.ProductCharacteristics.SpecificGravity == specificGravity, "Failed to set Specific Gravity", "Successfully set Specific Gravity");
+			Report.IsTrue(this.ProductCharacteristics.SpecificGravity == specificGravity, "Failed to set Relative Density", "Successfully set Relative Density");
 		}
 
 		[StepDefinition(@"I set 'pH' to: (.*)")]

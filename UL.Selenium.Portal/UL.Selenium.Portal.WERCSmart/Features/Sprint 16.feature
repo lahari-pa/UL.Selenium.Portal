@@ -49,7 +49,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Then I should see the Comments Page for the New Product
+	Then I should see the Optional Comments Page for the New Product
 	And The remaining characters counter displays: 500/500
 	Given I append the following into the comments field: comments
 	And The remaining characters counter displays: 492/500

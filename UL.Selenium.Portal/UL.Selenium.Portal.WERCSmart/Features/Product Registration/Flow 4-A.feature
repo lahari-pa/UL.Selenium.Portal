@@ -41,6 +41,6 @@ Scenario: [74825] Flow 4-A - Engine Degreaser - Aerosol - RU000647
 	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   | Aerosol                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
-	Then In the Data Acceptance page I select Yes, Agreed
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Then In the Data Acceptance page I select Agreed
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74825

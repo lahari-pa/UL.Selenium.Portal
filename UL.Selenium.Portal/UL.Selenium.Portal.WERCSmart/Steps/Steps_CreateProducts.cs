@@ -120,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
 			Report.StartStep("In the new products page, I hit continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
-			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test");
 			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
 			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
 			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Optional Reports and Documents Available for Purchase");
 			Report.StartStep("In the new products page, I hit continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
-			Report.StartStep("I call Shared Step 57883(Comments - Happy Path) and enter the comment: test");
+			Report.StartStep("I call Shared Step 57883(Optional Comments - Happy Path) and enter the comment: test");
 			MyStepsShared.GivenICallSharedCommentsHappyPath("test");
 			Report.StartStep("I call Shared Step 57885(Data Acceptance - Click Accept - Happy Path)");
 			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -425,7 +425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -626,7 +626,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -721,7 +721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
@@ -867,8 +867,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Artist's Solvent/Thinner");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Appreciable");
+			Table table73629 = new Table("Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
@@ -932,7 +932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
@@ -1011,8 +1011,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(table63804);
 
-			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+			Table table73629 = new Table("Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.ICallSharedStepPhysicalandChemicalPropertiesWithBoilingPointPHFlashPoint(table73629);
 			
@@ -1098,7 +1098,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 			Table table37857 = new Table("Secondary Physical State", "Water Solubility");
-			table37857.AddRow("Grainy", "Soluble in hot water");
+			table37857.AddRow("Grainy", "Dispersible");
 
 			sharedSteps.GivenICallSharedProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
@@ -1173,8 +1173,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
-			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Relative Density", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Dispersible");
 
 			sharedSteps.GivenICallSharedStepProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
 			sharedSteps.ICallSharedPhysicalandChemicalProperties_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
@@ -1466,7 +1466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
@@ -1512,7 +1512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
 			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
 			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
-			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Dispersible");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			
 
@@ -1814,7 +1814,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSds.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
 			new Steps_Shared().GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 				tableSds);
-			Report.StartStep("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment");
+			Report.StartStep("I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment");
 			new Steps_Shared().GivenICallSharedCommentsHappyPath("Test Comment");
 			Report.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
 			new Steps_Shared().GivenICallSharedDataAcceptance_ClickAccept_HappyPath();

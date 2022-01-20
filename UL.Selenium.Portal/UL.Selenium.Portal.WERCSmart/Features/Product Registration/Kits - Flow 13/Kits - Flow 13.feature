@@ -43,5 +43,5 @@ Scenario: [58753] Hair Color Kit - RU000724
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58753, container type: Plastic Container and size: 100
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment Kit 58753
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment Kit 58753
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

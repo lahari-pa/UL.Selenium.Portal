@@ -55,7 +55,7 @@ Given I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -119,7 +119,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -156,7 +156,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
@@ -216,7 +216,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
@@ -283,7 +283,7 @@ And I should see the Additional Documents to Provide Page
 Given I click continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
@@ -335,7 +335,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
@@ -384,7 +384,7 @@ Given I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -434,7 +434,7 @@ And I should see the Additional Documents to Provide Page
 Given I click continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
@@ -555,7 +555,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -584,7 +584,7 @@ Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cat
 Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
 Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145842, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
 Given I click continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -623,11 +623,10 @@ Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Con
 Given I call shared step 86009 (Retailer - PLP, Canada Only, Select Canadian Tire add PLP data - Continue)
 Given I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC145793, container type: Metal Container, size: 4.0, package type: <First> and Item Number: 111-1111 then click continue
 Given I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I click continue
 Given I click continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -668,7 +667,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -780,7 +779,7 @@ Given I call Shared Step 64097 - Additional Documents -> Contact Information - A
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -829,7 +828,7 @@ Given I call Shared Step 64097 - Additional Documents -> Contact Information - A
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -870,7 +869,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -906,7 +905,7 @@ Given I call shared step 52131 (CVS RCL Information - add Other where available 
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -945,7 +944,7 @@ Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Saf
 	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -1014,7 +1013,7 @@ Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Contain
 Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Given I click continue
 Given I click continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given In the Thank You screen I click Home
@@ -1049,7 +1048,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -1085,7 +1084,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing the comments text box to make sure it is working properly.
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

@@ -37,6 +37,6 @@ And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click 
 And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Test 69577
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Test 69577
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking Oil Spray - Aerosol
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69577

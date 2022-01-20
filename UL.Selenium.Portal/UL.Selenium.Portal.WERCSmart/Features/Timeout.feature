@@ -134,7 +134,7 @@ Then I Check The landing page has loaded, and report if an Alert and Inactivity 
 
 @Timeout5
 @ScenarioId:1435
-Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup can be interacted with
+Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup can be interacted with
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -158,14 +158,14 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup c
 	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
-	Given I click the Add Case UPC button under the Select UPCs tab
+	Given I click the Add Casepack button under the Select UPCs tab
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed	
 
 @Timeout6
 @ScenarioId:1436
-Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Works Correctly
+Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup- TimeoutFeature Works Correctly
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -189,7 +189,7 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Wo
 	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
-	Given I click the Add Case UPC button under the Select UPCs tab
+	Given I click the Add Casepack button under the Select UPCs tab
 	Given I wait for 900 seconds
 	Then I Look for an Alert for a max: 30 Seconds
 

@@ -834,7 +834,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickAddCaseUPCButton()
 		{
-			IWebElement AddCaseUPCButton = this.FindElement(By.XPath(".//button[text()='Add Case UPC ']"), 2);
+			IWebElement AddCaseUPCButton = this.FindElement(By.XPath(".//button[text()='Add Casepack ']"), 2);
 
 			return AddCaseUPCButton.TryClick();
 		}

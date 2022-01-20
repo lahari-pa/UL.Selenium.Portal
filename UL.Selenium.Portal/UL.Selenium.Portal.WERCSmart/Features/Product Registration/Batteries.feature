@@ -66,7 +66,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -109,7 +108,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -152,7 +150,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue

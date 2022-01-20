@@ -143,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var dist = new Distributor();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			Report.StartStep("I expand the first upc row");
 			dist.ClickExpandOnFirstRow();

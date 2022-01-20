@@ -104,7 +104,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I click the Home navigation icon
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

@@ -48,7 +48,7 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	And I search for the product saved as: ProductSetup64528
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64528)
@@ -69,7 +69,7 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 	And I search for the product saved as: ProductSetup64529
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64529)
@@ -101,16 +101,16 @@ Scenario: [64530] Process UPC Update
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I navigate to the home page
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Process UPC Update
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I call Shared Step 75307 (Edit UPC - Add UPC and all data - Click Save) for UPC Number saved as: "UPC64530", container type: "Plastic Container", size: "10"
 	And I should see the Data Acceptance Page
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	And the Purchase Summary should load
 	And I navigate to the home page
@@ -128,7 +128,7 @@ Scenario: [64531] Remove UPC Update - Cancel
 	And I search for the product saved as: ProductSetup64531
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I navigate to the home page
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
@@ -166,7 +166,7 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I search for the product saved as: ProductSetup64532
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 	And I navigate to the home page
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
@@ -239,7 +239,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
