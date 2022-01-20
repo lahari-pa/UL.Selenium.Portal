@@ -1529,7 +1529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public int GetTotalErrorMessagesCountFromPopup()
 		{
-			List<IWebElement> errorEls = this.ContainerElement.FindElements(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[contains(@data-bind,'visible: model.')]"), 2).ToList();
+			List<IWebElement> errorEls = this.ContainerElement.FindElements(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[not(@style='display: none;') and (@class='alert alert-danger')]"), 2).ToList();
 			if(errorEls.IsNullOrEmpty())
 			{
 				Report.Error($"The errorEls list was null or empty");
