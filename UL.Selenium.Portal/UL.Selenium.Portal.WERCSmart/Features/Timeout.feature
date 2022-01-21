@@ -25,7 +25,7 @@
 Feature: Timeout
 
 @Timeout1
-Scenario: [Timeout Test] Mass Upload UPCs Popup, Inactivity Popup can be interacted with
+Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interacted with
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -55,7 +55,7 @@ And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify 
 		| <RandomUPC3>  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
 		| <RandomUPC4>  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
 		| <RandomUPC5>  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
-Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest82536
+Then I click the 'Upload File' button and upload the file saved as: Bulktest82536
 Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 Then In the Add Multiple dialog box I select all UPCs
 Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
@@ -68,7 +68,7 @@ Then I confirm the Inactivity pop is closed
 
 @Timeout2
 @ScenarioId:1438
-Scenario: [Timeout Test] Mass Upload UPCs Popup, TimeoutFeature Works Correctly 
+Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly 
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -98,7 +98,7 @@ And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify 
 		| <RandomUPC3>  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
 		| <RandomUPC4>  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
 		| <RandomUPC5>  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
-Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest82536
+Then I click the 'Upload File' button and upload the file saved as: Bulktest82536
 Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 Then In the Add Multiple dialog box I select all UPCs
 Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
