@@ -219,7 +219,7 @@ Then I confirm I see the error message with text: and of type: Ingredient Type i
 
 Then I confirm that the number of errors found in the Ingredients Popup matches the expectation of: 4
 Then I click the close button for the CA Cleaning Ingredients Popup
-# Check for -> Please fix all errors related to California Cleaning Right to Know before proceeding.
+And The ingredients error message should be showing: Please fix all errors related to California Cleaning Right to Know before proceeding.
 Given I click the Home navigation icon
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase139205
 
