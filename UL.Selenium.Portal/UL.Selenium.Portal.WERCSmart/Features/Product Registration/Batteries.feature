@@ -21,7 +21,7 @@ And I call Shared Step 60935 (Product Information - US - Direct Ship - Private L
 And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-	| Battery Type   | Manufacturer | Number of batteries per package | How many batteries required to run |
+	| Battery Type   | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 	| Lthium Primary | <any>        | 6                               | 6                                  |
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Lithium
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

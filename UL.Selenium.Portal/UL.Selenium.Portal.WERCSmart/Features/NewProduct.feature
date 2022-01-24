@@ -82,7 +82,7 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
 	Given I add the following batteries:
-		| Battery Type     | Manufacturer                                                  | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Battery Type     | Manufacturer                                                  | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
 		| Lithium Primary  | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
