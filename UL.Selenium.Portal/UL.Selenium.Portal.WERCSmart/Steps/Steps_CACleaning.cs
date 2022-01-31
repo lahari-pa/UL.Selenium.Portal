@@ -23,6 +23,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(newProductIngredients.CheckForTwoErrorMessagesInPopupWithTitle(table, popupTitle), "Failed to find all the error messages in popup with title " + popupTitle, "Successfully found all the error messages in popup with title " + popupTitle);
 		}
 
+		[StepDefinition(@"I confirm I see the error message with text: and of type: (.*) in the popup with the following title: (.*)")]
+		public void ThenIConfirmISeeTheErrorOfTypeXandItMatchesTextFoundInTableForPopupWithGivenTitle(string errorType,string popupTitle,Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(table, errorType, popupTitle), "Failed to find matching error message in popup with title " + popupTitle, "Successfully found matching error message in popup with title " + popupTitle);
+		}
+
+		[StepDefinition(@"I confirm that the number of errors found in the Ingredients Popup matches the expectation of: (.*)")]
+		public void ThenIConfirmErrorCountInIngredientsPopupMatchesExpected(int expectedCount)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.Info($"The found number of errors was: {newProductIngredients.GetTotalErrorMessagesCountFromPopup()}");
+			Report.Info($"The expected number of errors was: {expectedCount}");
+			Report.IsTrue(newProductIngredients.GetTotalErrorMessagesCountFromPopup() == expectedCount, "The counts did not match", "The number of found errors matched the expected");
+		}
+
+
+
+
 		[StepDefinition(@"I click the 'x' button for component number (.*)")]
 		public void ThenIClickTheButtonForComponentNumber(string number)
 		{

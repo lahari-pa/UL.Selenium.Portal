@@ -37,7 +37,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Then I should see battery manufacturer message: Important: Prior to registering your battery-containing product, the battery manufacturer must first register the contained battery.
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 | Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I click continue
@@ -80,7 +80,7 @@ Given I call Shared Step 70393 (Product Information - With marketed for use by a
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 | Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)

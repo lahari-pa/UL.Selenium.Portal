@@ -42,7 +42,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 #Given I call Shared 48367 Product Includes Battery > any type
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 | Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path

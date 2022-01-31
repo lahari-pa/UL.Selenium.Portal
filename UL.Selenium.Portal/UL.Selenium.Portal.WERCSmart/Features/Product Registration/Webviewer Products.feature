@@ -40,7 +40,7 @@ Given I call Shared Step 57501 (Physical and Chemical Properties - More than one
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium Ion batteries for checking in Webviewers)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 | Lithium Ion  | <any>        | 6                               | 6                                  |

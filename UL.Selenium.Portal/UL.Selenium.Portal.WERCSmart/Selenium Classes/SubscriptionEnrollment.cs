@@ -773,7 +773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (var menu in listofMenus)
 			{
 				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
-				if (titleTrimmed == "No additional Agent Support Service")
+				if (titleTrimmed == "Bronze Level Support")
 				{
 					menu.Click();
 					return true;
