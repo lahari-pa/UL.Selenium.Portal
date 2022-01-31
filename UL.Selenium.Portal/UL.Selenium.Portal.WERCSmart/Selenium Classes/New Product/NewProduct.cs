@@ -4146,7 +4146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			thisAlert.Links = this.containerElement
 				.FindElements(By.XPath(
 					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"), 2)
-				.Select(x => new Mailosaur.Link() {
+				.Select(x => new Mailosaur.Models.Link() {
 					Href = x.GetAttribute("href"),
 					Text = x.Text
 				}).ToList();
@@ -5797,7 +5797,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string SubTitle { get; set; }
 		public string Text { get; set; }
 
-		public List<Mailosaur.Link> Links { get; set; }
+		public List<Mailosaur.Models.Link> Links { get; set; }
 	}
 
 	class RegulatoryList : SeleniumBaseObject
