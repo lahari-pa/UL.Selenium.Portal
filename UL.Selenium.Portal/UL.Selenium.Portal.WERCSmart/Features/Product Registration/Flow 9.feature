@@ -12,7 +12,7 @@
 @run_Flow9
 Feature: Flow 9
 
-@ScenarioId:668
+@TestCase:58072
 Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -51,7 +51,7 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
 @newproductstepstest
-@ScenarioId:676
+@TestCase:58098
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -78,7 +78,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	
-@ScenarioId:671
+@TestCase:58078
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -106,7 +106,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
-@ScenarioId:672
+@TestCase:58079
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -135,7 +135,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I navigate to the home page
 	Then I delete the product: TestCase58079
 
-@ScenarioId:669
+@TestCase:58073
 Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -167,7 +167,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 
-@ScenarioId:678
+@TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -205,7 +205,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
 
-@ScenarioId:674
+@TestCase:58091
 Scenario: [58091] Latex Gloves - RU000151
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -237,7 +237,7 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I navigate to the home page
 	Then I delete the product: TestCase58091
 
-@ScenarioId:670
+@TestCase:58075
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -270,7 +270,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I navigate to the home page
 	Then I delete the product: TestCase58075
 
-@ScenarioId:673
+@TestCase:58089
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -300,7 +300,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I navigate to the home page
 	Then I delete the product: TestCase58089
 
-@ScenarioId:675
+@TestCase:58097
 Scenario: [58097] Ingredient Search in Registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -324,6 +324,7 @@ Scenario: [58097] Ingredient Search in Registration
 
 @tfs_design
 @ignore
+@TestCase:58094
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -357,6 +358,7 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 
 @tfs_design
 @ignore
+@TestCase:58081
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -385,7 +387,7 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 @upctest
-@ScenarioId:677
+@TestCase:58604
 Scenario: [58604] Condom - RU000937
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

@@ -13,7 +13,7 @@
 @run_MyAccount
 Feature: MyAccount
 
-@ScenarioId:734
+@TestCase:61796
 Scenario: [61796] Account User Name in Header
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then The home screen should load
@@ -35,7 +35,7 @@ Scenario: [61796] Account User Name in Header
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
 
-@ScenarioId:6704
+@TestCase:63514
 Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
@@ -58,7 +58,7 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
 
-@ScenarioId:735
+@TestCase:64874
 Scenario: [64874] Division Area - no divisions set up
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	And I navigate to My Account
@@ -67,7 +67,7 @@ Scenario: [64874] Division Area - no divisions set up
 	And In the My Account page I navigate to the Company Information page
 	Then In the Company Information screen I should see 0 Division Accounts
 
-@ScenarioId:736
+@TestCase:65887
 Scenario: [65887] Pagination
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -81,7 +81,7 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
-@ScenarioId:6339
+@TestCase:70511
 Scenario: [70511] Pagination (...) need an account with six pages of users
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -98,7 +98,7 @@ Scenario: [70511] Pagination (...) need an account with six pages of users
 	Given I click ... in the My Account user grid
 	Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
-@ScenarioId:737
+@TestCase:68417
 Scenario: [68417] Company Information
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I click on My Account
@@ -111,7 +111,7 @@ Scenario: [68417] Company Information
 # Created by Larkin, Steve
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
-@ScenarioId:738
+@TestCase:87304
 Scenario: [87304] Video link How to Subscribe
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I click on My Account
@@ -124,7 +124,7 @@ Scenario: [87304] Video link How to Subscribe
 	And I close the window saved as: Subscription Enrollment and Management
 
 
-@ScenarioId:739
+@TestCase:92613
 Scenario: [92613] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -141,7 +141,7 @@ Scenario: [92613] Add and Deactivate a New User from the User Grid
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
 
-@ScenarioId:1515
+@TestCase:90197
 Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 62676 (Go To My Account)
@@ -158,7 +158,7 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I confirm the new user is Not Active
 
 
-@ScenarioId:1590
+@TestCase:85512
 Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	And I navigate to My Account
@@ -174,7 +174,7 @@ Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	And in the modal dialog I click Yes
 	And I confirm that I do not see any stewardship information
 
-	@ScenarioId:6057
+@TestCase:85513
 Scenario: [85513] My Account - Edit Stewardship Numbers - Save button
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load
@@ -198,7 +198,7 @@ Then I confirm that the data saved in the Stewardshp Numbers section is correct
 | test123     | 2019-01-30 | Tomorrow    |
 
 
-@ScenarioId:6056
+@TestCase:85258
 Scenario: [85258] My Account - Stewardship Numbers - table display validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load
@@ -223,7 +223,7 @@ Then I check if the Stewardship Numbers table province names match the following
 Then I check if 'Edit' button exists in the Stewardship Numbers section
 
 
-@ScenarioId:6063
+@TestCase:97846
 Scenario: [97846] - Company Information - Verify the 'State' drop-down is Available
 And I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -242,7 +242,7 @@ Then I click the User Icon
 And I click on Sign Out
 
 
-@ScenarioId:6069
+@TestCase:53694
 Scenario: [53694] - User Role - Reset Password
 Given I Login into WERCSmart Portal - Admin Role - Password Reset
 Then the WERCSmart homepage should load
@@ -254,9 +254,9 @@ And I click on Sign Out
 Given I Login into WERCSmart Portal - Admin Role - Password Reset
 
 
-@ScenarioId:6137
 #When running this, update the date 2019-12-09 to whatever the current date is
 #Update the date in the above sentence to avoid future confusion
+@TestCase:87349
 Scenario: [87349] - My Account - Edit Stewardship Numbers - Date validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load
@@ -564,7 +564,7 @@ Then I save the Stewardship Numbers data
 
 
 
-@ScenarioId:10291
+@TestCase:138836
 Scenario: [138836] My Account - Correct Message Displays when Date is Expired
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Given I navigate to My Account

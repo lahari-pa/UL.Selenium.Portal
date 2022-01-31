@@ -35,7 +35,7 @@ Background:
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\UPC
-@ScenarioId:1407
+@TestCase:91076
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
@@ -61,8 +61,8 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 
 @singlerun
-@ScenarioId:1547
-Scenario: [82536] Mass Upload File, Checking for Duplicate UPCs
+@TestCase:82536
+Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -178,7 +178,7 @@ Scenario: [82536] Mass Upload File, Checking for Duplicate UPCs
 	#And I Confirm you are allowed to go on to next screen without errors
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
-@ScenarioId:1406
+@TestCase:91801
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
@@ -213,7 +213,7 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. 
 	
 
-@ScenarioId:1412
+@TestCase:91735
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
@@ -237,7 +237,7 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	And In the UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
-@ScenarioId:1404
+@TestCase:91798
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
@@ -261,7 +261,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
 
-@ScenarioId:1405
+@TestCase:91800
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
@@ -285,7 +285,7 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
-@ScenarioId:1403
+@TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
@@ -309,7 +309,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 	
-@ScenarioId:1409
+@TestCase:91100
 Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -354,7 +354,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
-@ScenarioId:1411
+@TestCase:91157
 	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
@@ -388,7 +388,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then In the UPC modal window I click Cancel
 	And I click the Home navigation icon and accept the alert popup 
 
-@ScenarioId:1408
+@TestCase:91077
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
@@ -413,7 +413,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
 
 	
-@ScenarioId:1410
+@TestCase:91101
 	Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Bulk Upload
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

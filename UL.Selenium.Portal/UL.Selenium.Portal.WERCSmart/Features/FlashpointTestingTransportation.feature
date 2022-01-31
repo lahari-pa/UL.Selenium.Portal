@@ -14,6 +14,7 @@ Feature: Flash Point, testing method and Transportation (Suite ID: 74116)
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74337
 Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -65,6 +66,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74349
 Scenario: [74349] Flash Point = 60°C - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -119,6 +121,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74357
 Scenario: [74357] Flash Point < 60°C - Testing method shows closed cup only, Transportation select No due to an exemption
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -165,6 +168,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74346
 Scenario: [74346] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -221,6 +225,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74364
 Scenario: [74364] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -274,6 +279,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74365
 Scenario: [74365] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -330,6 +336,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74366
 Scenario: [74366] Flash Point = 60°C - Testing method shows closed cup only, Transportation select No due to an exemption
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -380,7 +387,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1182
+@TestCase:74368
 Scenario: [74368] Flash Point Range < 23 - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -433,7 +440,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1183
+@TestCase:74372
 Scenario: [74372] Flash Point Range >=23 and <38 - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -486,7 +493,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1184
+@TestCase:74374
 Scenario: [74374] Flash Point Range >=38 and <=60  - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -539,7 +546,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1185
+@TestCase:74376
 Scenario: [74376] Flash Point Range > 60 and < 93 - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -595,7 +602,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1186
+@TestCase:74379
 Scenario: [74379] Flash Point Range >=93 and <=815 - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -651,7 +658,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1180
+@TestCase:74380
 Scenario: [74380] Flash Point Range Not Tested - Testing method shows Not Applicable/available, Transportation shows all, UN page shows - FP is required with Hazard Class 3
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -705,7 +712,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1181
+@TestCase:74382
 Scenario: [74382] Flash Point Range None, No Flash Point- Testing method shows Not Applicable/available, Transportation shows all, UN page shows - FP is required with Hazard Class 3
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

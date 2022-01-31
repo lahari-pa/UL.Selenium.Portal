@@ -13,7 +13,7 @@
 
 Feature: Flow 6
 
-@ScenarioId:1204
+@TestCase:78731
 Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -73,7 +73,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
 
-@ScenarioId:1203
+@TestCase:57711
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -148,7 +148,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57711
 
 
-@ScenarioId:9322
+@TestCase:57647
 Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene - (RU001000) - 2S
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

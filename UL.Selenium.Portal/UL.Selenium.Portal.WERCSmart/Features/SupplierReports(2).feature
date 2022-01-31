@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -18,7 +18,7 @@
 @run_SupplierReports2
 Feature: Supplier Reports 2
 
-@ScenarioId:10293
+@TestCase:140261
 Scenario: [140261] California Proposition 65 - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -37,7 +37,7 @@ And I confirm the csv file saved as California Proposition 65 - Registrations Pr
 Given I click Close in the Report Download popup
 Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
 
-@ScenarioId:10294
+@TestCase:140260
 Scenario: [140260] Battery-Containing Products - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -57,7 +57,7 @@ And I confirm the csv file saved as Battery-Containing Products can be opened an
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as BatteryContaining Products
 
-@ScenarioId:10309
+@TestCase:140273
 Scenario: [140273] Eligible to Obsolete - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -78,7 +78,7 @@ And I confirm the csv file saved as Eligible to Obsolete can be opened and conta
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Eligible to Obsolete
 
-@ScenarioId:10310
+@TestCase:140280
 Scenario: [140280] Pesticide Registrations - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -98,7 +98,7 @@ And I confirm the csv file saved as Pesticide Registrations can be opened and co
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Pesticide Registrations
 
-@ScenarioId:10307
+@TestCase:140289
 Scenario: [140289] Registration Updates Not Submitted - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -118,7 +118,7 @@ And I confirm the csv file saved as Registrations Revised - Not Yet Submitted ca
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Registrations Revised - Not Yet Submitted
 
-@ScenarioId:10311
+@TestCase:140290
 Scenario: [140290] Subscription Product Types - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -138,7 +138,7 @@ And I confirm the csv file saved as Subscription Product Types can be opened and
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Subscription Product Types
 
-@ScenarioId:10312
+@TestCase:140291
 Scenario: [140291] UPC Duplication - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -158,7 +158,7 @@ And I confirm the csv file saved as UPCs Duplicated within Account can be opened
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as UPCs Duplicated within Account
 
-@ScenarioId:10313
+@TestCase:140292
 Scenario: [140292] Volatile Organic Compounds - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -178,7 +178,7 @@ And I confirm the csv file saved as Volatile Organic Compounds can be opened and
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Volatile Organic Compounds
 
-@ScenarioId:10314
+@TestCase:140293
 Scenario: [140293] Waste Classification Summary - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -200,7 +200,7 @@ Given I delete the excel file saved as Waste Classification Summary
 
 @tfs_design
 @ignore
-@ScenarioId:10259
+@TestCase:140309
 Scenario: [140309] Chemicals of Concern - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -269,7 +269,7 @@ Given I delete the excel file saved as Chemicals of Concern
 
 
 
-@ScenarioId:10293
+@TestCase:140997
 Scenario: [140997] California Proposition 65 - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -297,7 +297,7 @@ Then I Delete the file with name: California Proposition 65.zip from the downloa
 Then I Delete the file with name: California Proposition 65.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10294
+@TestCase:140683
 Scenario: [140683] Battery-Containing Products - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -325,7 +325,7 @@ Then I Delete the file with name: Battery-Containing Products.zip from the downl
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10309
+@TestCase:141005
 Scenario: [141005] Eligible to Obsolete - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -352,7 +352,7 @@ Given I delete the file saved as Eligible to Obsolete
 Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
 Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
 
-@ScenarioId:10310
+@TestCase:141023
 Scenario: [141023] Pesticide Registrations - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -385,7 +385,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 
 
-@ScenarioId:10307
+@TestCase:141028
 Scenario: [141028] Registration Updates Not Submitted - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -413,7 +413,7 @@ Then I Delete the file with name: Registrations Revised - Not Yet Submitted.zip 
 Then I Delete the file with name: Registrations Revised - Not Yet Submitted.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10311
+@TestCase:141029
 Scenario: [141029] Subscription Product Types - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -441,7 +441,7 @@ Then I Delete the file with name: Subscription Product Types.zip from the downlo
 Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10312
+@TestCase:141034
 Scenario: [141034] UPC Duplication - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -469,7 +469,7 @@ Then I Delete the file with name: UPCs Duplicated within Account.zip from the do
 Then I Delete the file with name: UPCs Duplicated within Account.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10313
+@TestCase:141036
 Scenario: [141036] Volatile Organic Compounds - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -497,7 +497,7 @@ Then I Delete the file with name: Volatile Organic Compounds.zip from the downlo
 Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10314
+@TestCase:141041
 Scenario: [141041] Waste Classification Summary - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -527,7 +527,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 @tfs_design
 @ignore
-@ScenarioId:10318
+@TestCase:141799
 Scenario: [141799] Chemicals of Concern - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane

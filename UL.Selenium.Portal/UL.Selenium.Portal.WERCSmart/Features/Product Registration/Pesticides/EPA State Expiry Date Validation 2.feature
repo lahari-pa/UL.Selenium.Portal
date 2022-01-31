@@ -20,7 +20,7 @@ Feature:  EPA State Expiry Date Validation 2 (Suite ID: 56545)
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
-@ScenarioId:930
+@TestCase:56601
 Scenario: [56601] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -49,7 +49,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
-@ScenarioId:931
+@TestCase:56602
 Scenario: [56602] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -74,7 +74,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56602
 
 # Assigned to Barrett, Beverly
-@ScenarioId:932
+@TestCase:56603
 Scenario: [56603] Pesticide Data - EPA Expiration date validation (Minnesota - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -99,7 +99,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56603
 
 # Assigned to Barrett, Beverly
-@ScenarioId:933
+@TestCase:56604
 Scenario: [56604] Pesticide Data - EPA Expiration date validation (Missouri -Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -124,7 +124,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56604
 
 # Assigned to Barrett, Beverly
-@ScenarioId:934
+@TestCase:56605
 Scenario: [56605] Pesticide Data - EPA Expiration date validation (Mississippi - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -149,7 +149,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56605
 
 # Assigned to Barrett, Beverly
-@ScenarioId:935
+@TestCase:56606
 Scenario: [56606] Pesticide Data - EPA Expiration date validation (Montana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -174,7 +174,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56606
 
 # Assigned to Barrett, Beverly
-@ScenarioId:936
+@TestCase:56607
 Scenario: [56607] Pesticide Data - EPA Expiration date validation (North Carloina - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -199,7 +199,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56607
 
 # Assigned to Barrett, Beverly
-@ScenarioId:937
+@TestCase:56608
 Scenario: [56608] Pesticide Data - EPA Expiration date validation (Nebraska - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -224,7 +224,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56608
 
 # Assigned to Barrett, Beverly
-@ScenarioId:938
+@TestCase:56609
 Scenario: [56609] Pesticide Data - EPA Expiration date validation (New Hampshire - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -249,7 +249,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56609
 
 # Assigned to Barrett, Beverly
-@ScenarioId:939
+@TestCase:56610
 Scenario: [56610] Pesticide Data - EPA Expiration date validation (New Jersey - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -275,7 +275,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
                                                                                                                                                                                     |
 
-@ScenarioId:9325
+@TestCase:56651
 	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
@@ -320,7 +320,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @tfs_design
 @ignore
 #Bug ticket placed for the error that is not displaying - Philip
-	@ScenarioId:9324
+@TestCase:56652
 Scenario: [56652] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
@@ -362,7 +362,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 
-@ScenarioId:9334
+@TestCase:56598
 	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Kansas - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
@@ -404,7 +404,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 
-@ScenarioId:9393
+@TestCase:26827
 	Scenario: [26827] UPC Assessment Details
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC26827

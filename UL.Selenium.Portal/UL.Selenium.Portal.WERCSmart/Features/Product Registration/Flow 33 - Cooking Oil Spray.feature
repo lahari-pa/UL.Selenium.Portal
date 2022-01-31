@@ -14,7 +14,7 @@
 Feature: Flow 33 - Cooking Oil Spray
 
 # Created by Aaron Caton
-@ScenarioId:1161
+@TestCase:69577
 Scenario: [69577] Cooking Oil Spray - Aerosol
 Given I generate a random UPC number and save as: UPC69577
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

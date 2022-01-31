@@ -17,7 +17,7 @@
 
 Feature: New Product
 
-@ScenarioId:1113
+@TestCase:31343
 Scenario: [31343] New Product screen navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -32,7 +32,7 @@ And I should see the following radio buttons:
 #TODO: create another test case for ULSC options in New product screen
 
 
-@ScenarioId:1114
+@TestCase:31344
 Scenario: [31344] New Product Screen validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -42,7 +42,7 @@ When I click continue
 Then I should see an error message: This is a required field.
 
 
-@ScenarioId:1115
+@TestCase:82750
 Scenario: [82750] Copy from an Existing Registration validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -53,7 +53,7 @@ When I click continue
 Then I should see an error message: This is a required field.
 
 
-@ScenarioId:6336
+@TestCase:87295
 Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -71,7 +71,7 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 
 
 
-@ScenarioId:6335
+@TestCase:74944
 Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question validations
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -99,7 +99,7 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 
 
 
-@ScenarioId:10618
+@TestCase:149421
 Scenario: [149421] CBD - Registration with CBD Ingredient in Formulation
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -161,7 +161,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 @tfs_design
 @ignore
-@ScenarioId:10619
+@TestCase:145400
 Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -191,6 +191,7 @@ And I click the following option in the bottom menu: Review
 
 
 
+@TestCase:120820
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -237,7 +238,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
-@ScenarioId:10108
+@TestCase:128694
 Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -254,7 +255,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10107
+@TestCase:128721
 Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard, no electronic components) - RU001206
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -271,7 +272,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10147
+@TestCase:128703
 Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Components with Electrical Parts -  RU001428
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -287,7 +288,7 @@ And The following options should be displayed exclusively for section: Product i
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
 
 
-@ScenarioId:10647
+@TestCase:136058
 Scenario: [136058] The Product - Industrial Category not available for Selection
 	
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -311,7 +312,7 @@ Given I clear 'Type of Product'
 
 
 
-@ScenarioId:10715
+@TestCase:159942
 Scenario: [159942] Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use RU001423
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

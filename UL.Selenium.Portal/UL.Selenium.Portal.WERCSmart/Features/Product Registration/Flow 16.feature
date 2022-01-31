@@ -13,7 +13,7 @@
 @UPC
 Feature: Flow 16
 
-@ScenarioId:680
+@TestCase:59273
 Scenario: [59273] Alkaline Battery - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -53,7 +53,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-@ScenarioId:681
+@TestCase:59274
 Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -93,7 +93,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
-@ScenarioId:683
+@TestCase:59276
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -131,7 +131,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 	
-@ScenarioId:684
+@TestCase:59277
 Scenario: [59277] Magnesium Battery - RU000728
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -169,7 +169,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
 	
-@ScenarioId:685
+@TestCase:59278
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -207,7 +207,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
 	
-@ScenarioId:686
+@TestCase:59279
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -246,7 +246,7 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-cadmium battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
 	
-@ScenarioId:687
+@TestCase:59280
 Scenario: [59280] Silver Battery - RU000698
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -286,7 +286,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
 	
-@ScenarioId:688
+@TestCase:59281
 Scenario: [59281] Water-Charged Cell - RU001543
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -326,7 +326,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
 	
-@ScenarioId:689
+@TestCase:59282
 Scenario: [59282] Zinc Air - RU001205
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -365,7 +365,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
 	
-@ScenarioId:682
+@TestCase:59275
 Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -404,7 +404,7 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Carbon Zinc Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275
 	
-@ScenarioId:1511
+@TestCase:97484
 Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -442,7 +442,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid (Non-Spillable) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
 	
-@ScenarioId:690
+@TestCase:97470
 Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -478,7 +478,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
 	
-@ScenarioId:679
+@TestCase:110324
 Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Error Messaging - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -535,7 +535,7 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
 
-@ScenarioId:8180
+@TestCase:122366
 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC122366

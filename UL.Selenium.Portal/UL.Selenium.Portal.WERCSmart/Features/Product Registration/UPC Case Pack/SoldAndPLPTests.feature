@@ -29,7 +29,7 @@ Given I verify the following users exist and if not I create them using SHAUser
 | username    | FirstName | LastName   | Role         | EmailAddress                |
 | SHAQAAuto24 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:11196
+@TestCase:87957
 Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87957
@@ -80,7 +80,7 @@ Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 
 
 
-@ScenarioId:6259
+@TestCase:87959
 Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87959
@@ -128,7 +128,7 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Completed
 
-@ScenarioId:8195
+@TestCase:87969
 Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87969
@@ -188,7 +188,7 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
 
-@ScenarioId:8196
+@TestCase:88198
 Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC88198
@@ -238,7 +238,7 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@ScenarioId:11088
+@TestCase:88199
 Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with Case UPC - process to  Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC88199

@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @NewProduct
 @ProductGrid
 @RetailPartners
@@ -9,7 +9,7 @@
 
 Feature: Battery
 
-@ScenarioId:8107
+@TestCase:127575
 Scenario: [127575] Battery Registration - Regulatory Documents - Needs "I don't Need" Option
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -41,6 +41,7 @@ Then I should see radio option: need a WHMIS Compliant SDS
 
 
 
+@TestCase:142371
 Scenario: [142371] Battery - Data Consents
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

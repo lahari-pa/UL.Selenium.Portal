@@ -23,7 +23,7 @@ Scenario: [API]ItemSync
 @tfs_design
 @ignore
 # uses 16793FA3-452C-45B6-AF48-969AFDF58216(TG) as the requesting retailer
-@ScenarioId:9791
+@TestCase:108810
 Scenario: [108810]ItemSync
 	Given I generate a random UPC number and save as: UPC108810
 	Given I authenticate ItemSync username: QATest, password: c06Q3@!gRzNzqk

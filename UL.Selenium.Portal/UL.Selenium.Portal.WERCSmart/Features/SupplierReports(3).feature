@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -19,7 +19,7 @@
 Feature: Supplier Reports 3
 
 
-@ScenarioId:10336
+@TestCase:146145
 Scenario: [146145] UPCs to Retailer via Item Sync - Excel File 
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -49,7 +49,7 @@ Given I confirm that an excel file is produced called UPCs to Retailer via Item 
 And I confirm the Supplier Reports excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 
-@ScenarioId:10349
+@TestCase:146172
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -85,7 +85,7 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the do
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10337
+@TestCase:146146
 Scenario: [146146] UPCs to Retailer via Item Sync - CSV File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -118,7 +118,7 @@ And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened
 Given I delete the file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 
-@ScenarioId:10345
+@TestCase:146164
 Scenario: [146164] UPCs to Retailer via Item Sync - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -157,7 +157,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 @tfs_design
 @ignore
-@ScenarioId:10343
+@TestCase:144339
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -188,7 +188,7 @@ Then I Delete the file with name: UPC and Retailer (All).zip from the downloads 
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@ScenarioId:10344
+@TestCase:144263
 Scenario: [144263] UPC Errors for The Home Depot- CSV Zip File 
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -222,7 +222,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 
 
-@ScenarioId:10367
+@TestCase:144240
 Scenario: [144240] Kit Registrations - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -255,7 +255,7 @@ Then I Delete the file with name: Kit Registrations.csv from the downloads folde
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
-@ScenarioId:10368
+@TestCase:144259
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -290,7 +290,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 
 
-@ScenarioId:10365
+@TestCase:144262
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

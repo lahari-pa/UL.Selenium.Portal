@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -15,7 +15,7 @@
 @run_CanNotRunOnTReVor
 Feature: CanNotRunOnTReVor
 
-@ScenarioId:6053
+@TestCase:88918
 Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -77,7 +77,7 @@ Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88918
 
 	# Failing due to bug 117614
-@ScenarioId:6079
+@TestCase:90001
 Scenario: [90001] Labels for Input Fields in UPC Screen
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -169,7 +169,7 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase90001
 
 
-	@ScenarioId:6227
+@TestCase:88879
 Scenario: [88879] Input fields and labels for Retailers HD and TG have been Updated
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -245,7 +245,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	And I check that OMSID for retailer The Home Depot UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable88879
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
 
-	@ScenarioId:6313
+@TestCase:90002
 	Scenario: [90002] Label for Input File for Canadian Tire
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

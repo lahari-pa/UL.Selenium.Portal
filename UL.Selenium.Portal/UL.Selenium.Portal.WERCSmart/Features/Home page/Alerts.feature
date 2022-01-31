@@ -26,7 +26,7 @@ Feature: Alerts
 #Design => Ready
 @tfs_design
 @ignore
-@ScenarioId:6069
+@TestCase:56280
 Scenario: [56280] - Document is created and is ready for review
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window

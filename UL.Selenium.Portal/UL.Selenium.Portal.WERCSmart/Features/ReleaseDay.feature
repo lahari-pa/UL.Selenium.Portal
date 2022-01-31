@@ -30,8 +30,7 @@ Feature: Release Day
 
 
 @singlerun
-@ScenarioId:1160
-@ScenarioId:1160
+@TestCase:78414
 Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
@@ -59,7 +58,7 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
-@ScenarioId:6002
+@TestCase:99052
 Scenario: [99052] UPC Validation of duplicate and Buffered zero duplicate not allowed
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

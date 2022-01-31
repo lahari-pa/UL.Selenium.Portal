@@ -27,7 +27,7 @@ Background:
 ## Test case can be found at the following paths:
 ## NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 12
 ## NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
-@ScenarioId:793
+@TestCase:58430
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I click on My Account
@@ -79,7 +79,7 @@ Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the co
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
-@ScenarioId:794
+@TestCase:58605
 Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -107,7 +107,7 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
 
-@ScenarioId:795
+@TestCase:58606
 Scenario: [58606] Medicinal Liquids - RU001188
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -151,7 +151,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 @ProductSetUp
 @42196
-@ScenarioId:796
+@TestCase:42196
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)

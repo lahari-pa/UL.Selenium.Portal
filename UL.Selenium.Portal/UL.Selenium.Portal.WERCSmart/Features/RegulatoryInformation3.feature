@@ -14,7 +14,7 @@
 
 Feature: Regulatory Information 3
 
-@ScenarioId:1188
+@TestCase:88022
 Scenario: [88022] Regulatory Information 3 - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -43,7 +43,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 #| An Active Ingredient is listed on the Panel |
 
 
-@ScenarioId:1189
+@TestCase:88644
 Scenario: [88644] Regulatory Information 3 - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

@@ -22,7 +22,7 @@ Feature: Webviewer Products
 #Last step of test will save successfull products and their unique IDs to TReVor (as Variable?)
 #These Product names containing unique IDs give to Bev or add to devops ticket in some way?
 
-@ScenarioId:10454
+@TestCase:146792
 Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test Batteries (Lithium Ion) with all document types
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -99,7 +99,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@ScenarioId:10691
+@TestCase:120814
 Scenario: [120814] WERCSmart product - Submitted to SHA, Status = Submitted
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
@@ -130,7 +130,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 @Missing_Steps
 @Rename_Product
-@ScenarioId:10637
+@TestCase:144967
 Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 #Need access to WebViewer Feed Account + Add to TReVor?
 
@@ -194,6 +194,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 @Missing_Steps
 @Rename_Product
+@TestCase:144975
 Scenario: [144975] US Only, PLP = No, GenDoc = 1, Doc Accepted = No (User rejects published SDS and uploads his own)
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -263,6 +264,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 
 @Rename_Product
+@TestCase:144979
 Scenario: [144979] US Only, PLP = No, GenDoc = 0, User uploads own SDS on submission
 
 #Login to WS as supplier with feed to Web viewers
@@ -312,6 +314,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 @Missing_Steps
 @Rename_Product
+@TestCase:144981
 Scenario: [144981] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Alias published = Yes
 #Login to WS as supplier with feed to Web viewers
 
@@ -364,6 +367,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 @Missing_Steps
 @Rename_Product
+@TestCase:144984
 Scenario: [144984] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Alias published = No
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -415,6 +419,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 @Missing_Steps
 @Rename_Product
+@TestCase:144992
 Scenario: [144992] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 0, Processed to Complete
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -459,6 +464,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase144992 and its status is: Completed
 Then I Update the TestUser: Webviewer Products to include the name of the product saved as: TestCase144992
 
+@TestCase:145074
 Scenario: [145074] US Only, Label Only Product - Label Uploaded - process to Complete
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -503,6 +509,7 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 
 
 
+@TestCase:145971
 Scenario: [145971] Canada Only, Non Authoring Product - No Label Uploaded, PLP = Yes, GENDOC = 0
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
@@ -536,6 +543,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 | Canadian Tire |
 
 
+@TestCase:120815
 Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
@@ -567,7 +575,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status
 
 
 
-@ScenarioId:10758
+@TestCase:145842
 Scenario: [145842] Canada Only, Non Authoring Product - No Label Uploaded, PLP = No, GENDOC = 0
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -606,7 +614,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@ScenarioId:10707
+@TestCase:145793
 Scenario: [145793] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 0
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -647,7 +655,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@ScenarioId:10788
+@TestCase:120811
 Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
@@ -678,6 +686,7 @@ Given I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Sub
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in New Status for saved as: TestCase120811)
 
 
+@TestCase:145970
 Scenario: [145970] Canada Only, Non Authoring Product - No Label Uploaded, PLP = Yes, GENDOC = 0, User Uploads SDS on Additional Documents to Provide
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -715,7 +724,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 | Canadian Tire |
 
 
-@ScenarioId:10706
+@TestCase:145852
 Scenario: [145852] Canada Only, Non Authoring Product - No Label Uploaded, PLP = No, GENDOC = 0, User Uploads SDS on Additional Documents to Provide
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -755,7 +764,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@ScenarioId:10714
+@TestCase:145743
 Scenario: [145743] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 1, Alias published = Yes
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -805,7 +814,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
-@ScenarioId:10705
+@TestCase:145783
 Scenario: [145783] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 1, Alias published = No
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
@@ -851,6 +860,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 
 
 
+@TestCase:120816
 Scenario: [120816] WERCSmart product - Submitted to SHA, Status = Accepted
 
 Given I Login into WERCSmart Portal - WebViewers Account
@@ -888,6 +898,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
+@TestCase:120817
 Scenario: [120817] WERCSmart product - Submitted to SHA, Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -927,6 +938,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
+@TestCase:120848
 Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Safety Data Sheet (SDS) or Label Mismatch due to 3rd-Party Formula)
 
 	Given I Login into WERCSmart Portal - WebViewers Account
@@ -965,6 +977,7 @@ Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Saf
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Pending
 
 
+@TestCase:120858
 Scenario: [120858] WERCSmart Product - from Completed status to Recertification
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I search for the product saved as: TestCase120817
@@ -993,6 +1006,7 @@ And In the Product Recertification History popup I should see the following entr
 		| saved as TestCase120817| false   | Recertification of Product by WERCSmart Customer |
 And I Close the Product Recertification History pop up
 
+@TestCase:120820
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1032,6 +1046,7 @@ Given I call Shared Step 155714 (SHA - Accepted Product - set Retailers to Cance
 | Walgreens|
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Status for saved as: TestCase120820)
 
+@TestCase:126691
 Scenario: [126691] WERCSmart product - Pesticide - processed from New to Suspended-Pesiticde
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -1068,6 +1083,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Pending
 	
+@TestCase:121986
 Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru to Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

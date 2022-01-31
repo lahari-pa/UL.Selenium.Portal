@@ -20,7 +20,7 @@ Background:
 		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
-@ScenarioId:655
+@TestCase:62775
 Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +46,7 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
-@ScenarioId:660
+@TestCase:62849
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
@@ -79,7 +79,7 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
-@ScenarioId:661
+@TestCase:62852
 Scenario: [62852] Pesticide - Product Label is required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -107,7 +107,7 @@ Scenario: [62852] Pesticide - Product Label is required
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62852
 
-@ScenarioId:644
+@TestCase:56547
 Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient information returned from call to Kelly API
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -131,7 +131,7 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
 
-@ScenarioId:646
+@TestCase:57512
 Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -142,7 +142,7 @@ Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57512
 
-@ScenarioId:647
+@TestCase:57516
 Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -153,7 +153,7 @@ Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57516
 
-@ScenarioId:648
+@TestCase:57520
 Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-B
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -164,7 +164,7 @@ Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
 
-@ScenarioId:649
+@TestCase:57522
 Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -175,7 +175,7 @@ Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
 
-@ScenarioId:650
+@TestCase:57527
 Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -186,7 +186,7 @@ Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57527
 
-@ScenarioId:651
+@TestCase:57529
 Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -197,7 +197,7 @@ Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529
 
-@ScenarioId:652
+@TestCase:57533
 Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -208,7 +208,7 @@ Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57533
 
-@ScenarioId:653
+@TestCase:57534
 Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -219,7 +219,7 @@ Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57534
 
-@ScenarioId:654
+@TestCase:57546
 Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -230,7 +230,7 @@ Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
 
-@ScenarioId:662
+@TestCase:66344
 Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -242,7 +242,7 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
-@ScenarioId:663
+@TestCase:66345
 Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -255,7 +255,7 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
 @56500
-@ScenarioId:641
+@TestCase:56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -356,7 +356,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 
-@ScenarioId:643
+@TestCase:56541
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -381,7 +381,7 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56541
 
-@ScenarioId:656
+@TestCase:62778
 Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Environment Protection Agency (EPA) Registration Number
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -415,7 +415,7 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
-@ScenarioId:657
+@TestCase:62780
 Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Number table
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -457,7 +457,7 @@ Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Numb
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62780
 
-@ScenarioId:645
+@TestCase:56577
 Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user edits date from Kelly
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -484,7 +484,7 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56577
 
-@ScenarioId:658
+@TestCase:62799
 Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates and coloring
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -524,7 +524,7 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides
-@ScenarioId:642
+@TestCase:56502
 Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Given I generate a random UPC number and save as: UPC56502
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -582,7 +582,7 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 
 #And I Go to the State Pesticide Section of MTR/CKLT SECT0127
 #And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
-@ScenarioId:664
+@TestCase:71051
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -611,7 +611,7 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
-@ScenarioId:659
+@TestCase:62848
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -645,7 +645,7 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 
 
-@ScenarioId:10534
+@TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC121120
@@ -679,7 +679,7 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	Given If purchase details are showing click confirm order
 
 	
-@ScenarioId:9323
+@TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

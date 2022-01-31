@@ -13,7 +13,7 @@
 @run_RegulatoryInformation1
 Feature: Regulatory Information 1
 
-@ScenarioId:1170
+@TestCase:85492
 Scenario: [85492] Regulatory Information 1 - navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -30,7 +30,7 @@ Scenario: [85492] Regulatory Information 1 - navigation
 	And I should see following statement: Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85492
 
-@ScenarioId:1171
+@TestCase:85693
 Scenario: [85693] Regulatory Information 1 - validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -47,7 +47,7 @@ Scenario: [85693] Regulatory Information 1 - validation
 	And Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85693
 
-@ScenarioId:1172
+@TestCase:85695
 Scenario: [85695] California Proposition 65 - select Yes - navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

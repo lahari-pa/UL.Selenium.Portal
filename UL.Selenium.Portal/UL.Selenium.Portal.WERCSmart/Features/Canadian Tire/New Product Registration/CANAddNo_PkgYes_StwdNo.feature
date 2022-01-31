@@ -16,7 +16,7 @@
 Feature: Account Canada Address(No) Packagetype(Yes) Stewardship(No)
 
 
-@ScenarioId:1275
+@TestCase:85871
 Scenario: [85871] Account Packaging type Only, SOLD = US Only, PL = YES, Packaging type IS NOT required
 
 Given I log in with the account saved in TReVor as: PackagingOnly
@@ -34,7 +34,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85871
 
 
-@ScenarioId:1276
+@TestCase:85872
 Scenario: [85872] Account Packaging type Only, SOLD = US Only, PL = NO, Packaging type IS NOT required
 
 Given I log in with the account saved in TReVor as: PackagingOnly
@@ -52,7 +52,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85872
 
 
-@ScenarioId:1277
+@TestCase:85873
 Scenario: [85873] Account Packaging type Only, SOLD = Canada Only, PL = YES, Packaging type IS required
 
 Given I log in with the account saved in TReVor as: PackagingOnly
@@ -69,7 +69,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85873
 
 
-@ScenarioId:1278
+@TestCase:85874
 Scenario: [85874] Account Packaging type Only, SOLD = Canada Only, PL = NO, Packaging type IS required
 
 Given I log in with the account saved in TReVor as: PackagingOnly
@@ -86,7 +86,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85874
 
 
-@ScenarioId:1279
+@TestCase:85875
 Scenario: [85875] Account Packaging type Only, SOLD = US & Canada, PL = YES, Packaging type IS required
 
 Given I log in with the account saved in TReVor as: PackagingOnly
@@ -103,7 +103,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85735
 
 
-@ScenarioId:1280
+@TestCase:85876
 Scenario: [85876] Account Packaging type Only, SOLD = US & Canada, PL = NO, Packaging type IS required
 
 Given I log in with the account saved in TReVor as: PackagingOnly

@@ -33,7 +33,7 @@ Background:
 		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
-@ScenarioId:1191
+@TestCase:87584
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -63,7 +63,7 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 		# See above comment; There is no way that this field name will return, so this step will always pass as written. Fix requested in 174731.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
-@ScenarioId:1192
+@TestCase:87587
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -88,7 +88,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
-@ScenarioId:1193
+@TestCase:87588
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -122,7 +122,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
-@ScenarioId:1194
+@TestCase:87593
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -151,7 +151,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
-@ScenarioId:1195
+@TestCase:87596
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -179,7 +179,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
 	#Philip - Working
-@ScenarioId:1196
+@TestCase:87597
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -204,7 +204,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
-@ScenarioId:8260
+@TestCase:87595
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
 	Given I save to context name: TestCase1 and value: 1525111
@@ -232,7 +232,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Size (Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 
-@ScenarioId:1198
+@TestCase:87832
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87832
@@ -270,7 +270,7 @@ Scenario: [87832] View Shows Case UPC Data
 		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
-@ScenarioId:1197
+@TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87825
@@ -306,7 +306,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
-@ScenarioId:1200
+@TestCase:96071
 Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC96071_2
@@ -355,8 +355,8 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96071_2
 
-@ScenarioId:1199
-Scenario: [95988] Mass Upload File Floating
+@TestCase:95988
+Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -420,7 +420,7 @@ Scenario: [95988] Mass Upload File Floating
 	And I navigate to the home page
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
 
-@ScenarioId:6375
+@TestCase:109516
 Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109516
@@ -490,7 +490,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
 	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
 
-@ScenarioId:6236
+@TestCase:101023
 Scenario: [101023] UPC Step - Add Part Number
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -524,7 +524,7 @@ Scenario: [101023] UPC Step - Add Part Number
 @tfs_design
 @ignore
 #In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
-@ScenarioId:6025
+@TestCase:84510
 Scenario: [84510] Select Retailers in UPC screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -584,7 +584,7 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given I click the 'Restore Selected' button
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
 
-@ScenarioId:6058
+@TestCase:87628
 Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
@@ -630,7 +630,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 
 @tfs_design
 @ignore
-@ScenarioId:6054
+@TestCase:87305
 Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -680,7 +680,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 	Then I confirm the retailers are removed TestCase87305
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87305
 
-@ScenarioId:6064
+@TestCase:87598
 Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields required
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -716,7 +716,7 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	Then I confirm no error is shown below the Individual UPC contained in the Case Pack field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
 
-@ScenarioId:6226
+@TestCase:115334
 Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -747,7 +747,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 #JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
 @tfs_design
 @ignore
-@ScenarioId:6399
+@TestCase:109596
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then I generate a random UPC number and save as: UPC#109596_1
@@ -832,7 +832,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 #And In the View Orders popup I click Back
 #Given I click on the second entry in the View Orders popup
 #And I confirm that for each retailer, the entry has a status of Chemical Assessment
-@ScenarioId:6948
+@TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -892,7 +892,7 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
-@ScenarioId:7042
+@TestCase:120798
 Scenario:[120798] "U" for UPC Update for Suspended Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
@@ -956,7 +956,7 @@ Scenario:[120798] "U" for UPC Update for Suspended Status
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
-@ScenarioId:7043
+@TestCase:120849
 Scenario:[120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
@@ -1014,7 +1014,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 	And I navigate to the home page
 
 
-	@ScenarioId:10662
+@TestCase:156789
 Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

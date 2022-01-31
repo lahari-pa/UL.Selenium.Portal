@@ -13,7 +13,7 @@
 
 Feature: Flow 25
 
-@ScenarioId:708
+@TestCase:60642
 Scenario: [60642] Engine Parts and Components with Battery Included - RU001430
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -58,7 +58,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:709
+@TestCase:60643
 Scenario: [60643] Cameras / Camcorders w/Battery - RU000932
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

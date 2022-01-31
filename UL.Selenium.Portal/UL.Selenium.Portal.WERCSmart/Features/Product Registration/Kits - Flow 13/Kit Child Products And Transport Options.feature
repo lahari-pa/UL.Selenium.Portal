@@ -25,7 +25,7 @@ Background:
 #And I The Purchase summary step is shown with the success message
 #Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
 
-@ScenarioId:1509
+@TestCase:63521
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

@@ -23,7 +23,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto26 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:978
+@TestCase:68420
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -50,7 +50,7 @@ Scenario: [68420] List of Supplier Reports
 @tfs_design
 @ignore
 @Obsolete
-@ScenarioId:979
+@TestCase:68421
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -82,7 +82,7 @@ Scenario: [68421] Active UPCs for Products Report
 	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
 	And I delete the Supplier Report file saved as 68421
 
-@ScenarioId:980
+@TestCase:68422
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -130,7 +130,7 @@ Scenario: [68422] Battery-containing products report
 	#And I confirm that the product returned has the same name as the product saved as: TestCase68422
 	#And I delete the Supplier Report file saved as 68422
 
-@ScenarioId:981
+@TestCase:68423
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -157,7 +157,7 @@ Scenario: [68423] Formulated vs Articles Report
 	And I confirm that the product returned has the same name as the product saved as: TestCase68423
 	And I delete the Supplier Report file saved as 68423
 
-@ScenarioId:982
+@TestCase:73082
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -219,7 +219,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
 
-@ScenarioId:977
+@TestCase:108254
 Scenario: [108254] UPC Report for All Products with Retailer - Create new products and verify in report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Create a formulated product - Chalk
@@ -300,7 +300,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 		| Camera wBattery | UPC108254BCP | Walgreens | Submitted | 32     | Plastic Container | Battery-Containing Product | ENHANCED ARTICLES |
 	And I delete the Supplier Report file saved as 108254
 
-@ScenarioId:6270
+@TestCase:73225
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -319,7 +319,7 @@ Scenario: [73225] Kits that Contain a specific Product
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73225
 
-@ScenarioId:6349
+@TestCase:73228
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -338,7 +338,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73228
 
-@ScenarioId:6262
+@TestCase:73226
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -363,7 +363,7 @@ Scenario: [73226] Pesticide Certificate Report
 	Given I save the product with name: TestCase73226Name and id: TestCase73226Id as: TestCase73226
 	And I delete the excel file saved as excel73226
 
-@ScenarioId:984
+@TestCase:73229
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -400,7 +400,7 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
-	@ScenarioId:983
+@TestCase:73227
 Scenario: [73227] Products and Recommended Use Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the My Reports icon in the QuickLinks Pane
@@ -419,7 +419,7 @@ Then I confirm that the excel file saved as: 73227 contains the following column
 		| Product Name   |
 And I delete the excel file saved as 73227
 
-@ScenarioId:985
+@TestCase:73230
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -442,6 +442,7 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 		| Status          |
 	And I delete the excel file saved as 73230
 
+@TestCase:75391
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -494,7 +495,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	And I delete the Supplier Report file saved as 75391
 
 #fails because of a bug 106613
-@ScenarioId:986
+@TestCase:76551
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
     Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -519,7 +520,7 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	And I delete the Supplier Report file saved as excel76551
 
 #TODO - this scenario is incomplete because the possibility of automating the rest of the test case needs review.
-@ScenarioId:978
+@TestCase:76759
 Scenario: [76759] Waste Classification Summary Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -601,7 +602,7 @@ Scenario: [76759] Waste Classification Summary Report
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
 @ignore
-@ScenarioId:6619
+@TestCase:79635
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -628,7 +629,7 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 	And I delete the Supplier Report file saved as 79635
 
 #Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
-@ScenarioId:976
+@TestCase:110480
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -638,7 +639,7 @@ Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- C
 
 
 
-@ScenarioId:5976
+@TestCase:114764
 Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
 	Given I Submit a new product which has a Case UPC and a regular UPC
