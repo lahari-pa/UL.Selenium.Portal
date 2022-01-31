@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Mailosaur;
+using Mailosaur.Models;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
 using NUnit.Framework;
