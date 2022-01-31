@@ -32,7 +32,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1455
+@TestCase:87640
 Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -63,7 +63,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87640
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-@ScenarioId:1454
+@TestCase:87643
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -97,7 +97,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
-@ScenarioId:1456
+@TestCase:87650
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -158,7 +158,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876502
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876503
 
-@ScenarioId:1457
+@TestCase:87676
 Scenario: [87676] UPC - Case Pack can be removed from new product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -210,7 +210,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
 
-@ScenarioId:1458
+@TestCase:87685
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -262,7 +262,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Completed
 
-@ScenarioId:1459
+@TestCase:87686
 Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -315,7 +315,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	@tfs_design
 	@ignore
 @singlerun
-@ScenarioId:10161
+@TestCase:87894
 Scenario: [87894] Forwarding - Edit existing Case UPC
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 	Given I navigate to the landing page
@@ -363,7 +363,7 @@ Given I Use Test case 87685 to create a product which has a Case UPC and a regul
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87894
 	Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
-@ScenarioId:1535
+@TestCase:87835
 Scenario: [87835] View UPCs shows Case UPC Data
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC87835
@@ -403,7 +403,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
 
 
-@ScenarioId:10103
+@TestCase:87631
 	Scenario: [87631] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -441,7 +441,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 
 
-@ScenarioId:10153
+@TestCase:87633
 Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -471,7 +471,7 @@ And I should see the Regulatory Documents to Provide Page
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
 
-@ScenarioId:10145
+@TestCase:87718
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -508,7 +508,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:11137
+@TestCase:87818
 Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -536,7 +536,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:6519
+@TestCase:87821
 Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -30,7 +30,7 @@ Background:
 
 @tfs_design
 @ignore
-@ScenarioId:11200
+@TestCase:56220
 Scenario: [56220] My Products grid Actions - Edit UPCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -40,7 +40,7 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 	Then I click on the Row Action: UPC Update
 	And UNDER DEVELOPMENT
 
-@ScenarioId:438
+@TestCase:64528
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64528
 	Given I navigate to the landing page
@@ -61,7 +61,7 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 
-@ScenarioId:439
+@TestCase:64529
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64529
 	Given I navigate to the landing page
@@ -92,7 +92,7 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 		| Remove UPC Update  |
 		| Monitor Progress   |
 
-@ScenarioId:440
+@TestCase:64530
 Scenario: [64530] Process UPC Update
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64530
 	Given I generate a random UPC number and save as: UPC64530
@@ -120,7 +120,7 @@ Scenario: [64530] Process UPC Update
 	And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
-@ScenarioId:441
+@TestCase:64531
 Scenario: [64531] Remove UPC Update - Cancel
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64531
 	Given I navigate to the landing page
@@ -158,7 +158,7 @@ Scenario: [64531] Remove UPC Update - Cancel
 		| Remove UPC Update  |
 		| Monitor Progress   |
 
-@ScenarioId:442
+@TestCase:64532
 Scenario: [64532] Remove UPC Update - Remove
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64532
 	Given I navigate to the landing page
@@ -198,7 +198,7 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
 	Given I Close the Product Recertification History pop up
 
-@ScenarioId:1566
+@TestCase:112568
 Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is displayed about Rejected Registrations and SDS Restrictions
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
@@ -217,7 +217,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	And I should see the The Product Page
 
 
- @ScenarioId:6786
+@TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120790

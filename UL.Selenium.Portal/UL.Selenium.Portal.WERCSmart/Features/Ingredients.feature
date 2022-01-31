@@ -23,7 +23,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:911
+@TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -65,7 +65,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
 
-@ScenarioId:912
+@TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -94,7 +94,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 
-@ScenarioId:907
+@TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -114,7 +114,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
-@ScenarioId:908
+@TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -136,7 +136,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
-@ScenarioId:906
+@TestCase:65459
 Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public Name are not active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -153,7 +153,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
-@ScenarioId:905
+@TestCase:65451
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -172,7 +172,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 
-@ScenarioId:904
+@TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -193,7 +193,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
-@ScenarioId:903
+@TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -212,7 +212,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 
-@ScenarioId:910
+@TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -235,7 +235,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
     And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
-@ScenarioId:913
+@TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -254,7 +254,7 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
 
-@ScenarioId:909
+@TestCase:69796
 Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -284,7 +284,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I should not see an error message: Formulation must total or exceed 100%.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
 
-@ScenarioId:915
+@TestCase:80728
 Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -306,7 +306,7 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
 
-@ScenarioId:914
+@TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -333,7 +333,7 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-@ScenarioId:919
+@TestCase:87301
 Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -368,7 +368,7 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
 @jamesnew
-@ScenarioId:918
+@TestCase:84528
 Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -422,7 +422,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-@ScenarioId:917
+@TestCase:81711
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -452,7 +452,7 @@ Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor I
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711
 
-@ScenarioId:916
+@TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -473,7 +473,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
-@ScenarioId:902
+@TestCase:109230
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109230
@@ -562,7 +562,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
 
-@ScenarioId:6314
+@TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
 
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -575,7 +575,7 @@ Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check t
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
-@ScenarioId:6062
+@TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -643,7 +643,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 
-@ScenarioId:9377
+@TestCase:133335
 	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -700,7 +700,7 @@ Given I should see the Product Information Page
 
 
 
-@ScenarioId:10286
+@TestCase:133610
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

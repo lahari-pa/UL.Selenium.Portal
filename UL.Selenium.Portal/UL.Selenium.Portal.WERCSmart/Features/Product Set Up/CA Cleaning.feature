@@ -19,7 +19,7 @@
 @run_CACleaning
 Feature:  California Cleaning Scenarios
 
-@ScenarioId:9832
+@TestCase:139531
 Scenario: [139531] CA Cleaning - Ingredient Type Missing
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -51,7 +51,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:9776
+@TestCase:139534
 Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisMatch
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -82,7 +82,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 
-@ScenarioId:10105
+@TestCase:139385
 Scenario: [139385] CA Cleaning - Generic Ingredient Used
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -113,7 +113,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139385
 
 
-@ScenarioId:10146
+@TestCase:139387
 Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -144,6 +144,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139387
 
 
+@TestCase:139388
 Scenario: [139388] CA Cleaning - Public Disclosure or Trade Secret Issue
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -175,7 +176,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10148
+@TestCase:139205
 Scenario: [139205] CA Cleaning - Ingredient Validation Upon Continue or Save
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -208,7 +209,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139205
 
 
-@ScenarioId:10106
+@TestCase:139193
 Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -227,7 +228,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10284
+@TestCase:139445
 Scenario: [139445] CA Cleaning - Ingredients Screen - Validation for INTENTIONALLY ADDED Ingredient Type and Multi-Select Functional Purpose
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -269,7 +270,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10653
+@TestCase:158172
 Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation - 
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

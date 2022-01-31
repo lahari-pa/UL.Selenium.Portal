@@ -12,7 +12,7 @@
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
-@ScenarioId:667
+@TestCase:60617
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -60,6 +60,7 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 
 @tfs_design
 @ignore
+@TestCase:60637
 Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	Given I generate a random UPC number and save as: UPC60637
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -103,6 +104,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
 
+@TestCase:60619
 Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -140,7 +142,7 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 
 
 
-	@ScenarioId:10716
+@TestCase:159880
 Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

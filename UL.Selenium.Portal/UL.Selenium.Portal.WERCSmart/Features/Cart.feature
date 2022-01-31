@@ -15,13 +15,13 @@ Feature: Cart
 ## THIS IS IN THE PRODUCTION BRANCH (MAYBE, HOPEFULLY)
 #Given I go to the WERCSmart Log in
 @mytag
-@ScenarioId:1008
+@TestCase:66635
 Scenario: [66635] Left hand navigation - Shopping Cart navigation - Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the Shopping Cart icon in the Navigation Pane
 
-@ScenarioId:1007
+@TestCase:63323
 Scenario: [63323] Remove single product from cart
 	Given I log in with the account saved in TReVor as: CartNoProducts
        Then The home screen should load
@@ -69,7 +69,7 @@ Scenario: [63323] Remove single product from cart
        Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63323
 
 
-@ScenarioId:1009
+@TestCase:74837
 Scenario: [74837] Shopping Cart navigation with subscription without products
 	Given I log in with the subscription without products account
 	Then The home screen should load
@@ -79,7 +79,7 @@ Scenario: [74837] Shopping Cart navigation with subscription without products
 	Given I close the Empty Cart pop up
 	Then The home screen should load
 
-@ScenarioId:1010
+@TestCase:74919
 Scenario: [74919] Shopping cart navigation with products in cart without subscription
 	Given I log in with the without subscription without products account
 	Then The home screen should load

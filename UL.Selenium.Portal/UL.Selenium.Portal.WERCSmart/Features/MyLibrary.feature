@@ -17,7 +17,7 @@
 @run_MyLibrary
 Feature: MyLibrary
 
-@ScenarioId:797
+@TestCase:64884
 Scenario: [64884] My Library
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then The home screen should load
@@ -31,7 +31,7 @@ Scenario: [64884] My Library
 		| My Ingredients                 |
 		| Contact Information per SDS(s) |
 
-@ScenarioId:799
+@TestCase:70535
 Scenario: [70535] Add Brand
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -48,7 +48,7 @@ Scenario: [70535] Add Brand
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:800
+@TestCase:70536
 Scenario: [70536] Edit Brand - Deactivate
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -67,7 +67,7 @@ Scenario: [70536] Edit Brand - Deactivate
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:801
+@TestCase:70537
 Scenario: [70537] Edit Brand - Update Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -85,7 +85,7 @@ Scenario: [70537] Edit Brand - Update Name
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:798
+@TestCase:70533
 Scenario: [70533] Edit Packaging Type
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -123,7 +123,7 @@ Scenario: [70533] Edit Packaging Type
 	Given I click Delete in the Delete Product pop up
 	Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
-@ScenarioId:802
+@TestCase:70539
 Scenario: [70539] Add an Ingredient (Basic) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -159,7 +159,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70539
 
-@ScenarioId:803
+@TestCase:70556
 Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -195,7 +195,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70556
 
-@ScenarioId:10602
+@TestCase:70567
 Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -237,7 +237,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70567
 
-@ScenarioId:6351
+@TestCase:73329
 Scenario: [73329] Edit Ingredient
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -301,6 +301,7 @@ Scenario: [73329] Edit Ingredient
 	Then I confirm that all changes in edited ingredients: My Library Ingredients Edited 2 were saved
 	And I remove all ingredients in the list saved as: My Library New Ingredients
 
+@TestCase:73227
 	Scenario: [73227] Products and Recommended Use Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -319,7 +320,7 @@ Scenario: [73329] Edit Ingredient
 		| Product Name   |
 	And I delete the excel file saved as 73227
 
-@ScenarioId:805
+@TestCase:73328
 Scenario: [73328] Pagination functionality
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -349,7 +350,7 @@ Scenario: [73328] Pagination functionality
 	And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
 	And I navigate to the home page
 
-@ScenarioId:804
+@TestCase:73326
 Scenario: [73326] Searching an Ingredient
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -362,7 +363,7 @@ Scenario: [73326] Searching an Ingredient
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	And I navigate to the home page
 
-@ScenarioId:10027
+@TestCase:70516
 Scenario: [70516] Add and Remove Packaging Type
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

@@ -19,7 +19,7 @@
 @run_ULSolutionCenter
 Feature: UL Solution Center
 
-@ScenarioId:1097
+@TestCase:59654
 Scenario: [59654] UL Solution Center shows when expanded menu item is clicked
 	Given I login as the administrator
 	Then The home screen should load
@@ -28,7 +28,7 @@ Scenario: [59654] UL Solution Center shows when expanded menu item is clicked
 	Given I click the UL Solution Center link in the expanded navigation side menu
 	Then I confirm that the UL Solution Center page is loaded
 
-@ScenarioId:1098
+@TestCase:59655
 Scenario: [59655] UL Solution Center shows correct entries
 	Given I login as the administrator
 	Then The home screen should load
@@ -44,7 +44,7 @@ Scenario: [59655] UL Solution Center shows correct entries
 		| ULGHS                    |
 		| Navigator                |
 
-@ScenarioId:1104
+@TestCase:81288
 Scenario: [81288] UL Solution Center shows correct entries - ECOLOGO section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -58,7 +58,7 @@ Scenario: [81288] UL Solution Center shows correct entries - ECOLOGO section
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
-@ScenarioId:1099
+@TestCase:59657
 Scenario: [59657] UL Solution Center shows correct entries - Prospector section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -72,7 +72,7 @@ Scenario: [59657] UL Solution Center shows correct entries - Prospector section
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
-@ScenarioId:1100
+@TestCase:59658
 Scenario: [59658] UL Solution Center shows correct entries - GOODGUIDE for CONSUMERS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -85,7 +85,7 @@ Scenario: [59658] UL Solution Center shows correct entries - GOODGUIDE for CONSU
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
-@ScenarioId:1101
+@TestCase:59659
 Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPLIERS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -99,7 +99,7 @@ Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPL
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
-@ScenarioId:1102
+@TestCase:59660
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -112,7 +112,7 @@ Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect s
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
-@ScenarioId:1103
+@TestCase:59661
 Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
@@ -126,7 +126,7 @@ Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
-@ScenarioId:1096
+@TestCase:102411
 Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane

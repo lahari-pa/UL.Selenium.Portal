@@ -21,6 +21,7 @@ Background:
 #Then The home screen should load
 
 
+@TestCase:68211
 Scenario: [68211] Conflict Minerals - Create a new company
 Given I create a new email address and save as: Myemail
 Given I navigate to the URL: https://secure.supplierwercs.com/Home/ssologin?sourceService=cm

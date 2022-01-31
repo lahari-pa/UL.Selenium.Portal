@@ -31,11 +31,12 @@ Background:
 		
 		
 
+@TestCase:755436
 Scenario:  [755436] Account Lockout and Account Issue Testing
 Given I navigate to the landing page		
 
 
-@ScenarioId:11198
+@TestCase:999999
 Scenario: [999999] Basic Test For Running Feature Outline
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -57,7 +58,7 @@ Given I search for the first product in the table
 Then I should see the product returned in the search results
 
 
-@ScenarioId:11189
+@TestCase:888888
 Scenario: [888888] SHA Acc Test Debug
 
 Given I Create SHA processing Rules for the accounts listed in the table:
@@ -65,6 +66,7 @@ Given I Create SHA processing Rules for the accounts listed in the table:
 | SHAQAAuto1 |
 
 
+@TestCase:755435
 Scenario:  [755435] Account Lockout and Account Issue Testing
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 Given I navigate to the landing page
@@ -84,5 +86,6 @@ Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted stat
 #Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 
 
+@TestCase:755437
 Scenario:  [755437] Product Creation Speed Test
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA

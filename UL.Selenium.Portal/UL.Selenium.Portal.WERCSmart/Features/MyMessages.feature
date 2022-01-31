@@ -22,7 +22,7 @@
 @run_MyMessages
 Feature: MyMessages
 
-@ScenarioId:1038
+@TestCase:72582
 Scenario: [72582] Active Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +46,7 @@ Scenario: [72582] Active Export Report
 # Need to check how to archive messages - there are none archived in the products account
 @tfs_design
 @ignore
-@ScenarioId:9410
+@TestCase:72586
 Scenario: [72586] Archive Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -71,7 +71,7 @@ Scenario: [72586] Archive Export Report
 
 @tfs_design
 @ignore
-@ScenarioId:1541
+@TestCase:109503
 Scenario: [109503] Message Center - Suspended message stays in Message Center for entirety of processing product - Formula - Document Issue
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC109503

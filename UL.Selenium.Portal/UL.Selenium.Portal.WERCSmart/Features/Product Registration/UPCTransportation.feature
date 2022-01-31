@@ -31,7 +31,7 @@
 @run_UPCTransportation
 Feature: UPCTransportation
 
-@ScenarioId:6508
+@TestCase:122305
 Scenario: [122305] UPC Transportation options are present if product-level options are present
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC112305
@@ -68,7 +68,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
-@ScenarioId:6598
+@TestCase:122382
 Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122382
@@ -137,7 +137,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 
 
 
-@ScenarioId:6613
+@TestCase:122428
 Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122428
@@ -229,7 +229,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I click continue on the Forward Product Registration page
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
-@ScenarioId:6524
+@TestCase:122940
 Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122940
@@ -257,7 +257,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
 
-@ScenarioId:6527
+@TestCase:122971
 Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulated at the UPC Level
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122971
@@ -306,7 +306,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122971
 
-@ScenarioId:6713
+@TestCase:122984
 Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122984
@@ -364,7 +364,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 
 @tfs_design
 @ignore
-@ScenarioId:6740
+@TestCase:123125
 Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC123125
@@ -421,7 +421,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 # Enter 170 in the Size (ounces) field
 # Click Save
 # Ensure that you get a UPC Transportation error
-@ScenarioId:6654
+@TestCase:123436
 Scenario: [123436] UPC Transportation - Recertification - Transportation Details 1 UPC popup
 	#may be worth either cutting some of the steps or making a shared step that creates the prouduct (shorten the specflow)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -507,7 +507,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
-@ScenarioId:6681
+@TestCase:125533
 Scenario: [125533] UPC Transportation - Recertification - iRules
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -577,7 +577,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click continue
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 
-@ScenarioId:6686
+@TestCase:125536
 Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade - Limited Quantity
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -654,7 +654,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 @tfs_design
 @ignore
 @obsolete
-@ScenarioId:6702
+@TestCase:125702
 Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade - Shipping with consumer commodity
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -724,7 +724,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
     Given I ensure that I can select DOT at Shipping with limited quantity
 	Given I ensure that I can select DOT at Shipping fully regulated
 
-@ScenarioId:6703
+@TestCase:125703
 Scenario: [125703] UPC transportation - Recertification - Upgrade and Downgrade - Shipping fully regulated
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

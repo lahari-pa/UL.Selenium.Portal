@@ -31,7 +31,7 @@ Feature: Actions
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Actions\View UPCs
 #actions/view upcs
-@ScenarioId:1207
+@TestCase:73424
 Scenario: [73424] View UPCs - Product with UPCs
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
@@ -50,7 +50,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I close the window that opened
 
 #actions/delete
-@ScenarioId:1206
+@TestCase:63663
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -73,7 +73,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Then I delete the product: TestCase63663
 
 #actions/delete
-@ScenarioId:432
+@TestCase:56216
 Scenario: [56216] My Products grid Actions - Delete Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -93,7 +93,7 @@ Scenario: [56216] My Products grid Actions - Delete Navigation
 	Then I should not see products in the Product Grid
 
 #actions/edit
-@ScenarioId:430
+@TestCase:56212
 Scenario: [56212] My Products grid Actions - Edit Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -105,7 +105,7 @@ Scenario: [56212] My Products grid Actions - Edit Navigation
 	And the product saved as: FirstProduct should be visible in editor
 
 #actions/submit
-@ScenarioId:431
+@TestCase:56214
 Scenario: [56214] My Products grid Actions - Submit navigation
 	Given I generate a random UPC number and save as: UPC56214
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -136,7 +136,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 #actions/view
-@ScenarioId:433
+@TestCase:56218
 Scenario: [56218] My Products grid Actions - View Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -148,7 +148,7 @@ Scenario: [56218] My Products grid Actions - View Navigation
 	Given I close the browser tab with the Summary page
 
 #actions/documents
-@ScenarioId:434
+@TestCase:56219
 Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -170,7 +170,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	
 
 
-@ScenarioId:6114
+@TestCase:112937
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	Given I Submit a new product which has a Case UPC and a regular UPC
 	Given I navigate to the landing page
@@ -205,7 +205,7 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View UPCs
 	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
-@ScenarioId:1591
+@TestCase:112939
 Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Given I Submit a new product which has a Case UPC and a regular UPC
 	Given I navigate to the landing page
@@ -242,7 +242,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 
 
 @CACleaning
-@ScenarioId:5984
+@TestCase:114944
 Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -266,7 +266,7 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Butane          | Nonfunctional Constituent | ButaneFunctionalPurposesList          |
 	
 
-@ScenarioId:6866
+@TestCase:119578
 Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -278,7 +278,7 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Then I confirm that all products appear in the 'My Products' grid
 
 
-@ScenarioId:8177
+@TestCase:125144
 Scenario: [125144] Actions - 3rd Party Access Code Window
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -309,7 +309,7 @@ Given I click close on the Save Changes popup dialog
 
 
 
-@ScenarioId:10646
+@TestCase:152230
 Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

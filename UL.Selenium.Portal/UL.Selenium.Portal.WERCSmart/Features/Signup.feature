@@ -17,7 +17,7 @@ Feature: Sign Up
 Background:
 	Given I go to the WERCSmart Log in
 
-@ScenarioId:1531
+@TestCase:53069
 Scenario: [53069] Signup - Account Creation - Happy Path
 	Given I define the user: SignupUser with the following parameters:
 		| Field                | Value                   |
@@ -69,7 +69,7 @@ Scenario: [53069] Signup - Account Creation - Happy Path
 	Then I should see username for user saved as: SignupUser in the right corner
 
 #pass - staging 4.10
-@ScenarioId:463
+@TestCase:52998
 Scenario: [52998] Signup - Emails Do Not Match
 	Given I click on the New to WERCSmart Link
 	Then the signup page should appear
@@ -89,7 +89,7 @@ Scenario: [52998] Signup - Emails Do Not Match
 	Then I click Cancel on the Sign Up screen
 
 #pass - staging 4.10
-@ScenarioId:464
+@TestCase:53000
 Scenario: [53000] Signup - Copy and Paste Email Address
 	Given I click on the New to WERCSmart Link
 	Then the signup page should appear
@@ -99,7 +99,7 @@ Scenario: [53000] Signup - Copy and Paste Email Address
 	Then I should see popup error: You cannot paste text into this textbox!
 	Given In the popup error I click on Cancel
 
-@ScenarioId:465
+@TestCase:57737
 Scenario: [57737] New Account - Required fields
 	Given I define the user: SignupUser2 with the following parameters:
 		| Field                | Value           |
@@ -180,7 +180,7 @@ Scenario: [57737] New Account - Required fields
 # Then In the FriendQuestion entry error I see error message: This is a required field.
 # Then In the PINQuestion entry error I see error message: This is a required field.
 
-@ScenarioId:1561
+@TestCase:112431
 Scenario: [112431] Signup - Account Creation - New user Email does not contain outdated PDF Attachment
 	Given I define the user: SignupUser with the following parameters:
 		| Field                | Value                   |

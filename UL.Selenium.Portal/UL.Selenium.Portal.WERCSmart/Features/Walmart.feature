@@ -22,7 +22,7 @@ Background:
 
 @tfs_design
 @ignore
-@ScenarioId:10443
+@TestCase:73917
 Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -43,7 +43,7 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73917
 
-@ScenarioId:791
+@TestCase:73920
 Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -61,7 +61,7 @@ Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 	Given I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view
 	And I navigate to the home page
 
-@ScenarioId:792
+@TestCase:74133
 Scenario: [74133] Walmart Product Type Electronics
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Test case calls shared 31053 but this is identical
@@ -81,6 +81,7 @@ And I call Shared Step 60935 (Product Information - US - Direct Ship - Private L
 
 @tfs_design
 @ignore
+@TestCase:74017
 Scenario: [74017] Walmart Affiliates when Adding a UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -111,6 +112,7 @@ Scenario: [74017] Walmart Affiliates when Adding a UPC
 # confirm WM under Destination Retailers
 @tfs_design
 @ignore
+@TestCase:73919
 Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -131,7 +133,7 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919
 
-@ScenarioId:790
+@TestCase:73918
 Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -162,7 +164,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
-@ScenarioId:11181
+@TestCase:63684
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -198,7 +200,7 @@ Scenario: [63684] Walmart Private label product
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
-@ScenarioId:6031
+@TestCase:96705
 Scenario: [96705] Light Bulbs - No Walmart
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

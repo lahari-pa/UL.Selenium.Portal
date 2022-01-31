@@ -16,7 +16,7 @@
 Feature: Account Canada Address(Yes) Package types (Yes) Stewardship (No)
 
 
-@ScenarioId:1236
+@TestCase:85325
 Scenario: [85325] Account has Canada address and packaging, SOLD US & Canada, PL = NO, packaging type is required
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -45,7 +45,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85325
 
 
-@ScenarioId:1237
+@TestCase:85740
 Scenario: [85740] Account has Canada address and packaging, SOLD US & Canada, PL = YES, packaging type is required
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 Given I generate a random UPC number and save as: UPC85740
@@ -72,7 +72,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85740
 
 
-@ScenarioId:1238
+@TestCase:85742
 Scenario: [85742] Account has Canada address and packaging, SOLD Canada Only, PL = NO, packaging type is required
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 Given I generate a random UPC number and save as: UPC85742
@@ -99,7 +99,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85742
 
 
-@ScenarioId:1239
+@TestCase:85743
 Scenario: [85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, packaging type is required
 
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
@@ -127,7 +127,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85743
 
 
-@ScenarioId:1240
+@TestCase:85744
 Scenario: [85744] Account has Canada address only - SOLD = US only, PL = YES, packaging type is NOT required
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 Given I generate a random UPC number and save as: UPC85744
@@ -144,7 +144,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85744
 
 
-@ScenarioId:1241
+@TestCase:85745
 Scenario: [85745] Account has Canada address and packaging, SOLD US Only, PL = NO, packaging type is NOT required
 Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 Given I generate a random UPC number and save as: UPC85745

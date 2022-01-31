@@ -13,7 +13,7 @@
 @run_Flow28_AutoParts
 Feature: [64733] Flow 28 - Auto Parts
 
-@ScenarioId:711
+@TestCase:60673
 Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

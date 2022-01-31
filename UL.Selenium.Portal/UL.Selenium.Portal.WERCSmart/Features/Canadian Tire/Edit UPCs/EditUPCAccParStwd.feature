@@ -30,7 +30,7 @@ Background:
 
 		
 
-@ScenarioId:1472
+@TestCase:86257
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86257
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
@@ -52,7 +52,7 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86257
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86257
 
-@ScenarioId:1473
+@TestCase:86258
 Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86258
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship	
@@ -73,7 +73,7 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86258
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86258
 
-@ScenarioId:6228
+@TestCase:86259
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
 	Given I generate a random UPC number and save as: UPC862591
@@ -93,7 +93,7 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86259
 	Then In the SHA list of UPCs I should see UPC: saved as UPC862591
 
-@ScenarioId:1474
+@TestCase:86260
 Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86260
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship

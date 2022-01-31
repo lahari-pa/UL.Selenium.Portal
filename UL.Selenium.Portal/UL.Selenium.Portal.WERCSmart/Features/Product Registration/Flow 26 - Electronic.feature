@@ -15,7 +15,7 @@
 Feature: [64732] Flow 26 - Electronic
 
 
-@ScenarioId:710
+@TestCase:60671
 Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

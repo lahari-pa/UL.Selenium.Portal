@@ -12,7 +12,7 @@
 @run_Flow7
 Feature: Flow 7
 
-@ScenarioId:694
+@TestCase:57863
 Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -51,7 +51,7 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57863
 
-@ScenarioId:695
+@TestCase:57905
 Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (RU001232)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -103,7 +103,7 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57905
 
-@ScenarioId:696
+@TestCase:63623
 Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

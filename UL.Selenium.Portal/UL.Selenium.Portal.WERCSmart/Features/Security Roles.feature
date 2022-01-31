@@ -10,7 +10,7 @@
 @run_SecurityRoles
 Feature: Security Roles
 
-@ScenarioId:806
+@TestCase:52978
 Scenario: [52978] Log Into Account
 	#Given I go to the WERCSmart Log in
 	Given I login as the administrator

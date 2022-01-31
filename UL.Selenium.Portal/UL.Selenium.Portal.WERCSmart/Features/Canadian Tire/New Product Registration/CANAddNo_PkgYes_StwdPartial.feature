@@ -16,7 +16,7 @@
 Feature: Account Canada Address(No) Packagetype(Yes) Stewardship(Partial)
 
 
-@ScenarioId:1281
+@TestCase:85885
 Scenario: [85885] Account Packaging & Partial Stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
@@ -34,7 +34,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85885
 
 
-@ScenarioId:1282
+@TestCase:85886
 Scenario: [85886] Account Packaging & Partial Stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
@@ -53,7 +53,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:1283
+@TestCase:85887
 Scenario: [85887] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
@@ -70,7 +70,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85887
 
 
-@ScenarioId:1284
+@TestCase:85888
 Scenario: [85888] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
 Given I generate a random UPC number and save as: UPC85888
@@ -94,7 +94,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:1285
+@TestCase:85889
 Scenario: [85889] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
 Given I generate a random UPC number and save as: UPC85889
@@ -118,7 +118,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:1286
+@TestCase:85890
 Scenario: [85890] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required
 Given I log in with the account saved in TReVor as: PackagePartialStewardship
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

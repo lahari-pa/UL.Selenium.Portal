@@ -27,7 +27,7 @@ Feature: SHA Search
 
 @SHASearch
 # QA Test needs UPC 5000171007186, Sprint 2 needs UPC 0046442718103. To access, use TestVariables.GetVariableSavedAs("Archived UPC")
-@ScenarioId:1574
+@TestCase:110399
 Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify Popup
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then SHA Search for Archived UPC. This uses environment variable for know archived product
@@ -36,6 +36,7 @@ Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify P
 	Then SHA Search for Archived UPC. This uses environment variable for know archived product
 
 
+@TestCase:160937
 Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Primary UPC Field Test
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account	
 	Given I generate a random UPC number and save as: UPC160937A
@@ -92,6 +93,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
 
+@TestCase:160940
 	Scenario: [160940] SHA Manager - Search - Product Search - SEARCH PATTERN - CASE UPC Field Test
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

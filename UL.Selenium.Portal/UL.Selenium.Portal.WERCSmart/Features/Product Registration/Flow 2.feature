@@ -12,7 +12,7 @@
 @run_Flow2
 Feature: Flow 2
 
-@ScenarioId:1011
+@TestCase:57367
 Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +46,7 @@ Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Spill Clean Up Agent (Mitigation Agent)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57367
 
-@ScenarioId:1012
+@TestCase:57403
 Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -76,7 +76,7 @@ Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57403
 
-@ScenarioId:1013
+@TestCase:57439
 Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -111,7 +111,7 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
 
-@ScenarioId:1014
+@TestCase:57646
 Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -145,7 +145,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 
-@ScenarioId:1015
+@TestCase:57648
 Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -175,7 +175,7 @@ Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Trap and/or Bait Station
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57648
 
-@ScenarioId:1016
+@TestCase:57649
 Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -204,7 +204,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
 
-@ScenarioId:1017
+@TestCase:57708
 Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -237,7 +237,7 @@ Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57708
 
-@ScenarioId:1018
+@TestCase:57731
 Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -268,7 +268,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
 
-@ScenarioId:1019
+@TestCase:57910
 Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -304,7 +304,7 @@ Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
 @71274
-@ScenarioId:1020
+@TestCase:71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

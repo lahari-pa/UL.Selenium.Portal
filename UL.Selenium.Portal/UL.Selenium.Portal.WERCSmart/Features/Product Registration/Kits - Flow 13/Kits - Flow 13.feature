@@ -22,7 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto19 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1095
+@TestCase:58753
 Scenario: [58753] Hair Color Kit - RU000724
 
 	Given I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1

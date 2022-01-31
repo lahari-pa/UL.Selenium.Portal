@@ -22,7 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto31  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1074
+@TestCase:80089
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -73,7 +73,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase80089) for	
 		| Retailer                   |		
 		| No Retailer/No UPC Product |
-@ScenarioId:1073
+@TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto31 and save as: TestCase75410
@@ -127,7 +127,7 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
-@ScenarioId:6186
+@TestCase:84507
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and force it to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
@@ -170,7 +170,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
 
 
-@ScenarioId:8268
+@TestCase:100969
 	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

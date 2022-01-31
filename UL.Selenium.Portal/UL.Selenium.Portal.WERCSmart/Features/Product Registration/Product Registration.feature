@@ -18,6 +18,7 @@ Feature: Product Registration
 @tfs_design
 @ignore
 #Non-important scenario - Philip
+@TestCase:130389
 Scenario: [130389] Demo Scenario
 Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -38,7 +39,7 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
-@ScenarioId:483
+@TestCase:63705
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -113,7 +114,7 @@ Scenario: [63705] New Product - BCP
 	Given I navigate to the home page
 	Then I delete the product: TestCase63705
 
-@ScenarioId:484
+@TestCase:63724
 Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
 	# DPCI: 087-06-680
@@ -176,7 +177,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
-@ScenarioId:6225
+@TestCase:65441
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -248,7 +249,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I navigate to the home page
 	Then I delete the product: TestCase65441
 
-@ScenarioId:485
+@TestCase:65392
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -286,6 +287,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 
 @tfs_design
 @ignore
+@TestCase:67661
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens / removing existing products
@@ -423,7 +425,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 @jacob
 @tfs_design
 @ignore
-@ScenarioId:482
+@TestCase:105352
 Scenario: [105352] Product Comments screen Max input length
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -498,7 +500,7 @@ Scenario: [105352] Product Comments screen Max input length
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
-	@ScenarioId:6627
+@TestCase:122123
 Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -595,7 +597,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 
 
-	@ScenarioId:6674
+@TestCase:122261
 	Scenario: [122261] Sustainability Screen - Consent Not Granted Message
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -627,7 +629,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
 	When I click continue
 
-@ScenarioId:9318
+@TestCase:128754
 Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -658,7 +660,7 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
-@ScenarioId:9397
+@TestCase:127767
 Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
 Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -700,7 +702,7 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-@ScenarioId:10280
+@TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -741,7 +743,7 @@ Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
 
-@ScenarioId:10281
+@TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -768,7 +770,7 @@ Given I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-@ScenarioId:10498
+@TestCase:147446
 Scenario: [147446] WM - Authoring option ONLY available
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -792,7 +794,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10500
+@TestCase:147447
 Scenario: [147447] Sears - Authoring option ONLY available
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

@@ -14,6 +14,7 @@ Feature: Flow 29 - Beverage
 
 
 @TReVorId:11622
+@TestCase:60694
 Scenario: [60694] Wine - RU001418
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -36,6 +37,7 @@ Scenario: [60694] Wine - RU001418
 
 #Retailers section needs to be confirmed!
 @TReVorId:22293
+@TestCase:60695
 Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -62,6 +64,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 
 
 
+@TestCase:73085
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -87,7 +90,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 
-@ScenarioId:10283
+@TestCase:144468
 Scenario: [144468] Alcoholic Beverages - With DOT Exception
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

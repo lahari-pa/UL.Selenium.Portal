@@ -12,7 +12,7 @@ Feature: Batteries
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
 @tfs_design
 @ignore
-@ScenarioId:10167
+@TestCase:97488
 Scenario: [97488] Stand alone Lithium Battery vehicle
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -44,7 +44,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1500
+@TestCase:97489
 Scenario: [97489] Stand alone Magnesium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -83,7 +83,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1502
+@TestCase:97495
 Scenario: [97495] Stand alone Nickel-Cadmium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -125,7 +125,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1501
+@TestCase:97494
 Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

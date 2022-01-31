@@ -22,7 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto23 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:9701
+@TestCase:77859
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 	#For this test case you will need two input products in completed status which have SOLD set to US only
 	#and make sure to add any retailer except Walmart as the retailer for these products.

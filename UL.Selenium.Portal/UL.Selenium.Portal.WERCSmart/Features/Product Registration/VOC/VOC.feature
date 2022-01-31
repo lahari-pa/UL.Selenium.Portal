@@ -13,7 +13,7 @@
 Feature: VOC
 
 @test74626
-@ScenarioId:975
+@TestCase:74626
 Scenario: [74626] VOC - Show state collection when state table has a value
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -50,7 +50,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		| Vermont         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
 
-@ScenarioId:968
+@TestCase:56475
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -108,7 +108,7 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
-@ScenarioId:970
+@TestCase:56477
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens
@@ -229,7 +229,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given I navigate to the home page
 	Then I delete the product: TestCase56477
 
-@ScenarioId:971
+@TestCase:56481
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -296,7 +296,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
-@ScenarioId:972
+@TestCase:56483
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens
@@ -411,7 +411,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	Given I navigate to the home page
 	Then I delete the product: TestCase56483
 
-@ScenarioId:973
+@TestCase:56484
 Scenario: [56484] VOC - Aero checks
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens
@@ -534,7 +534,7 @@ Scenario: [56484] VOC - Aero checks
 	Given I navigate to the home page
 	Then I delete the product: TestCase56484
 
-@ScenarioId:969
+@TestCase:56476
 Scenario: [56476] VOC checks for Personal Fragrance product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -586,7 +586,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 
-@ScenarioId:974
+@TestCase:73503
 Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step Shows Alternative Control Plan
 	Given I generate a random UPC number and save as: UPC73503
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

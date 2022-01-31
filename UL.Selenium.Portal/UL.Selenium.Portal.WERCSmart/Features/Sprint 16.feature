@@ -29,7 +29,7 @@
 Feature: Sprint 16
 
 
-@ScenarioId:1575
+@TestCase:112940
 Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 200 to 500 Characters and Spaces.
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -74,7 +74,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #Incomplete: waiting for bug 114335 to resolve to complete.
 @tfs_design
 @ignore
-@ScenarioId:5947
+@TestCase:113004
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the My Reports icon in the QuickLinks Pane

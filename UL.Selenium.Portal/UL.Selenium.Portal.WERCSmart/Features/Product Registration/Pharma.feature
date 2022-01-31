@@ -1,4 +1,4 @@
-﻿@PaymentMethods
+@PaymentMethods
 @Shared
 @Login
 @Homepage
@@ -12,6 +12,7 @@
 @run_Pharma
 Feature: Pharma
 
+@TestCase:128085
 Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
@@ -66,6 +67,7 @@ Then In the Thank You screen I confirm the following statement is shown: Thank y
 And I navigate to the home page
 
 
+@TestCase:127870
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
@@ -108,6 +110,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TestCase:127970
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -160,6 +163,7 @@ And I navigate to the home page
 
 
 
+@TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -215,6 +219,7 @@ And I navigate to the home page
 
 
 
+@TestCase:127847
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -256,6 +261,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TestCase:127854
 Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Containing Liquid
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -298,6 +304,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TestCase:127791
 Scenario: [127791] Pharma - Retailer Default
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -340,6 +347,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TestCase:128671
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
@@ -391,6 +399,7 @@ And I navigate to the home page
 
 
 
+@TestCase:128677
 Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
@@ -437,6 +446,7 @@ Then In the Thank You screen I confirm the following statement is shown: Thank y
 And I navigate to the home page
 
 
+@TestCase:128134
 Scenario: [128134] Pharma -  Product in Recertification
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
