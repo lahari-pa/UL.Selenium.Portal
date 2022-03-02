@@ -1502,6 +1502,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep(
+				"Which best describes your product, including when FIFRA 25(b) Exempt");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
 			Report.StartStep(
