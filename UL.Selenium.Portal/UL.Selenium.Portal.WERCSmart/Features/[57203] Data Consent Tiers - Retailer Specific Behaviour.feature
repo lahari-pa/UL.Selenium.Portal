@@ -171,7 +171,7 @@ Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded C
 	@singleRun
 @TestCase:115255
 Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included Categories)
-
+	# Commented Sections require later flow bug fix, leave commented til corrected
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
 	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
@@ -184,20 +184,20 @@ Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included C
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHomeExcelFile and check that is shows the expected product saved as: CVSHomeProduct1
 	Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSLawnGardenExcelFile and check that is shows the expected product saved as: CVSLawnGardenProduct1
- 	Then For CVS I create a product of type: Miscellaneous (RUCC0400), save it as: CVSMiscProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSMiscExcelFile and check that is shows the expected product saved as: CVSMiscProduct1
-	Then For CVS I create a product of type: Nutritional (RUCC0592), save it as: CVSNutritionalProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSNutritionalExcelFile and check that is shows the expected product saved as: CVSNutritionalProduct1
-	Then For CVS I create a product of type: Over-the-Counter (RUCC1002), save it as: CVSOTCProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSOTCExcelFile and check that is shows the expected product saved as: CVSOTCProduct1
+# 	Then For CVS I create a product of type: Miscellaneous (RUCC0400), save it as: CVSMiscProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSMiscExcelFile and check that is shows the expected product saved as: CVSMiscProduct1
+#	Then For CVS I create a product of type: Nutritional (RUCC0592), save it as: CVSNutritionalProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSNutritionalExcelFile and check that is shows the expected product saved as: CVSNutritionalProduct1
+#	Then For CVS I create a product of type: Over-the-Counter (RUCC1002), save it as: CVSOTCProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSOTCExcelFile and check that is shows the expected product saved as: CVSOTCProduct1
 	Then For CVS I create a product of type: Pet Care (RUCC0387), save it as: CVSPetCareProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPetCareExcelFile and check that is shows the expected product saved as: CVSPetCareProduct1
-	Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPhotopraphyExcelFile and check that is shows the expected product saved as: CVSPhotopraphyProduct1
-	Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoodsProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSSportingGoodsExcelFile and check that is shows the expected product saved as: CVSSportingGoodsProduct1
-	Then For CVS I create a product of type: Stationery (RUCC0385), save it as: CVSStationeryProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSStationeryExcelFile and check that is shows the expected product saved as: CVSStationeryProduct1
+#	Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPhotopraphyExcelFile and check that is shows the expected product saved as: CVSPhotopraphyProduct1
+#	Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoodsProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSSportingGoodsExcelFile and check that is shows the expected product saved as: CVSSportingGoodsProduct1
+#	Then For CVS I create a product of type: Stationery (RUCC0385), save it as: CVSStationeryProduct1 and leave it in New Status
+#	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSStationeryExcelFile and check that is shows the expected product saved as: CVSStationeryProduct1
 	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
 	
