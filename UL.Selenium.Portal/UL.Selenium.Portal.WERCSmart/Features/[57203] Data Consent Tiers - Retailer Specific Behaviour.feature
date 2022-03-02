@@ -84,7 +84,7 @@ Scenario: [57221] Retailer specific - Target
 	When I select the retailer: Target
 	And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
 	When I click the More Information hyperlink
-	Then I check that the current URL contains: https://corporate.target.com/corporate-responsibility/planet/sustainable-products
+	Then I check that the current URL contains: https://corporate.target.com/sustainability-esg/environment/sustainable-products
 	And I close the window that opened
 	When I click the Products in Scope button and confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
 	And I confirm the excel file saved as TargetExcelFile can be opened and contains data
@@ -158,6 +158,8 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 	Then I should see the Retail Partners page
 
 @TestCase:115256
+@Ignore
+@Obsolete
 Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded Categories)
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
