@@ -39,7 +39,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I should see the Data Acceptance Page
 	Then The Data Acceptance page should appear
-	Then I should see an error message: Select at least one of the options
+	Then I should see an error message: To submit registration, please indicate agreement with the Data Acceptance statement.
 	Then In the Data Acceptance page I select Agreed
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
