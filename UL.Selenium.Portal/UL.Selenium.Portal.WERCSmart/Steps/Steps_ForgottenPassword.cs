@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Automation.Reporting;
 using UL.Automation.Utilities;
+using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -247,14 +248,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the link in the email I get directed to security questions")]
 		public void WhenIClickTheLinkInTheEmailIGetDirectedToSecurityQuestions()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- I click the link in the email I get directed to security questions");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I click the link in the email I get directed to security questions");
 			try
 			{
 				Report.Info("Clicking the link which allows Password Reset");
 
 				//IWebElement myLink = IWebElement;
 
-				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				var matchingEmail = (Mailosaur.Models.Message)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
 		
