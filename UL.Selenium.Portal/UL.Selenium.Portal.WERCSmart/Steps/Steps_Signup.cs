@@ -13,6 +13,9 @@ using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -395,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on submit")]
 		public void GivenIClickOnSubmit()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Click on submit");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Click on submit");
 			try
 			{
 				Delay.Seconds(1);
@@ -408,12 +411,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					count++;
 				}
 				Report.Success("Submit clicked successfully!");
+				/*
 				Delay.Seconds(2);
 				if (selSignup.Wait_for_load(1))
 				{
 					selSignup.Click_Submit();
 				}
 				Delay.Seconds(2);
+				*/
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -474,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] There (should|should not) be a new email for user: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
@@ -493,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking for email differences");
 
 				Delay.Seconds(60);
-				if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
+				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(user.Email))
 				{
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 				}
@@ -511,7 +516,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						while (i < 5)
 						{
 							Report.Info("Attempt: " + (i + 1));
-							if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
+							if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(user.Email))
 							{
 								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;
@@ -535,7 +540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		// No StepDefinition?
 		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
-			List<Email> differences = MailosaurFunctions.GetInboxDifferences(user.Email);
+			List<Mailosaur.Models.Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(user.Email);
 
 			Report.Info("Checking that differences have been found...");
 			if (differences.FirstOrDefault() == null)
@@ -545,12 +550,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.Info("Emails have been found!");
-			Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
+			Mailosaur.Models.Message matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Email.ToLower() == emailFrom.ToLower() && x.Subject == title);
 			Report.Info("Checking that a matching email has been found");
 
 			if (should)
 			{
-				Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
+				Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + title + " has been found.");
 			}
 			else
 			{
@@ -581,10 +586,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] The email should contain a link to set up the WERCSmart account")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a link the email which sets up the WERCSmart account");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking whether there is a link the email which sets up the WERCSmart account");
 			try
 			{
-				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				var matchingEmail = (Mailosaur.Models.Message)Context.ScenarioContext["Matching"];
 				string myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);
@@ -599,7 +604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see popup error: (.*)")]
 		public void ThenIShouldSeePopupError(string expectedError)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- I should see popup error: " + expectedError);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I should see popup error: " + expectedError);
 			try
 			{
 				Delay.Seconds(2);
@@ -620,7 +625,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the popup error I click on Cancel")]
 		public void GivenInThePopupErrorIClickOnCancel()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- In the popup error I click on Cancel");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- In the popup error I click on Cancel");
 			try
 			{
 				Delay.Seconds(2);
@@ -641,14 +646,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I click on the link I should see the WERCSmart new account page")]
 		public void WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- When I click on the link I should see the WERCSmart new account page");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- When I click on the link I should see the WERCSmart new account page");
 			try
 			{
 				Report.Info("Attempting to open the email link");
 				string mylink = Context.GetFromContext("EmailLink").ToString();
 				Report.Info("Found a signup link of: '" + mylink + "'");
 				Report.Info("Attempting to navigate to the link...");
-				SeleniumBrowser.Navigate(mylink);
+				SeleniumWebDriver.CurrentDriver.Navigate(mylink);
 				Report.Success("Navigated to the link!");
 				var userCreationPage = new NewUser();
 				Report.IsTrue(userCreationPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
@@ -665,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void WhenIEnterTheFollowingInformationIntoTheNewUserForm(string savedAs)
 		{
 			Delay.Seconds(10);
-			Report.StartStep(ReportSettings.StepCounter + "- I enter the data in the table into the new account form.");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I enter the data in the table into the new account form.");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -720,7 +725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the new user form I click on continue")]
 		public void WhenInTheNewUserFormIClickOnContinue()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- I click continue on the New User form");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I click continue on the New User form");
 			try
 			{
 				Report.Info("Attempting to click continue");
@@ -769,7 +774,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- check current page title");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- check current page title");
 			try
 			{
 				var thisNewUser = new NewUser();
@@ -788,7 +793,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- If terms of use page appears I accept");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- If terms of use page appears I accept");
 			try
 			{
 				var myTermsOfUse = new TermsOfUse();
@@ -835,7 +840,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the following into the Security Questions window for user saved as: (.*)")]
 		public void EnterTheFollowingIntoSecurityQuestions(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Enter Security Question information for user: " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Enter Security Question information for user: " + savedAs);
 			try
 			{
 				Report.Info("Beginning entering Security Questions!");
@@ -878,7 +883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the pin: (.*)")]
 		public void EnterPin(string pin)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Enter Pin: '" + pin + "'");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Enter Pin: '" + pin + "'");
 			try
 			{
 				var thisNewUser = new NewUser();
@@ -897,7 +902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the pin for user saved as: (.*)")]
 		public void EnterPinForUser(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Enter Pin: for user: '" + savedAs + "'");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Enter Pin: for user: '" + savedAs + "'");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -924,7 +929,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I create a user account with the following parameters saved as: (.*)")]
 		public void CreateNewStandardAccount(string savedAs, Table parameters)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var stepsLogin = new StepsLogin();
 			this.DefineUser(savedAs, parameters);
 			this.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
@@ -943,14 +948,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.EnterTheFollowingIntoSecurityQuestions(savedAs);
 			this.EnterPinForUser(savedAs);
 			this.WhenInTheNewUserFormIClickOnContinue();
-			ReportSettings.UseSubSteps = false;
+			ReportDetails.CurrentDetails.UseSubSteps = false;
 		}
 
 
 		[StepDefinition(@"there is a new email for user: (.*) from: (.*) with the title: (.*) and it should contain no attachments with the file name: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitleWithNoAttachments(string savedAs, string emailFrom, string title,string fileName)
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			string shouldOrNot = "should";
 			try
 			{
@@ -970,7 +975,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking for email differences");
 
 				Delay.Seconds(60);
-				if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
+				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(user.Email))
 				{
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 					var email = (Email)Context.GetFromContext("Matching");
@@ -997,7 +1002,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						while (i < 5)
 						{
 							Report.Info("Attempt: " + (i + 1));
-							if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
+							if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(user.Email))
 							{
 								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;
