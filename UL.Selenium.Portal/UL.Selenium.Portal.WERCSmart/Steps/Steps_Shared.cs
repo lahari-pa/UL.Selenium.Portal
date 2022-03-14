@@ -13545,5 +13545,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
 		}
 
+		[StepDefinition(@"I call Shared Step 26900 \(Transportation Details 1 > Not Regulated\)")]
+		public void ICallSharedStep26900()
+		{
+			ReportDetails.CurrentDetails.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			Report.StartStep("I should see the Transportation Details 1 Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			Report.StartStep("In the Transportation Details 1 page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			Report.StartStep("In the Transportation Details 1 page, I should see error message: \"This is a required field\".");
+			MyNewProductSteps.ErrorMessageSpecific("This is a required field.");
+			Report.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
+			List<string> showing = MyNewProduct.SelectedOptionsForSection("Product is Regulated for Transport");
+			bool selected = false;
+			int wait = 0;
+			while (!selected && !showing.Contains("Not Regulated") && wait <= 10)
+			{
+				// Check if the option exists in the drop down
+				if (MyNewProduct.GetAllOptionsForSection("Product is Regulated for Transport")
+					.Contains("Not Regulated"))
+				{
+					// If yes, attempt again
+					Report.Info("Trying again to select option: Not Regulated");
+					MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
+					if (MyNewProduct.SetOptionInSection("Product is Regulated for Transport", "Not Regulated"))
+					{
+						selected = true;
+					}
+				}
+				else
+				{
+					// If no, report fail
+					Report.Failure(
+						"It was not possible to select the option: Not Regulated for the section: Product is Regulated for Transport");
+					Report.Screenshot();
+				}
+
+				wait++;
+				Delay.Seconds(1);
+			}
+
+			Report.StartStep("In the Transportation Details 1 page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			ReportDetails.CurrentDetails.UseSubSteps = false;
+		}
+
 	}
 }

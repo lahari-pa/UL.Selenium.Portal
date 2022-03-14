@@ -52,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				this.containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Submit").Click();
+				this.ContainerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Submit").Click();
 				return true;
 			}
 			catch (Exception)

@@ -179,11 +179,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
-
-	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-
-
+	Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should see the Regulatory Documents to Provide Page
 	Then I see the following sections
@@ -195,7 +191,6 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 		| OSHA-compliant Safety Data Sheet, English |
 	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Regulatory Documents to Provide page I click Continue
-	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section               |
