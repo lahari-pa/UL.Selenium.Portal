@@ -321,7 +321,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Data Summary page, I confirm that the Ingredients table matches the following:")]
 		public void InTheDataSummaryPageIConfirmThatIngredientsMatches(Table table)
 		{
-			Delay.Seconds(9999);
 			var thisDataSummary = new DataSummary();
 			thisDataSummary.ScrollToIngredients();
 			List<Ingredients.Ingredient> listOfIngredients = thisDataSummary.GetIngredients();
