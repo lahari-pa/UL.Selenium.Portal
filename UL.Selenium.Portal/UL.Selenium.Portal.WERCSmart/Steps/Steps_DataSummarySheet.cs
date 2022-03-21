@@ -9,6 +9,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -320,6 +321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Data Summary page, I confirm that the Ingredients table matches the following:")]
 		public void InTheDataSummaryPageIConfirmThatIngredientsMatches(Table table)
 		{
+			Delay.Seconds(9999);
 			var thisDataSummary = new DataSummary();
 			thisDataSummary.ScrollToIngredients();
 			List<Ingredients.Ingredient> listOfIngredients = thisDataSummary.GetIngredients();

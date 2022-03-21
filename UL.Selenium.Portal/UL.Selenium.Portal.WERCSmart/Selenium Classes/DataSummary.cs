@@ -364,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
-			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
+			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
@@ -372,7 +372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return listOfIngredients;
 			}
 
-			ReadOnlyCollection<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"));
+			ReadOnlyCollection<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody//tr//td[1]//div[@data-bind='html: Data']"));
 
 			if (ingredientsRows.Count == 0)
 			{
