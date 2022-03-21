@@ -2365,7 +2365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public List<string> ActiveSavedBrands()
 		{
-			return this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text: Phrase']"), 2).Select(x => x.Text).ToList();
 		}
 		public string BrandName(int rowIndex)
 		{
@@ -2376,7 +2376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Failure("There was no row showing at position: " + rowIndex);
 				return null;
 			}
-			return row.FindElement(By.XPath(".//span[@data-bind = 'text:Phrase']"), 2).Text;
+			return row.FindElement(By.XPath(".//span[@data-bind = 'text: Phrase']"), 2).Text;
 		}
 		public string IsActiveText(int row, string brandName)
 		{
