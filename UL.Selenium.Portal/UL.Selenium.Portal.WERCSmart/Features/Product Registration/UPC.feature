@@ -51,9 +51,9 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
-		| Option               |
-		| UPC Number           |
-		| Container Type       |
+		| Option              `           |
+		| GTIN/UPC (include check digit) |
+		| Container Type                  |
 		# | Size (Weight Ounces) |
 		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
 	Then I should not see the following UPC options:
@@ -80,7 +80,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
+		| GTIN/UPC (include check digit)   |
 		#| Size (Fluid Ounces)               |
 		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
 	Then I should not see the following UPC options:
@@ -111,8 +111,8 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
 		| Option                            |
-		| UPC Number                        |
-		#| Size (Fluid Ounces)               |
+		| GTIN/UPC (include check digit)    |
+		#| Size (Fluid Ounces)              |
 		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
 
 	Then I should not see the following UPC options:
