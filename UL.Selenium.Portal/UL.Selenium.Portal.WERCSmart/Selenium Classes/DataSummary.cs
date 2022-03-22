@@ -297,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement headerRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + header + @""")]/../.."), 2);
