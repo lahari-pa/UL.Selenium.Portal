@@ -3397,6 +3397,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
 		}
 
+		[StepDefinition(@"I confirm SKU field is blank")]
+		public void GivenIConfirmSKUFieldIsBlank()
+		{
+			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
+		}
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
