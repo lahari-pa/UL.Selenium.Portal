@@ -473,7 +473,6 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
-@ignore
 @TestCase:109230
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -643,7 +642,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 
-@ignore
+
 @TestCase:133335
 	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -703,71 +702,80 @@ Given I should see the Product Information Page
 
 @TestCase:133610
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
+	And I see the following sections
+		| Section                                                              |
+		| Which best describes your product, including when FIFRA 25(b) Exempt |
+	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then I set the value 'FIFRAPopupExpected' to be: true
+	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-And I see the following sections
-| Section                                                              |
-| Which best describes your product, including when FIFRA 25(b) Exempt |
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-Then I set the value 'FIFRAPopupExpected' to be: true
-Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
+	Given I set the Primary Physical State option to: Solid
+	Given I set the Secondary Physical State option to: Solid
+	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+	Then I click continue
 
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Then I click continue
-
-Then I add the following ingredients:
-| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Glutens, corn       | 100     | false         | false       |            |
-Then I click continue
-Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-Then I confirm the table in the popup view has following column data
-| CAS Number | Name                   | Active or Inert |
-| 66071-96-3 | Glutens, corn          | Active          |
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-And I should see the Ingredients Page
-When In the New Product page I click tab: Product Type
-And I click the page heading: The Product
-And I should see the The Product Page
-And I set 'Product Name' to: RESET PRODUCT
-And I set 'Type of Product' to: Chalk
-Then I save the product information as: TestCase133610
-Then I click continue
-Then I click continue
-And I should see the Product Information Page
-And I see the following sections
-| Section                               |
-| Select countries the product may be sold in |
-| Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) |
-| Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) |
-| Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns. |
-| Product is a Retailer's Private Label or Brand |
-| Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) |
-Given I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Soluble in water
-Then I click continue
-And I should see the Ingredients Page
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
-Then I add the following ingredients:
-| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Glutens, corn       | 100     | false         | false       |            |
-Then I click continue
-Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-#Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-#And I should see the Waste Classification Data Page
+	Then I add the following ingredients:
+		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn       | 100     | false         | false       |            |
+	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm the table in the popup view has following column data
+		| CAS Number | Name                   | Active or Inert |
+		| 66071-96-3 | Glutens, corn          | Active          |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	And I should see the Ingredients Page
+	When In the New Product page I click tab: Product Type
+	And I click the page heading: The Product
+	And I should see the The Product Page
+	And I set 'Product Name' to: RESET PRODUCT
+	And I set 'Type of Product' to: Charcoal
+	Then I save the product information as: TestCase133610
+	Then I click continue
+	And I should see the Product Information Page
+	And I see the following sections
+		| Section                                                                                                                                                                                          |
+		| Select countries the product may be sold in                                                                                                                                                      |
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
+	Given I set the Primary Physical State option to: Solid
+	Given I set the Secondary Physical State option to: Solid
+	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+	Given I set the Select the best Water Solubility description option to: Soluble in water
+	Then I click continue
+	And I should see the Ingredients Page
+	Then I click the 'x' button for component number 1
+	Given I click: YES in the 'Remove Component from My Ingredients' pop up
+	Then I add the following ingredients:
+		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| MICONAZOLE NITRATE | 100     | false               | false       |            |
+	Then I click continue
+	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	And I should see the Waste Classification Data Page
+	And I click the page heading: Ingredients
+	And I should see the Ingredients Page
+	Then I click the 'x' button for component number 1
+	Given I click: YES in the 'Remove Component from My Ingredients' pop up
+	Then I add the following ingredients:
+		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn    | 50      | false               | false       |            |
+		| Oils, peppermint | 50      | false               | false       |            |
+	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm the table in the popup view has following column data
+		| CAS Number | Name             | Active or Inert |
+		| 66071-96-3 | Glutens, corn    | Active          |
+		| 8006-90-4  | Oils, peppermint | Active          |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	Then I save the product information as: TestCase133610
+	Then I click the Home navigation icon
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
