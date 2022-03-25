@@ -98,6 +98,7 @@ Scenario: [70511] Pagination (...) need an account with six pages of users
 	Given I click ... in the My Account user grid
 	Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
+@ignore
 @TestCase:68417
 Scenario: [68417] Company Information
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

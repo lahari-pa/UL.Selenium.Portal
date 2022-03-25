@@ -257,6 +257,7 @@ Scenario: [65886] My Products - Pagination
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
+@ignore
 @TestCase:71188
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 	Given I log in with the account saved in TReVor as: ProductAccount

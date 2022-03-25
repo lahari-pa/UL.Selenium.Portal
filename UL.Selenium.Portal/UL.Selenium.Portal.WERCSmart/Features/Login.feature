@@ -66,7 +66,7 @@ Then I should see the following error message for email: This is a required fiel
 Given on the Login page I log in as test user: ProductAccount
 Then the WERCSmart homepage should load
 
-
+@ignore
 @TestCase:50831
 Scenario: [50831] Account Lockout
 

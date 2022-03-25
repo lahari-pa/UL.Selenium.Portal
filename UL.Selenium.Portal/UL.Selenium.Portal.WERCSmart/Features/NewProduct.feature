@@ -98,7 +98,8 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 
 
 
-
+@ignore
+#CBD Registration Guidance popup can be tested only in staging
 @TestCase:149421
 Scenario: [149421] CBD - Registration with CBD Ingredient in Formulation
 
@@ -130,33 +131,32 @@ Given I close the CBD Registration Guidance popup in the Ingredients Page
 
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer |
-| CVS      |
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC149421, container type: Plastic Container and size: 15.2
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor  | Odor Threshold           | Partition Coefficient | Personal Protection Equipment | Viscosity |
-| Amber      |                          |                         | Apple | No information available | 4                     |                               |           |
-Given I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
-Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
-Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase149421)
-Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase149421)
-Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
-Given I call Shared Step 59066 (Go to SHA Manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase149421)
-Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase149421)
-Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase149421) for
-| Retailer |
-| CVS      |
+#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+#| Retailer |
+#| CVS      |
+#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC149421, container type: Plastic Container and size: 15.2
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given in the Additional Documents to Provide page I click Continue
+#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+#| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor  | Odor Threshold           | Partition Coefficient | Personal Protection Equipment | Viscosity |
+#| Amber      |                          |                         | Apple | No information available | 4                     |                               |           |
+#Given I click continue
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+#And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto16 and Open SHA manager)
+#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase149421)
+#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase149421)
+#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase149421)
+#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
+#Given I call Shared Step 59066 (Go to SHA Manager)
+#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase149421)
+#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase149421
+#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase149421)
+#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase149421) for
+#| Retailer |
+#| CVS      |
 
 
 @tfs_design
@@ -190,7 +190,7 @@ And I click the following option in the bottom menu: Review
 
 
 
-
+@ignore
 @TestCase:120820
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 

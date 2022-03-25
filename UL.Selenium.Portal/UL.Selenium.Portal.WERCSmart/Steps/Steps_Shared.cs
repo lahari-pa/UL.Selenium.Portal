@@ -1380,7 +1380,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"If Section: Select the best Water Solubility description is visible, I select the first option");
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
-				"Insoluble");
+				"Insoluble in water");
 			Report.StartStep(
 				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection(
@@ -2851,8 +2851,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
-			Report.StartStep("I set the Secondary Physical State option to: Cream");
-			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Cream");
+			Report.StartStep("I set the Secondary Physical State option to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Delay.Seconds(5);
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
@@ -4297,9 +4297,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Liquid");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
-				"Cream");
+				"Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
-				 "Cream");
+				 "Liquid");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
 				"1.0");

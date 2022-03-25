@@ -9,6 +9,7 @@
 
 Feature: Battery
 
+@ignore
 @TestCase:127575
 Scenario: [127575] Battery Registration - Regulatory Documents - Needs "I don't Need" Option
 

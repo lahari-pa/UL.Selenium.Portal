@@ -249,6 +249,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I navigate to the home page
 	Then I delete the product: TestCase65441
 
+@ignore
 @TestCase:65392
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
@@ -500,6 +501,7 @@ Scenario: [105352] Product Comments screen Max input length
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
+@ignore
 @TestCase:122123
 Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Given I generate a random UPC number and save as: UPC79428
@@ -701,7 +703,7 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-
+@ignore
 @TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
@@ -733,8 +735,8 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
@@ -742,7 +744,7 @@ Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
-
+@ignore
 @TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
@@ -761,8 +763,8 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB

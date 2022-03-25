@@ -46,6 +46,7 @@ Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not requir
 	And I click continue on the Forward Product Registration page
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
+@ignore
 @TestCase:115393
 Scenario: [115393] Forward Product - Target - Does not require DPCI
 	Then I create a Chalk product for Amazon and Force it into to Completed Using Sha Account: SHAQAAuto11

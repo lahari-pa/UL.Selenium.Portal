@@ -375,6 +375,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
+@ignore
 @TestCase:118139
 Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

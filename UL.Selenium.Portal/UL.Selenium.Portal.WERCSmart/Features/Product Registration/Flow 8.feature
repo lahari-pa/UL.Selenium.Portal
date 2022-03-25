@@ -74,6 +74,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Accessories containing Gel (Seat Cushions, etc.)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
 
+@ignore
 @TestCase:58184
 Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -389,6 +390,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
 
+@ignore
 @TestCase:58390
 Scenario: [58390] Paint,Model - RU000333
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -475,6 +477,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing paints and glues
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
 
+@ignore
 @TestCase:58810
 Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -505,6 +508,7 @@ Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Helium tank
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58810
 
+@ignore
 @TestCase:58815
 Scenario: [58815] Lighters(RU000000) - 8G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -627,6 +631,7 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Single Purpose Cleaner
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75840
 
+@ignore
 @TestCase:117894
 Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -692,7 +697,7 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
 
 
-
+@ignore
 @TestCase:144527
 Scenario: [144527] Medical Test Kit With Alcohol Swab - RU000955 - Flow 8S
 

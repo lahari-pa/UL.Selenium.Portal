@@ -124,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://goodguide.com/" };
 					break;
 				case "Navigator":
-					urls = new[] { "https://msc.ul.com/en/products/navigator/" };
+					urls = new[] { "https://www.ul.com/resources/apps/navigator" };
 					break;
 			}
 			Report.Info("Switch to Tab: " + string.Join(", ", urls));

@@ -171,6 +171,7 @@ Then Is this product specifically designed, marketed or labeled for infants, bab
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74253
 
+@ignore
 @TestCase:74254
 Scenario: [74254] CVS topically used product and verification
 
@@ -612,6 +613,7 @@ Then What is the CVS Store Brand associated to this product? should be showing t
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
 
+@ignore
 @TestCase:74207
 Scenario: [74207] Product Development Manager (PDM) and verification
 
