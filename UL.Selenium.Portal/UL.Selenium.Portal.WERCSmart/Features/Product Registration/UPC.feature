@@ -306,6 +306,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
+@ignore
 @TestCase:96071
 Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -832,6 +833,8 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 #And In the View Orders popup I click Back
 #Given I click on the second entry in the View Orders popup
 #And I confirm that for each retailer, the entry has a status of Chemical Assessment
+
+
 @TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
@@ -892,6 +895,7 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
+@ignore
 @TestCase:120798
 Scenario:[120798] "U" for UPC Update for Suspended Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -956,6 +960,7 @@ Scenario:[120798] "U" for UPC Update for Suspended Status
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
+@ignore
 @TestCase:120849
 Scenario:[120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

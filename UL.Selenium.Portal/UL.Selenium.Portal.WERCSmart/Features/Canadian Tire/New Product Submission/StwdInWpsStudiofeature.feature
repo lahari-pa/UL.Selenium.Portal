@@ -22,11 +22,11 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto25 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-
+@ignore
 @TestCase:85982
 Scenario: [85982] SOLD = Canada Only, PL = No - Stewardship Information in WPS Studio
 Given I generate a random UPC number and save as: UPC85982
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 Then I save the product information as: TestCase85982
@@ -61,11 +61,11 @@ And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific
 And In Power Designer Plus page in My Toolbar tab I click on the product attributes button
 Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
-
+@ignore
 @TestCase:86008
 Scenario: [86008] Sold = Canada, PL = Yes - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86008
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 Then I save the product information as: TestCase86008
@@ -103,11 +103,11 @@ And In Power Designer Plus page in My Toolbar tab I click on the product attribu
 Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
 
-
+@ignore
 @TestCase:86017
 Scenario: [86017] Sold = US & Canada, PL = Yes - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86017
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 Then I save the product information as: TestCase86017
@@ -145,11 +145,11 @@ And In Power Designer Plus page in My Toolbar tab I click on the product attribu
 Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
 
-
+@ignore
 @TestCase:86019
 Scenario: [86019] Sold = US & Canada, PL = No - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86019
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 Then I save the product information as: TestCase86019

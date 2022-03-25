@@ -18,7 +18,7 @@ Feature: Account Canada Address(Yes) Package types (Yes) Stewardship (FULL)
 
 @TestCase:85329
 Scenario: [85329] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = NO, Packaging type IS NOT required
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85329
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -43,7 +43,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85750
 Scenario: [85750] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85750
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -65,7 +65,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85751
 Scenario: [85751] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85750
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -92,7 +92,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
 @TestCase:85752
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
-	Given I login into the WERCSmart Portal - Canada has all data account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	#And I In the shared step below use Bubble solution as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -117,7 +117,7 @@ And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), G
 
 @TestCase:85753
 Scenario: [85753] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85753
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -133,7 +133,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85754
 Scenario: [85754] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
-Given I login into the WERCSmart Portal - Canada has all data account
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85754
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution

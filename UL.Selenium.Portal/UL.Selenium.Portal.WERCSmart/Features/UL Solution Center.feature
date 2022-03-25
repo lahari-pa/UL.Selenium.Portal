@@ -85,6 +85,7 @@ Scenario: [59658] UL Solution Center shows correct entries - GOODGUIDE for CONSU
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
+@ignore
 @TestCase:59659
 Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPLIERS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -99,6 +100,8 @@ Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPL
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
+
+
 @TestCase:59660
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -137,4 +140,4 @@ Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	And I confirm the Learn More button is displayed for section: Navigator
 	Given I click the Learn More button for section: Navigator
 	Given I switch to the Navigator information tab
-	Then I check that the current URL contains: https://msc.ul.com/en/products/navigator/
+	Then I check that the current URL contains: https://www.ul.com/resources/apps/navigator

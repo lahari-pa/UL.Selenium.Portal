@@ -13,6 +13,7 @@
 
 Feature: Flow 18
 
+@ignore
 @tfsdesign
 @TestCase:60116
 Scenario: [60116] Anti-Static Product - Aerosol - RU000656

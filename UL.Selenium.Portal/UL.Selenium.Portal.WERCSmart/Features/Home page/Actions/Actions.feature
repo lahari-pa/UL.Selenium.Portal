@@ -31,6 +31,7 @@ Feature: Actions
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Actions\View UPCs
 #actions/view upcs
+@ignore
 @TestCase:73424
 Scenario: [73424] View UPCs - Product with UPCs
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -49,6 +50,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I confirm all UPC numbers in the list saved as: TestCase73424UPCs are displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
+@ignore
 #actions/delete
 @TestCase:63663
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
@@ -169,7 +171,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Then I close All the current windows except the Main Window
 	
 
-
+@ignore
 @TestCase:112937
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	Given I Submit a new product which has a Case UPC and a regular UPC
@@ -205,6 +207,7 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View UPCs
 	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
+@ignore
 @TestCase:112939
 Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Given I Submit a new product which has a Case UPC and a regular UPC
@@ -240,7 +243,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
-
+@ignore
 @CACleaning
 @TestCase:114944
 Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)

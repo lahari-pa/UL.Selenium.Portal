@@ -28,7 +28,7 @@
 @run_Sprint16
 Feature: Sprint 16
 
-
+@ignore
 @TestCase:112940
 Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 200 to 500 Characters and Spaces.
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

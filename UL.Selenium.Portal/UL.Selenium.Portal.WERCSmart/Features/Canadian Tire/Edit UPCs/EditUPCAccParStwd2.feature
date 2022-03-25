@@ -28,7 +28,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto8  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 		
-
+@ignore
 @TestCase:86462
 Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86462
@@ -50,6 +50,7 @@ Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86462
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86462
 
+@ignore
 @TestCase:86463
 Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT CT - Package type not required
 	Given I generate a random UPC number and save as: UPC86463
@@ -70,6 +71,7 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86463
 	Then In the SHA list of UPCs I should see UPC: saved as UPC864631
 
+@ignore
 @TestCase:86264
 Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canadian Tire  - Package type required
 	Given I generate a random UPC number and save as: UPC86264
@@ -91,6 +93,7 @@ Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canad
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86264
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86264
 
+@ignore
 @TestCase:86261
 Scenario: [86261] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86261

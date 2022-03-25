@@ -473,6 +473,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
+@ignore
 @TestCase:109230
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -642,7 +643,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 
-
+@ignore
 @TestCase:133335
 	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -767,5 +768,6 @@ Then I add the following ingredients:
 | ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Glutens, corn       | 100     | false         | false       |            |
 Then I click continue
-Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-And I should see the Waste Classification Data Page
+Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+#Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+#And I should see the Waste Classification Data Page

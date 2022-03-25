@@ -19,7 +19,7 @@ Feature: Account Canada Address(No) Packagetype(Yes) Stewardship(Partial)
 @TestCase:85885
 Scenario: [85885] Account Packaging & Partial Stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85885
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -37,7 +37,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85886
 Scenario: [85886] Account Packaging & Partial Stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85886
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -56,7 +56,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85887
 Scenario: [85887] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85887
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -72,7 +72,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85888
 Scenario: [85888] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85888
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -96,7 +96,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85889
 Scenario: [85889] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85889
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -117,10 +117,10 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85889
 
 
-
+@ignore
 @TestCase:85890
 Scenario: [85890] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85890

@@ -72,7 +72,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
-
+@ignore
 @TestCase:57711
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
 

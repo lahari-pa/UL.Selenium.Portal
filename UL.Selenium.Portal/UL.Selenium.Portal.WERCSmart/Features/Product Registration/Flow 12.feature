@@ -15,10 +15,10 @@
 
 Feature: Flow 12
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
@@ -27,9 +27,10 @@ Background:
 ## Test case can be found at the following paths:
 ## NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 12
 ## NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
+@ignore
 @TestCase:58430
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click on My Account
 Then I create a new email address
 Then I create a new user with the following information and set the password from the admin account: ProductAccount
@@ -81,7 +82,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 @TestCase:58605
 Scenario: [58605] Suppository (no laxative) -  RU001151
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Medicinal
@@ -151,6 +152,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 @ProductSetUp
 @42196
+@ignore
 @TestCase:42196
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

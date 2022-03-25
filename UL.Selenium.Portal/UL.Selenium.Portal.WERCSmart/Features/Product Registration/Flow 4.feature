@@ -12,6 +12,7 @@
 @run_Flow4
 Feature: Flow 4
 
+@ignore
 @TestCase:57922
 Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -42,7 +43,8 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Odor Remover/Eliminator - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57922
-	
+
+@ignore	
 @TestCase:57924
 Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -75,6 +77,7 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Penetrants
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57924
 
+@ignore
 @TestCase:57925
 Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -139,6 +142,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Floor Wax - Wood
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57927
 
+@ignore
 @TestCase:57931
 Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -171,6 +175,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Hair Styling Product - Mousse
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57931
 
+@ignore
 @TestCase:57933
 Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -299,6 +304,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive - Aerosol Web Spray
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57958
 
+@ignore
 @TestCase:57977
 Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding(RU000912) - 4AL - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -331,6 +337,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
+@ignore
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -397,6 +404,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
 
+@ignore
 @TestCase:57985
 Scenario: [57985] Footwear or Leather Care Product - Aerosol - (RU000744) - 4A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -429,6 +437,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
 
+@ignore
 @TestCase:57986
 Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746) - 4All - 4G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -488,6 +497,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
 
+@ignore
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid- (RU000745) - 4S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

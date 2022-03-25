@@ -270,6 +270,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@ignore
 @TestCase:65947
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly
 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

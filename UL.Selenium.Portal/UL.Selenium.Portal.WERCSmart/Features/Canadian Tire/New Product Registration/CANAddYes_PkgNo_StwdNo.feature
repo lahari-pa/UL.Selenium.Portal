@@ -15,11 +15,11 @@
 
 Feature: Account Canada Address(Yes) Packagetype(No) Stewardship(No)
 
-
+@ignore
 @TestCase:85315
 Scenario: [85315] Account has Canada address only - SOLD = US and Canada, PL = No, packaging type is required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85315
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -36,7 +36,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85735
 Scenario: [85735] Account has Canada address only - SOLD = US and Canada, PL = YES, packaging type is required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85735
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -49,11 +49,11 @@ And I call Shared Step  (Select Retailers Canadian Tire and enter additional req
 And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85735, container type: Plastic Container and size: 12 click continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85735
 
-
+@ignore
 @TestCase:85736
 Scenario: [85736] Account has Canada address only - SOLD = Canada only, PL = No, packaging type is required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85736
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -70,7 +70,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85737
 Scenario: [85737] Account has Canada address only - SOLD = Canada only, PL = YES, packaging type is required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85737
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -87,7 +87,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85738
 Scenario: [85738] Account has Canada address only - SOLD = US only, PL = No, packaging type is NOT required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85738
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -105,7 +105,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85739
 Scenario: [85739] Account has Canada address only - SOLD = US only, PL = YES, packaging type is NOT required
 
-Given I log in with the account saved in TReVor as: Canada Address Only
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85739
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution

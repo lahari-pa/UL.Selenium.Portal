@@ -38,6 +38,7 @@ Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 
 #This test cases uses the ULSC account
+@ignore
 @TestCase:56224
 Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
