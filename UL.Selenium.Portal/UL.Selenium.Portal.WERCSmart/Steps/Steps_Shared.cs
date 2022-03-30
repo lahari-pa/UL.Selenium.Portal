@@ -2930,7 +2930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 65511 \(Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
 		public void ICallSharedProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
@@ -13556,7 +13556,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 			Report.StartStep("In the Transportation Details 1 page, I should see error message: \"This is a required field\".");
-			MyNewProductSteps.ErrorMessageSpecific("This is a required field.");
+			MyNewProductSteps.ErrorMessageSpecific("This is a required field");
 			Report.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
 			List<string> showing = MyNewProduct.SelectedOptionsForSection("Product is Regulated for Transport");

@@ -142,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
 		}
 
-		private List<IWebElement> UpcHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'UPC')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+		private List<IWebElement> UpcHeadings => this.containerElement.FindElements(By.XPath(".//div[contains(text(),'UPC')]//ancestor::div[contains(@class,'summary-question-container')]/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
 
 		private string[] UPCHeadingTitles => this.UpcHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
 
@@ -161,14 +161,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
-		private List<IWebElement> IngredientHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+		private List<IWebElement> IngredientHeadings => this.containerElement.FindElements(By.XPath(".//div[contains(text(),'Ingredient')]//ancestor::div[contains(@class,'summary-question-container')]/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
 
 		private string[] IngredientHeadingTitles => this.IngredientHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
 
 		public string IngredientType(string ingredient)
 		{
 			//find row for ingredient want, then add all values from ingreident types column to list
-			IWebElement ingredientRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
+			IWebElement ingredientRow = this.containerElement.FindElement(By.XPath($".//div[contains(text(),'Ingredient')]//ancestor::div[contains(@class,'summary-question-container')]//tr[.//div[text()='{ingredient}']]"), 2);
 			var newList = this.IngredientHeadingTitles;
 			int i = 1;
 			bool foundColumn = false;
@@ -218,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> FunctionalPurposes(string ingredient)
 		{
 			//find row for ingredient want, then add all values from ingreident types column to list
-			IWebElement functionalRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
+			IWebElement functionalRow = this.containerElement.FindElement(By.XPath($".//div[contains(text(),'Ingredient')]//ancestor::div[contains(@class,'summary-question-container')]//tr[.//div[text()='{ingredient}']]"), 2);
 			var newList = this.IngredientHeadingTitles;
 			int i = 1;
 			bool foundColumn = false;

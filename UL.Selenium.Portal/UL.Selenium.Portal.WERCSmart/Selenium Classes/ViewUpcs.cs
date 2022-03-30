@@ -22,9 +22,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement ProductUpcBody => this.containerElement.FindElement(By.XPath("./div[@class='container']"), 2);
 
-		private List<IWebElement> UpcRows => this.ProductUpcBody.FindElements(By.XPath(".//div[@class='summary-question-container']/table/tbody/tr[contains(@data-bind,'values')]"), 2).ToList();
+		private List<IWebElement> UpcRows => this.ProductUpcBody.FindElements(By.XPath(".//div[contains(@class,'summary-question-container')]/table/tbody/tr[contains(@data-bind,'values')]"), 2).ToList();
 
-		private List<IWebElement> UpcHeadings => this.ProductUpcBody.FindElements(By.XPath(".//div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+		private List<IWebElement> UpcHeadings => this.ProductUpcBody.FindElements(By.XPath(".//div[contains(@class,'summary-question-container')]/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
 
 		private string[] HeadingTitles => this.UpcHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
 
@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				for (int i=0; i< this.HeadingTitles.Count(); i++)
 				{
 					var heading = this.HeadingTitles[i];
-					var colEl = row.FindElement(By.XPath($"./td[position()={i + 1}]/ div"), 2);
+					var colEl = row.FindElement(By.XPath($".//td[position()={i + 1}]/div"), 2);
 					var colVal = colEl?.Text;
 					switch (heading)
 					{
