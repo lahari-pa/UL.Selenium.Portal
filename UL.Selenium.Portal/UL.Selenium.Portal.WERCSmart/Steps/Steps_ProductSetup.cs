@@ -4027,7 +4027,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
 			sharedSteps.ICallSharedTransportationDetails1_NotRegulated();
-			sharedSteps.GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId("Wal-Mart/SAM'S CLUB", "Holiday Time", "TestBrand");
+			sharedSteps.GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId("Wal-Mart/SAM'S CLUB", "Holiday Time", "random");
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335", "Cardboard", "2");
 			//sharedSteps.retailer
 			//sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();

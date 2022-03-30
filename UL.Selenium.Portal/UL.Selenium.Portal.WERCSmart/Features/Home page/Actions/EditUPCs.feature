@@ -237,13 +237,13 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-	 And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
     Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
     Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
 	Given I navigate to the landing page
@@ -251,7 +251,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I search for the product saved as: TestCase120790
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
-	Given I click the page heading: Universal Product Code (UPC)
+	#Given I click the page heading: Universal Product Code (UPC)
 	And I delete UPC: saved as UPC120790
 	Then In the list of UPCs I should not see UPC: saved as UPC120790
 	
