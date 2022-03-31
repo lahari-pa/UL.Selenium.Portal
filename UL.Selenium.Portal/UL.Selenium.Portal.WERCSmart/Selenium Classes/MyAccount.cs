@@ -1813,11 +1813,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(5);
 			var abbr = new StateAbbreviations();
 			string selectedAbbr = "";
+
 			abbr.Map.TryGetValue(state, out selectedAbbr);
 
 			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
-			if (stateText.Text == selectedAbbr)
+			if (stateText.Text == state)
 			{
 				return true;
 			}
@@ -1836,7 +1837,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
-			if (stateText.Text == selectedAbbr)
+			if (stateText.Text == state)
 			{
 				return true;
 			}
