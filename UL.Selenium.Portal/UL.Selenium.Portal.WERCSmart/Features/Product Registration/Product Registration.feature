@@ -39,6 +39,7 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
+@ignore
 @TestCase:63705
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -114,6 +115,7 @@ Scenario: [63705] New Product - BCP
 	Given I navigate to the home page
 	Then I delete the product: TestCase63705
 
+@ignore
 @TestCase:63724
 Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
@@ -177,6 +179,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
+@ignore
 @TestCase:65441
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -631,6 +634,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
 	When I click continue
 
+@ignore
 @TestCase:128754
 Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
 
@@ -771,7 +775,7 @@ Then I confirm the excel file saved as: Products in Scope Report for BBB contain
 Given I delete the excel file saved as Products in Scope Report for BBB
 
 
-
+@ignore
 @TestCase:147446
 Scenario: [147446] WM - Authoring option ONLY available
 
@@ -796,6 +800,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ignore
 @TestCase:147447
 Scenario: [147447] Sears - Authoring option ONLY available
 

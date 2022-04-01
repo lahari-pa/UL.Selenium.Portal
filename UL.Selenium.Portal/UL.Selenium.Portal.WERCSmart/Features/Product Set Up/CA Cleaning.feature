@@ -19,6 +19,8 @@
 @run_CACleaning
 Feature:  California Cleaning Scenarios
 
+
+@ignore
 @TestCase:139531
 Scenario: [139531] CA Cleaning - Ingredient Type Missing
 
@@ -51,6 +53,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ignore
 @TestCase:139534
 Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisMatch
 
@@ -82,6 +85,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 
+@ignore
 @TestCase:139385
 Scenario: [139385] CA Cleaning - Generic Ingredient Used
 
@@ -113,6 +117,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139385
 
 
+@ignore
 @TestCase:139387
 Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 
@@ -144,6 +149,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139387
 
 
+@ignore
 @TestCase:139388
 Scenario: [139388] CA Cleaning - Public Disclosure or Trade Secret Issue
 
@@ -246,6 +252,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ignore
 @TestCase:139445
 Scenario: [139445] CA Cleaning - Ingredients Screen - Validation for INTENTIONALLY ADDED Ingredient Type and Multi-Select Functional Purpose
 
@@ -288,6 +295,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ignore
 @TestCase:158172
 Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation - 
 

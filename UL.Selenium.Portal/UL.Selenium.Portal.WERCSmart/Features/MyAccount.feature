@@ -81,6 +81,7 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
+@ignore
 @TestCase:70511
 Scenario: [70511] Pagination (...) need an account with six pages of users
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
@@ -112,6 +113,8 @@ Scenario: [68417] Company Information
 # Created by Larkin, Steve
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
+
+@ignore
 @TestCase:87304
 Scenario: [87304] Video link How to Subscribe
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -125,6 +128,7 @@ Scenario: [87304] Video link How to Subscribe
 	And I close the window saved as: Subscription Enrollment and Management
 
 
+@ignore
 @TestCase:92613
 Scenario: [92613] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -142,6 +146,7 @@ Scenario: [92613] Add and Deactivate a New User from the User Grid
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
 
+@ignore
 @TestCase:90197
 Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -159,6 +164,7 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I confirm the new user is Not Active
 
 
+@ignore
 @TestCase:85512
 Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	Given I log in with the account saved in TReVor as: NoProductsAccount
@@ -224,6 +230,7 @@ Then I check if the Stewardship Numbers table province names match the following
 Then I check if 'Edit' button exists in the Stewardship Numbers section
 
 
+@ignore
 @TestCase:97846
 Scenario: [97846] - Company Information - Verify the 'State' drop-down is Available
 And I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
@@ -243,6 +250,7 @@ Then I click the User Icon
 And I click on Sign Out
 
 
+@ignore
 @TestCase:53694
 Scenario: [53694] - User Role - Reset Password
 Given I Login into WERCSmart Portal - Admin Role - Password Reset
@@ -257,6 +265,8 @@ Given I Login into WERCSmart Portal - Admin Role - Password Reset
 
 #When running this, update the date 2019-12-09 to whatever the current date is
 #Update the date in the above sentence to avoid future confusion
+
+@ignore
 @TestCase:87349
 Scenario: [87349] - My Account - Edit Stewardship Numbers - Date validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -565,6 +575,7 @@ Then I save the Stewardship Numbers data
 
 
 
+@ignore
 @TestCase:138836
 Scenario: [138836] My Account - Correct Message Displays when Date is Expired
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

@@ -16,7 +16,7 @@ Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccou
 Given I save the current emails in the inbox for address saved as: ProductAccountEmail
 	Given I log in with the account saved in TReVor as: ProductAccount
 
-
+@ignore
 @TestCase:56942
 Scenario: [56942] Data Consent Tiers - Walmart
 Given I click on My Account

@@ -22,6 +22,7 @@
 @run_MyMessages
 Feature: MyMessages
 
+@ignore
 @TestCase:72582
 Scenario: [72582] Active Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

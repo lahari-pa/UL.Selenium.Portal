@@ -65,6 +65,8 @@ Scenario: [56227] Bulk Actions  Delete Products navigation
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
 
+
+@ignore
 @TestCase:74634
 Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -90,6 +92,8 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	And I confirm I am unable to select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	Given I click the Home navigation icon and accept the alert popup
 
+
+@ignore
 @TestCase:76314
 Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -142,6 +146,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I close the window that opened
 	Given I navigate to the home page
 
+@ignore
 @test75321
 @TestCase:75321
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
@@ -205,6 +210,8 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
+
+@ignore
 @TestCase:75129
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
@@ -253,6 +260,8 @@ Scenario: [75129] Forward - Product in Submitted Status
 # Created by Aaron Caton
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
+
+@ignore
 @TestCase:78048
 Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I generate a random UPC number and save as: UPC78048
@@ -299,7 +308,8 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 
-	
+
+@ignore
 @TestCase:93366
 	Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 

@@ -20,7 +20,7 @@ Background:
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
 
-
+@ignore
 @TestCase:68211
 Scenario: [68211] Conflict Minerals - Create a new company
 Given I create a new email address and save as: Myemail

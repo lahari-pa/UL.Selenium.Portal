@@ -68,7 +68,7 @@ Scenario: [63323] Remove single product from cart
        Then If a modal dialog opens I close it
        Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63323
 
-
+@ignore
 @TestCase:74837
 Scenario: [74837] Shopping Cart navigation with subscription without products
 	Given I log in with the subscription without products account
@@ -79,6 +79,7 @@ Scenario: [74837] Shopping Cart navigation with subscription without products
 	Given I close the Empty Cart pop up
 	Then The home screen should load
 
+@ignore
 @TestCase:74919
 Scenario: [74919] Shopping cart navigation with products in cart without subscription
 	Given I log in with the without subscription without products account
