@@ -23,6 +23,7 @@ Background:
 		| SHAQAAuto15 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @73949
+@ignore
 @TestCase:73949
 Scenario: [73949] Kit - Document merge - US only
 	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
@@ -80,6 +81,7 @@ Scenario: [73949] Kit - Document merge - US only
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Document merge
 @73950
+@ignore
 @TestCase:73950
 Scenario: [73950] Kit Document merge - Canada only
 	

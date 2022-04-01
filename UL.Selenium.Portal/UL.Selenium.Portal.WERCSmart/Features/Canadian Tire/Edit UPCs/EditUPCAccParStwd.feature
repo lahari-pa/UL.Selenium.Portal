@@ -29,7 +29,7 @@ Background:
 		| SHAQAAuto2 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 		
-
+@ignore
 @TestCase:86257
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86257

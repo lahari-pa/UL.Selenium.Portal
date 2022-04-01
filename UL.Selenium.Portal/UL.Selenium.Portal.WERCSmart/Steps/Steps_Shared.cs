@@ -1501,9 +1501,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep(
-				"Which best describes your product, including when FIFRA 25(b) Exempt");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			Report.StartStep("Looking for the Which best describes your product, including when FIFRA 25(b) Exempt and Setting to: Product is not a pesticide and does not make or imply a pesticidal claim if it exists");
+			if (myNewProductClass.SectionExists("Which best describes your product, including when FIFRA 25(b) Exempt"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");

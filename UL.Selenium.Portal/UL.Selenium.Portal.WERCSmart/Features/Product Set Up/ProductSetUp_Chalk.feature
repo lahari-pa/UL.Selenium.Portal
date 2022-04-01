@@ -21,6 +21,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto21 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
 @TestCase:75335
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -72,6 +73,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 
+@ignore
 @TestCase:75142
 Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - Status = Submitted
 	Given I login into the WERCSmart Portal - Administrator Role
@@ -101,6 +103,7 @@ Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - S
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted
 
+@ignore
 @TestCase:75651
 Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - Process to Assigned
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
@@ -134,6 +137,7 @@ Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase75651)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75651 and its status is: Assigned
 
+@ignore
 @TestCase:85965
 Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = Yes and submit thru to Completed status (NGHS only)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

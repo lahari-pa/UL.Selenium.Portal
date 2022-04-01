@@ -22,6 +22,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto19 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+
+@ignore
 @TestCase:58753
 Scenario: [58753] Hair Color Kit - RU000724
 

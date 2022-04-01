@@ -23,6 +23,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto26 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
 @TestCase:68420
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -82,6 +83,7 @@ Scenario: [68421] Active UPCs for Products Report
 	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
 	And I delete the Supplier Report file saved as 68421
 
+@ignore
 @TestCase:68422
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -130,6 +132,7 @@ Scenario: [68422] Battery-containing products report
 	#And I confirm that the product returned has the same name as the product saved as: TestCase68422
 	#And I delete the Supplier Report file saved as 68422
 
+@ignore
 @TestCase:68423
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -157,6 +160,7 @@ Scenario: [68423] Formulated vs Articles Report
 	And I confirm that the product returned has the same name as the product saved as: TestCase68423
 	And I delete the Supplier Report file saved as 68423
 
+@ignore
 @TestCase:73082
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -219,6 +223,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
 
+@ignore
 @TestCase:108254
 Scenario: [108254] UPC Report for All Products with Retailer - Create new products and verify in report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -300,6 +305,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 		| Camera wBattery | UPC108254BCP | Walgreens | Submitted | 32     | Plastic Container | Battery-Containing Product | ENHANCED ARTICLES |
 	And I delete the Supplier Report file saved as 108254
 
+@ignore
 @TestCase:73225
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -319,6 +325,7 @@ Scenario: [73225] Kits that Contain a specific Product
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73225
 
+@ignore
 @TestCase:73228
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -338,6 +345,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73228
 
+@ignore
 @TestCase:73226
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -363,6 +371,7 @@ Scenario: [73226] Pesticide Certificate Report
 	Given I save the product with name: TestCase73226Name and id: TestCase73226Id as: TestCase73226
 	And I delete the excel file saved as excel73226
 
+@ignore
 @TestCase:73229
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -400,6 +409,7 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
+@ignore
 @TestCase:73227
 Scenario: [73227] Products and Recommended Use Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -419,6 +429,7 @@ Then I confirm that the excel file saved as: 73227 contains the following column
 		| Product Name   |
 And I delete the excel file saved as 73227
 
+@ignore
 @TestCase:73230
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -442,6 +453,7 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 		| Status          |
 	And I delete the excel file saved as 73230
 
+@ignore
 @TestCase:75391
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -495,6 +507,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	And I delete the Supplier Report file saved as 75391
 
 #fails because of a bug 106613
+@ignore
 @TestCase:76551
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
     Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -520,6 +533,7 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	And I delete the Supplier Report file saved as excel76551
 
 #TODO - this scenario is incomplete because the possibility of automating the rest of the test case needs review.
+@ignore
 @TestCase:76759
 Scenario: [76759] Waste Classification Summary Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -628,7 +642,9 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635
 
+
 #Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
+@ignore
 @TestCase:110480
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -638,7 +654,7 @@ Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- C
 	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
 
 
-
+@ignore
 @TestCase:114764
 Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
