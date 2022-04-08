@@ -291,7 +291,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:158172
 Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation - 
 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I save the product information as: TestCase158172
 Given I call Shared Step 57561a (The Product - Enter Product Name: Trade Secret Validation Product and select Type of Product): General Purpose Cleaner - Non-aerosol
