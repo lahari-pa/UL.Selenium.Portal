@@ -133,6 +133,7 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919
 
+@ignore
 @TestCase:73918
 Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -164,6 +165,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
+@ignore
 @TestCase:63684
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -200,6 +202,7 @@ Scenario: [63684] Walmart Private label product
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
+@ignore
 @TestCase:96705
 Scenario: [96705] Light Bulbs - No Walmart
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

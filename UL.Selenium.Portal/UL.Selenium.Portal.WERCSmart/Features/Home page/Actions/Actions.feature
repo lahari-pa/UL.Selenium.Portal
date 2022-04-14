@@ -34,7 +34,7 @@ Feature: Actions
 @ignore
 @TestCase:73424
 Scenario: [73424] View UPCs - Product with UPCs
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	# search for product with name 'Product73424' in submitted status?
 	And I create a product and save as: TestCase73424 and name as: Product73424

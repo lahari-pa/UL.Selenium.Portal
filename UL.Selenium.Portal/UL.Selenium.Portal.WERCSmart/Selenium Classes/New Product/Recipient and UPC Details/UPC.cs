@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
-				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC')]/..//input"), 2);
 				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
 				
 				if (container == null)

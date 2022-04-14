@@ -10,6 +10,7 @@
 @run_SecurityRoles
 Feature: Security Roles
 
+@ignore
 @TestCase:52978
 Scenario: [52978] Log Into Account
 	#Given I go to the WERCSmart Log in

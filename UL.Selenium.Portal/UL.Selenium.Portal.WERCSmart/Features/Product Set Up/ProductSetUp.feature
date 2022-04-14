@@ -22,6 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto31  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
 @TestCase:80089
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -73,6 +74,8 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase80089) for	
 		| Retailer                   |		
 		| No Retailer/No UPC Product |
+
+@ignore
 @TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
@@ -127,6 +130,7 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
+@ignore
 @TestCase:84507
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and force it to completed using Test Case 84108 and save as: TestCase845072
@@ -170,6 +174,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
 
 
+@ignore
 @TestCase:100969
 	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging

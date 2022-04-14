@@ -8,6 +8,7 @@
 Feature: UPCCheckDigit
 
 
+@ignore
 @TestCase:169528
 Scenario: [169528] UPC Check Digit validations - With Recert
 	Given I login into the WERCSmart Portal - Canada has all data account
