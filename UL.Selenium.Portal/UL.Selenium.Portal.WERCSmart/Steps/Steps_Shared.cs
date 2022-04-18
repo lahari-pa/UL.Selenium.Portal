@@ -8869,6 +8869,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InProductAttributeFilterPopupISelectFromSelectBox("...Contains...", "Code");
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox(option, "Code");
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"I click alias subsection option (.*) and confirm data as:")]
