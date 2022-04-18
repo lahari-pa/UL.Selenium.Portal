@@ -1813,11 +1813,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(5);
 			var abbr = new StateAbbreviations();
 			string selectedAbbr = "";
+
 			abbr.Map.TryGetValue(state, out selectedAbbr);
 
 			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
-			if (stateText.Text == selectedAbbr)
+			if (stateText.Text == state)
 			{
 				return true;
 			}
@@ -1830,13 +1831,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool FindStateWithNameInShippingAddressSection(string state)
 		{
 			Delay.Seconds(5);
-			var abbr = new StateAbbreviations();
-			string selectedAbbr = "";
-			abbr.Map.TryGetValue(state, out selectedAbbr);
-
 			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
-			if (stateText.Text == selectedAbbr)
+			if (stateText.Text == state)
 			{
 				return true;
 			}
@@ -2365,7 +2362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public List<string> ActiveSavedBrands()
 		{
-			return this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text: Phrase']"), 2).Select(x => x.Text).ToList();
 		}
 		public string BrandName(int rowIndex)
 		{
@@ -2376,7 +2373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Failure("There was no row showing at position: " + rowIndex);
 				return null;
 			}
-			return row.FindElement(By.XPath(".//span[@data-bind = 'text:Phrase']"), 2).Text;
+			return row.FindElement(By.XPath(".//span[@data-bind = 'text: Phrase']"), 2).Text;
 		}
 		public string IsActiveText(int row, string brandName)
 		{

@@ -22,6 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto22 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
 @TestCase:84109
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -59,6 +60,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Completed
 
+@ignore
 @TestCase:84511
 Scenario: [84511] Electronic Product from Completed status to Recertification
 	#If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.

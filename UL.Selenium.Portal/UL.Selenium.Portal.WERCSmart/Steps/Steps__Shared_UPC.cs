@@ -43,6 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> upcOptions = selNewProduct.GetUPCOptions();
 			if (condition == "see")
 			{
+				//Delay.Seconds(9999);
 				foreach (TableRow row in expected.Rows)
 				{
 					string option = row["Option"];
@@ -205,6 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
+
 		}
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]

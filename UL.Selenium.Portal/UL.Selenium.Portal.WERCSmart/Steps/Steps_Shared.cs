@@ -1380,7 +1380,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(
 				"If Section: Select the best Water Solubility description is visible, I select the first option");
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
-				"Insoluble");
+				"Insoluble in water");
 			Report.StartStep(
 				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection(
@@ -1501,9 +1501,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep(
-				"Which best describes your product, including when FIFRA 25(b) Exempt");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			Report.StartStep("Looking for the Which best describes your product, including when FIFRA 25(b) Exempt and Setting to: Product is not a pesticide and does not make or imply a pesticidal claim if it exists");
+			if (myNewProductClass.SectionExists("Which best describes your product, including when FIFRA 25(b) Exempt"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			}
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
@@ -1956,9 +1958,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
-			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)"))
 			{
-				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 
 			}
@@ -2851,8 +2853,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
-			Report.StartStep("I set the Secondary Physical State option to: Cream");
-			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Cream");
+			Report.StartStep("I set the Secondary Physical State option to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Delay.Seconds(5);
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
@@ -4297,9 +4299,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Liquid");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
-				"Cream");
+				"Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
-				 "Cream");
+				 "Liquid");
 			Report.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Relative Density I enter: " +
 				"1.0");
@@ -11521,9 +11523,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
-			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is not considered a pesticide product"))
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)"))
 			{
-				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not considered a pesticide product");
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 
 			}
@@ -12141,9 +12143,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");
 			Report.StartStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not considered a pesticide product");
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not considered a pesticide product");
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 
 			Report.StartStep(

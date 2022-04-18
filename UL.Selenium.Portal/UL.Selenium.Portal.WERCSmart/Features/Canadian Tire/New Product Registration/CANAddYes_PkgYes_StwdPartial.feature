@@ -16,7 +16,7 @@ Feature: Account Canada Address(Yes) Package types(Yes) Stewardship(Partial)
 
 @TestCase:85762
 Scenario: [85762] Account all Canada data - Partial stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC85762
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -32,7 +32,7 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 
 @TestCase:85763
 Scenario: [85763] Account all Canada data - Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC85763
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -48,7 +48,7 @@ Scenario: [85763] Account all Canada data - Partial stewardship, SOLD = US Only,
 
 @TestCase:85764
 Scenario: [85764] Account all Canada data - Partial stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC85764
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -68,9 +68,10 @@ Scenario: [85764] Account all Canada data - Partial stewardship, SOLD = Canada O
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85764
 
+@ignore
 @TestCase:85765
 Scenario: [85765] Account all Canada data - Partial stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC85765
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -96,7 +97,7 @@ Scenario: [85765] Account all Canada data - Partial stewardship, SOLD = Canada O
 
 @TestCase:85766
 Scenario: [85766] Account all Canada data - Partial stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC85766
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -116,9 +117,10 @@ And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only ava
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85766
 
+@ignore
 @TestCase:85767
 Scenario: [85767] Account has Canada address and packaging, SOLD US & Canada, PL = NO, packaging type is required
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase85767

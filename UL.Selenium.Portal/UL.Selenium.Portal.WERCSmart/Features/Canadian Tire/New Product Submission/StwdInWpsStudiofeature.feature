@@ -22,7 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto25 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-
+@ignore
 @TestCase:85982
 Scenario: [85982] SOLD = Canada Only, PL = No - Stewardship Information in WPS Studio
 	Given I generate a random UPC number and save as: UPC85982
@@ -62,7 +62,7 @@ Scenario: [85982] SOLD = Canada Only, PL = No - Stewardship Information in WPS S
 	And In Power Designer Plus page in My Toolbar tab I click on the product attributes button
 	Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
-
+@ignore
 @TestCase:86008
 Scenario: [86008] Sold = Canada, PL = Yes - Stewardship information in WPS Studio
 	Given I generate a random UPC number and save as: UPC86008
@@ -105,7 +105,7 @@ Scenario: [86008] Sold = Canada, PL = Yes - Stewardship information in WPS Studi
 	Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
 
-
+@ignore
 @TestCase:86017
 Scenario: [86017] Sold = US & Canada, PL = Yes - Stewardship information in WPS Studio
 	Given I generate a random UPC number and save as: UPC86017
@@ -148,7 +148,7 @@ Scenario: [86017] Sold = US & Canada, PL = Yes - Stewardship information in WPS 
 	Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
 
-
+@ignore
 @TestCase:86019
 Scenario: [86019] Sold = US & Canada, PL = No - Stewardship information in WPS Studio
 	Given I generate a random UPC number and save as: UPC86019

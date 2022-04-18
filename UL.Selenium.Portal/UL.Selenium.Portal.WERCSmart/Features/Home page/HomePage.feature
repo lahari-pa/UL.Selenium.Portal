@@ -102,6 +102,7 @@ Scenario: [56149] Click Register Product button from home page - Navigation
 	And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
+@ignore
 @TestCase:56158
 Scenario: [56158] Retail Partners navigation No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -112,6 +113,7 @@ Scenario: [56158] Retail Partners navigation No Products
 	And I should not see the following subheading Most Recent Retailers
 
 #pass - staging 4.10
+@ignore
 @TestCase:56161
 Scenario: [56161] UL Solution Center navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -129,6 +131,7 @@ Scenario: [56161] UL Solution Center navigation
 		| Navigator                |
 
 #pass - staging 4.10
+@ignore
 @TestCase:56163
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -257,6 +260,7 @@ Scenario: [65886] My Products - Pagination
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
+@ignore
 @TestCase:71188
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -407,6 +411,7 @@ Scenario: [85275] Select All - Popup closes
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
+@ignore
 @TestCase:71230
 Scenario: [71230] Archived Retailers - My Products View
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto33 and save as: ProductSetup71230
@@ -489,6 +494,7 @@ Scenario: [55796] Navigate to Home Page
 
 
 
+@ignore
 @TestCase:158930
 Scenario: [158930] Home Page Search - Internal Information
 
@@ -539,6 +545,7 @@ Given I click More Filters in the products grid
 
 
 
+@ignore
 @TestCase:156787
 Scenario: [156787] Home Page Search - Internal SKU field
 

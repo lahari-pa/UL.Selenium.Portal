@@ -3,6 +3,7 @@
 @run_SHAManagerSupplierRecords
 Feature: SHA Manager Supplier Records
 
+@ignore
 @TestCase:127895
 Scenario: [127895] SHA Manager: Supplier Records: Verification of Data Tier Consent
 

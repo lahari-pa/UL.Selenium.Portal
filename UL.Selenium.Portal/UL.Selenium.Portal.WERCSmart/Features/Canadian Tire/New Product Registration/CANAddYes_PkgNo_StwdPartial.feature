@@ -18,7 +18,7 @@ Feature: Account Canada Address(Yes) Package types(No) Stewardship(Partial)
 
 @TestCase:85784
 Scenario: [85784] Account all Canada data - Partial stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85784
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -35,7 +35,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85785
 Scenario: [85785] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85785
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -52,7 +52,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85786
 Scenario: [85786] Account Canada address and Partial stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85786
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -71,10 +71,10 @@ And I click continue
 And I Confirm This is a required field. error message is shown below the Package Type field
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85786
 
-
+@ignore
 @TestCase:85787
 Scenario: [85787] Account Canada address and - Partial stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85787
@@ -97,7 +97,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 @TestCase:85788
 Scenario: [85788] Account all Canada address and Partial stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85788
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -116,10 +116,10 @@ And I click continue
 And I Confirm This is a required field. error message is shown below the Package Type field
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85788
 
-
+@ignore
 @TestCase:85789
 Scenario: [85789] Account Canada address and Partial stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85789

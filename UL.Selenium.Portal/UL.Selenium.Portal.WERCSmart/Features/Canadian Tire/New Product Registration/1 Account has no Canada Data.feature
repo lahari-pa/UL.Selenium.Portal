@@ -15,11 +15,11 @@
 
 Feature: Account has no Canada Data
 
-
+@ignore
 @TestCase:85312
 Scenario: [85312] No Canada data - SOLD = US and Canada, PL = No, Packaging Type is required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85312
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -37,7 +37,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85726
 Scenario: [85726] No Canada data - SOLD = US and Canada, PL = Yes, Packaging Type is required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85726
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -60,11 +60,11 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 #Then Package Type should be showing the error messages on upc screen: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85726
 
-
+@ignore
 @TestCase:85727
 Scenario: [85727] No Canada data - SOLD = Canada only, PL = No, Packaging Type is required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85727
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -91,7 +91,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85728
 Scenario: [85728] No Canada data - SOLD = Canada only, PL = YES, Packaging Type is required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85728
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -108,7 +108,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85733
 Scenario: [85733] No Canada data - SOLD = US Only, PL = No, Packaging Type is NOT required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85733
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -126,7 +126,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:85734
 Scenario: [85734] No Canada data - SOLD = US Only, PL = YES, Packaging Type is NOT required
 
-Given I log in with the account saved in TReVor as: NoCanadaData
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85734
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution

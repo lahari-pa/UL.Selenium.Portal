@@ -39,6 +39,7 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
+@ignore
 @TestCase:63705
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -114,6 +115,7 @@ Scenario: [63705] New Product - BCP
 	Given I navigate to the home page
 	Then I delete the product: TestCase63705
 
+@ignore
 @TestCase:63724
 Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
@@ -177,6 +179,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
+@ignore
 @TestCase:65441
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -249,6 +252,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I navigate to the home page
 	Then I delete the product: TestCase65441
 
+@ignore
 @TestCase:65392
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
@@ -500,6 +504,7 @@ Scenario: [105352] Product Comments screen Max input length
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
+@ignore
 @TestCase:122123
 Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Given I generate a random UPC number and save as: UPC79428
@@ -629,6 +634,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
 	When I click continue
 
+@ignore
 @TestCase:128754
 Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
 
@@ -701,7 +707,7 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-
+@ignore
 @TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
@@ -733,8 +739,8 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
@@ -742,7 +748,7 @@ Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
-
+@ignore
 @TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
@@ -761,15 +767,15 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
 Given I delete the excel file saved as Products in Scope Report for BBB
 
 
-
+@ignore
 @TestCase:147446
 Scenario: [147446] WM - Authoring option ONLY available
 
@@ -794,6 +800,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ignore
 @TestCase:147447
 Scenario: [147447] Sears - Authoring option ONLY available
 

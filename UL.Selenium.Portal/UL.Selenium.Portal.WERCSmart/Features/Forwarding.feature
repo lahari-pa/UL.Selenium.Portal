@@ -25,6 +25,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
 @TestCase:86003
 Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not required/shown
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto11 and save as: ProductSetup86003
@@ -46,6 +47,7 @@ Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not requir
 	And I click continue on the Forward Product Registration page
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
+@ignore
 @TestCase:115393
 Scenario: [115393] Forward Product - Target - Does not require DPCI
 	Then I create a Chalk product for Amazon and Force it into to Completed Using Sha Account: SHAQAAuto11

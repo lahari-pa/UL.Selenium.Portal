@@ -36,6 +36,7 @@ Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify P
 	Then SHA Search for Archived UPC. This uses environment variable for know archived product
 
 
+@ignore
 @TestCase:160937
 Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Primary UPC Field Test
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account	
@@ -93,6 +94,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
 
+@ignore
 @TestCase:160940
 	Scenario: [160940] SHA Manager - Search - Product Search - SEARCH PATTERN - CASE UPC Field Test
 

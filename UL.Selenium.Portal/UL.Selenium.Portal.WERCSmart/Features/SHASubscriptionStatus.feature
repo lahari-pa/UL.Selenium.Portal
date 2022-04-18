@@ -3,6 +3,7 @@
 @run_SHASubscriptionStatus
 Feature: SHASubscriptionStatus
 
+@ignore
 @TestCase:142233
 Scenario: [142233] Subscription Status - Cancelled
 	Given I Save the email for the TReVor: CancelledSubscriptionAccount Test user as: CancelledSubscriptionAccountEmail
@@ -16,6 +17,7 @@ Scenario: [142233] Subscription Status - Cancelled
 	Given I ensure that I see the status Cancelled under the SubscriptionStatus column
 	Given I ensure that the Subscription tab has red font
 
+@ignore
 @TestCase:142277
 Scenario: [142277] Subscription Status - Not Subscribed
 	Given I Save the email for the TReVor: VisualAccount Test user as: VisualAccountEmail
@@ -29,6 +31,7 @@ Scenario: [142277] Subscription Status - Not Subscribed
 	Given I ensure that I see the status Not Subscribed under the SubscriptionStatus column
 	Given I ensure that the Subscription tab has yellow font
 
+@ignore
 @TestCase:142278
 Scenario: [142278] Subscription Status - Past Due
 	Given I Save the email for the TReVor: PastDueSubscriptionAccount Test user as: PastDueSubscriptionAccountEmail
@@ -43,6 +46,7 @@ Scenario: [142278] Subscription Status - Past Due
 	Given I ensure that the Subscription tab has yellow background color
 	Given I ensure that the Subscription tab has black font
 
+@ignore
 @TestCase:142282
 Scenario: [142282] Subscription Status - 3rd Party
 	Given I Save the email for the TReVor: 3rdPartySubscriptionAccount Test user as: 3rdPartySubscriptionAccountEmail
@@ -56,6 +60,7 @@ Scenario: [142282] Subscription Status - 3rd Party
 	Given I ensure that I see the status 3rdParty under the SubscriptionStatus column
 	Given I ensure that the Subscription tab has blue font
 
+@ignore
 @TestCase:142283
 Scenario: [142283] Subscription Status - Active
 	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail

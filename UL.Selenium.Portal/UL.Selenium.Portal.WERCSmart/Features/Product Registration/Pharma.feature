@@ -15,7 +15,7 @@ Feature: Pharma
 @TestCase:128085
 Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128085
 Given I click continue
@@ -60,17 +60,18 @@ And I call Shared Step 60567 (Upload Product Label only) for section: Upload Ful
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
+#When I click continue
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+#And I navigate to the home page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128085
 
 
 @TestCase:127870
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127870
 Given I click continue
@@ -112,7 +113,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:127970
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127970
 Given I click continue
@@ -121,7 +122,7 @@ Then I set 'Product Name' to: prescription pharmaceutical, solid
 Then I set 'Type of Product' to: prescription pharmaceutical, solid
 Then I click continue
 Given I enter the NDC number: 10866-0885-2
-Then I save the product information as: TestCase127870
+Then I save the product information as: TestCase127970
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
@@ -149,11 +150,12 @@ And I call Shared Step 60567 (Upload Product Label only) for section: Upload Ful
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
+#When I click continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127970
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+#And I navigate to the home page
 
 
 
@@ -165,7 +167,7 @@ And I navigate to the home page
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
@@ -221,7 +223,7 @@ And I navigate to the home page
 
 @TestCase:127847
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
@@ -263,7 +265,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:127854
 Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Containing Liquid
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127854
 Given I click continue
@@ -277,7 +279,7 @@ Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
-And I set the Secondary Physical State to be: Solid containing liquid
+And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Dispersible
 Then I click continue
@@ -306,7 +308,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:127791
 Scenario: [127791] Pharma - Retailer Default
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127791
 Given I click continue
@@ -350,7 +352,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:128671
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue

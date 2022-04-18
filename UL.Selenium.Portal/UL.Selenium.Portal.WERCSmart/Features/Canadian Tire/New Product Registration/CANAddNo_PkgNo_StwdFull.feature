@@ -18,7 +18,7 @@ Feature: Account Canada Address(No), Package Type (No), Stewardship (FULL)
 
 @TestCase:85847
 Scenario: [85847] Account Full Stewardship only, SOLD = US Only, PL = YES, Packaging type IS NOT required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85847
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -35,7 +35,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85848
 Scenario: [85848] Account Full Stewardship only,  SOLD = US Only, PL = NO, Packaging type IS NOT required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85848
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -52,7 +52,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85849
 Scenario: [85849] Account Full Stewardship only, SOLD = Canada Only, PL = YES, Packaging type IS required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85849
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -74,7 +74,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85850
 Scenario: [85850] Account Full Stewardship only, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85850
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -100,7 +100,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:85851
 Scenario: [85851] Account No Canada address - Package and stewardship, SOLD = US and Canada, PL = No, Packaging is NOT required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85851
@@ -126,7 +126,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 @TestCase:85852
 Scenario: [85852] Account Full Stewardship only, SOLD US and Canada, PL = Yes, Packaging is required
-Given I log in with the account saved in TReVor as: fullstwrdshiponly
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85852
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
