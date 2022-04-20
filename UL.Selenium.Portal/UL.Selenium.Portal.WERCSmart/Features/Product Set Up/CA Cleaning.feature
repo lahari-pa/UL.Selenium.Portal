@@ -55,7 +55,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 #@ignore
 @TestCase:139534
-Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisMatch
+Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisMatch 
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
