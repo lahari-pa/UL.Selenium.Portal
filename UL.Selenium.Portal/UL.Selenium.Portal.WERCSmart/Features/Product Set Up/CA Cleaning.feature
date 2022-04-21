@@ -117,7 +117,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139385
 
 
-@ignore
+
 @TestCase:139387
 Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 
