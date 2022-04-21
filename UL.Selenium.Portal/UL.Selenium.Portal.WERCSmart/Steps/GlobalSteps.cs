@@ -989,7 +989,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					List<Mailosaur.Models.Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
-			
+
 					if (title.Contains(productSavedAs) || title.Contains("<" + productSavedAs + ">"))
 					{
 						if (!Context.Contains(productSavedAs))
@@ -1008,10 +1008,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							title = title.Replace(productSavedAs, id);
 						}
 					}
-
-
+					
 					Mailosaur.Models.Message matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Email.ToLower() == emailFrom.ToLower() && x.Subject == title);
-
+				
 					if (shouldOrNot == "should")
 					{
 						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
