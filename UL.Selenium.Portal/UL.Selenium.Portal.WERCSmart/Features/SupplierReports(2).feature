@@ -18,6 +18,7 @@
 @run_SupplierReports2
 Feature: Supplier Reports 2
 
+@ignore
 @TestCase:140261
 Scenario: [140261] California Proposition 65 - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -37,6 +38,7 @@ And I confirm the csv file saved as California Proposition 65 - Registrations Pr
 Given I click Close in the Report Download popup
 Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
 
+@ignore
 @TestCase:140260
 Scenario: [140260] Battery-Containing Products - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -57,6 +59,7 @@ And I confirm the csv file saved as Battery-Containing Products can be opened an
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as BatteryContaining Products
 
+@ignore
 @TestCase:140273
 Scenario: [140273] Eligible to Obsolete - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -78,6 +81,7 @@ And I confirm the csv file saved as Eligible to Obsolete can be opened and conta
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Eligible to Obsolete
 
+@ignore
 @TestCase:140280
 Scenario: [140280] Pesticide Registrations - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -98,6 +102,7 @@ And I confirm the csv file saved as Pesticide Registrations can be opened and co
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Pesticide Registrations
 
+@ignore
 @TestCase:140289
 Scenario: [140289] Registration Updates Not Submitted - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -118,6 +123,7 @@ And I confirm the csv file saved as Registrations Revised - Not Yet Submitted ca
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Registrations Revised - Not Yet Submitted
 
+@ignore
 @TestCase:140290
 Scenario: [140290] Subscription Product Types - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -138,6 +144,7 @@ And I confirm the csv file saved as Subscription Product Types can be opened and
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Subscription Product Types
 
+@ignore
 @TestCase:140291
 Scenario: [140291] UPC Duplication - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -158,6 +165,7 @@ And I confirm the csv file saved as UPCs Duplicated within Account can be opened
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as UPCs Duplicated within Account
 
+@ignore
 @TestCase:140292
 Scenario: [140292] Volatile Organic Compounds - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -178,6 +186,7 @@ And I confirm the csv file saved as Volatile Organic Compounds can be opened and
 Given I click Close in the Report Download popup
 Given I delete the excel file saved as Volatile Organic Compounds
 
+@ignore
 @TestCase:140293
 Scenario: [140293] Waste Classification Summary - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

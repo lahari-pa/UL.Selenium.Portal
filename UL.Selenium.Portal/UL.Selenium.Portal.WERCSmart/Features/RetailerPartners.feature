@@ -9,6 +9,7 @@
 @run_RetailerPartners
 Feature: Retailer Partners
 
+@ignore
 @TestCase:56881
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 	# Note: We will have a separate test case for new suppliers views of this page
@@ -155,6 +156,7 @@ Scenario: [56982] Retailer & You - validation of information shown
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
 
+@ignore
 @TestCase:56911
 Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -286,6 +288,7 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID\Supplier ID validation - retailer specific
 # NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
 # ******* Blocked because cannot run database queries on staging, also the query appears to be wrong or the database string is.
+@ignore
 @TestCase:57261
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -393,6 +396,7 @@ Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data 
 	And The pie chart should be showing on the retailer details page
 	And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
+@ignore
 @TestCase:56928
 Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -410,6 +414,7 @@ Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	And I close the Data Tier Details popup
 
 
+@ignore
 @TestCase:56930
 Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -425,6 +430,8 @@ Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Suppo
 	Then I delete the file saved as savedas56930PDF
 	And I close the Data Tier Details popup
 
+
+@ignore
 @TestCase:56932
 Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -440,6 +447,7 @@ Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (
 	Then I delete the file saved as savedas56932PDF
 	And I close the Data Tier Details popup
 
+@ignore
 @TestCase:56934
 Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

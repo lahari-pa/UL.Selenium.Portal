@@ -32,6 +32,7 @@
 
 Feature: UPCTransporationRules
 
+@ignore
 @TestCase:122304
 Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
@@ -184,6 +185,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S3
 
+@ignore
 @TestCase:122301
 	Scenario:	[122301] UPC Transportation Error - Mode 6 - Scenario 28
 
@@ -325,6 +327,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S4
 
+@ignore
 @TestCase:122295
 	Scenario: [122295] UPC Transportation Error - Mode 4x5 - Scenario 15
 
@@ -362,7 +365,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S15
 
-
+@ignore
 @TestCase:122296
 	Scenario: [122296] UPC Transportation Error - Mode 4x5 - Scenario 20
 
@@ -534,7 +537,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
-
+@ignore
 @TestCase:122288
 	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
@@ -799,7 +802,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S2
 
-
+@ignore
 @TestCase:122289
 	Scenario:  [122289] UPC Transportation Error - Mode 2/3 - 16
 		#If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
@@ -887,6 +890,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
+@ignore
 @TestCase:122291
 	Scenario:  [122291] UPC Transportation Error - Mode 2/3 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
@@ -1016,7 +1020,7 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S5
 
-
+@ignore
 @TestCase:122292
 Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		#If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
@@ -1081,7 +1085,7 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S21
 
-
+@ignore
 @TestCase:122293
 Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”

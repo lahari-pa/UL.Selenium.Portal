@@ -18,7 +18,7 @@
 @run_SupplierReports3
 Feature: Supplier Reports 3
 
-
+@ignore
 @TestCase:146145
 Scenario: [146145] UPCs to Retailer via Item Sync - Excel File 
 
@@ -49,6 +49,7 @@ Given I confirm that an excel file is produced called UPCs to Retailer via Item 
 And I confirm the Supplier Reports excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 
+@ignore
 @TestCase:146172
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
 
@@ -85,6 +86,7 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the do
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
+@ignore
 @TestCase:146146
 Scenario: [146146] UPCs to Retailer via Item Sync - CSV File
 
@@ -118,6 +120,7 @@ And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened
 Given I delete the file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 
+@ignore
 @TestCase:146164
 Scenario: [146164] UPCs to Retailer via Item Sync - CSV Zip File
 
@@ -188,6 +191,7 @@ Then I Delete the file with name: UPC and Retailer (All).zip from the downloads 
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
+@ignore
 @TestCase:144263
 Scenario: [144263] UPC Errors for The Home Depot- CSV Zip File 
 
@@ -221,7 +225,7 @@ Then I Delete the file with name: UPC Errors for The Home Depot.csv from the dow
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
-
+@ignore
 @TestCase:144240
 Scenario: [144240] Kit Registrations - CSV Zip File
 
@@ -254,7 +258,7 @@ Then I Delete the file with name: Kit Registrations.zip from the downloads folde
 Then I Delete the file with name: Kit Registrations.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-
+@ignore
 @TestCase:144259
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
@@ -289,7 +293,7 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 
 
 
-
+@ignore
 @TestCase:144262
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 

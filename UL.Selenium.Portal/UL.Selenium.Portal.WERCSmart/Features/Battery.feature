@@ -41,7 +41,7 @@ Then I should see radio option: need an OSHA-Compliant Safety Data Sheet (SDS) d
 Then I should see radio option: need a WHMIS Compliant SDS
 
 
-
+@ignore
 @TestCase:142371
 Scenario: [142371] Battery - Data Consents
 

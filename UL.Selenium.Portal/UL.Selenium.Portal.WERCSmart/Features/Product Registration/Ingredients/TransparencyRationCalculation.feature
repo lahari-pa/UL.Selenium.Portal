@@ -21,6 +21,7 @@ Background:
 #Outdated test case (now showing a %)
 #May need reworking for change from "x/y" to "%"
 #Philip - Working
+@ignore
 @TestCase:80854
 Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd party product included in formulation
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.

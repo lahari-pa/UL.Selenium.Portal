@@ -20,6 +20,7 @@
 
 Feature: Subscription
 
+@ignore
 @TestCase:63297
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I go to the WERCSmart Log in
@@ -295,7 +296,7 @@ Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
 
-
+@ignore
 @TestCase:59245
 Scenario: [59245] Add subscription to a new supplier from My account
 Given I go to the WERCSmart Log in
@@ -443,6 +444,7 @@ Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC59245User
 
+@ignore
 @TestCase:67822
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
 #This test requires a new master account in  wercsmart without any subscription
@@ -580,7 +582,7 @@ Then I should see Estimated Annual Cost of: $0.00
 Then I should see Estimated Annual Cost per Product of: $0.00
 Then I should see Proceed button disabled
 
-
+@ignore
 @TestCase:79577
 Scenario: [79577] PayPal flow through My Account
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -606,7 +608,7 @@ Then In the Purchase Summary screen I confirm the folling statement is shown: Su
 Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
 
-
+@ignore
 @TestCase:105063
 Scenario: [105063] Upgrade Subscription Message
 Given I go to the WERCSmart Log in
@@ -691,6 +693,7 @@ Then In the Thank You screen I check the Header is correct
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
 
+@ignore
 @TestCase:62727
 Scenario: [62727] Upgrade Subscription through My Account 
 Given I go to the WERCSmart Log in
@@ -785,6 +788,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC62727User
 
 
+@ignore
 @TestCase:63224
 Scenario: [63224] Upgrade subscription through data entry 
 Given I go to the WERCSmart Log in
@@ -880,6 +884,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63224User
 
 
+@ignore
 @TestCase:73388
 Scenario: [73388] Grace period through new account 
 Given I go to the WERCSmart Log in
@@ -930,6 +935,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
+@ignore
 @TestCase:73394
 Scenario: [73394] Grace period through My Account 
 Given I go to the WERCSmart Log in
@@ -989,6 +995,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
+@ignore
 @TestCase:94466
 Scenario: [94466] Subscription - Retailer count in messages
 Given I go to the WERCSmart Log in
@@ -1040,6 +1047,7 @@ Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
+@ignore
 @TestCase:119192
 Scenario: [119192] Subscription - Articles/Enhanced Articles/Formulated Products Drop Down Menus - Show/Select Options
 

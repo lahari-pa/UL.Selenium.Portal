@@ -14,6 +14,7 @@
 
 Feature: Retailer Selection
 
+@ignore
 @TestCase:78933
 Scenario: [78933] Select Retailers - Show List View
 
@@ -65,6 +66,7 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 
 
+@ignore
 @TestCase:78936
 Scenario: [78936] Select Retailers - Show Logo Tile View
 
@@ -147,6 +149,7 @@ Then the selected retailers on the Retailer page should match the retailer list 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
 
+@ignore
 @TestCase:85276
 Scenario: [85276] Select Retailers - Errors highlighted
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
