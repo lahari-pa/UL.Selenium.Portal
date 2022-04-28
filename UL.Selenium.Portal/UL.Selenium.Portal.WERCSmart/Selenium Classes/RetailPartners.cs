@@ -725,6 +725,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath($@".//div[@role='tabpanel'][h3[contains(text(),""{option}"")]]/a"), 2).TryClick();
 		}
+
+		public bool ActiveTabLinkExists(string linkText)
+		{
+			Report.Info($"Attemoting to confirm '{linkText}' link exists.");
+			return this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'tab-pane')][contains(@class,'active')]//a[text()='{linkText}']"), 1) != null;
+		}
+
+		public bool ActiveTabLinkClick(string linkText)
+		{
+			Report.Info($"Attemting to click '{linkText}' link.");
+			return this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'tab-pane')][contains(@class,'active')]//a[text()='{linkText}']"), 1).TryClick();
+		}
 	}
 
 	public class DeleteSupplierModal : SeleniumBaseObject

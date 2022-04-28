@@ -17,7 +17,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using NPOI.SS.Formula.Functions;
 using System.IO.Compression;
-
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1828,6 +1828,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickDownloadPdf(string option)
 		{
 			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
+		}
+
+		[StepDefinition(@"In the What are the Data Usage Tiers modal, I click the (.*) link")]
+		public void InWhatAreDataUsageTiersModalIClickLink(string linkText)
+		{
+			var dtd = new DataTierDetails();
+			if(Report.IsTrue(dtd.ActiveTabLinkExists(linkText),$"Failure, '{linkText}' link does not exist.",$"Success, '{linkText}' link exists."))
+			{
+				Report.IsTrue(dtd.ActiveTabLinkClick(linkText), $"Failure, failed to click '{linkText}' link.", $"Success, clicked '{linkText}' link.");
+			}
+		}
+
+		[StepDefinition(@"I confirm Terms Use page loads in new tab")]
+		public void ConfirmTermsUsePageLoadsInNewWindow()
+		{
+			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"),$"Failure, Terms Use tab does not exist.",$"Success, Terms Use tab exists."))
+			{
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.SwitchToTabWithURL($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"),"Failure, failied to switch to Terms Use tab.","Success, switched to Terms Use tab.");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath(".//h2[text()='WERCSmart® Terms of Use (effective October 1, 2020)']"), 1) != null,"Failure, Terms Use page fialed to load.","Success, Terms Use page loaded.");
+			}
+		}
+
+		[StepDefinition(@"I close the Terms Use tab")]
+		public void CloseTermsUseTab()
+		{
+			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"), $"Failure, Terms Use tab does not exist.", $"Success, Terms Use tab exists."))
+			{
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"), $"Failure, failed to close Terms Use tab.", $"Success, closed Terms Use tab.");
+			}
+		}
+
+		[StepDefinition(@"On the Terms Use page, I click on the '(.*)' link")]
+		public void OnTermsUsePageIClickOnLink(string linkLabel)
+		{
+			if(Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetActiveTabURL() == $"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse","Failure, not on Terms Use tab.","Success, on Terms Use tab."))
+			{
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath($"//a[starts-with(text(),'{linkLabel}')]"), 1) != null, $"Failure, '{linkLabel}' link does not exist.", $"Success, '{linkLabel}' link exists.");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath($"//a[starts-with(text(),'{linkLabel}')]"), 1).TryClick(), $"Failure, faild to click '{linkLabel}' link.", $"Success, clicked '{linkLabel}' link.");
+			}
 		}
 
 		[StepDefinition(@"The success message in the Save Changes popup dialog should contain the following:")]
