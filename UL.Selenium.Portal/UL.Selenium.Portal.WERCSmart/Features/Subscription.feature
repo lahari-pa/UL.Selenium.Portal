@@ -444,7 +444,7 @@ Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC59245User
 
-@ignore
+#@ignore
 @TestCase:67822
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
 #This test requires a new master account in  wercsmart without any subscription
@@ -482,32 +482,32 @@ Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
 Then In the Subscription Enrollment screen I confirm that I see the following subheadings:
-| Subheading                                                          |
-| 1 Select the range of your products, articles and enhanced articles |
-| 2 Select the feature plan                                           |
-| 3 Select the Support Services Plan                                  |
+| Subheading                                                                                         |
+| 1 Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products |
+| 2 Select a subscription plan                                                                       |
+| 3 Select an Agent Support Service Plan [optional]                                                  |
 
 Then In the Subscription Enrollment screen I confirm that you see Articles dropdown
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following heading: What Are Articles?
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following statement: According to OSHA regulation 1910.1200, an article is “a manufactured item other than a fluid or particle: (i) which is formed to a specific shape or design during manufacture; (ii) which has end-use function(s) dependent in whole or in part upon its shape or design during end-use; and (iii) which under normal conditions of use does not release more than very small quantities, e.g., minute or trace amounts of a hazardous chemical (as determined under paragraph (d) of this section), and does not pose a physical hazard or health risk to employees.”
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following heading: What Are Articles?
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following statement: According to OSHA regulation 1910.1200, an article is “a manufactured item other than a fluid or particle: (i) which is formed to a specific shape or design during manufacture; (ii) which has end-use function(s) dependent in whole or in part upon its shape or design during end-use; and (iii) which under normal conditions of use does not release more than very small quantities, e.g., minute or trace amounts of a hazardous chemical (as determined under paragraph (d) of this section), and does not pose a physical hazard or health risk to employees.”
 Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Choose...
 Then In the Subscription Enrollment screen I confirm that you see Enhanced Articles dropdown
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following heading: What Are Enhanced Articles?
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following statement: Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration.
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following heading: What Are Enhanced Articles?
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following statement: Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration.
 Then In the Subscription Enrollment screen I confirm that the option showing in the Enhanced Articles dropdown is: Choose...
 Then In the Subscription Enrollment screen I confirm that you see Formulated Products dropdown
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following heading: What Are Formulated Products?
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following statement: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following heading: What Are Formulated Products?
+#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following statement: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
 Then In the Subscription Enrollment screen I confirm that the option showing in the Formulated Products dropdown is: Choose...
 Then In the Subscription Enrollment screen I confirm that I see the following Plans
-| Plan Type | Plan Name    | Plan Subtext                                     | Best Value | Selected |
-| Feature   | Premium      | STANDARD + UNLIMITED FEATURES                    | false      | false    |
-| Feature   | Standard     | LIMITED PLUS + SUPPORT SERVICES                  | true       | true     |
-| Feature   | Limited Plus | LIMITED + EXTRA FEATURES                         | false      | false    |
-| Feature   | Limited      | BASIC FEATURES                                   | false      | false    |
-| Support   | Gold         | SILVER + ADVANCED REPORTING AND LIAISON SERVICES | false      | false    |
-| Support   | Silver       | BRONZE + WERCSMART DATA ENTRY FEATURES           | false      | false    |
-| Support   | Bronze       | DIRECT PHONE + EMAIL SUPPORT                     | false      | true     |
+| Plan Type | Plan Name            | Plan Subtext                                     | Best Value | Selected |
+| Feature   | Premium              | STANDARD + UNLIMITED FEATURES                    | false      | false    |
+| Feature   | Standard             | LIMITED PLUS + SUPPORT SERVICES                  | true       | true     |
+#| Feature   | Limited Plus         | LIMITED + EXTRA FEATURES                         | false      | false    |
+| Feature   | Limited              | BASIC FEATURES                                   | false      | false    |
+| Support   | Gold Agent Support   | SILVER + ADVANCED REPORTING AND LIAISON SERVICES | false      | false    |
+| Support   | Silver Agent Support | BRONZE + WERCSMART DATA ENTRY FEATURES           | false      | false    |
+| Support   | Bronze Level Support | DIRECT PHONE + EMAIL SUPPORT                     | false      | true     |
 
 Then In the Subscription Enrollment screen I confirm that under the Premium Plan I see the following items and further details
 | Item                                             | Further details                                                                                                                                                                                                                                                                                                                                                                                               |
