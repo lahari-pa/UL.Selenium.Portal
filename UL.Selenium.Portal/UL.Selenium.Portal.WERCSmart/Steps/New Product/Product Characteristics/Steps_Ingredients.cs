@@ -592,6 +592,118 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new Ingredients().IngredientGernicWarningPopoverIsActive(ingredient, "Sutainability "), "The Sustainability Hint popover was not open!", "The Sustainability Hint popover was open as expected");
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		[StepDefinition(@"I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
+		public void ConfirmScreenabilityAlertMatchesText(string savedAs, string text)
+		{
+			Report.StartStep($"I confirm that a Screenability Alert button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
+			var newProductIngredients = new Ingredients();
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			string actualText = newProductIngredients.IngredientGenericWarningPopoverTextScreenabilityAlert(ingredient, "Screenability Alert");
+			if (actualText == null)
+			{
+				Report.Failure("No Screenability Alert message was found for ingredient saved as: " + savedAs + "!");
+				return;
+			}
+			Report.IsTrue(actualText.Replace(" ", "") == text.Replace(" ", ""),
+				$"The Screenability Alert hover over message did not match the expected text! Expected: '{text}' but found: '{actualText}'",
+				"TheScreenability Alert hover over message matched the expected text: " + text);
+		}
+
+		[StepDefinition(@"I confirm that the 'Screenability Alert' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
+		public void ConfirmScreenabilityAlertIsDisplayed(string expectDisplayed, string savedAs)
+		{
+			var newProductIngredients = new Ingredients();
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			string actualText = newProductIngredients.IngredientGenericWarningPopoverTextScreenabilityAlert(ingredient, "Screenability Alert");
+			if (expectDisplayed == "is displayed")
+			{
+				Report.IsTrue(actualText != null, "");
+				return;
+			}
+			if (expectDisplayed == "is not displayed")
+			{
+				Report.IsTrue(actualText == null, "");
+				return;
+			}
+			Report.Failure("Invalid step variable was provided! Must be either 'is displayed' or 'is not displayed'");
+		}
+
+		[StepDefinition(@"I click on the Screenability Alert button under ingredient saved as: (.*)")]
+		public void ClickOnScreenabilityAlertButton(string savedAs)
+		{
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			Report.IsTrue(new Ingredients().ClickIngredientGenericWarningButtonScreenabilityAlert(ingredient, "Screenability Alert"),
+				"Failed to click the Screenability Alert button for ingredient saved as: " + savedAs, "Successfully clicked the Screenability Alert button for the ingredient saved as: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm a 'Screenability Alert' popover element is open under ingredient saved as: (.*)")]
+		public void ConfirmScreenabilityAlertPopoverIsActive(string savedAs)
+		{
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			Report.IsTrue(new Ingredients().IngredientGernicWarningPopoverIsActiveScreenabilityAlert(ingredient, "Sutainability Alert"), "The Screenability Alert popover was not open!", "The Screenability Alert popover was open as expected");
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		[StepDefinition(@"I confirm that you cannot add a new component to the formulation")]
 		public void ThenIConfirmThatYouCannotAddANewComponentToTheFormulation()
 		{
