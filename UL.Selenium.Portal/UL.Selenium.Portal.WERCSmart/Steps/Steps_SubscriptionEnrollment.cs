@@ -100,8 +100,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
 				Report.Info("Checking on plan: " + thisRow["Plan Name"]);
+				/*
 				Plan MatchingPlan =
 					allPlans.FirstOrDefault(x => x.Plan_Type == thisRow["Plan Type"] && x.Plan_Name == thisRow["Plan Name"] && x.Plan_Sub == thisRow["Plan Subtext"] && x.Best_Value == (thisRow["Best Value"].ToLower() == "true") && x.Selected == (thisRow["Selected"].ToLower() == "true"));
+				*/
+				Plan MatchingPlan =
+					allPlans.FirstOrDefault(x => x.Plan_Type.Trim() == thisRow["Plan Type"].Trim() && x.Plan_Name.Trim() == thisRow["Plan Name"].Trim()  && x.Best_Value == (thisRow["Best Value"].ToLower().Trim() == "true") && x.Selected == (thisRow["Selected"].ToLower().Trim() == "true"));
 				Report.IsTrue(MatchingPlan != null, "No matching item has been found for plan name: " + thisRow["Plan Name"],
 					"Plan: " + thisRow["Plan Name"] + " has matched as expected.");
 			}
