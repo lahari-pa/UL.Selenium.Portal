@@ -629,6 +629,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("No Screenability Alert message was found for ingredient saved as: " + savedAs + "!");
 				return;
 			}
+
 			Report.IsTrue(actualText.Replace(" ", "") == text.Replace(" ", ""),
 				$"The Screenability Alert hover over message did not match the expected text! Expected: '{text}' but found: '{actualText}'",
 				"TheScreenability Alert hover over message matched the expected text: " + text);
