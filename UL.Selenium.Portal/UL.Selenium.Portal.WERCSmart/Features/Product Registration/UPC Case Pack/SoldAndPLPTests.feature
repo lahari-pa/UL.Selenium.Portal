@@ -16,7 +16,7 @@
 @MyAccount
 @PackagingTypes
 @Brands
-@MyIngredients
+@MyIngredientsBackground:
 @UPC
 @SHA
 @ForwardProductRegistration
