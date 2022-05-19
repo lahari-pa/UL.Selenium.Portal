@@ -108,7 +108,7 @@ And In SHA Manager I click on bottom menu item: Search
 And In SHA Manager ProductSearch page I run search:
 | SearchTerm | SearchValue       |
 | Status     | Submitted         |
-| User       | AdminEmailAddress |
+| User       | last-frozen.kxxyxunf@mailosaur.io |
 Given In SHA Manager I select the first product
 And In SHA Manager I click on bottom menu item: Reject Submission
 And In the Reject Submission dialog I Select Subject: Volatile Organic Compound (VOC) Issue within Registration
