@@ -16,6 +16,7 @@
 @MyAccount
 @SubUpgrade
 @ProductSetUp
+@SubEnrollmentNew
 @run_Subscription
 
 Feature: Subscription
@@ -481,106 +482,114 @@ Then the WERCSmart homepage should load
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
-Then In the Subscription Enrollment screen I confirm that I see the following subheadings:
-| Subheading                                                                                         |
-| 1 Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products |
-| 2 Select a subscription plan                                                                       |
-| 3 Select an Agent Support Service Plan [optional]                                                  |
-
-Then In the Subscription Enrollment screen I confirm that you see Articles dropdown
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following heading: What Are Articles?
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Articles you see following statement: According to OSHA regulation 1910.1200, an article is “a manufactured item other than a fluid or particle: (i) which is formed to a specific shape or design during manufacture; (ii) which has end-use function(s) dependent in whole or in part upon its shape or design during end-use; and (iii) which under normal conditions of use does not release more than very small quantities, e.g., minute or trace amounts of a hazardous chemical (as determined under paragraph (d) of this section), and does not pose a physical hazard or health risk to employees.”
-Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Choose...
-Then In the Subscription Enrollment screen I confirm that you see Enhanced Articles dropdown
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following heading: What Are Enhanced Articles?
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following statement: Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration.
-Then In the Subscription Enrollment screen I confirm that the option showing in the Enhanced Articles dropdown is: Choose...
-Then In the Subscription Enrollment screen I confirm that you see Formulated Products dropdown
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following heading: What Are Formulated Products?
-#Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following statement: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
-Then In the Subscription Enrollment screen I confirm that the option showing in the Formulated Products dropdown is: Choose...
-Then In the Subscription Enrollment screen I confirm that I see the following Plans
-| Plan Type | Plan Name            | Plan Subtext                                     | Best Value | Selected |
-| Feature   | Premium              | STANDARD + UNLIMITED FEATURES                    | false      | false    |
-| Feature   | Standard             | LIMITED PLUS + SUPPORT SERVICES                  | true       | true     |
-#| Feature   | Limited Plus         | LIMITED + EXTRA FEATURES                         | false      | false    |
-| Feature   | Limited              | BASIC FEATURES                                   | false      | false    |
-| Support   | Gold Agent Support   | SILVER + ADVANCED REPORTING AND LIAISON SERVICES | false      | false    |
-| Support   | Silver Agent Support | BRONZE + WERCSMART DATA ENTRY FEATURES           | false      | false    |
-| Support   | Bronze Level Support | DIRECT PHONE + EMAIL SUPPORT                     | false      | true     |
-
-Then In the Subscription Enrollment screen I confirm that under the Premium Plan I see the following items and further details
-| Item                                             | Further details                                                                                                                                                                                                                                                                                                                                                                                               |
-| UL ECOLOGO Readiness Assessment                  | Recognized and referenced by more than 500 institutional procurement specifications, ECOLOGO Certification can increase market demand for your products. The ECOLOGO Certification readiness assessment evaluates the likelihood that your product can achieve certification to one of the ECOLOGO multi-attribute sustainability standards, and will expand to include other products such as personal care. |
-| Product Assessment Preview                       | See important product assessment results 2-business days before they are passed on to the retailer! If there are questions about your results, you will have those 2-business days to inquire with UL’s regulatory experts on the following topics: waste, transportation, California proposition 65, VOC and fire codes.                                                                                     |
-| Transportation Classification Regulatory Support | Avoid potential delays and pitfalls by relying on UL's regulatory experts to provide information and insights into your transportation classifications. You may be eligible for exemptions and exceptions that will save you money and get your products on the store shelves faster.                                                                                                                         |
-| Waste Classification Regulatory Support          | Many retailers are now passing the costs of hazardous waste disposal on to manufacturers like you! Understanding hazardous waste classification requirements and the basis for your products classifications is more important than ever. Rely on UL's regulatory experts to review and provide guidance to minimize your costs.                                                                              |
-| VOC Classification Regulatory Support            | Regulations around VOC are growing in size and complexity. Our regulatory experts will work with you to ensure your organizations products are compliant in the markets you serve.                                                                                                                                                                                                                            |
-| Draft OSHA-Compliant Safety Data Sheet           | Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.                                                                                                                                                                                                                                                                                          |
-
-Then In the Subscription Enrollment screen I confirm that under the Standard Plan I see the following items and further details
-| Item                      | Further details                                                                                                                                                                                                                                                                                                                              |
-| Bronze Agent Support Plan | Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services. |
-
-Then In the Subscription Enrollment screen I confirm that under the Limited Plus Plan I see the following items and further details
-| Item                            | Further details                                                                                                                                                                                                                                                                                                                               | Link text  | Link url                   |
-| PurView Sustainability Platform | In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.  | Learn More | https://www.ulpurview.com/ |
-
-Then In the Subscription Enrollment screen I confirm that under the Limited Plan I see the following items and further details
-| Item                         | Further details                                                                                                                                                                                                                                                                                              |
-| Product Registration         | Ensure your products meet the compliance requirements of over 45 retailers by submitting your product information in our secure software platform.                                                                                                                                                           |
-| Update Registration          | As regulations change, so will your reporting obligations. These changes will also require product updates. With subscription, you now have the ability to update existing product data and submit revisions for assessment at no additional charge.                                                         |
-| Add Retailer to Registration | As a WERCSmart subscriber, you will benefit from transmitting your product assessment with ease to over 45 retailers. As more retailers continue to join WERCSmart for their compliance and sustainability information, you can forward existing product registrations at any time for no additional charge. |
-| UPC Management               | Add or remove UPCs efficiently and as needed from your existing product registrations at no additional charge.                                                                                                                                                                                               |
-
-Then under subheading Select the Support Services Plan I should see text: Bronze Agent Support Services is already included with Premium and Standard subscriptions. You can always have our greatest support services. Check out what we offer!
-Then under subheading Select the Support Services Plan I should see hyperlink: (View Agency Service Agreement)
-Then under subheading Select the Support Services Plan clicking on hyperlink: (View Agency Service Agreement) opens Agency Service Agreement popup
-Then Agency Service Agreement popup contains the following text: By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. ("We" or "Us") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the "Products") and further appoint Us as Your designated agent ("Agent") with respect to such Products. You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results. You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products. You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof. This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time.
-Then on the Agency Service Agreement popup clicking Close closes the popup
-
-Then In the Subscription Enrollment screen I confirm that under the Gold Plan I see the following items and further details
-| Item                                                                                         | Further details |
-| Product Process Tracking and Follow up                                                       |                 |
-| Unlimited VOC CAS Hold Waste/Hazard Battery & transportation                                 |                 |
-| Proactive Product Maintenance with Direct Retailer and WERCSmart Internal Team Communication |                 |
-| Advanced Notice Alerts of Retail Requirement Changes                                         |                 |
-| Active Monitoring and Direct Notification of Retail Requirement Changes                      |                 |
-
-Then In the Subscription Enrollment screen I confirm that under the Silver Plan I see the following items and further details
-| Item                                                    | Further details |
-| Data Registration Input from Start to Finish            |                 |
-| On-Hand Management of Holds Updates and Recertification |                 |
-| On-Demand UPC WPS ID and Status Reports                 |                 |
-
-Given I select feature plan: Limited Plus
-Then In the Subscription Enrollment screen I confirm that I do see the following Plans:
-| plan            |
-| Gold            |
-| Silver          |
-| General Support |
-Then In the Subscription Enrollment screen I confirm that I do not see the following Plans:
-| plan   |
-| Bronze |
-
-Given I select feature plan: Premium
-Then In the Subscription Enrollment screen I confirm that I do see the following Plans:
-| plan   |
-| Gold   |
-| Silver |
-| Bronze |
-Then In the Subscription Enrollment screen I confirm that I do not see the following Plans:
-| plan            |
-| General Support |
-
-Then In the Subscription Enrollment screen I confirm that under the Bronze Plan I see the following items and further details
-| Item                                                                                                                | Further details |
-| Agent Guided Basic Account Management Like Account Creation & Update Holds & Recertification Mergers & Acquisitions |                 |
-
-Then I should see following statement at the bottom Based on the above subscription plan setup, here are your estimated annual costs:
-Then I should see Estimated Annual Cost of: $0.00
-Then I should see Estimated Annual Cost per Product of: $0.00
-Then I should see Proceed button disabled
+Then I confirm the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Tiered Subscription Options heading does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated Products panel does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confirm the text area containins: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected. A product is considered formulated when it is necessary to include ingredient formulations to validate potential safety hazards. This is the most common product category.
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Enhanced Articles panel does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confirm the text area containins: Enhanced Articles include beverage products or products that include a lithium (ion or metal) battery when sold to the consumer.
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Articles panel does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confirm the text area containins: An article is a manufactured item other than a fluid or particle which under normal conditions does not pose a physical health risk. Common examples include Light bulbs (do not contain any hazard component or ingredient), Electronics (circuit-board products without a battery), and Kits / gift packs ( two or more unrelated products combined in a package that uses a single upc.)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Single Retailer Subscription heading does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated, Enhanced & Articles panel does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section I confirm the Formulated, Enhanced & Articles panel does have the message: Coming Soon!
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section I confirm the Formulated, Enhanced & Articles panel is grayed out
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated, Enhanced & Articles panel, I confirm the text area containins: When registering a type of product (formulated, enhanced, or article, excluding batteries) that is desginated to be sold by a single retailer, this option provides disounted pricing. WERCSmart Agency services are available at an additional cost.
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated, Enhanced & Articles panel, I confrim the selector displays: Choose...
+Then I confirm the Select a subscription plan section does exist
+Then In the Select a subscription plan section, I confirm the Limited panel does exist
+Then In the Select a subscription plan section Limited panel, I confirm the list contains: Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs
+Then In the Select a subscription plan section Limited panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I click the info button
+Then In the Select a subscription plan section Limited panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Limited panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area displays: Ensure your products meet the compliance requirements of over 50 retailers by submitting your product information in our secure software platform. Revise your registrations to comply with ever-changing regulations and requirements. Over 50 participating recipients of Assessment data is managed in one place, with ease.
+Then In the Select a subscription plan section Limited panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I click the info button
+Then In the Select a subscription plan section Limited panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Limited panel, I confirm the list contains: PurView Catalog Access
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
+Then I confirm https://www.ulpurview.com/ tab does exist
+Then I close https://www.ulpurview.com/ tab
+Then I confirm https://www.ulpurview.com/ tab does not exist
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section, I confirm the Standard panel does exist
+Then In the Select a subscription plan section Standard panel, I confirm the list contains: Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs
+Then In the Select a subscription plan section Standard panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I click the info button
+Then In the Select a subscription plan section Standard panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Standard panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area displays: Ensure your products meet the compliance requirements of over 50 retailers by submitting your product information in our secure software platform. Revise your registrations to comply with ever-changing regulations and requirements. Over 50 participating recipients of Assessment data is managed in one place, with ease.
+Then In the Select a subscription plan section Standard panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I click the info button
+Then In the Select a subscription plan section Standard panel Create and Manage Product Data - manage product registration, submit to selected retailers, manage UPCs list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Limited panel, I confirm the list contains: PurView Catalog Access
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
+Then I confirm https://www.ulpurview.com/ tab does exist
+Then I close https://www.ulpurview.com/ tab
+Then I confirm https://www.ulpurview.com/ tab does not exist
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
+Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Standard panel, I confirm the list contains: Bronze Agent Support Services - direct phone and email support
+Then In the Select a subscription plan section Standard panel Bronze Agent Support Services - direct phone and email support list item, I click the info button
+Then In the Select a subscription plan section Standard panel Bronze Agent Support Services - direct phone and email support list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Standard panel Bronze Agent Support Services - direct phone and email support list item, I confrim the info text area displays: Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services.
+Then In the Select a subscription plan section Standard panel Bronze Agent Support Services - direct phone and email support list item, I click the info button
+Then In the Select a subscription plan section Standard panel Bronze Agent Support Services - direct phone and email support list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Standard panel, I confirm the Best Value footer does exist
+Then In the Select a subscription plan section, I confirm the Premium panel does exist
+Then In the Select a subscription plan section Premium panel, I confirm the list contains: Includes STANDARD features, plus
+Then In the Select a subscription plan section Premium panel, I confirm the list contains: Regulatory Support - transportation, waste, VOC classifications
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I click the info button
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I confrim the info text area displays: Transportation – Avoid potential delays and pitfalls by relying on UL’s regulatory experts to provide information and insights into your transportation classifications. You may be eligible for exemptions and exceptions that will save you money and get your products on the store shelves faster.
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I confrim the info text area displays: Waste – Many retailers are now passing the costs of regulated waste disposal on to manufacturers like you! Understanding regulated waste classification requirements and the basis for your products classifications is more important than ever. Rely on UL’s regulatory experts to review and provide guidance to minimize your costs.
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I confrim the info text area displays: VOC – Regulations around VOC are growing in size and complexity. Our regulatory experts will work with you to ensure your organizations products are compliant in the markets you serve.
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I click the info button
+Then In the Select a subscription plan section Premium panel Regulatory Support - transportation, waste, VOC classifications list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Premium panel, I confirm the list contains: UL ECOLOGO Readiness Assessment
+Then In the Select a subscription plan section Premium panel UL ECOLOGO Readiness Assessment list item, I click the info button
+Then In the Select a subscription plan section Premium panel UL ECOLOGO Readiness Assessment list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Premium panel UL ECOLOGO Readiness Assessment list item, I confrim the info text area displays: Recognized and referenced by more than 500 institutional procurement specifications, ECOLOGO Certification can increase market demand for your products.  The ECOLOGO Certification readiness assessment evaluates the likelihood that your product can achieve certification to one of the ECOLOGO multi-attribute sustainability standards, and will expand to include other products such as personal care.
+Then In the Select a subscription plan section Premium panel UL ECOLOGO Readiness Assessment list item, I click the info button
+Then In the Select a subscription plan section Premium panel UL ECOLOGO Readiness Assessment list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section Premium panel, I confirm the list contains: Draft OSHA-Compliant Safety Data Sheet
+Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I click the info button
+Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I confrim the info text area is displayed
+Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I confrim the info text area displays: Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.
+Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I click the info button
+Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I confrim the info text area is not displayed
+Then In the Select a subscription plan section, I confirm the Single Retailer panel does exist
+Then In the Select a subscription plan section I confirm the Single Retailer panel is grayed out
+Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Create and Manage Product Data
+Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Submit registration to single retailer + No Retailer
+Then I confirm the Select an Agent Support Service Plan [optional] section does exist
+Then In the Select an Agent Support Service Plan [optional] section, I confirm the text area displays: Personalized Agent Support Services are available to provide options for quality, dependable assistance ranging from direct phone access - to data entry - to advanced reporting and liaison services.
+Then In the Select an Agent Support Service Plan [optional] section text area, I click on the View Agent Support Service Agreement link
+Then I confirm the Agency Service Agreement modal is displayed
+Then In the Agency Service Agreement modal, I confirm the title displays: Agency Service Agreement
+Then In the Agency Service Agreement modal, I confirm the body text displays: By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. ("We" or "Us") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the "Products") and further appoint Us as Your designated agent ("Agent") with respect to such Products. You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results. You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products. You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof. This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time.
+Then In the Agency Service Agreement modal, I click the Close button
+Then I confirm the Agency Service Agreement modal is not displayed
+Then In the Select an Agent Support Service Plan [optional] section, I confirm the Bronze Level Support panel does exist
+Then In the Select an Agent Support Service Plan [optional] section Bronze Level Support panel, I confirm the list contains: Direct phone and email support. Agent-guided basic account management (i.e. account creation & updates, holds & re-certifications, mergers & acquisitions)
+Then In the Select an Agent Support Service Plan [optional] section, I confirm the Silver Agent Support panel does exist
+Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confirm the list contains: Data Registration Input from Start to Finish
+Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confirm the list contains: On-Hand Management of Holds Updates and Recertification
+Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confirm the list contains: On-Demand UPC WPS ID and Status Reports
+Then In the Select an Agent Support Service Plan [optional] section, I confirm the Gold Agent Support panel does exist
+Then In the Select an Agent Support Service Plan [optional] section Gold Agent Support panel, I confirm the list contains: Product Process Tracking and Follow up
+Then In the Select an Agent Support Service Plan [optional] section Gold Agent Support panel, I confirm the list contains: Unlimited VOC CAS Hold Waste/Hazard Battery & transportation
+Then In the Select an Agent Support Service Plan [optional] section Gold Agent Support panel, I confirm the list contains: Proactive Product Maintenance with Direct Retailer and WERCSmart Internal Team Communication
+Then In the Select an Agent Support Service Plan [optional] section Gold Agent Support panel, I confirm the list contains: Advanced Notice Alerts of Retail Requirement Changes
+Then In the Select an Agent Support Service Plan [optional] section Gold Agent Support panel, I confirm the list contains: Active Monitoring and Direct Notification of Retail Requirement Changes
+Then I confrim the Your Total footer exists and displays the text: Based on the above selected items, your estimated Subscription Plan total, excluding sales tax, is:
+Then In the enrollment footer, I confirm the Estimated Annual Cost calculator displayes: $0.00
+Then In the enrollment footer, I confirm the Estimated Annual Cost per Product calculator displayes: $0.00
 
 @ignore
 @TestCase:79577
