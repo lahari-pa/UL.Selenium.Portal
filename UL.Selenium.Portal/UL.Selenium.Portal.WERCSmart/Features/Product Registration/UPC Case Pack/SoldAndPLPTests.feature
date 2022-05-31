@@ -129,13 +129,14 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Completed
 
-@ignore
 @TestCase:87969
 Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87969
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
+	And I set the Select the best Water Solubility description field to: Insoluble in water
+	And I click continue
 	Then I save the product information as: TestCase87969
 	Given I call Shared Step 89286 - Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
@@ -190,7 +191,7 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
 
-@ignore
+
 @TestCase:88198
 Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
