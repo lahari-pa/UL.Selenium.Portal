@@ -279,7 +279,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
 	Then I should see the Waste Classification Data Page
-	Given In the New Product page I click tab: Physical and Chemical Properties
+	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
