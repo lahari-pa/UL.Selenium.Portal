@@ -1464,7 +1464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CloseCACleaningIngredientsPopupWindow()
 		{
-			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
 			return closeButton.TryClick();
 		}
 		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)

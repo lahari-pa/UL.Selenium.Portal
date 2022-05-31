@@ -404,12 +404,15 @@ Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 1: Regulatory Compliance" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Regulatory Support mean?"	
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56928PDF
-	Then I Check that the pdf file saved as: savedas56928PDF contains the text: WERCSmart Terms of Use
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56928PDF
+	Then I Check that the pdf file saved as: savedas56928PDF contains the text: WERCSmart® Terms of Use
 	#Can not check title as only get full pdf text. Could check first sentence contains text but does not really indicate we are checking title 
 	Then I delete the file saved as savedas56928PDF
+	And I close the Terms Use tab
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 	And I close the Data Tier Details popup
 
@@ -422,12 +425,15 @@ Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Suppo
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 2: Chemical Program Support" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Chemical Program Support mean?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56930PDF
-	Then I Check that the pdf file saved as: savedas56930PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56930PDF
+	Then I Check that the pdf file saved as: savedas56930PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56930PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
 
@@ -439,12 +445,15 @@ Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Supplemental Reports for Internal Business Use Only mean?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56932PDF
-	Then I Check that the pdf file saved as: savedas56932PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56932PDF
+	Then I Check that the pdf file saved as: savedas56932PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56932PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
 @ignore
@@ -455,10 +464,13 @@ Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Opti
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What are my Public Disclosure Options?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56934PDF
-	Then I Check that the pdf file saved as: savedas56934PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56934PDF
+	Then I Check that the pdf file saved as: savedas56934PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56934PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup
