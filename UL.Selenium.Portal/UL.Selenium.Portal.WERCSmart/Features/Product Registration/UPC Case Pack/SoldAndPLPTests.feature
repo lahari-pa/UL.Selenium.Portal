@@ -27,7 +27,7 @@ Feature: Sold and PLP Tests
 Background:
 Given I verify the following users exist and if not I create them using SHAUser
 | username    | FirstName | LastName   | Role         | EmailAddress                |
-| SHAQAAuto24 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ignore
 @TestCase:87957
@@ -135,13 +135,13 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I generate a random UPC number and save as: UPC87969
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
-	And I set the Select the best Water Solubility description field to: Insoluble in water
-	And I click continue
+	#And I set the Select the best Water Solubility description field to: Insoluble in water
+	#And I click continue
 	Then I save the product information as: TestCase87969
 	Given I call Shared Step 89286 - Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
 	Given I call Shared Step 74981 (Physical and Chemical Properties - gas)
 		| Secondary Physical State | Select the best Water Solubility description |
-		| Compressed gas           | Low                                          |
+		| Compressed gas           | Negligible                                   |
 	#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
 	#| No                                                             | No                            | No                         | No              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -167,7 +167,7 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto24 and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87969)
@@ -178,18 +178,18 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Amazon                     |
-	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87969)
-	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87969
-	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87969)
-	#Given I call Shared Step 59066 (Go to SHA Manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Accepted
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87969)
-	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87969) for
-	#	| Retailer |
-	#	| Amazon   |
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase87969)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase87969
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87969)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Accepted
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase87969)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87969) for
+		| Retailer |
+		| Amazon   |
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87969)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87969 and its status is: Completed
 
 
 @TestCase:88198
@@ -215,8 +215,8 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer      |
 		| Canadian Tire |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87957, container type: Paper bag and size: 2 do not click continue
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC879571, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88198, container type: Paper bag and size: 2 do not click continue
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881981, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
@@ -233,6 +233,7 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Canadian Tire              |
+
 	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88198)
 	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88198
 	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88198)
