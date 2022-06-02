@@ -340,14 +340,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(3);
 			Report.Info("Attemping to select first product");
 			Report.Screenshot();
-			
-			//IWebElement checkbox = SeleniumBrowser.WebBrowser
-			//	.FindElements(By.XPath("//table[@id='list']//tr//input"))
-			//	.FirstOrDefault(x => x != null);
+
+			IWebElement checkbox = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']//tr//input"))
+				.FirstOrDefault(x => x != null);
 			Report.Info("Found checkbox");
 
 			//get id no
-			IWebElement idTD = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[7]//input/../../td[2]"), 2);
+
+			IWebElement idTD = checkbox.FindElement(By.XPath("../../td[2]"), 2);
 			string id = "";
 			if (idTD == null)
 			{
