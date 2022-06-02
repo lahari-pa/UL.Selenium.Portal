@@ -296,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 0;
 
 
-		
+
 
 			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
@@ -1747,6 +1747,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SeleniumWebDriver.CurrentDriver.Close();
 		}
+
+		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]
+		public void ConfirmTabDoesDoesNotExist(string tabURL, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			List<string> urlList = SeleniumWebDriver.CurrentDriver.GetTabURLs();
+			Report.IsTrue(urlList.Contains(tabURL) == expected, $"Failure, '{tabURL}' {(expected ? "does not" : "does")} exist.", $"Success, '{tabURL}' {does_doesnot} exist.");
+		}
+
+		[StepDefinition(@"I close (.*) tab")]
+		public void CloseTab(string tabURL)
+		{
+			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
+		}
+		
 
 		[StepDefinition(@"I switch to the tab with title: (.*)")]
 		public void SwitchToTabWithTitle(string title)
