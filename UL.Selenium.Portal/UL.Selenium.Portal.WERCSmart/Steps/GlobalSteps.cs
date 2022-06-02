@@ -986,8 +986,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = savedAs;
 				}
+				else
+				{
+					email = savedAs;
+				}
 				Delay.Seconds(10);
-				
+
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
 
@@ -1007,9 +1011,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						if (title.Contains("<" + productSavedAs + ">"))
 						{
 							title = title.Replace("<" + productSavedAs + ">", id);
-						} else {
+						}
+						else
+						{
 							title = title.Replace(productSavedAs, id);
 						}
+
+					}
 
 					}
 
@@ -1070,7 +1078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
 				string emailBody = email.Html.Body;
-				
+
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
 
@@ -1091,7 +1099,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					bodyText = bodyText.Replace(productSavedAs, id);
 				}
-				
+
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 			
 				Report.Info("Expected email body text: " + bodyText);
