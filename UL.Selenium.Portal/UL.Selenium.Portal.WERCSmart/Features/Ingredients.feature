@@ -612,7 +612,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
-	And In the New Product page I click tab: Physical and Chemical Properties
+	And In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
 
@@ -620,7 +620,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
-	And for ingredient: Water Percentage displayed: 43
+	And for ingredient: Water Percentage displayed: 0
 	Then I enter text: Butane in the component search box
 	And I select the component search result with CAS matching text: 106-97-8 and save ingredient as: Butane_95487
 	And In the ingredients table the ingredients should be in the following order
@@ -639,6 +639,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 		| Water  |
 		| Butane |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+
 
 
 
