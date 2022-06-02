@@ -640,6 +640,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return null;
 		}
 
+		public string IngredientGenericWarningPopoverTextScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			IWebElement popover;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return null;
+				}
+				popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Screenability Alert"))
+				{
+					return popover.GetAttribute("data-content");
+				}
+				return null;
+			}
+			popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Screenability Alert"))
+			{
+				return popover.GetAttribute("data-content");
+			}
+			return null;
+		}
+
 		public bool ClickIngredientGenericWarningButton(Ingredient ingredient, string title)
 		{
 			IWebElement button;
@@ -660,6 +686,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']"), 2);
 			if (button != null && button.Text.Contains("Sustainability Hint"))
+			{
+				return button.FindElement(By.XPath("./a"), 2).TryClick();
+			}
+			return false;
+		}
+
+		public bool ClickIngredientGenericWarningButtonScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			IWebElement button;
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']"), 2);
+				if (button != null && button.Text.Contains("Screenability Alert"))
+				{
+					return button.FindElement(By.XPath("./a"), 2).TryClick();
+				}
+				return false;
+			}
+			button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']"), 2);
+			if (button != null && button.Text.Contains("Screenability Alert"))
 			{
 				return button.FindElement(By.XPath("./a"), 2).TryClick();
 			}
@@ -688,6 +740,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
 			if (popover != null && popover.Text.Contains("Sustainability Hint"))
+			{
+				popoverId = popover.GetAttribute("aria-describedby");
+				return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+			}
+			return false;
+		}
+
+		public bool IngredientGernicWarningPopoverIsActiveScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			IWebElement popover;
+			string popoverId = "";
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Screenability Alert"))
+				{
+					popoverId = popover.GetAttribute("aria-describedby");
+					return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+				}
+				return false;
+			}
+			popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Screenability Alert"))
 			{
 				popoverId = popover.GetAttribute("aria-describedby");
 				return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
