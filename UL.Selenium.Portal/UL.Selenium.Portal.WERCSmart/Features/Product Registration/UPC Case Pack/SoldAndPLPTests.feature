@@ -261,8 +261,9 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88199, container type: Paper bag and size: 2 do not click continue
-    Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881991, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: <first>
+    Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC881991, container type: Paper bag and size: 2 do not click continue
 	Given I Select a package type from the drop down list
+	Given I click the browse button for document type:  and for control label: Battery or Battery-Containing Product (BCP) Product Label per UPC and upload a PDF
 	Given I click continue
     Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -278,6 +279,7 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Canadian Tire              |
+
 	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88199)
 	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88199
 	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88199)
