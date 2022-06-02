@@ -296,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 0;
 
 
-		
+
 
 			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
@@ -967,6 +967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
+
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
 					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
@@ -978,15 +979,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
-				else
+				else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
 				{
 					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+				} else
+				{
+					email = savedAs;
 				}
 				Delay.Seconds(10);
-
-		
+				
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
+
 					List<Mailosaur.Models.Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
 
@@ -999,18 +1003,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 						string id = product.Id;
-				
+
 						if (title.Contains("<" + productSavedAs + ">"))
 						{
 							title = title.Replace("<" + productSavedAs + ">", id);
-						} else
-						{
+						} else {
 							title = title.Replace(productSavedAs, id);
 						}
+
 					}
-					
+
 					Mailosaur.Models.Message matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Email.ToLower() == emailFrom.ToLower() && x.Subject == title);
-				
+
 					if (shouldOrNot == "should")
 					{
 						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
@@ -1065,8 +1069,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
-				string emailBody = email.Html.ToString();
-
+				string emailBody = email.Html.Body;
+				
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
 
@@ -1079,8 +1083,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					emailBody = emailBody.Replace(productSavedAs, id);
 				}
 
+				if (bodyText.Contains("<" + productSavedAs + ">"))
+				{
+					bodyText = bodyText.Replace("<" + productSavedAs + ">", id);
+				}
+				else
+				{
+					bodyText = bodyText.Replace(productSavedAs, id);
+				}
+				
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
-
+			
 				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Actual email body text: " + emailBody);
 
@@ -1734,6 +1747,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SeleniumWebDriver.CurrentDriver.Close();
 		}
+
+		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]
+		public void ConfirmTabDoesDoesNotExist(string tabURL, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			List<string> urlList = SeleniumWebDriver.CurrentDriver.GetTabURLs();
+			Report.IsTrue(urlList.Contains(tabURL) == expected, $"Failure, '{tabURL}' {(expected ? "does not" : "does")} exist.", $"Success, '{tabURL}' {does_doesnot} exist.");
+		}
+
+		[StepDefinition(@"I close (.*) tab")]
+		public void CloseTab(string tabURL)
+		{
+			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
+		}
+		
 
 		[StepDefinition(@"I switch to the tab with title: (.*)")]
 		public void SwitchToTabWithTitle(string title)
