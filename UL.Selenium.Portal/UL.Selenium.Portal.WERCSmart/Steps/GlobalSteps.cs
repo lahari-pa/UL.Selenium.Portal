@@ -967,6 +967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
+
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
 					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
@@ -978,15 +979,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
-				else
+				else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
 				{
 					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+				} else
+				{
+					email = savedAs;
 				}
 				Delay.Seconds(10);
-
-
+				
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
+
 					List<Mailosaur.Models.Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
 
@@ -1003,12 +1007,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						if (title.Contains("<" + productSavedAs + ">"))
 						{
 							title = title.Replace("<" + productSavedAs + ">", id);
-						} else
-						{
+						} else {
 							title = title.Replace(productSavedAs, id);
 						}
-					}
 
+					}
 
 					Mailosaur.Models.Message matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Email.ToLower() == emailFrom.ToLower() && x.Subject == title);
 
@@ -1066,8 +1069,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
-				string emailBody = email.Html.ToString();
-
+				string emailBody = email.Html.Body;
+				
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
 
@@ -1080,8 +1083,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					emailBody = emailBody.Replace(productSavedAs, id);
 				}
 
+				if (bodyText.Contains("<" + productSavedAs + ">"))
+				{
+					bodyText = bodyText.Replace("<" + productSavedAs + ">", id);
+				}
+				else
+				{
+					bodyText = bodyText.Replace(productSavedAs, id);
+				}
+				
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
-
+			
 				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Actual email body text: " + emailBody);
 
