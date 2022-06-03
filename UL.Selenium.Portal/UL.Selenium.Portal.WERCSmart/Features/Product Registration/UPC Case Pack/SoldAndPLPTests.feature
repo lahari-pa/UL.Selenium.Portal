@@ -129,6 +129,7 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87959)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87959 and its status is: Completed
 
+@ignore
 @TestCase:87969
 Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
