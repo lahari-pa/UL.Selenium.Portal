@@ -422,6 +422,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+@ignore
 @TestCase:81711
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
