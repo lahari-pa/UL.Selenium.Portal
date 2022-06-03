@@ -978,18 +978,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
-				else
+				else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
 				{
 					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
+				else
+				{
+					email = savedAs;
+				}
 				Delay.Seconds(10);
 
-		
+
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
+
 					List<Mailosaur.Models.Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
-			
+
 					if (title.Contains(productSavedAs) || title.Contains("<" + productSavedAs + ">"))
 					{
 						if (!Context.Contains(productSavedAs))
@@ -999,14 +1004,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 						string id = product.Id;
-				
+
 						if (title.Contains("<" + productSavedAs + ">"))
 						{
 							title = title.Replace("<" + productSavedAs + ">", id);
-						} else
+						}
+						else
 						{
 							title = title.Replace(productSavedAs, id);
 						}
+
 					}
 
 
@@ -1066,7 +1073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
-				string emailBody = email.Html.ToString();
+				string emailBody = email.Html.Body;
 
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
@@ -1078,6 +1085,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				else
 				{
 					emailBody = emailBody.Replace(productSavedAs, id);
+				}
+
+				if (bodyText.Contains("<" + productSavedAs + ">"))
+				{
+					bodyText = bodyText.Replace("<" + productSavedAs + ">", id);
+				}
+				else
+				{
+					bodyText = bodyText.Replace(productSavedAs, id);
 				}
 
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
