@@ -255,7 +255,7 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
 @56500
-@ignore
+#@ignore
 @TestCase:56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

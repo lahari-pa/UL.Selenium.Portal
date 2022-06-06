@@ -348,6 +348,7 @@
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\MyProducts.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\TopMenu.cs" />
+    <Compile Include="Selenium Classes\SubscriptionEnrollment_new.cs" />
     <Compile Include="Selenium Classes\ConflictMinerals.cs" />
     <Compile Include="Selenium Classes\DataSummary.cs" />
     <Compile Include="Selenium Classes\DeleteActiveProducts.cs" />
@@ -437,6 +438,7 @@
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Selenium Classes\YouTube.cs" />
     <Compile Include="Steps\API\Steps_Api.cs" />
+    <Compile Include="Steps\Steps_SubscriptionEnrollment_new.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_Ecologo_Readiness.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ElectronicEquipment.cs" />
