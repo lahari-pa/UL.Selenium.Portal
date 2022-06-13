@@ -319,7 +319,8 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
+# Uncomment when emailing issue is fixed
+#Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
 
 @ignore
 @TestCase:59245
