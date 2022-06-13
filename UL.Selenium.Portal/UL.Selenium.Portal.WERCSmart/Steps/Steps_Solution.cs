@@ -115,6 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://msc.ul.com/en/products/ulghs" };
 					break;
 				case "UL Secure Connect (ULSC)":
+					//https://www.ul.com/
 					urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };
 					break;
 				case "GoodGuide for Suppliers":

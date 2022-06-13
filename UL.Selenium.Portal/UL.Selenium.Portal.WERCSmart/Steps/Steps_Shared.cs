@@ -886,7 +886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(
 				"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
-			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may include Active Ingredient)");
 			Report.StartStep("I set the Refer to your Product Label option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Refer to your Product Label", "None of the Above");
 			Report.StartStep("In the Regulatory Information 3 page I click Continue");
@@ -2519,7 +2519,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
+			//Report.StartStep(
+			//	"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			//MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+			//	"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			var tableFirst = new Table("Section");
+			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
@@ -2549,6 +2554,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
+			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
@@ -10274,7 +10280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsSHA.IClickTheFollowingOptionInTheBottomMenu("Reject Submission");
 			Report.IsTrue(productSubmissionRejection.Wait_for_load(30), "The Product Submission Rejection Popup did not appear", "The Product Submission Rejection Popup did appear");
 			Report.StartStep("Selecting the first subject from the Submission Rejection Popup");
-			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected succesfully");
+			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected successfully");
 			Report.StartStep("I check that Text is now shown in the Supplier Message Area of the Popup");
 			Report.IsTrue(!productSubmissionRejection.GetSupplierMessage().IsNullOrEmpty(), "The Supplier Message Area was empty", "Text was shown in the Supplier Message Area");
 			Report.StartStep("I Click save in the Product Submission Rejection Popup");
@@ -10283,7 +10289,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var saveClicked = productSubmissionRejection.ClickButton("Save");
 			if (saveClicked)
 			{
-				Report.Success("The save button was succesfully clicked");
+				Report.Success("The save button was successfully clicked");
 			}
 			else
 			{
@@ -10293,7 +10299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I check that an alert appears with the correct message");
 			//globalSteps.GivenICheckAlertTextContainsXAndDismiss($"Product Message for product {id} has been created successfully."); //Can return to this once spelling bug is fixed, or by using "suces" (as method uses a contains)
-			globalSteps.GivenICheckAlertTextContainsEitherXOrYAndDismiss($"Product Message for product {id} has been created successfully.", $"Product Message for product {id} has been created succesfully."); //Used as Alert Text currently has spelling error, but we don't want the test to fail. (remove once bug is fixed and use the method above).
+			globalSteps.GivenICheckAlertTextContainsEitherXOrYAndDismiss($"Product Message for product {id} has been created successfully.", $"Product Message for product {id} has been created successfully."); //Used as Alert Text currently has spelling error, but we don't want the test to fail. (remove once bug is fixed and use the method above).
 			Report.StartStep("I check the Product Submission Rejection Popup has been closed");
 			Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
 

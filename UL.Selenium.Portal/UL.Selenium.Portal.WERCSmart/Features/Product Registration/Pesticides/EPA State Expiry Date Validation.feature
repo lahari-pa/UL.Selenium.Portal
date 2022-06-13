@@ -65,9 +65,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 Given I save the product information as: TestCase56582
+Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -79,7 +79,7 @@ Then in page Pesticide Details - State Registration page I should see error: Sta
 Given I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: AK
 Then I should see the appropriate response depending on today's date for state: AK
 Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: AK
-Then I should see the Transportation Details 1 Page
+#Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
 
 @TestCase:56591

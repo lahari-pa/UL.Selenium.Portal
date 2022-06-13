@@ -15,10 +15,10 @@
 
 Feature: Flow 12
 
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username    | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
