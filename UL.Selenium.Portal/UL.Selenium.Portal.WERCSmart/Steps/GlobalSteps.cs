@@ -987,7 +987,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					email = savedAs;
 				}
 				Delay.Seconds(10);
-				
+
+
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
 
