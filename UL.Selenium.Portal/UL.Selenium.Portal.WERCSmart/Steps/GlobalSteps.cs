@@ -986,10 +986,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = savedAs;
 				}
-				else
-				{
-					email = savedAs;
-				}
 				Delay.Seconds(10);
 
 
