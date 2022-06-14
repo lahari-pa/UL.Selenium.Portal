@@ -348,6 +348,7 @@
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\MyProducts.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\TopMenu.cs" />
+    <Compile Include="Selenium Classes\PaymentMethods_new.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment_new.cs" />
     <Compile Include="Selenium Classes\ConflictMinerals.cs" />
     <Compile Include="Selenium Classes\DataSummary.cs" />
