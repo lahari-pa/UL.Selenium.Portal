@@ -383,7 +383,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _sel_exp_year = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationYear']"), 2);
 			IWebElement _txt_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-cardSecurityCode']"), 2);
 			IWebElement _txt_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardHolderName']"), 2);
-			IWebElement _txt_postal_code = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardPostalCode']"), 2);
 
 			switch (card_type)
 			{
@@ -417,8 +416,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_txt_cvv.EnterText(cvv);
 			Report.Info("Entering Cardholder Name: " + cardh_name);
 			_txt_cardholder_name.EnterText(cardh_name);
-			Report.Info("Entering Cardholder Postal Code: " + "12222");
-			_txt_postal_code.EnterText("12222");
 
 			Report.Info("Exiting iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
@@ -1721,7 +1718,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Thank_You_TextExists(string thankYouText)
 		{
-			IWebElement tyTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][contains(@data-bind,'true')]//p[contains(text(),'{thankYouText}')]"), 1);
+			IWebElement tyTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{thankYouText}')]"), 1);
 			return tyTextElement != null;
 		}
 

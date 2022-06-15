@@ -270,9 +270,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.EnrollmentPanelSelector.GetValue();
 		}
 
-		public bool EnrollmentPanelSelectorClick(string panelLabel)
+		public bool EnrollmentPanelSelectorClick(string sectionLabel, string panelLabel)
 		{
 			Report.Info($"Attempting to click '{panelLabel}' panel selector.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
 			return this.EnrollmentPanelSelector.TryClick();
 		}
 
@@ -285,9 +287,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.EnrollmentPanelSelectorOption != null;
 		}
 
-		public bool EnrollmentPanelSelectorOptionClick(string panelLabel, string optionLabel)
+		public bool EnrollmentPanelSelectorOptionClick(string sectionLabel, string panelLabel, string optionLabel)
 		{
 			Report.Info($"Attempting to click '{panelLabel}' panel '{optionLabel}' option.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			_optionLabel = optionLabel;
 			return this.EnrollmentPanelSelectorOption.TryClick();
 		}
 		
