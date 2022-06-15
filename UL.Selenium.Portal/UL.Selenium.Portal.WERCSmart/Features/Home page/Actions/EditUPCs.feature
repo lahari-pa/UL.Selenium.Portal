@@ -217,23 +217,25 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given in the Rejected Registration modal dialog I click Continue
 	And I should see the The Product Page
 
-@ignore
+
 @TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120790
 	Given I generate a random UPC number and save as: UPC120790B
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase120790
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And In the 'Select Retailers' window I select the retailer: Walgreens
-	And I click continue
-	And I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC120790B, container type: Plastic Container and size: 12 - do not click continue
-	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120790, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| Amazon   |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790, container type: Plastic Container and size: 12
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790B, container type: Plastic Container and size: 12
+	Given I click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -244,34 +246,16 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-    Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
-    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
-	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase120790
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
-	#Given I click the page heading: Universal Product Code (UPC)
 	And I delete UPC: saved as UPC120790
 	Then In the list of UPCs I should not see UPC: saved as UPC120790
-	
 	Then In the Universal Product Code (UPC) page I click Save
-	Given In the Data Acceptance page I click on the Accept button
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
-	
     And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
     Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
     Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120790
-
-
-
-	#Given I navigate to the landing page
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	#Given I search for the product saved as: TestCase120790
-	#When I click Row Actions for the most recent product returned
-	#Then I click on the Row Action: Edit UPCs
-	#Given I click the page heading: Universal Product Code (UPC)
-	#And I delete UPC: saved as UPC120790
-	#Then In the list of UPCs I should not see UPC: saved as UPC120790

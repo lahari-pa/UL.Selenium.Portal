@@ -122,6 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the product saved as: (.*)")]
 		public void GivenISearchForTheProductSavedAs(string savedAs)
 		{
+			Delay.Seconds(300);
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
@@ -602,6 +603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"I should (see|only see|not see) the following Actions options")]
