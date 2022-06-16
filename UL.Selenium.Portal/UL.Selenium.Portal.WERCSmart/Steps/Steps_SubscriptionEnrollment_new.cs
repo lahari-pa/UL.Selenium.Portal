@@ -418,6 +418,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (Report.IsTrue(subEnrollment.EnrollmentPanelExists(sectionLabel, panelLabel), $"Failure, in '{sectionLabel}' section, '{panelLabel}' panel does not exist and should.", $"Success, in '{sectionLabel}' section, '{panelLabel}' panel does exist."))
 				{
+					bool expected = true;
+					if(Report.IsTrue(subEnrollment.EnrollmentPanelSelectorOptionExists(sectionLabel, panelLabel, optionLabel) == expected, $"Failure, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option {(expected ? "does not" : "does")} exist.", $"Success, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option does not exist."))
+					{
+						if(Report.IsTrue(subEnrollment.EnrollmentPanelSelectorClick(sectionLabel, panelLabel),$"Failure, failed to click selector.",$"Success, clicked selector."))
+						{
+							Report.IsTrue(subEnrollment.EnrollmentPanelSelectorOptionClick(sectionLabel, panelLabel, optionLabel), $"Failure, failed to click '{optionLabel}' option.", $"Success, clicked '{optionLabel}' option.");
+						}
+					}
+				}
+			}
+		}
+
+		[StepDefinition(@"In the (.*) section (.*) panel, I select the (.*) selector option")]
+		public void InSectionPanelISelectSelectorOption(string sectionLabel, string panelLabel, string optionLabel)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (Report.IsTrue(subEnrollment.EnrollmentSectionExists(sectionLabel), $"Failed, '{sectionLabel}' section does not exist and should.", $"Success, '{sectionLabel}' section does exist."))
+			{
+				if (Report.IsTrue(subEnrollment.EnrollmentPanelExists(sectionLabel, panelLabel), $"Failure, in '{sectionLabel}' section, '{panelLabel}' panel does not exist and should.", $"Success, in '{sectionLabel}' section, '{panelLabel}' panel does exist."))
+				{
 					string optionLabelDisplayed = subEnrollment.EnrollmentPanelSelectorValueGet(sectionLabel, panelLabel);
 					Report.IsTrue(optionLabelDisplayed.Trim() == optionLabel.Trim(), $"Failure, '{sectionLabel}' section '{panelLabel}' panel selector option displyed: '{optionLabelDisplayed}' does not match expected: '{optionLabel}'.", $"Success, '{sectionLabel}' section '{panelLabel}' panel selector option displayed '{optionLabelDisplayed}' matches expected.");
 				}

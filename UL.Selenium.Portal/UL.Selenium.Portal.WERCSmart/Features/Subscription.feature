@@ -1029,7 +1029,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
-@ignore
+#@ignore
 @TestCase:94466
 Scenario: [94466] Subscription - Retailer count in messages
 Given I go to the WERCSmart Log in
@@ -1042,9 +1042,9 @@ Given If not already created, I create a user: TC94466User with the following pa
 | Password             | Pa4*ytuufnn             |
 | Address1             | Address 1               |
 | Address2             | Address 2               |
-| City                 | City Name               |
-| State                | Florida                 |
-| Zip                  | 999                     |
+| City                 | Latham                  |
+| State                | New York                |
+| Zip                  | 12110                   |
 | CompanyName          | Company 1               |
 | CompanyPhone         | 123-456-7889            |
 | EmergencyPhoneNumber | 123-456-7789            |
@@ -1063,23 +1063,17 @@ Given If not already created, I create a user: TC94466User with the following pa
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
-And In the Subscription Enrollment screen I confirm that under the Limited Plan I see the following items and further details
-| Item                         | Further details                                                                                                                                                                                                                                                                                              |
-| Product Registration         | Ensure your products meet the compliance requirements of over 45 retailers by submitting your product information in our secure software platform.                                                                                                                                                           |
-| Update Registration          | As regulations change, so will your reporting obligations. These changes will also require product updates. With subscription, you now have the ability to update existing product data and submit revisions for assessment at no additional charge.                                                         |
-| Add Retailer to Registration | As a WERCSmart subscriber, you will benefit from transmitting your product assessment with ease to over 45 retailers. As more retailers continue to join WERCSmart for their compliance and sustainability information, you can forward existing product registrations at any time for no additional charge. |
-| UPC Management               | Add or remove UPCs efficiently and as needed from your existing product registrations at no additional charge.                                                                                                                                                                                               |
-Then In the Subscription Enrollment screen I select the following enrollment options
-| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
-| Up to 5 Product(s) | Up to 5 Product(s) | Up to 5 Product(s)  | Standard     | Silver                |
-Then I click on Checkout
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confirm the Up to 1 Product(s) selector option is selected
+Given In the Select a subscription plan section Limited panel, I click the radio button
+Then In the enrollment footer, I click the PROCEED button
+Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I enter Credit Card details
 | Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
 | Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
-Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+Then In the Thank You screen I confirm the following statement is shown: You have successfully signed up for a subscription plan. Thank you for depending on UL to provide over 45 retailers with critical product information they require to on-board your products and keep store workers, consumers and the environment safe.
 
 @ignore
 @TestCase:119192
