@@ -428,5 +428,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return textField.TryEnterText(enterText);
 		}
 
+		public bool ClickxForRegistrationDetailsForState(string abbrevState)
+		{
+			IWebElement xButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: field.field'][text()='AK']/../following-sibling::td//a"), 2);
+			if (xButton == null)
+			{
+				return false;
+			}
+			return xButton.TryClick();
+		}
+		public bool ClickYesOrNoForRegistrationDetailsRemoveItemPopup(string yesOrNo)
+		{
+			IWebElement yesOrNoButton = this.containerElement.FindElement(By.XPath("//h3[@class='modal-title'][text()='Remove Item']/../..//div[@class='modal-footer']//button[text()='" + yesOrNo + "']"), 2);
+			if (yesOrNoButton == null)
+			{
+				return false;
+			}
+			return yesOrNoButton.TryClick();
+		}
+
 	}
 }
