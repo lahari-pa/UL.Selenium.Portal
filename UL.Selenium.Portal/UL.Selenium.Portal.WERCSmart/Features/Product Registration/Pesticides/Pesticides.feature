@@ -523,7 +523,7 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
-	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
