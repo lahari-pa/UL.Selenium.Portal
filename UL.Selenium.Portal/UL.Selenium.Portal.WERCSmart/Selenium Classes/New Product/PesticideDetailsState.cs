@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return null;
 			}
-
+			
 			IWebElement kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
 			if (kellyExpirationDateInput == null)
 			{

@@ -67,6 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string state = Context.GetFromContext("state").ToString();
 			string expirationDate = pesticideDetailsState.ExpirationDate(state);
 			string kellyExpirationDate = pesticideDetailsState.GetPesticideRegKellyExpirationDate(state);
+			
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
 		}
 
