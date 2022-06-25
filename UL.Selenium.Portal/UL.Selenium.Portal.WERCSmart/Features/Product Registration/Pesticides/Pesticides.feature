@@ -66,16 +66,16 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I should see the Pesticide Details - State Registration Details Page
 	Then I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2021-12-01 for the State: NY on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
