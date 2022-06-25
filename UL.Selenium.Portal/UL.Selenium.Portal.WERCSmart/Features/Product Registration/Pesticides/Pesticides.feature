@@ -641,9 +641,9 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State
-	#Then I confirm the 'Is Kelly Data' field for State: AZ is checked
-	#Given I navigate to the home page
-	#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+	Then I confirm the 'Is Kelly Data' field for State: AZ is checked
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 
 
 @TestCase:121120
