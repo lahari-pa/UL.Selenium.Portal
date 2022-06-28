@@ -20,7 +20,7 @@ Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto31  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+        | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ignore
 @TestCase:80089
@@ -79,7 +79,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 @TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
-	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto31 and save as: TestCase75410
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: TestCase75410
 	#Scenario: Test
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410

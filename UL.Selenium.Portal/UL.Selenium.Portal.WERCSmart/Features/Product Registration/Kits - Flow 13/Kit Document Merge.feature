@@ -20,15 +20,14 @@ Feature: Kit Document Merge
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto15 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+        | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @73949
-@ignore
 @TestCase:73949
 Scenario: [73949] Kit - Document merge - US only
-	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto9 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 	Given I navigate to the landing page
-	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto15 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto9 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 	Given I navigate to the landing page	
 	Given I generate a random UPC number and save as: UPC73949
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -47,11 +46,11 @@ Scenario: [73949] Kit - Document merge - US only
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And If purchase details are showing click confirm order
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase73949)
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
