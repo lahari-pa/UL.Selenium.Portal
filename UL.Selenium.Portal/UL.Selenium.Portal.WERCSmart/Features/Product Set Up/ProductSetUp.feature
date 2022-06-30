@@ -79,7 +79,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 @TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
-	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto31 and save as: TestCase75410
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: TestCase75410
 	#Scenario: Test
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410
@@ -87,10 +87,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I search for the product saved as: TestCase75410
 	Given For product saved as: TestCase75410 the status is: Completed
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: Update Data
-	And I should see the Update Registration popup
-	And In the Update Registration popup I click on button Yes
+    Given I call Shared Step 92580 (Click ... in Actions > Update Data > Summary Page - Edit Product)
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page
@@ -117,6 +114,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	Then I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
 	And I click the page heading: Data Acceptance
+	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
