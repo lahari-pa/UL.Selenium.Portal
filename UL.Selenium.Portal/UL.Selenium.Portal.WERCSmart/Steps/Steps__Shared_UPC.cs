@@ -43,7 +43,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> upcOptions = selNewProduct.GetUPCOptions();
 			if (condition == "see")
 			{
-				//Delay.Seconds(9999);
 				foreach (TableRow row in expected.Rows)
 				{
 					string option = row["Option"];
