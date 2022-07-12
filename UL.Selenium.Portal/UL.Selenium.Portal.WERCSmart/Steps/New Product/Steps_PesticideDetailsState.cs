@@ -161,6 +161,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Pesticide Details - State Registration Details page I click 'x' for the following state: (.*)")]
+		public void GivenInThePesticideDetails_StateRegistrationDetailsPageIClickForTheFollowingState(string abbrevState)
+		{
+			var Steps = new PesticideDetailsState();
+			Report.IsTrue(Steps.ClickxForRegistrationDetailsForState(abbrevState) == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
+			Report.IsTrue(Steps.ClickYesOrNoForRegistrationDetailsRemoveItemPopup("Yes") == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
+		}
+
 		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
 		public void IConfirmTheExpirationDateProvidedByKellyForStateIsBlank(string currentState)
 		{

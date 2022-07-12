@@ -112,11 +112,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.ulprospector.com/en/eu", "https://www.ulprospector.com/en/na" };
 					break;
 				case "ULGHS":
-					urls = new[] { "https://msc.ul.com/en/products/ulghs" };
+				    //urls = new[] { "https://msc.ul.com/en/products/ulghs" };
+				    urls = new[] { "https://www.ulghs.com/" };
 					break;
 				case "UL Secure Connect (ULSC)":
-					//https://www.ul.com/
-					urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };
+					//urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };
+					urls = new[] { "https://www.ul.com/" };
 					break;
 				case "GoodGuide for Suppliers":
 					urls = new[] { "https://choosegoodguide.com/" };
