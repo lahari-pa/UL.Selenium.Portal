@@ -320,17 +320,18 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Given I set the Alberta field to: Choose...
     Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field					     |
-		| Alberta                    |
-		| British Columbia           |
-		| New Brunswick              |
-		| New Foundland              |
-		| Nova Scotia                |
-		| Ontario                    |
-		| Prince Edward Island       |
-		| Quebec                     |
-		| Yukon Territory            |
-		| Manitoba                   |
+		| Field                |
+		| Alberta              |
+		| British Columbia     |
+		| New Brunswick        |
+		| New Foundland        |
+		| Nova Scotia          |
+		| Ontario              |
+		| Prince Edward Island |
+		| Quebec               |
+		| Yukon Territory      |
+		| Saskatchewan         |
+		| Manitoba             |
 	# Confirm N/A is shown as already selected for the Northwest Territory question
   	And Northwest Territory should be showing the value: Not Applicable
     #
@@ -342,7 +343,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
