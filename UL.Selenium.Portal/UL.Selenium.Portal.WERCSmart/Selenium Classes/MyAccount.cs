@@ -1894,6 +1894,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			};		
 
 			string newString = "";
+			/*
 			for(int x=0; x<Expected.Count(); x++)
 			{
 				if (x== Expected.Count() - 1)
@@ -1903,6 +1904,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				else
 				{
 					newString = newString + Expected[x]+ ", ";
+				}
+			}
+			*/
+			foreach(string e in Expected)
+			{
+				if (e != "")
+				{
+					if (newString == "")
+					{
+						newString = newString + e;
+					}
+					else
+					{
+						newString = newString + ", " + e;
+					}
 				}
 			}
 

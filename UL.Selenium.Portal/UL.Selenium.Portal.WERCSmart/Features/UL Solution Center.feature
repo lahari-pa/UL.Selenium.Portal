@@ -103,7 +103,7 @@ Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPL
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
 
-@ignore
+#@ignore
 @TestCase:59660
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -117,7 +117,7 @@ Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect s
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
-@ignore
+#@ignore
 @TestCase:59661
 Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -128,7 +128,7 @@ Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 	And I confirm the Learn More button is displayed for section: ULGHS
 	Given I click the Learn More button for section: ULGHS
 	Given I switch to the ULGHS information tab
-	Then I check that the current URL contains: https://msc.ul.com/en/products/ulghs
+	Then I check that the current URL contains: https://www.ulghs.com/
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
