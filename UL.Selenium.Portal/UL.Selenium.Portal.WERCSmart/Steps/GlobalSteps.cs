@@ -987,7 +987,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					email = savedAs;
 				}
 				Delay.Seconds(10);
-				
+
+
 				if (MailosaurHelpers.DefaultMailbox.WaitForInboxDifferences(email))
 				{
 
@@ -1846,6 +1847,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("Alert did not appear");
 			}
 			string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+
 			if (alertText == null)
 			{
 				Report.Failure("Text was not displayed", false);

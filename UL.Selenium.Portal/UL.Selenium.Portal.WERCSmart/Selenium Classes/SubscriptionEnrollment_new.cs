@@ -20,6 +20,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Constants
 		protected override By ContainerElementLocator => By.Id("enrollment");
+		private IWebElement EnrollmentPageHeader => this.ContainerElement.FindElement(By.XPath($".//h2"),1);
+		private List<IWebElement> EnrollmentAlertMessages => this.ContainerElement.FindElements(By.XPath($".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 1).ToList();
+
 		#region Section Level
 		private string _sectionLabel;
 		private IWebElement EnrollmentSection => this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'row')][.//h3[normalize-space(text())='{_sectionLabel}']]"), 1);
@@ -31,11 +34,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 		#region PanelLevel
 		private string _panelLabel;
-		private string _panelSubLabel;
 		private IWebElement EnrollmentPanel => this.EnrollmentSection.FindElement(By.XPath($".//div[contains(@class,'ws-subscription')][ .//div[@class='agency-header'][normalize-space(text()) = '{_panelLabel}'] | .//label[normalize-space(text())='{_panelLabel}']]"), 1);
-		private IWebElement EnrollmentPanelSubLabel => this.EnrollmentPanel.FindElement(By.XPath($".//div[@class='agency-header']//span[@text()='{_panelSubLabel}']"), 1);
+		private IWebElement EnrollmentPanelSubLabel => this.EnrollmentPanel.FindElement(By.XPath($".//div[@class='agency-header']//span[text()]"), 1);
 		private IWebElement EnrollmentPanelBody => this.EnrollmentPanel.FindElement(By.XPath(".//div[contains(@class,'panel-body')]"), 1);
-		private IWebElement EnrollmentPanelBodyTextArea => this.EnrollmentPanelBody.FindElement(By.XPath($".//div[contains(@class,'small')]"), 1);
+		private IWebElement EnrollmentPanelBodyTextArea => this.EnrollmentPanelBody.FindElement(By.XPath($".//div[contains(@class,'small')] | .//p"), 1);
 		private string _panelListText;
 		private IWebElement EnrollmentPanelBodyListItem => this.EnrollmentPanelBody.FindElement(By.XPath($".//li[normalize-space(text())='{_panelListText}']"), 1);
 		private IWebElement EnrollmentPanelBodyListItemInfoButton => this.EnrollmentPanelBodyListItem.FindElement(By.XPath($".//a[@data-toggle]"), 1);
@@ -45,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EnrollmentPanelSelector => this.EnrollmentPanel.FindElement(By.XPath(".//select"), 1);
 		private string _optionLabel;
 		private IWebElement EnrollmentPanelSelectorOption => this.EnrollmentPanelSelector.FindElement(By.XPath($".//option[text()='{_optionLabel}']"), 1);
-		private IWebElement EnrollmentPanelRadio => this.EnrollmentPanel.FindElement(By.XPath(".//input[@type=radio]"), 1);
+		private IWebElement EnrollmentPanelRadio => this.EnrollmentPanel.FindElement(By.XPath(".//div[@class='subs__indicator']"), 1);
 		private string _footerText;
 		private IWebElement EnrollmentPanelFooter => this.EnrollmentPanel.FindElement(By.XPath($".//div[contains(@class,'panel-footer')][contains(.,'{_footerText}')]"), 1);
 		private bool EnrollmentPanelGrayedOut => this.EnrollmentPanel.FindElement(By.XPath($".//ancestor-or-self::div[contains(@style,'opacity:')]"), 1) != null;
@@ -68,6 +70,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 
 		#region Methods
+		public bool EnrollmentPageHeaderExists()
+		{
+			Report.Info($"Attempting to confirm enrollment page header exists.");
+			return this.EnrollmentPageHeader != null;
+		}
+
+		public string EnrollmentPageHeaderGet()
+		{
+			Report.Info($"Attempting to get enrollment page header text.");
+			return this.EnrollmentPageHeader.Text;
+		}
+
+		public bool EnrollmentAlertsExist()
+		{
+			Report.Info($"Attempting to confirm enrollment alerts exist.");
+			return this.EnrollmentAlertMessages.Count != 0;
+		}
+
+		public bool EnrollmentAlertsContain(string alertMessage)
+		{
+			Report.Info($"Attempting to confirm '{alertMessage}' message exists.");
+			return this.EnrollmentAlertMessages.Where(x => x.Displayed).ToList().Select(x => x.GetValue().Trim() == alertMessage).FirstOrDefault();
+		}
+
 		#region SectionLevel
 		public bool EnrollmentSectionExists(string sectionLabel)
 		{
@@ -119,6 +145,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_sectionLabel = sectionLabel;
 			_panelLabel = panelLabel;
 			return this.EnrollmentPanel != null;
+		}
+
+		public bool EnrollmentPanelSubLabelExists(string sectionLabel, string panelLabel)
+		{
+			Report.Info($"Attempting to confrim '{panelLabel}' panel sub label exists.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			return this.EnrollmentPanelSubLabel != null;
+		}
+
+		public string EnrollmentPanelSubLabelGet(string sectionLabel, string panelLabel)
+		{
+			Report.Info($"Attempting to get '{panelLabel}' panel sub label.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			return this.EnrollmentPanelSubLabel.Text;
 		}
 
 		public bool EnrollmentPanelBodyTextAreaExists(string sectionLabel, string panelLabel)
@@ -228,9 +270,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.EnrollmentPanelSelector.GetValue();
 		}
 
-		public bool EnrollmentPanelSelectorClick(string panelLabel)
+		public bool EnrollmentPanelSelectorClick(string sectionLabel, string panelLabel)
 		{
 			Report.Info($"Attempting to click '{panelLabel}' panel selector.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
 			return this.EnrollmentPanelSelector.TryClick();
 		}
 
@@ -243,16 +287,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.EnrollmentPanelSelectorOption != null;
 		}
 
-		public bool EnrollmentPanelSelectorOptionClick(string panelLabel, string optionLabel)
+		public bool EnrollmentPanelSelectorOptionClick(string sectionLabel, string panelLabel, string optionLabel)
 		{
 			Report.Info($"Attempting to click '{panelLabel}' panel '{optionLabel}' option.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			_optionLabel = optionLabel;
 			return this.EnrollmentPanelSelectorOption.TryClick();
 		}
 		
-		public bool EnrollmentPanelRadioExists(string panelLabel)
+		public bool EnrollmentPanelRadioExists(string sectionLabel, string panelLabel)
 		{
 			Report.Info($"Attempting to confirm '{panelLabel}' panel radio button exists.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
 			return this.EnrollmentPanelRadio != null;
+		}
+
+		public bool EnrollmentPanelRadioIsSelected(string sectionLabel, string panelLabel)
+		{
+			Report.Info($"Attempting to confirm '{panelLabel}' panel radio button is selected.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			var test = this.EnrollmentPanelRadio.GetCssValue("box-shadow");
+			return this.EnrollmentPanelRadio.GetCssValue("box-shadow") != "none";
+		}
+
+		public bool EnrollmentPanelRadioClick(string sectionLabel, string panelLabel)
+		{
+			Report.Info($"Attempting to click '{panelLabel}' radio button.");
+			_sectionLabel = sectionLabel;
+			_panelLabel = panelLabel;
+			return this.EnrollmentPanelRadio.JsClick();
 		}
 
 		public bool EnrollmentPanelFooterExists(string sectionLabel, string panelLabel, string footerText)
@@ -375,6 +441,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attemoting to get modal body text.");
 			return this.ModalBody.Text;
+		}
+
+		public bool ModalButtonExists(string buttonLabel)
+		{
+			Report.Info($"Attempting to confirm '{buttonLabel}' button exists.");
+			_buttonLabel = buttonLabel;
+			return this.ModalButton != null;
+		}
+
+		public bool ModalButtonClick(string buttonLabel)
+		{
+			Report.Info($"Attempting to click '{buttonLabel}' button.");
+			_buttonLabel = buttonLabel;
+			return this.ModalButton.TryClick();
+		}
+		#endregion
+	}
+
+	class SubscriptionEnrollmentModal : SeleniumBaseObject
+	{
+		#region Constants
+		protected override By ContainerElementLocator => By.Id("subscriptionSummary");
+		string _modalTitle;
+		private IWebElement ModalTitle => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-header']//h2[text()='{_modalTitle}']"), 1);
+		private IWebElement ModalHeaderCloseButton => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-header']//button[@class='close']"), 1);
+		private IWebElement ModalBody => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-body']"), 1);
+		private string _buttonLabel;
+		private IWebElement ModalButton => this.ContainerElement.FindElement(By.XPath($".//button[text()='{_buttonLabel}']"), 1);
+		#endregion
+
+		#region Methods
+		public bool ModalTitleExists(string modalTitle)
+		{
+			Report.Info($"Attempting to confirm {modalTitle} modal exists.");
+			_modalTitle = modalTitle;
+			return this.ModalTitle != null;
+		}
+
+		public bool ModalHeaderCloseButtonExists()
+		{
+			Report.Info($"Attempting to confirm modal header close button exists.");
+			return this.ModalHeaderCloseButton != null;
+		}
+
+		public bool ModalHeaderCloseButtonClick()
+		{
+			Report.Info($"Attempting to click modal header close button.");
+			return this.ModalHeaderCloseButton.TryClick();
+		}
+
+		public bool ModalBodyExists()
+		{
+			Report.Info($"Attempting to confirm modal body exists.");
+			return this.ModalBody != null;
 		}
 
 		public bool ModalButtonExists(string buttonLabel)
