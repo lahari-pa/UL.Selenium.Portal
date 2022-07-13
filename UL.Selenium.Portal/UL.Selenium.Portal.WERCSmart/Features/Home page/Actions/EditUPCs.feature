@@ -198,10 +198,11 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
 	Given I Close the Product Recertification History pop up
 
-@ignore
+#@ignore
 @TestCase:112568
 Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is displayed about Rejected Registrations and SDS Restrictions
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase75142)
 	And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New

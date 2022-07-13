@@ -1014,14 +1014,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted");
+			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Accepted");
-			Report.StartStep("49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)");
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
+				"Completed");
+			Report.StartStep("49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase75335)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Completed", savedAs);
 			Report.StartStep("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.StartStep("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
+			Report.StartStep("51664 (SHA - Completed); Product - set Retailers to Completed for saved as: TestCase75335)");
 			var table4 = new Table(new string[] {
 				"Retailer"
 			});

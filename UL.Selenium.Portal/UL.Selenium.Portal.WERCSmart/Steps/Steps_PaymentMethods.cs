@@ -122,7 +122,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string address_one = userDetails.Address1;
 				string address_two = userDetails.Address2;
-				string city_state_zip = userDetails.City + " " + myAcc.Get_State_Code(userDetails.State) + " " + userDetails.Zip;
+				//string city_state_zip = userDetails.City + " " + myAcc.Get_State_Code(userDetails.State) + " " + userDetails.Zip;
+				string city_state_zip = userDetails.City + " " + userDetails.State + " " + userDetails.Zip;
 				//string state = myAcc.Get_State_Code(userDetails.State);
 				//string zip_code = userDetails.Zip;
 				string country = userDetails.Country;
@@ -818,8 +819,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info("Thank You Text = " + ty_text);
 
-				Report.IsTrue(myPay.Thank_You_Text().Contains("Thank you"), "Displayed Text does not contain Thank you",
-					"Displayed Text contains Thank you");
+				Report.IsTrue(myPay.Thank_You_TextExists(ty_text.Trim()), $"Displayed Text does not contain: '{ty_text}'",
+					$"Displayed Text contains: '{ty_text}'");
 			}
 			catch (Exception ex)
 			{
