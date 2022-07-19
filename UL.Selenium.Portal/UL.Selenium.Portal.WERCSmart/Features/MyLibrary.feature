@@ -358,7 +358,7 @@ Scenario: [73326] Searching an Ingredient
 	Given I click on My Account
 	Given In the My Account page I navigate to the My Library page
 	Given I navigate to the My Ingredients tab in the My Library page
-	Given I enter the text: 50-0 into the My Ingredients search field
+	Given I enter the text: 50-00 into the My Ingredients search field
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	Given I enter the text: Formald into the My Ingredients search field
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
