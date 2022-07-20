@@ -70,6 +70,8 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
 
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
@@ -83,10 +85,8 @@ Given In the Pesticide Details - State Registration Details page I click 'x' for
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
 Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
