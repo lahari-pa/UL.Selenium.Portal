@@ -1180,29 +1180,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterUPCInformation(TableRow row)
 		{
-			if (row["UPC Number"].ToLower().Contains("saved as"))
+			Report.Info(@"testing1");
+			if (row["UPC Number"].ToLower().Contains("saved as "))
 			{
+				Report.Info(@"testing1.1");
 				try
 				{
+					Report.Info(@"testing1.2");
+					Report.Info(@"testing1.2.1 " + row["UPC Number"]);
+					Report.Info(@"testing1.2.2 " + StringComparison.InvariantCultureIgnoreCase);
+					Report.Info(@"testing1.2.3 " + row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase).Trim());
 					string savedUPC = Context
-						.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.GetFromContext(row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();
+					Report.Info(@"testing1.2.4");
 					row["UPC Number"] = savedUPC;
+					Report.Info(@"testing1.2.5");
 				}
 				catch (Exception e)
 				{
-					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase) + " " + e.Message);
 					throw;
 				}
 			}
-
+			Report.Info(@"testing2");
 			IWebElement upcNumber = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'UPC Number')]"), 2);
 			if (upcNumber == null || !upcNumber.TryEnterText(row["UPC Number"]))
 			{
 				Report.Info("Failed to enter the UPC Number in the Add UPC modal window.");
 				return false;
 			}
-
+			Report.Info(@"testing3");
 			IWebElement type = this.containerElement.FindElement(By.XPath(@"//div//label[text() = 'Type']/following-sibling::select"), 2);
 			if (type == null)
 			{
@@ -1222,19 +1230,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					type.Select(firstOption);
 				}
 			}
-
 			else
 			{
 				type.Select(row["Type"]);
 			}
-
+			Report.Info(@"testing5");
 			IWebElement size = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Size (Ounces)')]"), 2);
 			if (size == null || !size.TryEnterText(row["Size (Ounces)"]))
 			{
 				Report.Info("Failed to enter the Size (Ounces) in the Add UPC modal window.");
 				return false;
 			}
-
+			Report.Info(@"testing6");
 			if (row["Retailer"] == "Select all")
 			{
 				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//input[@id='chkAllRetailers']"), 2);
@@ -1254,7 +1261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-
+			Report.Info(@"testing7");
 			Report.Info("Successfully entered all UPC information.");
 			return true;
 		}
