@@ -1115,8 +1115,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
-			GeneralUtilities.Wait_for_load_finish();
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			//GeneralUtilities.Wait_for_load_finish();
 		}
 
 		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.comUpcFunctions.GetRandomUpcNumber(

@@ -66,16 +66,16 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I should see the Pesticide Details - State Registration Details Page
 	Then I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2021-12-01 for the State: NY on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
@@ -320,17 +320,18 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Given I set the Alberta field to: Choose...
     Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field					     |
-		| Alberta                    |
-		| British Columbia           |
-		| New Brunswick              |
-		| New Foundland              |
-		| Nova Scotia                |
-		| Ontario                    |
-		| Prince Edward Island       |
-		| Quebec                     |
-		| Yukon Territory            |
-		| Manitoba                   |
+		| Field                |
+		| Alberta              |
+		| British Columbia     |
+		| New Brunswick        |
+		| New Foundland        |
+		| Nova Scotia          |
+		| Ontario              |
+		| Prince Edward Island |
+		| Quebec               |
+		| Yukon Territory      |
+		| Saskatchewan         |
+		| Manitoba             |
 	# Confirm N/A is shown as already selected for the Northwest Territory question
   	And Northwest Territory should be showing the value: Not Applicable
     #
@@ -342,7 +343,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
@@ -387,9 +387,11 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
@@ -404,6 +406,7 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
@@ -545,6 +548,56 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+		Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AZ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+		Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+    Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given I click continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
@@ -709,10 +762,10 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State
-	Then I confirm the 'Is Kelly Data' field for State: AZ is checked
-	Given I navigate to the home page
-	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
-
+	#Then I confirm the 'Is Kelly Data' field for State: AZ is checked
+	#Given I navigate to the home page
+	#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+	 
 
 @TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
