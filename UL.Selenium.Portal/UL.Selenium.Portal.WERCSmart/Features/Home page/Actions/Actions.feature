@@ -327,4 +327,4 @@ Given In UPC Details popup in Retailer and UPC Feed page I see the following pro
 | Gas Size (kg)    | Any Data |
 | Gas Name         | Any Data |
 Given I close UPC Details popup in Retailer and UPC Feed page
-Given I close the current tab
+Given I close the current window

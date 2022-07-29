@@ -430,7 +430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickxForRegistrationDetailsForState(string abbrevState)
 		{
-			IWebElement xButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: field.field'][text()='AK']/../following-sibling::td//a"), 2);
+			IWebElement xButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: field.field'][text()='" + abbrevState + "']/../following-sibling::td//a"), 2);
 			if (xButton == null)
 			{
 				return false;
@@ -446,5 +446,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return yesOrNoButton.TryClick();
 		}
+
 	}
 }
