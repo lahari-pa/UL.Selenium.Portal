@@ -1184,7 +1184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
-					return menuOption.TryClick(ClickExtensions.ClickType.JavaScript);
+					return menuOption.TryClick(ClickType.JavaScript);
 				}
 				else
 				{
