@@ -310,6 +310,9 @@
     <Reference Include="UL.Automation.Reporting.Html.AutomationPlugin, Version=5.0.47.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.Html.5.0.47\lib\net461\UL.Automation.Reporting.Html.AutomationPlugin.dll</HintPath>
     </Reference>
+    <Reference Include="UL.Automation.Reporting.ProgressDialog.AutomationPlugin, Version=5.0.47.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.Automation.Reporting.ProgressDialog.5.0.47\lib\net461\UL.Automation.Reporting.ProgressDialog.AutomationPlugin.dll</HintPath>
+    </Reference>
     <Reference Include="UL.Automation.SpecFlow, Version=5.0.47.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.SpecFlow.5.0.47\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
     </Reference>
