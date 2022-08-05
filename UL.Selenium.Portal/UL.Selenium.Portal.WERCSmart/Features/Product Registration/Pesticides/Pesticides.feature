@@ -696,6 +696,40 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Then I check each State Pesticide Registration Number contains the edited suffix
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I check each State Pesticide Registration Number contains the edited suffix
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
