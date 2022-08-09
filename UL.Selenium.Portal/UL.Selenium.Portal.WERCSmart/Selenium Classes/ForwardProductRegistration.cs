@@ -1180,18 +1180,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterUPCInformation(TableRow row)
 		{
-			if (row["UPC Number"].ToLower().Contains("saved as"))
+
+			if (row["UPC Number"].ToLower().Contains("saved as "))
 			{
+
 				try
 				{
 					string savedUPC = Context
-						.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.GetFromContext(row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();
 					row["UPC Number"] = savedUPC;
 				}
 				catch (Exception e)
 				{
-					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase) + " " + e.Message);
 					throw;
 				}
 			}
@@ -1222,7 +1224,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					type.Select(firstOption);
 				}
 			}
-
 			else
 			{
 				type.Select(row["Type"]);

@@ -361,9 +361,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
 		| Search Term | Search Value                  |
-		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
+		| Status      | Submitted                     |
 	Then I save a UPC number for any product in the grid to context as: ExistingUPC
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

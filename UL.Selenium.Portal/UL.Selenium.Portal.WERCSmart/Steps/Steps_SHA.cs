@@ -3132,7 +3132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Saved UPC to context");
 					break;
 				}
-			}
+			}Report.Info("testing0 " + savedAs);
 		}
 
 		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
