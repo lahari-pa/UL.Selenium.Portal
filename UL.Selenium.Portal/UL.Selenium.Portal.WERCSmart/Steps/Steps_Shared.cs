@@ -13564,7 +13564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 			Report.StartStep("In the Transportation Details 1 page, I should see error message: \"This is a required field\".");
-			MyNewProductSteps.ErrorMessageSpecific("This is a required field");
+			MyNewProductSteps.ErrorMessageSpecific("This is a required field.");
 			Report.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
 			List<string> showing = MyNewProduct.SelectedOptionsForSection("Product is Regulated for Transport");
