@@ -59,7 +59,6 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
-
 @singlerun
 @TestCase:82536
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
@@ -74,6 +73,8 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
