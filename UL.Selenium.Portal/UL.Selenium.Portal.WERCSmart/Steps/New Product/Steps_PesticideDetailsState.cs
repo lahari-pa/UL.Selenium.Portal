@@ -166,6 +166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var Steps = new PesticideDetailsState();
 			Report.IsTrue(Steps.ClickxForRegistrationDetailsForState(abbrevState) == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
+			Delay.Seconds(5);
 			Report.IsTrue(Steps.ClickYesOrNoForRegistrationDetailsRemoveItemPopup("Yes") == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
 		}
 

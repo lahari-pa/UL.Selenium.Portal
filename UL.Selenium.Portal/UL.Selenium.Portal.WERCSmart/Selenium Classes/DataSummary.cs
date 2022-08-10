@@ -387,7 +387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < ingredientsRows.Count - 1; i++)
 			{
 				IWebElement row = ingredientsRows[i];
-				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath(".//td"));
+				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath(".[1]//div[@data-bind='html: Data']"));
 				var thisIngredient = new Ingredients.Ingredient();
 				string CASAndNaME = rowColumns[0].GetValue();
 				string pattern = @"([A-Za-z\d\-\,^\r]+)";

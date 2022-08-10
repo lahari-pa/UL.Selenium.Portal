@@ -59,7 +59,6 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
-
 @singlerun
 @TestCase:82536
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
@@ -74,6 +73,8 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -239,7 +240,7 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 
 @TestCase:91798
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -359,9 +360,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	And In SHA Manager ProductSearch page I run search:
 		| Search Term | Search Value                  |
-		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
+		| Status      | Submitted                     |
 	Then I save a UPC number for any product in the grid to context as: ExistingUPC
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -422,14 +421,14 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	And I click Sample File link and verify the Upload UPC form and save it as test91101 with data:
-		| UPC          | Name | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
-		| 823973000000 |      | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 | Yes                     |            |                  |                  |            | Yes          |            |          | Yes                          |
-		| 71617198008  |      | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         | Yes        |                  |                  |            |              | Yes        |          |                              |
-		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
-		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
-		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-
+	And I click Sample File link and verify the Upload UPC form and save it as test91100
+		| UPC            | Name       | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
+		| 0086093278571  | Saco 1     | 1        | 100  | KS955AR      | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 | Yes                     |            |                  |                  |            | Yes          |            |          | Yes                          |
+		| 0770824617127  | Saco 2     | 2        | 101  |              | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         | Yes        |                  |                  |            |              | Yes        |          |                              |
+		| 039800006073   | Saco 3     | 3        | 102  |              | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
+		| 00022367069964 | Saco 4     | 4        | 103  | KS956AG      | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
+		| 00022367069964 | Saco 5     | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
+	
 	#Looks like there is a bug failing this test that does not auto fill product name if using bulk upload file, in testing we can use below method with sample file data+ names to stop this being an issue, but needs to be raised.
 	#And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988, (Base Data Only: true)
 
@@ -455,7 +454,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And In the Add Multiple dialog box I select all Retailers
 	Then In the Add Multiple dialog box I click Finish
 	Given I click continue
-	Then I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	Then I should see a list style form error with text: Please fix UPC errors
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91101
 
