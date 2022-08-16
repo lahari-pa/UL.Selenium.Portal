@@ -697,7 +697,8 @@ Given I should see the Product Information Page
 	And I should see the Waste Classification Data Page
 	And I click the page heading: Ingredients
 	And I click continue
-	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 
