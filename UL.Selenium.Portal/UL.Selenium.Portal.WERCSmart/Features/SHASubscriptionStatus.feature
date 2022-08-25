@@ -3,7 +3,7 @@
 @run_SHASubscriptionStatus
 Feature: SHASubscriptionStatus
 
-@ignore
+#@ignore
 @TestCase:142233
 Scenario: [142233] Subscription Status - Cancelled
 	Given I Save the email for the TReVor: CancelledSubscriptionAccount Test user as: CancelledSubscriptionAccountEmail
