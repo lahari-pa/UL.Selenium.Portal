@@ -138,7 +138,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	And I save the ingredient I added in My Library to context as: water70539
 	Given I click Save in the My Ingredients tab
 	Given I click the WERCSmart logo 
-
+	  Then The home screen should load
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
 	#Given I edit the product with ID: 1470688
