@@ -238,7 +238,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             public bool ClickGraphHamburger() => this.GraphHamburgerMenuButton.TryClick();
 
-            public bool ClickGraphHamburgerOption(string option) => this.HamburgerMenuOptions.FirstOrDefault(x => x.GetValue().Trim() == option).TryClick(ClickExtensions.ClickType.JavaScript);
+            public bool ClickGraphHamburgerOption(string option) => this.HamburgerMenuOptions.FirstOrDefault(x => x.GetValue().Trim() == option).TryClick(ClickType.JavaScript);
 
             public bool GraphMenuListDisplayed() => this.GraphMenuList.NotNullAndDisplayed();
 

@@ -1,428 +1,73 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.props" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.props')" />
-  <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" />
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props')" />
-  <Import Project="..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
-  <Import Project="..\packages\NUnit.3.13.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.13.1\build\NUnit.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5E1C2C3-F49C-447F-A90F-B8C3ED729051}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UL.Selenium.Portal.RPS</RootNamespace>
-    <AssemblyName>UL.Selenium.Portal.RPS</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="BoDi, Version=1.5.0.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
-      <HintPath>..\packages\BoDi.1.5.0\lib\net45\BoDi.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Cucumber.Messages, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b10c5988214f940c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cucumber.Messages.6.0.1\lib\net45\Cucumber.Messages.dll</HintPath>
-    </Reference>
-    <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
-    </Reference>
-    <Reference Include="Gherkin, Version=19.0.3.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851, processorArchitecture=MSIL">
-      <HintPath>..\packages\Gherkin.19.0.3\lib\net45\Gherkin.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Mailosaur, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mailosaur.8.2.0\lib\netstandard1.6\Mailosaur.dll</HintPath>
-    </Reference>
-    <Reference Include="Meziantou.Framework.Win32.CredentialManager, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Meziantou.Framework.Win32.CredentialManager.1.3.5\lib\net461\Meziantou.Framework.Win32.CredentialManager.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.13.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.13.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SpecFlow.Internal.Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.Internal.Json.1.0.8\lib\net45\SpecFlow.Internal.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Management" />
-    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.RegularExpressions.4.3.0\lib\net463\System.Text.RegularExpressions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TechTalk.SpecFlow, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.3.9.8\lib\net461\TechTalk.SpecFlow.dll</HintPath>
-    </Reference>
-    <Reference Include="TechTalk.SpecFlow.NUnit.SpecFlowPlugin, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpecFlow.NUnit.3.9.8\lib\net461\TechTalk.SpecFlow.NUnit.SpecFlowPlugin.dll</HintPath>
-    </Reference>
-    <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
-      <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
-    </Reference>
-    <Reference Include="Thomas.Agent.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.134\lib\net472\Thomas.Agent.Api.Wrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Thomas.Core.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.134\lib\net472\Thomas.Core.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="TReVor.Api.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.134\lib\net472\TReVor.Api.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="TReVor.Core.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.134\lib\net472\TReVor.Core.Classes.dll</HintPath>
-    </Reference>
-    <Reference Include="TReVor.Integrations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TReVor.Integrations.2.1.134\lib\net472\TReVor.Integrations.dll</HintPath>
-    </Reference>
-    <Reference Include="UL.Automation.Reporting, Version=2.3.40.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Reporting.2.3.40\lib\net461\UL.Automation.Reporting.dll</HintPath>
-    </Reference>
-    <Reference Include="UL.Automation.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.SpecFlow.2.3.35\lib\net461\UL.Automation.SpecFlow.dll</HintPath>
-    </Reference>
-    <Reference Include="UL.Automation.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.Utilities.3.0.2\lib\net461\UL.Automation.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="UL.Automation.WebDriver, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.WebDriver.4.0.47\lib\net472\UL.Automation.WebDriver.dll</HintPath>
-    </Reference>
-    <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
-      <HintPath>..\packages\Utf8Json.1.3.7\lib\net47\Utf8Json.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.4.0.0\lib\net47\WebDriver.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.4.0.0\lib\net47\WebDriver.Support.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Classes\GeneralUtilities.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selenium Classes\Dashboard.cs" />
-    <Compile Include="Selenium Classes\DemoStatus.cs" />
-    <Compile Include="Selenium Classes\DemoViewer.cs" />
-    <Compile Include="Selenium Classes\DrumLog.cs" />
-    <Compile Include="Selenium Classes\HelpAndSupport.cs" />
-    <Compile Include="Selenium Classes\Home.cs" />
-    <Compile Include="Selenium Classes\ItemSync.cs" />
-    <Compile Include="Selenium Classes\SuperTable.cs" />
-    <Compile Include="Selenium Classes\WidgetPage.cs" />
-    <Compile Include="Selenium Classes\LandingPage.cs" />
-    <Compile Include="Selenium Classes\Modals.cs" />
-    <Compile Include="Selenium Classes\NavBar.cs" />
-    <Compile Include="Selenium Classes\PrintDialog.cs" />
-    <Compile Include="Selenium Classes\ProductInformation.cs" />
-    <Compile Include="Selenium Classes\ProductLookUp.cs" />
-    <Compile Include="Selenium Classes\RecentActivities.cs" />
-    <Compile Include="Steps\Steps_DemoStatus.cs" />
-    <Compile Include="Steps\Steps_DemoViewer.cs" />
-    <Compile Include="Steps\Steps_DrumLog.cs" />
-    <Compile Include="Steps\Steps_HelpAndSupport.cs" />
-    <Compile Include="Steps\Steps_ItemSync.cs" />
-    <Compile Include="Steps\Steps_RecentActivities.cs" />
-    <Compile Include="Steps\Steps_Dashboard.cs" />
-    <Compile Include="Steps\Steps_Navigation.cs" />
-    <Compile Include="Selenium Classes\TopBar.cs" />
-    <Compile Include="Steps\Global Steps.cs" />
-    <Compile Include="Steps\Steps_Home.cs" />
-    <Compile Include="Steps\Steps_LandingPage.cs" />
-    <Compile Include="Steps\Steps_Login.cs" />
-    <Compile Include="Steps\Steps_ProductInformation.cs" />
-    <Compile Include="Steps\Steps_ProductLookUp.cs" />
-    <Compile Include="Steps\Steps_RPSSHA.cs" />
-    <Compile Include="Steps\Steps_Shared.cs" />
-    <Compile Include="Steps\Steps_TopBar.cs" />
-    <Compile Include="Steps\Steps_WebViewers.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <EmbeddedResource Include="Dependencies\CSV\TestMultipleUPCs.csv" />
-    <EmbeddedResource Include="Dependencies\CSV\No valid UPCs.csv" />
-    <EmbeddedResource Include="Dependencies\CSV\1100 UPCs from notepad.csv" />
-    <EmbeddedResource Include="Dependencies\CSV\notepad 301 upcs with some invalid.csv" />
-    <EmbeddedResource Include="Dependencies\CSV\test 1 valid and 1 invalid upc.csv" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - Invalid File Popup.feature" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - Manual Entry.feature" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - Menu Options.feature" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - Results Screen.feature" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - UPC Limit Exceeded.feature" />
-    <None Include="Features\ItemSync Within RPS\ItemSync - Uploading a File.feature" />
-    <None Include="Features\Lowe%27s - Specific Functionality\Drum Log Functionality\Drum Log - Layout.feature" />
-    <None Include="Features\Lowe%27s - Specific Functionality\Drum Log Functionality\Drum Log - More Filters.feature" />
-    <None Include="Features\Lowe%27s - Specific Functionality\Drum Log Functionality\Drum Log - Page Options.feature" />
-    <None Include="Features\Lowe%27s - Specific Functionality\Drum Log Functionality\Drum Log - Search.feature" />
-    <None Include="Features\Lowe%27s - Specific Functionality\Drum Log Functionality\Drum Log Functionality General.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Dashboard Tab.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Home Tab.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Landing Page.feature">
-    </None>
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Help and Support.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Actions.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Breadcrumbs.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Export to Excel.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Layout.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - More Filters.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Page Options.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Reset.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Search.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Recent Activities Tab\Recent Activities - Show Legend Status.feature" />
-    <None Include="Features\RPS Base Functionality - 99\Web Viewers.feature" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReportFiles\Wercs.Selenium.RPS.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj">
-      <Project>{0244aa85-2c15-420d-a151-2e72ed04a5dc}</Project>
-      <Name>UL.Selenium.Portal.WERCSmart</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
-  <Target Name="AfterUpdateFeatureFilesInProject">
-    <ItemGroup>
-      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
-    </ItemGroup>
-  </Target>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.13.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.1\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.3.9.8\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.props'))" />
-    <Error Condition="!Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets'))" />
-    <Error Condition="!Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.77\build\TReVor.Integrations.BuildOperations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TReVor.Integrations.BuildOperations.2.1.77\build\TReVor.Integrations.BuildOperations.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.props'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.targets'))" />
-  </Target>
-  <Import Project="..\packages\SpecFlow.3.9.8\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.8\build\SpecFlow.targets')" />
-  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.9.8\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
-  <Import Project="..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets" Condition="Exists('..\packages\SpecFlow.NUnit.3.9.8\build\SpecFlow.NUnit.targets')" />
-  <Import Project="..\packages\TReVor.Integrations.BuildOperations.2.1.77\build\TReVor.Integrations.BuildOperations.targets" Condition="Exists('..\packages\TReVor.Integrations.BuildOperations.2.1.77\build\TReVor.Integrations.BuildOperations.targets')" />
-  <Import Project="..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.SpecFlow.2.3.35\build\UL.Automation.SpecFlow.targets')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Dependencies\CSV\1100 UPCs from notepad.csv" />
+	  <None Remove="Dependencies\CSV\No valid UPCs.csv" />
+	  <None Remove="Dependencies\CSV\notepad 301 upcs with some invalid.csv" />
+	  <None Remove="Dependencies\CSV\test 1 valid and 1 invalid upc.csv" />
+	  <None Remove="Dependencies\CSV\TestMultipleUPCs.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Dependencies\CSV\1100 UPCs from notepad.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\No valid UPCs.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\notepad 301 upcs with some invalid.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\test 1 valid and 1 invalid upc.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\TestMultipleUPCs.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
+
+		<PackageReference Include="Castle.Core" Version="4.3.1" />
+
+		<PackageReference Include="UL.Automation" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.Framework.NUnit" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.Reporting.Html" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.SpecFlow" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.TReVor" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.Utilities" Version="5.0.47" />
+		<PackageReference Include="UL.Automation.WebDriver" Version="5.0.47" />
+
+		<!-- ===== TREVOR PACKAGE(S) ===== -->
+
+		<PackageReference Include="TReVor.Integrations" Version="3.0.20" />
+		<PackageReference Include="TReVor.Integrations.BuildOperations" Version="3.0.21">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- ===== SPECFLOW PACKAGE(S) ===== -->
+
+		<PackageReference Include="SpecFlow" Version="3.9.50" />
+		<PackageReference Include="SpecFlow.NUnit" Version="3.9.50" />
+		<PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.50" />
+
+		<!-- ===== NUNIT PACKAGE(S) ===== -->
+
+		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- ===== MISC. PACKAGE(S) ===== -->
+
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+		<PackageReference Include="iTextSharp" Version="5.5.11" />
+		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj" />
+	</ItemGroup>
 </Project>
