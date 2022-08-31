@@ -69,6 +69,44 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
+
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+Given in the New Product page I click Continue
+
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
@@ -516,6 +554,58 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
+
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
@@ -548,9 +638,10 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
+
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
-		Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AZ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AZ
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
@@ -565,7 +656,6 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
-	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
@@ -576,7 +666,7 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
-		Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NE
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
@@ -588,16 +678,16 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
-    Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
-	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+
 	Given I click continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
@@ -696,6 +786,40 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Then I check each State Pesticide Registration Number contains the edited suffix
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I check each State Pesticide Registration Number contains the edited suffix
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
@@ -720,6 +844,57 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 	Then I edit the Expiration Date to: 2022-12-31 for the State: AZ on the Pesticide State Registration Details page
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given in the New Product page I click Continue
 	Then I click the page heading: Pesticide Details - U.S.
 	And I should see the Pesticide Details - U.S. Page

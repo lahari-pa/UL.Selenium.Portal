@@ -683,6 +683,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public int GetProductCount()
 		{
+// Delay.Seconds(9999);
 			IWebElement pageCount = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='listPager_right']/div"), 2);
 			if (pageCount == null)
 			{

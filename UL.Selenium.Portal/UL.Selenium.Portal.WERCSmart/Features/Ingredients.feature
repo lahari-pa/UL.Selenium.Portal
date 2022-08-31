@@ -18,10 +18,10 @@
 Feature: Ingredients
 (Suite ID: 64740)
 
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username    | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
@@ -517,51 +517,52 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Formaldehyde            | 100     | No                  | No            |                        |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I close the window that opened
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto12 and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
-	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
-		| Retailer  |
-		| Walgreens |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
-	And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
-	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I filter for the product saved as: TestCase109230
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: View
-	Then I switch to the Data Summary page
-	And In the Data Summary page, I confirm that the Ingredients table matches the following:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
-		| Formaldehyde            | 100     | No                  | No            |                        |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I close the window that opened
-	And I filter for the product saved as: TestCase109230
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Physical and Chemical Properties
-	And I click the page heading: Ingredients
-	And I confirm that the ingredients table looks as follows:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Choose...              |
-		| Formaldehyde            | 100     | No                  | No            | Choose...              |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I navigate to the home page
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
+	#And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
+	#	| Retailer  |
+	#	| Walgreens |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
+	#And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
+	#Given I navigate to the landing page
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#And I filter for the product saved as: TestCase109230
+	#And I click Row Actions for the first product returned
+	#And I click on the Row Action: View
+	#Then I switch to the Data Summary page
+	#And In the Data Summary page, I confirm that the Ingredients table matches the following:
+	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+	#	| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+	#	| Formaldehyde            | 100     | No                  | No            |                        |
+	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	#And I close the window that opened
+	#And I filter for the product saved as: TestCase109230
+	#And I click Row Actions for the first product returned
+	#And I click on the Row Action: Update Required
+	#Given In the New Product page I click tab: Physical and Chemical Properties
+	#And I click the page heading: Ingredients
+	#And I confirm that the ingredients table looks as follows:
+	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+	#	| Chlorine                | 100     | No                  | Yes           | Choose...              |
+	#	| Formaldehyde            | 100     | No                  | No            | Choose...              |
+	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	#And I navigate to the home page
 
 @TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
@@ -696,7 +697,8 @@ Given I should see the Product Information Page
 	And I should see the Waste Classification Data Page
 	And I click the page heading: Ingredients
 	And I click continue
-	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 

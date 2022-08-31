@@ -2697,12 +2697,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
+			if (searchTerm.Contains("saved as "))
+			{
+				searchTerm = searchTerm.Replace("saved as ", "");
+			}
+
 			if (Context.GetFromContext(searchTerm) != null)
 			{
-				searchTerm = Context.GetFromContext("searchTerm").ToString();
+				searchTerm = Context.GetFromContext(searchTerm).ToString();
 			}
 
 			var thisStudioSupplierManager = new StudioSupplierManager();
+
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
@@ -3132,7 +3138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Saved UPC to context");
 					break;
 				}
-			}
+			}Report.Info("testing0 " + savedAs);
 		}
 
 		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]

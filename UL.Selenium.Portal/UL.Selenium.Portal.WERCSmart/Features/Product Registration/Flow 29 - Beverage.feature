@@ -79,12 +79,13 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Then the 'Select Retailers' window appears
 	Then In the 'Select retailers' window I should only see the following retailers:
-		| Retailer                   |
-		| Walgreens                  |
-		| No Retailer/No UPC Product |
-		| Publix                     |
-		| Optoro                     |
-		| Office Depot               |
+		| Retailer									|
+		| Walgreens									|
+		| No Retailer/No UPC Product				|
+		| Publix								    |
+		| Optoro								    |
+		| Office Depot							    |
+		| Onboarding test for ItemScan Subscription |
 	Given I click Close in the Select Retailers popup
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
 
