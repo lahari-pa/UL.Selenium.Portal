@@ -507,10 +507,17 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
 		| Question                                     | Expected Answer                                                                                                                   |
-		| Article Information Sheet                    | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
+		| Article Information Sheet (AIS)              | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
 		| Batteries are considered Articles            | Select at least one of the options                                                                                                |
 		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                                                                                                |
 		| Product Label in English and French-Canadian | Document is required: Label in both French and English                                                                            |
+	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	Then in the Regulatory Documents to Provide page I click Continue
+	Given I verify the error messaging in Regulatory Documents to Provide:
+		| Question                                     | Expected Answer                                        |
+		| Batteries are considered Articles            | Select at least one of the options                     |
+		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                     |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
@@ -533,6 +540,7 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+
 
 
 @TestCase:122366
