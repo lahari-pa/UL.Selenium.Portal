@@ -137,7 +137,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	And I select the smart search result with name: Water and CAS: 7732-18-5
 	And I save the ingredient I added in My Library to context as: water70539
 	Given I click Save in the My Ingredients tab
-	Given I click the WERCSmart logo
+	Given I click the WERCSmart logo 
 	Then The home screen should load
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
@@ -398,7 +398,7 @@ Scenario: [70516] Add and Remove Packaging Type
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Then Product Name should be showing value: Super Packaging Type 1 (TM)
-	Given I close the Data Summary tab
+    And I close the window that opened
 	Then I should see the Data Acceptance Page
 	#And I Verify the 'Summary Page' matched with the data/text entered for the '' you created
 	#And I Click on the top-right 'PRINT BUTTON'
@@ -406,6 +406,8 @@ Scenario: [70516] Add and Remove Packaging Type
 	#And I Close the 'Print Preview Tab'
 	#And I Click the 'ACCEPT BUTTON'
 	Given In the Data Acceptance page I click on the Accept button
+
+
 	#And I Verify your 'ID number and Packaging Type Name' appears under "ID / Packaging Type Name"
 	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
 	#And I Verify the date appears under "Date Created"
