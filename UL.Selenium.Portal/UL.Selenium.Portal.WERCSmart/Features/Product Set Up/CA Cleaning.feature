@@ -38,12 +38,14 @@ Given I add the following CA Cleaning ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
 		| Water         | 100      | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
-Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
-| Error                                   |
-| Ingredient Type                         |
-Then I click the close button for the CA Cleaning Ingredients Popup
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
+Then I should see an error message: Your product registration qualifies for the California SB 258 Cleaning Right-to-Know regulation based on the type of product being registered, as well as chemicals included with the registration.
+Then I should see an error message: Ingredients require Functional Purpose or Ingredient Type selections for one or more listed ingredients.
+#Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
+#| Error                                   |
+#| Ingredient Type                         |
+#Then I click the close button for the CA Cleaning Ingredients Popup
+#Then I click the 'x' button for component number 1
+#Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Given I add the following CA Cleaning ingredients:  
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
 		| Water         | 100     | false               | true       | AQUA           | AQUA1       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
