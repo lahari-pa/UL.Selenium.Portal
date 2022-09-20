@@ -2557,8 +2557,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-			//tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only the following sections");
