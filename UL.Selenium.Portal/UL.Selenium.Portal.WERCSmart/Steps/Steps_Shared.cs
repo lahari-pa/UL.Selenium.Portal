@@ -7,12 +7,13 @@ using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -22,11 +23,10 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-	[Binding, Scope(Tag = "Shared")]
+    [Binding, Scope(Tag = "Shared")]
 	public class Steps_Shared
 	{
 
@@ -102,6 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+			WercSmartSettings.TestCaseId = 101;
 			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("ERROR: Failed to find TestCaseId!");
@@ -2515,16 +2516,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
+			/*
 			Report.StartStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			*/
 			var tableFirst = new Table("Section");
-			tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
@@ -2554,8 +2557,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			//tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only the following sections");
@@ -5061,13 +5064,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 59066 \(Go to SHA Manager\)")]
 		public void GivenICallSharedStep59066GoToSHAManager()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyStepsSHA = new Steps_SHA();
 			Report.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
 			Report.Info($"Going to iframe swap");
-			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", showSuccessScreenshot: false);
+			Report.IsTrue(thisStudioShaManager.SwitchToFrame(frame: "<contains(@data-frameid,'SHA')>"), "Failed to switch to IFrame", showSuccessScreenshot: false);
 			Report.Info($"Waiting for loading to finish...");
 			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(120), "Loading did not finish", showSuccessScreenshot: false);
 
@@ -5325,7 +5328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
 		public void GivenICallShared65080LoginToStudioAndOpenSHAManager()
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var myStepsSha = new Steps_SHA();
 			Report.StartStep("I navigate to Studio");
 			myStepsSha.GivenINavigateToStudio();
@@ -5839,7 +5842,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
 		public void GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(string savedAs)
 		{
-			ReportSettings.UseSubSteps = true;
+			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("Beginning shared step 40657");
 			var myStudioShaManager = new StudioSHAManager();
 			if (!myStudioShaManager.Wait_for_load(30))
@@ -5958,6 +5961,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			table2.AddRow(new string[] {
 				"RSQAHDPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DPQAUN",
 				"pass"
 			});
 			var thisStepsStudio = new Steps_Studio();

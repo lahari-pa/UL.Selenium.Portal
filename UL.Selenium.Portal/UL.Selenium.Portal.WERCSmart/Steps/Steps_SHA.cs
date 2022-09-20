@@ -76,6 +76,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Studio desktop is loaded");
 			var thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
+
+			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
+			{
+				Report.Info($"key QASHAAccount did not exist...");
+				Context.FeatureContext.Add("QASHAAccount", shaUser.Username);
+			}
+			else
+			{
+				Report.Info($"key QASHAAccount did  exist, updating instead");
+				Context.FeatureContext["QASHAAccount"] = shaUser.Username;
+
+			}
 		}
 
 

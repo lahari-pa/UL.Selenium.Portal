@@ -234,7 +234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(15);
 				var thisGraphicEditor = new GraphicEditor();
-				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded","Graphic editor has loaded.");
+				Report.IsTrue(thisGraphicEditor.Wait_for_load(120), "Graphic editor has not loaded","Graphic editor has loaded.");
 				string valueToSearchFor = "";
 
 				Report.Info("Attempting to set value: " + thisRow["value"] + " for graphic: " + thisRow["datacode"]);
@@ -361,7 +361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSelectRulesFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
 			var thisSelectRulesFilter = new SelectRulesFilter();
-			value = value + "- additional doc";
+			value = $"{value} - create additional doc";
 			Report.IsTrue(thisSelectRulesFilter.EnterInTextBox(textbox, value),
 				"Failed to enter value: " + value + " in textbox: " + textbox,
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
