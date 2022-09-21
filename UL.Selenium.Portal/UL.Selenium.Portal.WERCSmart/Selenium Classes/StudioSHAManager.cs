@@ -18,6 +18,7 @@ using TechTalk.SpecFlow;
 using TableRow = TechTalk.SpecFlow.TableRow;
 using OpenQA.Selenium.Interactions;
 using UL.Selenium.Portal.WERCSmart.Steps;
+using OpenQA.Selenium.Support.UI;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -33,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				StudioUtilites.SwitchToWindow("Wercs Studio");
-				this.SwitchToFrame();
+				this.SwitchToFrame(frame: "<contains(@data-frameid,'SHA')>");
 				this.containerElement = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath), secondsToWait);
 				return this.containerElement != null && base.Wait_for_load(secondsToWait);
 			}
@@ -58,11 +59,86 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool SwitchToFrame(string frame = "Widget1FRAME", string partialURL = null)
+		{
+			string[] values = frame.Split(',');
+			bool output = true;
+			Regex regex = new Regex("<(.+)>");
+			string teststring = "";
+			foreach (string val in values)
+			{
+				try
+				{
+					if (teststring.StartsWith("<"))
+					{
+						teststring = $"{teststring},{val}";
+					}
+					else
+					{
+						teststring = val;
+					}
+					if (teststring.StartsWith("<") && !teststring.EndsWith(">"))
+					{
+						continue;
+					}
+					Match match = regex.Match(teststring);
+					By iframeLocator = null;
+
+
+
+					if (!match.Success)
+					{
+						iframeLocator = By.CssSelector($"iframe#{val}");
+					}
+					else
+					{
+						string position = match.Groups[1].Value;
+						iframeLocator = By.XPath($"//iframe[{position}]");
+					}
+					IWebElement iframe = null;
+					if (iframeLocator != null)
+					{
+						iframe = SeleniumWebDriver.CurrentDriver.FindElement(iframeLocator, 10);
+						if (!string.IsNullOrEmpty(partialURL) && iframe != null)
+						{
+							int i = 1;
+							string url = iframe.GetAttribute("src");
+							while (!url.Contains(partialURL, StringComparison.InvariantCultureIgnoreCase) && i < 10)
+							{
+								i++;
+								Delay.Seconds(1);
+								iframe = SeleniumWebDriver.CurrentDriver.FindElement(iframeLocator, 10);
+								url = iframe.GetAttribute("src");
+							}
+							if (i >= 10)
+							{
+								return false;
+							}
+						}
+						WebDriverWait iFrameWait = new WebDriverWait(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(30));
+						iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(iframeLocator));
+					}
+
+
+
+					output = true;
+					teststring = "";
+				}
+				catch (Exception ex)
+				{
+					SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+					Report.Failure($"Failed to switch frame {frame}. Exception was thrown: " + ex.Message);
+					return false;
+				}
+			}
+			return output;
+		}
+
 		public bool WaitForProductList(int secondsToWait)
 		{
 			Report.Info("Beginning wait for product list");
 			Delay.Seconds(2);
-			var tableVisible = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@id='list']"), secondsToWait);
+			var tableVisible = this.containerElement.WaitUntilElementVisible(By.XPath(".//table[@id='list']"), secondsToWait);
 			return tableVisible != null || this.containerElement.FindElements(By.XPath("//table[@id='list']//tr"), 1).Count == 1;
 		}
 
@@ -1239,9 +1315,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				option = "Srch";
 			}
 
-			ReadOnlyCollection<IWebElement> listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
+			ReadOnlyCollection<IWebElement> listOfOptions = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(
 				"//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
-			IWebElement matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
+			IWebElement matchingOption = listOfOptions.FirstOrDefault(x => x.GetInnerText().ToLower().Contains(option.ToLower()));
 
 			if (matchingOption == null)
 			{
