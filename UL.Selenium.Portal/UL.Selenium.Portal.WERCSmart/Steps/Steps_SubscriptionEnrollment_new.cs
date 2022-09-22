@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.IsTrue(subEnrollment.EnrollmentPanelBodyListItemInfoTextAreaIsDisplayed(sectionLabel, panelLabel, panelListText), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text area is not displayed.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text area is displayed.");
 							string displayedInfoText = subEnrollment.EnrollmentPanelBodyListItemInfoTextAreaTextGet(sectionLabel, panelLabel, panelListText);
-							bool test = Report.IsTrue(displayedInfoText.Trim().Contains(infoText.Trim()), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed, '{displayedInfoText}', does not match expected '{infoText}'.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed matches expected.");
+							Report.IsTrue(displayedInfoText.Trim().Contains(infoText.Trim()), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed, '{displayedInfoText}', does not match expected '{infoText}'.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed matches expected.");
 						}
 
 					}
