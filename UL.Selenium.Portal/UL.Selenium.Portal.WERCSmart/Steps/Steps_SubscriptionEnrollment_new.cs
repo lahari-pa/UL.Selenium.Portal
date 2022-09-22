@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							Report.IsTrue(subEnrollment.EnrollmentPanelBodyListItemInfoTextAreaIsDisplayed(sectionLabel, panelLabel, panelListText), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text area is not displayed.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text area is displayed.");
 							string displayedInfoText = subEnrollment.EnrollmentPanelBodyListItemInfoTextAreaTextGet(sectionLabel, panelLabel, panelListText);
-							Report.IsTrue(displayedInfoText.Trim().Contains(infoText.Trim()), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed, '{displayedInfoText}', does not match expected '{infoText}'.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed matches expected.");
+							bool test = Report.IsTrue(displayedInfoText.Trim().Contains(infoText.Trim()), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed, '{displayedInfoText}', does not match expected '{infoText}'.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel '{panelListText}' list item, the info text displayed matches expected.");
 						}
 
 					}
@@ -254,6 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var asam = new AgencyServiceAgreementModal();
 			bool expected = is_isnot == "is";
+			Delay.Seconds(1);
 			Report.IsTrue(asam.WaitForContainerToBeVisible(10) == expected, $"Failure, Agency Service Agreement Modal does not exist.", $"Success, Agency Service Agreement Modal does exist.");
 		}
 
