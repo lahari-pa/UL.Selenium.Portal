@@ -76,6 +76,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Studio desktop is loaded");
 			var thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
+
+			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
+			{
+				Report.Info($"key QASHAAccount did not exist...");
+				Context.FeatureContext.Add("QASHAAccount", shaUser.Username);
+			}
+			else
+			{
+				Report.Info($"key QASHAAccount did  exist, updating instead");
+				Context.FeatureContext["QASHAAccount"] = shaUser.Username;
+
+			}
 		}
 
 
@@ -2697,12 +2709,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
+			if (searchTerm.Contains("saved as "))
+			{
+				searchTerm = searchTerm.Replace("saved as ", "");
+			}
+
 			if (Context.GetFromContext(searchTerm) != null)
 			{
-				searchTerm = Context.GetFromContext("searchTerm").ToString();
+				searchTerm = Context.GetFromContext(searchTerm).ToString();
 			}
 
 			var thisStudioSupplierManager = new StudioSupplierManager();
+
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);

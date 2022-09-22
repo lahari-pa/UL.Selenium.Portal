@@ -329,14 +329,12 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| 978959000000 | Saco 3     | 3        | 102  |              | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 | Saco 4     | 4        | 103  | KS956AG      | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 | Saco 5     | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
+	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:
 		| Search Term | Search Value                  |
 		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
 	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
 	Given I navigate to the landing page
@@ -352,7 +350,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And In the Add Multiple dialog box I select all Retailers
 	Then In the Add Multiple dialog box I click Finish
 	Given I click continue
-	Then I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	Then I should see a list style form error with text: Please fix UPC errors
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
