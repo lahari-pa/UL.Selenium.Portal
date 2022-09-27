@@ -254,6 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var asam = new AgencyServiceAgreementModal();
 			bool expected = is_isnot == "is";
+			Delay.Seconds(1);
 			Report.IsTrue(asam.WaitForContainerToBeVisible(10) == expected, $"Failure, Agency Service Agreement Modal does not exist.", $"Success, Agency Service Agreement Modal does exist.");
 		}
 
