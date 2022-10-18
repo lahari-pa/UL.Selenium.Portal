@@ -375,6 +375,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 101672 \(Physical and Chemical Properties - Primary Physical State = Aerosol / Secondary Physical State = Liquid Spray \)")]
+		public void GivenICallSharedEnterPhysicalProperty_Aerosal()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+
+			Report.StartStep("I should see the Physical and Chemical Properties Page");
+			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
+			MyNewProduct.RadioButtonCountInSection("at least", "2", "Primary Physical State");
+			Report.StartStep("I set the Primary Physical State option to: Aerosol");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
+
+			Report.StartStep("I set the Secondary Physical State field to: Liquid spray");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartStep(
+				"If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
+				"Insoluble in water");
+			Report.StartStep(
+				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection(
+				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+
+		}
+
 		[StepDefinition(@"I call Shared Step 57570 \(Enter Ingredients\) and add the following ingredients:")]
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
@@ -1342,8 +1373,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("pH", "7.1 - 9.9");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartStep("I set the Boiling Point (in Celsius) field to: 20.1C (68.1F) - 35C (95F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
+			//Ticket 63666 indicates boiling point change from "Not tested/Unknown"
+			Report.StartStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			//Ticket 54725 indicates flash point change from ">=93C and <=815C"
@@ -2108,6 +2140,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			Report.StartStep("I delete the product: " + savedAs);
 			new StepsProductGrid().ThenIDeleteTheProduct(savedAs);
+		}
+
+		[StepDefinition(@"I call \(confirm a Product from the Product grid\) to confirm product: (.*)")]
+		public void GivenICallSharedConfirmAProductFromTheProductGrid(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I navigate to the home page");
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			Report.StartStep("I confirm the product: " + savedAs);
+			new StepsProductGrid().ThenIConfirmTheProduct(savedAs);
 		}
 
 		[StepDefinition(
@@ -5819,7 +5861,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("In the Additional Documents to Provide page I Upload File for: Volatile Organic Compounds");
-			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
+			MyNewProduct.UploadPDFFileSectionAndType("VOC Exemption Letter",
 				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("In the Additional Documents to Provide page I Upload File for: Provide Full Product Label (required) ");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
@@ -13559,7 +13601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().IShouldSeeTheUpdateRegistrationPopup();
 			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
 		}
-
+		
 		[StepDefinition(@"I call Shared Step 26900 \(Transportation Details 1 > Not Regulated\)")]
 		public void ICallSharedStep26900()
 		{
