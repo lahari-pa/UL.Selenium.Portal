@@ -1696,6 +1696,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
+		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value )
+		{
+			Report.Info("I Enter manually under the 'VOC VALUE' Column a value for each of the listed States");
+			var selNewProduct = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.IsTrue(selNewProduct.EnterVOCStateValue(value), "Failed to enter 'VOC value' Column a value for each of the listed States",
+				"Successfully enetered 'VOC value' Column a value for each of the listed States");
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
+		}
+
 		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
 		public void DataForStatesInVOCContentAsWeightPercentageTable()
 		{
