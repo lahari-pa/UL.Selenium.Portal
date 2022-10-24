@@ -26,7 +26,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-    [Binding, Scope(Tag = "Shared")]
+	[Binding, Scope(Tag = "Shared")]
 	public class Steps_Shared
 	{
 
@@ -4478,6 +4478,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Select the best Water Solubility description"]);
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
 				table.Rows[0]["Select the best Water Solubility description"]);
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 208261 \(Volatile Organic Compound \(VOC\) Step - enter OTC and CARB - No for state values\)")]
+		public void ICallSharedProductCharacteristics_EnterVocAndCarbSelectStateValueNo(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
+			Report.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
+			Report.StartStep("In the Product Characteristics tab of the New Product Page for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. I select: " +
+				table.Rows[0]["Product granted Alternative Control Plan"]);
+			//BELOW STEP HAS BE TEMP FIXED NEED TO GO BACK AND UPDATE (INSTEAD OF USING SHORT QS TEXT, UPDATE HOW TEXT IS MATCHED)
+			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP(table.Rows[0]["Product granted Alternative Control Plan"]);
+			Report.StartStep("In the Product Characteristics tab of the New Product Page for Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB I enter: " +
+				table.Rows[0]["Amount of VOC by CARB"]);
+			MyNewProduct.SetTheSectionOptionTo(
+				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB",
+				table.Rows[0]["Amount of VOC by CARB"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule I enter: " +
+				table.Rows[0]["Amount of VOC by OTC Model"]);
+			MyNewProduct.SetTheSectionOptionTo(
+				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule",
+				table.Rows[0]["Amount of VOC by OTC Model"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? I select: " +
+				table.Rows[0]["VOC for states"]);
+			MyNewProduct.SetTheSectionOptionTo(
+				"Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?",
+				table.Rows[0]["VOC for states"]);
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}

@@ -3066,6 +3066,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool EnterVOCStateValue(string value)
+		{
+			try
+			{
+				IList<IWebElement> vocvalues = FindElements(By.XPath("//input[@type='text']"), 2);
+
+				foreach (IWebElement vocvalue in vocvalues)
+				{
+					vocvalue.SendKeys(value);
+					vocvalue.SendKeys(Keys.Tab);
+				}
+				return true;
+			}catch(Exception e)
+			{
+				return false;
+			}
+		}
+
 		public string Appearance {
 			get
 			{
@@ -5832,7 +5850,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return rList;
 		}
-
 	}
 
 	public class InputError
