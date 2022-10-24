@@ -2625,6 +2625,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
+			;
 		}
 
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
