@@ -925,7 +925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
 		}
 
-		[StepDefinition(
+			[StepDefinition(
 			@"I call Shared Step 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath()
 		{
@@ -2272,7 +2272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-		[StepDefinition(
+			[StepDefinition(
 			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
 		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData()
 		{
@@ -13636,7 +13636,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().IShouldSeeTheUpdateRegistrationPopup();
 			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
 		}
-		
+	
 		[StepDefinition(@"I call Shared Step 26900 \(Transportation Details 1 > Not Regulated\)")]
 		public void ICallSharedStep26900()
 		{
@@ -13683,6 +13683,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 			ReportDetails.CurrentDetails.UseSubSteps = false;
+		}
+
+		[StepDefinition(
+	@"I call Shared Step 128742 \(Transportation Details - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
+		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_Continue_HappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport",
+				"No, due to an exemption or exception");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step \(Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path\)")]
+		public void GivenICallSharedConfirmDOTExceptions_Continue_HappyPath()
+		{
+			var newProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
+			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheOtherDOTException("test");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			newProduct.ConfirmTheDataSelectedIsVisible();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step \(Transportation Details - Other DOT Exception Validation - Continue - Happy Path\)")]
+		public void GivenICallSharedOtherDOTExceptionValidation_Continue_HappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheOtherDOTException(" ");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			Report.StartStep("I should see the DOT exceptions error message");
+			stepsNewProductIngredients.DOTExceptionsErrorMessageShowing("should");
 		}
 
 	}
