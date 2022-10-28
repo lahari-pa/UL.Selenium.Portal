@@ -2515,7 +2515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
-		{
+		{//Delay.Seconds(9999);
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
@@ -2557,13 +2557,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableSecond.AddRow("Select countries the product may be sold in");
 			tableSecond.AddRow(
-				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
-			Report.StartStep("I only the following sections");
-			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
-			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
+			tableSecond.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableSecond.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+		//	tableSecond.AddRow(
+		//	"Product is a Retailer's Private Label or Brand");
+		//	tableSecond.AddRow(
+		//"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			Report.StartStep("I only see the following sections");
+			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
+			//Delay.Seconds(9999);
+			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			Report.StartStep(
@@ -2574,7 +2583,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
-
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
 		public void ICallSharedIngredients_AddAnyChemical(string name)
 		{
