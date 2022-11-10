@@ -138,6 +138,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		
 		private void UpdatePasswordForUser(string alias)
 		{
+			Report.StartStep($"I update the password for user: {alias}");
+
 			SoftwareCredentialBasic user = TReVorSettings.Credentials.GetCredential(alias);
 			if (user == null)
 			{
@@ -166,8 +168,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a variable called 'TestUrl'!");
 				return;
 			}
-
-			Report.StartStep($"I update the password for user: {alias}");
 			
 			if (!this.LoginToAccount(user))
 			{
