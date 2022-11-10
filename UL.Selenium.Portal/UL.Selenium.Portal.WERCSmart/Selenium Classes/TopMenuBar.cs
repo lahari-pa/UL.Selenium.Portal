@@ -10,35 +10,33 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class TopMenuBar : BaseObject
+	class TopMenuBar : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='navbar navbar-inverse navbar-fixed-top']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@class='navbar navbar-inverse navbar-fixed-top']");
 
 		public bool AccountOptionsVisible()
 		{
-			return this.containerElement.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
+			return this.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
 		}
 
 		public bool MyAccountOptionPresent()
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
+			return this.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
 		}
 
 		public bool SignOutOptionPresent()
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
+			return this.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
 		}
 
 		public bool ClickOnUserTopRight()
 		{
-			return this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2).TryClick();
+			return this.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2).TryClick();
 		}
 
 		public bool ClickOnHelpTopRight()
 		{
-			return this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle live-help')]"), 2).TryClick();
+			return this.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle live-help')]"), 2).TryClick();
 		}
 
 		public bool ClickSignOut()
@@ -69,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				int i = 0;
 				while (i < 10)
 				{
-					IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
+					IList<IWebElement> aTags = this.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
 					if (aTags.FirstOrDefault(x => x.Text == option.Trim()).TryClick())
 					{
 						return true;
@@ -90,33 +88,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WercSmartLogoShowing()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
+			return this.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
 		}
 
 		public bool ClickWercsSmartLogo()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool NotificationIconShowing()
 		{
-			return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
+			return this.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
 		}
 
 		public void ClickNotificationIcon()
 		{
-			this.containerElement.FindElement(By.XPath("..//i[@class='fa fa-bell']/.."), 2).Click();
+			this.FindElement(By.XPath("..//i[@class='fa fa-bell']/.."), 2).Click();
 		}
 
 		public bool UserIconShowing()
 		{
-			return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
+			return this.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
 		}
 
 		public string GetCurrentUser()
 		{
 			Report.Info("Beginning get current user");
-			IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+			IWebElement ddt = this.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
 
 			if (ddt == null)
 			{
@@ -130,34 +128,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickLiveHelp()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[contains(@class,'live-help')]"), 2).TryClick();
+			return this.FindElement(By.XPath(".//a[contains(@class,'live-help')]")).TryClick();
 		}
 
 		public bool LoggedIn()
 		{
-			IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
-			if (ddt == null)
-			{
-				return false;
-			}
-			return true;
-
+			return this.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]")) != null;
 		}
 
 		public string GetCurrentUserText()
 		{
-			IWebElement el;
-			try
-			{
-				el = this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav pull-right']//a[i[@class='fa fa-user']]"), 2);
-			}
-			catch (NoSuchElementException)
-			{
-				return null;
-			}
-
-			var foundText = el.Text;
-			return foundText;
+			IWebElement el = this.FindElement(By.XPath("//ul[@class='nav navbar-nav pull-right']//a[i[@class='fa fa-user']]"));
+			return el?.Text;
 		}
 	}
 }

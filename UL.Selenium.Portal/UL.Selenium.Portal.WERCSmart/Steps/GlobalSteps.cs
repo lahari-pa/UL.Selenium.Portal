@@ -20,17 +20,16 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using UL.Automation.Utilities.Functions;
 using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Utilities;
-using OpenQA.Selenium.Chrome;
 using System.Diagnostics;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using TReVor.Core.Classes.Software;
 using UL.Selenium.Portal.WERCSmart.Extensions;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 using UL.Automation.Utilities.Mailosaur.Classes;
-using UL.Automation.Reporting.Classes;
+using UL.Automation.TReVor.Classes;
+using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
+using Mailosaur;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -187,64 +186,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		public string GetEmailForAccount(string accountSavedAs)
+		public string GetEmailForAccount(string alias)
 		{
-			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
 			if (user == null)
 			{
-				string Branch = TReVorSettings.SoftwareBranch;
-				string regexPattern = @"^.*(?=(\/))";
-				var regex = new Regex(regexPattern);
-				Match match = regex.Match(Branch);
-				if (match.Success)
-				{
-					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
-				}
-				else
-				{
-					throw new Exception("User: " + accountSavedAs + " could not be found");
-				}
+				throw new Exception($"Failed to find a user with alias: {alias}!");
 			}
 
-			return user.Username;
+			return user.UserName;
 		}
 
-		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
+		public void LoginToAccount(string alias, bool attemptOnce = false)
 		{
-			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
-
-			if (new TopMenuBar().LoggedIn())
-			{
-				Report.Info("Logged in, logging out");
-				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
-			}
-
+			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
 			if (user == null)
 			{
-				string Branch = TReVorSettings.SoftwareBranch;
-				string regexPattern = @"^.*(?=(\/))";
-				var regex = new Regex(regexPattern);
-				Match match = regex.Match(Branch);
-				if (match.Success)
-				{
-					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
-				}
-				else
-				{
-					throw new Exception("User: " + accountSavedAs + " could not be found");
-				}
+				Report.Failure($"Failed to find a user with alias: {alias}!");
+				return;
 			}
-			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
+
+			TopMenuBar topMenuBar = new TopMenuBar();
+			if (topMenuBar.WaitForContainerToBeVisible(1) && topMenuBar.LoggedIn())
 			{
-				if (attemptOnce)
+				Report.Info("Logged in, logging out");
+				if (!Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out"))
 				{
-					this.AttemptToLoginWithEmailAndPassword(user.Username, user.Password);
-					new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 					return;
 				}
-				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
-				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
+			
+			if (attemptOnce)
+			{
+				this.AttemptToLoginWithEmailAndPassword(user.UserName, user.Password);
+			}
+			else
+			{
+				this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
+			}
+
+			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 		}
 
 		/// <summary>
@@ -370,33 +351,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void AttemptToLoginWithEmailAndPassword(string email, string password)
 		{
 			Report.Info("Beginning I login with email and password");
-			var selLandingPage = new LandingPage();
-			if (!selLandingPage.WaitForContainerToBeVisible(5))
-			{
-				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
-				{
-					throw new Exception("HTTP Server error 503 was thrown!");
-				}
-				throw new Exception("Landing page did not load!");
-			}
-
-			Report.Info("Clicking 'Log In' on the Landing Page");
-			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
-			var selHomepage = new Homepage();
-			var selLogin = new Login();
-			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
+			
+			if (!this.PerformBasicLogin(email, password))
 			{
 				return;
 			}
 
-			Report.Info("Entering Email: '" + email + "'");
-			selLogin.EmailField = email;
-			Report.Info("Entering Password: '*********'");
-			selLogin.PasswordField = password;
-			Report.Info("Clicking login");
-			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
-			selLogin = new Login();
-			// check we have redirected from the log in page
+			Login selLogin = new Login();
+
+			// Check we have redirected from the log in page
 			if (!selLogin.WaitForContainerToBeInvisible())
 			{
 				if (!selLogin.Password_Error_Text().IsNullOrEmpty())
@@ -409,8 +372,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			selHomepage = new Homepage();
-			// check for home page
+
+			PasswordExpired passwordExpired = new PasswordExpired();
+			if (passwordExpired.WaitForContainerToBeVisible(2))
+			{
+				Report.Warning("User password requires reset.");
+				return;
+			}
+
+			Homepage selHomepage = new Homepage();
 
 			new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
 
@@ -437,6 +407,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to log in");
 			Report.Screenshot();
+		}
+
+		internal bool PerformBasicLogin(string emailAddress, string password)
+		{
+			LandingPage selLandingPage = new LandingPage();
+			if (!selLandingPage.WaitForContainerToBeVisible(5))
+			{
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
+				{
+					throw new Exception("HTTP Server error 503 was thrown!");
+				}
+
+				throw new Exception("Landing page did not load!");
+			}
+
+			Report.Info("Clicking 'Log In' on the Landing Page");
+			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
+
+			Login selLogin = new Login();
+			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
+			{
+				return false;
+			}
+
+			Report.Info($"Entering Email: '{emailAddress}'");
+			selLogin.EmailField = emailAddress;
+			Report.Info("Entering Password: '*********'");
+			selLogin.PasswordField = password;
+			Report.Info("Clicking login");
+			return Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
 		}
 
 		[StepDefinition(@"I logout")]
@@ -1480,161 +1480,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			UL.Automation.SpecFlow.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
-		}
-
-		[StepDefinition(@"I update the password for the following TReVor test users:")]
-		public void IUpdateThePasswordForTheFollowingTrevorTestUsers(Table users)
-		{
-			var usersSavedAs = new List<string>();
-			ReportDetails.CurrentDetails.UseSubSteps = true;
-			users.Rows.Cast<TableRow>().ToList().ForEach(x => usersSavedAs.Add(x["User"]));
-			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
-			foreach (string savedAs in usersSavedAs)
-			{
-				Report.StartStep($"I update the password for user: {savedAs}");
-				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
-				var selMyAccount = new StepsMyAccount();
-				Report.Info("Navigating to My Account from the homepage");
-				selMyAccount.GivenINavigateToTheMyAccountPage();
-				Report.Info("Clicking Reset Password for the current logged in user");
-				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
-				Report.Info("Updating the password for test user " + savedAs);
-				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
-				Report.Info("Logging out");
-				this.GivenILogout();
-				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.RefreshUsers();
-				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
-				Report.Info("Logging out");
-				this.GivenILogout();
-			}
-		}
-
-		[StepDefinition(@"I update the password for all TReVor Test Users within the current branch")]
-		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
-		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
-			List<TReVorTestUsers> users = TestUsers.Users;
-			IEnumerable<TReVorTestUsers> allUsers = users.Where(x => x.SoftwareId == TReVorSettings.EditionInformation.SoftwareId && x.BranchName == TReVorSettings.SoftwareBranch);
-			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
-			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
-			foreach (string savedAs in usersSavedAs)
-			{
-				TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
-				if (!user.Username.Contains("@"))
-				{
-					Report.Info($"The email did not contain an '@' so continuing to the next user.");
-					continue;
-				}
-				if (user.SavedAs == "PayPal")
-				{
-					Report.Info($"We do not need to update the PayPal password");
-					continue;
-				}
-				Report.StartStep($"I update the password for user: {savedAs}");
-				//this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
-				this.LoginToAccount(savedAs, true);
-				string alert = new RetailPartners().WarningMessage();
-				if (alert != null && alert.Contains("The recipients listed below have additional Data Consent requests"))
-				{
-					Report.Info("Account needs to be reviewed - data consent requests. Continuing to the next account");
-					Report.Info("Logging out");
-					this.GivenILogout();
-					continue;
-				}
-				if (!new Homepage().WaitForContainerToBeVisible())
-				{
-					// if 90 day expiry attempt to reset it
-					var passwordExpired = new PasswordExpired();
-					if (passwordExpired.Wait_for_load())
-					{
-						string message = passwordExpired.TopMessage();
-						if (message != null && message.Contains("Your password has expired after 90 days for security reasons"))
-						{
-							Report.Info("The password expired after 90 days.");
-							Report.Info("Attempting to reset password");
-							string currentPassword = user.Password;
-							Report.Info("Entering original password: *******");
-							passwordExpired.OriginalPassword = currentPassword;
-							string newPassword = "";
-							// If the current password ends in a character, append with a 1 for the new password
-							if (!char.IsDigit(currentPassword.Last()))
-							{
-								newPassword = currentPassword + "1";
-							}
-							else
-							{
-								char[] passwordChr = currentPassword.ToCharArray();
-								string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
-								newPassword = currentPassword.TrimEnd(result.ToCharArray()) + (Convert.ToInt32(result) + 1);
-							}
-							Report.Info("Entering New Password: *******");
-							passwordExpired.NewPassword = newPassword;
-							Report.Info("Entering Verify Password: *******");
-							passwordExpired.VerifyPassword = newPassword;
-							Report.Info("Clicking continue");
-							passwordExpired.ClickContinue();
-							GeneralUtilities.Wait_for_load_finish();
-							// Thank You page
-							if (passwordExpired.TopHeading().Contains("Thank You"))
-							{
-								Report.Info("Updating the password in TReVor Test Users");
-								TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
-								Report.Info("Navigating to the landing page");
-								SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
-								Report.Info("Checking I can log in with the new credentials");
-								TestUsers.RefreshUsers();
-								this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
-								Report.Info("Logging out");
-								this.GivenILogout();
-								SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
-								continue;
-							}
-							Report.Failure("Failed to update password in 90 day expiry page");
-							Report.Screenshot();
-							continue;
-						}
-						// then we're on the log in screen (incorrect password)
-						Report.Info("Navigating to the landing page");
-						SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
-						continue;
-					}
-					// The home page didn't load and it wasn't due to password expiry so dead end.
-					Report.Failure("Failed to log in with user: " + savedAs + ". Did not find the top menu bar!");
-					if (new TopMenuBar().Wait_for_load())
-					{
-						Report.Info("Logging out");
-						this.GivenILogout();
-					}
-					else
-					{
-						Report.Info("Unable to log out so navigating to the test url");
-						SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
-					}
-					continue;
-				}
-				var selMyAccount = new StepsMyAccount();
-				Report.Info("Navigating to My Account from the homepage");
-				selMyAccount.GivenINavigateToTheMyAccountPage();
-				Report.Info("Clicking Reset Password for the current logged in user");
-				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
-				Report.Info("Updating the password for test user " + savedAs);
-				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
-				Report.Info("Logging out");
-				this.GivenILogout();
-				if (!new LandingPage().WaitForContainerToBeVisible())
-				{
-					Report.Info("Directed to an unexpected WercSmart landing page!");
-					Report.Info("Navigating to the landing page");
-					new GlobalSteps().NavigateToLandingPage();
-				}
-				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.RefreshUsers();
-				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
-				Report.Info("Logging out");
-				this.GivenILogout();
-				SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
-			}
 		}
 
 		[StepDefinition(@"I save to context name: (.*) and value: (.*)")]
