@@ -1348,12 +1348,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return rList;
 		}
 
+		public void ConfirmTheDataSelectedIsVisible()
+		{
+
+			FindElement(By.XPath("//h3[text()='Transportation Details 1']")).Click();
+
+			Delay.Seconds(5);
+
+			IWebElement ele = FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"));
+			string text = ele.GetAttribute("value");
+			if (text == null)
+			{
+				Report.Info("No text is displayed");
+			}
+			else
+			{
+				Report.Info("Text entered is displayed : " + text);
+			}
+			
+			IWebElement ele1 =FindElement(By.XPath(".//input[@value='TRNSEX03']"));
+			if (ele1.GetAttribute("checked")!=null)
+			{
+				Report.Info("checkbox selected is visible");
+			}
+			else
+			{
+				Report.Info("checkbox selected is not visible");
+			}
+			IWebElement verifyIsSelected = FindElement(By.XPath("(//input[@type='radio'])[2]"));
+			if (verifyIsSelected.GetAttribute("checked") != null)
+			{
+				Report.Info("'No, due to an exemption or exception' selected is visible");
+			}
+			else
+			{
+				Report.Info("'No, due to an exemption or exception' selected is not visible");
+			}
+
+		}
+
+		public bool InputOtherDotException(string text)
+		{
+			IWebElement ele = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"), 2);
+			return ele.TryEnterText(text);
+		}
+
 		public bool CommentsAreaShowing()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Optional Comments']/../../../..//textarea"), 2);
 			return el != null;
 		}
-
+		
 		public bool InputCommentAreaText(string text, bool append = false)
 		{
 			try
