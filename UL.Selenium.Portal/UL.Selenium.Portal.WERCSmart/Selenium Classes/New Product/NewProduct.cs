@@ -1355,7 +1355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			Delay.Seconds(5);
 
-			IWebElement ele = FindElement(By.XPath("(//input[@type='text'])[1]"));
+			IWebElement ele = FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"));
 			string text = ele.GetAttribute("value");
 			if (text == null)
 			{
@@ -1366,7 +1366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info("Text entered is displayed : " + text);
 			}
 			
-			IWebElement ele1 =FindElement(By.XPath("(//input[@type='checkbox'])[4]"));
+			IWebElement ele1 =FindElement(By.XPath(".//input[@value='TRNSEX03']"));
 			if (ele1.GetAttribute("checked")!=null)
 			{
 				Report.Info("checkbox selected is visible");
@@ -1389,17 +1389,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool InputOtherDotException(string text)
 		{
-
-			try
-			{
-				FindElement(By.XPath("(//input[@type='text'])[1]"), 2).SendKeys(text);
-				return true;
-
-			}
-			catch (Exception e)
-			{
-				return false;
-			}
+			IWebElement ele = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"), 2);
+			return ele.TryEnterText(text);
 		}
 
 		public bool CommentsAreaShowing()
