@@ -1110,5 +1110,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(refValue), "failed to enter ingredient reference number", "Successfully entered ingredient reference number");
 		}
 
+		[StepDefinition(@"I (should|should not) see the DOT exceptions error message")]
+		public void DOTExceptionsErrorMessageShowing(string should)
+		{
+			bool expected;
+			switch (should)
+			{
+				case "should":
+					expected = true;
+					break;
+				case "should not":
+					expected = false;
+					break;
+				default:
+					Report.Failure("Invalid step parameter! Must be 'should' or 'should not'!");
+					return;
+			}
+			Report.IsTrue(expected != new Ingredients().GetDOTExceptionErrorMessage().IsNullOrEmpty(),
+				$"{(expected ? "Did not expect" : "Expected")} to see the DOT exceptions error message!",
+				$"DOT exceptions error message {(expected ? "was" : "was not")} showing as expected");
+		}
+
 	}
 }

@@ -40,18 +40,21 @@ Given I add the following CA Cleaning ingredients:
 Given I click continue
 Then I should see an error message: Your product registration qualifies for the California SB 258 Cleaning Right-to-Know regulation based on the type of product being registered, as well as chemicals included with the registration.
 Then I should see an error message: Ingredients require Functional Purpose or Ingredient Type selections for one or more listed ingredients.
-#Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
-#| Error                                   |
-#| Ingredient Type                         |
-#Then I click the close button for the CA Cleaning Ingredients Popup
-#Then I click the 'x' button for component number 1
-#Given I click: YES in the 'Remove Component from My Ingredients' pop up
+And I confirm the 'Select all' checkbox in the Ingredients table is unchecked
+	And I click 'Select all' in the Ingredients table
+	And I confirm that all ingredients in the table are selected
+	And I click the 'Delete' button in the Ingredients table
+	And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
+	And in the modal dialog I click the "YES" button
+	And I confirm there are a total of: 0 ingredients in the table
+
 Given I add the following CA Cleaning ingredients:  
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | true       | AQUA           | AQUA1       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| Water         | 100     | false               | true        | AQUA           | AQUA1       | Fragrance           | Fragrance Component           | true  | true      |
 Then I click continue
 And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
+
 
 
 

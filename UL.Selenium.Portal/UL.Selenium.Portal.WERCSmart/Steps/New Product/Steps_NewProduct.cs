@@ -1168,6 +1168,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
+		[StepDefinition(@"I enter the following into the Other DOT Exception field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheOtherDOTException(string text)
+		{
+			Report.IsTrue(new NewProduct().InputOtherDotException(text), "Text: " + text + " was not successfully inputted into the Other DOT Exception field!", "Text: " + text + " was successfully inputted into the Other DOT Exception field!");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
@@ -1694,6 +1700,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				Report.IsTrue(passed, "Voc percent data did not match for state: " + expectedinfo.State, "Voc percent data matched for state: " + expectedinfo.State);
 			}
+		}
+
+		[StepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
+		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value )
+		{
+			Report.Info("I Enter manually under the 'VOC VALUE' Column a value for each of the listed States");
+			var selNewProduct = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.IsTrue(selNewProduct.EnterVOCStateValue(value), "Failed to enter 'VOC value' Column a value for each of the listed States",
+				"Successfully enetered 'VOC value' Column a value for each of the listed States");
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
 		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]

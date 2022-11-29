@@ -982,6 +982,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		//confirm method
+		[StepDefinition(@"I confirm the product: (.*)")]
+		public void ThenIConfirmTheProduct(string savedas)
+		{
+			Report.Info("Attempting to get product from context");
+			if (!Context.Contains(savedas))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedas}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedas);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+			Report.Info("Attempting to delete: " + Product.Name);
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
+			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+			{
+				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
+				{
+					GeneralUtilities.Wait_for_load_finish();
+					if (!ProductGrid.RowsAreFoundInProductGrid())
+					{
+						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
+						return;
+					}
+					
+					Report.Info($"Products with ID '{Product.Id}' were found in the grid!");
+				}
+			}
+		}
+
 		[StepDefinition(@"The current page in the products grid is: (.*)")]
 		public void CurrentPageProductsGrid(string expectedPage)
 		{

@@ -9,15 +9,15 @@
 
 Feature: Reset Passwords
 
-@testaccount
-@tfs_design
-@ignore
-@ScenarioId:7031
+#@testaccount
+#@tfs_design
+#@ignore
+#@ScenarioId:7031
 Scenario: Reset password for specific TReVor test user accounts
 
 Given I update the password for the following TReVor test users:
-| User           |
-| ProductAccount |
+| User       |
+| UPCAccount |
 
 @TrevorUsers
 @JacobRun

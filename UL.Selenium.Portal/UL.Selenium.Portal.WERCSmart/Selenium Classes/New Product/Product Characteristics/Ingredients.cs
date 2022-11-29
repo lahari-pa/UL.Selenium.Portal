@@ -775,7 +775,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return false;
 		}
-
+		public string GetDOTExceptionErrorMessage()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//span[contains(text(),'Please select at least one option from above.')]"), 2);
+			return el?.Text;
+		}
 		public string GetIngredientErrorMessage()
 		{
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'formulation-grid')]//div[@role='alert']//span[starts-with(@data-bind,'text')]"), 2);
