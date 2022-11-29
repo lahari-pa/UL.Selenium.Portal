@@ -2997,6 +2997,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
