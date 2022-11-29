@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Mailosaur;
+using Mailosaur.Models;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
 using NUnit.Framework;
@@ -11,6 +12,9 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Automation.Reporting;
 using UL.Automation.Utilities;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -55,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should remain on the Forgotten Password dialog")]
 		public void ThenIShouldRemainOnTheForgottenPasswordDialog()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I should remain on the Forgotten password dialog");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I should remain on the Forgotten password dialog");
 			try
 			{
 				Delay.Seconds(5);
@@ -72,10 +76,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a new email address for user saved as (.*)")]
 		public void GivenIGenerateANewEmailAddressForUser(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I generate a new email address for user saved as " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I generate a new email address for user saved as " + savedAs);
 			try
 			{
-				string sEmail = MailosaurFunctions.CreateEmail("<random>");
+				string sEmail = MailosaurHelpers.DefaultMailbox.CreateEmail("<random>");
 				var newUser = new User {
 					Email = sEmail
 				};
@@ -92,8 +96,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter a Wercsmart email address: (.*)")]
 		public void GivenIEnterAWercsmartEmailAddress(string email)
 		{
-			string sEmail = MailosaurFunctions.CreateEmail(email);
-			Report.StartStep(ReportSettings.StepCounter + " - I enter a Wercsmart email address: " + sEmail);
+			string sEmail = MailosaurHelpers.DefaultMailbox.CreateEmail(email);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I enter a Wercsmart email address: " + sEmail);
 			try
 			{
 				Delay.Seconds(10);
@@ -111,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Forgotten Password window I should see the following error messages: (.*)")]
 		public void ThenInTheForgottenPasswordWindowIShouldSeeTheFollowingErrorMessages(string errorMessages)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - In the Forgotten Password window I should see the following error messages:" + errorMessages);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - In the Forgotten Password window I should see the following error messages:" + errorMessages);
 			try
 			{
 				int i = 0;
@@ -149,7 +153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter an email address: (.*)")]
 		public void GivenIEnterAEmailAddress(string email)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I enter email address: " + email);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I enter email address: " + email);
 			try
 			{
 				if (email.Contains("savedas"))
@@ -184,7 +188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the email address for user saved as: (.*)")]
 		public void GivenIEnterAEmailAddressForUser(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I enter email address for user: " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I enter email address for user: " + savedAs);
 			try
 			{
 				Report.Info("Getting user information for User: '" + savedAs + "'");
@@ -205,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the email address for the Account saved as: (.*)")]
 		public void GivenIEnterTheEmailAddressForTheAccountSavedAsX(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I enter email address for user: " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I enter email address for user: " + savedAs);
 			try
 			{
 				Report.Info("Getting user information for User: '" + savedAs + "'");
@@ -227,11 +231,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the email should contain a link to reset a WERCSmart Account Password")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a link the email which allows Password Reset");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking whether there is a link the email which allows Password Reset");
 			try
 			{
 				Report.Info("Checking whether there is a link the email which allows Password Reset");
-				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				var matchingEmail = (Mailosaur.Models.Message)Context.ScenarioContext["Matching"];
 				string myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);
@@ -246,14 +250,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the link in the email I get directed to security questions")]
 		public void WhenIClickTheLinkInTheEmailIGetDirectedToSecurityQuestions()
 		{
-			Report.StartStep(ReportSettings.StepCounter + "- I click the link in the email I get directed to security questions");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I click the link in the email I get directed to security questions");
 			try
 			{
 				Report.Info("Clicking the link which allows Password Reset");
 
 				//IWebElement myLink = IWebElement;
 
-				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				var matchingEmail = (Mailosaur.Models.Message)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
 		
@@ -294,7 +298,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the message should contain (.*)")]
 		public void ThenInTheForgottenPasswordWindowIShouldSeeTheFollowingConfirmationMessage(string confirmMessage)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - In the Forgotten Password window I should see the following confirmation message:" + confirmMessage);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - In the Forgotten Password window I should see the following confirmation message:" + confirmMessage);
 
 			try
 			{
@@ -318,7 +322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the login button in the Forgotten Password window")]
 		public void ClickTheLoginButton()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Click the WERCSmart login button");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Click the WERCSmart login button");
 			try
 			{
 				Report.Info("Beginning to click the Login button");
@@ -326,7 +330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (!selForgotPasswordpage.Wait_for_load(1))
 				{
 					Report.Info("Not on the Homepage, navigating...");
-					SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
+					SeleniumWebDriver.CurrentDriver.Navigate(SeleniumWebDriver.BaseTestUrl);
 					Report.IsTrue(selForgotPasswordpage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
 				}
 
@@ -347,7 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the cancel button")]
 		public void GivenIClickTheCancelButton()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I click the cancel button");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I click the cancel button");
 			try
 			{
 				var selForgotten = new ForgottenPassword();
@@ -380,7 +384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I answer the security questions for Account: (.*)")]
 		public void ThenIAnswerTheSecurityQuestionsForAccountX(string savedAs)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I answer the security questions for Account: " + savedAs);
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I answer the security questions for Account: " + savedAs);
 			try
 			{
 				var myForgotPw = new ForgottenPasswordQuestions();
@@ -396,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter a new password: (.*) and verify: (.*)")]
 		public void ThenIEnterANewPasswordPasswordAndVerifyPassword(string newPw, string verifyPw)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I answer the security questions");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I answer the security questions");
 			try
 			{
 				var myForgotPw = new ForgottenPasswordQuestions();
@@ -417,7 +421,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Login button on Forgotten Password")]
 		public void ThenIClickTheLoginButton()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I click the Login button");
+			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - I click the Login button");
 			try
 			{
 				var myForgotPw = new ForgottenPasswordQuestions();

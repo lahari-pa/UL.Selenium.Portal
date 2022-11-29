@@ -32,7 +32,8 @@
 
 Feature: UPCTransporationRules
 
-@ScenarioId:6425
+@ignore
+@TestCase:122304
 Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -40,7 +41,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode7S4
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 1
 	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -65,7 +66,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -76,7 +77,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode7S4
 
-@ScenarioId:6424
+@TestCase:122303
 	Scenario: [122303] UPC Transportation Error - Mode 7 - Scenario 23 	
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -116,9 +117,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -140,7 +141,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 	
 
-@ScenarioId:6422
+@TestCase:122302
 	Scenario: [122302] UPC Transportation Error - Mode 6 - Scenario 3
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -173,7 +174,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -184,7 +185,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S3
 
-@ScenarioId:6421
+@ignore
+@TestCase:122301
 	Scenario:	[122301] UPC Transportation Error - Mode 6 - Scenario 28
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -192,7 +194,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode6S28
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -210,7 +212,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -221,7 +223,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S28
 
-@ScenarioId:6420
+@TestCase:122300
 	Scenario: [122300] UPC Transportation Error - Mode 6 - Scenario 15	
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -260,9 +262,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -281,7 +283,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
-@ScenarioId:6419
+@TestCase:122299
 	Scenario: [122299] UPC Transportation Error - Mode 4x5 - Scenario 4
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -314,7 +316,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type | Size | DPCI | Quantity |
@@ -325,7 +327,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S4
 
-@ScenarioId:6415
+@ignore
+@TestCase:122295
 	Scenario: [122295] UPC Transportation Error - Mode 4x5 - Scenario 15
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -333,7 +336,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S15
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -351,7 +354,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -362,8 +365,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S15
 
-
-@ScenarioId:6416
+@ignore
+@TestCase:122296
 	Scenario: [122296] UPC Transportation Error - Mode 4x5 - Scenario 20
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -371,7 +374,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: Mode45S20
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	And I set the Boiling Point (in Celsius) field to: 1
 	And I set the Flash Point (in Celsius) field to: 65	
 	And I set the Flash Point Testing Method Used field to: Closed cup method
@@ -389,7 +392,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -401,7 +404,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S20
 
 
-@ScenarioId:6417
+@TestCase:122297
 	Scenario: [122297] UPC Transportation Error - Mode 4x5 - Scenario 25 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -440,9 +443,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -471,7 +474,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 	
-@ScenarioId:6418
+@TestCase:122298
 	Scenario: [122298] UPC Transportation Error - Mode 4x5 - Scenario 35 
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -509,9 +512,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -534,8 +537,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
-
-@ScenarioId:10800
+@ignore
+@TestCase:122288
 	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -543,7 +546,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode1S6
 		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 100
 		And I set the Flash Point (in Celsius) field to: 50
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -581,9 +584,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10006
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -599,7 +602,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
 
 
-@ScenarioId:10883
+@TestCase:122287
 	Scenario:  [122287] UPC Transportation Error - Mode 1 - 3 
 		#If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -641,9 +644,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10003
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -658,7 +661,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S3
 
-@ScenarioId:10292
+@TestCase:122286
 	Scenario: [122286] UPC Transportation Error - Mode 1 - 21
 		#If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -704,9 +707,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -724,6 +727,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 
 
+@TestCase:122290
 	Scenario:  [122290] UPC Transportation Error - Mode 2/3 - 2
 		#If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -775,9 +779,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20002
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		
 
@@ -798,8 +802,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S2
 
-
-@ScenarioId:10815
+@ignore
+@TestCase:122289
 	Scenario:  [122289] UPC Transportation Error - Mode 2/3 - 16
 		#If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -807,7 +811,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S16
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -863,9 +867,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Given in the New Product page I click Continue
 
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20016
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -886,7 +890,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
-@ScenarioId:10816
+@ignore
+@TestCase:122291
 	Scenario:  [122291] UPC Transportation Error - Mode 2/3 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -894,7 +899,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode23S34
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -944,9 +949,9 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC20034
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC20034 |
@@ -957,6 +962,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S34
 
 
+@TestCase:122294
 Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		#If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -996,9 +1002,9 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40005
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1014,7 +1020,8 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S5
 
-
+@ignore
+@TestCase:122292
 Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		#If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1022,7 +1029,7 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S21
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1061,9 +1068,9 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 
@@ -1078,7 +1085,8 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S21
 
-
+@ignore
+@TestCase:122293
 Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1086,7 +1094,7 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 		Then I save the product information as: Mode45S34
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 		And I set the Boiling Point (in Celsius) field to: 200
 		And I set the Flash Point (in Celsius) field to: 100
 		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
@@ -1125,9 +1133,9 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I should see the Retailer Page
 		Given in the New Product page I click Continue
 		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
+		And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 		Then I generate a random UPC number and save as: UPC40021
-		Given I click the 'Add UPC' button
+		Given I click the 'Add' button
 
 		#Andrews step to check transportation column is generated correctly
 

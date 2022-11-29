@@ -28,8 +28,8 @@
 @run_Sprint16
 Feature: Sprint 16
 
-
-@ScenarioId:1575
+@ignore
+@TestCase:112940
 Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 200 to 500 Characters and Spaces.
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -49,7 +49,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Then I should see the Comments Page for the New Product
+	Then I should see the Optional Comments Page for the New Product
 	And The remaining characters counter displays: 500/500
 	Given I append the following into the comments field: comments
 	And The remaining characters counter displays: 492/500
@@ -74,7 +74,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #Incomplete: waiting for bug 114335 to resolve to complete.
 @tfs_design
 @ignore
-@ScenarioId:5947
+@TestCase:113004
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the My Reports icon in the QuickLinks Pane

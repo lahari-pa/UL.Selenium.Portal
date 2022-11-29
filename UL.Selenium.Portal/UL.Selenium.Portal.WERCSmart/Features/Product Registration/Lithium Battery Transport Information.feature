@@ -19,7 +19,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto16 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1069
+@TestCase:65512
 Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -34,7 +34,7 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: Installed in the product
 	Given I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | lithiumbattery |
 	Given I continue to the next screen in the product registration
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
@@ -86,7 +86,7 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65512
 
-@ScenarioId:1070
+@TestCase:65516
 Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -98,7 +98,7 @@ Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Bat
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | lithiumbattery |
 	Given I continue to the next screen in the product registration
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
@@ -150,7 +150,7 @@ Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Bat
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
 
-@ScenarioId:1071
+@TestCase:65520
 Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -162,7 +162,7 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: Installed in the product
 	Given I add the following batteries:
-		| Battery Type    | Manufacturer                                                 | Number of batteries per package | How many batteries required to run | Saved As |
+		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithium  |
 	Given I continue to the next screen in the product registration
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
@@ -214,7 +214,7 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65520
 
-@ScenarioId:1072
+@TestCase:65523
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -226,7 +226,7 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
-		| Battery Type    | Manufacturer                                                  | Number of batteries per package | How many batteries required to run | Saved As |
+		| Battery Type    | Manufacturer                                                  | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Primary | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithium  |
 	Given I continue to the next screen in the product registration
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path

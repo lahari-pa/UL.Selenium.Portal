@@ -18,6 +18,7 @@ Feature: Product Registration
 @tfs_design
 @ignore
 #Non-important scenario - Philip
+@TestCase:130389
 Scenario: [130389] Demo Scenario
 Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -38,7 +39,8 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
-@ScenarioId:483
+@ignore
+@TestCase:63705
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -65,7 +67,7 @@ Scenario: [63705] New Product - BCP
 	And I should see the Product Includes Battery Page
 	And For 'Indicate how battery is packaged' I select: The battery is shipped with but not included in my product.
 	And I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | battery1 |
 		| Alkaline     | <any>        | 6                               | 6                                  | battery2 |
 	And in the New Product page I click Continue
@@ -90,7 +92,7 @@ Scenario: [63705] New Product - BCP
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value        |
 		| UPCNumber     | 630509667031 |
@@ -113,7 +115,8 @@ Scenario: [63705] New Product - BCP
 	Given I navigate to the home page
 	Then I delete the product: TestCase63705
 
-@ScenarioId:484
+@ignore
+@TestCase:63724
 Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
 	# DPCI: 087-06-680
@@ -140,7 +143,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC63724 |
@@ -176,7 +179,8 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
-@ScenarioId:6225
+@ignore
+@TestCase:65441
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -207,7 +211,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Granular
 	And I set the water mixture question to: Yes
-	And I set the water solubility description to: Completely soluble
+	And I set the water solubility description to: Dispersible
 	Given in the New Product page I click Continue
 	
 
@@ -230,7 +234,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
 	#Enter UPC
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC65441 |
@@ -248,7 +252,8 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I navigate to the home page
 	Then I delete the product: TestCase65441
 
-@ScenarioId:485
+@ignore
+@TestCase:65392
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -286,6 +291,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 
 @tfs_design
 @ignore
+@TestCase:67661
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	# Checking that the test will run correctly by handling extra screens / removing existing products
@@ -319,7 +325,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the Primary Physical State option to: Solid
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water option to: No
-	And I set the Select the best Water Solubility description option to: Very soluble
+	And I set the Select the best Water Solubility description option to: Dispersible
 	And in the New Product page I click Continue
 # Ingredients Page
 	And I should see the Ingredients Page
@@ -369,8 +375,8 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I should see the Retailer Page
 	Given in the New Product page I click Continue
 	# Universal Product Code (UPC) Page
-	And I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add UPC' button
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC67661 |
@@ -423,7 +429,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 @jacob
 @tfs_design
 @ignore
-@ScenarioId:482
+@TestCase:105352
 Scenario: [105352] Product Comments screen Max input length
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -449,7 +455,7 @@ Scenario: [105352] Product Comments screen Max input length
 	And I should see the Product Includes Battery Page
 	And For 'Indicate how battery is packaged' I select: The battery is shipped with but not included in my product.
 	And I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | battery1 |
 		| Alkaline     | <any>        | 6                               | 6                                  | battery2 |
 	And in the New Product page I click Continue
@@ -470,7 +476,7 @@ Scenario: [105352] Product Comments screen Max input length
 	Given the 'Select Retailers' window appears
 	Then In the 'Select Retailers' window I select the retailer: Target
 	And in the New Product page I click Continue
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I add the following into the UPC Fields
 		| Field         | Value        |
 		| UPCNumber     | 630509667031 |
@@ -498,7 +504,8 @@ Scenario: [105352] Product Comments screen Max input length
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
-	@ScenarioId:6627
+@ignore
+@TestCase:122123
 Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -592,10 +599,10 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	Then I close the retailer modal
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 
 
-	@ScenarioId:6674
+@TestCase:122261
 	Scenario: [122261] Sustainability Screen - Consent Not Granted Message
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -627,7 +634,8 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
 	When I click continue
 
-@ScenarioId:9318
+@ignore
+@TestCase:128754
 Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -640,7 +648,7 @@ Then I save the product information as: TestCase128754
 Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |
+| Battery Type | Quantity of Batteries to Operate Product | Manufacturer | Quantity of Batteries per Package |
 | Alkaline     | 6                                  | <any>        | 6                               |
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
@@ -658,7 +666,7 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
-@ScenarioId:9397
+@TestCase:127767
 Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
 Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -669,7 +677,7 @@ Given I set the Primary Physical State option to: Liquid
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
 Given I set the Secondary Physical State option to: Liquid
-Given I set the Specific Gravity option to: 0.1
+Given I set the Relative Density option to: 0.1
 Given I set the pH option to: 11.5
 Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
 Given I set the Flash Point (in Celsius) option to: None, No Flash Point
@@ -690,7 +698,7 @@ Given I click continue
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Then I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
@@ -699,8 +707,8 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-
-@ScenarioId:10280
+@ignore
+@TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -731,8 +739,8 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
@@ -740,8 +748,8 @@ Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
-
-@ScenarioId:10281
+@ignore
+@TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -759,16 +767,16 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
 Given I delete the excel file saved as Products in Scope Report for BBB
 
 
-
-@ScenarioId:10498
+@ignore
+@TestCase:147446
 Scenario: [147446] WM - Authoring option ONLY available
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -792,7 +800,8 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:10500
+@ignore
+@TestCase:147447
 Scenario: [147447] Sears - Authoring option ONLY available
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

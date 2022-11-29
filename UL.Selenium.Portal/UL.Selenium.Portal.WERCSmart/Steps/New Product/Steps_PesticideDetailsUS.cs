@@ -5,6 +5,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -137,8 +138,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Info("Clicking 'YES' in the Remove Item dialog");
 				Report.IsTrue(modal.ClickButton("YES"), "Failed to click YES in the 'Remove Item' popup", "Successfully clicked YES in the 'Remove Item' popup");
 			}
-
-
 		}
 
 		[StepDefinition(@"I click Add Row in the EPA Registration Table")]

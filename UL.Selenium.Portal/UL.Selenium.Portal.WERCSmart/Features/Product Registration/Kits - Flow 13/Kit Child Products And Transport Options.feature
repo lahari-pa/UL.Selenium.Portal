@@ -24,19 +24,19 @@ Background:
 
 #And I The Purchase summary step is shown with the success message
 #Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
-
-@ScenarioId:1509
+@ignore
+@TestCase:63521
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit1
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
-	Given I set the Select the best Water Solubility description field to: Decomposes
+	Given I set the Select the best Water Solubility description field to: Dispersible
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -53,7 +53,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -82,11 +82,11 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: Kit2
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	Given I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 	Given I set the Boiling Point (in Celsius) field to: 86
 	Given I set the Flash Point (in Celsius) field to: 92
 	Given I set the Flash Point Testing Method Used field to: Closed cup
-	Given I set the Select the best Water Solubility description field to: Decomposes
+	Given I set the Select the best Water Solubility description field to: Dispersible
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -112,7 +112,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -168,7 +168,7 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I should see the Data Acceptance Page
 	And I click the Summary button in the Data Acceptance window
 	And I switch to the Data Summary page

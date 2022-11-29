@@ -640,6 +640,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return null;
 		}
 
+		public string IngredientGenericWarningPopoverTextScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			IWebElement popover;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return null;
+				}
+				popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Screenability Alert"))
+				{
+					return popover.GetAttribute("data-content");
+				}
+				return null;
+			}
+			popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Screenability Alert"))
+			{
+				return popover.GetAttribute("data-content");
+			}
+			return null;
+		}
+
 		public bool ClickIngredientGenericWarningButton(Ingredient ingredient, string title)
 		{
 			IWebElement button;
@@ -660,6 +686,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']"), 2);
 			if (button != null && button.Text.Contains("Sustainability Hint"))
+			{
+				return button.FindElement(By.XPath("./a"), 2).TryClick();
+			}
+			return false;
+		}
+
+		public bool ClickIngredientGenericWarningButtonScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			IWebElement button;
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']"), 2);
+				if (button != null && button.Text.Contains("Screenability Alert"))
+				{
+					return button.FindElement(By.XPath("./a"), 2).TryClick();
+				}
+				return false;
+			}
+			button = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']"), 2);
+			if (button != null && button.Text.Contains("Screenability Alert"))
 			{
 				return button.FindElement(By.XPath("./a"), 2).TryClick();
 			}
@@ -695,6 +747,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool IngredientGernicWarningPopoverIsActiveScreenabilityAlert(Ingredient ingredient, string title)
+		{
+			string cas = ingredient.CASNumber;
+			string name = ingredient.ComponentName;
+			IWebElement popover;
+			string popoverId = "";
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Screenability Alert"))
+				{
+					popoverId = popover.GetAttribute("aria-describedby");
+					return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+				}
+				return false;
+			}
+			popover = this.ContainerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Screenability Alert"))
+			{
+				popoverId = popover.GetAttribute("aria-describedby");
+				return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+			}
+			return false;
+		}
+		public string GetDOTExceptionErrorMessage()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//span[contains(text(),'Please select at least one option from above.')]"), 2);
+			return el?.Text;
+		}
 		public string GetIngredientErrorMessage()
 		{
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'formulation-grid')]//div[@role='alert']//span[starts-with(@data-bind,'text')]"), 2);
@@ -1464,7 +1549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CloseCACleaningIngredientsPopupWindow()
 		{
-			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
 			return closeButton.TryClick();
 		}
 		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)
@@ -1525,6 +1610,118 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			return true;
+		}
+
+		public int GetTotalErrorMessagesCountFromPopup()
+		{
+			List<IWebElement> errorEls = this.ContainerElement.FindElements(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[not(@style='display: none;') and (@class='alert alert-danger')]"), 2).ToList();
+			if(errorEls.IsNullOrEmpty())
+			{
+				Report.Error($"The errorEls list was null or empty");
+				return 0;
+			}
+			return errorEls.Count();
+
+		}
+
+
+		public bool CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(Table table,string errorType, string popupTitle)
+		{
+
+			string errorTypeID = null;
+			
+			if (errorType == "Generic")
+			{
+				errorTypeID = "GenericInUse";
+			}
+			else if (errorType == "Percent")
+			{
+				errorTypeID = "LessThan100Percent";
+			}
+			else if (errorType == "Publicly Disclosed or Trade Secret")
+			{
+				errorTypeID = "PublicDisclosureOrTradeSecretIssue";
+			}
+			else if (errorType == "Ingredient Type")
+			{
+				errorTypeID = "IngredientTypeMissing";
+			}
+			else if (errorType == "Functional Purpose")
+			{
+				errorTypeID = "FragranceComponentFunctionalPurposeMismatch";
+			}
+			else if (errorType == "Publicly Disclosed")
+			{
+				errorTypeID = "NonFunctionalIngredientDisclosureIssue";
+			}
+			else if (errorType == "Public Name")
+			{
+				errorTypeID = "CAHCPPublicDisclosureIssues";
+			}
+			else if (errorType == "Ingredient Type with Functional Purpose")
+			{
+				errorTypeID = "NonFunctionalIngredientTypeOrFunctionalPurposeMismatch";
+			}
+			else if (errorType == "Third Party")
+			{
+				errorTypeID = "PVBOTThirdPartyError";
+			}
+			else
+			{
+				Report.Info($"errorType was not one of the expected options, could not assign errorTypeID");
+				return false;
+			}			
+
+			IWebElement errorEl = this.ContainerElement.FindElement(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.{errorTypeID}']"), 2);
+			if(errorEl.IsNullOrEmpty())
+			{
+				Report.Info($"The error was found to not be displayed");
+				return false;
+			}
+			if (errorEl.GetAttribute("style").IsNullOrEmpty())
+			{
+				Report.Info("correct error type found, going to text check");
+				string fullString = errorEl.Text;
+				var foundStringList = fullString.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+				if(table.RowCount==foundStringList.Count())
+				{
+					Report.Info($"The number of rows in the table containg the expected error matched the number of sections in the found error message");
+
+				}
+				else
+				{
+					Report.Info($"The number of sections betweent the found and expected error did not match");
+					return false;
+				}
+				int i = 0;
+				bool allSectionsmatch = true;
+				foreach (TableRow thisRow in table.Rows)
+				{
+					string expectedString = thisRow["ErrorSections"];
+					string foundString = foundStringList[i];
+					Report.Info($"The found error section {i + 1} was: {foundString}");
+					Report.Info($"The expected error section {i + 1} was: {expectedString}");
+					if(expectedString==foundString)
+					{
+						Report.Info($"The found sections in postion {i+1} matched");
+					}
+					else
+					{
+						Report.Info($"The found sections in postion {i+1} did not match");
+						allSectionsmatch = false;
+					}
+					i++;
+
+				}
+				return allSectionsmatch;
+			}
+			else
+			{
+				Report.Info($"The error was found to not be displayed");
+				return false;
+
+			}
+			
 		}
 
 		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
@@ -1808,6 +2005,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Glycerol");
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
+			ingredients.Add("Citric acid");
+
 
 
 

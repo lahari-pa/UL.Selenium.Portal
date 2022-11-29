@@ -14,7 +14,7 @@
 
 Feature: Physical and Chemical Properties
 
-@ScenarioId:1155
+@TestCase:31834
 Scenario: [31834] Physical and Chemical Properties - Solid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -32,7 +32,7 @@ And I should see following statement: When mixed with an equal amount of water, 
 And I should see following statement: Select the best Water Solubility description
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31834
 
-@ScenarioId:1156
+@TestCase:31837
 Scenario: [31837] Physical and Chemical Properties - Solid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -48,7 +48,7 @@ And Select the best Water Solubility description should be showing the error mes
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31837
 
 
-@ScenarioId:1153
+@TestCase:31827
 Scenario: [31827] Physical and Chemical Properties - Liquid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -62,7 +62,7 @@ And I should only see the following options for Primary Physical State:
 | State  |
 | Liquid |
 And I should see following statement: Secondary Physical State
-And I should see following statement: Specific Gravity
+And I should see following statement: Relative Density
 And I should see following statement: pH
 And I should see following statement: Boiling Point (in Celsius)
 And I should see following statement: Flash Point (in Celsius)
@@ -70,7 +70,7 @@ And I should see following statement: Flash Point (in Celsius)
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31827
 
 
-@ScenarioId:1154
+@TestCase:31833
 Scenario: [31833] Physical and Chemical Properties - Liquid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -83,7 +83,7 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 And I should see the Physical and Chemical Properties Page
 When I click continue
 And Secondary Physical State should be showing the error messages: This is a required field.
-And Specific Gravity should be showing the error messages: This is a required field.
+And Relative Density should be showing the error messages: This is a required field.
 And pH should be showing the error messages: This is a required field.
 And Boiling Point (in Celsius) should be showing the error messages: This is a required field.
 And Flash Point (in Celsius) should be showing the error messages: This is a required field.
@@ -92,7 +92,7 @@ And Select the best Water Solubility description should be showing the error mes
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31833
 
 
-@ScenarioId:1149
+@TestCase:31786
 Scenario: [31786] Physical and Chemical Properties - Aerosol only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -103,7 +103,7 @@ Given I call Shared Step 101692 Product Information - Pesticide Question - Happy
 Given I call Shared Step 168070 (Physical and Chemical Properties - Aerosol Only - Validation for Algicide Aerosol Type of Product)
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31786
 
-@ScenarioId:11129
+@TestCase:31826
 Scenario: [31826] Physical and Chemical Properties - Gas only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -118,7 +118,7 @@ And Secondary Physical State should be showing the error messages: This is a req
 And Select the best Water Solubility description should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31826
 
-@ScenarioId:1151
+@TestCase:31804
 Scenario: [31804] Physical and Chemical Properties - Gas only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -135,7 +135,7 @@ And I should see following statement: Secondary Physical State
 And I should see following statement: Select the best Water Solubility description
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31804
 
-@ScenarioId:1157
+@TestCase:85157
 Scenario: [85157] Physical and Chemical Properties - All navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

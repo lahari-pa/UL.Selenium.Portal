@@ -13,7 +13,7 @@ Given I go to the WERCSmart Log in
 
 @tfs_design
 @ignore
-@ScenarioId:5965
+@TestCase:50820
 Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese
@@ -32,7 +32,7 @@ Then The element: login button should display text: Login
 
 @tfs_design
 @ignore
-@ScenarioId:5966
+@TestCase:50828
 Scenario: [50828] Language Selector - Chinese
 
 When From the Language drop down I select Chinese
@@ -49,7 +49,7 @@ Then The element: forgotten password should display text: Forgot your Password?
 Then The element: login button should display text: Login
 
 
-@ScenarioId:461
+@TestCase:50830
 Scenario: [50830] Validation - Error Messages
 
 Then I ensure that the email input field is not populated
@@ -66,8 +66,8 @@ Then I should see the following error message for email: This is a required fiel
 Given on the Login page I log in as test user: ProductAccount
 Then the WERCSmart homepage should load
 
-
-@ScenarioId:462
+@ignore
+@TestCase:50831
 Scenario: [50831] Account Lockout
 
 Given I popupate the email input field with credentials for account: AccountLockOut

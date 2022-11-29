@@ -107,6 +107,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
 			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
 
+			//select I have no stewardship numbers
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			Delay.Seconds(5);
+			myAccount.ClickIhaveNoStewardshipNumbers();
+			Delay.Seconds(5);
+			
+
 			//My Brands
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");

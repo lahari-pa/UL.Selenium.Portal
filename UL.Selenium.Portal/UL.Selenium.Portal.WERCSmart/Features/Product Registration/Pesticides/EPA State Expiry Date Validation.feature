@@ -14,7 +14,7 @@
 Feature:  EPA State Expiry Date Validation (Suite ID: 56545)
 
 
-@ScenarioId:925
+@TestCase:56593
 Scenario: [56593] Pesticide Data - EPA Expiration date validation (Iowa - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -37,7 +37,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56593
 
-@ScenarioId:924
+@TestCase:56592
 Scenario: [56592] Pesticide Data - EPA Expiration date validation (Georgia - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -59,15 +59,15 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56592
 
-@ScenarioId:920
+@TestCase:56582
 Scenario: [56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 Given I save the product information as: TestCase56582
+Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -79,10 +79,10 @@ Then in page Pesticide Details - State Registration page I should see error: Sta
 Given I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: AK
 Then I should see the appropriate response depending on today's date for state: AK
 Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: AK
-Then I should see the Transportation Details 1 Page
+#Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
 
-@ScenarioId:923
+@TestCase:56591
 Scenario: [56591] Pesticide Data - EPA Expiration date validation (Colorado Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -103,7 +103,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56591
 
-@ScenarioId:922
+@TestCase:56590
 Scenario: [56590] Pesticide Data - EPA Expiration date validation (California - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -124,7 +124,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56590
 
-@ScenarioId:921
+@TestCase:56583
 Scenario: [56583] Pesticide Data - EPA Expiration date validation (Arkansas > Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -147,7 +147,7 @@ Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56583
 
 # Assigned to Barrett, Beverly
-@ScenarioId:926
+@TestCase:56594
 Scenario: [56594] Pesticide Data - EPA Expiration date validation (Idaho - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -173,7 +173,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56594
 
 # Assigned to Barrett, Beverly
-@ScenarioId:927
+@TestCase:56596
 Scenario: [56596] Pesticide Data - EPA Expiration date validation (Indiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -199,7 +199,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
-@ScenarioId:928
+@TestCase:56599
 Scenario: [56599] Pesticide Data - EPA Expiration date validation (Kentucky - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -229,7 +229,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
-@ScenarioId:929
+@TestCase:56600
 Scenario: [56600] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

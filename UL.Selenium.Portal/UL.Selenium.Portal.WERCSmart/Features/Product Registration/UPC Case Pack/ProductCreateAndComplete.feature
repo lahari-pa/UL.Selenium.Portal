@@ -31,8 +31,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto18 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-
-@ScenarioId:1503
+@ignore
+@TestCase:87913
 Scenario: [87913] Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87913
@@ -47,7 +47,7 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87913, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -72,7 +72,9 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@ScenarioId:1504
+
+@ignore
+@TestCase:87914
 Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to  Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87914
@@ -82,14 +84,14 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 		| Alkaline     | <any>        | 6                               | 6                                  |
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	#Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87914, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -114,7 +116,7 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 
 @tfs_design
 @ignore
-@ScenarioId:9406
+@TestCase:87915
 Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
@@ -137,7 +139,7 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87915, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: <First>
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -160,7 +162,8 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87915)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87915 and its status is: Completed
 
-@ScenarioId:1505
+@ignore
+@TestCase:87916
 Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87916
@@ -187,7 +190,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -212,7 +215,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@ScenarioId:6263
+
+@ignore
+@TestCase:87917
 Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87917
@@ -240,7 +245,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 	#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 	#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -260,7 +265,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -286,7 +291,10 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@ScenarioId:9761
+
+
+@ignore
+@TestCase:87922
 Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87922
@@ -305,7 +313,7 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -330,7 +338,10 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@ScenarioId:6073
+
+
+@ignore
+@TestCase:87923
 Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87923
@@ -350,7 +361,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
@@ -375,7 +386,8 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-@ScenarioId:6151
+@ignore
+@TestCase:118139
 Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -403,12 +415,11 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC118139, container type: Metal Container and size: 32
 	Given I set the OSHA-compliant Safety Data Sheet, English option to: Yes
 	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given I click continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)

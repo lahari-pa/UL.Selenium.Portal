@@ -23,8 +23,13 @@
 @Homepage
 Feature: Home Page
 
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto33 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+
 #pass - staging 4.10
-@ScenarioId:421
+@TestCase:55817
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -47,7 +52,7 @@ Scenario: [55817] Product Information Panel - No Alerts/No Products
 	Given I see notifications in the Announcement Panel
 
 #pass
-@ScenarioId:422
+@TestCase:55938
 Scenario: [55938] My Products grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -71,7 +76,7 @@ Scenario: [55938] My Products grid
 		| Actions           |
 
 #pass - staging 4.10
-@ScenarioId:423
+@TestCase:56020
 Scenario: [56020] Bulk Actions
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -86,7 +91,7 @@ Scenario: [56020] Bulk Actions
 	Then I should see the Subheading My Products in the products grid
 
 #pass - staging 4.10
-@ScenarioId:424
+@TestCase:56149
 Scenario: [56149] Click Register Product button from home page - Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -97,7 +102,8 @@ Scenario: [56149] Click Register Product button from home page - Navigation
 	And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
-@ScenarioId:425
+@ignore
+@TestCase:56158
 Scenario: [56158] Retail Partners navigation No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -107,7 +113,8 @@ Scenario: [56158] Retail Partners navigation No Products
 	And I should not see the following subheading Most Recent Retailers
 
 #pass - staging 4.10
-@ScenarioId:426
+@ignore
+@TestCase:56161
 Scenario: [56161] UL Solution Center navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -124,7 +131,8 @@ Scenario: [56161] UL Solution Center navigation
 		| Navigator                |
 
 #pass - staging 4.10
-@ScenarioId:427
+@ignore
+@TestCase:56163
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -134,7 +142,7 @@ Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 	Then I should see the Subheading Announcements in the main window
 
 #pass - staging 4.10 (might need to look at freshdesk link
-@ScenarioId:428
+@TestCase:56188
 Scenario: [56188] Support navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -142,7 +150,7 @@ Scenario: [56188] Support navigation
 	Then Confirm that freshdesk opens in another tab
 
 #pass - staging 4.10
-@ScenarioId:429
+@TestCase:56206
 Scenario: [56206] Sign Out
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -150,14 +158,14 @@ Scenario: [56206] Sign Out
 	And I click on Sign Out
 	And the landing page should load
 
-@ScenarioId:435
+@TestCase:56281
 Scenario: [56281] Product Information - Alerts - click More
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
 	Then I click More below the Alerts Panel
 	And I should see the header: Message Center on the Message Center window
 
-@ScenarioId:443
+@TestCase:64854
 Scenario: [64854] Navigation Settings
 	# Sign in and expand the menu, checking the correct items are showing
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -187,7 +195,7 @@ Scenario: [64854] Navigation Settings
 	Given I click on My Account
 	And the Navigation Menu should be collapsed
 
-@ScenarioId:444
+@TestCase:64872
 Scenario: [64872] Pie Panel Settings
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	When I click on the triangle next to Product Information to expand the section
@@ -220,7 +228,7 @@ Scenario: [64872] Pie Panel Settings
 	And I should see the Subheading Announcements in the main window
 	And the Announcements dialog should be visible
 
-@ScenarioId:450
+@TestCase:67299
 Scenario: [67299] Terms of Use - footer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then The home screen should load
@@ -229,7 +237,7 @@ Scenario: [67299] Terms of Use - footer
 	And I close the window that opened
 
 @singlerun
-@ScenarioId:446
+@TestCase:65886
 Scenario: [65886] My Products - Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -252,7 +260,8 @@ Scenario: [65886] My Products - Pagination
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
-@ScenarioId:452
+@ignore
+@TestCase:71188
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
@@ -267,7 +276,7 @@ Scenario: [71188] Primary Filter on My Products View - UPC Filter
 	Given I search for UPC number saved as: Summary - UPC - 71188
 	Then I should only see one product in the grid, with Product ID matching that saved as: Summary - Product ID - 71188
 
-@ScenarioId:445
+@TestCase:65617
 Scenario: [65617] Correct Order of Statuses
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	And I should see a Pie Chart and Legend under Product Information
@@ -288,7 +297,7 @@ Scenario: [65617] Correct Order of Statuses
 		| Needs Your Attention   |
 		| Canceled               |
 
-@ScenarioId:437
+@TestCase:59732
 Scenario: [59732] Announcements - Add
 	Given I navigate to Studio
 	Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
@@ -302,7 +311,7 @@ Scenario: [59732] Announcements - Add
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then In the announcements area I should see my saved messages
 
-@ScenarioId:436
+@TestCase:58579
 Scenario: [58579] Live Help - Chat Feature
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I click on the Live Help button on the upper right
@@ -318,7 +327,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Given In the Live Help dialog I click on the x to close
 
 # Couldn't find the test case in TFS folders, placing it in home page
-@ScenarioId:447
+@TestCase:66335
 Scenario: [66335] Main Menu - expanded
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then The home screen should load
@@ -348,7 +357,7 @@ Scenario: [66335] Main Menu - expanded
 		| Support              |
 	And the navigation labels should be hidden
 
-@ScenarioId:448
+@TestCase:66336
 Scenario: [66336] Main Menu - collapsed
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then The home screen should load
@@ -371,7 +380,7 @@ Scenario: [66336] Main Menu - collapsed
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page
-@ScenarioId:455
+@TestCase:85275
 Scenario: [85275] Select All - Popup closes
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -402,33 +411,38 @@ Scenario: [85275] Select All - Popup closes
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
-@ScenarioId:453
+@ignore
+@TestCase:71230
 Scenario: [71230] Archived Retailers - My Products View
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto33 and save as: ProductSetup71230
+	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
-	Given I filter the products by: Accepted by Retailers	
-	#And I should see an option for More Filters
-	#Given I click More Filters in the products grid
-	#And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
+	Given I filter the products by: Accepted by Retailers		
+	And I ensure that the check box next to Show Archived Retailers is unselected
 	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase71230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Archive Retailers
 	And I should see the Archive Retailers Popup
-	And In the Archive Retailers popup, I select the the checkbox next to the the first retailer
+	And In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: savedRetailer
 	And In the Archive Retailers popup click on: ARCHIVE
+	And I check that the Alert for Archiving a Retailers shows the text: Are you sure you want to archive these retailers from your product?
+	And I handle the Alert for Archive by answering Ok
+	And I should not see the Archive Retailers Popup
 	And I search for the product saved as: TestCase71230
+	And I Confirm that the retailer(s) saved as: savedRetailer are not displayed for the first product in the grid.
 	And I Select the check box next to Show Archived Retailers
-	And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display
+	And I Confirm that two asterisks are visible in the retailer(s) saved as: savedRetailer that are archived icons that display
 	And I Deselect the check box next to Show Archived Retailers
 
-@ScenarioId:454
+@TestCase:73791
 Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	And I check for all items in the grid that the retailers are alphabetically listed
 
-@ScenarioId:420
+@TestCase:55796
 Scenario: [55796] Navigate to Home Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -480,7 +494,8 @@ Scenario: [55796] Navigate to Home Page
 
 
 
-@ScenarioId:10755
+@ignore
+@TestCase:158930
 Scenario: [158930] Home Page Search - Internal Information
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -509,7 +524,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I navigate to the home page
@@ -530,7 +545,8 @@ Given I click More Filters in the products grid
 
 
 
-@ScenarioId:10736
+@ignore
+@TestCase:156787
 Scenario: [156787] Home Page Search - Internal SKU field
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -555,7 +571,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 Given I click the Home navigation icon

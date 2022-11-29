@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -15,7 +15,7 @@
 @run_CanNotRunOnTReVor
 Feature: CanNotRunOnTReVor
 
-@ScenarioId:6053
+@TestCase:88918
 Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -51,7 +51,7 @@ Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 		| %UPC#88918_5% | MyChalk5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |
 		| %UPC#88918_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |                         |            |                  |                  |            |              |            |          |                              |
 		| %UPC#88918_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |                         |            |                  |                  |            |              |            |          |                              |
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest88918
+	Then I click the 'Upload File' button and upload the file saved as: Bulktest88918
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable88918
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
@@ -77,7 +77,7 @@ Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88918
 
 	# Failing due to bug 117614
-@ScenarioId:6079
+@TestCase:90001
 Scenario: [90001] Labels for Input Fields in UPC Screen
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -131,7 +131,7 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 		| %UPC#90001_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
 		| %UPC#90001_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
 
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest90001
+	Then I click the 'Upload File' button and upload the file saved as: Bulktest90001
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable90001
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
@@ -169,7 +169,7 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase90001
 
 
-	@ScenarioId:6227
+@TestCase:88879
 Scenario: [88879] Input fields and labels for Retailers HD and TG have been Updated
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -220,7 +220,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 		| %UPC#88879_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
 		| %UPC#88879_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
 
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest88879
+	Then I click the 'Upload File' button and upload the file saved as: Bulktest88879
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable88879
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
@@ -245,7 +245,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	And I check that OMSID for retailer The Home Depot UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable88879
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
 
-	@ScenarioId:6313
+@TestCase:90002
 	Scenario: [90002] Label for Input File for Canadian Tire
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -295,7 +295,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 		| %UPC#90002_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |  |  |  |  |  |  |  |  |  |
 		| %UPC#90002_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |  |  |  |  |  |  |  |  |  |
 
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest90002
+	Then I click the 'Upload File' button and upload the file saved as: Bulktest90002
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable90002
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected

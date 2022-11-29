@@ -21,9 +21,10 @@ Background:
 		| username   | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto3 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1322
+@ignore
+@TestCase:86121
 Scenario: [86121] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
-	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86121
 	#Given I delete all products with UPC Number: saved as UPC86121
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -43,7 +44,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -68,9 +69,10 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86121)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86121 and its status is: Completed
 
-@ScenarioId:1323
+@ignore
+@TestCase:86122
 Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
-	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86122
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -88,7 +90,7 @@ Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -113,9 +115,10 @@ Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86122)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86122 and its status is: Completed
 
-@ScenarioId:1324
+@ignore
+@TestCase:86123
 Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
-	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86123
@@ -131,7 +134,7 @@ Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -150,9 +153,10 @@ Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86123)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86123 and its status is: Completed
 
-@ScenarioId:1325
+@ignore
+@TestCase:86124
 Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
-	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86124
@@ -168,7 +172,7 @@ Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -190,10 +194,12 @@ Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product 
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86123)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86124 and its status is: Completed
 
-@ScenarioId:1326
+
+@ignore
+@TestCase:86416
 Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86416
-	Given I login into the WERCSmart Portal - Canada has all data account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86416
@@ -212,7 +218,7 @@ Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto3 and Open SHA manager)
@@ -238,10 +244,12 @@ Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	| Retailer      |
 	| Canadian Tire |
 
-@ScenarioId:1327
+
+@ignore
+@TestCase:86417
 Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 	Given I generate a random UPC number and save as: UPC86417
-	Given I login into the WERCSmart Portal - Canada has all data account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86417
@@ -260,7 +268,7 @@ Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto3 and Open SHA manager)
@@ -286,9 +294,11 @@ Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	| Retailer      |
 	| Canadian Tire |
 
-@ScenarioId:1328
+
+@ignore
+@TestCase:86418
 Scenario: [86418] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
-	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86418
 	#Given I delete all products with UPC Number: saved as UPC86418
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -310,7 +320,7 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: awesome product
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: awesome product
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -338,10 +348,13 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	| Retailer      |
 	| Canadian Tire |
 
-@ScenarioId:1329
+
+
+@ignore
+@TestCase:86419
 Scenario: [86419] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86419
-	Given I login into the WERCSmart Portal - Canada has all data account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86419
@@ -360,7 +373,7 @@ Scenario: [86419] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto3 and Open SHA manager)

@@ -12,7 +12,7 @@
 @run_Flow9
 Feature: Flow 9
 
-@ScenarioId:668
+@TestCase:58072
 Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,12 +46,12 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 150                      | 25.0                    | 11.2      | White      | Floral | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
 @newproductstepstest
-@ScenarioId:676
+@TestCase:58098
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -78,7 +78,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	
-@ScenarioId:671
+@TestCase:58078
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -90,7 +90,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility     |
-		| Granular                 | Soluble in hot water |
+		| Granular                 | Dispersible |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
@@ -101,12 +101,12 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
-@ScenarioId:672
+@TestCase:58079
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -129,13 +129,13 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Powder/Mix
 	#Replace shared 42214
 	Given I navigate to the home page
 	Then I delete the product: TestCase58079
 
-@ScenarioId:669
+@TestCase:58073
 Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -147,7 +147,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
-		| Solid					   | Emulsifies       |
+		| Solid					   | Dispersible       |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glycerol      | 20      | false               | false       |            |
@@ -163,11 +163,11 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 800                      | 99                      | 60        | Clear      | Odorless | No data available | 11.2                  |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58073. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58073. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 
-@ScenarioId:678
+@TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -179,11 +179,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
-
-	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-
-
+	Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should see the Regulatory Documents to Provide Page
 	Then I see the following sections
@@ -195,8 +191,6 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 		| OSHA-compliant Safety Data Sheet, English |
 	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Regulatory Documents to Provide page I click Continue
-	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
-	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section               |
@@ -206,7 +200,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
 
-@ScenarioId:674
+@TestCase:58091
 Scenario: [58091] Latex Gloves - RU000151
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -232,13 +226,13 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 400                      | 60                      | 2.2       | White      | Odorless | No data available | 1.5                   |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58091. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58091. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Latex gloves
 	#Replace shared 42214
 	Given I navigate to the home page
 	Then I delete the product: TestCase58091
 
-@ScenarioId:670
+@TestCase:58075
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -267,11 +261,11 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page
 	Then I delete the product: TestCase58075
 
-@ScenarioId:673
+@TestCase:58089
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -297,11 +291,11 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 		| Flash Point Testing Report |
 	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page
 	Then I delete the product: TestCase58089
 
-@ScenarioId:675
+@TestCase:58097
 Scenario: [58097] Ingredient Search in Registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -325,6 +319,7 @@ Scenario: [58097] Ingredient Search in Registration
 
 @tfs_design
 @ignore
+@TestCase:58094
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -351,13 +346,14 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 54796 (Purchase Summary)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58094
 
 @tfs_design
 @ignore
+@TestCase:58081
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -382,11 +378,11 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58081. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58081. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 @upctest
-@ScenarioId:677
+@TestCase:58604
 Scenario: [58604] Condom - RU000937
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -411,6 +407,6 @@ Scenario: [58604] Condom - RU000937
 	# Needed 'Additional Documents to Provide' Page step
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58604. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58604. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condom with or without Spermicide
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604

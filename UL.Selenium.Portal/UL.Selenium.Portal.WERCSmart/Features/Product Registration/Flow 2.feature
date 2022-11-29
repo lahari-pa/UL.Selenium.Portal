@@ -10,9 +10,11 @@
 @wercsmart
 @RetailPartners
 @run_Flow2
+@Steps_Flow2A
 Feature: Flow 2
 
-@ScenarioId:1011
+@ignore
+@TestCase:57367
 Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -42,11 +44,11 @@ Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Spill Clean Up Agent (Mitigation Agent)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57367
 
-@ScenarioId:1012
+@TestCase:57403
 Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -72,11 +74,11 @@ Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57403
 
-@ScenarioId:1013
+@TestCase:57439
 Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -89,8 +91,8 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
-		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	#CLF 18/6/2019 removing this step because it appears to have been replaced by 57502
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -107,11 +109,11 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
 
-@ScenarioId:1014
+@TestCase:57646
 Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -124,8 +126,8 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 
 
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -141,11 +143,11 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 
-@ScenarioId:1015
+@TestCase:57648
 Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -171,11 +173,11 @@ Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Trap and/or Bait Station
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57648
 
-@ScenarioId:1016
+@TestCase:57649
 Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -184,8 +186,8 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Then I save the product information as: TestCase57649
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -200,11 +202,11 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
 
-@ScenarioId:1017
+@TestCase:57708
 Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -215,8 +217,8 @@ Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Then I save the product information as: TestCase57708
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -233,11 +235,11 @@ Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57708
 
-@ScenarioId:1018
+@TestCase:57731
 Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -264,11 +266,11 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
 
-@ScenarioId:1019
+@TestCase:57910
 Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -279,8 +281,8 @@ Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Then I save the product information as: TestCase57910
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -296,7 +298,7 @@ Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57910
 
@@ -304,7 +306,7 @@ Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
 @71274
-@ScenarioId:1020
+@TestCase:71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -314,8 +316,8 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 8  | 100                        | 80                       | Not applicable/available        | Appreciable                                  |
+		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                 | Liquid                   | 2                | 8  | 100                        | 80                       | Not applicable/available        | Dispersible                                  |
 	#CLF 26 Feb 2019. This appears to  be the wrong step so changed it to: 57865
 	# JS 13/03 - TFS test case changed to use shared 57865
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -341,6 +343,75 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274
+
+
+	
+# Created by Saikiran Chittampally
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
+@TestCase:57647
+Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene - (RU001000) - 2S
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC57647
+	Given I delete all products with UPC Number: saved as UPC57647
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
+	Then I save the product information as: TestCase57647
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Triclosan        | 24.94   | false               | false       |            |
+		| Hydrogen         | 30.2    | false               | false       |            |
+		| Propylene Glycol | 19.8    | false               | false       |            |
+		| Butane           | 25.06   | false               | false       |            |
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57647, container type: Cardboard and size: 1
+    Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue)
+	
+
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57647
+
+
+	# Created by Saikiran Chittampally
+	# Test case can be found at the following paths:
+	# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
+@TestCase:63666
+Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC63666
+	Given I delete all products with UPC Number: saved as UPC63666
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo
+	Then I save the product information as: TestCase63666
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Triclosan        | 24.94   | false               | false       |            |
+		| Hydrogen         | 30.2    | false               | false       |            |
+		| Propylene Glycol | 19.8    | false               | false       |            |
+		| Butane           | 25.06   | false               | false       |            |
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63666

@@ -12,7 +12,7 @@
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
-@ScenarioId:667
+@TestCase:60617
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -54,12 +54,13 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance               | Odor  | Odor Threshold    | Partition Coefficient |
 		| Goggles                       | 66                       | 51.5                    | 10.92     | Clear to hazy, colorless | Berry | No data available | 2                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 54796 (Purchase Summary)
 
 @tfs_design
 @ignore
+@TestCase:60637
 Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	Given I generate a random UPC number and save as: UPC60637
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -69,7 +70,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 	And I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Water Solubility     | Secondary Physical State |
-		| Soluble in hot water | Solid                    |
+		| Dispersible | Solid                    |
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium hydroxide | 80      | false               | false       |            |
@@ -91,7 +92,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor  | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 120                      | 70.5                    | 5         | Cloudy     | Fresh | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	#And I Click the Summary button the the Data Acceptance screen
 	#And I Click the View button on the Summary screen to view the uploaded document
 	#And I Confirm the link opens the document that was uploaded in Step 17
@@ -103,6 +104,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
 
+@TestCase:60619
 Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -134,13 +136,13 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60619
 
 
 
-	@ScenarioId:10716
+@TestCase:159880
 Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -153,7 +155,7 @@ And Primary Physical State should be showing the error messages: This is a requi
 Given I set the Primary Physical State option to: Solid
 Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Decomposes
+Given I set the Select the best Water Solubility description option to: Dispersible
 Given I click continue
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)

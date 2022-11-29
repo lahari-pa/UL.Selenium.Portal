@@ -8,25 +8,27 @@
 @RetailPartners
 @wercsmart
 @Signup
+@ProductGrid
 @run_FlashPointTestingMethodAndTransportation
 
 Feature: Flash Point, testing method and Transportation (Suite ID: 74116)
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74337
 Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -55,7 +57,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -65,19 +67,20 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74349
 Scenario: [74349] Flash Point = 60°C - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 38
 And I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -106,7 +109,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -119,19 +122,20 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74357
 Scenario: [74357] Flash Point < 60°C - Testing method shows closed cup only, Transportation select No due to an exemption
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 40
 And I set the Flash Point (in Celsius) field to: 50
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -155,7 +159,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -165,12 +169,13 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@TestCase:74346
 Scenario: [74346] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -179,7 +184,7 @@ And The following options should be displayed for section: Flash Point Testing M
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Open cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -208,7 +213,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -221,12 +226,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+
+@TestCase:74364
 Scenario: [74364] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -235,7 +242,7 @@ And The following options should be displayed for section: Flash Point Testing M
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -264,7 +271,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -274,12 +281,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+
+@TestCase:74365
 Scenario: [74365] Flash Point > 60°C - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 50
 Given I set the Flash Point (in Celsius) field to: 80
 And The following options should be displayed for section: Flash Point Testing Method Used
@@ -288,7 +297,7 @@ And The following options should be displayed for section: Flash Point Testing M
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Not applicable/available
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -317,7 +326,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 500                      | 9                       | 12.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74346
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74346
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -330,19 +339,21 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+
+@TestCase:74366
 Scenario: [74366] Flash Point = 60°C - Testing method shows closed cup only, Transportation select No due to an exemption
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 Given I set the Boiling Point (in Celsius) field to: 45
 Given I set the Flash Point (in Celsius) field to: 60
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -367,7 +378,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74366
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74366
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -380,13 +391,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1182
+
+@TestCase:74368
 Scenario: [74368] Flash Point Range < 23 - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 45
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: <23C
@@ -394,7 +406,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -423,7 +435,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 25                       | 11.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74368
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74368
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -433,13 +445,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1183
+
+@TestCase:74372
 Scenario: [74372] Flash Point Range >=23 and <38 - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=23C and <38C
@@ -447,7 +460,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -476,7 +489,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74372
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74372
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -486,13 +499,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1184
+
+@TestCase:74374
 Scenario: [74374] Flash Point Range >=38 and <=60  - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >=38C and <=60C
@@ -500,7 +514,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option            |
 | Closed cup method |
 And I set the Flash Point Testing Method Used field to: Closed cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -529,7 +543,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74374
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74374
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -539,13 +553,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1185
+
+@TestCase:74376
 Scenario: [74376] Flash Point Range > 60 and < 93 - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >60C and <=93C
@@ -555,7 +570,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Open cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -585,7 +600,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74376
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74376
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -595,13 +610,15 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1186
+
+@TestCase:74379
 Scenario: [74379] Flash Point Range >=93 and <=815 - Testing method shows all, Transportation shows all, Hazard class 3 must NOT be used
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+Then I save the product information as: TestCase74379
+And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: >93C and <=815C
@@ -611,9 +628,9 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Open cup method          |
 | Not applicable/available |
 And I set the Flash Point Testing Method Used field to: Open cup method
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -641,23 +658,26 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74379
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74379
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
 And I navigate to the home page
+Given I search for the product saved as: TestCase74379
+When I click Row Actions for the most recent product returned
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74379
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1180
+
+@TestCase:74380
 Scenario: [74380] Flash Point Range Not Tested - Testing method shows Not Applicable/available, Transportation shows all, UN page shows - FP is required with Hazard Class 3
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: Not Tested/Unknown
@@ -665,7 +685,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option                   |
 | Not Tested/Unknown |
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -695,7 +715,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74380
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74380
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -705,13 +725,14 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:1181
+
+@TestCase:74382
 Scenario: [74382] Flash Point Range None, No Flash Point- Testing method shows Not Applicable/available, Transportation shows all, UN page shows - FP is required with Hazard Class 3
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Specific gravity, pH)
+And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 75
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
 And I set the Flash Point (in Celsius) field to: None, No Flash Point
@@ -719,7 +740,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 | Option                   |
 | Not Tested/Unknown |
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
-And I set the Select the best Water Solubility description field to: Insoluble
+And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -749,7 +770,7 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 950                      | 35                       | 16.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 74382
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 74382
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page

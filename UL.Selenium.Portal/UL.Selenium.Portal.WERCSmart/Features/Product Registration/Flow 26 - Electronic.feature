@@ -15,7 +15,7 @@
 Feature: [64732] Flow 26 - Electronic
 
 
-@ScenarioId:710
+@TestCase:60671
 Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -42,7 +42,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 #Given I call Shared 48367 Product Includes Battery > any type
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 | Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
@@ -51,7 +51,7 @@ Given I call Shared Step 58189 Answer Electronic Equipment questions - With Cath
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop)
 

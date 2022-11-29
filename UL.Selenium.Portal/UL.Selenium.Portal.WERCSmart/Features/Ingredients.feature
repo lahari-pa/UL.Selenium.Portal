@@ -21,9 +21,9 @@ Feature: Ingredients
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto12 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:911
+@TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -36,7 +36,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	##Product Characteristics
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 50.0    | false               | false       |            |
+		| Wood dust      | 50.0    | false               | false       |            |
 		| RED 4         | 23.0    | false               | false       |            |
 		| Clothianidin  | 27.0    | false               | false       |            |
 	When In the ingredients table I click Chemical Name to order
@@ -65,7 +65,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
 
-@ScenarioId:912
+@TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -94,7 +94,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 
-@ScenarioId:907
+@TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -114,7 +114,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
-@ScenarioId:908
+@TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -136,7 +136,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
-@ScenarioId:906
+@TestCase:65459
 Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public Name are not active
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -153,7 +153,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
-@ScenarioId:905
+@TestCase:65451
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -172,7 +172,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 
-@ScenarioId:904
+@TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -193,7 +193,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
-@ScenarioId:903
+@TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -212,7 +212,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 
-@ScenarioId:910
+@TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -235,7 +235,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
     And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
-@ScenarioId:913
+@TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -254,7 +254,7 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
 
-@ScenarioId:909
+@TestCase:69796
 Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -266,7 +266,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I set the Primary Physical State option to: Aerosol
 	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
 	Given I set the pH option to: 5
-	Given I set the Select the best Water Solubility option to: Appreciable
+	Given I set the Select the best Water Solubility option to: Dispersible
 	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
 	Given I click continue
 	Given I click continue
@@ -279,12 +279,12 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
 	Then I should see the Waste Classification Data Page
-	Given In the New Product page I click tab: Physical and Chemical Properties
+	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
 
-@ScenarioId:915
+@TestCase:80728
 Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -306,7 +306,7 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
 
-@ScenarioId:914
+@TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -333,7 +333,7 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-@ScenarioId:919
+@TestCase:87301
 Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -368,7 +368,7 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
 @jamesnew
-@ScenarioId:918
+@TestCase:84528
 Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -422,7 +422,8 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-@ScenarioId:917
+@ignore
+@TestCase:81711
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -432,27 +433,27 @@ Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor I
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I enter text: FRAGRANCE in the component search box
 	And I select the component search result with CAS matching text: FRAGRANCE and save ingredient as: FragranceIngredient81711
-	And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
 	And I enter text: FRAGRANCE in the component search box
 	And I select the component search result with CAS matching text: RR and save ingredient as: FragranceRRIngredient81711
-	And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
 	And I enter text: Flavor in the component search box
 	And I select the component search result with CAS matching text: FLAVOR and save ingredient as: FlavorIngredient81711
-	And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
 	And I enter text: Flavor in the component search box
 	And I select the component search result with CAS matching text: RR and save ingredient as: FlavorRRIngredient81711
-	And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
 	And I enter text: N/A in the component search box
 	And I select the component search result with CAS matching text: N/A and save ingredient as: NAIngredient81711
-	And I confirm that the 'Sustainability Hint' button is not displayed under ingredient saved as: NAIngredient81711
-	And I click on the Sustainability Hint button under ingredient saved as: FragranceIngredient81711
-	And I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: FragranceIngredient81711
-	And I move the mouse pointer by an offset of 100 in x and 100 in y
-	And I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: FragranceIngredient81711
+	And I confirm that the 'Screenability Alert' button is not displayed under ingredient saved as: NAIngredient81711
+	And I click on the Screenability Alert button under ingredient saved as: FragranceIngredient81711
+	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
+	And I move the mouse pointer by an offset of 50 in x and 50 in y
+	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711
 
-@ScenarioId:916
+@TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -473,7 +474,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
-@ScenarioId:902
+@TestCase:109230
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109230
@@ -506,7 +507,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:
@@ -516,53 +517,54 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Formaldehyde            | 100     | No                  | No            |                        |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I close the window that opened
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto12 and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
-	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
-	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
-	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
-		| Retailer  |
-		| Walgreens |
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
-	And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
-	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I filter for the product saved as: TestCase109230
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: View
-	Then I switch to the Data Summary page
-	And In the Data Summary page, I confirm that the Ingredients table matches the following:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
-		| Formaldehyde            | 100     | No                  | No            |                        |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I close the window that opened
-	And I filter for the product saved as: TestCase109230
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: Update Required
-	Given In the New Product page I click tab: Physical and Chemical Properties
-	And I click the page heading: Ingredients
-	And I confirm that the ingredients table looks as follows:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Choose...              |
-		| Formaldehyde            | 100     | No                  | No            | Choose...              |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I navigate to the home page
 
-@ScenarioId:6314
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
+	#And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
+	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
+	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
+	#	| Retailer  |
+	#	| Walgreens |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
+	#And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
+	#Given I navigate to the landing page
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#And I filter for the product saved as: TestCase109230
+	#And I click Row Actions for the first product returned
+	#And I click on the Row Action: View
+	#Then I switch to the Data Summary page
+	#And In the Data Summary page, I confirm that the Ingredients table matches the following:
+	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+	#	| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+	#	| Formaldehyde            | 100     | No                  | No            |                        |
+	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	#And I close the window that opened
+	#And I filter for the product saved as: TestCase109230
+	#And I click Row Actions for the first product returned
+	#And I click on the Row Action: Update Required
+	#Given In the New Product page I click tab: Physical and Chemical Properties
+	#And I click the page heading: Ingredients
+	#And I confirm that the ingredients table looks as follows:
+	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+	#	| Chlorine                | 100     | No                  | Yes           | Choose...              |
+	#	| Formaldehyde            | 100     | No                  | No            | Choose...              |
+	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	#And I navigate to the home page
+
+@TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
 
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -575,7 +577,7 @@ Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check t
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
-@ScenarioId:6062
+@TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -612,7 +614,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
-	And In the New Product page I click tab: Physical and Chemical Properties
+	And In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
 
@@ -620,7 +622,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
-	And for ingredient: Water Percentage displayed: 43
+	And for ingredient: Water Percentage displayed: 0
 	Then I enter text: Butane in the component search box
 	And I select the component search result with CAS matching text: 106-97-8 and save ingredient as: Butane_95487
 	And In the ingredients table the ingredients should be in the following order
@@ -643,7 +645,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 
-@ScenarioId:9377
+
+@TestCase:133335
 	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -675,7 +678,7 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
-	| 106-97-8   | Butane                 | Inert           |
+	| 106-97-8   | Water                  | Active          |
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
@@ -694,78 +697,89 @@ Given I should see the Product Information Page
 	And I should see the Waste Classification Data Page
 	And I click the page heading: Ingredients
 	And I click continue
-	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 
 
 
-@ScenarioId:10286
+@TestCase:133610
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
+	And I see the following sections
+		| Section                                                              |
+		| Which best describes your product, including when FIFRA 25(b) Exempt |
+	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then I set the value 'FIFRAPopupExpected' to be: true
+	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-And I see the following sections
-| Section                                                              |
-| Which best describes your product, including when FIFRA 25(b) Exempt |
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-Then I set the value 'FIFRAPopupExpected' to be: true
-Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
+	Given I set the Primary Physical State option to: Solid
+	Given I set the Secondary Physical State option to: Solid
+	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+	Then I click continue
 
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Then I click continue
-
-Then I add the following ingredients:
-| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Glutens, corn       | 100     | false         | false       |            |
-Then I click continue
-Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-Then I confirm the table in the popup view has following column data
-| CAS Number | Name                   | Active or Inert |
-| 66071-96-3 | Glutens, corn          | Active          |
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-And I should see the Ingredients Page
-When In the New Product page I click tab: Product Type
-And I click the page heading: The Product
-And I should see the The Product Page
-And I set 'Product Name' to: RESET PRODUCT
-And I set 'Type of Product' to: Chalk
-Then I save the product information as: TestCase133610
-Then I click continue
-Then I click continue
-And I should see the Product Information Page
-And I see the following sections
-| Section                               |
-| Select countries the product may be sold in |
-| Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) |
-| Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) |
-| Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns. |
-| Product is a Retailer's Private Label or Brand |
-| Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) |
-Given I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Soluble in water
-Then I click continue
-And I should see the Ingredients Page
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
-Then I add the following ingredients:
-| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Glutens, corn       | 100     | false         | false       |            |
-Then I click continue
-Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-And I should see the Waste Classification Data Page
+	Then I add the following ingredients:
+		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn       | 100     | false         | false       |            |
+	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm the table in the popup view has following column data
+		| CAS Number | Name                   | Active or Inert |
+		| 66071-96-3 | Glutens, corn          | Active          |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	And I should see the Ingredients Page
+	When In the New Product page I click tab: Product Type
+	And I click the page heading: The Product
+	And I should see the The Product Page
+	And I set 'Product Name' to: RESET PRODUCT
+	And I set 'Type of Product' to: Charcoal
+	Then I save the product information as: TestCase133610
+	Then I click continue
+	And I should see the Product Information Page
+	And I see the following sections
+		| Section                                                                                                                                                                                          |
+		| Select countries the product may be sold in                                                                                                                                                      |
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
+	Given I set the Primary Physical State option to: Solid
+	Given I set the Secondary Physical State option to: Solid
+	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+	Given I set the Select the best Water Solubility description option to: Soluble in water
+	Then I click continue
+	And I should see the Ingredients Page
+	Then I click the 'x' button for component number 1
+	Given I click: YES in the 'Remove Component from My Ingredients' pop up
+	Then I add the following ingredients:
+		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| MICONAZOLE NITRATE | 100     | false               | false       |            |
+	Then I click continue
+	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	And I should see the Waste Classification Data Page
+	And I click the page heading: Ingredients
+	And I should see the Ingredients Page
+	Then I click the 'x' button for component number 1
+	Given I click: YES in the 'Remove Component from My Ingredients' pop up
+	Then I add the following ingredients:
+		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn    | 50      | false               | false       |            |
+		| Oils, peppermint | 50      | false               | false       |            |
+	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then I confirm the table in the popup view has following column data
+		| CAS Number | Name             | Active or Inert |
+		| 66071-96-3 | Glutens, corn    | Active          |
+		| 8006-90-4  | Oils, peppermint | Active          |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	Then I save the product information as: TestCase133610
+	Then I click the Home navigation icon
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610

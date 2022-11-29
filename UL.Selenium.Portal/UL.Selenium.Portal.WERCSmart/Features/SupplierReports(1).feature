@@ -23,7 +23,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto26 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:978
+@ignore
+@TestCase:68420
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -50,7 +51,7 @@ Scenario: [68420] List of Supplier Reports
 @tfs_design
 @ignore
 @Obsolete
-@ScenarioId:979
+@TestCase:68421
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -82,7 +83,8 @@ Scenario: [68421] Active UPCs for Products Report
 	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
 	And I delete the Supplier Report file saved as 68421
 
-@ScenarioId:980
+@ignore
+@TestCase:68422
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -130,7 +132,8 @@ Scenario: [68422] Battery-containing products report
 	#And I confirm that the product returned has the same name as the product saved as: TestCase68422
 	#And I delete the Supplier Report file saved as 68422
 
-@ScenarioId:981
+@ignore
+@TestCase:68423
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -157,7 +160,8 @@ Scenario: [68423] Formulated vs Articles Report
 	And I confirm that the product returned has the same name as the product saved as: TestCase68423
 	And I delete the Supplier Report file saved as 68423
 
-@ScenarioId:982
+@ignore
+@TestCase:73082
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -219,7 +223,8 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
 
-@ScenarioId:977
+@ignore
+@TestCase:108254
 Scenario: [108254] UPC Report for All Products with Retailer - Create new products and verify in report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Create a formulated product - Chalk
@@ -241,7 +246,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Create an article product - lightbulb
@@ -257,7 +262,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC108254Lightbulb, container type: Plastic Container and size: 12 click continue
 	Then in the Additional Documents to Provide page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
@@ -270,7 +275,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
-		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
 		| Lithium Ion  | <any>        | 4                               | 4                                  | lithiumbattery |
 	Given I click continue
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
@@ -278,7 +283,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC108254BCP, container type: Plastic Container and size: 32
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Begin steps to get report and verify data
@@ -300,7 +305,8 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 		| Camera wBattery | UPC108254BCP | Walgreens | Submitted | 32     | Plastic Container | Battery-Containing Product | ENHANCED ARTICLES |
 	And I delete the Supplier Report file saved as 108254
 
-@ScenarioId:6270
+@ignore
+@TestCase:73225
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -319,7 +325,8 @@ Scenario: [73225] Kits that Contain a specific Product
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73225
 
-@ScenarioId:6349
+@ignore
+@TestCase:73228
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -338,7 +345,8 @@ Scenario: [73228] Products that are Associated with a specific Kit
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73228
 
-@ScenarioId:6262
+@ignore
+@TestCase:73226
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -363,7 +371,8 @@ Scenario: [73226] Pesticide Certificate Report
 	Given I save the product with name: TestCase73226Name and id: TestCase73226Id as: TestCase73226
 	And I delete the excel file saved as excel73226
 
-@ScenarioId:984
+@ignore
+@TestCase:73229
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -400,7 +409,8 @@ Scenario: [73229] Products with VOCs
 		| VT           |
 	And I delete the excel file saved as 73229
 
-	@ScenarioId:983
+@ignore
+@TestCase:73227
 Scenario: [73227] Products and Recommended Use Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the My Reports icon in the QuickLinks Pane
@@ -419,7 +429,8 @@ Then I confirm that the excel file saved as: 73227 contains the following column
 		| Product Name   |
 And I delete the excel file saved as 73227
 
-@ScenarioId:985
+@ignore
+@TestCase:73230
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -442,6 +453,8 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 		| Status          |
 	And I delete the excel file saved as 73230
 
+@ignore
+@TestCase:75391
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -494,7 +507,8 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	And I delete the Supplier Report file saved as 75391
 
 #fails because of a bug 106613
-@ScenarioId:986
+@ignore
+@TestCase:76551
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
     Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -519,7 +533,8 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	And I delete the Supplier Report file saved as excel76551
 
 #TODO - this scenario is incomplete because the possibility of automating the rest of the test case needs review.
-@ScenarioId:978
+@ignore
+@TestCase:76759
 Scenario: [76759] Waste Classification Summary Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -601,7 +616,7 @@ Scenario: [76759] Waste Classification Summary Report
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
 @ignore
-@ScenarioId:6619
+@TestCase:79635
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -627,8 +642,10 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635
 
+
 #Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
-@ScenarioId:976
+@ignore
+@TestCase:110480
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
@@ -637,8 +654,8 @@ Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- C
 	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
 
 
-
-@ScenarioId:5976
+@ignore
+@TestCase:114764
 Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
 	Given I Submit a new product which has a Case UPC and a regular UPC

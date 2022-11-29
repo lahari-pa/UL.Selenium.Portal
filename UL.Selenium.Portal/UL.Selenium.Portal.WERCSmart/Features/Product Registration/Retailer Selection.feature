@@ -14,7 +14,8 @@
 
 Feature: Retailer Selection
 
-@ScenarioId:1075
+@ignore
+@TestCase:78933
 Scenario: [78933] Select Retailers - Show List View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -65,7 +66,8 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 
 
-@ScenarioId:1076
+@ignore
+@TestCase:78936
 Scenario: [78936] Select Retailers - Show Logo Tile View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -109,7 +111,7 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78936
 
 
-@ScenarioId:1077
+@TestCase:78937
 Scenario: [78937] Select Retailers - Select All
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -147,7 +149,8 @@ Then the selected retailers on the Retailer page should match the retailer list 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
 
-@ScenarioId:6055
+@ignore
+@TestCase:85276
 Scenario: [85276] Select Retailers - Errors highlighted
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 
@@ -179,7 +182,7 @@ Then I confirm I see error messages for the following retailers
 | O'Reilly            |
 | Sears/K-Mart        |
 | Wal-Mart/SAM'S CLUB |
-@ScenarioId:6010
+@TestCase:96708
 Scenario: [96708] Beverage RU - No Walmart
 Given I generate a random UPC number and save as: UPC96708
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -211,7 +214,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 
 
-@ScenarioId:9399
+@TestCase:136057
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -257,13 +260,13 @@ Then The following retailers in the Select Retailers popup list view should not 
 | Dollar General |
 Given I click Done in the Select Retailers popup
 Given I click continue
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
 And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
 
 
-@ScenarioId:9378
+@TestCase:133311
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -285,6 +288,7 @@ Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
 Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
 
 
+@TestCase:125130
 Scenario: [125130] Canadian Tire Available for Selection for Articles
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -302,6 +306,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TestCase:128920
 Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -328,7 +333,7 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
 
 
-@ScenarioId:10275
+@TestCase:128769
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

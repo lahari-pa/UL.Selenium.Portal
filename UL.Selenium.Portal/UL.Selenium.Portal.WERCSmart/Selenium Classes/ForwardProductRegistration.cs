@@ -1180,18 +1180,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterUPCInformation(TableRow row)
 		{
-			if (row["UPC Number"].ToLower().Contains("saved as"))
+
+			if (row["UPC Number"].ToLower().Contains("saved as "))
 			{
+
 				try
 				{
 					string savedUPC = Context
-						.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.GetFromContext(row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();
 					row["UPC Number"] = savedUPC;
 				}
 				catch (Exception e)
 				{
-					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as ", "", StringComparison.InvariantCultureIgnoreCase) + " " + e.Message);
 					throw;
 				}
 			}
@@ -1222,7 +1224,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					type.Select(firstOption);
 				}
 			}
-
 			else
 			{
 				type.Select(row["Type"]);
@@ -1295,7 +1296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement upcNumber = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'UPC Number')]"), 2);
 			if (upcNumber == null || !upcNumber.TryEnterText(row["UPC Number"]))
 			{
-				Report.Info("Failed to enter the UPC Number in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the UPC Number in the Add Casepack modal window.");
 				return false;
 			}
 
@@ -1313,14 +1314,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement size = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Size (Weight Ounces)')]"), 2);
 			if (size == null || !size.TryEnterText(row["Size (Weight Ounces)"]))
 			{
-				Report.Info("Failed to enter the Size (Weight Ounces) in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the Size (Weight Ounces) in the Add Casepack modal window.");
 				return false;
 			}
 
 			IWebElement quantity = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Quantity')]"), 2);
 			if (quantity == null || !quantity.TryEnterText(row["Quantity"]))
 			{
-				Report.Info("Failed to enter the Quantity in the Add Case UPC modal window.");
+				Report.Info("Failed to enter the Quantity in the Add Casepack modal window.");
 				return false;
 			}
 

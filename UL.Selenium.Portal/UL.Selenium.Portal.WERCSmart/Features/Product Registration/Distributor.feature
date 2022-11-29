@@ -26,7 +26,7 @@ Feature: Distributor
 
 @tfs_design
 @ignore
-@ScenarioId:6479
+@TestCase:122365
 Scenario: [122365] Create a distributor request and process it to completed
 	Given I generate a random UPC number and save as: UPC86463
 	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount

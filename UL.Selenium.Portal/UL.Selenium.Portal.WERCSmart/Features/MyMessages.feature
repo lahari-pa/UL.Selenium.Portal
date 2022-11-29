@@ -22,7 +22,8 @@
 @run_MyMessages
 Feature: MyMessages
 
-@ScenarioId:1038
+@ignore
+@TestCase:72582
 Scenario: [72582] Active Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +47,7 @@ Scenario: [72582] Active Export Report
 # Need to check how to archive messages - there are none archived in the products account
 @tfs_design
 @ignore
-@ScenarioId:9410
+@TestCase:72586
 Scenario: [72586] Archive Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -71,7 +72,7 @@ Scenario: [72586] Archive Export Report
 
 @tfs_design
 @ignore
-@ScenarioId:1541
+@TestCase:109503
 Scenario: [109503] Message Center - Suspended message stays in Message Center for entirety of processing product - Formula - Document Issue
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC109503
@@ -91,7 +92,7 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109503)

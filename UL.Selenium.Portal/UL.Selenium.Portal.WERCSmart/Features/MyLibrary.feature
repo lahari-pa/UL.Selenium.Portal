@@ -14,10 +14,12 @@
 @DataSummarySheet
 @ProductGrid
 @ProductSetUp
+@SupplierReports
+@RetailPartners
 @run_MyLibrary
 Feature: MyLibrary
 
-@ScenarioId:797
+@TestCase:64884
 Scenario: [64884] My Library
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then The home screen should load
@@ -31,7 +33,7 @@ Scenario: [64884] My Library
 		| My Ingredients                 |
 		| Contact Information per SDS(s) |
 
-@ScenarioId:799
+@TestCase:70535
 Scenario: [70535] Add Brand
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -48,7 +50,7 @@ Scenario: [70535] Add Brand
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:800
+@TestCase:70536
 Scenario: [70536] Edit Brand - Deactivate
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -67,7 +69,7 @@ Scenario: [70536] Edit Brand - Deactivate
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:801
+@TestCase:70537
 Scenario: [70537] Edit Brand - Update Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -85,7 +87,7 @@ Scenario: [70537] Edit Brand - Update Name
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@ScenarioId:798
+@TestCase:70533
 Scenario: [70533] Edit Packaging Type
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -123,7 +125,7 @@ Scenario: [70533] Edit Packaging Type
 	Given I click Delete in the Delete Product pop up
 	Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
-@ScenarioId:802
+@TestCase:70539
 Scenario: [70539] Add an Ingredient (Basic) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -135,7 +137,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	And I select the smart search result with name: Water and CAS: 7732-18-5
 	And I save the ingredient I added in My Library to context as: water70539
 	Given I click Save in the My Ingredients tab
-	Given I click the WERCSmart logo
+	Given I click the WERCSmart logo 
 	Then The home screen should load
 	#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
 	# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
@@ -159,7 +161,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70539
 
-@ScenarioId:803
+@TestCase:70556
 Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -195,7 +197,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70556
 
-@ScenarioId:10602
+@TestCase:70567
 Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -237,7 +239,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70567
 
-@ScenarioId:6351
+@TestCase:73329
 Scenario: [73329] Edit Ingredient
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -301,12 +303,13 @@ Scenario: [73329] Edit Ingredient
 	Then I confirm that all changes in edited ingredients: My Library Ingredients Edited 2 were saved
 	And I remove all ingredients in the list saved as: My Library New Ingredients
 
+@TestCase:73227
 	Scenario: [73227] Products and Recommended Use Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
 	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+	Given In the Supplier Reports screen the current page description should be: Products and Recommended Use Report
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
@@ -314,12 +317,11 @@ Scenario: [73329] Edit Ingredient
 		| Column         |
 		| Supplier       |
 		| RU Description |
-		| RU Category    |
 		| WPSID          |
 		| Product Name   |
 	And I delete the excel file saved as 73227
 
-@ScenarioId:805
+@TestCase:73328
 Scenario: [73328] Pagination functionality
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -349,20 +351,20 @@ Scenario: [73328] Pagination functionality
 	And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
 	And I navigate to the home page
 
-@ScenarioId:804
+@TestCase:73326
 Scenario: [73326] Searching an Ingredient
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click on My Account
 	Given In the My Account page I navigate to the My Library page
 	Given I navigate to the My Ingredients tab in the My Library page
-	Given I enter the text: 50-0 into the My Ingredients search field
+	Given I enter the text: 50-00 into the My Ingredients search field
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	Given I enter the text: Formald into the My Ingredients search field
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	And I navigate to the home page
 
-@ScenarioId:10027
+@TestCase:70516
 Scenario: [70516] Add and Remove Packaging Type
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -375,8 +377,8 @@ Scenario: [70516] Add and Remove Packaging Type
 	Given I click continue
 	Then I should see the Bill of Materials Page
 	And I save the Packaging Type details as: ThisPackaging
-	Given I click Add Row in the Bill Of Materials grid
-	Given I select the option: Clear Glass for the My Packaging Materials field in the table
+	#Given I click Add Row in the Bill Of Materials grid
+	Given I select the option: Glass Packaging - Clear Glass - Non-Beverage for the My Packaging Materials field in the table
 	Given I select the option: 99 for the My Packaging Weight (grams) field in the table
 	Given I click continue
 	Then I should see the CONEG Page
@@ -396,7 +398,7 @@ Scenario: [70516] Add and Remove Packaging Type
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Then Product Name should be showing value: Super Packaging Type 1 (TM)
-	Given I close the Data Summary tab
+    And I close the window that opened
 	Then I should see the Data Acceptance Page
 	#And I Verify the 'Summary Page' matched with the data/text entered for the '' you created
 	#And I Click on the top-right 'PRINT BUTTON'
@@ -404,6 +406,8 @@ Scenario: [70516] Add and Remove Packaging Type
 	#And I Close the 'Print Preview Tab'
 	#And I Click the 'ACCEPT BUTTON'
 	Given In the Data Acceptance page I click on the Accept button
+
+
 	#And I Verify your 'ID number and Packaging Type Name' appears under "ID / Packaging Type Name"
 	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
 	#And I Verify the date appears under "Date Created"

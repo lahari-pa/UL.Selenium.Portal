@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Dependencies\CSV\1100 UPCs from notepad.csv" />
+	  <None Remove="Dependencies\CSV\No valid UPCs.csv" />
+	  <None Remove="Dependencies\CSV\notepad 301 upcs with some invalid.csv" />
+	  <None Remove="Dependencies\CSV\test 1 valid and 1 invalid upc.csv" />
+	  <None Remove="Dependencies\CSV\TestMultipleUPCs.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Dependencies\CSV\1100 UPCs from notepad.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\No valid UPCs.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\notepad 301 upcs with some invalid.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\test 1 valid and 1 invalid upc.csv" />
+	  <EmbeddedResource Include="Dependencies\CSV\TestMultipleUPCs.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
+
+		<PackageReference Include="Castle.Core" Version="4.3.1" />
+
+		<PackageReference Include="UL.Automation" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.Framework.NUnit" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.Reporting.Html" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.SpecFlow" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.TReVor" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.Utilities" Version="5.0.57" />
+		<PackageReference Include="UL.Automation.WebDriver" Version="5.0.57" />
+
+		<!-- ===== TREVOR PACKAGE(S) ===== -->
+
+		<PackageReference Include="TReVor.Integrations" Version="3.0.28" />
+		<PackageReference Include="TReVor.Integrations.BuildOperations" Version="3.0.28">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- ===== SPECFLOW PACKAGE(S) ===== -->
+
+		<PackageReference Include="SpecFlow" Version="3.9.50" />
+		<PackageReference Include="SpecFlow.NUnit" Version="3.9.50" />
+		<PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.50" />
+
+		<!-- ===== NUNIT PACKAGE(S) ===== -->
+
+		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- ===== MISC. PACKAGE(S) ===== -->
+
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+		<PackageReference Include="iTextSharp" Version="5.5.11" />
+		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj" />
+	</ItemGroup>
+</Project>

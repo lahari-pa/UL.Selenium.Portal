@@ -76,6 +76,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Studio desktop is loaded");
 			var thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
+
+			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
+			{
+				Report.Info($"key QASHAAccount did not exist...");
+				Context.FeatureContext.Add("QASHAAccount", shaUser.Username);
+			}
+			else
+			{
+				Report.Info($"key QASHAAccount did  exist, updating instead");
+				Context.FeatureContext["QASHAAccount"] = shaUser.Username;
+
+			}
 		}
 
 
@@ -2066,6 +2078,252 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in the First Row of the UPC table")]
+		public void ShaUPCListFirstItemCheck(string condition, string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				//Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				SHAManagerProdcutUPC displayedUpcs = new StudioSHAManager().GetFirstUPC();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info($"The first found displayed UPC was: {displayedUpcs.UPCNumber}");
+
+				Report.Info($"Checking if the UPC needed is saved in context");
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.UPCNumber==upc, "UPC: " + upc + " does not display",
+						"UPC: " + upc + " displays as expected");
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(displayedUpcs.UPCNumber != upc, "UPC: " + upc + " was found in the first position.",
+						"UPC: " + upc + " was not found in the first position.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in Any Row of the UPC table")]
+		public void ShaUPCListAllItemsCheck(string condition, string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				//Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				List<string> displayedUpcs = new StudioSHAManager().UPCAssessmentScreenGetUPCStringList();
+
+
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				Report.Info($"The list of dispayed UPCs was: {string.Join(", ",displayedUpcs)}");
+
+				Report.Info($"Checking if the UPC needed is saved in context");
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.Contains(upc), "UPC: " + upc + " does not display", "UPC: " + upc + " displays as expected");
+
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(!displayedUpcs.Contains(upc), "UPC: " + upc + " was still found.","UPC: " + upc + " was not found");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+
+		[StepDefinition(@"In the SHA UPC list I should (see|not see) the case pack asterisk for the UPC: (.*)")]
+		public void ShaUPCListCasePackAsteriskSeen(string condition, string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				//Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().UPCAssessmentScreenGetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info($"The list of displayed UPCs was: {string.Join(", ", displayedUpcs.Select(x => x.UPCNumber).ToList())}");
+
+				Report.Info($"Checking if the UPC needed is saved in context");
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				Report.Info($"Checking that our upc is found in the table...");
+				var foundUPC = new SHAManagerProdcutUPC();
+				if(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)))
+				{
+					Report.Success($"The upc {upc} was  found in the table");
+
+					foreach(var item in displayedUpcs)
+					{
+						if (item.UPCNumber.Contains(upc))
+						{
+							foundUPC = item;
+							Report.Success($"Assigned upc to 'foundUPC', UPC was: {foundUPC.UPCNumber}");
+							break;
+						}
+					}
+					if(foundUPC.IsNullOrEmpty())
+					{
+						Report.Failure($"Not able to assign a value to 'foundUPC'");
+						return;
+					}
+
+
+					Report.Info($"Checking the Case pack asterisk presence against the required condition: ({condition})");
+					if (condition == "see")
+					{
+						var array = foundUPC.UPCNumber.ToArray();
+						char finalChar = array.Last();
+						Report.IsTrue(finalChar.ToString()=="*", "the case pack upc asterisk was not found", "The case pack upc asterisk was found");
+					}
+
+					if (condition == "not see")
+					{
+						var array = foundUPC.UPCNumber.ToArray();
+						char finalChar = array.Last();
+						Report.IsTrue(finalChar.ToString() != "*","The case pack upc asterisk was found", "the case pack upc asterisk was not found");
+					}
+
+				}
+				else
+				{
+					Report.Failure($"The upc {upc} was not found in the table");
+					return;
+				}
+
+				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
 
 		[StepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()
@@ -2451,12 +2709,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
+			if (searchTerm.Contains("saved as "))
+			{
+				searchTerm = searchTerm.Replace("saved as ", "");
+		    }
+		
 			if (Context.GetFromContext(searchTerm) != null)
 			{
-				searchTerm = Context.GetFromContext("searchTerm").ToString();
-			}
+				searchTerm = Context.GetFromContext(searchTerm).ToString();
+			} 
 
 			var thisStudioSupplierManager = new StudioSupplierManager();
+
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
@@ -2886,7 +3150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Saved UPC to context");
 					break;
 				}
-			}
+			}Report.Info("testing0 " + savedAs);
 		}
 
 		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
@@ -4431,6 +4695,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return;					
 			
 			
+		}
+
+		[StepDefinition(@"In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes")]
+		public void OpenSHAProductsGridClickCancelConfirmCloses()
+		{
+			var thisProductSearch = new StudioSHAManagerProductSearch();
+			var myStudioShaManager = new StudioSHAManager();
+
+			Report.StartStep("I click Search in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded","Product search page has loaded as expected", false, false);
+			Report.Screenshot();
+			Report.Info("Going to click 'Cancel'");
+			Delay.Seconds(1);
+			Report.IsTrue(thisProductSearch.ClickButton("Cancel"), "Failed to click cancel", "Clicked cancel", false, false);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Screenshot();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
+			Report.Screenshot();
+			var thisProductSearch2 = new StudioSHAManagerProductSearch();
+			Report.IsTrue(!thisProductSearch2.SearchPopupFound(), "The Product Search Popup was found", "The product search popup was closed");
+		}
+
+		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
+		public void InUPCAssessmentScreenConfrimISeeUPCSavedAs(string savedAs)
+		{
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			string idfound = new StudioSHAManager().GetUPCScreenWSProductID();
+			Report.Info($"id from context = {id}");
+			Report.Info($"id found on page = {idfound}");
+			Report.IsTrue(id == idfound, "The id found was not equal to the produc ID in context", "The Product ID's matched!");
 		}
 
 	}

@@ -12,7 +12,7 @@
 @run_Flow3
 Feature: Flow 3
 
-@ScenarioId:1005
+@TestCase:74992
 Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -36,11 +36,11 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I should see the Data Acceptance Page
 	Then The Data Acceptance page should appear
-	Then I should see an error message: Select at least one of the options
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then I should see an error message: To submit registration, please indicate agreement with the Data Acceptance statement.
+	Then In the Data Acceptance page I select Agreed
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Baby/infant/Adult Care/Cleansing Wipes
@@ -48,8 +48,10 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74992
 
-@ScenarioId:1006
+@ignore
+@PestDetailsStateRework
 #Need to Review the Updates to this test case.
+@TestCase:75081
 Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
@@ -93,11 +95,11 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I should see the Data Acceptance Page
 	Then The Data Acceptance page should appear
 	Then I should see an error message: Select at least one of the options
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Wipes, Cleaning (with Chemical)

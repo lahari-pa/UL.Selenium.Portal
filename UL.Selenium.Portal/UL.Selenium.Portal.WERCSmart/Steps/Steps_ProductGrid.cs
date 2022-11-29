@@ -122,6 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the product saved as: (.*)")]
 		public void GivenISearchForTheProductSavedAs(string savedAs)
 		{
+			Delay.Seconds(30);
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
@@ -602,6 +603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"I should (see|only see|not see) the following Actions options")]
@@ -976,6 +978,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.IsTrue(ProductGrid.DeleteFirstRow(), "Failed to delete product in first row!", "Successfully deleted product in first row!");
 					}
+				}
+			}
+		}
+
+		//confirm method
+		[StepDefinition(@"I confirm the product: (.*)")]
+		public void ThenIConfirmTheProduct(string savedas)
+		{
+			Report.Info("Attempting to get product from context");
+			if (!Context.Contains(savedas))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedas}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedas);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+			Report.Info("Attempting to delete: " + Product.Name);
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
+			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+			{
+				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
+				{
+					GeneralUtilities.Wait_for_load_finish();
+					if (!ProductGrid.RowsAreFoundInProductGrid())
+					{
+						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
+						return;
+					}
+					
+					Report.Info($"Products with ID '{Product.Id}' were found in the grid!");
 				}
 			}
 		}
@@ -2469,31 +2507,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the Archive Retailers Popup")]
-		public void GivenIShouldSeeTheArchiveRetailersPopup()
+		[StepDefinition(@"I should (see|not see) the Archive Retailers Popup")]
+		public void GivenIShouldSeeTheArchiveRetailersPopup(string condition)
 		{
 			var thisModalDialog = new ModalDialog();
-			if (thisModalDialog.Wait_for_load(5))
+			if (condition == "see")
 			{
-				Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
-					"Dialog is showing as expected");
+				if (thisModalDialog.Wait_for_load(5))
+				{
+					Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
+						"Dialog is showing as expected");
+					return;
+				}
+				else
+				{
+					Report.Failure("Archive Retailers dialog is not showing");
+					return;
+				}
 			}
-			else
+			if(condition=="not see")
 			{
-				Report.Failure("Archive Retailers dialog is not showing");
+				if (thisModalDialog.Wait_for_load(5))
+				{
+					Report.IsTrue(thisModalDialog.GetTitle() != "Archive Retailers",
+						"Dialog is showing", "Dialog is not showing");
+					return;
+				}
+				else
+				{
+					Report.Success("Archive Retailers dialog is not showing");
+					return;
+				}
 			}
+		
 		}
 
-		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer")]
-		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive()
+		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: (.*)")]
+		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive(string savedAs)
 		{
 			var thisModalDialog = new ModalDialog();
 			List<string> retailers = thisModalDialog.GetRetailers();
 			string retailerToArchive = retailers[0];
 			Report.IsTrue(thisModalDialog.SelectRetailer(retailerToArchive), "Failed to select: " + retailerToArchive,
 				"Selected: " + retailerToArchive);
-
-			Context.AddToContext("retailer", retailerToArchive);
+			Context.AddToContext(savedAs, retailerToArchive);
 		}
 
 		[StepDefinition(@"In the Archive Retailers popup, I select the checkbox next to the retailer (.*)")]
@@ -2517,6 +2574,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ProductsGrid().ArchiveAlert(response),$"Selected {response} in Archive Alert.",$"Unable to select {response} in Archive alert.");
 			string s = response;
+		}
+
+		[StepDefinition(@"I check that the Alert for Archiving a Retailers shows the text: (.*)")]
+		public void CheckArchiveRetailerAlertText(string val)
+		{
+			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match", showSuccessScreenshot: false);
+		}
+
+		[StepDefinition(@"I ensure that the check box next to Show Archived Retailers is unselected")]
+		public void EnsureShowArchivedRetailersCheckboxIsUnchecked()
+		{
+			var thisProductsGrid = new ProductsGrid();
+			bool status = thisProductsGrid.IsShowArchivedRetailersChecked();
+			if(status)
+			{
+				Report.Info($"The checkbox was checked, we need to uncheck it now");
+				Report.Screenshot();
+				this.GivenISelectTheCheckBoxNextToShowArchivedRetailers("Select");
+				Report.IsTrue(!thisProductsGrid.IsShowArchivedRetailersChecked(), "The checkbox was still checked", "The checkbox was unchecked");
+			}
+			else
+			{
+				Report.Success($"The checkbox was already unchecked. No action needed");
+				Report.Screenshot();
+			}
+
 		}
 
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
@@ -2604,12 +2687,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
-		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay()
+		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) saved as: (.*) that are archived icons that display")]
+		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay(string savedAs)
 		{
-			if (Context.Contains("retailer"))
+			if (Context.Contains(savedAs))
 			{
-				string archivedRetailer = Context.GetFromContext("retailer").ToString();
+				string archivedRetailer = Context.GetFromContext(savedAs).ToString();
 				var selProdGrid = new ProductsGrid();
 				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
 				List<string> retailers = productElement.Retailers;
@@ -2642,6 +2725,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"I Confirm that the retailer\(s\) saved as: (.*) are not displayed for the first product in the grid.")]
+		public void ConfirmRetailersNotDisplayedForFirstProductInGrid(string savedAs)
+		{
+			if (Context.Contains(savedAs))
+			{
+				string archivedRetailer = Context.GetFromContext(savedAs).ToString();
+				var selProdGrid = new ProductsGrid();
+				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+				List<string> retailers = productElement.Retailers;				
+				if (retailers.Contains(archivedRetailer))
+				{
+					Report.Failure($"The archieved retailer was still found under the product.");
+					return;
+				}
+				Report.Success($"The arhcieved retailer was not found for the product in the product.");
+				return;
+
+				
+
+			}
+			else
+			{
+				Report.Error("No retailer is saved into context");
+			}
+
+		}
+
+
 
 		[StepDefinition(@"I should see the View UPCs page")]
 		public void WhenIShouldSeeTheViewUPCsPage()

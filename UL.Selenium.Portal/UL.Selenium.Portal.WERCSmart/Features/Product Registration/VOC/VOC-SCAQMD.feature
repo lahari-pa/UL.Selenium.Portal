@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -13,6 +13,8 @@
 
 Feature: VOC - SCAQMD (Suite ID: 64748)
 
+@ignore
+@TestCase:56479
 Scenario: [56479] VOC SCAQMD -  SCAQMD Results - Low Solid = Yes - Exceeds area limit - exceeds SCAQMD Limits
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

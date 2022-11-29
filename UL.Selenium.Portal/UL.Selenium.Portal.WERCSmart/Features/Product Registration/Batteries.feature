@@ -12,7 +12,7 @@ Feature: Batteries
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
 @tfs_design
 @ignore
-@ScenarioId:10167
+@TestCase:97488
 Scenario: [97488] Stand alone Lithium Battery vehicle
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -21,7 +21,7 @@ And I call Shared Step 60935 (Product Information - US - Direct Ship - Private L
 And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-	| Battery Type   | Manufacturer | Number of batteries per package | How many batteries required to run |
+	| Battery Type   | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 	| Lthium Primary | <any>        | 6                               | 6                                  |
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Lithium
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -44,7 +44,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1500
+@TestCase:97489
 Scenario: [97489] Stand alone Magnesium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -66,7 +66,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -84,7 +83,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1502
+@TestCase:97495
 Scenario: [97495] Stand alone Nickel-Cadmium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -109,7 +108,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -127,7 +125,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
-@ScenarioId:1501
+@TestCase:97494
 Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -152,7 +150,6 @@ Given I should see the Regulatory Documents to Provide Page
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 Given I click continue
 Given I call Shared Step 60567 (Upload Product Label only)
 Given in the Optional Reports and Documents Available for Purchase page I click Continue

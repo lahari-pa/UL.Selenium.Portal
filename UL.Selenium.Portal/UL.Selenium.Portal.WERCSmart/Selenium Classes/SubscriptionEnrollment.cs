@@ -24,7 +24,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//======================================================================================================== RANGE OF PRODUCTS, ARTICLES AND ENHANCE ARTICLES
 
 		//Articles
-		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Articles ']/../select")]
+		//[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Articles ']/../select")]
+		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4'][.//label[normalize-space(text())='Articles']]//select")]
 		public IWebElement _selectArticles;
 
 		public bool Select_Articles(string articles)
@@ -69,7 +70,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetSectionSelectedOption(string section)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			//IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath($".//div[contains(@class,'ws-subscription')][.//label[normalize-space(text())='{section}']]//select"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the section: " + section);
@@ -159,7 +161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Enhanced Articles
-		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/../select")]
+		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4'][.//label[normalize-space(text())='Enhanced Articles']]//select")]
 		public IWebElement _selectEnArticles;
 
 		public bool Select_Enhanced_Articles(string enArticles)
@@ -219,7 +221,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Formulated Products
-		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Formulated Products ']/../select")]
+		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4'][.//label[normalize-space(text())='Formulated Products']]//select")]
 		public IWebElement _selectFormProds;
 
 		public bool Select_Formulated_Products(string formProds)
@@ -436,27 +438,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			List<string> featurePlans = this.Get_Feature_Plans();
 			var listOfPlans = new List<Plan>();
-			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]"), 2).ToList();
+			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4'][not(@style='display: none;')]//div[contains(@class, 'subscription')][.//input[@type='radio']]"), 2).ToList();
 
 			foreach (IWebElement subscription in listSubscriptions)
 			{
 				var newPlan = new Plan();
 
-				var regex = new Regex(@".*\r\n");
+				//var regex = new Regex(@".*\r\n");
 
-				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]/label"), 2).Text.Trim();
+				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//label[@class='subs subs--radio']"), 2).Text.Trim();
+				/*
 				Match match = regex.Match(allLabel);
 				if (match.Success)
 				{
 					newPlan.Plan_Name = match.Value.Replace("\r\n", string.Empty);
 				}
-
-
-				ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
-				if (spans.Count > 1)
+				*/
+				newPlan.Plan_Name = allLabel;
+				//ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
+				ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//li"));
+				if (subscription.FindElement(By.XPath(".//div[contains(@class,'best')]"),1) != null)
 				{
 					newPlan.Best_Value = true;
-					newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]"), 2).Text.Trim();
+					newPlan.Plan_Sub = ""; //subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]"), 2).Text.Trim();
 				}
 				else
 				{
@@ -513,8 +517,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//newPlan.Info_points
 				IWebElement subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"), 2);
 
-				string backGroundColour = subsIndicator.GetCssValue("background-color");
-				if (backGroundColour.Contains("255, 255, 255"))
+				//string backGroundColour = subsIndicator.GetCssValue("background-color");
+				//if (backGroundColour.Contains("255, 255, 255"))
+				if(subsIndicator.GetCssValue("box-shadow") !=null && subsIndicator.GetCssValue("box-shadow")=="none")
 				{
 					newPlan.Selected = false;
 				}
@@ -523,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					newPlan.Selected = true;
 				}
 
-
+				/*
 				if (featurePlans.Contains(newPlan.Plan_Name))
 				{
 					newPlan.Plan_Type = "Feature";
@@ -531,6 +536,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				else
 				{
 					newPlan.Plan_Type = "Support";
+				}
+				*/
+
+				if(subscription.GetAttribute("data-bind").Contains("Support"))
+				{
+					newPlan.Plan_Type = "Support";
+				}
+				else
+				{
+					newPlan.Plan_Type = "Feature";
 				}
 
 				listOfPlans.Add(newPlan);
@@ -728,7 +743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Gold_click()
 		{
 			Report.Info("Attempting to Select Gold Support Services Plan");			
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-md-12']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
@@ -749,7 +764,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Silver_click()
 		{
 			Report.Info("Attempting to Select Silver Support Services Plan");
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-md-12']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
@@ -769,11 +784,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-md-12']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string titleTrimmed = Regex.Replace(menu.Text, @"\r\n.*", "").Trim();
-				if (titleTrimmed == "No additional Agent Support Service")
+				if (titleTrimmed == "Bronze Level Support")
 				{
 					menu.Click();
 					return true;

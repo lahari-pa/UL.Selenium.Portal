@@ -792,9 +792,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I delete UPC: (.*)")]
 		public void GivenIDeleteUPC(string upc)
 		{
+			Delay.Seconds(10);
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
-			Delay.Seconds(5);
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
@@ -825,7 +826,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Relative Density text field");
 			try
 			{
 				var selNewProduct = new NewProduct();
@@ -1103,10 +1104,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the 'Add UPC' button")]
+		[StepDefinition(@"I click the 'Add' button")]
 		public void ThenIClickTheAddUpcButton()
 		{
-			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add UPC' button!", "Successfully clicked the 'Add UPC' button");
+			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add' button!", "Successfully clicked the 'Add' button");
 		}
 
 		[StepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
@@ -1167,10 +1168,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
+		[StepDefinition(@"I enter the following into the Other DOT Exception field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheOtherDOTException(string text)
+		{
+			Report.IsTrue(new NewProduct().InputOtherDotException(text), "Text: " + text + " was not successfully inputted into the Other DOT Exception field!", "Text: " + text + " was successfully inputted into the Other DOT Exception field!");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
-			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the Optional Comments field!", "Text: " + text + " was successfully inputted into the Optional Comments field!");
 		}
 
 		[StepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
@@ -1210,7 +1217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
+		[StepDefinition(@"In the Data Acceptance page I select Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			var thisNewProduct = new NewProduct();
@@ -1693,6 +1700,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				Report.IsTrue(passed, "Voc percent data did not match for state: " + expectedinfo.State, "Voc percent data matched for state: " + expectedinfo.State);
 			}
+		}
+
+		[StepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
+		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value )
+		{
+			Report.Info("I Enter manually under the 'VOC VALUE' Column a value for each of the listed States");
+			var selNewProduct = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.IsTrue(selNewProduct.EnterVOCStateValue(value), "Failed to enter 'VOC value' Column a value for each of the listed States",
+				"Successfully enetered 'VOC value' Column a value for each of the listed States");
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
 		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
@@ -2376,8 +2396,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			// if subscription upgrade - Proceed ?
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
+			Report.Info($"Looking for the purchase summary header...");
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			GeneralUtilities.Wait_for_load_finish();
+			Report.Info($"In the purchase summary screem I go to click 'Confirm order'...");
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 		}
 
@@ -2613,6 +2635,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
 		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
+
+			GeneralUtilities.Wait_for_load_finish();
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
 
 			if (isOrIsNot.ToLower() == "is not")
@@ -2851,9 +2875,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -2878,8 +2902,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(new NewProduct().SelectAllCertifications(), "Failed to select all certifications", "Successfully selected all certifications");
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -3391,6 +3415,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			int randomNumber = random.Next(1, HeightList.Count - 1);
 			Report.IsTrue(new NewProduct().SelectHeight(HeightList[randomNumber]),
 				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
+		}
+
+		[StepDefinition(@"I confirm SKU field is blank")]
+		public void GivenIConfirmSKUFieldIsBlank()
+		{
+			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
 		}
 
 	}

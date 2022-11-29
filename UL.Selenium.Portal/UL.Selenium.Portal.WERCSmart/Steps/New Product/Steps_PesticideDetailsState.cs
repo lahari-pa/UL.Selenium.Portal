@@ -67,6 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string state = Context.GetFromContext("state").ToString();
 			string expirationDate = pesticideDetailsState.ExpirationDate(state);
 			string kellyExpirationDate = pesticideDetailsState.GetPesticideRegKellyExpirationDate(state);
+			
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
 		}
 
@@ -158,6 +159,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
 			}
+		}
+
+		[StepDefinition(@"In the Pesticide Details - State Registration Details page I click 'x' for the following state: (.*)")]
+		public void GivenInThePesticideDetails_StateRegistrationDetailsPageIClickForTheFollowingState(string abbrevState)
+		{
+			var Steps = new PesticideDetailsState();
+			Report.IsTrue(Steps.ClickxForRegistrationDetailsForState(abbrevState) == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
+			Delay.Seconds(5);
+			Report.IsTrue(Steps.ClickYesOrNoForRegistrationDetailsRemoveItemPopup("Yes") == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
 		}
 
 		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]

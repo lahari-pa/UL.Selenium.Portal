@@ -1,9 +1,10 @@
-﻿@Shared
+@Shared
 @SHA
 @run_SHAManagerSupplierRecords
 Feature: SHA Manager Supplier Records
 
-@ScenarioId:8104
+@ignore
+@TestCase:127895
 Scenario: [127895] SHA Manager: Supplier Records: Verification of Data Tier Consent
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

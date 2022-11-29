@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return null;
 			}
-
+			
 			IWebElement kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
 			if (kellyExpirationDateInput == null)
 			{
@@ -426,6 +426,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement textField = this.containerElement.FindElement(By.XPath("//th[text()='EPA Pesticide Registration No.']/../../following-sibling::tbody//input"), 2);
 			return textField.TryEnterText(enterText);
+		}
+
+		public bool ClickxForRegistrationDetailsForState(string abbrevState)
+		{
+			IWebElement xButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: field.field'][text()='" + abbrevState + "']/../following-sibling::td//a"), 2);
+			if (xButton == null)
+			{
+				return false;
+			}
+			return xButton.TryClick();
+		}
+		public bool ClickYesOrNoForRegistrationDetailsRemoveItemPopup(string yesOrNo)
+		{
+			IWebElement yesOrNoButton = this.containerElement.FindElement(By.XPath("//h3[@class='modal-title'][text()='Remove Item']/../..//div[@class='modal-footer']//button[text()='" + yesOrNo + "']"), 2);
+			if (yesOrNoButton == null)
+			{
+				return false;
+			}
+			return yesOrNoButton.TryClick();
 		}
 
 	}

@@ -9,7 +9,8 @@
 @run_RetailerPartners
 Feature: Retailer Partners
 
-@ScenarioId:740
+@ignore
+@TestCase:56881
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 	# Note: We will have a separate test case for new suppliers views of this page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -27,7 +28,7 @@ Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 # Below step to be added when we have a db connection string
 # And Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
-@ScenarioId:741
+@TestCase:56895
 Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	# Retail Partners Page
@@ -93,7 +94,7 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Winco Foods            | WC    |
 		| NewEgg                 | NE    |
 
-@ScenarioId:742
+@TestCase:56903
 Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -108,7 +109,7 @@ Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID o
 	And I confirm that there is a section labeled: Data Consent Tiers
 	And Retail partner details should be showing text: Lowe's requires suppliers of products to grant Tier 1 at this time.
 
-@ScenarioId:743
+@TestCase:56907
 Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -128,7 +129,7 @@ Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but d
 	And I confirm that there is a section labeled: Data Consent Tiers
 	Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
-@ScenarioId:758
+@TestCase:56981
 Scenario: [56981] Retailer & You - layout
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -141,7 +142,7 @@ Scenario: [56981] Retailer & You - layout
 	And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
 
 #BLOCKED because requires database access
-@ScenarioId:759
+@TestCase:56982
 Scenario: [56982] Retailer & You - validation of information shown
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -155,7 +156,8 @@ Scenario: [56982] Retailer & You - validation of information shown
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
 
-@ScenarioId:745
+@ignore
+@TestCase:56911
 Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -177,7 +179,7 @@ Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID 
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:750
+@TestCase:56927
 Scenario: [56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -191,7 +193,7 @@ Scenario: [56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
-@ScenarioId:752
+@TestCase:56929
 Scenario: [56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -214,7 +216,7 @@ Scenario: [56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Supp
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
-@ScenarioId:754
+@TestCase:56931
 Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -232,7 +234,7 @@ Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports 
 	And I navigate to the home page
 
 # NB logged ticket for spelling error, waiting for correction
-@ScenarioId:756
+@TestCase:56933
 Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Options - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -249,7 +251,7 @@ Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Opt
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
-@ScenarioId:748
+@TestCase:56925
 Scenario: [56925] My Data & Recipients - General layout checks
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -265,7 +267,7 @@ Scenario: [56925] My Data & Recipients - General layout checks
 	And I should not be able to edit Tier Tier 1
 	And I navigate to the home page
 
-@ScenarioId:749
+@TestCase:56926
 Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -286,7 +288,8 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID\Supplier ID validation - retailer specific
 # NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
 # ******* Blocked because cannot run database queries on staging, also the query appears to be wrong or the database string is.
-@ScenarioId:760
+@ignore
+@TestCase:57261
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57264 (Go To Retail Partners - Select O'Reilly)
@@ -328,7 +331,7 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID
 # NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
 #DB queries are not automated because they will not work in staging
-@ScenarioId:747
+@TestCase:56920
 Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
@@ -355,7 +358,7 @@ Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 #And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
 #'And I Confirm the results of the query show the Is Active column is set to 1
 #And I Confirm the results of the query shows the F_User_updated column is set (does not show 0's)
-@ScenarioId:744
+@TestCase:56909
 Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -374,7 +377,7 @@ Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID b
 	And The pie chart should be showing on the retailer details page
 	And The pie chart footer text should contain: % of your product portfolio is associated with Amazon
 
-@ScenarioId:746
+@TestCase:56914
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -393,64 +396,81 @@ Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data 
 	And The pie chart should be showing on the retailer details page
 	And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
-@ScenarioId:751
+@ignore
+@TestCase:56928
 Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 1: Regulatory Compliance" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Regulatory Support mean?"	
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56928PDF
-	Then I Check that the pdf file saved as: savedas56928PDF contains the text: WERCSmart Terms of Use
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56928PDF
+	Then I Check that the pdf file saved as: savedas56928PDF contains the text: WERCSmart® Terms of Use
 	#Can not check title as only get full pdf text. Could check first sentence contains text but does not really indicate we are checking title 
 	Then I delete the file saved as savedas56928PDF
+	And I close the Terms Use tab
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 	And I close the Data Tier Details popup
 
 
-@ScenarioId:753
+@ignore
+@TestCase:56930
 Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 2: Chemical Program Support" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Chemical Program Support mean?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56930PDF
-	Then I Check that the pdf file saved as: savedas56930PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56930PDF
+	Then I Check that the pdf file saved as: savedas56930PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56930PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
-@ScenarioId:755
+
+@ignore
+@TestCase:56932
 Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What does Supplemental Reports for Internal Business Use Only mean?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56932PDF
-	Then I Check that the pdf file saved as: savedas56932PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56932PDF
+	Then I Check that the pdf file saved as: savedas56932PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56932PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
-@ScenarioId:757
+@ignore
+@TestCase:56934
 Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I click the Retail Partners icon in the Navigation Pane
 	And I select the retailer: CVS
 	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 	And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
-	Then I Delete the file with name: Data_Tier_Disclosure_12_01_2017.pdf from the downloads folder
-	And I click download PDF for "What are my Public Disclosure Options?"
+	Then I Delete the file with name: TermsofUseLinedVersion1ToVersion2Oct24.pdf from the downloads folder
+	And In the What are the Data Usage Tiers modal, I click the Terms of Use link
+	And I confirm Terms Use page loads in new tab
+	Then On the Terms Use page, I click on the 'PDF lined version (version 1 to version 2)' link
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
-	Then I confirm that a file is produced called Data_Tier_Disclosure_12_01_2017.pdf and save as savedas56934PDF
-	Then I Check that the pdf file saved as: savedas56934PDF contains the text: WERCSmart Terms of Use
+	Then I confirm that a file is produced called TermsofUseLinedVersion1ToVersion2Oct24.pdf and save as savedas56934PDF
+	Then I Check that the pdf file saved as: savedas56934PDF contains the text: WERCSmart® Terms of Use
 	Then I delete the file saved as savedas56934PDF
+	And I close the Terms Use tab
 	And I close the Data Tier Details popup

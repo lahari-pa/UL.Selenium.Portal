@@ -297,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement headerRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + header + @""")]/../.."), 2);
@@ -364,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
-			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
+			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
@@ -372,7 +372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return listOfIngredients;
 			}
 
-			ReadOnlyCollection<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"));
+			ReadOnlyCollection<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody//tr//td[1]//div[@data-bind='html: Data']"));
 
 			if (ingredientsRows.Count == 0)
 			{
@@ -387,7 +387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < ingredientsRows.Count - 1; i++)
 			{
 				IWebElement row = ingredientsRows[i];
-				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath(".//td"));
+				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath(".[1]//div[@data-bind='html: Data']"));
 				var thisIngredient = new Ingredients.Ingredient();
 				string CASAndNaME = rowColumns[0].GetValue();
 				string pattern = @"([A-Za-z\d\-\,^\r]+)";

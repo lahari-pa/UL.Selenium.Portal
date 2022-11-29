@@ -21,7 +21,7 @@ Feature: Product Documents
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Product Documents
 
 @59322
-@ScenarioId:1317
+@TestCase:59322
 Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -56,13 +56,13 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59322
 
 
 
-@ScenarioId:1315
+@TestCase:59320
 Scenario: [59320] Upload Document - IFRA certificate
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -88,12 +88,12 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59320
 
 
-@ScenarioId:1316
+@TestCase:59321
 Scenario: [59321] Upload Document - GRAS certificate
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -118,7 +118,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59321
 

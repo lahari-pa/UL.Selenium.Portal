@@ -32,7 +32,7 @@ Feature: UPC Case Pack
 #		| username    | FirstName | LastName   | Role         | EmailAddress                |
 #		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1455
+@TestCase:87640
 Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -54,7 +54,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -63,7 +63,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87640
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-@ScenarioId:1454
+@TestCase:87643
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -87,7 +87,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -97,7 +97,8 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
-@ScenarioId:1456
+@TestCase:87650
+@TestCase:87650
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -107,7 +108,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
+    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
     Then I save the product information as: TestCase87650
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
@@ -135,9 +136,10 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Then I should see maximum upc limit message: This product registration has reached the maximum limit of active UPC entries. You may remove UPC entries that are no longer valid, if possible. Also, be sure the UPC entries are for the specific registration being made. If you need an exception to the UPC limit for this registration, please contact support and advise the total quantity of UPCs needed to accommodate this registration.
 	And I should not see the following UPC buttons:
 		| Option       |
-		| Add UPC      |
-		| Add Case UPC |
+		| Add          |
+		| Add Casepack |
 	Given in the Universal Product Code (UPC) page I click Continue
+	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -145,7 +147,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -158,7 +160,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876502
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876503
 
-@ScenarioId:1457
+@TestCase:87676
 Scenario: [87676] UPC - Case Pack can be removed from new product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -181,7 +183,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87676 and its status is: New
@@ -198,7 +200,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	And I delete UPC: saved as UPC87676
 	Then In the list of UPCs I should not see UPC: saved as UPC87676
 	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC876761, container type: Plastic Container and size: 25 - do not click continue
-	And I click the 'Add Case UPC' button
+	And I click the 'Add Casepack' button
 	#And I switch to tab: UL Wercs Studio
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -210,7 +212,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
 
-@ScenarioId:1458
+@TestCase:87685
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -234,7 +236,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -262,7 +264,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Completed
 
-@ScenarioId:1459
+@TestCase:87686
 Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -284,7 +286,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
@@ -315,7 +317,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	@tfs_design
 	@ignore
 @singlerun
-@ScenarioId:10161
+@TestCase:87894
 Scenario: [87894] Forwarding - Edit existing Case UPC
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 	Given I navigate to the landing page
@@ -363,7 +365,7 @@ Given I Use Test case 87685 to create a product which has a Case UPC and a regul
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87894
 	Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
-@ScenarioId:1535
+@TestCase:87835
 Scenario: [87835] View UPCs shows Case UPC Data
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC87835
@@ -378,7 +380,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 		| Retailer |
 		| Amazon   |
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87835, container type: Paper bag and size: 2 do not click continue
-	And I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
+	And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
@@ -387,7 +389,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I navigate to the home page
 	And I search for the product saved as: TestCase87835
 	And I click Row Actions for the first product returned
@@ -403,8 +405,8 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
 
 
-@ScenarioId:10103
-	Scenario: [87631] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+@TestCase:87631
+	Scenario: [87631] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -418,7 +420,7 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 | Retailer  |
 | Walgreens |
 And I should see the Universal Product Code Page
-Given I click the 'Add Case UPC' button
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
@@ -468,7 +470,12 @@ Then I check for the appropriate alert: No error
 And I should see the Regulatory Documents to Provide Page
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
+<<<<<<< HEAD
 @ScenarioId:10145
+=======
+
+@TestCase:87718
+>>>>>>> origin/QA
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -482,8 +489,8 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
-Given I should see the Universal Product Code (UPC) Page
-Given I click the 'Add Case UPC' button
+Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87718   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
@@ -505,7 +512,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:11137
+@TestCase:87818
 Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -519,7 +526,7 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 Then I click continue
-Given I click the 'Add Case UPC' button
+Given I click the 'Add Casepack' button
 Given I add the following into the UPC case fields
 		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
 		| saved as UPC87818   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
@@ -533,7 +540,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:6519
+@TestCase:87821
 Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

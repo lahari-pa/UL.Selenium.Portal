@@ -406,6 +406,110 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
+		public static void SaveMiddle5DigitsOfUPCAS(string upc, string savedAs)
+		{
+			if (upc.Contains("savedAs"))
+			{
+				if (!Context.Contains(upc.Replace("savedAs", "")))
+				{
+					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
+				}
+				else
+				{
+					upc = (string)Context.GetFromContext(upc.Replace("savedAs", ""));
+
+				}
+			}
+			int upcTotalLength = upc.Length;
+			//even check
+			if (upcTotalLength % 2 == 0)
+			{
+				Report.Info($"The UPC was an even number");
+				int skipNum = ((upcTotalLength - 5) - 1) / 2;
+				string finalTerm = null;
+				for (int i = skipNum; i < skipNum + 5; i++)
+				{
+					var chars = upc.ToCharArray();
+					finalTerm = finalTerm + chars[i];
+				}
+
+				Report.Info($"The final term to be used is: {finalTerm}, saving to context as: {savedAs}");
+				Context.AddToContext(savedAs, finalTerm);
+
+			}
+			else
+			{
+				Report.Info($"The UPC was an odd number");
+				int skipNum = ((upcTotalLength - 5)) / 2;
+				string finalTerm = null;
+				for (int i = skipNum; i < skipNum + 5; i++)
+				{
+					var chars = upc.ToCharArray();
+					finalTerm = finalTerm + chars[i];
+				}
+
+				Report.Info($"The final term to be used is: {finalTerm}, saving to context as: {savedAs}");
+				Context.AddToContext(savedAs, finalTerm);
+			}
+
+		}
+
+		public static void SaveFirst5DigitsOfUPCAS(string upc, string savedAs)
+		{
+			if (upc.Contains("savedAs"))
+			{
+				if (!Context.Contains(upc.Replace("savedAs", "")))
+				{
+					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
+				}
+				else
+				{
+					upc = (string)Context.GetFromContext(upc.Replace("savedAs", ""));
+
+				}
+			}
+			string finalTerm = null;
+
+			for (int i = 0; i < 5; i++)
+			{
+				var chars = upc.ToCharArray();
+				finalTerm = finalTerm + chars[i];
+			}
+
+			Report.Info($"The final term to be used is: {finalTerm}, saving to context as: {savedAs}");
+			Context.AddToContext(savedAs, finalTerm);
+
+
+		}
+		public static void SaveLast5DigitsOfUPCAS(string upc, string savedAs)
+		{
+			if (upc.Contains("savedAs"))
+			{
+				if (!Context.Contains(upc.Replace("savedAs", "")))
+				{
+					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
+				}
+				else
+				{
+					upc = (string)Context.GetFromContext(upc.Replace("savedAs", ""));
+
+				}
+			}
+			string finalTerm = null;
+			int totalLength = upc.Length;
+
+			for (int i = totalLength - 5; i < totalLength; i++)
+			{
+				var chars = upc.ToCharArray();
+				finalTerm = finalTerm + chars[i];
+			}
+
+			Report.Info($"The final term to be used is: {finalTerm}, saving to context as: {savedAs}");
+			Context.AddToContext(savedAs, finalTerm);
+
+
+		}
+
 		public static bool IsValidDate(string value, string dateFormats)
 		{
 			DateTime tempDate;
@@ -422,6 +526,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 	}
+
+
 
 	public class RetailerAbbreviations
 	{
@@ -596,7 +702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-	
+
 
 
 
@@ -609,5 +715,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 	}
-
 }
+
+

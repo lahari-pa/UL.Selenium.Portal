@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// </summary>
 		/// <param name="table"></param>
 		[StepDefinition(@"I add the following batteries:")]
-		// Requires a table with the headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+		// Requires a table with the headings: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		public void AddTheFollowingBatteries(Table table)
 		{
 			try
@@ -39,15 +39,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var listOfBatteries = new List<Battery>();
 				foreach (var thisRow in table.Rows)
 				{
-					if (!int.TryParse(thisRow["Number of batteries per package"], out var batteriesPerPackage))
+					if (!int.TryParse(thisRow["Quantity of Batteries per Package"], out var batteriesPerPackage))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries per Package' column of the step table must be an integer value");
 					}
-					if (!int.TryParse(thisRow["How many batteries required to run"], out var batteriesRequired))
+					if (!int.TryParse(thisRow["Quantity of Batteries to Operate Product"], out var batteriesRequired))
 					{
 						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
-						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+						throw new Exception("'Quantity of Batteries to Operate Product' column of the step table must be an integer value");
 					}
 					var thisBattery = new Battery {
 						BatteryType = thisRow["Battery Type"],

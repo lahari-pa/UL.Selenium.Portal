@@ -16,9 +16,9 @@
 Feature: Flow 12
 
 Background:
-	Given I verify the following users exist and if not I create them using SHAUser
+Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto10 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
@@ -27,9 +27,10 @@ Background:
 ## Test case can be found at the following paths:
 ## NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 12
 ## NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
-@ScenarioId:793
+@ignore
+@TestCase:58430
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I click on My Account
 Then I create a new email address
 Then I create a new user with the following information and set the password from the admin account: ProductAccount
@@ -75,13 +76,13 @@ And I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I should see the Sustainability Page
 Given in the Sustainability page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
-@ScenarioId:794
+@TestCase:58605
 Scenario: [58605] Suppository (no laxative) -  RU001151
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Medicinal
@@ -103,11 +104,11 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
 
-@ScenarioId:795
+@TestCase:58606
 Scenario: [58606] Medicinal Liquids - RU001188
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -140,7 +141,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58606. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58606. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58606
 
@@ -151,7 +152,8 @@ Scenario: [58606] Medicinal Liquids - RU001188
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 @ProductSetUp
 @42196
-@ScenarioId:796
+@ignore
+@TestCase:42196
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)

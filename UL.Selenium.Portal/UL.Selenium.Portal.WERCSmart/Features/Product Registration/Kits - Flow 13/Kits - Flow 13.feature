@@ -22,7 +22,9 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto19 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1095
+
+@ignore
+@TestCase:58753
 Scenario: [58753] Hair Color Kit - RU000724
 
 	Given I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct1
@@ -43,5 +45,5 @@ Scenario: [58753] Hair Color Kit - RU000724
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58753, container type: Plastic Container and size: 100
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment Kit 58753
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment Kit 58753
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

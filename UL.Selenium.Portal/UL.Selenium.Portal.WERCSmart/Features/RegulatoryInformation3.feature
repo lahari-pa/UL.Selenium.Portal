@@ -14,7 +14,7 @@
 
 Feature: Regulatory Information 3
 
-@ScenarioId:1188
+@TestCase:88022
 Scenario: [88022] Regulatory Information 3 - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -23,8 +23,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase88022
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
@@ -43,7 +43,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 #| An Active Ingredient is listed on the Panel |
 
 
-@ScenarioId:1189
+@TestCase:88644
 Scenario: [88644] Regulatory Information 3 - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -52,8 +52,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase88644
 Given I call Shared Step 60310 (Product Information - Without Child question)
 Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |

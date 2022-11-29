@@ -12,7 +12,7 @@
 @run_VOCFlow19
 Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 
-@ScenarioId:1025
+@TestCase:62730
 Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit checking
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -39,7 +39,7 @@ Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit c
 		| Exceeds the limits specified by the Ozone Transport Commission                      |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62730
 
-@ScenarioId:1024
+@TestCase:62728
 Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -69,7 +69,7 @@ Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 		| Exceeds the limits specified by the Ozone Transport Commission                      |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62728
 
-@ScenarioId:1023
+@TestCase:62724
 Scenario: [62724] VOC - Flow 19 - Dilution - Sold = 50 Used = 2 - limit checking
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -96,7 +96,7 @@ Scenario: [62724] VOC - Flow 19 - Dilution - Sold = 50 Used = 2 - limit checking
 		| Does not exceed the limits specified by the Ozone Transport Commission              |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62724
 
-@ScenarioId:1022
+@TestCase:62708
 Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -134,7 +134,7 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 		| Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
 
-@ScenarioId:1021
+@TestCase:56478
 Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

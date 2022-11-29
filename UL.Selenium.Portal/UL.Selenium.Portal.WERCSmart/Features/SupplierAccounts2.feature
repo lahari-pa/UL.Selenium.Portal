@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -21,6 +21,6 @@
 
 Feature: SupplierAccounts2
 
-@ScenarioId:1397
+@TestCase:1234501
 Scenario: [1234501] Create new account with supplier settings for Products Account
 Given I create a new supplier products account with the following parameters and update TReVor information for: ProductAccount

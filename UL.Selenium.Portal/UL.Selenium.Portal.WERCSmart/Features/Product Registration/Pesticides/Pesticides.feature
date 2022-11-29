@@ -20,7 +20,7 @@ Background:
 		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
-@ScenarioId:655
+@TestCase:62775
 Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +46,7 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
-@ScenarioId:660
+@TestCase:62849
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
@@ -66,20 +66,58 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I should see the Pesticide Details - State Registration Details Page
 	Then I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2021-12-01 for the State: NY on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
+
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+Given in the New Product page I click Continue
+
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2021-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2022-12-01
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
-@ScenarioId:661
+@TestCase:62852
 Scenario: [62852] Pesticide - Product Label is required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -107,7 +145,7 @@ Scenario: [62852] Pesticide - Product Label is required
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62852
 
-@ScenarioId:644
+@TestCase:56547
 Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient information returned from call to Kelly API
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -131,7 +169,7 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
 
-@ScenarioId:646
+@TestCase:57512
 Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -142,7 +180,7 @@ Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57512
 
-@ScenarioId:647
+@TestCase:57516
 Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -153,7 +191,7 @@ Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57516
 
-@ScenarioId:648
+@TestCase:57520
 Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-B
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -164,7 +202,7 @@ Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
 
-@ScenarioId:649
+@TestCase:57522
 Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -175,7 +213,7 @@ Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
 
-@ScenarioId:650
+@TestCase:57527
 Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -186,7 +224,7 @@ Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57527
 
-@ScenarioId:651
+@TestCase:57529
 Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -197,7 +235,7 @@ Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529
 
-@ScenarioId:652
+@TestCase:57533
 Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -208,7 +246,7 @@ Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57533
 
-@ScenarioId:653
+@TestCase:57534
 Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -219,7 +257,7 @@ Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57534
 
-@ScenarioId:654
+@TestCase:57546
 Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -230,7 +268,7 @@ Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
 
-@ScenarioId:662
+@TestCase:66344
 Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -242,7 +280,7 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
-@ScenarioId:663
+@TestCase:66345
 Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -255,7 +293,8 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
 @56500
-@ScenarioId:641
+#@ignore
+@TestCase:56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -319,17 +358,18 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Given I set the Alberta field to: Choose...
     Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field					     |
-		| Alberta                    |
-		| British Columbia           |
-		| New Brunswick              |
-		| New Foundland              |
-		| Nova Scotia                |
-		| Ontario                    |
-		| Prince Edward Island       |
-		| Quebec                     |
-		| Yukon Territory            |
-		| Manitoba                   |
+		| Field                |
+		| Alberta              |
+		| British Columbia     |
+		| New Brunswick        |
+		| New Foundland        |
+		| Nova Scotia          |
+		| Ontario              |
+		| Prince Edward Island |
+		| Quebec               |
+		| Yukon Territory      |
+		| Saskatchewan         |
+		| Manitoba             |
 	# Confirm N/A is shown as already selected for the Northwest Territory question
   	And Northwest Territory should be showing the value: Not Applicable
     #
@@ -341,8 +381,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
 	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Given I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
-	Given I click continue
 	Then I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
@@ -351,13 +389,13 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
-	Then In the Data Acceptance page I select Yes, Agreed
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
+	Then In the Data Acceptance page I select Agreed
 	And I should not see any error messages
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 
-@ScenarioId:643
+@TestCase:56541
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -377,12 +415,49 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given in the New Product page I click Continue
 	And I should see the Transportation Details 1 Page
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56541
 
-@ScenarioId:656
+@TestCase:62778
 Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Environment Protection Agency (EPA) Registration Number
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -416,7 +491,7 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
-@ScenarioId:657
+@TestCase:62780
 Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Number table
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -458,7 +533,7 @@ Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Numb
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62780
 
-@ScenarioId:645
+@TestCase:56577
 Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user edits date from Kelly
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -479,13 +554,65 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
+
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56577
 
-@ScenarioId:658
+@TestCase:62799
 Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates and coloring
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -511,6 +638,56 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
+
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AZ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+
 	Given I click continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
@@ -525,7 +702,7 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides
-@ScenarioId:642
+@TestCase:56502
 Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Given I generate a random UPC number and save as: UPC56502
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -567,9 +744,9 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
-	Then In the Data Acceptance page I select Yes, Agreed
+	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
 	#And I Confirm the Purchase summary step is shown, depending on your subscription you will see either the success message or the product details and the Confirm order button.  If the product is shown click Confirm order
@@ -583,7 +760,7 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 
 #And I Go to the State Pesticide Section of MTR/CKLT SECT0127
 #And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
-@ScenarioId:664
+@TestCase:71051
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -609,10 +786,44 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Then I check each State Pesticide Registration Number contains the edited suffix
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I check each State Pesticide Registration Number contains the edited suffix
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
-@ScenarioId:659
+@TestCase:62848
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -632,7 +843,58 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	And I should see the Pesticide Details - State Registration Details Page
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2021-12-31 for the State: AZ on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2022-12-31 for the State: AZ on the Pesticide State Registration Details page
+Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DE
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: GA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ND
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OK
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
 	Given in the New Product page I click Continue
 	Then I click the page heading: Pesticide Details - U.S.
 	And I should see the Pesticide Details - U.S. Page
@@ -641,12 +903,12 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 	Then I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State
-	Then I confirm the 'Is Kelly Data' field for State: AZ is checked
-	Given I navigate to the home page
-	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+	#Then I confirm the 'Is Kelly Data' field for State: AZ is checked
+	#Given I navigate to the home page
+	#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+	 
 
-
-@ScenarioId:10534
+@TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC121120
@@ -675,12 +937,12 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 
 	
-@ScenarioId:9323
+@TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -691,8 +953,8 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Given I save the product information as: TestCase
 Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
 Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 74-98-6   | Propane       | 100     | false               |            | false       |

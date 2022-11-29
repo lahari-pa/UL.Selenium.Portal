@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @NewProduct
 @ProductGrid
 @RetailPartners
@@ -9,7 +9,8 @@
 
 Feature: Battery
 
-@ScenarioId:8107
+@ignore
+@TestCase:127575
 Scenario: [127575] Battery Registration - Regulatory Documents - Needs "I don't Need" Option
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -27,6 +28,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 |           | Potassium hydroxide | 20.5    | false               |            | false       |
 |           | Zinc chloride       | 9.5     | false               |            | false       |
 |           | Aqua                | 70      | false               |            | false       |
+Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
 Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
@@ -39,7 +41,8 @@ Then I should see radio option: need an OSHA-Compliant Safety Data Sheet (SDS) d
 Then I should see radio option: need a WHMIS Compliant SDS
 
 
-
+@ignore
+@TestCase:142371
 Scenario: [142371] Battery - Data Consents
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -68,7 +71,7 @@ Given I click the browse button for label: I have an Article Information Sheet (
 Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 Given I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 Given I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+#And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Given I click continue
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -76,7 +79,7 @@ And I call Shared Step 64097 - Additional Documents -> Contact Information - Add
 Given I click continue
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient  | Viscosity |
-| Mask                          | Buff       | 2                        | 2                       | Banana | Not applicable | 2                      | 2         |
+| Mask                          | Brown      | 2                        | 2                       | Banana | Not applicable | 2                      | 2         |
 Given I append the following into the comments field: test
 Given I click continue
 Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)

@@ -20,9 +20,10 @@ Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto31  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+        | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1074
+@ignore
+@TestCase:80089
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -52,7 +53,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -73,10 +74,12 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase80089) for	
 		| Retailer                   |		
 		| No Retailer/No UPC Product |
-@ScenarioId:1073
+
+#@ignore
+@TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
-	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto31 and save as: TestCase75410
+	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: TestCase75410
 	#Scenario: Test
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410
@@ -84,10 +87,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I search for the product saved as: TestCase75410
 	Given For product saved as: TestCase75410 the status is: Completed
-	And I click Row Actions for the first product returned
-	And I click on the Row Action: Update Data
-	And I should see the Update Registration popup
-	And In the Update Registration popup I click on button Yes
+    Given I call Shared Step 92580 (Click ... in Actions > Update Data > Summary Page - Edit Product)
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page
@@ -114,6 +114,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	Then I click Save in The Product Page
 	And In the New Product page I click tab: Review and Submit
 	And I click the page heading: Data Acceptance
+	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
@@ -127,7 +128,8 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
-@ScenarioId:6186
+@ignore
+@TestCase:84507
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and force it to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
@@ -170,7 +172,8 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
 
 
-@ScenarioId:8268
+@ignore
+@TestCase:100969
 	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -186,7 +189,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Then I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page

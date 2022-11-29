@@ -28,11 +28,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class StepsUPC
 	{
 
-		[StepDefinition(@"I click the 'Add Case UPC' button")]
-		[StepDefinition(@"in the UPC Window, I click the Add Case UPC button")]
+		[StepDefinition(@"I click the 'Add Casepack' button")]
+		[StepDefinition(@"in the UPC Window, I click the Add Casepack button")]
 		public void ThenIClickTheAddCaseUpcButton()
 		{
-			Report.IsTrue((new UPC()).ClickAddCaseUpcButton(), "Failed to click the 'Add Case UPC' button!", "Successfully clicked the 'Add Case UPC' button");
+			Report.IsTrue((new UPC()).ClickAddCaseUpcButton(), "Failed to click the 'Add Casepack' button!", "Successfully clicked the 'Add Casepack' button");
 			Delay.Seconds(5);
 		}
 
@@ -97,9 +97,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsUPC();
 			var MyStepsProduct = new StepsNewProduct();
-			//Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add Case UPC' button");
+			Report.StartStep("I click the 'Add Casepack' button");
 			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
 			Report.StartStep("I add the following into the UPC Fields");
@@ -128,8 +128,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 87641A\(Enter Universal Product Code - case information\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and package type:(.*) and Quantity: (.*) and Transportation option: (.*)")]
+		public void UPCCaseInformation(string upc, string containerType, string size, string packageType, string quantity, string transportation)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsUPC();
+			var MyStepsProduct = new StepsNewProduct();
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add Casepack' button");
+			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcCaseInformation {
+					ContainerType = containerType,
+					Size = size,
+					Quantity = quantity,
+					TransportationOption = transportation,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Quantity", quantity);
+				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("UPCName", "DefaultProductName");
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"I call Shared Step 87641 \(Enter Universal Product Code - case information\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Associated UPC: (.*) and Transportation option: (.*)")]
@@ -138,9 +179,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			StepsUPC MyStepsNewProduct = new StepsUPC();
 			StepsNewProduct MyStepsProduct = new StepsNewProduct();
-			//Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add Case UPC' button");
+			Report.StartStep("I click the 'Add Casepack' button");
 			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
 			Report.StartStep("I add the following into the UPC Fields");
@@ -170,8 +211,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
@@ -179,9 +220,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Delay.Seconds(3);
 			Report.StartStep("I add the following into the UPC Fields");
@@ -205,6 +246,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
+
+		}
+
+		[StepDefinition(@"I call Shared Step 87647A \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), size: (.*) and package type: (.*) do not click continue")]
+		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size, string packageType)
+		{
+			ReportDetails.CurrentDetails.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
+			Report.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					PackageType = packageType,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("PackageType", packageType);
+
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
@@ -215,7 +292,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			//Report.StartStep("I confirm 'Quantity' is visible in the UPC header");
 			//MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
 			var upcTable = new Table(new string[] {
@@ -337,9 +414,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsUPC();
 			var MyStepsProduct = new StepsNewProduct();
-			//Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add Case UPC' button");
+			Report.StartStep("I click the 'Add Casepack' button");
 			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
 			Report.StartStep("I add the following into the UPC Fields");
@@ -412,13 +489,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var MyStepsUpc = new StepsUPC();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			var uPCpage = new UPC();
 			Report.StartStep("I confirm Add new Packaging Type link");
 			List<string> labelLinksShowing = uPCpage.UpcPageLinks();
 			Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "The link with text: Add new Packaging Type was not found on the upc page", "The link with text: Add new Packaging Type was found on the upc page as expected");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -440,8 +517,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 			Delay.Seconds(1);
 			Report.StartStep("Confirm error message!");
 			string pipeDelimitedErrorMessages = "This is a required field.";
@@ -462,13 +539,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var MyStepsUpc = new StepsUPC();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			var uPCpage = new UPC();
 			Report.StartStep("I confirm Add new Packaging Type link does not display");
 			List<string> labelLinksShowing = uPCpage.UpcPageLinks();
 			Report.IsFalse(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I should not see Package Type option");
 			List<string> upcOptions = uPCpage.GetUPCOptions();
@@ -495,8 +572,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"I Select a package type from the drop down list")]
@@ -517,9 +594,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
@@ -555,7 +632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the 'Upload UPCs' button and upload the file saved as: (.*)")]
+		[StepDefinition(@"I click the 'Upload File' button and upload the file saved as: (.*)")]
 		public void ThenIClickTheUploadUpcsButtonAndUploadSavedAs(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -939,20 +1016,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (!upc.AddCaseUpcButton())
 			{
-				Report.Failure("The Add Case UPC Button was not found");
+				Report.Failure("The Add Casepack Button was not found");
 				Report.Screenshot();
 				allFound = false;
 			}
 			if (!upc.UploadUpcButton())
 			{
-				Report.Failure("The Upload UPCs Button was not found");
+				Report.Failure("The Upload File Button was not found");
 				Report.Screenshot();
 				allFound = false;
 			}
 
 			if (allFound)
 			{
-				Report.Success("The UPC Buttons (+Add UPC, + Add Case UPC, & ↑ Upload UPCs were all found");
+				Report.Success("The UPC Buttons (+Add UPC, + Add Casepack, & ↑ Upload File were all found");
 				Report.Screenshot();
 			}
 
@@ -1315,16 +1392,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.ClickSaveButton(), "Failed to click the Save button.", "Successfully clicked the Save button.");
 		}
 
-		[StepDefinition(@"I call Shared Step 87829 \(UPC - Add Case UPC - All Data > Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)")]
+		[StepDefinition(@"I call Shared Step 87829 \(UPC - Add Casepack - All Data > Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)")]
 		public void UPCCaseAddInformation(string upc, string containerType, string size, string quantity, string individualUpcCasePackSavedAS, string transportation)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsUPC();
 			var MyStepsProduct = new StepsNewProduct();
 			string individualUpcCasePack = (string)Context.GetFromContext(individualUpcCasePackSavedAS);
-			//Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			//Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add Case UPC' button");
+			Report.StartStep("I click the 'Add Casepack' button");
 			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
 			Report.StartStep("I add the following into the UPC Fields");
@@ -1355,8 +1432,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"In the Destination Retailers input field I input the value: (.*)")]
@@ -1530,12 +1607,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			for (int i = 0; i < 100; i++)
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
-				Report.StartStep("I click the 'Add UPC' button");
+				Report.StartStep("I click the 'Add' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				Report.StartStep("I add the following into the UPC Fields");
 				string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
@@ -1548,8 +1625,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
-				Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();
 				// not returning...
 				if (new NewProduct().FormError().IsNullOrEmpty())
@@ -1580,7 +1657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			for (int i = 0; i < 100; i++)
 			{
@@ -1607,8 +1684,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!",	"Successfully inputted UPC information!");
-				Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
-				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();
 				// not returning...
 				if (new NewProduct().FormError().IsNullOrEmpty())
@@ -1711,9 +1788,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			Report.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			Delay.Seconds(3);
 			Report.StartStep("I add the following into the UPC Fields");
@@ -1741,7 +1818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("ItemNumber", itemNumber);
 
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 
 			}
 		}

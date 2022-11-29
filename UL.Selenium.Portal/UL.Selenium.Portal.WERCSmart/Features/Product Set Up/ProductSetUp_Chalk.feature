@@ -21,7 +21,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto21 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1415
+@ignore
+@TestCase:75335
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC75335
@@ -43,7 +44,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
@@ -72,7 +73,8 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 
-@ScenarioId:1414
+@ignore
+@TestCase:75142
 Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - Status = Submitted
 	Given I login into the WERCSmart Portal - Administrator Role
 	Given I generate a random UPC number and save as: UPC75142
@@ -94,14 +96,15 @@ Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - S
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto21 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted
 
-@ScenarioId:1416
+@ignore
+@TestCase:75651
 Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - Process to Assigned
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	#Given I login into the WERCSmart Portal - Administrator Role
@@ -124,7 +127,7 @@ Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - 
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto21 and Open SHA manager)
@@ -134,7 +137,8 @@ Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase75651)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75651 and its status is: Assigned
 
-@ScenarioId:1417
+@ignore
+@TestCase:85965
 Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = Yes and submit thru to Completed status (NGHS only)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC85965
@@ -157,7 +161,7 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#Depending on your subscription you will either see the Purchase summary success message or you will see the Purchase summary with you product details save to contextshown.  If the product details are shown click Confirm order
 	Given If purchase details are showing click confirm order

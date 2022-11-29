@@ -15,7 +15,7 @@
 Feature: Flow 17
 
 @tfsdesign
-@ScenarioId:701
+@TestCase:60017
 Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -42,7 +42,6 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -50,11 +49,11 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60017. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60017. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Primary/Metal Batteries
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60017
 
-@ScenarioId:702
+@TestCase:60018
 Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -89,11 +88,11 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
 
-@ScenarioId:699
+@TestCase:104222
 Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -138,12 +137,11 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Label in both French and English is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Green
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
 
-@ScenarioId:700
+@TestCase:104227
 Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -172,7 +170,6 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
-	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
@@ -203,7 +200,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 @ignore
 # Test case can be found at the following path:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 17 - Lith bat
-@ScenarioId:11164
+@TestCase:103572
 Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	Given I generate a random UPC number and save as: UPC103572
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -262,7 +259,7 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: (.*)
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC103572, container type: (.*) and size: (.*)
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: (.*)
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: (.*)
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I Click Home
 	And [Shared Step 103255 - Login to SHA with your known user account and password]

@@ -31,7 +31,8 @@
 @run_UPCTransportation
 Feature: UPCTransportation
 
-@ScenarioId:6508
+@ignore
+@TestCase:122305
 Scenario: [122305] UPC Transportation options are present if product-level options are present
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC112305
@@ -40,8 +41,8 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I save the product information as: TestCase122305
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+          | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+          | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -68,7 +69,8 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
-@ScenarioId:6598
+@ignore
+@TestCase:122382
 Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122382
@@ -77,8 +79,8 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I save the product information as: TestCase122382
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+        | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -136,8 +138,8 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122382
 
 
-
-@ScenarioId:6613
+@ignore
+@TestCase:122428
 Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122428
@@ -146,8 +148,8 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I save the product information as: TestCase122428
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -183,7 +185,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I wait for 5 seconds
@@ -229,7 +231,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I click continue on the Forward Product Registration page
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
-@ScenarioId:6524
+@TestCase:122940
 Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122940
@@ -238,8 +240,8 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I save the product information as: TestCase122940
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -257,7 +259,8 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
 
-@ScenarioId:6527
+@ignore
+@TestCase:122971
 Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulated at the UPC Level
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122971
@@ -266,8 +269,8 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I save the product information as: TestCase122971
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -294,7 +297,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
@@ -306,7 +309,8 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122971
 
-@ScenarioId:6713
+@ignore
+@TestCase:122984
 Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122984
@@ -315,8 +319,8 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I save the product information as: TestCase122984
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -337,7 +341,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
@@ -364,7 +368,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 
 @tfs_design
 @ignore
-@ScenarioId:6740
+@TestCase:123125
 Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC123125
@@ -374,8 +378,8 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I save the product information as: TestCase123125
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
@@ -396,7 +400,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
@@ -421,7 +425,8 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 # Enter 170 in the Size (ounces) field
 # Click Save
 # Ensure that you get a UPC Transportation error
-@ScenarioId:6654
+@ignore
+@TestCase:123436
 Scenario: [123436] UPC Transportation - Recertification - Transportation Details 1 UPC popup
 	#may be worth either cutting some of the steps or making a shared step that creates the prouduct (shorten the specflow)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -436,7 +441,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 23
@@ -457,7 +462,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -471,7 +476,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -501,13 +506,14 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	#may need to update the below if inludes line breaks etc in the text
 	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
 	And I click continue
-	And I should see the Universal Product Code (UPC) Page
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
-@ScenarioId:6681
+@ignore
+@TestCase:125533
 Scenario: [125533] UPC Transportation - Recertification - iRules
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -521,7 +527,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -541,7 +547,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
 	And I click continue
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -555,7 +561,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -577,7 +583,8 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click continue
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 
-@ScenarioId:6686
+@ignore
+@TestCase:125536
 Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade - Limited Quantity
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -591,7 +598,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -613,7 +620,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -627,7 +634,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -654,7 +661,7 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 @tfs_design
 @ignore
 @obsolete
-@ScenarioId:6702
+@TestCase:125702
 Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade - Shipping with consumer commodity
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -668,7 +675,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -691,7 +698,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -705,7 +712,7 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
@@ -724,7 +731,8 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
     Given I ensure that I can select DOT at Shipping with limited quantity
 	Given I ensure that I can select DOT at Shipping fully regulated
 
-@ScenarioId:6703
+@ignore
+@TestCase:125703
 Scenario: [125703] UPC transportation - Recertification - Upgrade and Downgrade - Shipping fully regulated
 Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -738,7 +746,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Solid  |
 	And I set the Primary Physical State option to: Liquid
 	And I set the Secondary Physical State option to: Liquid
-	And I set the Specific Gravity option to: 10
+	And I set the Relative Density option to: 10
 	And I set the pH option to: 10.5
 	And I set the Boiling Point (in Celsius) option to: 120
 	And I set the Flash Point (in Celsius) option to: 70
@@ -760,7 +768,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
-	Given I click the 'Add UPC' button
+	Given I click the 'Add' button
 	Then I generate a random UPC number and save as: RandomUPC91076
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
@@ -774,7 +782,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

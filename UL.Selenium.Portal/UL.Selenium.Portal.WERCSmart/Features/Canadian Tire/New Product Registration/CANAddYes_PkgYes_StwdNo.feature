@@ -15,10 +15,10 @@
 
 Feature: Account Canada Address(Yes) Package types (Yes) Stewardship (No)
 
-
-@ScenarioId:1236
+@ignore
+@TestCase:85325
 Scenario: [85325] Account has Canada address and packaging, SOLD US & Canada, PL = NO, packaging type is required
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85325
@@ -28,10 +28,10 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And I click continue
-#And I should see the Universal Product Code (UPC) Page
+#And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 And In the UPC page I should see Add new Packaging Type link
 Given I generate a random UPC number and save as: UPC85325
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85325
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -44,10 +44,10 @@ Then The alert message is not displayed with text: STOP! When selecting authorin
 Given in the Regulatory Documents to Provide page I click Continue
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85325
 
-
-@ScenarioId:1237
+@ignore
+@TestCase:85740
 Scenario: [85740] Account has Canada address and packaging, SOLD US & Canada, PL = YES, packaging type is required
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85740
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -58,7 +58,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85740
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -71,10 +71,10 @@ Then The alert message is not displayed with text: STOP! When selecting authorin
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85740
 
-
-@ScenarioId:1238
+@ignore
+@TestCase:85742
 Scenario: [85742] Account has Canada address and packaging, SOLD Canada Only, PL = NO, packaging type is required
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85742
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -85,7 +85,7 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85742
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -98,11 +98,11 @@ Then The alert message is not displayed with text: STOP! When selecting authorin
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85742
 
-
-@ScenarioId:1239
+@ignore
+@TestCase:85743
 Scenario: [85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, packaging type is required
 
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85743
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -113,7 +113,7 @@ And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only)
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85743
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -127,9 +127,9 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85743
 
 
-@ScenarioId:1240
+@TestCase:85744
 Scenario: [85744] Account has Canada address only - SOLD = US only, PL = YES, packaging type is NOT required
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85744
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -144,9 +144,9 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85744
 
 
-@ScenarioId:1241
+@TestCase:85745
 Scenario: [85745] Account has Canada address and packaging, SOLD US Only, PL = NO, packaging type is NOT required
-Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85745
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution

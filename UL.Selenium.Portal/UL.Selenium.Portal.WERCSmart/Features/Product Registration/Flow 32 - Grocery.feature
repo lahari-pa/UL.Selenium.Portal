@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -14,6 +14,8 @@
 
 Feature: [64739] Flow 32 - Grocery
 
+@ignore
+@TestCase:60774
 Scenario: [60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU001244
 
 # ====== Logging in as the correct user ====== #
@@ -56,9 +58,9 @@ And I should see the Physical and Chemical Properties Page
 And Primary Physical State should be showing the value: Product is packaged in a gas cylinder (e.g., whip cream)
 And I set the Secondary Physical State option to: Liquid
 And I set the pH field to: 7
-And I set the Select the best Water Solubility description field to: Decomposes
+And I set the Select the best Water Solubility description field to: Dispersible
 And I set the When the product has a flammable propellant field to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
-And I set the Select all ingredients included in this product field to: Dairy
+And I set the Select all potential allergens included in this product field to: Dairy
 And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
 And I set the Product is verified and sold as field to: None of the Above
 And I set the Product contains the following sweeteners field to: None of the Above
@@ -75,6 +77,8 @@ Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false               | false       |            |
 And in the Ingredients page I click Continue
+Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
@@ -94,13 +98,13 @@ And I set the Proper Shipping Name field to: Aerosols
 And I set the Technical Name (if applicable) field to: My Safe Product
 And I set the Hazard Class (select) field to: 2
 And I set the Packing Group (select) field to: None
-Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+Given in the International Marine (IMDG) Classification page I click Continue
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 # ====== Following the steps from 'Shared Step' 57960 ====== #
-And I should see the Universal Product Code (UPC) Page
-Given I click the 'Add UPC' button
+And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+Given I click the 'Add' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
 | UPCNumber     | saved as UPC60774 |
@@ -122,7 +126,7 @@ And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57883 ====== #
-And I should see the Comments Page
+And I should see the Optional Comments Page
 And I enter the following into the comments field: Comments Field Text
 Then in the Comments page I click Continue
 
@@ -130,7 +134,8 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
 
-
+@ignore
+@TestCase:60775
 Scenario: [60775] Cooking Oil, Non-Aerosol - RU000942
 
 # ====== Logging in as the correct user ====== #
@@ -173,7 +178,7 @@ And in the New Product page I click Continue
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Cardboard and size: 20
 
 Given I call Shared Step 60567 (Upload Product Label only)
 
@@ -185,7 +190,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking oil - Non-Aerosol
 

@@ -23,7 +23,7 @@
 
 Feature: Filters
 
-@ScenarioId:449
+@TestCase:68388
 Scenario: [68388] More Filters - Brand
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -42,7 +42,7 @@ Scenario: [68388] More Filters - Brand
 
 @tfs_design
 @ignore
-@ScenarioId:5956
+@TestCase:56829
 Scenario: [56829] More Filters	
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -62,7 +62,7 @@ Scenario: [56829] More Filters
 
 # Assigned to Amanda Coutant
 # Created by Amanda Coutant
-@ScenarioId:451
+@TestCase:68413
 Scenario: [68413] More Filters - Retailer
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I click More Filters in the products grid

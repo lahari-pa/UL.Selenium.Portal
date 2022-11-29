@@ -22,7 +22,7 @@ Background:
 
 @tfs_design
 @ignore
-@ScenarioId:10443
+@TestCase:73917
 Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -43,7 +43,7 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73917
 
-@ScenarioId:791
+@TestCase:73920
 Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -61,7 +61,7 @@ Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 	Given I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view
 	And I navigate to the home page
 
-@ScenarioId:792
+@TestCase:74133
 Scenario: [74133] Walmart Product Type Electronics
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Test case calls shared 31053 but this is identical
@@ -81,6 +81,7 @@ And I call Shared Step 60935 (Product Information - US - Direct Ship - Private L
 
 @tfs_design
 @ignore
+@TestCase:74017
 Scenario: [74017] Walmart Affiliates when Adding a UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -111,6 +112,7 @@ Scenario: [74017] Walmart Affiliates when Adding a UPC
 # confirm WM under Destination Retailers
 @tfs_design
 @ignore
+@TestCase:73919
 Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -131,7 +133,8 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919
 
-@ScenarioId:790
+@ignore
+@TestCase:73918
 Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -162,7 +165,8 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 	Given I click the Home navigation icon and accept the alert popup
 
-@ScenarioId:11181
+@ignore
+@TestCase:63684
 Scenario: [63684] Walmart Private label product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -176,8 +180,8 @@ Scenario: [63684] Walmart Private label product
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | Yes                    | No                  |
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
-		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
@@ -191,14 +195,15 @@ Scenario: [63684] Walmart Private label product
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
 	Given I navigate to the home page
 	Given I search for the product saved as: TestCase63684
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
-@ScenarioId:6031
+@ignore
+@TestCase:96705
 Scenario: [96705] Light Bulbs - No Walmart
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

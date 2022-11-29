@@ -28,7 +28,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto6  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ScenarioId:1086
+@TestCase:56223
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -38,7 +38,8 @@ Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 
 #This test cases uses the ULSC account
-@ScenarioId:1087
+@ignore
+@TestCase:56224
 Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
 	Then the WERCSmart homepage should load
@@ -48,7 +49,7 @@ Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Then I click on the cancel button on the ULSC Sync popup
 	And I should see the Subheading Alerts in the main window
 
-@ScenarioId:1088
+@TestCase:56225
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -56,7 +57,7 @@ Scenario: [56225] Bulk Actions - Accept Documents navigation
 	And I click Accept Documents in the Bulk Actions window
 	And I should see the header: Document Acceptance on the Document Acceptance window
 
-@ScenarioId:1089
+@TestCase:56227
 Scenario: [56227] Bulk Actions  Delete Products navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -64,7 +65,9 @@ Scenario: [56227] Bulk Actions  Delete Products navigation
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
 
-@ScenarioId:1090
+
+@ignore
+@TestCase:74634
 Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -89,7 +92,9 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	And I confirm I am unable to select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	Given I click the Home navigation icon and accept the alert popup
 
-@ScenarioId:1093
+
+@ignore
+@TestCase:76314
 Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -122,6 +127,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 
 @tfs_design
 @ignore
+@TestCase:76056
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I login as the administrator
 	Then The home screen should load
@@ -140,8 +146,9 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I close the window that opened
 	Given I navigate to the home page
 
+@ignore
 @test75321
-@ScenarioId:1092
+@TestCase:75321
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto6 and save as: TestCase75321
 	Given I navigate to the landing page
@@ -203,7 +210,9 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
-@ScenarioId:1091
+
+@ignore
+@TestCase:75129
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
@@ -251,7 +260,9 @@ Scenario: [75129] Forward - Product in Submitted Status
 # Created by Aaron Caton
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
-@ScenarioId:1094
+
+@ignore
+@TestCase:78048
 Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I generate a random UPC number and save as: UPC78048
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -276,7 +287,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 	And I navigate to the home page
@@ -297,8 +308,9 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 
-	
-@ScenarioId:9320
+
+@ignore
+@TestCase:93366
 	Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -322,7 +334,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366b
@@ -345,7 +357,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
@@ -369,7 +381,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
@@ -393,7 +405,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 		And I navigate to the home page
@@ -417,7 +429,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 	And I navigate to the home page
@@ -471,7 +483,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then I make sure product saved as: TestCase93366c should missing from the product list
 
 	
-@ScenarioId:9321
+@TestCase:88826
 	Scenario:[88826] Delete Products > Product Not yet submitted
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

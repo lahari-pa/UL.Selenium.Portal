@@ -1590,7 +1590,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Success("Prices and Payment Heading Correct");
 
 			IWebElement myText = myHeading.FindElement(By.XPath("../p"), 2);
-
+			var test = myText.Text;
 			if (myText == null)
 			{
 				Report.Info("Prices and Payment Text Not Found");
@@ -1633,7 +1633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Confirm Order Button
 		[FindsBy(How = How.Id, Using = "ConfirmOrder")]
-		private IWebElement _btn_confirm;
+		public IWebElement _btn_confirm;
 
 		public bool Confirm_Order_click()
 		{
@@ -1714,6 +1714,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var actualText = this.containerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
 			return actualText;
 
+		}
+
+		public bool Thank_You_TextExists(string thankYouText)
+		{
+			IWebElement tyTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{thankYouText}')]"), 1);
+			return tyTextElement != null;
 		}
 
 		//Home Button

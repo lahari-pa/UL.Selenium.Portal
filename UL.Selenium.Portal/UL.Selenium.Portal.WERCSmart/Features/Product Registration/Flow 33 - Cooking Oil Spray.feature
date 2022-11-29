@@ -14,7 +14,7 @@
 Feature: Flow 33 - Cooking Oil Spray
 
 # Created by Aaron Caton
-@ScenarioId:1161
+@TestCase:69577
 Scenario: [69577] Cooking Oil Spray - Aerosol
 Given I generate a random UPC number and save as: UPC69577
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -37,6 +37,6 @@ And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click 
 And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Test 69577
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Test 69577
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking Oil Spray - Aerosol
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69577

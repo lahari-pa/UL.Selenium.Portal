@@ -20,8 +20,9 @@ Background:
 @tfs_desgin
 #Outdated test case (now showing a %)
 #May need reworking for change from "x/y" to "%"
-@ScenarioId:6047
 #Philip - Working
+@ignore
+@TestCase:80854
 Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd party product included in formulation
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.
 	#Use test case 80821 to create this third party product and get it to completed status.
@@ -113,7 +114,7 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	And I should see the Data Acceptance Page
 	And I click the Summary button in the Data Acceptance window
 	And I switch to the Data Summary page

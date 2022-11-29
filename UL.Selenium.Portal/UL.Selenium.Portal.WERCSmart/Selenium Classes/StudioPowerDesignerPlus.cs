@@ -254,7 +254,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void SetAUTHCinPowerAuthorPlus(string setTo)
 		{
 			IWebElement AUTHC = this.containerElement.FindElement(By.XPath(@"//*[@title='Click to Edit [AUTHC(PVAL)] - Authoring Complete']//span"), 2);
-			Report.IsTrue(AUTHC.TryDoubleClick(), "Unable to locate AUTHC to Edit Value.", "Opened AUTHC Edit Value box.");
+			AUTHC.ScrollElementIntoView();
+			Delay.Seconds(3);
+			AUTHC.JsClick();
+			Report.IsTrue(AUTHC.JsClick(), "Unable to locate AUTHC to Edit Value.", "Opened AUTHC Edit Value box.");
 			Delay.Seconds(2);
 			this.Wait_for_load(30);
 			IWebElement newVal = this.containerElement.FindElement(By.XPath("//*[@id='ssValue']"), 2);
@@ -668,6 +671,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				case "RSQAHDPF":
 					button = dataCodes.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetAttribute("name") == "RSQAHDPF");
 					break;
+				case "DPQAUN":
+					button = dataCodes.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetAttribute("name") == "DPQAUN");
+					break;
 				default:
 					Report.Error("Provide a valid data code. The code you have provided: " + code + " does not exist in the switch statement");
 					return false;
@@ -678,9 +684,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (button.FindElement(By.XPath(".//img"), 1) != null)
 				{
 					//button.Click();
-					//button.Click();
-					button.DoubleClick();
-					return true;
+					button.JsClick();
+					return button.JsClick();
 				}
 				Report.Error("Image was not found: " + code);
 				return false;

@@ -16,10 +16,10 @@
 Feature: Account Canada Address(No) Packagetype(Yes) Stewardship(Partial)
 
 
-@ScenarioId:1281
+@TestCase:85885
 Scenario: [85885] Account Packaging & Partial Stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85885
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -34,10 +34,10 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85885
 
 
-@ScenarioId:1282
+@TestCase:85886
 Scenario: [85886] Account Packaging & Partial Stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85886
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -53,10 +53,10 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:1283
+@TestCase:85887
 Scenario: [85887] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85887
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -70,9 +70,9 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85887
 
 
-@ScenarioId:1284
+@TestCase:85888
 Scenario: [85888] Account Packaging & Partial Stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85888
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -83,7 +83,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85888
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -94,9 +94,9 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@ScenarioId:1285
+@TestCase:85889
 Scenario: [85889] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I generate a random UPC number and save as: UPC85889
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
@@ -107,7 +107,7 @@ And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorin
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And In the UPC page I should see Add new Packaging Type link
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85889
 And I Select a container type from the drop down list
 And I enter Size Value: 12
@@ -117,10 +117,10 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85889
 
 
-
-@ScenarioId:1286
+@ignore
+@TestCase:85890
 Scenario: [85890] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required
-Given I log in with the account saved in TReVor as: PackagePartialStewardship
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 Then I save the product information as: TestCase85890
@@ -132,7 +132,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 And I click continue
 And In the UPC page I should see Add new Packaging Type link
 Given I generate a random UPC number and save as: UPC85890
-And I click the 'Add UPC' button
+And I click the 'Add' button
 And I enter UPC Number: saved as UPC85890
 And I Select a container type from the drop down list
 And I enter Size Value: 12
