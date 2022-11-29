@@ -246,7 +246,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)	Given If purchase details are showing click confirm order
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	Given I search for the product saved as: TestCase120790
 	When I click Row Actions for the most recent product returned
