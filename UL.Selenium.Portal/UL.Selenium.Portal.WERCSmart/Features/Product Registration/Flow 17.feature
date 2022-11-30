@@ -170,6 +170,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
+	And I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
