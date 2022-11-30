@@ -14,7 +14,7 @@
 
 Feature: [64739] Flow 32 - Grocery
 
-@ignore
+
 @TestCase:60774
 Scenario: [60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU001244
 
@@ -108,7 +108,7 @@ Given I click the 'Add' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
 | UPCNumber     | saved as UPC60774 |
-| ContainerType | Aerosol Can       |
+| ContainerType | Aerosol Can - Metal       |
 | Size          | 20                |
 And in the Universal Product Code (UPC) page I click Continue
 
