@@ -50,7 +50,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I confirm all UPC numbers in the list saved as: TestCase73424UPCs are displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
-@ignore
+#@ignore
 #actions/delete
 @TestCase:63663
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)

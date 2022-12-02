@@ -926,7 +926,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
 		}
 
-		[StepDefinition(
+			[StepDefinition(
 			@"I call Shared Step 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath()
 		{
@@ -2273,7 +2273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-		[StepDefinition(
+			[StepDefinition(
 			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
 		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData()
 		{
@@ -2998,6 +2998,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			Report.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
@@ -13646,7 +13650,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().IShouldSeeTheUpdateRegistrationPopup();
 			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
 		}
-		
+	
 		[StepDefinition(@"I call Shared Step 26900 \(Transportation Details 1 > Not Regulated\)")]
 		public void ICallSharedStep26900()
 		{
@@ -13695,5 +13699,164 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = false;
 		}
 
+		[StepDefinition(
+	@"I call Shared Step 128742 \(Transportation Details - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
+		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_Continue_HappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport",
+				"No, due to an exemption or exception");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step \(Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path\)")]
+		public void GivenICallSharedConfirmDOTExceptions_Continue_HappyPath()
+		{
+			var newProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
+			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheOtherDOTException("test");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			newProduct.ConfirmTheDataSelectedIsVisible();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step \(Transportation Details - Other DOT Exception Validation - Continue - Happy Path\)")]
+		public void GivenICallSharedOtherDOTExceptionValidation_Continue_HappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			MyStepsNewProduct.ThenIEnterTheFollowingIntoTheOtherDOTException(" ");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+			Report.StartStep("I should see the DOT exceptions error message");
+			stepsNewProductIngredients.DOTExceptionsErrorMessageShowing("should");
+		}
+
+
+		[StepDefinition(@"I call Shared Step 105009 \(Physical and Chemical Properties - Wine Not Regulated <=24% Alcohol\)")]
+		public void Shared105009EnterPhysicalProperty_Liquid_ForWineNotRegulatedLessThan24Alcohol()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			
+			Report.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartStep("I set the Relative Density option to: 68");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "68");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartStep("I set the pH field to: 4 - 6.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "4 - 6.9");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+		[StepDefinition(@"I call Shared Step 105010 \(Beverage Regulatory Details Less < 24%\)")]
+		public void Shared105010BeverageRegulatoryDetailsLessThan24()
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				"No"));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				"21"));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "21");
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
+		[StepDefinition(@"I call Shared Step 57984 \(Transportation Details - All options available - Select Not regulated - Continue - Happy Path\)")]
+		public void GivenICallSharedTransportationDetails_SelectNotregulated_Continue_HappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport",
+				"Not Regulated");
+			
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+		}
+
+		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol\)")]
+		public void Shared92979EnterPhysicalProperty_Liquid_ForWineGreaterThan70()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartStep("I set the Relative Density option to: 55");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "55");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartStep("I set the pH field to: 4 - 6.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "4 - 6.9");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
+			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+		[StepDefinition(@"I call Shared Step 92981 \(Beverage Regulatory Details Greater > 70%\)")]
+		public void Shared92981BeverageRegulatoryDetailsGreaterThan70()
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				"No"));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				"80"));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "80");
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcohol \(Packaging II\)\)")]
+		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData_ForAlcohol()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN3065");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3065");
+			Delay.Seconds(2);
+			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			Report.StartStep("I select '3' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "3");
+			Report.StartStep("I select 'II' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
+			Report.StartStep(
+				"The following question should be displayed: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packaging Group selected is not consistent with this data.  Verify the data and transportation packaging group.  If the problem persists, please contact Support.'");
+			var table = new Table("Section");
+			table.AddRow(
+				"Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.");
+			MyNewProduct.CheckDisplayedSections("see", table);
+			Report.StartStep(
+				"Setting 'Packing Group' error question to: 'Based on defined viscosity parameters, this product is classified as PG III'");
+			MyNewProduct.SetTheSectionOptionTo("Product has a boiling point of",
+				"Based on defined viscosity parameters, this product is classified as PG III");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+
+		}
 	}
 }
