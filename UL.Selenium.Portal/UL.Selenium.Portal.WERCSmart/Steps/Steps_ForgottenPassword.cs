@@ -250,7 +250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the link in the email I get directed to security questions")]
 		public void WhenIClickTheLinkInTheEmailIGetDirectedToSecurityQuestions()
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I click the link in the email I get directed to security questions");
+			Report.StartStep(Report.Details.StepIndex + "- I click the link in the email I get directed to security questions");
 			try
 			{
 				Report.Info("Clicking the link which allows Password Reset");
