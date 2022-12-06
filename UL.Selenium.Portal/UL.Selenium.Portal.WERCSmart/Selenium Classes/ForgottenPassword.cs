@@ -11,6 +11,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.TReVor.Classes;
+using TReVor.Integrations.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -25,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Continue()
 		{
-			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
+			IWebElement btn = this.ContainerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
 			btn.Click();
 		}
 
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Cancel()
 		{
-			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			IWebElement btn = this.ContainerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
 			btn.Click();
 		}
 
@@ -45,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					this.containerElement.FindElement(By.XPath("//input[@id='forgotEmail']"), 2).EnterText(email);
+					this.ContainerElement.FindElement(By.XPath("//input[@id='forgotEmail']"), 2).EnterText(email);
 					return;
 				}
 				catch (Exception)
@@ -61,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Login_Button_Exists()
 		{
-			return this.containerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Displayed;
+			return this.ContainerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Displayed;
 		}
 
 		///<summary>
@@ -69,14 +70,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		///</summary>
 		public void Click_Login_Button()
 		{
-			this.containerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Click();
+			this.ContainerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Click();
 		}
 
 		public List<string> GetErrors()
 		{
 			try
 			{
-				return this.containerElement.FindElements(By.XPath("//p[@id='email_error']/span"), 2).Select(x => x.GetValue().Trim()).ToList();
+				return this.ContainerElement.FindElements(By.XPath("//p[@id='email_error']/span"), 2).Select(x => x.GetValue().Trim()).ToList();
 			}
 			catch (Exception)
 			{
@@ -91,11 +92,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		///</summary>
 		public string ForgotPasswordSuccessMessage()
 		{
-			string text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+			string text = this.ContainerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
 			int i = 0;
 			while (text == "" && i < 10)
 			{
-				text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+				text = this.ContainerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
 				i++;
 				Delay.Seconds(1);
 			}
@@ -106,14 +107,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Reset_Password_Link");
 
-			var expectedPasswordLink = TestVariables.GetVariableSavedAs("ExpectedResetPasswordLink");
+			//var expectedPasswordLink = TestVariables.GetVariableSavedAs("ExpectedResetPasswordLink");
+			var expectedPasswordLink = TReVor.Integrations.Classes.TReVorSettings.Variables.GetVariable("ExpectedResetPasswordLink");
 
-			Report.Info("Link = " + myLink + "Expected Link = " + expectedPasswordLink);
+			Report.Info("Link = " + myLink.Href + "Expected Link = " + expectedPasswordLink);
 
 			if (myLink.Href.Contains(expectedPasswordLink))
 			{
 				Report.Info("Link Found");
-				SeleniumBrowser.Navigate(myLink.Href);
+				//SeleniumBrowser.Navigate(myLink.Href);
+				SeleniumWebDriver.CurrentDriver.Navigate(myLink.Href);
 				return true;
 		}
 		Report.Info(myLink.Href + " Not Found");
@@ -128,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		private IWebElement QuestionOne => this.containerElement.FindElement(By.Id("secQuestion1"), 1);
+		private IWebElement QuestionOne => this.ContainerElement.FindElement(By.Id("secQuestion1"), 1);
 
 		public bool Enter_Answer_One(string answerText)
 		{
@@ -180,8 +183,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(5);
-			IWebElement questionOne = this.containerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
-			IWebElement questionTwo = this.containerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
+			IWebElement questionOne = this.ContainerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
+			IWebElement questionTwo = this.ContainerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
 			switch (questionOne.Text)
 			{
 				case "What was your phone number when you were 15 years old?":
