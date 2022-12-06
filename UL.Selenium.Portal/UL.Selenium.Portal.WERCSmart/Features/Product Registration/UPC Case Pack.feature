@@ -27,10 +27,10 @@ Feature: UPC Case Pack
 
 
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+	#Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @TestCase:87640
 Scenario: [87640] UPC - Case Pack Only Present in product
@@ -454,8 +454,6 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
@@ -473,7 +471,7 @@ And I should see the Regulatory Documents to Provide Page
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
 
-@TestCase:87718
+@ScenarioId:10145
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
