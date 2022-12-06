@@ -2558,15 +2558,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
-<<<<<<< HEAD
 		{//Delay.Seconds(9999);
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("I should see the  Product Information Page");
-=======
-		{
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I should see the  Product Information Page");
->>>>>>> origin/QA
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			
