@@ -1168,6 +1168,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
+		[StepDefinition(@"I enter the following into the Other DOT Exception field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheOtherDOTException(string text)
+		{
+			Report.IsTrue(new NewProduct().InputOtherDotException(text), "Text: " + text + " was not successfully inputted into the Other DOT Exception field!", "Text: " + text + " was successfully inputted into the Other DOT Exception field!");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
