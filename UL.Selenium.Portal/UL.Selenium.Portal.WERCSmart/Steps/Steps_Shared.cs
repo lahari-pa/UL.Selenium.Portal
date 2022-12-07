@@ -2600,15 +2600,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-<<<<<<< HEAD
+
 			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 
 			tableSecond.AddRow(
 				"Select countries the product may be sold in");
-=======
-			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-			tableSecond.AddRow("Select countries the product may be sold in");
->>>>>>> origin/QA
 			tableSecond.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
 			tableSecond.AddRow(
