@@ -1348,12 +1348,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return rList;
 		}
 
+		public void ConfirmTheDataSelectedIsVisible()
+		{
+
+			FindElement(By.XPath("//h3[text()='Transportation Details 1']")).Click();
+
+			Delay.Seconds(5);
+
+			IWebElement ele = FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"));
+			string text = ele.GetAttribute("value");
+			if (text == null)
+			{
+				Report.Info("No text is displayed");
+			}
+			else
+			{
+				Report.Info("Text entered is displayed : " + text);
+			}
+			
+			IWebElement ele1 =FindElement(By.XPath(".//input[@value='TRNSEX03']"));
+			if (ele1.GetAttribute("checked")!=null)
+			{
+				Report.Info("checkbox selected is visible");
+			}
+			else
+			{
+				Report.Info("checkbox selected is not visible");
+			}
+			IWebElement verifyIsSelected = FindElement(By.XPath("(//input[@type='radio'])[2]"));
+			if (verifyIsSelected.GetAttribute("checked") != null)
+			{
+				Report.Info("'No, due to an exemption or exception' selected is visible");
+			}
+			else
+			{
+				Report.Info("'No, due to an exemption or exception' selected is not visible");
+			}
+
+		}
+
+		public bool InputOtherDotException(string text)
+		{
+			IWebElement ele = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Other DOT Exception']"), 2);
+			return ele.TryEnterText(text);
+		}
+
 		public bool CommentsAreaShowing()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Optional Comments']/../../../..//textarea"), 2);
 			return el != null;
 		}
-
+		
 		public bool InputCommentAreaText(string text, bool append = false)
 		{
 			try
@@ -2663,7 +2708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool UploadFileForSection(string section, string pdfFilePath)
 		{
 			string path = "//span[contains(text(),'" + section + "')]//..//div[@class='ws-dropzone-container invalid']//a";
-			IWebElement el = this.containerElement.FindElement(By.XPath(path), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info("Clicking Browse for document type: " + section);
 			Report.Screenshot();
 			if (el == null)
@@ -2682,7 +2727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.IsTrue(UploadDialog.UploadFile(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
 			string viewPath = "//span[contains(text(),'" + section + "')]//..//span[@class='dz-uploaded-doc']//..//a";
-			IWebElement viewEl = this.containerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
+			IWebElement viewEl = this.ContainerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
 			return viewEl != null;
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)

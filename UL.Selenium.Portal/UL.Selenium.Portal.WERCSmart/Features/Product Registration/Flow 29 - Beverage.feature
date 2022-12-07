@@ -110,3 +110,56 @@ And The following checkboxes should not be displayed for section: Please select 
 		| Checkbox                                                     |
 		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
+
+
+
+# Created by Saikiran Chittampally
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 29
+@TestCase:105007
+Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
+	
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC105007
+	Given I delete all products with UPC Number: saved as UPC105007
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Then I save the product information as: TestCase105007
+	Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
+	Given I call Shared Step 105009 (Physical and Chemical Properties - Wine Not Regulated <=24% Alcohol)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 105010 (Beverage Regulatory Details Less < 24%)
+	Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
+	Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	Given in the Additional Documents to Provide section page I click Continue
+	Given in the optional comments page I click Continue
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
+
+
+
+# Created by Saikiran Chittampally
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 29
+@TestCase:92943
+Scenario: [92943] Wine - RU001418 - Packaging Group II (Greater > 70% of Alcohol Content)
+	
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC92943
+	Given I delete all products with UPC Number: saved as UPC92943
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Then I save the product information as: TestCase92943
+	Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
+	Given I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 92981 (Beverage Regulatory Details Greater > 70%)
+	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I call Shared Step 92982 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging II))
+	Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	Given in the Additional Documents to Provide section page I click Continue
+	Given in the optional comments page I click Continue
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
