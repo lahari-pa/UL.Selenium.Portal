@@ -2563,10 +2563,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
+
 			//Report.StartStep(
 			//	"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			//MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 			//	"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+
 			var tableFirst = new Table("Section");
 			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
@@ -2598,7 +2600,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+
+			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+
 			tableSecond.AddRow("Select countries the product may be sold in");
 			tableSecond.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
