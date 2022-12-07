@@ -2558,26 +2558,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
-		{//Delay.Seconds(9999);
+		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-<<<<<<< HEAD
-
 			//Report.StartStep(
 			//	"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			//MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 			//	"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-
-=======
-			
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			
->>>>>>> origin/QA
 			var tableFirst = new Table("Section");
 			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
