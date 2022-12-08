@@ -2579,6 +2579,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+
+
 			Report.StartSubStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -2597,6 +2599,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+
+
 			var tableSecond = new Table("Section");
 			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableSecond.AddRow("Select countries the product may be sold in");
@@ -2607,13 +2611,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSecond.AddRow(
 				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
 
-		//	tableSecond.AddRow(
-		//	"Product is a Retailer's Private Label or Brand");
-		//	tableSecond.AddRow(
-		//"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			tableSecond.AddRow(
+			"Product is a Retailer's Private Label or Brand");
+			tableSecond.AddRow(
+			"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only see the following sections");
+
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
-			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+			MyNewProductSteps.CheckDisplayedSections("only see", tableSecond);
+
+
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -2624,7 +2631,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
-			;
 		}
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
 		public void ICallSharedIngredients_AddAnyChemical(string name)
