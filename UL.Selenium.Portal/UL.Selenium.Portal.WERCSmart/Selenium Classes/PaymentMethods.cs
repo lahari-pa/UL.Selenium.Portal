@@ -989,7 +989,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Edit Address Form Open");
 			if (accountName != "")
 			{
-				IWebElement myCompany = this._section_acc.FindElements(By.XPath(".//input[@name='account']"), 10).FirstOrDefault();
+				IWebElement myCompany = this._section_acc.FindElement(By.XPath(".//input[@name='account']"), 10);
 				if (myCompany == null)
 				{
 					Report.Info("Failed to Find Account Name Text Box");
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Screenshot();
 			return true;
 		}
-
+	
 		public bool Column_Headings_Correct(string column_1, string column_2, string column_3)
 		{
 			Report.Info("Beginning Column_Headings_Correct");

@@ -1145,8 +1145,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		public void GivenIConfirmThePartialProductNamWith3dots()
 		{
-			Report.FullPageScreenshot((MessageLevel)3);
-			Report.Info("Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ProductNameWithThreeDots(), "Product name doesnt have (3-dots) ... at the end of the characters","Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
 		}
 
 		[StepDefinition(@"I Confirm the Product Name is shown in full in the hover over pop up")]
@@ -1164,6 +1164,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.GetTheWPSIDForTheValidationOfProductNameFor449Characters(), "WPS ID for the Product is not shown at the end of the Product Name in brackets (parenthesis)", "WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)");
 		}
-
+		
 	}
 }

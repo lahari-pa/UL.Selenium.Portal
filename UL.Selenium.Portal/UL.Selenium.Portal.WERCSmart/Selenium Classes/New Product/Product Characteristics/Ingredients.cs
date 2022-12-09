@@ -2022,7 +2022,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool ConfirmProductName()
 		{
-			IWebElement prodele = this.containerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
 			if (prodele.Displayed)
 			{
 				string ProductTitle = prodele.GetAttribute("title");
@@ -2031,15 +2031,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool ProductNameWithThreeDots()
+		{
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			if (prodele.Displayed)
+			{
+				string cssvalue = prodele.GetCssValue("text-overflow");
+				Report.Info(cssvalue);
+				if (cssvalue == "ellipsis")
+				{
+					Report.Info("Product Name ends with 3 dots");
+				}
+			}
+			return true;
+		}
+
+
 		public bool MouseHoverOnElement()
 		{
-			IWebElement prodele = this.containerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
 			prodele.Hover();
 			return true;
 		}
 		public bool GetTheWPSIDForTheValidationOfProductNameFor449Characters()
 		{
-			IWebElement prodele = this.containerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
 			if (prodele.Displayed)
 			{
 				string ProductTitle = prodele.GetAttribute("title");
