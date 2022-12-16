@@ -1661,9 +1661,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"No");
 			}
 
-			if (myNewProduct.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			if (myNewProduct.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration."))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+				MyStepsNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.",
 					"Yes");
 			}
 
