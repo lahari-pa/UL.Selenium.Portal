@@ -1909,7 +1909,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
 			return closeButton.TryClick();
 		}
-
+		
 		public bool CheckGenericNameFieldIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
 		{
 			IWebElement genericNameField = this.ContainerElement.FindElement(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../following-sibling::td//input[@data-bind='value: GenericName.field']"), 2);
@@ -2019,6 +2019,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 
 			return ingredients;
+		}
+		public bool ConfirmProductName()
+		{
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			if (prodele.Displayed)
+			{
+				string ProductTitle = prodele.GetAttribute("title");
+				Report.Info("Product Name : " + ProductTitle);
+			}
+			return true;
+		}
+
+		public bool ProductNameWithThreeDots()
+		{
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			if (prodele.Displayed)
+			{
+				string cssvalue = prodele.GetCssValue("text-overflow");
+				Report.Info(cssvalue);
+				if (cssvalue == "ellipsis")
+				{
+					Report.Info("Product Name ends with 3 dots");
+				}
+			}
+			return true;
+		}
+
+
+		public bool MouseHoverOnElement()
+		{
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			prodele.Hover();
+			return true;
+		}
+		public bool GetTheWPSIDForTheValidationOfProductNameFor449Characters()
+		{
+			IWebElement prodele = this.ContainerElement.FindElement(By.XPath(@"//h2[@class='product-name']"), 2);
+			if (prodele.Displayed)
+			{
+				string ProductTitle = prodele.GetAttribute("title");
+				string result = ProductTitle.Substring(449);
+				Report.Info("WPS ID : " + result);
+			}
+			return true;
 		}
 	}
 }

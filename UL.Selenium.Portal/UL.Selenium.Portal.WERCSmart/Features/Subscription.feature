@@ -1119,3 +1119,16 @@ Scenario: [119192] Subscription - Articles/Enhanced Articles/Formulated Products
 	And The Enhanced Articles popup should have header: What Are Enhanced Articles?
 	And The Enhanced Articles popup should have content: Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration.
 	Then In the Subscription Enrollment screen I confirm that the option showing in the Enhanced Articles dropdown is: Up to 3 Product(s)
+
+
+# Created by Saikiran Chittampally
+
+@TestCase:112028
+Scenario: [112028] Subscription - Updating Company Name
+	
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given  I call Shared Step 62676 (Go To My Account)
+	Given In the My Account page I navigate to the Payment Methods page
+	Given In the Payment Methods screen I open the Edit Address form
+	Given In the Account Name field, change the name of the Company INT123-test and Confirm the Contact Information is updated with the New Company Name
+	
