@@ -972,6 +972,66 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		//Edit Account Name
+		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
+		private IWebElement _section_acc;
+
+		public bool Edit_Account_Name(string accountName = "")
+		{
+			Report.Info("Beginning Edit_Primary_Account_Contact");
+
+			if (!this.Exists)
+			{
+				Report.Info("Not on Edit Address Form");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Edit Address Form Open");
+			if (accountName != "")
+			{
+				IWebElement myCompany = this._section_acc.FindElement(By.XPath(".//input[@name='account']"), 10);
+				if (myCompany == null)
+				{
+					Report.Info("Failed to Find Account Name Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Account Name: " + accountName);
+				myCompany.EnterText(accountName);
+				
+
+			}
+			
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Success("Account Name Edited");
+			Report.Screenshot();
+			return true;
+		}
+		
+		public string GetCompanyName()
+		{
+
+			string DisplayedText = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-2 address-panel']/div[1]/div[1]")).GetElementText();
+			Report.Info(DisplayedText);
+			return DisplayedText;
+		}
+		public bool ConfirmCompanyName(string companyName)
+		{
+			Report.StartStep("Change the Name of the company and Confirm the Contact Information is updated with the New Company Name");
+			Report.IsTrue(this.Edit_Account_Name(companyName),
+						"Failed to change Name of the company", "Name of the company changed Successfully");
+			
+			Report.IsTrue(this.Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			Delay.Seconds(4 * Delay.SpeedFactor);
+			Report.Screenshot();
+			string DisplayedText = this.GetCompanyName();
+			if (companyName == DisplayedText)
+			{
+				Report.Success("Company name updated");
+			}
+			return true;
+		}
+
 		public bool EditAddressPopupNotShowing()
 		{
 			var elFound = this.containerElement.WaitUntilElementInvisible(By.Id("editAddressDetails"), 45);
@@ -1500,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Screenshot();
 			return true;
 		}
-
+	
 		public bool Column_Headings_Correct(string column_1, string column_2, string column_3)
 		{
 			Report.Info("Beginning Column_Headings_Correct");

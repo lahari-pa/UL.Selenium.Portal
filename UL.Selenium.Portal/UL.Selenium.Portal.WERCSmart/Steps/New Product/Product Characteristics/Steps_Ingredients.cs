@@ -10,6 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.Reporting.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1096,7 +1097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
 		}
-
+	
 		[StepDefinition(@"In the Ingredient Reference Number field I enter the following text: (.*)")]
 		public void IEnterTheGivenTextIntoTheIngredientReferenceNumbreField(string refValue)
 		{
@@ -1130,6 +1131,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"{(expected ? "Did not expect" : "Expected")} to see the DOT exceptions error message!",
 				$"DOT exceptions error message {(expected ? "was" : "was not")} showing as expected");
 		}
+		[StepDefinition(@"I Confirm the Product name is shown at the top of the page")]
 
+		public void GivenIConfirmTheProductName()
+		{
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.ConfirmProductName(), "Product name is not shown at the top of the page", "Product name is shown at the top of the page");
+
+
+		}
+		[StepDefinition(@"I Confirm the Product name shows on 1 line only and shows \(3-dots\) ... at the end of the characters")]
+
+		public void GivenIConfirmThePartialProductNamWith3dots()
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ProductNameWithThreeDots(), "Product name doesnt have (3-dots) ... at the end of the characters","Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
+		}
+
+		[StepDefinition(@"I Confirm the Product Name is shown in full in the hover over pop up")]
+
+		public void MouseHoverProductName()
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.MouseHoverOnElement(), "Failed to Mouse hover on the product", "Successfully Mouse hovered on the product");
+		}
+
+		[StepDefinition(@"I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets \(parenthesis\)")]
+
+		public void GivenIConfirmTheWPSID()
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.GetTheWPSIDForTheValidationOfProductNameFor449Characters(), "WPS ID for the Product is not shown at the end of the Product Name in brackets (parenthesis)", "WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)");
+		}
+		
 	}
 }

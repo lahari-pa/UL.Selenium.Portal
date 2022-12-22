@@ -81,3 +81,23 @@ Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name 
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase119476
+
+# Created by Saikiran Chittampally
+
+@TestCase:83844
+Scenario: [83844] The Product - Product Name - Name = 449 Characters - Product Name displayed in flow and hover over
+	
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC83844
+	Given I delete all products with UPC Number: saved as UPC83844
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561a (The Product - Enter Product Name: 1ProductNameShouldBe449CharactersLongToGenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujjhycyyy and select Type of Product): bubble solution
+	
+	Then I save the product information as: TestCase83844
+	
+	Then I Confirm the Product name is shown at the top of the page
+	Then I Confirm the Product name shows on 1 line only and shows (3-dots) ... at the end of the characters
+	Then I Confirm the Product Name is shown in full in the hover over pop up
+	Then I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844

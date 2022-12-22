@@ -1007,5 +1007,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
 			Report.IsTrue(MyAccount_CompanyInfoObject.FindStateWithNameInShippingAddressSection(stateName), "The state was not confirmed", "The state was confirmed");
 		}
+
+		[StepDefinition(@"In the Account Name field, change the name of the Company (.*) and Confirm the Contact Information is updated with the New Company Name")]
+		public void ThenIChangeAndConfirmTheNameOfTheCompany(string companyName)
+		{
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				Report.IsTrue(myPay.ConfirmCompanyName(companyName),
+						"I Confirm the Contact Information is not updated with the New Company Name", "I Confirm the Contact Information is updated with the New Company Name");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }
