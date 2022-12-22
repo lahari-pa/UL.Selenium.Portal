@@ -1230,7 +1230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Checking if Retailer popup is displayed");
 			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
-			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			string popoverId = this.ContainerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
 			if (popoverId.IsNullOrEmpty())
 			{
 				return true;
@@ -1260,7 +1260,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ClickContainer()
 		{
-			this.containerElement.Click();
+			this.ContainerElement.ScrollElementIntoView();
+			this.ContainerElement.TryClick();
 		}
 
 		public bool SelectItemsOnPage(string option)
