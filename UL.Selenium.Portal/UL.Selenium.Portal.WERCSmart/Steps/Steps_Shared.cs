@@ -4866,6 +4866,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 57932a \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
+		public void GivenICallSharedEnterRegulatoryInformation_YesToProp1()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			var selNewProduct = new NewProduct();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartStep("Prop 65 warning is required: Yes");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
+			Report.StartStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			MyStepsNewProduct.SetTheSectionOptionTo("Is the need to warn triggered by",
+				"A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			Report.StartStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
+			MyStepsNewProduct.SetTheSectionOptionTo("How is the exposure warning transmitted?",
+				"By affixing it to the product or its packaging");
+			Report.StartStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Prior to August 30, 2018");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured",
+				"Prior to August 30, 2018");
+			Report.StartStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: Does not apply ");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"If the product carries a safe-harbor short-form warning, indicate which of the following is provided:",
+				"Does not apply");
+			Report.StartStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: Does not apply");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
+				"Does not apply");
+			
+			Report.StartStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"If the product carries a custom warning, please provide the exact text that is being used:",
+				"NA");
+			Report.StartStep("In the Waste Classification Data page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+
+		[StepDefinition(
 			@"I call Shared Step 57980 \(Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails1_YesOption_SelectIMDGLimitedQuantity()
 		{
@@ -4942,8 +4983,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep(
 				"If Section: Select the best Water Solubility description is visible, I select the first option");
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
-				"Insoluble");
-			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+				"Insoluble in water");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
@@ -13858,6 +13899,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
 
+		}
+		[StepDefinition(@"I call Shared Step \(Enter Product Data for Physical State - Aerosol only and Secondary Physical state - Liquid spray\)")]
+		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnlyWithFIFRA()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			
+				// Primary Physical State is Aerosol which is the only option available
+				Report.StartStep("I should only see the following options for Primary Physical State: Aerosol");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
+			Report.StartStep("I set the Secondary Physical State field to: Liquid spray");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartStep(
+				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection(
+				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		//TC65470
+		[StepDefinition(@"I call Shared Step 59680a \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFRa()
+		{
+			ReportDetails.CurrentDetails.UseSubSteps = true;
+			Report.StartStep("I should see the  Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
+			
+			
+			Report.StartStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
+				"United States");
+			Report.StartStep(
+				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 	}
 }

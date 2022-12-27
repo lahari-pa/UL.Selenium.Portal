@@ -96,31 +96,29 @@ Scenario: [71987] Sorting Percent on Ingredient page
 
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I save the product information as: TestCase65469
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Butane        | 100     | true                | false       |            |
-	Then for ingredient: Butane the Trade Secret field is disabled
-	Given for ingredient: Butane I set Public Disclosure checkbox to checked: false
-	Then for ingredient: Butane the Trade Secret field is enabled
+		| Water        | 100     | true                | false       |            |
+	Then for ingredient: Water the Trade Secret field is disabled
+	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
+	Then for ingredient: Water the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
-	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65470
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -195,11 +193,12 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 
 @TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I save the product information as: TestCase63321
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I should see the Ingredients Page
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
