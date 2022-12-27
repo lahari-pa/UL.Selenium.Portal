@@ -19,16 +19,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class RuleWriter : SeleniumBaseObject
 	{
-		protected override By ContainerElementLocator => By.XPath("//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]");
+		protected override By ContainerElementLocator => By.XPath("//body[//div[contains(text(),'Rule Writer')]]");
 
 		public string _buttonString;
 
-		private IWebElement Button => ContainerElement.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]//div[@class='widgetStyleContents']//iframe[@id='Widget1FRAME']"), 2);
+		private IWebElement Button => this.ContainerElement.FindElement(By.XPath($"//body[//div[contains(text(),'Rule Writer')]]//div[@class='widgetStyleContents']//iframe[@id='Widget1FRAME']"), 2);
 
 		public bool FoundContainerEl()
 		{
-			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
-			var el = this.containerElement;
+			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
+			GeneralUtilities.SwitchToDefaultContent();
+			var el = this.ContainerElement;
 			//var thing = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
 			if (el!=null)
 			{
@@ -38,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int x = 0;
 			while (el == null & x < 20)
 			{
-				el = this.containerElement;
+				el = this.ContainerElement;
 				Delay.Seconds(5);
 				x++;
 			}
@@ -49,8 +50,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 
 			GeneralUtilities.SwitchToDefaultContent();
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
-			var containerEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA']]"), 5);
+			//SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			var containerEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//body[//div[@id='Widget1HEA']]"), 5);
 			if (containerEl != null)
 			{
 				Report.Info($"Container Found");
@@ -65,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int x = 0;
 			while (containerEl == null & x < 20)
 			{
-				containerEl = this.containerElement;
+				containerEl = this.ContainerElement;
 				Delay.Seconds(5);
 				x++;
 			}
@@ -88,12 +89,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickButton(string buttonName)
 		{
 			_buttonString = buttonName;
-			if (Button == null)
+			if (this.Button == null)
 			{
 				Report.Error($"Could not find a button with the name {buttonName}");
 				return false;
 			}
-			return Button.TryClick();
+			return this.Button.TryClick();
 		}
 
 		public bool ClickAllRulesButton()
@@ -101,8 +102,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//switch to iframe needed or? revert go back to parent needed?
 			
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("Widget1FRAME");
-			IWebElement el= SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("Widget2FRAME");
+			IWebElement el= SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
 			if (el == null)
 			{
 				Report.Error($"Could not find a button with the name All Rules");
@@ -118,9 +119,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info("Switching to iFrame");
 			GeneralUtilities.SwitchToDefaultContent();
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
 			if (el == null)
 			{
 				Report.Error($"Could not find a button with the name All Rules");
@@ -170,43 +171,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			protected override By ContainerElementLocator => By.XPath("//form[@name='form1']//table[@id='srSelectRules_divRounded']");
 
-			private IWebElement FilterButton => ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
+			private IWebElement FilterButton => this.ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
 
-			private IWebElement FilterTable => ContainerElement.FindElement(By.XPath(".//table[@id='srSelectRules_tblFilter']"), 2);
+			private IWebElement FilterTable => this.ContainerElement.FindElement(By.XPath(".//table[@id='srSelectRules_tblFilter']"), 2);
 
 			private string _searchHeader;
 
-			private IWebElement SearchRow => FilterTable.FindElement(By.XPath($".//table//tr[td/span[contains(text(),'{_searchHeader}')]]"), 2);
+			private IWebElement SearchRow => this.FilterTable.FindElement(By.XPath($".//table//tr[td/span[contains(text(),'{_searchHeader}')]]"), 2);
 
-			private IWebElement SearchDropDown => SearchRow.FindElement(By.XPath($".//select"), 2);
+			private IWebElement SearchDropDown => this.SearchRow.FindElement(By.XPath($".//select"), 2);
 
-			private IWebElement SearchTextBox => SearchRow.FindElement(By.XPath(".//input"), 2);
+			private IWebElement SearchTextBox => this.SearchRow.FindElement(By.XPath(".//input"), 2);
 
-			private IWebElement ApplyBtn => FilterTable.FindElement(By.XPath(".//input[@type='submit'][@title='Apply']"), 2);
+			private IWebElement ApplyBtn => this.FilterTable.FindElement(By.XPath(".//input[@type='submit'][@title='Apply']"), 2);
 
-			private IWebElement DataTable => ContainerElement.FindElement(By.XPath(".//div[@id='srSelectRules_divSRData']//table"), 2);
+			private IWebElement DataTable => this.ContainerElement.FindElement(By.XPath(".//div[@id='srSelectRules_divSRData']//table"), 2);
 
-			private List<IWebElement> ColHeaders => DataTable.FindElements(By.XPath($".//tr[contains(@class,'Header')]//a"), 2).ToList();
+			private List<IWebElement> ColHeaders => this.DataTable.FindElements(By.XPath($".//tr[contains(@class,'Header')]//a"), 2).ToList();
 
 			internal bool ClickFilterBtn()
 			{
-				return FilterButton != null && FilterButton.TryClick();
+				return this.FilterButton != null && this.FilterButton.TryClick();
 			}
 
 			internal bool SelectFilterType(string filterName, string searchType)
 			{
 				_searchHeader = filterName;
-				if (SearchRow == null)
+				if (this.SearchRow == null)
 				{
 					Report.Error($"Could not find the filter for {filterName}");
 					return false;
 				}
-				if (SearchDropDown == null)
+				if (this.SearchDropDown == null)
 				{
 					Report.Error($"Could not find the dropdown for the {filterName} row.");
 					return false;
 				}
-				List<IWebElement> DropDownOptions = SearchDropDown.FindElements(By.XPath(".//option"), 2).ToList();
+				List<IWebElement> DropDownOptions = this.SearchDropDown.FindElements(By.XPath(".//option"), 2).ToList();
 				if (DropDownOptions.Count == 0)
 				{
 					Report.Error("There were no options to select.");
@@ -218,7 +219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Match match = Regex.Match(option.Text, ToMatch);
 					if (match.Success)
 					{
-						SearchDropDown.Select(option.Text);
+						this.SearchDropDown.Select(option.Text);
 						return true;
 					}
 				}
@@ -229,25 +230,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			internal bool EnterFilterText(string searchHeader, string searchText)
 			{
 				_searchHeader = searchHeader;
-				if (SearchRow == null)
+				if (this.SearchRow == null)
 				{
 					Report.Error($"Could not find the filter for {searchHeader}");
 					return false;
 				}
-				if (SearchTextBox == null)
+				if (this.SearchTextBox == null)
 				{
 					Report.Error($"Could not find the text box for the filter {searchHeader}");
 					return false;
 				}
 				else
 				{
-					return SearchTextBox.TryEnterText(searchText);
+					return this.SearchTextBox.TryEnterText(searchText);
 				}
 			}
 
 			internal bool ClickApplyFilterBtn()
 			{
-				return ApplyBtn == null ? false : ApplyBtn.TryClick();
+				return this.ApplyBtn == null ? false : this.ApplyBtn.TryClick();
 			}
 
 			internal bool FindItem(string columnHeader, string userName)
@@ -272,7 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						colNum++;
 					}
 				}
-				if (colNum >= ColHeaders.Count())
+				if (colNum >= this.ColHeaders.Count())
 				{
 					Report.Error($"Could not find the column with the header {columnHeader}");
 					return false;
@@ -316,7 +317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						colNum++;
 					}
 				}
-				if (colNum >= ColHeaders.Count())
+				if (colNum >= this.ColHeaders.Count())
 				{
 					Report.Error($"Could not find the column with the header {columnHeader}");
 					return null;
@@ -343,26 +344,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			protected override By ContainerElementLocator => By.XPath("//form[@name='form1']//tbody");
 
-			private IWebElement FilterButton => ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
+			private IWebElement FilterButton => this.ContainerElement.FindElement(By.XPath("//a[@id='srSelectRules_lnkFilter']"), 2);
 
 			public List<IWebElement> RuleBoxElements => this.ContainerElement.FindElements(By.XPath($"//table[@id='rblRuleType']//tr"), 2).ToList();
 
-			private IWebElement CopySelectedRuleButton => ContainerElement.FindElement(By.XPath("//input[@id='chkCopyRule']"), 2);
+			private IWebElement CopySelectedRuleButton => this.ContainerElement.FindElement(By.XPath("//input[@id='chkCopyRule']"), 2);
 
-			private IWebElement EnterNameBox => ContainerElement.FindElement(By.XPath("//input[@name='txtRuleName']"), 2);
+			private IWebElement EnterNameBox => this.ContainerElement.FindElement(By.XPath("//input[@name='txtRuleName']"), 2);
 
-			private IWebElement OKButton => ContainerElement.FindElement(By.XPath("//input[@name='btnOk']"), 2);
+			private IWebElement OKButton => this.ContainerElement.FindElement(By.XPath("//input[@name='btnOk']"), 2);
 
 
 
-			private IWebElement CopyRuleLabelText => ContainerElement.FindElement(By.XPath("//span[@id='lblCopyRule']"), 2);
+			private IWebElement CopyRuleLabelText => this.ContainerElement.FindElement(By.XPath("//span[@id='lblCopyRule']"), 2);
 
 
 
 
 			internal bool ClickFilterBtn()
 			{
-				return FilterButton != null && FilterButton.TryClick();
+				return this.FilterButton != null && this.FilterButton.TryClick();
 			}
 
 			internal bool SelectGivenRuleType(string type)
@@ -485,9 +486,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			protected override By ContainerElementLocator => By.XPath("//form[@name='Form1']//tbody");
 
-			private IWebElement WillContainResultBox => ContainerElement.FindElement(By.XPath("//textarea[@name='EditCalculation']"), 2);
+			private IWebElement WillContainResultBox => this.ContainerElement.FindElement(By.XPath("//textarea[@name='EditCalculation']"), 2);
 
-			private IWebElement SaveButton => ContainerElement.FindElement(By.XPath("//input[@name='btnSave']"), 2);
+			private IWebElement SaveButton => this.ContainerElement.FindElement(By.XPath("//input[@name='btnSave']"), 2);
 
 
 
@@ -542,7 +543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			internal bool WaitForRulesEditorToBeGone()
 			{
-				var el = this.containerElement;
+				var el = this.ContainerElement;
 				if(el.IsNullOrEmpty())
 				{
 					Report.Info($"The el was not found as expected...");
@@ -551,7 +552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				int x = 0;
 				while(el!=null & x<20)
 				{
-					el = this.containerElement;
+					el = this.ContainerElement;
 					Delay.Seconds(5);
 					x++;
 				}

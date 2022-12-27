@@ -235,6 +235,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 		| Retailer |
 		| Amazon   |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790, container type: Plastic Container and size: 12
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Universal Product Code (UPC)
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790B, container type: Plastic Container and size: 12
 	Given I click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

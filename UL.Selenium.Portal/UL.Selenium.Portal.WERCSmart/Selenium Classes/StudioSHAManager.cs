@@ -1243,10 +1243,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+				if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
 				{
 					SeleniumBrowser.ExitIFrame();
-					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+					if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
 					{
 						Report.Info("Could not switch to iframe");
 						return false;

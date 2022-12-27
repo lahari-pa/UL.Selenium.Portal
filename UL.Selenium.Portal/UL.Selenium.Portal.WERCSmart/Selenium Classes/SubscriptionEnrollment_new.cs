@@ -231,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_sectionLabel = sectionLabel;
 			_panelLabel = panelLabel;
 			_panelListText = panelListText;
-			return this.EnrollmentPanelBodyListItemInfoTextArea.GetTextContent();
+			return this.EnrollmentPanelBodyListItemInfoTextArea.GetTextContent().Replace("\n", "").Replace("\t","").Replace("\r", " ");
 		}
 
 		public bool EnrollmentPanelBodyListItemInfoTextAreaLinkExists(string sectionLabel, string panelLabel, string panelListText, string linkLabel)

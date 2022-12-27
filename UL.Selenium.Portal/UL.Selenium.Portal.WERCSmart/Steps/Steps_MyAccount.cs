@@ -223,6 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			var selMyAccount = new MyAccount();
 			var selTopMenuBar = new TopMenuBar();
+
 			//get name of currently signed in
 			string username = selTopMenuBar.GetCurrentUser();
 			selMyAccount.EnterSearchTextAndClickFind(username);
@@ -1020,87 +1021,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
-		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
-		{
-			// Get user credentials from TReVor based on saved as ID
-			TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
-			if (user == null)
-			{
-				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
-				return;
-			}
-
-			string oldPassword = user.Password;
-			string newPassword = "";
-			// If the current password ends in a character, append with a 1 for the new password
-			if (!char.IsDigit(oldPassword.Last()))
-			{
-				newPassword = oldPassword + "1";
-			}
-			else
-			{
-				char[] passwordChr = oldPassword.ToCharArray();
-				string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
-				newPassword = oldPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
-			}
-			var selModal = new ModalDialog();
-			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
-			{
-				return;
-			}
-
-			// If the password has expired, the old password is required. Else it isn't.
-			if (selModal.LoginPasswordFieldPresent())
-			{
-				Report.Info("Entering current password in the input: *******");
-				selModal.EnterLoginPassword(oldPassword);
-			}
-
-			GeneralUtilities.Wait_for_load_finish();
-			int attempt = 0;
-			while (attempt < 10)
-			{
-				Report.Info("Entering new password in New Password input: *******");
-				selModal.EnterNewPassword(newPassword);
-				Report.Info("Entering new password in Verify Password input: *******");
-				selModal.EnterVerifyPassword(newPassword);
-				Report.Info("Clicking save in the Change Password popup");
-				Report.IsTrue(selModal.ClickSave(),
-					"Failed to click save in Change Password",
-					"Successfully clicked save in Change Password");
-				GeneralUtilities.Wait_for_load_finish();
-				if (selModal.GetAllText().Any(x => x.Contains("used too recently")))
-				{
-					Report.Info("The test attempted to assign a previously used password! Iterating the password suffix...");
-					Report.Info($"Current attempted password is: *******");
-					char[] passwordChr = newPassword.ToCharArray();
-					string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
-					newPassword = newPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
-					Report.Info($"New attempted password is: *******");
-					if (selModal.Click_Close())
-					{
-						Report.Info($"Attempt {attempt}. Trying again...");
-						attempt++;
-						continue;
-					}
-					throw new Exception("Failed to close the secondary password modal!");
-				}
-				Report.Info("Clicking close in the Change Password popup");
-				Report.IsTrue(selModal.Click_Close(),
-					"Failed to click close in Change Password",
-					"Successfully clicked clse in Change Password");
-				GeneralUtilities.Wait_for_load_finish();
-				if (selModal.Wait_for_close())
-				{
-					Report.Info("Updating the password in TReVor Test Users");
-					Automation.TReVor.Classes.TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
-					return;
-				}
-				throw new Exception("Modal dialog did not close!");
-			}
-			Report.Failure("Failed after 10 attempts to change the password!");
-		}
+		
 
 		[StepDefinition(@"I click the 'How to Subscribe' link in My Account")]
 		public void ClickHowToSubscribeLinkInMyAccount()

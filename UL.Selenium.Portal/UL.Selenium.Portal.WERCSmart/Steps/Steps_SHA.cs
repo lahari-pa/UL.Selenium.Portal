@@ -2712,12 +2712,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (searchTerm.Contains("saved as "))
 			{
 				searchTerm = searchTerm.Replace("saved as ", "");
-			}
-
+		    }
+		
 			if (Context.GetFromContext(searchTerm) != null)
 			{
 				searchTerm = Context.GetFromContext(searchTerm).ToString();
-			}
+			} 
 
 			var thisStudioSupplierManager = new StudioSupplierManager();
 
