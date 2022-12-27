@@ -18,10 +18,10 @@
 Feature: Ingredients
 (Suite ID: 64740)
 
-#Background:
-	#Given I verify the following users exist and if not I create them using SHAUser
-		#| username    | FirstName | LastName   | Role         | EmailAddress                |
-		#| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
