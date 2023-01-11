@@ -140,7 +140,8 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65459
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -238,7 +239,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
