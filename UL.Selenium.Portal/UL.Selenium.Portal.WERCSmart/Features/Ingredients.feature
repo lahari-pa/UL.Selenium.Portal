@@ -216,7 +216,8 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 
 @TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71291
@@ -226,7 +227,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 75.0    | false               | false       |            |
+		#| Wood dust     | 75.0    | false               | false       |            |
+		| Wood chips     | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
