@@ -1746,7 +1746,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current window")]
 		public void CloseCurrentWindow()
 		{
-			SeleniumWebDriver.CurrentDriver.Close();
+			SeleniumWebDriver.CurrentDriver.Quit();
 		}
 
 		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]

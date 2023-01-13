@@ -95,13 +95,16 @@ Scenario: [56216] My Products grid Actions - Delete Navigation
 	Then I should not see products in the Product Grid
 
 #actions/edit
+# 2023/01/13:Test not currently needed
+@ignore
 @TestCase:56212
 Scenario: [56212] My Products grid Actions - Edit Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	When I filter the products by: Not Yet Submitted
+	Then I search for the product: product
 	Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
-	When I click Row Actions for the most recent product returned
+	When I click Row Actions for product saved as: FirstProduct
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
 	And the product saved as: FirstProduct should be visible in editor
@@ -138,6 +141,8 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 #actions/view
+# 2023/01/13:Test not currently needed
+@ignore
 @TestCase:56218
 Scenario: [56218] My Products grid Actions - View Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -283,48 +288,46 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 
 @TestCase:125144
 Scenario: [125144] Actions - 3rd Party Access Code Window
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
-Then I save the product information as: TestCase125144
-Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
-|           | Copper sulfate  | 11.67   | false               |            | false       |
-|           | Nitric acid     | 55      | false               |            | false       |
-Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-Then I click continue
-Then I click continue
-And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-Then I should see the Sustainability Page
-Given in the Sustainability page I click Continue
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I click the Home navigation icon
-Given I search for the product saved as: TestCase125144
-When I click Row Actions for the most recent product returned
-Then I click on the Row Action: Access Code
-Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 12345678
-Given I click close on the Save Changes popup dialog
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase125144
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
+		|           | Copper sulfate  | 11.67   | false               |            | false       |
+		|           | Nitric acid     | 55      | false               |            | false       |
+	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	Then I click continue
+	Then I click continue
+	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then I should see the Sustainability Page
+	Given in the Sustainability page I click Continue
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I click the Home navigation icon
+	Given I search for the product saved as: TestCase125144
+	When I click Row Actions for the most recent product returned
+	Then I click on the Row Action: Access Code
+	Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 12345678
+	Given I click close on the Save Changes popup dialog
 
 
 
 @TestCase:152230
 Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
-
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Given In SHA Manager I set the filter for status to : Assigned
-Then In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.
-Given I click the first UPC in the UPC Retailer and Feed page
-Given In UPC Details popup in UPC Retailer and Feed page I select retailer: 99 Cents
-Given In UPC Details popup in Retailer and UPC Feed page I see the following properties and values
-| Property         | Value    |
-| Weight Size (oz) | Any Data |
-| Fluid Size (oz)  | Any Data |
-| Gas Size (kg)    | Any Data |
-| Gas Name         | Any Data |
-Given I close UPC Details popup in Retailer and UPC Feed page
-Given I close the current window
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In SHA Manager I set the filter for status to : Assigned
+	Then In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.
+	Given I click the first UPC in the UPC Retailer and Feed page
+	Given In UPC Details popup in UPC Retailer and Feed page I select retailer: 99 Cents
+	Given In UPC Details popup in Retailer and UPC Feed page I see the following properties and values
+		| Property         | Value    |
+		| Weight Size (oz) | Any Data |
+		| Fluid Size (oz)  | Any Data |
+		| Gas Size (kg)    | Any Data |
+		| Gas Name         | Any Data |
+	Given I close UPC Details popup in Retailer and UPC Feed page
+	Given I close the current window
