@@ -464,10 +464,12 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
@@ -740,3 +742,37 @@ Then I click on the Row Action: View
 Then A Summary page should open in a new browser tab
 Then I confirm the following section: Please select DOT Exceptions if applicable? has the following value: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. in the Summary Page
 Given I close the browser tab with the Summary page
+
+@TestCase:128744
+Scenario: [128744] Ammunition - DOT Exceptions Saved
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+    Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
+	Then I save the product information as: TestCase128744
+	Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Propane       | 100     | false               | false       |            |
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Given I call Shared Step (Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128744
+
+	@TestCase:128743
+Scenario: [128743] Ammunition - Other DOT Exception Validation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+    Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
+	Then I save the product information as: TestCase128743
+	Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Propane       | 100     | false               | false       |            |
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Given I call Shared Step (Transportation Details - Other DOT Exception Validation - Continue - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128743

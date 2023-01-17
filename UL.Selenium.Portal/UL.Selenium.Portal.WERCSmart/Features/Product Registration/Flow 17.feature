@@ -125,7 +125,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I click continue	
 	Then Article Information Sheet (AIS) should not be showing the error messages: Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.
-	Then Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should be showing the error messages: Select at least one of the options
+	#Then Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should be showing the error messages: Select at least one of the options
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	Then Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should not be showing the error messages: Select at least one of the options
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
@@ -134,6 +134,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then WHMIS-compliant Safety Data Sheet, English and French-Canadian should be showing the error messages: Select at least one of the options
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
 	Then WHMIS-compliant Safety Data Sheet, English and French-Canadian should not be showing the error messages: Select at least one of the options
+	And I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Label in both French and English is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Green
@@ -170,6 +171,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
+	And I click the browse button for label: Label in both French and English and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf

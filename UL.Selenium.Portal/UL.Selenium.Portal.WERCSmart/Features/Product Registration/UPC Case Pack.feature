@@ -27,10 +27,10 @@ Feature: UPC Case Pack
 
 
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+	#Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto30 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @TestCase:87640
 Scenario: [87640] UPC - Case Pack Only Present in product
@@ -98,6 +98,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
 @TestCase:87650
+@TestCase:87650
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -107,7 +108,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Batteries
+    Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
     Then I save the product information as: TestCase87650
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
@@ -138,6 +139,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 		| Add          |
 		| Add Casepack |
 	Given in the Universal Product Code (UPC) page I click Continue
+	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -452,8 +454,6 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 | Retailer  |
 | Walgreens |
@@ -471,7 +471,7 @@ And I should see the Regulatory Documents to Provide Page
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
 
-@TestCase:87718
+@ScenarioId:10145
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

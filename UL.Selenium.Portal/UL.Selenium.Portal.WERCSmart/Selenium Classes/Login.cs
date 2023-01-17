@@ -146,5 +146,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.LoginError?.FindElement(By.XPath(".//span"), 2)?.Text;
 		}
 
+		public string AccountNotificationsMessageText()
+		{
+			return this.LoginError?.Text;
+		}
+
+		public string GetServerErrorMessage()
+		{
+			IWebElement errorModal = this.WebDriver.FindElement(By.CssSelector("#accountNotifications .modal-dialog .modal-content"), 2);
+			return errorModal?.FindElement(By.CssSelector(".modal-body"), 2)?.Text;
+		}
 	}
 }

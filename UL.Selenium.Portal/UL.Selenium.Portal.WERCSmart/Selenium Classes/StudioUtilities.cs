@@ -14,18 +14,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (Context.GetFromContext("BaseWindow") == null)
 			{
-				Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 			}
 			else
 			{
 				try
 				{
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
 				}
 				catch (Exception)
 				{
-					ReadOnlyCollection<string> handlesTemp = SeleniumBrowser.WebBrowser.WindowHandles;
-					string currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+					ReadOnlyCollection<string> handlesTemp = SeleniumWebDriver.CurrentDriver.WindowHandles;
+					string currentWindow = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 					Context.AddToContext("BaseWindow", currentWindow);
 				}
 
@@ -33,11 +33,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (popupTitle == "BaseWindow")
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
 				return true;
 			}
 
-			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 
 
 			int i = 0;
@@ -45,11 +45,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				foreach (string handle in handles)
 				{
-					if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains(popupTitle))
+					if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains(popupTitle))
 					{
 						try
 						{
-							SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+							SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 						}
 						catch (Exception ex)
 						{
@@ -57,9 +57,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 
 
-						if (switchToFirstFrame && SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body/iframe"), 2) != null)
+						if (switchToFirstFrame && SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body/iframe"), 2) != null)
 						{
-							SeleniumBrowser.WebBrowser.SwitchTo().Frame(SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body/iframe"), 2));
+							SeleniumBrowser.WebBrowser.SwitchTo().Frame(SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body/iframe"), 2));
 						}
 
 						Report.Success("Found window containing title: " + popupTitle);
@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				i++;
 			}
 
-			SeleniumBrowser.WebBrowser.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
 			return false;
 		}
 
