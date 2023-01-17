@@ -51,7 +51,6 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I close the window that opened
 
 @ignore
-#actions/delete
 @TestCase:63663
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
