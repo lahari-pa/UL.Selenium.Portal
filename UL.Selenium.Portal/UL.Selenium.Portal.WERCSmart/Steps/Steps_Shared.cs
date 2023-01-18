@@ -2559,16 +2559,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 59680 \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
-			Report.StartStep("I should see the  Product Information Page");
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-			/*
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
+			tableFirst.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			Report.StartSubStep("I only see the following sections");
+			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
+			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+			Report.StartSubStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
+				"United States");
+			Report.StartSubStep(
+				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			var tableSecond = new Table("Section");
+			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+
+			tableSecond.AddRow(
+				"Select countries the product may be sold in");
+			tableSecond.AddRow(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
+			tableSecond.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableSecond.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			tableSecond.AddRow(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+
+			Report.StartSubStep("I only the following sections");
+			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
+			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
+			;
+		}
+
+		[StepDefinition(@"I call Shared Step 59680a \(Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR, with FIFRA - Continue - Happy Path\)")]
+		public void ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFRWithFIFRA()
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the  Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
+
 			Report.StartSubStep(
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			*/
+
 			var tableFirst = new Table("Section");
 			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
@@ -2581,8 +2647,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
-
-
 			Report.StartSubStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -2621,12 +2685,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only see the following sections");
 
-			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
-			MyNewProductSteps.CheckDisplayedSections("only see", tableSecond);
-
-
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
-
+			Report.StartSubStep("I only the following sections");
+			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
+			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
