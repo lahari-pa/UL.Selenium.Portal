@@ -42,7 +42,7 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 
 @TestCase:64528
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
-	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto9 and save as: ProductSetup64528
+	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64528
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I search for the product saved as: ProductSetup64528

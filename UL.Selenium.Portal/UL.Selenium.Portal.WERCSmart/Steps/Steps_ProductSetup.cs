@@ -914,6 +914,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
+			var newPaymentMethodSteps = new Steps_PaymentMethods();
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
@@ -981,6 +982,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// If purchase details are showing click confirm order
 			Report.StartStep("If purchase details are showing click confirm order");
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			//Check if thank you screen contains correct statement
+			Report.StartStep("Check if thank you screen contains correct statement");
+			newPaymentMethodSteps.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment.");
+			
+
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
 			//SHA Manager
