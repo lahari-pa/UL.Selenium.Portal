@@ -162,8 +162,8 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: Installed in the product
 	Given I add the following batteries:
-		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
-		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithium  |
+		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As            |
+		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 10                                | 10                                       | lithiumbattery65520 |
 	Given I continue to the next screen in the product registration
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
