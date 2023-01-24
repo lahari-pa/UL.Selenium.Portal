@@ -237,8 +237,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790, container type: Plastic Container and size: 12
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Universal Product Code (UPC)
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC120790B, container type: Plastic Container and size: 12
-	Given I click continue
+    Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC120790B, container type: Plastic Container and size: 12
+	Then I click Save in The Product Page
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -247,7 +247,6 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	Given I search for the product saved as: TestCase120790
 	When I click Row Actions for the most recent product returned
@@ -256,7 +255,6 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Then In the list of UPCs I should not see UPC: saved as UPC120790
 	Then In the Universal Product Code (UPC) page I click Save
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
     And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
     Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
