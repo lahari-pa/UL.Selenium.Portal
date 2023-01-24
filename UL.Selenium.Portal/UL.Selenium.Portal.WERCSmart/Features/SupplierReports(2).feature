@@ -282,28 +282,28 @@ Given I delete the excel file saved as Chemicals of Concern
 Scenario: [140997] California Proposition 65 - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: California Proposition 65
+Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: California Proposition 65.zip from the downloads folder
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
-Then I select the Request Report button zip file is produced called California Proposition 65.zip and save as California Proposition 65
-Given I confirm that an zip file is produced called California Proposition 65.zip and save as California Proposition 65
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.zip from the downloads folder
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
+Then I select the Request Report button zip file is produced called California Proposition 65  Registrations Prior to August 30 2018.zip and save as California Proposition 65  Registrations Prior to August 30 2018
+Given I confirm that an zip file is produced called California Proposition 65  Registrations Prior to August 30 2018.zip and save as California Proposition 65  Registrations Prior to August 30 2018
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as California Proposition 65 can be opened and contains data
-Given I delete the excel file saved as California Proposition 65
-Then I Delete the file with name: California Proposition 65.zip from the downloads folder
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as California Proposition 65  Registrations Prior to August 30 2018 can be opened and contains data
+Given I delete the excel file saved as California Proposition 65  Registrations Prior to August 30 2018
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.zip from the downloads folder
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 - Registrations Prior to August 30, 2018 File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: California Proposition 65 File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called California Proposition 65.zip and save as California Proposition 65
-And I confirm the zip csv file saved as California Proposition 65 can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: California Proposition 65 - Registrations Prior to August 30, 2018 File Type: CSV (Zip) Requested By: 0euotm7bf97k
+Given I confirm that an zip file is produced called California Proposition 65  Registrations Prior to August 30 2018.zip and save as California Proposition 65  Registrations Prior to August 30 2018
+And I confirm the zip csv file saved as California Proposition 65  Registrations Prior to August 30 2018 can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as California Proposition 65
-Then I Delete the file with name: California Proposition 65.zip from the downloads folder
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
+Given I delete the file saved as California Proposition 65  Registrations Prior to August 30 2018
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.zip from the downloads folder
+Then I Delete the file with name: California Proposition 65  Registrations Prior to August 30 2018.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:140683
@@ -323,9 +323,9 @@ Given I delete the excel file saved as BatteryContaining Products
 Then I Delete the file with name: BatteryContaining Products.zip from the downloads folder
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Then I click the Download button for the most recent report with Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Given I confirm that an zip file is produced called Battery-Containing Products.zip and save as BatteryContaining Products
 And I confirm the zip csv file saved as BatteryContaining Products can be opened and contains data
 Given I click Close in the Report Download popup
