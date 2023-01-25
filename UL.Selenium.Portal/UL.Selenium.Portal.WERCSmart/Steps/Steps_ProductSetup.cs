@@ -914,6 +914,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
+			var newPaymentMethodSteps = new Steps_PaymentMethods();
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();

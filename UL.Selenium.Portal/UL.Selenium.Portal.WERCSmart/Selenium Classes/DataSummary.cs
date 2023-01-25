@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForSpinner()
 		{
-			IWebElement spinner = this.containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
+			IWebElement spinner = this.ContainerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
 			if (spinner == null)
 			{
 				return true;
@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			while (spinner != null && spinner.Displayed)
 			{
-				spinner = this.containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
+				spinner = this.ContainerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
 
@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this.WaitForSpinner();
 			var retList = new List<Battery>();
-			IWebElement tableElement = this.containerElement.FindElement(By.XPath(".//h2[@class='summary-question' and contains(text(),'battery')]//following-sibling::table"), 2);
+			IWebElement tableElement = this.ContainerElement.FindElement(By.XPath(".//h2[@class='summary-question' and contains(text(),'battery')]//following-sibling::table"), 2);
 			if (tableElement == null)
 			{
 				return null;
