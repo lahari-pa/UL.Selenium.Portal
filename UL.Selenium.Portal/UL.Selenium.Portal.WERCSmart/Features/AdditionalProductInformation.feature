@@ -138,36 +138,36 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @TestCase:133161
 Scenario: [133161] Fertilizer - P, N, or K question
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-Given I should see the Product Information Page
-Given I set the Does the product contain fertilizer (N, P, K)? option to: No
-And I should not see following statement: Phosphates /Phosphorous (“P”)
-And I should not see following statement: Nitrogen /Nitrates (“N”)
-And I should not see following statement: Potassium(“K”)
-Given I set the Does the product contain fertilizer (N, P, K)? option to: Yes
-And I should see following statement: Phosphates /Phosphorous (“P”)
-And I should see following statement: Nitrogen /Nitrates (“N”)
-And I should see following statement: Potassium(“K”)
-Then I should see the PNK section title in the Product Information with the following text: Provide the amount (Percent) of each of the following within the product
-And I see the following sections
-| Section                       |
-| Phosphates /Phosphorous (“P”) |
-| Nitrogen /Nitrates (“N”)      |
-| Potassium(“K”)                |
-Then I set the Phosphates /Phosphorous (“P”) field to: 1000000
-Then I set the Nitrogen /Nitrates (“N”) field to: 10.1232123 
-Then I set the Potassium(“K”) field to: 100
-Then I click continue
-And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-Then I set the Phosphates /Phosphorous (“P”) field to: 35.24
-Then I set the Nitrogen /Nitrates (“N”) field to: .05
-And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	Given I should see the Product Information Page
+	Given I set the Does the product contain fertilizer (N, P, K)? option to: No
+	And I should not see following statement: Phosphates /Phosphorous (“P”)
+	And I should not see following statement: Nitrogen /Nitrates (“N”)
+	And I should not see following statement: Potassium(“K”)
+	Given I set the Does the product contain fertilizer (N, P, K)? option to: Yes
+	And I should see following statement: Phosphates /Phosphorous (“P”)
+	And I should see following statement: Nitrogen /Nitrates (“N”)
+	And I should see following statement: Potassium(“K”)
+	Then I should see the PNK section title in the Product Information with the following text: Provide the amount (Percent) of each of the following within the product
+	And I see the following sections
+		| Section                       |
+		| Phosphates /Phosphorous (“P”) |
+		| Nitrogen /Nitrates (“N”)      |
+		| Potassium(“K”)                |
+	Then I set the Phosphates /Phosphorous (“P”) field to: 1000000
+	Then I set the Nitrogen /Nitrates (“N”) field to: 10.1232123 
+	Then I set the Potassium(“K”) field to: 100
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	Then I set the Phosphates /Phosphorous (“P”) field to: 35.24
+	Then I set the Nitrogen /Nitrates (“N”) field to: .05
+	And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 
 

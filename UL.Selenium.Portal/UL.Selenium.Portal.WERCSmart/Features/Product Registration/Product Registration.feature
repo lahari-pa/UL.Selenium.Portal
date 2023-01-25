@@ -20,10 +20,10 @@ Feature: Product Registration
 #Non-important scenario - Philip
 @TestCase:130389
 Scenario: [130389] Demo Scenario
-Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save product Product to context as TestCase
+	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save product Product to context as TestCase
 
 #Background:
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -207,7 +207,6 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
-
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Granular
 	And I set the water mixture question to: Yes
@@ -500,7 +499,7 @@ Scenario: [105352] Product Comments screen Max input length
 		| BatteryType | Manufacturer | NumberPerPackage | RequiredToRun | Saved As |
 		| Lithium Ion | saved as     | 4                | 4             | battery1 |
 		| Alkaline    | saved as     | 6                | 6             | battery2 |
-	Then I close the Data Summary tab
+	Then I close the Data Summary Tab
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
@@ -539,62 +538,51 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	And I should see the Sustainability Page
 	And In the New Product page I should be on tab: Review and Submit
 	Then I check if the logo is displayed for the following retailers
-	| Retailer	    |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Target        |
-	| Walgreens     |
-	| Walmart       |
-
+		| Retailer	    |
+		| Canadian Tire |
+		| Costco        |
+		| CVS           |
+		| Dollar Tree   |
+		| Family Dollar |
+		| Target        |
+		| Walgreens     |
+		| Walmart       |
 	Then I check if a checkmark image is displayed above the following retailers
-	| Retailer      |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Target        |
-	
-
+		| Retailer      |
+		| Canadian Tire |
+		| Costco        |
+		| CVS           |
+		| Dollar Tree   |
+		| Family Dollar |
+		| Target        |
 	Then I check if a yellow triangle image is displayed above the following retailers
-	| Retailer	    |
-	| Walgreens     |
-	| Walmart       |
-
+		| Retailer	    |
+		| Walgreens     |
+		| Walmart       |
 	Then I check if a 'Scope' button is displayed below the following retailers
-	| Retailer	    |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Target        |
-	| Walgreens     |
-	| Walmart       |
-
-
+		| Retailer	    |
+		| Canadian Tire |
+		| Costco        |
+		| CVS           |
+		| Dollar Tree   |
+		| Family Dollar |
+		| Target        |
+		| Walgreens     |
+		| Walmart       |
 	#Update below to take retailer?
 	Then I hover over the yellow triangle image for retailer: Walgreens
 	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
 	Then I hover over the yellow triangle image for retailer: Walmart
 	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
-
-
 	Then I check if the retailer modal is displayed for the following retailer: CO
 	Then I check if the retailer modal is displaying the following text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
 	Then I close the retailer modal
-
 	Then I check if the retailer modal is displayed for the following retailer: CV
 	Then I check if the retailer modal is displaying the following text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
 	Then I close the retailer modal
-
 	Then I check if the retailer modal is displayed for the following retailer: DT
 	Then I check if the retailer modal is displaying the following text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
 	Then I close the retailer modal
-
 	Then I check if the retailer modal is displayed for the following retailer: WM
 	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	Then I close the retailer modal
@@ -637,190 +625,185 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 @ignore
 @TestCase:128754
 Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-Given I generate a random UPC number and save as: UPC128754
-Given I delete all products with UPC Number: saved as UPC128754
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
-Then I save the product information as: TestCase128754
-Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Quantity of Batteries to Operate Product | Manufacturer | Quantity of Batteries per Package |
-| Alkaline     | 6                                  | <any>        | 6                               |
-Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
-And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-Given I select the following retailers in the Select Retailers popup list view:
-| Retailer												   |
-| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
-| Family Dollar                                            |
-| No Retailer/No UPC Product                                           |
-Then I click Done on Select Retailers window
-Then I confirm the following retailers are showing in the Retailer page
-| Retailer												   |
-| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
-| Family Dollar                                           |
-| No Retailer/No UPC Product                                           |
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC128754
+	Given I delete all products with UPC Number: saved as UPC128754
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
+	Then I save the product information as: TestCase128754
+	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 48367 (Product Includes Battery > any type)
+		| Battery Type | Quantity of Batteries to Operate Product | Manufacturer | Quantity of Batteries per Package |
+		| Alkaline     | 6                                        | <any>        | 6                                 |
+	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+	And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+		| No Retailer/No UPC Product                               |
+	Then I click Done on Select Retailers window
+	Then I confirm the following retailers are showing in the Retailer page
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+		| No Retailer/No UPC Product                               |
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
 @TestCase:127767
 Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
-Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I generate a random UPC number and save as: UPC804879551225
-Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
-Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
-Given I set the Primary Physical State option to: Liquid
-And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-Given I set the Secondary Physical State option to: Liquid
-Given I set the Relative Density option to: 0.1
-Given I set the pH option to: 11.5
-Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
-Given I set the Flash Point (in Celsius) option to: None, No Flash Point
-Given I set the Select the best Water Solubility description option to: Soluble in water
-Given I click continue
-Given I click continue
-Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I generate a random UPC number and save as: UPC804879551225
+	Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
+	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	Given I set the Primary Physical State option to: Liquid
+	And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
+	And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
+	Given I set the Secondary Physical State option to: Liquid
+	Given I set the Relative Density option to: 0.1
+	Given I set the pH option to: 11.5
+	Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
+	Given I set the Flash Point (in Celsius) option to: None, No Flash Point
+	Given I set the Select the best Water Solubility description option to: Soluble in water
+	Given I click continue
+	Given I click continue
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
       	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
-Given I click continue
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
-Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given I click continue
-Given I click continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Given I click continue
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
+	Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I click continue
+	Given I click continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
-Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Cleaning Supplies Product for BBB
-Then I delete the excel file saved as Products in Scope Report for BBB
+	Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+	Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
+	Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Cleaning Supplies Product for BBB
+	Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
 @ignore
 @TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
-Given I generate a random UPC number and save as: UPC128144
-Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
-Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Given I set the Select countries the product may be sold in option to: Canada
-Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-Given I set the Product is a Retailer's Private Label or Brand option to: No
-Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-Then I click continue
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber  | ComponentName                   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 61789-31-9 | Fatty Acids, coco, sodium salts | 100     |                     |            |             |
-And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
-And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128144, container type: Plastic Container and size: 6.2 do not click continue
-Then I click continue
-Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
-Given I click continue
-Then I click continue
-And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
+	Given I generate a random UPC number and save as: UPC128144
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+	Given I set the Select countries the product may be sold in option to: Canada
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber  | ComponentName                   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 61789-31-9 | Fatty Acids, coco, sodium salts | 100     |                     |            |             |
+	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128144, container type: Plastic Container and size: 6.2 do not click continue
+	Then I click continue
+	Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
+	Given I click continue
+	Then I click continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
-Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
-Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
-Given I click on close in the Report Download dialog
-Given I navigate to the home page
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+	Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
+	Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
+	Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
+	Given I click on close in the Report Download dialog
+	Given I navigate to the home page
 
 @ignore
 @TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
-Given I generate a random UPC number and save as: UPC128140
-And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-Given I call Shared Step 37857 (Enter Physical Property - Solid)
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 56-85-9   | L-Glutamine   | 100     |                     |            |             |
-And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
-Given I call Shared Step 60567 (Upload Product Label only)
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
-Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
-Given I delete the excel file saved as Products in Scope Report for BBB
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
+	Given I generate a random UPC number and save as: UPC128140
+	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 56-85-9   | L-Glutamine   | 100     |                     |            |             |
+	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
+	Given I call Shared Step 60567 (Upload Product Label only)
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+	Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
+	Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
+	Given I delete the excel file saved as Products in Scope Report for BBB
 
 
 @ignore
 @TestCase:147446
 Scenario: [147446] WM - Authoring option ONLY available
-
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-Given I generate a random UPC number and save as: UPC147446
-Given I save the product information as: testcase147446
-Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
-And I see the following sections
-| Section                                   |
-| OSHA-compliant Safety Data Sheet, English |
-And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I generate a random UPC number and save as: UPC147446
+	Given I save the product information as: testcase147446
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
+	And I see the following sections
+		| Section                                   |
+		| OSHA-compliant Safety Data Sheet, English |
+	And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
 		| Option            |
 		| Request to author |
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147446
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147446
 
 
 
 @ignore
 @TestCase:147447
 Scenario: [147447] Sears - Authoring option ONLY available
-
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-Given I generate a random UPC number and save as: UPC147447
-Given I save the product information as: testcase147447
-Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Sears/K-Mart and enter the name: TestBrand
-Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
-Given I click continue
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147447, container type: Plastic Container and size: 2
-And I see the following sections
-| Section                                   |
-| OSHA-compliant Safety Data Sheet, English |
-And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I generate a random UPC number and save as: UPC147447
+	Given I save the product information as: testcase147447
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Sears/K-Mart and enter the name: TestBrand
+	Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
+	Given I click continue
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147447, container type: Plastic Container and size: 2
+	And I see the following sections
+		| Section                                   |
+		| OSHA-compliant Safety Data Sheet, English |
+	And The following options should be displayed exclusively for section: OSHA-compliant Safety Data Sheet, English
 		| Option            |
 		| Request to author |
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147447
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147447

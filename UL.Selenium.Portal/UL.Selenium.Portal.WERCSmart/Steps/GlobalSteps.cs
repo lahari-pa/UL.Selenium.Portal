@@ -1359,8 +1359,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to find the correct tab!");
 		}
-
-		[StepDefinition(@"I close the Data Summary tab")]
+		
+		[StepDefinition(@"I close the Data Summary Tab")]
 		public void CloseDataSummaryTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
@@ -1368,7 +1368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumWebDriver.CurrentDriver.Close();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainHandle);
 		}
-
+		
 		[StepDefinition(@"If a modal dialog opens I skip it")]
 		public void GivenIfAModalDialogOpensISkipIt()
 		{
@@ -1591,7 +1591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current window")]
 		public void CloseCurrentWindow()
 		{
-			SeleniumWebDriver.CurrentDriver.Close();
+			SeleniumWebDriver.CurrentDriver.Quit();
 		}
 
 		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]
@@ -2488,7 +2488,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
 		public void WhenIVerifyTheFollowingUsersExist(string savedAs, Table table)
 		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			bool found = Context.FeatureContext.TryGetValue("TryGetUsers", out var result);
 			bool TestFinished = result != null && (bool)result == false;
 			if (!found || TestFinished)
@@ -2525,7 +2525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 
 					//navigate to SHA
-					ReportDetails.CurrentDetails.UseSubSteps = true;
+					Report.UseSubSteps = true;
 					var myStepsSha = new Steps_SHA();
 					Report.StartStep("I navigate to Studio");
 					myStepsSha.GivenINavigateToStudio();
@@ -3453,7 +3453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
 		public void ICheckForSHARuleForAccount(string userAcc)
 		{
-			ReportDetails.CurrentDetails.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			var header = new Steps_Header();
 			var LS = new LoginScreen();
 			var S_SM = new Steps_SecurityManager();
@@ -3466,7 +3466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool credentialsFound = trevuser != null;
 
 			//navigate to SHA
-			ReportDetails.CurrentDetails.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			var myStepsSha = new Steps_SHA();
 			
 			//Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);

@@ -215,11 +215,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string ProductSkuField {
-			get => this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2).GetValue();
+			get => this.ContainerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2).GetValue();
 			set
 			{
 
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2);
 
 				el.EnterText(value);
 
@@ -257,13 +257,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickActions(int row)
 		{
-			return this.containerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
+			return this.ContainerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
 
 		}
 
 		public List<string> ActionsAvailableInDropDown()
 		{
-			IList<IWebElement> dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
+			IList<IWebElement> dropDownContents = this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
 			if (dropDownContents.Count == 0)
 			{
 				return null;
@@ -274,9 +274,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickRowAction(string action)
 		{
-			IList<IWebElement> dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
+			IList<IWebElement> dropDownContents = this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
 			if (dropDownContents.Count == 0)
 			{
+				Report.Failure("Failure, Row action dropdown failed to open.");
 				return false;
 			}
 
@@ -1230,7 +1231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Checking if Retailer popup is displayed");
 			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
-			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			string popoverId = this.ContainerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
 			if (popoverId.IsNullOrEmpty())
 			{
 				return true;
@@ -1260,7 +1261,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ClickContainer()
 		{
-			this.containerElement.Click();
+			this.ContainerElement.ScrollElementIntoView();
+			this.ContainerElement.TryClick();
 		}
 
 		public bool SelectItemsOnPage(string option)
