@@ -1359,8 +1359,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to find the correct tab!");
 		}
-
-		[StepDefinition(@"I close the Data Summary tab")]
+		
+		[StepDefinition(@"I close the Data Summary Tab")]
 		public void CloseDataSummaryTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
@@ -1368,7 +1368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumWebDriver.CurrentDriver.Close();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainHandle);
 		}
-
+		
 		[StepDefinition(@"If a modal dialog opens I skip it")]
 		public void GivenIfAModalDialogOpensISkipIt()
 		{
@@ -1591,7 +1591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current window")]
 		public void CloseCurrentWindow()
 		{
-			SeleniumWebDriver.CurrentDriver.Close();
+			SeleniumWebDriver.CurrentDriver.Quit();
 		}
 
 		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]
