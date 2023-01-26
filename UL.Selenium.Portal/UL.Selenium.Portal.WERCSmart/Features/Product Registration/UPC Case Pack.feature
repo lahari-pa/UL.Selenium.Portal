@@ -558,3 +558,33 @@ Then I confirm the case dropdown with the following UPC: saved as UPC87821 shoul
 Then I click continue
 Given I should see the Regulatory Documents Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87821
+
+
+# Created by Saikiran Chittampally
+@TestCase:112487
+Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same when Fields Collapse
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC112487
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I save the product information as: TestCase112487
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+			| Retailer  |
+			| Walgreens |
+	Given I click the 'Add Casepack' button
+	Given I add the following into the UPC case fields
+		| UPC Number          | Container Type		  | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC112487  | Plastic Container     | 6    | 4        |                          | 4A: steel box         |
+	Given I click on the arrow next to the UPC data
+	Given I confirm that the transportation option: 4A: steel box that was selected is still the same
+	Given I click continue
+	Given In the New Product page I click tab: Recipient and UPC Details
+	Given I click the page heading: Global Trade Item Number (GTIN) / Universal Product Code (UPC)
+	Given I Change the Transportation option from the dropdown to: 4B: aluminum box
+	Given I click on the arrow next to the UPC data
+	Given I confirm that the transportation option: 4B: aluminum box that was selected is still the same
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase112487
