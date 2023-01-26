@@ -5283,12 +5283,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product list is showing", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"I call Shared Step 59728 \(Go to Manage Global Messages\)")]
+		[StepDefinition(@"I call Shared Step 59728 \(Go to Announcement Manager\)")]
 		public void GivenICallSharedStep59728GoToManageGlobalMessages()
 		{
 			var MyStepsSHA = new Steps_SHA();
 			Delay.Seconds(1);
-			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
+			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Announcement Manager");
 		}
 
 		[StepDefinition(
