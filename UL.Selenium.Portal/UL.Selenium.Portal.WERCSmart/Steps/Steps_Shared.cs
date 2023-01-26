@@ -1152,6 +1152,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(
+	@"I call Shared Step 57960a \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only - Do Not Click Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly_DoNotClickContinue(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+		}
+
 		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.comUpcFunctions.GetRandomUpcNumber(
 		[StepDefinition(
 			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: CVS, container type: (.*) and size: (.*)")]
