@@ -338,28 +338,28 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 Scenario: [141005] Eligible to Obsolete - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Eligible to Obsolete
+Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
-Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Eligible to Obsolete.zip and save as Eligible to Obsolete
-Given I confirm that an zip file is produced called Eligible to Obsolete.zip and save as Eligible to Obsolete
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).zip from the downloads folder
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).csv from the downloads folder
+Then I select the Request Report button zip file is produced called Subscription Renewal (Registrations Eligible for Deletion).zip and save as Subscription Renewal (Registrations Eligible for Deletion)
+Given I confirm that an zip file is produced called Subscription Renewal (Registrations Eligible for Deletion).zip and save as Subscription Renewal (Registrations Eligible for Deletion)
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Eligible to Obsolete can be opened and contains data
-Given I delete the excel file saved as Eligible to Obsolete
-Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
-Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as Subscription Renewal (Registrations Eligible for Deletion) can be opened and contains data
+Given I delete the excel file saved as Subscription Renewal (Registrations Eligible for Deletion)
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).zip from the downloads folder
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).csv from the downloads folder
+Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
+Then I confirm the most recent file has the following information Report Name: Subscription Renewal (Registrations Eligible for Deletion) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Eligible to Obsolete File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Eligible to Obsolete.zip and save as Eligible to Obsolete
-And I confirm the zip csv file saved as Eligible to Obsolete can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: Subscription Renewal (Registrations Eligible for Deletion) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an zip file is produced called Subscription Renewal (Registrations Eligible for Deletion).zip and save as Subscription Renewal (Registrations Eligible for Deletion)
+And I confirm the zip csv file saved as Subscription Renewal (Registrations Eligible for Deletion) can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Eligible to Obsolete
-Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
-Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
+Given I delete the file saved as Subscription Renewal (Registrations Eligible for Deletion)
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).zip from the downloads folder
+Then I Delete the file with name: Subscription Renewal (Registrations Eligible for Deletion).csv from the downloads folder
 
 @TestCase:141023
 Scenario: [141023] Pesticide Registrations - CSV Zip File
@@ -414,12 +414,12 @@ Given Under the Supplier Reports menu I choose: Registrations Revised - Not Yet 
 Then I confirm the most recent file has the following information Report Name: Registrations Revised - Not Yet Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report with Report Name: Registrations Revised - Not Yet Submitted File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Registrations Revised - Not Yet Submitted.zip and save as Registrations Revised - Not Yet Submitted
-And I confirm the zip csv file saved as Registrations Revised - Not Yet Submitted can be opened and contains data
+Given I confirm that an zip file is produced called Registrations Revised - Not Yet Submitted.zip and save as Registrations Revised  Not Yet Submitted
+And I confirm the zip csv file saved as Registrations Revised  Not Yet Submitted can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Registrations Revised - Not Yet Submitted
-Then I Delete the file with name: Registrations Revised - Not Yet Submitted.zip from the downloads folder
-Then I Delete the file with name: Registrations Revised - Not Yet Submitted.csv from the downloads folder
+Given I delete the file saved as Registrations Revised  Not Yet Submitted
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.zip from the downloads folder
+Then I Delete the file with name: Registrations Revised  Not Yet Submitted.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:141029
@@ -482,28 +482,28 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 Scenario: [141036] Volatile Organic Compounds - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
+Given Under the Supplier Reports menu I choose: VOC-related Registrations
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
-Given I confirm that an zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
+Then I Delete the file with name: VOCrelated Registrations.zip from the downloads folder
+Then I Delete the file with name: VOCrelated Registrations.csv from the downloads folder
+Then I select the Request Report button zip file is produced called VOCrelated Registrations..zip and save as VOC-related Registrations
+Given I confirm that an zip file is produced called VOCrelated Registrations.zip and save as VOC-related Registrations
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
-Given I delete the excel file saved as Volatile Organic Compounds
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as VOC-related Registrations can be opened and contains data
+Given I delete the excel file saved as VOC-related Registrations
+Then I Delete the file with name: VOCrelated Registrations.zip from the downloads folder
+Then I Delete the file with name: VOCrelated Registrations.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: VOC-related Registrations
+Then I confirm the most recent file has the following information Report Name: VOC-related Registrations File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Volatile Organic Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
-And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: VOC-related Registrations File Type: CSV (Zip) Requested By: 0euotm7bf97k
+Given I confirm that an zip file is produced called VOCrelated Registrations.zip and save as VOC-related Registrations
+And I confirm the zip csv file saved as VOC-related Registrations can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Volatile Organic Compounds
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
+Given I delete the file saved as VOC-related Registrations
+Then I Delete the file with name: VOCrelated Registrations.zip from the downloads folder
+Then I Delete the file with name: VOCrelated Registrations.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:141041
@@ -523,9 +523,9 @@ Given I delete the excel file saved as Waste Classification Summary
 Then I Delete the file with name: Waste Classification Summary.zip from the downloads folder
 Then I Delete the file with name: Waste Classification Summary.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Waste Classification Summary File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Then I click the Download button for the most recent report with Report Name: Waste Classification Summary File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Given I confirm that an zip file is produced called Waste Classification Summary.zip and save as Waste Classification Summary
 And I confirm the zip csv file saved as Waste Classification Summary can be opened and contains data
 Given I click Close in the Report Download popup
