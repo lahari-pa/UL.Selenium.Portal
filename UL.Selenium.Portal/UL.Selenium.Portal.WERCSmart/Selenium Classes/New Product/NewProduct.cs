@@ -5408,7 +5408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool GetTransportationOption(string option)
 		{
-			IWebElement transportationOption = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: transportToString()']"));
+			IWebElement transportationOption = this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: transportToString()']"));
 			string transportationValue = transportationOption.Text;
 			Report.Info("Transportation Option : "+transportationValue);
 			if (transportationValue.Equals(option))
@@ -5419,13 +5419,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool SelectTransportationOption(string option)
 		{
-			IWebElement selectionBox = this.containerElement.FindElement(By.XPath("(//select[@class='form-control'])[3]"), 2);
+			IWebElement selectionBox = this.containerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
 			selectionBox.Select(option);
 			return selectionBox.SelectedOption() == option;
 		}
 		public bool ClickArrow()
 		{
-			IWebElement element = this.ContainerElement.FindElement(By.XPath("//a[@title='Expand']"), 2);
+			IWebElement element = this.ContainerElement.FindElement(By.XPath(".//a[@title='Expand']"), 2);
 			return element.TryClick();
 		}
 		public bool SelectCaseUPCDropDownArrowForUPC(string savedAs, string expandOrCollapse)
