@@ -918,6 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
+			var newPaymentMethodSteps = new Steps_PaymentMethods();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
 			Report.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
@@ -985,7 +986,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Check if thank you screen contains correct statement
 			Report.StartStep("Check if thank you screen contains correct statement");
 			newPaymentMethodSteps.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment.");
-			
 
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
