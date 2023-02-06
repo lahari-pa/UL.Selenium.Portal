@@ -873,6 +873,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool UPCSectionFieldsAvailable(string field)
+		{
+			try
+			{
+				IWebElement Field = this.containerElement.FindElement(By.XPath(".//input[@placeholder='"+ field +"']"), 2);
+				if (Field == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public string GetValidOptionForUPCPackageType()
 		{
 			if (!this.UPCPackageTypeFieldExists())
