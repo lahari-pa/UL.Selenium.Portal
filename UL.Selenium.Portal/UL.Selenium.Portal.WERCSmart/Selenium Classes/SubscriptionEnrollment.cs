@@ -852,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Support_Services_Plan(string servicesPlan)
 		{
 			Report.Info("Beginning Select_Support_Services_Plan: " + servicesPlan);
-			SeleniumBrowser.ScrollToBottomOfPage();
+			SeleniumWebDriver.CurrentDriver.ScrollToBottomOfPage();
 			//GeneralUtilities.ScrollToBottomOfPage();
 			if (!this.Exists)
 			{
@@ -903,6 +903,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					Report.Success("General Support Services Plan Selected");
 					break;
+
+				case "No additional Agent Support Service":
+					SubscriptionEnrollment_new subEnrollment = new SubscriptionEnrollment_new();
+					if (!subEnrollment.EnrollmentPanelRadioClick("Select an Agent Support Service Plan [optional]", "No additional Agent Support Service"))
+					{
+						Report.Info("Failed to Select No additional Agent Support Service Plan");
+						Report.Screenshot();
+						return false;
+					}
+
+					Report.Success("No additional Agent Support Service Plan Selected");
+					break;
+
 				default:
 					Report.Error("Unable to Find Correct Support Services Plan");
 					return false;

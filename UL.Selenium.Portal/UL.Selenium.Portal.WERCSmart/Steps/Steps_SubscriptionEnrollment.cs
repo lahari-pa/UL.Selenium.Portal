@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Subscription Enrollment screen I select the following enrollment options")]
 		public void ThenISelectTheFollowingEnrollmentOptions(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I select enrollment options");
+			Report.StartStep(Report.Details.StepIndex + " - I select enrollment options");
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
