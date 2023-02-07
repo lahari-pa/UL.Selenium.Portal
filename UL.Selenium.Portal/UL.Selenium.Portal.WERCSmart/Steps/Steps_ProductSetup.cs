@@ -918,7 +918,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
-			var newPaymentMethodSteps = new Steps_PaymentMethods();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
 			Report.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
