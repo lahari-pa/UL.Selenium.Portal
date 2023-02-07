@@ -482,28 +482,28 @@ Given I Delete the directory and its contents with name: ExtractFolder from the 
 Scenario: [141036] Volatile Organic Compounds - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
+Given Under the Supplier Reports menu I choose: VOC-related Compounds
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
-Given I confirm that an zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
+Then I Delete the file with name: VOC related Compounds.zip from the downloads folder
+Then I Delete the file with name: VOC related Compounds.csv from the downloads folder
+Then I select the Request Report button zip file is produced called VOC related Compounds.zip and save as VOC-related Compounds
+Given I confirm that an zip file is produced called VOC related Compounds.zip and save as VOC-related Compounds
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
-Given I delete the excel file saved as Volatile Organic Compounds
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as VOC-related Compounds can be opened and contains data
+Given I delete the excel file saved as VOC-related Compounds
+Then I Delete the file with name: VOC related Compounds.zip from the downloads folder
+Then I Delete the file with name: VOC related Compounds.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: VOC-related Compounds
+Then I confirm the most recent file has the following information Report Name: VOC-related Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Volatile Organic Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
-And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: VOC-related Compounds File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an zip file is produced called VOC related Compounds.zip and save as VOC-related Compounds
+And I confirm the zip csv file saved as VOC-related Compounds can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Volatile Organic Compounds
-Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
-Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
+Given I delete the file saved as VOC-related Compounds
+Then I Delete the file with name: VOC related Compounds.zip from the downloads folder
+Then I Delete the file with name: VOC related Compounds.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:141041

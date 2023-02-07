@@ -3238,6 +3238,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I confirm that the transportation option: (.*) that was selected is still the same")]
+		public void ThenIConfirmThatThatTheTransportationOptionSelectedIsSame(string option)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.GetTransportationOption(option), "The transportation option " + option + " selected was not same", "The transportation option " + option + " selected was still same");
+			
+		}
+		[StepDefinition(@"I Change the Transportation option from the dropdown to: (.*)")]
+		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string option)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.SelectTransportationOption(option),
+				"Failed to select transportation option: " + option, "Successfully selected transportation option: " + option);
+		}
+		[StepDefinition(@"I click on the arrow next to the UPC data")]
+		public void ThenIClickArrow()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ClickArrow(), "Failed to click the arrow next to the UPC data", "Succesfully clicked the arrow next to the UPC data");
+		}
+
 		[StepDefinition(@"I select the case UPC dropdown arrow to (expand|collapse) the UPC saved as: (.*)")]
 		public void ThenISelectTheCaseUPCDropdownArrowForUPCSavedAsUPC(string expandOrCollapse, string savedAs)
 		{

@@ -118,8 +118,8 @@ Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127970
 Given I click continue
 Then I should see the Product Type Page
-Then I set 'Product Name' to: prescription pharmaceutical, solid
-Then I set 'Type of Product' to: prescription pharmaceutical, solid
+Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
+Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
 Then I click continue
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127970
@@ -143,19 +143,24 @@ Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
 Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
-When I click continue
-When I click continue
+#When I click continue
+#When I click continue
+Then in the Regulatory Documents to Provide page I click Continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-When I click continue
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-When I click continue
+Then I check for the following options in the Additonal Documents to Provide section
+| Option                       |
+| Safety Data Sheet (Optional) |
+Then in the Additional Documents to Provide page I click Continue
 #When I click continue
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127970
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-#And I navigate to the home page
+#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+#When I click continue
+#When I click continue
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127970
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+And I navigate to the home page
 
 
 
@@ -313,8 +318,8 @@ Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127791
 Given I click continue
 Then I should see the Product Type Page
-Then I set 'Product Name' to: prescription pharmaceutical, solid
-Then I set 'Type of Product' to: prescription pharmaceutical, solid
+Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
+Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
 Then I click continue
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127791
