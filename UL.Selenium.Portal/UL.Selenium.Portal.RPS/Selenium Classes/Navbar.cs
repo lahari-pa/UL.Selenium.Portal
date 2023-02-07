@@ -38,9 +38,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement DemoStatusLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Demo Status']"), 2);
 
-        private IWebElement ManualEntryLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Manual Entry']"), 2);
+        private IWebElement ManualEntryLink => this.containerElement.FindElement(By.XPath($"//div[@class='dropdown-menu show']//a[text()='Manual Entry']"), 2);
 
-        private IWebElement UploadAFileLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Upload a File']"), 2);
+        private IWebElement UploadAFileLink => this.containerElement.FindElement(By.XPath($"//div[@class='dropdown-menu show']//[text()='Upload a File']"), 2);
 
 
 
