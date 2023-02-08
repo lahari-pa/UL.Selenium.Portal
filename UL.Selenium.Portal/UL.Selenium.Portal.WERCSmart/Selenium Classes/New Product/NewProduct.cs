@@ -4272,8 +4272,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			//  2/6/23 S.A --> container element locator incorrect, fix at later date! 
+			//IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+
+			Report.Info("locating the remove link");
+
+
+			IWebElement remove = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+
+
+			Report.Info("attempting to click the remove button"); 
 			return remove.TryClick();
+
+		
 		}
 
 		public bool ExpandArrowforUPC(string upc)
@@ -5406,7 +5417,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
-
+		public bool GetTransportationOption(string option)
+		{
+			IWebElement transportationOption = this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: transportToString()']"));
+			string transportationValue = transportationOption.Text;
+			Report.Info("Transportation Option : "+transportationValue);
+			if (transportationValue.Equals(option))
+			{
+				return true;
+			}
+			return false;
+		}
+		public bool SelectTransportationOption(string option)
+		{
+			IWebElement selectionBox = this.containerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
+			selectionBox.Select(option);
+			return selectionBox.SelectedOption() == option;
+		}
+		public bool ClickArrow()
+		{
+			IWebElement element = this.ContainerElement.FindElement(By.XPath(".//a[@title='Expand']"), 2);
+			return element.TryClick();
+		}
 		public bool SelectCaseUPCDropDownArrowForUPC(string savedAs, string expandOrCollapse)
 		{
 			IWebElement optionEl;

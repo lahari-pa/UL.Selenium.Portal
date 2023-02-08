@@ -140,7 +140,8 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65459
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -155,9 +156,11 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I save the product information as: TestCase65451
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -169,7 +172,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then in the Ingredients page I click Continue
 	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
-
+	
 @TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -213,7 +216,8 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 
 @TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71291
@@ -223,7 +227,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 75.0    | false               | false       |            |
+		#| Wood dust     | 75.0    | false               | false       |            |
+		| Wood chips     | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
@@ -236,7 +241,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
@@ -255,7 +261,8 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 
 @TestCase:69796
 Scenario: [69796] Aerosol Warning Message on Ingredient page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
