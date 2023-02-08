@@ -69,7 +69,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
 
 			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
-
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -86,8 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -167,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
 			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
 			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.SetDataConsentTier("Tier 4.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 4.1", "on");
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
@@ -308,8 +306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -446,8 +443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -552,8 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -724,8 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -874,8 +868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -980,8 +973,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
@@ -1273,8 +1265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
 			myPkgType.SavePackagingTypeDetails("MyPkg1");
-			myPkgType.ClickAddRowBillOfMaterials();
-			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("Glass Packaging - Clear Glass - Non-Beverage", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
