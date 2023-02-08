@@ -221,8 +221,8 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	# Subscription Enrollment - Footer Checks
 
 	Then I confrim the Your Total footer exists and displays the text: Based on the above selected items, your estimated Subscription Plan total, excluding sales tax, is:
-	Then In the enrollment footer, I confirm the Estimated Annual Cost calculator displayes: $440.00
-	Then In the enrollment footer, I confirm the Estimated Annual Cost per Product calculator displayes: $440.00
+	Then In the enrollment footer, I confirm the Estimated Annual Cost calculator displayes: $454.00
+	Then In the enrollment footer, I confirm the Estimated Annual Cost per Product calculator displayes: $454.00
 	Then In the enrollment footer, I click the PROCEED button
 	Then In the Subscription Enrollment Modal, I click the Checkout button
 	Then In the Payment Methods screen I check the Payment Methods heading and sub headings are correct

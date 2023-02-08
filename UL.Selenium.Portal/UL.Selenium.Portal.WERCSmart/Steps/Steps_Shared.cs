@@ -2715,7 +2715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSecond.AddRow(
 			"Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
-			"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+		"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only see the following sections");
 
 			Report.StartSubStep("I only the following sections");
@@ -5316,12 +5316,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product list is showing", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"I call Shared Step 59728 \(Go to Manage Global Messages\)")]
+		[StepDefinition(@"I call Shared Step 59728 \(Go to Announcement Manager\)")]
 		public void GivenICallSharedStep59728GoToManageGlobalMessages()
 		{
 			var MyStepsSHA = new Steps_SHA();
 			Delay.Seconds(1);
-			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
+			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Announcement Manager");
 		}
 
 		[StepDefinition(

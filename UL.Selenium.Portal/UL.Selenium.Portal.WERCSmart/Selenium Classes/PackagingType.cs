@@ -75,8 +75,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
 			if (el.TagName == "select")
 			{
-				el.Select(option);
-				return el.SelectedOption() == option;
+				IWebElement optionToSelect = el.FindElement(By.XPath($".//option['{option}']"), 1);
+				if(Report.IsTrue(optionToSelect != null,$"Failure, option '{option}' does not exist.",$"Success, option '{option}' exists"))
+				{
+					el.Select(option);
+					return el.SelectedOption() == option;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			if (el.TagName == "input")
 			{

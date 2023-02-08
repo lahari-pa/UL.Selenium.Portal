@@ -365,28 +365,28 @@ Then I Delete the file with name: Subscription Renewal (Registrations Eligible f
 Scenario: [141023] Pesticide Registrations - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Pesticide Registrations
+Given Under the Supplier Reports menu I choose: Pesticide Report
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
-Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Pesticide Registrations.zip and save as Pesticide Registrations
-Given I confirm that an zip file is produced called Pesticide Registrations.zip and save as Pesticide Registrations
+Then I Delete the file with name: Pesticide Report.zip from the downloads folder
+Then I Delete the file with name: Pesticide Report.csv from the downloads folder
+Then I select the Request Report button zip file is produced called Pesticide Report.zip and save as Pesticide Report
+Given I confirm that an zip file is produced called Pesticide Report.zip and save as Pesticide Report
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Pesticide Registrations can be opened and contains data
-Given I delete the excel file saved as Pesticide Registrations
-Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
-Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as Pesticide Report can be opened and contains data
+Given I delete the excel file saved as Pesticide Report
+Then I Delete the file with name: Pesticide Report.zip from the downloads folder
+Then I Delete the file with name: Pesticide Report.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: Pesticide Report
+Then I confirm the most recent file has the following information Report Name: Pesticide Report File Type: CSV (Zip) Requested By: 0euotm7bf97k
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Pesticide Registrations File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Pesticide Registrations.zip and save as Pesticide Registrations
-And I confirm the zip csv file saved as Pesticide Registrations can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: Pesticide Report File Type: CSV (Zip) Requested By: 0euotm7bf97k
+Given I confirm that an zip file is produced called Pesticide Report.zip and save as Pesticide Report
+And I confirm the zip csv file saved as Pesticide Report can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Pesticide Registrations
-Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
-Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
+Given I delete the file saved as Pesticide Report
+Then I Delete the file with name: Pesticide Report.zip from the downloads folder
+Then I Delete the file with name: Pesticide Report.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
@@ -423,31 +423,31 @@ Then I Delete the file with name: Registrations Revised  Not Yet Submitted.csv f
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:141029
-Scenario: [141029] Subscription Product Types - CSV Zip File
+Scenario: [141029] Product Types Registered - CSV Zip File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Subscription Product Types
+Given Under the Supplier Reports menu I choose: Product Types Registered
 Then I select CSV from the Select File Type
 Given I select the Zip Report Checkbox
-Then I Delete the file with name: Subscription Product Types.zip from the downloads folder
-Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
-Then I select the Request Report button zip file is produced called Subscription Product Types.zip and save as Subscription Product Types
-Given I confirm that an zip file is produced called Subscription Product Types.zip and save as Subscription Product Types
+Then I Delete the file with name: Product Types Registered.zip from the downloads folder
+Then I Delete the file with name: Product Types Registered.csv from the downloads folder
+Then I select the Request Report button zip file is produced called Product Types Registered.zip and save as Product Types Registered
+Given I confirm that an zip file is produced called Product Types Registered.zip and save as Product Types Registered
 Given I click Close in the Report Download popup
-And I confirm the zip csv file saved as Subscription Product Types can be opened and contains data
-Given I delete the excel file saved as Subscription Product Types
-Then I Delete the file with name: Subscription Product Types.zip from the downloads folder
-Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
-Given Under the Supplier Reports menu I choose: Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the zip csv file saved as Product Types Registered can be opened and contains data
+Given I delete the excel file saved as Product Types Registered
+Then I Delete the file with name: Product Types Registered.zip from the downloads folder
+Then I Delete the file with name: Product Types Registered.csv from the downloads folder
+Given Under the Supplier Reports menu I choose: Product Types Registered
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report with Report Name: Subscription Product Types File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
-Given I confirm that an zip file is produced called Subscription Product Types.zip and save as Subscription Product Types
-And I confirm the zip csv file saved as Subscription Product Types can be opened and contains data
+Then I click the Download button for the most recent report with Report Name: Product Types Registered File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
+Given I confirm that an zip file is produced called Product Types Registered.zip and save as Product Types Registered
+And I confirm the zip csv file saved as Product Types Registered can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the file saved as Subscription Product Types
-Then I Delete the file with name: Subscription Product Types.zip from the downloads folder
-Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
+Given I delete the file saved as Product Types Registered
+Then I Delete the file with name: Product Types Registered.zip from the downloads folder
+Then I Delete the file with name: Product Types Registered.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @TestCase:141034
