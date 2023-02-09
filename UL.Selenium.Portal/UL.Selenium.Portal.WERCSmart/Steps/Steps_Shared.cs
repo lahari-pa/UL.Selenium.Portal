@@ -2714,7 +2714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableSecond.AddRow(
 			"Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
-			"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+		"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartStep("I only see the following sections");
 
 			Report.StartSubStep("I only the following sections");

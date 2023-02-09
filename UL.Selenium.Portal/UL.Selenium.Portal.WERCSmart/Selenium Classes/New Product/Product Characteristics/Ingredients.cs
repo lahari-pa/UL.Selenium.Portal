@@ -1456,7 +1456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckACheckboxWithTheFollowingText(string text)
 		{
-			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath($"//span[text()='{text}']/preceding-sibling::input"), 2);
 			return checkbox.TryCheck();
 		}
 
