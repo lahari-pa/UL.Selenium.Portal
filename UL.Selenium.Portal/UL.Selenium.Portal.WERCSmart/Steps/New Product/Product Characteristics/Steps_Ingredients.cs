@@ -367,6 +367,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Ingredients error message {(expected ? "was" : "was not")} showing as expected");
 		}
 
+		[StepDefinition(@"I (should|should not) see the ingredient obsolete error message: (.*)")] //change step def wording 
+		public void CheckForObsoleteIngredient(string condition , string message)
+		{
+			bool should = condition == "should not";
+
+			var ingredients = new Ingredients();
+			//ingredintes.DeleteIngredientsDisplayed  --> is present 
+			//ingredents. ClickDeleteIngredients  ---> click delete
+			//ingredients.GetAvailableIngredients()
+			string displayedMessage = ingredients.GetIngredientErrorMessage();
+			string ingredientName; 
+			
+			if (should)
+			{
+				if(Report.IsTrue(displayedMessage != null , "Error message not present on the page! (null value)"))
+				{
+					if (Report.IsTrue(displayedMessage.Contains(message), $"Obsolete Error Message is not showing on the page. Message Displayed: {displayedMessage} | Expected Message: {message} " , $"Obsolete Error Message: {message} , is displayed on the screen!"))
+					{
+						string[] splitMessage = displayedMessage.Split(':');
+						ingredientName = splitMessage[splitMessage.Length - 1].Trim();
+
+						if(Report.IsTrue(ingredients.GetAvailableIngredients().Contains(ingredientName), $"Expected ingredient name: {ingredientName} cannot be found in the list of available ingredients" , $"Ingredient:{ingredientName} was found in the available ingredients list"))
+						{
+							//change to select by specific element title and click delete 
+						}
+					}
+					
+				}
+			}
+		}
+
+
 		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
 		public void IngredientsErrorMessageShowingCorrectText(string text)
 		{

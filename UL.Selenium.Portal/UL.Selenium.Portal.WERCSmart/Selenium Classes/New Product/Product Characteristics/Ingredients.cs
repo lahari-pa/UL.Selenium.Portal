@@ -786,6 +786,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el?.Text;
 		}
 
+		public List<string> GetAvailableIngredients()
+		{
+			//locates all the available ingredient names including the cas number and chemical name 
+			//  .//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]  ---> locates the whole row 
+			List<IWebElement> Ingredients = this.ContainerElement.FindElements(By.XPath(".//table[@class='table table-hover']//tbody//tr//td[@class='component-name']")).ToList();
+
+			return Ingredients.Select(x => x.GetValue()).ToList();
+		}
+
+		public bool ClickRemove()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//td[@class='remove delete-row']//a[@class='close']"));
+
+			Report.Info("Attempting to click the remove!"); 
+
+			return el.TryClick(); 
+		}
 		/// <summary>
 		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
 		/// </summary>
@@ -2006,7 +2023,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
 			ingredients.Add("Citric acid");
-
+			ingredients.Add("Nitrogen"); 
 
 
 
@@ -2064,5 +2081,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return true;
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
+
 }

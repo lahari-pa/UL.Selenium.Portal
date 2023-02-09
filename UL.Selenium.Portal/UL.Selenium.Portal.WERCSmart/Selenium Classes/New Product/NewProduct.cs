@@ -1221,8 +1221,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				
 				if (info.ContainerType.ToLower() != "none")
 				{
-					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-					containsType.Select(info.ContainerType);
+					SelectElement containsType = new SelectElement(container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2));
+					//containsType.Select(info.ContainerType);
+					containsType.SelectByText(info.ContainerType);
+					
+
 				}
 				
 				string regex = @"(.*)\((.*)\)";
@@ -1235,6 +1238,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
 					return false;
 				}
+
+				Report.Info("entering the size");
+
 				sizeField.EnterText(info.Size);
 				if (info.Dpci.Length > 0)
 				{
