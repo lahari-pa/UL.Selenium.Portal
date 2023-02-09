@@ -791,3 +791,43 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I save the product information as: TestCase133610
 	Then I click the Home navigation icon
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
+
+# Created by Saikiran Chittampally
+	@TestCase:158853
+Scenario: [158853] Ingredient Identifier
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase158853
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
+	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I should see the Waste Classification Data Page
+	And I click the page heading: Ingredients
+	And I should see the Ingredients Page
+	Then In the Ingredient Reference Number field I enter the following text: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
+	Then I click continue
+	Then I should see an error message: This field has a maximum length of 100 characters
+	Then In the Ingredient Reference Number field I enter the following text: test 123 !@#
+	Then I click continue
+	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+	Then I click continue
+	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
+	Then I click continue
+	And I should see the Waste Classification Data Page
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
+	Given I close the browser tab with the Summary page
+	Given I click the Home navigation icon
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158853
