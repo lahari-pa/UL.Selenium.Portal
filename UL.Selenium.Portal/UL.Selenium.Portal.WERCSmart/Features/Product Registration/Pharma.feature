@@ -39,7 +39,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	Then I should not see the ingredient obsolete error message: The following formula items are not valid (Obsolete): 
+	Then I should not see the ingredient obsolete error message: The following formula items are not valid (Obsolete)
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
