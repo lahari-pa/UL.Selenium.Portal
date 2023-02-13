@@ -14075,5 +14075,86 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
+		[StepDefinition(@"I call Shared Step 208116 Product Information - FIFRA 25\(b\) Product Not a Pesticide, US \(SOLD\), NO \(OSHA\), NO \(DSV\), YES \(CA RTK\), NO \(PL\), NO \(GNFR\)")]
+		public void GivenICallSharedStepProductInformation_FIFRA25b_NoPesticideUSSOLD_NOOSHA_NODSV_YESCARTK_NOPL_NOGNFR()
+		{
+			Report.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+			Report.StartSubStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"Yes");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor")]
+		public void InTheCACleaningProductDisclosureScreenChooseHappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			
+
+			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
+			Delay.Seconds(1);
+
+			if (myNewProduct.SectionExists("Who is publicly identified on the product label as responsible for the product?"))
+			{
+				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Final Domestic Distributor");
+			}
+
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product?"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("NONE");
+			}
+
+			if (myNewProduct.SectionExists("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?", "No");
+			}
+
+			if (myNewProduct.SectionExists("Company's Toll-Free Phone Number"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField("11111111111");
+			}
+
+			if (myNewProduct.SectionExists("Company Web Address"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField("http://TestWebsitePlaceholderName.com");
+			}
+
+			if (myNewProduct.SectionExists("Select the product's GTIN Brick Code"))
+			{
+				MyStepsNewProduct.ThenISetTheProductsGTINBrickCodeTo("[10000397] Cleaning Aids");
+			}
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
 	}
 }

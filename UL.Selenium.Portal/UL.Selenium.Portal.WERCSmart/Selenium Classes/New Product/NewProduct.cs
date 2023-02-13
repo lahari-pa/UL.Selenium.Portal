@@ -877,15 +877,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Field = this.containerElement.FindElement(By.XPath(".//input[@placeholder='"+ field +"']"), 2);
-				if (Field == null)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='"+ field +"']"), 2);
+				return Field != null;
 			}
 			catch (Exception)
 			{
@@ -5431,15 +5424,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement transportationOption = this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: transportToString()']"));
 			string transportationValue = transportationOption.Text;
 			Report.Info("Transportation Option : "+transportationValue);
-			if (transportationValue.Equals(option))
-			{
-				return true;
-			}
-			return false;
+			return transportationValue.Equals(option);
 		}
 		public bool SelectTransportationOption(string option)
 		{
-			IWebElement selectionBox = this.containerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
+			IWebElement selectionBox = this.ContainerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
 			selectionBox.Select(option);
 			return selectionBox.SelectedOption() == option;
 		}
