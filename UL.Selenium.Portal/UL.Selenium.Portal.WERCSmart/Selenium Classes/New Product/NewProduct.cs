@@ -4285,8 +4285,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			//  2/6/23 S.A --> container element locator incorrect, fix at later date! 
+			//IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+
+			Report.Info("locating the remove link");
+
+
+			IWebElement remove = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+
+
+			Report.Info("attempting to click the remove button"); 
 			return remove.TryClick();
+
+		
 		}
 
 		public bool ExpandArrowforUPC(string upc)

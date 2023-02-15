@@ -1254,7 +1254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				ReadOnlyCollection<IWebElement> ListOfTopMenuOptions =
-					SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//ul[@id='ddsubmenu1']/li/a"));
+					SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//ul[@id='ddsubmenu1']/li/a"));
 				IWebElement menuOption =
 					ListOfTopMenuOptions.FirstOrDefault(x => x.GetValue(true).ToLower() == option.ToLower());
 				Report.Info("Found options: " +

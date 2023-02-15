@@ -38,9 +38,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement DemoStatusLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Demo Status']"), 2);
 
-        private IWebElement ManualEntryLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Manual Entry']"), 2);
+        private IWebElement ManualEntryLink => this.containerElement.FindElement(By.XPath($"//div[@class='dropdown-menu show']//a[text()='Manual Entry']"), 2);
 
-        private IWebElement UploadAFileLink => this.containerElement.FindElement(By.XPath($"//ul[@class='dropdown-menu']//li//a[text()='Upload a File']"), 2);
+        private IWebElement UploadAFileLink => this.containerElement.FindElement(By.XPath($"//div[@class='dropdown-menu show']//[text()='Upload a File']"), 2);
 
 
 
@@ -135,9 +135,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public List<string> LinkSubTitles(string mainTitle)
         {
-            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='dropdown-toggle']"), 4).ToList();
+            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='nav-link dropdown-toggle']"), 4).ToList();
             IWebElement wantedEl = dropDownEls.First(x => x.Text == mainTitle);
-            List<IWebElement> subTitleEls = wantedEl.FindElements(By.XPath($".//following-sibling::ul//li"), 4).ToList();
+            List<IWebElement> subTitleEls = wantedEl.FindElements(By.XPath($".//following-sibling::div//a"), 4).ToList();
             List<string> subTitlesStr = subTitleEls.Select(x => x.Text).ToList();
             return subTitlesStr;
 
@@ -145,7 +145,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool LinkDropDownOpen(string mainTitle)
         {
-            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='dropdown-toggle']"), 4).ToList();
+            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='nav-link dropdown-toggle']"), 4).ToList();
             IWebElement wantedEl = dropDownEls.First(x => x.Text == mainTitle);
             string attr = wantedEl.GetAttribute("aria-expanded");
             return attr == "true";
@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool LinkDropDownClosed(string mainTitle)
         {
-            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='dropdown-toggle']"), 4).ToList();
+            List<IWebElement> dropDownEls = this.containerElement.FindElements(By.XPath(".//a[@class='nav-link dropdown-toggle']"), 4).ToList();
             IWebElement wantedEl = dropDownEls.First(x => x.Text == mainTitle);
             string attr = wantedEl.GetAttribute("aria-expanded");
             return attr == "false";
