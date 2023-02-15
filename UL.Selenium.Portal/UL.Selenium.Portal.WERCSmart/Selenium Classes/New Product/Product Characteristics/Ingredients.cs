@@ -2069,14 +2069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + field + "')]"), 2);
-				if (Field == null)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				return Field != null;
 			}
 			catch (Exception)
 			{
@@ -2087,16 +2080,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);
-				if (Value.Displayed)
-				{
-					Report.Info(Value.Text);
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);	
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, '{Value.Text}' displayed.");
 			}
 			catch (Exception)
 			{
