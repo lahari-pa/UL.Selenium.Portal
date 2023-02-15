@@ -2069,14 +2069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + field + "')]"), 2);
-				if (Field == null)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				return Field != null;
 			}
 			catch (Exception)
 			{
