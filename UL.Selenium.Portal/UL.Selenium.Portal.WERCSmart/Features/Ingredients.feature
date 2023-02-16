@@ -227,8 +227,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		#| Wood dust     | 75.0    | false               | false       |            |
-		| Wood chips     | 75.0    | false               | false       |            |
+		| Wood dust     | 75.0    | false               | false       |            |
+		| Wood chips    | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
@@ -379,6 +379,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase84528
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	#And I Start typing in the component box
