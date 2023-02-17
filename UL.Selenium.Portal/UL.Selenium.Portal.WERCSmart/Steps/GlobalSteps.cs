@@ -2760,7 +2760,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.StartSubStep($"Then Under 'User Name' I double click the username stored in '{user}'");
 							SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
 
-							//TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);  --> (Shianne A. 2/15/2023) line is outdated see bellow for revised version 
 							SoftwareCredentialBasic trevuser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(user);
 
 
