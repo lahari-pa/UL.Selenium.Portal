@@ -364,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
-			IWebElement ingredientsTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]//table[1]"), 60);
+			IWebElement ingredientsTable = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]//table[1]"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
