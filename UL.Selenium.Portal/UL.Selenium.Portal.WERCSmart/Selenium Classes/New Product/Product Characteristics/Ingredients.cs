@@ -2064,5 +2064,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return true;
 		}
+		public bool IngredientsFieldAvailable(string field)
+		{
+			try
+			{
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + field + "')]"), 2);
+				return Field != null;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool FieldAvailableInSummaryPage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);	
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, '{Value.Text}' displayed.");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 	}
 }

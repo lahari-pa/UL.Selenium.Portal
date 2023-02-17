@@ -227,8 +227,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		#| Wood dust     | 75.0    | false               | false       |            |
-		| Wood chips     | 75.0    | false               | false       |            |
+		| Wood dust     | 75.0    | false               | false       |            |
+		| Wood chips    | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
@@ -379,6 +379,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase84528
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	#And I Start typing in the component box
@@ -676,7 +677,11 @@ Given I should see the Product Information Page
 	Given in the New Product page I click Continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The registration ingredient contains information that typically is included in a product that is considered a pesticide under U.S. E.P.A. guidelines or Canada Pest guidelines. The product type you've selected for this registration is not within the scope of pesticide registrations and the ingredient(s) which are typically used in Pesticide or Herbicide registrations is/are:
+<<<<<<< HEAD
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+=======
+	#Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+>>>>>>> origin/QA
 	Then I confirm the table in the popup view has the following column titles
 	| Titles          |
 	| CAS Number      |
@@ -684,7 +689,12 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
+<<<<<<< HEAD
 	| 106-97-8   | Butane                 | Inert           |
+=======
+	#| 106-97-8   | Water                  | Active          |
+	| 106-97-8   | Butane                 | Inert          |
+>>>>>>> origin/QA
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
@@ -697,6 +707,7 @@ Given I should see the Product Information Page
 	And I should see the Ingredients Page
 	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
 	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
     Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	## Regulatory 1 Page Details
@@ -789,3 +800,43 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I save the product information as: TestCase133610
 	Then I click the Home navigation icon
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
+
+# Created by Saikiran Chittampally
+	@TestCase:158853
+Scenario: [158853] Ingredient Identifier
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase158853
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
+	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I should see the Waste Classification Data Page
+	And I click the page heading: Ingredients
+	And I should see the Ingredients Page
+	Then In the Ingredient Reference Number field I enter the following text: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
+	Then I click continue
+	Then I should see an error message: This field has a maximum length of 100 characters
+	Then In the Ingredient Reference Number field I enter the following text: test 123 !@#
+	Then I click continue
+	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+	Then I click continue
+	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
+	Then I click continue
+	And I should see the Waste Classification Data Page
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
+	Given I close the browser tab with the Summary page
+	Given I click the Home navigation icon
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158853
