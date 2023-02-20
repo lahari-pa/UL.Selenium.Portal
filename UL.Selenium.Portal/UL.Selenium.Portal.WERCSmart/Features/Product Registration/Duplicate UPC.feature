@@ -72,10 +72,9 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
+	Given I confirm I check the checkbox in the popup view with the following text: Ok
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -160,7 +159,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	#And I In the UPC document add some duplicate UPCs, save the document
 	#And I Click on the Upload File button
 	#And I Search for the document that contains the UPCs you will upload, click Open button
-	#And I Confirm that the Add Multiple window openswith the UPCs that were added in the document
+	#And I Confirm that the Add Multiple window openswith the UPCs that were added in the docment
 	#And I Confirm that the size is also the same as from what is in the UPC document
 	#And I Select the checkbox that next to the UPC tilte
 	#And I From the Packaging type dropdown select one of the options
