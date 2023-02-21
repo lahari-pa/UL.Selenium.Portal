@@ -1437,6 +1437,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool ClickOkInThePopupWithTheFollowingText(string text)
+		{
+			IWebElement okButton = this.ContainerElement.FindElement(By.XPath($"//div[@data-bind='html:okMessageText']/../../..//div[@class='modal-footer']//button[text()='Ok']"), 2);
+			return okButton.TryClick();
+		}
+
 		public bool CheckACheckboxWithTheFollowingText(string text)
 		{
 			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath($"//span[text()='{text}']/preceding-sibling::input"), 2);
