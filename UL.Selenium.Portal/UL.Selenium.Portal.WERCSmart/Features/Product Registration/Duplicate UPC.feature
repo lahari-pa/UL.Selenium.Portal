@@ -159,7 +159,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	#And I In the UPC document add some duplicate UPCs, save the document
 	#And I Click on the Upload File button
 	#And I Search for the document that contains the UPCs you will upload, click Open button
-	#And I Confirm that the Add Multiple window openswith the UPCs that were added in the docment
+	#And I Confirm that the Add Multiple window openswith the UPCs that were added in the document
 	#And I Confirm that the size is also the same as from what is in the UPC document
 	#And I Select the checkbox that next to the UPC tilte
 	#And I From the Packaging type dropdown select one of the options
