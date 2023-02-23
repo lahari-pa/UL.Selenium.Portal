@@ -4129,7 +4129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 
-			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 			//new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
