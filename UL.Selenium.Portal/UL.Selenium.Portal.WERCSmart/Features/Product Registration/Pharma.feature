@@ -39,7 +39,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	Then I should not see the ingredient obsolete error message: The following formula items are not valid (Obsolete)
+	#Then I should not see the ingredient obsolete error message
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
@@ -53,7 +53,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Then I click continue
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can - Plastic and size: 12
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can – Plastic and size: 12
 	When I click continue
 	When I click continue
 	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label

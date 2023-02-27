@@ -415,14 +415,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
-			Report.StartSubStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			//Report.StartSubStep("In the Ingredients page I click Continue");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should see the ingredients error message");
 			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
 			Report.StartSubStep("I add the following ingredients:");
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartSubStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartSubStep("I should not see the ingredient obsolete error message");
+			stepsNewProductIngredients.CheckForObsoleteIngredient();
+
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+
 
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
@@ -441,7 +447,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
 			}
-
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
@@ -502,6 +507,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 			}
+
+
 		}
 
 		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
