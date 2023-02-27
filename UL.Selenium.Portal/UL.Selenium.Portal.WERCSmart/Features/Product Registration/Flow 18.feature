@@ -75,3 +75,28 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
 
+
+# Created by Saikiran Chittampally
+@TestCase:208099
+Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
+	Then I save the product information as: TestCase208099
+	Given I call Shared Step 208116 Product Information - FIFRA 25(b) Product Not a Pesticide, US (SOLD), NO (OSHA), NO (DSV), YES (CA RTK), NO (PL), NO (GNFR)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
+	Given I add the following CA Cleaning ingredients:  
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | true               | false       | AQUA           | Fragrance      |  |   |       |
+	Then I click continue
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then I see the following questions
+		| Section                                                                                                                                        |
+		| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
+	Then The following options should be displayed for section: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		| Option |
+		| Yes    |
+		| No     |
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099

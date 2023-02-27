@@ -229,38 +229,41 @@ Scenario: [128018] Pharma - Forwarding Not Allowed
 
 @TestCase:127847
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC127847
-	Given I click continue
-	Then I should see the Product Type Page
-	Then I set 'Product Name' to: prescription pharmaceutical, solid
-	Then I set 'Type of Product' to: prescription pharmaceutical, solid
-	Then I click continue
-	Given I enter the NDC number: 10866-0885-2
-	Then I save the product information as: TestCase127847
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	And I set the Secondary Physical State to be: Solid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-	Then I click continue
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
-	When I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+Given I log in with the account saved in TReVor as: ProductAccount
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC127847
+Given I click continue
+Then I should see the Product Type Page
+Then I set 'Product Name' to: prescription pharmaceutical, solid
+Then I set 'Type of Product' to: prescription pharmaceutical, solid
+Then I click continue
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase127847
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Dispersible
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
+Then I click continue
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Given I click the 'Add' button
+Then I Confirm that the Tablet or Capsule Count field is available
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container and size: 1
+#Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+When I click continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 
 
 

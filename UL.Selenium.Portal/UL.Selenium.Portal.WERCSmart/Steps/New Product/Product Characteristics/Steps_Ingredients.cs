@@ -1164,6 +1164,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(refValue), "failed to enter ingredient reference number", "Successfully entered ingredient reference number");
 		}
 
+		[StepDefinition(@"In the Ingredients screen, I ensure that there is a field called: (.*)")]
+		public void FieldInTheIngredientScreen(string field)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+	
+			Report.IsTrue(ingredientsObject.IngredientsFieldAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
+		}
+
+		[StepDefinition(@"In the Data Summary page, I ensure that the value (.*) shown under the field Ingredient Reference Number \(Optional\) displays as it was keyed on the Ingredients page")]
+		public void FieldInTheSummaryPage(string value)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.FieldAvailableInSummaryPage(value), "Failed to ensure that the  value '" + value + "' shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page", "I ensure that the value '" + value + "'shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page");
+		}
+
 		[StepDefinition(@"I (should|should not) see the DOT exceptions error message")]
 		public void DOTExceptionsErrorMessageShowing(string should)
 		{
