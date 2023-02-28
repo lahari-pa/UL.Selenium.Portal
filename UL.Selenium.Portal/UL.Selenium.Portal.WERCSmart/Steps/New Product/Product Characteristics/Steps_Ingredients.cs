@@ -409,8 +409,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 							if(Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes" , "Successfully clicked yes"))
 							{
-							Delay.Seconds(10);
 
+							Delay.Seconds(10);
 							Report.StartSubStep("In the Ingredients page I click Continue");
 							NP.GivenInTheNewProductPageIClickContinue("Ingredients");
 

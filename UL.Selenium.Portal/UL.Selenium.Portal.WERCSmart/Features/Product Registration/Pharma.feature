@@ -53,7 +53,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Then I click continue
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can – Plastic and size: 12
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can - Metal and size: 12
 	When I click continue
 	When I click continue
 	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
