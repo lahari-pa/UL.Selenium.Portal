@@ -742,8 +742,9 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I confirm the table in the popup view has following column data
 		| CAS Number | Name                   | Active or Inert |
 		| 66071-96-3 | Glutens, corn          | Active          |
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-	And I should see the Ingredients Page
+	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	And I should see the Waste Classification Data Page
 	When In the New Product page I click tab: Product Type
 	And I click the page heading: The Product
 	And I should see the The Product Page
@@ -752,6 +753,9 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I save the product information as: TestCase133610
 	Then I click continue
 	And I should see the Product Information Page
+	And I do not see the following sections
+		| Section                                                              |
+		| Which best describes your product, including when FIFRA 25(b) Exempt |
 	And I see the following sections
 		| Section                                                                                                                                                                                          |
 		| Select countries the product may be sold in                                                                                                                                                      |
