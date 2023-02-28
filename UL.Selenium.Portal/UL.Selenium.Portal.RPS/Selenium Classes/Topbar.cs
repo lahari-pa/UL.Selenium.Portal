@@ -10,7 +10,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     class TopBar : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//nav[contains(concat(' ',normalize-space(@class),' '),' bar-top ')]");
+        protected override By ContainerElementLocator => By.XPath("//div[contains(concat(' ',normalize-space(@class),' '),' bar-top ')]");
 
         private IWebElement RightToolBar => FindElement(By.XPath(".//ul[@class='nav navbar-nav ml-auto']"), 1);
 
