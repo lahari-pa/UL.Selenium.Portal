@@ -423,11 +423,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should not see the ingredient obsolete error message");
 			stepsNewProductIngredients.CheckForObsoleteIngredient();
-
+/*
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-
+			*/
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -489,7 +489,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.Failure("Popup not found");
 						Report.Screenshot();
-						return;
+						Report.StartStep("In the Ingredients page I click Continue");
+						MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+						//return; 
 					}
 				}
 				else
@@ -1139,6 +1141,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Size = size,
 					UpcNumber = upc_,
 				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 			}

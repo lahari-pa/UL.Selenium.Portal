@@ -1228,14 +1228,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					Report.Failure("The UPC Name field was not present");
 				}
-				
-				
 
+
+				Delay.Seconds(5); 
 				
 				if (info.ContainerType.ToLower() != "none")
 				{
 					SelectElement containsType = new SelectElement(container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2));
 					//containsType.Select(info.ContainerType);
+					 
 					containsType.SelectByText(info.ContainerType);
 					
 

@@ -11,6 +11,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
+using System.Windows.Forms;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -382,8 +383,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			ingredients.WaitForContainerToBeVisible(); 
 						
-				if(Report.IsTrue(displayedMessage != null , "Error message not present on the page!" , "An error message is displayed!"))
+				if(displayedMessage != null)
 				{
+				Report.Screenshot(); 
+				    Report.Info("An error message is displayed!");
 					Report.Info("Checking if the error message present contains an obsolete ingredient");
 
 					if (displayedMessage.Contains(obsoleteMessage))
@@ -404,7 +407,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 							new GlobalSteps().WaitForAModalDialogToOpen();
 
-							Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes" , "Successfully clicked yes");
+							if(Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes" , "Successfully clicked yes"))
+							{
+							Delay.Seconds(10);
+
+							Report.StartSubStep("In the Ingredients page I click Continue");
+							NP.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+							}
+
 						}
 					}
 					else
@@ -414,7 +425,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.Success($"Cannot find the Obsolete Error Message! Message Displayed: {displayedMessage} | Expected Message: {obsoleteMessage} ");
 
 					}
-				}	
+			}
+			else
+			{
+				Report.Screenshot();
+				Report.Success("Error message not present on the page!"); 
+			}
+			
 			
 
 		}
