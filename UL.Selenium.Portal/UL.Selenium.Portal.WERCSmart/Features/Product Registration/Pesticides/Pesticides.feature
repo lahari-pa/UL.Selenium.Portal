@@ -427,7 +427,6 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
-	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
