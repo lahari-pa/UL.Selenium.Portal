@@ -10,8 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.Reporting.Classes;
-using System.Windows.Forms;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
