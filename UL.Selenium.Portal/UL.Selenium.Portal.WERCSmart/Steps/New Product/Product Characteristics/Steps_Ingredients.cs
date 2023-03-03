@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			IEnumerable<Ingredients.Ingredient> Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
 			foreach (Ingredients.Ingredient item in Ingredients)
 			{
-				Report.IsTrue(newProductIngredients.AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+				Report.IsTrue(newProductIngredients.AddIngredient(item), $"Failed to add ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}!", $"Successfully added ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}");
 			}
 		}
 
