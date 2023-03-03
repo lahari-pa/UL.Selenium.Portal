@@ -1026,11 +1026,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
-		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to click the ok button with the following text: " + text, "Successfully clicked the ok button with the following text: " + text);
+			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
+		}
+
+		[StepDefinition(@"I click the Ok button in the popup view with the following text: (.*)")]
+		public void ThenIConfirmIClicktheOkButtonInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
-
 
 		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
@@ -1109,6 +1115,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.Info($"Entering: {refValue} into the Ingredient Reference Number field");
 			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(refValue), "failed to enter ingredient reference number", "Successfully entered ingredient reference number");
+		}
+
+		[StepDefinition(@"In the Ingredients screen, I ensure that there is a field called: (.*)")]
+		public void FieldInTheIngredientScreen(string field)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+	
+			Report.IsTrue(ingredientsObject.IngredientsFieldAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
+		}
+
+		[StepDefinition(@"In the Data Summary page, I ensure that the value (.*) shown under the field Ingredient Reference Number \(Optional\) displays as it was keyed on the Ingredients page")]
+		public void FieldInTheSummaryPage(string value)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.FieldAvailableInSummaryPage(value), "Failed to ensure that the  value '" + value + "' shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page", "I ensure that the value '" + value + "'shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page");
 		}
 
 		[StepDefinition(@"I (should|should not) see the DOT exceptions error message")]

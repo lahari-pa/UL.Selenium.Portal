@@ -2760,7 +2760,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.StartSubStep($"Then Under 'User Name' I double click the username stored in '{user}'");
 							SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
 
-							TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(user);
+							SoftwareCredentialBasic trevuser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(user);
+
+
 							bool credentialsFound = trevuser != null;
 
 							if (credentialsFound)
@@ -2863,8 +2865,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.IsTrue(SM_AU.EnterLastName(last), "Failed to enter the last name.", "successfully entered the last name.");
 
 									//15 char limit on user name
-									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{trevuser.Username}'");
-									Report.IsTrue(SM_AU.EnterUserName(trevuser.Username), "Failed to enter the username.", "successfully entered the username.");
+									Report.StartSubStep($"Then in the 'Add' window, I enter the Username '{trevuser.UserName}'");
+									Report.IsTrue(SM_AU.EnterUserName(trevuser.UserName), "Failed to enter the username.", "successfully entered the username.");
 
 									Report.StartSubStep($"Then in the 'Add' window, I enter the Email Address '{EmailAdd}'");
 									Report.IsTrue(SM_AU.EnterEmail(EmailAdd), "Failed to enter the email address.", "Successfully entered the email address.");

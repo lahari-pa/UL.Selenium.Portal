@@ -257,7 +257,10 @@ Given I set the Is the product regulated for transport (before exceptions or exe
 Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+Given I click the 'Add' button
+Then I Confirm that the Tablet or Capsule Count field is available
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container and size: 1
+#Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 

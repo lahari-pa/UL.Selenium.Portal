@@ -1829,6 +1829,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
 		}
 
+		[StepDefinition(@"I Confirm that the (.*) field is available")]
+		public void ConfirmUPCSectionFieldsAvailable(string field)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(field), "Failed to Confirm the'" +field+"' field is available", "I Confirm the '" + field + "' field is available");
+		}
+
 		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
 		public void ConfirmQuantityIsVisibleInUPCHeader()
 		{
