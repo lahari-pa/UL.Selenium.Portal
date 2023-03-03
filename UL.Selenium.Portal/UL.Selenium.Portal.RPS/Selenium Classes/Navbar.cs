@@ -54,7 +54,6 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             switch (tabName.ToLower())
             {
                 case "home":
-                    Report.Info("testinga2.2");
                     thisClass = HomeLink.ClassAttribute();
                     break;
                 case "dashboard":
@@ -82,9 +81,6 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     Report.Error("tabName parameter did not match any expected case");
                     return false;
             }
-            Report.Info("testinga2.1");
-
-           Report.Info("testinga2 " + thisClass);
             return !thisClass.IsNullOrEmpty() && thisClass.Contains("active");
         }
 
@@ -105,7 +101,6 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 case "product lookup":
                     return ProductLookupsLink.TryClick();
                 case "help & support":
-                    Report.Info("testinga1");
                     return HelpAndSupportLink.TryClick();
                 case "drum log":
                     return DrumLogLink.TryClick();
