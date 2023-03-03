@@ -2408,6 +2408,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info($"In the purchase summary screem I go to click 'Confirm order'...");
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			//TODO: Add steps to renew subscription
+
 		}
 
 		[StepDefinition(@"the 'Regulatory List' window opens")]
