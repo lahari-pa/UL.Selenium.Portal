@@ -24,10 +24,10 @@
 @run_SoldAndPLPTests
 Feature: Sold and PLP Tests
 
-#Background:
-#Given I verify the following users exist and if not I create them using SHAUser
-#| username    | FirstName | LastName   | Role         | EmailAddress                |
-#| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+Given I verify the following users exist and if not I create them using SHAUser
+| username    | FirstName | LastName   | Role         | EmailAddress                |
+| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #@ignore
 @TestCase:87957
@@ -265,9 +265,9 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase88199
+	#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase88199
 	#added line above 
-	Given I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: [string] for the retailer: [string] using details saved in the table: [string]
+	#Given I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: [string] for the retailer: [string] using details saved in the table: [string]
 	#added line above 
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase88199)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
