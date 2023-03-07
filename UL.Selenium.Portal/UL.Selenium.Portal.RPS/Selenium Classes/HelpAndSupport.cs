@@ -501,11 +501,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 return false;
 
             }
-<<<<<<< HEAD
+
             List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath(".//following-sibling::select[@class='dropdown select2-offscreen']//option"), 2).ToList();
-=======
-            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath("//select[@class='dropdown` select2-offscreen']//option"), 2).ToList();
->>>>>>> origin/QA
+
             if (proityFoundOptions.IsNullOrEmpty())
             {
                 Report.Info("The Priority Field dropdown element was not null or empty123");
