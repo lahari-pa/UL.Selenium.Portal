@@ -36,19 +36,15 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Then I click continue
 	Then I click continue
 	Given I fill all empty fields in the Pharma Ingredients screen
-#	Given I add the following ingredients:
+	#	Given I add the following ingredients:
 	#	| ComponentName | Percent |
 	#	| Nitrogen      | 100     |
 
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Nitrogen       | 100     | false               | false       |            |
-#	And I click continue
 	#Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	#| Propane       | 100     | false               | false       |            |
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
