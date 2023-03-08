@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			IEnumerable<Ingredients.Ingredient> Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
 			foreach (Ingredients.Ingredient item in Ingredients)
 			{
-				Report.IsTrue(newProductIngredients.AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+				Report.IsTrue(newProductIngredients.AddIngredient(item), $"Failed to add ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}!", $"Successfully added ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}");
 			}
 		}
 
@@ -1095,11 +1095,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
-		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to click the ok button with the following text: " + text, "Successfully clicked the ok button with the following text: " + text);
+			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
+		}
+
+		[StepDefinition(@"I click the Ok button in the popup view with the following text: (.*)")]
+		public void ThenIConfirmIClicktheOkButtonInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
-
 
 		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)

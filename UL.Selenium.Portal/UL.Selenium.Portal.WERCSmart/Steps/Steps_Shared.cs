@@ -102,7 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			WercSmartSettings.TestCaseId = 101;
+			//WercSmartSettings.TestCaseId = 101;
 			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("ERROR: Failed to find TestCaseId!");
@@ -478,7 +478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"The fifra tag was set a true, popup is expected");
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Delay.Seconds(10);
 						Report.Screenshot();
@@ -628,7 +628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"The fifra tag was set a true, popup is expected");
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Delay.Seconds(10);
 						Report.Screenshot();
@@ -2782,7 +2782,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Report.StartSubStep("I should see the Waste Classification Data Page");
 						MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
@@ -4979,40 +4979,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 57932a \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_YesToProp1()
 		{
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			var selNewProduct = new NewProduct();
-			Report.StartStep("I should see the Waste Classification Data Page");
+			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
-			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			stepsRegulatoryInformation.SetTSCATo("Compliant");
-			Report.StartStep("Prop 65 warning is required: Yes");
+			Report.StartSubStep("Prop 65 warning is required: Yes");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
-			Report.StartStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			Report.StartSubStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
 			MyStepsNewProduct.SetTheSectionOptionTo("Is the need to warn triggered by",
 				"A chemical or chemicals in the product, or chemicals formed during the use of the product.");
-			Report.StartStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
+			Report.StartSubStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
 			MyStepsNewProduct.SetTheSectionOptionTo("How is the exposure warning transmitted?",
 				"By affixing it to the product or its packaging");
-			Report.StartStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Prior to August 30, 2018");
+			Report.StartSubStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Prior to August 30, 2018");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured",
 				"Prior to August 30, 2018");
-			Report.StartStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: Does not apply ");
+			Report.StartSubStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: Does not apply ");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor short-form warning, indicate which of the following is provided:",
 				"Does not apply");
-			Report.StartStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: Does not apply");
+			Report.StartSubStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: Does not apply");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
-
-			Report.StartStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
+			
+			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
 				"NA");
-			Report.StartStep("In the Waste Classification Data page I click Continue");
+			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
 
@@ -5546,12 +5546,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
 		public void
-			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
-				TechTalk.SpecFlow.Table retailers)
+			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(Table retailers)
 		{
 			Report.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (TableRow thisRetailer in retailers.Rows)
 			{
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -8025,10 +8024,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Click the filter icon
 			thisStepsStudio.InProductAttributePageIClickOnFilterIcon();
 			//Enter CNTXT in code
+			var paf = new ProductAttributesFilter();
 			thisStepsStudio.InProductAttributeFilterPopupISelectFromSelectBox("...Contains...", "Code");
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
 		}
 
 		[StepDefinition(
