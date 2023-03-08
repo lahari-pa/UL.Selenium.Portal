@@ -829,6 +829,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Subscription Issue screen I confirm the following statement is shown: (.*)")]
+		public void ThenInTheSubscriptionIssueScreenIConfirmTheFollowingStatementIsShownX(string si_text)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - In the Subscription Issue screen I check the Confirmation statement is correct");
+			try
+			{
+				var myPay = new PaymentMethods_Thank_You();
+
+				Report.Info("Subscription Issue Text = " + si_text);
+
+				Report.IsTrue(myPay.Subscription_Issue_TextExists(si_text), $"Displayed Text does not contain: '{si_text}'",
+					$"Displayed Text contains: '{si_text}'");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"In the Thank You screen I click Home")]
 		public void ThenInTheThankYouScreenIClickHome()
 		{
