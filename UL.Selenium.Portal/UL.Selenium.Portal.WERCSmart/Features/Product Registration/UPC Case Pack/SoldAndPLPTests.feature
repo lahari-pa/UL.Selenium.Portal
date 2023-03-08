@@ -210,13 +210,13 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
-	Given I call Shared Step 87647A (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88198, container type: Paper bag, size: 2 and package type: test do not click continue
+	Given I call Shared Step 87647A (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88198, container type: Paper bag, size: 2 and package type: myPkg do not click continue
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881981, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Submitted

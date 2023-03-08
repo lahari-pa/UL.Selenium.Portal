@@ -6,6 +6,7 @@
 @wercsmart
 @NewProduct
 @ProductGrid
+@PaymentMethods
 @DataSummarySheet
 @wercsmart
 @RetailPartners
@@ -21,7 +22,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto4  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-@ignore
+#@ignore
 @TestCase:86114
 Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -45,7 +46,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise. 
 	#Scenario: Test
 	#Given I save to context name: TestCase86114 and value: 1559223
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
@@ -69,7 +70,7 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86114 and its status is: Completed
 
 
-@ignore
+#@ignore
 @TestCase:86115
 Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -92,7 +93,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise. 
 	#Scenario: Test
 	#Given I save to context name: TestCase86115 and value: 1559223
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
@@ -116,7 +117,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86115 and its status is: Completed
 
 
-@ignore
+#@ignore
 @TestCase:86452
 Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -137,7 +138,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise. 
 	#Scenario: Test
 	#Given I save to context name: TestCase86452 and value: 1559223
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
@@ -155,7 +156,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Completed
 
 
-@ignore
+#@ignore
 @TestCase:86117
 Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -196,7 +197,7 @@ Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product 
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86117)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86117 and its status is: Completed
 
-@ignore
+#@ignore
 @TestCase:86116
 Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86116
@@ -246,7 +247,7 @@ Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	| Canadian Tire |
 
 
-@ignore
+#@ignore
 @TestCase:86454
 Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 	Given I generate a random UPC number and save as: UPC86454
@@ -273,7 +274,8 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	#Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise. 
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86454)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86454 and its status is: Submitted
@@ -298,7 +300,7 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	| Canadian Tire |
 
 
-@ignore
+#@ignore
 @TestCase:86455
 Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -351,7 +353,7 @@ Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	| Retailer      |
 	| Canadian Tire |
 
-@ignore
+#@ignore
 @TestCase:86458
 Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86458
