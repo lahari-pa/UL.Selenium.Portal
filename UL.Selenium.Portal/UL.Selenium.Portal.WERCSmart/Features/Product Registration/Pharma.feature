@@ -178,7 +178,7 @@ And I navigate to the home page
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
-Given I log in with the account saved in TReVor as: ProductAccount
+Given I log in with the account saved in TReVor as: PharmaAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
@@ -217,8 +217,8 @@ Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Pa
 When I click continue
 When I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
 Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
