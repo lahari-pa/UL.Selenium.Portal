@@ -10,7 +10,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
-{
+{ 
     class HelpAndSupport : SeleniumBaseObject
     {
         #region Page Objects
@@ -501,7 +501,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 return false;
 
             }
-            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath("//select[@class='dropdown select2-offscreen']//option"), 2).ToList();
+            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath("//select[@class='dropdown` select2-offscreen']//option"), 2).ToList();
             if (proityFoundOptions.IsNullOrEmpty())
             {
                 Report.Info("The Priority Field dropdown element was not null or empty");
