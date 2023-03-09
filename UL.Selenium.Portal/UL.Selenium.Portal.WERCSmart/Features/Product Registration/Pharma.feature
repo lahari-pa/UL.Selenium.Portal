@@ -178,7 +178,7 @@ And I navigate to the home page
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
-Given I log in with the account saved in TReVor as: ProductAccount
+Given I log in with the account saved in TReVor as: PharmaAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
