@@ -273,7 +273,6 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#Given If purchase details are showing click confirm order
 	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86454)
