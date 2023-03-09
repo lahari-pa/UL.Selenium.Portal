@@ -376,6 +376,7 @@ Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise. 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto4 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86458)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86458 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86458)
