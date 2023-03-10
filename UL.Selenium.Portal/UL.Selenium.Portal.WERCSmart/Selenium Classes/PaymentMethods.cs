@@ -1784,6 +1784,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return tyTextElement != null;
 		}
 
+		public bool Subscription_Issue_TextExists(string subscriptionIssueText)
+		{
+			IWebElement siTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{subscriptionIssueText}')]"), 1);
+			return siTextElement != null;
+		}
+
 		//Home Button
 		[FindsBy(How = How.XPath, Using = ".//p[@class='text-right']/a[text()='Home']")]
 		private IWebElement _btn_home;
