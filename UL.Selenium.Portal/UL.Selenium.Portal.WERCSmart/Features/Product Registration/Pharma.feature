@@ -71,7 +71,6 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128085
 
 
 @TestCase:127870
