@@ -10,7 +10,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
-{
+{ 
     class HelpAndSupport : SeleniumBaseObject
     {
         #region Page Objects
