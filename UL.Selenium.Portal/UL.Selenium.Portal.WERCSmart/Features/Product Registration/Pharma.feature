@@ -425,48 +425,48 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 @TestCase:128677
 Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
-	Given I call Shared Step (Login to WERCSmart - Pharma Account)
-	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC128677
-	Given I click continue
-	Then I should see the Product Type Page
-	Then I set 'Product Name' to: prescription pharmaceutical, solid
-	Then I set 'Type of Product' to: prescription pharmaceutical, solid
-	Then I click continue
-	Given I enter the NDC number: 10866-0885-2
-	Then I save the product information as: TestCase128677
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	Given I set the Secondary Physical State field to: Liquid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	Given I set the Select the best Water Solubility description field to: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
-	Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
-	Then I click continue
-	Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container and size: 1
-	When I click continue
-	When I click continue
-	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-	When I click continue
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
+Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC128677
+Given I click continue
+Then I should see the Product Type Page
+Then I set 'Product Name' to: prescription pharmaceutical, solid
+Then I set 'Type of Product' to: prescription pharmaceutical, solid
+Then I click continue
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase128677
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+Given I set the Secondary Physical State field to: Liquid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given I set the Select the best Water Solubility description field to: Dispersible
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
+Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
+Then I click continue
+Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container and size: 1
+When I click continue
+When I click continue
+Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+When I click continue
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+When I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then In the Subscription Issue screen I confirm the following statement is shown: This order cannot be processed due to an issue with your subscription. You may need to upgrade to process this registration.
+And I navigate to the home page
 
 
 @TestCase:128134
