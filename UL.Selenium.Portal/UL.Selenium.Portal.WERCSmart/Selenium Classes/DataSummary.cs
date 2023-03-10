@@ -297,7 +297,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table"), 2);
+			
+			//   //div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement headerRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + header + @""")]/../.."), 2);
@@ -307,21 +309,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (head.Text == header)
 				{
-					break;
-				}
-				index++;
+					IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
+					IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2).ToList();
+					List<string> getUpcValues=upcValues.Select(x => x.GetValue()).ToList(); 
+				
+					if (getUpcValues.Contains(value) && getUpcValues.Contains(upc))
+					{
+						return true;
+					}
+
+					break; 
+
+				}				
 			}
-
-			IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
-			IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
-
-			IWebElement containerType = upcValues[index];
-			if (containerType.Text == value)
-			{
-				return true;
-			}
-
 			return false;
+
+			/*	IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
+				IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
+
+				IWebElement containerType = upcValues[index];
+				if (containerType.Text == value)
+				{
+					return true;
+				}
+
+				return false;
+			*/
 		}
 
 		public string SGetProductName()
