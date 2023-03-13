@@ -520,7 +520,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
-	Given I close the Data Summary tab
+	Given I close the Review tab
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
