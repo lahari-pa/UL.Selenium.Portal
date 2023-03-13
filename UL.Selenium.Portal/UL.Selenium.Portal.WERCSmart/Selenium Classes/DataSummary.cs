@@ -298,7 +298,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
 			
-			//   //div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table
 			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
@@ -324,17 +323,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 
-			/*	IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
-				IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
-
-				IWebElement containerType = upcValues[index];
-				if (containerType.Text == value)
-				{
-					return true;
-				}
-
-				return false;
-			*/
 		}
 
 		public string SGetProductName()
