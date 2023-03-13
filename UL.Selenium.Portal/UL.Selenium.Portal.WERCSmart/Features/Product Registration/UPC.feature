@@ -840,7 +840,6 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 
 @TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
-	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
