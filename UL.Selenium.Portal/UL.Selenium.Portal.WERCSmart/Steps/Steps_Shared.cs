@@ -102,7 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			WercSmartSettings.TestCaseId = 101;
+			//WercSmartSettings.TestCaseId = 101;
 			if (WercSmartSettings.TestCaseId == 0)
 			{
 				throw new Exception("ERROR: Failed to find TestCaseId!");
@@ -186,7 +186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
-			Delay.Seconds(1);			
+			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -475,7 +475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"The fifra tag was set a true, popup is expected");
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Delay.Seconds(10);
 						Report.Screenshot();
@@ -621,11 +621,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"The fifra tag was set a true, popup is expected");
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Delay.Seconds(10);
 						Report.Screenshot();
-						
+
 					}
 					else
 					{
@@ -647,7 +647,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 			}
-			
+
 
 		}
 
@@ -926,8 +926,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
 		}
 
-			[StepDefinition(
-			@"I call Shared Step 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
+		[StepDefinition(
+		@"I call Shared Step 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2306,8 +2306,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-			[StepDefinition(
-			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
+		[StepDefinition(
+		@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
 		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData()
 		{
 			Report.UseSubSteps = true;
@@ -2477,7 +2477,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
 				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
-			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);			
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
 			Report.StartSubStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2742,8 +2742,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I add the ingredient " + name + " at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
-			stepsNewProductIngredients.AddIngredients(table);			
-			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();	
+			stepsNewProductIngredients.AddIngredients(table);
+			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
 
@@ -2773,7 +2773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
 					{
-						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 						Report.StartSubStep("I should see the Waste Classification Data Page");
 						MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
@@ -4114,7 +4114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Product's container or liner contains Bisphenol A (BPA)",
 				"No"));
-			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");		
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Percent of Alcohol in the Product (numeric entry only)",
 				"55"));
@@ -4970,40 +4970,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 57932a \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_YesToProp1()
 		{
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			var selNewProduct = new NewProduct();
-			Report.StartStep("I should see the Waste Classification Data Page");
+			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
-			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			stepsRegulatoryInformation.SetTSCATo("Compliant");
-			Report.StartStep("Prop 65 warning is required: Yes");
+			Report.StartSubStep("Prop 65 warning is required: Yes");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
-			Report.StartStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			Report.StartSubStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
 			MyStepsNewProduct.SetTheSectionOptionTo("Is the need to warn triggered by",
 				"A chemical or chemicals in the product, or chemicals formed during the use of the product.");
-			Report.StartStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
+			Report.StartSubStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
 			MyStepsNewProduct.SetTheSectionOptionTo("How is the exposure warning transmitted?",
 				"By affixing it to the product or its packaging");
-			Report.StartStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Prior to August 30, 2018");
+			Report.StartSubStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Prior to August 30, 2018");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured",
 				"Prior to August 30, 2018");
-			Report.StartStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: Does not apply ");
+			Report.StartSubStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: Does not apply ");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor short-form warning, indicate which of the following is provided:",
 				"Does not apply");
-			Report.StartStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: Does not apply");
+			Report.StartSubStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: Does not apply");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
 			
-			Report.StartStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
+			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
 				"NA");
-			Report.StartStep("In the Waste Classification Data page I click Continue");
+			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
 
@@ -5537,12 +5537,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(
 			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
 		public void
-			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
-				TechTalk.SpecFlow.Table retailers)
+			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(Table retailers)
 		{
 			Report.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (TableRow thisRetailer in retailers.Rows)
 			{
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -5967,7 +5966,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			if (!thisPowerDesignerPlus.Wait_for_load(120))
+			thisPowerDesignerPlus.Wait_for_load(240);
+			Delay.Seconds(10);
+
+			if (!thisPowerDesignerPlus.Wait_for_load(240))
 			{
 
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
@@ -5975,7 +5977,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(3);
 			}
 
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(60), "Power designer plus has not loaded",
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(240), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
 			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
@@ -5994,13 +5996,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = productDetails.Id;
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
-			Delay.Seconds(3);
+			Delay.Seconds(120);
 
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
-			Delay.Seconds(3);
-			thisPowerDesignerPlus.Wait_for_load(60);
+			Delay.Seconds(120);
+			thisPowerDesignerPlus.Wait_for_load(240);
 
 			//HERE ADD EDITMODE
 
@@ -6280,7 +6282,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 
 			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			if (found)
+			{
+				thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			}
+			else
+			{
+				Report.Error("Value: QASHAAccount , can't be found in context");
+			}
 
 
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
@@ -8013,10 +8023,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Click the filter icon
 			thisStepsStudio.InProductAttributePageIClickOnFilterIcon();
 			//Enter CNTXT in code
+			var paf = new ProductAttributesFilter();
 			thisStepsStudio.InProductAttributeFilterPopupISelectFromSelectBox("...Contains...", "Code");
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
 		}
 
 		[StepDefinition(
@@ -8249,7 +8261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
-			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");		
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -10587,7 +10599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
 			Report.StartSubStep("I upload a PDF file to section: OSHA SDS");
-			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");			
+			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -11982,7 +11994,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			var MyStepsNewProduct = new StepsNewProduct();
-			var newProdClass = new NewProduct();			
+			var newProdClass = new NewProduct();
 			Report.StartSubStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -12478,7 +12490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
-			
+
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 
@@ -13793,7 +13805,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().IShouldSeeTheUpdateRegistrationPopup();
 			new StepsProductGrid().InUpdateRegistrationPopupIClickButton("Continue");
 		}
-	
+
 		[StepDefinition(@"I call Shared Step 26900 \(Transportation Details 1 > Not Regulated\)")]
 		public void ICallSharedStep26900()
 		{
@@ -13881,7 +13893,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			
+
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			Report.StartStep("I set the Relative Density option to: 68");
@@ -13923,7 +13935,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport",
 				"Not Regulated");
-			
+
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
@@ -14006,9 +14018,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			
-				// Primary Physical State is Aerosol which is the only option available
-				Report.StartStep("I should only see the following options for Primary Physical State: Aerosol");
+
+			// Primary Physical State is Aerosol which is the only option available
+			Report.StartStep("I should only see the following options for Primary Physical State: Aerosol");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
 			Report.StartStep("I set the Secondary Physical State field to: Liquid spray");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
@@ -14032,8 +14044,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-			
-			
+
+
 			Report.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -14052,7 +14064,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-			
+
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			Report.StartStep(
@@ -14062,6 +14074,99 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 150905 \(Retailer - NR selected by default\)")]
+		public void GivenICallSharedRetailerNRSelectedByDefault()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartSubStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+		[StepDefinition(@"I call Shared Step 208116 Product Information - FIFRA 25\(b\) Product Not a Pesticide, US \(SOLD\), NO \(OSHA\), NO \(DSV\), YES \(CA RTK\), NO \(PL\), NO \(GNFR\)")]
+		public void GivenICallSharedStepProductInformation_FIFRA25b_NoPesticideUSSOLD_NOOSHA_NODSV_YESCARTK_NOPL_NOGNFR()
+		{
+			Report.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+			Report.StartSubStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"Yes");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor")]
+		public void InTheCACleaningProductDisclosureScreenChooseHappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			
+
+			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
+			Delay.Seconds(1);
+
+			if (myNewProduct.SectionExists("Who is publicly identified on the product label as responsible for the product?"))
+			{
+				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Final Domestic Distributor");
+			}
+
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product?"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("NONE");
+			}
+
+			if (myNewProduct.SectionExists("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?", "No");
+			}
+
+			if (myNewProduct.SectionExists("Company's Toll-Free Phone Number"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField("11111111111");
+			}
+
+			if (myNewProduct.SectionExists("Company Web Address"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField("http://TestWebsitePlaceholderName.com");
+			}
+
+			if (myNewProduct.SectionExists("Select the product's GTIN Brick Code"))
+			{
+				MyStepsNewProduct.ThenISetTheProductsGTINBrickCodeTo("[10000397] Cleaning Aids");
+			}
+			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 	}
 }
