@@ -2094,5 +2094,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+		
+		public bool TotalPercentage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + value + "')]"), 2);
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, Total percentage : '{Value.Text}'%");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 	}
 }

@@ -15,6 +15,10 @@
 @MyIngredients
 @CACleaning
 @run_Ingredients
+@PaymentMethods
+@Studio_Header
+@Studio
+@DeleteActiveProducts
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -835,3 +839,60 @@ Scenario: [158853] Ingredient Identifier
 	Given I close the browser tab with the Summary page
 	Given I click the Home navigation icon
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158853
+
+	
+
+# Created by Saikiran Chittampally
+@TestCase:209549
+Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum is Five
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I generate a random UPC number and save as: UPC209549
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase209549
+Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+And I should see the Ingredients Page
+Then I add the following ingredients:
+		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 471-34-1      | 3.51131     | false         | false       |            |
+		| 7440-44-0     | 10.21141    | false         | false       |            |
+		| 7732-18-5     | 15.32251    | false         | false       |            |
+		| 1317-61-9     | 15.33361    | false         | false       |            |
+		| 7778-18-9     | 61.44374    | false         | false       |            |
+And I click continue
+Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+Then I confirm the total percent of these five ingredients is 105.82258 %
+And I click continue
+Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC209549, container type: Metal Container and size: 1
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Given in the Optional Comments page I click Continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+And I navigate to the home page
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
+Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549
+Given I confirm the Product Data window has opened
+Then I check for the following columns in Formulation
+	| CAS Number |  Percent |
+	|  471-34-1  |3.51131   |
+	| 7440-44-0  | 10.21141 | 
+	| 7732-18-5  |15.32251  |
+	| 1317-61-9  |15.33361  |
+	| 7778-18-9  |61.44374  |
+And I close the current window and switch to the main window in Studio
+Then I click to open the 'My Wercs' menu and select 'Log Out'

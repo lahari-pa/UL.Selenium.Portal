@@ -14168,5 +14168,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
+
+		[StepDefinition(@"I call Shared Step \(SHA > Select Product > Review\) for product saved as: (.*)")]
+		public void Shared134404_SHA_SelectProduct_ClickOnReview(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			var selStepsStudio = new Steps_Studio();
+			Report.StartSubStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			// saving the current window so we can naviate back
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartSubStep("I click 'Review'");
+			selStepsStudio.InSHAManagerIClickOnBottomMenuItem("Review");
+			Delay.Seconds(5);
+		}
 	}
 }
