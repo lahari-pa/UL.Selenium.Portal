@@ -414,9 +414,12 @@ When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 #NOTE: There is a known issue about the Purchase Summary screen NOT showing the Thank you message in staging and production, a bug was created for this issue. The message does appear in INT - Integration site.
 #Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 
 
