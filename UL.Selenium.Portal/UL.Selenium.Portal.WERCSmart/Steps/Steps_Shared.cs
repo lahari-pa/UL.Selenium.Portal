@@ -6282,7 +6282,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 
 			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			if (found)
+			{
+				thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			}
+			else
+			{
+				Report.Error("Value: QASHAAccount , can't be found in context");
+			}
 
 
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
