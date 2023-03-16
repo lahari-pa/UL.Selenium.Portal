@@ -496,11 +496,18 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
+And I set the Select applicable modes of transport for which you classify the product. field to: DOT
+And I select option: Yes, Shipped with Limited quantity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+And I select option: Yes, Shipped with Consumer Commodity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
 Then I click continue
-Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, flammable, n.o.s.
+And I set the Select Hazard Class (if available) option to: 2.1
+Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Contains, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
