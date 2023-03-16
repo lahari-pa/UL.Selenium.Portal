@@ -1602,7 +1602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(urlList.Contains(tabURL) == expected, $"Failure, '{tabURL}' {(expected ? "does not" : "does")} exist.", $"Success, '{tabURL}' {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"I close (.*) tab")]
+		[StepDefinition(@"I close the (.*) tab")]
 		public void CloseTab(string tabURL)
 		{
 			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
