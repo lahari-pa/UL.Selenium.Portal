@@ -14,9 +14,9 @@ Scenario: [143638] Reject Submission - Product Name is Unclear
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager I click on bottom menu item: Search
 	And In SHA Manager ProductSearch page I run search:
-		| SearchTerm | SearchValue                       |
-		| Status     | Submitted                         |
-		| User       | last-frozen.kxxyxunf@mailosaur.io |
+		| SearchTerm | SearchValue    |
+		| Status     | Submitted      |
+		| TReVorUser | ProductAccount |
 	Given In SHA Manager I select the first product
 	And In SHA Manager I click on bottom menu item: Reject Submission
 	And In the Reject Submission dialog I Select Subject: Product Name is Unclear
@@ -56,9 +56,9 @@ Scenario: [143499] Reject Submission - Transportation Information – Missing Ba
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager I click on bottom menu item: Search
 	And In SHA Manager ProductSearch page I run search:
-		| SearchTerm | SearchValue                       |
-		| Status     | Submitted                         |
-		| User       | last-frozen.kxxyxunf@mailosaur.io |
+		| SearchTerm | SearchValue    |
+		| Status     | Submitted      |
+		| TReVorUser | ProductAccount |
 	Given In SHA Manager I select the first product
 	And In SHA Manager I click on bottom menu item: Reject Submission
 	And In the Reject Submission dialog I Select Subject: Transportation Information – Missing Base Classification before Exemption or Exception
@@ -78,9 +78,9 @@ Scenario: [143470] Reject Submission - Ingredient Issue - Document and Ingredien
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager I click on bottom menu item: Search
 	And In SHA Manager ProductSearch page I run search:
-		| SearchTerm | SearchValue                       |
-		| Status     | Submitted                         |
-		| User       | last-frozen.kxxyxunf@mailosaur.io |
+		| SearchTerm | SearchValue    |
+		| Status     | Submitted      |
+		| TReVorUser | ProductAccount |
 	Given In SHA Manager I select the first product
 	And In SHA Manager I click on bottom menu item: Reject Submission
 	And In the Reject Submission dialog I Select Subject: Ingredient Issue - Document and Ingredients Do Not Match
@@ -90,8 +90,8 @@ Scenario: [143470] Reject Submission - Ingredient Issue - Document and Ingredien
 	Given In the Reject Submission dialog I click Save
 	Given For product saved as: ID I should see an alert with the following message: Product Message for product ID has been created successfully.
 	And I close alert
-	Given For product saved as: ID there should be a new email for email Address saved as: AdminEmailAddress from: NoReply@UL.com with the title: Notification - Product <ID> - Ingredient Issue - Document and Ingredients Do Not Match
-	Given For product saved as: ID the html of the email should show: Your product assessment has been Suspended. During our assessment and data creation we have found a discrepancy between the formulation submitted to WERCSmart and the document (Label or Safety Data Sheet). The document includes a missing/incorrect ingredient missing from the formulation. Please update the ingredient(s) below. (Water) Please update the formulation to reflect the ingredients found on the documentation provided with this product. All ingredients found on a GHS SDS should be present in the WERCSmart submission, and they need to match the percentage, or within the range, found on the document. To resolve this issue, please log into WERCSmart. Using either the RESOLVE option in the ALERT area on the Home Page, or using the RESOLVE option available for the registration in My Messages, update the necessary data or documentation. Once the registration is revised, you may accept the updates which will transfer the registration back to the Assessment team for processing. Please be aware that if you do not update and resubmit the registration data within ten (10) days this may result in your registration being cancelled and the assessment will not proceed to your Retailer(s). If you have questions, please contact WERCSmart Customer Support via email (WERCSmartCustomer@UL.com), chat, or by calling 877-642-6753. Thank you for your prompt attention to this matter. The WERCSmart Assessment Team This e-mail may contain privileged or confidential information. If you are not the intended recipient: (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify the sender by reply e-mail, and then delete this message and its attachment(s). Underwriters Laboratories Inc. and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachments.
+	Given For product saved as: ID there should be a new email for email Address saved as: AdminEmailAddress from: <sitenotification> with the title: Notification - Product <ID> - Ingredient Issue - Document and Ingredients Do Not Match
+	Given For product saved as: ID the html of the email should show: Your product assessment has been Suspended. During our assessment and data creation we have found a discrepancy between the formulation submitted to WERCSmart and the document (Label or Safety Data Sheet). The document includes a missing/incorrect ingredient missing from the formulation. Please update the ingredient(s) below. (Water) Please update the formulation to reflect the ingredients found on the documentation provided with this product. All ingredients found on a GHS SDS should be present in the WERCSmart submission, and they need to match the percentage, or within the range, found on the document. To resolve this issue, please log into WERCSmart. Using either the RESOLVE option in the ALERT area on the Home Page, or using the RESOLVE option available for the registration in My Messages, update the necessary data or documentation. Once the registration is revised, you may accept the updates which will transfer the registration back to the Assessment team for processing. Please be aware that if you do not update and resubmit the registration data within ten (10) days this may result in your registration being cancelled and the assessment will not proceed to your Retailer(s). If you have questions, please contact WERCSmart Customer Support via email (WERCSmartCustomer@UL.com), chat, or by calling 877-642-6753. Thank you for your prompt attention to this matter. The WERCSmart Assessment Team 
 
 #@ignore
 @TestCase:143507
@@ -101,9 +101,9 @@ Scenario: [143507] Reject Submission - Volatile Organic Compound (VOC) Issue wit
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager I click on bottom menu item: Search
 	And In SHA Manager ProductSearch page I run search:
-		| SearchTerm | SearchValue                       |
-		| Status     | Submitted                         |
-		| User       | last-frozen.kxxyxunf@mailosaur.io |
+		| SearchTerm | SearchValue    |
+		| Status     | Submitted      |
+		| TReVorUser | ProductAccount |
 	Given In SHA Manager I select the first product
 	And In SHA Manager I click on bottom menu item: Reject Submission
 	And In the Reject Submission dialog I Select Subject: Volatile Organic Compound (VOC) Issue within Registration
@@ -124,9 +124,9 @@ Scenario: [143390] Reject Submission - Flash Point - Safety Data Sheet (SDS) or 
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager I click on bottom menu item: Search
 	And In SHA Manager ProductSearch page I run search:
-		| SearchTerm | SearchValue                       |
-		| Status     | Submitted                         |
-		| User       | last-frozen.kxxyxunf@mailosaur.io |
+		| SearchTerm | SearchValue    |
+		| Status     | Submitted      |
+		| TReVorUser | ProductAccount |
 	Given In SHA Manager I select the first product
 	And In SHA Manager I click on bottom menu item: Reject Submission
 	And In the Reject Submission dialog I Select Subject: Flash Point - Safety Data Sheet (SDS) or Article Information Sheet (AIS) Discrepancy

@@ -1077,13 +1077,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"For product saved as: (.*) the html of the email should show: (.*)")]
 		public void ThenTheHTMLOfTheEmailShouldShow(string productSavedAs, string bodyText)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
+			Report.StartStep(Report.Details.StepIndex + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
 				string emailBody = email.Html.Body;
-				
+
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
 
