@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         #endregion
 
         #region Methods   
-        public bool WaitUntilHomeXGraphsDisplayed(int graphNumber = 4, int waitForSeconds = 30)
+        public bool WaitUntilHomeXGraphsDisplayed(int graphNumber = 2, int waitForSeconds = 30)
         {
 
             int i = 0;

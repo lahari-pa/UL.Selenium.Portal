@@ -496,15 +496,17 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             if (priorityFieldLabel == null)
             {
                                 
-                Report.Info("The Priority Field dropdown element was not found");
+                Report.Info("The Priority Field dropdown element was not found123");
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
 
             }
-            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath("//select[@class='dropdown` select2-offscreen']//option"), 2).ToList();
+
+            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath(".//following-sibling::select[@class='dropdown select2-offscreen']//option"), 2).ToList();
+
             if (proityFoundOptions.IsNullOrEmpty())
             {
-                Report.Info("The Priority Field dropdown element was not null or empty");
+                Report.Info("The Priority Field dropdown element was not null or empty123");
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
             }
