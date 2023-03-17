@@ -393,9 +393,6 @@ Given I add the following ingredients:
 And I click continue
 Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
   Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	#| Propane       | 100     | false               | false       |            |
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
@@ -416,8 +413,6 @@ When I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-#NOTE: There is a known issue about the Purchase Summary screen NOT showing the Thank you message in staging and production, a bug was created for this issue. The message does appear in INT - Integration site.
-#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
