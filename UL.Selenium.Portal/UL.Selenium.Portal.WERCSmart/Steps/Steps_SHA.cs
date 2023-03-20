@@ -304,6 +304,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
+					case "TReVorUser":
+						SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(value);
+						if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{value}' does not exist.",$"Success, TReVor user '{value}' exists."))
+						{
+							Report.IsTrue(thisProductSearch.EnterUser(TReVorUser.UserName),
+							"Failed to set user", "Successfully set user", false, false);
+						}
+						break;
 					case "Reviewer":
 						Report.IsTrue(thisProductSearch.EnterReviewer(value),
 							"Failed to set reviewer", "Successfully set reviewer", false, false);

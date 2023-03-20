@@ -393,9 +393,6 @@ Given I add the following ingredients:
 And I click continue
 Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
   Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	#| Propane       | 100     | false               | false       |            |
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
@@ -414,9 +411,10 @@ When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#NOTE: There is a known issue about the Purchase Summary screen NOT showing the Thank you message in staging and production, a bug was created for this issue. The message does appear in INT - Integration site.
-#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 
 
@@ -496,11 +494,18 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
+And I set the Select applicable modes of transport for which you classify the product. field to: DOT
+And I select option: Yes, Shipped with Limited quantity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+And I select option: Yes, Shipped with Consumer Commodity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
 Then I click continue
-Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, flammable, n.o.s.
+And I set the Select Hazard Class (if available) option to: 2.1
+Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Contains, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label

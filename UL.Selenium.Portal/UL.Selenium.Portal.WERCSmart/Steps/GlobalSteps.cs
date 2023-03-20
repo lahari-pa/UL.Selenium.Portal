@@ -961,30 +961,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
-		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string savedAs, string emailFrom, string title)
+		[StepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address (saved|saved in TReVor) as: (.*) from: (.*) with the title: (.*)")]
+		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string inTReVor,string savedAs, string emailFrom, string title)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(Report.Details.StepIndex + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
-
+				bool isTReVorUser = inTReVor == "saved in TReVor";
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
-					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
+					emailFrom = TReVor.Integrations.Classes.TReVorSettings.Variables.GetVariable("NotificationEmail");
 				}
-
 				string email = string.Empty;
-				if (savedAs == "ForgotPW_SecQs")
+				if (isTReVorUser)
 				{
-					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
-					email = user.Email;
+					SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(savedAs);
+					if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
+					{
+						email = TReVorUser.UserName;
+					}
 				}
-				else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
+				else
 				{
-					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
-				} else
-				{
-					email = savedAs;
+					
+					if (savedAs == "ForgotPW_SecQs")
+					{
+						var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
+						email = user.Email;
+					}
+					else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
+					{
+						email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+					}
+					else
+					{
+						email = savedAs;
+					}
 				}
 				Delay.Seconds(10);
 
@@ -1065,13 +1077,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"For product saved as: (.*) the html of the email should show: (.*)")]
 		public void ThenTheHTMLOfTheEmailShouldShow(string productSavedAs, string bodyText)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
+			Report.StartStep(Report.Details.StepIndex + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
 
 				string emailBody = email.Html.Body;
-				
+
 				var product = (ProductInformation)Context.GetFromContext(productSavedAs);
 				string id = product.Id;
 
@@ -1602,7 +1614,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(urlList.Contains(tabURL) == expected, $"Failure, '{tabURL}' {(expected ? "does not" : "does")} exist.", $"Success, '{tabURL}' {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"I close (.*) tab")]
+		[StepDefinition(@"I close the (.*) tab")]
 		public void CloseTab(string tabURL)
 		{
 			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
