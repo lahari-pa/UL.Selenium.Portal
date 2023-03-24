@@ -1195,6 +1195,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(ingredientsObject.TotalPercentage(value), "Failed to confirm the total percent '" + value + "' on the Ingredients page", "I confirm that the total percent '" + value + "' on the Ingredients page");
 		}
+		[StepDefinition(@"I Select the NO Button for the Cleaning products must comply with California Cleaning Product Right to Know Act.")]
+		public void GivenISelectOption()
+		{
+			Delay.Seconds(15);
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
+		}
 
 	}
 }

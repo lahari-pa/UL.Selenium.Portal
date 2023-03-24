@@ -14184,5 +14184,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.InSHAManagerIClickOnBottomMenuItem("Review");
 			Delay.Seconds(5);
 		}
+		[StepDefinition(@"I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion1()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartSubStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
+			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
+			}
+			else
+			{
+				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
+
+			}
+			Report.StartSubStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep(
+				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: No");
+			//TestCase:207581
+			stepsNewProductIngredients.GivenISelectOption();
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
 	}
 }

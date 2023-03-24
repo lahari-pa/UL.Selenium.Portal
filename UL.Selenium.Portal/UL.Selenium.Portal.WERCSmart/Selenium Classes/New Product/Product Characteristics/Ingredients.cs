@@ -2107,5 +2107,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+		public bool SelectOption()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"(//span[text()='No'])[3]"), 2);
+			return closeButton.TryClick();
+		}
 	}
 }
