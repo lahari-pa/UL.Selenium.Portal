@@ -24,10 +24,10 @@
 @run_SoldAndPLPTests
 Feature: Sold and PLP Tests
 
-#Background:
-#Given I verify the following users exist and if not I create them using SHAUser
-#| username    | FirstName | LastName   | Role         | EmailAddress                |
-#| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+Given I verify the following users exist and if not I create them using SHAUser
+| username    | FirstName | LastName   | Role         | EmailAddress                |
+| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #@ignore
 @TestCase:87957
@@ -210,13 +210,13 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
-	Given I call Shared Step 87647A (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88198, container type: Paper bag, size: 2 and package type: test do not click continue
+	Given I call Shared Step 87647A (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88198, container type: Paper bag, size: 2 and package type: myPkg do not click continue
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC881981, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88198)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88198 and its status is: Submitted
@@ -261,22 +261,22 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I click continue
     Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
-	#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Submitted
-	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase88199)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Assigned
-	#Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase88199)
-	#Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase88199) for	
-	#	| Retailer                   |
-	#	| No Retailer/No UPC Product |
-	#	| Canadian Tire              |
+	Then In the Purchase Summary page Confirm thank you message is shown if product details is not shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase88199)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Assigned
+	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase88199)
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase88199) for	
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+		| Canadian Tire              |
 
-	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88199)
-	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88199
-	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88199)
-	#Given I call Shared Step 59066 (Go to SHA Manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Accepted or Completed
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase88199)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase88199
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase88199)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase88199)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase88199 and its status is: Accepted or Completed

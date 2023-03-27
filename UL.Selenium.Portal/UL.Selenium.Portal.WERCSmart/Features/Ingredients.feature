@@ -15,6 +15,10 @@
 @MyIngredients
 @CACleaning
 @run_Ingredients
+@PaymentMethods
+@Studio_Header
+@Studio
+@DeleteActiveProducts
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -227,8 +231,8 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		#| Wood dust     | 75.0    | false               | false       |            |
-		| Wood chips     | 75.0    | false               | false       |            |
+		| Wood dust     | 75.0    | false               | false       |            |
+		| Wood chips    | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
@@ -379,6 +383,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase84528
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	#And I Start typing in the component box
@@ -653,7 +658,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 @TestCase:133335
-	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
+Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
@@ -676,7 +681,7 @@ Given I should see the Product Information Page
 	Given in the New Product page I click Continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The registration ingredient contains information that typically is included in a product that is considered a pesticide under U.S. E.P.A. guidelines or Canada Pest guidelines. The product type you've selected for this registration is not within the scope of pesticide registrations and the ingredient(s) which are typically used in Pesticide or Herbicide registrations is/are:
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm the table in the popup view has the following column titles
 	| Titles          |
 	| CAS Number      |
@@ -684,10 +689,10 @@ Given I should see the Product Information Page
 	| Active or Inert |
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
-	| 106-97-8   | Water                  | Active          |
+	| 106-97-8   | Butane                 | Inert          |
 	| 66071-96-3 | Glutens, corn          | Active          |
 	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
-    Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+    Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
 	| Button  |
@@ -697,6 +702,7 @@ Given I should see the Product Information Page
 	And I should see the Ingredients Page
 	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
 	Then I click continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
     Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	## Regulatory 1 Page Details
@@ -740,8 +746,9 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I confirm the table in the popup view has following column data
 		| CAS Number | Name                   | Active or Inert |
 		| 66071-96-3 | Glutens, corn          | Active          |
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-	And I should see the Ingredients Page
+	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	And I should see the Waste Classification Data Page
 	When In the New Product page I click tab: Product Type
 	And I click the page heading: The Product
 	And I should see the The Product Page
@@ -750,6 +757,9 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I save the product information as: TestCase133610
 	Then I click continue
 	And I should see the Product Information Page
+	And I do not see the following sections
+		| Section                                                              |
+		| Which best describes your product, including when FIFRA 25(b) Exempt |
 	And I see the following sections
 		| Section                                                                                                                                                                                          |
 		| Select countries the product may be sold in                                                                                                                                                      |
@@ -789,3 +799,209 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I save the product information as: TestCase133610
 	Then I click the Home navigation icon
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
+
+# Created by Saikiran Chittampally
+	@TestCase:158853
+Scenario: [158853] Ingredient Identifier
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase158853
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
+	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I should see the Waste Classification Data Page
+	And I click the page heading: Ingredients
+	And I should see the Ingredients Page
+	Then In the Ingredient Reference Number field I enter the following text: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
+	Then I click continue
+	Then I should see an error message: This field has a maximum length of 100 characters
+	Then In the Ingredient Reference Number field I enter the following text: test 123 !@#
+	Then I click continue
+	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+	Then I click continue
+	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
+	Then I click continue
+	And I should see the Waste Classification Data Page
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
+	Given I close the browser tab with the Summary page
+	Given I click the Home navigation icon
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158853
+
+	
+
+# Created by Saikiran Chittampally
+@TestCase:209549
+Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum is Five
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I generate a random UPC number and save as: UPC209549
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase209549
+Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+And I should see the Ingredients Page
+Then I add the following ingredients:
+		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 471-34-1      | 3.51131     | false         | false       |            |
+		| 7440-44-0     | 10.21141    | false         | false       |            |
+		| 7732-18-5     | 15.32251    | false         | false       |            |
+		| 1317-61-9     | 15.33361    | false         | false       |            |
+		| 7778-18-9     | 61.44374    | false         | false       |            |
+And I click continue
+Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+Then I confirm the total percent of these five ingredients is 105.82258 %
+And I click continue
+Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC209549, container type: Metal Container and size: 1
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Given in the Optional Comments page I click Continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+And I navigate to the home page
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
+Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549
+Given I confirm the Product Data window has opened
+Then I check for the following columns in Formulation
+	| CAS Number |  Percent |
+	|  471-34-1  |3.51131   |
+	| 7440-44-0  | 10.21141 | 
+	| 7732-18-5  |15.32251  |
+	| 1317-61-9  |15.33361  |
+	| 7778-18-9  |61.44374  |
+And I close the current window and switch to the main window in Studio
+Then I click to open the 'My Wercs' menu and select 'Log Out'
+
+# Created by Saikiran Chittampally
+@TestCase:207581
+Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
+	Then I save the product information as: TestCase207581
+	Given I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question
+	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then I should see the Ingredients Page
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName			| Percent | PublicallyDisclosed | TradeSecret | PublicName				|
+	| 7732-18-5				| 90	  | true  			    | false       | Water				    |
+	| 1310-73-2				| 5		  | true                | false       | Sodium hydroxide        |
+	| 151-21-3				| 5		  | true                | false       | Sodium lauryl sulphate   |
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: 9402-10
+	Given I click continue
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO	
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC	
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL	
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+	Then I click continue
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I click continue
+	And I set the UN Number field to: UN1719
+	And I set the Technical Name (if applicable) option to: SODIUM HYDROXIDE
+	And I set the Packing Group (select) option to: II
+	And I click continue
+	And I should see the International Marine (IMDG) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And UN Number should be showing the value: UN1719
+	And Proper Shipping Name should be showing the value: Caustic alkali liquid, n.o.s.
+	And Technical Name (if applicable) should be showing the value: SODIUM HYDROXIDE
+	And Hazard Class (select) should be showing the value: 8
+	And Packing Group (select) should be showing the value: II
+	And I click continue
+	And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes
+	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
+	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 40
+	And I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
+	And I click continue
+	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+	And I click continue
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should see the Additional Documents to Provide Page
+	Then I click continue
+	Then Volatile Organic Compounds should be showing the error messages: Document is required: VOC Exemption Letter
+	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	Then I should see the Optional Reports and Documents Available for Purchase Page
+	Given I click continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient  | Viscosity |
+		| Mask                          | Brown      | 2                        | 2                       | Banana | Not applicable | 2                      | 2         |
+	
+	Then I should see the Optional Comments Page
+	Given I click continue
+	Given In the Data Acceptance page I select Agreed	
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207581
