@@ -243,32 +243,34 @@ Scenario: [87832] View Shows Case UPC Data
 	Then I save the product information as: TestCase87832
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-	#	| Retailer |
-	#	| Amazon   |
-	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
-	#Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Given in the Additional Documents to Provide page I click Continue
-	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| Amazon   |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
+	Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given In the Purchase Summary page Confirm thank you message is shown if product details is not shown:
+
 	#Given If purchase details are showing click confirm order
-	#Given I navigate to the home page
-	#And I filter for the product saved as: TestCase87832
-	#And I click Row Actions for the first product returned
-	#And I click on the Row Action: View
-	#Then I switch to the Data Summary page
-	#And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
-	#	| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
-	#	| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
-	#	| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
+	Given I navigate to the home page
+	And I filter for the product saved as: TestCase87832
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	And The Data Summary section should be showing the following UPC table:
+		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
+		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
+		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
 @TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
@@ -298,7 +300,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
-	And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
+	And The Data Summary section should be showing the following UPC table:
 		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
 		| saved as UPC878251 | saved as UPC87825 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87825  |                   | Paper bag      | 2             |          |               | AM        |

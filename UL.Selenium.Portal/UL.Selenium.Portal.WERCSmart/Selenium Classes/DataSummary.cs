@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
-		public bool ConfirmHeaders(ICollection<string> headers, string section)
+		public bool ConfirmHeaders(ICollection<string> headers)
 		{
 			
 
@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool ConfirmCaseUPC(TableRows rows, string section)
+		public bool ConfirmCaseUPC(TableRows rows)
 		{
 			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
@@ -264,7 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool ConfirmUPC(TableRows rows, string section)
+		public bool ConfirmUPC(TableRows rows)
 		{
 			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
@@ -284,6 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string upcNumber = upcValues != null ? upcValues[0].Text : "";
 
 			bool found = false;
+			int rowIndex = 0; 
 			foreach (TableRow row in rows)
 			{
 				if (row["UPC Number"].ToLower().Contains("saved as"))
@@ -309,6 +310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						row["Associated UPC"] = savedUPC;
+
 					}
 					catch (Exception e)
 					{
@@ -317,23 +319,68 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 				}
 
-				if (upcNumber != "" && row["UPC Number"] == upcNumber)
+				if (upcNumber != "" && row["UPC Number"] == upcNumber && rowIndex == 1)
 				{
 					found = true;
 					string[] rowValues = row.Values.ToArray();
 					for (int i = 0; i < rowValues.Length; i++)
 					{
-						if (rowValues[i] != upcValues[i].Text.Trim())
+						IWebElement tableEle;
+						string caseUPCValue = "";
+						switch (i)
 						{
-							Report.Info("Values do not match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
-							return false;
+							case 0:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{upcNumber}')]")); // locates upc number
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 1:
+								tableEle = upcRow.FindElement(By.XPath(".//td[5]")); //locates the associated upc 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 2:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]")); // locates container type 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 3:
+								tableEle = upcRow.FindElement(By.XPath($".//div[text()='{rowValues[i]}']"), 2); // locates size 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 4:
+								tableEle = upcRow.FindElement(By.XPath(".//td[9]"));//locates quantity 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 5:
+								tableEle = upcRow.FindElement(By.XPath($".//td[10]")); // locates transport 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 6:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]"), 2); // locates retailers 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							default:
+								break;
+						}
+
+						if (rowValues[i] == caseUPCValue)
+						{
+							Report.Info($"Values match: '{rowValues[i]}' and '{caseUPCValue}' .");
 						}
 						else
 						{
-							Report.Info("Values match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
+							Report.Info($"Values do not match: '{rowValues[i]}' and '{caseUPCValue}' .");
+							return false;
 						}
 					}
 				}
+
+				rowIndex++;
 			}
 
 			if (found == false)
