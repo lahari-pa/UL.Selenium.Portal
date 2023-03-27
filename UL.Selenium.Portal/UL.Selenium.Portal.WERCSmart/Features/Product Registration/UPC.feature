@@ -259,9 +259,7 @@ Scenario: [87832] View Shows Case UPC Data
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#Given In the Purchase Summary page Confirm thank you message is shown if product details is not shown:
-
-	#Given If purchase details are showing click confirm order
+	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
 	And I filter for the product saved as: TestCase87832
 	And I click Row Actions for the first product returned
