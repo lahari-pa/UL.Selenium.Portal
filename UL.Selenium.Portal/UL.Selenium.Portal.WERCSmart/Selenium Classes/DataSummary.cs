@@ -310,7 +310,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						row["Associated UPC"] = savedUPC;
-
 					}
 					catch (Exception e)
 					{
