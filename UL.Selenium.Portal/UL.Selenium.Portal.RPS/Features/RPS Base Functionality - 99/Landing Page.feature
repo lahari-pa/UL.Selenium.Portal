@@ -10,8 +10,8 @@ Feature: Landing Page
 @ScenarioId:9730
 Scenario: [70245] UL Logo
 Given I click the UL Logo in the upper right of the page
-And I verify that a tab opens with url: https://msc.ul.com/en/
-Then I close the tab with url: https://msc.ul.com/en/
+And I verify that a tab opens with url: https://www.ul.com/
+Then I close the tab with url: https://www.ul.com/
 Then I click the UL Logo in the bottom of the page
 And I verify that no tab opens
 

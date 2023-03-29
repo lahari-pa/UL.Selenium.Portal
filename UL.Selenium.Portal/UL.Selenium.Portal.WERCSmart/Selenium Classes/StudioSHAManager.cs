@@ -1900,6 +1900,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool FindColumnInProductDataPageWithTable(Table table)
+		{
+
+			List<string> casNotFound = new List<string>();
+			List<string> casList = new List<string>();
+			List<string> percentNotFound = new List<string>();
+			List<string> percentList = new List<string>();
+			IList<IWebElement> CASnumbers = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//div[@class='ui-jqgrid-bdiv']//table[@id='listProductFormulation']//td[1]"), 2);
+			IList<IWebElement> percent = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@class='ui-jqgrid-bdiv']//table[@id='listProductFormulation']//td[3]"), 2);
+
+			
+			foreach (var CAS in CASnumbers)
+			{
+				casList.Add(CAS.Text);
+				
+			}
+			foreach (var cas in casList)
+			{
+				Report.Info(cas);
+			}
+			foreach (var percentage in percent)
+			{
+				percentList.Add(percentage.Text);
+			}
+			foreach(var per in percentList)
+			{
+				Report.Info(per);
+			}
+			
+			foreach (TableRow row in table.Rows)
+			{
+
+				if (!casList.Contains(row["CAS Number"]))
+				{
+					casNotFound.Add(row["CAS Number"]);
+					return false;
+				}
+				if (!percentList.Contains(row["Percent"]))
+				{
+					percentNotFound.Add(row["Percent"]);
+					return false;
+				}
+			}
+			
+
+			return true;
+
+		}
+
+
+
 		public string FindClientsForProduct(string productID)
 		{
 			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
