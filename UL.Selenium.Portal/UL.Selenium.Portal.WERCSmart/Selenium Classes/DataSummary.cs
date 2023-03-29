@@ -236,6 +236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								break;
 
 							default:
+								Report.Error($"index value: {i} does not match any defined cases for index values of 0-6");
 								break;
 						}
 
@@ -364,6 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								break;
 
 							default:
+								Report.Error($"index value: {i} does not match any defined cases for index value 0-6"); 
 								break;
 						}
 

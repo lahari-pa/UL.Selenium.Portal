@@ -1486,9 +1486,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (myHeader == null)
 			{
-				Report.Info("Failed to Find Header Text");
+				Report.Info("Failed to Find Purchase Summary Header Text");
 				Report.Screenshot();
-				return false;
+				return false; 
 			}
 			if (!myHeader.Displayed)
 			{
