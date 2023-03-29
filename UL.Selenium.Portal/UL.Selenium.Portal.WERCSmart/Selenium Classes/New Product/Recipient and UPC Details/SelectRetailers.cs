@@ -138,6 +138,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 			}
 		}
+		public bool ConfirmSelectAll()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Select all')]"), 2);
+
+			if (ele.Displayed)
+			{
+				Report.Info("Select All option found");
+				Report.Screenshot();
+				return true;
+			}
+			else
+			{
+				Report.Info("Select All option not found");
+				return false;
+			}
+		}
+
 
 		public bool RetailersShownInViewType(string viewType)
 		{

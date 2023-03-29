@@ -279,5 +279,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
 		}
 
+		[StepDefinition(@"I Confirm that on the top right corner the Select All option is available")]
+		public void IConfirmSelectAllOptionIstAvailable()
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.ConfirmSelectAll(), "Select All option is not available", "Select All option is available");
+		}
+
+		[StepDefinition(@"I Confirm that on the top right corner the Select All option is NOT available")]
+		public void IConfirmSelectAllOptionIsNotAvailable()
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsFalse(selSelectRetailers.ConfirmSelectAll(), "Select All option is available", "Select All option is not available");
+		}
+
+		[StepDefinition(@"I confirm when I select the retailer: (.*) the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle")]
+		public void IConfirmRetailerCannotBeSelected(string retailer)
+		{
+			var selectRetailers = new SelectRetailers();
+			Report.IsFalse(selectRetailers.SelectRetailer(retailer), "Successfully selected retailer: " + retailer, "Failed to select retailer: " + retailer + "!");
+		}
+
+		[StepDefinition(@"I Confirm that you are not allowed to check in This registration is for single - retailer subscription checkbox - red crossed circle appears")]
+		public void IConfirmNotAllowedToCheckSingleRetailerSubscriptionCheckbox()
+		{
+			var retailerObject = new Retailer();
+			Report.IsFalse(retailerObject.SubscriptionCheckboxNotAllowedToSelect(), "Allowed to select the checkbox", "Not allowed to select the checkbox");
+		}
+
+		[StepDefinition(@"I confirm I uncheck the retailer checkbox")]
+		public void IConfirmRetailerBeSelected()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.UnCheckRetailer(), "Retailer checkbox is selected", "Successfully unchecked retailer checkbox");
+		}
+		[StepDefinition(@"I confirm I select the retailer checkbox")]
+		public void IConfirmRetailerBeUnChecked()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.CheckRetailer(), "Retailer checkbox is not  selected", "Successfully checked retailer checkbox");
+		}
+
 	}
 }

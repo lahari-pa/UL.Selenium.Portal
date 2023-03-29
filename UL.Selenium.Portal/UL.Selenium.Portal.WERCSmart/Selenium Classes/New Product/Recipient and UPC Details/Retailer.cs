@@ -434,5 +434,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool UnCheckRetailer()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+			if (ele.Selected)
+			{
+				Report.Info("Uncheck the checkbox");
+				ele.TryClick();
+			}
+			return true;
+		}
+
+		public bool CheckRetailer()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+			if (!ele.Selected)
+			{
+				Report.Info("I select the checkbox");
+				ele.TryClick();
+			}
+			return true;
+		}
+
+		public bool SubscriptionCheckboxNotAllowedToSelect()
+		{
+			IWebElement retailerCheckbox = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+			retailerCheckbox.TryClick();
+			if (!retailerCheckbox.Selected)
+			{
+				Report.Info("Not allowed to select the checkbox");
+			}
+			Report.Error("Allowed to select the checkbox");
+			return false;
+		}
+
 	}
 }
