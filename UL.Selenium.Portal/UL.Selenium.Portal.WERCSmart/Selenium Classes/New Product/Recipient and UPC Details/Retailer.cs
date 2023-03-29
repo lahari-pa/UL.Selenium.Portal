@@ -459,11 +459,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Failure("Could not find the text");
 				return false;
 			}
-			if (actualText == expectedText)
-			{
-				return true;
-			}
-			return false;
+			return actualText == expectedText;
 		}
 
 	}
