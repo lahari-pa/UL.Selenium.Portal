@@ -61,7 +61,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-    Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Cardboard and size: 20
+    Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Glass Container and size: 20
 	And I click continue
 	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 	Given I call Shared Step 60567 (Upload Product Label only)
