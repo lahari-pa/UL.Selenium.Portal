@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 case ("bottom"):
                     {
-                        Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//footer//div[contains(@class,'footer-logo')]"), 2).TryClick(), "Failed to click the UL Logo at the bottom of the page!", "Successfully clicked the UL Logo at the bottom of the page!");
+                        Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//footer//img[contains(@src,'/Content/images/ul-logo.png')]"), 2).TryClick(), "Failed to click the UL Logo at the bottom of the page!", "Successfully clicked the UL Logo at the bottom of the page!");
                         return;
                     }
                 default:

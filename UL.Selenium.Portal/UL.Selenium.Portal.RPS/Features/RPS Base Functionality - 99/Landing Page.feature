@@ -10,8 +10,8 @@ Feature: Landing Page
 @ScenarioId:9730
 Scenario: [70245] UL Logo
 Given I click the UL Logo in the upper right of the page
-And I verify that a tab opens with url: https://msc.ul.com/en/
-Then I close the tab with url: https://msc.ul.com/en/
+And I verify that a tab opens with url: https://www.ul.com/
+Then I close the tab with url: https://www.ul.com/
 Then I click the UL Logo in the bottom of the page
 And I verify that no tab opens
 
@@ -51,8 +51,8 @@ And I verify that the following items are displayed in the Landing Page Footer:
 @ScenarioId:6436
 Scenario: [70244] I'd Like to Learn More
 And I click on the "I'd like to learn more" button in the Good business section
-And I verify that a tab opens with url: https://msc.ul.com/en/
-Then I close the tab with url: https://msc.ul.com/en/
+And I verify that a tab opens with url: https://www.ul.com/services/portfolios/chemical-data-management
+Then I close the tab with url: https://www.ul.com/services/portfolios/chemical-data-management
 And I verify that the I'd like to learn more link for section: Let's talk has a subject line containing: Retail Product Suite
 # I confirm that email address shown in the "To..." address is: ul.psiinfo@ul.com
 

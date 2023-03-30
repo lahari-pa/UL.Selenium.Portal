@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement ToolbarRight => FindElement(By.XPath(".//div[@id='navbarSupportedContent']"), 1);
 
-        private IWebElement UlLogo => this.ToolbarRight.FindElement(By.XPath(".//a[@class = 'pull-right ul-logo']"), 1);
+        private IWebElement UlLogo => this.ToolbarRight.FindElement(By.XPath(".//a[@class = 'nav-link ul-logo']"), 1);
 
         private IWebElement OfferingsRequestMoreInfoButton(string section) => FindElement(By.XPath($".//div[@class = 'row offerings'][last()]/div[(./h3[contains(text(),'{section}')])]/button"), 1);
 
