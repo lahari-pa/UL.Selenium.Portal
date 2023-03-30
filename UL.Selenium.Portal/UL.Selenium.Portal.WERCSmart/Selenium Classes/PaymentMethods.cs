@@ -1705,9 +1705,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				return this._btn_confirm.Displayed;
+				if (this._btn_confirm.Displayed)
+				{
+					return true;
+				}
+				else
+				{
+					return false; 
+				}		
 			}
-			catch (Exception)
+			catch (NoSuchElementException)
 			{
 				return false;
 			}
