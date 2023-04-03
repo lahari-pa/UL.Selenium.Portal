@@ -25,7 +25,6 @@ Feature: Alerts
 
 #Design => Ready
 @tfs_design
-@ignore
 @TestCase:56280
 Scenario: [56280] - Document is created and is ready for review
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
