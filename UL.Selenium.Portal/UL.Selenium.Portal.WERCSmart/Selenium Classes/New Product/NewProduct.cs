@@ -1230,12 +1230,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				
 				
-
-				
 				if (info.ContainerType.ToLower() != "none")
 				{
 					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-					containsType.Select(info.ContainerType);
+
+
+
+					var select = new SelectElement((IWebElement)containsType);
+
+					if (info.ContainerType == "any")
+					{
+						select.SelectByIndex(1);
+
+					}
+					else
+					{
+						containsType.Select(info.ContainerType);
+					}
 				}
 				
 				string regex = @"(.*)\((.*)\)";
