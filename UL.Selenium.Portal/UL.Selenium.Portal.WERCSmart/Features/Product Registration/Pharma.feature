@@ -39,7 +39,6 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Nitrogen       | 100     | false               | false       |            |
-
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
@@ -61,7 +60,6 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	When I click continue
 	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	When I click continue
-	#When I click continue
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
