@@ -304,6 +304,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
+					case "TReVorUser":
+						SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(value);
+						if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{value}' does not exist.",$"Success, TReVor user '{value}' exists."))
+						{
+							Report.IsTrue(thisProductSearch.EnterUser(TReVorUser.UserName),
+							"Failed to set user", "Successfully set user", false, false);
+						}
+						break;
 					case "Reviewer":
 						Report.IsTrue(thisProductSearch.EnterReviewer(value),
 							"Failed to set reviewer", "Successfully set reviewer", false, false);
@@ -4159,7 +4167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-
+	
 		[StepDefinition(@"I verify the file saved as: (.*) against the specific requirements for Daily Report - WERCSmart Additional Reports Published")]
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
@@ -4554,7 +4562,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-
+		
 		[StepDefinition(@"I save all clients for product saved as: (.*)")]
 		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
 		{
@@ -4769,6 +4777,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(id == idfound, "The id found was not equal to the produc ID in context", "The Product ID's matched!");
 		}
 
+		[StepDefinition(@"I confirm the Product Data window has opened")]
+		public void ConfirmProductDatawindowOpened()
+		{
+			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
+			Report.Info("Looking for SHA Manager Product data window");
+			bool foundWindow = false;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Checking handle: " + handle);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+				if (SeleniumWebDriver.CurrentDriver.FindElement(
+						By.XPath(".//span[contains(text(),'Formulation')]"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					Report.Screenshot();
+					var currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
+					Context.AddToContext("SHAManagerProductData", currentHandle);
+					foundWindow = true;
+					break;
+				}
+			}
+			if (!foundWindow)
+			{
+				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I check for the following columns in Formulation")]
+		public void ThenICheckForTheFollowingColumnsInFormulation(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.FindColumnInProductDataPageWithTable(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
 	}
 
 }

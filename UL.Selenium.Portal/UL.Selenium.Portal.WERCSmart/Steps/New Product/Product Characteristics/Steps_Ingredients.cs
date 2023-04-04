@@ -1121,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnDataInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
 		}
 
-
+		
 		[StepDefinition(@"I confirm the table in the popup view has the following column titles")]
 		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
 		{
@@ -1255,6 +1255,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.GetTheWPSIDForTheValidationOfProductNameFor449Characters(), "WPS ID for the Product is not shown at the end of the Product Name in brackets (parenthesis)", "WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)");
 		}
-		
+
+		[StepDefinition(@"I confirm the total percent of these five ingredients is (.*) %")]
+		public void GivenIConfirmPercentageOfFiveIngredients(string value)
+		{
+			Delay.Seconds(15);
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.TotalPercentage(value), "Failed to confirm the total percent '" + value + "' on the Ingredients page", "I confirm that the total percent '" + value + "' on the Ingredients page");
+		}
+		[StepDefinition(@"I Select the NO Button for the Cleaning products must comply with California Cleaning Product Right to Know Act.")]
+		public void GivenISelectOption()
+		{
+			Delay.Seconds(15);
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
+		}
+
 	}
 }

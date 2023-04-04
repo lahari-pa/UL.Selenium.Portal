@@ -27,10 +27,10 @@
 
 Feature: UPC
 #
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username    | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:87584
@@ -243,32 +243,32 @@ Scenario: [87832] View Shows Case UPC Data
 	Then I save the product information as: TestCase87832
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-	#	| Retailer |
-	#	| Amazon   |
-	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
-	#Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Given in the Additional Documents to Provide page I click Continue
-	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#Given If purchase details are showing click confirm order
-	#Given I navigate to the home page
-	#And I filter for the product saved as: TestCase87832
-	#And I click Row Actions for the first product returned
-	#And I click on the Row Action: View
-	#Then I switch to the Data Summary page
-	#And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
-	#	| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
-	#	| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
-	#	| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| Amazon   |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
+	Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I navigate to the home page
+	And I filter for the product saved as: TestCase87832
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	And The Data Summary section should be showing the following UPC table:
+		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
+		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
+		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
 @TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
@@ -298,7 +298,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
-	And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
+	And The Data Summary section should be showing the following UPC table:
 		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
 		| saved as UPC878251 | saved as UPC87825 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87825  |                   | Paper bag      | 2             |          |               | AM        |
@@ -520,7 +520,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
-	Given I close the Data Summary tab
+	Given I close the Review tab
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
@@ -840,7 +840,6 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 
 @TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
-	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -871,13 +870,13 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
 		| UPC            | Name     | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
-		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
-		| %UPC#115330_2% | MyChalk2 | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
-		| %UPC#115330_3% | MyChalk3 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
-		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
-		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
-		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
+		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 12345678               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
+		| %UPC#115330_2% | MyChalk2 | 2        | 32   | 12345678               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
+		| %UPC#115330_3% | MyChalk3 | 3        | 32   | 12345678               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
+		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 12345678               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
+		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 12345678               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
+		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 12345678               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
+		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 12345678               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then I click the 'Upload File' button and upload the file saved as: Bulktest115330
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330
 	Then In the Add Multiple dialog box I select all UPCs

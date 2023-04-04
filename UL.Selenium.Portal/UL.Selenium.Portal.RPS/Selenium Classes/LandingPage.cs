@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         protected override By ContainerElementLocator => By.XPath(BasePath);
 
-        private IWebElement ToolbarRight => FindElement(By.XPath(".//div[@id='navbarSupportedContent']"), 1);
+        private IWebElement ToolbarRight => FindElement(By.XPath(".//div[@class='btn-toolbar pull-right']"), 1);
 
         private IWebElement UlLogo => this.ToolbarRight.FindElement(By.XPath(".//a[@class = 'pull-right ul-logo']"), 1);
 

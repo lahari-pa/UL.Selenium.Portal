@@ -5464,7 +5464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			else
 			{
-				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
+				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='GTIN or UPC (include check digit)']/../../..//a[@title='Expand']"), 2);
 			}
 			return optionEl.TryClick();
 		}

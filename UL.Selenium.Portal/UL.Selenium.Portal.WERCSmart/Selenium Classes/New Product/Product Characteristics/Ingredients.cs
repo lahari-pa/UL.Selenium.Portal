@@ -2111,6 +2111,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+		
+		public bool TotalPercentage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + value + "')]"), 2);
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, Total percentage : '{Value.Text}'%");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool SelectOption()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"(//span[text()='No'])[3]"), 2);
+			return closeButton.TryClick();
+		}
 	}
 
 }

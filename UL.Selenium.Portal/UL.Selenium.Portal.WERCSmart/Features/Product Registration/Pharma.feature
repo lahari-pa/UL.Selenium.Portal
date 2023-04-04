@@ -36,15 +36,10 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	Then I click continue
 	Then I click continue
 	Given I fill all empty fields in the Pharma Ingredients screen
-	#	Given I add the following ingredients:
-	#	| ComponentName | Percent |
-	#	| Nitrogen      | 100     |
-
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Nitrogen       | 100     | false               | false       |            |
-	#Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
@@ -69,7 +64,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	#When I click continue
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
 
 
@@ -177,52 +172,52 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC128018
-	Given I click continue
-	Then I should see the Product Type Page
-	Then I set 'Product Name' to: prescription pharmaceutical, solid
-	Then I set 'Type of Product' to: prescription pharmaceutical, solid
-	Then I click continue
-	Given I enter the NDC number: 10866-0885-2
-	Then I save the product information as: TestCase128018
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	And I set the Secondary Physical State to be: Solid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-	Then I click continue
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
-	When I click continue
-	When I click continue
-	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-	When I click continue
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	When I click continue
-	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
-	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
-	And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
-	And I navigate to the home page
+Given I log in with the account saved in TReVor as: PharmaAccount
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC128018
+Given I click continue
+Then I should see the Product Type Page
+Then I set 'Product Name' to: prescription pharmaceutical, solid
+Then I set 'Type of Product' to: prescription pharmaceutical, solid
+Then I click continue
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase128018
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Dispersible
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
+Then I click continue
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
+When I click continue
+When I click continue
+Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+When I click continue
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+When I click continue
+When I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+And I navigate to the home page
+Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
+And I navigate to the home page
 
 
 
@@ -365,58 +360,56 @@ Scenario: [127791] Pharma - Retailer Default
 @TestCase:128671
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
-	Given I log in with the account saved in TReVor as: PharmaAccount
-	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC127847
-	Given I click continue
-	Then I should see the Product Type Page
-	Then I set 'Product Name' to: Prescription Pharmaceutical with Liquid Core
-	Then I set 'Type of Product' to: Prescription Pharmaceutical with Liquid Core
-	Then I click continue
-	Given I enter the NDC number: 10866-0885-2
-	Then I save the product information as: TestCase127847
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	And I set the Secondary Physical State to be: Solid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I add the following ingredients:
-		| ComponentName | Percent |
-		| Propane       | 100     |
-	And I click continue
-	Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	#| Propane       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-	Then I click continue
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
-	When I click continue
-	When I click continue
-	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-	Then I check for the following options in the Additonal Documents to Provide section
-		| Option                       |
-		| Safety Data Sheet (Optional) |
-	When I click continue
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#NOTE: There is a known issue about the Purchase Summary screen NOT showing the Thank you message in staging and production, a bug was created for this issue. The message does appear in INT - Integration site.
-#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+Given I log in with the account saved in TReVor as: PharmaAccount
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC127847
+Given I click continue
+Then I should see the Product Type Page
+Then I set 'Product Name' to: Prescription Pharmaceutical with Liquid Core
+Then I set 'Type of Product' to: Prescription Pharmaceutical with Liquid Core
+Then I click continue
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase127847
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Dispersible
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I add the following ingredients:
+		| ComponentName    | Percent |
+		| Propane             | 100     |
+And I click continue
+Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+  Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
+Then I click continue
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+When I click continue
+When I click continue
+Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+Then I check for the following options in the Additonal Documents to Provide section
+| Option                       |
+| Safety Data Sheet (Optional) |
+When I click continue
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+When I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 
 
 
@@ -472,49 +465,56 @@ And I navigate to the home page
 @TestCase:128134
 Scenario: [128134] Pharma -  Product in Recertification
 
-	Given I call Shared Step (Login to WERCSmart - Pharma Account)
-	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC128018
-	Given I click continue
-	Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-	Given I enter the NDC number: 10866-0885-2
-	Then I save the product information as: TestCase128018
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	And I set the Secondary Physical State to be: Solid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
-	Then I click continue
-	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Contains, capsule count: 50 and size: 1
-	When I click continue
-	When I click continue
-	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-	Then I check for the following options in the Additonal Documents to Provide section
-		| Option                       |
-		| Safety Data Sheet (Optional) |
-	When I click continue
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	When I click continue
-	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
+Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC128018
+Given I click continue
+Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase128018
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Dispersible
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
+And I set the Select applicable modes of transport for which you classify the product. field to: DOT
+And I select option: Yes, Shipped with Limited quantity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+And I select option: Yes, Shipped with Consumer Commodity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+Then I click continue
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, flammable, n.o.s.
+And I set the Select Hazard Class (if available) option to: 2.1
+Then I click continue
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
+When I click continue
+When I click continue
+Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+Then I check for the following options in the Additonal Documents to Provide section
+| Option                       |
+| Safety Data Sheet (Optional) |
+When I click continue
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+When I click continue
+When I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+And I navigate to the home page
 
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
