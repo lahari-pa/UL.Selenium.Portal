@@ -697,15 +697,19 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 	Given I set all product information options to No
 	Given in the Product Information page I click Continue
-	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I select the following retailers in the 'Select Retailers' window
-		| Retailer |
-		| Amazon   |
-		| CVS      |
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#And I select the following retailers in the 'Select Retailers' window
+	#	| Retailer |
+	#	| Amazon   |
+	#| CVS      |
+	And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	| Retailer |
+	| Amazon   |
 	Given I click Add Casepack
 	Given in the Universal Product Code (UPC) page I click Continue
 	Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
