@@ -292,5 +292,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.HoverOverText(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
 		}
+
+		[StepDefinition(@"I confirm the checkbox (.*) NOT present for stand alone batteries in Retailer page")]
+		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value)
+		{
+			var retailerObject = new Retailer();
+			Report.IsFalse(retailerObject.ConfirmRetailerRegistrationCheckbox(value), "Failed to confirm the checkbox is not displayed", "Successfully confirmed that there is no checkbox is displayed");
+		}
+
 	}
 }
