@@ -1259,6 +1259,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
 					return false;
 				}
+
+				Report.Info("entering the size");
+
 				sizeField.EnterText(info.Size);
 				if (info.Dpci.Length > 0)
 				{
