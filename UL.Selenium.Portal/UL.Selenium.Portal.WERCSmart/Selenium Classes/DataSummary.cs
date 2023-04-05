@@ -99,9 +99,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
-		public bool ConfirmHeaders(ICollection<string> headers, string section)
+		public bool ConfirmHeaders(ICollection<string> headers)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			
+
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"), 2);
 			var foundHeaders = new List<string>();
@@ -125,9 +127,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool ConfirmCaseUPC(TableRows rows, string section)
+		public bool ConfirmCaseUPC(TableRows rows)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement caseUPCIcon = table.FindElement(By.XPath("//i[@class='fa fa-truck']"), 2);
@@ -150,8 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			IWebElement caseUPCRow = table.FindElement(By.XPath("//i[@class='fa fa-truck']/../../.."), 2);
-			IList<IWebElement> caseUPCValues = caseUPCRow.FindElements(By.TagName("div"), 2);
-
+			string associatedUPCValue = "";
 			bool found = false;
 			foreach (TableRow row in rows)
 			{
@@ -178,6 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						row["Associated UPC"] = savedUPC;
+						associatedUPCValue = savedUPC; 
 					}
 					catch (Exception e)
 					{
@@ -190,16 +192,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					found = true;
 					string[] rowValues = row.Values.ToArray();
-					for (int i = 0; i < rowValues.Length; i++)
+					
+					for ( int i = 0 ; i < rowValues.Length; i++)
 					{
-						if (rowValues[i] != caseUPCValues[i].Text.Trim())
+
+						IWebElement tableEle;
+						string caseUPCValue = ""; 
+						switch (i)
 						{
-							Report.Info("Values do not match: '" + rowValues[i] + "' and '" + caseUPCValues[i].Text.Trim() + "'.");
-							return false;
+							case 0:
+								 tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{caseUPCNumber}')]"));
+								 caseUPCValue = tableEle.Text.Trim(); 
+								break;
+
+							case 1:
+								tableEle=caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{associatedUPCValue}')]"));
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 2:
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]"));
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 3:
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[text()='{rowValues[i]}']"), 2);
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 4:
+								tableEle = caseUPCRow.FindElement(By.XPath($"(.//div[text()='{rowValues[i]}'])[2]"), 2);
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 5:
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(normalize-space(), '{rowValues[i]}')]"), 2);
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 6:
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]"), 2);
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							default:
+								Report.Error($"index value: {i} does not match any defined cases for index values of 0-6");
+								break;
+						}
+
+
+
+						if (rowValues[i] == caseUPCValue)
+						{
+							Report.Info($"Values match: '{rowValues[i]}' and '{caseUPCValue}' .");
 						}
 						else
 						{
-							Report.Info("Values match: '" + rowValues[i] + "' and '" + caseUPCValues[i].Text.Trim() + "'.");
+							
+							Report.Info($"Values do not match: '{rowValues[i]}' and '{caseUPCValue}' .");
+							return false;
 						}
 					}
 				}
@@ -214,9 +265,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool ConfirmUPC(TableRows rows, string section)
+		public bool ConfirmUPC(TableRows rows)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement upcRow = null;
@@ -234,6 +285,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string upcNumber = upcValues != null ? upcValues[0].Text : "";
 
 			bool found = false;
+			int rowIndex = 0; 
 			foreach (TableRow row in rows)
 			{
 				if (row["UPC Number"].ToLower().Contains("saved as"))
@@ -267,23 +319,69 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 				}
 
-				if (upcNumber != "" && row["UPC Number"] == upcNumber)
+				if (upcNumber != "" && row["UPC Number"] == upcNumber && rowIndex == 1)
 				{
 					found = true;
 					string[] rowValues = row.Values.ToArray();
 					for (int i = 0; i < rowValues.Length; i++)
 					{
-						if (rowValues[i] != upcValues[i].Text.Trim())
+						IWebElement tableEle;
+						string caseUPCValue = "";
+						switch (i)
 						{
-							Report.Info("Values do not match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
-							return false;
+							case 0:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{upcNumber}')]")); // locates upc number
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 1:
+								tableEle = upcRow.FindElement(By.XPath(".//td[5]")); //locates the associated upc 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 2:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]")); // locates container type 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 3:
+								tableEle = upcRow.FindElement(By.XPath($".//div[text()='{rowValues[i]}']"), 2); // locates size 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 4:
+								tableEle = upcRow.FindElement(By.XPath(".//td[9]"));//locates quantity 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 5:
+								tableEle = upcRow.FindElement(By.XPath($".//td[10]")); // locates transport 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							case 6:
+								tableEle = upcRow.FindElement(By.XPath($".//div[contains(text(),'{rowValues[i]}')]"), 2); // locates retailers 
+								caseUPCValue = tableEle.Text.Trim();
+								break;
+
+							default:
+								Report.Error($"index value: {i} does not match any defined cases for index value 0-6"); 
+								break;
+						}
+
+						if (rowValues[i] == caseUPCValue)
+						{
+							Report.Info($"Values match: '{rowValues[i]}' and '{caseUPCValue}' .");
 						}
 						else
 						{
-							Report.Info("Values match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
+							Report.Info($"Values do not match: '{rowValues[i]}' and '{caseUPCValue}' .");
+							return false;
 						}
 					}
 				}
+
+				rowIndex++;
 			}
 
 			if (found == false)
@@ -297,7 +395,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//h2[contains(text(), 'Provide the product's UPC(s), including container type and size (ounces)')]/../../preceding-sibling::div[@class='form - group']//div[@class='summary - question - container - bottom']//table"), 2);
+			
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement headerRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + header + @""")]/../.."), 2);
@@ -307,21 +406,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (head.Text == header)
 				{
-					break;
-				}
-				index++;
+					IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
+					IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2).ToList();
+					List<string> getUpcValues=upcValues.Select(x => x.GetValue()).ToList(); 
+				
+					if (getUpcValues.Contains(value) && getUpcValues.Contains(upc))
+					{
+						return true;
+					}
+
+					break; 
+
+				}				
 			}
-
-			IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
-			IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
-
-			IWebElement containerType = upcValues[index];
-			if (containerType.Text == value)
-			{
-				return true;
-			}
-
 			return false;
+
 		}
 
 		public string SGetProductName()
@@ -364,7 +463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
-			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]"), 60);
+			IWebElement ingredientsTable = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='summary-question-container-bottom'][1]//table[1]"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
@@ -387,7 +486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < ingredientsRows.Count - 1; i++)
 			{
 				IWebElement row = ingredientsRows[i];
-				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath(".[1]//div[@data-bind='html: Data']"));
+				ReadOnlyCollection<IWebElement> rowColumns = row.FindElements(By.XPath("./../..//td"));
 				var thisIngredient = new Ingredients.Ingredient();
 				string CASAndNaME = rowColumns[0].GetValue();
 				string pattern = @"([A-Za-z\d\-\,^\r]+)";

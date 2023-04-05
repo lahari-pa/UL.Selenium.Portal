@@ -873,6 +873,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool UPCSectionFieldsAvailable(string field)
+		{
+			try
+			{
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='"+ field +"']"), 2);
+				return Field != null;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public string GetValidOptionForUPCPackageType()
 		{
 			if (!this.UPCPackageTypeFieldExists())
@@ -1129,7 +1142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			try
 			{
-				IWebElement container = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IWebElement container = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'GTIN/UPC')]/..//input"), 2);
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
@@ -1217,12 +1230,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				
 				
-
-				
 				if (info.ContainerType.ToLower() != "none")
 				{
 					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-					containsType.Select(info.ContainerType);
+
+
+
+					var select = new SelectElement((IWebElement)containsType);
+
+					if (info.ContainerType == "any")
+					{
+						select.SelectByIndex(1);
+
+					}
+					else
+					{
+						containsType.Select(info.ContainerType);
+					}
 				}
 				
 				string regex = @"(.*)\((.*)\)";
@@ -5422,15 +5446,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement transportationOption = this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: transportToString()']"));
 			string transportationValue = transportationOption.Text;
 			Report.Info("Transportation Option : "+transportationValue);
-			if (transportationValue.Equals(option))
-			{
-				return true;
-			}
-			return false;
+			return transportationValue.Equals(option);
 		}
 		public bool SelectTransportationOption(string option)
 		{
-			IWebElement selectionBox = this.containerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
+			IWebElement selectionBox = this.ContainerElement.FindElement(By.XPath("(.//select[@class='form-control'])[3]"), 2);
 			selectionBox.Select(option);
 			return selectionBox.SelectedOption() == option;
 		}
@@ -5448,7 +5468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			else
 			{
-				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
+				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='GTIN or UPC (include check digit)']/../../..//a[@title='Expand']"), 2);
 			}
 			return optionEl.TryClick();
 		}

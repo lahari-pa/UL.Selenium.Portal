@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			IEnumerable<Ingredients.Ingredient> Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
 			foreach (Ingredients.Ingredient item in Ingredients)
 			{
-				Report.IsTrue(newProductIngredients.AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+				Report.IsTrue(newProductIngredients.AddIngredient(item), $"Failed to add ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}!", $"Successfully added ingredient: {(item.CASNumber == "" ? item.ComponentName : item.CASNumber)}");
 			}
 		}
 
@@ -1026,11 +1026,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
-		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to click the ok button with the following text: " + text, "Successfully clicked the ok button with the following text: " + text);
+			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
+		}
+
+		[StepDefinition(@"I click the Ok button in the popup view with the following text: (.*)")]
+		public void ThenIConfirmIClicktheOkButtonInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
-
 
 		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
@@ -1046,7 +1052,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnDataInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
 		}
 
-
+		
 		[StepDefinition(@"I confirm the table in the popup view has the following column titles")]
 		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
 		{
@@ -1111,6 +1117,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(refValue), "failed to enter ingredient reference number", "Successfully entered ingredient reference number");
 		}
 
+		[StepDefinition(@"In the Ingredients screen, I ensure that there is a field called: (.*)")]
+		public void FieldInTheIngredientScreen(string field)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+	
+			Report.IsTrue(ingredientsObject.IngredientsFieldAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
+		}
+
+		[StepDefinition(@"In the Data Summary page, I ensure that the value (.*) shown under the field Ingredient Reference Number \(Optional\) displays as it was keyed on the Ingredients page")]
+		public void FieldInTheSummaryPage(string value)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.FieldAvailableInSummaryPage(value), "Failed to ensure that the  value '" + value + "' shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page", "I ensure that the value '" + value + "'shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page");
+		}
+
 		[StepDefinition(@"I (should|should not) see the DOT exceptions error message")]
 		public void DOTExceptionsErrorMessageShowing(string should)
 		{
@@ -1164,6 +1186,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.GetTheWPSIDForTheValidationOfProductNameFor449Characters(), "WPS ID for the Product is not shown at the end of the Product Name in brackets (parenthesis)", "WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)");
 		}
-		
+
+		[StepDefinition(@"I confirm the total percent of these five ingredients is (.*) %")]
+		public void GivenIConfirmPercentageOfFiveIngredients(string value)
+		{
+			Delay.Seconds(15);
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.TotalPercentage(value), "Failed to confirm the total percent '" + value + "' on the Ingredients page", "I confirm that the total percent '" + value + "' on the Ingredients page");
+		}
+		[StepDefinition(@"I Select the NO Button for the Cleaning products must comply with California Cleaning Product Right to Know Act.")]
+		public void GivenISelectOption()
+		{
+			Delay.Seconds(15);
+			Ingredients ingredientsObject = new Ingredients();
+
+			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
+		}
+
 	}
 }
