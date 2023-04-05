@@ -602,12 +602,12 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 	Given I set all product information options to No
 	Given in the Product Information page I click Continue
-	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I select the following retailers in the 'Select Retailers' window
+	And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| Amazon   |
 	Given I click the 'Add' button
@@ -624,7 +624,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
-	Given I fill in the UPC data; UPC:0727506002788, Product Type:Paper bag, Product Weight:5
+	Given I fill in the UPC data; UPC:0079400861603, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Then I check for the appropriate alert: No error
 	Given in the Universal Product Code (UPC) page I click Continue
