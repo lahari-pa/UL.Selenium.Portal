@@ -10,7 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.Reporting.Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -366,6 +366,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"{(expected ? "Did not expect" : "Expected")} to see the ingredients error message!",
 				$"Ingredients error message {(expected ? "was" : "was not")} showing as expected");
 		}
+
+		
+
+
+		[StepDefinition(@"I should not see the ingredient obsolete error message")]
+		public void CheckForObsoleteIngredient()
+		{		
+			var ingredients = new Ingredients();
+			var NP = new StepsNewProduct();
+
+			string obsoleteMessage = "The following formula items are not valid (Obsolete)"; 
+			string displayedMessage = ingredients.GetIngredientErrorMessage();
+			string casNumber;
+
+			ingredients.WaitForContainerToBeVisible(); 
+						
+				if(displayedMessage != null)
+				{
+				Report.Screenshot(); 
+				    Report.Info("An error message is displayed!");
+					Report.Info("Checking if the error message present contains an obsolete ingredient");
+
+					if (displayedMessage.Contains(obsoleteMessage))
+					{
+
+					Report.Screenshot(); 
+					Report.Error($"Messaged displayed on the page contains the Obsolete Error Message: {obsoleteMessage}"); 
+
+					string[] splitMessage = displayedMessage.Split(':');
+					string extractedValue = splitMessage[splitMessage.Length - 1].Trim().TrimEnd(',');
+					string[] splitValue = extractedValue.Split(')');
+					casNumber = splitValue[0].Substring(1);
+
+
+					if (Report.IsTrue(ingredients.GetAvailableIngredientsCASNumber().Contains(casNumber), $"Expected Cas Number: {casNumber} cannot be found in the list of available ingredients" , $"Cas Number: {casNumber} was successfully found in the available ingredients list!"))
+						{
+							Report.IsTrue(ingredients.ClickRemoveByCasNumber(casNumber), $"Failed to remove ingredient with the cas number: {casNumber}" , $"Successfully removed ingredient with the cas number: {casNumber}");
+
+							new GlobalSteps().WaitForAModalDialogToOpen();
+
+							if(Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes" , "Successfully clicked yes"))
+							{
+
+							Delay.Seconds(10);
+							Report.StartSubStep("In the Ingredients page I click Continue");
+							NP.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+							}
+
+						}
+					}
+					else
+					{
+
+					Report.Screenshot(); 
+					Report.Success($"Cannot find the Obsolete Error Message! Message Displayed: {displayedMessage} | Expected Message: {obsoleteMessage} ");
+
+					}
+			}
+			else
+			{
+				Report.Screenshot();
+				Report.Success("Error message not present on the page!"); 
+			}
+			
+			
+
+		}
+
 
 		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
 		public void IngredientsErrorMessageShowingCorrectText(string text)
