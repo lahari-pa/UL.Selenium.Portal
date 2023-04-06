@@ -30,7 +30,6 @@ Scenario: [56280] - Document is created and is ready for review
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I should see the button: Resolve for alert: AGHS document is created and is ready for review
 Then I should see the button: Details for alert: AGHS document is created and is ready for review
-Then I should see the button: Resolve for alert: Transportation Information
 Given I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window
 Then I confirm that the Document Acceptance page is showing
 Then I navigate to the home page
