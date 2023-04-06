@@ -261,7 +261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AlertsButtonIsDisplayed(string button, string alert)
 		{
-			IWebElement AlertButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), '" + alert + "')]/../../following-sibling::td//a[text()='" + button + " ']"), 2);
+			IWebElement AlertButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), '" + alert + "')]/../../following-sibling::td//a[starts-with(text(), '" + button + "')]"), 2);
 			return AlertButton.Displayed;
 		}
 		//public bool DataConsentPopupPresent()
