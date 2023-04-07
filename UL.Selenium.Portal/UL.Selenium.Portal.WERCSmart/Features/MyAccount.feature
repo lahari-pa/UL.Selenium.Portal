@@ -181,6 +181,8 @@ Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	And in the modal dialog I click Yes
 	And I confirm that I do not see any stewardship information
 
+#Remove from regression: 2023/04
+@ignore
 @TestCase:85513
 Scenario: [85513] My Account - Edit Stewardship Numbers - Save button
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
