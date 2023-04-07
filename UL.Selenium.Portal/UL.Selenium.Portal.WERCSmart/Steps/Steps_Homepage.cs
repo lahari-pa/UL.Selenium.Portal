@@ -1164,7 +1164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIShouldSeeTheButtonForAlert(string button, string alert)
 		{
 			var Alert = new Alerts(alert);
-			Report.IsTrue(Alert.AlertsButtonIsDisplayed(button, alert), "Failed to find button", "Successfully found button");
+			Report.IsTrue(Alert.AlertsButtonIsDisplayed(button, alert), $"Failed to find button {button} for alert {alert}", $"Successfully found button {button} for alert {alert}");
 
 
 		}
