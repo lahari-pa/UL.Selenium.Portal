@@ -712,8 +712,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
-			Report.StartStep("If purchase details are showing click confirm order");
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			Report.StartStep("In the Purchase Summary page Confirm thank you message is shown if product details is not shown");
+			newProductSteps.ConfirmThankYouMessageIfProductDetailsNotPresent("hank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
 			//SHA Manager

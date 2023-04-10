@@ -1718,9 +1718,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"HVOC (high volatile organic compound) content as weight percent of the total formulation", "10");
 			Report.StartSubStep(
-				"I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 5.6");
+				"I set the MVOC (medium volatile organic compound) content as weight percentage of the total formulation field to: 5.6");
 			MyNewProduct.SetTheSectionOptionTo(
-				"MVOC (microbial volatile organic compound) content as weight percentage of the total formulation",
+				"MVOC (medium volatile organic compound) content as weight percentage of the total formulation",
 				"5.6");
 			Report.StartSubStep("In the Volatile Organic Compounds (VOC) page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
