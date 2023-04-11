@@ -5930,7 +5930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickClose()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@class='btn btn-default']"), 2).TryClick();
 		}
 		public class RegulatoryListItem
 		{
