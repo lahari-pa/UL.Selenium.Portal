@@ -279,5 +279,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
 		}
 
+		[StepDefinition(@"I confirm for the checkbox in Retailer page : (.*)")]
+		public void ThenIConfirmRetailerRegistrationCheckbox(string value)
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.ConfirmRetailerRegistrationCheckbox(value), "Failed to confirm the checkbox is displayed", "Successfully confirmed the checkbox is displayed");
+		}
+
+		[StepDefinition(@"I confirm the message on retailers page : (.*)")]
+		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.HoverOverText(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
+		}
 	}
 }

@@ -292,3 +292,19 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 		| No Retailer/No UPC Product							   |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
+# Created by Saikiran Chittampally
+@TestCase:181949
+Scenario: [181949] Single Retailer Checkbox and Hover message
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase181949
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Retailer Page
+	Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
+	Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181949

@@ -125,7 +125,7 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -142,7 +142,7 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -539,7 +539,7 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -556,7 +556,7 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
