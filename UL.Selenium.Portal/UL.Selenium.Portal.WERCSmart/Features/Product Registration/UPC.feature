@@ -27,10 +27,10 @@
 
 Feature: UPC
 
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username    | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:87584
@@ -186,7 +186,6 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
 	#Given I save to context name: TestCase1 and value: 1525111
 	#Given I save to context name: TestCase2 and value: 1501057
-	
 	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: TestCase1
 	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: TestCase2
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -210,7 +209,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Option        |
 		| Size (Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
-
+	
 @TestCase:87832
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
