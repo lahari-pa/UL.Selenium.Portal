@@ -34,6 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement AlertName = element.FindElement(By.XPath(".//p"), 2);
 				if (AlertName == null)
 				{
+					Report.Info("Failed to get alert's name");
 					return false;
 				}
 				string getAlertName = AlertName.Text;
@@ -41,10 +42,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					IWebElement Button = element.FindElement(By.XPath($".//a[starts-with(text(),{button})]"));
 					if (Button == null)
-					{ return false; }
+					{
+						return false;
+					}
 					return Button.Displayed;
 				}
 			}
+			Report.Info($"Failed to find alert {alertName}");
 			return false;
 
 		}
