@@ -146,7 +146,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
-		| Alkaline     | <any>        | 6                               | 6                                  |
+		| Alkaline     | <any>        | 6                                 | 6                                        |
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -167,8 +167,8 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
-    Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
-    And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -221,32 +221,32 @@ Scenario: [87832] View Shows Case UPC Data
 	Then I save the product information as: TestCase87832
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-	#	| Retailer |
-	#	| Amazon   |
-	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
-	#Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Given in the Additional Documents to Provide page I click Continue
-	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#Given If purchase details are showing click confirm order
-	#Given I navigate to the home page
-	#And I filter for the product saved as: TestCase87832
-	#And I click Row Actions for the first product returned
-	#And I click on the Row Action: View
-	#Then I switch to the Data Summary page
-	#And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
-	#	| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
-	#	| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
-	#	| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| Amazon   |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
+	Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I navigate to the home page
+	And I filter for the product saved as: TestCase87832
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	And The Data Summary section should be showing the following UPC table:
+		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
+		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
+		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
 @TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
@@ -257,7 +257,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87825
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -276,7 +276,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
-	And The Data Summary section Provide the product's UPC(s), including container type and size (ounces) should be showing the following UPC table:
+	And The Data Summary section should be showing the following UPC table:
 		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
 		| saved as UPC878251 | saved as UPC87825 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87825  |                   | Paper bag      | 2             |          |               | AM        |
@@ -317,7 +317,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase96071_2
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -436,7 +436,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109516)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase109516) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase109516) for
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Amazon                     |
@@ -478,7 +478,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase105352
-		And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
@@ -498,7 +498,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
-	Given I close the Data Summary tab
+	Given I close the Review tab
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
@@ -580,12 +580,12 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 	Given I set all product information options to No
 	Given in the Product Information page I click Continue
-	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I select the following retailers in the 'Select Retailers' window
+	And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| Amazon   |
 	Given I click the 'Add' button
@@ -602,7 +602,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
-	Given I fill in the UPC data; UPC:0727506002788, Product Type:Paper bag, Product Weight:5
+	Given I fill in the UPC data; UPC:0079400861603, Product Type:Paper bag, Product Weight:5
 	When I click continue
 	Then I check for the appropriate alert: No error
 	Given in the Universal Product Code (UPC) page I click Continue
@@ -675,20 +675,19 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 	Given I set all product information options to No
 	Given in the Product Information page I click Continue
-	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I select the following retailers in the 'Select Retailers' window
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| Amazon   |
-		| CVS      |
 	Given I click Add Casepack
 	Given in the Universal Product Code (UPC) page I click Continue
 	Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
 		| Placeholder                       |
-		| UPC Number                        |
+		| GTIN or UPC (include check digit) |
 		| Size (Weight Ounces)              |
 		| Quantity of Units within the Case |
 	Then I check if the dropdowns with the following default options display the error 'This is a required field.' bottom
@@ -704,7 +703,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase115334
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -737,7 +736,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase109596
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -772,7 +771,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase109596)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109596 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109596)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Amazon                     |
@@ -818,12 +817,11 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 
 @TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
-	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase115330
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -849,13 +847,13 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
 		| UPC            | Name     | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
-		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
-		| %UPC#115330_2% | MyChalk2 | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
-		| %UPC#115330_3% | MyChalk3 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
-		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
-		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
-		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
+		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 12345678     | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
+		| %UPC#115330_2% | MyChalk2 | 2        | 32   | 12345678     | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
+		| %UPC#115330_3% | MyChalk3 | 3        | 32   | 12345678     | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
+		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 12345678     | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
+		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 12345678     | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
+		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 12345678     | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
+		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 12345678     | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then I click the 'Upload File' button and upload the file saved as: Bulktest115330
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330
 	Then In the Add Multiple dialog box I select all UPCs
@@ -878,13 +876,13 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 
 @ignore
 @TestCase:120798
-Scenario:[120798] "U" for UPC Update for Suspended Status
+Scenario: [120798] "U" for UPC Update for Suspended Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120798
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -943,13 +941,13 @@ Scenario:[120798] "U" for UPC Update for Suspended Status
 
 @ignore
 @TestCase:120849
-Scenario:[120849] "U" for UPC Update No Fee Charge
+Scenario: [120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120798
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -974,7 +972,7 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120798)
-	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for	
+	Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase79428) for
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Walgreens                  |
@@ -1003,32 +1001,32 @@ Scenario:[120849] "U" for UPC Update No Fee Charge
 @TestCase:156789
 Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I generate a random UPC number and save as: UPC156789
-Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I save the product information as: TestCase156789
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC156789
+	Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I save the product information as: TestCase156789
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC156789, container type: Plastic Container and size: 2 do not click continue
-Given I confirm SKU field is blank
-Given I click continue
-Then I should see the Regulatory Documents to Provide Page
-Given In the New Product page I click tab: Recipient and UPC Details
-Given I click the page heading: Universal Product Code (UPC)
-Given I delete UPC: saved as UPC156789
-Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 12345!@#$%12
-Given In the Universal Product Code (UPC) page I click Save
-Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
-Given I delete UPC: saved as UPC156789
-Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
-Given In the Universal Product Code (UPC) page I click Save
-Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC156789, container type: Plastic Container and size: 2 do not click continue
+	Given I confirm SKU field is blank
+	Given I click continue
+	Then I should see the Regulatory Documents to Provide Page
+	Given In the New Product page I click tab: Recipient and UPC Details
+	Given I click the page heading: Universal Product Code (UPC)
+	Given I delete UPC: saved as UPC156789
+	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 12345!@#$%12
+	Given In the Universal Product Code (UPC) page I click Save
+	Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
+	Given I delete UPC: saved as UPC156789
+	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
+	Given In the Universal Product Code (UPC) page I click Save
+	Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789

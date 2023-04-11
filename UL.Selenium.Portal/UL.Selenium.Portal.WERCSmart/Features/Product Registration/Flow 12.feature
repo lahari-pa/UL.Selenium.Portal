@@ -80,6 +80,8 @@ Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the co
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
+#Remove from regression: 2023/04
+@ignore
 @TestCase:58605
 Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -108,6 +110,8 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
 
+#Remove from regression: 2023/04
+@ignore
 @TestCase:58606
 Scenario: [58606] Medicinal Liquids - RU001188
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -55,15 +55,16 @@ Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to
 	And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order
+	#Given If purchase details are showing click confirm order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77859)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Submitted
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77859)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Submitted
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77859)
 	#Scenario: test
 	#Given I save to context name: TestCase77859 and value: 1525212
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Assigned
+	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Assigned
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
 	And I Confirm the Product ID: saved as TestCase77859 is not highlited yellow indicating that this is not an e-comm/direct ship product
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77859)
 	And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)

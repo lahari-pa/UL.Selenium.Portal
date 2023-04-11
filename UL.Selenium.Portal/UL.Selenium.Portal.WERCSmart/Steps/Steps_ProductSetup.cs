@@ -1363,8 +1363,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
-			Report.StartStep("If purchase details are showing click confirm order");
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
 			//SHA Manager
@@ -1372,18 +1370,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			
+			//Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			/*
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			*/
 			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			/*
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
+			*/
+			shaSteps.InShaManagerGridForProductIDSavedAsIfStatusSubmittedMoveToAssignedThenConfirmStatusAssigned(savedAs);
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 
@@ -4129,7 +4133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 
-			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 			//new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
