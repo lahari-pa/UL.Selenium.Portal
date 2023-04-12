@@ -434,38 +434,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool UnCheckRetailer()
+		public bool SetRetailerCheck()
 		{
 			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+			
 			if (ele.Selected)
 			{
 				Report.Info("Uncheck the checkbox");
 				ele.TryClick();
+				return true;
 			}
-			return true;
-		}
-
-		public bool CheckRetailer()
-		{
-			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
-			if (!ele.Selected)
+			else if(!ele.Selected)
 			{
-				Report.Info("I select the checkbox");
+				Report.Info("check the checkbox");
 				ele.TryClick();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
-		public bool SubscriptionCheckboxNotAllowedToSelect()
+		public bool SubscriptionCheckboxSelectable(bool value)
 		{
 			IWebElement retailerCheckbox = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
-			retailerCheckbox.TryClick();
-			if (!retailerCheckbox.Selected)
+			if (retailerCheckbox.Enabled==value)
 			{
-				Report.Info("Not allowed to select the checkbox");
+				retailerCheckbox.TryClick();
+				Report.Info("Allowed to select the checkbox");
+				return value;
 			}
-			Report.Error("Allowed to select the checkbox");
-			return false;
+			else if (!retailerCheckbox.Enabled == value)
+			{
+				Report.Info("Not Allowed to select the checkbox");
+				return value;
+			}
+			return true;		
 		}
 
 	}
