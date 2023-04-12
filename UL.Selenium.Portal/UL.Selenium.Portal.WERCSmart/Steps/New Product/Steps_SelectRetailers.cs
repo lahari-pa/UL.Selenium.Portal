@@ -297,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value)
 		{
 			var retailerObject = new Retailer();
-			Report.IsFalse(retailerObject.ConfirmRetailerRegistrationCheckbox(value), "Failed to confirm the checkbox is not displayed", "Successfully confirmed that there is no checkbox is displayed");
+			Report.IsFalse(retailerObject.ConfirmRetailerRegistrationCheckbox(value), "Failed to confirm the checkbox is not present", "Successfully confirmed that the checkbox is not present");
 		}
 
 	}
