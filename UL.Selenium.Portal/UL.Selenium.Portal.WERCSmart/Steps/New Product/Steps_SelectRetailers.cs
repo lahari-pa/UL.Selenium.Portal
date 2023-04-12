@@ -297,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmRetailerCannotBeSelected(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
-			Report.IsFalse(selectRetailers.SelectRetailer(retailer), "Successfully selected retailer: " + retailer, "Failed to select retailer: " + retailer + "!");
+			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
 		}
 
 		[StepDefinition(@"I Confirm that if the checkbox enabled : (.*) then not allowed to check in This registration is for single - retailer subscription checkbox - red crossed circle appears")]
