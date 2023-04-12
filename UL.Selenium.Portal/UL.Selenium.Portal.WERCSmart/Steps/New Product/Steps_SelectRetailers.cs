@@ -283,14 +283,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmSelectAllOptionIstAvailable()
 		{
 			var selSelectRetailers = new SelectRetailers();
-			Report.IsTrue(selSelectRetailers.ConfirmSelectAll(), "Select All option is not available", "Select All option is available");
+			Report.IsTrue(selSelectRetailers.SelectAllDisplayed(), "Select All option is not available", "Select All option is available");
 		}
 
 		[StepDefinition(@"I Confirm that on the top right corner the Select All option is NOT available")]
 		public void IConfirmSelectAllOptionIsNotAvailable()
 		{
 			var selSelectRetailers = new SelectRetailers();
-			Report.IsFalse(selSelectRetailers.ConfirmSelectAll(), "Select All option is available", "Select All option is not available");
+			Report.IsFalse(selSelectRetailers.SelectAllDisplayed(), "Select All option is available", "Select All option is not available");
 		}
 
 		[StepDefinition(@"I confirm when I select the retailer: (.*) the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle")]
