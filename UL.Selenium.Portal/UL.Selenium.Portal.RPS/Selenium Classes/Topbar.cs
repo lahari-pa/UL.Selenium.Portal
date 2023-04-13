@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         #region Page Objects
         protected override By ContainerElementLocator => By.XPath("//div[contains(concat(' ',normalize-space(@class),' '),' bar-top ')]");
 
-        private IWebElement RightToolBar => FindElement(By.XPath(".//ul[@class='nav navbar-nav ml-auto']"), 1);
+        private IWebElement RightToolBar => FindElement(By.XPath(".//ul[@class='nav navbar-nav navbar-right']"), 1);
 
         private IWebElement UserAccount => this.RightToolBar.FindElement(By.Id("dAcccount"), 1);
 

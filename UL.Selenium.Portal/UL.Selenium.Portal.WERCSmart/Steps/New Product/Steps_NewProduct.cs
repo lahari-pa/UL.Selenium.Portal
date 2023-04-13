@@ -2400,38 +2400,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
-		{
-			// if subscription upgrade - Proceed ?
+		{			
 			Report.UseSubSteps = true;
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
-			Report.StartSubStep($"Looking for the purchase summary header...");
-			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
-			GeneralUtilities.Wait_for_load_finish();
-			Report.StartSubStep($"In the purchase summary screem I go to click 'Confirm order'...");
-			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
-			//TODO: Add steps to renew subscription
-			var pmtk = new PaymentMethods_Thank_You();
-			if (pmtk.WaitForContainerToExist())
+			var mySub = new PaymentMethods_Subscription_Billing();
+			
+			if (mySub.Purchase_Header_Correct())
 			{
-				Report.StartSubStep("In the Thank You screen I check the Header is correct");
-				MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
-				Report.StartSubStep("In the Thank You screen I confirm the following statement is shown");
-				MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");
+			
+				if (mySub.ConfirmOrderButtonExists())
+				{
+					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+					GeneralUtilities.WaitForRefreshToDisappear(mySub._btn_confirm);
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Screenshot();
+				}
+
+				var pmtk = new PaymentMethods_Thank_You();
+				if (pmtk.WaitForContainerToExist())
+				{					
+					Report.StartSubStep("In the Thank You screen I confirm the following statement is shown");
+					MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");					
+				}
 			}
 			else
 			{
-				var MyStepsSubscriptonEnrollment = new StepsSubscriptionEnrollment();
-				Report.StartSubStep("The Subscription Upgrade page should load");
-				MyStepsSubscriptonEnrollment.ThenTheSubscriptionEnrollmentPageShouldLoad();
-				Report.StartSubStep("I should see Proceed button enabled");
-				MyStepsSubscriptonEnrollment.ThenIShouldSeeProceedButtonDisabled("enabled");
-				Report.StartSubStep("I click on the Proceed button");
-				MyStepsSubscriptonEnrollment.ClickProceedButton();
-				var StepsSE_new = new StepsSubscriptionEnrollmentNew();
-				Report.StartSubStep("In the Subscription Enrollment Modal, I click the Checkout button");
-				StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
-				Report.StartSubStep("In the Payment Methods screen I click Continue");
-				MyStepsPaymentMethods.ThenIClickContinue();
+				var sub = new SubscriptionEnrollment();
+
+				if (sub.Get_Page_Header().Equals("Subscription  Upgrade"))
+				{
+					var MyStepsSubscriptonEnrollment = new StepsSubscriptionEnrollment();
+					Report.StartSubStep("The Subscription Upgrade page should load");
+					MyStepsSubscriptonEnrollment.ThenTheSubscriptionEnrollmentPageShouldLoad();
+					Report.StartSubStep("I should see Proceed button enabled");
+					MyStepsSubscriptonEnrollment.ThenIShouldSeeProceedButtonDisabled("enabled");
+					Report.StartSubStep("I click on the Proceed button");
+					MyStepsSubscriptonEnrollment.ClickProceedButton();
+					var StepsSE_new = new StepsSubscriptionEnrollmentNew();
+					Report.StartSubStep("In the Subscription Enrollment Modal, I click the Checkout button");
+					StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
+					Report.StartSubStep("In the Payment Methods screen I click Continue");
+					MyStepsPaymentMethods.ThenIClickContinue();
+				}
+				else
+				{
+					Report.Error("Page header does not include or equal 'Subscription Uprgade'!");
+					Report.Screenshot();
+				}
 			}
 		}
 

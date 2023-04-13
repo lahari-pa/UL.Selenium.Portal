@@ -63,7 +63,8 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
 
 
-
+#Remove from regression: 2023/04
+@ignore
 @TestCase:73085
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

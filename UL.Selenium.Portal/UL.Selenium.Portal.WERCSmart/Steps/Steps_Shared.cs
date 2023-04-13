@@ -410,20 +410,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
 			Report.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
+			//var MyNewProductSteps = new StepsNewProduct();
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
-			Report.StartSubStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should see the ingredients error message");
 			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
 			Report.StartSubStep("I add the following ingredients:");
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartSubStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartSubStep("I should not see the ingredient obsolete error message");
+			stepsNewProductIngredients.CheckForObsoleteIngredient();
+/*
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
+			*/
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -441,7 +445,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
 			}
-
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
@@ -486,7 +489,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.Failure("Popup not found");
 						Report.Screenshot();
-						return;
+						Report.StartStep("In the Ingredients page I click Continue");
+						MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+						//return; 
 					}
 				}
 				else
@@ -502,6 +507,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 			}
+
+
 		}
 
 		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
@@ -1116,8 +1123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(
-	@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
 		{
 			Report.UseSubSteps = true;
@@ -1135,6 +1141,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Size = size,
 					UpcNumber = upc_,
 				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 			}
@@ -14167,6 +14176,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step \(SHA > Select Product > Review\) for product saved as: (.*)")]
+		public void Shared134404_SHA_SelectProduct_ClickOnReview(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			var selStepsStudio = new Steps_Studio();
+			Report.StartSubStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			// saving the current window so we can naviate back
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartSubStep("I click 'Review'");
+			selStepsStudio.InSHAManagerIClickOnBottomMenuItem("Review");
+			Delay.Seconds(5);
+		}
+		[StepDefinition(@"I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question")]
+		public void GivenICallSharedStepProductInformation_USPesticideNoNoOSHANoDSNoCACleaningVNoPLNoGNFRWithoutChildQuestion1()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsIngredients();
+			Report.StartSubStep("I set any option for: 'Which best describes your product, including when FIFRA 25(b) Exempt'");
+			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
+			if (new NewProduct().GetAllOptionsForSection("Which best describes your product, including when FIFRA 25(b) Exempt").Contains("Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
+			}
+			else
+			{
+				MyNewProduct.SelectFirstOptionInSection("Which best describes your product, including when FIFRA 25(b) Exempt");
+				new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
+
+			}
+			Report.StartSubStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep(
+				"I set the Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration. field to: No");
+			//TestCase:207581
+			stepsNewProductIngredients.GivenISelectOption();
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 	}
 }

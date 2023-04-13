@@ -786,6 +786,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el?.Text;
 		}
 
+		public List<string> GetAvailableIngredientsCASNumber()
+		{
+		
+			List<IWebElement> Ingredients = this.ContainerElement.FindElements(By.XPath(".//tr//td[@class='component-name']//small[contains(text(),'')]")).ToList();
+			return Ingredients.Select(x => x.GetValue()).ToList();
+		
+		}
+
+		public bool ClickRemoveByCasNumber(string number)
+		{
+
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($"//tr[.//td//div[small[contains(text(),'{number}')]]]//td[@class='remove delete-row']"));
+			Report.Info("Attempting to click remove based on the cas number");
+			return el.TryClick();
+		}
+
+	
 		/// <summary>
 		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
 		/// </summary>
@@ -2012,7 +2029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
 			ingredients.Add("Citric acid");
-
+			ingredients.Add("Nitrogen"); 
 
 
 
@@ -2094,5 +2111,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+		
+		public bool TotalPercentage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + value + "')]"), 2);
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, Total percentage : '{Value.Text}'%");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool SelectOption()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"(//span[text()='No'])[3]"), 2);
+			return closeButton.TryClick();
+		}
 	}
+
 }
