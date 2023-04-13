@@ -278,19 +278,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
 		}
-
-		[StepDefinition(@"I Confirm that on the top right corner the Select All option is available")]
-		public void IConfirmSelectAllOptionIstAvailable()
+		[StepDefinition(@"I Confirm that on the top right corner the Select All option is (available|NOT available)")]
+		public void IConfirmSelectAllOptionIstAvailable(string availableNotAvailable)
 		{
 			var selSelectRetailers = new SelectRetailers();
-			Report.IsTrue(selSelectRetailers.SelectAllDisplayed(), "Select All option is not available", "Select All option is available");
-		}
-
-		[StepDefinition(@"I Confirm that on the top right corner the Select All option is NOT available")]
-		public void IConfirmSelectAllOptionIsNotAvailable()
-		{
-			var selSelectRetailers = new SelectRetailers();
-			Report.IsFalse(selSelectRetailers.SelectAllDisplayed(), "Select All option is available", "Select All option is not available");
+			bool value = availableNotAvailable == "available";
+			Report.IsTrue(selSelectRetailers.SelectAllDisplayed() == value, $"Failure, Select All option {(value ? "Not available" : "available")} and should be {availableNotAvailable}", $"Success, Select All option {availableNotAvailable}");
 		}
 
 		[StepDefinition(@"I confirm when I select the retailer: (.*) the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle")]
