@@ -403,7 +403,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I save all retailers in the Select Retailers window in alphabetical order as: AllSelectRetailers181979
 	Given I click Done in the Select Retailers popup
 	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers181979
-	Given I Confirm that if the checkbox enabled : true then not allowed to check in This registration is for single - retailer subscription checkbox - red crossed circle appears
+	Given I Confirm that if the checkbox disabled
 	Given I click 'Add Retailers' in the Retailers page
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup

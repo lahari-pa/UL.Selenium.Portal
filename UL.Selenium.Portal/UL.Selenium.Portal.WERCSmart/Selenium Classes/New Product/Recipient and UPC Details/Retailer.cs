@@ -452,22 +452,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return false;
 		}
-
-		public bool SubscriptionCheckboxSelectable(bool value)
+		public bool SubscriptionCheckboxEnbable()
 		{
 			IWebElement retailerCheckbox = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
-			if (retailerCheckbox.Enabled==value)
-			{
-				retailerCheckbox.TryClick();
-				Report.Info("Allowed to select the checkbox");
-				return value;
-			}
-			else if (!retailerCheckbox.Enabled == value)
-			{
-				Report.Info("Not Allowed to select the checkbox");
-				return value;
-			}
-			return true;		
+
+			return retailerCheckbox.Enabled;
 		}
 
 	}

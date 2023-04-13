@@ -300,12 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
 		}
 
-		[StepDefinition(@"I Confirm that if the checkbox enabled : (.*) then not allowed to check in This registration is for single - retailer subscription checkbox - red crossed circle appears")]
-		public void IConfirmNotAllowedToCheckSingleRetailerSubscriptionCheckbox(bool value)
-		{
-			var retailerObject = new Retailer();
-			Report.IsTrue(retailerObject.SubscriptionCheckboxSelectable(value), "Allowed to select the checkbox", "Not allowed to select the checkbox");
-		}
+		
 		[StepDefinition(@"I confirm I uncheck the retailer checkbox")]
 		[StepDefinition(@"I confirm I check the retailer checkbox")]
 		public void IConfirmRetailerBeSelected()
@@ -313,7 +308,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SetRetailerCheck(), "Failed to click Retailer checkbox", "Successfully clicked retailer checkbox");
 		}
-		
+		[StepDefinition(@"I Confirm that if the checkbox (enabled|disabled)")]
+		public void IConfirmNotAllowedToCheckSingleRetailerSubscriptionCheckbox(string enabledDisabled)
+		{
+			var retailerObject = new Retailer();
+			bool value = enabledDisabled == "enabled";
+			Report.IsTrue(retailerObject.SubscriptionCheckboxEnbable() == value, $"Failure, check box is {enabledDisabled} when it should {(value ? "enabled" : "disabled")}.", $"Success, checkbox is {enabledDisabled}.");
+		}
+
 
 	}
 }
