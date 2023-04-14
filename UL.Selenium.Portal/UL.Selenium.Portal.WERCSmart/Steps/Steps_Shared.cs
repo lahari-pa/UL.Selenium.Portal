@@ -410,7 +410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
 			Report.UseSubSteps = true;
-			var MyNewProductSteps = new StepsNewProduct();
+			//var MyNewProductSteps = new StepsNewProduct();
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -421,9 +421,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
 			Report.StartSubStep("I add the following ingredients:");
 			stepsNewProductIngredients.AddIngredients(ingredientsTable);
+			Report.StartSubStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+			Report.StartSubStep("I should not see the ingredient obsolete error message");
+			stepsNewProductIngredients.CheckForObsoleteIngredient();
+/*
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 
+			*/
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -441,7 +447,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
 			}
-
 
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
@@ -486,7 +491,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.Failure("Popup not found");
 						Report.Screenshot();
-						return;
+						Report.StartStep("In the Ingredients page I click Continue");
+						MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
+						//return; 
 					}
 				}
 				else
@@ -502,6 +509,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 			}
+
+
 		}
 
 		[StepDefinition(@"I call Shared Step 57570c \(Enter Ingredients\) and add the following ingredients for Canda Only:")]
@@ -1116,8 +1125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(
-	@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
 		{
 			Report.UseSubSteps = true;
@@ -1135,6 +1143,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Size = size,
 					UpcNumber = upc_,
 				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 			}

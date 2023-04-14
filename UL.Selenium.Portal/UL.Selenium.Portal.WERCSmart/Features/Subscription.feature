@@ -125,7 +125,7 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -142,7 +142,7 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -518,7 +518,7 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Choose...
 	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Articles panel does exist
 	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confirm the text area containins: An article is a manufactured item other than a fluid or particle which under normal conditions does not pose a physical health risk. Common examples include Light bulbs (do not contain any hazard component or ingredient), Electronics (circuit-board products without a battery), and Kits / gift packs ( two or more unrelated products combined in a package that uses a single upc.)
-#	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
+	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
 #	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Single Retailer Subscription heading does exist
 #	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated, Enhanced & Articles panel does exist
 #	Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section I confirm the Formulated, Enhanced & Articles panel does have the message: Coming Soon!
@@ -539,7 +539,7 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -556,7 +556,7 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area displays: In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the Learn More link
 	Then I confirm https://www.ulpurview.com/ tab does exist
-	Then I close https://www.ulpurview.com/ tab
+	Then I close the https://www.ulpurview.com/ tab
 	Then I confirm https://www.ulpurview.com/ tab does not exist
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I click the info button
 	Then In the Select a subscription plan section Limited panel PurView Catalog Access list item, I confrim the info text area is not displayed
@@ -589,10 +589,10 @@ Scenario: [67822] New subscription to a new supplier from My account - Visual Ch
 	Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I confrim the info text area displays: Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.
 	Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I click the info button
 	Then In the Select a subscription plan section Premium panel Draft OSHA-Compliant Safety Data Sheet list item, I confrim the info text area is not displayed
-#	Then In the Select a subscription plan section, I confirm the Single Retailer panel does exist
-#	Then In the Select a subscription plan section I confirm the Single Retailer panel is grayed out
-#	Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Create and Manage Product Data
-#	Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Submit registration to single retailer + No Retailer
+	Then In the Select a subscription plan section, I confirm the Single Retailer panel does exist
+	Then In the Select a subscription plan section I confirm the Single Retailer panel is grayed out
+	Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Create and Manage Product Data
+	Then In the Select a subscription plan section Single Retailer panel, I confirm the list contains: Submit registration to single retailer + No Retailer
 	Then I confirm the Select an Agent Support Service Plan [optional] section does exist
 	Then In the Select an Agent Support Service Plan [optional] section, I confirm the text area displays: Personalized Agent Support Services are available to provide options for quality, dependable assistance ranging from direct phone access - to data entry - to advanced reporting and liaison services.
 	Then In the Select an Agent Support Service Plan [optional] section text area, I click on the View Agent Support Service Agreement link
