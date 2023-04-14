@@ -406,8 +406,7 @@ Scenario: [95988] Mass Upload UPCs Floating
 
 @TestCase:109516
 Scenario: [109516] Archive Retailer should Archive UPC
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109516
 	Given I generate a random UPC number and save as: UPC109516_2
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
