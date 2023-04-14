@@ -186,8 +186,10 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
 	#Given I save to context name: TestCase1 and value: 1525111
 	#Given I save to context name: TestCase2 and value: 1501057
-	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: Chalk
-	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: Chalk
+	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: TestCase1
+	Given I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: TestCase2
+	Given I close the current window
+	And I navigate to the WERCSmart site
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
@@ -197,7 +199,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Then I save the product information as: TestCase87595
 	Given I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: Chalk and product 2: Chalk)
+	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: TestCase1 and product 2: TestCase2)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -404,7 +406,8 @@ Scenario: [95988] Mass Upload UPCs Floating
 
 @TestCase:109516
 Scenario: [109516] Archive Retailer should Archive UPC
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC109516
 	Given I generate a random UPC number and save as: UPC109516_2
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
