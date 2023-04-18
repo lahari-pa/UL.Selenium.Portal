@@ -387,3 +387,49 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 	Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
 	Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181949
+
+# Created by Saikiran Chittampally
+@TestCase:181979
+Scenario: [181979] Single Retailer Checkbox Checks
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase181979
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Retailer Page
+	Then I confirm the following retailers are showing in the Retailer page
+		| Retailer					 |
+		| No Retailer/No UPC Product |
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I Confirm that on the top right corner the Select All option is NOT available
+	Then In the 'Select Retailers' window I select the retailer: Amazon
+	Given I click 'Add Retailers' in the Retailers page
+	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
+	Given I click Done in the Select Retailers popup
+	Given I confirm I uncheck the retailer checkbox
+	Then I click 'Add Retailers' in the Retailers page
+	Then I Confirm that on the top right corner the Select All option is available
+	Given I click the Select all retailers option in the Select Retailers popup
+	Then all retailers are selected in the Select Retailers window
+	Given I save all retailers in the Select Retailers window in alphabetical order as: AllSelectRetailers181979
+	Given I click Done in the Select Retailers popup
+	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers181979
+	Given I Confirm that if the checkbox disabled
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I click the Select all retailers option in the Select Retailers popup
+	Given I click Done in the Select Retailers popup
+	Given I confirm I check the retailer checkbox
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I Confirm that on the top right corner the Select All option is NOT available
+	Then In the 'Select Retailers' window I select the retailer: Amazon
+	Given I click 'Add Retailers' in the Retailers page
+	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
+	Given I click Done in the Select Retailers popup
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
