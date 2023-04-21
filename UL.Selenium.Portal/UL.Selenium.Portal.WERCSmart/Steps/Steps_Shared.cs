@@ -426,10 +426,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should not see the ingredient obsolete error message");
 			stepsNewProductIngredients.CheckForObsoleteIngredient();
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/QA
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
