@@ -547,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Accounts_Navigation(string nav_option)
 		{
 			Report.Info("Navigating to the page - " + nav_option);
-			IWebElement myNav = this._nav_accounts.FindElement(By.XPath(".//li/a[text()='" + nav_option + "']"), 5);
+			IWebElement myNav = this._nav_accounts.FindElement(By.XPath(".//li/a[text()='" + nav_option + "']"), 15);
 			bool navigated;
 			if (myNav == null)
 			{
