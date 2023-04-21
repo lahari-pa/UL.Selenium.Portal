@@ -417,6 +417,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			Report.StartSubStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should see the ingredients error message");
 			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
 			Report.StartSubStep("I add the following ingredients:");
