@@ -414,6 +414,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			Report.StartSubStep("I should see the ingredients error message");
 			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
@@ -423,11 +425,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should not see the ingredient obsolete error message");
 			stepsNewProductIngredients.CheckForObsoleteIngredient();
-/*
-			Report.StartStep("In the Ingredients page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
-
-			*/
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -2606,7 +2603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
-			tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			#//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
@@ -2617,10 +2614,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
-			MyNewProductSteps.SetTheSectionOptionTo(
-				"Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			//MyNewProductSteps.SetTheSectionOptionTo(
+			//	"Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			//Report.StartSubStep(
+			//	"I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartSubStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -2642,7 +2639,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var tableSecond = new Table("Section");
 			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 
-			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableSecond.AddRow(
 				"Select countries the product may be sold in");
 			tableSecond.AddRow(
