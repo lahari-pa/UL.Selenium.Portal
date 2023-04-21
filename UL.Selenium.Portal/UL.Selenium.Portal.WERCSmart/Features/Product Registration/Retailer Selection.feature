@@ -11,6 +11,7 @@
 @RetailPartners
 @run_RetailerSelection
 @UPC
+@PaymentMethods
 
 Feature: Retailer Selection
 
@@ -434,3 +435,45 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
 	Given I click Done in the Select Retailers popup
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
+
+	
+# Created by Saikiran Chittampally
+@TestCase:183582
+Scenario: [183582] Behaviors and Restrictions on Duplicate UPCs 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC183582
+Then I save the product information as: TestCase183582
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
+Given In the 'Select Retailers' window I select the retailer: Target
+Given I click continue
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 4
+Then in the Universal Product Code (UPC) page I click Continue
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given in the Optional Comments page I click Continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given In the Thank You screen I click Home
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 12
+Then in the Universal Product Code (UPC) page I click Continue
+And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase183582
+
+
