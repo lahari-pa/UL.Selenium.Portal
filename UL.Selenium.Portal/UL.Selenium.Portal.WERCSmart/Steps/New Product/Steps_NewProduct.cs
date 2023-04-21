@@ -2450,6 +2450,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Purchase Summary page Confirm thank you message is shown if product details is not shown: (.*)")]
+		public void ConfirmThankYouMessageIfProductDetailsNotPresent(string message)
+		{
+			var mySub = new PaymentMethods_Subscription_Billing();
+			if (mySub.Product_Billing_Header_Displayed())
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - If purchase details are showing click confirm order");
+				Report.Info("The Product Billing section was displayed, so trying to click 'Confirm Order'");
+				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+				Delay.Seconds(10);
+			}
+			else
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - In the Thank You screen I check the Confirmation statement is correct");
+				try
+				{
+					var myPay = new PaymentMethods_Thank_You();
+					Report.Info($"Thank You Text = {message}");
+					Report.IsTrue(myPay.Thank_You_TextExists(message.Trim()), $"Displayed Text does not contain: '{message}'",
+						$"Displayed Text contains: '{message}'");
+				}
+				catch (Exception ex)
+				{
+					Report.Failure(ex.Message);
+					throw;
+				}
+			}
+		}
+
+
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{

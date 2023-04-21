@@ -163,4 +163,4 @@ Scenario: [92943] Wine - RU001418 - Packaging Group II (Greater > 70% of Alcohol
 	Given in the Additional Documents to Provide section page I click Continue
 	Given in the optional comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
