@@ -411,7 +411,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I click 'Add Retailers' in the Retailers page
 	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
 	Given I click Done in the Select Retailers popup
-	Given I confirm I uncheck the retailer checkbox
+	Given I click the single retialer checkbox
 	Then I click 'Add Retailers' in the Retailers page
 	Then I Confirm that on the top right corner the Select All option is available
 	Given I click the Select all retailers option in the Select Retailers popup
@@ -419,12 +419,12 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I save all retailers in the Select Retailers window in alphabetical order as: AllSelectRetailers181979
 	Given I click Done in the Select Retailers popup
 	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers181979
-	Given I Confirm that if the checkbox disabled
+	Given I confirm if the single retailer checkbox is disabled
 	Given I click 'Add Retailers' in the Retailers page
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
 	Given I click Done in the Select Retailers popup
-	Given I confirm I check the retailer checkbox
+	Given I click the single retialer checkbox
 	Given I click 'Add Retailers' in the Retailers page
 	Then the 'Select Retailers' window appears
 	Given I Confirm that on the top right corner the Select All option is NOT available
