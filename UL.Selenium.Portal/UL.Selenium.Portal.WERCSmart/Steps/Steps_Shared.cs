@@ -5552,7 +5552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var retailer = new Retailer();
 				retailer.WaitForContainerToBeVisible();
 
-				if (retailer.ConfirmRetailerRegistrationCheckboxDisplayed())
+				if (retailer.ConfirmSingleRetailerCheckboxDisplayed())
 				{
 					if (retailer.CheckSingleRetailerCheckboxSelected())
 					{

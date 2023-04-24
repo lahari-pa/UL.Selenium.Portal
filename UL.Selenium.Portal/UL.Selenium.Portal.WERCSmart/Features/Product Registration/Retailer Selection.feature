@@ -306,7 +306,7 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
-	Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
+	Then I confirm if the single retailer checkbox is displayed on the retailer page
 	Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181949
 
@@ -334,7 +334,7 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I should see the Retailer Page
-Given I confirm the single retailer checkbox is displayed on the retailer page
+Given I confirm if the single retailer checkbox is displayed on the retailer page
 Given I confirm if the single retailer checkbox is displayed on the retailer page
 And The selected retailers on the Retailer page should be:
 		| Retailer                   |
@@ -451,7 +451,7 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
+Then I confirm if the single retailer checkbox is displayed on the retailer page
 Given In the 'Select Retailers' window I select the retailer: Target
 Given I click continue
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 4
