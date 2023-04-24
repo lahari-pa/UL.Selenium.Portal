@@ -424,7 +424,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
 	Given I click Done in the Select Retailers popup
-	Given I click the single retialer checkbox
+	Given I click the single retailer checkbox
 	Given I click 'Add Retailers' in the Retailers page
 	Then the 'Select Retailers' window appears
 	Given I Confirm that on the top right corner the Select All option is NOT available
