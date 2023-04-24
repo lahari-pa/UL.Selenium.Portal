@@ -12,7 +12,6 @@
 @run_RetailerSelection
 @UPC
 @PaymentMethods
-@SelectRetailers 
 
 Feature: Retailer Selection
 
