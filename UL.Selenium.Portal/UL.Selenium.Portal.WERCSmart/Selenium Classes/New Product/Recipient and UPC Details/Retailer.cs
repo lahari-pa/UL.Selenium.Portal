@@ -436,8 +436,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmSingleRetailerCheckboxDisplayed()
 		{
-			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program']"), 2);
-			if (checkBox != null)
+			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program']"), 2);
+			if (checkbox.Displayed)
 			{
 				Report.Info("Single retailer checkbox was displayed on the page");
 				return true;
@@ -487,13 +487,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckSingleRetailerCheckboxSelected()
 		{
 			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
-			if (ele.Selected)
-			{
-				Report.Info("The single retailer checkbox is selected");
-				return true; 
-			}
-			Report.Info("The single retailer checkbox is not selected"); 
-			return false; 
+
+			Report.Info("Attempting to confirm the single retailer checkbox is selected.");
+			return ele.Selected;
 		}
 
 		public bool SubscriptionCheckboxEnbable()
