@@ -5549,9 +5549,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsNewProduct = new StepsNewProduct();
 			foreach (TableRow thisRetailer in retailers.Rows)
 			{
+				var retailer = new Retailer();
+				retailer.WaitForContainerToBeVisible();
+
+				if (retailer.ConfirmSingleRetailerCheckboxDisplayed())
+				{
+					if (retailer.CheckSingleRetailerCheckboxSelected())
+					{
+						if (retailers.Rows.Count > 1)
+						{
+							var selectRetailers = new StepsSelectRetailers();
+							selectRetailers.ClickTheSingleRetailerCheckbox();
+						}
+					}					
+				}
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
+
 			}
 			Report.StartSubStep("I click continue");
 			selStepsNewProduct.ClickContinue();

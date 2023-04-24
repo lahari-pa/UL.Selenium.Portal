@@ -294,15 +294,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		
-		[StepDefinition(@"I confirm I uncheck the retailer checkbox")]
-		[StepDefinition(@"I confirm I check the retailer checkbox")]
-		public void IConfirmRetailerBeSelected()
+		[StepDefinition(@"I click the single retailer checkbox")]
+		public void ClickTheSingleRetailerCheckbox()
 		{
 			var retailerObject = new Retailer();
-			Report.IsTrue(retailerObject.SetRetailerCheck(), "Failed to click Retailer checkbox", "Successfully clicked retailer checkbox");
+			Report.IsTrue(retailerObject.ClickSingleRetailerCheckbox(), "Failed to click the Single Retailer checkbox", "Successfully clicked the Single Retailer checkbox");
 		}
-		[StepDefinition(@"I Confirm that if the checkbox (enabled|disabled)")]
-		public void IConfirmNotAllowedToCheckSingleRetailerSubscriptionCheckbox(string enabledDisabled)
+
+		[StepDefinition(@"I confirm if the single retailer checkbox is selected")]
+		public void ConfirmIfSingleRetailerCheckboxisSelected()
+		{
+			var retailer = new Retailer();
+			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected", "Single retailer checkbox is selected"); 
+		}
+
+		[StepDefinition(@"I confirm if the single retailer checkbox is displayed on the retailer page")]
+		public void ConfirmIfSingleRetailerCheckboxIsDisplayed()
+		{
+			var retailer = new Retailer();
+			Report.IsTrue(retailer.ConfirmSingleRetailerCheckboxDisplayed(), "The single retailer checkbox was displayed on the page!", "The single retailer checkbox was not displayed on the page");
+		}
+
+		[StepDefinition(@"I confirm if the single retailer checkbox is (enabled|disabled)")]
+		public void ConfirmIfSingleRetailerCheckboxIsEnabled(string enabledDisabled)
 		{
 			var retailerObject = new Retailer();
 			bool value = enabledDisabled == "enabled";
