@@ -434,7 +434,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool ConfirmRetailerRegistrationCheckboxDisplayed()
+		public bool ConfirmSingleRetailerCheckboxDisplayed()
 		{
 			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program']"), 2);
 			if (checkBox != null)

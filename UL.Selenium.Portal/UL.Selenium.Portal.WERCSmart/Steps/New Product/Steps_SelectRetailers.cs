@@ -308,6 +308,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected", "Single retailer checkbox is selected"); 
 		}
 
+	
+
 		[StepDefinition(@"I confirm if the single retailer checkbox is (enabled|disabled)")]
 		public void ConfirmIfSingleRetailerCheckboxIsEnabled(string enabledDisabled)
 		{

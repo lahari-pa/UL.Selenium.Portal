@@ -12,6 +12,7 @@
 @run_RetailerSelection
 @UPC
 @PaymentMethods
+@SelectRetailers 
 
 Feature: Retailer Selection
 
@@ -334,7 +335,8 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I should see the Retailer Page
-Given I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
+Given I confirm the single retailer checkbox is displayed on the retailer page
+Given I confirm if the single retailer checkbox is displayed on the retailer page
 And The selected retailers on the Retailer page should be:
 		| Retailer                   |
 		| No Retailer/No UPC Product |
@@ -363,7 +365,7 @@ And I should not see the following UPC buttons:
 	Given in the Universal Product Code (UPC) page I click Continue
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Retailer
-	Given I confirm I uncheck the retailer checkbox
+	Given I click the single retailer checkbox
 	And I click Save in The Product Page
 	And I should see the following UPC buttons:
 		| Option       |
@@ -373,13 +375,13 @@ And I should not see the following UPC buttons:
 	Then In the Universal Product Code (UPC) page I click Save
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Retailer
-	Given I Confirm that if the checkbox disabled
+	Given I confirm if the single retailer checkbox is disabled
 	And I click the page heading: Universal Product Code (UPC)
 	Given I delete UPC: saved as UPC1828240
 	Then In the Universal Product Code (UPC) page I click Save
 	And In the New Product page I click tab: Recipient and UPC Details
 	And I click the page heading: Retailer
-	Given I confirm I check the retailer checkbox
+	Given I click the single retailer checkbox
 	And I click Save in The Product Page
 	Then I should see the Universal Product Code (UPC) Page
 	And I should not see the following UPC buttons:
