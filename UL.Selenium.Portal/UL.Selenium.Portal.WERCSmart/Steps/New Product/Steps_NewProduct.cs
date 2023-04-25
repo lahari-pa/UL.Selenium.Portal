@@ -2406,8 +2406,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var mySub = new PaymentMethods_Subscription_Billing();
 			
 			if (mySub.Purchase_Header_Correct())
-			{
-			
+			{			
 				if (mySub.ConfirmOrderButtonExists())
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
@@ -2415,12 +2414,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 				}
+				else
+				{
+					Report.Info("Purchase details page is not showing"); 
+				}
+
+				Report.Info("Checking if thank you page is showing instead");
 
 				var pmtk = new PaymentMethods_Thank_You();
 				if (pmtk.WaitForContainerToExist())
 				{					
 					Report.StartSubStep("In the Thank You screen I confirm the following statement is shown");
-					MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");					
+					MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");
+				}
+				else
+				{
+					Report.Info("Thank you page is not showing");				
 				}
 			}
 			else
@@ -2441,6 +2450,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
 					Report.StartSubStep("In the Payment Methods screen I click Continue");
 					MyStepsPaymentMethods.ThenIClickContinue();
+					Report.StartSubStep("In the Purchase Summary screen I click Confirm Order");
+					MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+					Report.StartSubStep("In the Thank You screen I check the Header is correct"); 
+					MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
 				}
 				else
 				{
@@ -2449,6 +2462,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 			}
 		}
+
+		[StepDefinition(@"In the Purchase Summary page Confirm thank you message is shown if product details is not shown: (.*)")]
+		public void ConfirmThankYouMessageIfProductDetailsNotPresent(string message)
+		{
+			var mySub = new PaymentMethods_Subscription_Billing();
+			if (mySub.Product_Billing_Header_Displayed())
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - If purchase details are showing click confirm order");
+				Report.Info("The Product Billing section was displayed, so trying to click 'Confirm Order'");
+				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+				Delay.Seconds(10);
+			}
+			else
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - In the Thank You screen I check the Confirmation statement is correct");
+				try
+				{
+					var myPay = new PaymentMethods_Thank_You();
+					Report.Info($"Thank You Text = {message}");
+					Report.IsTrue(myPay.Thank_You_TextExists(message.Trim()), $"Displayed Text does not contain: '{message}'",
+						$"Displayed Text contains: '{message}'");
+				}
+				catch (Exception ex)
+				{
+					Report.Failure(ex.Message);
+					throw;
+				}
+			}
+		}
+
 
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
