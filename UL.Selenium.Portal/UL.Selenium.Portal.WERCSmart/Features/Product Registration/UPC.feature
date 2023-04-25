@@ -430,6 +430,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
@@ -454,6 +455,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	#	| Walgreens |
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I filter for the product saved as: TestCase109516
