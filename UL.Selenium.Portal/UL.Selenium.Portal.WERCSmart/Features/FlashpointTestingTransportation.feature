@@ -82,7 +82,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -99,7 +99,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -137,7 +137,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -149,7 +149,7 @@ And I set the Please select DOT Exceptions if applicable? field to: 173.120(a)(2
 And I click continue
 And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 23
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -186,7 +186,7 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
 | Option                               |
@@ -203,7 +203,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -244,7 +244,7 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
 | Option                               |
@@ -261,7 +261,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -299,7 +299,7 @@ And The following options should be displayed for section: Flash Point Testing M
 And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
 | Option                               |
@@ -316,7 +316,7 @@ And UN Number should be showing the error messages: Flash Point is required with
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -355,7 +355,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -368,7 +368,7 @@ And I click continue
 And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 24
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -408,7 +408,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -425,7 +425,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -462,7 +462,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -479,7 +479,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -516,7 +516,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -533,7 +533,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -572,7 +572,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Open cup method
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -590,7 +590,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -648,7 +648,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -687,7 +687,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -705,7 +705,7 @@ And UN Number should be showing the error messages: Flash Point is required with
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
@@ -742,7 +742,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 #And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen peroxide
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -760,7 +760,7 @@ And UN Number should be showing the error messages: Flash Point is required with
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-#And [Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path]
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page
