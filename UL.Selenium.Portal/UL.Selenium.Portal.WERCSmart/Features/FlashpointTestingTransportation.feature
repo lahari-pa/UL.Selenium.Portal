@@ -30,7 +30,7 @@ And The following options should be displayed exclusively for section: Flash Poi
 And I set the Flash Point Testing Method Used field to: Closed cup method
 And I set the Select the best Water Solubility description field to: Soluble in water
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -47,7 +47,7 @@ And UN Number should be showing the error messages: The UN-Number (DOT) is inval
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-And I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And I should see the Additional Documents to Provide Page

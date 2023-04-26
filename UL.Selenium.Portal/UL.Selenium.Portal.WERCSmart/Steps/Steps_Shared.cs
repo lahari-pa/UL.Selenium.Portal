@@ -7429,11 +7429,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//If your subscription is set to Premium you will see the ECOLOGO Readiness step - if you do perform the shared step below - if you do not see it skip to step 17
 		[StepDefinition(
-			@"I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path")]
+			@"If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path")]
 		public void ThenICallSharedStep_ECOLOGOReadinessAssessment_NotAtThisTime_Continue_HappyPath()
 		{
-			//Select the not at this time radio button
-			//Click continue
+			Report.UseSubSteps = true;
+			var stepEcologo = new Steps_Ecologo_Readiness();
+			var selNewProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			if (newProduct.WaitForSection("ECOLOGO Readiness"))
+			{
+				Report.Info("The ECOLOGO Readiness page is displayed, selecting 'Not at this time'");
+				Report.StartSubStep("The ECOLOGO Readiness page should be loaded");
+				stepEcologo.EcologoReadinessPageShouldBeLoaded();
+				Report.StartSubStep("I confirm the ECOLOGO Readiness Assessment question is displayed");
+				stepEcologo.ConfirmEcologoReadinessAssessmentQuestionDisplayed();
+				Report.StartSubStep("I set ECOLOGO Readiness Assessment to: (Yes|Not at this time)");
+				stepEcologo.SetEcologoReadiness("Not at this time");
+				Report.StartSubStep("I click continue");
+				selNewProductSteps.ClickContinue();
+			}
+			else
+			{
+				Report.Info("The ECOLOGO Readiness page is not displayed");
+			}
+
 		}
 
 		[StepDefinition(
