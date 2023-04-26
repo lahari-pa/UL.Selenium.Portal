@@ -80,6 +80,8 @@ Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the co
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
+#Remove from regression: 2023/04
+
 @TestCase:58605
 Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -108,6 +110,8 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
 
+#Remove from regression: 2023/04
+
 @TestCase:58606
 Scenario: [58606] Medicinal Liquids - RU001188
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -135,6 +139,7 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	# Regulatory Documents to Provide page is showing
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 60567 (Upload Product Label only)
 	#Given I call Shared Step 60567 (Upload Product Label only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

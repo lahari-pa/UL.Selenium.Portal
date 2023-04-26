@@ -40,6 +40,8 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 	Then I click on the Row Action: UPC Update
 	And UNDER DEVELOPMENT
 
+#Remove from regression: 2023/04
+@ignore
 @TestCase:64528
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64528
@@ -61,6 +63,8 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Given I navigate to the landing page
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 
+#Remove from regression: 2023/04
+@ignore
 @TestCase:64529
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64529
