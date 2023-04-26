@@ -12,9 +12,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		protected IWebElement PaceProgress => this.containerElement.FindElement(By.XPath(".//div[@class='pace-progress']"));
 		public bool ClickGetStarted()
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[text()='Get Started NOW']"), 2).TryClick();
+		}
+
+		public string GetPaceProgress()
+		{
+			return this.PaceProgress.GetAttribute("data-progress-text");
 		}
 	}
 }

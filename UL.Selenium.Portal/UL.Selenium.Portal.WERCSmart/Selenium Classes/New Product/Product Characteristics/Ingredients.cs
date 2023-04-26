@@ -129,9 +129,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					// If no elements match this, then we will simply take the first element in the list
 					IList<IWebElement> results =
 						this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-					i = 0;
-					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
-						   null && i < 20)
+					//i = 0;
+					var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+					while (homePage.GetPaceProgress()!= "100%")
 					{
 						if (this.ContainerElement
 								.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text ==
@@ -142,8 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 								"Unable to add the ingredient because the search criteria did not yield any!");
 						}
 
-						i++;
-						Delay.Seconds(1);
+						//i++;
+						//Delay.Seconds(1);
 						results = this.ContainerElement.FindElements(
 							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					}
