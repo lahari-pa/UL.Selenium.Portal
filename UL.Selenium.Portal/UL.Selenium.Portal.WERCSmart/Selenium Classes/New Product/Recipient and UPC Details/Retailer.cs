@@ -433,15 +433,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
-		public bool ConfirmRetailerRegistrationCheckbox(string value)
+
+		public bool ConfirmSingleRetailerCheckboxDisplayed()
 		{
-			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='" + value + "']"), 2);
-			if (checkBox.Displayed)
+			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program']"), 2);
+			if (checkbox.Displayed)
 			{
+				Report.Info("Single retailer checkbox was displayed on the page");
 				return true;
 			}
+			Report.Info("Single retailer checkbox is not displayed"); 
 			return false;
 		}
+
 		public bool HoverOverText(string expectedText)
 		{
 
@@ -462,7 +466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return actualText == expectedText;
 		}
 
-		public bool SetRetailerCheck()
+		public bool ClickSingleRetailerCheckbox()
 		{
 			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
 			
@@ -480,6 +484,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return false;
 		}
+		public bool CheckSingleRetailerCheckboxSelected()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+
+			Report.Info("Attempting to confirm the single retailer checkbox is selected.");
+			return ele.Selected;
+		}
+
 		public bool SubscriptionCheckboxEnbable()
 		{
 			IWebElement retailerCheckbox = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
