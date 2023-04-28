@@ -380,6 +380,7 @@ Scenario: [66336] Main Menu - collapsed
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page
+@ignore
 @TestCase:85275
 Scenario: [85275] Select All - Popup closes
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

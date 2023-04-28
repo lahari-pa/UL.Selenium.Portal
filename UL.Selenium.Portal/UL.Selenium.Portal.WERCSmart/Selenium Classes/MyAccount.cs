@@ -2698,12 +2698,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public int GetHighestPageNo()
 		{
 			IList<IWebElement> pageNumbers = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
-			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
-			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 
+			List<int> intPageNos = new List<int> { };
+			foreach (IWebElement el in pageNumbers)
+			{
+				int x = !string.IsNullOrEmpty(el.GetValue()) ? Convert.ToInt16(el.GetValue()) : 0;
+				intPageNos.Add(x);
+			}
+
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 		}
 
-		
+
 
 		public class SearchResult
 		{
