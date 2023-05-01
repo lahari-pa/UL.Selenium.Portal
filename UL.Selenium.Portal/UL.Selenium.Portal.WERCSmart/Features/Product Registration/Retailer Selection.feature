@@ -85,7 +85,7 @@ Scenario: [78937] Select Retailers - Select All
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Chlorine      | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
