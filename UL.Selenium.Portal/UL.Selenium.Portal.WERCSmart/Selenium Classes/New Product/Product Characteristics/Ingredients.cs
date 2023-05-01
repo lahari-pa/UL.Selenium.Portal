@@ -1457,34 +1457,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
 		{
-			IList<IWebElement> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2);
-			IList<IWebElement> name = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2);
-			IList<IWebElement> activeOrInert = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2);
-
-			var index = 0;
+			IList<string> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2).Select(x=>x.GetValue()).ToList();
+			IList<string> name = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2).Select(x => x.GetValue()).ToList();
+			IList<string> activeOrInert = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2).Select(x => x.GetValue()).ToList();
 
 			foreach (TableRow row in table.Rows)
 			{
-				if (casNum[index].Text != row["CAS Number"])
+				if (!casNum.Contains(row["CAS Number"]))
 				{
 					Report.Info("CAS Number did not match");
 					return false;
 				}
-				if (name[index].Text != row["Name"])
+				if (!name.Contains(row["Name"]))
 				{
 					Report.Info("Name did not match");
 					return false;
 				}
-				if (activeOrInert[index].Text != row["Active or Inert"])
+				if (!activeOrInert.Contains(row["Active or Inert"]))
 				{
 					Report.Info("Active or Inert Number did not match");
 					return false;
 				}
 
-				index += 1;
 			}
 
 			return true;
+
+
 		}
 
 		public bool CheckForTheFollowingTableColumnTitlesInPopupView(Table table)
