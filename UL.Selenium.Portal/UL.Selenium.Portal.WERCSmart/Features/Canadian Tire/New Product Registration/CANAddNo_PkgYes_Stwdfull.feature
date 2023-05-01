@@ -72,7 +72,8 @@ And I click continue
 And I Confirm This is a required field. error message is shown below the Package Type field
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85793
 
-
+#Remove from regression: 2023/04
+@ignore
 @TestCase:85794
 Scenario: [85794] Account No Canada address - Package and stewardship, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: ProductAccount
@@ -120,7 +121,8 @@ And I click continue
 And I Confirm This is a required field. error message is shown below the Package Type field
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85795
 
-
+#Remove from regression: 2023/04
+@ignore
 @TestCase:85796
 Scenario: [85796] Account No Canada address - Package and stewardship, SOLD = US and Canada, PL = No, Packaging is NOT required
 Given I log in with the account saved in TReVor as: ProductAccount

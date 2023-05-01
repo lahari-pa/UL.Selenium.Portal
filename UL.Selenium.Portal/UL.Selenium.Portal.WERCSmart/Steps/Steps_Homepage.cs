@@ -1160,6 +1160,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(HomePageObject.ClickResolveButton(), "Failed to click 'Resolve' button", "Successfully clicked 'Resolve' button");
 		}
 
+		[Then(@"I should see the button: (.*) for alert: (.*)")]
+		public void ThenIShouldSeeTheButtonForAlert(string button, string alert)
+		{
+			var Alert = new Alerts(alert);
+			Report.IsTrue(Alert.AlertsButtonIsDisplayed(button, alert), $"Failed to find button {button} for alert {alert}", $"Successfully found button {button} for alert {alert}");
+
+
+		}
+
+
 		[StepDefinition(@"If The Data Consent Requests modal is showing, navigate to the Retailer Partners page and add required tiers")]
 		public void IfDataConsentRequestsModalIsShowingAddRequiredTiers()
 		{

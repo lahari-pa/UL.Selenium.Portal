@@ -1486,9 +1486,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (myHeader == null)
 			{
-				Report.Info("Failed to Find Header Text");
+				Report.Info("Failed to Find Purchase Summary Header Text");
 				Report.Screenshot();
-				return false;
+				return false; 
 			}
 			if (!myHeader.Displayed)
 			{
@@ -1705,9 +1705,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				return this._btn_confirm.Displayed;
+				if (this._btn_confirm.Displayed)
+				{
+					return true;
+				}
+				else
+				{
+					return false; 
+				}		
 			}
-			catch (Exception)
+			catch (NoSuchElementException)
 			{
 				return false;
 			}
@@ -1734,23 +1741,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class PaymentMethods_Thank_You : BaseObject
+	class PaymentMethods_Thank_You : SeleniumBaseObject
 	{
-		[FindsBy(How = How.Id, Using = "shoppingCart")]
-		protected override IWebElement containerElement { get; set; }
+		//[FindsBy(How = How.Id, Using = "shoppingCart")]
+		//protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.Id("shoppingCart");
 
 		public bool ThankYou_Header_Correct()
 		{
 			Report.Info("Beginning ThankYou_Header_Correct");
 
-			if (!this.Exists)
+			if (!this.WaitForContainerToExist())
 			{
 				Report.Info("Not on Thank you Page");
 				Report.Screenshot();
 				return false;
 			}
 
-			IWebElement myHeader = this.containerElement
+			IWebElement myHeader = this.ContainerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()=' Thank You']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -1771,15 +1780,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Thank_You_Text()
 		{
-			var actualText = this.containerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
+			var actualText = this.ContainerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
 			return actualText;
 
 		}
 
 		public bool Thank_You_TextExists(string thankYouText)
 		{
-			IWebElement tyTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{thankYouText}')]"), 1);
+			IWebElement tyTextElement = this.ContainerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{thankYouText}')]"), 1);
 			return tyTextElement != null;
+		}
+
+		public bool Subscription_Issue_TextExists(string subscriptionIssueText)
+		{
+			IWebElement siTextElement = this.containerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{subscriptionIssueText}')]"), 1);
+			return siTextElement != null;
 		}
 
 		//Home Button
@@ -1789,7 +1804,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
 			return el.TryClick();
 		}
 
