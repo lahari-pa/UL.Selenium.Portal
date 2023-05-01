@@ -413,6 +413,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			Report.StartSubStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
@@ -424,7 +426,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should not see the ingredient obsolete error message");
 			stepsNewProductIngredients.CheckForObsoleteIngredient();
-
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -2632,8 +2633,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-
 			tableSecond.AddRow(
 				"Select countries the product may be sold in");
 			tableSecond.AddRow(
@@ -2668,14 +2667,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-
 			var tableFirst = new Table("Section");
-			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
@@ -2686,6 +2679,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartSubStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -2704,25 +2701,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-
-
 			var tableSecond = new Table("Section");
+			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 
-			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-
-			tableSecond.AddRow("Select countries the product may be sold in");
+			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableSecond.AddRow(
+				"Select countries the product may be sold in");
 			tableSecond.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
 			tableSecond.AddRow(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
 			tableSecond.AddRow(
 				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
-
+			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
-			"Product is a Retailer's Private Label or Brand");
-			tableSecond.AddRow(
-		"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
-			Report.StartStep("I only see the following sections");
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 
 			Report.StartSubStep("I only the following sections");
 			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
@@ -2736,7 +2729,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
+			;
 		}
+
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
 		public void ICallSharedIngredients_AddAnyChemical(string name)
 		{
