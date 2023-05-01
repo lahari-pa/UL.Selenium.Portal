@@ -27,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			while (this.GetPaceProgress() != "100%")
 			{
-				Delay.Seconds(Delay.SpeedFactor * 1);
+				Delay.Seconds(Delay.SpeedFactor);
 			}
 		}
 	}
