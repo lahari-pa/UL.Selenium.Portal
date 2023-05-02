@@ -69,44 +69,42 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I edit the Expiration Date to: 2022-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
-
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
-Given in the New Product page I click Continue
-
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CO
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: CT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: DC
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: FL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: HI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ID
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: ME
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NJ
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NM
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: NY
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OH
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: OR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: PR
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: RI
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: SD
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TN
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: TX
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: UT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VA
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: VT
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
+	Given in the New Product page I click Continue
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
@@ -372,11 +370,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Manitoba             |
 	# Confirm N/A is shown as already selected for the Northwest Territory question
   	And Northwest Territory should be showing the value: Not Applicable
-    #
-
-
-
-
 	Then in the Pesticide Details - Canada page I click Continue
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
@@ -395,6 +388,8 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 
+#Removed from regression: 2023/04
+@ignore
 @TestCase:56541
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -427,7 +422,6 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: IN
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KS
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KY
-	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: KL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: LA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MA
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: MD
@@ -554,7 +548,6 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
-
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
@@ -605,13 +598,14 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
-
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56577
 
+#Removed from regression: 2023/04
+@ignore
 @TestCase:62799
 Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates and coloring
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -638,7 +632,6 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
-
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AZ
@@ -687,7 +680,6 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WI
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WV
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: WY
-
 	Given I click continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
@@ -707,7 +699,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Given I generate a random UPC number and save as: UPC56502
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -745,7 +737,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
-And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
+	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
 	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
@@ -757,9 +749,11 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Submitted
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
+	#And I Go to the State Pesticide Section of MTR/CKLT SECT0127
+	#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
 
-#And I Go to the State Pesticide Section of MTR/CKLT SECT0127
-#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
+#Removed from regression: 2023/04
+@ignore
 @TestCase:71051
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -823,6 +817,8 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
+#Removed from regression: 2023/04
+@ignore
 @TestCase:62848
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -844,7 +840,7 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 	Then I edit the Expiration Date to: 2022-12-31 for the State: AZ on the Pesticide State Registration Details page
-Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
+	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AK
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AL
 	Given In the Pesticide Details - State Registration Details page I click 'x' for the following state: AR
@@ -922,10 +918,10 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I should see the Transportation Details 1 Page
     And The following options should be displayed exclusively for section: Product is Regulated for Transport
-    | Option                               |
-    | Yes                                  |
-    | No, due to an exemption or exception |
-    | Not Regulated                        |
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
     And I set the Product is Regulated for Transport field to: Not Regulated
     And I click continue
 	And In the 'Select Retailers' window I select the retailer: Walgreens
@@ -935,8 +931,8 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -944,33 +940,32 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	
 @TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I generate a random UPC number and save as: RandomUPC
-Given I delete all products with UPC Number: RandomUPC
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-Given I save the product information as: TestCase
-Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
-Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 74-98-6   | Propane       | 100     | false               |            | false       |
-And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Then I should see the Pesticide Details - Canada Page
-Then I check the options in the dropdown menus for the following sections
-| Section                    | Options                                                                                                                                                                                                                       |
-| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
-| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
-| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
-| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
-| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
-| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
-| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
-| Prince Edward Island       | None,Banned,Controlled Purchase,Exempt: Schedule 7,Exempt: Schedule 2,Non-Domestic,Self-Select: Schedule 8                                                                                                                    |
-| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
-| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
-| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                               |       
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: RandomUPC
+	Given I delete all products with UPC Number: RandomUPC
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+	Given I save the product information as: TestCase
+	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
+	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
+		| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 74-98-6   | Propane       | 100     | false               |            | false       |
+	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	Then I should see the Pesticide Details - Canada Page
+	Then I check the options in the dropdown menus for the following sections
+		| Section                    | Options                                                                                                                                                                                                                       |
+		| Alberta                    | None, 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
+		| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
+		| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
+		| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
+		| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
+		| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
+		| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed, Class D: Banned-Cosmetic Pesticide |
+		| Prince Edward Island       | None,Banned,Controlled Purchase,Exempt: Schedule 7,Exempt: Schedule 2,Non-Domestic,Self-Select: Schedule 8                                                                                                                    |
+		| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
+		| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
+		| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
+		| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                                |       

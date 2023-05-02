@@ -653,7 +653,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC10003 |
-		| ContainerType | Aerosol Can       |
+		| ContainerType | Aerosol Can - Metal       |
 		| Size          | 55                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
@@ -788,7 +788,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC20002 |
-		| ContainerType | Aerosol Can       |
+		| ContainerType | Aerosol Can - Metal       |
 		| Size          | 9                 |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
@@ -1011,8 +1011,8 @@ Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
 		Then I add the following into the UPC Fields
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC40005 |
-		| ContainerType | Aerosol Can       |
-		| Size          | 55                 |
+		| ContainerType | Aerosol Can - Metal       |
+		| Size          | 55                |
 		
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked		

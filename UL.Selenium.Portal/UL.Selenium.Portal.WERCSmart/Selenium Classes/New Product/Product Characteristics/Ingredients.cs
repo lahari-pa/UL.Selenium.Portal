@@ -786,6 +786,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el?.Text;
 		}
 
+		public List<string> GetAvailableIngredientsCASNumber()
+		{
+		
+			List<IWebElement> Ingredients = this.ContainerElement.FindElements(By.XPath(".//tr//td[@class='component-name']//small[contains(text(),'')]")).ToList();
+			return Ingredients.Select(x => x.GetValue()).ToList();
+		
+		}
+
+		public bool ClickRemoveByCasNumber(string number)
+		{
+
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($"//tr[.//td//div[small[contains(text(),'{number}')]]]//td[@class='remove delete-row']"));
+			Report.Info("Attempting to click remove based on the cas number");
+			return el.TryClick();
+		}
+
+	
 		/// <summary>
 		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
 		/// </summary>
@@ -1437,6 +1454,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool ClickOkInThePopupWithTheFollowingText(string text)
+		{
+			IWebElement okButton = this.ContainerElement.FindElement(By.XPath($"//div[@data-bind='html:okMessageText']/../../..//div[@class='modal-footer']//button[text()='Ok']"), 2);
+			return okButton.TryClick();
+		}
+
 		public bool CheckACheckboxWithTheFollowingText(string text)
 		{
 			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath($"//span[text()='{text}']/preceding-sibling::input"), 2);
@@ -2006,7 +2029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
 			ingredients.Add("Citric acid");
-
+			ingredients.Add("Nitrogen"); 
 
 
 
@@ -2064,5 +2087,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return true;
 		}
+		public bool IngredientsFieldAvailable(string field)
+		{
+			try
+			{
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + field + "')]"), 2);
+				return Field != null;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool FieldAvailableInSummaryPage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);	
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, '{Value.Text}' displayed.");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		
+		public bool TotalPercentage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + value + "')]"), 2);
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, Total percentage : '{Value.Text}'%");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool SelectOption()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"(//span[text()='No'])[3]"), 2);
+			return closeButton.TryClick();
+		}
 	}
+
 }

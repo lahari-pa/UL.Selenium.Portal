@@ -433,6 +433,59 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
+		public bool ConfirmRetailerRegistrationCheckbox(string value)
+		{
+			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']//following::span[text()='" + value + "']"), 2);
+			if (checkBox.Displayed)
+			{
+				return true;
+			}
+			return false;
+		}
+		public bool HoverOverText(string expectedText)
+		{
+
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//span[@class='glyphicon glyphicon-info-sign']"), 2);
+			string actualText = ele.GetAttribute("title");
+			if (actualText == null)
+			{
+				return false;
+			}
+
+			Report.Info($"The expected Text was: {expectedText}");
+			Report.Info($"The actual text found is: {actualText}");
+			if (actualText == null)
+			{
+				Report.Failure("Could not find the text");
+				return false;
+			}
+			return actualText == expectedText;
+		}
+
+		public bool SetRetailerCheck()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+			
+			if (ele.Selected)
+			{
+				Report.Info("Uncheck the checkbox");
+				ele.TryClick();
+				return true;
+			}
+			else if(!ele.Selected)
+			{
+				Report.Info("check the checkbox");
+				ele.TryClick();
+				return true;
+			}
+			return false;
+		}
+		public bool SubscriptionCheckboxEnbable()
+		{
+			IWebElement retailerCheckbox = this.ContainerElement.FindElement(By.XPath(".//input[@id='single-retailer']"));
+
+			return retailerCheckbox.Enabled;
+		}
 
 	}
 }
