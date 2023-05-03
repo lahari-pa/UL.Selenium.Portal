@@ -309,11 +309,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SubscriptionCheckboxEnbable() == value, $"Failure, check box is {enabledDisabled} when it should {(value ? "enabled" : "disabled")}.", $"Success, checkbox is {enabledDisabled}.");
 		}
 
-		[StepDefinition(@"I confirm the checkbox (.*) NOT present for stand alone batteries in Retailer page")]
-		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value)
+		[StepDefinition(@"I confirm the checkbox (.*) is (present|not present) for stand alone batteries in Retailer page")]
+		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value, string presentNotPresent)
 		{
 			var retailerObject = new Retailer();
-			Report.IsFalse(retailerObject.ConfirmRetailerRegistrationCheckbox(value), "Failed to confirm the checkbox is not present", "Successfully confirmed that the checkbox is not present");
+			bool status = presentNotPresent == "present";
+			Report.IsTrue(retailerObject.ConfirmRetailerRegistrationCheckbox(value) == status, $"Failed to confirm the checkbox is {presentNotPresent}.", $"Successfully confirmed that the checkbox is {presentNotPresent}.");
 		}
 
 	}

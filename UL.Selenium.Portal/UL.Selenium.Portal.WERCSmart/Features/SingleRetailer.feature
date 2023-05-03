@@ -28,5 +28,5 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 Then I should see the Retailer Page
-Given I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program NOT present for stand alone batteries in Retailer page
+Given I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is not present for stand alone batteries in Retailer page 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase182705
