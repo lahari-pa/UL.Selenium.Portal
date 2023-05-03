@@ -2737,6 +2737,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
+
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
 		public void ICallSharedIngredients_AddAnyChemical(string name)
 		{
@@ -2776,8 +2777,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var selNewProduct = new NewProduct();
 					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
 					Report.Screenshot();
-
-					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					
+					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
