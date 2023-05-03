@@ -4779,7 +4779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
