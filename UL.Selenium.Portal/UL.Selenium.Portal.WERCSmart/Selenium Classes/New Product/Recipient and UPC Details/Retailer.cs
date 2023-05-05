@@ -499,5 +499,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return retailerCheckbox.Enabled;
 		}
 
+		public bool ConfirmRetailerRegistrationCheckbox(string value)
+		{
+			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath($".//input[@type='checkbox']//following::span[text()='{value}']"), 2);
+			return checkBox.Displayed;
+		}
+
 	}
 }
