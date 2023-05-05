@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		public bool CheckForTheFollowingRetailersInRetailerPage(Table table)
 		{
-			IList<IWebElement> retailerList = this.containerElement.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);
+			IList<IWebElement> retailerList = this.ContainerElement.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);
 			List<string> retailerListText = new List<string>();
 
 			if (table.RowCount != retailerList.Count)
@@ -43,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"), 2);
+				IWebElement button = this.ContainerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"), 2);
 				
 				if (button == null)
 				{
@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement poup = this.containerElement.FindElement(By.XPath(".//h4[contains(text(),'Select Retailers')]"), 2);
+				IWebElement poup = this.ContainerElement.FindElement(By.XPath(".//h4[contains(text(),'Select Retailers')]"), 2);
 
 				if (poup != null)
 				{
@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				var selectedRetailers = new List<string>();
-				ReadOnlyCollection<IWebElement> selectedRetailersName = this.containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+				ReadOnlyCollection<IWebElement> selectedRetailersName = this.ContainerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
 				
 				if (selectedRetailersName == null)
 				{
@@ -101,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmRetailerCannotBeDeselectedInRetailersTable(string retailer)
 		{
-			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//td[text()='" + retailer + "']/preceding-sibling::td//input[@disabled='disabled']"), 2);
+			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//td[text()='" + retailer + "']/preceding-sibling::td//input[@disabled='disabled']"), 2);
 
 			if (retailerEl != null)
 			{
@@ -113,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(string retailer)
 		{
-			IWebElement retailerEl = this.containerElement.FindElement(By.XPath(".//div[@class='row retailers-list']//span[text()='" + retailer + "']/preceding-sibling::input[@checked][@disabled='disabled']"), 2);
+			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(".//div[@class='row retailers-list']//span[text()='" + retailer + "']/preceding-sibling::input[@checked][@disabled='disabled']"), 2);
 
 			if (retailerEl != null)
 			{
@@ -130,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 				IWebElement el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//select"), 2);
 				if (el == null)
 				{
@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 				IWebElement el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//input"), 2);
 				if (el == null)
 				{
@@ -180,7 +180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
 				
 				if (el == null)
 				{
@@ -206,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IList <IWebElement> elList = this.containerElement.FindElements(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[contains(text(), '" + retailer + "')])]//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/following-sibling::select//option"), 2);
+				IList <IWebElement> elList = this.ContainerElement.FindElements(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[contains(text(), '" + retailer + "')])]//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/following-sibling::select//option"), 2);
 
 				if (elList.Count == 0)
 				{
@@ -240,7 +240,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 
 				if (container == null)
 				{
@@ -285,7 +285,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 				IWebElement el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
 				if (el == null)
 				{
@@ -315,7 +315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 				IWebElement el = container.FindElement(By.XPath($@".//tr[./td[text()=""{retailer}""]]//label[text()='Select Vendor']/..//select"), 2);
 				if (el == null)
 				{
@@ -364,19 +364,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SelectRetailer(string retailerName)
 		{
 			string xPath = @".//input[@type='checkbox' and parent::td/following-sibling::td[text() =""" + retailerName + @"""]]";
-			IWebElement box = this.containerElement.FindElement(By.XPath(xPath), 2);
+			IWebElement box = this.ContainerElement.FindElement(By.XPath(xPath), 2);
 			return box.TryClick() && box.Checked();
 		}
 
 		public bool DeleteSelectedRetailers()
 		{
 			string xPath = ".//a[@class='btn delete-selected']/i";
-			return this.containerElement.FindElement(By.XPath(xPath), 2).TryClick();
+			return this.ContainerElement.FindElement(By.XPath(xPath), 2).TryClick();
 		}
 
 		public bool ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(string dropDownTitle, string retailer)
 		{
-			IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//label[contains(text(), '" + dropDownTitle + "')]/following-sibling::select//option"), 2);
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//label[contains(text(), '" + dropDownTitle + "')]/following-sibling::select//option"), 2);
 			List<string> optionsNames = new List<string>();
 
 			//Remove the default "Choose..." option
@@ -402,7 +402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectTheDeleteSelectedRetailersButton()
 		{
-			IWebElement deleteButton = this.containerElement.FindElement(By.XPath("//a[@class='btn delete-selected']"), 2);
+			IWebElement deleteButton = this.ContainerElement.FindElement(By.XPath("//a[@class='btn delete-selected']"), 2);
 			return deleteButton.TryClick();
 		}
 
@@ -410,7 +410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement checkBox = this.containerElement.FindElement(By.XPath("//td[text()='" + row["Retailers"] + "']/preceding-sibling::td//input"), 2);
+				IWebElement checkBox = this.ContainerElement.FindElement(By.XPath("//td[text()='" + row["Retailers"] + "']/preceding-sibling::td//input"), 2);
 				if (checkBox.TryCheck() == false)
 				{
 					return false;
@@ -424,7 +424,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement retailerCheckBox = this.containerElement.FindElement(By.XPath("//span[text()='" + row["Retailers"] + "']/preceding-sibling::input"), 2);
+				IWebElement retailerCheckBox = this.ContainerElement.FindElement(By.XPath("//span[text()='" + row["Retailers"] + "']/preceding-sibling::input"), 2);
 				if (retailerCheckBox.Checked())
 				{
 					return true;
