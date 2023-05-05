@@ -819,7 +819,7 @@ Scenario: [158853] Ingredient Identifier
 	Then I should see an error message: This field has a maximum length of 100 characters
 	Then In the Ingredient Reference Number field I enter the following text: test 123 !@#
 	Then I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + ® ™)
 	Then I click continue
 	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
 	Then I click continue
