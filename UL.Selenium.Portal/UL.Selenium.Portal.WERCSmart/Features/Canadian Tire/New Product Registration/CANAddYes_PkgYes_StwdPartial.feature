@@ -14,6 +14,8 @@
 @run_CANAddYes_PkgYes_StwdPartial
 Feature: Account Canada Address(Yes) Package types(Yes) Stewardship(Partial)
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85762
 Scenario: [85762] Account all Canada data - Partial stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -21,7 +23,7 @@ Scenario: [85762] Account all Canada data - Partial stewardship, SOLD = US Only,
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase85754
-Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -30,6 +32,8 @@ Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), N
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85762
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85763
 Scenario: [85763] Account all Canada data - Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -46,6 +50,8 @@ Scenario: [85763] Account all Canada data - Partial stewardship, SOLD = US Only,
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85763
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85764
 Scenario: [85764] Account all Canada data - Partial stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -95,6 +101,8 @@ Scenario: [85765] Account all Canada data - Partial stewardship, SOLD = Canada O
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85765
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85766
 Scenario: [85766] Account all Canada data - Partial stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -103,7 +111,7 @@ Scenario: [85766] Account all Canada data - Partial stewardship, SOLD = US & Can
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase85766
 	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
-And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine dioxide
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)

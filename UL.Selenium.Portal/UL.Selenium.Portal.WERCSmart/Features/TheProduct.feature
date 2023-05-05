@@ -13,6 +13,8 @@
 @run_TheProduct
 Feature: The Product
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:31346
 Scenario: [31346] The Product navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -114,12 +114,9 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 		| GTIN/UPC (include check digit) |
 		#| Size (Fluid Ounces)              |
 		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
-
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
-	
-
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
 @TestCase:87593
@@ -145,12 +142,13 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		#| Option                            |
 		#| Size (Fluid Ounces)               |
 		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
-
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:87596
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -174,11 +172,9 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Then I should not see the following UPC options:
 		| Option              |
 		| Size (Fluid Ounces) |
-	
-
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
-	#Philip - Working
+#Philip - Working
 @TestCase:87597
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -199,11 +195,10 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Then I should not see the following UPC options:
 		| Option              |
 		| Size (Fluid Ounces) |
-	
-	
-
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:87595
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
@@ -242,7 +237,6 @@ Scenario: [87832] View Shows Case UPC Data
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87832
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -280,7 +274,6 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87825
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -405,8 +398,6 @@ Scenario: [95988] Mass Upload UPCs Floating
 	Then I click the 'Upload File' button and upload the file saved as: Bulktest95988
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable95988
 	Then In the Add Multiple dialog box I select all UPCs
-
-
 	#Then I Confirm All UPCs are: Selected
 	#Then In the Add Multiple dialog box I select the packaging type: <first>
 	#Then I Check that the type column becomes populated with option: <first>
@@ -463,8 +454,6 @@ Scenario: [109516] Archive Retailer should Archive UPC
 		| No Retailer/No UPC Product |
 		| Amazon                     |
 		| Walgreens                  |
-
-
 	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109516)
 	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109516
 	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109516)
@@ -501,7 +490,6 @@ Scenario: [101023] UPC Step - Add Part Number
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase105352
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -569,11 +557,9 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	And I click continue
-
 	Given I click the 'Add' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
-
 	#Below check that the realtaiers deleted are all seen in below window popup list.
 	#Retailers in popup are in alphabeticcal order
 	#Once restored check destination retailers list is in alpha order
@@ -726,7 +712,6 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase115334
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -759,7 +744,6 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase109596
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -828,7 +812,6 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109596)
-
 #Given I right click on product saved as TestCase109596 and select View Orders
 #Given I click on the first entry in the View Orders popup
 #And I confirm that the top entry has a status of Additional UPC submission
@@ -844,7 +827,6 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase115330
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -905,7 +887,6 @@ Scenario: [120798] "U" for UPC Update for Suspended Status
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120798
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -970,7 +951,6 @@ Scenario: [120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120798
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -998,7 +978,6 @@ Scenario: [120849] "U" for UPC Update No Fee Charge
 		| Retailer                   |
 		| No Retailer/No UPC Product |
 		| Walgreens                  |
-
 	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120798)
 	#And I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS for saved as: TestCase120798
 	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120798)
@@ -1022,7 +1001,6 @@ Scenario: [120849] "U" for UPC Update No Fee Charge
 
 @TestCase:156789
 Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
-
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC156789
 	Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1
@@ -1030,7 +1008,6 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Given I save the product information as: TestCase156789
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
