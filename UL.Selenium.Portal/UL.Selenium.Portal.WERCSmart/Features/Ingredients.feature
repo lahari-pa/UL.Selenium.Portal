@@ -715,7 +715,8 @@ Given I should see the Product Information Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:133610
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

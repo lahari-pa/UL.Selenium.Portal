@@ -14,6 +14,8 @@
 @run_Flow17
 Feature: Flow 17
 
+#Remove from regression: 2023/05
+@ignore
 @tfsdesign
 @TestCase:60017
 Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
