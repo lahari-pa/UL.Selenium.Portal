@@ -5130,7 +5130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 225948 \(EPA expiration date - enter current year - enter next year - check for error\) for state:")]
-		public void GivenICallSharedStepXxxEPAExpirationDate_EnterCurrentYear_EnterNextYear_CheckForErrorForState(Table table)
+		public void GivenICallSharedStep225948EPAExpirationDate_EnterCurrentYear_EnterNextYear_CheckForErrorForState(Table table)
 		{
 			var newProductSteps = new StepsNewProduct();
 			var pesticideDetailsStateSteps = new Steps_PesticideDetailsState();
