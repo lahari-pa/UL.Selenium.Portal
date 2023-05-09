@@ -210,7 +210,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	And I should see the Ingredients Page
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| WPS1434087    | 50      | false               | true        |            |
+		|WPS1351129    | 50      | false               | true        |            |
 		| Water         | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
@@ -988,6 +988,7 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And I click continue
+	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page

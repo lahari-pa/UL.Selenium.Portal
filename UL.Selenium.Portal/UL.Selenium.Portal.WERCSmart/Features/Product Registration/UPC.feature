@@ -26,7 +26,7 @@
 @run_UPC
 
 Feature: UPC
-#
+
 Background:
 	Given I verify the following users exist and if not I create them using SHAUser
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
@@ -45,22 +45,15 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	#Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
-		| Option              `          |
-		| GTIN/UPC (include check digit) |
-		| Container Type                 |
-		# | Size (Weight Ounces) |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+		| Option                         |
+		| Size (Weight Ounces)           |
 	Then I should not see the following UPC options:
 		| Option                       |
 		| Size (Fluid Ounces)          |
-		| Overall Appliace Weight (oz) |
-		# See above comment; There is no way that this field name will return, so this step will always pass as written. Fix requested in 174731.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
 @TestCase:87587
@@ -69,7 +62,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
-	Then I save the product information as: TestCase87584
+	Then I save the product information as: TestCase87587
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -79,10 +72,8 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
-		| Option                         |
-		| GTIN/UPC (include check digit) |
-		#| Size (Fluid Ounces)               |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+		| Option                            |
+		| Size (Fluid Ounces)               |
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
@@ -110,10 +101,8 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
 	Then I should see the following UPC options:
-		| Option                         |
-		| GTIN/UPC (include check digit) |
-		#| Size (Fluid Ounces)              |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+		| Option                           |
+		| Size (Fluid Ounces)              |
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
@@ -138,10 +127,9 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
-	#Then I should see the following UPC options:
-		#| Option                            |
-		#| Size (Fluid Ounces)               |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+	Then I should see the following UPC options:
+		| Option                            |
+		| Size (Fluid Ounces)               |
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
@@ -165,16 +153,15 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
-	#Then I should see the following UPC options:
-	#	| Option                            |
-	#	| Size (Weight Ounces)              |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+	Then I should see the following UPC options:
+		| Option                            |
+		| Size (Weight Ounces)              |
 	Then I should not see the following UPC options:
 		| Option              |
-		| Size (Fluid Ounces) |
+		| Size (Fluid Ounces) |	
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
-#Philip - Working
+	
 @TestCase:87597
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -188,22 +175,21 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
-	#Then I should see the following UPC options:
-	#	| Option                            |
-	#	| Size (Weight Ounces)              |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+	Then I should see the following UPC options:
+		| Option                            |
+		| Size (Weight Ounces)              |
 	Then I should not see the following UPC options:
-		| Option              |
-		| Size (Fluid Ounces) |
+		| Option               |
+		| Size (Fluid Ounces)  |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
 #Remove from regression: 2023/05
 @ignore
 @TestCase:87595
-Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
-	# Hardcoded values for Product ID. These do not exist in all environments.
-	Given I save to context name: TestCase1 and value: 1525111
-	Given I save to context name: TestCase2 and value: 1501057
+Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)	
+	Given I create a product for a Kit with name: 875951 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto9 and save as: TestCase875951
+	Given I create a product for a Kit with name: 875952 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto9 and save as: TestCase875952
+	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
@@ -213,20 +199,19 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Then I save the product information as: TestCase87595
 	Given I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: TestCase1  and product 2: TestCase2)
+	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: TestCase875951 and product 2: TestCase875952)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I click the 'Add Casepack' button
-	#Then I should see the following UPC options:
-	#	| Option          |
-	#	| Weight (Ounces) |
-		# Due to an issue with the way this field is built (HTML conditional) I cannot get the placeholder for this field. See User Story 174731.
+	Then I should see the following UPC options:
+		| Option          |
+		| Weight (Ounces) |
 	Then I should not see the following UPC options:
 		| Option        |
 		| Size (Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
-
+	
 @TestCase:87832
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -445,6 +430,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
@@ -467,6 +453,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	#	| Walgreens |
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+
 	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I filter for the product saved as: TestCase109516
@@ -828,7 +815,9 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then I save the product information as: TestCase115330
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water       | 100     | false               | false       |            |
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer |
@@ -851,13 +840,13 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
 		| UPC            | Name     | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
-		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 12345678     | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
-		| %UPC#115330_2% | MyChalk2 | 2        | 32   | 12345678     | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
-		| %UPC#115330_3% | MyChalk3 | 3        | 32   | 12345678     | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
-		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 12345678     | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
-		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 12345678     | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
-		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 12345678     | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 12345678     | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
+		| %UPC#115330_1% | MyChalk1 | 1        | 32   |               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
+		| %UPC#115330_2% | MyChalk2 | 2        | 32   |               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
+		| %UPC#115330_3% | MyChalk3 | 3        | 32   |               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
+		| %UPC#115330_4% | MyChalk4 | 4        | 32   |               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
+		| %UPC#115330_5% | MyChalk5 | 5        | 32   |               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
+		| %UPC#115330_6% | MyChalk6 | 6        | 32   |               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
+		| %UPC#115330_7% | MyChalk7 | 7        | 32   |               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then I click the 'Upload File' button and upload the file saved as: Bulktest115330
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330
 	Then In the Add Multiple dialog box I select all UPCs

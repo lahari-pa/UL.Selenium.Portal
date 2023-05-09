@@ -11,6 +11,7 @@
 @RetailPartners
 @run_RetailerSelection
 @UPC
+@PaymentMethods
 
 Feature: Retailer Selection
 
@@ -84,7 +85,7 @@ Scenario: [78937] Select Retailers - Select All
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Chlorine      | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
@@ -302,9 +303,178 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 	Then I save the product information as: TestCase181949
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Retailer Page
+	Then I confirm if the single retailer checkbox is displayed on the retailer page
+	Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181949
+
+# Created by Saikiran Chittampally
+@TestCase:182824
+Scenario: [182824] Single Retailer - UPC Screen and Retailer Screen Checks 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC182824
+Given I generate a random UPC number and save as: UPC1828241
+Given I generate a random UPC number and save as: UPC1828242
+Given I generate a random UPC number and save as: UPC1828243
+Given I generate a random UPC number and save as: UPC1828244
+Given I generate a random UPC number and save as: UPC1828245
+Given I generate a random UPC number and save as: UPC1828246
+Given I generate a random UPC number and save as: UPC1828247
+Given I generate a random UPC number and save as: UPC1828248
+Given I generate a random UPC number and save as: UPC1828249
+Given I generate a random UPC number and save as: UPC1828240
+Then I save the product information as: TestCase182824
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I should see the Retailer Page
+Given I confirm if the single retailer checkbox is displayed on the retailer page
+Given I confirm if the single retailer checkbox is displayed on the retailer page
+And The selected retailers on the Retailer page should be:
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+Then I click 'Add Retailers' in the Retailers page
+Given In the 'Select Retailers' window I select the retailer: Amazon
+Given I click 'Add Retailers' in the Retailers page
+Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
+Given I click Done in the Select Retailers popup
+Then I click continue
+Then I should see the Universal Product Code (UPC) Page
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC182824, container type: Plastic Container and size: 4
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828241, container type: Plastic Container and size: 6
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828242, container type: Plastic Container and size: 7
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828243, container type: Plastic Container and size: 3
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828244, container type: Plastic Container and size: 4
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828245, container type: Plastic Container and size: 5
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828246, container type: Plastic Container and size: 6
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828247, container type: Plastic Container and size: 7
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828248, container type: Plastic Container and size: 8
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828249, container type: Plastic Container and size: 9
+And I should not see the following UPC buttons:
+		| Option       |
+		| Add          |
+		| Add Casepack |
+		| Upload File  |
+	Given in the Universal Product Code (UPC) page I click Continue
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Retailer
+	Given I click the single retailer checkbox
+	And I click Save in The Product Page
+	And I should see the following UPC buttons:
+		| Option       |
+		| Add          |
+		| Add Casepack |
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828240, container type: Plastic Container and size: 9
+	Then In the Universal Product Code (UPC) page I click Save
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Retailer
+	Given I confirm if the single retailer checkbox is disabled
+	And I click the page heading: Universal Product Code (UPC)
+	Given I delete UPC: saved as UPC1828240
+	Then In the Universal Product Code (UPC) page I click Save
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Retailer
+	Given I click the single retailer checkbox
+	And I click Save in The Product Page
+	Then I should see the Universal Product Code (UPC) Page
+	And I should not see the following UPC buttons:
+		| Option       |
+		| Add          |
+		| Add Casepack |
+		| Upload File  |
+Then In the Universal Product Code (UPC) page I click Save
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase182824
+
+# Created by Saikiran Chittampally
+@TestCase:181979
+Scenario: [181979] Single Retailer Checkbox Checks
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase181979
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
-	Then I confirm for the checkbox in Retailer page : Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
-	Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181949
+	Then I confirm the following retailers are showing in the Retailer page
+		| Retailer					 |
+		| No Retailer/No UPC Product |
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I Confirm that on the top right corner the Select All option is NOT available
+	Then In the 'Select Retailers' window I select the retailer: Amazon
+	Given I click 'Add Retailers' in the Retailers page
+	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
+	Given I click Done in the Select Retailers popup
+	Given I click the single retailer checkbox
+	Then I click 'Add Retailers' in the Retailers page
+	Then I Confirm that on the top right corner the Select All option is available
+	Given I click the Select all retailers option in the Select Retailers popup
+	Then all retailers are selected in the Select Retailers window
+	Given I save all retailers in the Select Retailers window in alphabetical order as: AllSelectRetailers181979
+	Given I click Done in the Select Retailers popup
+	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers181979
+	Given I confirm if the single retailer checkbox is disabled
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I click the Select all retailers option in the Select Retailers popup
+	Given I click Done in the Select Retailers popup
+	Given I click the single retailer checkbox
+	Given I click 'Add Retailers' in the Retailers page
+	Then the 'Select Retailers' window appears
+	Given I Confirm that on the top right corner the Select All option is NOT available
+	Then In the 'Select Retailers' window I select the retailer: Amazon
+	Given I click 'Add Retailers' in the Retailers page
+	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
+	Given I click Done in the Select Retailers popup
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
+
+	
+# Created by Saikiran Chittampally
+@TestCase:183582
+Scenario: [183582] Behaviors and Restrictions on Duplicate UPCs 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC183582
+Then I save the product information as: TestCase183582
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm if the single retailer checkbox is displayed on the retailer page
+Given In the 'Select Retailers' window I select the retailer: Target
+Given I click continue
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 4
+Then in the Universal Product Code (UPC) page I click Continue
+Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given in the Optional Comments page I click Continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given In the Thank You screen I click Home
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 12
+Then in the Universal Product Code (UPC) page I click Continue
+And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase183582
+
+
