@@ -303,7 +303,7 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 	Then I save the product information as: TestCase181949
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
 	Then I confirm if the single retailer checkbox is displayed on the retailer page
