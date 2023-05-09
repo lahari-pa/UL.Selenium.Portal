@@ -222,7 +222,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given in the Rejected Registration modal dialog I click Continue
 	And I should see the The Product Page
 
-
+@OnlyInIntegration
 @TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
