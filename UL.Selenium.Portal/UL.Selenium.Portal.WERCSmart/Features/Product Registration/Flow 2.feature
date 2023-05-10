@@ -13,6 +13,7 @@
 @Steps_Flow2A
 Feature: Flow 2
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:57367
 Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S

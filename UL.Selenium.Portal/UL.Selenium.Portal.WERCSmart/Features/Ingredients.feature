@@ -433,6 +433,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+#Remove from regression: 2023/05
 @ignore
 @TestCase:81711
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
@@ -528,7 +529,6 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Formaldehyde            | 100     | No                  | No            |                        |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I close the window that opened
-
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
@@ -577,15 +577,14 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 
 @TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
-
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-Then I save the product information as: TestCase110368
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase110368
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
 @TestCase:95487
@@ -628,7 +627,6 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
-
 	#Looks like th issue is with the ingredients page not showing, instead its the product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
@@ -659,11 +657,11 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 @TestCase:133335
 Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
-Then I save the product information as: TestCase133335
-Given I should see the Product Information Page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
+	Then I save the product information as: TestCase133335
+	Given I should see the Product Information Page
 	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	And I set the Primary Physical State option to: Aerosol
 	And I set the Secondary Physical State option to: Liquid spray
@@ -683,21 +681,21 @@ Given I should see the Product Information Page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The registration ingredient contains information that typically is included in a product that is considered a pesticide under U.S. E.P.A. guidelines or Canada Pest guidelines. The product type you've selected for this registration is not within the scope of pesticide registrations and the ingredient(s) which are typically used in Pesticide or Herbicide registrations is/are:
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm the table in the popup view has the following column titles
-	| Titles          |
-	| CAS Number      |
-	| Name            |
-	| Active or Inert |
+		| Titles          |
+		| CAS Number      |
+		| Name            |
+		| Active or Inert |
 	Then I confirm the table in the popup view has following column data
-	| CAS Number | Name                   | Active or Inert |
-	| 106-97-8   | Butane                 | Inert          |
-	| 66071-96-3 | Glutens, corn          | Active          |
-	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
+		| CAS Number | Name                   | Active or Inert |
+		| 106-97-8   | Butane                 | Inert           |
+		| 66071-96-3 | Glutens, corn          | Active          |
+		| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
-	| Button  |
-	| Go back |
-	| Confirm |
+		| Button  |
+		| Go back |
+		| Confirm |
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
 	And I should see the Ingredients Page
 	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
@@ -738,7 +736,6 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Given I set the Secondary Physical State option to: Solid
 	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	Then I click continue
-
 	Then I add the following ingredients:
 		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glutens, corn       | 100     | false         | false       |            |
@@ -802,7 +799,7 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
 
 # Created by Saikiran Chittampally
-	@TestCase:158853
+@TestCase:158853
 Scenario: [158853] Ingredient Identifier
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -846,57 +843,56 @@ Scenario: [158853] Ingredient Identifier
 # Created by Saikiran Chittampally
 @TestCase:209549
 Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum is Five
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I generate a random UPC number and save as: UPC209549
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save the product information as: TestCase209549
-Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-And I should see the Ingredients Page
-Then I add the following ingredients:
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I generate a random UPC number and save as: UPC209549
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase209549
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I should see the Ingredients Page
+	Then I add the following ingredients:
 		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| 471-34-1      | 3.51131     | false         | false       |            |
 		| 7440-44-0     | 10.21141    | false         | false       |            |
 		| 7732-18-5     | 15.32251    | false         | false       |            |
 		| 1317-61-9     | 15.33361    | false         | false       |            |
 		| 7778-18-9     | 61.44374    | false         | false       |            |
-And I click continue
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-Then I confirm the total percent of these five ingredients is 105.82258 %
-And I click continue
-Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	And I click continue
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	Then I confirm the total percent of these five ingredients is 105.82258 %
+	And I click continue
+	Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC209549, container type: Metal Container and size: 1
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC209549, container type: Metal Container and size: 1
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-Given in the Optional Comments page I click Continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-And I navigate to the home page
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
-Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549
-Given I confirm the Product Data window has opened
-Then I check for the following columns in Formulation
-	| CAS Number |  Percent |
-	|  471-34-1  |3.51131   |
-	| 7440-44-0  | 10.21141 | 
-	| 7732-18-5  |15.32251  |
-	| 1317-61-9  |15.33361  |
-	| 7778-18-9  |61.44374  |
-And I close the current window and switch to the main window in Studio
-Then I click to open the 'My Wercs' menu and select 'Log Out'
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	And I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
+	Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549
+	Given I confirm the Product Data window has opened
+	Then I check for the following columns in Formulation
+		| CAS Number |  Percent |
+		|  471-34-1  |3.51131   |
+		| 7440-44-0  | 10.21141 | 
+		| 7732-18-5  |15.32251  |
+		| 1317-61-9  |15.33361  |
+		| 7778-18-9  |61.44374  |
+	And I close the current window and switch to the main window in Studio
+	Then I click to open the 'My Wercs' menu and select 'Log Out'
 
 # Created by Saikiran Chittampally
 @TestCase:207581
@@ -1001,7 +997,6 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient  | Viscosity |
 		| Mask                          | Brown      | 2                        | 2                       | Banana | Not applicable | 2                      | 2         |
-	
 	Then I should see the Optional Comments Page
 	Given I click continue
 	Given In the Data Acceptance page I select Agreed	

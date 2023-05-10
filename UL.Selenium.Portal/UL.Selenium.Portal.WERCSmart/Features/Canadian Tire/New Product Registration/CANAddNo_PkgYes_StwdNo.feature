@@ -68,6 +68,7 @@ Scenario: [85873] Account Packaging type Only, SOLD = Canada Only, PL = YES, Pac
 	And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85873, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85873
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85874
 Scenario: [85874] Account Packaging type Only, SOLD = Canada Only, PL = NO, Packaging type IS required
@@ -101,6 +102,7 @@ Scenario: [85875] Account Packaging type Only, SOLD = US & Canada, PL = YES, Pac
 	And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85735, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85735
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85876
 Scenario: [85876] Account Packaging type Only, SOLD = US & Canada, PL = NO, Packaging type IS required

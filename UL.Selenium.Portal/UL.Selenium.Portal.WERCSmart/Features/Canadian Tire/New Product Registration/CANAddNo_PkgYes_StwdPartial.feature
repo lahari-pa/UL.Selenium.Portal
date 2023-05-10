@@ -116,7 +116,7 @@ Scenario: [85889] Account Packaging & Partial Stewardship, SOLD = US & Canada, P
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85889
 
-
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85890
 Scenario: [85890] Account Packaging & Partial Stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required

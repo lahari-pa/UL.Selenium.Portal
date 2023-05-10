@@ -15,6 +15,7 @@
 
 Feature: Account Canada Address(Yes) Packagetype(No) Stewardship(No)
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85315
 Scenario: [85315] Account has Canada address only - SOLD = US and Canada, PL = No, packaging type is required
@@ -48,6 +49,7 @@ Scenario: [85735] Account has Canada address only - SOLD = US and Canada, PL = Y
 	And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC85735, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85735
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85736
 Scenario: [85736] Account has Canada address only - SOLD = Canada only, PL = No, packaging type is required

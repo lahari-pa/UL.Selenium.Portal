@@ -15,6 +15,7 @@
 
 Feature: Account Canada Address(Yes) Package types (Yes) Stewardship (No)
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85325
 Scenario: [85325] Account has Canada address and packaging, SOLD US & Canada, PL = NO, packaging type is required
@@ -44,6 +45,7 @@ Scenario: [85325] Account has Canada address and packaging, SOLD US & Canada, PL
 	Given in the Regulatory Documents to Provide page I click Continue
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85325
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85740
 Scenario: [85740] Account has Canada address and packaging, SOLD US & Canada, PL = YES, packaging type is required
@@ -71,6 +73,7 @@ Scenario: [85740] Account has Canada address and packaging, SOLD US & Canada, PL
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85740
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85742
 Scenario: [85742] Account has Canada address and packaging, SOLD Canada Only, PL = NO, packaging type is required
@@ -98,6 +101,7 @@ Scenario: [85742] Account has Canada address and packaging, SOLD Canada Only, PL
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85742
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85743
 Scenario: [85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, packaging type is required

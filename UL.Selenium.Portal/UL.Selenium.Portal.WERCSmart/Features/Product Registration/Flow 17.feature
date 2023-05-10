@@ -200,6 +200,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	And I switch to Data Acceptance page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
 
+#Remove from regression: 2023/05
 @tfs_design
 @ignore
 # Test case can be found at the following path:

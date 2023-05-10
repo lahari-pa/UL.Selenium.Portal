@@ -74,6 +74,7 @@ Scenario: [85764] Account all Canada data - Partial stewardship, SOLD = Canada O
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85764
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85765
 Scenario: [85765] Account all Canada data - Partial stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
@@ -125,6 +126,7 @@ Scenario: [85766] Account all Canada data - Partial stewardship, SOLD = US & Can
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85766
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85767
 Scenario: [85767] Account has Canada address and packaging, SOLD US & Canada, PL = NO, packaging type is required

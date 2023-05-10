@@ -15,6 +15,7 @@
 
 Feature: Account has no Canada Data
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85312
 Scenario: [85312] No Canada data - SOLD = US and Canada, PL = No, Packaging Type is required
@@ -59,6 +60,7 @@ Scenario: [85726] No Canada data - SOLD = US and Canada, PL = Yes, Packaging Typ
 	#Then Package Type should be showing the error messages on upc screen: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85726
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85727
 Scenario: [85727] No Canada data - SOLD = Canada only, PL = No, Packaging Type is required
