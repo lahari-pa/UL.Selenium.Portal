@@ -89,11 +89,11 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Then I save the product information as: TestCase58078
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
-		| Secondary Physical State | Water Solubility     |
-		| Granular                 | Dispersible |
+		| Secondary Physical State | Water Solubility |
+		| Granular                 | Dispersible      |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water  | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Refer to your Product Label option to: None of the Above
 	Given I click continue
@@ -121,7 +121,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 		| Flaked                   | Soluble in water |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water  | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Refer to your Product Label option to: None of the Above
 	Given I click continue
@@ -147,10 +147,10 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
-		| Solid					   | Dispersible       |
+		| Solid                    | Dispersible      |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		|Water     | 100      | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58073, container type: Plastic bag and size: 8
@@ -190,8 +190,8 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Given in the Regulatory Documents to Provide page I click Continue
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
-		| Section               |
-		| Upload SDS (Optional) |
+		| Section                                           |
+		| Upload SDS (Optional)                             |
 		| Toxicity Characteristic Leaching Procedure (TCLP) |
 	Given I click Continue and should not see an error message
 	Then I should see the Optional Reports and Documents Available for Purchase Page
@@ -210,7 +210,7 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water  | 100      | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
@@ -250,8 +250,8 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
 	Then I see the following sections
-	| Section                    |
-	| Flash Point Testing Report |
+		| Section                    |
+		| Flash Point Testing Report |
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
