@@ -861,12 +861,10 @@ Then I add the following ingredients:
 		| 7732-18-5     | 15.32251    | false         | false       |            |
 		| 1317-61-9     | 15.33361    | false         | false       |            |
 		| 7778-18-9     | 61.44374    | false         | false       |            |
-And I click continue
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+Given I click continue
+And I click the page heading: Ingredients
 Then I confirm the total percent of these five ingredients is 105.82258 %
 And I click continue
-Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |

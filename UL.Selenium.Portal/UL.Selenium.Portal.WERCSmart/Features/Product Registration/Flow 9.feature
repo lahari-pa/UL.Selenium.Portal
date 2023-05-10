@@ -93,7 +93,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 		| Granular                 | Dispersible |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Cocoa butter  | 100     | false               | false       |            |
+		| Water  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Refer to your Product Label option to: None of the Above
 	Given I click continue
@@ -121,7 +121,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 		| Flaked                   | Soluble in water |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Cocoa butter  | 100     | false               | false       |            |
+		| Water  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I set the Refer to your Product Label option to: None of the Above
 	Given I click continue
@@ -150,10 +150,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 		| Solid					   | Dispersible       |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glycerol      | 20      | false               | false       |            |
-		| Isohexadecane | 30      | false               | false       |            |
-		| POLOXAMER 181 | 10      | false               | false       |            |
-		| Aqua          | 40      | false               | false       |            |
+		|Water     | 100      | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58073, container type: Plastic bag and size: 8
@@ -176,7 +173,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I save the product information as: TestCase63325
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
@@ -213,11 +210,8 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Polyisoprene  | 90      | false               | false       |            |
-		| Ethanol       | 10      | false               | false       |            |
-	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+		| Water  | 100      | false               | false       |            |
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
-
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
