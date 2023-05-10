@@ -1075,5 +1075,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I click the back arrow next to payment methods")]
+		public void GivenIClickTheBackArrowNextToPaymentMethods()
+		{
+			Report.IsTrue(new PaymentMethods().ClickBackButton(), "Failed to click the back arrow",
+				"Successfully clicked the back arrow");
+		}
+
+		[StepDefinition(@"In the payment methods page I confirm that the Contact Information account name: (.*), firstname: (.*),last name: (.*), email addresss: (.*) appear correct")]
+		public void IConfirmContactInformationAppear(string account_name, string first_name, string last_name, string email_address)
+		{
+			try
+			{
+				var myPay = new PaymentMethods();
+				GeneralUtilities.Wait_for_load_finish();
+				Report.IsTrue(myPay.Confirm_Contact_Info(account_name, first_name, last_name, email_address),
+					"Contact Information Incorrect", "Confirmed Contact Information");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the payment methods page I confirm that the Billing Address address one: (.*), address two: (.*), cityStateZip: (.*), country: (.*), phoneNo: (.*) appear correct")]
+		public void IConfirmBillingAddressAppear(string address_one, string address_two, string city_state_zip, string country, string phone_no)
+		{
+			try
+			{
+				var myPay = new PaymentMethods();
+				Report.IsTrue(myPay.Confirm_Billing_Address(address_one, address_two, city_state_zip, country, phone_no),
+					"Billing Address Incorrect", "Confirmed Billing Address");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the company information page I confirm that the Address (.*) for: action_menu: (.*) country: (.*) address one: (.*), address two: (.*), city: (.*), State: (.*), Zip: (.*), phoneNo: (.*), saveAddressOption: (.*) updated correctly")]
+		public void IConfirmUpdateContactInformation(string action, string action_menu, string country, string address1, string address2, string city, string state, string zip, string phone, string saveOption)
+		{
+			try
+			{
+				var myInfo = new ContactInformation_Edit_Address();
+				Report.IsTrue(myInfo.Edit_Contact_Address(action, country, address1, address2, city, state, zip, phone, saveOption),
+								"Failed to Edit " + action + "", "" + action + " Edited Successfully");
+				Report.IsTrue(myInfo.Confirm_Contact_AddressAppear(action_menu, country, address1, address2, city, state, zip, phone),
+					""+action_menu+" Address Incorrect", "Confirmed "+action_menu+"");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }

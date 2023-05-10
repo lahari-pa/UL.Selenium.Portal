@@ -869,9 +869,232 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickBackButton()
+		{
+			return SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+}
+
+class ContactInformation_Edit_Address : BaseObject
+	{
+		[FindsBy(How = How.Id, Using = "companyInfoContainer")]
+		protected override IWebElement containerElement { get; set; }
+
+		[FindsBy(How = How.XPath, Using = "//div[@id='companyInfoContainer']/div[2]")]
+		private IWebElement _section_bill;
+
+
+		public bool Edit_Contact_Address(string action = "", string country = "", string address1 = "", string address2 = "", string city = "", string state = "", string zip = "", string phone = "", string saveAddressOption = "")
+		{
+			Report.Info("Beginning Edit contact Address");
+			// var myPay = new PaymentMethods();
+			if (!this.ClickEditAction(action))
+			{
+				Report.Info("Failed to Click Edit Button");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			if (!this.Exists)
+			{
+				Report.Info("Not on Edit Address Form");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Edit Address Form Open");
+			if (country != "")
+			{
+				IWebElement myCountry = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '"+action+"')]//select[@id='regCountry']"), 10).FirstOrDefault();
+				if (myCountry == null)
+				{
+					Report.Info("Failed to Find country");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing country " + country);
+				myCountry.Select(country);
+			}
+			if (address1 != "")
+			{
+				IWebElement myAdd1 = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '"+action+ "')]//input[contains(@data-bind, 'address1')]"), 10).FirstOrDefault();
+				if (myAdd1 == null)
+				{
+					Report.Info("Failed to Find Address Line 1 Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Address Line 1: " + address1);
+				myAdd1.EnterText(address1);
+			}
+			if (address2 != "")
+			{
+				IWebElement myAdd2 = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//input[contains(@data-bind, 'address2')]"), 10).FirstOrDefault();
+				if (myAdd2 == null)
+				{
+					Report.Info("Failed to Find Address Line 2 Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Address Line 2: " + address2);
+				myAdd2.EnterText(address2);
+			}
+			if (city != "")
+			{
+				IWebElement myCity = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//input[contains(@data-bind, 'city')]"), 10).FirstOrDefault();
+				if (myCity == null)
+				{
+					Report.Info("Failed to Find City Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing City: " + city);
+				myCity.EnterText(city);
+			}
+			if (state != "")
+			{				
+				IWebElement selectDropdown = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//select[contains(@data-bind, 'state')]"), 10).FirstOrDefault();
+				IWebElement inputTextbox = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//input[contains(@data-bind, 'state')]"), 10).FirstOrDefault();
+
+				if (inputTextbox != null)
+				{
+					Report.Info("Editing State: " + state);
+					inputTextbox.EnterText(state);
+				}
+				else if (selectDropdown != null)
+				{
+					Report.Info("Editing State: " + state);
+					selectDropdown.Select(state);
+				}
+				else
+				{
+					Report.Info("Failed to Find State Text Box");
+					Report.Screenshot();
+					return false;
+				}
+			}
+			if (zip != "")
+			{
+				IWebElement myZip = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//input[contains(@data-bind, 'zipCode')]"), 10).FirstOrDefault();
+				if (myZip == null)
+				{
+					Report.Info("Failed to Find Zip Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Zip Code: " + zip);
+				myZip.EnterText(zip);
+			}			
+			if (phone != "")
+			{
+				IWebElement myPhone = this._section_bill.FindElements(By.XPath("//div[contains(@data-bind, '" + action + "')]//input[contains(@data-bind, 'phone')]"), 10).FirstOrDefault();
+				if (myPhone == null)
+				{
+					Report.Info("Failed to Find Phone Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Phone Number: " + phone);
+				myPhone.EnterText(phone);
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			this.Save_click(saveAddressOption);
+			Delay.Seconds(5 * Delay.SpeedFactor);
+			Report.Screenshot();
+			Report.Success(""+action+" Edited");			
+			return true;
+		}
+
+		public List<string> Get_Contact_Address(string action_menu)
+		{
+			Report.Info("Begining Get Contact Address method");
+			IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='"+action_menu+"']"), 10).FirstOrDefault();
+			if (myBill == null)
+			{
+				Report.Info("Failed to Find "+action_menu+" heading");
+				return null;
+			}
+			IList<IWebElement> myAddress = myBill.FindElements(By.XPath("../div"), 10);
+			if (myAddress != null)
+			{
+				return myAddress.Select(x => x.GetValue()).ToList();
+			}
+			return new List<string>();
+
+		}
+
+		public bool Confirm_Contact_AddressAppear(string action_menu, string country, string address_one, string address_two, string city, string state_code, string zip_code, string phone_no)
+		{
+				Report.Info("Beginning Confirm_Address_Appear");
+				List<string> myInfo = this.Get_Contact_Address(action_menu);
+
+			if (!myInfo[0].Contains(country))
+				{
+					Report.Info("Country Incorrect: " + country);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Country Correct: " + country);
+
+			if (!myInfo[0].Contains(address_one))
+				{
+					Report.Info("Address One Incorrect: " + address_one);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Address One Correct: " + address_one);
+				if (!myInfo[0].Contains(address_two))
+				{
+					Report.Info("Address Two Incorrect: " + address_two);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Address Two Correct: " + address_two);
+				if (!myInfo[1].Contains(city))
+				{
+					Report.Info("City Incorrect: " + city);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("City Correct: " + city);
+				if (!myInfo[1].Contains(state_code))
+				{
+					Report.Info("State Code Incorrect: " + state_code);
+					Report.Screenshot();
+				return false;
+				}
+				Report.Info("State Code Correct: " + state_code);
+				if (!myInfo[1].Contains(zip_code))
+				{
+					Report.Info("Zip Code Incorrect: " + zip_code);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Zip Code Correct: " + zip_code);
+				if (!myInfo[2].Contains(phone_no))
+				{
+					Report.Info("Phone Number Incorrect: " + phone_no);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Phone Number Correct: " + phone_no);
+
+				Report.Info(""+action_menu+" is Correct");
+				Report.Screenshot();
+				return true;
+			}
+
+		public bool Save_click(string saveAddressOption)
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[contains(@data-bind,'" + saveAddressOption + "')]/a[contains(text(),'Save')]"), 2).TryClick();
+
+		}
+		public bool ClickEditAction(string addressEdit)
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[contains(@data-bind,'" + addressEdit + "')]/a[contains(text(),'Edit')]"), 2).TryClick();
+		}
 	}
 
-	class PaymentMethods_Edit_Address : BaseObject
+class PaymentMethods_Edit_Address : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "editAddressDetails")]
 		protected override IWebElement containerElement { get; set; }
@@ -1309,6 +1532,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		
+
 		//Shipping Address is the same as billing address
 		[FindsBy(How = How.XPath, Using = ".//div[@class='checkbox']/label/input")]
 		private IWebElement _chk_same;
@@ -1739,7 +1964,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return new List<string>();
 		}
-	}
+}
 
 	class PaymentMethods_Thank_You : SeleniumBaseObject
 	{

@@ -598,6 +598,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
 		{
 			var selMyAccount = new MyAccount();
+			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), "Failed to Navigate to " + nav_option,
 				"Successully Navigated to " + nav_option);
 		}
