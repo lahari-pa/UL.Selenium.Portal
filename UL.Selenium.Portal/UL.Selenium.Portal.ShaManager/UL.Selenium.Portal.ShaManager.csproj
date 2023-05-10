@@ -40,7 +40,7 @@
 
 		<!-- ===== MISC. PACKAGE(S) ===== -->
 
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
 		<PackageReference Include="iTextSharp" Version="5.5.11" />
 		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
 			<PrivateAssets>all</PrivateAssets>
