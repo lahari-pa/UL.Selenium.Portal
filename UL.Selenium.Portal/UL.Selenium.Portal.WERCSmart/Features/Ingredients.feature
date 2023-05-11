@@ -433,6 +433,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+#Remove from regression: 2023/05
 @ignore
 @TestCase:81711
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
@@ -528,7 +529,6 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Formaldehyde            | 100     | No                  | No            |                        |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I close the window that opened
-
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
@@ -577,14 +577,13 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 
 @TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
-
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase110368
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient
+	Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
@@ -628,7 +627,6 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
-
 	#Looks like th issue is with the ingredients page not showing, instead its the product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
@@ -715,7 +713,8 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:133610
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -737,7 +736,6 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 	Given I set the Secondary Physical State option to: Solid
 	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	Then I click continue
-
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glutens, corn | 100     | false               | false       |            |
@@ -985,6 +983,7 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And I click continue
+	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
