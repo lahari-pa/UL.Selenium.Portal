@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 	{
 		private string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
 
-		[BeforeScenario("OnlyInStaging")]
+		[BeforeScenario("OnlyInIntegration")]
 		public void OnlyInStagingLogic(IObjectContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "Staging - AZ");

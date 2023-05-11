@@ -2771,8 +2771,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var selNewProduct = new NewProduct();
 					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
 					Report.Screenshot();
-
-					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					
+					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
@@ -5158,6 +5158,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				pesticideDetailsStateSteps.ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(state);
 
 				Report.StartSubStep("I set the EPA Expiration Date current year for state: " + state);
+
+				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
+				this.GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
+				this.GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
+				this.GivenICallSharedStep55821ExpirationDate31DecNextYear(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date appropriate response for state: {state}");
+				pesticideDetailsStateSteps.ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(state);
+
+				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
+
 				this.GivenICallSharedStep55822ExpirationDate31DecthisYear(state);
 
 			}

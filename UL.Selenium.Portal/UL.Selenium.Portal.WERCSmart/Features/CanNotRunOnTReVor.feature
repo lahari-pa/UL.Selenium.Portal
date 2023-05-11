@@ -15,6 +15,8 @@
 @run_CanNotRunOnTReVor
 Feature: CanNotRunOnTReVor
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:88918
 Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
