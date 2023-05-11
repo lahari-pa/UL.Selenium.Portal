@@ -45,13 +45,9 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)
-Given I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: GA
-Then in page Pesticide Details - State Registration page I should see error: State GA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: GA
-Then in page Pesticide Details - State Registration page I should see error: State GA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: GA
-Then I should see the appropriate response depending on today's date for state: GA
-Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: GA
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| GA    |
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56592
 
@@ -85,13 +81,9 @@ Given I call Shared Step 57501 (Physical and Chemical Properties - More than one
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)
-Given I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: CO
-Then in page Pesticide Details - State Registration page I should see error: State CO: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: CO
-Then in page Pesticide Details - State Registration page I should see error: State CO: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: CO
-Then I should see the appropriate response depending on today's date for state: CO
-Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: CO
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| CO    |
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56591
 
@@ -106,13 +98,9 @@ Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Butane
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)
-Given I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: CA
-Then in page Pesticide Details - State Registration page I should see error: State CA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: CA
-Then in page Pesticide Details - State Registration page I should see error: State CA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-Given I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: CA
-Then I should see the appropriate response depending on today's date for state: CA
-Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: CA
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| CA    |
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56590
 
@@ -200,13 +188,9 @@ And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(N
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 And I add the EPA registration number: TEST-1234
 And I click continue
-And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: ID
-Then in page Pesticide Details - State Registration page I should see error: State ID: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: ID
-Then in page Pesticide Details - State Registration page I should see error: State ID: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: ID
-Then I should see the appropriate response depending on today's date for state: ID
-And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: ID
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| ID    |
 And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56594
@@ -225,13 +209,9 @@ And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None 
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 And I add the EPA registration number: TEST-1234
 And I click continue
-And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: IN
-Then in page Pesticide Details - State Registration page I should see error: State IN: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: IN
-Then in page Pesticide Details - State Registration page I should see error: State IN: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: IN
-Then I should see the appropriate response depending on today's date for state: IN
-And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: IN
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| IN    |
 And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56596
@@ -251,13 +231,9 @@ And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None 
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 And I add the EPA registration number: TEST-1234
 And I click continue
-And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: KY
-Then in page Pesticide Details - State Registration page I should see error: State KY: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: KY
-Then in page Pesticide Details - State Registration page I should see error: State KY: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: KY
-Then I should see the appropriate response depending on today's date for state: KY
-And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: KY
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| KY    |
 And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56599
@@ -281,13 +257,9 @@ And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None 
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 And I add the EPA registration number: TEST-1234
 And I click continue
-And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: LA
-Then in page Pesticide Details - State Registration page I should see error: State LA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: LA
-Then in page Pesticide Details - State Registration page I should see error: State LA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
-And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: LA
-Then I should see the appropriate response depending on today's date for state: LA
-And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: LA
+Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
+| State |
+| LA    |
 And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56600
