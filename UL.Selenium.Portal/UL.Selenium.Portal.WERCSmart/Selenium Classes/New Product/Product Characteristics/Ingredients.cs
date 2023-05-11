@@ -114,6 +114,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info(
 						"No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
 					inputEl.EnterText(ingredient.ComponentName);
+					var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+					homePage.WaitLoading();
 					IWebElement searching =
 						this.ContainerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
@@ -130,6 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IList<IWebElement> results =
 						this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					i = 0;
+					
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
 						   null && i < 20)
 					{

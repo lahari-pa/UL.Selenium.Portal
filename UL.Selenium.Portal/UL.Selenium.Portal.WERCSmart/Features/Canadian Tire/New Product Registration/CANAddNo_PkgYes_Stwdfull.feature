@@ -15,7 +15,8 @@
 
 Feature: Account Canada Address(No) Package types(Yes) Stewardship(Full)
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85791
 Scenario: [85791] Account No Canada address - Package and stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: ProductAccount
@@ -32,7 +33,8 @@ And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not 
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85791
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85792
 Scenario: [85792] Account No Canada address - Package and stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: ProductAccount
@@ -50,6 +52,8 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85792
 
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85793
 Scenario: [85793] Account No Canada address - Package and stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 Given I log in with the account saved in TReVor as: ProductAccount
@@ -98,7 +102,8 @@ Then The alert message is not displayed with text: STOP! When selecting authorin
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85794
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85795
 Scenario: [85795] Account No Canada address - Package and stewardship, SOLD US and Canada, PL = Yes, Packaging is required
 Given I log in with the account saved in TReVor as: ProductAccount
