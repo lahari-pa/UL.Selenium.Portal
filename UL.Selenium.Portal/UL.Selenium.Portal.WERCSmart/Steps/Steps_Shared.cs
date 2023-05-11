@@ -5187,7 +5187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
 		}
-
+/*
 		[StepDefinition(@"I call Shared Step 225948 \(EPA expiration date - enter current year - enter next year - check for error\) for state:")]
 		public void GivenICallSharedStep225948EPAExpirationDate_EnterCurrentYear_EnterNextYear_CheckForErrorForState(Table table)
 		{
@@ -5221,7 +5221,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-
+*/
 		[StepDefinition(
 			@"I call Shared Step 55821 \(EPA expiration date - enter Dec 31st of Next year\) for state: (.*)")]
 		public void GivenICallSharedStep55821ExpirationDate31DecNextYear(string state)
