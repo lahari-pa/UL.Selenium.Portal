@@ -102,7 +102,7 @@ Scenario: [56149] Click Register Product button from home page - Navigation
 	And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:56158
 Scenario: [56158] Retail Partners navigation No Products
@@ -114,7 +114,7 @@ Scenario: [56158] Retail Partners navigation No Products
 	And I should not see the following subheading Most Recent Retailers
 
 #pass - staging 4.10
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:56161
 Scenario: [56161] UL Solution Center navigation
@@ -133,7 +133,7 @@ Scenario: [56161] UL Solution Center navigation
 		| Navigator                |
 
 #pass - staging 4.10
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:56163
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
@@ -263,7 +263,7 @@ Scenario: [65886] My Products - Pagination
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:71188
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
@@ -384,7 +384,7 @@ Scenario: [66336] Main Menu - collapsed
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85275
 Scenario: [85275] Select All - Popup closes
@@ -417,7 +417,7 @@ Scenario: [85275] Select All - Popup closes
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
-	# Put Back Into Design - May 5th, 2023
+	#Remove from regression: 2023/05
 @ignore
 @TestCase:71230
 Scenario: [71230] Archived Retailers - My Products View
@@ -499,8 +499,8 @@ Scenario: [55796] Navigate to Home Page
 	And I should see the Subheading Alerts expanded in the main window
 	And I should see the Subheading Announcements expanded in the main window
 
-
-	# Put Back Into Design - May 5th, 2023
+	
+	#Remove from regression: 2023/05
 @ignore
 @TestCase:158930
 Scenario: [158930] Home Page Search - Internal Information
@@ -551,7 +551,7 @@ Given I clear the Search Criteria
 Given I click More Filters in the products grid
 
 
-# Put Back Into Design - May 5th, 2023
+#Remove from regression: 2023/05
 @ignore
 @TestCase:156787
 Scenario: [156787] Home Page Search - Internal SKU field
