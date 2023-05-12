@@ -75,6 +75,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool InSupplierManagerClickButton(string buttonName)
+		{
+			IWebElement Button = this.containerElement.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2);
+			if (Button == null)
+			{
+				Report.Info($"No button {buttonName} has been found");
+				return false;
+			}
+
+			if (Button.TryClick())
+			{
+				return true;
+			}
+			return false;
+		}
+
 		public bool SelectSupplierSearchTypeRadio(string radio)
 		{
 			IWebElement matchingRadio = this.containerElement.FindElement(By.XPath(".//input[@type='radio'][following-sibling::text()[position()=1][contains(., '" + radio + "')]]"), 2);

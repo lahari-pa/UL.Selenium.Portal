@@ -1215,10 +1215,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget1FRAME"))
+				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
 				{
 					SeleniumWebDriver.CurrentDriver.ExitIFrame();
-					if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget1FRAME"))
+					if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
 					{
 						Report.Info("Could not switch to iframe");
 						return false;

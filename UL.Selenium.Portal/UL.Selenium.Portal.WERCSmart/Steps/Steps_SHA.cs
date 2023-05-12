@@ -2746,6 +2746,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"StudioSupplierManager has opened");
 		}
 
+		[StepDefinition(@"I should see the Add New Supplier popup")]
+		public void ThenIShouldSeeTheAddNewSupplierPopup()
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
+				"StudioSupplierManager has opened");
+		
+		}
+
+
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
@@ -2819,6 +2829,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked search button");
 			Delay.Seconds(10);
 		}
+
+		//Step can be user for New User Request button in Supplier Manager too
+		[StepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
+		public void ThenInTheSupplierManagerPopupIClickOnTheNewSupplierButton(string button)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.InSupplierManagerClickButton(button), $"Failed to click {button} button",
+				$"Clicked {button} button");
+		}
+
+		[StepDefinition(@"In the Add New Supplier I click on Accept button")]
+		public void ThenInTheAddNewSupplierIClickOnButtonAccept()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), $"Failed to click Accept button",
+				$"Clicked Accept button");
+		}
+
+		[StepDefinition(@"I fill out the information in the Add New Supplier: (.*), (.*)")]
+		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string fieldName, string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterData(fieldName, value), $"Failed to enter {value} in {fieldName}",
+			$"Succesfully entered {value} in field {fieldName}");
+		}
+
+
+
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
 		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
