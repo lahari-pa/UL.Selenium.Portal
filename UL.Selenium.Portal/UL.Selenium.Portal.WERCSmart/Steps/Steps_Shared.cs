@@ -5139,25 +5139,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				string state = row["State"];
 
-				Report.StartSubStep("I set the EPA Expiration Date current year for state: " + state);
+				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
 				this.GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(state);
 
-				Report.StartSubStep("I check for EPA Expiration Date error for state: " + state);
-				newProductSteps.InPageIShouldSeeError("Pesticide Details - State Registration page", "State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 
-				Report.StartSubStep("I set the EPA Expiration Date next year for state: " + state);
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
 				this.GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(state);
 
-				Report.StartSubStep("I check for EPA Expiration Date error for state: " + state);
-				newProductSteps.InPageIShouldSeeError("Pesticide Details - State Registration page", "State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 
-				Report.StartSubStep("I set the EPA Expiration Date next year for state: " + state);
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
 				this.GivenICallSharedStep55821ExpirationDate31DecNextYear(state);
 
-				Report.StartSubStep("I check for EPA Expiration Date appropriate response for state: " + state);
+				Report.StartSubStep($"I check for EPA Expiration Date appropriate response for state: {state}");
 				pesticideDetailsStateSteps.ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(state);
-
-				Report.StartSubStep("I set the EPA Expiration Date current year for state: " + state);
 
 				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
 				this.GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(state);
