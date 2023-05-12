@@ -202,7 +202,7 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
 	Given I Close the Product Recertification History pop up
 
-#@ignore
+@OnlyInIntegration
 @TestCase:112568
 Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is displayed about Rejected Registrations and SDS Restrictions
 	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
