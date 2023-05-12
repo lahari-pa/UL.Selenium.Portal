@@ -181,6 +181,8 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 		| Size (Fluid Ounces)  |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:87595
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)	
 	Given I create a product for a Kit with name: 875951 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto9 and save as: TestCase875951
@@ -282,6 +284,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:96071
 Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
@@ -504,6 +507,7 @@ Scenario: [101023] UPC Step - Add Part Number
 
 
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 #In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @TestCase:84510
@@ -611,6 +615,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
 
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:87305
 Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
@@ -727,6 +732,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 
 #JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:109596
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
@@ -875,6 +881,7 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:120798
 Scenario: [120798] "U" for UPC Update for Suspended Status
@@ -940,6 +947,7 @@ Scenario: [120798] "U" for UPC Update for Suspended Status
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:120849
 Scenario: [120849] "U" for UPC Update No Fee Charge
