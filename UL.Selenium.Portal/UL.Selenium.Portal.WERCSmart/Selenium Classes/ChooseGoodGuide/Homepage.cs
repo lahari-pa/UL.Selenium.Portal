@@ -3,6 +3,7 @@ using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.Reporting.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -25,9 +26,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		}
 		public void WaitLoading()
 		{
-			while (this.GetPaceProgress() != "100%")
+			int timeoutCounter = 0;
+			string currentPaceProgress = this.GetPaceProgress();
+			while (currentPaceProgress != "100%" && timeoutCounter < 300)
 			{
+
 				Delay.Seconds(Delay.SpeedFactor);
+				currentPaceProgress = this.GetPaceProgress();
+				timeoutCounter++;
+			}
+			if (timeoutCounter == 300)
+			{
+				Report.Error("Failed to load page or data within 5 minutes");
 			}
 		}
 	}
