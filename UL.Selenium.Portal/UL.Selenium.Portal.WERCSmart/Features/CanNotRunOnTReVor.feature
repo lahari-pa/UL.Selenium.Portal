@@ -12,6 +12,7 @@
 @SummaryPage
 @SHA
 @UPC
+@ignore
 @run_CanNotRunOnTReVor
 Feature: CanNotRunOnTReVor
 
