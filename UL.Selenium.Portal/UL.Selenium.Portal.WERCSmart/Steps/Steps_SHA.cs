@@ -2847,12 +2847,105 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Clicked Accept button");
 		}
 
-		[StepDefinition(@"I fill out the information in the Add New Supplier: (.*), (.*)")]
-		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string fieldName, string value)
+		[StepDefinition(@"In Add New Supplier I enter Company Name: (.*)")]
+		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterData(fieldName, value), $"Failed to enter {value} in {fieldName}",
-			$"Succesfully entered {value} in field {fieldName}");
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(value), $"Failed to enter {value} in field Company Name",
+			$"Succesfully entered {value} in field Company Name");
+		}
+		[StepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
+		public void ThenInAddNewSupplierIEnterSupplierSellerID(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSellerId(value), $"Failed to enter {value} in field Supplier Seller ID",
+			$"Succesfully entered {value} in field Supplier Seller ID");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
+		public void ThenInAddNewSupplierIEnterCountry(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountry(value), $"Failed to enter {value} in field Country",
+			$"Succesfully entered {value} in field Country");
+		}
+
+		[StepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
+		public void ThenIAddNewSupplierIEnterCountryCode(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountryCode(value), $"Failed to enter {value} in field Country Code",
+			$"Succesfully entered {value} in field Country Code");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
+		public void ThenInAddNewSupplierIEnterSupplierPhone(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSupplierPhone(value), $"Failed to enter {value} in field Supplier Phone",
+			$"Succesfully entered {value} in field Supplier Phone");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Address: (.*)")]
+		public void ThenInAddNewSupplierIEnterAddress(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterAddress(value), $"Failed to enter {value} in field Address",
+			$"Succesfully entered {value} in field Address");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter City: (.*)")]
+		public void ThenInAddNewSupplierIEnterCity(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCity(value), $"Failed to enter {value} in field City",
+			$"Succesfully entered {value} in field City");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter State: (.*)")]
+		public void ThenInAddNewSupplierIEnterState(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterState(value), $"Failed to enter {value} in field State",
+			$"Succesfully entered {value} in field State");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
+		public void ThenInAddNewSupplierIEnterPostalCode(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterPostalCode(value), $"Failed to enter {value} in field Postal Code",
+			$"Succesfully entered {value} in field Postal Code");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Name: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactName(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactName(value), $"Failed to enter {value} in field Contact Name",
+			$"Succesfully entered {value} in field Contact Name");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Email: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactEmail(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
+			$"Succesfully entered {value} in field Contact Email");
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactPhone(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
+			$"Succesfully entered {value} in field Contact Phone");
+		}
+
+		[StepDefinition(@"In Supplier Manager I check new supplier is added")]
+		public void ThenInSupplierManagerICheckNewSupplierIsAdded()
+		{
+			
 		}
 
 
