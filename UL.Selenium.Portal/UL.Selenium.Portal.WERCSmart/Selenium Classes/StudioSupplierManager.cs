@@ -102,7 +102,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return matchingRadio.TryCheck();
 		}
+		public bool CheckSupplierSearchTypeRadio(string radio)
+		{
+			IWebElement RadioButton = this.containerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
+			if (RadioButton == null)
+			{
+				Report.Info("No matching radio has been found");
+				return false;
+			}
 
+			return RadioButton.Displayed;
+		}
 		public List<string> GetSupplierIDs()
 		{
 			var suppliers = new List<string>();

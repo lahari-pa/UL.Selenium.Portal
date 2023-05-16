@@ -2727,9 +2727,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return count;
 		}
 
-
-
-
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
 		{
@@ -2766,6 +2763,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I check next radio buttons:")]
+		public void ThenInTheSupplierManagerPopupICheckNextRadioButtons(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}");
+			}
+
+		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
