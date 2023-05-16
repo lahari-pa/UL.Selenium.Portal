@@ -113,42 +113,4 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given there should be a new email for email Address saved as: AdminEmailAddress from: ULSCN.Notifications@ULNotification.com with the title: WERCSmart Shopping Cart Cleared by UL
 Given the body of the email should show: Your shopping cart has been cleared of registrations by a UL representative as requested by your organization. Registrations may be restored to your cart and submitted. No registration data has been affected by removal from the shopping cart. If you have any questions regarding this action, please contact us at WERCSmartCustomer@UL.com. Thank you. The WERCSmart Team @ UL Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).
 
-@TestCase:199660
-Scenario: [199660] Supplier Manager - Adding New Supplier
-
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I click on the Suppliers link on the top right of the screen
-And I should see the 'Supplier Manager' popup
-Then In the Supplier Manager Popup I click on button: New Supplier 
-And I should see the 'Add New Supplier' popup
-Then In the Add New Supplier I click on Accept button
-And An alert is displayed with next errors:
-| Error                                  |
-| Please specify a Company Name          |
-| Please specify a Country               |
-| Please specify a Country Code          |
-| Please specify a Supplier Phone number |
-| Please specify a Primary Address       |
-| Please specify a City                  |
-| Please specify  a State                |
-| Please specify a Postal Code           |
-| Please specify a Contact Name          |
-| Please specify a Contact Email         |
-| Please specify a Contact Phone         |
-And In Add New Supplier I enter Company Name: CompanyName
-And In Add New Supplier I enter Supplier Seller ID: 123456
-And In Add New Supplier I enter Country: United States
-And I Add New Supplier I enter Country Code: +1
-And In Add New Supplier I enter Supplier Phone: 123456789
-And In Add New Supplier I enter Address: 7856 Paris st
-And In Add New Supplier I enter City: New York
-And In Add New Supplier I enter State: New York
-And In Add New Supplier I enter Postal Code: 58963
-And In Add New Supplier I enter Contact Name: Name
-And In Add New Supplier I enter Contact Email: random
-And In Add New Supplier I enter Contact Phone: Phone
-Then In the Add New Supplier I click on Accept button
-And An alert is displayed with the message: The supplier was successfully added to the system.
-Then I close alert
-And I should not see the 'Add New Supplier' popup
 

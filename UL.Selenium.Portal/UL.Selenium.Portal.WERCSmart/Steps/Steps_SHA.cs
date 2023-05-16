@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using TReVor.Core.Classes.Software;
+using NUnit.Framework;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2768,7 +2769,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"An alert is displayed with next errors:")]
 		public void ThenAnAlertIsDisplayedWithNextErrors(Table table)
 		{
-		
+			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text does not contain error { thisRow["Error"]}");
+			}
+
 		}
 
 
