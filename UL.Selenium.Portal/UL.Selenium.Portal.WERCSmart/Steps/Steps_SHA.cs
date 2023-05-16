@@ -2948,9 +2948,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-
-
-
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
 		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
 		{
