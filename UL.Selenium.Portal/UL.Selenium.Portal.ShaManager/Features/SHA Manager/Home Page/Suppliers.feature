@@ -122,8 +122,19 @@ And I should see the 'Supplier Manager' popup
 Then In the Supplier Manager Popup I click on button: New Supplier 
 And I should see the 'Add New Supplier' popup
 Then In the Add New Supplier I click on Accept button
-And An alert is displayed with the message: The following errors were encountered: \r\n\r\nPlease specify a Company Name.\r\nPlease specify a Country.\r\nPlease specify a Country Code.\r\nPlease specify a Supplier Phone number.\r\nPlease specify a Primary Address.\r\nPlease specify a City.\r\nPlease specify a State.\r\nPlease specify a Postal Code.\r\nPlease specify a Contact Name.\r\nPlease specify a Contact Email\r\nPlease specify a Contact Phone
-Then I close alert
+And An alert is displayed with next errors:
+| Error                                  |
+| Please specify a Company Name          |
+| Please specify a Country               |
+| Please specify a Country Code          |
+| Please specify a Supplier Phone number |
+| Please specify a Primary Address       |
+| Please specify a City                  |
+| Please specify  a State                |
+| Please specify a Postal Code           |
+| Please specify a Contact Name          |
+| Please specify a Contact Email         |
+| Please specify a Contact Phone         |
 And In Add New Supplier I enter Company Name: CompanyName
 And In Add New Supplier I enter Supplier Seller ID: 123456
 And In Add New Supplier I enter Country: United States

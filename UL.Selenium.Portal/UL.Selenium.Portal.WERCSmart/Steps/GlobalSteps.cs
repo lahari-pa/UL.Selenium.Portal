@@ -2327,7 +2327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"An alert is displayed with the message: (.*)")]
+		[StepDefinition(@"An alert is displayed with the message: '(.*)'")]
 		public void AnAlertIsDisplayedWithTheMessage(string message)
 		{
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())

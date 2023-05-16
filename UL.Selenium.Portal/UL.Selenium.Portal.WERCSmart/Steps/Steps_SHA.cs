@@ -2765,6 +2765,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+		[StepDefinition(@"An alert is displayed with next errors:")]
+		public void ThenAnAlertIsDisplayedWithNextErrors(Table table)
+		{
+		
+		}
 
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
