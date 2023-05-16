@@ -45,6 +45,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool CheckPopupHeader(string header)
+		{
+			IWebElement PopupHeader = this.containerElement.FindElement(By.XPath($"//span[@class = 'ui-dialog-title' and text() = '{header}']"));
+			if( PopupHeader == null)
+			{
+				Report.Info("Failed to find popup header");
+				return false;
+			}
+			string getHeader = PopupHeader.Text;
+			if(getHeader == header)
+			{
+				return true;
+			}
+			return false;
+		}
+
 		public bool SwitchToFrame()
 		{
 			try
