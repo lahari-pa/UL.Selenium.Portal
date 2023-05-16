@@ -2744,15 +2744,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
 				"StudioSupplierManager has opened");
+
 		}
 
-		[StepDefinition(@"I should see the Add New Supplier popup")]
-		public void ThenIShouldSeeTheAddNewSupplierPopup()
+		[StepDefinition(@"I (should|should not) see the '(.*)' popup")]
+		public void ThenIShouldSeeThePopup(string condition,  string header)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
-				"StudioSupplierManager has opened");
-		
+			var thisStudioSHAManager = new StudioSHAManager();
+			if (condition == "should")
+			{
+				Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
+					"StudioSupplierManager has opened");
+				Report.IsTrue(thisStudioSHAManager.CheckPopupHeader(header), $"Failed to verify the {header} popup header", $"Succesfully verified the {header} popup header");
+			}
+			else
+			{
+				Report.IsFalse(thisStudioSHAManager.CheckPopupHeader(header), $"Failed to verify the {header} popup is closed", $"Succesfully closed the {header} popup");
+				Report.Screenshot();
+			}
+
 		}
 
 
@@ -2940,12 +2951,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
 			$"Succesfully entered {value} in field Contact Phone");
-		}
-
-		[StepDefinition(@"In Supplier Manager I check new supplier is added")]
-		public void ThenInSupplierManagerICheckNewSupplierIsAdded()
-		{
-			
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
