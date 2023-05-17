@@ -35,118 +35,109 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool InAddNewSupplierClickAcceptButton()
 		{
-			if (this.AcceptButton == null)
-			{
-				Report.Info($"No Accept button has been found");
-				return false;
-			}
-
 			return this.AcceptButton.TryClick();
 		}
-		public bool InAddNewSupplierEnterCompanyName( string value)
+		public bool AcceptButtonExists()
 		{
-
-			if (this.CompanyNameInput == null)
-			{
-				Report.Info($"Failed to find field Company Name");
-				return false;
-			}
+			Report.Info("Attempting to confirm Accept Button exists.");
+			return this.AcceptButton != null;
+		}
+		public bool InAddNewSupplierEnterCompanyName(string value)
+		{
 			return this.CompanyNameInput.TryEnterText(value);
+		}
+		public bool CompanyNameInputExists()
+		{
+			Report.Info("Attempting to confirm Company Name input exists.");
+			return this.CompanyNameInput != null;
 		}
 
 		public bool InAddNewSupplierEnterSellerId(string value)
 		{
-			if (this.SellerIdInput == null)
-			{
-				Report.Info($"Failed to find field Supplier Seller ID");
-				return false;
-			}
 			return this.SellerIdInput.TryEnterText(value);
 		}
 
+		public bool SellerIdInputExists()
+		{
+			Report.Info("Attempting to confirm Seller ID input exists.");
+			return this.SellerIdInput != null;
+		}
 		public bool InAddNewSupplierEnterCountry(string value)
 		{
-			if (this.CountryInput == null)
-			{
-				Report.Info($"Failed to find field Country");
-				return false;
-			}
 			return this.CountryInput.JsSelectElementByText(value);
+		}
+		public bool CountryInputExists()
+		{
+			Report.Info("Attempting to confirm Country input exists.");
+			return this.CountryInput != null;
 		}
 		public bool InAddNewSupplierEnterCountryCode(string value)
 		{
-
-			if (this.CountryCodeInput == null)
-			{
-				Report.Info($"Failed to find field Country");
-				return false;
-			}
 			return this.CountryCodeInput.TryEnterText(value);
+		}
+		public bool CountryCodeInputExists()
+		{
+			Report.Info("Attempting to confirm Country Code input exists.");
+			return this.CountryCodeInput != null;
 		}
 		public bool InAddNewSupplierEnterSupplierPhone(string value)
 		{
-			if (this.PhoneInput == null)
-			{
-				Report.Info($"Failed to find field Supplier Phone");
-				return false;
-			}
 			return this.PhoneInput.TryEnterText(value);
+		}
+		public bool SupplierPhoneInputExists()
+		{
+			Report.Info("Attempting to confirm Supplier Phone input exists.");
+			return this.PhoneInput != null;
 		}
 		public bool InAddNewSupplierEnterAddress(string value)
 		{
-			if (this.AddressInput == null)
-			{
-				Report.Info($"Failed to find field Address");
-				return false;
-			}
 			return this.AddressInput.TryEnterText(value);
+		}
+		public bool AddressInputExists()
+		{
+			Report.Info("Attempting to confirm Address input exists.");
+			return this.AddressInput != null;
 		}
 
 		public bool InAddNewSupplierEnterCity(string value)
 		{
-			if (this.CityInput == null)
-			{
-				Report.Info($"Failed to find field City");
-				return false;
-			}
 			return this.CityInput.TryEnterText(value);
+		}
+		public bool CityInputExists()
+		{
+			Report.Info("Attempting to confirm City input exists.");
+			return this.CityInput != null;
 		}
 		public bool InAddNewSupplierEnterState(string value)
 		{
-			if (this.StateInput == null)
-			{
-				Report.Info($"Failed to find field State");
-				return false;
-			}
 			return this.StateInput.JsSelectElementByText(value);
+		}
+		public bool StateInputExists()
+		{
+			Report.Info("Attempting to confirm State input exists.");
+			return this.StateInput != null;
 		}
 
 		public bool InAddNewSupplierEnterPostalCode(string value)
 		{
-			if (this.PostalCodeInput == null)
-			{
-				Report.Info($"Failed to find field Postal Code");
-				return false;
-			}
 			return this.PostalCodeInput.TryEnterText(value);
 		}
-
+		public bool PostalCodeInputExists()
+		{
+			Report.Info("Attempting to confirm Postal Code input exists.");
+			return this.PostalCodeInput != null;
+		}
 		public bool InAddNewSupplierEnterContactName(string value)
 		{
-			if (this.ContactNameInput == null)
-			{
-				Report.Info($"Failed to find field Contact Name");
-				return false;
-			}
 			return this.ContactNameInput.TryEnterText(value);
+		}
+		public bool ContactNameInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Name input exists.");
+			return this.ContactNameInput != null;
 		}
 		public bool InAddNewSupplierEnterContactEmail(string value)
 		{
-			if (this.ContactEmailInput == null)
-			{
-				Report.Info($"Failed to find field Contact Email");
-				return false;
-			}
 			if (value == "random")
 			{
 				var mailboxActions = new MailboxActions("<random>");
@@ -159,14 +150,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return this.ContactEmailInput.TryEnterText(value);
 			}
 		}
+		public bool ContactEmailInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Email input exists.");
+			return this.ContactEmailInput != null;
+		}
 		public bool InAddNewSupplierEnterContactPhone(string value)
 		{
-			if (this.ContactPhoneInput == null)
-			{
-				Report.Info($"Failed to find field Contact Phone");
-				return false;
-			}
 			return this.ContactPhoneInput.TryEnterText(value);
+		}
+		public bool ContactPhoneInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Phone input exists.");
+			return this.ContactPhoneInput != null;
 		}
 
 	}

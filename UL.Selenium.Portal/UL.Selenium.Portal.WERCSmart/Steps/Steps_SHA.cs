@@ -2865,103 +2865,146 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheAddNewSupplierIClickOnButtonAccept()
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), $"Failed to click Accept button",
-				$"Clicked Accept button");
+
+			if(Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), $"Failed to click Accept button", "Succesfully clicked Accept button");
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Company Name: (.*)")]
 		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CompanyNameInputExists(), "Failed to find Company Name input", "Succesfully found Company Name input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(value), $"Failed to enter {value} in field Company Name",
 			$"Succesfully entered {value} in field Company Name");
+			}
+			
 		}
 		[StepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
 		public void ThenInAddNewSupplierIEnterSupplierSellerID(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.SellerIdInputExists(), "Failed to find Seller ID input", "Succesfully found Seller ID input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSellerId(value), $"Failed to enter {value} in field Supplier Seller ID",
 			$"Succesfully entered {value} in field Supplier Seller ID");
+			}
+			
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CountryInputExists(), "Failed to find Country input", "Succesfully found Country input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountry(value), $"Failed to enter {value} in field Country",
 			$"Succesfully entered {value} in field Country");
+			}
+			
 		}
 
 		[StepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
 		public void ThenIAddNewSupplierIEnterCountryCode(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CountryCodeInputExists(), "Failed to find Country Code input", "Succesfully found Country Code input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountryCode(value), $"Failed to enter {value} in field Country Code",
 			$"Succesfully entered {value} in field Country Code");
+			}	
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
 		public void ThenInAddNewSupplierIEnterSupplierPhone(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.SupplierPhoneInputExists(), "Failed to find Phone input", "Succesfully found Phone input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSupplierPhone(value), $"Failed to enter {value} in field Supplier Phone",
 			$"Succesfully entered {value} in field Supplier Phone");
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Address: (.*)")]
 		public void ThenInAddNewSupplierIEnterAddress(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.AddressInputExists(), "Failed to find Address input", "Succesfully found Address input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterAddress(value), $"Failed to enter {value} in field Address",
 			$"Succesfully entered {value} in field Address");
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter City: (.*)")]
 		public void ThenInAddNewSupplierIEnterCity(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CityInputExists(), "Failed to find City input", "Succesfully found City input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCity(value), $"Failed to enter {value} in field City",
 			$"Succesfully entered {value} in field City");
+			}
+			
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter State: (.*)")]
 		public void ThenInAddNewSupplierIEnterState(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.StateInputExists(), "Failed to find State input", "Succesfully found State input"))
+			{
 			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterState(value), $"Failed to enter {value} in field State",
 			$"Succesfully entered {value} in field State");
+			}		
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
 		public void ThenInAddNewSupplierIEnterPostalCode(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterPostalCode(value), $"Failed to enter {value} in field Postal Code",
+			if (Report.IsTrue(thisStudioAddNewSupplier.PostalCodeInputExists(), "Failed to find Postal Code input", "Succesfully found Postal Code input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterPostalCode(value), $"Failed to enter {value} in field Postal Code",
 			$"Succesfully entered {value} in field Postal Code");
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Contact Name: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactName(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactName(value), $"Failed to enter {value} in field Contact Name",
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactNameInputExists(), "Failed to find Contact Name input", "Succesfully found Contact Name input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactName(value), $"Failed to enter {value} in field Contact Name",
 			$"Succesfully entered {value} in field Contact Name");
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Contact Email: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactEmail(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Contact Email input", "Succesfully found Contact Email input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
 			$"Succesfully entered {value} in field Contact Email");
+			}	
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactPhone(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactPhoneInputExists(), "Failed to find Contact Phone input", "Succesfully found Contact Phone input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
 			$"Succesfully entered {value} in field Contact Phone");
+			}	
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
