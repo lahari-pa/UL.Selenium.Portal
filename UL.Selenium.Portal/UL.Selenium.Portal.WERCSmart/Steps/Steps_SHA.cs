@@ -2852,7 +2852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		//Step can be user for New User Request button in Supplier Manager too
+		//Step can be used for New User Request button in Supplier Manager too
 		[StepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
 		public void ThenInTheSupplierManagerPopupIClickOnTheNewSupplierButton(string button)
 		{

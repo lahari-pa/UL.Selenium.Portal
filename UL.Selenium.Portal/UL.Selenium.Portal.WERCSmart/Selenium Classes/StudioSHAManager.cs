@@ -54,11 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			string getHeader = PopupHeader.Text;
-			if(getHeader == header)
-			{
-				return true;
-			}
-			return false;
+			return getHeader == header;
 		}
 
 		public bool SwitchToFrame()
