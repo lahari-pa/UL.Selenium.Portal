@@ -502,6 +502,7 @@ Scenario: [101023] UPC Step - Add Part Number
 
 #Remove from regression: 2023/05
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 #In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @TestCase:84510
@@ -608,6 +609,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 
 #Remove from regression: 2023/05
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:87305
 Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
@@ -724,6 +726,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 #JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
 #Remove from regression: 2023/05
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:109596
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
