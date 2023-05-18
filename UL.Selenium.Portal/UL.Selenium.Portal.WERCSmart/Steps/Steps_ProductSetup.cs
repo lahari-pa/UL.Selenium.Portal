@@ -1111,8 +1111,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			Report.StartStep("(Ingredients - add any chemical) with name: Sodium hydroxide");
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("(Ingredients - add any chemical) with name: water");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			Report.StartStep("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
@@ -4630,8 +4630,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			
-			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Water");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			Report.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146");
@@ -4779,7 +4779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",

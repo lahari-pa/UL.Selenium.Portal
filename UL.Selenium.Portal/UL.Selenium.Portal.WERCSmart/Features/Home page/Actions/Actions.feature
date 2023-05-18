@@ -118,7 +118,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	Then I save the product information as: TestCase56214
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	#And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))

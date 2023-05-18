@@ -132,16 +132,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				if (!selectRetailers.SelectRetailerContains("walmart"))
 				{
-					Report.IsTrue(selectRetailers.SelectRetailerContains("wal-mart"), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+					Report.IsTrue(selectRetailers.SelectRetailerContains("wal-mart"), $"Failed to select retailer: {retailer} !", $"Successfully selected retailer: {retailer}");
 				}
 				else
 				{
-					Report.Success("Successfully selected retailer: " + retailer);
+					Report.Success($"Successfully selected retailer: {retailer}");
 				}
 			}
 			else
 			{
-				Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+				Report.IsTrue(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 			}
 
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
@@ -315,6 +315,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailer.ConfirmSingleRetailerCheckboxDisplayed(), "The single retailer checkbox was displayed on the page!", "The single retailer checkbox was not displayed on the page");
 		}
 
+		[StepDefinition(@"I confirm the message on retailers page : (.*)")]
+		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.HoverOverText(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
+		}
+
 		[StepDefinition(@"I confirm if the single retailer checkbox is (enabled|disabled)")]
 		public void ConfirmIfSingleRetailerCheckboxIsEnabled(string enabledDisabled)
 		{
@@ -323,6 +330,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SubscriptionCheckboxEnbable() == value, $"Failure, check box is {enabledDisabled} when it should {(value ? "enabled" : "disabled")}.", $"Success, checkbox is {enabledDisabled}.");
 		}
 
+		[StepDefinition(@"I confirm the checkbox (.*) is (present|not present) for stand alone batteries in Retailer page")]
+		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value, string presentNotPresent)
+		{
+			var retailerObject = new Retailer();
+			bool status = presentNotPresent == "present";
+			Report.IsTrue(retailerObject.ConfirmRetailerRegistrationCheckbox(value) == status, $"Failed to confirm the checkbox is {presentNotPresent}.", $"Successfully confirmed that the checkbox is {presentNotPresent}.");
+		}
 
 	}
 }
