@@ -141,7 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return (colourShowing == colourExpected);
 
 		}
-	
+
 
 
 		public bool ClickStatusFilter(string option)
@@ -158,7 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickMoreFilters()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
+			return this.ContainerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
 		}
 
 		public bool MoreFiltersExpanded()
@@ -203,7 +203,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public string ProductIdField {
+		public string ProductIdField
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2).GetValue();
 			set
 			{
@@ -214,7 +215,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ProductSkuField {
+		public string ProductSkuField
+		{
 			get => this.ContainerElement.FindElement(By.XPath(".//input[@aria-describedby='internalProdIDAddOn']"), 2).GetValue();
 			set
 			{
@@ -406,10 +408,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				IWebElement masterEl = row.FindElement(By.XPath(".//ul[@class='list-inline retailers']"), 2);
 				List<IWebElement> nonArchRetailers = masterEl.FindElements(By.XPath(".//li[not(@class='abr archived hidden')]"), 2).ToList();
-				if(nonArchRetailers.Count()==1)
+				if (nonArchRetailers.Count() == 1)
 				{
 					string retailerFound = nonArchRetailers.First().Text;
-					if(retailerFound=="NR")
+					if (retailerFound == "NR")
 					{
 						continue;
 					}
@@ -499,7 +501,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string UpcNumber {
+		public string UpcNumber
+		{
 			get
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']"), 2);
@@ -564,11 +567,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (rows.Count == 0)
 			{
 				bool rowsFound = false;
-				if(rowsFound==false)
+				if (rowsFound == false)
 				{
 					GeneralUtilities.Wait_for_load_finish();
 					IList<IWebElement> newrows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-					if(newrows.Count==0)
+					if (newrows.Count == 0)
 					{
 						Report.Info("No rows were found to delete! Waiting for 10 seconds");
 
@@ -577,15 +580,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info("Rows were found");
 						rowsFound = true;
-					}					
+					}
 				}
 
-				if(rowsFound == false)
+				if (rowsFound == false)
 				{
 					Report.Info("Afterwaiting for loading to finish No rows were found to delete! Moving on.");
 					return true;
-				}	
-				
+				}
+
 			}
 			rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			foreach (IWebElement row in rows)
@@ -637,7 +640,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						//Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
 						int x = 0;
-						while(x<10)
+						while (x < 10)
 						{
 							var modalD = new ModalDialog();
 							if (modalD.ContainerVisible())
@@ -645,7 +648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								delDialog.ClickDelete();
 							}
 							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-							if(row==null)
+							if (row == null)
 							{
 								Report.Info($"The products grid was emtpy");
 								return true;
@@ -691,7 +694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 
 						Report.Info($"The Products grid was still not empty after all attempts");
-						return false;						
+						return false;
 					}
 					Report.Info("Failed to click 'Delete' in popup dialog");
 					return false;
@@ -786,7 +789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					bool clickSuccess = navEl.TryClick();
 					Delay.Seconds(1);
 					int x = 0;
-					while(clickSuccess==false&&x<6)
+					while (clickSuccess == false && x < 6)
 					{
 						navEl.ScrollElementIntoView();
 						Delay.Seconds(1);
@@ -813,7 +816,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 
-						
+
 		}
 
 		public bool NextDisabled()
@@ -1164,7 +1167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Report.Info($"No retailers in row contained the expected status/color...");
 					return false;
-				}				
+				}
 			}
 
 			return true;
@@ -1216,7 +1219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			// Use the ID to find the popup container (if it exists)
 			int x = 0;
 			bool popupdisplayed = false;
-			while (x<30&& popupdisplayed==false)
+			while (x < 30 && popupdisplayed == false)
 			{
 				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 				popupdisplayed = popover != null;
@@ -1224,7 +1227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(2);
 			}
 			return popupdisplayed;
-			
+
 		}
 
 		public bool WaitForRetailerPopupToNotBeDisplayed()
@@ -1255,7 +1258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return true;
 			}
-			
+
 
 		}
 
@@ -1364,8 +1367,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//if the first one does not have the archeived tag then go
 			//if not try second row in list and so on
 			//checking the archieved tag -			
-			
-			foreach(var row in productRows)
+
+			foreach (var row in productRows)
 			{
 				bool notArchieved = false;
 				List<IWebElement> retailersymbolEL = row.FindElements(By.XPath(".//td[5]//ul//li"), 2).ToList();
@@ -1380,7 +1383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						break;
 					}
 				}
-				if(!notArchieved)
+				if (!notArchieved)
 				{
 
 					Report.Info($"The product did not contain any archived retailers, using this product");
@@ -1424,7 +1427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						NameLabel = labelBrandTag?.Text
 					};
 					return productElement;
-				}					
+				}
 			}
 			Report.Info($"All Products Found had either archieved retailers or were in recertification");
 			return null;
@@ -1453,7 +1456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetArchiveAlertText()
 		{
-			if(!SeleniumWebDriver.CurrentDriver.WaitForAlert(30))
+			if (!SeleniumWebDriver.CurrentDriver.WaitForAlert(30))
 			{
 				Report.Info($"Alert did not appear!");
 				return null;
@@ -1580,6 +1583,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	class MoreFilters : ProductsGrid
 	{
+		private IWebElement Value => this.FindElement(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']"), 2);
+		private IList<IWebElement> Values => this.FindElements(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']/option"), 2);
+		IWebElement AdditionalProgramsElement => this.ContainerElement.FindElement(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']"));
+
 		public List<string> Options(string filter)
 		{
 			IWebElement el;
@@ -1614,7 +1621,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Brand {
+		public string Brand
+		{
 			get
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
@@ -1627,7 +1635,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Retailer {
+		public string Retailer
+		{
 			get
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
@@ -1640,7 +1649,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string AdditionalPrograms {
+		public string AdditionalPrograms
+		{
 			get
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
@@ -1677,7 +1687,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ProductIDIngredientIDSKUFieldIsFound()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 15);
-			if (el ==null)
+			if (el == null)
 			{
 				Report.Info($"el was null");
 				return false;
@@ -1723,12 +1733,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
 			if (product == null)
-			{ 
+			{
 				return true;
 			}
 
 			return false;
 
+		}
+
+		public bool ConfirmTheIndicatorSingleRetailerRA()
+		{
+			IWebElement indicator = this.ContainerElement.FindElement(By.XPath("//div[@id='products-grid']/div/table/tbody/tr/td[5]/div[1]"));
+			return indicator.Displayed;
+		}
+		public string ConfirmMessageForSingleRetailerRA()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//div[@data-toggle='tooltip']"));
+			string text = ele.GetAttribute("title");
+			Report.Info(text);
+			return text;
+		}
+
+		public bool ClickAdditionalPrograms()
+		{
+			return this.AdditionalProgramsElement.TryClick();
+		}
+		public bool ConfirmAdditionalProgramsDropdownOpen()
+		{
+			return this.Value.Displayed;
+		}
+
+		public List<string> GetDataOfAdditionalPrograms()
+		{
+			return this.Values.Select(x => x.Text).ToList();
+			
 		}
 
 		public class FilterInformation
@@ -1752,7 +1790,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string Status { get; set; }
 
 
-			
+
 
 
 		}
@@ -1766,14 +1804,4 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 	}
-
-
-
-
-
-
-
-
-
-
 }

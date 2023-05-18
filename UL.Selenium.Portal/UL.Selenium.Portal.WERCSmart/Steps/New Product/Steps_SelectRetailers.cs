@@ -312,7 +312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmIfSingleRetailerCheckboxIsDisplayed()
 		{
 			var retailer = new Retailer();
-			Report.IsTrue(retailer.ConfirmSingleRetailerCheckboxDisplayed(), "The single retailer checkbox was displayed on the page!", "The single retailer checkbox was not displayed on the page");
+			Report.IsTrue(retailer.ConfirmSingleRetailerCheckboxDisplayed(), "The single retailer checkbox was not displayed on the page!", "The single retailer checkbox displayed on the page");
 		}
 
 		[StepDefinition(@"I confirm the message on retailers page : (.*)")]
