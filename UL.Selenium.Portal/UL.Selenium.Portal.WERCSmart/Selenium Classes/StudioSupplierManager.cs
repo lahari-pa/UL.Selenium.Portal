@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
-
+		List<IWebElement> ColumnNames => this.containerElement.FindElements(By.XPath("//td[@aria-describedby='listSupplierInfo_Subscription']"), 2).ToList();
 
 		public bool EnterSearchTerm(string searchTerm)
 		{
@@ -110,9 +110,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("No matching radio has been found");
 				return false;
 			}
-
 			return RadioButton.Displayed;
 		}
+		public bool CheckSubscriptionColumnValues()
+		{
+			List<bool> result= new List<bool>();
+			if (this.ColumnNames.Count > 0)
+			{
+				foreach (IWebElement element in this.ColumnNames)
+				{
+					string value = element.Text;
+					if (value == " " || value == "" || value == "Tiered" || value == "Single" || value == "Single+Tier")
+					{
+						result.Add(true);
+					}
+					else
+					{
+						Report.Info($"Current value in Subscription column is {value}, but expected value should be Tiered, Single, Single+Tier or empty");
+						result.Add(false);
+					}
+				}
+			return result.All(x => x.Equals(true));
+			}
+			Report.Info("There is no suppliers with such search option");
+			return true;
+		}		
 		public List<string> GetSupplierIDs()
 		{
 			var suppliers = new List<string>();
@@ -220,18 +242,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return true;
-
 		}
 
 		public bool CheckForSupplierManagerColumn(string columnTitle)
 		{
-			IWebElement subscriptionStatusColumn = this.containerElement.FindElement(By.XPath($".//th//div[contains(text(), '{columnTitle}')]"), 2);
+			IWebElement Column = this.containerElement.FindElement(By.XPath($".//th//div[contains(text(), '{columnTitle}')]"), 2);
 
-			if (subscriptionStatusColumn == null)
+			if (Column == null)
 			{
 				return false;
 			}
-			return true;
+			return Column.Displayed;
 		}
 
 		public bool CheckForSupplierManagerColumnValue(string columnTitle, string status)

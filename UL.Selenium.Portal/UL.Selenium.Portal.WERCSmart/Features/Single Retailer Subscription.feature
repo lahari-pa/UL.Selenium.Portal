@@ -29,7 +29,66 @@ Then In the Supplier Manager Popup I check next radio buttons:
 | Phone          |
 | Invoice Number |
 And In the Supplier Manager Popup I select radio button: Company
-And In the Supplier Manager Popup I enter the following search term: Company Name
+And In the Supplier Manager Popup I enter the following search term: Company
 And In the Supplier Manager Popup I click on the search button
+And In the Supplier Manager Popup I check next columns exist:
+| Column             |
+| Name               |
+| Subscription       |
+| SubscriptionStatus |
+| Phone              |
+| City               |
+| State              |
+And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
+And In the Supplier Manager Popup I select radio button: User Name
+And In the Supplier Manager Popup I enter the following search term: User Name
+And In the Supplier Manager Popup I click on the search button
+And In the Supplier Manager Popup I check next columns exist:
+| Column             |
+| Name               |
+| Subscription       |
+| SubscriptionStatus |
+| Phone              |
+| City               |
+| State              |
+And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
+And In the Supplier Manager Popup I select radio button: E-Mail
+And In the Supplier Manager Popup I enter the following search term: E-Mail
+And In the Supplier Manager Popup I click on the search button
+And In the Supplier Manager Popup I check next columns exist:
+| Column             |
+| Name               |
+| Subscription       |
+| SubscriptionStatus |
+| Phone              |
+| City               |
+| State              |
+And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
+And In the Supplier Manager Popup I select radio button: Phone
+And In the Supplier Manager Popup I enter the following search term: 999-999-9999
+And In the Supplier Manager Popup I click on the search button
+And In the Supplier Manager Popup I check next columns exist:
+| Column             |
+| Name               |
+| Subscription       |
+| SubscriptionStatus |
+| Phone              |
+| City               |
+| State              |
+And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
+And In the Supplier Manager Popup I select radio button: Invoice Number
+And In the Supplier Manager Popup I enter the following search term: Invoice Number
+And In the Supplier Manager Popup I click on the search button
+And In the Supplier Manager Popup I check next columns exist:
+| Column             |
+| Name               |
+| Subscription       |
+| SubscriptionStatus |
+| Phone              |
+| City               |
+| State              |
+And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
+
+
 
 

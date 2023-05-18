@@ -2771,7 +2771,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}");
 			}
-
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
@@ -4488,6 +4487,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Checking for SubscriptionStatus column");
 			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I check next columns exist:")]
+		public void ThenInTheSupplierManagerPopupICheckNextColumnsExist(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(thisStudioSupplierManager.CheckForSupplierManagerColumn(thisRow["Column"]), $"Failed to find column {thisRow["Column"]}", $"Succesfully found column {thisRow["Column"]}");
+			}
+		}
+		[StepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
+		public void ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank()
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.CheckSubscriptionColumnValues(), $"Failed to confirm all values in Subscription column are Tiered, Single, Single+Tier or blank", $"Succesfully confirmed all values in Subscription column are Tiered, Single, Single+Tier, blank or there is no values to be checked");
 		}
 
 		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
