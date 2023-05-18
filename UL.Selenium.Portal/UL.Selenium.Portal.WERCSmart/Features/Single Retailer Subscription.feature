@@ -28,10 +28,7 @@ Then In the Supplier Manager Popup I check next radio buttons:
 | E-Mail         |
 | Phone          |
 | Invoice Number |
-And In the Supplier Manager Popup I select radio button: Company
-And In the Supplier Manager Popup I enter the following search term: Company
-And In the Supplier Manager Popup I click on the search button
-And In the Supplier Manager Popup I check next columns exist:
+And I call Shared step In the Supplier Manager Popup - radio button 'Company',enter in search 'Company' and check column headers:
 | Column             |
 | Name               |
 | Subscription       |
@@ -39,11 +36,7 @@ And In the Supplier Manager Popup I check next columns exist:
 | Phone              |
 | City               |
 | State              |
-And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
-And In the Supplier Manager Popup I select radio button: User Name
-And In the Supplier Manager Popup I enter the following search term: User Name
-And In the Supplier Manager Popup I click on the search button
-And In the Supplier Manager Popup I check next columns exist:
+And I call Shared step In the Supplier Manager Popup - radio button 'User Name',enter in search 'User Name' and check column headers:
 | Column             |
 | Name               |
 | Subscription       |
@@ -51,11 +44,7 @@ And In the Supplier Manager Popup I check next columns exist:
 | Phone              |
 | City               |
 | State              |
-And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
-And In the Supplier Manager Popup I select radio button: E-Mail
-And In the Supplier Manager Popup I enter the following search term: E-Mail
-And In the Supplier Manager Popup I click on the search button
-And In the Supplier Manager Popup I check next columns exist:
+And I call Shared step In the Supplier Manager Popup - radio button 'E-Mail',enter in search 'E-Mail' and check column headers:
 | Column             |
 | Name               |
 | Subscription       |
@@ -63,11 +52,7 @@ And In the Supplier Manager Popup I check next columns exist:
 | Phone              |
 | City               |
 | State              |
-And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
-And In the Supplier Manager Popup I select radio button: Phone
-And In the Supplier Manager Popup I enter the following search term: 999-999-9999
-And In the Supplier Manager Popup I click on the search button
-And In the Supplier Manager Popup I check next columns exist:
+And I call Shared step In the Supplier Manager Popup - radio button 'Phone',enter in search '999-999-9999' and check column headers:
 | Column             |
 | Name               |
 | Subscription       |
@@ -75,11 +60,7 @@ And In the Supplier Manager Popup I check next columns exist:
 | Phone              |
 | City               |
 | State              |
-And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
-And In the Supplier Manager Popup I select radio button: Invoice Number
-And In the Supplier Manager Popup I enter the following search term: Invoice Number
-And In the Supplier Manager Popup I click on the search button
-And In the Supplier Manager Popup I check next columns exist:
+And I call Shared step In the Supplier Manager Popup - radio button 'Invoice Number',enter in search 'Invoice Number' and check column headers:
 | Column             |
 | Name               |
 | Subscription       |
@@ -87,8 +68,6 @@ And In the Supplier Manager Popup I check next columns exist:
 | Phone              |
 | City               |
 | State              |
-And In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank
-
 
 
 

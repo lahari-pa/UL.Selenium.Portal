@@ -14300,5 +14300,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
+		
+			[StepDefinition(@"I call Shared step In the Supplier Manager Popup - radio button '(.*)',enter in search '(.*)' and check column headers:")]
+			public void ThenICallSharedStepSupplierManagerPopup_RadioButtonEnterInSearchAndCheckColumnHeaders(string radioButton, string searchValue, Table table)
+			{
+				Report.UseSubSteps = true;
+				var thisSteps_SHA = new Steps_SHA();
+				Report.StartSubStep($"In the Supplier Manager Popup I select radio button: {radioButton}");
+				thisSteps_SHA.InSupplierManagerPopupISelectRadioButton(radioButton);
+				Report.StartSubStep($"In the Supplier Manager Popup I enter the following search term: {searchValue}");
+				thisSteps_SHA.InSupplierManagerPopupIEnterSearchTerm(searchValue);
+				Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+				thisSteps_SHA.InSupplierManagerPopupIClickOnTheSearchButton();
+				Report.StartSubStep("In the Supplier Manager Popup I check next columns exist:");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckNextColumnsExist(table);
+				Report.StartSubStep("In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank();
+
+			}
+	
 	}
 }
