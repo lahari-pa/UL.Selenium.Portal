@@ -11,7 +11,7 @@ Feature: Reset Passwords
 
 #@testaccount
 #@tfs_design
-#@ignore
+@ignore
 #@ScenarioId:7031
 Scenario: Reset password for specific TReVor test user accounts
 

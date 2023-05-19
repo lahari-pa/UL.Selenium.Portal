@@ -19,168 +19,150 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class StudioAddNewSupplier : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id = 'dialog-supplier-manager-add-newsupplier']");
+		IWebElement AcceptButton => this.FindElement(By.Id("btnAddNewSupplierSupplierAccount"), 2);
+		IWebElement CompanyNameInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierName']"), 2);
+		IWebElement SellerIdInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierVendorID']"), 2);
+		IWebElement CountryInput => this.FindElement(By.XPath("//select[@id = 'ddNewSupplierCountries']"), 2);
+		IWebElement CountryCodeInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierCountryCode']"), 2);
+		IWebElement PhoneInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierSupplierPhone']"), 2);
+		IWebElement AddressInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierAddressOne']"), 2);
+		IWebElement CityInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierCity']"), 2);
+		IWebElement StateInput => this.FindElement(By.XPath("//select[@id = 'ddNewSupplierState']"), 2);
+		IWebElement PostalCodeInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierZip']"), 2);
+		IWebElement ContactNameInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactName']"), 2);
+		IWebElement ContactEmailInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactEmail']"), 2);
+		IWebElement ContactPhoneInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactPhone']"), 2);
 
 		public bool InAddNewSupplierClickAcceptButton()
 		{
-			IWebElement AcceptButton = this.ContainerElement.FindElement(By.Id("btnAddNewSupplierSupplierAccount"), 2);
-			if (AcceptButton == null)
-			{
-				Report.Info($"No Accept button has been found");
-				return false;
-			}
-
-			if (AcceptButton.TryClick())
-			{
-				return true;
-			}
-			return false;
+			return this.AcceptButton.TryClick();
 		}
-		public bool InAddNewSupplierEnterCompanyName( string value)
+		public bool AcceptButtonExists()
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierName']"));
-
-			if (FieldInput == null)
-				{
-				Report.Info($"Failed to find field Company Name");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			Report.Info("Attempting to confirm Accept Button exists.");
+			return this.AcceptButton != null;
+		}
+		public bool InAddNewSupplierEnterCompanyName(string value)
+		{
+			return this.CompanyNameInput.TryEnterText(value);
+		}
+		public bool CompanyNameInputExists()
+		{
+			Report.Info("Attempting to confirm Company Name input exists.");
+			return this.CompanyNameInput != null;
 		}
 
 		public bool InAddNewSupplierEnterSellerId(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierVendorID']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Supplier Seller ID");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.SellerIdInput.TryEnterText(value);
 		}
 
+		public bool SellerIdInputExists()
+		{
+			Report.Info("Attempting to confirm Seller ID input exists.");
+			return this.SellerIdInput != null;
+		}
 		public bool InAddNewSupplierEnterCountry(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//select[@id = 'ddNewSupplierCountries']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Country");
-				return false;
-			}
-			return FieldInput.JsSelectElementByText(value);
+			return this.CountryInput.JsSelectElementByText(value);
+		}
+		public bool CountryInputExists()
+		{
+			Report.Info("Attempting to confirm Country input exists.");
+			return this.CountryInput != null;
 		}
 		public bool InAddNewSupplierEnterCountryCode(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierCountryCode']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Country");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.CountryCodeInput.TryEnterText(value);
+		}
+		public bool CountryCodeInputExists()
+		{
+			Report.Info("Attempting to confirm Country Code input exists.");
+			return this.CountryCodeInput != null;
 		}
 		public bool InAddNewSupplierEnterSupplierPhone(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierSupplierPhone']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Supplier Phone");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.PhoneInput.TryEnterText(value);
+		}
+		public bool SupplierPhoneInputExists()
+		{
+			Report.Info("Attempting to confirm Supplier Phone input exists.");
+			return this.PhoneInput != null;
 		}
 		public bool InAddNewSupplierEnterAddress(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierAddressOne']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Address");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.AddressInput.TryEnterText(value);
+		}
+		public bool AddressInputExists()
+		{
+			Report.Info("Attempting to confirm Address input exists.");
+			return this.AddressInput != null;
 		}
 
 		public bool InAddNewSupplierEnterCity(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierCity']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field City");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.CityInput.TryEnterText(value);
+		}
+		public bool CityInputExists()
+		{
+			Report.Info("Attempting to confirm City input exists.");
+			return this.CityInput != null;
 		}
 		public bool InAddNewSupplierEnterState(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//select[@id = 'ddNewSupplierState']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field State");
-				return false;
-			}
-			return FieldInput.JsSelectElementByText(value);
+			return this.StateInput.JsSelectElementByText(value);
+		}
+		public bool StateInputExists()
+		{
+			Report.Info("Attempting to confirm State input exists.");
+			return this.StateInput != null;
 		}
 
 		public bool InAddNewSupplierEnterPostalCode(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierZip']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Postal Code");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.PostalCodeInput.TryEnterText(value);
 		}
-
+		public bool PostalCodeInputExists()
+		{
+			Report.Info("Attempting to confirm Postal Code input exists.");
+			return this.PostalCodeInput != null;
+		}
 		public bool InAddNewSupplierEnterContactName(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactName']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Contact Name");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.ContactNameInput.TryEnterText(value);
+		}
+		public bool ContactNameInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Name input exists.");
+			return this.ContactNameInput != null;
 		}
 		public bool InAddNewSupplierEnterContactEmail(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactEmail']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Contact Email");
-				return false;
-			}
 			if (value == "random")
 			{
 				var mailboxActions = new MailboxActions("<random>");
 				string email = mailboxActions.CreateRandomEmail("<random>");
-				return FieldInput.TryEnterText(email);
+				return this.ContactEmailInput.TryEnterText(email);
 
 			}
 			else
 			{
-				return FieldInput.TryEnterText(value);
+				return this.ContactEmailInput.TryEnterText(value);
 			}
+		}
+		public bool ContactEmailInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Email input exists.");
+			return this.ContactEmailInput != null;
 		}
 		public bool InAddNewSupplierEnterContactPhone(string value)
 		{
-			IWebElement FieldInput = this.ContainerElement.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactPhone']"));
-
-			if (FieldInput == null)
-			{
-				Report.Info($"Failed to find field Contact Phone");
-				return false;
-			}
-			return FieldInput.TryEnterText(value);
+			return this.ContactPhoneInput.TryEnterText(value);
+		}
+		public bool ContactPhoneInputExists()
+		{
+			Report.Info("Attempting to confirm Contact Phone input exists.");
+			return this.ContactPhoneInput != null;
 		}
 
 	}

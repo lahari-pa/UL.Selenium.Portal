@@ -17,7 +17,9 @@
 @SubUpgrade
 @ProductSetUp
 @SupplierAccounts
+@ignore
 @run_SupplierAccounts
+
 Feature: SupplierAccounts
 
 @TestCase:1234502

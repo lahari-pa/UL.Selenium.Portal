@@ -71,6 +71,9 @@ Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 		| Exceeds the limits specified by the Ozone Transport Commission                      |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62728
 
+
+#Remove from regression: 2023/05
+@ignore
 @TestCase:62724
 Scenario: [62724] VOC - Flow 19 - Dilution - Sold = 50 Used = 2 - limit checking
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

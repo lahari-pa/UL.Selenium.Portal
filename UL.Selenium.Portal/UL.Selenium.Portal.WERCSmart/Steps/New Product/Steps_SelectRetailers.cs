@@ -132,16 +132,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				if (!selectRetailers.SelectRetailerContains("walmart"))
 				{
-					Report.IsTrue(selectRetailers.SelectRetailerContains("wal-mart"), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+					Report.IsTrue(selectRetailers.SelectRetailerContains("wal-mart"), $"Failed to select retailer: {retailer} !", $"Successfully selected retailer: {retailer}");
 				}
 				else
 				{
-					Report.Success("Successfully selected retailer: " + retailer);
+					Report.Success($"Successfully selected retailer: {retailer}");
 				}
 			}
 			else
 			{
-				Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+				Report.IsTrue(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 			}
 
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");

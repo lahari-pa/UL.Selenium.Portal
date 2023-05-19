@@ -29,6 +29,7 @@
 @ViewUpcs
 @Solutions
 @run_NotIncludedGeneralTests
+@ignore
 Feature: NotIncludedGeneralTests
 
 ##This is a feature that is used to debug tests that you don't want included in trevor.
