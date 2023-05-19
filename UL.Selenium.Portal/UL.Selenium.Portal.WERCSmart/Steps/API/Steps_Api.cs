@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			{ return true; });
 
 			string token = "";
-			string loginUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint");
+			string loginUrl = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable("ItemSyncApiEndpoint").Value;
 
 			using (var wc = new WebClient())
 			{
@@ -60,8 +60,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			{ return true; });
 
 			var token = "";
-			var loginUrl = TestVariables.GetVariableSavedAs("WasteHaulerApiEndpoint") + @"/users/login";
-
+			//var loginUrl = TestVariables.GetVariableSavedAs("WasteHaulerApiEndpoint") + @"/users/login";
+			var loginUrl = $"{TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable("WasteHaulerApiEndpoint").Value}/users/login";
 			using (var wc = new WebClient())
 			{
 				wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -86,10 +86,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 
 			string token = (string)Context.GetFromContext("ApiSavedToken");
 
-			if (TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") != null)
+			if (TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable("ItemSyncApiEndpoint").Value != null)
 			{
 
-				string requestUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") + "/ProcessRetailerUPCList?client=" + guid + "&Token=" + token;
+				string requestUrl = $"{TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable("ItemSyncApiEndpoint").Value}/ProcessRetailerUPCList?client={guid}&Token={token}";
 
 				string requestBody = this.MakeRequestString(tableData);
 				string xml = string.Empty;
@@ -101,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 					Context.AddToContext(savedAs, xml, true);
 				}
 
-				Report.IsTrue(!string.IsNullOrEmpty(xml), "Failed to return xml for GUID: " + guid, "Successfully acquired a report for GUID: " + guid, false, false);
+				Report.IsTrue(!string.IsNullOrEmpty(xml), $"Failed to return xml for GUID: {guid}", $"Successfully acquired a report for GUID: {guid}", false, false);
 
 				var doc = new XmlDocument();
 				doc.LoadXml(xml);
@@ -156,7 +156,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 		public void GetWasteHaulerReport(string upc, string reportSavedAs)
 		{
 			var token = (string)Context.GetFromContext("ApiSavedToken");
-			var requestUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") + @"/upc/" + upc + "/waste_profile";
+			var requestUrl = $"{TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable("WasteHaulerApiEndpoint").Value}/upc/{upc}/waste_profile";
 			var xml = "";
 
 			using (var wc = new WebClient())
