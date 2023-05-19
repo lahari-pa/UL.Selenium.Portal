@@ -599,8 +599,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selMyAccount = new MyAccount();
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), "Failed to Navigate to " + nav_option,
-				"Successully Navigated to " + nav_option);
+			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), $"Failed to Navigate to { nav_option}",
+				$"Successully Navigated to { nav_option}");
 		}
 
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]

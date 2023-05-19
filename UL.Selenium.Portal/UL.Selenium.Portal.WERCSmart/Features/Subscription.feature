@@ -1144,7 +1144,7 @@ Scenario: [112388] Subscription - Contact Information and Billing Information Ap
 	And I click the back arrow next to payment methods
 	When In the My Account page I navigate to the Company Information page
 	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: INDIA address one: test1, address two: test2, city: Hyderabad, State: Telangana, Zip: 99897, phoneNo: 345-678-9001, saveAddressOption: billingAddress updated correctly
-	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: testshiping, address two: testshipping2, city: Ontario, State: Ontario, Zip: 99977, phoneNo: 956-608-9000, saveAddressOption: shippingAddress updated correctly
+	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: test, address two: testshipping2, city: Ontario, State: Ontario, Zip: 97977, phoneNo: 956-608-9000, saveAddressOption: shippingAddress updated correctly
 	#Again updating the Billing address with the previous data, As the data getting updated in Payment Methods page
 	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: UNITED STATES address one: 725 5th Ave, address two: test2, city: New York, State: New York, Zip: 10022, phoneNo: 123-456-7889, saveAddressOption: billingAddress updated correctly
 	#Again updating the Shipping address with the previous data, As the data getting updated in Payment Methods page

@@ -1121,11 +1121,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
+				Report.Info("Editing the contact address Information");
 				var myInfo = new ContactInformation_Edit_Address();
-				Report.IsTrue(myInfo.Edit_Contact_Address(action, country, address1, address2, city, state, zip, phone, saveOption),
-								"Failed to Edit " + action + "", "" + action + " Edited Successfully");
-				Report.IsTrue(myInfo.Confirm_Contact_AddressAppear(action_menu, country, address1, address2, city, state, zip, phone),
-					""+action_menu+" Address Incorrect", "Confirmed "+action_menu+"");
+				myInfo.ClickEditAction(action);
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				myInfo.Edit_Country_Address(action, country);
+				myInfo.Edit_Address_One(action, address1);
+				myInfo.Edit_Address_Two(action, address2);
+				myInfo.Edit_City_Address(action, city);
+				myInfo.Edit_State_Address(action, state);
+				myInfo.Edit_Zip_Address(action, zip);
+				myInfo.Edit_Phone_Number(action, phone);
+
+				Report.Info("Saving the contact information");
+				myInfo.Save_click(saveOption);
+				Delay.Seconds(5 * Delay.SpeedFactor);
+
+				Report.Info("Making sure that the Contact information edited successfully");
+				Report.IsTrue(myInfo.Confirm_Country_AddressAppear(action_menu, country), $"{ action_menu} country Incorrect", $"Confirmed editing {action_menu} country");
+				Report.IsTrue(myInfo.Confirm_addressOne_AddressAppear(action_menu, address1), $"{ action_menu} address one Incorrect", $"Confirmed editing {action_menu} one");
+				Report.IsTrue(myInfo.Confirm_addressTwo_AddressAppear(action_menu, address2), $"{ action_menu} address two Incorrect", $"Confirmed editing {action_menu} two");
+				Report.IsTrue(myInfo.Confirm_City_AddressAppear(action_menu, city), $"{ action_menu} city Incorrect", $"Confirmed editing {action_menu} city");
+				Report.IsTrue(myInfo.Confirm_State_AddressAppear(action_menu, state), $"{ action_menu} state Incorrect", $"Confirmed editing {action_menu} state");
+				Report.IsTrue(myInfo.Confirm_Zip_Code_AddressAppear(action_menu, zip), $"{ action_menu} zip code Incorrect", $"Confirmed editing {action_menu} zip code");
+				Report.IsTrue(myInfo.Confirm_PhoneNo_AddressAppear(action_menu, phone), $"{ action_menu} phone number Incorrect", $"Confirmed editing {action_menu} phone number");				
 			}
 			catch (Exception ex)
 			{
