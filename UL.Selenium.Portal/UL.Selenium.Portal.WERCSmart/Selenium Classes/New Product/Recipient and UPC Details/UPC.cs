@@ -81,26 +81,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetUPCOptions()
 		{
 			IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IList<IWebElement> rList = new List<IWebElement>();
-			List<string> result = new List<string>();
-			if (container != null)
-			{
-				rList = container.FindElements(By.XPath("//tbody//div[@class='form-group']"), 2);
+			this.WaitForContainerToBeVisible();			
+			IList<IWebElement> rList = container.FindElements(By.XPath("//tbody//div[@class='form-group' or @class='form-group has-success']//input"), 2).ToList();
 
-				foreach(IWebElement item in rList)
-				{
-					if (item.Text.Length > 0)
-					{
-						result.Add(item.Text);
-					}
-					else
-					{
-						result.Add("Error. Size field is unable to collect text. See TFS 174731");
-						// This catches the one that doesn't appear at this time. See TFS 174731
-					}
-				}
-			}
-			return result;
+			return rList.Select(x => x.GetAttribute("placeholder")).ToList();			
 		}
 
 		public List<string> GetUPCbuttons()

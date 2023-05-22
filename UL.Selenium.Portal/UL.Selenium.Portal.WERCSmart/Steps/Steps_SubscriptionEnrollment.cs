@@ -452,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I cancel the Enrollment dialog, confirm correct page opens and Proceed")]
 		public void ThenICancelTheEnrollmentDialogConfirmCorrectPageOpensAndProceed()
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I cancel the Enrollment dialog, confirm correct page opens and Proceed");
+			Report.StartStep(Report.Details.StepIndex + " - I cancel the Enrollment dialog, confirm correct page opens and Proceed");
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
@@ -484,7 +484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the chosen options and body text are correct")]
 		public void ThenIConfirmTheChosenOptionsAndBodyTextAreCorrect(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I confirm the chosen options and body text are correct");
+			Report.StartStep(Report.Details.StepIndex + " - I confirm the chosen options and body text are correct");
 			try
 			{
 				var mySubDlg = new SubscriptionEnrollmentDlg();
@@ -514,7 +514,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on (Checkout|Cancel)")]
 		public void ThenIClickOnX(string button)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I click on " + button);
+			Report.StartStep(Report.Details.StepIndex + " - I click on " + button);
 			try
 			{
 				var mySub = new SubscriptionEnrollment();

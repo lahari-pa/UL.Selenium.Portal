@@ -32,7 +32,7 @@ Scenario: [63323] Remove single product from cart
        Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
        Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
              | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-             | Propane       | 100     | false               | false       |            |
+             | Water         | 100     | false               | false       |            |
        Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
        Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
        Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

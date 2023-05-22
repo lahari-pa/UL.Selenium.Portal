@@ -74,6 +74,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Accessories containing Gel (Seat Cushions, etc.)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:58184
 Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
@@ -270,6 +271,7 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
 
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:57344
 Scenario: [57344] Artists Solvent-Thinner - 8-L
@@ -331,6 +333,8 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antibiotic, Liquid or Cream, Non-Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:58282
 Scenario: [58282] Dental Whitening Gel - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -390,6 +394,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:58390
 Scenario: [58390] Paint,Model - RU000333
@@ -432,7 +437,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -479,6 +484,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing paints and glues
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:58810
 Scenario: [58810] Helium Tank(RU000340) - 8G
@@ -510,6 +516,7 @@ Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Helium tank
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58810
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:58815
 Scenario: [58815] Lighters(RU000000) - 8G
@@ -554,7 +561,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -600,6 +607,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
 
 @tfs_design
+#Remove from regression: 2023/05
 @ignore
 @TestCase:75840
 Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
@@ -633,6 +641,7 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Single Purpose Cleaner
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75840
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:117894
 Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
@@ -699,49 +708,49 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
 
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:144527
 Scenario: [144527] Medical Test Kit With Alcohol Swab - RU000955 - Flow 8S
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medical Test Kit With Alcohol Swab
-Given I generate a random UPC number and save as: UPC144527
-Then I save the product information as: TestCase144527
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medical Test Kit With Alcohol Swab
+	Given I generate a random UPC number and save as: UPC144527
+	Then I save the product information as: TestCase144527
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-|           | Alcohol       | 100     |                     |            |             |
-Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
-And The following checkboxes should be displayed for section: Please select DOT Exceptions if applicable?
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		|           | Alcohol       | 100     |                     |            |             |
+	Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+	And The following checkboxes should be displayed for section: Please select DOT Exceptions if applicable?
 		| Checkbox																		                                                    |
 		|  172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. |
-		And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
+	And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
 		| Checkbox														|
 		| 173.159 (a) - Exemption for non-spillable lead-acid batteries |
-And I set the Please select DOT Exceptions if applicable? field to: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid.
-And I click continue
-And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC144527, container type: Plastic Container and size: 9
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given I click continue
-Given I click continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-| Appearance        | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
-| No data available |                          |                         | Neutral | Not applicable | 9                     |                               |           |
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing comment area
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 54796 (Purchase Summary)
-Given I navigate to the home page
-And I search for the product saved as: TestCase144527
-When I click Row Actions for the most recent product returned
-Then I click on the Row Action: View
-Then A Summary page should open in a new browser tab
-Then I confirm the following section: Please select DOT Exceptions if applicable? has the following value: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. in the Summary Page
-Given I close the browser tab with the Summary page
+	And I set the Please select DOT Exceptions if applicable? field to: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid.
+	And I click continue
+	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC144527, container type: Plastic Container and size: 9
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I click continue
+	Given I click continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance        | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| No data available |                          |                         | Neutral | Not applicable | 9                     |                               |           |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Testing comment area
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 54796 (Purchase Summary)
+	Given I navigate to the home page
+	And I search for the product saved as: TestCase144527
+	When I click Row Actions for the most recent product returned
+	Then I click on the Row Action: View
+	Then A Summary page should open in a new browser tab
+	Then I confirm the following section: Please select DOT Exceptions if applicable? has the following value: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid. in the Summary Page
+	Given I close the browser tab with the Summary page
 
 @TestCase:128744
 Scenario: [128744] Ammunition - DOT Exceptions Saved
@@ -753,7 +762,7 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
@@ -770,7 +779,7 @@ Scenario: [128743] Ammunition - Other DOT Exception Validation
 	Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)

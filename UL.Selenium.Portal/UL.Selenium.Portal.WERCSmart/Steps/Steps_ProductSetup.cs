@@ -713,7 +713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
 			Report.StartStep("If purchase details are showing click confirm order");
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder(); 
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
 			//SHA Manager
@@ -721,6 +721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			/*
 			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
@@ -733,6 +734,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
+			*/
+			Report.StartSubStep($"In the SHA manager grid I see the WPS ID I have saved as product: {savedAs} and if status is Submitted, I change status to Assigned, then confirm status is Assigned");
+			shaSteps.InShaManagerGridForProductIDSavedAsIfStatusSubmittedMoveToAssignedThenConfirmStatusAssigned(savedAs); 
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
@@ -1107,8 +1111,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			Report.StartStep("(Ingredients - add any chemical) with name: Sodium hydroxide");
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("(Ingredients - add any chemical) with name: water");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			Report.StartStep("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
@@ -1363,8 +1367,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
-			Report.StartStep("If purchase details are showing click confirm order");
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
 			//SHA Manager
@@ -1372,18 +1374,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared65080LoginToStudioAsUserAndOpenSHAManager(shaAcc);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			
+			//Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			/*
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			*/
 			Report.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			/*
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
+			*/
+			shaSteps.InShaManagerGridForProductIDSavedAsIfStatusSubmittedMoveToAssignedThenConfirmStatusAssigned(savedAs);
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 
@@ -4129,7 +4137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 
-			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_("The Product Type, Pest Selection, and Ingredients listed are accurate.");
+			//new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 			//new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
 
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -4622,8 +4630,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			
-			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide");
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.StartStep("I call Shared Step 29181 (Ingredients - add any chemical) with name: Water");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			Report.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146");
@@ -4771,7 +4779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",

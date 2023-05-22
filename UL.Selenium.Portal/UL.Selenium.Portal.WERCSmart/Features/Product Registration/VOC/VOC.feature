@@ -87,6 +87,7 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	# Confirm the VOC Summary page is NOT shown (because there are no results for show for this RU)
 	# If the Ecologo step is shown run the Shared Step below - if not continue at step 35
 	# Shared 57712
+	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
@@ -275,6 +276,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
 	# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
+	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
@@ -359,9 +361,9 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
 	And in the New Product page I click Continue
 	Then HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
-	Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+	Then MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
 	And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 1
-	And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 1
+	And I set the MVOC (medium volatile organic compound) content as weight percentage of the total formulation field to: 1
 	And in the New Product page I click Continue
 	# Volatile Organic Compound Summary page
 	And I should see the Volatile Organic Compound Summary Page
@@ -377,7 +379,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	#change the HVOC and MVOC value
 	Then I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 	And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 0
-	And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
+	And I set the MVOC (medium volatile organic compound) content as weight percentage of the total formulation field to: 0
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
@@ -567,6 +569,7 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 20
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
+	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
