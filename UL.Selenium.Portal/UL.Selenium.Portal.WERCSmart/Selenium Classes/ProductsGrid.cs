@@ -29,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1);
 
 		private List<IWebElement> ProductTableHeadings => this.ProductTable.FindElements(By.XPath(".//th"), 2).ToList();
-
+		
 		#endregion
 
 		public string HeadingText => this.ProductsHeading?.Text;
@@ -1586,6 +1586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement Value => this.FindElement(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']"), 2);
 		private IList<IWebElement> Values => this.FindElements(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']/option"), 2);
 		IWebElement AdditionalProgramsElement => this.ContainerElement.FindElement(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']"));
+		private IWebElement Indicator => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'Single-Rtlr')]"), 1);
 
 		public List<string> Options(string filter)
 		{
@@ -1743,8 +1744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmTheIndicatorSingleRetailerRA()
 		{
-			IWebElement indicator = this.ContainerElement.FindElement(By.XPath("//div[@id='products-grid']/div/table/tbody/tr/td[5]/div[1]"));
-			return indicator.Displayed;
+			return this.Indicator.Displayed;
 		}
 		public string ConfirmMessageForSingleRetailerRA()
 		{
