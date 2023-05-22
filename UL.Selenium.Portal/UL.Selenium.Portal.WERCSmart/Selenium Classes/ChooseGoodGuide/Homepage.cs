@@ -28,16 +28,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			int timeoutCounter = 0;
 			string currentPaceProgress = this.GetPaceProgress();
-			while (currentPaceProgress != "100%" && timeoutCounter < 300)
+			while (currentPaceProgress != "100%" && timeoutCounter < 120)
 			{
 
 				Delay.Seconds(Delay.SpeedFactor);
 				currentPaceProgress = this.GetPaceProgress();
 				timeoutCounter++;
 			}
-			if (timeoutCounter == 300)
+			if (timeoutCounter == 120)
 			{
-				Report.Error("Failed to load page or data within 5 minutes");
+				Report.Error("Failed to load page or data within 2 minutes");
 			}
 		}
 	}
