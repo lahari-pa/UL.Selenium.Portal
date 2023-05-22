@@ -31,15 +31,16 @@ Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interac
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I should see the The Product Page
-	And I set 'Product Name' to:  Soap (Bar, Liquid) for Body
-	And I set 'Type of Product' to: Soap (Bar, Liquid) for Body
+	And I set 'Product Name' to:  Chalk
+	And I set 'Type of Product' to: Chalk
 	Then I save the product information as: TestCase82536
 	And I click continue
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -75,15 +76,16 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 #And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I should see the The Product Page
-	And I set 'Product Name' to:  Soap (Bar, Liquid) for Body
-	And I set 'Type of Product' to: Soap (Bar, Liquid) for Body
+	And I set 'Product Name' to:  Chalk
+	And I set 'Type of Product' to: Chalk
 	Then I save the product information as: TestCase82536
 	And I click continue
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -113,9 +115,12 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
 	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	Given I wait for 880 seconds
-	Then I Look for an Alert for a max: 30 Seconds
-	And I take a ScreenShot
+	#Given I wait for 900 seconds
+	#Then I Look for an Alert for a max: 30 Seconds
+	#And I take a ScreenShot
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+	Then Click Yes on the inactivity popup
+	Then I confirm the Inactivity pop is closed
 #Then I Check that both an alert and inactivity prompt are on screen
 #Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
 ##Then I Look for an Alert for a max: 1 minutes
@@ -160,6 +165,8 @@ Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup c
 	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
+	Given I click the Add Casepack button under the Select UPCs tab
+	Given In the UPC modal window I click Cancel
 	Given I click the Add Casepack button under the Select UPCs tab
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup

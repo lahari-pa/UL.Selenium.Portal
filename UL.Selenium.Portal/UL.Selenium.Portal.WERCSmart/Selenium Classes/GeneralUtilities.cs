@@ -213,7 +213,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public static bool DeleteFileFromDownloadsFolder(string fileName)
 		{
 
-			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			//string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			string downloadsFolder = SeleniumWebDriver.Interface.DownloadsFolder;
 			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
 			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
 			foreach (var file in files)
