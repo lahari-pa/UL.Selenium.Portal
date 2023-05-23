@@ -20,11 +20,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dialog-supplier-manager']");
 
 		List<IWebElement> ColumnNames => this.ContainerElement.FindElements(By.XPath("//td[@aria-describedby='listSupplierInfo_Subscription']"), 2).ToList();
+		IWebElement Column(string columnTitle) => this.ContainerElement.FindElement(By.XPath($".//th//div[contains(text(),'{columnTitle}')]"), 2);
+		IWebElement RadioButton(string radio) => this.ContainerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
 
 		public bool ColumnNamesExists()
 		{
 			Report.Info("Attempting to confirm Columns Names exist.");
 			return this.ColumnNames != null;
+		}
+		public bool RadioButtonExists(string radio)
+		{
+			Report.Info("Attempting to confirm radio button exist.");
+			return this.RadioButton(radio) != null;
 		}
 		public bool EnterSearchTerm(string searchTerm)
 		{
@@ -101,13 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool CheckSupplierSearchTypeRadio(string radio)
 		{
-			IWebElement RadioButton = this.ContainerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
-			if (RadioButton == null)
-			{
-				Report.Info("No matching radio has been found");
-				return false;
-			}
-			return RadioButton.Displayed;
+			return this.RadioButton(radio).Displayed;
 		}
 		public bool CheckSubscriptionColumnValues()
 		{
@@ -241,16 +242,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForSupplierManagerColumn(string columnTitle)
 		{
-			IWebElement Column = this.ContainerElement.FindElement(By.XPath($".//th//div[contains(text(), '{columnTitle}')]"), 2);
-
-			if (Column == null)
-			{
-				Report.Info("Failed to find columns titles");
-				return false;
-			}
-			return Column.Displayed;
+			return this.Column(columnTitle).Displayed;
 		}
-
+		public bool ColunmTitleExists(string columnTitle)
+		{
+			Report.Info($"Attempt to find column title {columnTitle}");
+			return this.Column(columnTitle) != null;	
+		}
 		public bool CheckForSupplierManagerColumnValue(string columnTitle, string status)
 		{
 			IWebElement subscriptionStatus = this.ContainerElement.FindElement(By.XPath($".//td[@aria-describedby='listSupplierInfo_{columnTitle}']"), 2);

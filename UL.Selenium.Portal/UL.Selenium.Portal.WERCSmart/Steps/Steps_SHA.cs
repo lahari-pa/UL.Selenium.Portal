@@ -2780,7 +2780,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}");
+				if (Report.IsTrue(thisStudioSupplierManager.RadioButtonExists(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to confirm radio button {thisRow["Radio Button"]} is displayed", $"Succesfully confirmed radio button {thisRow["Radio Button"]} is displayed");
+				}
 			}
 		}
 
@@ -4549,7 +4552,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(thisStudioSupplierManager.CheckForSupplierManagerColumn(thisRow["Column"]), $"Failed to find column {thisRow["Column"]}", $"Succesfully found column {thisRow["Column"]}");
+				if (Report.IsTrue(thisStudioSupplierManager.ColunmTitleExists(thisRow["Column"]), $"Failed to find column {thisRow["Column"]}", $"Succesfully found column {thisRow["Column"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckForSupplierManagerColumn(thisRow["Column"]), $"Failed to confirm column {thisRow["Column"]} is displayed", $"Succesfully confirmed column {thisRow["Column"]} is displayed");
+				}
 			}
 		}
 		[StepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
