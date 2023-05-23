@@ -4556,7 +4556,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.CheckSubscriptionColumnValues(), $"Failed to confirm all values in Subscription column are Tiered, Single, Single+Tier or blank", $"Succesfully confirmed all values in Subscription column are Tiered, Single, Single+Tier, blank or there is no values to be checked");
+			if (Report.IsTrue(thisStudioSupplierManager.ColumnNamesExists(), $"Failed to find columns names", $"Succesfully found column names"))
+			{
+				Report.IsTrue(thisStudioSupplierManager.CheckSubscriptionColumnValues(), $"Failed to confirm all values in Subscription column are Tiered, Single, Single+Tier or blank", $"Succesfully confirmed all values in Subscription column are Tiered, Single, Single+Tier, blank or there is no values to be checked");
+			}
 		}
 
 		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
