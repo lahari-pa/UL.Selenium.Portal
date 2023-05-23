@@ -433,12 +433,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> allIngredientsNames = new List<string>();
 			var tableCast = ingredientsTable.Rows.Cast<TableRow>().ToList();
 			var headerRow = tableCast[0];
-			if(headerRow.Keys.Contains("ComponentName"))
+			if (headerRow.Keys.Contains("ComponentName"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
 
 			}
-			if(headerRow.Keys.Contains("CASNumber"))
+			if (headerRow.Keys.Contains("CASNumber"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
@@ -2769,9 +2769,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Report.StartSubStep("In the Ingredients page I click Continue");
 					var selNewProduct = new NewProduct();
-					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false), "Failed to click continue", "Continue was clicked");
 					Report.Screenshot();
-					
+
 					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
@@ -4999,7 +4999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
-			
+
 			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
@@ -5590,7 +5590,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selectRetailers = new StepsSelectRetailers();
 							selectRetailers.ClickTheSingleRetailerCheckbox();
 						}
-					}					
+					}
 				}
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -5721,9 +5721,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = product.Id;
 
 
-			if(upc.Contains("savedAs"))
+			if (upc.Contains("savedAs"))
 			{
-				if(!Context.Contains(upc.Replace("savedAs", "")))
+				if (!Context.Contains(upc.Replace("savedAs", "")))
 				{
 					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
 				}
@@ -8097,7 +8097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
-			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30), "Failure, failed to close", "Success, closed");
 		}
 
 		[StepDefinition(
@@ -14200,7 +14200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			
+
 
 			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
 			Delay.Seconds(1);
@@ -14299,6 +14299,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+		[StepDefinition(@"I call Shared Step 77383 \(Regulatory Documents to Provide - Request to Author \(Happy Path\)\)")]
+		public void ISelectRequestToAuthorInRegulatoryDocuments()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 	}
 }
