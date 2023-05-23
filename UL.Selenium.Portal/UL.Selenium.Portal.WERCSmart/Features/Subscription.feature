@@ -57,7 +57,7 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Then I save the product information as: TestCase63297
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -1131,4 +1131,22 @@ Scenario: [112028] Subscription - Updating Company Name
 	Given In the My Account page I navigate to the Payment Methods page
 	Given In the Payment Methods screen I open the Edit Address form
 	Given In the Account Name field, change the name of the Company INT123-test and Confirm the Contact Information is updated with the New Company Name
+
+# Created by Saikiran Chittampally
+@TestCase:112388
+Scenario: [112388] Subscription - Contact Information and Billing Information Appear Properly
+	
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given  I call Shared Step 62676 (Go To My Account)
+	Given In the My Account page I navigate to the Payment Methods page
+	Then In the payment methods page I confirm that the Contact Information account name: INT123-test, firstname: Test_Automation_ProductsAccount,last name: WERCS, email addresss: User_edcc11cb5c8e@kxxyxunf.mailosaur.net appear correct
+	Then In the payment methods page I confirm that the Billing Address address one: 725 5th Ave, address two: test2, cityStateZip: New York New York 10022, country: UNITED STATES, phoneNo: 123-456-7889 appear correct		
+	And I click the back arrow next to payment methods
+	When In the My Account page I navigate to the Company Information page
+	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: INDIA address one: test1, address two: test2, city: Hyderabad, State: Telangana, Zip: 99897, phoneNo: 345-678-9001, saveAddressOption: billingAddress updated correctly
+	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: test, address two: testshipping2, city: Ontario, State: Ontario, Zip: 97977, phoneNo: 956-608-9000, saveAddressOption: shippingAddress updated correctly
+	#Again updating the Billing address with the previous data, As the data getting updated in Payment Methods page
+	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: UNITED STATES address one: 725 5th Ave, address two: test2, city: New York, State: New York, Zip: 10022, phoneNo: 123-456-7889, saveAddressOption: billingAddress updated correctly
+	#Again updating the Shipping address with the previous data, As the data getting updated in Payment Methods page
+	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: 725 6th Ave, address two: testshipping, city: Ontalon, State: Ontario, Zip: 99977, phoneNo: 956-608-9990, saveAddressOption: shippingAddress updated correctly
 	

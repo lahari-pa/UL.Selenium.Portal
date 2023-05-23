@@ -85,7 +85,7 @@ Scenario: [78937] Select Retailers - Select All
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Chlorine      | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
@@ -303,7 +303,7 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 	Then I save the product information as: TestCase181949
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
 	Then I confirm if the single retailer checkbox is displayed on the retailer page
@@ -401,7 +401,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Then I save the product information as: TestCase181979
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
 	Then I confirm the following retailers are showing in the Retailer page
@@ -477,4 +477,75 @@ And I should see a list style form error with text: There are UPCs that already 
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase183582
 
+# Created by Saikiran Chittampally
+@TestCase:184381
+Scenario: [184381] My Retail Partners: Data Tier Consent - Hover Messaging 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Given I generate a random UPC number and save as: UPC184381
+Then I save the product information as: TestCase184381
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is not present for stand alone batteries in Retailer page
+Given In the 'Select Retailers' window I select the retailer: Rite Aid
+Given I click continue
+Given I click the 'Add' button
+Given I enter UPC Number: saved as UPC184381
+Given I Select a container type from the drop down list
+Given I enter Size Value: 4
+Given I click continue
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Given in the Optional Comments page I click Continue
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then In the Thank You screen I click Home
+And I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+When I select the retailer: Rite Aid
+And I confirm that: Rite Aid requests suppliers of Cleaning, Health & Beauty, OTC (Over-the-Counter), Nutritional Supplements, Artists Supplies, Stationery, as well as Toys and Candle products to grant Tier 2,1, 2.2, 3 and 4.1 consent. is showing under the Data Consent Tiers heading
+Then I confirm that when hover over the tooltip icon : There are registrations in the account enrolled in Single-Retailer Subscription. For those registrations, only Tier 1 is applicable. You may convert existing registrations to Tiered Subscription in the My Account / Subscription Information area in WERCSmart. This will then permit these registrations to participate in the Retailer's overall Data Tier Consent program. is showing
+And I navigate to the home page
+Then The home screen should load
 
+# Created by Saikiran Chittampally
+@TestCase:184567
+Scenario: [184567] My Products - Single Retailer: Indicator and Hover Message / And "Kit Registrations" removed from Additional Programs
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC184567
+Then I save the product information as: TC184567
+Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm if the single retailer checkbox is displayed on the retailer page
+Given In the 'Select Retailers' window I select the retailer: Rite Aid
+Given I click continue
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC184567, container type: Plastic Container and size: 4
+Then in the Universal Product Code (UPC) page I click Continue
+Given I call Shared Step 77383 (Regulatory Documents to Provide - Request to Author (Happy Path))
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given In the Thank You screen I click Home
+Given I confirm the product: TC184567
+Given I confirm that the indicator Single Retailer RA is showing above No Retailer and Rite Aid
+Given I confirm that when hover over on the Single Retailer : Single-Retailer Subscription for Rite Aid message is showing
+And I should see an option for More Filters
+Given I click More Filters in the products grid
+Given I Click on the ADDITIONAL PROGRAMS drop down and confirm options should be available under Additional Programs

@@ -413,6 +413,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("In the Ingredients page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			Report.StartSubStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
@@ -424,7 +426,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartSubStep("I should not see the ingredient obsolete error message");
 			stepsNewProductIngredients.CheckForObsoleteIngredient();
-
 			Report.Screenshot();
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
@@ -432,12 +433,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> allIngredientsNames = new List<string>();
 			var tableCast = ingredientsTable.Rows.Cast<TableRow>().ToList();
 			var headerRow = tableCast[0];
-			if(headerRow.Keys.Contains("ComponentName"))
+			if (headerRow.Keys.Contains("ComponentName"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
 
 			}
-			if(headerRow.Keys.Contains("CASNumber"))
+			if (headerRow.Keys.Contains("CASNumber"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
@@ -2632,8 +2633,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-
 			tableSecond.AddRow(
 				"Select countries the product may be sold in");
 			tableSecond.AddRow(
@@ -2668,14 +2667,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the  Product Information Page");
 			var MyNewProductSteps = new StepsNewProduct();
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
-
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProductSteps.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-
 			var tableFirst = new Table("Section");
-			//tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableFirst.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 			tableFirst.AddRow("Select countries the product may be sold in");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
@@ -2686,6 +2679,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Which best describes your product, including when FIFRA 25(b) Exempt", "Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			Report.StartSubStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
@@ -2704,25 +2701,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-
-
 			var tableSecond = new Table("Section");
+			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
 
-			//tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
-
-			tableSecond.AddRow("Select countries the product may be sold in");
+			tableSecond.AddRow("Which best describes your product, including when FIFRA 25(b) Exempt");
+			tableSecond.AddRow(
+				"Select countries the product may be sold in");
 			tableSecond.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
 			tableSecond.AddRow(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
 			tableSecond.AddRow(
 				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
-
+			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
 			tableSecond.AddRow(
-			"Product is a Retailer's Private Label or Brand");
-			tableSecond.AddRow(
-		"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
-			Report.StartStep("I only see the following sections");
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 
 			Report.StartSubStep("I only the following sections");
 			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
@@ -2736,7 +2729,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Information");
+			;
 		}
+
 		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
 		public void ICallSharedIngredients_AddAnyChemical(string name)
 		{
@@ -2774,10 +2769,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Report.StartSubStep("In the Ingredients page I click Continue");
 					var selNewProduct = new NewProduct();
-					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false), "Failed to click continue", "Continue was clicked");
 					Report.Screenshot();
 
-					if (Report.IsTrue(new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"), "Failed to find popup", "Found popup"))
+					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
 						new StepsIngredients().ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton("Product Contains Ingredients Typical of a Pesticide", "Confirm");
@@ -5004,7 +4999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
-			
+
 			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
@@ -5132,6 +5127,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
 			Report.StartSubStep("I click continue");
 			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 225948 \(EPA expiration date - enter current year - enter next year - check for error\) for state:")]
+		public void GivenICallSharedStep225948EPAExpirationDate_EnterCurrentYear_EnterNextYear_CheckForErrorForState(Table table)
+		{
+			var newProductSteps = new StepsNewProduct();
+			var pesticideDetailsStateSteps = new Steps_PesticideDetailsState();
+
+			foreach (TableRow row in table.Rows)
+			{
+				string state = row["State"];
+
+				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
+				this.GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
+				this.GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date error for state: {state}");
+				newProductSteps.InPageIShouldSeeError($"Pesticide Details - State Registration page", $"State {state}: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+
+				Report.StartSubStep($"I set the EPA Expiration Date next year for state: {state}");
+				this.GivenICallSharedStep55821ExpirationDate31DecNextYear(state);
+
+				Report.StartSubStep($"I check for EPA Expiration Date appropriate response for state: {state}");
+				pesticideDetailsStateSteps.ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(state);
+
+				Report.StartSubStep($"I set the EPA Expiration Date current year for state: {state}");
+				this.GivenICallSharedStep55822ExpirationDate31DecthisYear(state);
+
+			}
 		}
 
 		//CLF - From test plans - Confirm that an error shows "State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable."
@@ -5561,7 +5590,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selectRetailers = new StepsSelectRetailers();
 							selectRetailers.ClickTheSingleRetailerCheckbox();
 						}
-					}					
+					}
 				}
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -5692,9 +5721,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = product.Id;
 
 
-			if(upc.Contains("savedAs"))
+			if (upc.Contains("savedAs"))
 			{
-				if(!Context.Contains(upc.Replace("savedAs", "")))
+				if (!Context.Contains(upc.Replace("savedAs", "")))
 				{
 					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
 				}
@@ -8068,7 +8097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
-			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30), "Failure, failed to close", "Success, closed");
 		}
 
 		[StepDefinition(
@@ -14171,7 +14200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			
+
 
 			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
 			Delay.Seconds(1);
@@ -14270,6 +14299,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+		[StepDefinition(@"I call Shared Step 77383 \(Regulatory Documents to Provide - Request to Author \(Happy Path\)\)")]
+		public void ISelectRequestToAuthorInRegulatoryDocuments()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 	}
 }

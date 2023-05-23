@@ -673,7 +673,7 @@ Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a veri
 	Given I click continue
 	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
       	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)

@@ -74,6 +74,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+		public bool InSupplierManagerClickButton(string buttonName)
+		{
+			IWebElement Button = this.containerElement.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2);
+			if (Button == null)
+			{
+				Report.Info($"No button {buttonName} has been found");
+				return false;
+			}
+			return Button.TryClick();
+		}
 
 		public bool SelectSupplierSearchTypeRadio(string radio)
 		{
@@ -104,7 +114,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return suppliers;
 
 		}
-
 		public List<string> GetSupplierNames()
 		{
 			var suppliers = new List<string>();
@@ -122,7 +131,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return suppliers;
 
 		}
-
 		public bool ClickClose()
 		{
 			IWebElement closeButton = this.containerElement.FindElement(By.XPath("./../..//span[text()='Result Clear Shopping Cart All Users']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button"), 2);
