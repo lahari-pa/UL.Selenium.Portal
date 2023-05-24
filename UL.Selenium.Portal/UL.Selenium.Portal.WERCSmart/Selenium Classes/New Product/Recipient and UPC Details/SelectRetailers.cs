@@ -206,7 +206,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return;
 		}
 
+		public bool OnlyOneRetailerCanBeSelected(Table retailers)
+		{
+			var retailersToSelect = new List<string>();
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
+			List<IWebElement> GetListOfRetailers = this.ContainerElement.FindElements(By.XPath(".//div[@class='col-sm-12 list-view']"), 2).ToList();
+			IWebElement RetailerName;
+			IWebElement Checkbox;
+			bool retailerIsSelected;
+			var retailersList = new List<string>();
+
+			foreach (var element in GetListOfRetailers)
+			{
+				RetailerName = element.FindElement(By.XPath(".//span[contains(@data-bind,'retailer.description')]"));
+				Checkbox = element.FindElement(By.XPath("//input"));
+				string getRetailerName = RetailerName.Text;
+				retailerIsSelected = retailersToSelect.Contains(getRetailerName);
+				retailersList.Add(getRetailerName);
+				if (!retailerIsSelected)
+				{
+					if (!Checkbox.Enabled)
+					{
+						Report.Info($"Checkbox are not disabled for retailer{getRetailerName}");
+						return false;
+					}
+				}
+			}
+			return true;
+		}
 	}
+
+}
 
 	class NoRetailerWarningPopup : SeleniumBaseObject
 	{
