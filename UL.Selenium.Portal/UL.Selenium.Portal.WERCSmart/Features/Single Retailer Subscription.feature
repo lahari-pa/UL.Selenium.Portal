@@ -10,7 +10,8 @@
 @wercsmart
 @RetailPartners
 @SHA
-
+@PaymentMethods
+@ForwardProductRegistration
 
 Feature: Single Retailer Subscription
 
