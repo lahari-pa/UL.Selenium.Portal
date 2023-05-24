@@ -1643,20 +1643,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
-		public void GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath()
-		{
-			Report.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
-			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
-			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
-			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
-			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
-		}
-
 		[StepDefinition(@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_SpecialPermit_ProductLabel()
 		{
@@ -14300,6 +14286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
+		[StepDefinition(@"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
 		[StepDefinition(@"I call Shared Step 77383 \(Regulatory Documents to Provide - Request to Author \(Happy Path\)\)")]
 		public void ISelectRequestToAuthorInRegulatoryDocuments()
 		{
@@ -14312,7 +14299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
-		
+
 		[StepDefinition(@"I call Shared step In the Supplier Manager Popup - radio button '(.*)',enter in search '(.*)' and check column headers:")]
 			public void ThenICallSharedStepSupplierManagerPopup_RadioButtonEnterInSearchAndCheckColumnHeaders(string radioButton, string searchValue, Table table)
 			{
