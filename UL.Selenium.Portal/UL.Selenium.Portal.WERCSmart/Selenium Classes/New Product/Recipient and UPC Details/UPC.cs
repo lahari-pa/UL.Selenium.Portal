@@ -500,7 +500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string downloadsFolder = SeleniumWebDriver.Interface.DownloadsFolder; 
 			Report.Info("Downloads folder: " + downloadsFolder);
 			int counter = 0;
-			while (counter <= 5)
+			while (counter <= 15)
 			{
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (dir.Any())
