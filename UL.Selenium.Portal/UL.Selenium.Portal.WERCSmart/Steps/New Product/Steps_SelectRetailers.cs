@@ -342,7 +342,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInTheWindowICheckOnlyOneRetailerCanBeSelected(Table retailers)
 		{
 			var selSelectRetailers = new SelectRetailers();
-
 			this.SelectRetailersInListView(retailers);
 			Report.IsTrue(selSelectRetailers.OnlyOneRetailerCanBeSelected(retailers), "Failed to verify no more retailers can be selected", "Succesfully verified no more retailers can be selected");
 
