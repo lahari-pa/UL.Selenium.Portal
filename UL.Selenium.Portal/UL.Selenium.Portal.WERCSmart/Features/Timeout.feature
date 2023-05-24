@@ -29,7 +29,6 @@ Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interac
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I should see the The Product Page
 	And I set 'Product Name' to:  Chalk
 	And I set 'Type of Product' to: Chalk
@@ -37,10 +36,8 @@ Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interac
 	And I click continue
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	#And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -63,10 +60,7 @@ Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interac
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
-#Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
-#Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-#Then Click No on the inactivity popup
-#And the landing page should load
+
 
 @Timeout2
 @ScenarioId:1438
@@ -74,7 +68,6 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I should see the The Product Page
 	And I set 'Product Name' to:  Chalk
 	And I set 'Type of Product' to: Chalk
@@ -82,10 +75,8 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 	And I click continue
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	#And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	#And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
@@ -115,18 +106,10 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
 	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	#Given I wait for 900 seconds
-	#Then I Look for an Alert for a max: 30 Seconds
-	#And I take a ScreenShot
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
-#Then I Check that both an alert and inactivity prompt are on screen
-#Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
-##Then I Look for an Alert for a max: 1 minutes
-#Then I confirm the Inactivity pop is open but dont take a screenshot
-#Then Click Yes on the inactivity popup but dont take a screenshot
-#Then I confirm the Inactivity pop is closed but dont take a screenshot
+
 
 
 @Timeout4
