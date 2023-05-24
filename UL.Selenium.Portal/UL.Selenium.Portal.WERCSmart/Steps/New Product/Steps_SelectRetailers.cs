@@ -338,5 +338,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.ConfirmRetailerRegistrationCheckbox(value) == status, $"Failed to confirm the checkbox is {presentNotPresent}.", $"Successfully confirmed that the checkbox is {presentNotPresent}.");
 		}
 
+		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view and check no more retailers can be selected:")]
+		public void ThenInTheWindowICheckOnlyOneRetailerCanBeSelected(Table retailers)
+		{
+			var selSelectRetailers = new SelectRetailers();
+
+			this.SelectRetailersInListView(retailers);
+			Report.IsTrue(selSelectRetailers.OnlyOneRetailerCanBeSelected(retailers), "Failed to verify no more retailers can be selected", "Succesfully verified no more retailers can be selected");
+
+		}
+
 	}
 }
