@@ -233,11 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckCategoriesPresent()
 		{
 			IWebElement categoryHeaders = this.ContainerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
-			if (categoryHeaders == null)
-			{
-				return false;
-			}
-			return true;
+			return categoryHeaders != null;
 		}
 
 		public bool CheckForSupplierManagerColumn(string columnTitle)
