@@ -133,7 +133,7 @@ Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retai
 | Amazon   |
 Then I generate a random UPC number and save as: UPC200449
 And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
-And I call Shared Step 77383 (Regulatory Documents to Provide - Request to Author (Happy Path))
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 And in the Additional Documents to Provide page I click Continue
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
