@@ -2728,9 +2728,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return count;
 		}
 
-
-
-
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
 		{
@@ -2777,6 +2774,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I check next radio buttons:")]
+		public void ThenInTheSupplierManagerPopupICheckNextRadioButtons(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				if (Report.IsTrue(thisStudioSupplierManager.RadioButtonExists(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to confirm radio button {thisRow["Radio Button"]} is displayed", $"Succesfully confirmed radio button {thisRow["Radio Button"]} is displayed");
+				}
+			}
+		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
@@ -4535,6 +4544,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Checking for SubscriptionStatus column");
 			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I check next columns exist:")]
+		public void ThenInTheSupplierManagerPopupICheckNextColumnsExist(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				if (Report.IsTrue(thisStudioSupplierManager.ColunmTitleExists(thisRow["Column"]), $"Failed to find column {thisRow["Column"]}", $"Succesfully found column {thisRow["Column"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckForSupplierManagerColumn(thisRow["Column"]), $"Failed to confirm column {thisRow["Column"]} is displayed", $"Succesfully confirmed column {thisRow["Column"]} is displayed");
+				}
+			}
+		}
+		[StepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
+		public void ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank()
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (Report.IsTrue(thisStudioSupplierManager.ColumnNamesExists(), $"Failed to find columns names", $"Succesfully found column names"))
+			{
+				Report.IsTrue(thisStudioSupplierManager.CheckSubscriptionColumnValues(), $"Failed to confirm all values in Subscription column are Tiered, Single, Single+Tier or blank", $"Succesfully confirmed all values in Subscription column are Tiered, Single, Single+Tier, blank or there is no values to be checked");
+			}
 		}
 
 		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
