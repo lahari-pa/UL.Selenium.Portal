@@ -156,7 +156,7 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 | Retailer |
 | Amazon   |
 And I navigate to the landing page
-Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
 And I enter the text: saved as Product200449 in the 'Search by WPS ID or Product Name' field
 And I click Row Actions for the first product returned
 And I should not see the following Actions options
