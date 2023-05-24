@@ -111,7 +111,7 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 | Retailer |
 | Amazon   |
 And I navigate to the landing page
-Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 And I enter the text: saved as Product200434 in the 'Search by WPS ID or Product Name' field
 And In the Foward Product Registration Screen I should not see product: saved as Product200434
