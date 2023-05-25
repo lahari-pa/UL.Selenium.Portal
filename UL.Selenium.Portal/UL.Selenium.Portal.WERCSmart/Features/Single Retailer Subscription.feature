@@ -157,7 +157,7 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 | Amazon   |
 And I navigate to the landing page
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
-And I enter the text: saved as Product200449 in the 'Search by WPS ID or Product Name' field
+And I search for the product saved as: Product200449
 And I click Row Actions for the first product returned
 And I should not see the following Actions options
 | Option             |
