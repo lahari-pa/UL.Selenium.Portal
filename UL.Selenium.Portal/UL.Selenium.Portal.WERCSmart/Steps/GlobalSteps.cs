@@ -2333,7 +2333,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
 			{
 				string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
-				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
+				Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{ message}'. Actual: '{ alertText } " +
+					"'.",
 					"Successfully found text in alert!");
 			}
 			else

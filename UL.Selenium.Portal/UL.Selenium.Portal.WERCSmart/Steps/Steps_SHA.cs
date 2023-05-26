@@ -2868,7 +2868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if(Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
 			{
-				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), $"Failed to click Accept button", "Succesfully clicked Accept button");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), "Failed to click Accept button", "Succesfully clicked Accept button");
 			}
 		}
 
