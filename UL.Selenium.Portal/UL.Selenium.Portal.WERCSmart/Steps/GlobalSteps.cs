@@ -2727,7 +2727,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Failure($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
-						Report.EndScenario();
 						return;
 					}
 				}
@@ -2948,7 +2947,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								Report.Error($"Could not find the Credentials for {user}");
-								Report.EndScenario();
 								return;
 							}
 						}
