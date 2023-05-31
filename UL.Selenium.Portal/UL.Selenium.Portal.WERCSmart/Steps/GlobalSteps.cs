@@ -977,6 +977,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (isTReVorUser)
 				{
 					CredentialVaultRecord TReVorUser = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+
 					if (Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
 					{
 						email = TReVorUser.UserName;
