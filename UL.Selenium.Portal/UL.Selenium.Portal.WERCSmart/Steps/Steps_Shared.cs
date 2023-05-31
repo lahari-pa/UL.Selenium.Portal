@@ -433,12 +433,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> allIngredientsNames = new List<string>();
 			var tableCast = ingredientsTable.Rows.Cast<TableRow>().ToList();
 			var headerRow = tableCast[0];
-			if(headerRow.Keys.Contains("ComponentName"))
+			if (headerRow.Keys.Contains("ComponentName"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
 
 			}
-			if(headerRow.Keys.Contains("CASNumber"))
+			if (headerRow.Keys.Contains("CASNumber"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
@@ -2769,9 +2769,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Report.StartSubStep("In the Ingredients page I click Continue");
 					var selNewProduct = new NewProduct();
-					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false), "Failed to click continue", "Continue was clicked");
 					Report.Screenshot();
-					
+
 					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
@@ -4999,7 +4999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
-			
+
 			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
@@ -5590,7 +5590,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selectRetailers = new StepsSelectRetailers();
 							selectRetailers.ClickTheSingleRetailerCheckbox();
 						}
-					}					
+					}
 				}
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -5721,9 +5721,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = product.Id;
 
 
-			if(upc.Contains("savedAs"))
+			if (upc.Contains("savedAs"))
 			{
-				if(!Context.Contains(upc.Replace("savedAs", "")))
+				if (!Context.Contains(upc.Replace("savedAs", "")))
 				{
 					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
 				}
@@ -8097,7 +8097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
-			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30), "Failure, failed to close", "Success, closed");
 		}
 
 		[StepDefinition(
@@ -14200,7 +14200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			
+
 
 			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
 			Delay.Seconds(1);
@@ -14299,6 +14299,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+		[StepDefinition(@"I call Shared Step 77383 \(Regulatory Documents to Provide - Request to Author \(Happy Path\)\)")]
+		public void ISelectRequestToAuthorInRegulatoryDocuments()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+		
+		[StepDefinition(@"I call Shared step In the Supplier Manager Popup - radio button '(.*)',enter in search '(.*)' and check column headers:")]
+			public void ThenICallSharedStepSupplierManagerPopup_RadioButtonEnterInSearchAndCheckColumnHeaders(string radioButton, string searchValue, Table table)
+			{
+				Report.UseSubSteps = true;
+				var thisSteps_SHA = new Steps_SHA();
+				Report.StartSubStep($"In the Supplier Manager Popup I select radio button: {radioButton}");
+				thisSteps_SHA.InSupplierManagerPopupISelectRadioButton(radioButton);
+				Report.StartSubStep($"In the Supplier Manager Popup I enter the following search term: {searchValue}");
+				thisSteps_SHA.InSupplierManagerPopupIEnterSearchTerm(searchValue);
+				Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+				thisSteps_SHA.InSupplierManagerPopupIClickOnTheSearchButton();
+				Report.StartSubStep("In the Supplier Manager Popup I check next columns exist:");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckNextColumnsExist(table);
+				Report.StartSubStep("In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank();
+
+			}
+		[StepDefinition(@"I call Shared Step 183893 \(Single Retailer - Retailer Screen - Select retailer\)")]
+		public void ThenICallSharedStepSingleRetailer_RetailerScreen_SelectRetailer(Table table)
+		{
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsSelectRetailer = new StepsSelectRetailers();
+			var stepsRetailer = new Steps_Retailer();
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the Retailer Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartSubStep("I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is present for stand alone batteries in Retailer page");
+			stepsSelectRetailer.ThenIConfirmNoRetailerRegistrationCheckbox("Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program", "present");
+			Report.StartSubStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			stepsRetailer.SelectedRetailersShouldBe("should", newTable);
+			Report.StartSubStep("I select the following retailers in the Select Retailers popup list view and check no more retailers can be selected: Amazon");
+			stepsSelectRetailer.ThenInTheWindowICheckOnlyOneRetailerCanBeSelected(table);
+			Report.StartSubStep("I click Done on Select Retailers window");
+			stepsSelectRetailer.IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartSubStep("In the Retailer page I click Continue");
+			stepsNewProduct.ClickContinue();
+
 		}
 	}
 }
