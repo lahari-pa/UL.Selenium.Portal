@@ -117,14 +117,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
 					homePage.WaitLoading();
 					IWebElement searching =
-						this.ContainerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+						this.ContainerElement.FindElement(By.XPath(".//li[@class='select2-results__option loading-results']//div[contains(text(),'Searching')]"), 2);
 					int i = 0;
 					while (searching != null && i < 30)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
 						searching = this.ContainerElement.FindElement(
-							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+							By.XPath("//li[@class='select2-results__option loading-results']//div[contains(text(),'Searching')]"), 2);
 					}
 
 					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
