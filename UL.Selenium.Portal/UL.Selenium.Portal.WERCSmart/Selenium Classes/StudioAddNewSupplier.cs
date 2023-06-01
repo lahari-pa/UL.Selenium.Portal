@@ -32,6 +32,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement ContactNameInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactName']"), 2);
 		IWebElement ContactEmailInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactEmail']"), 2);
 		IWebElement ContactPhoneInput => this.FindElement(By.XPath("//input[@id = 'txtNewSupplierContactPhone']"), 2);
+		private IWebElement CancelButton => this.FindElement(By.XPath("//table[@class= 'new-supplier']//button[contains(text(), 'Cancel')]"), 2);
+		private IWebElement NewSupplierButton => this.FindElement(By.XPath("//button[contains(text(), 'New Supplier')]"), 2);
+		private IWebElement CloseSupplierManagerwindow => this.FindElement(By.XPath("//span[contains(text(),'Supplier Manager')]//parent::div/a"), 2);
 
 		public bool InAddNewSupplierClickAcceptButton()
 		{
@@ -163,6 +166,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Attempting to confirm Contact Phone input exists.");
 			return this.ContactPhoneInput != null;
+		}
+		public bool InAddNewSupplierClickCancelButton()
+		{
+			return this.CancelButton.TryClick();
+		}
+		public bool CancelButtonExists()
+		{
+			Report.Info("Attempting to confirm Cancel Button exists.");
+			return this.CancelButton != null;
+		}
+		public bool ClickNewSupplierButton()
+		{
+			return this.NewSupplierButton.TryClick();
+		}
+		public bool NewSupplierButtonExists()
+		{
+			Report.Info("Attempting to confirm New Supplier Button exists.");
+			return this.NewSupplierButton != null;
+		}
+		public bool CloseSupplierManagerButton()
+		{
+			return this.CloseSupplierManagerwindow.TryClick();
+		}
+		public bool CloseSupplierManagerButtonExists()
+		{
+			Report.Info("Attempting to confirm Supplier Manager close Button exists.");
+			return this.CloseSupplierManagerwindow != null;
 		}
 
 	}
