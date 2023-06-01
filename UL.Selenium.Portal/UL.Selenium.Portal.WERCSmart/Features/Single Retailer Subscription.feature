@@ -167,7 +167,7 @@ And I should not see the following Actions options
 
 @TestCase:184385
 
-Scenario: [184385] Single Retailer - Not Available for Forwarding
+Scenario: [184385] My Retail Partners:  Data Tier Consent - Products in Scope - Report Show Single Retailer Products
 
 Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
