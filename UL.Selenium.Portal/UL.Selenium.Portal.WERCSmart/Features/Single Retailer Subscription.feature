@@ -211,5 +211,7 @@ Then In the Thank You screen I click Home
 Then I click the Retail Partners icon in the Navigation Pane
 Then I select the retailer: Rite Aid
 Then I click the Products in Scope button and confirm that a file is produced called RA_Report_DataUsageTier_6_1_2023.xlsx and save as File184385
+Then I verify downloaded file RA_Report_DataUsageTier_6_1_2023.xlsx saved as File184385 contains data:
+| WPS ID | INTERNAL ID |
 
 

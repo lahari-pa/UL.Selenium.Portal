@@ -2710,6 +2710,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[Then(@"I verify downloaded file (.*) saved as (.*) contains data:")]
+		public void ThenIVerifyDownloadedFileRA_Report_DataUsageTier___XlsxSavedAsFileContainsData(string fileName, string savedAs, Table table)
+		{
+			var upc = new UPC();
+			Report.IsTrue(upc.VerifySampleFile(table, fileName, savedAs), "Failed to validate  File", "Successfully validated File");
+		}
+
+
 	}
 
 
