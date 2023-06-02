@@ -14,7 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class PaymentMethods : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.Id("paymentMethodsContainer");
-
+		private IWebElement _btnBackArrow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//i[@class='fa fa-arrow-left']"), 2);
+		
 		public bool Payment_Header_Correct()
 		{
 			Report.Info("Beginning Header_Correct");
@@ -870,7 +871,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
-}
+		
+		public bool Continue_back_arrow()
+		{
+			Report.Info("Attempting to Click Back Arrow");
+			this._btnBackArrow.Click();
+			return true;
+		}
+	}
 
 class ContactInformation_Edit_Address : SeleniumBaseObject
 	{
@@ -1756,6 +1764,9 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 	class PaymentMethods_Subscription_Billing : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.Id("shoppingCart");
+		IWebElement _quaterlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='2']"), 2);
+		IWebElement _yearlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='0']"), 2);
+		IWebElement _monthlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='1']"), 2);
 
 		public bool Purchase_Header_Correct()
 		{
@@ -2019,7 +2030,30 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			return new List<string>();
 		}
-}
+
+		public bool Billing_frequency_options()
+		{
+			if (_yearlyOption.Displayed && _quaterlyOption == null && _monthlyOption == null)
+			{
+				Report.Info("I can see yearly option and is selected");
+			}
+			else if (_yearlyOption.Displayed && _quaterlyOption.Displayed && _monthlyOption == null)
+			{
+				Report.Info(" I can see yearly option and quaterly option");
+			}
+			else
+			{
+				Report.Info("I can see Yearly option, monthly option and quaterly option");
+			}
+			return true;
+		}
+
+		public bool Billing_frequency_YearlyLabel()
+		{
+			IWebElement yearlyLabel = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//label[contains(text(), 'Yearly')]"), 2);
+			return yearlyLabel.Displayed;
+		}
+	}
 
 	class PaymentMethods_Thank_You : SeleniumBaseObject
 	{
@@ -2067,7 +2101,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		public bool Thank_You_TextExists(string thankYouText)
 		{
-			IWebElement tyTextElement = this.ContainerElement.FindElement(By.XPath($".//div[@class='panel panel-default ws-panel'][not(contains(@style,'display:none;'))]//p[contains(text(),'{thankYouText}')]"), 1);
+			IWebElement tyTextElement = this.ContainerElement.FindElement(By.XPath($".//div[@class='panel-body']//p[contains(text(), '{thankYouText}')]"), 1);
 			return tyTextElement != null;
 		}
 
