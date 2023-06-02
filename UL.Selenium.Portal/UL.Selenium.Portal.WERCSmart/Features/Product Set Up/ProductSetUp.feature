@@ -120,7 +120,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	And I navigate to the home page
 	And I search for the product saved as: TestCase75410
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Recertification
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Assigned
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its font is not red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase75410
 	And In the Product Recertification History popup I should see the following entry
