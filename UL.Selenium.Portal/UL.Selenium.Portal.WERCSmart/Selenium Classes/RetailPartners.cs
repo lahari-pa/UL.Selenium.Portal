@@ -8,6 +8,10 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TechTalk.SpecFlow;
+using UL.Automation.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -600,6 +604,88 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string text = ele.GetAttribute("title");
 			Report.Info(text);
 			return text;
+		}
+
+		public bool VerifyExcelFile(string sheetName, string fileName, string savedAs, Table table)
+		{
+			var upc = new UPC();
+			var tableData = new List<string>();
+			var fileProductsData = new List<string>();
+
+			upc.GetFile(fileName, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = this.GetExcelFileData(sheetName, savedAs, actualFile);
+			tableData.AddRange(table.Header);
+			if (tableData is null || fileData is null)
+			{
+				Report.Failure("Either the table is empty or the file: '" + fileName + "' is not being read.");
+				return false;
+			}
+			foreach (TableRow row in table.Rows)
+			{
+				var ProductDetails = (ProductInformation)Context.GetFromContext(row["WPS ID"]);
+				if (ProductDetails == null)
+				{
+					Report.Error($"Product saved as '{savedAs}' not found in context.");
+					return false;
+				}
+				string ID = ProductDetails.Id;
+				Report.Info($"Looking for product with ID {ID} in excel file");
+				for (int i = 0;i < fileData.Count;i++)
+				{
+					if (fileData[i] == ID)
+					{
+						Report.Info($"Product with ID {ID} was found in excel file");
+						int index = i;
+						for (int y = i; y <= i+8; y++)
+						{
+							fileProductsData.Add(fileData[y]);
+						}
+
+					}
+				}
+
+
+				var vals = row.RowValuesFromContext();
+				tableData.AddRange(vals.ToList());
+			}
+
+			for (int i = 0; i < tableData.Count; i++)
+			{
+				//if (tableData[i].Trim() != fileData[i].Trim())
+				string t1 = tableData[i];
+				string t2 = fileProductsData[i];
+				t1 = Regex.Replace(t1, @"\s+", "");
+				t2 = Regex.Replace(t2, @"\s+", "");
+				if (t1 != t2)
+				{
+					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public List<string> GetExcelFileData(string sheetName, string savedAs, object actualFile)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(actualFile.ToString(), sheetName);
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+
+				var list = new List<string>();
+
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					list.AddRange(ExcelUtils.Excel_GetRow(i));
+				}
+				Report.IsTrue(list != null, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+				return list;
+			}
+			return null;
 		}
 
 	}

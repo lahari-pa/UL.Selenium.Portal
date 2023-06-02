@@ -172,7 +172,7 @@ Scenario: [184385] My Retail Partners:  Data Tier Consent - Products in Scope - 
 Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save the product information as: Product200449
+Then I save the product information as: Product184385SRS
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -191,6 +191,7 @@ Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product184385T
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -210,8 +211,12 @@ Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
 Then I click the Retail Partners icon in the Navigation Pane
 Then I select the retailer: Rite Aid
-Then I click the Products in Scope button and confirm that a file is produced called RA_Report_DataUsageTier_6_1_2023.xlsx and save as File184385
-Then I verify downloaded file RA_Report_DataUsageTier_6_1_2023.xlsx saved as File184385 contains data:
-| WPS ID | INTERNAL ID |
+Then I click the Products in Scope button and confirm that a file is produced called RA_Report_DataUsageTier_<Date>.xlsx and save as File184385
+Then I verify sheet Table in downloaded file RA_Report_DataUsageTier_<Date>.xlsx saved as File184385 contains data:
+| WPS ID           | Internal ID | Product Name | Formula ID | Retailer | Product Type | Included in Consent | Excluded from Consent | Single-Retail Subscription |
+| Product184385SRS |             | Chalk        |            | Rite Aid | Chalk        |                     | EXCLUDED              | Enrolled / Exempt          |
+| Product184385T   |             | Chalk        |            | Rite Aid | Chalk        | YES                 |                       |                            |
+Then I click the Home icon in the Navigation Pane
+
 
 
