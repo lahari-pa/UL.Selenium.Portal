@@ -9,6 +9,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@ignore
 @run_EPAState4
 
 Feature:  EPA State Expiry Date Validation 4 (Suite ID: 56545)
