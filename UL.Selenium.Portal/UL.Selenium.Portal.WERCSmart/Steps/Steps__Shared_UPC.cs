@@ -805,7 +805,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				utils.AddRow(vals.ToList());
 			}
 			//add all rows from table to excelfile
-			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+			string downloadsFolder = SeleniumWebDriver.Interface.DownloadsFolder;
+
+			System.IO.Directory.Move(destination, downloadsFolder + @"\testdoc.xlsx");
 			
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
 

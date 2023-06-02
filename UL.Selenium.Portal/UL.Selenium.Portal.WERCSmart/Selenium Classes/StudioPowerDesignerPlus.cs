@@ -2473,13 +2473,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class ProductAttributesFilter : BaseObject
+	class ProductAttributesFilter : SeleniumBaseObject
 	{
-		public const string BasePath = "//table[@id='AttributesGrid_tblSelectRecord']";
+		public const string BasePath = "//table[@id='AttributesGrid_tblFilter']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		//[FindsBy(How = How.XPath, Using = BasePath)]
+		//protected override IWebElement containerElement { get; set; }
 		public void Close()
 		{
 			SeleniumBrowser.WebBrowser.Close();
@@ -2488,7 +2489,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SelectFromSelectBox(string selectBox, string value)
 		{
 			Report.Info("Select from select box: " + selectBox + " value: " + value);
-			ReadOnlyCollection<IWebElement> listOfSelects = this.containerElement.FindElements(By.XPath(".//select"));
+			ReadOnlyCollection<IWebElement> listOfSelects = this.ContainerElement.FindElements(By.XPath(".//select"));
 			IWebElement matchingSelect;
 			switch (selectBox.ToLower())
 			{

@@ -75,3 +75,159 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
 
+
+# Created by Saikiran Chittampally
+@TestCase:208099
+Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
+	Then I save the product information as: TestCase208099
+	Given I call Shared Step 208116 Product Information - FIFRA 25(b) Product Not a Pesticide, US (SOLD), NO (OSHA), NO (DSV), YES (CA RTK), NO (PL), NO (GNFR)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
+	Given I add the following CA Cleaning ingredients:  
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | true               | false       | AQUA           | Fragrance      |  |   |       |
+	Then I click continue
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then I see the following questions
+		| Section                                                                                                                                        |
+		| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
+	Then The following options should be displayed for section: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		| Option |
+		| Yes    |
+		| No     |
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
+
+
+# Created by Saikiran Chittampally
+@TestCase:207582
+Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid (RU000756) - New Flow Testing
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then I save the product information as: TestCase207582
+	Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	Then I should see the Pesticide Details - Canada Page
+	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 27925
+	And The following options should be displayed for section: Product's packaging includes a Poison Danger symbol
+		| Option |
+		| Yes    |
+		| No     |
+	Given I set the Product's packaging includes a Poison Danger symbol option to: No
+	Given I set the Alberta option to: Schedule 1
+	Given I set the British Columbia option to: Commercial
+	Given I set the Manitoba option to: Commercial
+	Given I set the New Brunswick option to: None
+	Given I set the New Foundland and Labrador option to: Domestic
+	Given I set the Nova Scotia option to: Commercial
+	Given I set the Ontario option to: Class A: Manufacturing Products
+	Given I set the Prince Edward Island option to: Controlled Purchase
+	Given I set the Quebec option to: Class 1
+	Given I set the Saskatchewan option to: Commercial
+	Given I set the Northwest Territory option to: Not Applicable 
+	Given I set the Yukon Territory option to: Commercial
+	Then I click continue
+	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Then I click continue
+	Given Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
+	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
+	Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should should not be showing any error messages
+	Then I click continue
+	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	And I confirm that statement with text: 'Based on your selection, you have verified your product contains VOC with intended uses as follows.  The CARB VOC compliance limit(s) for the intended use you identified is/are:' is not displayed
+	Then in the VOC Limits table, the Use column should contain the value: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
+	Then in the VOC Limits table, the Regulation column should contain the value: CARB limit
+	And I should see the following Voc percent for each state:
+		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
+		| Canada          | State Allowable Limit | 0         | 65                  | Does not exceed the State Limits |
+	Then I confirm that I see the following CARB value: 50
+	Then The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+	Given in the Volatile Organic Compound Summary page I click Continue
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
+
+# Created by Saikiran Chittampally
+@TestCase:207584
+Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid - Canada Only (RU000755) - New Flow Testing
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (20% or less fragrance) - Liquid
+	Then I save the product information as: TestCase207584
+	Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
+	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	Then I should see the Pesticide Details - Canada Page
+	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 27925
+	And The following options should be displayed for section: Product's packaging includes a Poison Danger symbol
+		| Option |
+		| Yes    |
+		| No     |
+	Given I set the Product's packaging includes a Poison Danger symbol option to: No
+	Given I set the Alberta option to: Schedule 1
+	Given I set the British Columbia option to: Commercial
+	Given I set the Manitoba option to: Commercial
+	Given I set the New Brunswick option to: None
+	Given I set the New Foundland and Labrador option to: Domestic
+	Given I set the Nova Scotia option to: Commercial
+	Given I set the Ontario option to: Class A: Manufacturing Products
+	Given I set the Prince Edward Island option to: Controlled Purchase
+	Given I set the Quebec option to: Class 1
+	Given I set the Saskatchewan option to: Commercial
+	Given I set the Northwest Territory option to: Not Applicable 
+	Given I set the Yukon Territory option to: Commercial
+	Then I click continue
+	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Then I click continue
+	Given Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
+	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
+	Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should should not be showing any error messages
+	Then I click continue
+	Then I should see the Volatile Organic Compound Summary Page
+	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	And I confirm that statement with text: 'Based on your selection, you have verified your product contains VOC with intended uses as follows.  The CARB VOC compliance limit(s) for the intended use you identified is/are:' is not displayed
+	Then in the VOC Limits table, the Use column should contain the value: Personal Fragrance Product (20% or less fragrance) - Liquid
+	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 75
+	Then in the VOC Limits table, the Regulation column should contain the value: CARB limit
+	And I should see the following Voc percent for each state:
+		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
+		| Canada          | State Allowable Limit | 0         | 75                  | Does not exceed the State Limits |
+	Then I confirm that I see the following CARB value: 50
+	Then The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+	Given in the Volatile Organic Compound Summary page I click Continue
+	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (20% or less fragrance) - Liquid
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207584
+

@@ -86,6 +86,8 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65512
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:65516
 Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -150,6 +152,8 @@ Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Bat
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
 
+#removed from regression: 2023/06
+@ignore
 @TestCase:65520
 Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

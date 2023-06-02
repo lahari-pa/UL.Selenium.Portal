@@ -15,17 +15,27 @@ using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioSupplierManager : BaseObject
+	class StudioSupplierManager : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='dialog-supplier-manager']";
+		protected override By ContainerElementLocator => By.XPath("//div[@id='dialog-supplier-manager']");
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		List<IWebElement> ColumnNames => this.ContainerElement.FindElements(By.XPath("//td[@aria-describedby='listSupplierInfo_Subscription']"), 2).ToList();
+		IWebElement Column(string columnTitle) => this.ContainerElement.FindElement(By.XPath($".//th//div[contains(text(),'{columnTitle}')]"), 2);
+		IWebElement RadioButton(string radio) => this.ContainerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
 
-
+		public bool ColumnNamesExists()
+		{
+			Report.Info("Attempting to confirm Columns Names exist.");
+			return this.ColumnNames != null;
+		}
+		public bool RadioButtonExists(string radio)
+		{
+			Report.Info("Attempting to confirm radio button exist.");
+			return this.RadioButton(radio) != null;
+		}
 		public bool EnterSearchTerm(string searchTerm)
 		{
-			IWebElement searchInput = this.containerElement.FindElement(By.XPath(".//input[@id='textSupplierSearch']"), 2);
+			IWebElement searchInput = this.ContainerElement.FindElement(By.XPath(".//input[@id='textSupplierSearch']"), 2);
 			if (searchInput == null)
 			{
 				Report.Info("No search input has been found");
@@ -37,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForSuppliersToLoad()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
 			if(el==null)
 			{
 				Report.Success($"Loading... was not showing");
@@ -48,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool loaded = false;
 			while (x<12&&loaded==false)
 			{
-				el = this.containerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
+				el = this.ContainerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
 				loaded = el.IsNullOrEmpty();
 				x++;
 				Delay.Seconds(5);
@@ -58,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSearchButton()
 		{
-			IWebElement searchButton = this.containerElement.FindElement(By.XPath(".//button[@id='supplierSearchButton']"), 2);
+			IWebElement searchButton = this.ContainerElement.FindElement(By.XPath(".//button[@id='supplierSearchButton']"), 2);
 			if (searchButton == null)
 			{
 				Report.Info("No search input has been found");
@@ -74,10 +84,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+		public bool InSupplierManagerClickButton(string buttonName)
+		{
+			IWebElement Button = this.ContainerElement.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2);
+			if (Button == null)
+			{
+				Report.Info($"No button {buttonName} has been found");
+				return false;
+			}
+			return Button.TryClick();
+		}
 
 		public bool SelectSupplierSearchTypeRadio(string radio)
 		{
-			IWebElement matchingRadio = this.containerElement.FindElement(By.XPath(".//input[@type='radio'][following-sibling::text()[position()=1][contains(., '" + radio + "')]]"), 2);
+			IWebElement matchingRadio = this.ContainerElement.FindElement(By.XPath(".//input[@type='radio'][following-sibling::text()[position()=1][contains(., '" + radio + "')]]"), 2);
 			if (matchingRadio == null)
 			{
 				Report.Info("No matching radio has been found");
@@ -86,11 +106,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return matchingRadio.TryCheck();
 		}
-
+		public bool CheckSupplierSearchTypeRadio(string radio)
+		{
+			return this.RadioButton(radio).Displayed;
+		}
+		public bool CheckSubscriptionColumnValues()
+		{
+			List<bool> result= new List<bool>();
+			if (this.ColumnNames.Count > 0)
+			{
+				foreach (IWebElement element in this.ColumnNames)
+				{
+					string value = element.Text;
+					if (value == " " || value == "" || value == "Tiered" || value == "Single" || value == "Single+Tier")
+					{
+						result.Add(true);
+					}
+					else
+					{
+						Report.Info($"Current value in Subscription column is {value}, but expected value should be Tiered, Single, Single+Tier or empty");
+						result.Add(false);
+					}
+				}
+			return result.All(x => x.Equals(true));
+			}
+			Report.Info("There is no suppliers with such search option");
+			return true;
+		}		
 		public List<string> GetSupplierIDs()
 		{
 			var suppliers = new List<string>();
-			IWebElement searchTable = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']"), 5);
+			IWebElement searchTable = this.ContainerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']"), 5);
 			if (searchTable == null)
 			{
 				Report.Info("No supplier table has been found");
@@ -104,11 +150,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return suppliers;
 
 		}
-
 		public List<string> GetSupplierNames()
 		{
 			var suppliers = new List<string>();
-			IWebElement searchTable = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']"), 5);
+			IWebElement searchTable = this.ContainerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']"), 5);
 			if (searchTable == null)
 			{
 				Report.Info("No supplier table has been found");
@@ -122,10 +167,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return suppliers;
 
 		}
-
 		public bool ClickClose()
 		{
-			IWebElement closeButton = this.containerElement.FindElement(By.XPath("./../..//span[text()='Result Clear Shopping Cart All Users']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button"), 2);
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("./../..//span[text()='Result Clear Shopping Cart All Users']/../following-sibling::div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button"), 2);
 			if (closeButton == null)
 			{
 				Report.Info("Could not find close button");
@@ -138,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickFirstSupplier()
 		{
 			Delay.Seconds(10);
-			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath("//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			IWebElement firstSupplier = this.ContainerElement.FindElement(By.XPath("//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
 			//int i = 0;
 			//while (firstSupplier == null)
 			//{
@@ -156,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCategory(string category)
 		{
-			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
+			List<IWebElement> categories = this.ContainerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
 
 			if (categories == null)
 			{
@@ -180,37 +224,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickClearCartForAllUsers()
 		{
-			IWebElement clearCartForAllUsersButton = this.containerElement.FindElement(By.XPath(".//button[@id='clearCartButton']"), 2);
+			IWebElement clearCartForAllUsersButton = this.ContainerElement.FindElement(By.XPath(".//button[@id='clearCartButton']"), 2);
 			return clearCartForAllUsersButton.TryClick();
 		}
 
-		public IWebElement CategoryHeaders => this.containerElement.WaitUntilElementVisible(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
+		public IWebElement CategoryHeaders => this.ContainerElement.WaitUntilElementVisible(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
 
 		public bool CheckCategoriesPresent()
 		{
-			IWebElement categoryHeaders = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
-			if (categoryHeaders == null)
-			{
-				return false;
-			}
-			return true;
-
+			IWebElement categoryHeaders = this.ContainerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
+			return categoryHeaders != null;
 		}
 
 		public bool CheckForSupplierManagerColumn(string columnTitle)
 		{
-			IWebElement subscriptionStatusColumn = this.containerElement.FindElement(By.XPath($".//th//div[contains(text(), '{columnTitle}')]"), 2);
-
-			if (subscriptionStatusColumn == null)
-			{
-				return false;
-			}
-			return true;
+			return this.Column(columnTitle).Displayed;
 		}
-
+		public bool ColunmTitleExists(string columnTitle)
+		{
+			Report.Info($"Attempt to find column title {columnTitle}");
+			return this.Column(columnTitle) != null;	
+		}
 		public bool CheckForSupplierManagerColumnValue(string columnTitle, string status)
 		{
-			IWebElement subscriptionStatus = this.containerElement.FindElement(By.XPath($".//td[@aria-describedby='listSupplierInfo_{columnTitle}']"), 2);
+			IWebElement subscriptionStatus = this.ContainerElement.FindElement(By.XPath($".//td[@aria-describedby='listSupplierInfo_{columnTitle}']"), 2);
 			string statusText = subscriptionStatus.Text;
 			return statusText == status;
 		}
@@ -234,19 +271,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				default:
 					break;
 			}
-			string fontColor = this.containerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetCssValue("color").ToString();
+			string fontColor = this.ContainerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetCssValue("color").ToString();
 			return color == fontColor;
 		}
 
 		public bool CheckForSubscriptionTabBackgroundColor(string color)
 		{
-			string style = this.containerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetAttribute("style");
+			string style = this.ContainerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetAttribute("style");
 			return style.Contains("background-color") && style.Contains(color);
 		}
 
 		public bool CategoryIsActive(string category)
 		{
-			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
+			List<IWebElement> categories = this.ContainerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
 			IWebElement foundCategory = categories.First(x => x.Text == category);
 			if (foundCategory == null)
 			{
@@ -263,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> ColumnValues(string columnTitle)
 		{
-			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<IWebElement> tableHeaders = this.ContainerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
 			List<string> tableHeaderStrings = new List<string>();
 
 			foreach (var item in tableHeaders)
@@ -297,7 +334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 			Report.Info("Starting to look for differences in the column and the expected values");
-			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<IWebElement> tableRows = this.ContainerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
 			List<string> tableRowStrings = new List<string>();
 			foreach (var row in tableRows)
 			{
@@ -323,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DataConsentTableIsPresent()
 		{
-			IWebElement dataTierTable = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//table[@class='DataTierConsentGrid']"), 30);
+			IWebElement dataTierTable = this.ContainerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//table[@class='DataTierConsentGrid']"), 30);
 			if (dataTierTable == null)
 			{
 				return false;
@@ -334,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DataConsentTiersTableContainsHeaders(List<string> expectedHeaders)
 		{
 
-			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<IWebElement> tableHeaders = this.ContainerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
 			List<string> tableHeaderStrings = new List<string>();
 			foreach (var item in tableHeaders)
 			{
@@ -427,7 +464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
 		{
 
-			IList<IWebElement> rowElementsArray = this.containerElement.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
+			IList<IWebElement> rowElementsArray = this.ContainerElement.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
 
 			foreach (string str in tierArray)
 			{
@@ -497,35 +534,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickTabWithName(string tabName)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
 			return el.TryClick();
 		}
 		public bool ClickResultWithName(string resultName)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
 			return el.TryClick();
 		}
 		public bool SearchTheFollowingText(string searchText)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
 			return el.TryEnterText(searchText);
 		}
 
 		public bool ClickSuppliersButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
 			return el.TryClick();
 		}
 
 		public bool CloseSupplierManager()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='dialog-supplier-manager']/preceding-sibling::div//a"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//div[@id='dialog-supplier-manager']/preceding-sibling::div//a"), 2);
 			return el.TryClick();
 		}
 
 		public bool RetailsAreInAlphabeticalOrder()
 		{
-			IList<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
+			IList<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
 			List<string> retailerNames = new List<string>();
 			foreach (var retailer in retailers)
 			{
@@ -547,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckTextInConfirmClearCartForAllUsersPopup()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
 
 			if (el.Text.Contains("You have selected to clear the shopping cart for this account. The Account's Administrator(s) will be notified via email of this action.") &&
 				el.Text.Contains("Are you sure you want to proceed? It cannot be reversed."))
@@ -560,16 +597,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickContinueInConfirmClearCartForAllUsersPopup()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']/following-sibling::div//span[text()='Continue']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']/following-sibling::div//span[text()='Continue']"), 2);
 			return el.TryClick();
 		}
 
 		public bool EnterInformationInClearShoppingCartPopup(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
 		{
-			IWebElement userIDEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetUser']"), 2);
-			IWebElement passwordEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetPassword']"), 2);
-			IWebElement tfsTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='TFSTicketNumber']"), 2);
-			IWebElement supportTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='SupportTicketNumber']"), 2);
+			IWebElement userIDEl = this.ContainerElement.FindElement(By.XPath("//input[@name='ResetUser']"), 2);
+			IWebElement passwordEl = this.ContainerElement.FindElement(By.XPath("//input[@name='ResetPassword']"), 2);
+			IWebElement tfsTicketNumberEl = this.ContainerElement.FindElement(By.XPath("//input[@name='TFSTicketNumber']"), 2);
+			IWebElement supportTicketNumberEl = this.ContainerElement.FindElement(By.XPath("//input[@name='SupportTicketNumber']"), 2);
 			if (userIDEl.TryEnterText(userID) && passwordEl.TryEnterText(password) && tfsTicketNumberEl.TryEnterText(tfsTicketNumber) && supportTicketNumberEl.TryEnterText(supportTicketNumber))
 			{
 				return true;
@@ -580,13 +617,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickContinueInClearShoppingCartPopup()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-dialog-validate-clear-cart']//span[text()='Continue']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-dialog-validate-clear-cart']//span[text()='Continue']"), 2);
 			return el.TryClick();
 		}
 
 		public bool CheckTextInResultsClearShoppingCartForAllUsersPopup()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-1']//div[@class='ui-dialog-content ui-widget-content']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-1']//div[@class='ui-dialog-content ui-widget-content']"), 2);
 			if (el.Text.Contains("The Cart has successfully been cleared for all users from the active database. the account administrator has been notified via email."))
 			{
 				return true;

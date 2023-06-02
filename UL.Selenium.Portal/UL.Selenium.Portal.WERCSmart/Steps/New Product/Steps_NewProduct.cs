@@ -253,7 +253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to, ${page } is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -1285,15 +1285,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
-					"Failed to set the input to " + value.Trim() + " in section: " + section.Trim(),
-					"Successfully set the input to " + value.Trim() + " in section: " + section.Trim());
+					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {value.Trim()} in section: { section.Trim()}");
 				Delay.Seconds(1);
 			}
 			else
 			{
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
-					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+					$"Failed to set the input to {option.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {option.Trim()} in section: {section.Trim()}");
 				Delay.Seconds(1);
 			}
 		}
@@ -1827,6 +1827,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductPage = new NewProduct();
 			List<string> labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
+		}
+
+		[StepDefinition(@"I Confirm that the (.*) field is available")]
+		public void ConfirmUPCSectionFieldsAvailable(string field)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(field), "Failed to Confirm the'" +field+"' field is available", "I Confirm the '" + field + "' field is available");
 		}
 
 		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
@@ -2393,15 +2400,98 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
-		{
-			// if subscription upgrade - Proceed ?
+		{			
+			Report.UseSubSteps = true;
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
-			Report.Info($"Looking for the purchase summary header...");
-			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
-			GeneralUtilities.Wait_for_load_finish();
-			Report.Info($"In the purchase summary screem I go to click 'Confirm order'...");
-			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			var mySub = new PaymentMethods_Subscription_Billing();
+			
+			if (mySub.Purchase_Header_Correct())
+			{			
+				if (mySub.ConfirmOrderButtonExists())
+				{
+					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+					GeneralUtilities.WaitForRefreshToDisappear(mySub._btn_confirm);
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Screenshot();
+				}
+				else
+				{
+					Report.Info("Purchase details page is not showing"); 
+				}
+
+				Report.Info("Checking if thank you page is showing instead");
+
+				var pmtk = new PaymentMethods_Thank_You();
+				if (pmtk.WaitForContainerToExist())
+				{					
+					Report.StartSubStep("In the Thank You screen I confirm the following statement is shown");
+					MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");
+				}
+				else
+				{
+					Report.Info("Thank you page is not showing");				
+				}
+			}
+			else
+			{
+				var sub = new SubscriptionEnrollment();
+
+				if (sub.Get_Page_Header().Equals("Subscription  Upgrade"))
+				{
+					var MyStepsSubscriptonEnrollment = new StepsSubscriptionEnrollment();
+					Report.StartSubStep("The Subscription Upgrade page should load");
+					MyStepsSubscriptonEnrollment.ThenTheSubscriptionEnrollmentPageShouldLoad();
+					Report.StartSubStep("I should see Proceed button enabled");
+					MyStepsSubscriptonEnrollment.ThenIShouldSeeProceedButtonDisabled("enabled");
+					Report.StartSubStep("I click on the Proceed button");
+					MyStepsSubscriptonEnrollment.ClickProceedButton();
+					var StepsSE_new = new StepsSubscriptionEnrollmentNew();
+					Report.StartSubStep("In the Subscription Enrollment Modal, I click the Checkout button");
+					StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
+					Report.StartSubStep("In the Payment Methods screen I click Continue");
+					MyStepsPaymentMethods.ThenIClickContinue();
+					Report.StartSubStep("In the Purchase Summary screen I click Confirm Order");
+					MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+					Report.StartSubStep("In the Thank You screen I check the Header is correct"); 
+					MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
+				}
+				else
+				{
+					Report.Error("Page header does not include or equal 'Subscription Uprgade'!");
+					Report.Screenshot();
+				}
+			}
 		}
+
+		[StepDefinition(@"In the Purchase Summary page Confirm thank you message is shown if product details is not shown: (.*)")]
+		public void ConfirmThankYouMessageIfProductDetailsNotPresent(string message)
+		{
+			var mySub = new PaymentMethods_Subscription_Billing();
+			if (mySub.Product_Billing_Header_Displayed())
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - If purchase details are showing click confirm order");
+				Report.Info("The Product Billing section was displayed, so trying to click 'Confirm Order'");
+				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+				Delay.Seconds(10);
+			}
+			else
+			{
+				Report.StartStep(ReportSettings.StepCounter + " - In the Thank You screen I check the Confirmation statement is correct");
+				try
+				{
+					var myPay = new PaymentMethods_Thank_You();
+					Report.Info($"Thank You Text = {message}");
+					Report.IsTrue(myPay.Thank_You_TextExists(message.Trim()), $"Displayed Text does not contain: '{message}'",
+						$"Displayed Text contains: '{message}'");
+				}
+				catch (Exception ex)
+				{
+					Report.Failure(ex.Message);
+					throw;
+				}
+			}
+		}
+
 
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()

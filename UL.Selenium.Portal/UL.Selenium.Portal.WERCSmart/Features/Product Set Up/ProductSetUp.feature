@@ -75,7 +75,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 		| Retailer                   |		
 		| No Retailer/No UPC Product |
 
-#@ignore
+@OnlyInIntegration
 @TestCase:75410
 Scenario: [75410] Product from Completed status to Recertification
 	#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410

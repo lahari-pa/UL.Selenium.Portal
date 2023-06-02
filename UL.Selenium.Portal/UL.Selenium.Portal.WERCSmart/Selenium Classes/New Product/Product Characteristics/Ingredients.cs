@@ -114,15 +114,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info(
 						"No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
 					inputEl.EnterText(ingredient.ComponentName);
+					var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+					homePage.WaitLoading();
 					IWebElement searching =
-						this.ContainerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+						this.ContainerElement.FindElement(By.XPath(".//li[@class='select2-results__option loading-results']//div[contains(text(),'Searching')]"), 2);
 					int i = 0;
 					while (searching != null && i < 30)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
 						searching = this.ContainerElement.FindElement(
-							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+							By.XPath("//li[@class='select2-results__option loading-results']//div[contains(text(),'Searching')]"), 2);
 					}
 
 					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
@@ -130,6 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IList<IWebElement> results =
 						this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					i = 0;
+					
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
 						   null && i < 20)
 					{
@@ -786,6 +789,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el?.Text;
 		}
 
+		public List<string> GetAvailableIngredientsCASNumber()
+		{
+		
+			List<IWebElement> Ingredients = this.ContainerElement.FindElements(By.XPath(".//tr//td[@class='component-name']//small[contains(text(),'')]")).ToList();
+			return Ingredients.Select(x => x.GetValue()).ToList();
+		
+		}
+
+		public bool ClickRemoveByCasNumber(string number)
+		{
+
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($"//tr[.//td//div[small[contains(text(),'{number}')]]]//td[@class='remove delete-row']"));
+			Report.Info("Attempting to click remove based on the cas number");
+			return el.TryClick();
+		}
+
+	
 		/// <summary>
 		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
 		/// </summary>
@@ -1437,6 +1457,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool ClickOkInThePopupWithTheFollowingText(string text)
+		{
+			IWebElement okButton = this.ContainerElement.FindElement(By.XPath($"//div[@data-bind='html:okMessageText']/../../..//div[@class='modal-footer']//button[text()='Ok']"), 2);
+			return okButton.TryClick();
+		}
+
 		public bool CheckACheckboxWithTheFollowingText(string text)
 		{
 			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath($"//span[text()='{text}']/preceding-sibling::input"), 2);
@@ -1457,34 +1483,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
 		{
-			IList<IWebElement> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2);
-			IList<IWebElement> name = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2);
-			IList<IWebElement> activeOrInert = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2);
-
-			var index = 0;
+			IList<string> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2).Select(x=>x.GetValue()).ToList();
+			IList<string> name = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2).Select(x => x.GetValue()).ToList();
+			IList<string> activeOrInert = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2).Select(x => x.GetValue()).ToList();
 
 			foreach (TableRow row in table.Rows)
 			{
-				if (casNum[index].Text != row["CAS Number"])
+				if (!casNum.Contains(row["CAS Number"]))
 				{
 					Report.Info("CAS Number did not match");
 					return false;
 				}
-				if (name[index].Text != row["Name"])
+				if (!name.Contains(row["Name"]))
 				{
 					Report.Info("Name did not match");
 					return false;
 				}
-				if (activeOrInert[index].Text != row["Active or Inert"])
+				if (!activeOrInert.Contains(row["Active or Inert"]))
 				{
 					Report.Info("Active or Inert Number did not match");
 					return false;
 				}
 
-				index += 1;
 			}
 
 			return true;
+
+
 		}
 
 		public bool CheckForTheFollowingTableColumnTitlesInPopupView(Table table)
@@ -2006,7 +2031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
 			ingredients.Add("Citric acid");
-
+			ingredients.Add("Nitrogen"); 
 
 
 
@@ -2064,5 +2089,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return true;
 		}
+		public bool IngredientsFieldAvailable(string field)
+		{
+			try
+			{
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + field + "')]"), 2);
+				return Field != null;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool FieldAvailableInSummaryPage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);	
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, '{Value.Text}' displayed.");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		
+		public bool TotalPercentage(string value)
+		{
+			try
+			{
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//label[contains(text(),'" + value + "')]"), 2);
+				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, Total percentage : '{Value.Text}'%");
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		public bool SelectOption()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"(//span[text()='No'])[3]"), 2);
+			return closeButton.TryClick();
+		}
 	}
+
 }

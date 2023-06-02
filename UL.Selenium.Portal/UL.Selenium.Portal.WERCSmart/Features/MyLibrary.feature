@@ -100,8 +100,7 @@ Scenario: [70533] Edit Packaging Type
 	Given I click continue
 	Then I should see the Bill of Materials Page
 	And I save the Packaging Type details as: ThisPackaging
-	Given I click Add Row in the Bill Of Materials grid
-	Given I select the option: Clear Glass for the My Packaging Materials field in the table
+	Given I select the option: Glass Packaging - Colored Glass - Non-Beverage for the My Packaging Materials field in the table
 	Given I select the option: 250.0 for the My Packaging Weight (grams) field in the table
 	Given I click continue
 	Then I should see the CONEG Page

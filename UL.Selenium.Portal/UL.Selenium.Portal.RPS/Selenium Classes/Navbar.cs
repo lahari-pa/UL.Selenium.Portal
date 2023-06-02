@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     class NavBar : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//ul[contains(@class,'nav subheader')]");
+        protected override By ContainerElementLocator => By.XPath("//div[@class='pull-left clearfix']//ul[contains(@class,'nav navbar-nav')]");
 
         //Tab Links
         private IWebElement HomeLink => FindElement(By.Id("home-link"), 1);

@@ -27,7 +27,7 @@ Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Propane       | 100     | false               | false       |            |
+| Water         | 100     | false               | false       |            |
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 And I should see the Regulatory Information 3 Page
 And I should see following statement: Refer to your Product Label. From the options, select those that appear on the Label.
@@ -56,7 +56,7 @@ Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Dispersible                                  |
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Propane       | 100     | false               | false       |            |
+| Water       | 100     | false               | false       |            |
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 When I click continue
 And Refer to your Product Label. should be showing the error messages: Please select at least one option from above.

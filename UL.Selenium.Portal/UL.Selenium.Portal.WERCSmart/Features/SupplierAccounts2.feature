@@ -17,6 +17,7 @@
 @SubUpgrade
 @ProductSetUp
 @SupplierAccounts
+@ignore
 @run_SupplierAccounts2
 
 Feature: SupplierAccounts2

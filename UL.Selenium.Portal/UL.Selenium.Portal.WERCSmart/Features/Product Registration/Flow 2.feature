@@ -13,6 +13,7 @@
 @Steps_Flow2A
 Feature: Flow 2
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:57367
 Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
@@ -48,6 +49,8 @@ Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Spill Clean Up Agent (Mitigation Agent)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57367
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:57403
 Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -102,7 +105,7 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Cardboard and size: 33
+    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Glass Container and size: 33
     Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -136,7 +139,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57646, container type: Cardboard and size: 1
+    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57646, container type: Glass Container and size: 1
     Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -166,7 +169,7 @@ Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57648, container type: Cardboard and size: 1
+    Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57648, container type: Glass Container and size: 1
     Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -206,6 +209,8 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:57708
 Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -270,6 +275,8 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
 
+#Remove from regression: 2023/05
+@ignore
 @TestCase:57910
 Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

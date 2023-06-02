@@ -98,15 +98,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.Wait_for_load(10))
+			if (!selRetailPartners.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Page failed to load!");
 			}
 
 			List<string> subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
 			Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
-				"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
-				"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
+				$"Subheading ({expected} ? was not : was) showing as expected! Expected: '{ subheading }', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
+				$"Subheading ({ expected} ? was : was not) showing: '{ subheading }', as expected!");
 			Report.Screenshot();
 
 		}
@@ -114,13 +114,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following heading (.*)")]
 		public void ThenIShouldSeeTheFollowingHeading(string heading)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Checking that the heading " + heading + " is showing");
+			Report.StartStep(Report.Details.StepIndex + $" - Checking that the heading '{heading}' is showing");
 			try
 			{
 				Report.Info("Checking that the heading " + heading + " is showing");
 				var selRetailPartners = new RetailPartners();
 
-				if (!selRetailPartners.Wait_for_load(10))
+				if (!selRetailPartners.WaitForContainerToBeVisible(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
@@ -128,8 +128,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string headingShowing = selRetailPartners.HeaderShowing();
 				Report.IsTrue(headingShowing.Trim() == heading.Trim(),
-					"Header was not showing as expected! Expected: '" + heading + "', but found: '" + headingShowing + "'!",
-					"Header was showing: '" + heading + "', as expected!");
+					$"Header was not showing as expected! Expected: '{heading}', but found: '{headingShowing}'!",
+					$"Header was showing: '{ heading }', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -151,14 +151,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.Wait_for_load(10))
+			if (!selRetailPartners.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Page failed to load!");
 			}
 
 			Report.IsTrue(selRetailPartners.ClickRetailer(retailer),
-				"Failed to click retailer " + retailer + "!",
-				"Retailer " + retailer + " was selected successfully!");
+				$"Failed to click retailer {retailer} !",
+				$"Retailer {retailer} was selected successfully!");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Screenshot();
 		}
@@ -298,22 +298,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
 		public void ThenConfirmYouSeeUnderTheDataConsentTiersHeading(string tierInformation)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
+			Report.StartStep(Report.Details.StepIndex + $" - Confirming that '{ tierInformation }' is showing under the Data Consent Tiers heading");
 			try
 			{
 				Report.Info("Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
 
 				var selRetailDetails = new RetailPartnersDetails();
 
-				if (!selRetailDetails.Wait_for_load(10))
+				if (!selRetailDetails.WaitForContainerToBeVisible(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
 
 				string tierInfoShowing = selRetailDetails.GetTierInformation();
 				Report.IsTrue(tierInfoShowing == tierInformation,
-					"Tier information was showing: '" + tierInfoShowing + "', but was expected to show: '" + tierInformation + "'",
-					"Tier information was showing: '" + tierInformation + "', as expected!");
+					$"Tier information was showing: '{ tierInfoShowing }', but was expected to show: '{ tierInformation }'",
+					$"Tier information was showing: '{ tierInformation }', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -2682,6 +2682,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	Report.IsTrue(new RetailPartnersDetails().)
 		//}
 
+		[StepDefinition(@"I confirm that when hover over the tooltip icon : (.*) is showing")]
+		public void ThenConfirmTooltipMessage(string tooltipMessage)
+		{
+			Report.StartStep(Report.Details.StepIndex + $" - Confirming that'{tooltipMessage}' is showing under the Data Consent Tiers heading");
+			try
+			{
+				Report.Info($"Confirming that '{tooltipMessage}' is showing under the Data Consent Tiers heading");
+
+				var selRetailDetails = new RetailPartnersDetails();
+
+				if (!selRetailDetails.WaitForContainerToBeVisible(10))
+				{
+					throw new Exception("Page failed to load!");
+				}
+
+				string tooltipMessageShowing = selRetailDetails.GetTooltipMessage();
+				Report.IsTrue(tooltipMessageShowing == tooltipMessage,
+					$"Tier information was showing: {tooltipMessageShowing}., but was expected to show: {tooltipMessage }.",
+					$"Tier information was showing: {tooltipMessage}, as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 	}
 

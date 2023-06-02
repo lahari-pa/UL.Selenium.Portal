@@ -131,19 +131,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}
 
-		[StepDefinition(@"The Data Summary section (.*) should be showing the following UPC table:")]
-		public void ShouldBeShowingTheFollowingTable(string section, Table table)
+		[StepDefinition(@"The Data Summary section should be showing the following UPC table:")]
+		public void ShouldBeShowingTheFollowingTable(Table table)
 		{
 			var dataSummarySheet = new DataSummary();
 
 			ICollection<string> headers = table.Header;
 
-			Report.IsTrue(dataSummarySheet.ConfirmHeaders(headers, section), "Could not find the appropriate headers",
+			Report.IsTrue(dataSummarySheet.ConfirmHeaders(headers), "Could not find the appropriate headers",
 				"Found all the appropriate headers");
 			TableRows rows = table.Rows;
-			Report.IsTrue(dataSummarySheet.ConfirmCaseUPC(rows, section), "Could not find Case UPC information.",
+			Report.IsTrue(dataSummarySheet.ConfirmCaseUPC(rows), "Could not find Case UPC information.",
 				"Successfully found Case UPC information.");
-			Report.IsTrue(dataSummarySheet.ConfirmUPC(rows, section), "Could not find UPC information.",
+			Report.IsTrue(dataSummarySheet.ConfirmUPC(rows), "Could not find UPC information.",
 				"Successfully found UPC information.");
 		}
 
