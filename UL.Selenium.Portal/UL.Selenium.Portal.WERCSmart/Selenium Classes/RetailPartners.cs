@@ -611,14 +611,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var upc = new UPC();
 			var tableData = new List<string>();
 			var fileProductsData = new List<string>();
+			string Id;
 			fileProductsData.AddRange(table.Header);
+			int columnsCount = table.Header.Count;
 			upc.GetFile(fileName, savedAs);
 			var actualFile = Context.GetFromContext(savedAs);
 			List<string> fileData = this.GetExcelFileData(sheetName, savedAs, actualFile);
 			tableData.AddRange(table.Header);
-			if (tableData is null || fileData is null)
+			if (fileData is null)
 			{
-				Report.Failure("Either the table is empty or the file: '" + fileName + "' is not being read.");
+				Report.Failure($"The file: {fileName} is empty or is not being read.");
 				return false;
 			}
 			foreach (TableRow row in table.Rows)
@@ -632,25 +634,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Error($"Product saved as '{savedAs}' not found in context.");
 					return false;
 				}
-				string ID = ProductDetails.Id;
-				Report.Info($"Looking for product with ID {ID} in excel file");
+				Id = ProductDetails.Id;
+				Report.Info($"Looking for product with ID {Id} in excel file");
 				for (int i = 0;i < fileData.Count;i++)
 				{
-					if (fileData[i] == ID)
+					if (fileData[i] == Id)
 					{
-						Report.Info($"Product with ID {ID} was found in excel file");
-						int index = i;
-						for (int y = i; y <= i+8; y++)
+						Report.Info($"Product with ID {Id} was found in excel file");
+						for (int y = i; y <= i+ columnsCount; y++)
 						{
 							fileProductsData.Add(fileData[y]);
 						}
 					}
 				}
 			}
-
+			if (tableData is null || fileProductsData is null)
+			{
+				Report.Failure($"Either the table data is empty or failed to find products Id in file {fileName}");
+				return false;
+			}
 			for (int i = 0; i < tableData.Count; i++)
 			{
-				//if (tableData[i].Trim() != fileData[i].Trim())
 				string t1 = tableData[i];
 				string t2 = fileProductsData[i];
 				t1 = Regex.Replace(t1, @"\s+", "");

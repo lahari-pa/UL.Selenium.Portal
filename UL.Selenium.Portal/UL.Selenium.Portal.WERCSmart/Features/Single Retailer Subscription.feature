@@ -197,6 +197,7 @@ Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only ava
 Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I click the single retailer checkbox
+Then I confirm if the Single Retailer Checkbox is not selected
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer   |
 | Rite Aid   |
