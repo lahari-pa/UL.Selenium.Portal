@@ -613,7 +613,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var fileProductsData = new List<string>();
 			string Id;
 			fileProductsData.AddRange(table.Header);
-			int columnsCount = table.Header.Count;
 			upc.GetFile(fileName, savedAs);
 			var actualFile = Context.GetFromContext(savedAs);
 			List<string> fileData = this.GetExcelFileData(sheetName, savedAs, actualFile);
@@ -636,12 +635,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				Id = ProductDetails.Id;
 				Report.Info($"Looking for product with ID {Id} in excel file");
-				for (int i = 0;i < fileData.Count;i++)
+				for (int i = 0; i < fileData.Count; i++)
 				{
 					if (fileData[i] == Id)
 					{
 						Report.Info($"Product with ID {Id} was found in excel file");
-						for (int y = i; y <= i+ columnsCount; y++)
+						for (int y = i; y < i + table.Header.Count; y++)
 						{
 							fileProductsData.Add(fileData[y]);
 						}
