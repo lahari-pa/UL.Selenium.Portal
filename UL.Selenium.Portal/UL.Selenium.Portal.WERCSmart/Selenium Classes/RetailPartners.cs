@@ -611,7 +611,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var upc = new UPC();
 			var tableData = new List<string>();
 			var fileProductsData = new List<string>();
-
+			fileProductsData.AddRange(table.Header);
 			upc.GetFile(fileName, savedAs);
 			var actualFile = Context.GetFromContext(savedAs);
 			List<string> fileData = this.GetExcelFileData(sheetName, savedAs, actualFile);
@@ -624,6 +624,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (TableRow row in table.Rows)
 			{
 				var ProductDetails = (ProductInformation)Context.GetFromContext(row["WPS ID"]);
+				var vals = row.RowValuesFromContext();
+				vals[0] = ProductDetails.Id;
+				tableData.AddRange(vals.ToList());
 				if (ProductDetails == null)
 				{
 					Report.Error($"Product saved as '{savedAs}' not found in context.");
@@ -641,13 +644,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						{
 							fileProductsData.Add(fileData[y]);
 						}
-
 					}
 				}
-
-
-				var vals = row.RowValuesFromContext();
-				tableData.AddRange(vals.ToList());
 			}
 
 			for (int i = 0; i < tableData.Count; i++)
@@ -659,7 +657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				t2 = Regex.Replace(t2, @"\s+", "");
 				if (t1 != t2)
 				{
-					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
+					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileProductsData[i] + " in row " + i);
 					return false;
 				}
 			}
