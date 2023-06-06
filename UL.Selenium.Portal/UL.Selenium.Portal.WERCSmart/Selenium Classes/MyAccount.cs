@@ -1878,6 +1878,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "SubscriptionInfoContainer")]
 		protected override IWebElement containerElement { get; set; }
 
+		IWebElement Section(string section) => this.containerElement.FindElement(By.XPath($".//h4[contains(text(), '{section}')]"), 2);
+
+
+
+		public bool SectionExists(string section, Table table)
+		{
+			List<string> GetProductTypes = new List<string>();
+			List<IWebElement> ProductTypes = this.containerElement.FindElements(By.XPath($".//div[h4[contains(text(), '{section}')]]//div//ul[@class=\"list-unstyled spaced-text\"]//li"), 2).ToList();
+			if(this.Section(section) == null)
+			{
+				return false;
+			}
+			foreach(var element in ProductTypes)
+			{
+				GetProductTypes.Add(element.Text);
+			}
+			if(GetProductTypes == null)
+			{
+				Report.Info($"Failed to find product types in section {section}");
+				return false;
+			}
+			foreach(var row in table.Rows)
+			{
+				if (!GetProductTypes.Contains(row["Product types"]))
+				{
+					return false;
+				}
+			}
+			return true;
+
+		}
 
 		public bool Status_Information_Correct(string form_no, string art_no, string en_art_no)
 		{

@@ -593,6 +593,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found subscription level '" + subSavedAs + "'.");
 		}
 
+		[StepDefinition(@"In the Subscription Information screen I verify section (.*) is present with product types:")]
+		public void ThenInTheSubscriptionInformationScreenIVerifySectionSubmittedIsPresentWithProductTypes(string sectionName, Table table)
+		{
+			Report.IsTrue(new MyAccount_SubscriptionInfo().SectionExists(sectionName, table), $"Failed to verify product types in section {sectionName}", $"Successfully verified product types in section {sectionName}");
+		}
+
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
