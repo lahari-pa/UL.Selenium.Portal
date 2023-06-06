@@ -180,13 +180,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return companyName;
 		}
 
-		public string GetRandomCompanyName()
-		{
-			string number = MiscHelpers.RandomDigits(4);
-			string companyName = "ABC" + number;
-			return companyName;
-		}
-
 		public void EnterSearchTextInSupplyManager(string savedAs)
 		{
 			this.EnterText.EnterText(savedAs);
