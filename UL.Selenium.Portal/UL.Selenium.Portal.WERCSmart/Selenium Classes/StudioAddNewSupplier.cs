@@ -164,7 +164,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Attempting to confirm Contact Phone input exists.");
 			return this.ContactPhoneInput != null;
 		}
-
+		public void Enter_Email(string email)
+		{
+			int count = 0;
+			while (count < 10)
+			{
+				try
+				{
+					SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id ='txtNewSupplierContactEmail']"), 2).EnterText(email);
+				}
+				catch (Exception)
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+				}
+				throw new Exception("Could not enter email!");
+			}
+		}
 	}
 }
 

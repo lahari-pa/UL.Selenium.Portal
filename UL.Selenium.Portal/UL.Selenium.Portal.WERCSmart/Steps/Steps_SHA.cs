@@ -3005,6 +3005,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}	
 		}
 
+		[StepDefinition(@"I enter email address: (.*)")]
+		public void IEnterEmailAddress(string email)
+		{
+			try
+			{
+				if (email.Contains("savedas"))
+				{
+					email = email.Replace("savedas", "").Trim();
+					email = Context.GetFromContext(email).ToString();
+				}
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+						thisStudioAddNewSupplier.Enter_Email(email);
+						break;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactPhone(string value)
 		{

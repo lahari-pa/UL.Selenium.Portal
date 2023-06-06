@@ -6,6 +6,7 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -13,6 +14,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 
 		private IWebElement CompanyInput => this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
+		private IWebElement EnterText => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("textSupplierSearch"), 2);
+		private IWebElement SearchButton => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("supplierSearchButton"), 2);
+
 
 		public bool EnterSupplierID(string supplierID)
 		{
@@ -170,6 +174,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+		public string GetRandomCompanyName()
+		{
+			string number = MiscHelpers.RandomDigits(4);
+			string companyName = "ABC" + number;
+			return companyName;
+		}
+
+		public void EnterSearchTextInSupplyManager(string savedAs)
+		{
+			this.EnterText.EnterText(savedAs);
+		}
+
+		public void ClickSearchButtonInSupplyManager()
+		{
+			this.SearchButton.TryClick();
+		}
+
+		public bool ClickNewSupplierInSupplyManager(string supplierName)
+		{
+			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
+			return NewSupplier.TryClick();
+		}
+
 
 	}
 }
