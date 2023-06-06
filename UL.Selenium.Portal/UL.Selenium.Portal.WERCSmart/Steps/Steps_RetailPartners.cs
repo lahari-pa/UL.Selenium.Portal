@@ -2192,7 +2192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
 		}
 
-
+		
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs, string wpsidSavedAs, Table table)
 		{
@@ -2709,6 +2709,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+		[Then(@"I verify sheet (.*) in downloaded file (.*) saved as (.*) contains data:")]
+		public void ThenIVerifyDownloadedFileRA_Report_DataUsageTier___XlsxSavedAsFileContainsData(string sheetName, string file, string savedAs, Table table)
+		{
+			var retailPartnersDetails = new RetailPartnersDetails();
+			Report.IsTrue(retailPartnersDetails.VerifyExcelFile(sheetName, file, savedAs, table), "Failed to validate excel File", "Successfully validated excel File");	
+
+		}
+
 
 	}
 

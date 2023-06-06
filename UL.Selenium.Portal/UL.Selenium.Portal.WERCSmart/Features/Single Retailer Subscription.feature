@@ -12,6 +12,8 @@
 @SHA
 @PaymentMethods
 @ForwardProductRegistration
+@Homepage
+@RetailPartners
 
 Feature: Single Retailer Subscription
 
@@ -162,3 +164,60 @@ And I click Row Actions for the first product returned
 And I should not see the following Actions options
 | Option             |
 | Archive Retailers  |
+
+@TestCase:184385
+
+Scenario: [184385] My Retail Partners:  Data Tier Consent - Products in Scope - Report Show Single Retailer Products
+
+Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product184385SRS
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I generate a random UPC number and save as: UPC183646
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC183646, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then If purchase details are showing click confirm order
+Then In the Thank You screen I click Home
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product184385T
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I click the single retailer checkbox
+Then I confirm if the Single Retailer Checkbox is not selected
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I generate a random UPC number and save as: UPC183646_1
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC183646_1, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then If purchase details are showing click confirm order
+Then In the Thank You screen I click Home
+Then I click the Retail Partners icon in the Navigation Pane
+Then I select the retailer: Rite Aid
+Then I click the Products in Scope button and confirm that a file is produced called RA_Report_DataUsageTier_<Date>.xlsx and save as File184385
+Then I verify sheet Table in downloaded file RA_Report_DataUsageTier_<Date>.xlsx saved as File184385 contains data:
+| WPS ID           | Internal ID | Product Name | Formula ID | Retailer | Product Type | Included in Consent | Excluded from Consent | Single-Retail Subscription |
+| Product184385SRS |             | Chalk        |            | Rite Aid | Chalk        |                     | EXCLUDED              | Enrolled / Exempt          |
+| Product184385T   |             | Chalk        |            | Rite Aid | Chalk        | YES                 |                       |                            |
+Then I click the Home icon in the Navigation Pane
+
+
+
