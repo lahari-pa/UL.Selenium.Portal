@@ -307,6 +307,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailer = new Retailer();
 			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected", "Single retailer checkbox is selected"); 
 		}
+		[StepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]
+		public void ConfirmSingleRetailerCheckboxisSelected(string condition)
+		{
+			var retailer = new Retailer();
+
+			if (condition == "selected")
+			{
+				Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected, but should be", "Single retailer checkbox is selected as expected");
+			}
+			else
+			{
+				Report.IsFalse(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is selected, but should not be", "Single retailer checkbox is not selected, as expected");
+
+			}
+		}
 
 		[StepDefinition(@"I confirm if the single retailer checkbox is displayed on the retailer page")]
 		public void ConfirmIfSingleRetailerCheckboxIsDisplayed()

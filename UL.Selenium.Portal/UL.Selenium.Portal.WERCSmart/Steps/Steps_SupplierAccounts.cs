@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SupplierAccounts")]
 	class StepsSupplierAccounts
 	{
-		public static string companyName = new AddNewSupplier().GetRandomCompanyName();
+		public static string companyName= new AddNewSupplier().GetRandomCompanyName();
 
 		[StepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountWithFollowingParameters(string savedAs)
@@ -1349,7 +1349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-				var newSupplier = new AddNewSupplier();
+				var newSupplier = new AddNewSupplier(); 
 				newSupplier.EnterSearchTextInSupplyManager(companyName);
 				Delay.Seconds(Delay.SpeedFactor * 2);
 				newSupplier.ClickSearchButtonInSupplyManager();
@@ -1360,6 +1360,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			catch (Exception e)
 			{
 				Report.Info(e.Message);
+			}
+		}
+
+		[Then(@"I confirm following tabs appear available")]
+		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)
+		{
+			foreach (TableRow Row in table.Rows)
+			{
+				var newSupplier = new AddNewSupplier();
+				List<string> tabs = newSupplier.AllTabs();				
+				Report.IsTrue(tabs.Contains(Row["tabs"]), $"text does not contain tab {Row["tabs"]}", $"text contain tab{ Row["tabs"]}");
+			}
+		}
+
+		[Then(@"I click on (.*) tab")]
+		public void ThenClickOnGivenTab(string selectTab)
+		{
+			var newSupplier = new AddNewSupplier();
+			Report.IsTrue(newSupplier.ClickSelectedTab(selectTab), $"Failed to click {selectTab} tab",
+				$"Succesfully clicked {selectTab} tab");			
+		}
+
+		[Then(@"I confirm following toggles displayed")]
+		public void ThenIConfirmFollowingTogglesDisplayed(Table table)
+		{
+			foreach (TableRow Row in table.Rows)
+			{
+				var newSupplier = new AddNewSupplier();
+				List<string> toggleValues = newSupplier.FetaureToggle();
+				Report.IsTrue(toggleValues.Contains(Row["ToggleInfo"]), $"text does not contain tab {Row["ToggleInfo"]}", $"text contain tab{ Row["ToggleInfo"]}");
 			}
 		}
 	}

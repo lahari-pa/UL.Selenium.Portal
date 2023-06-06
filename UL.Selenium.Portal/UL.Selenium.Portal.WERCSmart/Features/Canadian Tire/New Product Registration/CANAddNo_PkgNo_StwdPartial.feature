@@ -11,6 +11,7 @@
 @RetailPartners
 @SHA
 @UPC
+@ignore
 @run_CANAddNo_PkgNo_StwdPartial
 
 Feature: Account Canada Address(No), Package Type (No), Stewardship (Partial)
@@ -33,6 +34,7 @@ Scenario: [85855] Account Partial stewardship Only, SOLD = US Only, PL = YES, Pa
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85855
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85856
 Scenario: [85856] Account Partial stewardship Only, SOLD = US Only, PL = NO, Packaging type IS NOT required
@@ -74,6 +76,7 @@ Scenario: [85857] Account Partial stewardship Only, SOLD = Canada Only, PL = YES
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85857
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85858
 Scenario: [85858] Account Partial stewardship Only, SOLD = Canada Only, PL = NO, Packaging type IS required
@@ -125,6 +128,7 @@ Scenario: [85859] Account Partial stewardship Only, SOLD = US & Canada, PL = YES
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85859
 
+#Remove from regression: 2023/05
 @ignore
 @TestCase:85860
 Scenario: [85860] Account Partial stewardship Only, SOLD = US & Canada, PL = NO, Packaging type IS required

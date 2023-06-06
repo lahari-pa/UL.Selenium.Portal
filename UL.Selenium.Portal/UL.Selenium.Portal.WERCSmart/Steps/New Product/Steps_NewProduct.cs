@@ -1285,15 +1285,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
-					$"Failed to set the input to {value}.Trim() in section: {section}.Trim()",
-					$"Successfully set the input to {value}.Trim() in section: { section}.Trim()");
+					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {value.Trim()} in section: { section.Trim()}");
 				Delay.Seconds(1);
 			}
 			else
 			{
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-					$"Failed to set the input to {option}.Trim() in section: {section}.Trim()",
-					$"Successfully set the input to {option}.Trim() in section: {section}.Trim()");
+					$"Failed to set the input to {option.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {option.Trim()} in section: {section.Trim()}");
 				Delay.Seconds(1);
 			}
 		}

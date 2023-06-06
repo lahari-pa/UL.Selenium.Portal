@@ -25,6 +25,7 @@ Feature: Distributor
 #In order to manually create a distributor use query - update t_product set F_STATUS = 8 where F_PRODUCT = ''
 
 @tfs_design
+#Removed from regression: 2023/05
 @ignore
 @TestCase:122365
 Scenario: [122365] Create a distributor request and process it to completed

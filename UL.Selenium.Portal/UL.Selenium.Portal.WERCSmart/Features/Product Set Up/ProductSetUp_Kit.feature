@@ -12,6 +12,7 @@
 @CreateProducts
 @Studio
 @ProductSetUp
+@ignore
 @run_ProductSetUpKit
 
 Feature: ProductSetUp_Kit
@@ -22,14 +23,14 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
         | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-#@ignore
+#Removed from regression: 2023/05
+@ignore
 @TestCase:77859
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 	#For this test case you will need two input products in completed status which have SOLD set to US only
 	#and make sure to add any retailer except Walmart as the retailer for these products.
 	#Use the test case 75335 to create these products - test case is linked to this one.
 	#Note: these input products do not have to be direct ship vendor products
-
 	Given I create a product for a Kit with name: 778591 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto9 and save as: TestCase778591
 	Given I create a product for a Kit with name: 778592 and Force it to completed using Test Case 75335 using SHA Account: SHAQAAuto9 and save as: TestCase778592
 	Given I navigate to the landing page

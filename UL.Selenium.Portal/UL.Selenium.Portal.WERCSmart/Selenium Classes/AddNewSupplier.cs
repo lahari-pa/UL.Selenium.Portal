@@ -17,7 +17,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EnterText => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("textSupplierSearch"), 2);
 		private IWebElement SearchButton => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("supplierSearchButton"), 2);
 
-
 		public bool EnterSupplierID(string supplierID)
 		{
 			Delay.Seconds(2);
@@ -48,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public bool SupplierIDErrorExists()
-		{ 
+		{
 			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
 
 			if (SupplierError == null)
@@ -77,10 +76,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
 
-				if (SupplierError == null)
-				{
-					return false;
-				}
+			if (SupplierError == null)
+			{
+				return false;
+			}
 
 			return (SupplierError.Enabled && SupplierError.Displayed && SupplierError.Text != string.Empty);
 		}
@@ -94,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 
-				return SupplierError.GetValue();
+			return SupplierError.GetValue();
 		}
 
 		public bool EnterCompanyOrBrandName(string companyOrBrandName)
@@ -181,6 +180,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return companyName;
 		}
 
+		public string GetRandomCompanyName()
+		{
+			string number = MiscHelpers.RandomDigits(4);
+			string companyName = "ABC" + number;
+			return companyName;
+		}
+
 		public void EnterSearchTextInSupplyManager(string savedAs)
 		{
 			this.EnterText.EnterText(savedAs);
@@ -193,10 +199,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickNewSupplierInSupplyManager(string supplierName)
 		{
-			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
-			return NewSupplier.TryClick();
+		IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
+		return NewSupplier.TryClick();
 		}
 
+		public List<string> AllTabs()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//div[@id='tabs']/ul/li"), 2).Select(x => x.Text).ToList();
+		}
+
+		public List<string> FetaureToggle()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//form[@id='frmFeatures']//td"), 2).Select(x => x.Text).ToList();
+		}
+
+		public bool ClickSelectedTab(string selectTab)
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[@id='tabs']/ul/li/a[contains(text(),'{selectTab}')]"), 2).TryClick();
+		}
 
 	}
 }

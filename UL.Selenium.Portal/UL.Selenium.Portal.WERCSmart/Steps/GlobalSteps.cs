@@ -30,6 +30,7 @@ using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Automation.TReVor.Classes;
 using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
 using Mailosaur;
+using TReVor.Core.Classes.Software.Vault;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -975,8 +976,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (isTReVorUser)
 				{
-					SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(savedAs);
-					if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
+					CredentialVaultRecord TReVorUser = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+
+					if (Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
 					{
 						email = TReVorUser.UserName;
 					}
@@ -2333,8 +2335,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
 			{
 				string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
-				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
-					"Successfully found text in alert!");
+				Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{ message}'. Actual: '{ alertText }'.",	"Successfully found text in alert!");
 			}
 			else
 			{

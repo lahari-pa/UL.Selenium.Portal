@@ -12,6 +12,8 @@
 @SHA
 @PaymentMethods
 @ForwardProductRegistration
+@Homepage
+@RetailPartners
 
 Feature: Single Retailer Subscription
 
@@ -115,3 +117,107 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 And I enter the text: saved as Product200434 in the 'Search by WPS ID or Product Name' field
 And In the Foward Product Registration Screen I should not see product: saved as Product200434
+
+@TestCase:200449
+
+Scenario: [200449] Single Retailer - Not Available for Forwarding
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product200449
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer |
+| Amazon   |
+Then I generate a random UPC number and save as: UPC200449
+And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And in the Additional Documents to Provide page I click Continue
+And in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And If purchase details are showing click confirm order
+And In the Thank You screen I click Home
+Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And In the SHA manager grid I see the WPS ID I have saved as product: Product200449 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: Product200449)
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Product200449)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Product200449)
+And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Product200449
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Product200449)
+And I call Shared Step 59066 (Go to SHA Manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: Product200449)
+And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: Product200449) for
+| Retailer |
+| Amazon   |
+And I navigate to the landing page
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+And I search for the product saved as: Product200449
+And I click Row Actions for the first product returned
+And I should not see the following Actions options
+| Option             |
+| Archive Retailers  |
+
+@TestCase:184385
+
+Scenario: [184385] My Retail Partners:  Data Tier Consent - Products in Scope - Report Show Single Retailer Products
+
+Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product184385SRS
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I generate a random UPC number and save as: UPC183646
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC183646, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then If purchase details are showing click confirm order
+Then In the Thank You screen I click Home
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: Product184385T
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I click the single retailer checkbox
+Then I confirm if the Single Retailer Checkbox is not selected
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I generate a random UPC number and save as: UPC183646_1
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC183646_1, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then If purchase details are showing click confirm order
+Then In the Thank You screen I click Home
+Then I click the Retail Partners icon in the Navigation Pane
+Then I select the retailer: Rite Aid
+Then I click the Products in Scope button and confirm that a file is produced called RA_Report_DataUsageTier_<Date>.xlsx and save as File184385
+Then I verify sheet Table in downloaded file RA_Report_DataUsageTier_<Date>.xlsx saved as File184385 contains data:
+| WPS ID           | Internal ID | Product Name | Formula ID | Retailer | Product Type | Included in Consent | Excluded from Consent | Single-Retail Subscription |
+| Product184385SRS |             | Chalk        |            | Rite Aid | Chalk        |                     | EXCLUDED              | Enrolled / Exempt          |
+| Product184385T   |             | Chalk        |            | Rite Aid | Chalk        | YES                 |                       |                            |
+Then I click the Home icon in the Navigation Pane
+
+
+

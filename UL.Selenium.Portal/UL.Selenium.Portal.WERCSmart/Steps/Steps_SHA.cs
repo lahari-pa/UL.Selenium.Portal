@@ -2877,7 +2877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if(Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
 			{
-				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), $"Failed to click Accept button", "Succesfully clicked Accept button");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), "Failed to click Accept button", "Succesfully clicked Accept button");
 			}
 		}
 
@@ -5061,6 +5061,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.FindColumnInProductDataPageWithTable(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+		[StepDefinition(@"In the Add New Supplier I click on Cancel button")]
+		public void ThenInTheAddNewSupplierIClickOnCancelButton()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.CancelButtonExists(), "Failed to find cancel button", "Succesfully found cancel button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickCancelButton(), "Failed to click cancel button", "Succesfully clicked cancel button");
+			}
+		}
+
+		[StepDefinition(@"I click on New Supplier Button")]
+		public void ThenClickNewSupplierButton()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.NewSupplierButtonExists(), "Failed to find New Supplier button", "Succesfully found New Supplier button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.ClickNewSupplierButton(), "Failed to click New Supplier button", "Succesfully clicked New Supplier button");
+			}
+		}
+
+		[StepDefinition(@"I close Supplier Manager window")]
+		public void ThenICloseSupplierManagerWindow()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButtonExists(), "Failed to find Supplier Manager window close button", "Succesfully found Supplier Manager window close button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButton(), "Failed to click on Supplier Manager window button", "Succesfully clicked Supplier Manager window close button");
+			}
 		}
 	}
 
