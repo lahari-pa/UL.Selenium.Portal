@@ -233,9 +233,9 @@ Then In the Subscription Information screen I verify section Submitted is presen
 | Enhanced Articles |
 | Formulated        |
 | Single Retailer   |
+Then I get the count of products in section Submitted and save as: ProductsCount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save the product information as: Product184385SRS
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -252,4 +252,7 @@ Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the com
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
+Then I navigate to the MyAccount page
+Then In the My Account screen I navigate to the Subscription Information page
+Then I verify the products count encreased for type Single Retailer in section Submitted then was before saved as: ProductsCount
 
