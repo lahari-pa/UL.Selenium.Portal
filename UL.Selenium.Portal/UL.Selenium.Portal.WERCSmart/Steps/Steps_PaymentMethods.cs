@@ -1152,33 +1152,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I can see Yearly and Quarterly options")]
-		public void ThenIConfirmTheYearlyQuarterlyRadioButtons()
-		{
-			Report.StartStep(Report.Details.StepIndex+ " - I confirm the Yearly and Quaterly Radio Options");
-			try
-			{
-				Delay.Seconds(2 * Delay.SpeedFactor);
-				var mySub = new PaymentMethods_Subscription_Billing();
-
-				Report.IsTrue(mySub.Billing_frequency_options(), "Cannot see Yearly and Quarterly options", "Can see Yearly and Quarterly options");
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see Yearly, Quarterly, and Monthly options")]
-		public void ThenIConfirmTheMonthlyYearlyQuarterlyRadioButtons()
+		
+		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: (.*), quarterly: (.*), monthly: (.*) options")]
+		public void ThenIConfirmTheBillingFrequencyRadioButtons(string yearly, string quarterly, string monthly)
 		{
 			try
 			{
 				Delay.Seconds(2 * Delay.SpeedFactor);
 				var mySub = new PaymentMethods_Subscription_Billing();
-
-				Report.IsTrue(mySub.Billing_frequency_options(), "Cannot see Monthly,Yearly and Quarterly options", "Can see Monthly,Yearly and Quarterly options");
+				mySub.Billing_frequency_options(yearly, quarterly, monthly);
 			}
 			catch (Exception ex)
 			{

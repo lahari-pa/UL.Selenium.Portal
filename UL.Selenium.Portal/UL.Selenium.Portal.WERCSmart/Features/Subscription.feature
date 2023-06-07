@@ -1196,7 +1196,7 @@ Scenario: [204225] Subscription - Billing Frequency
 Given the Purchase Summary should be loaded
 Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
-Then In the Purchase Summary screen I Confirm that for Billing Frequency I can see Yearly and Quarterly options
+Then In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: Yearly, quarterly: Quarterly, monthly:  options
 Given I Click on the back arrow in Payment methods
 Given I Click on the back arrow in Payment methods
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
@@ -1212,15 +1212,15 @@ Then In the Payment Methods screen I click Continue
 Given the Purchase Summary should be loaded
 Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
-Then In the Purchase Summary screen I Confirm that for Billing Frequency I see Yearly, Quarterly, and Monthly options
+Then In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: Yearly, quarterly: Quarterly, monthly: Monthly options
 Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
 Then In the Purchase Summary screen I click Confirm Order
+Given the Purchase Summary should be loaded
 Then In the Thank You screen I confirm the following statement is shown: You have successfully signed up for a subscription plan. Thank you for depending on UL to provide over 45 retailers with critical product information they require to on-board your products and keep store workers, consumers and the environment safe.
 Then In the Thank You screen I confirm the following statement is shown: We are committed to helping you monitor and manage all of your product data needs with the highest standards of confidentiality and service. If we can be of further assistance, please contact Customer Support at +1 (877) 642-6753 or (518) 720-6220
 Then In the Thank You screen I click Home
 Given  I call Shared Step 62676 (Go To My Account)
 Then In the Subscription Information screen I click the Upgrade button
-#Then In the Subscription Enrollment screen I confirm heading as Subscription Upgrade
 Then In the Subscription Enrollment screen I select the following enrollment options
 | Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
 | Up to 100 Product(s)| Up to 100 Product(s) | Up to 150 Product(s)  | Standard      | Bronze       |

@@ -875,8 +875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Continue_back_arrow()
 		{
 			Report.Info("Attempting to Click Back Arrow");
-			this._btnBackArrow.Click();
-			return true;
+			return this._btnBackArrow.TryClick();			
 		}
 	}
 
@@ -1767,6 +1766,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		IWebElement _quaterlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='2']"), 2);
 		IWebElement _yearlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='0']"), 2);
 		IWebElement _monthlyOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='billingFrequency' and @value='1']"), 2);
+		IWebElement _optionGetText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@class= 'col-sm-12']"), 2);
 
 		public bool Purchase_Header_Correct()
 		{
@@ -1779,7 +1779,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			{
 				Report.Info("Failed to Find Purchase Summary Header Text");
 				Report.Screenshot();
-				return false; 
+				return false;
 			}
 			if (!myHeader.Displayed)
 			{
@@ -1851,7 +1851,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			Report.Screenshot();
 			return true;
 		}
-	
+
 		public bool Column_Headings_Correct(string column_1, string column_2, string column_3)
 		{
 			Report.Info("Beginning Column_Headings_Correct");
@@ -2002,8 +2002,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				}
 				else
 				{
-					return false; 
-				}		
+					return false;
+				}
 			}
 			catch (NoSuchElementException)
 			{
@@ -2031,22 +2031,35 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			return new List<string>();
 		}
 
-		public bool Billing_frequency_options()
+		public void Billing_frequency_options(string yearly, string quarterly, string monthly)
 		{
 			if (_yearlyOption.Displayed && _quaterlyOption == null && _monthlyOption == null)
 			{
-				Report.Info("I can see yearly option and is selected");
+				Report.Info(" I can see yearly option");
+				string data = this.OptionsGetText();
+				Report.IsTrue(data.Contains(yearly), $"Failed to find {yearly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {yearly} displayed ");
 			}
 			else if (_yearlyOption.Displayed && _quaterlyOption.Displayed && _monthlyOption == null)
 			{
 				Report.Info(" I can see yearly option and quaterly option");
+				string data = this.OptionsGetText();
+				Report.IsTrue(data.Contains(yearly), $"Failed to find {yearly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {yearly} displayed ");
+				Report.IsTrue(data.Contains(quarterly), $"Failed to find {quarterly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {quarterly} displayed");
+
 			}
 			else
 			{
 				Report.Info("I can see Yearly option, monthly option and quaterly option");
+				string data = this.OptionsGetText();
+				Report.IsTrue(data.Contains(yearly), $"Failed to find {yearly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {yearly} displayed ");
+				Report.IsTrue(data.Contains(quarterly), $"Failed to find {quarterly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {quarterly} displayed");
+				Report.IsTrue(data.Contains(monthly), $"Failed to find {monthly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {monthly} displayed");				
 			}
-			return true;
 		}
+
+		public string OptionsGetText() {
+			return this._optionGetText.Text;
+			}
 
 		public bool Billing_frequency_YearlyLabel()
 		{
