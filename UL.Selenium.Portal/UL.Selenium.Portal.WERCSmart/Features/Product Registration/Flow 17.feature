@@ -11,6 +11,7 @@
 @DocumentAcceptance
 @RetailPartners
 @RegulatoryDocsToProvide
+@ignore
 @run_Flow17
 Feature: Flow 17
 

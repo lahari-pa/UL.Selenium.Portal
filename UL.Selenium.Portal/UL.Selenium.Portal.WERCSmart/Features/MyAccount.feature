@@ -81,6 +81,7 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
+#Removed from regression 2023/05
 @ignore
 @TestCase:70511
 Scenario: [70511] Pagination (...) need an account with six pages of users
@@ -99,6 +100,7 @@ Scenario: [70511] Pagination (...) need an account with six pages of users
 	Given I click ... in the My Account user grid
 	Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
+#Removed from regression 2023/05
 @ignore
 @TestCase:68417
 Scenario: [68417] Company Information
@@ -113,7 +115,7 @@ Scenario: [68417] Company Information
 # Created by Larkin, Steve
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
-
+#Removed from regression 2023/05
 @ignore
 @TestCase:87304
 Scenario: [87304] Video link How to Subscribe
@@ -127,7 +129,7 @@ Scenario: [87304] Video link How to Subscribe
 	And I close the window saved as: YouTube
 	And I close the window saved as: Subscription Enrollment and Management
 
-
+#Removed from regression 2023/05
 @ignore
 @TestCase:92613
 Scenario: [92613] Add and Deactivate a New User from the User Grid
@@ -146,6 +148,7 @@ Scenario: [92613] Add and Deactivate a New User from the User Grid
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
 
+#Removed from regression 2023/05
 @ignore
 @TestCase:90197
 Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
@@ -163,7 +166,7 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I Confirm that you See the user you just created in the grid
 	And I confirm the new user is Not Active
 
-
+#Removed from regression 2023/05
 @ignore
 @TestCase:85512
 Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
@@ -231,7 +234,7 @@ Scenario: [85258] My Account - Stewardship Numbers - table display validation
 		| Quebec           |
 	Then I check if 'Edit' button exists in the Stewardship Numbers section
 
-
+#Removed from regression 2023/05
 @ignore
 @TestCase:97846
 Scenario: [97846] - Company Information - Verify the 'State' drop-down is Available
@@ -251,7 +254,7 @@ Scenario: [97846] - Company Information - Verify the 'State' drop-down is Availa
 	Then I click the User Icon
 	And I click on Sign Out
 
-
+#Removed from regression 2023/05
 @ignore
 @TestCase:53694
 Scenario: [53694] - User Role - Reset Password
@@ -266,6 +269,7 @@ Scenario: [53694] - User Role - Reset Password
 	#When running this, update the date 2019-12-09 to whatever the current date is
 	#Update the date in the above sentence to avoid future confusion
 
+#Removed from regression 2023/05
 @ignore
 @TestCase:87349
 Scenario: [87349] - My Account - Edit Stewardship Numbers - Date validation
@@ -508,6 +512,7 @@ Scenario: [87349] - My Account - Edit Stewardship Numbers - Date validation
 		|             |            |             |
 	Then I save the Stewardship Numbers data
 
+#Removed from regression 2023/05
 @ignore
 @TestCase:138836
 Scenario: [138836] My Account - Correct Message Displays when Date is Expired

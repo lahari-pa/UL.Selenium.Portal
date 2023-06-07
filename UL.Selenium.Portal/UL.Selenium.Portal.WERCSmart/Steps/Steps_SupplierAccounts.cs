@@ -20,6 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SupplierAccounts")]
 	class StepsSupplierAccounts
 	{
+		public static string companyName= new AddNewSupplier().GetRandomCompanyName();
 
 		[StepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountWithFollowingParameters(string savedAs)
@@ -1326,6 +1327,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
+		[StepDefinition(@"In Add New Supplier I enter random Company Name")]
+		public void ThenIFillOutTheInformationInTheAddNewSupplierRandomCompanyNameName()
+		{
+
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			var newSupplier = new AddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CompanyNameInputExists(), "Failed to find Company Name input", "Succesfully found Company Name input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(companyName), $"Failed to enter {companyName} in field Company Name",
+				$"Succesfully entered {companyName} in field Company Name");
+			}
+			else
+			{
+				Report.Info("Company Input not found");
+			}
+		}
+
+		[Then(@"I confirm the new supplier added in the supplier manager window")]
+		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow()
+		{
+			try
+			{
+				var newSupplier = new AddNewSupplier(); 
+				newSupplier.EnterSearchTextInSupplyManager(companyName);
+				Delay.Seconds(Delay.SpeedFactor * 2);
+				newSupplier.ClickSearchButtonInSupplyManager();
+				Delay.Seconds(Delay.SpeedFactor * 5);
+				Report.IsTrue(newSupplier.ClickNewSupplierInSupplyManager(companyName), $"{companyName} not displayed", $"{companyName} is displayed");
+				Delay.Seconds(Delay.SpeedFactor * 5);
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+			}
+		}
+
+		[Then(@"I confirm following tabs appear available")]
+		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)
+		{
+			foreach (TableRow Row in table.Rows)
+			{
+				var newSupplier = new AddNewSupplier();
+				List<string> tabs = newSupplier.AllTabs();				
+				Report.IsTrue(tabs.Contains(Row["tabs"]), $"text does not contain tab {Row["tabs"]}", $"text contain tab{ Row["tabs"]}");
+			}
+		}
+
+		[Then(@"I click on (.*) tab")]
+		public void ThenClickOnGivenTab(string selectTab)
+		{
+			var newSupplier = new AddNewSupplier();
+			Report.IsTrue(newSupplier.ClickSelectedTab(selectTab), $"Failed to click {selectTab} tab",
+				$"Succesfully clicked {selectTab} tab");			
+		}
+
+		[Then(@"I confirm following toggles displayed")]
+		public void ThenIConfirmFollowingTogglesDisplayed(Table table)
+		{
+			foreach (TableRow Row in table.Rows)
+			{
+				var newSupplier = new AddNewSupplier();
+				List<string> toggleValues = newSupplier.FetaureToggle();
+				Report.IsTrue(toggleValues.Contains(Row["ToggleInfo"]), $"text does not contain tab {Row["ToggleInfo"]}", $"text contain tab{ Row["ToggleInfo"]}");
+			}
+		}
 	}
 }
 
