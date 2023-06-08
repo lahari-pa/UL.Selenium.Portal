@@ -2009,8 +2009,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Upgrade_click()
 		{
 			Report.Info("Attempting to Click UPGRADE Button");
-			this._btnUpgrade.Click();
-			return true;
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			return this._btnUpgrade.TryClick();			
 		}
 
 		public bool Click_Upgrade_Button()

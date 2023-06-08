@@ -818,7 +818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Thank_You();
 
-				Report.Info("Thank You Text = " + ty_text);
+				Report.Info($"Thank You Text = '{ty_text}'");
 
 				Report.IsTrue(myPay.Thank_You_TextExists(ty_text.Trim()), $"Displayed Text does not contain: '{ty_text}'",
 					$"Displayed Text contains: '{ty_text}'");
@@ -1145,6 +1145,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(myInfo.Confirm_State_AddressAppear(action_menu, state), $"{ action_menu} state Incorrect", $"Confirmed editing {action_menu} state");
 				Report.IsTrue(myInfo.Confirm_Zip_Code_AddressAppear(action_menu, zip), $"{ action_menu} zip code Incorrect", $"Confirmed editing {action_menu} zip code");
 				Report.IsTrue(myInfo.Confirm_PhoneNo_AddressAppear(action_menu, phone), $"{ action_menu} phone number Incorrect", $"Confirmed editing {action_menu} phone number");				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		
+		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: (.*), quarterly: (.*), monthly: (.*) options")]
+		public void ThenIConfirmTheBillingFrequencyRadioButtons(string yearly, string quarterly, string monthly)
+		{
+			try
+			{
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				var mySub = new PaymentMethods_Subscription_Billing();
+				mySub.Billing_frequency_options(yearly, quarterly, monthly);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see Yearly label")]
+		public void ThenIConfirmYearlyLabel()
+		{
+			try
+			{
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Billing_frequency_YearlyLabel(), "Cannot see Yearly label", "Can see Yearly label");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Click on the back arrow in Payment methods")]
+		public void ThenIClickOnTheBackArrow()
+		{
+			Report.StartStep(Report.Details.StepIndex + " - Click on the back arrow next to ");
+			try
+			{
+				var myPay = new PaymentMethods();
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				Report.IsTrue(myPay.Continue_back_arrow(), "Failed to Click Back Arrow", "Back Arrow Clicked");
+				Delay.Seconds(15 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{
