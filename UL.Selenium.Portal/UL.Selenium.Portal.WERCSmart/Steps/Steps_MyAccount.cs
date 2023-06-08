@@ -593,6 +593,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found subscription level '" + subSavedAs + "'.");
 		}
 
+		[StepDefinition(@"In the Subscription Information screen I verify section (.*) is present with product types:")]
+		public void ThenInTheSubscriptionInformationScreenIVerifySectionSubmittedIsPresentWithProductTypes(string sectionName, Table table)
+		{
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
+			{
+				if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesExists(sectionName), $"Failed to find product types in section {sectionName}", $"Successfully found product types in section {sectionName}"))
+				{
+					Report.IsTrue(new MyAccount_SubscriptionInfo().SectionExists(sectionName, table), $"Failed to verify product types in section {sectionName}", $"Successfully verified product types in section {sectionName}");
+				}
+			}
+		}
+		[Then(@"I get the count of products in section (.*) and save as: (.*)")]
+		public void ThenIGetTheCountOfProductsInSectionSubmittedAndSaveAsProductsCount(string sectionName, string savedAs)
+		{
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
+			{
+				if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesExists(sectionName), $"Failed to find product types in section {sectionName}", $"Successfully found product types in section {sectionName}"))
+				{
+					Report.IsTrue(new MyAccount_SubscriptionInfo().SaveProductsCount(sectionName, savedAs), $"Failed to save the count of products from section {sectionName}", $"Successfully saved the count of products from section {sectionName}");
+				}
+			}
+		}
+
+		[Then(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
+		public void ThenIVerifyTheProductsCountEncreasedForTypeSingleRetailerInSectionSubmittedThenWasBeforeSavedAsProductsCount(string productType, string sectionName, string savedAs)
+		{
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
+			{
+				if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesExists(sectionName), $"Failed to find product types in section {sectionName}", $"Successfully found product types in section {sectionName}"))
+				{
+					Report.IsTrue(new MyAccount_SubscriptionInfo().VerifyProductsCount(productType, sectionName, savedAs), $"Failed to confirm the product count was changed correctly", $"Successfully confirmed the product count was changed correctly");
+				}
+			}
+		}
+
+
+
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
