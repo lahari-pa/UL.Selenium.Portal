@@ -1906,14 +1906,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info($"Failed to get product types in section {section}");
 				return false;
 			}
+			bool result = true;
 			foreach (var row in table.Rows)
 			{
 				if (!GetProductTypes.Contains(row["Product types"]))
 				{
-					return false;
+					Report.Info($"Failed to find {row["Product types"]} product type in section {section}");
+					result = false;
 				}
 			}
-			return true;
+			return result;
 		}
 		public bool SaveProductsCount(string section, string savedAs)
 		{
@@ -1952,6 +1954,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			int currentCount;
 			int savedCount;
+			bool result = true;
 			foreach (string[] getElement in GetProductTypes)
 			{
 				foreach (string[] savedElement in GetSavedProductTypes)
@@ -1965,7 +1968,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							if (currentCount != savedCount + 1)
 							{
 								Report.Info($"Failed to confirm the products count encreased by one, current value is {currentCount}, but should be {savedCount} + 1");
-								return false;
+								result = false;
 							}
 						}
 						else
@@ -1975,14 +1978,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							if (currentCount != savedCount)
 							{
 								Report.Info($"Failed to confirm the products count still the same, current value is {currentCount}, but should be {savedCount}");
-								return false;
+								result = false;
 							}
 						}
 					}
 				}	
 			}
-	
-			return true;
+			return result;
 		}
 
 		public bool Status_Information_Correct(string form_no, string art_no, string en_art_no)
