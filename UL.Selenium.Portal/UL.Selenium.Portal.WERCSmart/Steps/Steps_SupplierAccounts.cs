@@ -1345,23 +1345,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[Then(@"I confirm the new supplier added in the supplier manager window")]
-		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow()
+		[Then(@"I confirm the new supplier (should|should not) see in the supplier manager window")]
+		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow(string condition)
 		{
 			try
 			{
-				var newSupplier = new AddNewSupplier(); 
+				var newSupplier = new AddNewSupplier();
 				newSupplier.EnterSearchTextInSupplyManager(companyName);
 				Delay.Seconds(Delay.SpeedFactor * 2);
 				newSupplier.ClickSearchButtonInSupplyManager();
 				Delay.Seconds(Delay.SpeedFactor * 5);
-				Report.IsTrue(newSupplier.ClickNewSupplierInSupplyManager(companyName), $"{companyName} not displayed", $"{companyName} is displayed");
-				Delay.Seconds(Delay.SpeedFactor * 5);
+				if (condition == "should")
+				{
+					if (newSupplier.IfSupplierExists(companyName) != null)
+					{
+						Report.IsTrue(newSupplier.ClickNewSupplierInSupplyManager(companyName), $"{companyName} not displayed", $"{companyName} is displayed");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+					}
+				}
+				else
+				{
+					Report.IsTrue(newSupplier.IfSupplierExists(companyName) == null, $"{companyName} exists", $"{companyName} not exists");
+				}
 			}
 			catch (Exception e)
 			{
 				Report.Info(e.Message);
 			}
 		}
+
 
 		[Then(@"I confirm following tabs appear available")]
 		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)

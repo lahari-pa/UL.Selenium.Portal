@@ -97,7 +97,7 @@ Then In the Add New Supplier I click on Accept button
 And An alert is displayed with the message: The supplier was successfully added to the system.
 Then I close alert
 And I should not see the 'Add New Supplier' popup
-Then I confirm the new supplier added in the supplier manager window
+Then I confirm the new supplier should see in the supplier manager window
 Then I confirm following tabs appear available
 | tabs                |
 | Company Information |
@@ -167,3 +167,45 @@ And An alert is displayed with next errors:
 | Please specify a Contact Phone         |
 Then In the Add New Supplier I click on Cancel button
 Then I close Supplier Manager window
+
+# Created by Saikiran Chittampally
+@TestCase:202291
+Scenario: [202291] [Automation] : Supplier Manager - Adding New Supplier - Using Existing Contact Email
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+Then In the Supplier Manager Popup I click on button: New Supplier 
+And I should see the 'Add New Supplier' popup
+Then In the Add New Supplier I click on Accept button
+And An alert is displayed with next errors:
+| Error                                  |
+| Please specify a Company Name          |
+| Please specify a Country               |
+| Please specify a Country Code          |
+| Please specify a Supplier Phone number |
+| Please specify a Primary Address       |
+| Please specify a City                  |
+| Please specify a State                |
+| Please specify a Postal Code           |
+| Please specify a Contact Name          |
+| Please specify a Contact Email         |
+| Please specify a Contact Phone         |
+And In Add New Supplier I enter random Company Name
+And In Add New Supplier I enter Supplier Seller ID: 123456
+And In Add New Supplier I enter Country: United States
+And I Add New Supplier I enter Country Code: +1
+And In Add New Supplier I enter Supplier Phone: 123456789
+And In Add New Supplier I enter Address: 7856 Paris st
+And In Add New Supplier I enter City: New York
+And In Add New Supplier I enter State: New York
+And In Add New Supplier I enter Postal Code: 58963
+And In Add New Supplier I enter Contact Name: Name
+And In Add New Supplier I enter Contact Email: 2e063d578bc1@.mailosaur.net
+And In Add New Supplier I enter Contact Phone: Phone
+Then In the Add New Supplier I click on Accept button
+And An alert is displayed with next errors:
+| Error                                  |
+| A user with this email already exists    |
+And I should see the 'Add New Supplier' popup
+Then In the Add New Supplier I click on Cancel button
+Then I confirm the new supplier should not see in the supplier manager window
