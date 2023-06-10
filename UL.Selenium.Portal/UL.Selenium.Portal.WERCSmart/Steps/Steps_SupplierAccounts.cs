@@ -1344,8 +1344,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm the new supplier added in the supplier manager window")]
-		[Then(@"I confirm the new supplier (should|should not) see in the supplier manager window")]
+		[Then(@"I confirm the new supplier (should|should not) be seen in the supplier manager window")]
 		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow(string condition)
 		{
 			try

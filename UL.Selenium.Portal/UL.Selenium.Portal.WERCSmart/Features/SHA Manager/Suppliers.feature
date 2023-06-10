@@ -97,7 +97,7 @@ Then In the Add New Supplier I click on Accept button
 And An alert is displayed with the message: The supplier was successfully added to the system.
 Then I close alert
 And I should not see the 'Add New Supplier' popup
-Then I confirm the new supplier should see in the supplier manager window
+Then I confirm the new supplier should be seen in the supplier manager window
 Then I confirm following tabs appear available
 | tabs                |
 | Company Information |
@@ -208,4 +208,4 @@ And An alert is displayed with next errors:
 | A user with this email already exists    |
 And I should see the 'Add New Supplier' popup
 Then In the Add New Supplier I click on Cancel button
-Then I confirm the new supplier should not see in the supplier manager window
+Then I confirm the new supplier should not be seen in the supplier manager window
