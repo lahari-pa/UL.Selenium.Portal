@@ -3014,20 +3014,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = email.Replace("savedas", "").Trim();
 					email = Context.GetFromContext(email).ToString();
-				}
-				int i = 0;
-				while (i < 10)
-				{
-					try
+					var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+					if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Email address input", "Succesfully found email address input"))
 					{
-						var thisStudioAddNewSupplier = new StudioAddNewSupplier();
-						thisStudioAddNewSupplier.Enter_Email(email);
-						break;
-					}
-					catch (Exception)
-					{
-						i++;
-						Delay.Seconds(1);
+						Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(email), $"Failed to enter {email} in field Email address",
+					$"Succesfully entered {email} in field Email address");
 					}
 				}
 			}
