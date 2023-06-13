@@ -76,7 +76,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -131,7 +131,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -160,10 +160,20 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
 | Please specify a Contact Phone         |
 Then In the Add New Supplier I click on Cancel button
 Then I close Supplier Manager window
+
+@TestCase:202273
+Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I click on the Suppliers link on the top right of the screen
+Then I should see the 'Supplier Manager' popup
+Then 
+
+
