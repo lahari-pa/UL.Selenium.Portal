@@ -174,6 +174,10 @@ Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I click on the Suppliers link on the top right of the screen
 Then I should see the 'Supplier Manager' popup
+Then In the Supplier Manager Popup I select radio button: E-mail
+Then In the Supplier Manager Popup I enter the following search term: olha.turkot@ul.com
+Then In the Supplier Manager Popup I click on the search button
 Then 
+
 
 

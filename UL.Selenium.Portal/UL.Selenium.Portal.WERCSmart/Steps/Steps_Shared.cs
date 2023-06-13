@@ -14306,7 +14306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.UseSubSteps = true;
 				var thisSteps_SHA = new Steps_SHA();
-				Report.StartSubStep($"Then");
+				Report.StartSubStep($"In the Supplier Manager Popup I select radio button: {radioButton}");
 				thisSteps_SHA.InSupplierManagerPopupISelectRadioButton(radioButton);
 				Report.StartSubStep($"In the Supplier Manager Popup I enter the following search term: {searchValue}");
 				thisSteps_SHA.InSupplierManagerPopupIEnterSearchTerm(searchValue);
