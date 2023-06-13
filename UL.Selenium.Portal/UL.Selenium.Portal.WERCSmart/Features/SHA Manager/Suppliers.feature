@@ -112,7 +112,7 @@ Then I confirm following toggles displayed
 | After-Market Distributor |
 | Prescription Pharma      |
 | UL Test Company          |
-|Document Reader|
+|Document Reader           |
 
 # Created by Saikiran Chittampally
 @TestCase:202274
@@ -168,16 +168,8 @@ And An alert is displayed with next errors:
 Then In the Add New Supplier I click on Cancel button
 Then I close Supplier Manager window
 
-@TestCase:202273
-Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
 
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I click on the Suppliers link on the top right of the screen
-Then I should see the 'Supplier Manager' popup
-Then In the Supplier Manager Popup I select radio button: E-mail
-Then In the Supplier Manager Popup I enter the following search term: olha.turkot@ul.com
-Then In the Supplier Manager Popup I click on the search button
-Then 
+
 
 
 
