@@ -256,3 +256,21 @@ Then I navigate to the MyAccount page
 Then In the My Account screen I navigate to the Subscription Information page
 Then I verify the products count encreased for type Single Retailer in section Submitted then was before saved as: ProductsCount
 
+@TestCase:202464
+
+Scenario: [202464] Single-Retailer Subscription: Subscription Header Revision
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I navigate to the MyAccount page
+Then In MyAccount page I verify Subscription section exist with options:
+| options         |
+| Level           |
+| Agent Support   |
+| Formulated      |
+| Enhanced        |
+| Article         |
+| Single-Retailer |
+Then In MyAccount page I get Subscription detailes and save data as: MyAccountSubscription
+Then In the My Account page I navigate to the Subscription Information page
+
+
