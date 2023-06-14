@@ -368,6 +368,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return box.TryClick() && box.Checked();
 		}
 
+		public bool CheckSelectAllCheckboxInRetailersTableView()
+		{
+			IWebElement SelectAllRetailersButton = this.containerElement.FindElement(By.XPath(".//input[@data-bind='click: checkAll']"), 2);
+			return SelectAllRetailersButton.TryCheck();
+		}
+
 		public bool DeleteSelectedRetailers()
 		{
 			string xPath = ".//a[@class='btn delete-selected']/i";
@@ -404,6 +410,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement deleteButton = this.ContainerElement.FindElement(By.XPath("//a[@class='btn delete-selected']"), 2);
 			return deleteButton.TryClick();
+		}
+
+		public bool CheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram()
+		{
+			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath("//input[@id='single-retailer'][@type='checkbox']"), 2);
+			return checkBox.TryCheck();
 		}
 
 		public bool SelectTheFollowingRetailersInTheRetailersPage(Table table)

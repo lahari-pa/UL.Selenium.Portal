@@ -404,6 +404,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Retailer Page
+	Then I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is present for stand alone batteries in Retailer page
 	Then I confirm the following retailers are showing in the Retailer page
 		| Retailer					 |
 		| No Retailer/No UPC Product |
@@ -428,6 +429,11 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I click the Select all retailers option in the Select Retailers popup
 	Given I click Done in the Select Retailers popup
 	Given I click the single retailer checkbox
+	Then I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is present for stand alone batteries in Retailer page
+	Given I select all retails in Retailers page table view
+	Then I click the delete icon in the Retailer page
+	Given I click Done in the Select Retailers popup
+	Then I check the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program
 	Given I click 'Add Retailers' in the Retailers page
 	Then the 'Select Retailers' window appears
 	Given I Confirm that on the top right corner the Select All option is NOT available

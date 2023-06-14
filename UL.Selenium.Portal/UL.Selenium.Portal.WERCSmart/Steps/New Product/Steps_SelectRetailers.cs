@@ -230,6 +230,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked 'Done' in the Select Retailers window");
 		}
 
+		[StepDefinition(@"I select all retails in Retailers page table view")]
+		public void GivenISelectAllRetailsInRetailersPageTableView()
+		{
+			Retailer newRetailerObject = new Retailer();
+			Report.StartStep("In the Retailer page I check the top checkbox to select all retailers");
+			Report.IsTrue(newRetailerObject.CheckSelectAllCheckboxInRetailersTableView(), "Failed to click top checkbox in the Retailers page table view",
+				"Successfully clicked top checkbox in the Retailers page table view");
+		}
+
+
 		[StepDefinition(@"I confirm the following retailers are selected in the Select Retailers window")]
 		public void ConfirmSelectedRetailers(Table retailers)
 		{
@@ -271,6 +281,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
 		}
+
+		[StepDefinition(@"I check the checkbox Registration is for a Single Retail Recipient \(No Retailer \+1\) and will use Single-Retail Subscription program")]
+		public void ThenICheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.CheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram(), "Failed to check the Single Retailer checkbox", "Successfully checked the Single Retailer checkbox");
+		}
+
 
 		[StepDefinition(@"I select the following retailers in the Retailer page")]
 		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
