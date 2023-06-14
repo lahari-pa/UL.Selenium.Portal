@@ -1878,6 +1878,114 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "SubscriptionInfoContainer")]
 		protected override IWebElement containerElement { get; set; }
 
+		IWebElement ProductTypesSection(string section) => this.containerElement.FindElement(By.XPath($".//div[h4[contains(text(), '{section}')]]"), 2);
+		IWebElement ProductTypesSectionName(string section) => this.containerElement.FindElement(By.XPath($".//h4[contains(text(), '{section}')]"), 2);
+
+		private List<IWebElement> ProductTypes(string section) => this.containerElement.FindElements(By.XPath($".//div[h4[contains(text(), '{section}')]]//div//ul[@class=\"list-unstyled spaced-text\"]//li"), 2).ToList();
+
+		public bool ProductTypesSectionExists(string section)
+		{
+			return this.ProductTypesSection(section) != null;
+		}
+		public bool ProductTypesExists(string section)
+		{
+			return this.ProductTypes(section) != null;
+		}
+
+		public bool SectionExists(string section, Table table)
+		{
+			List<string> GetProductTypes = new List<string>();
+			
+			foreach(var element in this.ProductTypes(section))
+			{
+				string[] line = element.Text.Split('\r');
+				GetProductTypes.Add(line[0]);
+			}
+			if(GetProductTypes == null)
+			{
+				Report.Info($"Failed to get product types in section {section}");
+				return false;
+			}
+			bool result = true;
+			foreach (var row in table.Rows)
+			{
+				if (!GetProductTypes.Contains(row["Product types"]))
+				{
+					Report.Info($"Failed to find {row["Product types"]} product type in section {section}");
+					result = false;
+				}
+			}
+			return result;
+		}
+		public bool SaveProductsCount(string section, string savedAs)
+		{
+			List<string[]> GetProductTypes = new List<string[]> {
+				this.ProductTypesSectionName(section).Text.Split(' ')
+			};
+			foreach (var element in this.ProductTypes(section))
+			{
+				string[] line = element.Text.Split('\r');
+				GetProductTypes.Add(line);
+			}
+			if (GetProductTypes == null)
+			{
+				Report.Info($"Failed to get product types in section {section}");
+				return false;
+			}
+			Report.Info("Add the count of products to context");
+			Context.AddToContext(savedAs, GetProductTypes);
+			return true;
+		}
+
+		public bool VerifyProductsCount(string productType, string section, string savedAs)
+		{
+			List<string[]> GetSavedProductTypes = new List<string[]>();
+			List<string[]> GetProductTypes = new List<string[]> {this.ProductTypesSectionName(section).Text.Split(' ')};
+			GetSavedProductTypes = (List<string[]>)Context.GetFromContext(savedAs);
+			foreach (var element in this.ProductTypes(section))
+			{
+				string[] line = element.Text.Split('\r');
+				GetProductTypes.Add(line);
+			}
+			if (GetProductTypes == null)
+			{
+				Report.Info($"Failed to get product types in section {section}");
+				return false;
+			}
+			int currentCount;
+			int savedCount;
+			bool result = true;
+			foreach (string[] getElement in GetProductTypes)
+			{
+				foreach (string[] savedElement in GetSavedProductTypes)
+				{
+					if (getElement[0] == savedElement[0])
+					{
+						if (getElement[0] == productType || getElement[0] == section)
+						{
+							currentCount = int.Parse(getElement[1]);
+							savedCount = int.Parse(savedElement[1]);
+							if (currentCount != savedCount + 1)
+							{
+								Report.Info($"Failed to confirm the products count encreased by one, current value is {currentCount}, but should be {savedCount} + 1");
+								result = false;
+							}
+						}
+						else
+						{
+							currentCount = int.Parse(getElement[1]);
+							savedCount = int.Parse(savedElement[1]);
+							if (currentCount != savedCount)
+							{
+								Report.Info($"Failed to confirm the products count still the same, current value is {currentCount}, but should be {savedCount}");
+								result = false;
+							}
+						}
+					}
+				}	
+			}
+			return result;
+		}
 
 		public bool Status_Information_Correct(string form_no, string art_no, string en_art_no)
 		{
@@ -2009,8 +2117,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Upgrade_click()
 		{
 			Report.Info("Attempting to Click UPGRADE Button");
-			this._btnUpgrade.Click();
-			return true;
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			return this._btnUpgrade.TryClick();			
 		}
 
 		public bool Click_Upgrade_Button()
