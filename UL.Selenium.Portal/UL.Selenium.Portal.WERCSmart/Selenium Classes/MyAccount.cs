@@ -27,6 +27,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		List<IWebElement> SubscriptionOptions => this.ContainerElement.FindElements(By.XPath(".//div/strong"), 2).ToList();
 		List<IWebElement> SubscriptionDetails => this.ContainerElement.FindElements(By.XPath(".//div[@style]/div[@class = 'row']"), 2).ToList();
 
+		IWebElement Header(string header) => this.ContainerElement.FindElement(By.XPath($".//h3[text() = '{header}']"), 2);
+
+		public bool HeaderExists(string header)
+		{
+			Report.Info($"Starting looking for header {header}");
+			return this.Header(header) != null;
+		}
 		public bool SubscriptionDetailsExists()
 		{
 			Report.Info("Starting looking for Subscription details");
@@ -39,19 +46,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool VerifySubscriptionOptions(Table table)
 		{
-			bool result = true;
 			List<string> getSubscriptionOptions = new List<string>();
+			List<string> tableSubscriptionOptions = new List<string>();
+
 			string[] getOption;
 			foreach (var element in this.SubscriptionOptions)
 			{
 				getOption = element.Text.Split(':');
 				getSubscriptionOptions.Add(getOption[0]);
 			}
+			if(getSubscriptionOptions == null)
+			{
+				Report.Info("Failed to get Subscription options in My Account page");
+			}
 			foreach (var row in table.Rows)
 			{
-				result = getSubscriptionOptions.Contains(row["options"]);
+				tableSubscriptionOptions.Add(row["options"]);
 			}
-			return result;
+			return Enumerable.SequenceEqual(getSubscriptionOptions, tableSubscriptionOptions);
 		}
 		public bool SaveSubscriptionDetails(string savedAs)
 		{
@@ -62,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if(getSubscriptionDetails == null)
 			{
-				Report.Info("Failed to get Subscription details");
+				Report.Info("Failed to get Subscription details in My Account page");
 				return false;
 			}
 			Context.AddToContext(savedAs, getSubscriptionDetails);
@@ -1925,7 +1937,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		IWebElement ProductTypesSection(string section) => this.containerElement.FindElement(By.XPath($".//div[h4[contains(text(), '{section}')]]"), 2);
 		IWebElement ProductTypesSectionName(string section) => this.containerElement.FindElement(By.XPath($".//h4[contains(text(), '{section}')]"), 2);
-
+		List<IWebElement> SubscriptionDetailsList => this.containerElement.FindElements(By.XPath(".//div[@class='subscription-level']//div[@class = 'row']"), 2).ToList();
 		private List<IWebElement> ProductTypes(string section) => this.containerElement.FindElements(By.XPath($".//div[h4[contains(text(), '{section}')]]//div//ul[@class=\"list-unstyled spaced-text\"]//li"), 2).ToList();
 
 		public bool ProductTypesSectionExists(string section)
@@ -1935,6 +1947,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ProductTypesExists(string section)
 		{
 			return this.ProductTypes(section) != null;
+		}
+		public bool SubscriptionDetailsListExists()
+		{
+			return this.SubscriptionDetailsList != null;
 		}
 
 		public bool SectionExists(string section, Table table)
@@ -1962,6 +1978,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return result;
 		}
+
+		public bool CheckSubscriptionDetails(string savedAs)
+		{
+			List<string> getSubscriptionDetails = new List<string>();
+
+			foreach (var element in this.SubscriptionDetailsList)
+			{
+				getSubscriptionDetails.Add(element.Text);
+			}
+			if (getSubscriptionDetails == null)
+			{
+				Report.Info("Failed to get Subscription details from Subscription Information page");
+				return false;
+			}
+			var savedSubscriptionDetails = Context.GetFromContext(savedAs);
+			return Enumerable.SequenceEqual(getSubscriptionDetails, (IEnumerable<string>)savedSubscriptionDetails);
+		}
+
 		public bool SaveProductsCount(string section, string savedAs)
 		{
 			List<string[]> GetProductTypes = new List<string[]> {

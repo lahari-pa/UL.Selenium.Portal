@@ -272,5 +272,6 @@ Then In MyAccount page I verify Subscription section exist with options:
 | Single-Retailer |
 Then In MyAccount page I get Subscription detailes and save data as: MyAccountSubscription
 Then In the My Account page I navigate to the Subscription Information page
+Then I verify Subscription details on Subscription Information page match with saved as: MyAccountSubscription
 
 
