@@ -67,8 +67,8 @@ Scenario: [56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)
 	Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
-		| State |
-		| AK    |
+	| State |
+	| IA    |
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
 
