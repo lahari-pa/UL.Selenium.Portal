@@ -76,7 +76,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -112,7 +112,7 @@ Then I confirm following toggles displayed
 | After-Market Distributor |
 | Prescription Pharma      |
 | UL Test Company          |
-|Document Reader|
+|Document Reader           |
 
 # Created by Saikiran Chittampally
 @TestCase:202274
@@ -131,7 +131,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -160,7 +160,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -214,3 +214,9 @@ Then there should be a new email for email Address saved as: EmailAddressGen fro
 And the html of the email should show: UL, working in collaboration with retailers in both the United States and Canada, has established a User Sign-On for your organization. The UL WERCSmart online portal is used by retailers to provide vital information about products being sold through the retailer. A separate email will be provided to you with a temporary password. After receiving the data, UL will utilize the information provided about your product to generate regulatory compliance data, for handling of returns and other reverse-logistic purposes.To begin to register your product data, the site address is UL-WERCSmart (ulwercsmart.com). The site performs best when using either Google Chrome or Microsoft Edge as your browser. If you need assistance while using the site, please email ULWERCSmartCustomer@ul.com. Thank you. Important Notice: This email may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL Verification Services at DSVCustomer@UL.com and then delete this message and its attachment(s). UL and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).
 Then there should be a new email for email Address saved as: EmailAddressGen from: <SiteNotification> with the title: UL WERCSmart Temporary Password
 And the html of the email should show: Recently, in a separate email, UL provided you information related to the WERCSmart registration process. Your temporary password is: (Password) Once successfully accessing the site, if you go to the My Account area, you can update your password as you'd like. To begin to register your product data, the site address is UL-WERCSmart (ulwercsmart.com) and best performance is achieved when using either Google Chrome or Microsoft Edge. If you need assistance while using the site, please email ULWERCSmartCustomer@ul.com. Thank you. Important Notice: This email may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL Verification Services at DSVCustomer@UL.com and then delete this message and its attachment(s). UL and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).
+
+
+
+
+
+

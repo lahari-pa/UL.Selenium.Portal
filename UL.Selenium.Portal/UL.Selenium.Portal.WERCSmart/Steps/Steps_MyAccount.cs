@@ -15,6 +15,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
+using static NUnit.Framework.Internal.OSPlatform;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -604,7 +605,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[Then(@"I get the count of products in section (.*) and save as: (.*)")]
+		[StepDefinition(@"I get the count of products in section (.*) and save as: (.*)")]
 		public void ThenIGetTheCountOfProductsInSectionSubmittedAndSaveAsProductsCount(string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -616,7 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
+		[StepDefinition(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
 		public void ThenIVerifyTheProductsCountEncreasedForTypeSingleRetailerInSectionSubmittedThenWasBeforeSavedAsProductsCount(string productType, string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -628,7 +629,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In MyAccount page I verify Subscription section exist with options:")]
+		public void ThenInMyAccountPageIVerifySubscriptionSectionExistWithOptions(Table table)
+		{
+			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
+			if (Report.IsTrue(new MyAccount().SubscriptionOptionsExists(), "Failed to find section Subscription in My Account page", "Successfully found section Subscription in My Account page"))
+			{
+				Report.IsTrue(new MyAccount().VerifySubscriptionOptions(table), $"Failed to verify all options in the Subscription section", $"Successfully verified all options in the Subscription section");	
+			}
+		}
 
+		[Then(@"In MyAccount page I get Subscription detailes and save data as: (.*)")]
+		public void ThenInMyAccountPageIGetSubscriptionDetailesAndSaveDataAsMyAccountSubscription(string savedAs)
+		{
+			if (Report.IsTrue(new MyAccount().SubscriptionDetailsExists(), "Failed to find Subscription details in My Account page", "Successfully found Subscription details in My Account page"))
+			{
+				Report.IsTrue(new MyAccount().SaveSubscriptionDetails(savedAs), $"Failed to get and save Subscription details", $"Successfully got and saved Subscription details");
+			}
+		}
 
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
@@ -639,6 +657,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), $"Failed to Navigate to { nav_option}",
 				$"Successully Navigated to { nav_option}");
 		}
+
+		[Then(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
+		public void ThenIVerifySubscriptionDetailsOnSubscriptionInformationPageMatchWithSavedAsMyAccountSubscription(string savedAs)
+		{
+			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().SubscriptionDetailsListExists(), "Failed to find Subscription details in Subscription Information page", "Successfully found Subscription details in Subscription Information page"))
+			{
+				Report.IsTrue(new MyAccount_SubscriptionInfo().CheckSubscriptionDetails(savedAs), $"Failed to confirm Subscription details match with My Account page", $"Successfully confirmed Subscription details match with My Account page");
+			}
+		}
+
 
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles(string form_no, string art_no, string en_art_no)
