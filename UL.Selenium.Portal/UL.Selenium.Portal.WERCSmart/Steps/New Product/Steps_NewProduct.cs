@@ -792,10 +792,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I delete UPC: (.*)")]
 		public void GivenIDeleteUPC(string upc)
 		{
-			Delay.Seconds(10);
+			Delay.Seconds(30);
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
-			Delay.Seconds(10);
+			Delay.Seconds(30);
 		}
 
 		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
