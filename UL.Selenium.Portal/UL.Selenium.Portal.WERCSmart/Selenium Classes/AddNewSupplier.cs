@@ -190,6 +190,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.SearchButton.TryClick();
 		}
 
+		public IWebElement IfSupplierExists(string supplierName)
+		{
+			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
+			return NewSupplier;
+		}
+
 		public bool ClickNewSupplierInSupplyManager(string supplierName)
 		{
 		IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);

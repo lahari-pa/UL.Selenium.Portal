@@ -2769,7 +2769,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text does not contain error { thisRow["Error"]}");
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error { thisRow["Error"]}");
 			}
 
 		}
