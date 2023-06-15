@@ -14,6 +14,7 @@
 @ForwardProductRegistration
 @Homepage
 @RetailPartners
+@MyAccount
 
 Feature: Single Retailer Subscription
 
@@ -219,5 +220,58 @@ Then I verify sheet Table in downloaded file RA_Report_DataUsageTier_<Date>.xlsx
 | Product184385T   |             | Chalk        |            | Rite Aid | Chalk        | YES                 |                       |                            |
 Then I click the Home icon in the Navigation Pane
 
+@TestCase:201584
+
+Scenario: [201584] Single Retailer - Behaviors and Restrictions - Managing Product Counts
+
+Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
+Then I navigate to the MyAccount page
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I verify section Submitted is present with product types:
+| Product types     |
+| Articles          |
+| Enhanced Articles |
+| Formulated        |
+| Single Retailer   |
+Then I get the count of products in section Submitted and save as: ProductsCount
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I generate a random UPC number and save as: UPC183646
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC183646, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then If purchase details are showing click confirm order
+Then In the Thank You screen I click Home
+Then I navigate to the MyAccount page
+Then In the My Account screen I navigate to the Subscription Information page
+Then I verify the products count encreased for type Single Retailer in section Submitted then was before saved as: ProductsCount
+
+@TestCase:202464
+
+Scenario: [202464] Single-Retailer Subscription: Subscription Header Revision
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I navigate to the MyAccount page
+Then In MyAccount page I verify Subscription section exist with options:
+| options         |
+| Level           |
+| Agent Support   |
+| Formulated      |
+| Enhanced        |
+| Article         |
+| Single-Retailer |
+Then In MyAccount page I get Subscription detailes and save data as: MyAccountSubscription
+Then In the My Account page I navigate to the Subscription Information page
+Then I verify Subscription details on Subscription Information page match with saved as: MyAccountSubscription
 
 

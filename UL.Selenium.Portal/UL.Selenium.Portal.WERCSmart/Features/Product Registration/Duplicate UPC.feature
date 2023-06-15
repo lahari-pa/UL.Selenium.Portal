@@ -46,7 +46,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	#And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
@@ -331,7 +331,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I save the product information as: TestCase91100
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	And I click Sample File link and verify the Upload UPC form and save it as test91100
@@ -353,6 +353,8 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Global Trade Item Number (GTIN) / Universal Product Code (UPC)
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click the 'Upload File' button and upload the file saved as: test91100
 	Then I confirm that the Add Multiple UPC window opens
@@ -408,7 +410,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Then I save the product information as: TestCase91077
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
@@ -431,7 +433,7 @@ Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New P
 	Then I save the product information as: TestCase91101
 And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	And I click Sample File link and verify the Upload UPC form and save it as test91100
@@ -458,6 +460,8 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I search for the product saved as: TestCase91101
 	Given I edit the first product in results
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Global Trade Item Number (GTIN) / Universal Product Code (UPC)
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click the 'Upload File' button and upload the file saved as: test91101 with data:
 	Then I confirm that the Add Multiple UPC window opens
