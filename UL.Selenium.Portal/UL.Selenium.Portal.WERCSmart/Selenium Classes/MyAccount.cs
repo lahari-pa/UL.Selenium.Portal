@@ -1979,6 +1979,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return result;
 		}
 
+		public bool CheckOptionExistsInSection(string option, string section)
+		{
+			List<string> GetProductTypes = new List<string> ();
+			foreach (var element in this.ProductTypes(section))
+			{
+				string[] line = element.Text.Split('\r');
+				GetProductTypes.Add(line[0]);
+			}
+			if (GetProductTypes == null)
+			{
+				Report.Info($"Failed to get product types in section {section}");
+				return false;
+			}
+			return GetProductTypes.Contains(option);
+		}
+
 		public bool CheckSubscriptionDetails(string savedAs)
 		{
 			List<string> getSubscriptionDetails = new List<string>();

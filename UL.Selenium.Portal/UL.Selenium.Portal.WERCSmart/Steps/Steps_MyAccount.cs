@@ -658,7 +658,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successully Navigated to { nav_option}");
 		}
 
-		[Then(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
+		[StepDefinition(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
 		public void ThenIVerifySubscriptionDetailsOnSubscriptionInformationPageMatchWithSavedAsMyAccountSubscription(string savedAs)
 		{
 			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
@@ -667,6 +667,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(new MyAccount_SubscriptionInfo().CheckSubscriptionDetails(savedAs), $"Failed to confirm Subscription details match with My Account page", $"Successfully confirmed Subscription details match with My Account page");
 			}
 		}
+
+		[StepDefinition(@"In the Subscription Information I see option (.*) under (.*) section")]
+		public void ThenInTheSubscriptionInformationISeeOptionSingleRetailerUnderSubmittedSection(string option, string section)
+		{
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(section), $"Failed to find product types section {section} in the Subscription Information screen", $"Successfully found product types section {section} in the Subscription Information screen"))
+			{
+				if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesExists(section), $"Failed to find product types in section {section}", $"Successfully found product types in section {section}"))
+				{
+					Report.IsTrue(new MyAccount_SubscriptionInfo().CheckOptionExistsInSection(option, section), $"Failed to find option {option} in section {section}", $"Successfully found option {option} in section {section}");
+				}
+			}
+		}
+
+		[StepDefinition(@"In the Subscription Information in Subscription History under Subscription Level Status I see option (.*)")]
+		public void ThenInTheSubscriptionInformationInSubscriptionHistoryUnderSubscriptionLevelStatusISeeOptionSingleRetailer(string option)
+		{
+			Report.IsTrue(new MyAccount_SubscriptionInfo().Subscription_Level_Status(option),
+										$"Failed to Confirm Subscription Level Status contains option {option}", $"Subscription Level Status Correct contains option {option}");
+		}
+
+
 
 
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]

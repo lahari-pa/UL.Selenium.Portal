@@ -275,3 +275,15 @@ Then In the My Account page I navigate to the Subscription Information page
 Then I verify Subscription details on Subscription Information page match with saved as: MyAccountSubscription
 
 
+@TestCase:202477
+
+Scenario: [202477] Single Retailer Subscription - Subscription Information Screen
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I navigate to the MyAccount page
+Then In the My Account page I navigate to the Subscription Information page
+Then In the Subscription Information I see option Single Retailer under Submitted section
+Then In the Subscription Information I see option Single Retailer under In Cart section
+Then In the Subscription Information in Subscription History under Subscription Level Status I see option Single Retailer
+Then I logout
+
