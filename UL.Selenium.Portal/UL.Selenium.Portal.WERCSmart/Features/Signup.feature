@@ -17,7 +17,6 @@ Feature: Sign Up
 Background:
 	Given I go to the WERCSmart Log in
 
-@ignore
 @TestCase:53069
 Scenario: [53069] Signup - Account Creation - Happy Path
 	Given I define the user: SignupUser with the following parameters:
@@ -68,6 +67,15 @@ Scenario: [53069] Signup - Account Creation - Happy Path
 	Given If terms of use page appears I accept
 	Then the WERCSmart homepage should load
 	Then I should see username for user saved as: SignupUser in the right corner
+	And I click the Retail Partners icon in the Navigation Pane
+	Then I should see the following heading Retail Partners
+	And I select the retailer: Wal-Mart/SAM'S CLUB
+	Then I Confirm Regulatory support toggle is Active
+	Then I confirm the following text in Data Consent Tiers table is displayed:By agreeing to the Terms of Use upon creation of the WERCSmart account, you agree that all registrations will comply with Data Tier 1 for Regulatory Support to the retail recipient for your product registrations. This option cannot be changed in any way.
+	And I confirm the following text in Data Consent Tiers table is displayed:Mandatory Consent. Any registered WERCSmart supplier of a product (a "Direct Supplier") is deemed to consent to providing Tier 1 Data Use - Regulatory Support ("Tier 1 Consent") to any entity that sells, transports, stores or disposes of such Direct Supplier's product (each, a "WERCSmart Recipient"). The WERCSmart platform provides Direct Suppliers with a current list of all WERCSmart Recipients as well as product-level information about which specific Recipients are in receipt of Tier 1 data. Any registered supplier that provides components to a Direct Supplier (a "Third-Party Supplier") is also deemed to provide Tier 1 Consent to WERCSmart Recipients. Use of the term "Supplier(s)" shall mean both Direct Suppliers and Third-Party Suppliers.
+	Given I click the back arrow on the Retail Partners Details page
+	Then I click on Sign Out
+
 
 #pass - staging 4.10
 @ignore
