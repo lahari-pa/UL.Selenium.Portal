@@ -2967,7 +2967,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-
 		[StepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatOnlyDiscontinuedProductsAppearInTheMyProductsGrid()
 		{
@@ -2975,11 +2974,79 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " discontinued products displayed");
 		}
 
+		[StepDefinition(@"I confirm that only Single-Retailer products appear in the 'My Products' grid")]
+		public void OnlySingleRetailerProductsAppear()
+		{
+			var newProdGrid = new ProductsGrid();
+			if (Report.IsTrue(newProdGrid.ProductListExists(), "Failed to get Products list", "Successfully got Products list"))
+			{
+				Report.IsTrue(newProdGrid.OnlySingleRetailerProductsInProductGrid(), "Failed to confirm only only Products with Single Retailer next to the Product ID show in My Products", "Successfully confirmed only only Products with Single Retailer next to the Product ID show in My Productst");
+			}
+		}
+
+		[StepDefinition(@"I click the (.*) checkbox in the 'My Products' grid")]
+		public void ThenIClickTheCheckboxInTheMyProductsGrid(string checkbox)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			if (Report.IsTrue(moreFiltersObject.CheckboxExists(checkbox), $"Failed to find checkbox {checkbox}", $"Successfully found checkbox {checkbox}"))
+			{
+				Report.IsTrue(moreFiltersObject.ClickCheckboxInProductGrig(checkbox), $"Failed to click checkbox {checkbox}", $"Successfully clicked checkbox {checkbox}");
+				Delay.Seconds(5);
+			}
+		}
+
+		[StepDefinition(@"In Product Grid I confirm if the checkbox (.*) is (selected|not selected)")]
+		public void ConfirmCheckboxInProductGridIsSelected(string checkbox, string condition)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+
+			if (condition == "selected")
+			{
+				Report.IsTrue(moreFiltersObject.CheckCheckboxIsSelected(checkbox), $"{checkbox} checkbox is not selected, but should be", $"{checkbox} checkbox is selected as expected");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsFalse(moreFiltersObject.CheckCheckboxIsSelected(checkbox), $"{checkbox} checkbox is selected, but should not be", $"{checkbox} checkbox is not selected, as expected");
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I click the Clear button in the More Filters section")]
+		public void ThenIClickClearInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			if (Report.IsTrue(moreFiltersObject.ClearButtonExists(), "Failed to find The Clear Button", "Successfully found The Clear Button"))
+			{
+				Report.IsTrue(moreFiltersObject.ClickClearFilterButtonInMoreFilters(), "Failed to click The Clear Button", "Successfully clicked The Clear Button");
+				Delay.Seconds(5);
+			}
+		}
+		[StepDefinition(@"I confirm More Filters section (is|is not) expended")]
+		public void ThenIConfirmMoreFiltersSectionIsExpended(string condition)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+
+			if (condition == "is")
+			{
+				Report.IsTrue(moreFiltersObject.MoreFiltersExpanded(), "Failed to confirm More Filters section is expended", "Successfully confirmed More Filters section is expended");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsFalse(moreFiltersObject.MoreFiltersExpanded(), "Failed to confirm More Filters section is not expended", "Successfully confirmed More Filters section is not expended");
+				Report.Screenshot();
+			}
+
+		}
+
+
 		[StepDefinition(@"I confirm that all products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatAllProductsAppearInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " products displayed");
+			Report.Screenshot();
 		}
 
 
