@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that the heading '{heading}' is showing");
 			try
 			{
-				Report.Info("Checking that the heading " + heading + " is showing");
+				Report.Info($"Checking that the heading '{ heading }' is showing");
 				var selRetailPartners = new RetailPartners();
 
 				if (!selRetailPartners.WaitForContainerToBeVisible(10))
@@ -2718,7 +2718,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Confirm Regulatory support toggle is Active")]
+		public void ConfirmRegulatorySupportTogglenInDataTierDetails()
+		{
+			Report.Info("Start Step: I verify 'Tier 1' is set to: active/ on");
+			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTierOnofFSwitch("Tier 1"), "Tier 1 was not set to active!", "Tier 1 was set to active as expected");
+		}
 
+		[StepDefinition(@"I confirm the following text in Data Consent Tiers table is displayed:(.*)")]
+		public void ConfirmTheFollowingtextDataConsentTiersTable(string text)
+		{
+			Report.IsTrue(new RetailPartnersDetails().DataConsentTierTableData().Text.Contains(text),
+				$"The Data Consent Tiers table with following text {text} was not displayed!",
+				$"The Data Consent Tiers table with following text {text} was displayed as expected.");
+		}
 	}
 
 
