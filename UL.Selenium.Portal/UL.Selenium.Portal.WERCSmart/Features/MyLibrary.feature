@@ -308,7 +308,8 @@ Scenario: [73329] Edit Ingredient
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
 	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: Products and Recommended Use Report
+	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+	#Products and Recommended Use Report
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227

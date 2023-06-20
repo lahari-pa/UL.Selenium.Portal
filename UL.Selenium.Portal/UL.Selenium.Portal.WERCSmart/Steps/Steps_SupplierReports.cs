@@ -888,8 +888,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Reports screen the current page description should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentPageDescriptionShouldBe(string expectedDesc)
 		{
-			Report.IsTrue(new SupplierReports().GetCurrentDescriptionText() == expectedDesc, "Description is not showing as expected",
-				"Showing Description: " + expectedDesc + " as expected.");
+			var actualDiscription = new SupplierReports().GetCurrentDescriptionText();
+			Report.IsTrue(actualDiscription == expectedDesc, $"Description is not showing as expected: {expectedDesc} | displayed description: {actualDiscription}",
+				$"Expected Description is displayed: {expectedDesc}!");
 		}
 
 		[StepDefinition(@"I select (Excel|CSV) from the Select File Type")]
