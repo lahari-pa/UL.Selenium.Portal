@@ -2805,7 +2805,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
-
 		[StepDefinition(@"I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers")]
 		public void GivenIConfirmTheProductsShownHaveAtLeastOneGreen()
 		{

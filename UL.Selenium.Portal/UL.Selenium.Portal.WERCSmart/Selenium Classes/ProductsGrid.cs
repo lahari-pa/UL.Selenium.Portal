@@ -1082,7 +1082,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AllRetailersAreShowingStatus(string expectedStatus)
 		{
-			ReadOnlyCollection<IWebElement> listOfRetailers = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
+			ReadOnlyCollection<IWebElement> listOfRetailers = this.ContainerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
 
 			foreach (IWebElement thisItem in listOfRetailers)
 			{
