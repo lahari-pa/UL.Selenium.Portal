@@ -320,11 +320,25 @@ Then I save the ProductID and Name of the first Product in the grid as: FirstPro
 Then I click Row Actions for product saved as: FirstProduct
 Then I click on the Row Action: Transfer to Tiered Subscription
 Then I confirm the pop up shows the heading: Transfer Single Retailer product to Tiered Subscription
-Then In the popup with the following title: Transfer Single Retailer product to Tiered Subscription I click the Transfet button
-Then I confirm that I see the following text in the modal window popup: Product Eligible for transfer
-Then in the modal dialog I click cancel
+Then I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: FirstProduct
+Then In the popup with the following title: Transfer Single Retailer product to Tiered Subscription I click the Cancel button
+Then I filter the products by: Assessment in Progress
+Then I search for the product saved as: FirstProduct
 Then I confirm that only Single-Retailer products appear in the 'My Products' grid
 Then I click Row Actions for product saved as: FirstProduct
-Then In the popup view with the following title: Transfer Single Retailer product to Tiered Subscription I click the Transfet button
-
+Then I click on the Row Action: Transfer to Tiered Subscription
+Then I confirm the pop up shows the heading: Transfer Single Retailer product to Tiered Subscription
+Then I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: FirstProduct
+Then In the popup with the following title: Transfer Single Retailer product to Tiered Subscription I click the Transfer button
+Then An alert is displayed with the message: Success! Product has been transferred to Tiered Subscription.
+Then I accept the alert pop up
+Then I filter the products by: All
+Then I click the Show Only Single Retailer Products checkbox in the 'My Products' grid
+Then In Product Grid I confirm if the checkbox Show Only Single Retailer Products is not selected
+Then I search for the product saved as: FirstProduct
+Then I confirm that the indicator Single Retailer RA is not showing under the Retailers column
+Then I click Row Actions for product saved as: FirstProduct
+And I should not see the following Actions options
+| Option                           |
+| Transfer to Tiered Subscription  |
 

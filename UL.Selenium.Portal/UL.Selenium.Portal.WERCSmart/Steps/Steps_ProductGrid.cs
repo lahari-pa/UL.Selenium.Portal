@@ -652,6 +652,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: (.*)")]
+		public void ThenIVerifyTextInTransferToTieredSubscriptionPopupContainsProductIDSavedAsFirstProduct(string savedAs)
+		{
+			var product = (ProductGridItem)Context.GetFromContext(savedAs);
+			string Id = product.ProductId;
+			string expectedText = "Product " + Id + " Eligible for transfer\r\nThis product is eligible for transfer to tiered subscription.\r\nTo complete this process please click the transfer button below.\r\nPlease note! This process cannot be reversed.";
+			var modal = new ModalDialog();
+			Report.IsTrue(modal.GetText() == expectedText, $"Failed to find text '{expectedText}' in modal window. Found text '{modal.GetText()}' instead.",
+				"Successfully found text '{expectedText}' in modal window.");
+		}
+
+
 		[StepDefinition(@"I click Bulk Actions in the Products Grid")]
 		public void GivenIClickBulkActionsInTheProductsGrid()
 		{
@@ -3592,6 +3604,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selMoreFilters = new MoreFilters();
 			Report.IsTrue(selMoreFilters.ConfirmTheIndicatorSingleRetailerRA(), "The indicator Single Retailer RA is not showing above No Retailer and Rite Aid", "The indicator Single Retailer RA is showing above No Retailer and Rite Aid");
 		}
+
+		[StepDefinition(@"I confirm that the indicator Single Retailer RA is not showing under the Retailers column")]
+		public void ThenIConfirmThatTheIndicatorSingleRetailerRAIsNotShowingUnderTheRetailersColumn()
+		{
+			var selMoreFilters = new MoreFilters();
+			Report.IsFalse(selMoreFilters.IndicatorExists(), "The indicator Single Retailer RA is showing under the Retailers column, but it should not", "The indicator Single Retailer RA is not showing under the Retailers column, as expected");
+		}
+
+
 
 		[StepDefinition(@"I Click on the ADDITIONAL PROGRAMS drop down and confirm options should be available under Additional Programs")]
 		public void IClickOnAdditionalPrograms()

@@ -1468,6 +1468,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
 			if (action == "accept")
 			{
 				Report.Info("Accepting the pop up alert");
