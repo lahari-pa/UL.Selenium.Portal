@@ -26,6 +26,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (!string.IsNullOrEmpty(ingredient.CASNumber))
 				{
 					inputEl.EnterText(ingredient.CASNumber);
+					var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+					homePage.WaitLoading();
 					IWebElement searching =
 						this.ContainerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
