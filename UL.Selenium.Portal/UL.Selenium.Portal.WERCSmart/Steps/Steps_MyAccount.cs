@@ -1775,6 +1775,120 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(MyAccountObject.SearchForUserSavedAs(), "Failed to find user with email", "Successfully found user with email");
 		}
 
+		[StepDefinition(@"I confirm following error message displayed for confirm email text box: (.*)")]
+		public void ThenIConfirmEmailDoesNotMatchError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.ConfirmEmailError() != null)
+			{
+				Report.IsTrue(MyAccountObject.ConfirmEmailError().Text == errorMessage, "Failed to verify the confirm email error message", "Successfully found confirm email error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I clear the name and email address fields text")]
+		public void ThenIClearNameAndEmailInput()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.Info("I clear the Name and Email input text");
+			try
+			{
+				MyAccountObject.ClearNameAndEmailInput();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm following error message displayed for email text box: (.*)")]
+		public void ThenIConfirmEmailAlreadyExistsError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.EmailError() != null)
+			{
+				Report.IsTrue(MyAccountObject.EmailError().Text == errorMessage, "Failed to verify the email already exists error message", "Successfully found already exists email error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I confirm following error message displayed for last name input empty text box: (.*)")]
+		public void ThenIConfirmLatNameInputEmptyError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.LastNameEmptyError() != null)
+			{
+				Report.IsTrue(MyAccountObject.LastNameEmptyError().Text == errorMessage, "Failed to verify the name input empty error message", "Successfully found name input empty error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I click on Add new User link")]
+		public void IClickOnAddNewUserLink()
+		{
+			var selMyAccount = new MyAccount();
+			//Open New User Form
+			Delay.Seconds(10);
+			Report.IsTrue(selMyAccount.Add_New_User_click(), "Failed to Click Add New User Link",
+				"New User Form Link Clicked");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I add following new User information")]
+		public void AddUserInformation(Table table)
+		{
+			try
+			{
+				GeneralUtilities.Wait_for_load_finish();
+				Report.StartStep(Report.Details.StepIndex + " - I enter data with the following information");
+				foreach (TableRow thisRow in table.Rows)
+				{
+					string userName = thisRow["User Name"];
+					string title = thisRow["Title"];
+					string role = thisRow["Role"];
+					string phoneNo = thisRow["Phone Number"];
+					string emailAddress = thisRow["Email Address"];
+					string confirmEmail = thisRow["Confirm Email"];
+					string countryCode = thisRow["Country Code"];
+					string country = thisRow["Country"];
+
+					var selMyUserForm = new UserDetails();
+					//Check Form Has Opened
+					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");					
+					selMyUserForm.Add_User_Check(userName, title, role, phoneNo, emailAddress, confirmEmail, country);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"In the dialog I click on Cancel")]
+		public void GivenInThePopupErrorIClickOnCancel()
+		{
+			try
+			{
+				var selMyAccount = new MyAccount();
+				selMyAccount.CancelButtonOnAddUserDialog("Cancel");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 	}
 }
