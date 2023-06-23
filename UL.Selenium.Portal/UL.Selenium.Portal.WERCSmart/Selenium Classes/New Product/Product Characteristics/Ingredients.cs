@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -600,6 +601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// </summary>
 		public bool EnterTextSearchComponent(string value)
 		{
+			ChooseGoodGuide_Homepage homepage = new ChooseGoodGuide_Homepage();
 			Report.Info("Entering text to the search box input");
 			IWebElement inputEl = this.ContainerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 			if (inputEl == null)
@@ -608,7 +610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 			inputEl.EnterText(value);
-			Delay.Seconds(1);
+			homepage.WaitLoading();
 			return inputEl.GetValue() == value;
 		}
 
@@ -1146,6 +1148,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			bool resultFound = false;
 			while (!resultFound && j < 10)
 			{
+				var homepage = new ChooseGoodGuide_Homepage();
+				homepage.WaitLoading(); 
 				resultFound = results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) != null;
 				Delay.Seconds(1);
 				results = this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);

@@ -1420,7 +1420,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
@@ -1428,6 +1427,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ModalDialog().ClickButton(button),
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
+		}
+		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
+		{
+			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
 		}
 
 		[StepDefinition(@"I click the Terms of Use link in the footer")]
@@ -1462,6 +1468,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
 			if (action == "accept")
 			{
 				Report.Info("Accepting the pop up alert");

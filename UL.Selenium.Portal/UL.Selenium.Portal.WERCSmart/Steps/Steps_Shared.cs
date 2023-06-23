@@ -2726,7 +2726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
-			Report.StartSubStep("I add the ingredient " + name + " at 100%");
+			Report.StartSubStep($"I add the ingredient '{ name }' at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
@@ -5634,14 +5634,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", showSuccessScreenshot: false);
-			Report.Info("Getting saved product: " + savedAs);
+			Report.Info($"Getting saved product: { savedAs}");
 			if (!Context.Contains(savedAs))
 			{
-				Report.Error("Context does not contain: " + savedAs);
+				Report.Error($"Context does not contain: {savedAs}");
 			}
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = product.Id;
-			Report.Info("Looking for id: " + id);
+			Report.Info($"Looking for id: { id }");
 			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"

@@ -1082,7 +1082,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AllRetailersAreShowingStatus(string expectedStatus)
 		{
-			ReadOnlyCollection<IWebElement> listOfRetailers = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
+			ReadOnlyCollection<IWebElement> listOfRetailers = this.ContainerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
 
 			foreach (IWebElement thisItem in listOfRetailers)
 			{
@@ -1606,6 +1606,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement Indicator => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'Single-Rtlr')]"), 1);
 		private IWebElement Checkbox(string checkbox) => this.ContainerElement.FindElement(By.XPath($".//label[text()[contains(.,'{checkbox}')]]//input"), 2);
 		IWebElement ClearButton => this.ContainerElement.FindElement(By.XPath(".//a[@data-bind='click: clearFilters']"), 2);
+		public bool IndicatorExists()
+		{
+			return this.Indicator != null;
+		}
 
 		public bool CheckboxExists(string checkbox)
 		{

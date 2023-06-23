@@ -793,7 +793,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				var thisStudioShaManager = new StudioSHAManager();
 				Report.IsTrue(thisStudioShaManager.SelectProductByID(idToSelect),
-					"Failed to select item by id: " + idToSelect, "Selected item with id: " + idToSelect);
+					$"Failed to select item by id: '{ idToSelect }'", $"Selected item with id: '{ idToSelect}'");
 			}
 			catch (Exception)
 			{
@@ -830,7 +830,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var RetailersList=thisProcessProducts.GetAllRetailers();
 					foreach(var item in RetailersList)
 					{
-						Report.IsTrue(thisProcessProducts.SelectRetailer(item),	"Failed to select retailer: " + item, "Selected retailer: " + item);
+						Report.IsTrue(thisProcessProducts.SelectRetailer(item),	$"Failed to select retailer: '{item}'", $"Selected retailer:{ item }");
 					}
 					return;
 				}
@@ -841,8 +841,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						.ToString();
 				}
 				Report.IsTrue(thisProcessProducts.SelectRetailer(thisRetailer),
-					"Failed to select retailer: " + thisRetailer,
-					"Selected retailer: " + thisRetailer);
+					$"Failed to select retailer: {thisRetailer}",
+					$"Selected retailer: { thisRetailer}");
 			}
 		}
 
@@ -852,8 +852,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisProcessProducts = new ProcessProducts();
 			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
 				"Process products screen is showing");
-			Report.IsTrue(thisProcessProducts.SelectNewStatus(status), "Failed to select new status: " + status,
-				"Selected new status: " + status);
+			Report.IsTrue(thisProcessProducts.SelectNewStatus(status), $"Failed to select new status: {status}",
+				$"Selected new status: {status}");
 		}
 
 		[StepDefinition(@"In the Process Products popup in SHAManager I click on update status button")]
