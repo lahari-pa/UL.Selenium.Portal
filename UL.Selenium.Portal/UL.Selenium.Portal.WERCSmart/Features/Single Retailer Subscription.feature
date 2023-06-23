@@ -261,8 +261,9 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 # Created by Saikiran Chittampally
 @TestCase:182824
-Scenario: [182824] Single Retailer - UPC Screen and Retailer Screen Checks 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [182824] Single Retailer - UPC Screen and Retailer Screen Checks
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -282,18 +283,9 @@ Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS,
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Then I should see the Retailer Page
-Given I confirm if the single retailer checkbox is displayed on the retailer page
-Given I confirm if the single retailer checkbox is displayed on the retailer page
-And The selected retailers on the Retailer page should be:
-		| Retailer                   |
-		| No Retailer/No UPC Product |
-Then I click 'Add Retailers' in the Retailers page
-Given In the 'Select Retailers' window I select the retailer: Amazon
-Given I click 'Add Retailers' in the Retailers page
-Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
-Given I click Done in the Select Retailers popup
-Then I click continue
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer |
+| Amazon   |
 Then I should see the Universal Product Code (UPC) Page
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC182824, container type: Plastic Container and size: 4
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828241, container type: Plastic Container and size: 6
@@ -310,29 +302,31 @@ And I should not see the following UPC buttons:
 		| Add          |
 		| Add Casepack |
 		| Upload File  |
-	Given in the Universal Product Code (UPC) page I click Continue
-	And In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Retailer
-	Given I click the single retailer checkbox
-	And I click Save in The Product Page
-	And I should see the following UPC buttons:
+Given in the Universal Product Code (UPC) page I click Continue
+And In the New Product page I click tab: Recipient and UPC Details
+And I click the page heading: Retailer
+Given I click the single retailer checkbox
+Then I confirm if the Single Retailer Checkbox is not selected
+And I click Save in The Product Page
+And I should see the following UPC buttons:
 		| Option       |
 		| Add          |
 		| Add Casepack |
-	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828240, container type: Plastic Container and size: 9
-	Then In the Universal Product Code (UPC) page I click Save
-	And In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Retailer
-	Given I confirm if the single retailer checkbox is disabled
-	And I click the page heading: Universal Product Code (UPC)
-	Given I delete UPC: saved as UPC1828240
-	Then In the Universal Product Code (UPC) page I click Save
-	And In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Retailer
-	Given I click the single retailer checkbox
-	And I click Save in The Product Page
-	Then I should see the Universal Product Code (UPC) Page
-	And I should not see the following UPC buttons:
+Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828240, container type: Plastic Container and size: 9
+Then In the Universal Product Code (UPC) page I click Save
+And In the New Product page I click tab: Recipient and UPC Details
+And I click the page heading: Retailer
+Given I confirm if the single retailer checkbox is disabled
+And I click the page heading: Universal Product Code (UPC)
+Given I delete UPC: saved as UPC1828240
+Then In the Universal Product Code (UPC) page I click Save
+And In the New Product page I click tab: Recipient and UPC Details
+And I click the page heading: Retailer
+Given I click the single retailer checkbox
+Then I confirm if the Single Retailer Checkbox is selected
+And I click Save in The Product Page
+Then I should see the Universal Product Code (UPC) Page
+And I should not see the following UPC buttons:
 		| Option       |
 		| Add          |
 		| Add Casepack |
