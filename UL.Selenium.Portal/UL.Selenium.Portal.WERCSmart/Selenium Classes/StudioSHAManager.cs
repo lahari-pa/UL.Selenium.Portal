@@ -1333,7 +1333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingOption == null)
 			{
-				Report.Info("No matching menu option found: " + option + ". Available options: " +
+				Report.Info($"No matching menu option found: '{ option }'. Available options: " +
 							string.Join(",", listOfOptions));
 				return false;
 			}
