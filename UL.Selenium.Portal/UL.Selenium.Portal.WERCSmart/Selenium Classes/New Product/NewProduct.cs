@@ -228,7 +228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
+			return this.ContainerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
 		}
 
 		public bool ClickSection(string section)

@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.WaitForContainerToBeVisible(10))
+			if (!selRetailPartners.WaitForContainerToBeVisible(30))
 			{
 				throw new Exception("Page failed to load!");
 			}
