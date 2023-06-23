@@ -284,19 +284,8 @@ Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only av
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
-| Amazon |
-#Then I should see the Retailer Page
-#Given I confirm if the single retailer checkbox is displayed on the retailer page
-#Given I confirm if the single retailer checkbox is displayed on the retailer page
-#And The selected retailers on the Retailer page should be:
-		| Retailer                   |
-		| No Retailer/No UPC Product |
-#Then I click 'Add Retailers' in the Retailers page
-#Given In the 'Select Retailers' window I select the retailer: Amazon
-#Given I click 'Add Retailers' in the Retailers page
-#Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
-#Given I click Done in the Select Retailers popup
-#Then I click continue
+| Retailer |
+| Amazon   |
 Then I should see the Universal Product Code (UPC) Page
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC182824, container type: Plastic Container and size: 4
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC1828241, container type: Plastic Container and size: 6
