@@ -15,6 +15,8 @@
 @Homepage
 @RetailPartners
 @MyAccount
+@MyMessages
+@DeleteActiveProducts
 
 Feature: Single Retailer Subscription
 
@@ -286,4 +288,22 @@ Then In the Subscription Information I see option Single Retailer under Submitte
 Then In the Subscription Information I see option Single Retailer under In Cart section
 Then In the Subscription Information in Subscription History under Subscription Level Status I see option Single Retailer
 Then I logout
+
+
+@TestCase:202543
+
+Scenario: [202543] Single Retailer Subscription - More Filters - Show Only Single Retailer Products Checkbox Filter
+
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I click More Filters in the products grid
+Then I confirm More Filters section is expended
+Then I click the Show Only Single Retailer Products checkbox in the 'My Products' grid
+Then In Product Grid I confirm if the checkbox Show Only Single Retailer Products is selected
+Then I confirm that only Single-Retailer products appear in the 'My Products' grid
+Then I click the Clear button in the More Filters section
+Then In Product Grid I confirm if the checkbox Show Only Single Retailer Products is not selected
+Then I confirm that all products appear in the 'My Products' grid
+Then I click More Filters in the products grid
+Then I confirm More Filters section is not expended
+
 
