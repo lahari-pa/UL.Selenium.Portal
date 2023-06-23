@@ -1363,16 +1363,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SearchForUserSavedAs()
 		{
-			IWebElement searchBar = this.ContainerElement.FindElement(By.XPath("//input[@id='userSearch']"), 2);
-			IWebElement searchButton = this.ContainerElement.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
+			IWebElement searchBar = this.ContainerElement.FindElement(By.XPath(".//input[@id='userSearch']"), 2);
+			IWebElement searchButton = this.ContainerElement.FindElement(By.XPath(".//input[@id='userSearch']/following-sibling::span"), 2);
 
 			string email = Context.GetFromContext("CurrentEmail").ToString();
 
 			searchBar.TryEnterText(email);
 			searchButton.TryClick();
-			Delay.Seconds(5);
+			Delay.Seconds(15);
 
-			IList<IWebElement> userEmails = this.ContainerElement.FindElements(By.XPath("//div[@id='user-accounts-grid']//td[@data-bind='text: Email']"), 2);
+			IList<IWebElement> userEmails = this.ContainerElement.FindElements(By.XPath(".//div[@id='user-accounts-grid']//td[@data-bind='text: Email']"), 2);
 			string[] userEmailArr = new string[userEmails.Count];
 
 			for (int i = 0; i < userEmails.Count; i++)
@@ -1401,7 +1401,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(5);
 			return searchClicked && textEntered;
 		}
-
+		public IWebElement ConfirmEmailError()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id = 'confirmEmail_error']"), 2);
+		}
+		public IWebElement EmailError()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id = 'Email_error']"), 2);
+		}
+		public void ClearNameAndEmailInput()
+		{
+			IWebElement NameInput = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(), 'Name')]/following-sibling::input"), 2);
+			IWebElement ConfirmEmailInput = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(), 'Confirm Email Address')]/following-sibling::input"), 2);
+			IWebElement EmailInput = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(), 'Email Address')]/following-sibling::input"), 2);
+			if (NameInput.Text != null)
+			{
+				NameInput.Clear();
+			}
+			if (ConfirmEmailInput.Text != null)
+			{
+				ConfirmEmailInput.Clear();
+			}
+			if (EmailInput.Text != null)
+			{
+				EmailInput.Clear();
+			}
+		}
+		public IWebElement LastNameEmptyError()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id = 'lastName_error']"), 2);
+		}
+		public void CancelButtonOnAddUserDialog(string buttonToClick)
+		{
+			IWebElement cancelButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='add-user-dialog']"));
+			ReadOnlyCollection<IWebElement> buttons = cancelButton.FindElements(By.XPath(".//button"));
+			IWebElement matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
+			matchingButton.TryClick();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
