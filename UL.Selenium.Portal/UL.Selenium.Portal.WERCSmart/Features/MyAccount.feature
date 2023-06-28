@@ -254,8 +254,6 @@ Scenario: [97846] - Company Information - Verify the 'State' drop-down is Availa
 	Then I click the User Icon
 	And I click on Sign Out
 
-#Removed from regression 2023/05
-@ignore
 @TestCase:53694
 Scenario: [53694] - User Role - Reset Password
 	Given I Login into WERCSmart Portal - Admin Role - Password Reset
@@ -263,10 +261,10 @@ Scenario: [53694] - User Role - Reset Password
 	Given I call Shared Step 62676 (Go To My Account)
 	Given I go to Reset Password in User Grid for the current user
 	Then I call a Shared Step to create a new password for the account saved as: PasswordResetAccount
+	Given on the Login page I log in as test user: PasswordResetAccount
 	Then I click the User Icon
 	And I click on Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - Password Reset
-	#When running this, update the date 2019-12-09 to whatever the current date is
+	#When running this, update the date 2023-06-28 to whatever the current date is
 	#Update the date in the above sentence to avoid future confusion
 
 #Removed from regression 2023/05
@@ -535,3 +533,13 @@ Scenario: [138836] My Account - Correct Message Displays when Date is Expired
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I navigate to My Account
 	Given In the My Account page I navigate to the Company Information page
+
+	@TestCase:223555
+Scenario: [223555] - User Role- Reset Password Option - Used Too Recently
+	Given I Login into WERCSmart Portal - Admin Role - Password Reset
+	Then the WERCSmart homepage should load
+	Given I call Shared Step 62676 (Go To My Account)
+	Given I go to Reset Password in User Grid for the current user
+	When I enter new password for the account saved as: PasswordResetAccount
+	Then I Confirm following error message displayed: This password was used too recently.
+
