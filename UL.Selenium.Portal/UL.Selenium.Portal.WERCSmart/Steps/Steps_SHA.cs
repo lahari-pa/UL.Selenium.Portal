@@ -99,9 +99,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioLogin = new StudioLogin();
 			SoftwareCredentialBasic shaUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(savedAs);
 			Report.Info("Entering username: " + shaUser.UserName);
-			thisStudioLogin.Username = "PHILIPN";
+			thisStudioLogin.Username = shaUser.UserName;
 			Report.Info("Entering password: ****** ");
-			thisStudioLogin.Password = "Sassyman123@";
+			thisStudioLogin.Password = shaUser.Password;
 			Report.Info("Clicking 'sign in'");
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
