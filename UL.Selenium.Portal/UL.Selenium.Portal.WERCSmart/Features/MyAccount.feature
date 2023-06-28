@@ -535,3 +535,45 @@ Scenario: [138836] My Account - Correct Message Displays when Date is Expired
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I navigate to My Account
 	Given In the My Account page I navigate to the Company Information page
+
+# Created by Saikiran Chittampally
+	@TestCase:219311
+Scenario: [219311] Add User: Error Messaging Checks
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then the WERCSmart homepage should load
+	Given I click on My Account
+	When I click on Add new User link
+	Then I add following new User information
+		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
+		| User123     | Mr    | User | 123-456-7889 | EmailAddressGen@kxxyxunf.mailosaur.net   | Abc@gmail.com    | 1234   | United Kingdom |
+	Then I confirm following error message displayed for confirm email text box: Email address and confirmation email address do not match. Please make sure both email addresses are the same.
+	When I clear the name and email address fields text
+	When I paste into confirm email: EmailAddressGen@kxxyxunf.mailosaur.net
+	Then I confirm following error message displayed for confirm email text box: You cannot paste text into this textbox!
+	Then I confirm following error message displayed for last name input empty text box: This is a required field.	
+	Then I add following new User information
+		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
+		|   User123   |  Mr   | User | 123-456-7889 |  EmailAddressGen@kxxyxunf.mailosaur.net  |  EmailAddressGen@kxxyxunf.mailosaur.net   | 1234   | United Kingdom |	
+	Then I confirm following error message displayed for email text box: User with same email address exists in the system.
+	When I clear the name and email address fields text
+	Then I confirm following error message displayed for last name input empty text box: This is a required field.	
+	Then I confirm following error message displayed for confirm email text box: This is a required field.
+	Then In the dialog I click on Cancel
+	Given I click on My Account
+	Then I create a new email address
+	Then I add a new user with the following information
+		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
+		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
+	Then I search for user with email
+	Then I confirm the new user is Active
+	Given I Select the ... from the Actions column of the account I just created and select Deactivate
+	Then I Wait for a modal popup to appear
+	And I Click approve in dialog
+	And I Click close in dialog
+	Then I confirm the new user is Not Active
+	Given I Select the ... from the Actions column of the account I just created and select Activate
+	And I Click close in dialog
+	Then I confirm the new user is Active
+	Then I Select the ... from the Actions column of the account I just created and select Deactivate
+	Then I Wait for a modal popup to appear
+	And I Click approve in dialog

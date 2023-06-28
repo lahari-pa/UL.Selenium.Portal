@@ -1081,7 +1081,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), $"Failed to click the {buttonTitle} button", $"Successfully clicked the {buttonTitle } button");
 			//Delay.Seconds(5);
 			Delay.Seconds(1);
 		}
@@ -1097,7 +1097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
 		{
-			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to click the ok button with the following text: " + text, "Successfully clicked the ok button with the following text: " + text);
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), $"Failed to click the ok button with the following text: {text}", $"Successfully clicked the ok button with the following text: {text}");
 			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
 		}
 

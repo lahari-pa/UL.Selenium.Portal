@@ -43,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return (SupplierID.Enabled && SupplierID.Displayed);
-
+			
 		}
 
 		public bool SupplierIDErrorExists()
@@ -173,7 +173,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
-
 		public string GetRandomCompanyName()
 		{
 			string number = MiscHelpers.RandomDigits(4);
@@ -189,6 +188,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void ClickSearchButtonInSupplyManager()
 		{
 			this.SearchButton.TryClick();
+		}
+
+		public IWebElement IfSupplierExists(string supplierName)
+		{
+			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
+			return NewSupplier;
 		}
 
 		public bool ClickNewSupplierInSupplyManager(string supplierName)

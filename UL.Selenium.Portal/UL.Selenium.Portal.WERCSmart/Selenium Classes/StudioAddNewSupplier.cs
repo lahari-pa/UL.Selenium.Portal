@@ -194,7 +194,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Attempting to confirm Supplier Manager close Button exists.");
 			return this.CloseSupplierManagerwindow != null;
 		}
-
 	}
 }
 

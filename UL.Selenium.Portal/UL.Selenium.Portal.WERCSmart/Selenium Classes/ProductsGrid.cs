@@ -17,6 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	public class ProductsGrid : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='products-grid']");
+		IList<IWebElement> ProductList => this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 
 		#region web elements
 
@@ -31,12 +32,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private List<IWebElement> ProductTableHeadings => this.ProductTable.FindElements(By.XPath(".//th"), 2).ToList();
 		
 		#endregion
-
 		public string HeadingText => this.ProductsHeading?.Text;
 
 		public bool HeadingShowing() => this.ProductsHeading != null;
 
 		public bool ProductsPresent() => this.ProductRows != null && this.ProductRows.Count > 0;
+		public bool ProductListExists() => this.ProductList != null;
 
 		public int ProductsCount()
 		{
@@ -1081,7 +1082,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AllRetailersAreShowingStatus(string expectedStatus)
 		{
-			ReadOnlyCollection<IWebElement> listOfRetailers = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
+			ReadOnlyCollection<IWebElement> listOfRetailers = this.ContainerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
 
 			foreach (IWebElement thisItem in listOfRetailers)
 			{
@@ -1436,7 +1437,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public int CheckTheAmountOfProductsInProductsGrid()
 		{
-			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
+			IList<IWebElement> productList = this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
 		}
 
@@ -1466,6 +1467,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
+		}
+
+		public bool OnlySingleRetailerProductsInProductGrid()
+		{
+			bool result = true;
+			IWebElement SingleRetailerLabel;
+			foreach(var product in this.ProductList)
+			{
+				SingleRetailerLabel = this.ContainerElement.FindElement(By.XPath(".//small[text()[contains(.,'Single Retailer')]]"));
+				if (SingleRetailerLabel == null)
+				{
+					Report.Info("There is no 'Single Retailer' next to the Product ID");
+					result = false;
+				}
+			}
+			return result;
 		}
 	}
 
@@ -1587,14 +1604,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IList<IWebElement> Values => this.FindElements(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']/option"), 2);
 		IWebElement AdditionalProgramsElement => this.ContainerElement.FindElement(By.XPath(".//select[@aria-describedby='additionalProgramAddOn']"));
 		private IWebElement Indicator => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'Single-Rtlr')]"), 1);
+		private IWebElement Checkbox(string checkbox) => this.ContainerElement.FindElement(By.XPath($".//label[text()[contains(.,'{checkbox}')]]//input"), 2);
+		IWebElement ClearButton => this.ContainerElement.FindElement(By.XPath(".//a[@data-bind='click: clearFilters']"), 2);
+		public bool IndicatorExists()
+		{
+			return this.Indicator != null;
+		}
 
+		public bool CheckboxExists(string checkbox)
+		{
+			return this.Checkbox(checkbox) != null;
+		}
+		public bool ClearButtonExists()
+		{
+			return this.ClearButton != null;
+		}
 		public List<string> Options(string filter)
 		{
 			IWebElement el;
 			switch (filter)
 			{
 				case "Brand":
-					el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+					el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
 					if (el == null)
 					{
 						return new List<string>();
@@ -1602,7 +1633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Brands").ToList();
 				case "Retailer":
-					el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+					el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
 					if (el == null)
 					{
 						return new List<string>();
@@ -1610,7 +1641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Retailers").ToList();
 				case "Additional Programs":
-					el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+					el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
 					if (el == null)
 					{
 						return new List<string>();
@@ -1626,12 +1657,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			get
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
 				return el?.SelectedOption();
 			}
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
 				el?.Select(value);
 			}
 		}
@@ -1640,12 +1671,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			get
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
 				return el?.SelectedOption();
 			}
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
 				el?.Select(value);
 			}
 		}
@@ -1654,12 +1685,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			get
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
 				return el?.SelectedOption();
 			}
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
 				el?.Select(value);
 			}
 		}
@@ -1669,12 +1700,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			get
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
 				return el == null ? "" : el.GetValue();
 			}
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 2);
 				if (el == null)
 				{
 					Report.Error("Product ID, Ingredient ID, SKU field could not be found!");
@@ -1687,7 +1718,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ProductIDIngredientIDSKUFieldIsFound()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 15);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='Product ID, Ingredient ID, SKU']"), 15);
 			if (el == null)
 			{
 				Report.Info($"el was null");
@@ -1701,21 +1732,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool MoreFiltersDisplayed()
 		{
 			var moreFilters = new List<IWebElement>() {
-				this.containerElement.FindElement(By.XPath(".//label[@id='brandAddOn']"), 2),
-				this.containerElement.FindElement(By.XPath(".//label[@id='retailerAddOn']"), 2),
-				this.containerElement.FindElement(By.XPath(".//label[@id='additionalProgramAddOn']"), 2)
+				this.ContainerElement.FindElement(By.XPath(".//label[@id='brandAddOn']"), 2),
+				this.ContainerElement.FindElement(By.XPath(".//label[@id='retailerAddOn']"), 2),
+				this.ContainerElement.FindElement(By.XPath(".//label[@id='additionalProgramAddOn']"), 2)
 			};
 			return moreFilters.All(x => x.Displayed);
 		}
 
 		public List<string> MoreFilterLabels()
 		{
-			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label"), 2).Select(x => x.Text).ToList();
+			return this.ContainerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool SelectBrandByValue(MyBrands.Brand brand)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -1726,10 +1757,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickShowOnlyDiscontinuedProductsCheckbox()
 		{
-			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
+			IWebElement checkBox = this.ContainerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
 			return checkBox.TryClick();
 		}
-
+		public bool ClickCheckboxInProductGrig(string checkbox)
+		{
+			return this.Checkbox(checkbox).TryClick();
+		}
+		public bool CheckCheckboxIsSelected(string checkbox)
+		{
+			Report.Info($"Attempting to confirm the {checkbox} checkbox is selected.");
+			return this.Checkbox(checkbox).Selected;
+		}
+		public bool ClickClearFilterButtonInMoreFilters()
+		{
+			return this.ClearButton.TryClick();
+		}
 		public bool CheckIfProductIsMissing(string wpsID)
 		{
 			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);

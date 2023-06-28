@@ -2769,7 +2769,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text does not contain error { thisRow["Error"]}");
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error { thisRow["Error"]}");
 			}
 
 		}
@@ -3003,6 +3003,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
 			$"Succesfully entered {value} in field Contact Email");
 			}	
+		}
+
+		[StepDefinition(@"I enter email address: (.*)")]
+		public void IEnterEmailAddress(string email)
+		{
+			try
+			{
+				if (email.Contains("savedas"))
+				{
+					email = email.Replace("savedas", "").Trim();
+					email = Context.GetFromContext(email).ToString();
+					var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+					if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Email address input", "Succesfully found email address input"))
+					{
+						Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(email), $"Failed to enter {email} in field Email address",
+					$"Succesfully entered {email} in field Email address");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]

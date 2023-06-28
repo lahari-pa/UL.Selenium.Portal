@@ -15,6 +15,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
+using static NUnit.Framework.Internal.OSPlatform;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -604,7 +605,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[Then(@"I get the count of products in section (.*) and save as: (.*)")]
+		[StepDefinition(@"I get the count of products in section (.*) and save as: (.*)")]
 		public void ThenIGetTheCountOfProductsInSectionSubmittedAndSaveAsProductsCount(string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -616,7 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
+		[StepDefinition(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
 		public void ThenIVerifyTheProductsCountEncreasedForTypeSingleRetailerInSectionSubmittedThenWasBeforeSavedAsProductsCount(string productType, string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -628,7 +629,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In MyAccount page I verify Subscription section exist with options:")]
+		public void ThenInMyAccountPageIVerifySubscriptionSectionExistWithOptions(Table table)
+		{
+			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
+			if (Report.IsTrue(new MyAccount().SubscriptionOptionsExists(), "Failed to find section Subscription in My Account page", "Successfully found section Subscription in My Account page"))
+			{
+				Report.IsTrue(new MyAccount().VerifySubscriptionOptions(table), $"Failed to verify all options in the Subscription section", $"Successfully verified all options in the Subscription section");	
+			}
+		}
 
+		[Then(@"In MyAccount page I get Subscription detailes and save data as: (.*)")]
+		public void ThenInMyAccountPageIGetSubscriptionDetailesAndSaveDataAsMyAccountSubscription(string savedAs)
+		{
+			if (Report.IsTrue(new MyAccount().SubscriptionDetailsExists(), "Failed to find Subscription details in My Account page", "Successfully found Subscription details in My Account page"))
+			{
+				Report.IsTrue(new MyAccount().SaveSubscriptionDetails(savedAs), $"Failed to get and save Subscription details", $"Successfully got and saved Subscription details");
+			}
+		}
 
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
@@ -639,6 +657,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), $"Failed to Navigate to { nav_option}",
 				$"Successully Navigated to { nav_option}");
 		}
+
+		[StepDefinition(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
+		public void ThenIVerifySubscriptionDetailsOnSubscriptionInformationPageMatchWithSavedAsMyAccountSubscription(string savedAs)
+		{
+			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().SubscriptionDetailsListExists(), "Failed to find Subscription details in Subscription Information page", "Successfully found Subscription details in Subscription Information page"))
+			{
+				Report.IsTrue(new MyAccount_SubscriptionInfo().CheckSubscriptionDetails(savedAs), $"Failed to confirm Subscription details match with My Account page", $"Successfully confirmed Subscription details match with My Account page");
+			}
+		}
+
+		[StepDefinition(@"In the Subscription Information I see option (.*) under (.*) section")]
+		public void ThenInTheSubscriptionInformationISeeOptionSingleRetailerUnderSubmittedSection(string option, string section)
+		{
+			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(section), $"Failed to find product types section {section} in the Subscription Information screen", $"Successfully found product types section {section} in the Subscription Information screen"))
+			{
+				if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesExists(section), $"Failed to find product types in section {section}", $"Successfully found product types in section {section}"))
+				{
+					Report.IsTrue(new MyAccount_SubscriptionInfo().CheckOptionExistsInSection(option, section), $"Failed to find option {option} in section {section}", $"Successfully found option {option} in section {section}");
+				}
+			}
+		}
+
+		[StepDefinition(@"In the Subscription Information in Subscription History under Subscription Level Status I see option (.*)")]
+		public void ThenInTheSubscriptionInformationInSubscriptionHistoryUnderSubscriptionLevelStatusISeeOptionSingleRetailer(string option)
+		{
+			Report.IsTrue(new MyAccount_SubscriptionInfo().Subscription_Level_Status(option),
+										$"Failed to Confirm Subscription Level Status contains option {option}", $"Subscription Level Status Correct contains option {option}");
+		}
+
+
+
 
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles(string form_no, string art_no, string en_art_no)
@@ -1744,6 +1794,120 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.SearchForUserSavedAs(), "Failed to find user with email", "Successfully found user with email");
+		}
+
+		[StepDefinition(@"I confirm following error message displayed for confirm email text box: (.*)")]
+		public void ThenIConfirmEmailDoesNotMatchError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.ConfirmEmailError() != null)
+			{
+				Report.IsTrue(MyAccountObject.ConfirmEmailError().Text == errorMessage, "Failed to verify the confirm email error message", "Successfully found confirm email error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I clear the name and email address fields text")]
+		public void ThenIClearNameAndEmailInput()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.Info("I clear the Name and Email input text");
+			try
+			{
+				MyAccountObject.ClearNameAndEmailInput();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm following error message displayed for email text box: (.*)")]
+		public void ThenIConfirmEmailAlreadyExistsError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.EmailError() != null)
+			{
+				Report.IsTrue(MyAccountObject.EmailError().Text == errorMessage, "Failed to verify the email already exists error message", "Successfully found already exists email error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I confirm following error message displayed for last name input empty text box: (.*)")]
+		public void ThenIConfirmLatNameInputEmptyError(string errorMessage)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			if (MyAccountObject.LastNameEmptyError() != null)
+			{
+				Report.IsTrue(MyAccountObject.LastNameEmptyError().Text == errorMessage, "Failed to verify the name input empty error message", "Successfully found name input empty error message");
+			}
+			else
+			{
+				Report.Info("No error message displayed");
+			}
+		}
+
+		[StepDefinition(@"I click on Add new User link")]
+		public void IClickOnAddNewUserLink()
+		{
+			var selMyAccount = new MyAccount();
+			//Open New User Form
+			Delay.Seconds(10);
+			Report.IsTrue(selMyAccount.Add_New_User_click(), "Failed to Click Add New User Link",
+				"New User Form Link Clicked");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I add following new User information")]
+		public void AddUserInformation(Table table)
+		{
+			try
+			{
+				GeneralUtilities.Wait_for_load_finish();
+				Report.StartStep(Report.Details.StepIndex + " - I enter data with the following information");
+				foreach (TableRow thisRow in table.Rows)
+				{
+					string userName = thisRow["User Name"];
+					string title = thisRow["Title"];
+					string role = thisRow["Role"];
+					string phoneNo = thisRow["Phone Number"];
+					string emailAddress = thisRow["Email Address"];
+					string confirmEmail = thisRow["Confirm Email"];
+					string countryCode = thisRow["Country Code"];
+					string country = thisRow["Country"];
+
+					var selMyUserForm = new UserDetails();
+					//Check Form Has Opened
+					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");					
+					selMyUserForm.Add_User_Check(userName, title, role, phoneNo, emailAddress, confirmEmail, country);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"In the dialog I click on Cancel")]
+		public void GivenInThePopupErrorIClickOnCancel()
+		{
+			try
+			{
+				var selMyAccount = new MyAccount();
+				selMyAccount.CancelButtonOnAddUserDialog("Cancel");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
 
