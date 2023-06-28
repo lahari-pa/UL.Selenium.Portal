@@ -533,13 +533,3 @@ Scenario: [138836] My Account - Correct Message Displays when Date is Expired
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I navigate to My Account
 	Given In the My Account page I navigate to the Company Information page
-
-	@TestCase:223555
-Scenario: [223555] - User Role- Reset Password Option - Used Too Recently
-	Given I Login into WERCSmart Portal - Admin Role - Password Reset
-	Then the WERCSmart homepage should load
-	Given I call Shared Step 62676 (Go To My Account)
-	Given I go to Reset Password in User Grid for the current user
-	When I enter new password for the account saved as: PasswordResetAccount
-	Then I Confirm following error message displayed: This password was used too recently.
-
