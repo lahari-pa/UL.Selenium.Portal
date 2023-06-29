@@ -301,7 +301,6 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 
 @TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
-	#Given I find an existing UPC number in trevor account saved as: SingleRetailerAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
