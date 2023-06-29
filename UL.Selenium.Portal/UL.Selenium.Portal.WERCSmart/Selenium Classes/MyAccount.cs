@@ -1439,6 +1439,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			matchingButton.TryClick();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 		}
+		public string GetMismatchErrorText()
+		{
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//span[text()='Your passwords do not match. Please try again.']"));
+			return ErrText.Text;
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
