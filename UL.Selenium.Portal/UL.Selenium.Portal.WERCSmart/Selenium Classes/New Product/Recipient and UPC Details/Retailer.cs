@@ -102,25 +102,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ConfirmRetailerCannotBeDeselectedInRetailersTable(string retailer)
 		{
 			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//td[text()='" + retailer + "']/preceding-sibling::td//input[@disabled='disabled']"), 2);
-
-			if (retailerEl != null)
-			{
-				return true;
-			}
-
-			return false;
+			return retailerEl != null;
 		}
 
 		public bool ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(string retailer)
 		{
 			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(".//div[@class='row retailers-list']//span[text()='" + retailer + "']/preceding-sibling::input[@checked][@disabled='disabled']"), 2);
-
-			if (retailerEl != null)
-			{
-				return true;
-			}
-
-			return false;
+			return retailerEl != null;
 		}
 
 		/// <summary>
@@ -230,6 +218,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			return false;
+		}
+
+		private IWebElement RetailerTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 1);
+		private IWebElement RetailerRow(string retailer) => this.RetailerTable.FindElement(By.XPath($".//tr[(.//td[contains(text(), '{retailer}')])]"), 1);
+		private IWebElement RetailerRowSelector(string retailer) => this.RetailerRow(retailer).FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/following-sibling::select"), 1);
+		public bool RetailerPrivateLabelOptionExists(string retailer, string label)
+		{
+			Report.Info($"Attempting to confirm the '{retailer}' private label option '{label}' exists.");
+			IWebElement RetailerRowSelector = this.RetailerRowSelector(retailer).FindElement(By.XPath($".//option[text() = '{label}']"), 1);
+			return RetailerRowSelector != null;
+		}
+
+		public bool RetailerPrivateLabelOptionSelect(string retailer, string label)
+		{
+			Report.Info($"Attempting to select the '{retailer}' private label option '{label}'.");
+			this.RetailerRowSelector(retailer).Select(label);
+			return this.RetailerRowSelector(retailer).SelectedOption() == label;
 		}
 
 		/// <summary>

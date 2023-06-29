@@ -319,11 +319,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.ClickSingleRetailerCheckbox(), "Failed to click the Single Retailer checkbox", "Successfully clicked the Single Retailer checkbox");
 		}
 
-		[StepDefinition(@"I confirm if the single retailer checkbox is selected")]
-		public void ConfirmIfSingleRetailerCheckboxisSelected()
+		[StepDefinition(@"I confirm if the single retailer checkbox (is|is not) selected")]
+		public void ConfirmIfSingleRetailerCheckboxisSelected(string is_isnot)
 		{
 			var retailer = new Retailer();
-			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected", "Single retailer checkbox is selected"); 
+			bool expected = is_isnot == "is";
+			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected() == expected, $"Failure, Single retailer checkbox {(expected?"is not":"is")} selected", $"Success, Single retailer checkbox {is_isnot} selected");
+
 		}
 		[StepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]
 		public void ConfirmSingleRetailerCheckboxisSelected(string condition)
