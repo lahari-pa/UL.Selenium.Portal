@@ -1910,6 +1910,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I enter new password for the account saved as: (.*)")]
+		public void ThenIEnterANewPassword(string accountSavedAs)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
+				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
 
+				string contextPassword = currentUser.Password;
+				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
+				Report.IsTrue(FP.Enter_Verify_Password(contextPassword), $"Confirm Password with '{ contextPassword }' entered");
+				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
+				Delay.Seconds(2);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Confirm following error message displayed: (.*)")]
+		public void ThenIConfirmPasswordErrorMessage(string errMsg)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				if (!MyAccountObject.PasswordTooRecentPopupPresent())
+				{
+					Report.Info("There was no popup present with the message 'This password was used too recently.'");
+				}
+				Report.IsTrue(MyAccountObject.GetErrorPopupText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }

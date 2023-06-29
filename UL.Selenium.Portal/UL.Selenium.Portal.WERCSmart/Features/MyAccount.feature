@@ -577,3 +577,13 @@ Scenario: [219311] Add User: Error Messaging Checks
 	Then I Select the ... from the Actions column of the account I just created and select Deactivate
 	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
+
+	# Created by Saikiran Chittampally
+	@TestCase:223555
+Scenario: [223555] - User Role- Reset Password Option - Used Too Recently
+	Given I Login into WERCSmart Portal - Admin Role - Password Reset
+	Then the WERCSmart homepage should load
+	Given I call Shared Step 62676 (Go To My Account)
+	Given I go to Reset Password in User Grid for the current user
+	When I enter new password for the account saved as: PasswordResetAccount
+	Then I Confirm following error message displayed: This password was used too recently.
