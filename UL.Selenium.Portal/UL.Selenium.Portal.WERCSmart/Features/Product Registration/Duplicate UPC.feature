@@ -301,7 +301,6 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 
 @TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
-	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -309,14 +308,14 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	Then I save the product information as: TestCase91741
     And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And in the UPC Window, I click the Add Casepack button
 	Given I add the following into the UPC case fields
-		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as ExistingUPC_ProductAccount_1 | <first>        | 1    | 1        |                          | <first>               |
+		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option							  |
+		| saved as ExistingUPC_ProductAccount_1 | Cardboard      | 1    | 1        |                          | 1A1:  non-removable head steel drum               |
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
@@ -370,14 +369,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 
 @TestCase:91157
 Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
-	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
-	Then I click the following option in the bottom menu: Search
-	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	And In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value |
-		| Status      | Submitted    |
-	Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	Given I navigate to the landing page
+
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then I filter the products by: Accepted by Retailers
 	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
