@@ -229,8 +229,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string username = selTopMenuBar.GetCurrentUser();
 			selMyAccount.EnterSearchTextAndClickFind(username);
 			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
-				"Failed to click action: " + action + " for user: " + username,
-				"Successfully clicked action: " + action + " for user: " + username);
+				$"Failed to click action: {action } for user: { username }",
+				$"Successfully clicked action: { action } for user:{ username }");
 			Delay.Seconds(1);
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -1689,7 +1689,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("There was a popup present with the message 'This password was used too recently.'");
 					Report.Info("Attempting to Close the Popup");
-					MyAccountObject.ClickCloseInPasswordTooRecentPopup();
+					if (MyAccountObject.CloseInPasswordTooRecentPopupPresent())
+					{
+						MyAccountObject.ClickCloseInPasswordTooRecentPopup();
+					}
 					bool popupClosed = false;
 					int j = 0;
 					while (popupClosed == false && j<5)
@@ -1732,10 +1735,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("The Password was still showing as Too recent even after increasing the value 10 times");
 				return;
-			}	
-			
-			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
-
+			}
+			if (MyAccountObject.CloseInPasswordTooRecentPopupPresent())
+			{
+				Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
+			}
 
 			var finalPassword = (string)Context.GetFromContext("contextPassword");
 			if (acceptedPass)
