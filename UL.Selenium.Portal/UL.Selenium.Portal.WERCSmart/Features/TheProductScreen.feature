@@ -25,7 +25,7 @@ Scenario: [83844] The Product - Product Name - Validate Name with 449 Characters
 	Given I generate a random UPC number and save as: UPC83844
 	Given I delete all products with UPC Number: saved as UPC83844
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57561a (The Product - Enter Product Name: 1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShouldBe449CharactersLong1ProductNameShould and select Type of Product): bubble solution
+	Given I call Shared Step 57561a (The Product - Enter Product Name: 1ProductNameShouldBe449CharactersLongToGenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujjhycyyy and select Type of Product): bubble solution
 	Then I save the product information as: TestCase83844
 	Then I Confirm the Product name is shown at the top of the page
 	Then I Confirm the Product name shows on 1 line only and shows (3-dots) ... at the end of the characters
