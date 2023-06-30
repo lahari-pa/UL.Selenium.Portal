@@ -2832,6 +2832,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
+		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
+		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartSubStep("In the Waste Classification Data page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
 
 		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
 		public void ICallSharedRetailer_SelectNoRetailer_ClickDone()
@@ -3245,6 +3262,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I confirm 'Quantity' is visible in the UPC header");
 			MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Quantity",
+				quantity
+			});
+			Report.StartSubStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartSubStep("I select Package Type from drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 213071 \(Enter Universal Product Code \(UPC\) - Applicable Only to Alkaline Battery-Quantity Field Required\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		public void SharedEnterUPC_Battery_ConfirmQuantity(string upc, string containerType,
+			string size, string quantity)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			var upcTable = new Table(new string[] {
@@ -8314,6 +8369,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
+			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 213199 - Regulatory Documents to Provide - Required Document Uploads - Applicable Only to Alkaline Battery")]
+		public void ICallSharedStep104662_RegulatoryDocumentsToProvide_AlcalineBatteries()
+		{
+			
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I confirm text 'Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.' is shown in Regulatory Documents to Provide");
+			MyNewProduct.RegulatoryDocumentsText("Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.");
+			Report.StartSubStep("I confirm field 'Article Information Sheet (AIS)' exists");
+			MyNewProduct.ThenFieldExists("Article Information Sheet (AIS)");
+			Report.StartSubStep("I upload a PDF document into the Article Information Sheet (AIS) field.");
+			MyNewProduct.UploadPDFFile("Article Information Sheet (AIS)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.");
+			MyNewProduct.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.", "I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the OSHA-COMPLIANT field.");
+			MyNewProduct.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
+			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the Upload SDS field.");
+			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Prodivde page, I enter the value: 2023-06-27 into the WHMIS SDS Docmument Date Field");
+			newProdClass.EnterWHMISSDSDocumentDate("2023-06-27");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
