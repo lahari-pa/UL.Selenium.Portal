@@ -259,7 +259,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return ResolveButton.TryClick();
 		}
 
-		
+		public bool ProductNameWrapped()
+		{
+			bool result = false;
+			IWebElement prodName = this.ContainerElement.FindElement(By.XPath(@".//table[@class='table table-hover products-table']//p"), 2);
+			if (prodName.Displayed)
+			{
+				string cssvalue = prodName.GetCssValue("overflow-wrap");
+				Report.Info(cssvalue);
+				if (cssvalue == "break-word")
+				{
+					Report.Info("Product Name is wrapped within the area of the column ID/Product Name");
+					result = true;
+				}
+			}
+			return result;
+		}
+
+
 		//public bool DataConsentPopupPresent()
 		//{
 
