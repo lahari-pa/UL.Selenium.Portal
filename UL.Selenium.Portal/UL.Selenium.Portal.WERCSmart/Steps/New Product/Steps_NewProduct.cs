@@ -2957,7 +2957,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
 		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
 		{
+			if (Report.IsTrue(new NewProduct().InputFieldExists(fieldName), "Feiled to find Input field", "Successfully found the Input field"))
+			{ 
 			Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
+			}
 		}
 
 		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]

@@ -28,6 +28,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	public class NewProduct : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
+
+		public bool InputFieldExists(string fieldName)
+		{
+			return this.InputField(fieldName) != null;
+		}
 
 		#region web elements
 		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
@@ -4543,17 +4549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			Report.Info($"Exepcted Color is: {expectedColor}");
 
-			IWebElement inputField;
-
-
 			string expectedColorCode;
-
-			inputField = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
-			if (inputField == null)
-			{
-				Report.Failure("Could not find input field element");
-				return false;
-			}
 
 			switch (expectedColor)
 			{
@@ -4572,11 +4568,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				default:
 					Report.Error("expectedColor must be either: 'Red' or 'Green'");
 					return false;
-
-
 			}
-
-			string inputFieldColor = inputField.GetCssValue("background-color");
+			string inputFieldColor = this.InputField(fieldName).GetCssValue("background-color");
 
 			if (expectedColorCode == inputFieldColor)
 			{
@@ -4587,7 +4580,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
 			}
-
 
 			return fieldIsCorrectColor;
 
