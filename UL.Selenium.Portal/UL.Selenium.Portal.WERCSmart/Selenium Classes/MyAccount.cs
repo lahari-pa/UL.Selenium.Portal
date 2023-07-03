@@ -1441,7 +1441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string GetMismatchErrorText()
 		{
-			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//span[text()='Your passwords do not match. Please try again.']"));
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id='verifyPassword_error']"));
 			return ErrText.Text;
 		}
 	}

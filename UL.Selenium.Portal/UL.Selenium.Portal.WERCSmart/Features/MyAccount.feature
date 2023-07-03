@@ -585,5 +585,5 @@ Scenario: [223554] - User Role- Reset Password Option - Mismatch
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 62676 (Go To My Account)
 	Given I go to Reset Password in User Grid for the current user
-	When I enter new password and confirm password input fields for the account saved as: PasswordResetAccount
+	When I enter new password and confirm password input fields with diff data: TestPass123 for the account saved as: PasswordResetAccount
 	Then I Confirm mismatch error message displayed: Your passwords do not match. Please try again.

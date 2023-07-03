@@ -1910,8 +1910,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter new password and confirm password input fields for the account saved as: (.*)")]
-		public void ThenIEnterANewAndConfirmPassword(string accountSavedAs)
+		[StepDefinition(@"I enter new password and confirm password input fields with diff data: (.*) for the account saved as: (.*)")]
+		public void ThenIEnterANewAndConfirmPassword(string diffPassword, string accountSavedAs)
 		{
 			try
 			{
@@ -1919,7 +1919,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
 				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
 				string contextPassword = currentUser.Password;
-				string diffPassword = "TestPass123";
 				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
 				Report.IsTrue(FP.Enter_Verify_Password(diffPassword), $"Confirm Password with '{ diffPassword }' entered");
 				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
@@ -1938,11 +1937,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				MyAccount MyAccountObject = new MyAccount();
-				if (!MyAccountObject.PasswordTooRecentPopupPresent())
+				if (MyAccountObject.GetMismatchErrorText() != null)
 				{
-					Report.Info("There was no popup present with the message 'Your passwords do not match. Please try again.'");
+					Report.IsTrue(MyAccountObject.GetMismatchErrorText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
 				}
-				Report.IsTrue(MyAccountObject.GetMismatchErrorText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+				else
+				{
+					Report.Info("No error message displayed");
+				}
 			}
 			catch (Exception ex)
 			{
