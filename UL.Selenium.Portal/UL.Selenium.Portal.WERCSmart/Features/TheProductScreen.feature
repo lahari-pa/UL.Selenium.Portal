@@ -51,5 +51,6 @@
 	Then I set 'Product Name' to: 1ProductNameShouldBe449CharactersLongToGenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujgfthyjh
 	Then I check that the input field with label: Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS) is shown as Green
 	Then in the New Product page I click Continue
+	Then I save the product information as: TestCase83844
 	Then I should see the Product Information Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
