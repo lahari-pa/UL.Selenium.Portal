@@ -1938,11 +1938,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				MyAccount MyAccountObject = new MyAccount();
-				if (!MyAccountObject.PasswordTooRecentPopupPresent())
-				{
-					Report.Info("There was no popup present with the message 'This password was used too recently.'");
-				}
+				if (MyAccountObject.GetErrorPopupText() != null)
+				{ 
 				Report.IsTrue(MyAccountObject.GetErrorPopupText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+			}
+			else
+				{
+					Report.Info("No error message displayed");
+				}
 			}
 			catch (Exception ex)
 			{

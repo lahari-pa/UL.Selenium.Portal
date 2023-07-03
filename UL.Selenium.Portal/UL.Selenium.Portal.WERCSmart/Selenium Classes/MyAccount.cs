@@ -1362,7 +1362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string GetErrorPopupText()
 		{
-			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]/div[2]/p"));
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@aria-labelledby='myModalLabel']/div/div/div/following-sibling::div/p"));
 			return ErrText.Text;
 		}
 
