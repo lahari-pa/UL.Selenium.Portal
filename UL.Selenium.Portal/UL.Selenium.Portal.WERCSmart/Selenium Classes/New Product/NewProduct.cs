@@ -4467,7 +4467,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 
 		}
-
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
 			bool fieldIsCorrectColor = false;
@@ -4492,6 +4491,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			inputField = parentContainer.FindElement(By.XPath(".//div[contains(@class,'dropzone')]"), 2);
+			if (inputField == null)
+			{
+				Report.Failure("Could not find input field element");
+				return false;
+			}
+
+			switch (expectedColor)
+			{
+				case "Green":
+					expectedColorCode = "rgba(240, 255, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length > 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField = parentContainer.FindElement(By.XPath(".//div[@class='ws-dropzone-container']"), 2);
+					break;
+
+				case "Red":
+					expectedColorCode = "rgba(255, 240, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
+
+					break;
+				default:
+					Report.Error("expectedColor must be either: 'Red' or 'Green'");
+					return false;
+
+
+			}
+
+			string inputFieldColor = inputField.GetCssValue("background-color");
+
+			if (expectedColorCode == inputFieldColor)
+			{
+				Report.Success($"The color of the input field was the color {expectedColor} as expected");
+				fieldIsCorrectColor = true;
+			}
+			else
+			{
+				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
+			}
+
+
+			return fieldIsCorrectColor;
+
+		}
+
+		public bool CheckInputFieldColor(string expectedColor, string fieldName)
+		{
+			bool fieldIsCorrectColor = false;
+
+			Report.Info($"Looking at the input field with label {fieldName}");
+
+			Report.Info($"Exepcted Color is: {expectedColor}");
+
+			IWebElement inputField;
+
+
+			string expectedColorCode;
+
+			inputField = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
 			if (inputField == null)
 			{
 				Report.Failure("Could not find input field element");

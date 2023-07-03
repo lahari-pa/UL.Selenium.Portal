@@ -2954,6 +2954,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
+		[StepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
+		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
+		}
 
 		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
 		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)

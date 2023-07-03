@@ -22,8 +22,6 @@
 	
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
-	Given I generate a random UPC number and save as: UPC83844
-	Given I delete all products with UPC Number: saved as UPC83844
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561a (The Product - Enter Product Name: 1 ProductNameShould Be449Characters Long To GenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujjh and select Type of Product): bubble solution
 	Then I save the product information as: TestCase83844
@@ -48,5 +46,10 @@
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561a (The Product - Enter Product Name: More1 ProductNameShould Be449Characters Long To GenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujjh and select Type of Product): bubble solution
-	Then I should see an error message: This field has a maximum length of 499 characters.
+	Then I should see an error message: This field has a maximum length of 449 characters.
+	Then I check that the input field with label: Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS) is shown as Red
 	Then I set 'Product Name' to: 1ProductNameShouldBe449CharactersLongToGenerateErrorMessage--dhjhsjhjhhjhsjhgjshjhdfdfsssssssssssssssshvhswgdwgyag(263526536572)ghasvdghxvsghvxghvsghdgghshhshdgsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhghdghsgdghgshgywgyugwuuydwdhuwhugusgugghshhsghdghsgdghgshgywgyugwuuydwdhuwhugusguhdgghshhsghdghsgdghgshgywgyugwuuydwduhugusguhdgghshhsghdghsgdghgshgywgyugwuuyyxdshudsjyguhhnkjnsduygawuduhsyuyyyuyuuyuyudjfgvhjxgjjcghxhjhsgcjcxjghjxjdsguyugsdujgfthyjh
+	Then I check that the input field with label: Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS) is shown as Green
+	Then in the New Product page I click Continue
+	Then I should see the Product Information Page
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
