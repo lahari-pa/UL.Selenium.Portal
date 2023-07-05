@@ -144,7 +144,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 29
 @TestCase:92943
-Scenario: [92943] Wine - RU001418 - Packaging Group II (Greater > 70% of Alcohol Content)
+Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of Alcohol Content) - DOT - Packaging Group II Should be Pre-Selected
 	
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
