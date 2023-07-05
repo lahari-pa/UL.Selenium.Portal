@@ -151,7 +151,7 @@ Scenario: [92943] Wine - RU001418 - Packaging Group II (Greater > 70% of Alcohol
 	Given I generate a random UPC number and save as: UPC92943
 	Given I delete all products with UPC Number: saved as UPC92943
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Spirits
 	Then I save the product information as: TestCase92943
 	Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	Given I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol)
