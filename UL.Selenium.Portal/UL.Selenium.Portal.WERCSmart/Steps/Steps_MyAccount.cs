@@ -1914,6 +1914,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I enter new password and confirm password input fields with diff data: (.*) for the account saved as: (.*)")]
+		public void ThenIEnterANewAndConfirmPassword(string diffPassword, string accountSavedAs)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
+				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
+				string contextPassword = currentUser.Password;
+				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
+				Report.IsTrue(FP.Enter_Verify_Password(diffPassword), $"Confirm Password with '{ diffPassword }' entered");
+				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
+				Delay.Seconds(2);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Confirm mismatch error message displayed: (.*)")]
+		public void ThenIConfirmMismatchPasswordErrorMessage(string errMsg)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				if (MyAccountObject.GetMismatchErrorText() != null)
+				{
+					Report.IsTrue(MyAccountObject.GetMismatchErrorText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+				}
+				else
+				{
+					Report.Info("No error message displayed");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 	}
 }

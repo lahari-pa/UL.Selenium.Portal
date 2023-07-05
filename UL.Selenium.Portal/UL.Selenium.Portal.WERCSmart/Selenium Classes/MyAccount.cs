@@ -1445,6 +1445,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			matchingButton.TryClick();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 		}
+		public string GetMismatchErrorText()
+		{
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id='verifyPassword_error']"));
+			return ErrText.Text;
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
