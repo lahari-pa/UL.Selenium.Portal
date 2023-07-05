@@ -4448,6 +4448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
 			Report.StartSubStep("I should see the Physical and Chemical Properties Page");
 			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
@@ -4486,11 +4487,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
-			Report.StartSubStep(
+			if (myNewProduct.SectionExists(
+			"Select the best Water Solubility description"))
+			{
+				Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
 				table.Rows[0]["Select the best Water Solubility description"]);
-			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-				table.Rows[0]["Select the best Water Solubility description"]);
+				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+					table.Rows[0]["Select the best Water Solubility description"]);
+			}
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -14128,6 +14133,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
 
+		[StepDefinition(@"I call Shared Step 92981a \(Beverage Regulatory Details\):")]
+		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTable( Table table)
+		{ 
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", table.Rows[0]["BPA"]);
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcohol \(Packaging II\)\)")]
 		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData_ForAlcohol()
@@ -14156,8 +14178,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Based on defined viscosity parameters, this product is classified as PG III");
 			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
-
 		}
+		[StepDefinition(@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcoholic Beverages - Spirits \(RU001434\) - Packaging Group should pre-select Packaging Group II\)")]
+
+		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData_ForSpirits()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN3065");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3065");
+			Delay.Seconds(2);
+			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			Report.StartStep("I select '3' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "3");
+			Report.StartStep("I select 'II' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+		}
+
 		[StepDefinition(@"I call Shared Step \(Enter Product Data for Physical State - Aerosol only and Secondary Physical state - Liquid spray\)")]
 		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnlyWithFIFRA()
 		{

@@ -156,14 +156,17 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	Then I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 	| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used |
-	| Liquid                 | Liquid                   | 0.1              |  7 | 78                         | 12                       | Closed Cup Method               |
-	#Given I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol)
+	| Liquid                 | Liquid                   | 0.1              |  7 | 78                         | 12                       | Closed cup method               |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 92981 (Beverage Regulatory Details Greater > 70%)
+	Given I call Shared Step 92981a (Beverage Regulatory Details):
+	| BPA | Percent of Alcohol |
+	| No  | 100                |
+	#Given I call Shared Step 92981 (Beverage Regulatory Details Greater > 70%)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 92982 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging II))
+	Given I call Shared Step 92982 (U. S. Department of Transportation (DOT) Classification - For Alcoholic Beverages - Spirits (RU001434) - Packaging Group should pre-select Packaging Group II)
+	#Given I call Shared Step 92982 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging II))
 	Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	Given in the Additional Documents to Provide section page I click Continue
 	Given in the optional comments page I click Continue
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Spirits
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
