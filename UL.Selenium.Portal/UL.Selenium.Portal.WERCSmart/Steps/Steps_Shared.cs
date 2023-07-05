@@ -4487,15 +4487,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
-			if (myNewProduct.SectionExists(
-			"Select the best Water Solubility description"))
-			{
 				Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
 				table.Rows[0]["Select the best Water Solubility description"]);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-					table.Rows[0]["Select the best Water Solubility description"]);
-			}
+				table.Rows[0]["Select the best Water Solubility description"]);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -14088,7 +14084,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
-
+		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Spirits \(RU001434\) \(Greater than 70% Alcohol\)\)")]
 		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol\)")]
 		public void Shared92979EnterPhysicalProperty_Liquid_ForWineGreaterThan70()
 		{
@@ -14096,21 +14092,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Relative Density option to: 55");
-			MyNewProduct.SetTheSectionOptionTo("Relative Density", "55");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
-			MyNewProduct.SectExatcDataNotKnown("pH");
-			Report.StartStep("I set the pH field to: 4 - 6.9");
-			MyNewProduct.SetTheSectionOptionTo("pH", "4 - 6.9");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
-			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			Report.StartStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("In the Product Characteristics tab of the New Product Page for pH I enter: 7 ");
+			MyNewProduct.SetTheSectionOptionTo("pH","7");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: 78 ");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)","78");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 12 ");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)","12");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Closed Cup Method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
