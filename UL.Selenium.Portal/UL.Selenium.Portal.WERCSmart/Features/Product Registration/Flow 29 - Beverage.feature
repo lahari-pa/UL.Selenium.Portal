@@ -154,7 +154,10 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Spirits
 	Then I save the product information as: TestCase92943
 	Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
-	Given I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol)
+	Then I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+	| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used |
+	| Liquid                 | Liquid                   | 0.1              |  7 | 78                         | 12                       | Closed Cup Method               |
+	#Given I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 92981 (Beverage Regulatory Details Greater > 70%)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
