@@ -1668,8 +1668,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var modal = new ModalDialog();
 
-			Report.IsTrue(modal.GetText() == text, "Failed to find text '" + text + "' in modal window. Found text '" + modal.GetText() + "' instead.",
-				"Successfully found text '" + text + "' in modal window.");
+			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{ text }' in modal window. Found text '" + modal.GetText() + "' instead.",
+				$"Successfully found text '{text}' in modal window.");
 		}
 
 		[StepDefinition(@"I check that the alert displayed contains text: (.*)")]

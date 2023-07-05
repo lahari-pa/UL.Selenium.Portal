@@ -608,7 +608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool navigated;
 			if (myNav == null)
 			{
-				Report.Info("Failed to Find Navigation Option: " + nav_option);
+				Report.Info($"Failed to Find Navigation Option: { nav_option }");
 				Report.Screenshot();
 				return false;
 			}
@@ -638,7 +638,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					navigated = myLibrary.Exists;
 					break;
 				default:
-					Report.Info("The specified navigation option: " + nav_option + " was not valid");
+					Report.Info($"The specified navigation option: { nav_option } was not valid");
 					return false;
 			}
 			return navigated;

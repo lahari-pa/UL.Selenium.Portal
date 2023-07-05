@@ -1567,7 +1567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICheckThatAHeadingWithTheNameStewardshipNumbersExists(string headingName)
 		{
 			MyAccount MyAccountObject = new MyAccount();
-			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), "Heading with name: " + headingName + ", was not found", "Heading with name: " + headingName + ", was found");
+			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), $"Heading with name: { headingName }, was not found", $"Heading with name: { headingName }, was found");
 		}
 
 		[StepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
@@ -1612,7 +1612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				GeneralUtilities.ScrollToBottomOfPage();
 				var mystwdinfo = new MyAccount_CompanyInfo();
-				//Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 				GeneralUtilities.Wait_for_load_finish();
 				foreach (TableRow row in table.Rows)
 				{
