@@ -1362,7 +1362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string GetErrorPopupText()
 		{
-			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@aria-labelledby='myModalLabel']/div/div/div/following-sibling::div/p"));
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@aria-labelledby='myModalLabel']//p"));
 			return ErrText.Text;
 		}
 

@@ -1923,7 +1923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
 				Report.IsTrue(FP.Enter_Verify_Password(contextPassword), $"Confirm Password with '{ contextPassword }' entered");
 				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
-				Delay.Seconds(2);
+				Delay.Seconds(5);
 			}
 			catch (Exception ex)
 			{
@@ -1939,7 +1939,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyAccount MyAccountObject = new MyAccount();
 				if (MyAccountObject.GetErrorPopupText() != null)
-				{ 
+				{					
 				Report.IsTrue(MyAccountObject.GetErrorPopupText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
 			}
 			else
