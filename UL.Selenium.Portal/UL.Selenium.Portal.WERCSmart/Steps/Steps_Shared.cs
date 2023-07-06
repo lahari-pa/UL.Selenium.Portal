@@ -4448,7 +4448,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			var myNewProduct = new NewProduct();
 			Report.StartSubStep("I should see the Physical and Chemical Properties Page");
 			MyNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 			Delay.Seconds(1);
