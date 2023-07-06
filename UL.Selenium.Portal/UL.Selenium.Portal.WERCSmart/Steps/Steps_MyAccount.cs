@@ -229,8 +229,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string username = selTopMenuBar.GetCurrentUser();
 			selMyAccount.EnterSearchTextAndClickFind(username);
 			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
-				"Failed to click action: " + action + " for user: " + username,
-				"Successfully clicked action: " + action + " for user: " + username);
+				$"Failed to click action: {action } for user: { username }",
+				$"Successfully clicked action: { action } for user:{ username }");
 			Delay.Seconds(1);
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -1567,7 +1567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICheckThatAHeadingWithTheNameStewardshipNumbersExists(string headingName)
 		{
 			MyAccount MyAccountObject = new MyAccount();
-			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), "Heading with name: " + headingName + ", was not found", "Heading with name: " + headingName + ", was found");
+			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), $"Heading with name: { headingName }, was not found", $"Heading with name: { headingName }, was found");
 		}
 
 		[StepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
@@ -1612,7 +1612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				GeneralUtilities.ScrollToBottomOfPage();
 				var mystwdinfo = new MyAccount_CompanyInfo();
-				//Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 				GeneralUtilities.Wait_for_load_finish();
 				foreach (TableRow row in table.Rows)
 				{
@@ -1689,7 +1689,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("There was a popup present with the message 'This password was used too recently.'");
 					Report.Info("Attempting to Close the Popup");
-					MyAccountObject.ClickCloseInPasswordTooRecentPopup();
+					if (MyAccountObject.CloseInPasswordTooRecentPopupPresent())
+					{
+						MyAccountObject.ClickCloseInPasswordTooRecentPopup();
+					}
 					bool popupClosed = false;
 					int j = 0;
 					while (popupClosed == false && j<5)
@@ -1732,10 +1735,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("The Password was still showing as Too recent even after increasing the value 10 times");
 				return;
-			}	
-			
-			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
-
+			}
+			if (MyAccountObject.CloseInPasswordTooRecentPopupPresent())
+			{
+				Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
+			}
 
 			var finalPassword = (string)Context.GetFromContext("contextPassword");
 			if (acceptedPass)
@@ -1910,6 +1914,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I enter new password and confirm password input fields with diff data: (.*) for the account saved as: (.*)")]
+		public void ThenIEnterANewAndConfirmPassword(string diffPassword, string accountSavedAs)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
+				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
+				string contextPassword = currentUser.Password;
+				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
+				Report.IsTrue(FP.Enter_Verify_Password(diffPassword), $"Confirm Password with '{ diffPassword }' entered");
+				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
+				Delay.Seconds(2);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Confirm mismatch error message displayed: (.*)")]
+		public void ThenIConfirmMismatchPasswordErrorMessage(string errMsg)
+		{
+			try
+			{
+				MyAccount MyAccountObject = new MyAccount();
+				if (MyAccountObject.GetMismatchErrorText() != null)
+				{
+					Report.IsTrue(MyAccountObject.GetMismatchErrorText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+				}
+				else
+				{
+					Report.Info("No error message displayed");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 		[StepDefinition(@"I enter new password for the account saved as: (.*)")]
 		public void ThenIEnterANewPassword(string accountSavedAs)
 		{

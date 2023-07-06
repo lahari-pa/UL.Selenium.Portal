@@ -230,7 +230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var listOfUsers = listOfUsersRows.Select(x => x.FindElement(By.XPath(".//td[1]/span"), 2).Text).ToList();
 			if (!listOfUsers.Contains(username))
 			{
-				Report.Error("Username: " + username + " does not show in the list. The full list is: " +
+				Report.Error($"Username:{ username } does not show in the list. The full list is: "+
 											  string.Join(",", listOfUsers));
 				return false;
 			}
@@ -248,14 +248,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Clicked actions button");
 			//Actions drop down menu should now open
-			IWebElement dropDownMenu = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"), 2);
+			IWebElement dropDownMenu = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"), 2);
 			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li"), 2).FirstOrDefault(x => x.Text == action);
 			if (!actionLink.TryClick())
 			{
-				Report.Error("Failed to click action: " + action);
+				Report.Error($"Failed to click action: { action }");
 				return false;
 			}
-			Report.Info("Clicked action: " + action);
+			Report.Info($"Clicked action: { action }");
 			return true;
 		}
 
@@ -608,7 +608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool navigated;
 			if (myNav == null)
 			{
-				Report.Info("Failed to Find Navigation Option: " + nav_option);
+				Report.Info($"Failed to Find Navigation Option: { nav_option }");
 				Report.Screenshot();
 				return false;
 			}
@@ -638,7 +638,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					navigated = myLibrary.Exists;
 					break;
 				default:
-					Report.Info("The specified navigation option: " + nav_option + " was not valid");
+					Report.Info($"The specified navigation option: { nav_option } was not valid");
 					return false;
 			}
 			return navigated;
@@ -1339,25 +1339,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSaveInChangeUserPasswordWindow()
 		{
-			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//a[text()='Save']"), 2);
+			IWebElement SaveButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//a[text()='Save']"), 2);
 			return SaveButton.TryClick();
 		}
 
 		public bool ClickCloseInChangeUserPasswordWindow()
 		{
-			IWebElement CloseButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//button[text()='Close']"), 2);
+			IWebElement CloseButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//button[text()='Close']"), 2);
 			return CloseButton.TryClick();
+		}
+
+		public bool CloseInPasswordTooRecentPopupPresent()
+		{
+			IWebElement tooRecentPopupClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
+			return tooRecentPopupClose != null;
 		}
 
 		public bool PasswordTooRecentPopupPresent()
 		{
-			IWebElement tooRecentPopup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]"), 2);
+			IWebElement tooRecentPopup = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]"), 2);
 			return tooRecentPopup != null;
 		}
 
 		public bool ClickCloseInPasswordTooRecentPopup()
 		{
-			IWebElement tooRecentPopupClose = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
+			IWebElement tooRecentPopupClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
 			return tooRecentPopupClose.TryClick();
 		}
 		public string GetErrorPopupText()
@@ -1443,6 +1449,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
 			matchingButton.TryClick();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+		}
+		public string GetMismatchErrorText()
+		{
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id='verifyPassword_error']"));
+			return ErrText.Text;
 		}
 	}
 
@@ -2354,7 +2365,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			return true;
 		}
-
 		public string Get_Invoice_Number(string submitted_by)
 		{
 			Report.Info("Beginning Get_Invoice_Number");

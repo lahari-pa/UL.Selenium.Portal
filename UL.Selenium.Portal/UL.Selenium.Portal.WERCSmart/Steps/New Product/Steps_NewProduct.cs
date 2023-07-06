@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
+using Mailosaur;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -2953,6 +2954,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
+		[StepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
+		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
+		{
+			if (Report.IsTrue(new NewProduct().InputFieldExists(fieldName), "Feiled to find Input field", "Successfully found the Input field"))
+			{ 
+			Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
+			}
+		}
 
 		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
 		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)
@@ -3166,6 +3175,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(new NewProduct().CheckEmailAddressAgainstDataAcceptanceEmail(email, dataAcceptanceEmail), "Failed to check user email: " + email + " against: " + dataAcceptanceEmail, "Successfully checked user email: " + email + " against: " + dataAcceptanceEmail);
 		}
+
+		[StepDefinition(@"In Regulatory Documents to Provide I see text:(.*)")]
+
+		public void RegulatoryDocumentsText(string text)
+		{
+			List<string> getText = new List<string>();
+			getText = new NewProduct().Get3rdPartyPageAlerts();
+			Report.IsTrue(getText.Contains(text), $"Failed to confirm text '{text}' is shown", $"Successfully confirmed text '{text}' is shown");
+		}
+
 
 		#endregion
 		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
