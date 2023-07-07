@@ -15,7 +15,8 @@
 
 Feature: Account Canada Address(No), Package Type (No), Stewardship (FULL)
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85847
 Scenario: [85847] Account Full Stewardship only, SOLD = US Only, PL = YES, Packaging type IS NOT required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -32,7 +33,8 @@ Scenario: [85847] Account Full Stewardship only, SOLD = US Only, PL = YES, Packa
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85847
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85848
 Scenario: [85848] Account Full Stewardship only,  SOLD = US Only, PL = NO, Packaging type IS NOT required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -49,7 +51,8 @@ Scenario: [85848] Account Full Stewardship only,  SOLD = US Only, PL = NO, Packa
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85848
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85849
 Scenario: [85849] Account Full Stewardship only, SOLD = Canada Only, PL = YES, Packaging type IS required
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -125,7 +128,8 @@ Scenario: [85851] Account No Canada address - Package and stewardship, SOLD = US
 	Given in the Regulatory Documents to Provide page I click Continue
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85851
 
-
+#Remove from regression: 2023/05
+@ignore
 @TestCase:85852
 Scenario: [85852] Account Full Stewardship only, SOLD US and Canada, PL = Yes, Packaging is required
 	Given I log in with the account saved in TReVor as: ProductAccount

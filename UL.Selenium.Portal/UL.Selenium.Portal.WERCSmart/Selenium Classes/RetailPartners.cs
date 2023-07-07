@@ -594,7 +594,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					
 		}
 
-		
+		public string GetTooltipMessage()
+		{
+			IWebElement ele = this.ContainerElement.FindElement(By.XPath(".//i[@data-toggle='tooltip']"));
+			string text = ele.GetAttribute("title");
+			Report.Info(text);
+			return text;
+		}
+
 	}
 
 	public class DataEntryNotification : SeleniumBaseObject

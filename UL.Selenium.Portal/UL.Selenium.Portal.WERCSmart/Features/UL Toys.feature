@@ -7,6 +7,7 @@
 Feature: UL Toys
 
 @tfs_design
+#Remove from automation: 2023/05
 @ignore
 @TestCase:68368
 Scenario: [68368] UL Toys - Create a New Company

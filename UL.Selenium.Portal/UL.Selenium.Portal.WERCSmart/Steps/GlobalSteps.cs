@@ -2582,6 +2582,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 1);
 								}
 
+
 								Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
 								Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 								Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
@@ -2813,7 +2814,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									}
 
 									var PassResetPopup = new ResetYourPasswordPopup();
-									//Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
+									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("Confirm Password", newPassword), "Failed to enter text into 'Confirm Password' field", "Successfully entered text into 'Confirm Password' Field");
 									Report.IsTrue(PassResetPopup.ClickSubmit(), "Failed to click submit", "Submit was clicked successfully");
