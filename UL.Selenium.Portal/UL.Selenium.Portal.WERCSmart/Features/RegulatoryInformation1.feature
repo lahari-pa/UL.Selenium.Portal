@@ -58,7 +58,7 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: Yes
 	And I should see following statement: Is the need to warn triggered by
