@@ -498,21 +498,18 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		|   CASNumber         | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 7439-89-6           | 15      | false               | false       |            |
-		| 12054-48-7          | 35      | false               | false       |            |
-		| 7440-50-8           | 8       | false               | false       |            |
-		| WPS1106911          | 30      | false               | false       |            |
+		| 7439-89-6           | 30      | false               | false       |            |
+		| 12054-48-7          | 45      | false               | false       |            |
+		| 7440-50-8           | 13      | false               | false       |            |
 		| 1310-58-3           | 12      | false               | false       |            |
-	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	And I should see the Formulation > Batteries Page
 	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
 	Given I click continue
 	Given I call Shared Step 214541 (Waste Classification Data - Applicable Only to Nickel Metal Hydride (NiMH) Battery (RU000373))
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC110324 with container type: Plastic Container size: 75.0 and quantity: 2
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Given In Regulatory Documents to Provide I see text: Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.
+	Given In Regulatory Documents to Provide I see text:Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.
 	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf	
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I don't need a WHMIS Compliant SDS
