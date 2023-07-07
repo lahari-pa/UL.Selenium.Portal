@@ -24,7 +24,7 @@ Scenario: [85492] Regulatory Information 1 - navigation
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	And I should see the Waste Classification Data Page
 	And I should see following statement: U.S. Toxic Substances Control Act (TSCA) status
 	And I should see following statement: Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?
