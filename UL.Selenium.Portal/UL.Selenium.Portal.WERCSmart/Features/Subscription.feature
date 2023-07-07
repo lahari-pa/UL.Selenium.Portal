@@ -1131,4 +1131,107 @@ Scenario: [112028] Subscription - Updating Company Name
 	Given In the My Account page I navigate to the Payment Methods page
 	Given In the Payment Methods screen I open the Edit Address form
 	Given In the Account Name field, change the name of the Company INT123-test and Confirm the Contact Information is updated with the New Company Name
+
+# Created by Saikiran Chittampally
+@TestCase:112388
+Scenario: [112388] Subscription - Contact Information and Billing Information Appear Properly
 	
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given  I call Shared Step 62676 (Go To My Account)
+	Given In the My Account page I navigate to the Payment Methods page
+	Then In the payment methods page I confirm that the Contact Information account name: INT123-test, firstname: Test_Automation_ProductsAccount,last name: WERCS, email addresss: User_edcc11cb5c8e@kxxyxunf.mailosaur.net appear correct
+	Then In the payment methods page I confirm that the Billing Address address one: 725 5th Ave, address two: test2, cityStateZip: New York New York 10022, country: UNITED STATES, phoneNo: 123-456-7889 appear correct		
+	And I click the back arrow next to payment methods
+	When In the My Account page I navigate to the Company Information page
+	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: INDIA address one: test1, address two: test2, city: Hyderabad, State: Telangana, Zip: 99897, phoneNo: 345-678-9001, saveAddressOption: billingAddress updated correctly
+	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: test, address two: testshipping2, city: Ontario, State: Ontario, Zip: 97977, phoneNo: 956-608-9000, saveAddressOption: shippingAddress updated correctly
+	#Again updating the Billing address with the previous data, As the data getting updated in Payment Methods page
+	Then In the company information page I confirm that the Address billingAddress for: action_menu: Billing Address country: UNITED STATES address one: 725 5th Ave, address two: test2, city: New York, State: New York, Zip: 10022, phoneNo: 123-456-7889, saveAddressOption: billingAddress updated correctly
+	#Again updating the Shipping address with the previous data, As the data getting updated in Payment Methods page
+	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: 725 6th Ave, address two: testshipping, city: Ontalon, State: Ontario, Zip: 99977, phoneNo: 956-608-9990, saveAddressOption: shippingAddress updated correctly
+	
+# Created by Saikiran Chittampally
+@TestCase:204225
+Scenario: [204225] Subscription - Billing Frequency
+	Given I go to the WERCSmart Log in
+	Given If not already created, I create a user: TC63297User with the following parameters:
+		| Field                | Value          |
+		| Email                | User_<random>  |
+		| Country              | UNITED STATES  |
+		| FirstName            | WERCS          |
+		| LastName             | Test_Automation |
+		| Password             | Welcome1!      |
+		| Address1             | Address 1      |
+		| Address2             | Address 2      |
+		| City                 | Latham         |
+		| State                | New York       |
+		| Zip                  | 12110          |
+		| CompanyName          | Company 1      |
+		| CompanyPhone         | 123-456-7889   |
+		| EmergencyPhoneNumber | 123-456-7789   |
+		| SupplierType         | Manufacturer   |
+		| PhoneQuestion        | PhoneQuestion  |
+		| PhoneHint            | PhoneHint      |
+		| MentorQuestion       | MentorQuestion |
+		| MentorHint           | MentorHint     |
+		| FriendQuestion       | FriendQuestion |
+		| FriendHint           | FriendHint     |
+		| AnimalQuestion       | AnimalQuestion |
+		| AnimalHint           | AnimalHint     |
+		| CollegeQuestion      | CollegeQuestion|
+		| CollegeHint          | CollegeHint    |
+		| Pin                  | 1234           |
+	Then I should see username for user saved as: TC63297User in the right corner
+	Given  I call Shared Step 62676 (Go To My Account)
+	Then I click on NEW SUBSCRIPTION
+	Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| None               | None               | Up to 20 Product(s)  | Standard      | Gold      |
+	Then I click on Checkout
+	Then In the Payment Methods screen I select Payment Method: Credit Card
+	Then In the Payment Methods screen I enter Credit Card details
+		| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+		| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+	Then In the Payment Methods screen I click Continue
+Given the Purchase Summary should be loaded
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: Yearly, quarterly: Quarterly, monthly:  options
+Given I Click on the back arrow in Payment methods
+Given I Click on the back arrow in Payment methods
+Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| Up to 100 Product(s)| Up to 100 Product(s)               | Up to 100 Product(s)  | Standard      | Bronze       |
+	Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Given the Purchase Summary should be loaded
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: Yearly, quarterly: Quarterly, monthly: Monthly options
+Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
+Then In the Purchase Summary screen I click Confirm Order
+Given the Purchase Summary should be loaded
+Then In the Thank You screen I confirm the following statement is shown: You have successfully signed up for a subscription plan. Thank you for depending on UL to provide over 45 retailers with critical product information they require to on-board your products and keep store workers, consumers and the environment safe.
+Then In the Thank You screen I confirm the following statement is shown: We are committed to helping you monitor and manage all of your product data needs with the highest standards of confidentiality and service. If we can be of further assistance, please contact Customer Support at +1 (877) 642-6753 or (518) 720-6220
+Then In the Thank You screen I click Home
+Given  I call Shared Step 62676 (Go To My Account)
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| Up to 100 Product(s)| Up to 100 Product(s) | Up to 150 Product(s)  | Standard      | Bronze       |
+Then I click on Checkout
+Then In the Payment Methods screen I click Continue
+Given the Purchase Summary should be loaded
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I Confirm that for Billing Frequency I see Yearly label
+Then In the Purchase Summary screen I click Confirm Order
+Given the Purchase Summary should be loaded
+Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+Then In the Thank You screen I confirm the following statement is shown: We are committed to helping you monitor and manage all of your product data needs with the highest standards of confidentiality and service. If we can be of any assistance, please contact our Support Team or review our Support Site for helpful tools.
+Then In the Thank You screen I click Home

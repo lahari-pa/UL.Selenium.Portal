@@ -160,9 +160,7 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
 	#And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 and save as: TestCase42196
-
 	And I create a product with name: TEST CASE 42196 - 3rd party Recertification while logged in as Portal - ULSC Role and take to completed using Test Case 79428 using SHA Acc: SHAQAAuto10 and save as: TestCase42196
-
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto10 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Completed
@@ -231,4 +229,4 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
 	And I search for the product saved as: TestCase42196
 	Given For product saved as: TestCase42196 the status is: Completed
-#And I Confirm the product is shown in Completed status for NR so that it can be used again the next time the test case is run
+	#And I Confirm the product is shown in Completed status for NR so that it can be used again the next time the test case is run

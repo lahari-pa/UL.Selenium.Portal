@@ -30,6 +30,7 @@ using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Automation.TReVor.Classes;
 using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
 using Mailosaur;
+using TReVor.Core.Classes.Software.Vault;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -975,8 +976,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (isTReVorUser)
 				{
-					SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(savedAs);
-					if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
+					CredentialVaultRecord TReVorUser = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+
+					if (Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
 					{
 						email = TReVorUser.UserName;
 					}
@@ -1418,7 +1420,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
@@ -1426,6 +1427,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ModalDialog().ClickButton(button),
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
+		}
+		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
+		{
+			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
 		}
 
 		[StepDefinition(@"I click the Terms of Use link in the footer")]
@@ -1460,6 +1468,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
 			if (action == "accept")
 			{
 				Report.Info("Accepting the pop up alert");
@@ -1658,8 +1668,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var modal = new ModalDialog();
 
-			Report.IsTrue(modal.GetText() == text, "Failed to find text '" + text + "' in modal window. Found text '" + modal.GetText() + "' instead.",
-				"Successfully found text '" + text + "' in modal window.");
+			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{ text }' in modal window. Found text '" + modal.GetText() + "' instead.",
+				$"Successfully found text '{text}' in modal window.");
 		}
 
 		[StepDefinition(@"I check that the alert displayed contains text: (.*)")]
@@ -2333,8 +2343,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
 			{
 				string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
-				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
-					"Successfully found text in alert!");
+				Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{ message}'. Actual: '{ alertText }'.",	"Successfully found text in alert!");
 			}
 			else
 			{
@@ -2727,7 +2736,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Failure($"Could not find the credentials needed from TReVor for: '{user}'. Please manually add the credentials needed to TReVor.");
-						Report.EndScenario();
 						return;
 					}
 				}
@@ -2948,7 +2956,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								Report.Error($"Could not find the Credentials for {user}");
-								Report.EndScenario();
 								return;
 							}
 						}

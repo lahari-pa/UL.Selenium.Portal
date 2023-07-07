@@ -123,7 +123,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButton(string button)
 		{
-			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
+			return this.ContainerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
+		}
+		public bool ClickTheButtonInThePopupView(string popupTitle, string buttonTitle)
+		{
+			IWebElement button = this.ContainerElement.FindElement(By.XPath($"//div[@class='modal-content']//h4[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}']"), 2);
+			return button.TryClick();
 		}
 
 		public bool ClickRemoveButtonInDialogModal()

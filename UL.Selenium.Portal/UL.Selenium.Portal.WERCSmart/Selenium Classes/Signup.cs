@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void PasteIntoConfirmEmailFromClipboard()
 		{
-			IWebElement confirmEmail = this.containerElement.FindElement(By.XPath("//input[@id='txtConfirm']"));
+			IWebElement confirmEmail = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='txtConfirm']"));
 			confirmEmail.SendKeys(OpenQA.Selenium.Keys.Control + "v");
 		}
 

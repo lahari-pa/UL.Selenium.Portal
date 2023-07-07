@@ -1,32 +1,21 @@
 ﻿@Shared
 @LandingPage
 @Login
-@SHA
 @Homepage
 @Signup
 @wercsmart
 @NewProduct
 @ProductGrid
-@DataSummarySheet
-@RetailPartners
-@SummaryPage
-@SupplierReports
-@PaymentMethods
-@SubEnrollment
-@WERCSmart_Signup
-@MyAccount
-@PackagingTypes
-@Brands
-@MyIngredients
-@SupplierReports
-@UPC
 @SHA
-@FileOps
-@ForwardProductRegistration
+@wercsmart
+@RetailPartners
+@CreateProducts
+@PaymentMethods
+@UPC
+@Studio
 @ProductSetUp
-@MyMessages
-@Portal_ShaManager
-@run_Suppliers
+@run_ProductSetUp
+
 Feature: Suppliers
 
 @tfs_design
@@ -123,4 +112,5 @@ Given I navigate to the landing page
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given there should be a new email for email Address saved as: AdminEmailAddress from: ULSCN.Notifications@ULNotification.com with the title: WERCSmart Shopping Cart Cleared by UL
 Given the body of the email should show: Your shopping cart has been cleared of registrations by a UL representative as requested by your organization. Registrations may be restored to your cart and submitted. No registration data has been affected by removal from the shopping cart. If you have any questions regarding this action, please contact us at WERCSmartCustomer@UL.com. Thank you. The WERCSmart Team @ UL Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).
+
 

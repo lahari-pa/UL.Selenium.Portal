@@ -108,20 +108,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Home, Register, Retail Partners, Supplier Reports, Solution Center, Shopping Cart, Support
 		public bool Click_Icon(string destination)
 		{
-			IList<IWebElement> allIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);
+			IList<IWebElement> allIcons = this.ContainerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);
 			IWebElement icon = allIcons.FirstOrDefault(x => x.GetAttribute("title").Trim().Contains(destination));
 			if (icon == null)
 			{
 				Report.Info("Icons found: " + string.Join(",", allIcons.ToList().Select(x => x.GetAttribute("title").Trim())));
 				return false;
 			}
-			Report.Info("Icon has been found for: " + destination);
+			Report.Info($"Icon has been found for: { destination}");
 			IWebElement button = icon.FindElement(By.XPath(".."), 2);
 			if (button == null)
 			{
-				Report.Info("Could not find button for: " + destination);
+				Report.Info($"Could not find button for: { destination }");
 			}
-			Report.Info("Button has been found for: " + destination);
+			Report.Info($"Button has been found for: { destination }");
 			return button.TryClick();
 		}
 

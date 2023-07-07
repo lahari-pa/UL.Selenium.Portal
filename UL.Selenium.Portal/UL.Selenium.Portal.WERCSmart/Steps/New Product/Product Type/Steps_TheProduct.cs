@@ -23,6 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			Report.Info("Setting Product Name to: " + productName);
 			this.TheProduct.ProductName = productName;
 			Report.IsTrue(this.TheProduct.ProductName == productName, "Failed to set the Product Name", "Successfully set the Product Name");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I set 'Type of Product' to: (.*)")]

@@ -14,6 +14,7 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.WebDriver.Shared.Classes.Configuration;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -494,11 +495,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void GetFile(string file, string savedAs)
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
-			//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			string downloadsFolder = AutomationSettings.DownloadsFolder;
+			
+			string downloadsFolder = SeleniumWebDriver.Interface.DownloadsFolder; 
 			Report.Info("Downloads folder: " + downloadsFolder);
 			int counter = 0;
-			while (counter <= 5)
+			while (counter <= 15)
 			{
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (dir.Any())

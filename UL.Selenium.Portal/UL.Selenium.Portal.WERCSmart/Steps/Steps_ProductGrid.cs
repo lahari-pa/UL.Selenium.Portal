@@ -20,22 +20,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
 		public void GivenIShouldSeeAnOptionFor(string field)
 		{
-			Report.StartStep(Report.Details.StepIndex + " - Checking that option " + field + " is present");
+			Report.StartStep(Report.Details.StepIndex + $" - Checking that option {field} is present");
 			try
 			{
-				Report.Info("Checking that option " + field + " is present");
+				Report.Info($"Checking that option { field } is present");
 				var selProdGrid = new ProductsGrid();
 
 				switch (field)
 				{
 					case ("More Filters"):
-						Report.IsTrue(selProdGrid.MoreFiltersOptionPresent(), field + " option was not showing as expected!", field + " option was showing as expected!");
+						Report.IsTrue(selProdGrid.MoreFiltersOptionPresent(), $"{field} option was not showing as expected!, {field} option was showing as expected!");
 						break;
 					case ("Product ID/Name"):
-						Report.IsTrue(selProdGrid.ProductIdNameFieldPresent(), field + " option was not showing as expected!", field + " option was showing as expected!");
+						Report.IsTrue(selProdGrid.ProductIdNameFieldPresent(), $"{ field}  option was not showing as expected!", $"{field} option was showing as expected!");
 						break;
 					case ("Bulk Actions"):
-						Report.IsTrue(selProdGrid.BulkActionsOptionPresent(), field + " option was not showing as expected!", field + " option was showing as expected!");
+						Report.IsTrue(selProdGrid.BulkActionsOptionPresent(), $"{field} option was not showing as expected!", $"{field} option was showing as expected!");
 						break;
 				}
 				Report.Screenshot();
@@ -182,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				bool oneFound = false;
 				int x = 0;
-				while (oneFound==false && x<20)
+				while (oneFound == false && x < 20)
 				{
 					oneFound = selProdGrid.ProductsCount() == 1;
 					Report.Info($"Number of products found was: {selProdGrid.ProductsCount()}");
@@ -255,7 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		
+
 		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
 		{
@@ -498,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			string firstId = selProductsGrid.GetIdInFirstGridRow();
 			int productsCount = selProductsGrid.ProductsCount();
-	
+
 			Report.IsTrue(productsCount == 1 && firstId == id,
 				"Product with ID: " + id + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
 				"Product with ID: " + id + " was the only result returned as expected");
@@ -542,13 +542,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Clicking 'Row Actions' for first product returned");
 				var selProdGrid = new ProductsGrid();
-				
+
 				if (selProdGrid.ProductsCount() == 0)
 				{
 					Report.Warning("No products present! Cannot click Row Actions!");
 					return;
 				}
-				
+
 				Report.Info("Found products in grid, clicking first action button...");
 				Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
 				Report.Screenshot();
@@ -651,6 +651,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 			}
 		}
+
+		[StepDefinition(@"I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: (.*)")]
+		public void ThenIVerifyTextInTransferToTieredSubscriptionPopupContainsProductIDSavedAsFirstProduct(string savedAs)
+		{
+			var product = (ProductGridItem)Context.GetFromContext(savedAs);
+			string Id = product.ProductId;
+			string expectedText = "Product " + Id + " Eligible for transfer\r\nThis product is eligible for transfer to tiered subscription.\r\nTo complete this process please click the transfer button below.\r\nPlease note! This process cannot be reversed.";
+			var modal = new ModalDialog();
+			Report.IsTrue(modal.GetText() == expectedText, $"Failed to find text '{expectedText}' in modal window. Found text '{modal.GetText()}' instead.",
+				"Successfully found text '{expectedText}' in modal window.");
+		}
+
 
 		[StepDefinition(@"I click Bulk Actions in the Products Grid")]
 		public void GivenIClickBulkActionsInTheProductsGrid()
@@ -950,7 +962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIDeleteTheProduct(string savedas)
 		{
 			Report.Info("Attempting to get product from context");
-			if(!Context.Contains(savedas))
+			if (!Context.Contains(savedas))
 			{
 				Report.Failure($"Context did not contain the Product saved as: {savedas}");
 			}
@@ -1014,7 +1026,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
 						return;
 					}
-					
+
 					Report.Info($"Products with ID '{Product.Id}' were found in the grid!");
 				}
 			}
@@ -1349,7 +1361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			int N = 4;
 			int Q = 2;
-			for ( int i = 0; i < N - 1; i++)
+			for (int i = 0; i < N - 1; i++)
 			{
 				// The filter at index i and j are the targets for this action
 				// Fix i and iterate j from i + 1 to the end then repeat for i++ etc
@@ -1386,8 +1398,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								options = selMoreFilters.Options(filterType);
-							}				
-							
+							}
+
 							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{
@@ -1956,7 +1968,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				productTable.AddRow(new string[] {
 				"Staples"
-			});				
+			});
 				productTable.AddRow(new string[] {
 				"Target"
 			});
@@ -2024,9 +2036,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-			//	productTable.AddRow(new string[] {
-			//	"Costco"
-			//});
+				//	productTable.AddRow(new string[] {
+				//	"Costco"
+				//});
 				productTable.AddRow(new string[] {
 				"CVS"
 			});
@@ -2486,14 +2498,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The products Grid I Wait for the Retailers Popup to (appear|disappear)")]
 		public void InTheProductsGridIWaitForRetailersPopupToAppearOrDisappear(string status)
 		{
-			
+
 			switch (status)
 			{
 				case "appear":
-					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToBeDisplayed(), "The retailers popup was not displayed when it was expected to be!","The retailers popup was displayed as expected");
+					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToBeDisplayed(), "The retailers popup was not displayed when it was expected to be!", "The retailers popup was displayed as expected");
 					return;
 				case "disappear":
-					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToNotBeDisplayed(), "The retailers popup was displayed when it was not expected to be!","The retailers popup was not displayed as expected");
+					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToNotBeDisplayed(), "The retailers popup was displayed when it was not expected to be!", "The retailers popup was not displayed as expected");
 					return;
 				default:
 					Report.Info("The parameter did not match expected: 'appear' or 'disappear'");
@@ -2527,7 +2539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			if(condition=="not see")
+			if (condition == "not see")
 			{
 				if (thisModalDialog.WaitForContainerToBeVisible(5))
 				{
@@ -2541,7 +2553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-		
+
 		}
 
 		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: (.*)")]
@@ -2574,7 +2586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I handle the Alert for Archive by answering (Ok|Cancel)")]
 		public void HandleTheAlertForArchiveByAnswering(string response)
 		{
-			Report.IsTrue(new ProductsGrid().ArchiveAlert(response),$"Selected {response} in Archive Alert.",$"Unable to select {response} in Archive alert.");
+			Report.IsTrue(new ProductsGrid().ArchiveAlert(response), $"Selected {response} in Archive Alert.", $"Unable to select {response} in Archive alert.");
 			string s = response;
 		}
 
@@ -2589,7 +2601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisProductsGrid = new ProductsGrid();
 			bool status = thisProductsGrid.IsShowArchivedRetailersChecked();
-			if(status)
+			if (status)
 			{
 				Report.Info($"The checkbox was checked, we need to uncheck it now");
 				Report.Screenshot();
@@ -2736,7 +2748,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string archivedRetailer = Context.GetFromContext(savedAs).ToString();
 				var selProdGrid = new ProductsGrid();
 				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
-				List<string> retailers = productElement.Retailers;				
+				List<string> retailers = productElement.Retailers;
 				if (retailers.Contains(archivedRetailer))
 				{
 					Report.Failure($"The archieved retailer was still found under the product.");
@@ -2745,7 +2757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success($"The arhcieved retailer was not found for the product in the product.");
 				return;
 
-				
+
 
 			}
 			else
@@ -2804,7 +2816,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
-
 
 		[StepDefinition(@"I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers")]
 		public void GivenIConfirmTheProductsShownHaveAtLeastOneGreen()
@@ -2967,7 +2978,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-
 		[StepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatOnlyDiscontinuedProductsAppearInTheMyProductsGrid()
 		{
@@ -2975,14 +2985,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " discontinued products displayed");
 		}
 
+		[StepDefinition(@"I confirm that only Single-Retailer products appear in the 'My Products' grid")]
+		public void OnlySingleRetailerProductsAppear()
+		{
+			var newProdGrid = new ProductsGrid();
+			if (Report.IsTrue(newProdGrid.ProductListExists(), "Failed to get Products list", "Successfully got Products list"))
+			{
+				Report.IsTrue(newProdGrid.OnlySingleRetailerProductsInProductGrid(), "Failed to confirm only only Products with Single Retailer next to the Product ID show in My Products", "Successfully confirmed only only Products with Single Retailer next to the Product ID show in My Productst");
+			}
+		}
+
+		[StepDefinition(@"I click the (.*) checkbox in the 'My Products' grid")]
+		public void ThenIClickTheCheckboxInTheMyProductsGrid(string checkbox)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			if (Report.IsTrue(moreFiltersObject.CheckboxExists(checkbox), $"Failed to find checkbox {checkbox}", $"Successfully found checkbox {checkbox}"))
+			{
+				Report.IsTrue(moreFiltersObject.ClickCheckboxInProductGrig(checkbox), $"Failed to click checkbox {checkbox}", $"Successfully clicked checkbox {checkbox}");
+				Delay.Seconds(5);
+			}
+		}
+
+		[StepDefinition(@"In Product Grid I confirm if the checkbox (.*) is (selected|not selected)")]
+		public void ConfirmCheckboxInProductGridIsSelected(string checkbox, string condition)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+
+			if (condition == "selected")
+			{
+				Report.IsTrue(moreFiltersObject.CheckCheckboxIsSelected(checkbox), $"{checkbox} checkbox is not selected, but should be", $"{checkbox} checkbox is selected as expected");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsFalse(moreFiltersObject.CheckCheckboxIsSelected(checkbox), $"{checkbox} checkbox is selected, but should not be", $"{checkbox} checkbox is not selected, as expected");
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I click the Clear button in the More Filters section")]
+		public void ThenIClickClearInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			if (Report.IsTrue(moreFiltersObject.ClearButtonExists(), "Failed to find The Clear Button", "Successfully found The Clear Button"))
+			{
+				Report.IsTrue(moreFiltersObject.ClickClearFilterButtonInMoreFilters(), "Failed to click The Clear Button", "Successfully clicked The Clear Button");
+				Delay.Seconds(5);
+			}
+		}
+		[StepDefinition(@"I confirm More Filters section (is|is not) expended")]
+		public void ThenIConfirmMoreFiltersSectionIsExpended(string condition)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+
+			if (condition == "is")
+			{
+				Report.IsTrue(moreFiltersObject.MoreFiltersExpanded(), "Failed to confirm More Filters section is expended", "Successfully confirmed More Filters section is expended");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsFalse(moreFiltersObject.MoreFiltersExpanded(), "Failed to confirm More Filters section is not expended", "Successfully confirmed More Filters section is not expended");
+				Report.Screenshot();
+			}
+
+		}
+
+
 		[StepDefinition(@"I confirm that all products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatAllProductsAppearInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " products displayed");
+			Report.Screenshot();
 		}
 
-	
+
 		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
 		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
@@ -3018,7 +3096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
-	
+
 			RetailPartners retailPartnersObject = new RetailPartners();
 			string savedAs = productID;
 			try
@@ -3502,6 +3580,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-	}
+		[StepDefinition(@"I confirm that when hover over on the Single Retailer : (.*) message is showing")]
+		public void IConfirmTheMessageForSingleRetailer(string message)
+		{
+			try
+			{
+				var selMoreFilters = new MoreFilters();
+				string MessageShowing = selMoreFilters.ConfirmMessageForSingleRetailerRA();
+				Report.IsTrue(MessageShowing == message,
+					$"Tier information was showing: '{ MessageShowing }', but was expected to show: '{ message }'",
+					$"Tier information was showing: '{ MessageShowing }', as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I confirm that the indicator Single Retailer RA is showing above No Retailer and Rite Aid")]
+		public void IConfirmForTheIndicatorSingleRetailerRA()
+		{
+			var selMoreFilters = new MoreFilters();
+			Report.IsTrue(selMoreFilters.ConfirmTheIndicatorSingleRetailerRA(), "The indicator Single Retailer RA is not showing above No Retailer and Rite Aid", "The indicator Single Retailer RA is showing above No Retailer and Rite Aid");
+		}
 
+		[StepDefinition(@"I confirm that the indicator Single Retailer RA is not showing under the Retailers column")]
+		public void ThenIConfirmThatTheIndicatorSingleRetailerRAIsNotShowingUnderTheRetailersColumn()
+		{
+			var selMoreFilters = new MoreFilters();
+			Report.IsFalse(selMoreFilters.IndicatorExists(), "The indicator Single Retailer RA is showing under the Retailers column, but it should not", "The indicator Single Retailer RA is not showing under the Retailers column, as expected");
+		}
+
+
+
+		[StepDefinition(@"I Click on the ADDITIONAL PROGRAMS drop down and confirm options should be available under Additional Programs")]
+		public void IClickOnAdditionalPrograms()
+		{
+			var selMoreFilters = new MoreFilters();
+			Report.IsTrue(selMoreFilters.ClickAdditionalPrograms(), "Failed to click on Additional Programs dropdown", "Successfully clicked Additional programs dropdown");
+			Report.IsTrue(selMoreFilters.ConfirmAdditionalProgramsDropdownOpen(), "Failed to dispaly Additional Programs dropdown", "Successfully Additional programs dropdown displayed");
+			List<string> isStringContained = selMoreFilters.GetDataOfAdditionalPrograms();
+			Report.IsTrue(isStringContained.All(x => (new[] { "None", "California Cleaning SB 258", "California Cosmetic Fragrance/Flavor SB 312", "Distributor Product - Approved", "Distributor Product - Pending Approval", "Distributor Product - Rejected", "Target Sustainability Product Index" }).Contains(x)), "Failed to find the expected option under Additional Programs", "Successfully found the expected options under Additional programs");
+
+		}
+	}
 }

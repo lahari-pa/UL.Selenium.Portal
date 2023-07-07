@@ -818,7 +818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Thank_You();
 
-				Report.Info("Thank You Text = " + ty_text);
+				Report.Info($"Thank You Text = '{ty_text}'");
 
 				Report.IsTrue(myPay.Thank_You_TextExists(ty_text.Trim()), $"Displayed Text does not contain: '{ty_text}'",
 					$"Displayed Text contains: '{ty_text}'");
@@ -1068,6 +1068,134 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.IsTrue(myPay.ConfirmCompanyName(companyName),
 						"I Confirm the Contact Information is not updated with the New Company Name", "I Confirm the Contact Information is updated with the New Company Name");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I click the back arrow next to payment methods")]
+		public void GivenIClickTheBackArrowNextToPaymentMethods()
+		{
+			Report.IsTrue(new PaymentMethods().ClickBackButton(), "Failed to click the back arrow",
+				"Successfully clicked the back arrow");
+		}
+
+		[StepDefinition(@"In the payment methods page I confirm that the Contact Information account name: (.*), firstname: (.*),last name: (.*), email addresss: (.*) appear correct")]
+		public void IConfirmContactInformationAppear(string account_name, string first_name, string last_name, string email_address)
+		{
+			try
+			{
+				var myPay = new PaymentMethods();
+				GeneralUtilities.Wait_for_load_finish();
+				Report.IsTrue(myPay.Confirm_Contact_Info(account_name, first_name, last_name, email_address),
+					"Contact Information Incorrect", "Confirmed Contact Information");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the payment methods page I confirm that the Billing Address address one: (.*), address two: (.*), cityStateZip: (.*), country: (.*), phoneNo: (.*) appear correct")]
+		public void IConfirmBillingAddressAppear(string address_one, string address_two, string city_state_zip, string country, string phone_no)
+		{
+			try
+			{
+				var myPay = new PaymentMethods();
+				Report.IsTrue(myPay.Confirm_Billing_Address(address_one, address_two, city_state_zip, country, phone_no),
+					"Billing Address Incorrect", "Confirmed Billing Address");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the company information page I confirm that the Address (.*) for: action_menu: (.*) country: (.*) address one: (.*), address two: (.*), city: (.*), State: (.*), Zip: (.*), phoneNo: (.*), saveAddressOption: (.*) updated correctly")]
+		public void IConfirmUpdateContactInformation(string action, string action_menu, string country, string address1, string address2, string city, string state, string zip, string phone, string saveOption)
+		{
+			try
+			{
+				Report.Info("Editing the contact address Information");
+				var myInfo = new ContactInformation_Edit_Address();
+				myInfo.ClickEditAction(action);
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				myInfo.Edit_Country_Address(action, country);
+				myInfo.Edit_Address_One(action, address1);
+				myInfo.Edit_Address_Two(action, address2);
+				myInfo.Edit_City_Address(action, city);
+				myInfo.Edit_State_Address(action, state);
+				myInfo.Edit_Zip_Address(action, zip);
+				myInfo.Edit_Phone_Number(action, phone);
+
+				Report.Info("Saving the contact information");
+				myInfo.Save_click(saveOption);
+				Delay.Seconds(5 * Delay.SpeedFactor);
+
+				Report.Info("Making sure that the Contact information edited successfully");
+				Report.IsTrue(myInfo.Confirm_Country_AddressAppear(action_menu, country), $"{ action_menu} country Incorrect", $"Confirmed editing {action_menu} country");
+				Report.IsTrue(myInfo.Confirm_addressOne_AddressAppear(action_menu, address1), $"{ action_menu} address one Incorrect", $"Confirmed editing {action_menu} one");
+				Report.IsTrue(myInfo.Confirm_addressTwo_AddressAppear(action_menu, address2), $"{ action_menu} address two Incorrect", $"Confirmed editing {action_menu} two");
+				Report.IsTrue(myInfo.Confirm_City_AddressAppear(action_menu, city), $"{ action_menu} city Incorrect", $"Confirmed editing {action_menu} city");
+				Report.IsTrue(myInfo.Confirm_State_AddressAppear(action_menu, state), $"{ action_menu} state Incorrect", $"Confirmed editing {action_menu} state");
+				Report.IsTrue(myInfo.Confirm_Zip_Code_AddressAppear(action_menu, zip), $"{ action_menu} zip code Incorrect", $"Confirmed editing {action_menu} zip code");
+				Report.IsTrue(myInfo.Confirm_PhoneNo_AddressAppear(action_menu, phone), $"{ action_menu} phone number Incorrect", $"Confirmed editing {action_menu} phone number");				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		
+		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: (.*), quarterly: (.*), monthly: (.*) options")]
+		public void ThenIConfirmTheBillingFrequencyRadioButtons(string yearly, string quarterly, string monthly)
+		{
+			try
+			{
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				var mySub = new PaymentMethods_Subscription_Billing();
+				mySub.Billing_frequency_options(yearly, quarterly, monthly);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see Yearly label")]
+		public void ThenIConfirmYearlyLabel()
+		{
+			try
+			{
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Billing_frequency_YearlyLabel(), "Cannot see Yearly label", "Can see Yearly label");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Click on the back arrow in Payment methods")]
+		public void ThenIClickOnTheBackArrow()
+		{
+			Report.StartStep(Report.Details.StepIndex + " - Click on the back arrow next to ");
+			try
+			{
+				var myPay = new PaymentMethods();
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				Report.IsTrue(myPay.Continue_back_arrow(), "Failed to Click Back Arrow", "Back Arrow Clicked");
+				Delay.Seconds(15 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{

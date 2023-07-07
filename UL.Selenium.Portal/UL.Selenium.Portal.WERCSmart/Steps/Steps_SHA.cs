@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using TReVor.Core.Classes.Software;
+using NUnit.Framework;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2727,9 +2728,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return count;
 		}
 
-
-
-
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
 		{
@@ -2744,6 +2742,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
 				"StudioSupplierManager has opened");
+
+		}
+
+		[StepDefinition(@"I (should|should not) see the '(.*)' popup")]
+		public void ThenIShouldSeeThePopup(string condition,  string header)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			var thisStudioSHAManager = new StudioSHAManager();
+			if (condition == "should")
+			{
+				Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
+					"StudioSupplierManager has opened");
+				Report.IsTrue(thisStudioSHAManager.CheckPopupHeader(header), $"Failed to verify the {header} popup header", $"Succesfully verified the {header} popup header");
+			}
+			else
+			{
+				Report.IsFalse(thisStudioSHAManager.CheckPopupHeader(header), $"Failed to verify the {header} popup is closed", $"Succesfully closed the {header} popup");
+				Report.Screenshot();
+			}
+
+		}
+		[StepDefinition(@"An alert is displayed with next errors:")]
+		public void ThenAnAlertIsDisplayedWithNextErrors(Table table)
+		{
+			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error { thisRow["Error"]}");
+			}
+
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I check next radio buttons:")]
+		public void ThenInTheSupplierManagerPopupICheckNextRadioButtons(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				if (Report.IsTrue(thisStudioSupplierManager.RadioButtonExists(thisRow["Radio Button"]), $"Failed to find radio button {thisRow["Radio Button"]}", $"Succesfully found radio button {thisRow["Radio Button"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckSupplierSearchTypeRadio(thisRow["Radio Button"]), $"Failed to confirm radio button {thisRow["Radio Button"]} is displayed", $"Succesfully confirmed radio button {thisRow["Radio Button"]} is displayed");
+				}
+			}
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
@@ -2818,6 +2859,185 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
 				"Clicked search button");
 			Delay.Seconds(10);
+		}
+
+		//Step can be used for New User Request button in Supplier Manager too
+		[StepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
+		public void ThenInTheSupplierManagerPopupIClickOnTheNewSupplierButton(string button)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.InSupplierManagerClickButton(button), $"Failed to click {button} button",
+				$"Clicked {button} button");
+		}
+
+		[StepDefinition(@"In the Add New Supplier I click on Accept button")]
+		public void ThenInTheAddNewSupplierIClickOnButtonAccept()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if(Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), "Failed to click Accept button", "Succesfully clicked Accept button");
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Company Name: (.*)")]
+		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CompanyNameInputExists(), "Failed to find Company Name input", "Succesfully found Company Name input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(value), $"Failed to enter {value} in field Company Name",
+			$"Succesfully entered {value} in field Company Name");
+			}
+			
+		}
+		[StepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
+		public void ThenInAddNewSupplierIEnterSupplierSellerID(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.SellerIdInputExists(), "Failed to find Seller ID input", "Succesfully found Seller ID input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSellerId(value), $"Failed to enter {value} in field Supplier Seller ID",
+			$"Succesfully entered {value} in field Supplier Seller ID");
+			}
+			
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
+		public void ThenInAddNewSupplierIEnterCountry(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CountryInputExists(), "Failed to find Country input", "Succesfully found Country input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountry(value), $"Failed to enter {value} in field Country",
+			$"Succesfully entered {value} in field Country");
+			}
+			
+		}
+
+		[StepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
+		public void ThenIAddNewSupplierIEnterCountryCode(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CountryCodeInputExists(), "Failed to find Country Code input", "Succesfully found Country Code input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountryCode(value), $"Failed to enter {value} in field Country Code",
+			$"Succesfully entered {value} in field Country Code");
+			}	
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
+		public void ThenInAddNewSupplierIEnterSupplierPhone(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.SupplierPhoneInputExists(), "Failed to find Phone input", "Succesfully found Phone input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSupplierPhone(value), $"Failed to enter {value} in field Supplier Phone",
+			$"Succesfully entered {value} in field Supplier Phone");
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Address: (.*)")]
+		public void ThenInAddNewSupplierIEnterAddress(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.AddressInputExists(), "Failed to find Address input", "Succesfully found Address input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterAddress(value), $"Failed to enter {value} in field Address",
+			$"Succesfully entered {value} in field Address");
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter City: (.*)")]
+		public void ThenInAddNewSupplierIEnterCity(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.CityInputExists(), "Failed to find City input", "Succesfully found City input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCity(value), $"Failed to enter {value} in field City",
+			$"Succesfully entered {value} in field City");
+			}
+			
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter State: (.*)")]
+		public void ThenInAddNewSupplierIEnterState(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.StateInputExists(), "Failed to find State input", "Succesfully found State input"))
+			{
+			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterState(value), $"Failed to enter {value} in field State",
+			$"Succesfully entered {value} in field State");
+			}		
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
+		public void ThenInAddNewSupplierIEnterPostalCode(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.PostalCodeInputExists(), "Failed to find Postal Code input", "Succesfully found Postal Code input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterPostalCode(value), $"Failed to enter {value} in field Postal Code",
+			$"Succesfully entered {value} in field Postal Code");
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Name: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactName(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactNameInputExists(), "Failed to find Contact Name input", "Succesfully found Contact Name input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactName(value), $"Failed to enter {value} in field Contact Name",
+			$"Succesfully entered {value} in field Contact Name");
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Email: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactEmail(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Contact Email input", "Succesfully found Contact Email input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
+			$"Succesfully entered {value} in field Contact Email");
+			}	
+		}
+
+		[StepDefinition(@"I enter email address: (.*)")]
+		public void IEnterEmailAddress(string email)
+		{
+			try
+			{
+				if (email.Contains("savedas"))
+				{
+					email = email.Replace("savedas", "").Trim();
+					email = Context.GetFromContext(email).ToString();
+					var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+					if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Email address input", "Succesfully found email address input"))
+					{
+						Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(email), $"Failed to enter {email} in field Email address",
+					$"Succesfully entered {email} in field Email address");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
+		public void ThenInAddNewSupplierIEnterContactPhone(string value)
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+			if (Report.IsTrue(thisStudioAddNewSupplier.ContactPhoneInputExists(), "Failed to find Contact Phone input", "Succesfully found Contact Phone input"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
+			$"Succesfully entered {value} in field Contact Phone");
+			}	
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
@@ -4350,6 +4570,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I check next columns exist:")]
+		public void ThenInTheSupplierManagerPopupICheckNextColumnsExist(Table table)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				if (Report.IsTrue(thisStudioSupplierManager.ColunmTitleExists(thisRow["Column"]), $"Failed to find column {thisRow["Column"]}", $"Succesfully found column {thisRow["Column"]}"))
+				{
+					Report.IsTrue(thisStudioSupplierManager.CheckForSupplierManagerColumn(thisRow["Column"]), $"Failed to confirm column {thisRow["Column"]} is displayed", $"Succesfully confirmed column {thisRow["Column"]} is displayed");
+				}
+			}
+		}
+		[StepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
+		public void ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank()
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (Report.IsTrue(thisStudioSupplierManager.ColumnNamesExists(), $"Failed to find columns names", $"Succesfully found column names"))
+			{
+				Report.IsTrue(thisStudioSupplierManager.CheckSubscriptionColumnValues(), $"Failed to confirm all values in Subscription column are Tiered, Single, Single+Tier or blank", $"Succesfully confirmed all values in Subscription column are Tiered, Single, Single+Tier, blank or there is no values to be checked");
+			}
+		}
+
 		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
 		public void IEnsureThatISeeTheStatusUnderTheSubscriptionStatusColumn(string status)
 		{
@@ -4810,6 +5052,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.FindColumnInProductDataPageWithTable(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+		[StepDefinition(@"In the Add New Supplier I click on Cancel button")]
+		public void ThenInTheAddNewSupplierIClickOnCancelButton()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.CancelButtonExists(), "Failed to find cancel button", "Succesfully found cancel button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickCancelButton(), "Failed to click cancel button", "Succesfully clicked cancel button");
+			}
+		}
+
+		[StepDefinition(@"I click on New Supplier Button")]
+		public void ThenClickNewSupplierButton()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.NewSupplierButtonExists(), "Failed to find New Supplier button", "Succesfully found New Supplier button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.ClickNewSupplierButton(), "Failed to click New Supplier button", "Succesfully clicked New Supplier button");
+			}
+		}
+
+		[StepDefinition(@"I close Supplier Manager window")]
+		public void ThenICloseSupplierManagerWindow()
+		{
+			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+
+			if (Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButtonExists(), "Failed to find Supplier Manager window close button", "Succesfully found Supplier Manager window close button"))
+			{
+				Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButton(), "Failed to click on Supplier Manager window button", "Succesfully clicked Supplier Manager window close button");
+			}
 		}
 	}
 

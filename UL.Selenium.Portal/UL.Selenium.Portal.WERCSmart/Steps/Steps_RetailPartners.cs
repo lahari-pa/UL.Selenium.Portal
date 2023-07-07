@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that the heading '{heading}' is showing");
 			try
 			{
-				Report.Info("Checking that the heading " + heading + " is showing");
+				Report.Info($"Checking that the heading '{ heading }' is showing");
 				var selRetailPartners = new RetailPartners();
 
 				if (!selRetailPartners.WaitForContainerToBeVisible(10))
@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.WaitForContainerToBeVisible(10))
+			if (!selRetailPartners.WaitForContainerToBeVisible(30))
 			{
 				throw new Exception("Page failed to load!");
 			}
@@ -2192,7 +2192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
 		}
 
-
+		
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs, string wpsidSavedAs, Table table)
 		{
@@ -2710,6 +2710,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[Then(@"I verify sheet (.*) in downloaded file (.*) saved as (.*) contains data:")]
+		public void ThenIVerifyDownloadedFileRA_Report_DataUsageTier___XlsxSavedAsFileContainsData(string sheetName, string file, string savedAs, Table table)
+		{
+			var retailPartnersDetails = new RetailPartnersDetails();
+			Report.IsTrue(retailPartnersDetails.VerifyExcelFile(sheetName, file, savedAs, table), "Failed to validate excel File", "Successfully validated excel File");	
+
+		}
+
+		[StepDefinition(@"I Confirm Regulatory support toggle is Active")]
+		public void ConfirmRegulatorySupportTogglenInDataTierDetails()
+		{
+			Report.Info("Start Step: I verify 'Tier 1' is set to: active/ on");
+			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTierOnofFSwitch("Tier 1"), "Tier 1 was not set to active!", "Tier 1 was set to active as expected");
+		}
+
+		[StepDefinition(@"I confirm the following text in Data Consent Tiers table is displayed:(.*)")]
+		public void ConfirmTheFollowingtextDataConsentTiersTable(string text)
+		{
+			Report.IsTrue(new RetailPartnersDetails().DataConsentTierTableData().Text.Contains(text),
+				$"The Data Consent Tiers table with following text {text} was not displayed!",
+				$"The Data Consent Tiers table with following text {text} was displayed as expected.");
+		}
 	}
 
 

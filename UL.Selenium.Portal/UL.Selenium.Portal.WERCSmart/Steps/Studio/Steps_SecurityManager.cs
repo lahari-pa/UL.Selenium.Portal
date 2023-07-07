@@ -175,7 +175,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error($"Could not find the Credentials for {savedAs}");
-				Report.EndScenario();
 			}
 		}
 
@@ -194,7 +193,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error($"Could not find the Credentials for {savedAs}");
-				Report.EndScenario();
 			}
 		}
 		[StepDefinition(@"Under '(.*)' I double click the username stored in '(.*)'")]
@@ -212,7 +210,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error($"Could not find the Credentials for {savedAs}");
-				Report.EndScenario();
 			}
 		}
 		[StepDefinition(@"Under '(.*)' I click the username stored in '(.*)'")]
@@ -230,7 +227,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error($"Could not find the Credentials for {savedAs}");
-				Report.EndScenario();
 			}
 		}
 
@@ -277,7 +273,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error($"Could not find the Credentials for {savedAs}");
-				Report.EndScenario();
 			}
 		}
 		[StepDefinition(@"In the '(Users and Roles)' window, I click the '(All Roles)' button")]

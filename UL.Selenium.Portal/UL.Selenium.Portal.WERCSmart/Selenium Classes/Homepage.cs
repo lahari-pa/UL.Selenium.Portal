@@ -16,15 +16,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-
+		IWebElement ProdName => this.ContainerElement.FindElement(By.XPath(@".//table[@class='table table-hover products-table']//p"), 2);
+		public bool ProdNameExists()
+		{
+			return this.ProdName!= null;
+		}
 
 		public bool SubTestStep()
         {
 			return true;
         }
-
-
-
 
 		public bool QuickLinkButtonShowing(string button)
 		{
@@ -259,7 +260,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return ResolveButton.TryClick();
 		}
 
-		
+		public bool ProductNameWrapped()
+		{
+			bool result = false;
+			if (this.ProdName.Displayed)
+			{
+				string cssvalue = this.ProdName.GetCssValue("overflow-wrap");
+				Report.Info(cssvalue);
+				if (cssvalue == "break-word")
+				{
+					Report.Info("Product Name is wrapped within the area of the column ID/Product Name");
+					result = true;
+				}
+			}
+			return result;
+		}
+
+
 		//public bool DataConsentPopupPresent()
 		//{
 

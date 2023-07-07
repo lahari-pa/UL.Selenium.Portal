@@ -433,12 +433,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> allIngredientsNames = new List<string>();
 			var tableCast = ingredientsTable.Rows.Cast<TableRow>().ToList();
 			var headerRow = tableCast[0];
-			if(headerRow.Keys.Contains("ComponentName"))
+			if (headerRow.Keys.Contains("ComponentName"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["ComponentName"]));
 
 			}
-			if(headerRow.Keys.Contains("CASNumber"))
+			if (headerRow.Keys.Contains("CASNumber"))
 			{
 				ingredientsTable.Rows.Cast<TableRow>().ToList().ForEach(x => allIngredientsNames.Add(x["CASNumber"]));
 
@@ -1643,20 +1643,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
-		public void GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath()
-		{
-			Report.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
-			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
-			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
-			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
-			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
-		}
-
 		[StepDefinition(@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_SpecialPermit_ProductLabel()
 		{
@@ -2740,7 +2726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
-			Report.StartSubStep("I add the ingredient " + name + " at 100%");
+			Report.StartSubStep($"I add the ingredient '{ name }' at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
@@ -2769,9 +2755,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Report.StartSubStep("In the Ingredients page I click Continue");
 					var selNewProduct = new NewProduct();
-					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false),"Failed to click continue","Continue was clicked");
+					Report.IsTrue(selNewProduct.ClickContinue(waitForLoadingBtnSpinner: false), "Failed to click continue", "Continue was clicked");
 					Report.Screenshot();
-					
+
 					if (new Ingredients().ConfirmThereIsAPopupViewTitled("Product Contains Ingredients Typical of a Pesticide"))
 					{
 						new StepsIngredients().ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText("The Product Type, Pest Selection, and Ingredients listed are accurate.");
@@ -2839,6 +2825,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
 			stepsRegulatoryInformation.SetTSCATo("Exempt");
+			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartSubStep("In the Waste Classification Data page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
+		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
@@ -3259,6 +3262,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I confirm 'Quantity' is visible in the UPC header");
 			MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Quantity",
+				quantity
+			});
+			Report.StartSubStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartSubStep("I select Package Type from drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 213071 \(Enter Universal Product Code \(UPC\) - Applicable Only to Alkaline Battery-Quantity Field Required\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		public void SharedEnterUPC_Battery_ConfirmQuantity(string upc, string containerType,
+			string size, string quantity)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			var upcTable = new Table(new string[] {
@@ -4999,7 +5040,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"Does not apply");
-			
+
 			Report.StartSubStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
@@ -5535,8 +5576,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Select Retailers popup I select the retailer: Rite Aid");
 			new StepsSelectRetailers().SelectTheRetailer("Rite Aid");
 			Report.StartSubStep("I enter private label as 'This Private Label'");
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Rite Aid", "This Private Label");
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
+			new Steps_Retailer().RetailerPrivateLabelDoesDoesNotExist("Rite Aid", "Rite Aid", "does");
+			new Steps_Retailer().RetailerPrivateLabelSelect("Rite Aid", "Rite Aid");
 			Report.StartSubStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -5590,7 +5631,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selectRetailers = new StepsSelectRetailers();
 							selectRetailers.ClickTheSingleRetailerCheckbox();
 						}
-					}					
+					}
 				}
 				Report.StartSubStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
@@ -5648,14 +5689,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", showSuccessScreenshot: false);
-			Report.Info("Getting saved product: " + savedAs);
+			Report.Info($"Getting saved product: { savedAs}");
 			if (!Context.Contains(savedAs))
 			{
-				Report.Error("Context does not contain: " + savedAs);
+				Report.Error($"Context does not contain: {savedAs}");
 			}
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = product.Id;
-			Report.Info("Looking for id: " + id);
+			Report.Info($"Looking for id: { id }");
 			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
@@ -5721,9 +5762,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = product.Id;
 
 
-			if(upc.Contains("savedAs"))
+			if (upc.Contains("savedAs"))
 			{
-				if(!Context.Contains(upc.Replace("savedAs", "")))
+				if (!Context.Contains(upc.Replace("savedAs", "")))
 				{
 					Report.Info($"There was no value for {upc.Replace("savedAs", "")} found in context");
 				}
@@ -8097,7 +8138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
-			Report.IsTrue(paf.WaitForContainerToBeInvisible(30),"Failure, failed to close","Success, closed");
+			Report.IsTrue(paf.WaitForContainerToBeInvisible(30), "Failure, failed to close", "Success, closed");
 		}
 
 		[StepDefinition(
@@ -8328,6 +8369,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
+			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 213199 - Regulatory Documents to Provide - Required Document Uploads - Applicable Only to Alkaline Battery")]
+		public void ICallSharedStep104662_RegulatoryDocumentsToProvide_AlcalineBatteries()
+		{
+			
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I confirm text 'Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.' is shown in Regulatory Documents to Provide");
+			MyNewProduct.RegulatoryDocumentsText("Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.");
+			Report.StartSubStep("I confirm field 'Article Information Sheet (AIS)' exists");
+			MyNewProduct.ThenFieldExists("Article Information Sheet (AIS)");
+			Report.StartSubStep("I upload a PDF document into the Article Information Sheet (AIS) field.");
+			MyNewProduct.UploadPDFFile("Article Information Sheet (AIS)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.");
+			MyNewProduct.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.", "I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the OSHA-COMPLIANT field.");
+			MyNewProduct.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
+			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the Upload SDS field.");
+			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Prodivde page, I enter the value: 2023-06-27 into the WHMIS SDS Docmument Date Field");
+			newProdClass.EnterWHMISSDSDocumentDate("2023-06-27");
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
@@ -14200,7 +14276,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
-			
+
 
 			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
 			Delay.Seconds(1);
@@ -14299,6 +14375,65 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 77383 \(Regulatory Documents to Provide - Request to Author \(Happy Path\)\)")]
+		[StepDefinition(@"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
+		public void GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared step In the Supplier Manager Popup - radio button '(.*)',enter in search '(.*)' and check column headers:")]
+			public void ThenICallSharedStepSupplierManagerPopup_RadioButtonEnterInSearchAndCheckColumnHeaders(string radioButton, string searchValue, Table table)
+			{
+				Report.UseSubSteps = true;
+				var thisSteps_SHA = new Steps_SHA();
+				Report.StartSubStep($"In the Supplier Manager Popup I select radio button: {radioButton}");
+				thisSteps_SHA.InSupplierManagerPopupISelectRadioButton(radioButton);
+				Report.StartSubStep($"In the Supplier Manager Popup I enter the following search term: {searchValue}");
+				thisSteps_SHA.InSupplierManagerPopupIEnterSearchTerm(searchValue);
+				Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+				thisSteps_SHA.InSupplierManagerPopupIClickOnTheSearchButton();
+				Report.StartSubStep("In the Supplier Manager Popup I check next columns exist:");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckNextColumnsExist(table);
+				Report.StartSubStep("In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single+Tier or it should be blank");
+				thisSteps_SHA.ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank();
+
+			}
+		[StepDefinition(@"I call Shared Step 183893 \(Single Retailer - Retailer Screen - Select retailer\)")]
+		public void ThenICallSharedStepSingleRetailer_RetailerScreen_SelectRetailer(Table table)
+		{
+			var newTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer",
+			});
+			newTable.AddRow(new string[] {
+				"No Retailer/No UPC Product",
+			});
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsSelectRetailer = new StepsSelectRetailers();
+			var stepsRetailer = new Steps_Retailer();
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the Retailer Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			Report.StartSubStep("I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is present for stand alone batteries in Retailer page");
+			stepsSelectRetailer.ThenIConfirmNoRetailerRegistrationCheckbox("Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program", "present");
+			Report.StartSubStep("In the 'Retailers' table I see the retailer: No Retailer/No UPC Product");
+			stepsRetailer.SelectedRetailersShouldBe("should", newTable);
+			Report.StartSubStep("I select the following retailers in the Select Retailers popup list view and check no more retailers can be selected: Amazon");
+			stepsSelectRetailer.ThenInTheWindowICheckOnlyOneRetailerCanBeSelected(table);
+			Report.StartSubStep("I click Done on Select Retailers window");
+			stepsSelectRetailer.IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartSubStep("In the Retailer page I click Continue");
+			stepsNewProduct.ClickContinue();
+
 		}
 	}
 }

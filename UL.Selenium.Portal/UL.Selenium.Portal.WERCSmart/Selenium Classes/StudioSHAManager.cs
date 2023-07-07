@@ -45,6 +45,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool CheckPopupHeader(string header)
+		{
+			IWebElement PopupHeader = this.containerElement.FindElement(By.XPath($"//span[@class = 'ui-dialog-title' and text() = '{header}']"));
+			if( PopupHeader == null)
+			{
+				Report.Info("Failed to find popup header");
+				return false;
+			}
+			string getHeader = PopupHeader.Text;
+			return getHeader == header;
+		}
+
 		public bool SwitchToFrame()
 		{
 			try
@@ -1215,10 +1227,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget1FRAME"))
+				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
 				{
 					SeleniumWebDriver.CurrentDriver.ExitIFrame();
-					if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget1FRAME"))
+					if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
 					{
 						Report.Info("Could not switch to iframe");
 						return false;
@@ -1321,7 +1333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingOption == null)
 			{
-				Report.Info("No matching menu option found: " + option + ". Available options: " +
+				Report.Info($"No matching menu option found: '{ option }'. Available options: " +
 							string.Join(",", listOfOptions));
 				return false;
 			}

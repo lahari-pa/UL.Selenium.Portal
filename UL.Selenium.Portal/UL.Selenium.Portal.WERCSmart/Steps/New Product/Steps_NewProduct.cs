@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using UL.Automation.Utilities.Helpers;
+using Mailosaur;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -254,7 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to, ${page } is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -793,10 +794,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I delete UPC: (.*)")]
 		public void GivenIDeleteUPC(string upc)
 		{
-			Delay.Seconds(10);
+			Delay.Seconds(30);
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
-			Delay.Seconds(10);
+			Delay.Seconds(30);
 		}
 
 		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
@@ -1286,15 +1287,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
-					"Failed to set the input to " + value.Trim() + " in section: " + section.Trim(),
-					"Successfully set the input to " + value.Trim() + " in section: " + section.Trim());
+					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {value.Trim()} in section: { section.Trim()}");
 				Delay.Seconds(1);
 			}
 			else
 			{
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
-					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+					$"Failed to set the input to {option.Trim()} in section: {section.Trim()}",
+					$"Successfully set the input to {option.Trim()} in section: {section.Trim()}");
 				Delay.Seconds(1);
 			}
 		}
@@ -2954,6 +2955,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
+		[StepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
+		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
+		{
+			if (Report.IsTrue(new NewProduct().InputFieldExists(fieldName), "Feiled to find Input field", "Successfully found the Input field"))
+			{ 
+			Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
+			}
+		}
 
 		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
 		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)
@@ -3167,6 +3176,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(new NewProduct().CheckEmailAddressAgainstDataAcceptanceEmail(email, dataAcceptanceEmail), "Failed to check user email: " + email + " against: " + dataAcceptanceEmail, "Successfully checked user email: " + email + " against: " + dataAcceptanceEmail);
 		}
+
+		[StepDefinition(@"In Regulatory Documents to Provide I see text:(.*)")]
+
+		public void RegulatoryDocumentsText(string text)
+		{
+			List<string> getText = new List<string>();
+			getText = new NewProduct().Get3rdPartyPageAlerts();
+			Report.IsTrue(getText.Contains(text), $"Failed to confirm text '{text}' is shown", $"Successfully confirmed text '{text}' is shown");
+		}
+
 
 		#endregion
 		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]

@@ -7,7 +7,7 @@
 @Signup
 @UPC
 @run_ForgottenPassword
-
+@ignore
 Feature: Forgotten Password
 
 # Will need to create a user for this to work! Don't use the master

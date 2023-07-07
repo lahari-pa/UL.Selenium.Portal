@@ -8,6 +8,10 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TechTalk.SpecFlow;
+using UL.Automation.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -55,21 +59,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickRetailer(string retailer, bool exact = false)
 		{
 			// Finds all the most recent retail partners
-			IList<IWebElement> recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
+			IList<IWebElement> recentPartners = this.ContainerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
 			if (recentPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
 				return recentPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
 			// Retailer not found in the most recent retailers portion, so checking the rest of the retailers
-			IList<IWebElement> allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
+			IList<IWebElement> allPartners = this.ContainerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
 			if (allPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
 				return allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
 			// Retailer not found!
-			Report.Failure("No matching retailer for: " + retailer + " was found!");
+			Report.Failure($"No matching retailer for: '{ retailer }' was found!");
 			return false;
 		}
 
@@ -356,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool GetDataConsentTierOnofFSwitch(string tier)
 		{
-			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			IWebElement onOffSwitch = this.ContainerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
 			if (onOffSwitch != null)
 			{
 				return true;
@@ -602,6 +606,92 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return text;
 		}
 
+		public bool VerifyExcelFile(string sheetName, string fileName, string savedAs, Table table)
+		{
+			var upc = new UPC();
+			var tableData = new List<string>();
+			var fileProductsData = new List<string>();
+			string Id;
+			fileProductsData.AddRange(table.Header);
+			upc.GetFile(fileName, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = this.GetExcelFileData(sheetName, savedAs, actualFile);
+			tableData.AddRange(table.Header);
+			if (fileData is null)
+			{
+				Report.Failure($"The file: {fileName} is empty or is not being read.");
+				return false;
+			}
+			foreach (TableRow row in table.Rows)
+			{
+				var ProductDetails = (ProductInformation)Context.GetFromContext(row["WPS ID"]);
+				var vals = row.RowValuesFromContext();
+				vals[0] = ProductDetails.Id;
+				tableData.AddRange(vals.ToList());
+				if (ProductDetails == null)
+				{
+					Report.Error($"Product saved as '{savedAs}' not found in context.");
+					return false;
+				}
+				Id = ProductDetails.Id;
+				Report.Info($"Looking for product with ID {Id} in excel file");
+				for (int i = 0; i < fileData.Count; i++)
+				{
+					if (fileData[i] == Id)
+					{
+						Report.Info($"Product with ID {Id} was found in excel file");
+						for (int y = i; y < i + table.Header.Count; y++)
+						{
+							fileProductsData.Add(fileData[y]);
+						}
+					}
+				}
+			}
+			if (tableData is null || fileProductsData is null)
+			{
+				Report.Failure($"Either the table data is empty or failed to find products Id in file {fileName}");
+				return false;
+			}
+			for (int i = 0; i < tableData.Count; i++)
+			{
+				string t1 = tableData[i];
+				string t2 = fileProductsData[i];
+				t1 = Regex.Replace(t1, @"\s+", "");
+				t2 = Regex.Replace(t2, @"\s+", "");
+				if (t1 != t2)
+				{
+					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileProductsData[i] + " in row " + i);
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public List<string> GetExcelFileData(string sheetName, string savedAs, object actualFile)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(actualFile.ToString(), sheetName);
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+
+				var list = new List<string>();
+
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					list.AddRange(ExcelUtils.Excel_GetRow(i));
+				}
+				Report.IsTrue(list != null, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+				return list;
+			}
+			return null;
+		}
+		public IWebElement DataConsentTierTableData()
+		{
+			return this.ContainerElement.FindElement(By.XPath(".//table[contains(@data-bind, 'tiersControl.loaded')]"), 2);
+		}
 	}
 
 	public class DataEntryNotification : SeleniumBaseObject

@@ -28,6 +28,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	public class NewProduct : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
+
+		public bool InputFieldExists(string fieldName)
+		{
+			return this.InputField(fieldName) != null;
+		}
 
 		#region web elements
 		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
@@ -228,7 +234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
+			return this.ContainerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
 		}
 
 		public bool ClickSection(string section)
@@ -759,6 +765,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
 			}
 			Report.Info("Attempting to delete: " + upc);
+			Delay.Seconds(20);
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			IWebElement upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.Text.Contains(upc))
 							?? container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc))
@@ -4466,7 +4473,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 
 		}
-
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
 			bool fieldIsCorrectColor = false;
@@ -4530,6 +4536,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
 			}
 
+
+			return fieldIsCorrectColor;
+
+		}
+
+		public bool CheckInputFieldColor(string expectedColor, string fieldName)
+		{
+			bool fieldIsCorrectColor = false;
+
+			Report.Info($"Looking at the input field with label {fieldName}");
+
+			Report.Info($"Exepcted Color is: {expectedColor}");
+
+			string expectedColorCode;
+
+			switch (expectedColor)
+			{
+				case "Green":
+					expectedColorCode = "rgba(240, 255, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length > 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField = parentContainer.FindElement(By.XPath(".//div[@class='ws-dropzone-container']"), 2);
+					break;
+
+				case "Red":
+					expectedColorCode = "rgba(255, 240, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
+
+					break;
+				default:
+					Report.Error("expectedColor must be either: 'Red' or 'Green'");
+					return false;
+			}
+			string inputFieldColor = this.InputField(fieldName).GetCssValue("background-color");
+
+			if (expectedColorCode == inputFieldColor)
+			{
+				Report.Success($"The color of the input field was the color {expectedColor} as expected");
+				fieldIsCorrectColor = true;
+			}
+			else
+			{
+				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
+			}
 
 			return fieldIsCorrectColor;
 

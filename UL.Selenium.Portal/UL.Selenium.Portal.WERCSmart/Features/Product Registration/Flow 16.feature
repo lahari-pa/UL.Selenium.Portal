@@ -26,32 +26,22 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Potassium hydroxide | 20.5    | false               | false       |            |
-		| Zinc chloride       | 9.5     | false               | false       |            |
-		| Aqua                | 70      | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7439-96-5     | 60      | false               | false       |            |
+		| 7782-42-5     | 10      | false               | false       |            |
+		| 7440-66-6     | 25      | false               | false       |            |
+		| 1310-58-3     | 5       | false               | false       |            |
 	# removed Shared Step 57571
 	And I should see the Formulation > Batteries Page
 	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
 	Given I click continue
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 214520 (Waste Classification Data - Applicable Only to Alkaline Battery)
+	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
+	Given I call Shared Step 213071 (Enter Universal Product Code (UPC) - Applicable Only to Alkaline Battery-Quantity Field Required) for UPC saved as: UPC59273 with container type: Plastic Container size: 20 and quantity: 2
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
+	Given I call Shared Step 213199 - Regulatory Documents to Provide - Required Document Uploads - Applicable Only to Alkaline Battery
+	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
 @TestCase:59274
@@ -211,7 +201,9 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
-	
+
+#Removed from regression: 2023/06
+@ignore
 @TestCase:59279
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -373,7 +365,9 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59282. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
-	
+
+#Removed from regression: 2023/06
+@ignore
 @TestCase:59275
 Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

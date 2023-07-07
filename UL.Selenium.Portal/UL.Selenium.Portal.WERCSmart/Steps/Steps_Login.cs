@@ -207,14 +207,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					selLogin.PasswordField = text;
 					break;
 			}
-			if(inputField == "password")
+			if (inputField == "password")
 			{
-				Report.Success("Entered text: ' ******** ' in the input field: '" + inputField + "'");
+				Report.Success($"Entered text: ' ******** ' in the input field: '{ inputField }'");
 
 			}
 			else
 			{
-				Report.Success("Entered text: '" + text + "' in the input field: '" + inputField + "'");
+				Report.Success($"Entered text: '{ text } ' in the input field: '{inputField }'");
 
 			}
 			Report.Screenshot();

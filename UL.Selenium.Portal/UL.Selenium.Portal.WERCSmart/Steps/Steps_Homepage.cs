@@ -1197,5 +1197,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 		}
+
+		[StepDefinition(@"I confirm ID/Product Name column displays the product name wrapped within the area of the column")]
+		public void ThenIConfirmIDProductNameColumnDisplaysTheProductNameWrappedWithinTheAreaOfTheColumn()
+		{
+			var homePage = new Homepage();
+			if (Report.IsTrue(homePage.ProdNameExists(), "Failed to find Product Name field", "Successfully found Product Name field"))
+			{
+				Report.IsTrue(homePage.ProductNameWrapped(), "Failed to confirm Product Name is wrapped within the area of the column ID/Product Name", "Successfully confirmed Product Name is wrapped within the area of the column ID/Product Name");
+			}
+		}
+
 	}
 }

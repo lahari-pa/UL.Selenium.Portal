@@ -26,6 +26,7 @@ Background:
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 
+#Removed from regression: 2023/05
 @ignore
 @TestCase:77862
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
@@ -61,6 +62,8 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
 	And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
+
+#Removed from regression: 2023/05
 @ignore
 @TestCase:77837
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
@@ -99,6 +102,7 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77857
+#Removed from regression: 2023/05
 @ignore
 @TestCase:77857
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
@@ -159,6 +163,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
+#Removed from regression: 2023/05
 @ignore
 @TestCase:77858
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
