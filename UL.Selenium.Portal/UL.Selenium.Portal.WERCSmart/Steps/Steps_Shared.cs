@@ -2832,6 +2832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
+		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
 		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		{
