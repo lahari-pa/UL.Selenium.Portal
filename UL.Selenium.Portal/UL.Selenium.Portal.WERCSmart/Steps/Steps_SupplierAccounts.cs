@@ -1403,6 +1403,73 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(toggleValues.Contains(Row["ToggleInfo"]), $"text does not contain tab {Row["ToggleInfo"]}", $"text contain tab{ Row["ToggleInfo"]}");
 			}
 		}
+
+		[When(@"I search with email in the supplier manager window: (.*)")]
+		public void ISearchWithEmailInSupplierManagerWindow(string email)
+		{
+			try
+			{
+				var newSupplier = new AddNewSupplier();
+				newSupplier.ClickEmailRadioButtonForSearch();
+				Delay.Seconds(Delay.SpeedFactor * 2);
+				newSupplier.EnterSearchTextInSupplyManager(email);
+				newSupplier.ClickSearchButtonInSupplyManager();
+				Delay.Seconds(Delay.SpeedFactor * 5);
+				Report.IsTrue(newSupplier.ClickNewlyAddedSupplierInSupplyManagerWithEmailSearch(), "Supplier not displayed", $"Supplier displayed successfully");
+				Delay.Seconds(Delay.SpeedFactor * 5);
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+			}
+		}
+
+		[Then(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
+		public void ThenIConfirmToggleSupplierManagerWindow(string toggleName, string action)
+		{
+			try
+			{
+				var newSupplier = new AddNewSupplier();
+				string gettoggleColor = null;
+				string expectedGreyColor = "rgba(204, 204, 204, 1)";
+				string expectedBlueColor = "rgba(33, 150, 243, 1)";
+				if (newSupplier.IsToggleButtonEnabled(toggleName) == expectedBlueColor)
+				{
+					Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+					Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+					Delay.Seconds(Delay.SpeedFactor * 5);
+					newSupplier.SaveButton();
+				}
+				else
+				{
+					if (action == "back")
+					{
+						Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+						Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						newSupplier.BackButton();
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+						Report.IsTrue(gettoggleColor == expectedGreyColor, "Toggle button enabled", "Toggle button disabled as expected");
+					}
+					else
+					{
+						Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+						Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						newSupplier.SaveButton();
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+						Report.IsTrue(gettoggleColor == expectedBlueColor, "Toggle button disabled", "Toggle button enabled as expected");
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Report.Failure(e.Message);
+			}
+		}
+
 	}
 }
 
