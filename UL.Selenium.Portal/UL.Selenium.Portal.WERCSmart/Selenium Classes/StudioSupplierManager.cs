@@ -49,10 +49,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool result = false;
 			foreach (IWebElement element in this.ToggleButtons)
 			{
-				getToggleName = element.FindElement(By.XPath("//label"), 2).Text;
+				getToggleName = element.FindElement(By.XPath(".//label"), 2).Text;
 				if (getToggleName == toggleName)
 				{
-					result = element.FindElement(By.XPath("//label//span")).Selected;
+					result = element.FindElement(By.XPath(".//label//input")).Selected;
 				}
 			}
 			return result;

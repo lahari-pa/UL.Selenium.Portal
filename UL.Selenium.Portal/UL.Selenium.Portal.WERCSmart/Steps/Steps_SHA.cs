@@ -2918,6 +2918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toggle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+
 					}
 				}
 				else
