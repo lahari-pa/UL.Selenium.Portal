@@ -2903,6 +2903,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
+		[StepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
+		public void ThenInTheSupplierManagerPopupITurnOnToggleSingle_RetailSubscription(string condition, string toggleName)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (Report.IsTrue(thisStudioSupplierManager.ToggleButtonsExists(), "Failed to find toggle buttons", "Succesfully found toggle buttons"))
+			{
+				if (condition == "on")
+				{
+					if (thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned On");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toggle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+					}
+				}
+				else
+				{
+					if (!thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned Off");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toogle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+					}
+				}
+			}
+
+		}
 
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
