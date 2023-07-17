@@ -233,9 +233,24 @@ Then I close Supplier Manager window
 Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
 Then I Click 'Suppliers' in SHA Manager
-When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
 Then In the Supplier Manager Popup I click on the first supplier returned
 Then Select the 'Company Information' Tab in Supplier Manager
 Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Back
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then Select the 'Subscription' Tab in Supplier Manager
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
 Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
