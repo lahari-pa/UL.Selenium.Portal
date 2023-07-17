@@ -236,3 +236,6 @@ Then I Click 'Suppliers' in SHA Manager
 When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
 Then In the Supplier Manager Popup I click on the first supplier returned
 Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
