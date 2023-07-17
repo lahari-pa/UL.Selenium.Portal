@@ -228,3 +228,9 @@ Then I confirm following toggles displayed
 Then I confirm Document Reader Toggle enable check after clicking back button
 Then I confirm Document Reader Toggle enable check after clicking save button
 Then I close Supplier Manager window
+
+@TestCase:202273
+Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
