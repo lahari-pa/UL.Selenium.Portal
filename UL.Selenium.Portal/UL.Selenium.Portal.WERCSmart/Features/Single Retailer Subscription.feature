@@ -474,5 +474,6 @@ Then I navigate to the landing page
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
+Then I confirm the Single Retailer Subscription section does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Single Retailer Subscription heading does exist
 
