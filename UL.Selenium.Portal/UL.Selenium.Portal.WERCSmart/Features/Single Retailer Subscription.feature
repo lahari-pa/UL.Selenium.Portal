@@ -455,3 +455,17 @@ And I should not see the following Actions options
 | Option                           |
 | Transfer to Tiered Subscription  |
 
+
+@TestCase:202359
+
+Scenario: [202359] Single Retail Subscription - Subscription Screen Options Available and Not Available
+
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+
