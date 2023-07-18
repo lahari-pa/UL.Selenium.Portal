@@ -16,7 +16,7 @@ using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
 using static NUnit.Framework.Internal.OSPlatform;
-
+using UL.Automation.Utilities.Mailosaur.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -403,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add a new user with the following information")]
 		public void ThenIAddANewUserWithTheFollowingInformation(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I add a new user with the following information");
+			Report.StartStep($"{Report.Details.StepIndex} - I add a new user with the following information");
 			try
 			{
 				foreach (TableRow thisRow in table.Rows)
@@ -443,7 +443,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info("Email Address = " + emailAddress);
 					}
 					// adding this to allow checking for confirmation email to the new user
-					MailosaurFunctions.StoreCurrentInbox(emailAddress);
+					//MailosaurFunctions.StoreCurrentInbox(emailAddress);
+					MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
