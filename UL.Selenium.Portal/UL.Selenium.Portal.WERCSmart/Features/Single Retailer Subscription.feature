@@ -18,6 +18,7 @@
 @MyMessages
 @DeleteActiveProducts
 @UPC
+@SupplierAccounts
 
 Feature: Single Retailer Subscription
 
@@ -468,4 +469,6 @@ Then Select the 'Company Information' Tab in Supplier Manager
 Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
-
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I navigate to the MyAccount page
+Then In the Subscription Information screen I click the Upgrade button
