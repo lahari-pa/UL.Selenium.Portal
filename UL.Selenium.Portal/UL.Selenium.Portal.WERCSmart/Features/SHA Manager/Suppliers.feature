@@ -229,6 +229,8 @@ Then I confirm Document Reader Toggle enable check after clicking back button
 Then I confirm Document Reader Toggle enable check after clicking save button
 Then I close Supplier Manager window
 
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in
+@OnlyInIntegration
 @TestCase:202273
 Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
 
