@@ -467,8 +467,10 @@ When I search with email in the supplier manager window: SingleRetailerAccount@k
 Then In the Supplier Manager Popup I click on the first supplier returned
 Then Select the 'Company Information' Tab in Supplier Manager
 Then In the Supplier Manager Popup I click on button: Edit
-Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then I navigate to the landing page
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
