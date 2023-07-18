@@ -33,6 +33,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Subscription page I confirm the (.*) heading (does|does not) exist")]
+		public void InConfirmHeadingDoesDoesNotExist(string headingText, string does_doesnot)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			bool expected = does_doesnot == "does";
+				Report.IsTrue(subEnrollment.EnrollmentHeadingExists(headingText), $"The '{headingText}' heading {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.", $"Success, the '{headingText}' heading {does_doesnot} exist.");
+		}
+
 		[StepDefinition(@"In the (.*) section, I confirm the (.*) panel (does|does not) exist")]
 		public void InSectionConfirmPanelDoesDoesNotExist(string sectionLabel, string panelLabel, string does_doesnot)
 		{

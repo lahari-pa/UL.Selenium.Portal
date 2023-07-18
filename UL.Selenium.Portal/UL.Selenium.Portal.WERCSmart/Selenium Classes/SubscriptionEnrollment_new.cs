@@ -108,6 +108,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_headingText = headingText;
 			return this.EnrollmentSectionHeading != null;
 		}
+		public bool EnrollmentHeadingExists(string headingText)
+		{
+			_headingText = headingText;
+			return this.EnrollmentSectionHeading != null;
+		}
 		public bool EnrollmentSectionTextAreaExists(string sectionLabel)
 		{
 			Report.Info($"Attempting to confirm '{sectionLabel}' section text area exists.");
