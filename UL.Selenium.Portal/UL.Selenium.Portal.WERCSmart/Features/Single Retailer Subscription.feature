@@ -479,3 +479,19 @@ Then In the Subscription page I confirm the Formulated, Enhanced & Articles subh
 Then In the Subscription page I confirm the Single Retailer Subscription column contains text: When registering a type of product (formulated, enhanced, or article, excluding batteries) that is designated to be sold by a single retailer, this option provides discounted pricing. WERCSmart Agency services are available at an additional cost.
 Then In the Subscription page I confirm the Single Retailer radio icon does exist
 Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data\r\nSubmit registration to single retailer + No Retailer'
+Then I click the Home icon in the Navigation Pane
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then I switch to the tab: [string]
+Then I navigate to the MyAccount page
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription page I confirm the Single Retailer Subscription heading does not exist
+Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does not exist
+Then In the Subscription page I confirm the Single Retailer radio icon does not exist
