@@ -480,6 +480,7 @@ Then In the Subscription page I confirm the Single Retailer Subscription column 
 Then In the Subscription page I confirm the Single Retailer radio icon does exist
 Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data\r\nSubmit registration to single retailer + No Retailer'
 Then I click the Home icon in the Navigation Pane
+Then I open the new tab in browser
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
 Then I Click 'Suppliers' in SHA Manager
 When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
@@ -489,7 +490,7 @@ Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
 Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
-Then I switch to the tab: [string]
+Then I switch to the tab with title: WERCSmart Version 2.0
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription page I confirm the Single Retailer Subscription heading does not exist
