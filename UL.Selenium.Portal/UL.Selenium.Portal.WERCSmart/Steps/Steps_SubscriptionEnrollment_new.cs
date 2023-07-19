@@ -37,8 +37,86 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InConfirmHeadingDoesDoesNotExist(string headingText, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
-			bool expected = does_doesnot == "does";
-				Report.IsTrue(subEnrollment.EnrollmentHeadingExists(headingText), $"The '{headingText}' heading {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.", $"Success, the '{headingText}' heading {does_doesnot} exist.");
+			if(does_doesnot == "does")
+			{
+				if (Report.IsTrue(subEnrollment.ColumnHeaderExists(), $"Failed to find the column header {headingText}", $"Successfully found the '{headingText}' heading"))
+				{
+					Report.IsTrue(subEnrollment.EnrollmentHeadingExists(headingText), $"The '{headingText}' heading is not displayed", $"The '{headingText}' heading is displayed");
+				}
+			}
+			else
+			{
+				Report.IsFalse(subEnrollment.ColumnHeaderExists(), $"Failed to confirm {headingText} column is not displayed", $"Successfully confirmed {headingText} column is not displayed");
+			}
+		}
+		[StepDefinition(@"In the Subscription page I confirm the Single Retailer Subscription column contains text: (.*)")]
+		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerSubscriptionColumnContainsText(string text)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (Report.IsTrue(subEnrollment.SingleRetailerColumnTextExists(), $"Failed to find text in Single Retailer Subscription column", $"Successfully found text in Single Retailer Subscription column"))
+			{
+				Report.IsTrue(subEnrollment.SingleRetailerColumnTextDisplayed(text), $"The '{text}' is not displayed", $"The '{text}' is displayed");
+			}
+		}
+		[StepDefinition(@"In the Subscription page I confirm the Single Retailer column contains text: '(.*)'")]
+		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerColumnContainsText(string text)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (Report.IsTrue(subEnrollment.SingleRetailerTextExists(), $"Failed to find text in Single Retailer Subscription column", $"Successfully found text in Single Retailer Subscription column"))
+			{
+				Report.IsTrue(subEnrollment.SingleRetailerTextDisplayed(text), $"The '{text}' is not displayed", $"The '{text}' is displayed");
+			}
+		}
+
+		[StepDefinition(@"In the Subscription page I confirm Select Options element (does|does not) exists in Single Retailer Subscription column")]
+		public void ThenInTheSubscriptionPageIConfirmSelectOptionsElementDoesExistsInSingleRetailerSubscriptionColumn(string does_doesnot)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (does_doesnot == "does")
+			{
+				if (Report.IsTrue(subEnrollment.SingleRetailerSelectExists(), "Failed to find the Select options element in SRS column", "Successfully found the Select options element in SRS column"))
+				{
+					Report.IsTrue(subEnrollment.SingleRetailerSelectDisplayed(), "The Select options element is not displayed", "The Select options element is displayed");
+				}
+			}
+			else
+			{
+				Report.IsFalse(subEnrollment.SingleRetailerSelectExists(), "Failed to confict the Select options element is not displayed in SRS column", "Successfully confirmed the Select options element in not displayed in SRS column");
+			}
+		}
+		[StepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (does|does not) exist")]
+		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerRadioIconDoesExist(string does_doesnot)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (does_doesnot == "does")
+			{
+				if (Report.IsTrue(subEnrollment.SingleRetailerRadioIconExists(), "Failed to find the Single Retailer radio icon", "Successfully found the Single Retailer radio icon"))
+				{
+					Report.IsTrue(subEnrollment.SingleRetailerRadioIconDisplayed(), "Single Retailer radio icon is not displayed", "The Single Retailer radio icon is displayed");
+				}
+			}
+			else
+			{
+				Report.IsFalse(subEnrollment.SingleRetailerRadioIconExists(), $"Failed to confict the Single Retailer radio icon is not displayed", $"Successfully confirmed the Single Retailer radio icon is not displayed");
+			}
+		}
+
+
+		[StepDefinition(@"In the Subscription page I confirm the (.*) subheader (does|does not) exist")]
+		public void ThenInTheSubscriptionPageIConfirmTheFormulatedEnhancedArticlesPanelHeadingDoesDoesNotExist(string panelHeader, string does_doesnot)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (does_doesnot == "does")
+			{
+				if (Report.IsTrue(subEnrollment.PanelHeaderExists(panelHeader), $"Failed to find the panel header {panelHeader}", $"Successfully found the '{panelHeader}' heading"))
+				{
+					Report.IsTrue(subEnrollment.PanelHeadingDisplayed(panelHeader), $"The '{panelHeader}' heading is not displayed", $"The '{panelHeader}' heading is displayed");
+				}
+			}
+			else
+			{
+				Report.IsFalse(subEnrollment.PanelHeaderExists(panelHeader), $"Failed to confirm {panelHeader} panel header is not displayed", $"Successfully confirmed {panelHeader} pahel header is not displayed");
+			}
 		}
 
 		[StepDefinition(@"In the (.*) section, I confirm the (.*) panel (does|does not) exist")]

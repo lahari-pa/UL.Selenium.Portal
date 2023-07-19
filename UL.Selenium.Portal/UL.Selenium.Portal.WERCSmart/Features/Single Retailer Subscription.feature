@@ -475,4 +475,7 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription page I confirm the Single Retailer Subscription heading does exist
-
+Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does exist
+Then In the Subscription page I confirm the Single Retailer Subscription column contains text: When registering a type of product (formulated, enhanced, or article, excluding batteries) that is designated to be sold by a single retailer, this option provides discounted pricing. WERCSmart Agency services are available at an additional cost.
+Then In the Subscription page I confirm the Single Retailer radio icon does exist
+Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data\r\nSubmit registration to single retailer + No Retailer'
