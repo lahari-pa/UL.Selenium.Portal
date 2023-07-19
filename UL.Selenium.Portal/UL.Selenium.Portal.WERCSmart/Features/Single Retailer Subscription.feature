@@ -456,7 +456,7 @@ And I should not see the following Actions options
 | Option                           |
 | Transfer to Tiered Subscription  |
 
-
+@OnlyInIntegration
 @TestCase:202359
 
 Scenario: [202359] Single Retail Subscription - Subscription Screen Options Available and Not Available
@@ -478,7 +478,7 @@ Then In the Subscription page I confirm the Single Retailer Subscription heading
 Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does exist
 Then In the Subscription page I confirm the Single Retailer Subscription column contains text: When registering a type of product (formulated, enhanced, or article, excluding batteries) that is designated to be sold by a single retailer, this option provides discounted pricing. WERCSmart Agency services are available at an additional cost.
 Then In the Subscription page I confirm the Single Retailer radio icon does exist
-Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data\r\nSubmit registration to single retailer + No Retailer'
+Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data Submit registration to single retailer + No Retailer'
 Then I click the Home icon in the Navigation Pane
 Then I open the new tab in browser
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
@@ -496,3 +496,10 @@ Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription page I confirm the Single Retailer Subscription heading does not exist
 Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does not exist
 Then In the Subscription page I confirm the Single Retailer radio icon does not exist
+Then I logout
+Then I switch to the tab with title: UL Wercs Studio
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on

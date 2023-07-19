@@ -139,6 +139,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SingleRetailerTextDisplayed(string text)
 		{
 			string getText = this.SingleRetailerText.Text;
+			string[] splitedtext = getText.Split('\n');
+			splitedtext[0] = splitedtext[0].Split('\r')[0];
+			getText = splitedtext[0] + ' ' + splitedtext[1];
 			return getText == text;
 		}
 		public bool SingleRetailerSelectExists()
