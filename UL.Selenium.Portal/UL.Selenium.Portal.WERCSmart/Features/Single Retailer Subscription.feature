@@ -490,7 +490,7 @@ Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
 Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
-Then I click top menu item: My Wercs and submenu item: Logout
+Then I click top menu item: My Wercs and submenu item: Log Out
 Then I switch to the tab with title: WERCSmart Version 2.0
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
