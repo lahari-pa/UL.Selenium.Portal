@@ -456,6 +456,7 @@ And I should not see the following Actions options
 | Option                           |
 | Transfer to Tiered Subscription  |
 
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
 @OnlyInIntegration
 @TestCase:202359
 
