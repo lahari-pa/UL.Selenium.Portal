@@ -14469,5 +14469,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 
 		}
+
+		[StepDefinition(@"I call Shared Step 67820 \(Sign up New Account - Step 1\): user (.*) with the following parameters:")]
+		public void GivenICallSharedStepSignUpNewAccount_StepUserTCWithTheFollowingParameters(string savedAs, Table parameters)
+		{
+			Report.UseSubSteps = true;
+			var landingPage = new StepsLandingPage();
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I define the user: {savedAs} with the following parameters:");
+			steps_Signup.DefineUser(savedAs, parameters);
+			Report.StartSubStep($"I save the current emails in the inbox for user saved as: {savedAs}");
+			steps_Signup.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			Report.StartSubStep("I select the Sign Up link");
+			landingPage.ClickSignUpLink();
+			Report.StartSubStep("the signup page should appear");
+			steps_Signup.ThenTheSignupPageShouldAppear();
+			Report.StartSubStep($"I enter signup email for user: {savedAs}");
+			steps_Signup.GivenIEnterSignupEmailUser(savedAs);
+			Report.StartSubStep($"I confirm signup email for user: {savedAs}");
+			steps_Signup.GivenIConfirmSignupEmailUser(savedAs);
+			Report.StartSubStep("I click on submit");
+			steps_Signup.GivenIClickOnSubmit();
+			Report.StartSubStep("the signup thank you page should appear");
+			steps_Signup.ThenTheSignupThankYouPageShouldAppear();
+			Report.StartSubStep($"there should be a new email for user: {savedAs} from: <SiteNotification> with the title: Link to create WERCSmart Account");
+			steps_Signup.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			Report.StartSubStep("the email should contain a link to set up the WERCSmart account");
+			steps_Signup.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			Report.StartSubStep("I click on the link I should see the WERCSmart new account page");
+			steps_Signup.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+		}
+
+		[Given(@"I call Shared Step 57744\(New Account - Account Information - Step 2\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_AccountInformation_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the information into the new user form for user saved as: {savedAs}");
+			steps_Signup.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Security Questions page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+		}
+
+		[Given(@"I call Shared Step 57745\(New Account - Security Questions - Step 3\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_SecurityQuestions_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the following into the Security Questions window for user saved as: {savedAs}");
+			steps_Signup.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			Report.StartSubStep($"I enter the pin for user saved as: {savedAs}");
+			steps_Signup.EnterPinForUser(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Thank You page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
+		}
+
 	}
 }
