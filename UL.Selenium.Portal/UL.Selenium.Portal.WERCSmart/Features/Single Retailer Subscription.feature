@@ -490,6 +490,7 @@ Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
 Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then I click top menu item: My Wercs and submenu item: Logout
 Then I switch to the tab with title: WERCSmart Version 2.0
 Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
@@ -497,7 +498,11 @@ Then In the Subscription page I confirm the Single Retailer Subscription heading
 Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does not exist
 Then In the Subscription page I confirm the Single Retailer radio icon does not exist
 Then I logout
-Then I switch to the tab with title: UL Wercs Studio
+Then I navigate to the landing page
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
 Then Select the 'Company Information' Tab in Supplier Manager
 Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
