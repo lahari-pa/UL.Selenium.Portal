@@ -455,3 +455,67 @@ And I should not see the following Actions options
 | Option                           |
 | Transfer to Tiered Subscription  |
 
+
+@TestCase:202549
+
+Scenario: [202549] Single Retail - Subscription Selector Page
+
+Given I call Shared Step 67820 (Sign up New Account - Step 1): user TC202549 with the following parameters:
+		| Field                | Value                   |
+		| Email                | User_<random>           |
+		| Country              | UNITED STATES           |
+		| FirstName            | TestCase                |
+		| LastName             | 202549                  |
+		| Password             | Pa4*ytuufnn             |
+		| Address1             |  725 5th Ave,           |
+		| Address2             | Address 2               |
+		| City                 | New York                |
+		| State                | New York                |
+		| Zip                  | 10022                   |
+		| CompanyName          | Wercs QA Automated test |
+		| CompanyPhone         | 123-456-7889            |
+		| EmergencyPhoneNumber | 123-456-7789            |
+		| SupplierType         | Manufacturer            |
+		| PhoneQuestion        | PhoneQuestion           |
+		| PhoneHint            | PhoneHint               |
+		| MentorQuestion       | MentorQuestion          |
+		| MentorHint           | MentorHint              |
+		| FriendQuestion       | FriendQuestion          |
+		| FriendHint           | FriendHint              |
+		| AnimalQuestion       | AnimalQuestion          |
+		| AnimalHint           | AnimalHint              |
+		| CollegeQuestion      | CollegeQuestion         |
+		| CollegeHint          | CollegeHint             |
+		| Pin                  | 1234                    |
+Given I call Shared Step 57744(New Account - Account Information - Step 2) for user: TC202549
+Given I call Shared Step 57745(New Account - Security Questions - Step 3) for user: TC202549
+#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I click on the Suppliers link on the top right of the screen
+And I should see the 'Supplier Manager' popup
+Then In the Supplier Manager Popup I select radio button: E-Mail
+Then In the Supplier Manager Popup I enter in search field Email if user: saved as TC202549
+Then In the Supplier Manager Popup I click on the search button
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then I click top menu item: My Wercs and submenu item: Log Out
+Given I go to the WERCSmart Log in
+Given I login as user: TC202549
+Given If terms of use page appears I accept
+Then the WERCSmart homepage should load
+Then I should see username for user saved as: TC202549 in the right corner
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#Then I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+Then I confirm that I see the following text in the modal window popup: You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.
+Then in the modal dialog I click the "OK" button
+Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Water         | 100     | false               | false       |            |
+Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+Then I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+Then in the Additional Documents to Provide page I click Continue
