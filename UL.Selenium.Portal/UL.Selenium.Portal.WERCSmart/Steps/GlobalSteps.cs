@@ -250,13 +250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			new StepsLogin().IClickTheLoginButton();
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
-
-
-
 		}
-
-
-
 
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		// requires the user to be on the landing page
@@ -277,9 +271,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-
-
-
 
 			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
@@ -358,7 +349,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
-
 			Login selLogin = new Login();
 
 			// Check we have redirected from the log in page

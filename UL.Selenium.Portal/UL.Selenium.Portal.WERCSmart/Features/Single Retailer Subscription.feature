@@ -490,6 +490,7 @@ Given I call Shared Step 67820 (Sign up New Account - Step 1): user TC202549 wit
 Given I call Shared Step 57744(New Account - Account Information - Step 2) for user: TC202549
 Given I call Shared Step 57745(New Account - Security Questions - Step 3) for user: TC202549
 #Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I generate a random UPC number and save as: UPC202549
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
 Then I click on the Suppliers link on the top right of the screen
 And I should see the 'Supplier Manager' popup
@@ -508,14 +509,21 @@ Given If terms of use page appears I accept
 Then the WERCSmart homepage should load
 Then I should see username for user saved as: TC202549 in the right corner
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-#Then I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
-Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
-Then I confirm that I see the following text in the modal window popup: You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.
-Then in the modal dialog I click the "OK" button
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water         | 100     | false               | false       |            |
-Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-Then I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm if the single retailer checkbox is displayed on the retailer page
+Then I confirm if the Single Retailer Checkbox is selected
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC202549, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
+Then in the Optional reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
