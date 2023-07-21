@@ -10,7 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-
+using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1273,5 +1273,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
 		}
 
+		[StepDefinition(@"I Confirm the product retailers appear in orange - Assessment in Progress status")]
+		public void GivenIConfirmProductRetailersColor()
+		{
+			Delay.Seconds(10);
+			Ingredients ingredientsObject = new Ingredients();
+			IList<IWebElement> retailers = ingredientsObject.CheckRetailerList();
+			foreach (IWebElement rt in retailers)
+			{
+				string color = rt.GetCssValue("border-bottom-color").ToString();
+				Report.IsTrue(color == "rgba(239, 157, 14, 1)", "Failed to Confirm the product retailers appear in orange", "I Confirm the product retailers appear in orange");
+			}
+		}
 	}
 }

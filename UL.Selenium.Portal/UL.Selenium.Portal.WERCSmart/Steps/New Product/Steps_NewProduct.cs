@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using Mailosaur;
+using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -471,7 +472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFileSectionAndType(string type, string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 
 		}
@@ -479,21 +480,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFile(string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
 		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
 		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
 		{
-			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			var pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
 		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
 		public void UploadPDFFileEmbedded(string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 

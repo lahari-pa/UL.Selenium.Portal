@@ -12,6 +12,7 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.Utilities.Helpers;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -2873,9 +2874,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			Report.StartSubStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 
 			new NewProduct().UploadFileForSection(type, pdfFile);
+
+		}
+
+		[StepDefinition(@"I call Shared Step \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
+		public void ICallSharedBrowseForFileOpen(string type, string pdfFile)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep($"I upload document type: { type } using the Browse and Open");
+			Delay.Seconds(2);
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			new NewProduct().UploadFileSection(type, pdfFile);
 
 		}
 
@@ -10807,7 +10819,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
 			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
-			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			//MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
+		[StepDefinition(@"I call Shared Step Completed Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void Shared_SHAManager_CompletedProduct_AddToRecertificationReason20(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep("Beginning shared step: 43587");
+			var MyStepsSha = new Steps_SHA();
+
+			var productTable = new Table(new string[] {
+				"ProductID"
+			});
+			productTable.AddRow(new string[] {
+				"saved as " + savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenAddProductToRecertificationScreenShouldBeShowing();
 			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
 			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}
