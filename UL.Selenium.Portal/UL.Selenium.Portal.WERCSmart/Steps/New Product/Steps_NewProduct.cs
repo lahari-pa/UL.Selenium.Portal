@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
+using UL.Automation.Utilities.Helpers;
 using Mailosaur;
 using UL.Automation.Utilities.Helpers;
 

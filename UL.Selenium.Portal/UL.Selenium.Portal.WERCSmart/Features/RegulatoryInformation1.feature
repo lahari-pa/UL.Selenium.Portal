@@ -24,7 +24,7 @@ Scenario: [85492] Regulatory Information 1 - navigation
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	And I should see the Waste Classification Data Page
 	And I should see following statement: U.S. Toxic Substances Control Act (TSCA) status
 	And I should see following statement: Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?
@@ -41,7 +41,7 @@ Scenario: [85693] Regulatory Information 1 - validation
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	When I click continue
 	And U.S. Toxic Substances Control Act (TSCA) status should be showing the error messages: This is a required field.
 	And Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? should be showing the error messages: This is a required field.
@@ -58,7 +58,7 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: Yes
 	And I should see following statement: Is the need to warn triggered by

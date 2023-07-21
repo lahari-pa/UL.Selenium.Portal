@@ -1366,6 +1366,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement tooRecentPopupClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
 			return tooRecentPopupClose.TryClick();
 		}
+		public string GetErrorPopupText()
+		{
+			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@aria-labelledby='myModalLabel']//p"));
+			return ErrText.Text;
+		}
 
 		public bool SearchForUserSavedAs()
 		{

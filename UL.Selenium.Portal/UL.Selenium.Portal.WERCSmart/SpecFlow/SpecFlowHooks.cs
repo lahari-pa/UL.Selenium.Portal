@@ -20,9 +20,8 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 		[BeforeScenario("OnlyInIntegration")]
 		public void OnlyInStagingLogic(IObjectContainer container)
 		{
-			this.PerformBranchSkipLogic(container, "Staging - AZ");
+			this.PerformBranchSkipLogic(container, "Staging");
 		}
-
 		private void PerformBranchSkipLogic(IObjectContainer container, string targetBranchName)
 		{
 			string branchName = this.GetBranchName();

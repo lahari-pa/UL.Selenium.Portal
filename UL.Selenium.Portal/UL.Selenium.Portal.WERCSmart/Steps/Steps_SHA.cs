@@ -2903,6 +2903,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
+		[StepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
+		public void ThenInTheSupplierManagerPopupITurnOnToggleSingle_RetailSubscription(string condition, string toggleName)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (Report.IsTrue(thisStudioSupplierManager.ToggleButtonsExists(), "Failed to find toggle buttons", "Succesfully found toggle buttons"))
+			{
+				if (condition == "on")
+				{
+					if (thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned On");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toggle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+
+					}
+				}
+				else
+				{
+					if (!thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned Off");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toogle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+					}
+				}
+			}
+
+		}
+		[StepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
+		public void ThenInTheSupplierManagerPopupIConfirmSingle_RetailSubscriptionIsTurnedOn(string toggleName, string condition)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			var newSupplier = new AddNewSupplier();
+			string gettoggleColor = null;
+			string expectedGreyColor = "rgba(204, 204, 204, 1)";
+			string expectedBlueColor = "rgba(33, 150, 243, 1)";
+			if (Report.IsTrue(thisStudioSupplierManager.ToggleButtonsExists(), "Failed to find toggle buttons", "Succesfully found toggle buttons"))
+			{
+				if (condition == "on")
+				{
+					Report.IsTrue(thisStudioSupplierManager.ToggleIsON(toggleName), $"Failed to confirm {toggleName} toggle is turned on", $"Succesfully confirmed {toggleName} toggle is turned on");
+					gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+					Report.IsTrue(gettoggleColor == expectedBlueColor, "Failed to confirm toggle color is blue", "Succesfully confirmed toggle color is blue");
+				}
+				else
+				{
+					Report.IsFalse(thisStudioSupplierManager.ToggleIsON(toggleName), $"Failed to confirm {toggleName} toggle is turned off", $"Succesfully confirmed {toggleName} toggle is turned off");
+					gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+					Report.IsTrue(gettoggleColor == expectedGreyColor, "Failed to confirm toggle color is grey", "Succesfully confirmed toggle color is grey");
+				}
+			}
+		}
+
 
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)

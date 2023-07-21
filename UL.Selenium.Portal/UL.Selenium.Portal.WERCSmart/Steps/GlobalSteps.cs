@@ -200,7 +200,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void LoginToAccount(string alias, bool attemptOnce = false)
 		{
-			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
+			//SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
+			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias).ToSoftwareCredentialBasic();
 			if (user == null)
 			{
 				Report.Failure($"Failed to find a user with alias: {alias}!");

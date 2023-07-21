@@ -2832,6 +2832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
+		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
 		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		{
@@ -2873,7 +2874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			Report.StartSubStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = Automation.Utilities.Helpers.EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 
 			new NewProduct().UploadFileForSection(type, pdfFile);
 
@@ -4486,10 +4487,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
-			Report.StartSubStep(
+				Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
 				table.Rows[0]["Select the best Water Solubility description"]);
-			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
 				table.Rows[0]["Select the best Water Solubility description"]);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -14139,7 +14140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
-
+		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Spirits \(RU001434\) \(Greater than 70% Alcohol\)\)")]
 		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol\)")]
 		public void Shared92979EnterPhysicalProperty_Liquid_ForWineGreaterThan70()
 		{
@@ -14147,21 +14148,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Relative Density option to: 55");
-			MyNewProduct.SetTheSectionOptionTo("Relative Density", "55");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
-			MyNewProduct.SectExatcDataNotKnown("pH");
-			Report.StartStep("I set the pH field to: 4 - 6.9");
-			MyNewProduct.SetTheSectionOptionTo("pH", "4 - 6.9");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
-			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			Report.StartStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("In the Product Characteristics tab of the New Product Page for pH I enter: 7 ");
+			MyNewProduct.SetTheSectionOptionTo("pH","7");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: 78 ");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)","78");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 12 ");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)","12");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Closed Cup Method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
@@ -14180,6 +14178,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Percent of Alcohol in the Product (numeric entry only)",
 				"80"));
 			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "80");
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
+		[StepDefinition(@"I call Shared Step 92981a \(Beverage Regulatory Details\):")]
+		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTable( Table table)
+		{ 
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", table.Rows[0]["BPA"]);
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
 			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
@@ -14212,8 +14227,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Based on defined viscosity parameters, this product is classified as PG III");
 			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
-
 		}
+		[StepDefinition(@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcoholic Beverages - Spirits \(RU001434\) - Packaging Group should pre-select Packaging Group II\)")]
+
+		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData_ForSpirits()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN3065");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3065");
+			Delay.Seconds(2);
+			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			Report.StartStep("I select '3' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "3");
+			Report.StartStep("I select 'II' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+		}
+
 		[StepDefinition(@"I call Shared Step \(Enter Product Data for Physical State - Aerosol only and Secondary Physical state - Liquid spray\)")]
 		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnlyWithFIFRA()
 		{
