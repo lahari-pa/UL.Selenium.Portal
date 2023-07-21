@@ -2886,7 +2886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			Report.StartSubStep($"I upload document type: { type } using the Browse and Open");
 			Delay.Seconds(2);
-			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = Automation.Utilities.Helpers.EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			new NewProduct().UploadFileSection(type, pdfFile);
 
 		}
