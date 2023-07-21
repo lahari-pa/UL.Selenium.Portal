@@ -217,5 +217,46 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[@id='tabs']/ul/li/a[contains(text(),'{selectTab}')]"), 2).TryClick();
 		}
 
+		public bool ClickNewlyAddedSupplierInSupplyManagerWithEmailSearch()
+		{
+			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']"), 2);
+			return NewSupplier.TryClick();
+		}
+
+		public bool ClickEmailRadioButtonForSearch()
+		{
+			IWebElement EmailRadioButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='dialog-supplier-manager']/input[4]"), 2);
+			return EmailRadioButton.TryClick();
+		}
+
+		public bool EditButton()
+		{
+			IWebElement EditButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@id='btnEdit']"));
+				return EditButton.TryClick();
+		}
+
+		public bool SaveButton()
+		{
+			IWebElement saveButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@id='btnSubmit']"));
+			return saveButton.TryClick();
+		}
+
+		public bool BackButton()
+		{
+			IWebElement BackButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@id='btnBack']"));
+			return BackButton.TryClick();
+		}
+
+		public bool ToggleButton(string toggleName)
+		{
+			IWebElement Toggle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'"+ toggleName + "')]/../following-sibling::td//span[@class='slider round']"), 2);	
+			return Toggle.TryClick();
+		}
+		public string IsToggleButtonEnabled(string toggleName)
+		{
+			IWebElement IsToggleEnabled = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'" + toggleName + "')]/../following-sibling::td//span[@class='slider round']"),2);
+			string color = IsToggleEnabled.GetCssValue("background-color");
+			return color.ToString();		
+		}
 	}
 }

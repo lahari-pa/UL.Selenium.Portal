@@ -209,3 +209,56 @@ And An alert is displayed with next errors:
 And I should see the 'Add New Supplier' popup
 Then In the Add New Supplier I click on Cancel button
 Then I confirm the new supplier should not be seen in the supplier manager window
+
+# Created by Saikiran Chittampally
+# Executed in QA-Integration env as Edit permission provided for SHAManager Account in Integration environment
+@TestCase:202272
+Scenario: [202272] Supplier Manager - Company Information - Document Reader Toggle
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+Then I confirm following toggles displayed
+|ToggleInfo|
+| UL Retail Services (IFS) |
+| After-Market Distributor |
+| Prescription Pharma      |
+| UL Test Company          |
+|Document Reader           |
+Then I confirm Document Reader Toggle enable check after clicking back button
+Then I confirm Document Reader Toggle enable check after clicking save button
+Then I close Supplier Manager window
+
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
+@OnlyInIntegration
+@TestCase:202273
+Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
+
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Back
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then Select the 'Subscription' Tab in Supplier Manager
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save

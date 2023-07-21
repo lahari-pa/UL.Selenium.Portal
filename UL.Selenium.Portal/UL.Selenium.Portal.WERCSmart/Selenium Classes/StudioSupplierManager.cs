@@ -22,7 +22,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		List<IWebElement> ColumnNames => this.ContainerElement.FindElements(By.XPath("//td[@aria-describedby='listSupplierInfo_Subscription']"), 2).ToList();
 		IWebElement Column(string columnTitle) => this.ContainerElement.FindElement(By.XPath($".//th//div[contains(text(),'{columnTitle}')]"), 2);
 		IWebElement RadioButton(string radio) => this.ContainerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
+		List<IWebElement> ToggleButtons => this.ContainerElement.FindElements(By.XPath(".//form[@id = 'frmFeatures']//tr"), 2).ToList();
 
+		public bool ToggleButtonsExists()
+		{
+			Report.Info("Attempting to confirm Toggle buttons exist.");
+			return this.ToggleButtons != null;
+		}
+		public bool ClickToggleButton(string toggleName)
+		{
+			string getToggleName;
+			bool result = false;
+			foreach (IWebElement element in this.ToggleButtons)
+			{
+				getToggleName = element.FindElement(By.XPath(".//label"), 2).Text;
+				if (getToggleName == toggleName)
+				{
+					result = element.FindElement(By.XPath(".//label//span")).TryClick();
+				}
+			}
+			return result;
+		}
+		public bool ToggleIsON(string toggleName)
+		{
+			string getToggleName;
+			bool result = false;
+			foreach (IWebElement element in this.ToggleButtons)
+			{
+				getToggleName = element.FindElement(By.XPath(".//label"), 2).Text;
+				if (getToggleName == toggleName)
+				{
+					result = element.FindElement(By.XPath(".//label//input")).Selected;
+				}
+			}
+			return result;
+		}
 		public bool ColumnNamesExists()
 		{
 			Report.Info("Attempting to confirm Columns Names exist.");
