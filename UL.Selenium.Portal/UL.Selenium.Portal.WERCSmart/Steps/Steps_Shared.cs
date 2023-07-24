@@ -3172,7 +3172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			stepsRegulatoryInformation.SetTSCATo("This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");

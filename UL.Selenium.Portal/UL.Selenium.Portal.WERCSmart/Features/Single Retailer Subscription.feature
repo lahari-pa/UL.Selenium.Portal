@@ -584,7 +584,7 @@ Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription Enrollment screen I select the following enrollment options
 	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan                |
-	| Choose...          | Choose...          | Up to 1 Product(s)  | Limited      | No additional Agent Support Service  |
+	| None               | None               | Up to 1 Product(s)  | Limited      | No additional Agent Support Service  |
 Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I click Continue
@@ -594,7 +594,7 @@ Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription Enrollment screen I select the following enrollment options
 	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan                |
-	| Choose...          | Up to 3 Product(s) | Up to 5 Product(s)  | Standard      | No additional Agent Support Service  |
+	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | No additional Agent Support Service  |
 	Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I click Continue
