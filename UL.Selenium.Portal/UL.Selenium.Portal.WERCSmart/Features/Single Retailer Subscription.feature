@@ -514,9 +514,7 @@ Then I call Shared Step 57753 (Create a New Registration via Register New Produc
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Water         | 100     | false               | false       |            |
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm if the Single Retailer Checkbox is selected

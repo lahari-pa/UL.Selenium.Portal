@@ -18,6 +18,7 @@ using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using static UL.Selenium.Portal.RPS.Selenium_Classes.WidgetPage.Widget;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 [assembly: Apartment(ApartmentState.STA)]
 
