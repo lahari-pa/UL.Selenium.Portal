@@ -13,6 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using System.Collections.ObjectModel;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -28,7 +29,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement SingleRetailerSelect => this.ContainerElement.FindElement(By.XPath(".//div[@class='col-md-3']//select"), 2);
 		private IWebElement SingleRetailerRadioIcon => this.ContainerElement.FindElement(By.XPath(".//label[contains(text(), 'Single Retailer')]"), 2);
 		private IWebElement SingleRetailerText => this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-body min-height-175']"), 2);
-
 		#region Section Level
 		private string _sectionLabel;
 		private IWebElement EnrollmentSection => this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'row')][.//h3[normalize-space(text())='{_sectionLabel}']]"), 1);
@@ -152,6 +152,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.SingleRetailerSelect.Displayed;
 		}
+		public bool VerifySingleRetailerSelectedOption(string selectedOption)
+		{
+			string getOption = this.SingleRetailerSelect.Text;
+			return getOption== selectedOption;
+		}
+
 		public bool SingleRetailerRadioIconExists()
 		{
 			return this.SingleRetailerRadioIcon != null;
@@ -159,6 +165,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SingleRetailerRadioIconDisplayed()
 		{
 			return this.SingleRetailerRadioIcon.Displayed;
+		}
+		public bool SingleRetailerRadioIconSelected()
+		{
+			return this.SingleRetailerRadioIcon.Selected;
 		}
 		public bool PanelHeaderExists(string headerName)
 		{

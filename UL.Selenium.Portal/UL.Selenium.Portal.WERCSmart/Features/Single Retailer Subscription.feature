@@ -21,7 +21,7 @@
 @SupplierAccounts
 @SubEnrollmentNew
 @SubEnrollment
-@SubEnrollmentNew
+
 
 Feature: Single Retailer Subscription
 
@@ -582,26 +582,29 @@ Then in the Additional Documents to Provide page I click Continue
 Then in the Optional reports and Documents Available for Purchase page I click Continue
 Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Then I should see the Subscription Enrollment Page
+Then the Subscription Enrollment page should load
+#Then I should see the Subscription Enrollment Page
 Then I confirm the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Tiered Subscription Options heading does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated Products panel drop down does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Enhanced Articles panel drop down does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Articles panel drop down does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Choose...
-Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Choose...
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
-#Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Choose...
+Then In the Subscription page I confirm the Single Retailer Subscription heading does exist
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 1 Product(s)
+Then In the Subscription page I confirm the Single Retailer radio icon does exist
+Then In the Subscription page I confirm the Single Retailer radio icon is selected
 Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
 Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
-Then I should see the Payment Methods Page
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I enter Credit Card details
 	| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
 	| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
 Then In the Payment Methods screen I click Continue
-Then I should see the Purchase Summary Page
+Then the Purchase Summary should load
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
 Then I generate a random UPC number and save as: UPC202549.2
@@ -609,9 +612,7 @@ Then I call Shared Step 57753 (Create a New Registration via Register New Produc
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Water         | 100     | false               | false       |            |
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm if the Single Retailer Checkbox is selected
@@ -624,12 +625,15 @@ Then in the Additional Documents to Provide page I click Continue
 Then in the Optional reports and Documents Available for Purchase page I click Continue
 Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Then I should see the Subscription Upgrade Page
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
+Then In the Select a subscription plan section I confirm the Limited panel is grayed out
+Then In the Select a subscription plan section I confirm the Standard panel is grayed out
+Then In the Select a subscription plan section I confirm the Premium panel is grayed out
+Then In the Subscription page I confirm the Single Retailer radio icon is selected
 #Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Choose...
 Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
 Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
-Then I should see the Payment Methods Page
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
@@ -638,7 +642,6 @@ Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription Enrollment screen I select the following enrollment options
 	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan                |
 	| None               | None               | Up to 1 Product(s)  | Limited      | No additional Agent Support Service  |
-Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
@@ -646,12 +649,16 @@ Then In the Thank You screen I click Home
 Then I navigate to the MyAccount page 
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription Enrollment screen I select the following enrollment options
-	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan                |
-	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | No additional Agent Support Service  |
-	Then In the enrollment footer, I click the PROCEED button
+	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | Silver Agent Support  |
 Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
 Then I navigate to the MyAccount page 
 Then In the Subscription Information screen I click the Upgrade button
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Up to 5 Product(s)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Up to 5 Product(s)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
+Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confrim the radio is selected
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
