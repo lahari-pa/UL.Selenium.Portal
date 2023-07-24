@@ -2956,6 +2956,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+
 		[StepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
 		public void ThenInTheSupplierManagerPopupIConfirmSingle_RetailSubscriptionIsTurnedOn(string toggleName, string condition)
 		{
@@ -2980,8 +2982,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-
-
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
 		{

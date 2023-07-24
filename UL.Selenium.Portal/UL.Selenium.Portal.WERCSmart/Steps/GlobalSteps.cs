@@ -1294,6 +1294,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+		[StepDefinition(@"I open the new tab in browser")]
+		public void OpenNewTab()
+		{
+			Report.Info("Open the new tab in browser");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().NewWindow(WindowType.Tab);
+		}
 
 		[StepDefinition(@"I save the current window as: (.*)")]
 		public void SaveTheCurrentWindowAs(string savedAs)
