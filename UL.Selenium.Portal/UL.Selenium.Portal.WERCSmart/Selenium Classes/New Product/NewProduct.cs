@@ -1967,7 +1967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement el = this.containerElement
+				IWebElement el = this.ContainerElement
 					.FindElement(By.XPath(".//label[contains(text(),'Special Permit')]/../following-sibling::div//input"), 2);
 				el.EnterText(value);
 			}
@@ -1975,14 +1975,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> ListOfPrimaryPhysicalStates()
 		{
-			return this.containerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
+			return this.ContainerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool SelectSecondaryPhysicalState(string item)
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Secondary Physical State']/..//following-sibling::div//select"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//label[text()='Secondary Physical State']/..//following-sibling::div//select"), 2);
 				el.Select(item);
 				return true;
 			}
@@ -3321,7 +3321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> GetDisplayedSections()
 		{
 			var DisplayedSections = new List<string>();
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]/div/label"), 2);
+			IList<IWebElement> els = this.ContainerElement.FindElements(By.XPath(".//div[contains(@class,'collapse')]//label"), 2);
 			DisplayedSections = els.Select(x => x.Text).ToList();
 			return DisplayedSections;
 		}
