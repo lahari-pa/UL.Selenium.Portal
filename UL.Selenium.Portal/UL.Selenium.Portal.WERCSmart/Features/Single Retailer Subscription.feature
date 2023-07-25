@@ -513,6 +513,8 @@ Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
 Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
 
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
+@OnlyInIntegration
 @TestCase:202549
 
 Scenario: [202549] Single Retail - Subscription Selector Page
