@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			new Steps_TheProduct().SetProductNameTo(name);
-			Report.StartSubStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			Report.StartSubStep($"In the Product Type tab of the New Product Page, I enter: { type } in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -5130,6 +5130,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Insoluble in water");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+		[StepDefinition(@"I call Shared Step 228844 \(Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path\)")]
+		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasLiquidSolidAvailable_SelectSolid_Continue_HappyPath()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Relative Density ");
+			tableFirst.AddRow("pH");
+			tableFirst.AddRow("Boiling Point (in Celsius)");
+			tableFirst.AddRow("Flash Point (in Celsius)");
+			tableFirst.AddRow("Flash Point Testing Method Used");
+
+			Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
+			var produtTable = new Table(new string[] {
+				"State"
+			});
+			produtTable.AddRow("Aerosol");
+			produtTable.AddRow("Gas");
+			produtTable.AddRow("Liquid");
+			produtTable.AddRow("Solid");
+			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
+			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
+			Report.StartSubStep("I set the pH field to: 10.4");
+			stepsProductCharacteristics.SetPHTo("10.4");
+			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D003 Hazardous Waste under RCRA.");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is not classified as D001 or D003 Hazardous Waste under RCRA");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Gas");
+			Report.StartSubStep("I set the Secondary Physical State option to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Liquid");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyNewProduct.CheckDisplayedSections("see", tableFirst);
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Solid");
+			Report.StartSubStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.StartSubStep(
+					"I set the Secondary Physical State option to: Solid Gel Consistency");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid Gel Consistency");
+			}
+			Report.StartSubStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(
