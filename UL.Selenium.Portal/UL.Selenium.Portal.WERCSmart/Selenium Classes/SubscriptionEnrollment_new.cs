@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EnrollmentPanelRadio => this.EnrollmentPanel.FindElement(By.XPath(".//div[@class='subs__indicator']"), 1);
 		private string _footerText;
 		private IWebElement EnrollmentPanelFooter => this.EnrollmentPanel.FindElement(By.XPath($".//div[contains(@class,'panel-footer')][contains(.,'{_footerText}')]"), 1);
-		private bool EnrollmentPanelGrayedOut => this.EnrollmentPanel.FindElement(By.XPath($".//ancestor-or-self::div[contains(@style,'opacity:')]"), 1) != null;
+		private bool EnrollmentPanelGrayedOut => this.EnrollmentPanel.FindElement(By.XPath($"//input[@disabled='true']"), 1) != null;
 		private string _enrollmentPanelMessageText;
 		private bool EnrollmentPanelMessageExists => this.EnrollmentPanel.FindElement(By.XPath($".//ancestor-or-self::div//h3[@style='color:blue;']//strong[text()='{_enrollmentPanelMessageText}']"), 1) != null;
 		#endregion
@@ -154,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool VerifySingleRetailerSelectedOption(string selectedOption)
 		{
-			string getOption = this.SingleRetailerSelect.Text;
+			string getOption = this.SingleRetailerSelect.GetValue();
 			return getOption== selectedOption;
 		}
 

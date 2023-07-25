@@ -650,7 +650,7 @@ Then I navigate to the MyAccount page
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Subscription Enrollment screen I select the following enrollment options
 	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
-	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | Silver Agent Support  |
+	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | Silver                |
 Then In the Subscription Enrollment Modal, I click the Checkout button
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
@@ -658,7 +658,8 @@ Then In the Thank You screen I click Home
 Then I navigate to the MyAccount page 
 Then In the Subscription Information screen I click the Upgrade button
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Up to 5 Product(s)
-Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Up to 5 Product(s)
-Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Up to 3 Product(s)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: None
 Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confrim the radio is selected
 Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
+Then I click the Home icon in the Navigation Pane
