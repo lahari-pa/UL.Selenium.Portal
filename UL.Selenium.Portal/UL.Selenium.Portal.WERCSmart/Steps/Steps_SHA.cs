@@ -2807,7 +2807,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered search term: " + searchTerm);
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email if user: (.*)")]
+		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
 		public void ThenInTheSupplierManagerPopupIEnterInSearchFieldEmailIfUserSavedAsTC(string savedAs)
 		{
 			if (savedAs.Contains("saved as "))

@@ -554,7 +554,7 @@ Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager an
 Then I click on the Suppliers link on the top right of the screen
 And I should see the 'Supplier Manager' popup
 Then In the Supplier Manager Popup I select radio button: E-Mail
-Then In the Supplier Manager Popup I enter in search field Email if user: saved as TC202549
+Then In the Supplier Manager Popup I enter in search field Email of user: saved as TC202549
 Then In the Supplier Manager Popup I click on the search button
 Then In the Supplier Manager Popup I click on the first supplier returned
 Then Select the 'Company Information' Tab in Supplier Manager
