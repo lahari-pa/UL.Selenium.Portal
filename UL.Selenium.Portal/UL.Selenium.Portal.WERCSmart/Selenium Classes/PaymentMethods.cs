@@ -2131,7 +2131,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[@data-bind='visible: model.CartProcessed()===true']//a[text()='Home']"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-body']//a[text()='Home']"), 2);
 			return el.TryClick();
 		}
 

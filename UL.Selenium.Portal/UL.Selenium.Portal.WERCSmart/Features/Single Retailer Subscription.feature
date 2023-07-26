@@ -585,7 +585,6 @@ Then in the Optional reports and Documents Available for Purchase page I click C
 Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then the Subscription Enrollment page should load
-#Then I should see the Subscription Enrollment Page
 Then I confirm the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Tiered Subscription Options heading does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated Products panel drop down does exist
@@ -608,7 +607,7 @@ Then In the Payment Methods screen I enter Credit Card details
 Then In the Payment Methods screen I click Continue
 Then the Purchase Summary should load
 Then In the Purchase Summary screen I click Confirm Order
-Then In the Thank You screen I click Home
+Then I click the Home icon in the Navigation Pane
 Then I generate a random UPC number and save as: UPC202549.2
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -635,7 +634,6 @@ Then In the Select a subscription plan section I confirm the Limited panel is gr
 Then In the Select a subscription plan section I confirm the Standard panel is grayed out
 Then In the Select a subscription plan section I confirm the Premium panel is grayed out
 Then In the Subscription page I confirm the Single Retailer radio icon is selected
-#Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Choose...
 Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
 Then In the enrollment footer, I click the PROCEED button
 Then In the Subscription Enrollment Modal, I click the Checkout button
