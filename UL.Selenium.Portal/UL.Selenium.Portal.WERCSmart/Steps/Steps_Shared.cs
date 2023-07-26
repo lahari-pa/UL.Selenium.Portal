@@ -3157,14 +3157,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
-
+		[StepDefinition(@"I call Shared Step 57503 \(Inventory Status, Prop 65 \(US\) - TSCA\(Any Option\) - Prop 65 \(NO\) - Continue - Happy Path\)")]
 		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
