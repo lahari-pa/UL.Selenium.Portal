@@ -10819,7 +10819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
 			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
-			//MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
 			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
 			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}
