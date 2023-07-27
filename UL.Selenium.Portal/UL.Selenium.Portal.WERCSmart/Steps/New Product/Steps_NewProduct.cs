@@ -495,7 +495,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
 		public void UploadPDFFileEmbedded(string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 

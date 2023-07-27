@@ -2880,6 +2880,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
+		public void ICallSharedBrowseForFileOpen(string type, string pdfFile)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep($"I upload document type: { type } using the Browse and Open");
+			Delay.Seconds(2);
+			pdfFile = Automation.Utilities.Helpers.EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			new NewProduct().UploadFileSection(type, pdfFile);
+
+		}
+
 		[StepDefinition(@"I call Shared Step 60533 \(Additional Documents to Provide - Flash Point and Product Label only\) : (.*)")]
 		public void ICallSharedAdditionalDocumentsToProvide_FlashPointAndProductLabelOnly(string docPath)
 		{
@@ -10865,6 +10876,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
 			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
 			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
+		[StepDefinition(@"I call Shared Step Completed Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void Shared_SHAManager_CompletedProduct_AddToRecertificationReason20(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep("Beginning shared step: 43587");
+			var MyStepsSha = new Steps_SHA();
+
+			var productTable = new Table(new string[] {
+				"ProductID"
+			});
+			productTable.AddRow(new string[] {
+				"saved as " + savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenAddProductToRecertificationScreenShouldBeShowing();
 			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
 			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}

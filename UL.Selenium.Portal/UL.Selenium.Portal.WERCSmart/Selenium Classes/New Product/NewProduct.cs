@@ -2764,6 +2764,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement viewEl = this.ContainerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
 			return viewEl != null;
 		}
+
+		public bool UploadFileSection(string section, string pdfFilePath)
+		{
+			string path = "//label[contains(text(),'" + section + "')]/..//following-sibling::div/div/div[@class='ws-dropzone-container invalid']/a";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info("Clicking Browse for document type: " + section);
+			Report.Screenshot();
+			if (el == null)
+			{
+				Report.Error("The browse button was not found!! - Looking for xpath: " + path);
+				return false;
+			}
+
+			if (!el.TryClick())
+			{
+				Report.Error("Failed to click the Browse button!");
+				return false;
+			}
+			Delay.Seconds(2);
+			Report.Info("Entering file name with path: " + pdfFilePath);
+			Report.IsTrue(UploadDialog.UploadFile(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
+			int i = 0;
+			string viewPath = "//a[@class='btn btn-sm btn-primary']";
+			IWebElement viewEl = this.ContainerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
+			return viewEl != null;
+		}
+
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)
 		{
