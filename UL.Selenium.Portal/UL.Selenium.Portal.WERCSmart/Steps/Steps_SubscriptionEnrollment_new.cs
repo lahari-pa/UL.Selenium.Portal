@@ -100,6 +100,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(subEnrollment.SingleRetailerRadioIconExists(), $"Failed to confict the Single Retailer radio icon is not displayed", $"Successfully confirmed the Single Retailer radio icon is not displayed");
 			}
 		}
+		[StepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (is|is not) selected")]
+		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerRadioIconIsSelected(string condition)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (condition == "is")
+			{
+				if (Report.IsTrue(subEnrollment.SingleRetailerRadioIconExists(), "Failed to find the Single Retailer radio icon", "Successfully found the Single Retailer radio icon"))
+				{
+					Report.IsTrue(subEnrollment.SingleRetailerRadioIconDisplayed(), "Single Retailer radio icon is not selected", "The Single Retailer radio icon is selected");
+				}
+			}
+			else
+			{
+				if (Report.IsTrue(subEnrollment.SingleRetailerRadioIconExists(), "Failed to find the Single Retailer radio icon", "Successfully found the Single Retailer radio icon"))
+				{
+					Report.IsFalse(subEnrollment.SingleRetailerRadioIconDisplayed(), "Failed to confirm Single Retailer plan is not selected", "Successfully confirmed Single Retailer plan is not selected");
+				}
+			}
+		}
+
+		[StepDefinition(@"In the Single Retailer Section section, I confrim the selector displays: (.*)")]
+		public void ThenInTheSingleRetailerSectionSectionIConfrimTheSelectorDisplaysChoose_(string selectedOption)
+		{
+			var subEnrollment = new SubscriptionEnrollment_new();
+			if (Report.IsTrue(subEnrollment.SingleRetailerSelectExists(), "Failed to find the Select options element in SRS column", "Successfully found the Select options element in SRS column"))
+			{
+				Report.IsTrue(subEnrollment.VerifySingleRetailerSelectedOption(selectedOption), $"Failed to confirm {selectedOption} is selected in Sengle Retailer Column", $"Successfully confirm {selectedOption} is selected in Sengle Retailer Column");
+			}
+		}
+
 
 
 		[StepDefinition(@"In the Subscription page I confirm the (.*) subheader (does|does not) exist")]

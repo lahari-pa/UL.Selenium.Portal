@@ -3321,7 +3321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> GetDisplayedSections()
 		{
 			var DisplayedSections = new List<string>();
-			IList<IWebElement> els = this.ContainerElement.FindElements(By.XPath(".//div[contains(@class,'collapse')]//label"), 2);
+			IList<IWebElement> els = this.ContainerElement.FindElements(By.XPath(".//label[@class='control-label']"), 2);
 			DisplayedSections = els.Select(x => x.Text).ToList();
 			return DisplayedSections;
 		}

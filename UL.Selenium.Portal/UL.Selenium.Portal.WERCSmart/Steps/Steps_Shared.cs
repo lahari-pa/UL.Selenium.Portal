@@ -3157,22 +3157,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
-
+		[StepDefinition(@"I call Shared Step 57503 \(Inventory Status, Prop 65 \(US\) - TSCA\(Any Option\) - Prop 65 \(NO\) - Continue - Happy Path\)")]
 		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
 			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
-			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
+			stepsRegulatoryInformation.SetTSCATo("This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
@@ -14525,5 +14525,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 
 		}
+
+		[StepDefinition(@"I call Shared Step 67820 \(Sign up New Account - Step 1\): user (.*) with the following parameters:")]
+		public void GivenICallSharedStepSignUpNewAccount_StepUserTCWithTheFollowingParameters(string savedAs, Table parameters)
+		{
+			Report.UseSubSteps = true;
+			var landingPage = new StepsLandingPage();
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I define the user: {savedAs} with the following parameters:");
+			steps_Signup.DefineUser(savedAs, parameters);
+			Report.StartSubStep($"I save the current emails in the inbox for user saved as: {savedAs}");
+			steps_Signup.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			Report.StartSubStep("I select the Sign Up link");
+			landingPage.ClickSignUpLink();
+			Report.StartSubStep("the signup page should appear");
+			steps_Signup.ThenTheSignupPageShouldAppear();
+			Report.StartSubStep($"I enter signup email for user: {savedAs}");
+			steps_Signup.GivenIEnterSignupEmailUser(savedAs);
+			Report.StartSubStep($"I confirm signup email for user: {savedAs}");
+			steps_Signup.GivenIConfirmSignupEmailUser(savedAs);
+			Report.StartSubStep("I click on submit");
+			steps_Signup.GivenIClickOnSubmit();
+			Report.StartSubStep("the signup thank you page should appear");
+			steps_Signup.ThenTheSignupThankYouPageShouldAppear();
+			Report.StartSubStep($"there should be a new email for user: {savedAs} from: <SiteNotification> with the title: Link to create WERCSmart Account");
+			steps_Signup.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			Report.StartSubStep("the email should contain a link to set up the WERCSmart account");
+			steps_Signup.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			Report.StartSubStep("I click on the link I should see the WERCSmart new account page");
+			steps_Signup.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+		}
+
+		[Given(@"I call Shared Step 57744\(New Account - Account Information - Step 2\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_AccountInformation_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the information into the new user form for user saved as: {savedAs}");
+			steps_Signup.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Security Questions page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+		}
+
+		[Given(@"I call Shared Step 57745\(New Account - Security Questions - Step 3\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_SecurityQuestions_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the following into the Security Questions window for user saved as: {savedAs}");
+			steps_Signup.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			Report.StartSubStep($"I enter the pin for user saved as: {savedAs}");
+			steps_Signup.EnterPinForUser(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Thank You page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
+		}
+
 	}
 }

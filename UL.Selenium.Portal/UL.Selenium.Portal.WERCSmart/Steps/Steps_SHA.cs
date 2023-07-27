@@ -2807,6 +2807,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered search term: " + searchTerm);
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
+		public void ThenInTheSupplierManagerPopupIEnterInSearchFieldEmailIfUserSavedAsTC(string savedAs)
+		{
+			if (savedAs.Contains("saved as "))
+			{
+				savedAs = savedAs.Replace("saved as ", "");
+			}
+
+			if (Context.GetFromContext(savedAs) != null)
+			{
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				savedAs = user.Email;
+			}
+
+			var thisStudioSupplierManager = new StudioSupplierManager();
+
+			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(savedAs),
+				"Failed to enter search term: " + savedAs,
+				"Entered search term: " + savedAs);
+		}
+
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
 		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
 		{

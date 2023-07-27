@@ -9,6 +9,7 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using static UL.Selenium.Portal.RPS.Selenium_Classes.RecentActivities;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
