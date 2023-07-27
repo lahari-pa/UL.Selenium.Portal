@@ -24,9 +24,6 @@
 Feature: Home Page
 
 Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto33 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #pass - staging 4.10
 @TestCase:55817
@@ -155,7 +152,7 @@ Scenario: [56188] Support navigation
 #pass - staging 4.10
 @TestCase:56206
 Scenario: [56206] Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Then I click the User Icon
 	And I click on Sign Out
@@ -171,7 +168,7 @@ Scenario: [56281] Product Information - Alerts - click More
 @TestCase:64854
 Scenario: [64854] Navigation Settings
 	# Sign in and expand the menu, checking the correct items are showing
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then I expand the Navigation Menu
 	And the Navigation Menu should be expanded
 	And the following icons and labels should be found in the navigation bar
@@ -186,21 +183,21 @@ Scenario: [64854] Navigation Settings
 		| Support              |
 	And I click on Sign Out
 	# Sign back in with same account
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And the Navigation Menu should be expanded
 	Given I click on My Account
 	And the Navigation Menu should be expanded
 	Then I collapse the Navigation Menu
 	And I click on Sign Out
 	# Sign back in a third time
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And the Navigation Menu should be collapsed
 	Given I click on My Account
 	And the Navigation Menu should be collapsed
 
 @TestCase:64872
 Scenario: [64872] Pie Panel Settings
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	When I click on the triangle next to Product Information to expand the section
 	And I should see a Pie Chart and Legend under Product Information
 	And I should see the following states in the Legend:
@@ -216,7 +213,7 @@ Scenario: [64872] Pie Panel Settings
 	And I should see the Subheading Announcements in the main window
 	And the Announcements dialog should be visible
 	And I click on Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And I should see a Pie Chart and Legend under Product Information
 	# Collapse the section
 	When I click on the triangle next to Product Information to collapse the section
