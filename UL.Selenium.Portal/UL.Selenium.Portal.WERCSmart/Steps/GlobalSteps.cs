@@ -270,23 +270,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
-			int i = 0;
+			Report.Info("========== Login Attempt: ==========");
+			var selLogin = new Login();
+			Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!");
+			Report.Info("Entering Email: '" + username + "'");
+			selLogin.EmailField = username;
+			Report.Info("Entering Password: '*********'");
+			selLogin.PasswordField = password;
+			Report.Info("Clicking login");
+			Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
+			selHomepage = new Homepage();
+			PasswordExpired passwordExpired = new PasswordExpired();
+			var modalDialog = new ModalDialog();
 
-			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
+			if (selHomepage.WaitForContainerToBeVisible())
 			{
-				Report.Info("========== Login Attempt: " + i + " ==========");
-				var selLogin = new Login();
-				if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
-				{
-					break;
-				}
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '*********'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
-				selHomepage = new Homepage();
+				Report.Success("Successfully logged in!");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			else if (selLogin.LoginErrorDisplayed() || modalDialog.WaitForContainerToBeVisible(4))
+			{
+				Report.Info("Login is failed");
+			}
+		
 
 				//wait 5 seconds max for the consent page/handle
 				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
@@ -297,7 +303,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					GeneralUtilities.Wait_for_load_finish();
 					return;
 				}
-				var modalDialog = new ModalDialog();
 				if (modalDialog.WaitForContainerToBeVisible(4))
 				{
 					modalDialog.Click_Closex();
@@ -312,7 +317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						return;
 					}
 				}
-				i++;
+				
 			}
 			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
