@@ -270,7 +270,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
-			Report.Info("========== Login Attempt: ==========");
+			Report.Info("Login Attempt:");
 			var selLogin = new Login();
 			Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!");
 			Report.Info("Entering Email: '" + username + "'");
@@ -280,30 +280,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Clicking login");
 			Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 			selHomepage = new Homepage();
-			PasswordExpired passwordExpired = new PasswordExpired();
 			var modalDialog = new ModalDialog();
-
 			if (selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
 			}
-			else if (selLogin.LoginErrorDisplayed() || modalDialog.WaitForContainerToBeVisible(4))
+			else if (selLogin.LoginErrorDisplayed())
 			{
-				Report.Info("Login is failed");
+				Report.Info("Login is failed.The username and/or password you entered does not match our records.");
 			}
-		
+			new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
 
-				//wait 5 seconds max for the consent page/handle
-				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
-
-				if (selHomepage.WaitForContainerToBeVisible())
-				{
-					Report.Success("Successfully logged in!");
-					GeneralUtilities.Wait_for_load_finish();
-					return;
-				}
-				if (modalDialog.WaitForContainerToBeVisible(4))
+				/*if (modalDialog.WaitForContainerToBeVisible(4))
 				{
 					modalDialog.Click_Closex();
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -316,9 +305,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						return;
 					}
-				}
+				}*/
 				
-			}
+
 			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
 			//var selLogin2 = new Login();
