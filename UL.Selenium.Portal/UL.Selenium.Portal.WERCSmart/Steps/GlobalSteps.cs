@@ -198,7 +198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return user.UserName;
 		}
 
-		public void LoginToAccount(string alias, bool attemptOnce = false)
+		public void LoginToAccount(string alias)
 		{
 			//SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
 			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias).ToSoftwareCredentialBasic();
@@ -217,16 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			
-			if (attemptOnce)
-			{
-				this.AttemptToLoginWithEmailAndPassword(user.UserName, user.Password);
-			}
-			else
-			{
-				this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
-			}
-
+			this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
 			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 		}
 
@@ -270,35 +261,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
-			int i = 0;
-
-			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
+			Report.Info("Login Attempt:");
+			var selLogin = new Login();
+			Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!");
+			Report.Info("Entering Email: '" + username + "'");
+			selLogin.EmailField = username;
+			Report.Info("Entering Password: '*********'");
+			selLogin.PasswordField = password;
+			Report.Info("Clicking login");
+			Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
+			selHomepage = new Homepage();
+			var modalDialog = new ModalDialog();
+			if (selHomepage.WaitForContainerToBeVisible())
 			{
-				Report.Info("========== Login Attempt: " + i + " ==========");
-				var selLogin = new Login();
-				if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
-				{
-					break;
-				}
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '*********'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
-				selHomepage = new Homepage();
-
-				//wait 5 seconds max for the consent page/handle
+				Report.Success("Successfully logged in!");
+				GeneralUtilities.Wait_for_load_finish();
 				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
+			}
+			else if (selLogin.LoginErrorDisplayed())
+			{
+				Report.Failure("Login is failed.The username and/or password you entered does not match our records.");
+			}
 
-				if (selHomepage.WaitForContainerToBeVisible())
-				{
-					Report.Success("Successfully logged in!");
-					GeneralUtilities.Wait_for_load_finish();
-					return;
-				}
-				var modalDialog = new ModalDialog();
-				if (modalDialog.WaitForContainerToBeVisible(4))
+				/*if (modalDialog.WaitForContainerToBeVisible(4))
 				{
 					modalDialog.Click_Closex();
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -311,9 +296,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						return;
 					}
-				}
-				i++;
-			}
+				}*/
+				
+
 			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
 			//var selLogin2 = new Login();
