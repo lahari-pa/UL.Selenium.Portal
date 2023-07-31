@@ -198,7 +198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return user.UserName;
 		}
 
-		public void LoginToAccount(string alias, bool attemptOnce = false)
+		public void LoginToAccount(string alias)
 		{
 			//SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
 			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias).ToSoftwareCredentialBasic();
@@ -217,16 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			
-			if (attemptOnce)
-			{
-				this.AttemptToLoginWithEmailAndPassword(user.UserName, user.Password);
-			}
-			else
-			{
-				this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
-			}
-
+			this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
 			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 		}
 
@@ -285,12 +276,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
+				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
 			}
 			else if (selLogin.LoginErrorDisplayed())
 			{
-				Report.Info("Login is failed.The username and/or password you entered does not match our records.");
+				Report.Failure("Login is failed.The username and/or password you entered does not match our records.");
 			}
-			new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
 
 				/*if (modalDialog.WaitForContainerToBeVisible(4))
 				{

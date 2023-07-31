@@ -671,3 +671,5 @@ Then In the Select a subscription plan section Standard panel, I confrim the rad
 Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confrim the radio is selected
 Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
 Then I click the Home icon in the Navigation Pane
+
+
