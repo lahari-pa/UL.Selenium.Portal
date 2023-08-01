@@ -9,6 +9,7 @@
 @PaymentMethods
 @NewProduct
 @PackagingTypes
+@SHA
 @Brands
 @MyIngredients
 @DataSummarySheet
@@ -96,26 +97,38 @@ Scenario: [70533] Edit Packaging Type
 	Then I confirm the current active tab on the My Library page is: My Packaging Types
 	Given I click 'Add New' in the My Packaging Types section of My Library
 	Then I should see the Packaging Type Page
-	Given I set the Package Type Name field to: Super Packaging Type (TM)
+	Given I set the Package Type Name field to: Super Packaging Type('@&)
 	Given I click continue
 	Then I should see the Bill of Materials Page
-	And I save the Packaging Type details as: ThisPackaging
+	And I save the Packaging Type details as: MyPackaging
+	Then I save the product information as: TestCase70533
 	Given I select the option: Glass Packaging - Colored Glass - Non-Beverage for the My Packaging Materials field in the table
-	Given I select the option: 250.0 for the My Packaging Weight (grams) field in the table
+	Given I select the option: 2 for the My Packaging Weight (grams) field in the table
 	Given I click continue
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
-	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	And I click the CONEG browse button and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-	Given In the Data Acceptance page I click on the Accept button
-	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
-	Given I edit Packaging Type saved as: ThisPackaging
-	Given I set the Package Type Name field to: Super Packaging Type Edited (TM)
-	Given I click continue
-	And I save the Packaging Type details as: ThisPackaging
+	Given I set the Do you have a CONEG Certificate for this package? field to: No
 	Given I click continue
 	Then I should see the CONEG Page
+	Given I set the Does your container contain the following? option to: None of the above
+	Given I set the Packaging Component Recyclable Number field to: 1
+	Given I click continue
+	Given In the Data Acceptance page I click on the Accept button
+	Then I confirm that the Packaging Type saved as: MyPackaging appears in the My Packaging Types grid
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase70533)
+
+	And In the SHA manager grid I right click against product saved as: ID
+	And In the SHA manager grid when the right click context menu is open I select option: UPC Retailer and Feed
+
+	#Given I edit Packaging Type saved as:  TestCase70533
+	#above step is in question still
+
+	#Given I set the Package Type Name field to: Super Packaging Type Edited (TM)
+	#Given I click continue
+	#And I save the Packaging Type details as: ThisPackaging
+	#Given I click continue
+	#Then I should see the CONEG Page
 	Given I click continue
 	Given In the Data Acceptance page I click on the Accept button
 	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
@@ -308,7 +321,7 @@ Scenario: [73329] Edit Ingredient
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
 	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
-	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
+	Given In the Supplier Reports screen the current page description should be: Products and Recommended Use Report
 	#Products and Recommended Use Report
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
