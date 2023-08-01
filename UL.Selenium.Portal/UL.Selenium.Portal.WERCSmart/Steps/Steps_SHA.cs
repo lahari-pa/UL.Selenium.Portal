@@ -1723,6 +1723,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Add Product to Recertification screen has loaded");
 		}
 
+		[StepDefinition(@"The Add Product to Recertification screen should be loaded")]
+		public void ThenAddProductToRecertificationScreenShouldBeShowing()
+		{
+			var thisAddProductToRecertificationDialog =
+				new AddProductToRecertificationDialog();
+			Report.IsTrue(thisAddProductToRecertificationDialog.Wait_until_load(30),
+				"Add Product to Recertification screen has failed to load",
+				"Add Product to Recertification screen has loaded");
+		}
 		[StepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
 		{
@@ -1953,7 +1962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InAddProductToRecertificationScreenSelectReasonByNumber(int number)
 		{
 			var thisAddProductToRecertificationDialog =
-				new AddProductToRecertificationDialog();
+					new AddProductToRecertificationDialog();
 			Report.IsTrue(thisAddProductToRecertificationDialog.SelectReasonByNumber(number),
 				"Failed to select reason number: " + number.ToString(),
 				"Selected reason by number: " + number.ToString());
@@ -2769,7 +2778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text does not contain error { thisRow["Error"]}");
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error { thisRow["Error"]}");
 			}
 
 		}
@@ -2805,6 +2814,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
+		public void ThenInTheSupplierManagerPopupIEnterInSearchFieldEmailIfUserSavedAsTC(string savedAs)
+		{
+			if (savedAs.Contains("saved as "))
+			{
+				savedAs = savedAs.Replace("saved as ", "");
+			}
+
+			if (Context.GetFromContext(savedAs) != null)
+			{
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				savedAs = user.Email;
+			}
+
+			var thisStudioSupplierManager = new StudioSupplierManager();
+
+			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(savedAs),
+				"Failed to enter search term: " + savedAs,
+				"Entered search term: " + savedAs);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
@@ -2903,7 +2933,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
+		[StepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
+		public void ThenInTheSupplierManagerPopupITurnOnToggleSingle_RetailSubscription(string condition, string toggleName)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (Report.IsTrue(thisStudioSupplierManager.ToggleButtonsExists(), "Failed to find toggle buttons", "Succesfully found toggle buttons"))
+			{
+				if (condition == "on")
+				{
+					if (thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned On");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toggle {toggleName}", $"Succesfully clicked toggle {toggleName}");
 
+					}
+				}
+				else
+				{
+					if (!thisStudioSupplierManager.ToggleIsON(toggleName))
+					{
+						Report.Info($"{toggleName} is already turned Off");
+					}
+					else
+					{
+						Report.IsTrue(thisStudioSupplierManager.ClickToggleButton(toggleName), $"Failed to click toogle {toggleName}", $"Succesfully clicked toggle {toggleName}");
+					}
+				}
+			}
+
+		}
+
+
+		[StepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
+		public void ThenInTheSupplierManagerPopupIConfirmSingle_RetailSubscriptionIsTurnedOn(string toggleName, string condition)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			var newSupplier = new AddNewSupplier();
+			string gettoggleColor = null;
+			string expectedGreyColor = "rgba(204, 204, 204, 1)";
+			string expectedBlueColor = "rgba(33, 150, 243, 1)";
+			if (Report.IsTrue(thisStudioSupplierManager.ToggleButtonsExists(), "Failed to find toggle buttons", "Succesfully found toggle buttons"))
+			{
+				if (condition == "on")
+				{
+					Report.IsTrue(thisStudioSupplierManager.ToggleIsON(toggleName), $"Failed to confirm {toggleName} toggle is turned on", $"Succesfully confirmed {toggleName} toggle is turned on");
+					gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+					Report.IsTrue(gettoggleColor == expectedBlueColor, "Failed to confirm toggle color is blue", "Succesfully confirmed toggle color is blue");
+				}
+				else
+				{
+					Report.IsFalse(thisStudioSupplierManager.ToggleIsON(toggleName), $"Failed to confirm {toggleName} toggle is turned off", $"Succesfully confirmed {toggleName} toggle is turned off");
+					gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+					Report.IsTrue(gettoggleColor == expectedGreyColor, "Failed to confirm toggle color is grey", "Succesfully confirmed toggle color is grey");
+				}
+			}
+		}
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
 		{
@@ -3003,6 +3090,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
 			$"Succesfully entered {value} in field Contact Email");
 			}	
+		}
+
+		[StepDefinition(@"I enter email address: (.*)")]
+		public void IEnterEmailAddress(string email)
+		{
+			try
+			{
+				if (email.Contains("savedas"))
+				{
+					email = email.Replace("savedas", "").Trim();
+					email = Context.GetFromContext(email).ToString();
+					var thisStudioAddNewSupplier = new StudioAddNewSupplier();
+					if (Report.IsTrue(thisStudioAddNewSupplier.ContactEmailInputExists(), "Failed to find Email address input", "Succesfully found email address input"))
+					{
+						Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(email), $"Failed to enter {email} in field Email address",
+					$"Succesfully entered {email} in field Email address");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
 		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]

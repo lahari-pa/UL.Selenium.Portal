@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButton(string sButtonName)
 		{
-			ReadOnlyCollection<IWebElement> buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
+			ReadOnlyCollection<IWebElement> buttons = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//a[@id='carouselContinue']"));
 			IWebElement thisButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
 			return thisButton.TryClick();
 		}
@@ -197,7 +197,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Success("User Added");
 			return true;
 		}
+		public void Add_User_Check(string username, string title, string role, string phoneNo, string emailAddress,
+			string confirm, string country)
+		{
+			Report.Info("Entering User Information");
+			this.Name = username;
+			this.Title = title;
+			this.UserRole = role;
+			this.PhoneNumber = phoneNo;
+			this.EmailAddress = emailAddress;
+			this.ConfirmEmailAddress = confirm;
+			this.Country = country.ToUpper();
 
+			Report.Info("User Details Entered");
+			Report.Screenshot();
+
+			if (!this.ClickButton("Create"))
+			{
+				Report.Info("Failed to Click Create Button");
+				Report.Screenshot();
+			}
+			Delay.Seconds(1);
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 
 	class AddUserThankYouDialog : SeleniumBaseObject

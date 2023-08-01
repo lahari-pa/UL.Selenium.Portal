@@ -10,7 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-
+using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1081,7 +1081,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), $"Failed to click the {buttonTitle} button", $"Successfully clicked the {buttonTitle } button");
 			//Delay.Seconds(5);
 			Delay.Seconds(1);
 		}
@@ -1097,7 +1097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
 		{
-			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to click the ok button with the following text: " + text, "Successfully clicked the ok button with the following text: " + text);
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), $"Failed to click the ok button with the following text: {text}", $"Successfully clicked the ok button with the following text: {text}");
 			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
 		}
 
@@ -1273,5 +1273,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
 		}
 
+		[StepDefinition(@"I Confirm the product retailers appear in orange - Assessment in Progress status")]
+		public void GivenIConfirmProductRetailersColor()
+		{
+			Delay.Seconds(10);
+			Ingredients ingredientsObject = new Ingredients();
+			IList<IWebElement> retailers = ingredientsObject.CheckRetailerList();
+			foreach (IWebElement rt in retailers)
+			{
+				string color = rt.GetCssValue("border-bottom-color").ToString();
+				Report.IsTrue(color == "rgba(239, 157, 14, 1)", "Failed to Confirm the product retailers appear in orange", "I Confirm the product retailers appear in orange");
+			}
+		}
 	}
 }

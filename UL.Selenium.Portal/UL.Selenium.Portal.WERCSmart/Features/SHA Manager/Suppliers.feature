@@ -76,7 +76,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -97,7 +97,7 @@ Then In the Add New Supplier I click on Accept button
 And An alert is displayed with the message: The supplier was successfully added to the system.
 Then I close alert
 And I should not see the 'Add New Supplier' popup
-Then I confirm the new supplier added in the supplier manager window
+Then I confirm the new supplier should be seen in the supplier manager window
 Then I confirm following tabs appear available
 | tabs                |
 | Company Information |
@@ -112,7 +112,7 @@ Then I confirm following toggles displayed
 | After-Market Distributor |
 | Prescription Pharma      |
 | UL Test Company          |
-|Document Reader|
+|Document Reader           |
 
 # Created by Saikiran Chittampally
 @TestCase:202274
@@ -131,7 +131,7 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
@@ -160,10 +160,105 @@ And An alert is displayed with next errors:
 | Please specify a Supplier Phone number |
 | Please specify a Primary Address       |
 | Please specify a City                  |
-| Please specify a State                |
+| Please specify a State                 |
 | Please specify a Postal Code           |
 | Please specify a Contact Name          |
 | Please specify a Contact Email         |
 | Please specify a Contact Phone         |
 Then In the Add New Supplier I click on Cancel button
 Then I close Supplier Manager window
+
+# Created by Saikiran Chittampally
+@TestCase:202291
+Scenario: [202291] [Automation] : Supplier Manager - Adding New Supplier - Using Existing Contact Email
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+Then In the Supplier Manager Popup I click on button: New Supplier 
+And I should see the 'Add New Supplier' popup
+Then In the Add New Supplier I click on Accept button
+And An alert is displayed with next errors:
+| Error                                  |
+| Please specify a Company Name          |
+| Please specify a Country               |
+| Please specify a Country Code          |
+| Please specify a Supplier Phone number |
+| Please specify a Primary Address       |
+| Please specify a City                  |
+| Please specify a State                 |
+| Please specify a Postal Code           |
+| Please specify a Contact Name          |
+| Please specify a Contact Email         |
+| Please specify a Contact Phone         |
+And In Add New Supplier I enter random Company Name
+And In Add New Supplier I enter Supplier Seller ID: 123456
+And In Add New Supplier I enter Country: United States
+And I Add New Supplier I enter Country Code: +1
+And In Add New Supplier I enter Supplier Phone: 123456789
+And In Add New Supplier I enter Address: 7856 Paris st
+And In Add New Supplier I enter City: New York
+And In Add New Supplier I enter State: New York
+And In Add New Supplier I enter Postal Code: 58963
+And In Add New Supplier I enter Contact Name: Name
+And In Add New Supplier I enter Contact Email: 2e063d578bc1@.mailosaur.net
+And In Add New Supplier I enter Contact Phone: Phone
+Then In the Add New Supplier I click on Accept button
+And An alert is displayed with next errors:
+| Error                                  |
+| A user with this email already exists    |
+And I should see the 'Add New Supplier' popup
+Then In the Add New Supplier I click on Cancel button
+Then I confirm the new supplier should not be seen in the supplier manager window
+
+# Created by Saikiran Chittampally
+# Executed in QA-Integration env as Edit permission provided for SHAManager Account in Integration environment
+@TestCase:202272
+Scenario: [202272] Supplier Manager - Company Information - Document Reader Toggle
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+Then I confirm following toggles displayed
+|ToggleInfo|
+| UL Retail Services (IFS) |
+| After-Market Distributor |
+| Prescription Pharma      |
+| UL Test Company          |
+|Document Reader           |
+Then I confirm Document Reader Toggle enable check after clicking back button
+Then I confirm Document Reader Toggle enable check after clicking save button
+Then I close Supplier Manager window
+
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
+@OnlyInIntegration
+@TestCase:202273
+Scenario: [202273] Supplier Manager - Single Retail Subscription Toggle
+
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Back
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then Select the 'Subscription' Tab in Supplier Manager
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save

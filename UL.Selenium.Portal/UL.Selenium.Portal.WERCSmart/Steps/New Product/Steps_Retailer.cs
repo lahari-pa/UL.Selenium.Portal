@@ -86,9 +86,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			};
 			foreach (var retailer in retailerInfo)
 			{
-				ReportSettings.UseSubSteps = false;
-				Report.StartStep("Selecting retailer: '" + retailer + "' selects all Wal-mart affiliates in 'Select a Retailer', then the retailer is set to: 'Wal-Mart/SAM'S CLUB'");
-				ReportSettings.UseSubSteps = true;
+				Report.UseSubSteps = false;
+				Report.StartStep($"Selecting retailer: '{retailer}' selects all Wal-mart affiliates in 'Select a Retailer', then the retailer is set to: 'Wal-Mart/SAM'S CLUB'");
+				Report.UseSubSteps = true;
 				var selSelectRetailers = new SelectRetailers();
 				var selNewProduct = new NewProduct();
 				var selRetailer = new Retailer();
@@ -97,14 +97,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.Info("Clicking 'logo tile view' option because Select Retailers is shown in list view");
 					Report.IsTrue(selSelectRetailers.ClickRetailerOption("logo tile view"), "Failed to click 'logo tile view'", "Successfully clicked 'logo tile view'");
 				}
-				Report.StartStep(ReportSettings.StepCounter + " - I select retailer: " + retailer.Value);
-				ReportSettings.StepCounter++;
-				Report.Info("Clicking the checkbox for retailer with logo: " + retailer.Key);
+				Report.StartSubStep($"{Report.Details.StepIndex} - I select retailer: {retailer.Value}");
+				Report.Details.StepIndex++;
+				Report.Info($"Clicking the checkbox for retailer with logo: {retailer.Key}");
 				Report.IsTrue(selSelectRetailers.SelectRetailerByLogo(retailer.Key),
-					"Failed to select retailer: " + retailer.Value,
-					"Successfully selected retailer: " + retailer.Value);
-				Report.StartStep(ReportSettings.StepCounter + " - I confirm all of the Walmart affiliated retailers are now selected");
-				ReportSettings.StepCounter++;
+					$"Failed to select retailer: {retailer.Value}",
+					$"Successfully selected retailer: {retailer.Value}");
+				Report.StartStep($"{Report.Details.StepIndex} - I confirm all of the Walmart affiliated retailers are now selected");
+				Report.Details.StepIndex++;
 				Report.Info("Comparing the selected retailer list with the expected retailer list");
 				var allSelected = new List<string>();
 				foreach (var selected in selSelectRetailers.SelectedRetailers(true))
@@ -115,15 +115,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				var allExpected = retailerInfo.Select(x => x.Key.ToLower()).ToList();
 				Report.IsTrue(!allSelected.Except(allExpected).Any() && allExpected.Count == allSelected.Count,
-					"The selected retailers did not match the group of Walmart Affiliates: " + string.Join(", ", retailerInfo.Select(x => "'" + x.Value + "'").ToList()),
+					$"The selected retailers did not match the group of Walmart Affiliates: {string.Join(", ", retailerInfo.Select(x => "'" + x.Value + "'").ToList())}",
 					"The selected retailers matched the group of Walmart Affiliates: ");
-				Report.StartStep(ReportSettings.StepCounter + " - I click the Done button");
-				ReportSettings.StepCounter++;
+				Report.StartStep($"{Report.Details.StepIndex} - I click the Done button");
+				Report.Details.StepIndex++;
 				Report.IsTrue(selSelectRetailers.ClickDone(),
 					"Failed to click the 'Done' button!",
 					"Successfully clicked the 'Done' button");
-				Report.StartStep(ReportSettings.StepCounter + " - I confirm the only retailer selected is: 'Wal-Mart/SAM'S CLUB' ");
-				ReportSettings.StepCounter++;
+				Report.StartStep($"{Report.Details.StepIndex} - I confirm the only retailer selected is: 'Wal-Mart/SAM'S CLUB' ");
+				Report.Details.StepIndex++;
 				var actualRetailers = selRetailer.SelectedRetailers();
 				var expectedRetailers = new List<string> { @"Wal-Mart/SAM'S CLUB" };
 				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count,
@@ -155,6 +155,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ForRetailerIChoosePrivateLabelName(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().ChoosePrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
+		}
+
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I confirm '(.*)' private label (does|does not) exist")]
+		public void RetailerPrivateLabelDoesDoesNotExist(string retailer, string option, string doesDoesNot)
+		{
+			bool expected = doesDoesNot == "does";
+			Retailer rt = new Retailer();
+			Report.IsTrue(rt.RetailerPrivateLabelOptionExists(retailer, option) == expected,$"Failure, for {retailer} retailer, '{option}' private label {(expected?"does not":"does")} exist.",$"Success, {retailer} retailer {option} private label {doesDoesNot} exist.");
+		}
+
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
+		public void RetailerPrivateLabelSelect(string retailer, string option)
+		{
+			Retailer rt = new Retailer();
+			Report.IsTrue(rt.RetailerPrivateLabelOptionSelect(retailer, option), $"Failure, failed to select for {retailer} retailer, '{option}' private label option.", $"Success, successfully selected {retailer} retailer {option} private label option.");
 		}
 
 		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
@@ -259,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'")]
 		public void ClickContinueDismissNoUpcPopup()
 		{
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 			Report.StartStep("I click continue");
 			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue", "Clicked continue");
 			Report.StartStep("I click 'OK' in the 'UPCs Warning' popup if it is displayed");

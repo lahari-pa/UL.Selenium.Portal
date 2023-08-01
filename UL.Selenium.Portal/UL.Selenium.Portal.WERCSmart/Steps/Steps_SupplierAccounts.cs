@@ -1344,18 +1344,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm the new supplier added in the supplier manager window")]
-		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow()
+		[Then(@"I confirm the new supplier (should|should not) be seen in the supplier manager window")]
+		public void ThenIConfirmNewSupplierAddedInSupplierManagerWindow(string condition)
 		{
 			try
 			{
-				var newSupplier = new AddNewSupplier(); 
+				var newSupplier = new AddNewSupplier();
 				newSupplier.EnterSearchTextInSupplyManager(companyName);
 				Delay.Seconds(Delay.SpeedFactor * 2);
 				newSupplier.ClickSearchButtonInSupplyManager();
 				Delay.Seconds(Delay.SpeedFactor * 5);
-				Report.IsTrue(newSupplier.ClickNewSupplierInSupplyManager(companyName), $"{companyName} not displayed", $"{companyName} is displayed");
-				Delay.Seconds(Delay.SpeedFactor * 5);
+				if (condition == "should")
+				{
+					if (newSupplier.IfSupplierExists(companyName) != null)
+					{
+						Report.IsTrue(newSupplier.ClickNewSupplierInSupplyManager(companyName), $"{companyName} not displayed", $"{companyName} is displayed");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+					}
+				}
+				else
+				{
+					Report.IsTrue(newSupplier.IfSupplierExists(companyName) == null, $"{companyName} exists", $"{companyName} not exists");
+				}
 			}
 			catch (Exception e)
 			{
@@ -1363,7 +1373,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm following tabs appear available")]
+
+		[StepDefinition(@"I confirm following tabs appear available")]
 		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1374,7 +1385,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I click on (.*) tab")]
+		[StepDefinition(@"I click on (.*) tab")]
 		public void ThenClickOnGivenTab(string selectTab)
 		{
 			var newSupplier = new AddNewSupplier();
@@ -1382,7 +1393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Succesfully clicked {selectTab} tab");			
 		}
 
-		[Then(@"I confirm following toggles displayed")]
+		[StepDefinition(@"I confirm following toggles displayed")]
 		public void ThenIConfirmFollowingTogglesDisplayed(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1392,6 +1403,73 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(toggleValues.Contains(Row["ToggleInfo"]), $"text does not contain tab {Row["ToggleInfo"]}", $"text contain tab{ Row["ToggleInfo"]}");
 			}
 		}
+
+		[StepDefinition(@"I search with email in the supplier manager window: (.*)")]
+		public void ISearchWithEmailInSupplierManagerWindow(string email)
+		{
+			try
+			{
+				var newSupplier = new AddNewSupplier();
+				newSupplier.ClickEmailRadioButtonForSearch();
+				Delay.Seconds(Delay.SpeedFactor * 2);
+				newSupplier.EnterSearchTextInSupplyManager(email);
+				newSupplier.ClickSearchButtonInSupplyManager();
+				Delay.Seconds(Delay.SpeedFactor * 5);
+				Report.IsTrue(newSupplier.ClickNewlyAddedSupplierInSupplyManagerWithEmailSearch(), "Supplier not displayed", $"Supplier displayed successfully");
+				Delay.Seconds(Delay.SpeedFactor * 5);
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+			}
+		}
+
+		[StepDefinition(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
+		public void ThenIConfirmToggleSupplierManagerWindow(string toggleName, string action)
+		{
+			try
+			{
+				var newSupplier = new AddNewSupplier();
+				string gettoggleColor = null;
+				string expectedGreyColor = "rgba(204, 204, 204, 1)";
+				string expectedBlueColor = "rgba(33, 150, 243, 1)";
+				if (newSupplier.IsToggleButtonEnabled(toggleName) == expectedBlueColor)
+				{
+					Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+					Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+					Delay.Seconds(Delay.SpeedFactor * 5);
+					newSupplier.SaveButton();
+				}
+				else
+				{
+					if (action == "back")
+					{
+						Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+						Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						newSupplier.BackButton();
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+						Report.IsTrue(gettoggleColor == expectedGreyColor, "Toggle button enabled", "Toggle button disabled as expected");
+					}
+					else
+					{
+						Report.IsTrue(newSupplier.EditButton(), "Failed to click edit button", "Sucessfully clicked edit button");
+						Report.IsTrue(newSupplier.ToggleButton(toggleName), "Failed to click toggle", "Successfully clicked toggle");
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						newSupplier.SaveButton();
+						Delay.Seconds(Delay.SpeedFactor * 5);
+						gettoggleColor = newSupplier.IsToggleButtonEnabled(toggleName);
+						Report.IsTrue(gettoggleColor == expectedBlueColor, "Toggle button disabled", "Toggle button enabled as expected");
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Report.Failure(e.Message);
+			}
+		}
+
 	}
 }
 

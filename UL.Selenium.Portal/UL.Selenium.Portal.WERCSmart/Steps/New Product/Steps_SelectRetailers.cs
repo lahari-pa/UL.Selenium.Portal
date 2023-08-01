@@ -230,6 +230,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked 'Done' in the Select Retailers window");
 		}
 
+		[StepDefinition(@"I select all retails in Retailers page table view")]
+		public void GivenISelectAllRetailsInRetailersPageTableView()
+		{
+			Retailer newRetailerObject = new Retailer();
+			Report.StartStep("In the Retailer page I check the top checkbox to select all retailers");
+			Report.IsTrue(newRetailerObject.CheckSelectAllCheckboxInRetailersTableView(), "Failed to click top checkbox in the Retailers page table view",
+				"Successfully clicked top checkbox in the Retailers page table view");
+		}
+
+
 		[StepDefinition(@"I confirm the following retailers are selected in the Select Retailers window")]
 		public void ConfirmSelectedRetailers(Table retailers)
 		{
@@ -272,6 +282,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
 		}
 
+		[StepDefinition(@"I check the checkbox Registration is for a Single Retail Recipient \(No Retailer \+1\) and will use Single-Retail Subscription program")]
+		public void ThenICheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.CheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram(), "Failed to check the Single Retailer checkbox", "Successfully checked the Single Retailer checkbox");
+		}
+
+
 		[StepDefinition(@"I select the following retailers in the Retailer page")]
 		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
 		{
@@ -301,11 +319,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.ClickSingleRetailerCheckbox(), "Failed to click the Single Retailer checkbox", "Successfully clicked the Single Retailer checkbox");
 		}
 
-		[StepDefinition(@"I confirm if the single retailer checkbox is selected")]
-		public void ConfirmIfSingleRetailerCheckboxisSelected()
+		[StepDefinition(@"I confirm if the single retailer checkbox (is|is not) selected")]
+		public void ConfirmIfSingleRetailerCheckboxisSelected(string is_isnot)
 		{
 			var retailer = new Retailer();
-			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected(), "Single retailer checkbox is not selected", "Single retailer checkbox is selected"); 
+			bool expected = is_isnot == "is";
+			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected() == expected, $"Failure, Single retailer checkbox {(expected?"is not":"is")} selected", $"Success, Single retailer checkbox {is_isnot} selected");
+
 		}
 		[StepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]
 		public void ConfirmSingleRetailerCheckboxisSelected(string condition)

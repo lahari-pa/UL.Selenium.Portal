@@ -59,21 +59,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickRetailer(string retailer, bool exact = false)
 		{
 			// Finds all the most recent retail partners
-			IList<IWebElement> recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
+			IList<IWebElement> recentPartners = this.ContainerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
 			if (recentPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
 				return recentPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
 			// Retailer not found in the most recent retailers portion, so checking the rest of the retailers
-			IList<IWebElement> allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
+			IList<IWebElement> allPartners = this.ContainerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
 			if (allPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
 				return allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
 			// Retailer not found!
-			Report.Failure("No matching retailer for: " + retailer + " was found!");
+			Report.Failure($"No matching retailer for: '{ retailer }' was found!");
 			return false;
 		}
 
@@ -360,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool GetDataConsentTierOnofFSwitch(string tier)
 		{
-			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			IWebElement onOffSwitch = this.ContainerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
 			if (onOffSwitch != null)
 			{
 				return true;
@@ -688,7 +688,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return null;
 		}
-
+		public IWebElement DataConsentTierTableData()
+		{
+			return this.ContainerElement.FindElement(By.XPath(".//table[contains(@data-bind, 'tiersControl.loaded')]"), 2);
+		}
 	}
 
 	public class DataEntryNotification : SeleniumBaseObject

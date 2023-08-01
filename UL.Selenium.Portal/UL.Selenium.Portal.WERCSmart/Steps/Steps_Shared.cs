@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			new Steps_TheProduct().SetProductNameTo(name);
-			Report.StartSubStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			Report.StartSubStep($"In the Product Type tab of the New Product Page, I enter: { type } in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -2726,7 +2726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsNewProductIngredients = new StepsIngredients();
 			Report.StartSubStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
-			Report.StartSubStep("I add the ingredient " + name + " at 100%");
+			Report.StartSubStep($"I add the ingredient '{ name }' at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
@@ -2832,6 +2832,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
+		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
+		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
+		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartSubStep("In the Waste Classification Data page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
 
 		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
 		public void ICallSharedRetailer_SelectNoRetailer_ClickDone()
@@ -2856,9 +2874,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			Report.StartSubStep("I upload document type: " + type + " using the Browse and Open");
 			Delay.Seconds(2);
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = Automation.Utilities.Helpers.EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 
 			new NewProduct().UploadFileForSection(type, pdfFile);
+
+		}
+
+		[StepDefinition(@"I call Shared Step \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
+		public void ICallSharedBrowseForFileOpen(string type, string pdfFile)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep($"I upload document type: { type } using the Browse and Open");
+			Delay.Seconds(2);
+			pdfFile = Automation.Utilities.Helpers.EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			new NewProduct().UploadFileSection(type, pdfFile);
 
 		}
 
@@ -3139,22 +3168,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
-
+		[StepDefinition(@"I call Shared Step 57503 \(Inventory Status, Prop 65 \(US\) - TSCA\(Any Option\) - Prop 65 \(NO\) - Continue - Happy Path\)")]
 		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
 			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
-			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
+			stepsRegulatoryInformation.SetTSCATo("This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
@@ -3245,6 +3274,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I confirm 'Quantity' is visible in the UPC header");
 			MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			var upcTable = new Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Quantity",
+				quantity
+			});
+			Report.StartSubStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			Report.StartSubStep("I select Package Type from drop down list");
+			new StepsUPC().GivenISelectAPackagerTypeFromTheDropDownList();
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 213071 \(Enter Universal Product Code \(UPC\) - Applicable Only to Alkaline Battery-Quantity Field Required\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		public void SharedEnterUPC_Battery_ConfirmQuantity(string upc, string containerType,
+			string size, string quantity)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			var upcTable = new Table(new string[] {
@@ -4431,10 +4498,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
-			Report.StartSubStep(
+				Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
 				table.Rows[0]["Select the best Water Solubility description"]);
-			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
 				table.Rows[0]["Select the best Water Solubility description"]);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -5076,6 +5143,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 228844 \(Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path\)")]
+		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasLiquidSolidAvailable_SelectSolid_Continue_HappyPath()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Relative Density ");
+			tableFirst.AddRow("pH");
+			tableFirst.AddRow("Boiling Point (in Celsius)");
+			tableFirst.AddRow("Flash Point (in Celsius)");
+			tableFirst.AddRow("Flash Point Testing Method Used");
+
+			Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
+			var produtTable = new Table(new string[] {
+				"State"
+			});
+			produtTable.AddRow("Aerosol");
+			produtTable.AddRow("Gas");
+			produtTable.AddRow("Liquid");
+			produtTable.AddRow("Solid");
+			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
+			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
+			Report.StartSubStep("I set the pH field to: 10.4");
+			stepsProductCharacteristics.SetPHTo("10.4");
+			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D003 Hazardous Waste under RCRA.");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is not classified as D001 or D003 Hazardous Waste under RCRA");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Gas");
+			Report.StartSubStep("I set the Secondary Physical State option to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Liquid");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyNewProduct.CheckDisplayedSections("see", tableFirst);
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Solid");
+			Report.StartSubStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.StartSubStep(
+					"I set the Secondary Physical State option to: Solid Gel Consistency");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid Gel Consistency");
+			}
+			Report.StartSubStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 63226 \(Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path\)")]
 		public void GivenICallSharedStepPesticideDate_YesRegistered_EnterEPANumberNotOnKelly_ClickContinue_HappyPath()
@@ -5521,8 +5644,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Select Retailers popup I select the retailer: Rite Aid");
 			new StepsSelectRetailers().SelectTheRetailer("Rite Aid");
 			Report.StartSubStep("I enter private label as 'This Private Label'");
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Rite Aid", "This Private Label");
-			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
+			new Steps_Retailer().RetailerPrivateLabelDoesDoesNotExist("Rite Aid", "Rite Aid", "does");
+			new Steps_Retailer().RetailerPrivateLabelSelect("Rite Aid", "Rite Aid");
 			Report.StartSubStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -5634,14 +5757,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", showSuccessScreenshot: false);
-			Report.Info("Getting saved product: " + savedAs);
+			Report.Info($"Getting saved product: { savedAs}");
 			if (!Context.Contains(savedAs))
 			{
-				Report.Error("Context does not contain: " + savedAs);
+				Report.Error($"Context does not contain: {savedAs}");
 			}
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = product.Id;
-			Report.Info("Looking for id: " + id);
+			Report.Info($"Looking for id: { id }");
 			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
@@ -8322,6 +8445,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 213199 - Regulatory Documents to Provide - Required Document Uploads - Applicable Only to Alkaline Battery")]
+		public void ICallSharedStep104662_RegulatoryDocumentsToProvide_AlcalineBatteries()
+		{
+			
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+			Report.StartSubStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartSubStep("I confirm text 'Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.' is shown in Regulatory Documents to Provide");
+			MyNewProduct.RegulatoryDocumentsText("Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.");
+			Report.StartSubStep("I confirm field 'Article Information Sheet (AIS)' exists");
+			MyNewProduct.ThenFieldExists("Article Information Sheet (AIS)");
+			Report.StartSubStep("I upload a PDF document into the Article Information Sheet (AIS) field.");
+			MyNewProduct.UploadPDFFile("Article Information Sheet (AIS)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.");
+			MyNewProduct.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.", "I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the OSHA-COMPLIANT field.");
+			MyNewProduct.UploadPDFFile("OSHA SDS", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
+			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
+			Report.StartSubStep("I upload a PDF document into the Upload SDS field.");
+			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Prodivde page, I enter the value: 2023-06-27 into the WHMIS SDS Docmument Date Field");
+			newProdClass.EnterWHMISSDSDocumentDate("2023-06-27");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
+			Report.StartSubStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+		[StepDefinition(
 			@"I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path")]
 		public void
 			GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath()
@@ -10718,6 +10876,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
 			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
 			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
+		[StepDefinition(@"I call Shared Step Completed Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void Shared_SHAManager_CompletedProduct_AddToRecertificationReason20(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep("Beginning shared step: 43587");
+			var MyStepsSha = new Steps_SHA();
+
+			var productTable = new Table(new string[] {
+				"ProductID"
+			});
+			productTable.AddRow(new string[] {
+				"saved as " + savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenAddProductToRecertificationScreenShouldBeShowing();
 			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
 			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}
@@ -13993,7 +14173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
-
+		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Spirits \(RU001434\) \(Greater than 70% Alcohol\)\)")]
 		[StepDefinition(@"I call Shared Step 92979 \(Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than >70% Alcohol\)")]
 		public void Shared92979EnterPhysicalProperty_Liquid_ForWineGreaterThan70()
 		{
@@ -14001,21 +14181,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			Report.StartStep("I set the Relative Density option to: 55");
-			MyNewProduct.SetTheSectionOptionTo("Relative Density", "55");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: pH");
-			MyNewProduct.SectExatcDataNotKnown("pH");
-			Report.StartStep("I set the pH field to: 4 - 6.9");
-			MyNewProduct.SetTheSectionOptionTo("pH", "4 - 6.9");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
-			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
-			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			Report.StartStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("In the Product Characteristics tab of the New Product Page for pH I enter: 7 ");
+			MyNewProduct.SetTheSectionOptionTo("pH","7");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: 78 ");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)","78");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 12 ");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)","12");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Closed Cup Method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
@@ -14034,6 +14211,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Percent of Alcohol in the Product (numeric entry only)",
 				"80"));
 			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "80");
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
+		[StepDefinition(@"I call Shared Step 92981a \(Beverage Regulatory Details\):")]
+		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTable( Table table)
+		{ 
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", table.Rows[0]["BPA"]);
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
 			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
@@ -14066,8 +14260,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Based on defined viscosity parameters, this product is classified as PG III");
 			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
-
 		}
+		[StepDefinition(@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcoholic Beverages - Spirits \(RU001434\) - Packaging Group should pre-select Packaging Group II\)")]
+
+		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData_ForSpirits()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN3065");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3065");
+			Delay.Seconds(2);
+			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			Report.StartStep("I select '3' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "3");
+			Report.StartStep("I select 'II' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+		}
+
 		[StepDefinition(@"I call Shared Step \(Enter Product Data for Physical State - Aerosol only and Secondary Physical state - Liquid spray\)")]
 		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnlyWithFIFRA()
 		{
@@ -14345,5 +14558,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 
 		}
+
+		[StepDefinition(@"I call Shared Step 67820 \(Sign up New Account - Step 1\): user (.*) with the following parameters:")]
+		public void GivenICallSharedStepSignUpNewAccount_StepUserTCWithTheFollowingParameters(string savedAs, Table parameters)
+		{
+			Report.UseSubSteps = true;
+			var landingPage = new StepsLandingPage();
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I define the user: {savedAs} with the following parameters:");
+			steps_Signup.DefineUser(savedAs, parameters);
+			Report.StartSubStep($"I save the current emails in the inbox for user saved as: {savedAs}");
+			steps_Signup.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			Report.StartSubStep("I select the Sign Up link");
+			landingPage.ClickSignUpLink();
+			Report.StartSubStep("the signup page should appear");
+			steps_Signup.ThenTheSignupPageShouldAppear();
+			Report.StartSubStep($"I enter signup email for user: {savedAs}");
+			steps_Signup.GivenIEnterSignupEmailUser(savedAs);
+			Report.StartSubStep($"I confirm signup email for user: {savedAs}");
+			steps_Signup.GivenIConfirmSignupEmailUser(savedAs);
+			Report.StartSubStep("I click on submit");
+			steps_Signup.GivenIClickOnSubmit();
+			Report.StartSubStep("the signup thank you page should appear");
+			steps_Signup.ThenTheSignupThankYouPageShouldAppear();
+			Report.StartSubStep($"there should be a new email for user: {savedAs} from: <SiteNotification> with the title: Link to create WERCSmart Account");
+			steps_Signup.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			Report.StartSubStep("the email should contain a link to set up the WERCSmart account");
+			steps_Signup.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			Report.StartSubStep("I click on the link I should see the WERCSmart new account page");
+			steps_Signup.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+		}
+
+		[Given(@"I call Shared Step 57744\(New Account - Account Information - Step 2\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_AccountInformation_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the information into the new user form for user saved as: {savedAs}");
+			steps_Signup.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Security Questions page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+		}
+
+		[Given(@"I call Shared Step 57745\(New Account - Security Questions - Step 3\) for user: (.*)")]
+		public void GivenICallSharedStepNewAccount_SecurityQuestions_StepForUserTC(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var steps_Signup = new StepsSignup();
+			Report.StartSubStep($"I enter the following into the Security Questions window for user saved as: {savedAs}");
+			steps_Signup.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			Report.StartSubStep($"I enter the pin for user saved as: {savedAs}");
+			steps_Signup.EnterPinForUser(savedAs);
+			Report.StartSubStep("In the new user form I click on continue");
+			steps_Signup.WhenInTheNewUserFormIClickOnContinue();
+			Report.StartSubStep("I should be on the Thank You page of the for");
+			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
+		}
+
 	}
 }

@@ -28,6 +28,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	public class NewProduct : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
+
+		public bool InputFieldExists(string fieldName)
+		{
+			return this.InputField(fieldName) != null;
+		}
 
 		#region web elements
 		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
@@ -228,7 +234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
+			return this.ContainerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
 		}
 
 		public bool ClickSection(string section)
@@ -759,6 +765,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
 			}
 			Report.Info("Attempting to delete: " + upc);
+			Delay.Seconds(20);
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			IWebElement upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.Text.Contains(upc))
 							?? container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc))
@@ -1960,7 +1967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement el = this.containerElement
+				IWebElement el = this.ContainerElement
 					.FindElement(By.XPath(".//label[contains(text(),'Special Permit')]/../following-sibling::div//input"), 2);
 				el.EnterText(value);
 			}
@@ -1968,14 +1975,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> ListOfPrimaryPhysicalStates()
 		{
-			return this.containerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
+			return this.ContainerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool SelectSecondaryPhysicalState(string item)
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Secondary Physical State']/..//following-sibling::div//select"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//label[text()='Secondary Physical State']/..//following-sibling::div//select"), 2);
 				el.Select(item);
 				return true;
 			}
@@ -2757,6 +2764,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement viewEl = this.ContainerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
 			return viewEl != null;
 		}
+
+		public bool UploadFileSection(string section, string pdfFilePath)
+		{
+			string path = "//label[contains(text(),'" + section + "')]/..//following-sibling::div/div/div[@class='ws-dropzone-container invalid']/a";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info("Clicking Browse for document type: " + section);
+			Report.Screenshot();
+			if (el == null)
+			{
+				Report.Error("The browse button was not found!! - Looking for xpath: " + path);
+				return false;
+			}
+
+			if (!el.TryClick())
+			{
+				Report.Error("Failed to click the Browse button!");
+				return false;
+			}
+			Delay.Seconds(2);
+			Report.Info("Entering file name with path: " + pdfFilePath);
+			Report.IsTrue(UploadDialog.UploadFile(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
+			int i = 0;
+			string viewPath = "//a[@class='btn btn-sm btn-primary']";
+			IWebElement viewEl = this.ContainerElement.WaitUntilElementVisible(By.XPath(viewPath), 60);
+			return viewEl != null;
+		}
+
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)
 		{
@@ -3314,7 +3348,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> GetDisplayedSections()
 		{
 			var DisplayedSections = new List<string>();
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]/div/label"), 2);
+			IList<IWebElement> els = this.ContainerElement.FindElements(By.XPath(".//label[@class='control-label']"), 2);
 			DisplayedSections = els.Select(x => x.Text).ToList();
 			return DisplayedSections;
 		}
@@ -4466,7 +4500,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 
 		}
-
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
 			bool fieldIsCorrectColor = false;
@@ -4530,6 +4563,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
 			}
 
+
+			return fieldIsCorrectColor;
+
+		}
+
+		public bool CheckInputFieldColor(string expectedColor, string fieldName)
+		{
+			bool fieldIsCorrectColor = false;
+
+			Report.Info($"Looking at the input field with label {fieldName}");
+
+			Report.Info($"Exepcted Color is: {expectedColor}");
+
+			string expectedColorCode;
+
+			switch (expectedColor)
+			{
+				case "Green":
+					expectedColorCode = "rgba(240, 255, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length > 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField = parentContainer.FindElement(By.XPath(".//div[@class='ws-dropzone-container']"), 2);
+					break;
+
+				case "Red":
+					expectedColorCode = "rgba(255, 240, 240, 1)";
+					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					//inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
+
+					break;
+				default:
+					Report.Error("expectedColor must be either: 'Red' or 'Green'");
+					return false;
+			}
+			string inputFieldColor = this.InputField(fieldName).GetCssValue("background-color");
+
+			if (expectedColorCode == inputFieldColor)
+			{
+				Report.Success($"The color of the input field was the color {expectedColor} as expected");
+				fieldIsCorrectColor = true;
+			}
+			else
+			{
+				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
+			}
 
 			return fieldIsCorrectColor;
 

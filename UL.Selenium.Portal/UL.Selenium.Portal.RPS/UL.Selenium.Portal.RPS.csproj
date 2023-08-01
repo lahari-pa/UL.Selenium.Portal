@@ -23,17 +23,17 @@
 	<ItemGroup>
 		<!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
 
-		<PackageReference Include="Castle.Core" Version="4.3.1" />
+		<PackageReference Include="Castle.Core" Version="5.1.1" />
 
-		<PackageReference Include="UL.Automation" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.Framework.NUnit" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.Reporting.Html" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.SpecFlow" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.TReVor" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.Utilities" Version="5.0.98" />
-		<PackageReference Include="UL.Automation.WebDriver" Version="5.0.98" />
+		<PackageReference Include="UL.Automation" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.Framework.NUnit" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.Reporting.Html" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.SpecFlow" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.TReVor" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.Utilities" Version="5.1.11" />
+		<PackageReference Include="UL.Automation.WebDriver" Version="5.1.11" />
 
 		<!-- ===== TREVOR PACKAGE(S) ===== -->
 
@@ -58,7 +58,7 @@
 
 		<!-- ===== MISC. PACKAGE(S) ===== -->
 
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
 		<PackageReference Include="iTextSharp" Version="5.5.11" />
 		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
 			<PrivateAssets>all</PrivateAssets>

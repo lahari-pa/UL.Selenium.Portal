@@ -13,6 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using System.Collections.ObjectModel;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -22,7 +23,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.Id("enrollment");
 		private IWebElement EnrollmentPageHeader => this.ContainerElement.FindElement(By.XPath($".//h2"),1);
 		private List<IWebElement> EnrollmentAlertMessages => this.ContainerElement.FindElements(By.XPath($".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 1).ToList();
-
+		private IWebElement ColumnHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='col-md-3']//strong"), 2);
+		private IWebElement PanelHeader(string panelName) => this.ContainerElement.FindElement(By.XPath($".//label[contains(text(), '{panelName}')]"), 2);
+		private IWebElement SingleRetailerColumnText => this.ContainerElement.FindElement(By.XPath(".//div[@class='col-md-3']//div[@class='small min-height-100']"), 2);
+		private IWebElement SingleRetailerSelect => this.ContainerElement.FindElement(By.XPath(".//div[@class='col-md-3']//select"), 2);
+		private IWebElement SingleRetailerRadioIcon => this.ContainerElement.FindElement(By.XPath(".//label[contains(text(), 'Single Retailer')]"), 2);
+		private IWebElement SingleRetailerText => this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-body min-height-175']"), 2);
 		#region Section Level
 		private string _sectionLabel;
 		private IWebElement EnrollmentSection => this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'row')][.//h3[normalize-space(text())='{_sectionLabel}']]"), 1);
@@ -50,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EnrollmentPanelRadio => this.EnrollmentPanel.FindElement(By.XPath(".//div[@class='subs__indicator']"), 1);
 		private string _footerText;
 		private IWebElement EnrollmentPanelFooter => this.EnrollmentPanel.FindElement(By.XPath($".//div[contains(@class,'panel-footer')][contains(.,'{_footerText}')]"), 1);
-		private bool EnrollmentPanelGrayedOut => this.EnrollmentPanel.FindElement(By.XPath($".//ancestor-or-self::div[contains(@style,'opacity:')]"), 1) != null;
+		private bool EnrollmentPanelGrayedOut => this.EnrollmentPanel.FindElement(By.XPath($"//input[@disabled='true']"), 1) != null;
 		private string _enrollmentPanelMessageText;
 		private bool EnrollmentPanelMessageExists => this.EnrollmentPanel.FindElement(By.XPath($".//ancestor-or-self::div//h3[@style='color:blue;']//strong[text()='{_enrollmentPanelMessageText}']"), 1) != null;
 		#endregion
@@ -75,25 +81,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to confirm enrollment page header exists.");
 			return this.EnrollmentPageHeader != null;
 		}
-
 		public string EnrollmentPageHeaderGet()
 		{
 			Report.Info($"Attempting to get enrollment page header text.");
 			return this.EnrollmentPageHeader.Text;
 		}
-
 		public bool EnrollmentAlertsExist()
 		{
 			Report.Info($"Attempting to confirm enrollment alerts exist.");
 			return this.EnrollmentAlertMessages.Count != 0;
 		}
-
 		public bool EnrollmentAlertsContain(string alertMessage)
 		{
 			Report.Info($"Attempting to confirm '{alertMessage}' message exists.");
 			return this.EnrollmentAlertMessages.Where(x => x.Displayed).ToList().Select(x => x.GetValue().Trim() == alertMessage).FirstOrDefault();
 		}
-
 		#region SectionLevel
 		public bool EnrollmentSectionExists(string sectionLabel)
 		{
@@ -107,6 +109,70 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_sectionLabel = sectionLabel;
 			_headingText = headingText;
 			return this.EnrollmentSectionHeading != null;
+		}
+		public bool EnrollmentHeadingExists(string headerName)
+		{
+			string getText = this.ColumnHeader.Text;
+			return getText==headerName;
+		}
+		public bool ColumnHeaderExists()
+		{
+			return this.ColumnHeader != null;
+		}
+		public bool PanelHeadingDisplayed(string headerName)
+		{
+			return this.PanelHeader(headerName).Displayed;
+		}
+		public bool SingleRetailerColumnTextExists()
+		{
+			return this.SingleRetailerColumnText != null;
+		}
+		public bool SingleRetailerColumnTextDisplayed(string text)
+		{
+			string getText = this.SingleRetailerColumnText.Text;
+			return getText == text;
+		}
+		public bool SingleRetailerTextExists()
+		{
+			return this.SingleRetailerText != null;
+		}
+		public bool SingleRetailerTextDisplayed(string text)
+		{
+			string getText = this.SingleRetailerText.Text;
+			string[] splitedtext = getText.Split('\n');
+			splitedtext[0] = splitedtext[0].Split('\r')[0];
+			getText = splitedtext[0] + ' ' + splitedtext[1];
+			return getText == text;
+		}
+		public bool SingleRetailerSelectExists()
+		{
+			return this.SingleRetailerSelect != null;
+		}
+		public bool SingleRetailerSelectDisplayed()
+		{
+			return this.SingleRetailerSelect.Displayed;
+		}
+		public bool VerifySingleRetailerSelectedOption(string selectedOption)
+		{
+			string getOption = this.SingleRetailerSelect.GetValue();
+			return getOption== selectedOption;
+		}
+
+		public bool SingleRetailerRadioIconExists()
+		{
+			return this.SingleRetailerRadioIcon != null;
+		}
+		public bool SingleRetailerRadioIconDisplayed()
+		{
+			return this.SingleRetailerRadioIcon.Displayed;
+		}
+		public bool SingleRetailerRadioIconSelected()
+		{
+			return this.SingleRetailerRadioIcon.Selected;
+		}
+		public bool PanelHeaderExists(string headerName)
+		{
+			return this.PanelHeader(headerName) != null;
 		}
 		public bool EnrollmentSectionTextAreaExists(string sectionLabel)
 		{

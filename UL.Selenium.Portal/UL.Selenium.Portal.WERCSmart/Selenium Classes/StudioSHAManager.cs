@@ -1333,7 +1333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingOption == null)
 			{
-				Report.Info("No matching menu option found: " + option + ". Available options: " +
+				Report.Info($"No matching menu option found: '{ option }'. Available options: " +
 							string.Join(",", listOfOptions));
 				return false;
 			}
@@ -3218,11 +3218,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			StudioUtilites.SwitchToWindow("Wercs Studio");
 			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 			IWebElement frame =
-				SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);			
 			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 			;
+		}
+
+		public bool Wait_until_load(int secondsToWait = 30)
+		{
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
+			return base.Wait_for_load(30);
 		}
 
 		public List<string> GetReasons()
