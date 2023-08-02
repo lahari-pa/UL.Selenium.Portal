@@ -16,6 +16,7 @@
 @ProductSetUp
 @run_ProductSetUp
 @SupplierAccounts
+@Studio_Header
 
 Feature: Suppliers
 
@@ -262,3 +263,30 @@ Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turne
 Then In the Supplier Manager Popup I click on button: Edit
 Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
 Then In the Supplier Manager Popup I click on button: Save
+
+# Created by Saikiran Chittampally
+# Executed in QA-Integration env as Edit permission provided for SHAManager Account in Integration environment
+@TestCase:210011
+Scenario: [210011] Supplier Manager - After Market Distributor Toggle
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+Then I confirm following toggles displayed
+|ToggleInfo|
+| UL Retail Services (IFS) |
+| After-Market Distributor |
+| Prescription Pharma      |
+| UL Test Company          |
+|Document Reader           |
+Then I confirm After-Market Distributor Toggle enable check after clicking back button
+Then I confirm After-Market Distributor Toggle enable check after clicking save button
+Then I close Supplier Manager window
+Then I click to open the 'My Wercs' menu and select 'Log Out'
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+Then In the Supplier Manager Popup I confirm After-Market Distributor is turned on
+Then I confirm After-Market Distributor Toggle enable check after clicking save button
+Then I close Supplier Manager window
