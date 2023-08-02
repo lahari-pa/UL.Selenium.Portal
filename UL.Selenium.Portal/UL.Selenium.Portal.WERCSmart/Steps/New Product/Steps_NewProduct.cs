@@ -23,6 +23,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using UL.Automation.Utilities.Helpers;
 using Mailosaur;
+using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -472,7 +473,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFileSectionAndType(string type, string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 
 		}
@@ -487,14 +488,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
 		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
 		{
-			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			var pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
 		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
 		public void UploadPDFFileEmbedded(string label, string pdfFile)
 		{
-			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
@@ -1284,7 +1285,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var value = Context.GetFromContext(option)?.ToString();
 				if (value == null)
 				{
-					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
+					throw new Exception($"Could not find item in context: { value } for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
 					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
@@ -1422,7 +1423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var myProduct = new NewProduct();
 			List<string> options = myProduct.GetAllOptionsForSection(section);
-			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
+			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), $"The option: { options[0] } could not be selected in section: { section }", $"The option: { options[0] } was selected in section: { section }");
 		}
 
 
@@ -1434,11 +1435,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Selecting the first option for section: " + section);
 				//var options = myProduct.GetDropDownOptionsForSection(section);
-				Report.IsTrue(myProduct.SetOptionInSection(section, option), "The option: " + option + " could not be selected in section: " + section, "The option: " + option + " was selected in section: " + section);
+				Report.IsTrue(myProduct.SetOptionInSection(section, option), $"The option: { option } could not be selected in section: { section }", $"The option: { option } was selected in section: { section}");
 			}
 			else
 			{
-				Report.Info("The section: " + section + " was not showing so no option was selected");
+				Report.Info($"The section: { section } was not showing so no option was selected");
 			}
 		}
 

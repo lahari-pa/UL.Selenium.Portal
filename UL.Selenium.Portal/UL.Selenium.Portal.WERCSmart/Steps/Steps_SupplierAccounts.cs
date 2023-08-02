@@ -1374,7 +1374,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"I confirm following tabs appear available")]
+		[StepDefinition(@"I confirm following tabs appear available")]
 		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1385,7 +1385,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I click on (.*) tab")]
+		[StepDefinition(@"I click on (.*) tab")]
 		public void ThenClickOnGivenTab(string selectTab)
 		{
 			var newSupplier = new AddNewSupplier();
@@ -1393,7 +1393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Succesfully clicked {selectTab} tab");			
 		}
 
-		[Then(@"I confirm following toggles displayed")]
+		[StepDefinition(@"I confirm following toggles displayed")]
 		public void ThenIConfirmFollowingTogglesDisplayed(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1404,7 +1404,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[When(@"I search with email in the supplier manager window: (.*)")]
+		[StepDefinition(@"I search with email in the supplier manager window: (.*)")]
 		public void ISearchWithEmailInSupplierManagerWindow(string email)
 		{
 			try
@@ -1424,7 +1424,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
+		[StepDefinition(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
 		public void ThenIConfirmToggleSupplierManagerWindow(string toggleName, string action)
 		{
 			try

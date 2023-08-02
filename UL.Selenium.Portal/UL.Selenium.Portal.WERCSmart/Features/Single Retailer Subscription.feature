@@ -18,6 +18,10 @@
 @MyMessages
 @DeleteActiveProducts
 @UPC
+@SupplierAccounts
+@SubEnrollmentNew
+@SubEnrollment
+
 
 Feature: Single Retailer Subscription
 
@@ -454,4 +458,218 @@ Then I click Row Actions for product saved as: FirstProduct
 And I should not see the following Actions options
 | Option                           |
 | Transfer to Tiered Subscription  |
+
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
+@OnlyInIntegration
+@TestCase:202359
+
+Scenario: [202359] Single Retail Subscription - Subscription Screen Options Available and Not Available
+
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+Then I navigate to the landing page
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
+Then I navigate to the MyAccount page
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription page I confirm the Single Retailer Subscription heading does exist
+Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does exist
+Then In the Subscription page I confirm the Single Retailer Subscription column contains text: When registering a type of product (formulated, enhanced, or article, excluding batteries) that is designated to be sold by a single retailer, this option provides discounted pricing. WERCSmart Agency services are available at an additional cost.
+Then In the Subscription page I confirm the Single Retailer radio icon does exist
+Then In the Subscription page I confirm the Single Retailer column contains text: 'Create and Manage Product Data Submit registration to single retailer + No Retailer'
+Then I click the Home icon in the Navigation Pane
+Then I open the new tab in browser
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn off toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned off
+Then I click top menu item: My Wercs and submenu item: Log Out
+Then I switch to the tab with title: WERCSmart Version 2.0
+Then I navigate to the MyAccount page
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription page I confirm the Single Retailer Subscription heading does not exist
+Then In the Subscription page I confirm the Formulated, Enhanced & Articles subheader does not exist
+Then In the Subscription page I confirm the Single Retailer radio icon does not exist
+Then I logout
+Then I navigate to the landing page
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+When I search with email in the supplier manager window: SingleRetailerAccount@kxxyxunf.mailosaur.net
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then In the Supplier Manager Popup I confirm Single-Retail Subscription is turned on
+
+#Currently test case can be run only in QA-Integration, as SHAManager account waiting for additional settings in Staging
+@OnlyInIntegration
+@TestCase:202549
+
+Scenario: [202549] Single Retail - Subscription Selector Page
+
+Given I call Shared Step 67820 (Sign up New Account - Step 1): user TC202549 with the following parameters:
+		| Field                | Value                   |
+		| Email                | User_<random>           |
+		| Country              | UNITED STATES           |
+		| FirstName            | TestCase                |
+		| LastName             | 202549                  |
+		| Password             | Pa4*ytuufnn             |
+		| Address1             |  725 5th Ave,           |
+		| Address2             | Address 2               |
+		| City                 | New York                |
+		| State                | New York                |
+		| Zip                  | 10022                   |
+		| CompanyName          | Wercs QA Automated test |
+		| CompanyPhone         | 123-456-7889            |
+		| EmergencyPhoneNumber | 123-456-7789            |
+		| SupplierType         | Manufacturer            |
+		| PhoneQuestion        | PhoneQuestion           |
+		| PhoneHint            | PhoneHint               |
+		| MentorQuestion       | MentorQuestion          |
+		| MentorHint           | MentorHint              |
+		| FriendQuestion       | FriendQuestion          |
+		| FriendHint           | FriendHint              |
+		| AnimalQuestion       | AnimalQuestion          |
+		| AnimalHint           | AnimalHint              |
+		| CollegeQuestion      | CollegeQuestion         |
+		| CollegeHint          | CollegeHint             |
+		| Pin                  | 1234                    |
+Given I call Shared Step 57744(New Account - Account Information - Step 2) for user: TC202549
+Given I call Shared Step 57745(New Account - Security Questions - Step 3) for user: TC202549
+#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I generate a random UPC number and save as: UPC202549
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I click on the Suppliers link on the top right of the screen
+And I should see the 'Supplier Manager' popup
+Then In the Supplier Manager Popup I select radio button: E-Mail
+Then In the Supplier Manager Popup I enter in search field Email of user: saved as TC202549
+Then In the Supplier Manager Popup I click on the search button
+Then In the Supplier Manager Popup I click on the first supplier returned
+Then Select the 'Company Information' Tab in Supplier Manager
+Then In the Supplier Manager Popup I click on button: Edit
+Then In the Supplier Manager Popup I turn on toggle: Single-Retail Subscription
+Then In the Supplier Manager Popup I click on button: Save
+Then I click top menu item: My Wercs and submenu item: Log Out
+Given I go to the WERCSmart Log in
+Given I login as user: TC202549
+Given If terms of use page appears I accept
+Then the WERCSmart homepage should load
+Then I should see username for user saved as: TC202549 in the right corner
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
+Then I confirm if the single retailer checkbox is displayed on the retailer page
+Then I confirm if the Single Retailer Checkbox is selected
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC202549, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then the Subscription Enrollment page should load
+Then I confirm the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Tiered Subscription Options heading does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Formulated Products panel drop down does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Enhanced Articles panel drop down does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Articles panel drop down does exist
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Choose...
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: Choose...
+Then In the Subscription page I confirm the Single Retailer Subscription heading does exist
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 1 Product(s)
+Then In the Subscription page I confirm the Single Retailer radio icon does exist
+Then In the Subscription page I confirm the Single Retailer radio icon is selected
+Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
+Then In the enrollment footer, I click the PROCEED button
+Then In the Subscription Enrollment Modal, I click the Checkout button
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+	| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+	| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then the Purchase Summary should load
+Then In the Purchase Summary screen I click Confirm Order
+Then I click the Home icon in the Navigation Pane
+Then I generate a random UPC number and save as: UPC202549.2
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I confirm if the single retailer checkbox is displayed on the retailer page
+Then I confirm if the Single Retailer Checkbox is selected
+Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+| Retailer   |
+| Rite Aid   |
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC202549.2, container type: any and size: 20
+Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+Then in the Additional Documents to Provide page I click Continue
+Then in the Optional reports and Documents Available for Purchase page I click Continue
+Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: None
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: None
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: None
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
+Then In the Select a subscription plan section I confirm the Limited panel is grayed out
+Then In the Select a subscription plan section I confirm the Standard panel is grayed out
+Then In the Select a subscription plan section I confirm the Premium panel is grayed out
+Then In the Subscription page I confirm the Single Retailer radio icon is selected
+Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
+Then In the enrollment footer, I click the PROCEED button
+Then In the Subscription Enrollment Modal, I click the Checkout button
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+Then I navigate to the MyAccount page 
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Select a subscription plan section Limited panel, I confrim the radio is selected
+Then In the Select an Agent Support Service Plan [optional] section No additional Agent Support Service panel, I confrim the radio is selected
+Then In the Subscription Enrollment screen I select the following enrollment options
+	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan                |
+	| None               | None               | Up to 1 Product(s)  | Limited      | No additional Agent Support Service  |
+	Then In the Select a subscription plan section I confirm the Standard panel is not grayed out
+Then In the Select a subscription plan section I confirm the Premium panel is not grayed out
+Then In the Subscription Enrollment Modal, I click the Checkout button
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+Then I navigate to the MyAccount page 
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription Enrollment screen I select the following enrollment options
+	| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+	| None               | Up to 3 Product(s) | Up to 5 Product(s)  | Standard     | Silver                |
+Then In the Subscription Enrollment Modal, I click the Checkout button
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+Then I navigate to the MyAccount page 
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: Up to 5 Product(s)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: Up to 3 Product(s)
+Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: None
+Then In the Select a subscription plan section Standard panel, I confrim the radio is selected
+Then In the Select an Agent Support Service Plan [optional] section Silver Agent Support panel, I confrim the radio is selected
+Then In the Single Retailer Section section, I confrim the selector displays: Up to 3 Product(s)
+Then I click the Home icon in the Navigation Pane
+
 

@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
 			foreach (string state in expected)
 			{
-				if (Report.IsTrue(found.Contains(state), "Failed to find state: " + state + " in the list!", state + " was successfully found!"))
+				if (Report.IsTrue(found.Contains(state), $"Failed to find state: { state } in the list!", $"{ state } was successfully found!"))
 				{
 					found.Remove(state);
 				}
@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set the Primary Physical State to be: (.*)")]
 		public void SetThePrimayPhysicalStateTo(string state)
 		{
-			Report.Info("Selecting the radio input: " + state);
+			Report.Info($"Selecting the radio input: { state}");
 			this.ProductCharacteristics.PrimaryPhysicalState = state;
 			Report.IsTrue(new ProductCharacteristics().PrimaryPhysicalState == state, "Failed to set the primary physical state", "Successfully set the Primary Physical State");
 		}

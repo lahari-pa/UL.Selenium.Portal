@@ -1723,6 +1723,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Add Product to Recertification screen has loaded");
 		}
 
+		[StepDefinition(@"The Add Product to Recertification screen should be loaded")]
+		public void ThenAddProductToRecertificationScreenShouldBeShowing()
+		{
+			var thisAddProductToRecertificationDialog =
+				new AddProductToRecertificationDialog();
+			Report.IsTrue(thisAddProductToRecertificationDialog.Wait_until_load(30),
+				"Add Product to Recertification screen has failed to load",
+				"Add Product to Recertification screen has loaded");
+		}
 		[StepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
 		{
@@ -1953,7 +1962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InAddProductToRecertificationScreenSelectReasonByNumber(int number)
 		{
 			var thisAddProductToRecertificationDialog =
-				new AddProductToRecertificationDialog();
+					new AddProductToRecertificationDialog();
 			Report.IsTrue(thisAddProductToRecertificationDialog.SelectReasonByNumber(number),
 				"Failed to select reason number: " + number.ToString(),
 				"Selected reason by number: " + number.ToString());
@@ -2807,6 +2816,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered search term: " + searchTerm);
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
+		public void ThenInTheSupplierManagerPopupIEnterInSearchFieldEmailIfUserSavedAsTC(string savedAs)
+		{
+			if (savedAs.Contains("saved as "))
+			{
+				savedAs = savedAs.Replace("saved as ", "");
+			}
+
+			if (Context.GetFromContext(savedAs) != null)
+			{
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				savedAs = user.Email;
+			}
+
+			var thisStudioSupplierManager = new StudioSupplierManager();
+
+			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(savedAs),
+				"Failed to enter search term: " + savedAs,
+				"Entered search term: " + savedAs);
+		}
+
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
 		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
 		{
@@ -2935,6 +2965,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+
 		[StepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
 		public void ThenInTheSupplierManagerPopupIConfirmSingle_RetailSubscriptionIsTurnedOn(string toggleName, string condition)
 		{
@@ -2959,8 +2991,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-
-
 		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
 		{
