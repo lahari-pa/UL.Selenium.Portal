@@ -3626,11 +3626,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
 
