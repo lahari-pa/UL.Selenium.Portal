@@ -97,7 +97,7 @@ Scenario: [70533] Edit Packaging Type
 	Then I confirm the current active tab on the My Library page is: My Packaging Types
 	Given I click 'Add New' in the My Packaging Types section of My Library
 	Then I should see the Packaging Type Page
-	Given I set the Package Type Name field to: Super Packaging Type('@&)
+	Given I set the Package Type Name field to: Super Packaging Type('@&%$)
 	Given I click continue
 	Then I should see the Bill of Materials Page
 	And I save the Packaging Type details as: MyPackaging
@@ -117,25 +117,13 @@ Scenario: [70533] Edit Packaging Type
 	Then I confirm that the Packaging Type saved as: MyPackaging appears in the My Packaging Types grid
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase70533)
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase70533
+	And I confirm the Product UPC window has opened
+	Then In the UPC Retailer and Feed page, confirm that the Packing Type Name saved as: MyPackaging is displayed 
+	Then I close All the current windows
 
-	And In the SHA manager grid I right click against product saved as: ID
-	And In the SHA manager grid when the right click context menu is open I select option: UPC Retailer and Feed
 
-	#Given I edit Packaging Type saved as:  TestCase70533
-	#above step is in question still
-
-	#Given I set the Package Type Name field to: Super Packaging Type Edited (TM)
-	#Given I click continue
-	#And I save the Packaging Type details as: ThisPackaging
-	#Given I click continue
-	#Then I should see the CONEG Page
-	Given I click continue
-	Given In the Data Acceptance page I click on the Accept button
-	Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
-	Given I delete Packaging Type saved as: ThisPackaging
-	Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in the Delete Product pop up
-	Given I click Delete in the Delete Product pop up
-	Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
+	
 
 @TestCase:70539
 Scenario: [70539] Add an Ingredient (Basic) and remove
