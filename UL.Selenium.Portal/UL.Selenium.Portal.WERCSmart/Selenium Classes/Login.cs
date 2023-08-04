@@ -156,5 +156,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement errorModal = this.WebDriver.FindElement(By.CssSelector("#accountNotifications .modal-dialog .modal-content"), 2);
 			return errorModal?.FindElement(By.CssSelector(".modal-body"), 2)?.Text;
 		}
+
+		public bool LoginErrorDisplayed()
+		{
+			return this.LoginError != null;
+
+		}
 	}
 }
