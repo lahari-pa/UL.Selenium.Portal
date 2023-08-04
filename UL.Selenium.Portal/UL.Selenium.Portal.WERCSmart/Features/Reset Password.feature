@@ -6,12 +6,12 @@
 @wercsmart
 @MyAccount
 @run_ResetPasswords
+@ignore
 
 Feature: Reset Passwords
 
 #@testaccount
 #@tfs_design
-@ignore
 #@ScenarioId:7031
 Scenario: Reset password for specific TReVor test user accounts
 
