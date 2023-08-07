@@ -5465,7 +5465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsSHA = new Steps_SHA();
 			Delay.Seconds(1);
-			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Announcement Manager");
+			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Announcements");
 		}
 
 		[StepDefinition(
