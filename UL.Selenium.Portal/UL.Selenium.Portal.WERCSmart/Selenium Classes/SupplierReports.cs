@@ -362,6 +362,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetCurrentDescriptionText()
 		{
 			string descriptionText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"))?.Text;
+			if (descriptionText == null)
+			{
+				Report.Info("description text could not be found!");
+			}
 			return descriptionText;
 		}
 

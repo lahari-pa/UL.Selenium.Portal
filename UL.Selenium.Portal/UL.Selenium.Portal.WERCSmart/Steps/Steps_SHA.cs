@@ -5063,8 +5063,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure($"Was unable to navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
 			return;					
-			
-			
+						
+		}
+
+		
+
+		[StepDefinition(@"In the UPC Retailer and Feed page, confirm that the Packing Type Name saved as: (.*) is displayed")]
+		public void ConfirmProductNameDisplayedOnUPCRetailerAndFeedPage(string savedAs)
+		{
+			var packagingType = new MyPackagingTypes.PackagingTypeItem { Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString() };
+			StudioSHAManagerUPCRetailerAndFeedPage UPCRetailerAndFeedPage = new StudioSHAManagerUPCRetailerAndFeedPage();
+			string displayedProductName = UPCRetailerAndFeedPage.GetProductTypeNameDisplayedInUPCRetailerAndFeedPage();
+			Report.IsTrue(packagingType.Name.Equals(displayedProductName), $"Expected Product Name: {packagingType.Name} is not showing. Displayed: {displayedProductName}", $"Expected Product Name: {packagingType.Name} is showing!");
 		}
 
 		[StepDefinition(@"In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes")]
@@ -5089,6 +5099,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisProductSearch2 = new StudioSHAManagerProductSearch();
 			Report.IsTrue(!thisProductSearch2.SearchPopupFound(), "The Product Search Popup was found", "The product search popup was closed");
 		}
+
 
 		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
 		public void InUPCAssessmentScreenConfrimISeeUPCSavedAs(string savedAs)
