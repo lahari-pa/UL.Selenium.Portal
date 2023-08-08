@@ -1608,8 +1608,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			Report.Info("(Ingredients - add any chemical) with name: Sodium hydroxide");
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			Report.Info("(Ingredients - add any chemical) with name: Water");
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Water");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			Report.Info("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();

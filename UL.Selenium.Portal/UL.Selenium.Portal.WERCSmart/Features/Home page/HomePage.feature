@@ -304,8 +304,8 @@ Scenario: [65617] Correct Order of Statuses
 		| Needs Your Attention   |
 		| Canceled               |
 
-@TestCase:59732
-Scenario: [59732] Announcements - Add
+@TestCase:231100
+Scenario: [231100] Announcements - Add
 	Given I navigate to Studio
 	Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
 	Given I call Shared Step 59066 (Go to SHA Manager)
@@ -315,7 +315,7 @@ Scenario: [59732] Announcements - Add
 		| My title | generated | GlobalMessage | true   | Warning |
 	Given I close the Manage Global Messages dialog
 	Given I navigate to Portal
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then In the announcements area I should see my saved messages
 
 @TestCase:58579

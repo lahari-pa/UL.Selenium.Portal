@@ -34,6 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(Delay.SpeedFactor);
 				currentPaceProgress = this.GetPaceProgress();
 				timeoutCounter++;
+				Report.Info($"Waiting for loading bar. current pace progress: {currentPaceProgress} | seconds waited: {timeoutCounter}"); 
 			}
 			if (timeoutCounter == 120)
 			{

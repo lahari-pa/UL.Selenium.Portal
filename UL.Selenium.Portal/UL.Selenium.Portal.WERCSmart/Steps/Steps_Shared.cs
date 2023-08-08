@@ -714,9 +714,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+<<<<<<< HEAD
 			stepsRegulatoryInformation.SetTSCATo("This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+=======
+			stepsRegulatoryInformation.SetTSCATo("complies");
+			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+>>>>>>> origin/QA
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
@@ -731,11 +737,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
@@ -2821,16 +2827,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
-			stepsRegulatoryInformation.SetTSCATo("Exempt");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is exempt from TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
@@ -2842,11 +2848,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
@@ -3182,12 +3188,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
-			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
-			stepsRegulatoryInformation.SetTSCATo("This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: complies");
+			stepsRegulatoryInformation.SetTSCATo("complies");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(@"I call Shared Step 132370 \(Waste Classification Data - TSCA \(Random\) - Prop 65 \(No\) - Continue - Happy Path\)")]
@@ -3196,19 +3202,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
 			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
-			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: complies");
+			stepsRegulatoryInformation.SetTSCATo("complies");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data Page page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(@"I call Shared Step 133277\(Waste Classification Data - CEPA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
@@ -3217,17 +3223,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			var table = new Table("Section");
 			table.AddRow("Canadian Enviornmental Protection Act (CEPA) status");
 			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
-			Report.StartSubStep("I set the Canadian Enviornmental Protection Act (CEPA) status option to: Compliant");
+			Report.StartSubStep("I set the Canadian Enviornmental Protection Act (CEPA) status option to: complies");
 			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data Page page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(@"I call Shared Step 132375 \(Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -3236,16 +3242,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
 			stepsRegulatoryInformation.SetTSCATo("Exempt");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartSubStep("In the Waste Classification Data Page page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
@@ -3629,7 +3635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
@@ -4987,7 +4993,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("Prop 65 warning is required: Yes");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
 			Report.StartSubStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
@@ -5031,7 +5037,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Waste Classification Data Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("Prop 65 warning is required: Yes");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
 			Report.StartSubStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
@@ -5465,7 +5471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsSHA = new Steps_SHA();
 			Delay.Seconds(1);
-			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Announcement Manager");
+			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Announcements");
 		}
 
 		[StepDefinition(
@@ -12242,10 +12248,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 
