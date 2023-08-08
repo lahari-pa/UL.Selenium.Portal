@@ -304,8 +304,8 @@ Scenario: [65617] Correct Order of Statuses
 		| Needs Your Attention   |
 		| Canceled               |
 
-@TestCase:59732
-Scenario: [59732] Announcements - Add
+@TestCase:231100
+Scenario: [231100] Announcements - Add
 	Given I navigate to Studio
 	Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
 	Given I call Shared Step 59066 (Go to SHA Manager)
