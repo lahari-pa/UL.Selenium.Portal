@@ -315,7 +315,7 @@ Scenario: [59732] Announcements - Add
 		| My title | generated | GlobalMessage | true   | Warning |
 	Given I close the Manage Global Messages dialog
 	Given I navigate to Portal
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then In the announcements area I should see my saved messages
 
 @TestCase:58579

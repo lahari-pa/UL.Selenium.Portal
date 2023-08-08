@@ -19,6 +19,7 @@ using TableRow = TechTalk.SpecFlow.TableRow;
 using OpenQA.Selenium.Interactions;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using OpenQA.Selenium.Support.UI;
+using NPOI.XWPF.UserModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -3561,6 +3562,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//body");
 
+		public string GetProductTypeNameDisplayedInUPCRetailerAndFeedPage()
+		{
+			IWebElement productName = this.ContainerElement.FindElement(By.XPath(@"//div[@class='main']//h1[contains(text(), 'WERCSmart Product ID')]"));
+			string productNameDisplayed = "";
+			if (productName == null)
+			{
+				Report.Info("Element was null");
+			}
+			else
+			{
+				 productNameDisplayed = productName.GetElementText();				
+			}
+
+			int dashIndex = productNameDisplayed.LastIndexOf('-');
+			if (dashIndex >= 0)
+			{
+				return productNameDisplayed.Substring(dashIndex + 1).Trim();
+			}
+			else
+			{
+				Report.Info($"Product name did not contain a '-' symbol, product name displayed: {productNameDisplayed}");
+				return string.Empty;
+			}
+
+		}
+
 		public bool SelectFirstUPCInUPCRetailerAndFeed()
 		{
 			IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
@@ -3653,7 +3680,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return closeButton.TryClick();
 		}
 
-
+	
 	}
 
 }

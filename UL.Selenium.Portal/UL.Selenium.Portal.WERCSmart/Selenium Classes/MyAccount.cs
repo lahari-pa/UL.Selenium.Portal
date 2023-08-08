@@ -2703,7 +2703,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSearchResult(string name, string cas)
 		{
+			var homepage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homepage.WaitLoading();
 			IList<IWebElement> resultsName = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
+			
 			if (resultsName.Count == 0 && GeneralUtilities.Wait_for_load_finish())
 			{
 				Report.Info("Unable to locate any search results with chemical name!");
