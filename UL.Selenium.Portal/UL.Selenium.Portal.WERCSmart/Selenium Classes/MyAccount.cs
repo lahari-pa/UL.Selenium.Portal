@@ -28,6 +28,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		List<IWebElement> SubscriptionDetails => this.ContainerElement.FindElements(By.XPath(".//div[@style]/div[@class = 'row']"), 2).ToList();
 
 		IWebElement Header(string header) => this.ContainerElement.FindElement(By.XPath($".//h3[text() = '{header}']"), 2);
+		IWebElement OrderSearch => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'SUBSCRIPTION')]/input"), 2);
+
+		List<IWebElement> OrderSearchResult => this.ContainerElement.FindElements(By.XPath(".//table/tbody[contains(@data-bind, 'orders')]"), 2).ToList();
+
+		IWebElement OrderNumberResult => this.ContainerElement.FindElement(By.XPath(".//table//td/span[contains(@data-bind, 'OrderNumber')]"), 2);
+
+		List<IWebElement> OrderNumClearFilter => this.ContainerElement.FindElements(By.XPath(".//span[contains(@data-bind, 'OrderNumber')]"), 2).ToList();
+		IWebElement ViewDetailsLink => this.ContainerElement.FindElement(By.XPath(".//table//td/a[contains(text(), 'View details')]"), 2);
 
 		public bool HeaderExists(string header)
 		{
@@ -1455,6 +1463,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement ErrText = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[@id='verifyPassword_error']"));
 			return ErrText.Text;
 		}
+		public void OrderSearchText(string orderNum)
+		{
+			this.OrderSearch.EnterText(orderNum);
+		}
+
+		public int OrderSearchFilterResult()
+		{
+			return this.OrderSearchResult.Count;
+		}
+		public bool OrderNumberData(string value)
+		{
+			Delay.Seconds(5);
+			return this.OrderNumberResult.Text == value;
+		}
+		public int OrderNumberClearFilter()
+		{
+			Delay.Seconds(5);
+			return this.OrderNumClearFilter.Count;
+		}
+		public bool ClickViewDetailsLink()
+		{
+			return this.ViewDetailsLink.TryClick();
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
@@ -2334,7 +2365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		[FindsBy(How = How.Id, Using = "orderHistoryContainer")]
 		protected override IWebElement containerElement { get; set; }
-
+		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-default' and contains(text(),'{value}')]"), 2);
 
 		public bool Order_History_Select(string history_type)
 		{
@@ -2414,6 +2445,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Invoice Date Found: " + myDate.Text);
 			return myDate.Text;
+		}
+		public bool FieldExists(string value)
+		{
+			Delay.Seconds(5);
+			return this.FliterButton(value).Text == value;
+		}
+
+		public bool ClickGivenFilterAction(string value)
+		{
+			return this.FliterButton(value).TryClick();
 		}
 
 	}
