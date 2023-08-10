@@ -327,7 +327,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Then I save the product information as: TestCase91798
     And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
     Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
