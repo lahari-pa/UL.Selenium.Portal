@@ -166,4 +166,28 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given in the optional comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Spirits
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
- 
+
+	@TestCase:216709
+
+	Scenario: [216709] Container Types -Primary Physical State Liquid - Wine - RU001418
+	
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC216709
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
+	Then I save the product information as: TestCase216709
+	Then I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine (RU001418)
+	Then I call Shared Step 216822 (Physical and Chemical Properties - Applicable Only to Alcoholic Beverages - Wine (RU001418))
+	Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
+	Then I call Shared Step 216838 (Beverage Regulatory Details - Applicable Only to Alcoholic Beverages - Wine (RU001418)):
+	| BPA | Percent of Alcohol |
+	| No  | 8.3                |
+	And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+	And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
+		| Checkbox                                                     |
+		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+	Then I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
+	Then I should see the Additional Documents to Provide Page
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
