@@ -1048,6 +1048,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 216862 \(Retailer - Add Retailer - Applicable Only to Alcoholic Beverages - Wine \(RU001418\): (.*)")]
+		[StepDefinition(
 			@"I call Shared Step 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
 		{
@@ -2213,8 +2215,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No, due to an exemption or exception");
 			Report.StartSubStep(
 			"I set the Please select DOT Exceptions if Applicable to: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less.");
-			MyNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if Applicable",
-				"173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less.");
+			MyNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable?",
+				"173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less");
 			Report.StartSubStep("In the Transportation Details 1 page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
@@ -4068,6 +4070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 216861 \(Transportation Details 2 > Applicable Only to Alcoholic Beverages - Wine \(RU001418\)\)")]
 		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
 		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
 		{

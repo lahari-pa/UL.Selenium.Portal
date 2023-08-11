@@ -182,11 +182,8 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I call Shared Step 216838 (Beverage Regulatory Details - Applicable Only to Alcoholic Beverages - Wine (RU001418)):
 	| BPA | Percent of Alcohol |
 	| No  | 8.3                |
-	And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
-	And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
-		| Checkbox                                                     |
-		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
-	Then I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	Then I call Shared Step 216860 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine (RU001418))
+	Then I call Shared Step 216861 (Transportation Details 2 > Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
 	Then I should see the Additional Documents to Provide Page
