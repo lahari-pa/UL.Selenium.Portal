@@ -185,6 +185,6 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I call Shared Step 216860 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Then I call Shared Step 216861 (Transportation Details 2 > Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Then I call Shared Step 216862 (Retailer - Add Retailer - Applicable Only to Alcoholic Beverages - Wine (RU001418): Walgreens
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
+	Then I call Shared Step 216863 (UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine) Enter UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
 	Then I should see the Additional Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709

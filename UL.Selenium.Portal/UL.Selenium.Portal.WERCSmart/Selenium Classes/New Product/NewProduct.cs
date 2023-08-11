@@ -4010,6 +4010,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return optionsText;
 		}
 
+		public List<string> GetAllOptionsForContainerTypeField()
+		{
+			var optionsText = new List<string>();
+			IList<IWebElement> matchingElements = this.ContainerElement.FindElements(By.XPath(".//select[@class = 'form-control']//option"), 2).ToList();
+			foreach( IWebElement element in matchingElements)
+			{
+				optionsText.Add(element.Text);
+			}
+			return optionsText;
+		}
+
 		public List<string> RegulatoryInformationLabelLinks()
 		{
 			var linksText = new List<string>();

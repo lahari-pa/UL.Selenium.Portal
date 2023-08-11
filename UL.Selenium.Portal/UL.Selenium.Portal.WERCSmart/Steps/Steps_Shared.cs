@@ -17,6 +17,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -1133,6 +1134,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			Report.StartSubStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"I call Shared Step 216863 \(UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine\) Enter UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerTypeVerifyContainerTypes(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("Confirm that you see only options: Glass Container, Metal Container, Metal Cylinder, Plastic Container, Plastic Liner/Corrugate for Container Types");
+			var option = new Table("Option");
+			option.AddRow("Container Type");
+			option.AddRow("Glass Container");
+			option.AddRow("Metal Container");
+			option.AddRow("Metal Cylinder");
+			option.AddRow("Plastic Container");
+			option.AddRow("Plastic Liner/Corrugate");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Container Type", option);
 			Report.StartSubStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
@@ -14237,6 +14285,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 12 ");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "34");
+			Report.StartSubStep("Confirm that  you see only Closed Cup Method option for Flash Point Testing Method Used");
+			var option = new Table("Option");
+			option.AddRow("Closed cup method");
+			MyNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Flash Point Testing Method Used", option);
 			Report.StartSubStep(
 				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Closed Cup Method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
