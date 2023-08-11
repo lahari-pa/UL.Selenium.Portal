@@ -2002,7 +2002,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm that I see the field : (.*)")]
 		public void ThenInTheOrderHistoryScreenISelect(string value)
 		{
-			Report.StartStep(Report.Details.StepIndex + $" In the Order History screen I confirm { value }");
+			Report.StartStep($" In the Order History screen I confirm { value }");
 			try
 			{
 				var selMyAccount = new MyAccount_OrderHistory();
@@ -2019,7 +2019,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I filter with order Number : (.*), (.*)")]
 		public void IFilterWithOrderNumber(string orderNum, string action)
 		{
-			Report.StartStep(Report.Details.StepIndex + $" In the Order Number search text box enter { orderNum }");
+			Report.StartStep($" In the Order Number search text box enter { orderNum }");
 			try
 			{
 				var MyAccount = new MyAccount();
@@ -2037,7 +2037,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm (.*) results are correct: (.*)")]
 		public void IConfirmInvoiceOrderNumFilterResult(string action, string value)
 		{
-			Report.StartStep(Report.Details.StepIndex + $" I confirm Order Number filter working as expected ");
+			Report.StartStep($" I confirm Order Number filter working as expected ");
 			try
 			{
 				var MyAccount = new MyAccount();
@@ -2065,7 +2065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click view details link")]
 		public void IClickViewDetailsLink()
 		{
-			Report.StartStep(Report.Details.StepIndex + $" I click view details link");
+			Report.StartStep($" I click the view details link");
 			try
 			{
 				var MyAccount = new MyAccount();

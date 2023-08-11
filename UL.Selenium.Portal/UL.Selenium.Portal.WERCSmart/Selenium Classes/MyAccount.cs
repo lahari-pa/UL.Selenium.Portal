@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		List<IWebElement> SubscriptionDetails => this.ContainerElement.FindElements(By.XPath(".//div[@style]/div[@class = 'row']"), 2).ToList();
 
 		IWebElement Header(string header) => this.ContainerElement.FindElement(By.XPath($".//h3[text() = '{header}']"), 2);
-		IWebElement OrderSearch => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'SUBSCRIPTION')]/input"), 2);
+		IWebElement OrderSearch => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind, 'SUBSCRIPTION')]//input[contains(@placeholder, 'Order #')]"), 2);
 
 		List<IWebElement> OrderSearchResult => this.ContainerElement.FindElements(By.XPath(".//table/tbody[contains(@data-bind, 'orders')]"), 2).ToList();
 
