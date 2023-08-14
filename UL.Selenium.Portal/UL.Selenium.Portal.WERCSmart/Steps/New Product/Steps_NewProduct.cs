@@ -1464,7 +1464,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
-		[StepDefinition(@"I set the below options for field: (.*)")]
+		[StepDefinition(@"I set the radio button (.*) for field: (.*)")]
+		public void SectRadioButtonInSection(string section, string option)
+		{
+			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
+				$"Failed to set the input to {option} in section: {section} ",
+				$"Successfully set the input to {option} in section: {section}");
+		}
+
+			[StepDefinition(@"I set the below options for field: (.*)")]
 		public void CheckAvailableOptionsInSection(string section, Table options)
 		{
 			foreach (TableRow row in options.Rows)
