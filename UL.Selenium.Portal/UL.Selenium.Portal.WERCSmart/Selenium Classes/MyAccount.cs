@@ -284,6 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			int pageNo = 1;
 			int pageCount = this.GetPage("last");
+			IWebElement userAccountsDiv;
 			while (pageNo <= pageCount)
 			{
 				Delay.Seconds(1.5 * Delay.SpeedFactor);
@@ -292,7 +293,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
 
-				IWebElement userAccountsDiv = this.ContainerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+				userAccountsDiv = this.ContainerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
 				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
 				foreach (IWebElement userRow in listOfUsersRows)
