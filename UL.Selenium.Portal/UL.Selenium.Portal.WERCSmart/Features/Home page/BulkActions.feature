@@ -388,7 +388,8 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)		And I navigate to the home page
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366d
 	Given I delete all products with UPC Number: saved as UPC93366d
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
