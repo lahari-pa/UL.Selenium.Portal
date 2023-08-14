@@ -4044,6 +4044,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			Report.StartSubStep("I set the Relative Density option to: 0.8892");
 			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.8892");
+			Report.StartStep("I set the Relative Density option to: lb./gal. (pounds per gallon)");
+			MyNewProduct.SectRadioButtonInSection("Relative Density", "lb./gal. (pounds per gallon)");
 			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
 			MyNewProduct.SectExatcDataNotKnown("pH");
 			Report.StartSubStep("I set the pH field to: Not tested/Unknown");
