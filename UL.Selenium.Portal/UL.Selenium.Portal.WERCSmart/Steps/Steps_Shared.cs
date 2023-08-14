@@ -1163,6 +1163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(@"I call Shared Step 216819 \(UPC Screen - Verify that the Updated Container Types Applicable to Engine Motor Oil for Auto or Boat\) Enter UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		[StepDefinition(@"I call Shared Step 216863 \(UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine\) Enter UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerTypeVerifyContainerTypes(string upc, string containerType, string size)
 		{
@@ -2029,6 +2030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 217667 \(Product Information - Applicable Only to Engine Motor Oil for Auto or Boat \(RU000269\)\)")]
 		// Shared Step was updated to include 'which one best describes your product'. This breaks a couple of tests, which has been raised to Bug Triage (incorrect step called)
 		[StepDefinition(@"I call Shared Step 60310 \(Product Information - Without Child question\)")]
 		public void GivenICallSharedProductInformation_WithoutChildQuestion()
@@ -4030,6 +4032,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Select the best Water Solubility description"]);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		[StepDefinition(@"I call Shared Step 217668 \(Physical and Chemical Properties - Applicable Only to Engine Motor Oil for Auto or Boat \(RU000269\)\)")]
+		public void Shared92950EnterPhysicalProperty_Liquid_ForMotorOil()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 0.8892");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.8892");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: 180");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "180");
+			Report.StartSubStep("I set the Flash Point Determination method option to: Not applicable/available");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: Insoluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Insoluble in water");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 		[StepDefinition(@"I call Shared Step 73748 \(Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
