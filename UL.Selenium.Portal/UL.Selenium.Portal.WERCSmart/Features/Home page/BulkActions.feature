@@ -28,6 +28,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto6  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 08/2023
+@ignore
 @TestCase:56223
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -49,6 +51,8 @@ Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Then I click on the cancel button on the ULSC Sync popup
 	And I should see the Subheading Alerts in the main window
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:56225
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -57,6 +61,8 @@ Scenario: [56225] Bulk Actions - Accept Documents navigation
 	And I click Accept Documents in the Bulk Actions window
 	And I should see the header: Document Acceptance on the Document Acceptance window
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:56227
 Scenario: [56227] Bulk Actions  Delete Products navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
