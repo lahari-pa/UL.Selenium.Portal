@@ -1999,5 +1999,84 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+		[StepDefinition(@"I Confirm that I see the field : (.*)")]
+		public void ThenInTheOrderHistoryScreenISelect(string value)
+		{
+			Report.StartStep($" In the Order History screen I confirm { value }");
+			try
+			{
+				var selMyAccount = new MyAccount_OrderHistory();
+				Report.IsTrue(selMyAccount.FieldExists(value), $"Failed to find { value}",
+					$"Successully found { value }");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I filter with order Number : (.*), (.*)")]
+		public void IFilterWithOrderNumber(string orderNum, string action)
+		{
+			Report.StartStep($" In the Order Number search text box enter { orderNum }");
+			try
+			{
+				var MyAccount = new MyAccount();
+				var selMyAccount = new MyAccount_OrderHistory();
+				MyAccount.OrderSearchText(orderNum);
+				selMyAccount.ClickGivenFilterAction(action);
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I Confirm (.*) results are correct: (.*)")]
+		public void IConfirmInvoiceOrderNumFilterResult(string action, string value)
+		{
+			Report.StartStep($" I confirm Order Number filter working as expected ");
+			try
+			{
+				var MyAccount = new MyAccount();
+				if (action == "Clear Filter")
+				{
+					int count = MyAccount.OrderNumberClearFilter();
+					Report.IsTrue(count > 1, "Order Number clear Filter not working as expected",
+							"Order Number clear Filter working as expected");
+				}
+				else if (action == "Filter")
+				{
+					int count = MyAccount.OrderSearchFilterResult();
+					Report.IsTrue(count == 1, "Order Number Filter not working as expected",
+						"Order Number Filter working as expected");
+					Report.IsTrue(MyAccount.OrderNumberData(value), "specified order number does not match",
+							"Order Number matched successfully");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I click view details link")]
+		public void IClickViewDetailsLink()
+		{
+			Report.StartStep($" I click the view details link");
+			try
+			{
+				var MyAccount = new MyAccount();
+				Report.IsTrue(MyAccount.ClickViewDetailsLink(), "view details link not clickable",
+							"view details link clicked successfully");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }
