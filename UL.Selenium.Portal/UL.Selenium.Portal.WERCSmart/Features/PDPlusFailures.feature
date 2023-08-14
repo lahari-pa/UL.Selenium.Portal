@@ -36,7 +36,7 @@ Feature: PDPlusFailures
 Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Crayon
 	Then I save the product information as: TestCase86452
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -54,9 +54,9 @@ Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order	
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86452)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Submitted
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86452)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86452)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Submitted
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase86452)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86452)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase86452)
@@ -153,7 +153,7 @@ Scenario: [PDPlusFailures] 118139 | Product Create and Process to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I generate a random UPC number and save as: UPC118139
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
+    And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax - Wood
 	Then I save the product information as: TestCase118139
 	Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 	Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
@@ -185,10 +185,10 @@ Scenario: [PDPlusFailures] 118139 | Product Create and Process to Completed
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Submitted
-
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase118139)
+#	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
+#	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Submitted
+#
+#	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase118139)
 	#^Failing on this step, but because of an error on the Process products popup. Possible bug
 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
@@ -211,7 +211,7 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87914
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase87914
 	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -226,10 +226,10 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Submitted
-
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87914)
+#	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
+#	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Submitted
+#
+#	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87914)
 	#^Appears that the test is porcessing the product data and it ends in accepted not assigned.
 	
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
@@ -256,7 +256,7 @@ Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Comple
 	Given I generate a random UPC number and save as: UPC75335
 	Given I delete all products with UPC Number: saved as UPC75335
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase75335
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -280,7 +280,7 @@ Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Comple
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)

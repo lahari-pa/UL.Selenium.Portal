@@ -1100,8 +1100,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return "";
 			}
 		}
-
-
+		public IList<IWebElement> CheckRetailerList()
+		{
+			IList < IWebElement >  retailer = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@id='products-grid']//li[@class='aip']"));
+			return retailer;
+		}
 		public class Ingredient
 		{
 			public string ComponentName { get; set; } = "";

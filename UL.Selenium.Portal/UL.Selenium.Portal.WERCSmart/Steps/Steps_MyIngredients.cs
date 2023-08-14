@@ -7,6 +7,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -37,16 +38,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var ingredientsContext = new List<MyIngredients.IngredientItem>();
 			var selMyIngredients = new MyIngredients();
 			List<MyIngredients.IngredientItem> allIngredients = selMyIngredients.IngredientsLibrary();
+			var homepage = new ChooseGoodGuide_Homepage();
 			foreach (TableRow row in ingredients.Rows)
 			{
 				Report.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
 				Report.Info("I enter the text: " + row["Chemical Name"] + " into the My Ingredients search field");
 				this.EnterTextInSearch(row["Chemical Name"]);
+				homepage.WaitLoading();
 				Report.Info("I select '" + row["Chemical Name"] + "' from the smart search results");
 				this.SelectSearchResult(row["Chemical Name"], row["CAS"]);
 				List<MyIngredients.IngredientItem> allIngredientsUpdate = selMyIngredients.IngredientsLibrary();
 				ingredientsContext.Add(allIngredientsUpdate.First(r => allIngredients.All(p => r.Index != p.Index)));
 				allIngredients = allIngredientsUpdate;
+
 			}
 			Context.AddToContext(savedAs, ingredientsContext);
 		}

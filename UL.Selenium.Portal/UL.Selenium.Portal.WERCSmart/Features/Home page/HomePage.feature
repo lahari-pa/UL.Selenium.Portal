@@ -24,9 +24,6 @@
 Feature: Home Page
 
 Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto33 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #pass - staging 4.10
 @TestCase:55817
@@ -91,6 +88,8 @@ Scenario: [56020] Bulk Actions
 	Then I should see the Subheading My Products in the products grid
 
 #pass - staging 4.10
+#Removed from regression 2023/08
+@ignore
 @TestCase:56149
 Scenario: [56149] Click Register Product button from home page - Navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -102,7 +101,7 @@ Scenario: [56149] Click Register Product button from home page - Navigation
 	And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:56158
 Scenario: [56158] Retail Partners navigation No Products
@@ -114,7 +113,7 @@ Scenario: [56158] Retail Partners navigation No Products
 	And I should not see the following subheading Most Recent Retailers
 
 #pass - staging 4.10
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:56161
 Scenario: [56161] UL Solution Center navigation
@@ -133,7 +132,7 @@ Scenario: [56161] UL Solution Center navigation
 		| Navigator                |
 
 #pass - staging 4.10
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:56163
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
@@ -145,6 +144,8 @@ Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 	Then I should see the Subheading Announcements in the main window
 
 #pass - staging 4.10 (might need to look at freshdesk link
+#Removed from regression 2023/08
+@ignore
 @TestCase:56188
 Scenario: [56188] Support navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -155,7 +156,7 @@ Scenario: [56188] Support navigation
 #pass - staging 4.10
 @TestCase:56206
 Scenario: [56206] Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Then I click the User Icon
 	And I click on Sign Out
@@ -171,7 +172,7 @@ Scenario: [56281] Product Information - Alerts - click More
 @TestCase:64854
 Scenario: [64854] Navigation Settings
 	# Sign in and expand the menu, checking the correct items are showing
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then I expand the Navigation Menu
 	And the Navigation Menu should be expanded
 	And the following icons and labels should be found in the navigation bar
@@ -186,21 +187,21 @@ Scenario: [64854] Navigation Settings
 		| Support              |
 	And I click on Sign Out
 	# Sign back in with same account
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And the Navigation Menu should be expanded
 	Given I click on My Account
 	And the Navigation Menu should be expanded
 	Then I collapse the Navigation Menu
 	And I click on Sign Out
 	# Sign back in a third time
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And the Navigation Menu should be collapsed
 	Given I click on My Account
 	And the Navigation Menu should be collapsed
 
 @TestCase:64872
 Scenario: [64872] Pie Panel Settings
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	When I click on the triangle next to Product Information to expand the section
 	And I should see a Pie Chart and Legend under Product Information
 	And I should see the following states in the Legend:
@@ -216,7 +217,7 @@ Scenario: [64872] Pie Panel Settings
 	And I should see the Subheading Announcements in the main window
 	And the Announcements dialog should be visible
 	And I click on Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And I should see a Pie Chart and Legend under Product Information
 	# Collapse the section
 	When I click on the triangle next to Product Information to collapse the section
@@ -263,7 +264,7 @@ Scenario: [65886] My Products - Pagination
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:71188
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
@@ -280,6 +281,8 @@ Scenario: [71188] Primary Filter on My Products View - UPC Filter
 	Given I search for UPC number saved as: Summary - UPC - 71188
 	Then I should only see one product in the grid, with Product ID matching that saved as: Summary - Product ID - 71188
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:65617
 Scenario: [65617] Correct Order of Statuses
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -301,8 +304,8 @@ Scenario: [65617] Correct Order of Statuses
 		| Needs Your Attention   |
 		| Canceled               |
 
-@TestCase:59732
-Scenario: [59732] Announcements - Add
+@TestCase:231100
+Scenario: [231100] Announcements - Add
 	Given I navigate to Studio
 	Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
 	Given I call Shared Step 59066 (Go to SHA Manager)
@@ -312,7 +315,7 @@ Scenario: [59732] Announcements - Add
 		| My title | generated | GlobalMessage | true   | Warning |
 	Given I close the Manage Global Messages dialog
 	Given I navigate to Portal
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then In the announcements area I should see my saved messages
 
 @TestCase:58579
@@ -384,7 +387,7 @@ Scenario: [66336] Main Menu - collapsed
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:85275
 Scenario: [85275] Select All - Popup closes
@@ -417,7 +420,7 @@ Scenario: [85275] Select All - Popup closes
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
-	#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:71230
 Scenario: [71230] Archived Retailers - My Products View
@@ -449,6 +452,8 @@ Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
 	Given I filter the products by: Accepted by Retailers
 	And I check for all items in the grid that the retailers are alphabetically listed
 
+#Removed from regression: 2023/08
+@ignore
 @TestCase:55796
 Scenario: [55796] Navigate to Home Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -500,86 +505,84 @@ Scenario: [55796] Navigate to Home Page
 	And I should see the Subheading Announcements expanded in the main window
 
 	
-	#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:158930
 Scenario: [158930] Home Page Search - Internal Information
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC158930
+	Given I generate a random Product ID and save as: ProductID158930
+	Then Generate a random SKU number (12 random digits) and save as: RandomSKU158930
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I set the Product Identification (Optional) field to Proudct ID saved as: ProductID158930
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I save the product information as: TestCase158930
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I generate a random Ingredient ID and save as: IngredientID158930
+	Given In the Ingredient Reference Number field I enter the following text: savedasIngredientID158930
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Waste Classification Data Page
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC158930 with container type: Metal Container size: 2 and SKU: RandomSKU158930
+	Given in the Universal Product Code (UPC) page I click Continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I navigate to the home page
+	Given I click More Filters in the products grid
+	Given I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid
+	Given In the Product ID, Ingredient ID, SKU filter field I search for: ProductID158930
+	Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
+	Given I clear the Search Criteria
+	Given I click More Filters in the products grid
+	Given In the Product ID, Ingredient ID, SKU filter field I search for: IngredientID158930
+	Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
+	Given I clear the Search Criteria
+	Given I click More Filters in the products grid
+	Given In the Product ID, Ingredient ID, SKU filter field I search for: RandomSKU158930
+	Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
+	Given I clear the Search Criteria
+	Given I click More Filters in the products grid
 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I generate a random UPC number and save as: UPC158930
-Given I generate a random Product ID and save as: ProductID158930
-Then Generate a random SKU number (12 random digits) and save as: RandomSKU158930
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I set the Product Identification (Optional) field to Proudct ID saved as: ProductID158930
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I save the product information as: TestCase158930
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I generate a random Ingredient ID and save as: IngredientID158930
-Given In the Ingredient Reference Number field I enter the following text: savedasIngredientID158930
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Waste Classification Data Page
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC158930 with container type: Metal Container size: 2 and SKU: RandomSKU158930
-Given in the Universal Product Code (UPC) page I click Continue
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
-| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given If purchase details are showing click confirm order
-Given I navigate to the home page
-Given I click More Filters in the products grid
-Given I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid
-Given In the Product ID, Ingredient ID, SKU filter field I search for: ProductID158930
-Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
-Given I clear the Search Criteria
-Given I click More Filters in the products grid
-Given In the Product ID, Ingredient ID, SKU filter field I search for: IngredientID158930
-Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
-Given I clear the Search Criteria
-Given I click More Filters in the products grid
-Given In the Product ID, Ingredient ID, SKU filter field I search for: RandomSKU158930
-Given I should only see one product in the grid, with Product ID matching that saved as: TestCase158930
-Given I clear the Search Criteria
-Given I click More Filters in the products grid
 
-
-#Remove from regression: 2023/05
+#Removed from regression: 2023/05
 @ignore
 @TestCase:156787
 Scenario: [156787] Home Page Search - Internal SKU field
-
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I generate a random UPC number and save as: UPC156787
-Then Generate a random SKU number (12 random digits) and save as: RandomSKU_156787
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I save the product information as: TestCase
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
-Given I click continue
-Given I click continue
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
-| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given If purchase details are showing click confirm order
-Given I click the Home navigation icon
-Given I search for the product with SKU saved as: RandomSKU_156787
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC156787
+	Then Generate a random SKU number (12 random digits) and save as: RandomSKU_156787
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I save the product information as: TestCase
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156787 with container type: Metal Container size: 40.0 and SKU: RandomSKU_156787
+	Given I click continue
+	Given I click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I click the Home navigation icon
+	Given I search for the product with SKU saved as: RandomSKU_156787

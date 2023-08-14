@@ -268,3 +268,59 @@ Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)
 	Given I call (confirm a Product from the Product grid) to confirm product: TestCase208260
+
+# Created by Saikiran Chittampally
+@TestCase:57986
+Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746) - 4All - 4G
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
+	Then I save the product information as: TestCase57986
+	Then I should see the following radio buttons:
+		| Button                                                                                                                                                                               |
+		| Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)                        |
+		| Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)                                   |
+		| Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
+	And I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
+	Given I call Shared Step 228844 (Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path)
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Paraffin       | 25     | false               | false       |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Isostearic Acid      | 10    | false               | false       |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Toluene       | 23     | false               | false       |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water       | 42    | false               | false       |            |
+	And I click continue
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
+	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
+		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
+		| No                                       | 15                     | 15                         | Yes            |
+	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	Then in the VOC Limits table, the Use column should contain the value: Footwear or Leather Care Product - All other forms
+	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 15
+	Then in the VOC Limits table, the Regulation column should contain the value: CARB limit
+	Then in the VOC Limits table, the Regulation column should contain the value: OTC Model rule limit
+	Then I confirm that I see the following CARB value: 15
+	Then I confirm that I see the following OTC Model Rule value: 15
+	Then The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation	
+	Then in the Volatile Organic Compound Summary page I click Continue
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Then in the Additional Documents to Provide page I click Continue
+	Given I call Shared Step 60567 (Upload Product Label only)
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - All other forms
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
+
