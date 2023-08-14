@@ -71,7 +71,7 @@ Scenario: [56227] Bulk Actions  Delete Products navigation
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
 
-
+#Removed from regression 2023/08
 @ignore
 @TestCase:74634
 Scenario: [74634] Forward Product Registration - Only can select product once
@@ -98,7 +98,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	And I confirm I am unable to select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	Given I click the Home navigation icon and accept the alert popup
 
-
+#Removed from regression 2023/08
 @ignore
 @TestCase:76314
 Scenario: [76314] Forward Product - NR should Not Require UPC
@@ -131,6 +131,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	# Confirm product has been forward properly (Message: Thank you for registering your product on WERCSmart for assessment.)
 	Given I navigate to the home page
 
+#Removed from regression 2023/08
 @tfs_design
 @ignore
 @TestCase:76056
@@ -152,6 +153,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I close the window that opened
 	Given I navigate to the home page
 
+#Removed from regression 2023/08
 @ignore
 @test75321
 @TestCase:75321
@@ -217,6 +219,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
+#Removed from regression 2023/08
 @ignore
 @TestCase:75129
 Scenario: [75129] Forward - Product in Submitted Status
@@ -267,6 +270,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
 
+#Removed from regression 2023/08
 @ignore
 @TestCase:78048
 Scenario: [78048] Forwarding to Walmart - Without Authoring
@@ -295,7 +299,6 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
 	And I navigate to the home page
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field
@@ -314,11 +317,10 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 
-
+#Removed from regression 2023/08
 @ignore
 @TestCase:93366
-	Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
-
+Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC93366a
 	Given I delete all products with UPC Number: saved as UPC93366a
@@ -341,7 +343,6 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366b
 	Given I delete all products with UPC Number: saved as UPC93366b
@@ -365,8 +366,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
-		And I navigate to the home page
+	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366c
 	Given I delete all products with UPC Number: saved as UPC93366c
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -388,9 +388,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
-		And I navigate to the home page
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)		And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366d
 	Given I delete all products with UPC Number: saved as UPC93366d
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -413,8 +411,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
-		And I navigate to the home page
+	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366e
 	Given I delete all products with UPC Number: saved as UPC93366e
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -437,7 +434,6 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
 	And I navigate to the home page
 	Given I click Bulk Actions in the Products Grid
 	And I click Delete Products in the Bulk Actions window
@@ -446,12 +442,10 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then I confirm all checkboxes are selected in the Delete Active Products page
 	Then I deselect the checkbox next to WPS ID in the Delete Active Products page
 	Then I confirm all checkboxes are deselected in the Delete Active Products page
-
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366a
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase93366a should not missing from the product list
 	Then I select checkbox for product saved as: TestCase93366a
-
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Cancel button
@@ -459,13 +453,11 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Accept button
 	Then I make sure product saved as: TestCase93366a should missing from the product list
-
 	Then In the Delete Active Products page I click the Clear Filter button
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366b
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase93366b should not missing from the product list
 	Then I select checkbox for product saved as: TestCase93366b
-
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Cancel button
@@ -473,13 +465,10 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Accept button
 	Then I make sure product saved as: TestCase93366b should missing from the product list
-
-
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366c
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase93366c should not missing from the product list
 	Then I select checkbox for product saved as: TestCase93366c
-
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Cancel button
@@ -490,7 +479,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 
 	
 @TestCase:88826
-	Scenario:[88826] Delete Products > Product Not yet submitted
+Scenario:[88826] Delete Products > Product Not yet submitted
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
