@@ -1464,7 +1464,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
-		[StepDefinition(@"I set the below options for field: (.*)")]
+		[StepDefinition(@"I set the radio button (.*) for field: (.*)")]
+		public void SectRadioButtonInSection(string section, string option)
+		{
+			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
+				$"Failed to set the input to {option} in section: {section} ",
+				$"Successfully set the input to {option} in section: {section}");
+		}
+
+			[StepDefinition(@"I set the below options for field: (.*)")]
 		public void CheckAvailableOptionsInSection(string section, Table options)
 		{
 			foreach (TableRow row in options.Rows)
@@ -2209,10 +2217,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
+			List<string> displayedOptions = new List<string>();
 			var differences = new List<string>();
 			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
-			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			if(section == "Container Type")
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForContainerTypeField();
+			}
+			else
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			}
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
 			if (exclusive == "displayed")
 			{

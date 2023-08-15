@@ -17,6 +17,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -193,6 +194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine \(RU001418\)")]
 		[StepDefinition(@"I call Shared Step 90477 - Product Information - US, \(NO\) Retailer's PL")]
 		public void ICallSharedStep90477ProductInformation_US_NoRetailersPL()
 		{
@@ -1053,6 +1055,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 216862 \(Retailer - Add Retailer - Applicable Only to Alcoholic Beverages - Wine \(RU001418\): (.*)")]
+		[StepDefinition(
 			@"I call Shared Step 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
 		{
@@ -1136,6 +1140,54 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			Report.StartSubStep("I click the 'Add' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"I call Shared Step 216819 \(UPC Screen - Verify that the Updated Container Types Applicable to Engine Motor Oil for Auto or Boat\) Enter UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		[StepDefinition(@"I call Shared Step 216863 \(UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine\) Enter UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerTypeVerifyContainerTypes(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("Confirm that you see only options: Glass Container, Metal Container, Metal Cylinder, Plastic Container, Plastic Liner/Corrugate for Container Types");
+			var option = new Table("Option");
+			option.AddRow("Container Type");
+			option.AddRow("Glass Container");
+			option.AddRow("Metal Container");
+			option.AddRow("Metal Cylinder");
+			option.AddRow("Plastic Container");
+			option.AddRow("Plastic Liner/Corrugate");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Container Type", option);
 			Report.StartSubStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
@@ -1984,6 +2036,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 217667 \(Product Information - Applicable Only to Engine Motor Oil for Auto or Boat \(RU000269\)\)")]
 		// Shared Step was updated to include 'which one best describes your product'. This breaks a couple of tests, which has been raised to Bug Triage (incorrect step called)
 		[StepDefinition(@"I call Shared Step 60310 \(Product Information - Without Child question\)")]
 		public void GivenICallSharedProductInformation_WithoutChildQuestion()
@@ -2204,7 +2257,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Transportation Details 1 page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
-
+		[StepDefinition(
+		@"I call Shared Step 216860 \(Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine \(RU001418\)\)")]
+		public void GivenICallSharedTransportationDetails1_ApplicableOnlyToAlcoholicBeverages()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Transportation Details 1 Page");
+			MyNewProduct.GivenIShouldSeeXPage("Transportation Details 1");
+			Report.StartSubStep(
+			"I set the Product is Regulated for Transport to: No, due to an exemption or exception");
+			MyNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport",
+				"No, due to an exemption or exception");
+			Report.StartSubStep(
+			"I set the Please select DOT Exceptions if Applicable to: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less.");
+			MyNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable?",
+				"173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less");
+			Report.StartSubStep("In the Transportation Details 1 page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+		}
 		[StepDefinition(
 			@"I call Shared Step 126160 \(U\.S\. Department of Transportation \(DOT\) Classification - Enter UN1057 - Lighter Fluid\)")]
 		public void
@@ -3968,6 +4039,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+		[StepDefinition(@"I call Shared Step 217668 \(Physical and Chemical Properties - Applicable Only to Engine Motor Oil for Auto or Boat \(RU000269\)\)")]
+		public void Shared92950EnterPhysicalProperty_Liquid_ForMotorOil()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 0.8892");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.8892");
+			Report.StartStep("I set the Relative Density option to: lb./gal. (pounds per gallon)");
+			MyNewProduct.SectRadioButtonInSection("Relative Density", "lb./gal. (pounds per gallon)");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: 180");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "180");
+			Report.StartSubStep("I set the Flash Point Determination method option to: Not applicable/available");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: Insoluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Insoluble in water");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
 
 		[StepDefinition(@"I call Shared Step 73748 \(Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
 		public void GivenICallSharedStepProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
@@ -4055,6 +4156,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 216861 \(Transportation Details 2 > Applicable Only to Alcoholic Beverages - Wine \(RU001418\)\)")]
 		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
 		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
 		{
@@ -14204,6 +14306,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 216822 \(Physical and Chemical Properties - Applicable Only to Alcoholic Beverages - Wine \(RU001418\)\)")]
+		public void Shared216822EnterPhysicalProperty_Liquid_Wine()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("In the Product Characteristics tab of the New Product Page for pH I enter: 7 ");
+			MyNewProduct.SetTheSectionOptionTo("pH", "7");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: 78 ");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "78");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 12 ");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "34");
+			Report.StartSubStep("Confirm that  you see only Closed Cup Method option for Flash Point Testing Method Used");
+			var option = new Table("Option");
+			option.AddRow("Closed cup method");
+			MyNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Flash Point Testing Method Used", option);
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Closed Cup Method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
 		[StepDefinition(@"I call Shared Step 92981 \(Beverage Regulatory Details Greater > 70%\)")]
 		public void Shared92981BeverageRegulatoryDetailsGreaterThan70()
 		{
@@ -14220,7 +14350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
-
+		[StepDefinition(@"I call Shared Step 216838 \(Beverage Regulatory Details - Applicable Only to Alcoholic Beverages - Wine \(RU001418\)\):")]
 		[StepDefinition(@"I call Shared Step 92981a \(Beverage Regulatory Details\):")]
 		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTable( Table table)
 		{ 

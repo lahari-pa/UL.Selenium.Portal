@@ -1235,3 +1235,23 @@ Given the Purchase Summary should be loaded
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 Then In the Thank You screen I confirm the following statement is shown: We are committed to helping you monitor and manage all of your product data needs with the highest standards of confidentiality and service. If we can be of any assistance, please contact our Support Team or review our Support Site for helpful tools.
 Then In the Thank You screen I click Home
+
+#Executed in QA-Integration Environment
+# Created by Saikiran Chittampally
+@TestCase:87997
+Scenario: [87997] Order History - Subscription Features
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I click on My Account
+	Then In the My Account screen I navigate to the Order History page
+	When In the Order History screen I select Subscription
+	Then I Confirm that I see the field : Filter
+	And I Confirm that I see the field : Clear Filter
+	Given I filter with order Number : INV00095035, Clear Filter
+	Then I Confirm Clear Filter results are correct: INV00095035
+	Given I filter with order Number : INV00095035, Filter
+	Then I Confirm Filter results are correct: INV00095035
+	When I click view details link
+	Then I confirm that a file is produced called INV00095035-08_05_2023.pdf and save as savedasINV00095035PDF
+	Then I Check that the pdf file saved as: savedasINV00095035PDF contains the text: UL Verification Services Inc.
+	Then I click on close in the Report Download dialog
+	Then I delete the file saved as savedasINV00095035PDF
