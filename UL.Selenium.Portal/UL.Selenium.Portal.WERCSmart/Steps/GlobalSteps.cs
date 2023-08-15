@@ -2403,7 +2403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenTheRuleWriterPageShouldLoad()
 		{
 			RuleWriter rw = new RuleWriter();
-			Delay.Seconds(1);
+			Delay.Seconds(10);
 			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
 			

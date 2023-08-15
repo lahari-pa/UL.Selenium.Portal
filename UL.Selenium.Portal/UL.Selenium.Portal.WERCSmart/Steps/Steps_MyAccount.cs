@@ -16,7 +16,7 @@ using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
 using static NUnit.Framework.Internal.OSPlatform;
-
+using UL.Automation.Utilities.Mailosaur.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -403,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add a new user with the following information")]
 		public void ThenIAddANewUserWithTheFollowingInformation(Table table)
 		{
-			Report.StartStep(ReportSettings.StepCounter + " - I add a new user with the following information");
+			Report.StartStep($"{Report.Details.StepIndex} - I add a new user with the following information");
 			try
 			{
 				foreach (TableRow thisRow in table.Rows)
@@ -443,7 +443,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info("Email Address = " + emailAddress);
 					}
 					// adding this to allow checking for confirmation email to the new user
-					MailosaurFunctions.StoreCurrentInbox(emailAddress);
+					//MailosaurFunctions.StoreCurrentInbox(emailAddress);
+					MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
@@ -1992,6 +1993,85 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("No error message displayed");
 				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I Confirm that I see the field : (.*)")]
+		public void ThenInTheOrderHistoryScreenISelect(string value)
+		{
+			Report.StartStep($" In the Order History screen I confirm { value }");
+			try
+			{
+				var selMyAccount = new MyAccount_OrderHistory();
+				Report.IsTrue(selMyAccount.FieldExists(value), $"Failed to find { value}",
+					$"Successully found { value }");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I filter with order Number : (.*), (.*)")]
+		public void IFilterWithOrderNumber(string orderNum, string action)
+		{
+			Report.StartStep($" In the Order Number search text box enter { orderNum }");
+			try
+			{
+				var MyAccount = new MyAccount();
+				var selMyAccount = new MyAccount_OrderHistory();
+				MyAccount.OrderSearchText(orderNum);
+				selMyAccount.ClickGivenFilterAction(action);
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I Confirm (.*) results are correct: (.*)")]
+		public void IConfirmInvoiceOrderNumFilterResult(string action, string value)
+		{
+			Report.StartStep($" I confirm Order Number filter working as expected ");
+			try
+			{
+				var MyAccount = new MyAccount();
+				if (action == "Clear Filter")
+				{
+					int count = MyAccount.OrderNumberClearFilter();
+					Report.IsTrue(count > 1, "Order Number clear Filter not working as expected",
+							"Order Number clear Filter working as expected");
+				}
+				else if (action == "Filter")
+				{
+					int count = MyAccount.OrderSearchFilterResult();
+					Report.IsTrue(count == 1, "Order Number Filter not working as expected",
+						"Order Number Filter working as expected");
+					Report.IsTrue(MyAccount.OrderNumberData(value), "specified order number does not match",
+							"Order Number matched successfully");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I click view details link")]
+		public void IClickViewDetailsLink()
+		{
+			Report.StartStep($" I click the view details link");
+			try
+			{
+				var MyAccount = new MyAccount();
+				Report.IsTrue(MyAccount.ClickViewDetailsLink(), "view details link not clickable",
+							"view details link clicked successfully");
 			}
 			catch (Exception ex)
 			{
