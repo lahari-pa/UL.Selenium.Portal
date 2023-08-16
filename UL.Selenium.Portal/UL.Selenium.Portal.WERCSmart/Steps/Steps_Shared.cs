@@ -712,11 +712,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var regulatoryInformation = new RegulatoryInformation1();
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("complies");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
