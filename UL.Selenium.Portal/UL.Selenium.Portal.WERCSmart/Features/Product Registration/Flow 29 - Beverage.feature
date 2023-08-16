@@ -191,7 +191,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 
 	@TestCase:161374
 
-	Scenario: [162374] Enhanced Water Beverage (RUU001411)
+	Scenario: [161374] Enhanced Water Beverage (RUU001411)
 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -203,6 +203,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given I call Shared Step 92981a (Beverage Regulatory Details):
 	| BPA | Percent of Alcohol |
 	| No  | 100                |
+	And in the Retailer page I click Continue
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Comments page I click Continue
 	And In the Data Acceptance page I select Agreed
