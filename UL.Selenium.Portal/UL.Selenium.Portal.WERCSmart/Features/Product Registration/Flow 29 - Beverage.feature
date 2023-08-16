@@ -203,3 +203,8 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given I call Shared Step 92981a (Beverage Regulatory Details):
 	| BPA | Percent of Alcohol |
 	| No  | 100                |
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Comments page I click Continue
+	And In the Data Acceptance page I select Agreed
+	Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Enhanced Water Beverage
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase161374
