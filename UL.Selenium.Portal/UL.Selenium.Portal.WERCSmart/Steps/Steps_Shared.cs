@@ -4219,24 +4219,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			Report.StartSubStep("I set the Relative Density option to: 68");
-			MyNewProduct.SetTheSectionOptionTo("Relative Density", "68");
-			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
-			MyNewProduct.SectExatcDataNotKnown("pH");
-			Report.StartSubStep("I set the pH field to: 2.1 - 3.9");
-			MyNewProduct.SetTheSectionOptionTo("pH", "2.1 - 3.9");
-			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: <= 20C (68F)");
-			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "<= 20C (68F)");
-			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
-			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartSubStep("I set the Flash Point (in Celsius) field to: >=38C and <=60C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=38C and <=60C");
-			Report.StartSubStep("I set the Flash Point Testing Method Used option to: Closed cup method");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: 43");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "43");
+			Report.StartSubStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
@@ -4273,8 +4271,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "No");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Percent of Alcohol in the Product (numeric entry only)",
-				"55"));
-			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "55");
+				"27"));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "27");
 			Report.StartSubStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
@@ -4304,16 +4302,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.CheckingFieldInputIsCorrect("Hazard Class (select)", "3");
 			Report.StartSubStep("I set the Packing Group section to 'III'");
 			myStepsNewProduct.SetTheSectionOptionTo("Packing Group (select)", "III");
-			Report.StartSubStep(
-				"The following question should be displayed: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packaging Group selected is not consistent with this data.  Verify the data and transportation packaging group.  If the problem persists, please contact Support.'");
-			var table = new Table("Section");
-			table.AddRow(
-				"Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.");
-			myStepsNewProduct.CheckDisplayedSections("see", table);
-			Report.StartSubStep(
-				"Setting 'Packing Group' error question to: 'Based on defined viscosity parameters, this product is classified as PG III'");
-			myStepsNewProduct.SetTheSectionOptionTo("Product has a boiling point of",
-				"Based on defined viscosity parameters, this product is classified as PG III");
 			Report.StartSubStep(
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue(

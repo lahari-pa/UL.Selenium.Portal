@@ -15,13 +15,13 @@ Feature: Flow 29 - Beverage
 
 @TReVorId:11622
 @TestCase:60694
-Scenario: [60694] Wine - RU001418
+Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Less than 70% of Alcohol Content) - DOT - Packaging Group III Should be Pre-Selected
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60694
 	Given I delete all products with UPC Number: saved as UPC60694
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
 	Then I save the product information as: TestCase60694
 	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
@@ -31,7 +31,7 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694.
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
