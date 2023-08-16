@@ -4198,11 +4198,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "30");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point (in Celsius)",
-				"80"));
+				"50"));
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "50");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point Testing Method Used",
-				"50"));
+				"Closed cup method"));
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Secondary Physical State",

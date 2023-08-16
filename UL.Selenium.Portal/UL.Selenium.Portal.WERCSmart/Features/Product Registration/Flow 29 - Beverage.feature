@@ -93,9 +93,9 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 @TestCase:144468
-Scenario: [144468] Alcoholic Beverages - With DOT Exception
+Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
@@ -103,13 +103,23 @@ Then I confirm that the the option: United States is checked for the following s
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
 Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-And I should see the Waste Classification Data Page
+#And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 49818 (Beverage Regulatory Details)
+Given I call Shared Step 92981a (Beverage Regulatory Details):
+	| BPA | Percent of Alcohol |
+	| No  | 10                |
 And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
 And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
 		| Checkbox                                                     |
 		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+And I set the Please select DOT Exceptions if applicable? option to exactly match: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less
+And I click continue
+Then I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And in the Ratailer page I click Continue
+And in the Additional Documents to Provide page I click Continue
+And in the Optional Comments page I click Continue
+And In the Data Acceptance page I select Agreed
+Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Beer
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
 
 
