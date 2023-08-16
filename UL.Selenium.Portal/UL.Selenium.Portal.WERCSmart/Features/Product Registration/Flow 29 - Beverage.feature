@@ -103,15 +103,14 @@ Then I confirm that the the option: United States is checked for the following s
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
 Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-#And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 92981a (Beverage Regulatory Details):
 	| BPA | Percent of Alcohol |
 	| No  | 10                |
 And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
 And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
-		| Checkbox                                                     |
-		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+	| Checkbox                                                     |
+	| 173.159(a) - Exemption for non-spillable lead-acid batteries |
 And I set the Please select DOT Exceptions if applicable? option to exactly match: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less
 And I click continue
 Then I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
@@ -121,7 +120,6 @@ And in the Optional Comments page I click Continue
 And In the Data Acceptance page I select Agreed
 Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Beer
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
-
 
 
 # Created by Saikiran Chittampally
@@ -147,7 +145,6 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Given in the optional comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
-
 
 
 # Created by Saikiran Chittampally
