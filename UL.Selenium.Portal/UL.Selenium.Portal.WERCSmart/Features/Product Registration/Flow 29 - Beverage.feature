@@ -188,3 +188,18 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I call Shared Step 216863 (UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine) Enter UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
 	Then I should see the Additional Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
+
+	@TestCase:161374
+
+	Scenario: [162374] Enhanced Water Beverage (RUU001411)
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Enhanced Water Beverage
+	Then I save the product information as: TestCase161374
+	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
+	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+	Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
+	Given I call Shared Step 92981a (Beverage Regulatory Details):
+	| BPA | Percent of Alcohol |
+	| No  | 100                |
