@@ -90,7 +90,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						else
 						{
 							// Component name was defined, so just check to see if there is a match
-							Delay.Seconds(10);
 							IWebElement matchingNames = matchingCasResults.FirstOrDefault(x =>
 								x.FindElement(
 									By.XPath(".//span[@class='component-name' and text() = '" +
