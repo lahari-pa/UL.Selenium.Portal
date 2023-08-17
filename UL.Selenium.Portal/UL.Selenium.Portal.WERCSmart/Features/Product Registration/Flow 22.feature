@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow22
+@NewProduct
 Feature: Flow 22
 
 @tfsdesign
@@ -125,16 +126,25 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Then I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
-	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I click continue
-	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	#Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	#Given I click continue
+	#Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	#Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName									  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Air											  | 90      | false               | false       |            |
+		| Oxygen									      | 3.89    | false               | false       |            |
+		| 1-Butane									      | 3.85    | false               | false       |            |
+		| Hydrocarbons, C3-4-rich, petroleum distillates  | 3.89    | false               | false       |            |
+	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
-	Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1954
+	Then I set the UN Number option to: UN1950
+	Then in the International Marine (IMDG) Classification page I click Continue
+	#Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1950
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 0.5
+	Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 1
 	Given I click continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
