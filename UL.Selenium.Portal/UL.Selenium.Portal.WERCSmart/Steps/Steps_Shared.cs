@@ -14349,6 +14349,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
+		[StepDefinition(@"I call Shared Step 178053 \(Beverage Regulatory Details - BPA - Prop65\):")]
+		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTableWithProp65(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", table.Rows[0]["BPA"]);
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", table.Rows[0]["Prop 65"]);
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Does your product contain a Prop 65 chemical?",
+				table.Rows[0]["Prop 65"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
 
 		[StepDefinition(
 			@"I call Shared Step 92982 \(U\. S\. Department of Transportation \(DOT\) Classification - For Alcohol \(Packaging II\)\)")]

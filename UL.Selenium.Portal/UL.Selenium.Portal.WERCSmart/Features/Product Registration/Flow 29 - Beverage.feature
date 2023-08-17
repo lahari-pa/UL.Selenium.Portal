@@ -200,9 +200,9 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
-	Given I call Shared Step 92981a (Beverage Regulatory Details):
-	| BPA | Percent of Alcohol |
-	| No  | 100                |
+	Given I call Shared Step 178053 (Beverage Regulatory Details - BPA - Prop65):
+	| BPA | Percent of Alcohol | Prop 65 |
+	| No  | 100                | No      |
 	And in the Retailer page I click Continue
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Comments page I click Continue
