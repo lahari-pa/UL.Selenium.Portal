@@ -113,7 +113,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
 	Then for ingredient: Water the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
 @TestCase:65470
@@ -134,7 +134,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Water the Public Name field is enabled
 	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
@@ -153,7 +153,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Water the Publicly Disclosed field is disabled
 	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
 @TestCase:65451
@@ -195,7 +195,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Trade Secret?       | checkbox |
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
 @TestCase:63321
@@ -288,7 +288,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
-	Then I should see the Waste Classification Data Page
+	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
