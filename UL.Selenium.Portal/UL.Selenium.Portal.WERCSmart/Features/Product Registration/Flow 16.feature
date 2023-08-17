@@ -518,8 +518,6 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-
-
 @TestCase:122366
 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -555,3 +553,27 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+	@TestCase:220789
+
+	Scenario: [220789] Carbon Zinc Battery - RU000727
+	
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC220789
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
+	Then I save the product information as: TestCase220789
+	Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water         | 100      | false               | false       |            |
+	Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Then I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Then I call Shared Step 150905 (Retailer - NR selected by default)
+	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
+	Then I should see the Additional Documents to Provide Page
+	Then in the optional comments page I click Continue
+	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+

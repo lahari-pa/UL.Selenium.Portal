@@ -12812,7 +12812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I don't need a WHMIS Compliant SDS");
 
 			Report.StartSubStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
-			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
 
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
