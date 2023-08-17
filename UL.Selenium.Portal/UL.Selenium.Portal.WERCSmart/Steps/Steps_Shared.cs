@@ -1559,12 +1559,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
 			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
-			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
-			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
-			Report.StartSubStep("I set the pH field to: 10.4");
-			stepsProductCharacteristics.SetPHTo("10.4");
-			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid Spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Solid Spray");
+			Report.StartSubStep("I set the pH field to: 12");
+			stepsProductCharacteristics.SetPHTo("12");
+			Report.StartSubStep("I set the Water Solubility description to: No Data Available");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No Data Available");
 			Report.StartSubStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
