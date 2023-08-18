@@ -569,11 +569,13 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100      | false               | false       |            |
 	Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
-	Then I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I call Shared Step 150905 (Retailer - NR selected by default)
 	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
-	Then I should see the Additional Documents to Provide Page
-	Then in the optional comments page I click Continue
+	Then in the Additional Documents to Provide page I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	Then in the Optional Comments page I click Continue
 	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-
+	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
+	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
