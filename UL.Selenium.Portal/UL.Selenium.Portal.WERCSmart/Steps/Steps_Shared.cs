@@ -12949,6 +12949,174 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
+		[StepDefinition(@"I call Shared Step 209526 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Products with an Uploaded OSHA-SDS or Kit Products\)")]
+		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts()
+		{
+			Report.StartStep("Beginning shared step 209526");
+			Report.UseSubSteps = true;
+			Report.StartSubStep(
+				"I set the data codes to show the Green check mark graphic");
+			Report.Info("In power tools workspace I set edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			//new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"CAWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"EPAN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"HCM",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"OTC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RAUNDW",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DPQAUN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"WSWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+
+				//thisStepsStudio.InPDIEnsureSECT2318IsActive();
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0755] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Reviewer Checklist");
+
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			//var checkListSection = TestVariables.GetVariableSavedAs("Battery/BCP Checklist");
+			thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0756] Battery/BCP Checklist");
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("authoring");
+			Report.StartSubStep("I open the Current Document pop up using the tool bar icons");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			Report.StartSubStep("Select the Authorize Formula and Attributes for publishing check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			GeneralUtilities.StudioWaitForSpinner();
+			//Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+			//	"Set language option");
+			//Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+			//	"Set subformat option");
+			Report.StartSubStep("Select the Apply to all subformats check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Info("Clicked apply, waiting");
+			Delay.Seconds(10);
+			Report.Info("Now going to wait for spinner");
+			if (!GeneralUtilities.StudioWaitForSpinner(30))
+			{
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert())
+				{
+					Report.Info("Spinner is still showing but alert is there.");
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				}
+			}
+			Report.StartSubStep("I close Current Document window");
+			thisStepsStudio.GivenICloseCurrentDocument();
+
+		}
+		[StepDefinition(@"I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product")]
+		public void ThenICallSharedStepPowerDesignerPlus_APPLYRULESToProduct()
+		{
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("wizards");
+			Report.StartSubStep("I select the Apply Rules icon from the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			Report.StartSubStep("I select the Single rule radio button");
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			Report.StartSubStep("I click the three ... icon to open the Select Rule pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			Report.StartSubStep("I click the filter icon");
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			Report.StartSubStep("In the rule name filter box I enter the studio user name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Report.StartSubStep("I select the rule  by clicking on it");
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			Report.StartSubStep("I click Apply");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(10);
+			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				Delay.Seconds(1);
+			}
+
+			Report.StartSubStep("I close the Apply Rules pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+			if (new ApplyRulesPage().Wait_for_load(20))
+			{
+				Delay.Seconds(3);
+				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
+				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+				Report.Screenshot();
+				Delay.Seconds(3);
+				if (new ApplyRulesPage().Wait_for_load(1))
+				{
+					Report.Error("Apply rules popup did not close after two attempts");
+					SeleniumBrowser.WebBrowser.Close();
+				}
+			}
+		}
+
 		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
 		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)
 		{
