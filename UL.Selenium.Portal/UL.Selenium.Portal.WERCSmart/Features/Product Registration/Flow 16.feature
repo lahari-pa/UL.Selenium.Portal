@@ -581,4 +581,4 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
 	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
-
+	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)

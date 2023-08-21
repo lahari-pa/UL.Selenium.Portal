@@ -13157,7 +13157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I call Sared Step 209569 Power Designer Plus - PUBLISH Product \(Applicable Only to Products with an Uploaded OSHA-SDS or Kit Products\): (.*)")]
+		[StepDefinition(@"I call Sared Step 214627 Power Designer Plus - PUBLISH Product \(Applicable Only to Battery Products \): (.*)")]
 		public void ThenICallSaredStepPowerDesignerPlus_PUBLISHProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
 		{
 			var thisStepsStudio = new Steps_Studio();

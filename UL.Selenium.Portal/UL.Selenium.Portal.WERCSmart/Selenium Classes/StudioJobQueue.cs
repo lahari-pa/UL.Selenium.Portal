@@ -28,6 +28,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			SeleniumBrowser.WebBrowser.Close();
 		}
+		public bool CloseJobQueueWindow()
+		{
+			return this.CloseButton.TryClick();
+		}
 		public bool ClickTopBarMenuBotton(string button)
 		{
 			return this.TopBarMenuButton(button).TryClick();
