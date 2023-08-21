@@ -13296,7 +13296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioJobQueue.ClickTopBarMenuBotton("Refresh"), "Failed to click Refresh button", "Successfully clicked Refresh button");
 			}
 			List<Job> ListOfJobsInHistory = thisStudioJobQueue.GetFirstXJobs(20);
-			Job matchingJobInHistory = ListOfJobs.FirstOrDefault(x =>
+			Job matchingJobInHistory = ListOfJobsInHistory.FirstOrDefault(x =>
 				x.Status == "Closed" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJobInHistory == null)
 			{
@@ -13308,7 +13308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Found matching job in History tab");
 				Report.Screenshot();
 			}
-			thisStudioJobQueue.CloseJobQueueWindow();
+			thisStudioJobQueue.Close();
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.StartSubStep("I close the Jod Queue window");
 			//thisStepsStudio.GivenICloseJobQueue();

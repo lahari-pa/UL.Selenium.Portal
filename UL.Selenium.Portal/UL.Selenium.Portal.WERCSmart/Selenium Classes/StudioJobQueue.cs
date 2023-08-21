@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public void Close()
 		{
-			SeleniumBrowser.WebBrowser.Close();
+			SeleniumWebDriver.CurrentDriver.Close();
 		}
 		public bool CloseJobQueueWindow()
 		{
