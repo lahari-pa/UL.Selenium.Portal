@@ -12949,17 +12949,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I call Shared Step 209526 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Products with an Uploaded OSHA-SDS or Kit Products\)")]
-		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts()
+		[Then(@"I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Battery Products\) for product saved as: (.*)")]
+		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
 		{
-			Report.StartStep("Beginning shared step 209526");
 			Report.UseSubSteps = true;
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisTopMenu = new StudioTopMenu();
+			Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Report.Screenshot();
+			Delay.Seconds(3);
+			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
+			thisPowerDesignerPlus.Wait_for_load(240);
+			Delay.Seconds(10);
+
+			if (!thisPowerDesignerPlus.Wait_for_load(240))
+			{
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(240), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+				"Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+				"Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
+				"Set format option");
+			Report.StartSubStep("I click the Edit Existing product radio button if not already selected");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
+				"Set action option");
+			Report.Screenshot();
+			Delay.Seconds(1);
+			Report.StartSubStep("I filter for the product");
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisPowerDesignerPlus.EnterSourceProduct(id);
+			thisPowerDesignerPlus.ClickRefreshButton();
+			Delay.Seconds(120);
+			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			Report.StartStep("I click Continue");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
+			Delay.Seconds(120);
+			thisPowerDesignerPlus.Wait_for_load(240);
 			Report.StartSubStep(
 				"I set the data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
-			var thisStudioPowerDesignerPlusDesignMode =
-				new StudioPowerDesignerPlusDesignMode();
-			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
 			thisStudioPowerDesignerPlusDesignMode.ClickOptions();

@@ -579,6 +579,6 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
 	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase220789)
-	Then I call Shared Step 209526 Power Designer Plus - AUTHORIZE Product (Applicable Only to Products with an Uploaded OSHA-SDS or Kit Products)
+	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase220789)
+	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
