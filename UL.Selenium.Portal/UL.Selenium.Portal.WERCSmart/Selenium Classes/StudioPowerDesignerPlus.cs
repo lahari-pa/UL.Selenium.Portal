@@ -20,6 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+		private IWebElement ProductIsCheckedOutIcon => this.ContainerElement.FindElement(By.XPath(".//i[@title='Product is Checked Out']"));
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
