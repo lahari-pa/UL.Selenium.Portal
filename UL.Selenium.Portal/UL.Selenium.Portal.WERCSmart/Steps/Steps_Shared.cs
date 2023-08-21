@@ -14352,6 +14352,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTableWithProp65(Table table)
 		{
 			ReportSettings.UseSubSteps = true;
+			if (table.Rows.Count != 1)
+			{
+				throw new Exception($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+			}
 			var myStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
 				"Product's container or liner contains Bisphenol A (BPA)",
