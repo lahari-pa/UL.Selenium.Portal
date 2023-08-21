@@ -14,12 +14,14 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class StudioPowerDesignerPlus : BaseObject
+	public class StudioPowerDesignerPlus : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'container')]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		//protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class, 'container')]");
+
 		private IWebElement ProductIsCheckedOutIcon => this.ContainerElement.FindElement(By.XPath(".//i[@title='Product is Checked Out']"));
 
 		public bool Wait_for_load(int secondsToWait = 60)

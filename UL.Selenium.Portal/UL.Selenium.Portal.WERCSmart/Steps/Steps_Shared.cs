@@ -13311,7 +13311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStudioJobQueue.CloseJobQueueWindow();
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.StartSubStep("I close the Jod Queue window");
-			thisStepsStudio.GivenICloseJobQueue();
+			//thisStepsStudio.GivenICloseJobQueue();
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}
 
