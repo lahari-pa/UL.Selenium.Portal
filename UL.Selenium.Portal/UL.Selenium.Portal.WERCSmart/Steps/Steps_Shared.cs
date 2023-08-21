@@ -14354,7 +14354,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			if (table.Rows.Count != 1)
 			{
-				throw new Exception($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Error($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Info("Using only the first row from the table");
 			}
 			var myStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
