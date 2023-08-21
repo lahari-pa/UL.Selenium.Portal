@@ -17,6 +17,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		public bool TopBarMenuButtonExists(string button)
+		{
+			Report.Info($"Attempt to find button {button}");
+			return this.TopBarMenuButton(button) != null;
+		}
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+		public bool ClickTopBarMenuBotton(string button)
+		{
+			return this.TopBarMenuButton(button).TryClick();
+		}
+
 		public bool WaitForJobInformationList(int secondsToWait)
 		{
 			Report.Info("Beginning wait for job list");
