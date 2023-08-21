@@ -170,7 +170,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//button[contains(@class, 'refresh')]"));
 			return enterField.TryClick();
 		}
+		public bool ProductIsCheckedOutIconDisplayed()
+		{
+			return this.ProductIsCheckedOutIcon.Displayed;
 
+		}
 		public string GetSourceProductName()
 		{
 			IWebElement label = this.containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"), 5);
