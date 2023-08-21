@@ -13157,6 +13157,164 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I call Sared Step 209569 Power Designer Plus - PUBLISH Product \(Applicable Only to Products with an Uploaded OSHA-SDS or Kit Products\): (.*)")]
+		public void ThenICallSaredStepPowerDesignerPlus_PUBLISHProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
+		{
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("product");
+			Report.StartSubStep("I click the Document queue icon in the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			Report.StartSubStep("I click the filter icon");
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			Report.StartSubStep("I enter the product id in the Product/Alias area of the filter and click Apply");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			for (int i = 0; i < 5; i++)
+			{
+				Delay.Seconds(5);
+				Report.Screenshot();
+				var newDocumentQueuePage = new DocumentQueuePage();
+				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+					"Document queue page loaded");
+				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+				if (listOfDocuments.Count > 0)
+				{
+					break;
+				}
+			}
+			Report.StartSubStep(
+				"I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
+			var tblCheckDocument = new Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"Language",
+				"DocType",
+				"Authorized"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"CKLT",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWHD",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWST",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF",
+				"3"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			Report.StartSubStep("I click Process Documents");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Delay.Seconds(4);
+			//Report.Screenshot();
+			Report.Info($"waiting for spinner...");
+			GeneralUtilities.StudioWaitForSpinner(60);
+			Report.Info($"fFinished waiting for spinner...");
+			Report.StartSubStep(
+				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			Report.StartSubStep("I click OK ");
+			thisStepsStudio.ICloseAlert();
+			Report.StartSubStep("I close the Document queue window");
+			var thisTopMenu = new StudioTopMenu();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+			Report.StartSubStep("I open Job Queue window");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			thisTopMenu.ClickSubMenu("System", "Job Queue");
+			GeneralUtilities.StudioWaitForSpinner();
+			Delay.Seconds(5);
+			var thisStudioJobQueue = new StudioJobQueue();
+			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
+				"Job queue has loaded");
+			Delay.Seconds(5);
+			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
+				x.Status == "Working" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+			if (matchingJob == null)
+			{
+				Report.Info("Did not find matching job");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Success("Found job as expected");
+				//Wait for job to not appear in the list
+				for (int i = 0; i < 2; i++)
+				{
+					thisStudioJobQueue = new StudioJobQueue();
+					if (Report.IsTrue(thisStudioJobQueue.TopBarMenuButtonExists("Refresh"), "Failed to find Refresh button", "Successfully found Refresh button"))
+					{
+						Report.IsTrue(thisStudioJobQueue.ClickTopBarMenuBotton("Refresh"), "Failed to click Refresh button", "Successfully clicked Refresh button");
+					}
+					ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+					matchingJob = ListOfJobs.FirstOrDefault(x =>
+						x.Status == "Working" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+					if (matchingJob == null)
+					{
+						Report.Info("Job is no longer found so assume it has completed");
+						Report.Screenshot();
+					}
+					Delay.Seconds(1);
+				}
+			}
+			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("History"), "Failed to click History button", "Successfully clicked History button");
+			Delay.Seconds(3);
+			if (Report.IsTrue(thisStudioJobQueue.TopBarMenuButtonExists("Refresh"), "Failed to find Refresh button", "Successfully found Refresh button"))
+			{
+				Report.IsTrue(thisStudioJobQueue.ClickTopBarMenuBotton("Refresh"), "Failed to click Refresh button", "Successfully clicked Refresh button");
+			}
+			List<Job> ListOfJobsInHistory = thisStudioJobQueue.GetFirstXJobs(20);
+			Job matchingJobInHistory = ListOfJobs.FirstOrDefault(x =>
+				x.Status == "Closed" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+			if (matchingJobInHistory == null)
+			{
+				Report.Info("Did not find matching job in History tab");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Found matching job in History tab");
+				Report.Screenshot();
+			}
+			thisStudioJobQueue.CloseJobQueueWindow();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.StartSubStep("I close the Jod Queue window");
+			thisStepsStudio.GivenICloseJobQueue();
+			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
+		}
+
 		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
 		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)
 		{
