@@ -26,16 +26,16 @@ Feature: Distributor
 
 @tfs_design
 #Removed from regression: 2023/05
-@ignore
+#@ignore
 @TestCase:122365
 Scenario: [122365] Create a distributor request and process it to completed
 	Given I generate a random UPC number and save as: UPC86463
 	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 	Given I create a Chalk product and take to completed for distributor and save as: TestCase0001
-	#Given I save to context name: UPC86463 and value: 635039847816
-	#Given I save to context name: TestCase0001 and value: 1616035
+	Given I save to context name: UPC86463 and value: 635039847816
+	Given I save to context name: TestCase0001 and value: 1616035
 	Given I navigate to the landing page
-	Given I log in with the account saved in TReVor as: CanadaHasAllData
+	Given I log in with the account saved in TReVor as: DistributorAccount
 	Then the WERCSmart homepage should load
 	Given I create a distibutor request as TestCase0002 and send to manufacturer
 	#And I click the Register New Product icon in the Navigation Pane
@@ -59,7 +59,7 @@ Scenario: [122365] Create a distributor request and process it to completed
 	Given I search for the product in My Distributor: TestCase0001
 	And I click Approve for the most recent product returned in my dist
 	Given I navigate to the landing page
-	Given I log in with the account saved in TReVor as: CanadaHasAllData
+	Given I log in with the account saved in TReVor as: DistributorAccount
 	Then the WERCSmart homepage should load
 	And I search for the product saved as: TestCase0002
 	And I click Row Actions for the first product returned

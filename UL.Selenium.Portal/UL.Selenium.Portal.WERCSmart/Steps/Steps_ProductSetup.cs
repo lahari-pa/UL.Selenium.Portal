@@ -6745,8 +6745,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			sharedSteps.ICallSharedProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			sharedSteps.SharedPhysicalandChemicalProperties_SolidOnlyAvailable_Continue();
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Amazon");
