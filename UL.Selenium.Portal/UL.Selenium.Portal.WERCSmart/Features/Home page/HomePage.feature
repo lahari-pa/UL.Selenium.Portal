@@ -25,7 +25,8 @@ Feature: Home Page
 
 Background:
 
-#pass - staging 4.10
+#Removed from regression 2023/08
+@ignore
 @TestCase:55817
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
