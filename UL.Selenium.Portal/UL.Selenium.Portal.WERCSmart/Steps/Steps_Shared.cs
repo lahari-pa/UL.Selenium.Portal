@@ -13308,10 +13308,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Found matching job in History tab");
 				Report.Screenshot();
 			}
-			thisStudioJobQueue.Close();
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisStudioNavBar = new StudioNavBar();
 			Report.StartSubStep("I close the Jod Queue window");
-			//thisStepsStudio.GivenICloseJobQueue();
+			thisStudioNavBar.ClickSwitchTabs("Power Designer Plus");
+			thisPowerDesignerPlus.ClickRefreshButton();
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}
 

@@ -17,20 +17,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 		private IWebElement TopBarMenuButton(string button) => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//div[@class='ui-jqgrid-view']//div[@title = '{button}']"));
-		private IWebElement CloseButton => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//span[text() ='Job Queue']/following-sibling::button[@class='ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close']"));
-
 		public bool TopBarMenuButtonExists(string button)
 		{
 			Report.Info($"Attempt to find button {button}");
 			return this.TopBarMenuButton(button) != null;
-		}
-		public void Close()
-		{
-			SeleniumWebDriver.CurrentDriver.Close();
-		}
-		public bool CloseJobQueueWindow()
-		{
-			return this.CloseButton.TryClick();
 		}
 		public bool ClickTopBarMenuBotton(string button)
 		{
