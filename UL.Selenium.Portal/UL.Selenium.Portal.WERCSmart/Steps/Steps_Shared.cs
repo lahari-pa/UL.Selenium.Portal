@@ -729,6 +729,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
+			if (table.Rows.Count != 1)
+			{
+				Report.Error($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Info("Using only the first row from the table");
+			}
 			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep($"I set the U.S. Toxic Substances Control Act (TSCA) status option to: {table.Rows[0]["TSCA"]}");
