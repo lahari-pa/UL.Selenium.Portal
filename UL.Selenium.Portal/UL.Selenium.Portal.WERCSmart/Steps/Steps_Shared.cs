@@ -7331,6 +7331,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void Shared65969_GoToPdPlus_SelectYourProductAndCklt_Continue()
 		{
 			Report.UseSubSteps = true;
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisTopMenu = new StudioTopMenu();
+			Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Report.Screenshot();
+			Delay.Seconds(3);
+			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
+			thisPowerDesignerPlus.Wait_for_load(240);
+			Delay.Seconds(10);
+
+			if (!thisPowerDesignerPlus.Wait_for_load(240))
+			{
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(240), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+				"Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+				"Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
+				"Set format option");
+			Report.StartSubStep("I click the Edit Existing product radio button if not already selected");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
+				"Set action option");
+			Report.Screenshot();
+			Delay.Seconds(1);
+			Report.StartSubStep("I filter for the product");
+			var productDetails = (ProductInformation)Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId);
+			string id = productDetails.Id;
+			thisPowerDesignerPlus.EnterSourceProduct(id);
+			thisPowerDesignerPlus.ClickRefreshButton();
+			Delay.Seconds(120);
+			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			Report.StartStep("I click Continue");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
+			Delay.Seconds(120);
+			thisPowerDesignerPlus.Wait_for_load(240);
+			/*
+			Report.UseSubSteps = true;
 			var selStepsSha = new Steps_SHA();
 			var selStepsStudio = new Steps_Studio();
 			Report.StartSubStep("I navigate to Power Designer Plus");
@@ -7342,8 +7388,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Needs the test case ID to fetch the product ID to continue!");
 			}
-
-			string id = Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId).ToString();
+			var productDetails = (ProductInformation)Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId);
+			string id = productDetails.Id;
+			//string id = Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId).ToString();
 			if (id == null)
 			{
 				throw new Exception($"Needs the product ID to be saved to context as 'TestCase{WercSmartSettings.TestCaseId}'!");
@@ -7355,7 +7402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
-
+			
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
@@ -7371,6 +7418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+			*/
 		}
 
 		[StepDefinition(
@@ -12956,7 +13004,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var thisTopMenu = new StudioTopMenu();
-			Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
+			/*Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
 			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
@@ -12997,6 +13045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(120);
 			thisPowerDesignerPlus.Wait_for_load(240);
+			*/
 			Report.StartSubStep(
 				"I set the data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
@@ -13309,9 +13358,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			var thisStudioNavBar = new StudioNavBar();
-			Report.StartSubStep("I close the Jod Queue window");
-			thisStudioNavBar.ClickSwitchTabs("Power Designer Plus");
+			var globalSteps = new GlobalSteps();
+			Report.StartSubStep("I switch to the PD+ tab");
+			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}

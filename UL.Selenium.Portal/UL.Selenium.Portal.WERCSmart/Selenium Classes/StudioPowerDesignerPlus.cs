@@ -154,7 +154,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSourceProduct(string sourceProduct)
 		{
-			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
+			/*if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("modalDialogFrameFrm"))
+			{
+				SeleniumWebDriver.CurrentDriver.ExitIFrame();
+				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("modalDialogFrameFrm"))
+				{
+					Report.Info("Could not switch to iframe");
+					return false;
+				}
+			}
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.Id("modalDialogFrameFrm"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			*/
+			IWebElement enterField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
 			enterField.EnterText(sourceProduct);
 			return (enterField.GetValue() == sourceProduct);
 		}
