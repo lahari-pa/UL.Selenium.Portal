@@ -404,17 +404,17 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
 
-@ignore
 @TestCase:57985
-Scenario: [57985] Footwear or Leather Care Product - Aerosol - (RU000744) - 4A
+Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol
 	Then I save the product information as: TestCase57985
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
+	Then I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	#Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+		#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		#| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
