@@ -1593,6 +1593,56 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 213391\(Physical and Chemical Properties \(Applicable Only to Flow 6-A Type of Products\) - Primary Physical State \(AEROSOL ONLY\) / Secondary Physical State \(ANY\)\):")]
+		public void ThenICallSharedStepPhysicalAndChemicalPropertiesApplicableOnlyToFlow_ATypeOfProducts_PrimaryPhysicalStateAEROSOLONLYSecondaryPhysicalStateANY(Table table)
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			foreach(var row in table.Rows)
+			{
+				switch (row["Section"])
+				{
+					case "Primary Physical State":
+						Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
+						var produtTable = new Table(new string[] {
+						"State"
+						});
+						produtTable.AddRow(new string[] {
+						"Aerosol"
+						});
+						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+						Report.StartSubStep($"I set the Primary Physical State field to: {row["Value"]}");
+						stepsProductCharacteristics.SetThePrimayPhysicalStateTo(row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"I set the Secondary Physical State field to: {row["Value"]}]");
+						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
+						break;
+					case "pH":
+						if (row["do not have exact data"]== "yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+							MyNewProduct.SectExatcDataNotKnown("pH");
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+					case "product has a flammable propellant":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
+						break;
+				}
+			}
+		}
+
+
 		[StepDefinition(@"I call Shared Step 168070 \(Physical and Chemical Properties - Aerosol Only - Validation for Algicide Aerosol Type of Product\)")]
 		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_ValidationForAlgicideAerosolTypeOfProduct()
 		{
