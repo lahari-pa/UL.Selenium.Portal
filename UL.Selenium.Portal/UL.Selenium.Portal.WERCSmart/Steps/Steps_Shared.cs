@@ -13322,7 +13322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I switch to the PD+ tab");
 			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
-			Delay.Seconds(60);
+			Delay.Seconds(120);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickRefreshButtonLeft(), "Failed to click Refresh button", "Successfully clicked Refresh button");
 			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
