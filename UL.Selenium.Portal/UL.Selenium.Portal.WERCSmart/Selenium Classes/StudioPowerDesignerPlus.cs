@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//protected override IWebElement containerElement { get; set; }
 		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class, 'container')]");
 
-		private IWebElement ProductIsCheckedOutIcon => this.ContainerElement.FindElement(By.XPath(".//i[@title='Product is Checked Out']"));
+		private IWebElement ProductIsCheckedOutIcon => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//i[@title='Product is Checked Out']"));
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
@@ -154,18 +154,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSourceProduct(string sourceProduct)
 		{
-			/*if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("modalDialogFrameFrm"))
-			{
-				SeleniumWebDriver.CurrentDriver.ExitIFrame();
-				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("modalDialogFrameFrm"))
-				{
-					Report.Info("Could not switch to iframe");
-					return false;
-				}
-			}
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.Id("modalDialogFrameFrm"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			*/
 			IWebElement enterField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
 			enterField.EnterText(sourceProduct);
 			return (enterField.GetValue() == sourceProduct);
@@ -548,6 +536,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (refreshButton != null)
 			{
 				return refreshButton.TryClick();
+			}
+
+			return false;
+		}
+		public bool ClickRefreshButtonLeft()
+		{
+			IWebElement refreshButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@title = 'Refresh']"));
+			if (refreshButton != null)
+			{
+				return refreshButton.TryClick();
+			}
+
+			return false;
+		}
+		public bool ClickSearchFormatSubformat()
+		{
+			IWebElement searchButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id = 'selectFormatselFormat']"));
+			if (searchButton != null)
+			{
+				return searchButton.TryClick();
 			}
 
 			return false;

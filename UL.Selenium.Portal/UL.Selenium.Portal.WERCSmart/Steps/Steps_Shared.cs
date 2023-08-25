@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6749,7 +6750,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = productDetails.Id;
 			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
-				x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+				x.Status == "Closed" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
 			{
 				Report.Info("Did not find matching job");
@@ -13004,48 +13005,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var thisTopMenu = new StudioTopMenu();
-			/*Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
-			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
-				"Failed to navigate to power designer plus", "Navigated to power designer plus");
-			Report.Screenshot();
-			Delay.Seconds(3);
-			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
-			thisPowerDesignerPlus.Wait_for_load(240);
-			Delay.Seconds(10);
-
-			if (!thisPowerDesignerPlus.Wait_for_load(240))
-			{
-				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
-				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
-				Delay.Seconds(3);
-			}
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(240), "Power designer plus has not loaded",
-				"Power designer plus has loaded");
-			Report.Info("Setting power designer plus options...");
-			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
-				"Set language option");
-			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
-				"Set subformat option");
-			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
-				"Set format option");
-			Report.StartSubStep("I click the Edit Existing product radio button if not already selected");
-			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
-				"Set action option");
-			Report.Screenshot();
-			Delay.Seconds(1);
-			Report.StartSubStep("I filter for the product");
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = productDetails.Id;
-			thisPowerDesignerPlus.EnterSourceProduct(id);
-			thisPowerDesignerPlus.ClickRefreshButton();
-			Delay.Seconds(120);
-			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
-			Report.StartStep("I click Continue");
-			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
-			Delay.Seconds(120);
-			thisPowerDesignerPlus.Wait_for_load(240);
-			*/
+			
 			Report.StartSubStep(
 				"I set the data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
@@ -13128,7 +13088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			//var checkListSection = TestVariables.GetVariableSavedAs("Battery/BCP Checklist");
 			thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0756] Battery/BCP Checklist");
-			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenICheckTheDatacodesAsFollows(table2);
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("authoring");
 			Report.StartSubStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
@@ -13361,9 +13321,59 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var globalSteps = new GlobalSteps();
 			Report.StartSubStep("I switch to the PD+ tab");
 			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
-			thisPowerDesignerPlus.ClickRefreshButton();
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			Delay.Seconds(60);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickRefreshButtonLeft(), "Failed to click Refresh button", "Successfully clicked Refresh button");
+			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}
+
+		[Then(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\)")]
+		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts()
+		{
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.UseSubSteps = true;
+			var thisTopMenu = new StudioTopMenu();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var globalSteps = new GlobalSteps();
+			var newValueEditor = new ValueEditor();
+			Report.StartSubStep("I switch to the PD+ tab");
+			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+		
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickSearchFormatSubformat(), "Failed to click Search button", "Successfully clicked Search button");
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Format"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Format/SubFormat");
+					Report.Screenshot();
+					break;
+				}
+			}
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+		
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
+				"Set format option");
+			Report.Info("Now going to click the sections side tab if its not open");
+			thisPowerDesignerPlus.Wait_for_load(60);
+			var selStepsStudio = new Steps_Studio();	
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("SECT0069"))
+			{
+				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
+			}
+			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery Indicator");
+			newValueEditor.EnterValueIntoField("1");
+			string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery Indicator");
+			Report.Info($"BATACT value is {value}");
+			newValueEditor.ClickSaveButton();
+		}
+
 
 		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
 		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)
