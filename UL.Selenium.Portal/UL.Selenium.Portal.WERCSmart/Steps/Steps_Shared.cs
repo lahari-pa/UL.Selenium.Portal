@@ -1,3 +1,4 @@
+using NPOI.SS.Formula.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -718,6 +719,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+
+		[StepDefinition(@"I call Shared Step 57571b \(Enter Regulatory Information - Not Prop 65\):")]
+		public void GivenICallSharedEnterRegulatoryInformation_NotProp(Table table)
+		{
+
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			if (table.Rows.Count != 1)
+			{
+				Report.Error($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Info("Using only the first row from the table");
+			}
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep($"I set the U.S. Toxic Substances Control Act (TSCA) status option to: {table.Rows[0]["TSCA"]}");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", table.Rows[0]["TSCA"]);
+			Report.StartSubStep($"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: {table.Rows[0]["Prop 65"]}");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", table.Rows[0]["Prop 65"]);
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
@@ -2248,6 +2270,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenIConfirmThatTheVOCAnalysisDateIsShowing();
 			Report.StartSubStep("I confirm that I see todays VOC Analysis Date");
 			MyNewProduct.ThenIConfirmThatISeeTodaysVOCAnalysisDate();
+			Report.StartSubStep("In the Volatile Organic Compound Summary page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
 		}
 
 		[StepDefinition(@"I call Shared Step 42214 \(Delete a Product from the Product grid\) to delete product: (.*)")]
@@ -6347,8 +6371,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.UploadPDFFileSectionAndType("VOC Exemption Letter",
 				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Additional Documents to Provide page I Upload File for: Provide Full Product Label (required) ");
-			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
+				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
