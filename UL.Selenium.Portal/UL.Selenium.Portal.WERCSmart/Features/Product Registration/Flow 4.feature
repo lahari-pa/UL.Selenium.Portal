@@ -404,6 +404,7 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
 
+@OnlyInStaging
 @TestCase:57985
 Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -448,11 +449,9 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	#Given in the Additional Documents to Provide page I click Continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
 	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
 	| Section                                    | Value                                                                                                                                                                                |
 	| Type of Product                            | Footwear or Leather Care Product - Aerosol                                                                                                                                           |
