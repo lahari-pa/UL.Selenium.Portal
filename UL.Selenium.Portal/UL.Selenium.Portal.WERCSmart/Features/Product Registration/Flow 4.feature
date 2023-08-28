@@ -452,7 +452,17 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
+	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
+	| Section                                    | Value                                                                                                                                                                                |
+	| Type of Product                            | Footwear or Leather Care Product - Aerosol                                                                                                                                           |
+	| FIFRA 25(b) Exempt						 | Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
+	| UN Number                                  | UN1950                                                                                                                                                                               |
+	| Proper Shipping Name                       | Aerosols                                                                                                                                                                             |
+	| Hazard Class                               | 2.1                                                                                                                                                                                  |
+	| Packing Group                              | None                                                                                                                                                                                 |
+	| CARB									     | 75                                                                                                                                                                                   |
+	| OTC Model Rule							 | 15                                                                                                                                                                                   |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
 
 @TestCase:57988
