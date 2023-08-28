@@ -1620,7 +1620,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
 						break;
 					case "pH":
-						if (row["do not have exact data"]== "yes")
+						if (row["do not have exact data"]== "Yes")
 						{
 							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
 							MyNewProduct.SectExatcDataNotKnown("pH");
@@ -1634,12 +1634,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
 							break;
 						}
-					case "product has a flammable propellant":
+					case "has a flammable propellant":
 						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
 						break;
 				}
 			}
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
 
