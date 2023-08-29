@@ -339,8 +339,8 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 
 @ignore
 @TestCase:57982
-Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
@@ -350,14 +350,16 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
-	Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57981 (Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Acetic Acid       | 100     | false               | false       |            |
+	Then I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+	Then I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
+	#Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 57981 (Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
+		| No                                       | 10                    | 6                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
