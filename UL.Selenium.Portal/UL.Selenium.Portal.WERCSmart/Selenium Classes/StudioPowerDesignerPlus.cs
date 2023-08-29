@@ -221,7 +221,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
-
+		public bool SetUsageType(string usage)
+		{
+			IWebElement UsageTypeSelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='ucSelUsage_ddlUsages']"), 2);
+			if (UsageTypeSelect != null)
+			{
+				UsageTypeSelect.Select(usage);
+				return (UsageTypeSelect.SelectedOption() == usage);
+			}
+			return false;
+		}
 
 	}
 
@@ -521,6 +530,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool ClickAddNewButton()
+		{
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
+			return AddNewButton.TryClick();
 		}
 
 		public bool ClickRefresh()

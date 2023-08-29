@@ -192,13 +192,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			try
 			{
-				SeleniumBrowser.Alert.WaitForAlert(3);
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				SeleniumWebDriver.CurrentDriver.WaitForAlert(3);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 			}
 			catch
 			{
 				Report.Info("No alert found");
 			}
+		}
+
+		public void ISetUsageType(string usageType)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");
+			Delay.Seconds(2);
 		}
 
 		public void ISetTheAuthoringCompleteCodeToNGHS()
@@ -1619,16 +1625,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string click = "left";
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
-			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
+			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT0877]"))
 			{
 				Report.Success("The Section was already active");
 				return;
 			}
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 								"Studio power designer is open");
-			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT2318] WALMART QC RESPONSE FORM", click),
-				"Failed to " + click + " click section: " + "[SECT2318] WALMART QC RESPONSE FORM",
-				"Successfully " + click + " clicked " + "[SECT2318] WALMART QC RESPONSE FORM");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT0877] WALMART QC RESPONSE FORM", click),
+				"Failed to " + click + " click section: " + "[SECT0877] WALMART QC RESPONSE FORM",
+				"Successfully " + click + " clicked " + "[SECT0877] WALMART QC RESPONSE FORM");
 			Delay.Seconds(3);
 			return;		
 

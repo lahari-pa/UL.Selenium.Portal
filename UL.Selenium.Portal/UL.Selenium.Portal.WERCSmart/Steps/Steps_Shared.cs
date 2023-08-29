@@ -4600,11 +4600,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Flash Point Testing Method Used"]);
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
 				table.Rows[0]["Flash Point Testing Method Used"]);
-				Report.StartSubStep(
-				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
-				table.Rows[0]["Select the best Water Solubility description"]);
-				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
-				table.Rows[0]["Select the best Water Solubility description"]);
+			Report.StartSubStep(
+			"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
+			table.Rows[0]["Select the best Water Solubility description"]);
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+			table.Rows[0]["Select the best Water Solubility description"]);
 			Report.StartSubStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -4984,6 +4984,54 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Does the product contain fertilizer (N, P, K)",
 				"No");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 214000 \(Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue\)")]
+		public void
+			GivenICallSharedStep_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
+			Report.StartSubStep(
+				"I set the Does the product contain fertilizer (N, P, K) field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Does the product contain fertilizer (N, P, K)",
+				"Yes");
 			Report.StartSubStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -7146,7 +7194,214 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
 
-		[StepDefinition(@"I call Shared Step 79501 \(WPS Studio - PD\+ - Create Component for 3rd party product\)")]
+		[StepDefinition(
+			@"I call Shared Step 209526 \(WPS Studio - PD\+ - set all data and publish using rule and doc queue - CKLT and MTR only\) for product saved as: (.*)")]
+		public void GivenICallSharedStep209526WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndMTROnly(
+			string savedAs)
+		{
+			if (Context.Contains("ElectronicProduct"))
+			{
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
+			}
+
+			Report.UseSubSteps = true;
+			Report.Info("In power tools workspace setting edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"CAWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"EPAN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"HCM",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"OTC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RAUNDW",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"UNIFFC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"WSWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			var table3 = new Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+
+			Report.Info("Going to do publishing");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Delay.Seconds(3);
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			GeneralUtilities.StudioWaitForSpinner();
+			var table4 = new Table(new string[] {
+				"Text",
+				"Should Show"
+			});
+			table4.AddRow(new string[] {
+				"CKLT",
+				"False"
+			});
+			table4.AddRow(new string[] {
+				"MTR",
+				"False"
+			});
+			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			thisStepsStudio.GivenICloseCurrentDocument();
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(3);
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			var tblCheckDocument = new Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"Language",
+				"DocType"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			thisStepsStudio.ICloseAlert();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) to the Section - Applicable Only to Type of Product: GRASS SEED")]
+		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode)
+		{
+			
+			Report.UseSubSteps = true;
+			var thisStepsStudio = new Steps_Studio();
+			Report.Info("In Designer Plus clicking Add New Link to add Data Code");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickAddNewButton();
+			Delay.Seconds(1);
+			thisStepsStudio.ISetUsageType(usageType);
+			GeneralUtilities.StudioWaitForSpinner();
+			
+		}
+
+			[StepDefinition(@"I call Shared Step 79501 \(WPS Studio - PD\+ - Create Component for 3rd party product\)")]
 		public void GivenICallSharedStep79501WPSStudio_PD_CreateComponentForRdPartyProduct(
 			TechTalk.SpecFlow.Table components)
 		{
@@ -14116,16 +14371,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStudioPowerDesignerPlus.Wait_for_load(60);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0877"))
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
-				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+				//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			/*if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
 			{
 				selStepsStudio.InPDIEnsureSECT0077IsActive();
 				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
-			}
+			}*/
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
@@ -14746,6 +15001,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should be on the Thank You page of the for");
 			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
 		}
-
 	}
 }
