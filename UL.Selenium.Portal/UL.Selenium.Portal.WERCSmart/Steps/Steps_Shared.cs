@@ -13007,7 +13007,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisTopMenu = new StudioTopMenu();
 			
 			Report.StartSubStep(
-				"I set the data codes to show the Green check mark graphic");
+				"I set the data codes to show the Green check mark graphic in Reviewer Checklist section");
 			Report.Info("In power tools workspace I set edit to true");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
@@ -13086,7 +13086,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			}
-			//var checkListSection = TestVariables.GetVariableSavedAs("Battery/BCP Checklist");
+			Report.StartSubStep(
+				"I set the data codes to show the Green check mark graphic in Battery/BCP Checklist section");
 			thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0756] Battery/BCP Checklist");
 			thisStepsStudio.GivenICheckTheDatacodesAsFollows(table2);
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("authoring");
@@ -13101,6 +13102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"Set subformat option");
 			Report.StartSubStep("Select the Apply to all subformats check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Screenshot();
 			Report.Info("Clicked apply, waiting");
 			Delay.Seconds(10);
 			Report.Info("Now going to wait for spinner");
@@ -13109,6 +13111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (SeleniumWebDriver.CurrentDriver.WaitForAlert())
 				{
 					Report.Info("Spinner is still showing but alert is there.");
+					Report.Screenshot();
 					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 				}
 			}
@@ -13322,8 +13325,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I switch to the PD+ tab");
 			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
-			Delay.Seconds(120);
+			Delay.Seconds(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickRefreshButtonLeft(), "Failed to click Refresh button", "Successfully clicked Refresh button");
+			Delay.Seconds(30);
 			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}
@@ -13367,6 +13371,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
 			}
+			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
+			Report.Info($"Battery Manufacturers value is {battManufacturer}");
+			string battType = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Types");
+			Report.Info($"Battery Manufacturers value is {battType}");
+			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Product Itself is a Battery");
+			Report.Info($"Battery Manufacturers value is {battItself}");
 			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery Indicator");
 			newValueEditor.EnterValueIntoField("1");
 			string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery Indicator");
