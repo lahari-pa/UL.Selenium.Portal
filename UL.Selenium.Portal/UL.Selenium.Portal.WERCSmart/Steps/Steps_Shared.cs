@@ -1593,6 +1593,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 213391\(Physical and Chemical Properties \(Applicable Only to Flow 6-A Type of Products\) - Primary Physical State \(AEROSOL ONLY\) / Secondary Physical State \(ANY\)\):")]
+		public void ThenICallSharedStepPhysicalAndChemicalPropertiesApplicableOnlyToFlow_ATypeOfProducts_PrimaryPhysicalStateAEROSOLONLYSecondaryPhysicalStateANY(Table table)
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			foreach(var row in table.Rows)
+			{
+				switch (row["Section"])
+				{
+					case "Primary Physical State":
+						Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
+						var produtTable = new Table(new string[] {
+						"State"
+						});
+						produtTable.AddRow(new string[] {
+						"Aerosol"
+						});
+						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+						Report.StartSubStep($"I set the Primary Physical State field to: {row["Value"]}");
+						stepsProductCharacteristics.SetThePrimayPhysicalStateTo(row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"I set the Secondary Physical State field to: {row["Value"]}]");
+						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
+						break;
+					case "pH":
+						if (row["do not have exact data"]== "Yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+							MyNewProduct.SectExatcDataNotKnown("pH");
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+					case "has a flammable propellant":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
+						break;
+				}
+			}
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+
 		[StepDefinition(@"I call Shared Step 168070 \(Physical and Chemical Properties - Aerosol Only - Validation for Algicide Aerosol Type of Product\)")]
 		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_ValidationForAlgicideAerosolTypeOfProduct()
 		{
@@ -4392,6 +4444,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.StartStep("I navigate to the home page");
 			//new StepsHomepage().ThenINavigateToTheHomePage();
 		}
+		[Given(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
+		public void GivenICallSharedStepSummaryTab_ProductsDataVerificationWhenRequestToAuthorIsNOTSelectedInTheRegulatoryDocumentsToProvidePageAppliesOnlyToFootwearOrLeatherCareProductAerosolRU( Table table)
+		{
+			Report.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			var myGlobalSteps = new GlobalSteps();
+			Report.StartSubStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+			Report.StartSubStep("I click the Summary button in the Data Acceptance window");
+			myStepsNewProduct.GivenIClickTheSummaryButtonInTheDataAcceptanceWindow();
+			Report.StartSubStep("I switch to the Data Summary page");
+			myGlobalSteps.SwitchToDataSumaryTab();
+			foreach(var row in table.Rows)
+			{
+				switch (row["Section"])
+				{
+					case "Type of Product":
+						Report.StartSubStep($"Type of Product should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Type of Product", row["Value"]);
+						break;
+					case "FIFRA 25(b) Exempt":
+						Report.StartSubStep($"Section 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("FIFRA 25(b) Exempt", row["Value"]);
+						break;
+					case "UN Number":
+						Report.StartSubStep($"Section 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("UN Number", row["Value"]);
+						break;
+					case "Proper Shipping Name":
+						Report.StartSubStep($"Section 'Proper Shipping Name' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Proper Shipping Name", row["Value"]);
+						break;
+					case "Hazard Class":
+						Report.StartSubStep($"Section 'Hazard Class' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Hazard Class", row["Value"]);
+						break;
+					case "Packing Group":
+						Report.StartSubStep($"Section 'Packing Group' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Packing Group", row["Value"]);
+						break;
+					case "CARB":
+						Report.StartSubStep($"Section 'CARB' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("CARB", row["Value"]);
+						break;
+					case "OTC Model Rule":
+						Report.StartSubStep($"Section 'OTC Model Rule' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("OTC Model Rule", row["Value"]);
+						break;
+				}
+			}
+			Report.StartSubStep("I close the Data Summary tab");
+			myGlobalSteps.CloseDataSummaryTab();
+			Report.StartSubStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+		}
+
 
 		[StepDefinition(
 			@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
