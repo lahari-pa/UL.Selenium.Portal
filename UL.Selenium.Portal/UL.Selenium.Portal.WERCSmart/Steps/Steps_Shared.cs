@@ -1603,15 +1603,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				switch (row["Section"])
 				{
-					case "Primary Physical State":
-						Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
-						var produtTable = new Table(new string[] {
+					case "Primary State Options":
+						Report.StartSubStep($"I should only see the following options for Primary Physical State: {row["Value"]}");
+						var expectedOptions = new Table(new string[] {
 						"State"
 						});
-						produtTable.AddRow(new string[] {
-						"Aerosol"
-						});
-						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+						string[] options = row["Value"].Split(' ');
+						foreach (string option in options)
+						{
+							expectedOptions.AddRow(option);
+						}
+						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(expectedOptions);
+						break;
+					case "Primary Physical State":
 						Report.StartSubStep($"I set the Primary Physical State field to: {row["Value"]}");
 						stepsProductCharacteristics.SetThePrimayPhysicalStateTo(row["Value"]);
 						break;
@@ -1637,6 +1641,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					case "has a flammable propellant":
 						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
+						break;
+					case "Relative Density":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Relative Density");
+						MyNewProduct.SetTheSectionOptionTo("Relative Density", row["Value"]);
+						break;
+					case "Boiling Point (in Celsius)":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Boiling Point (in Celsius)");
+						MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", row["Value"]);
+						break;
+					case "Flash Point (in Celsius)":
+						if (row["do not have exact data"] == "Yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+							MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+					case "Water Solubility":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Select the best Water Solubility description");
+						MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", row["Value"]);
 						break;
 				}
 			}
