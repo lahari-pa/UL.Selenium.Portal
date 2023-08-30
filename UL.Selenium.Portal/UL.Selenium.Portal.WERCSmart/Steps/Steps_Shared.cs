@@ -13364,21 +13364,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
 				"Set format option");
-			Report.Info("Now going to click the sections side tab if its not open");
-			thisPowerDesignerPlus.Wait_for_load(60);
-			var selStepsStudio = new Steps_Studio();	
+			var selStepsStudio = new Steps_Studio();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			// 'If you can't click on them select Options and make sure Edit mode is selected.'
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("SECT0069"))
 			{
 				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
 			}
 			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
+			newValueEditor.ClickButton("Cancel");
+
 			Report.Info($"Battery Manufacturers value is {battManufacturer}");
 			string battType = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Types");
+			newValueEditor.ClickButton("Cancel");
+
 			Report.Info($"Battery Manufacturers value is {battType}");
 			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Product Itself is a Battery");
+			newValueEditor.ClickButton("Cancel");
+
 			Report.Info($"Battery Manufacturers value is {battItself}");
 			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery Indicator");
 			newValueEditor.EnterValueIntoField("1");
+			newValueEditor.ClickButton("Save");
 			string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery Indicator");
 			Report.Info($"BATACT value is {value}");
 			newValueEditor.ClickSaveButton();
