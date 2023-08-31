@@ -344,7 +344,7 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
-	Then I generate a random UPC number and save as: TestCase57982
+	Then I generate a random UPC number and save as: UPC57982
 	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
@@ -377,22 +377,24 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer       |
+		| The Home Depot |
+	Then I click Done on Select Retailers window
+	Then I click continue
+	Then I call Shared Step 226089 (Add UPC - Applicable Only to Bonding Agent (RU000023)) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
 	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
-	| Section              | Value                                                                                                                                                                                |
-	| Type of Product      | Footwear or Leather Care Product - Aerosol                                                                                                                                           |
-	| FIFRA 25(b) Exempt   | Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
-	| UN Number            | UN1950                                                                                                                                                                               |
-	| Proper Shipping Name | Aerosols                                                                                                                                                                             |
-	| Hazard Class         | 2.1                                                                                                                                                                                  |
-	| Packing Group        | None                                                                                                                                                                                 |
-	| CARB                 | 75                                                                                                                                                                                   |
-	| OTC Model Rule       | 15                                                                                                                                                                                   |
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	| Section											   | Value          |
+	| Type of Product									   | Bonding agent	|
+	| Primary Physical State							   | Liquid	        |
+	| Secondary Physical State							   | Liquid	        |
+	| Product has been granted an Alternative Control Plan | No             |
+	| CARB												   | 10             |
+	| OTC Model Rule                                       | 6              |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
 
 @TestCase:57983

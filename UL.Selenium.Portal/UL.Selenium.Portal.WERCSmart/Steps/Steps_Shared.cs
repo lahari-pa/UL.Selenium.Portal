@@ -1232,6 +1232,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(@"I call Shared Step 226089 \(Add UPC - Applicable Only to Bonding Agent \(RU000023\)\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void ThenICallSharedStepAddUPC_ApplicableOnlyToBondingAgentRUForUPCSavedAsUPCContainerTypePlasticContainerAndSize(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I confirm that retailer HD is present under the 'Destination Retailers' column in the UPC table");
+			MyStepsNewProduct.ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable("HD", "is");
+			Report.StartSubStep("Confirm that you see only options: Glass Container, Metal Container, Metal Cylinder, Plastic Container, Plastic Liner/Corrugate for Container Types");
+			var option = new Table("Option");
+			option.AddRow("Container Type");
+			option.AddRow("Coated or Laminated Paperboard");
+			option.AddRow("Full Syringe - Medical");
+			option.AddRow("Glass Container");
+			option.AddRow("Metal Container");
+			option.AddRow("Metal Cylinder");
+			option.AddRow("Plastic Container");
+			option.AddRow("Vial - Medical");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Container Type", option);
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+
 		[StepDefinition(
 	@"I call Shared Step 57960a \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only - Do Not Click Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly_DoNotClickContinue(string upc, string containerType, string size)
@@ -4523,6 +4575,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.StartSubStep($"Section 'OTC Model Rule' should be showing the following option: {row["Value"]}");
 						new StepsDataSummarySheet().ShouldBeShowingFollowing("OTC Model Rule", row["Value"]);
 						break;
+					case "Product has been granted an Alternative Control Plan":
+						Report.StartSubStep($"Section 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Product has been granted", row["Value"]);
+						break;
+					case "Primary Physical State":
+						Report.StartSubStep($"Section 'Primary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Primary Physical State", row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"Section 'Secondary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Secondary Physical State", row["Value"]);
+						break;
+
 				}
 			}
 			Report.StartSubStep("I close the Data Summary tab");
