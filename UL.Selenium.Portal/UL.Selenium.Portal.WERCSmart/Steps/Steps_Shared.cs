@@ -13359,8 +13359,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				}
 			}
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			//IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			//SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 		
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
 				"Set format option");
