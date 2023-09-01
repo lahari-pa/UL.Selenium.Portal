@@ -4533,6 +4533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
 			var myGlobalSteps = new GlobalSteps();
+			var dataSummary = new DataSummary();
 			Report.StartSubStep("I should see the Data Acceptance Page");
 			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
 			Report.StartSubStep("I click the Summary button in the Data Acceptance window");
@@ -4587,7 +4588,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.StartSubStep($"Section 'Secondary Physical State' should be showing the following option: {row["Value"]}");
 						new StepsDataSummarySheet().ShouldBeShowingFollowing("Secondary Physical State", row["Value"]);
 						break;
-
+					case "Container Type":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Size (Ounces)":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Retailers":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
 				}
 			}
 			Report.StartSubStep("I close the Data Summary tab");

@@ -388,13 +388,16 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
-	| Section											   | Value          |
-	| Type of Product									   | Bonding agent	|
-	| Primary Physical State							   | Liquid	        |
-	| Secondary Physical State							   | Liquid	        |
-	| Product has been granted an Alternative Control Plan | No             |
-	| CARB												   | 10             |
-	| OTC Model Rule                                       | 6              |
+	| Section                                              | Value             |
+	| Type of Product                                      | Bonding agent     |
+	| Primary Physical State                               | Liquid            |
+	| Secondary Physical State                             | Liquid            |
+	| Product has been granted an Alternative Control Plan | No                |
+	| CARB                                                 | 10                |
+	| OTC Model Rule                                       | 6                 |
+	| Container Type                                       | Plastic Container |
+	| Size (Ounces)                                        | 12.5              |
+	| Retailers                                            | HD                |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
 
 @TestCase:57983
