@@ -14994,6 +14994,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should be on the Thank You page of the for");
 			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
 		}
+		[StepDefinition(@"I call Shared Step 213796 \(Physical and Chemical Properties - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void Shared_Physical_and_Chemical_Properties_Applicable_Only_to_Lipbalm()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
 
+			Report.StartSubStep("I set the Primary Physical State field to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			Report.StartSubStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: No data available");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No data available");
+
+			Report.StartSubStep("in the Physical and Chemical Properties page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+		[StepDefinition(@"I call Shared Step 234333 \(Inventory Status, Prop 65 \(US\) - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void ICallSharedRegulatoryInformation_TSCAAndCEPAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I click continue");
+			new StepsNewProduct().ClickContinue();
+			Report.StartSubStep("Confirm that both questions in this screen display the 'This is a required field' error message");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("U.S. Toxic Substances Control Act (TSCA) status", "should", "This is a required field.");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "should", "This is a required field.");
+			Report.StartSubStep("Select ONE Radio Button for the TSCA Question");
+			new StepsNewProduct().SelectFirstOptionInSection("U.S. Toxic Substances Control Act (TSCA) status");
+			Report.StartSubStep("Confirm the 'Required field error message' no longer shows for the TSCA Question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("U.S.Toxic Substances Control Act (TSCA) status");
+			Report.StartSubStep("I select the 'No' button for the Prop 65 question");
+			new StepsNewProduct().SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "No");
+			Report.StartSubStep("I confirm the 'Required field' error message is no longer displayed for the prop 65 question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act");
+			Report.StartSubStep("I select the 'Yes' button for the Prop 65 question");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+
+		[StepDefinition(@"I call Shared Step 234334 \(Regulatory Information 3 - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void GivenICallSharedStepRegulatoryInformation_LipBalm()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Information 3");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 3");
+			MyStepsNewProduct.IConfirmRegulatoryInformation3PageContainsStatement("Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California. Please complete the additional question below to ensure proper classification of this product for the retailer(s).");
+			Report.StartSubStep("For the 'Refer to your Product Label. From the options, select those that appear on the Label.' question four options should appear: 'Drug Facts Panel', 'Supplement Facts Panel', 'Nutrition Facts Panel' and 'None of the Above'");
+			var table = new Table("Option");
+			table.AddRow("Drug Facts Panel");
+			table.AddRow("Supplement Facts Panel");
+			table.AddRow("Nutrition Facts Panel");
+			table.AddRow("None of the Above");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed", "Refer to your Product Label.", table);
+			Report.StartSubStep("Select any of the four options that apply");
+			MyStepsNewProduct.GivenInTheRegulatoryInforamtionTabISelectProductLableAs("None of the Above");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may include Active Ingredient)");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Nutritional and Supplement Labels");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Dietary Supplements Label");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Dietary Supplements Label");
+			Report.StartSubStep("In the Regulatory Information 3 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
 	}
 }
