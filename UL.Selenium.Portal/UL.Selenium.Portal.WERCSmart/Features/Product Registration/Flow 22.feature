@@ -116,7 +116,7 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 
 @TestCase:60547
 Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60547
 	Given I delete all products with UPC Number: saved as UPC60547
