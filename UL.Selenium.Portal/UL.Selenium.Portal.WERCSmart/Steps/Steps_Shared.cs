@@ -13395,7 +13395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newValueEditor.ClickButton("Cancel");
 
 			Report.Info($"Battery Manufacturers value is {battItself}");*/
-			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery Indicator");
+			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery indicator");
 			newValueEditor.EnterValueIntoField("1");
 			newValueEditor.ClickButton("Save");
 			string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery indicator");
