@@ -25,7 +25,8 @@ Feature: Home Page
 
 Background:
 
-#pass - staging 4.10
+#Removed from regression 2023/08
+@ignore
 @TestCase:55817
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -51,7 +52,7 @@ Scenario: [55817] Product Information Panel - No Alerts/No Products
 #pass
 @TestCase:55938
 Scenario: [55938] My Products grid
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Given I should see the following filter options below My Products
 		| Options                | Colour       |
@@ -75,7 +76,7 @@ Scenario: [55938] My Products grid
 #pass - staging 4.10
 @TestCase:56020
 Scenario: [56020] Bulk Actions
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
@@ -164,7 +165,7 @@ Scenario: [56206] Sign Out
 
 @TestCase:56281
 Scenario: [56281] Product Information - Alerts - click More
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Then I click More below the Alerts Panel
 	And I should see the header: Message Center on the Message Center window
@@ -234,7 +235,7 @@ Scenario: [64872] Pie Panel Settings
 
 @TestCase:67299
 Scenario: [67299] Terms of Use - footer
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the Terms of Use link in the footer
 	Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it
@@ -336,7 +337,7 @@ Scenario: [58579] Live Help - Chat Feature
 # Couldn't find the test case in TFS folders, placing it in home page
 @TestCase:66335
 Scenario: [66335] Main Menu - expanded
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	And I should see the navigation menu icon in the navigation bar
 	Given I expand the Navigation Menu
@@ -348,7 +349,6 @@ Scenario: [66335] Main Menu - expanded
 		| My Messages          |
 		| Retail Partners      |
 		| My Reports           |
-		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
 	Given I collapse the Navigation Menu
@@ -359,14 +359,13 @@ Scenario: [66335] Main Menu - expanded
 		| My Messages          |
 		| Retail Partners      |
 		| My Reports           |
-		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
 	And the navigation labels should be hidden
 
 @TestCase:66336
 Scenario: [66336] Main Menu - collapsed
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I expand the Navigation Menu
 	Then the Navigation Menu should be expanded
@@ -379,7 +378,6 @@ Scenario: [66336] Main Menu - collapsed
 		| Envelope   | My Messages          |
 		| Handshake  | Retail Partners      |
 		| File-Text  | My Reports           |
-		| Bulb       | UL Solution Center   |
 		| Cart       | Shopping Cart        |
 		| Life-Saver | Support              |
 
