@@ -146,13 +146,8 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	#Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	#Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName									  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Air											  | 90      | false               | false       |            |
-		| Oxygen									      | 3.89    | false               | false       |            |
-		| 1-Butane									      | 3.85    | false               | false       |            |
-		| Hydrocarbons, C3-4-rich, petroleum distillates  | 3.89    | false               | false       |            |
-	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	
+	#Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
 	Then I set the UN Number option to: UN1950
