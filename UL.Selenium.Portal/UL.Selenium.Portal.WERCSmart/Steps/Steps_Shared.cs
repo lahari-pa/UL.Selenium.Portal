@@ -1645,6 +1645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 214644\(Physical and Chemical Properties - Applicable Only to Bonding Agent \(RU000023\)\)")]
 		[StepDefinition(@"I call Shared Step 213391\(Physical and Chemical Properties \(Applicable Only to Flow 6-A Type of Products\) - Primary Physical State \(AEROSOL ONLY\) / Secondary Physical State \(ANY\)\):")]
 		public void ThenICallSharedStepPhysicalAndChemicalPropertiesApplicableOnlyToFlow_ATypeOfProducts_PrimaryPhysicalStateAEROSOLONLYSecondaryPhysicalStateANY(Table table)
 		{
@@ -4527,7 +4528,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.StartStep("I navigate to the home page");
 			//new StepsHomepage().ThenINavigateToTheHomePage();
 		}
-		[Given(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
+		[StepDefinition(@"I call Shared Step 214662 \(Summary Tab - Data Verification - Applicable Only to Bonding Agent \(RU000023\)\)")]
+		[StepDefinition(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
 		public void GivenICallSharedStepSummaryTab_ProductsDataVerificationWhenRequestToAuthorIsNOTSelectedInTheRegulatoryDocumentsToProvidePageAppliesOnlyToFootwearOrLeatherCareProductAerosolRU( Table table)
 		{
 			Report.UseSubSteps = true;
@@ -4712,7 +4714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"This recipient does not require additional data consent tiers at this time.");
 
 		}
-
+		[StepDefinition(@"I call Shared Step 214643 \(Product Information - Applicable Only to Bonding Agent \(RU000023\)\)")]
 		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{

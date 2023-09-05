@@ -345,10 +345,10 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
 	Then I generate a random UPC number and save as: UPC57982
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+	Then I call Shared Step 214643 (Product Information - Applicable Only to Bonding Agent (RU000023))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
+	Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023))
 		| Section                  | do not have exact data | Value                    |
 		| Primary Physical State   |                        | Liquid                   |
 		| Secondary Physical State |                        | Liquid                   |
@@ -387,7 +387,7 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
+	Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023))
 	| Section                                              | Value             |
 	| Type of Product                                      | Bonding agent     |
 	| Primary Physical State                               | Liquid            |

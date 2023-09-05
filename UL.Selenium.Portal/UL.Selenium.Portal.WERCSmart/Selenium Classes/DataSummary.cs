@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Cannot find table data");
 				status = false;
 			}
-			string[,] tableData = new string[9,9];
+			string[,] tableData = new string[2,9];
 			int i = 0;
 			foreach (IWebElement elem in headersElems)
 			{
