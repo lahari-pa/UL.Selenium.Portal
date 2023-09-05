@@ -13382,6 +13382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
 			}
+			/*
 			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
 			newValueEditor.ClickButton("Cancel");
 
@@ -13393,7 +13394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Product Itself is a Battery");
 			newValueEditor.ClickButton("Cancel");
 
-			Report.Info($"Battery Manufacturers value is {battItself}");
+			Report.Info($"Battery Manufacturers value is {battItself}");*/
 			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery Indicator");
 			newValueEditor.EnterValueIntoField("1");
 			newValueEditor.ClickButton("Save");
