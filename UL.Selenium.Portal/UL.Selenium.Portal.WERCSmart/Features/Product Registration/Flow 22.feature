@@ -131,12 +131,13 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 		| Secondary Physical State   |                        | Solid spray                                                      |
 		| pH                         |                        | 12                                                               |
 		| has a flammable propellant |                        | This product is classified as a D003 Hazardous Waste under RCRA. |
+		| Water Solubility           |                        | No data available                                                |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName			    | Percent	| PublicallyDisclosed | TradeSecret | PublicName |
 		| Air					    | 90		| false               | false       |            |
 		| Oxygen				    | 3.89      | false               | false       |            |
 		| 1-Butene				    | 3.85      | false               | false       |            |
-		| Hydrocarbon, propellant   | 3.89		| false               | false       |            |
+		| Hydrocarbon propellant    | 3.89		| false               | false       |            |
 	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
 		| TSCA																		                  | Prop 65 |
 		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |

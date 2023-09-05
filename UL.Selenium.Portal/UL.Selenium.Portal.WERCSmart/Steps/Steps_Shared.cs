@@ -1638,6 +1638,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
 						break;
+					case "Water Solubility":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Select the best Water Solubility description");
+						MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", row["Value"]);
+						break;
 				}
 			}
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
