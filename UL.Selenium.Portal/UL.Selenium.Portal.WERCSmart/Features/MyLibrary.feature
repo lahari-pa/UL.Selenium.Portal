@@ -20,6 +20,8 @@
 @run_MyLibrary
 Feature: MyLibrary
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:64884
 Scenario: [64884] My Library
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

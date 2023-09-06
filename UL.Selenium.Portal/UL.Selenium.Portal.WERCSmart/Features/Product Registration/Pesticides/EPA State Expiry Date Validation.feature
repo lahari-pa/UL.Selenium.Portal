@@ -89,6 +89,8 @@ Scenario: [56591] Pesticide Data - EPA Expiration date validation (Colorado Dec 
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56591
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:56590
 Scenario: [56590] Pesticide Data - EPA Expiration date validation (California - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -106,6 +108,8 @@ Scenario: [56590] Pesticide Data - EPA Expiration date validation (California - 
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56590
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:56583
 Scenario: [56583] Pesticide Data - EPA Expiration date validation (Arkansas > Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
