@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow4
+@UPC
 Feature: Flow 4
 
 @ignore
@@ -337,7 +338,6 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
-@ignore
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -345,21 +345,34 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
+	Given I generate a random UPC number and save as: UPC57982
 	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)
+	Given I call Shared Step 214644 (Physical and Chemical Properties - Applicable Only to Bonding Agent)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
-	Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57981 (Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+		| Acetic Acid  | 100      | false               | false       |            |
+	And I call Shared Step 40650 (Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)	
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
+		| No                                       | 10                     | 6                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+	Then I click continue
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
+	Given I should see following container type from the drop down list
+	|Container Type|
+	| Coated or Laminated Paperboard |
+	| Full Syringe - Medical         |
+	| Glass Container                |
+	| Metal Container                |
+	| Metal Cylinder                 |
+	| Plastic Container              |
+	| Vial - Medical                 |
+	And I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
+	Then I click continue	
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
