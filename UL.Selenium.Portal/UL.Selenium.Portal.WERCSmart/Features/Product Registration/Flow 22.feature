@@ -162,6 +162,18 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	Then I confirm that I see the following VOC Grams Ozone value: 1
+	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then I should see the following Voc Limits present:
+	| Use									                        | VOC Compliance Limit | Regulation                  |
+	| Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol | 1.8                  | Aerosol Coatings CARB limit |
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
