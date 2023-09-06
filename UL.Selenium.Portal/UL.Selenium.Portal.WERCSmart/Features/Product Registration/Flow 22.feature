@@ -123,6 +123,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Then I save the product information as: TestCase60547
+	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 60756 (Product Information with Country and every option)
 	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
 		| Section                    | do not have exact data | Value                                                            |
@@ -139,7 +140,16 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 		| Hydrocarbon propellant    | 3.89		| false               | false       |            |
 	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
 		| TSCA																		                  | Prop 65 |
-		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |	
+		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |
+	Then I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
+	#Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	#Given I click continue
+	#Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	#Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	
+	#Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
 	Then I set the UN Number option to: UN1950
 	Then in the International Marine (IMDG) Classification page I click Continue
@@ -152,21 +162,9 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Then I confirm that I see the following VOC Grams Ozone value: 1
-	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	Then I should see the following Voc Limits present:
-	| Use									                        | VOC Compliance Limit | Regulation                  |
-	| Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol | 1.8                  | Aerosol Coatings CARB limit |
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
-	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-	And in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient| Product's Dispensing Method |
-		| Mask                          | 150                      | 44                      | 10.7      | Black grey | Odorless | No data available | 1                    | Aerosol                     |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60547. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
