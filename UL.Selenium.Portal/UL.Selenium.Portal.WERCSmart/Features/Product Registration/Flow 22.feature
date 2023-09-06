@@ -123,15 +123,8 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Then I save the product information as: TestCase60547
-	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 60756 (Product Information with Country and every option)
-	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
-		| Section                    | do not have exact data | Value                                                            |
-		| Primary Physical State     |                        | Aerosol                                                          |
-		| Secondary Physical State   |                        | Solid spray                                                      |
-		| pH                         |                        | 12                                                               |
-		| has a flammable propellant |                        | This product is classified as a D003 Hazardous Waste under RCRA. |
-		| Water Solubility           |                        | No data available                                                |
+	Then I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName			    | Percent	| PublicallyDisclosed | TradeSecret | PublicName |
 		| Air					    | 90		| false               | false       |            |
@@ -154,8 +147,13 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	And The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)	
-	Then I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
+	Then I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Aerosol Can - Metal and size: 33
+	Given I should see following container type from the drop down list
+	|Container Type         |
+	| Aerosol Can - Metal   |
+	| Aerosol Can - Plastic |
+	Then I click continue	
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -165,3 +163,4 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60547. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
+
