@@ -148,7 +148,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)	
 	Then I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Aerosol Can - Metal and size: 33
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
 	Given I should see following container type from the drop down list
 	|Container Type         |
 	| Aerosol Can - Metal   |
