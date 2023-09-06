@@ -13398,9 +13398,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery indicator");
 			newValueEditor.EnterValueIntoField("1");
 			newValueEditor.ClickButton("Save");
-			string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery indicator");
-			Report.Info($"BATACT value is {value}");
-			newValueEditor.ClickSaveButton();
+			//string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery indicator");
+			//Report.Info($"BATACT value is {value}");
+			//newValueEditor.ClickSaveButton();
 		}
 
 
