@@ -952,6 +952,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public string GetCurrentValueInMTRFormat(string category)
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//b/span[@name = '{category}']"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category {category}");
+			}
+			return Category.Text;
+
+		}
 		public string GetCategoryValue(string category)
 		{
 			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);

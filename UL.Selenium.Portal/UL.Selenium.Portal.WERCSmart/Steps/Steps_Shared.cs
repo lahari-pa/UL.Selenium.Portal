@@ -13331,9 +13331,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
 			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
 		}
+		
 
-		[Then(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\)")]
-		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts()
+		[StepDefinition(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\): (.*)")]
+		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts(string savedAs)
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
@@ -13346,7 +13347,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
-		
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickSearchFormatSubformat(), "Failed to click Search button", "Successfully clicked Search button");
 			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in urls)
@@ -13361,7 +13361,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-		
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
 				"Set format option");
 			var selStepsStudio = new Steps_Studio();
@@ -13382,25 +13381,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
 			}
-			/*
+			Report.Info($"Getting saved product: {savedAs}");
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error($"Context does not contain: {savedAs}");
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			string productName = product.Name;
 			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
 			newValueEditor.ClickButton("Cancel");
-
-			Report.Info($"Battery Manufacturers value is {battManufacturer}");
-			string battType = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Types");
-			newValueEditor.ClickButton("Cancel");
-
-			Report.Info($"Battery Manufacturers value is {battType}");
-			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Product Itself is a Battery");
-			newValueEditor.ClickButton("Cancel");
-
-			Report.Info($"Battery Manufacturers value is {battItself}");*/
-			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Active Battery indicator");
+			Report.IsTrue(battManufacturer.Contains(productName), "Failed to confirm Battery Manufacturers section contains correct product name", "Successfully confirmed confirm Battery Manufacturers section contains correct product name");
+			Report.IsTrue(battManufacturer.Contains(id), "Failed to confirm Battery Manufacturers section contains correct product ID", "Successfully confirmed confirm Battery Manufacturers section contains correct product ID");
+			string battType = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATYPE");
+			Report.IsTrue(battType.Contains("Carbon zinc"), "Failed to confirm Battery Types section contains correct battery type", "Successfully confirmed Battery Types section contains correct battery type");
+			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATTT");
+			Report.IsTrue(battItself.Contains("1"), "Failed to confirm 'Product Itself is a battery' section contains value '1'", "Successfully confirmed 'Product Itself is a battery' section contains value '1'");
+			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("BATACT");
 			newValueEditor.EnterValueIntoField("1");
 			newValueEditor.ClickButton("Save");
-			//string value = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Active Battery indicator");
-			//Report.Info($"BATACT value is {value}");
-			//newValueEditor.ClickSaveButton();
 		}
 
 
