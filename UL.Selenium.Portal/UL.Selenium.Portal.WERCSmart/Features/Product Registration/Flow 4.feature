@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow4
+@UPC
 Feature: Flow 4
 
 @ignore
@@ -338,8 +339,8 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
 @TestCase:57982
-Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
-	Given I log in with the account saved in TReVor as: ProductAccount
+Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
@@ -359,33 +360,34 @@ Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
 		| Flash Point (in Celsius) | Yes                    | None, No Flash Point     |
 		| Water Solubility         |                        | Insoluble in water       |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Acetic Acid       | 100     | false               | false       |            |
-	Then I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Then I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Acetic Acid  | 100      | false               | false       |            |
+	And I call Shared Step 40650 (Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)	
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 10                    | 6                          | Yes            |
-	Then I confirm that I see the following CARB value: 10
-	Then I confirm that I see the following OTC Model Rule value: 6
-	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
-	Then I should see the following Voc Limits present:
-	| Use			| VOC Compliance Limit | Regulation           |
-	| Bonding agent | 10                   | OTC Model rule limit |
-	| Bonding agent | 10                   | CARB limit           |
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
-	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Given I select the following retailers in the Select Retailers popup list view:
-		| Retailer       |
-		| The Home Depot |
-	Then I click Done on Select Retailers window
+		| No                                       | 10                     | 6                          | Yes            |
+	Given in the Volatile Organic Compound Summary page I click Continue
+	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
 	Then I click continue
-	Then I call Shared Step 226089 (Add UPC - Applicable Only to Bonding Agent (RU000023)) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
-	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
+	Given I should see following container type from the drop down list
+	|Container Type|
+	| Coated or Laminated Paperboard |
+	| Full Syringe - Medical         |
+	| Glass Container                |
+	| Metal Container                |
+	| Metal Cylinder                 |
+	| Plastic Container              |
+	| Vial - Medical                 |
+	And I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
+	Then I click continue	
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023))
 	| Section                                              | Value             |
