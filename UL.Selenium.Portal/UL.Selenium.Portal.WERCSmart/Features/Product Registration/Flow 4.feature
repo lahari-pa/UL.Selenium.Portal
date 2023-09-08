@@ -338,7 +338,6 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
-@ignore
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
