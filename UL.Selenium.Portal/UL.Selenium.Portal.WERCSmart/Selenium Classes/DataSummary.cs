@@ -99,6 +99,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
+		public bool VerifyTableValueInSammeryPage(string tableHeader, string tableValue)
+		{
+			IWebElement table = this.ContainerElement.FindElement(By.XPath($".//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='{tableHeader}']]"), 2);
+			bool status = false;
+			if (table == null)
+			{
+				Report.Info("Cannot find table with such column");
+				status = false;
+			}
+			table.ScrollElementIntoView();
+			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"), 2);
+			if (headersElems == null)
+			{
+				Report.Info("Cannot find table columns");
+				status = false;
+			}
+			IList<IWebElement> rowData = table.FindElements(By.XPath($"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='{tableHeader}']]//tbody//div[@data-bind='html: Data']"), 2);
+			if (rowData == null)
+			{
+				Report.Info("Cannot find table data");
+				status = false;
+			}
+			string[,] tableData = new string[2,9];
+			int i = 0;
+			foreach (IWebElement elem in headersElems)
+			{
+				tableData[0,i] = elem.Text;
+				i ++;
+			}
+			if (tableData == null)
+			{
+				Report.Info("Cannot get and save table headers");
+				status = false;
+			}
+			i = 0;
+			foreach (IWebElement elem in rowData)
+			{
+				tableData[1,i] = elem.Text;
+				i ++;
+			}
+			if (tableData == null)
+			{
+				Report.Info("Cannot get and save table data");
+				status = false;
+			}
+			if (tableData != null)
+			{
+				for (i = 0; i < headersElems.Count; i++)
+				{
+					if (tableData[0,i] == tableHeader)
+					{
+						Report.Info($"Found column header {tableHeader} in table");
+						status = tableData[1, i] == tableValue;
+					}
+
+				}
+			}
+			return status;
+		}
 		public bool ConfirmHeaders(ICollection<string> headers)
 		{
 			
