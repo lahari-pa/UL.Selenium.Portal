@@ -1232,6 +1232,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(@"I call Shared Step 226089 \(Add UPC - Applicable Only to Bonding Agent \(RU000023\)\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void ThenICallSharedStepAddUPC_ApplicableOnlyToBondingAgentRUForUPCSavedAsUPCContainerTypePlasticContainerAndSize(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I confirm that retailer HD is present under the 'Destination Retailers' column in the UPC table");
+			MyStepsNewProduct.ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable("HD", "is");
+			Report.StartSubStep("Confirm that you see only options: Glass Container, Metal Container, Metal Cylinder, Plastic Container, Plastic Liner/Corrugate for Container Types");
+			var option = new Table("Option");
+			option.AddRow("Container Type");
+			option.AddRow("Coated or Laminated Paperboard");
+			option.AddRow("Full Syringe - Medical");
+			option.AddRow("Glass Container");
+			option.AddRow("Metal Container");
+			option.AddRow("Metal Cylinder");
+			option.AddRow("Plastic Container");
+			option.AddRow("Vial - Medical");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Container Type", option);
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+
 		[StepDefinition(
 	@"I call Shared Step 57960a \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only - Do Not Click Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly_DoNotClickContinue(string upc, string containerType, string size)
@@ -1593,6 +1645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 214644\(Physical and Chemical Properties - Applicable Only to Bonding Agent \(RU000023\)\)")]
 		[StepDefinition(@"I call Shared Step 213391\(Physical and Chemical Properties \(Applicable Only to Flow 6-A Type of Products\) - Primary Physical State \(AEROSOL ONLY\) / Secondary Physical State \(ANY\)\):")]
 		public void ThenICallSharedStepPhysicalAndChemicalPropertiesApplicableOnlyToFlow_ATypeOfProducts_PrimaryPhysicalStateAEROSOLONLYSecondaryPhysicalStateANY(Table table)
 		{
@@ -1603,15 +1656,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				switch (row["Section"])
 				{
-					case "Primary Physical State":
-						Report.StartSubStep("I should only see the following options for Primary Physical State: Aerosol");
-						var produtTable = new Table(new string[] {
+					case "Primary State Options":
+						Report.StartSubStep($"I should only see the following options for Primary Physical State: {row["Value"]}");
+						var expectedOptions = new Table(new string[] {
 						"State"
 						});
-						produtTable.AddRow(new string[] {
-						"Aerosol"
-						});
-						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+						string[] options = row["Value"].Split(' ');
+						foreach (string option in options)
+						{
+							expectedOptions.AddRow(option);
+						}
+						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(expectedOptions);
+						break;
+					case "Primary Physical State":
 						Report.StartSubStep($"I set the Primary Physical State field to: {row["Value"]}");
 						stepsProductCharacteristics.SetThePrimayPhysicalStateTo(row["Value"]);
 						break;
@@ -1637,6 +1694,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					case "has a flammable propellant":
 						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
+						break;
+					case "Relative Density":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Relative Density");
+						MyNewProduct.SetTheSectionOptionTo("Relative Density", row["Value"]);
+						break;
+					case "Boiling Point (in Celsius)":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Boiling Point (in Celsius)");
+						MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", row["Value"]);
+						break;
+					case "Flash Point (in Celsius)":
+						if (row["do not have exact data"] == "Yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+							MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+					case "Water Solubility":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Select the best Water Solubility description");
+						MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", row["Value"]);
 						break;
 				}
 			}
@@ -4460,12 +4544,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.StartStep("I navigate to the home page");
 			//new StepsHomepage().ThenINavigateToTheHomePage();
 		}
-		[Given(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
+		[StepDefinition(@"I call Shared Step 214662 \(Summary Tab - Data Verification - Applicable Only to Bonding Agent \(RU000023\)\)")]
+		[StepDefinition(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
 		public void GivenICallSharedStepSummaryTab_ProductsDataVerificationWhenRequestToAuthorIsNOTSelectedInTheRegulatoryDocumentsToProvidePageAppliesOnlyToFootwearOrLeatherCareProductAerosolRU( Table table)
 		{
 			Report.UseSubSteps = true;
 			var myStepsNewProduct = new StepsNewProduct();
 			var myGlobalSteps = new GlobalSteps();
+			var dataSummary = new DataSummary();
 			Report.StartSubStep("I should see the Data Acceptance Page");
 			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
 			Report.StartSubStep("I click the Summary button in the Data Acceptance window");
@@ -4507,6 +4593,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					case "OTC Model Rule":
 						Report.StartSubStep($"Section 'OTC Model Rule' should be showing the following option: {row["Value"]}");
 						new StepsDataSummarySheet().ShouldBeShowingFollowing("OTC Model Rule", row["Value"]);
+						break;
+					case "Product has been granted an Alternative Control Plan":
+						Report.StartSubStep($"Section 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Product has been granted", row["Value"]);
+						break;
+					case "Primary Physical State":
+						Report.StartSubStep($"Section 'Primary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Primary Physical State", row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"Section 'Secondary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Secondary Physical State", row["Value"]);
+						break;
+					case "Container Type":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Size (Ounces)":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Retailers":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
 						break;
 				}
 			}
@@ -4620,7 +4730,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"This recipient does not require additional data consent tiers at this time.");
 
 		}
-
+		[StepDefinition(@"I call Shared Step 214643 \(Product Information - Applicable Only to Bonding Agent \(RU000023\)\)")]
 		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{

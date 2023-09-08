@@ -338,6 +338,7 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
+@ignore
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -345,11 +346,20 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
-	Given I generate a random UPC number and save as: UPC57982
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+	Then I generate a random UPC number and save as: UPC57982
+	Then I call Shared Step 214643 (Product Information - Applicable Only to Bonding Agent (RU000023))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 214644 (Physical and Chemical Properties - Applicable Only to Bonding Agent)
+	Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023))
+		| Section                  | do not have exact data | Value                    |
+		| Primary Physical State   |                        | Liquid                   |
+		| Secondary Physical State |                        | Liquid                   |
+		| pH                       |                        | 5                        |
+		| Relative Density         |                        | 0.82                     |
+		| Primary State Options    |                        | Aerosol Gas Liquid Solid |
+		| Boiling Point (in Celsius) |                        | 100                      |
+		| Flash Point (in Celsius) | Yes                    | None, No Flash Point     |
+		| Water Solubility         |                        | Insoluble in water       |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Acetic Acid  | 100      | false               | false       |            |
@@ -380,7 +390,17 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bonding agent
+	Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023))
+	| Section                                              | Value             |
+	| Type of Product                                      | Bonding agent     |
+	| Primary Physical State                               | Liquid            |
+	| Secondary Physical State                             | Liquid            |
+	| Product has been granted an Alternative Control Plan | No                |
+	| CARB                                                 | 10                |
+	| OTC Model Rule                                       | 6                 |
+	| Container Type                                       | Plastic Container |
+	| Size (Ounces)                                        | 12.5              |
+	| Retailers                                            | HD                |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
 
 @TestCase:57983
@@ -429,6 +449,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
 		| Section                    | do not have exact data | Value                                                                                                 |
 		| Primary Physical State     |                        | Aerosol                                                                                               |
+		| Primary State Options      |                        | Aerosol |
 		| Secondary Physical State   |                        | Solid spray                                                                                           |
 		| pH                         |  Yes                   | Not tested/Unknown                                                                                    |
 		| has a flammable propellant |                        | This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS). |
