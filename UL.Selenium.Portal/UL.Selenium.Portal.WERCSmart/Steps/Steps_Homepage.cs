@@ -96,6 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I should see the (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
+		[StepDefinition(@"I should see (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
 		public void ThenIShouldSeeTheUlwercSmartLogoInTheHeaderBar(string item, string area)
 		{
 			try
@@ -707,6 +708,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
 		{
