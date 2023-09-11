@@ -23,9 +23,6 @@ Feature: Ingredients
 (Suite ID: 64740)
 
 Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username   | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto9 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
@@ -113,7 +110,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
 	Then for ingredient: Water the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
 @TestCase:65470
@@ -134,7 +131,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Water the Public Name field is enabled
 	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
@@ -153,7 +150,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Water the Publicly Disclosed field is disabled
 	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
 @TestCase:65451
@@ -195,7 +192,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Trade Secret?       | checkbox |
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
 @TestCase:63321
@@ -214,7 +211,11 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 		| Water         | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
+<<<<<<< HEAD
 	And I should see the Inventory Status, Prop 65 (US) Page
+=======
+	And I should see the Inventory Status, Prop 656 (US) Page
+>>>>>>> origin/QA
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 
@@ -240,7 +241,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
 @TestCase:74142
@@ -288,7 +289,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
-	Then I should see the Waste Classification Data Page
+	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
@@ -384,7 +385,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase84528
-	And I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR, with FIFRA - Continue - Happy Path)
+	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	#And I Start typing in the component box
 	#And I Add as many random ingredients as possible

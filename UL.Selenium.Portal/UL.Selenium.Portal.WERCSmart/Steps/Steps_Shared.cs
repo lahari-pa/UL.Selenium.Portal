@@ -1,3 +1,4 @@
+using NPOI.SS.Formula.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -712,13 +713,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var regulatoryInformation = new RegulatoryInformation1();
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			stepsRegulatoryInformation.SetTSCATo("complies");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+
+		[StepDefinition(@"I call Shared Step 57571b \(Enter Regulatory Information - Not Prop 65\):")]
+		public void GivenICallSharedEnterRegulatoryInformation_NotProp(Table table)
+		{
+
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			if (table.Rows.Count != 1)
+			{
+				Report.Error($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Info("Using only the first row from the table");
+			}
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep($"I set the U.S. Toxic Substances Control Act (TSCA) status option to: {table.Rows[0]["TSCA"]}");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", table.Rows[0]["TSCA"]);
+			Report.StartSubStep($"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: {table.Rows[0]["Prop 65"]}");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", table.Rows[0]["Prop 65"]);
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
@@ -1211,6 +1232,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(@"I call Shared Step 226089 \(Add UPC - Applicable Only to Bonding Agent \(RU000023\)\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void ThenICallSharedStepAddUPC_ApplicableOnlyToBondingAgentRUForUPCSavedAsUPCContainerTypePlasticContainerAndSize(string upc, string containerType, string size)
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartSubStep("I click the 'Add' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartSubStep("I confirm that retailer HD is present under the 'Destination Retailers' column in the UPC table");
+			MyStepsNewProduct.ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable("HD", "is");
+			Report.StartSubStep("Confirm that you see only options: Glass Container, Metal Container, Metal Cylinder, Plastic Container, Plastic Liner/Corrugate for Container Types");
+			var option = new Table("Option");
+			option.AddRow("Container Type");
+			option.AddRow("Coated or Laminated Paperboard");
+			option.AddRow("Full Syringe - Medical");
+			option.AddRow("Glass Container");
+			option.AddRow("Metal Container");
+			option.AddRow("Metal Cylinder");
+			option.AddRow("Plastic Container");
+			option.AddRow("Vial - Medical");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Container Type", option);
+			Report.StartSubStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+
+				var NP = new NewProduct();
+				NP.WaitForContainerToBeVisible(30);
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartSubStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+
 		[StepDefinition(
 	@"I call Shared Step 57960a \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only - Do Not Click Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly_DoNotClickContinue(string upc, string containerType, string size)
@@ -1560,17 +1633,101 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
 			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
-			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
-			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
-			Report.StartSubStep("I set the pH field to: 10.4");
-			stepsProductCharacteristics.SetPHTo("10.4");
-			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
-			Report.StartSubStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Solid spray");
+			Report.StartSubStep("I set the pH field to: 12");
+			stepsProductCharacteristics.SetPHTo("12");
+			Report.StartSubStep("I set the Water Solubility description to: No data available");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No data available");
+			Report.StartSubStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then to: This product is classified as a D003 Hazardous Waste under RCRA.");
+			MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D003 Hazardous Waste under RCRA.");
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
+
+		[StepDefinition(@"I call Shared Step 214644\(Physical and Chemical Properties - Applicable Only to Bonding Agent \(RU000023\)\)")]
+		[StepDefinition(@"I call Shared Step 213391\(Physical and Chemical Properties \(Applicable Only to Flow 6-A Type of Products\) - Primary Physical State \(AEROSOL ONLY\) / Secondary Physical State \(ANY\)\):")]
+		public void ThenICallSharedStepPhysicalAndChemicalPropertiesApplicableOnlyToFlow_ATypeOfProducts_PrimaryPhysicalStateAEROSOLONLYSecondaryPhysicalStateANY(Table table)
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
+			foreach(var row in table.Rows)
+			{
+				switch (row["Section"])
+				{
+					case "Primary State Options":
+						Report.StartSubStep($"I should only see the following options for Primary Physical State: {row["Value"]}");
+						var expectedOptions = new Table(new string[] {
+						"State"
+						});
+						string[] options = row["Value"].Split(' ');
+						foreach (string option in options)
+						{
+							expectedOptions.AddRow(option);
+						}
+						stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(expectedOptions);
+						break;
+					case "Primary Physical State":
+						Report.StartSubStep($"I set the Primary Physical State field to: {row["Value"]}");
+						stepsProductCharacteristics.SetThePrimayPhysicalStateTo(row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"I set the Secondary Physical State field to: {row["Value"]}]");
+						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
+						break;
+					case "pH":
+						if (row["do not have exact data"] == "Yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+							MyNewProduct.SectExatcDataNotKnown("pH");
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the pH field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("pH", row["Value"]);
+							break;
+						}
+					case "has a flammable propellant":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+						MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", row["Value"]);
+						break;
+					case "Relative Density":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Relative Density");
+						MyNewProduct.SetTheSectionOptionTo("Relative Density", row["Value"]);
+						break;
+					case "Boiling Point (in Celsius)":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Boiling Point (in Celsius)");
+						MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", row["Value"]);
+						break;
+					case "Flash Point (in Celsius)":
+						if (row["do not have exact data"] == "Yes")
+						{
+							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+							MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+						else
+						{
+							Report.StartSubStep($"I set the Flash Point (in Celsius) field to: {row["Value"]}");
+							MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", row["Value"]);
+							break;
+						}
+					case "Water Solubility":
+						Report.StartSubStep($"I select the {row["Value"]} option for section: Select the best Water Solubility description");
+						MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", row["Value"]);
+						break;
+				}
+			}
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
 
 		[StepDefinition(@"I call Shared Step 168070 \(Physical and Chemical Properties - Aerosol Only - Validation for Algicide Aerosol Type of Product\)")]
 		public void ICallSharedPhysicalanChemicalProperties_AerosolOnly_ValidationForAlgicideAerosolTypeOfProduct()
@@ -2199,6 +2356,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 217788 \(Product Information - not Pesticide, US only, select Yes for JSON Question - Happy Path\)")]
+		public void	GivenICallSharedStepProductInformation_ApplicableLiquidDishwashing_YesJSONQues()
+		{
+			Report.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
+			Report.StartSubStep("I set the product description option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt", "Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(false);
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"Yes");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(
 			@"I call Shared Step 57801 \(Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path\)")]
 		public void GivenICallSharedConfirmVOCSummaryAndVOCAnalysisDate_HappyPath()
 		{
@@ -2210,6 +2406,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenIConfirmThatTheVOCAnalysisDateIsShowing();
 			Report.StartSubStep("I confirm that I see todays VOC Analysis Date");
 			MyNewProduct.ThenIConfirmThatISeeTodaysVOCAnalysisDate();
+			Report.StartSubStep("In the Volatile Organic Compound Summary page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
 		}
 
 		[StepDefinition(@"I call Shared Step 42214 \(Delete a Product from the Product grid\) to delete product: (.*)")]
@@ -2903,6 +3101,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
+		[StepDefinition(@"I call Shared Step 40650 \(Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path\)")]
+		public void ICallSharedRegulatoryInformation1_TSCAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Complaint");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+		
 		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
 		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
@@ -4198,11 +4412,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "30");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point (in Celsius)",
-				"80"));
+				"50"));
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "50");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point Testing Method Used",
-				"50"));
+				"Closed cup method"));
 			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartSubStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Secondary Physical State",
@@ -4330,6 +4544,88 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.StartStep("I navigate to the home page");
 			//new StepsHomepage().ThenINavigateToTheHomePage();
 		}
+		[StepDefinition(@"I call Shared Step 214662 \(Summary Tab - Data Verification - Applicable Only to Bonding Agent \(RU000023\)\)")]
+		[StepDefinition(@"I call Shared Step 221015 \(Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page \(Applies Only to Footwear or Leather Care Product Aerosol \(RU000744\)\)")]
+		public void GivenICallSharedStepSummaryTab_ProductsDataVerificationWhenRequestToAuthorIsNOTSelectedInTheRegulatoryDocumentsToProvidePageAppliesOnlyToFootwearOrLeatherCareProductAerosolRU( Table table)
+		{
+			Report.UseSubSteps = true;
+			var myStepsNewProduct = new StepsNewProduct();
+			var myGlobalSteps = new GlobalSteps();
+			var dataSummary = new DataSummary();
+			Report.StartSubStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+			Report.StartSubStep("I click the Summary button in the Data Acceptance window");
+			myStepsNewProduct.GivenIClickTheSummaryButtonInTheDataAcceptanceWindow();
+			Report.StartSubStep("I switch to the Data Summary page");
+			myGlobalSteps.SwitchToDataSumaryTab();
+			foreach(var row in table.Rows)
+			{
+				switch (row["Section"])
+				{
+					case "Type of Product":
+						Report.StartSubStep($"Type of Product should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Type of Product", row["Value"]);
+						break;
+					case "FIFRA 25(b) Exempt":
+						Report.StartSubStep($"Section 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("FIFRA 25(b) Exempt", row["Value"]);
+						break;
+					case "UN Number":
+						Report.StartSubStep($"Section 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("UN Number", row["Value"]);
+						break;
+					case "Proper Shipping Name":
+						Report.StartSubStep($"Section 'Proper Shipping Name' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Proper Shipping Name", row["Value"]);
+						break;
+					case "Hazard Class":
+						Report.StartSubStep($"Section 'Hazard Class' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Hazard Class", row["Value"]);
+						break;
+					case "Packing Group":
+						Report.StartSubStep($"Section 'Packing Group' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Packing Group", row["Value"]);
+						break;
+					case "CARB":
+						Report.StartSubStep($"Section 'CARB' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("CARB", row["Value"]);
+						break;
+					case "OTC Model Rule":
+						Report.StartSubStep($"Section 'OTC Model Rule' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("OTC Model Rule", row["Value"]);
+						break;
+					case "Product has been granted an Alternative Control Plan":
+						Report.StartSubStep($"Section 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Product has been granted", row["Value"]);
+						break;
+					case "Primary Physical State":
+						Report.StartSubStep($"Section 'Primary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Primary Physical State", row["Value"]);
+						break;
+					case "Secondary Physical State":
+						Report.StartSubStep($"Section 'Secondary Physical State' should be showing the following option: {row["Value"]}");
+						new StepsDataSummarySheet().ShouldBeShowingFollowing("Secondary Physical State", row["Value"]);
+						break;
+					case "Container Type":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Size (Ounces)":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+					case "Retailers":
+						Report.StartSubStep($"Section {row["Section"]} should be showing the following option: {row["Value"]}");
+						Report.IsTrue(dataSummary.VerifyTableValueInSammeryPage(row["Section"], row["Value"]), $"Failed to confirm {row["Section"]} is {row["Value"]}", $"Successfully confirmed {row["Section"]} is {row["Value"]}");
+						break;
+				}
+			}
+			Report.StartSubStep("I close the Data Summary tab");
+			myGlobalSteps.CloseDataSummaryTab();
+			Report.StartSubStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+		}
+
 
 		[StepDefinition(
 			@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
@@ -4434,7 +4730,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"This recipient does not require additional data consent tiers at this time.");
 
 		}
-
+		[StepDefinition(@"I call Shared Step 214643 \(Product Information - Applicable Only to Bonding Agent \(RU000023\)\)")]
 		[StepDefinition(@"I call Shared Step 63804 \(Product Information - US, No\(OSHA\), No\(DSV\), Yes \(PLP\), No\(GNFR\)\)")]
 		public void ICallSharedStepProductInformation_US_NoOSHA_NoDSV_YesPLP_NoGNFR(Table table)
 		{
@@ -5230,6 +5526,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
 				"Insoluble in water");
 			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+	[StepDefinition(@"I call Shared Step 214644 \(Physical and Chemical Properties - Applicable Only to Bonding Agent\)")]
+		public void GivenICallSharedPhysicalChemicalProperties_applicable_only_to_bonding_agent()
+		{
+
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 20");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "20");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: 7.1 - 9.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "7.1 - 9.9");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			//Ticket 63666 indicates boiling point change from "Not tested/Unknown"
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			//Ticket 54725 indicates flash point change from ">=93C and <=815C"
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: >93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
+			Report.StartSubStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartSubStep("I set the Select the best Water Solubility description field to: Soluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
@@ -6309,8 +6639,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.UploadPDFFileSectionAndType("VOC Exemption Letter",
 				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Additional Documents to Provide page I Upload File for: Provide Full Product Label (required) ");
-			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
-				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
+				"Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -14316,6 +14646,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+		[StepDefinition(@"I call Shared Step 217789 \(Physical and Chemical Properties - Physical Property - Liquid \)")]
+		public void Shared92979EnterPhysicalProperty_Liquid()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartStep("I set the Relative Density option to: 0.1");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "0.1");
+			Report.StartSubStep("In the Product Characteristics tab of the New Product Page for pH I enter: 6 ");
+			MyNewProduct.SetTheSectionOptionTo("pH", "6	");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: 100 ");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "100");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: 100 ");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "100");
+			Report.StartSubStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: Not applicable/available");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Miscible");
+			Report.StartStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
+
 		[StepDefinition(@"I call Shared Step 92981 \(Beverage Regulatory Details Greater > 70%\)")]
 		public void Shared92981BeverageRegulatoryDetailsGreaterThan70()
 		{
@@ -14345,6 +14700,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Percent of Alcohol in the Product (numeric entry only)",
 				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
+			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+		[StepDefinition(@"I call Shared Step 178053 \(Beverage Regulatory Details - BPA - Prop65\):")]
+		public void GivenICallSharedStepABeverageRegulatoryDetailsWithTableWithProp65(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			if (table.Rows.Count != 1)
+			{
+				Report.Error($"This step requires a table that only has one row in it, and there were {table.Rows.Count}.");
+				Report.Info("Using only the first row from the table");
+			}
+			var myStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", table.Rows[0]["BPA"]);
+			Report.StartStep(string.Format($"I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				table.Rows[0]["BPA"]));
+			myStepsNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", table.Rows[0]["Prop 65"]);
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Does your product contain a Prop 65 chemical?",
+				table.Rows[0]["Prop 65"]));
 			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", table.Rows[0]["Percent of Alcohol"]);
 			Report.StartStep("In the Beverage Regulatory Details page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
@@ -14554,6 +14934,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("in the Physical and Chemical Properties page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
+		[StepDefinition(@"I call Shared Step 217792 California Cleaning Product Disclosure - Manufacturer")]
+		public void InTheCACleaningProductDisclosureScreenChooseManufacturerHappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
+			Delay.Seconds(1);
+
+			if (myNewProduct.SectionExists("Who is publicly identified on the product label as responsible for the product?"))
+			{
+				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Manufacturer");
+			}
+
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product?"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("Target");
+			}
+
+			if (myNewProduct.SectionExists("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?", "No");
+			}
+
+			if (myNewProduct.SectionExists("Company's Toll-Free Phone Number"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField("11111111111");
+			}
+
+			if (myNewProduct.SectionExists("Company Web Address"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField("http://TestWebsitePlaceholderName.com");
+			}
+
+			if (myNewProduct.SectionExists("Select the product's GTIN Brick Code"))
+			{
+				MyStepsNewProduct.ThenISetTheProductsGTINBrickCodeTo("[10000397] Cleaning Aids");
+			}
+			Report.StartStep("In the California Cleaning Product Disclosure page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("California Cleaning Product Disclosure");
+		}
 
 		[StepDefinition(@"I call Shared Step \(SHA > Select Product > Review\) for product saved as: (.*)")]
 		public void Shared134404_SHA_SelectProduct_ClickOnReview(string savedAs)
@@ -14734,6 +15154,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should be on the Thank You page of the for");
 			steps_Signup.ThenIShouldBeOnThePageOfTheForm("Thank You");
 		}
+		[StepDefinition(@"I call Shared Step 213796 \(Physical and Chemical Properties - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void Shared_Physical_and_Chemical_Properties_Applicable_Only_to_Lipbalm()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
 
+			Report.StartSubStep("I set the Primary Physical State field to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			Report.StartSubStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: No data available");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No data available");
+
+			Report.StartSubStep("in the Physical and Chemical Properties page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+		[StepDefinition(@"I call Shared Step 234333 \(Inventory Status, Prop 65 \(US\) - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void ICallSharedRegulatoryInformation_TSCAAndCEPAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I click continue");
+			new StepsNewProduct().ClickContinue();
+			Report.StartSubStep("Confirm that both questions in this screen display the 'This is a required field' error message");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("U.S. Toxic Substances Control Act (TSCA) status", "should", "This is a required field.");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "should", "This is a required field.");
+			Report.StartSubStep("Select ONE Radio Button for the TSCA Question");
+			new StepsNewProduct().SelectFirstOptionInSection("U.S. Toxic Substances Control Act (TSCA) status");
+			Report.StartSubStep("Confirm the 'Required field error message' no longer shows for the TSCA Question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("U.S.Toxic Substances Control Act (TSCA) status");
+			Report.StartSubStep("I select the 'No' button for the Prop 65 question");
+			new StepsNewProduct().SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "No");
+			Report.StartSubStep("I confirm the 'Required field' error message is no longer displayed for the prop 65 question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act");
+			Report.StartSubStep("I select the 'Yes' button for the Prop 65 question");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+
+		[StepDefinition(@"I call Shared Step 234334 \(Regulatory Information 3 - Applicable Only to Lip Balm \(RU000246\)\)")]
+		public void GivenICallSharedStepRegulatoryInformation_LipBalm()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Regulatory Information 3");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 3");
+			MyStepsNewProduct.IConfirmRegulatoryInformation3PageContainsStatement("Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California. Please complete the additional question below to ensure proper classification of this product for the retailer(s).");
+			Report.StartSubStep("For the 'Refer to your Product Label. From the options, select those that appear on the Label.' question four options should appear: 'Drug Facts Panel', 'Supplement Facts Panel', 'Nutrition Facts Panel' and 'None of the Above'");
+			var table = new Table("Option");
+			table.AddRow("Drug Facts Panel");
+			table.AddRow("Supplement Facts Panel");
+			table.AddRow("Nutrition Facts Panel");
+			table.AddRow("None of the Above");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed", "Refer to your Product Label.", table);
+			Report.StartSubStep("Select any of the four options that apply");
+			MyStepsNewProduct.GivenInTheRegulatoryInforamtionTabISelectProductLableAs("None of the Above");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may include Active Ingredient)");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Nutritional and Supplement Labels");
+			Report.StartSubStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Dietary Supplements Label");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Dietary Supplements Label");
+			Report.StartSubStep("In the Regulatory Information 3 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
 	}
 }

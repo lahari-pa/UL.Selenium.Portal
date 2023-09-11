@@ -2923,6 +2923,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}
 
+		[StepDefinition(@"I (should|should not) see following container type from the drop down list")]
+		public void GivenIShouldSeeContainerTypeFromTheDropDownList(string shouldOrNot, Table table)
+		{
+			List<string> containerTypes = new NewProduct().GetContainerOptions();
+			if (shouldOrNot == "should")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(containerTypes.Contains(Row["Container Type"]), "Container type was not found", "Container Type was found on the upc page as expected");
+				}
+			}
+			else if (shouldOrNot == "should not")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(!containerTypes.Contains(Row["Container Type"]), "Container type was found", "Container Type was not found on the upc page as expected");
+				}
+			}
+			else
+			{
+				Report.Failure("input values must be either 'should' or 'should not'");
+			}
+		}
+
 		[StepDefinition(@"I enter Size Value: (.*)")]
 		public void GivenIEnterSizeValue(string size)
 		{
@@ -3570,7 +3594,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
 		}
-
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
