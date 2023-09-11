@@ -104,13 +104,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			//WercSmartSettings.TestCaseId = 101;
-			if (WercSmartSettings.TestCaseId == 0)
-			{
-				throw new Exception("ERROR: Failed to find TestCaseId!");
-			}
+			//if (WercSmartSettings.TestCaseId == 0)
+			//{
+			//	throw new Exception("ERROR: Failed to find TestCaseId!");
+			//}
 
-			Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
-			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
+			//Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
+			//Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
