@@ -15,7 +15,7 @@ Feature: Flow 4
 @ignore
 @TestCase:57922
 Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Odor Remover/Eliminator - Aerosol
@@ -47,7 +47,7 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 @ignore
 @TestCase:57924
 Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Penetrants
@@ -80,7 +80,7 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 @ignore
 @TestCase:57925
 Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Maintenance Product - Non-Aerosol
@@ -114,7 +114,7 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 
 @TestCase:57927
 Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
@@ -145,7 +145,7 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 @ignore
 @TestCase:57931
 Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Mousse
@@ -178,7 +178,7 @@ Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 @ignore
 @TestCase:57933
 Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
@@ -210,7 +210,7 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 
 @TestCase:57950
 Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
@@ -244,7 +244,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 
 @TestCase:57952
 Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Gel
@@ -276,7 +276,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 
 @TestCase:57958
 Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive - Aerosol Web Spray
@@ -307,7 +307,7 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 @ignore
 @TestCase:57977
 Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding(RU000912) - 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
@@ -340,7 +340,7 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 @ignore
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
@@ -372,7 +372,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 
 @TestCase:57983
 Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lubricant, Multi-Purpose, Not for Personal Use
@@ -466,7 +466,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 
 @TestCase:57988
 Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Non-Aerosol
@@ -494,7 +494,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Solid
@@ -534,7 +534,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 
 @TestCase:57991
 Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glue sticks for glue guns
