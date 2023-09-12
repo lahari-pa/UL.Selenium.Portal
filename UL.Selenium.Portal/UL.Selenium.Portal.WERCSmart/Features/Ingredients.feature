@@ -171,7 +171,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
 	Then for ingredient: Water I select Public Name: Water
 	Then in the Ingredients page I click Continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 	
 @TestCase:65448
@@ -211,7 +211,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 		| Water         | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
-	And I should see the Inventory Status, Prop 656 (US) Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 
@@ -806,7 +806,7 @@ Scenario: [158853] Ingredient Identifier
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
 	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	And I click the page heading: Ingredients
 	And I should see the Ingredients Page
 	Then In the Ingredient Reference Number field I enter the following text: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
@@ -818,7 +818,7 @@ Scenario: [158853] Ingredient Identifier
 	Then I click continue
 	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
 	Then I click continue
-	And I should see the Waste Classification Data Page
+	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
