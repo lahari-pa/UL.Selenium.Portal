@@ -211,11 +211,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 		| Water         | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
-<<<<<<< HEAD
 	And I should see the Inventory Status, Prop 65 (US) Page
-=======
-	And I should see the Inventory Status, Prop 656 (US) Page
->>>>>>> origin/QA
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 

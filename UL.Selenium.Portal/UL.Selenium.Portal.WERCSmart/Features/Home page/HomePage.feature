@@ -321,7 +321,7 @@ Scenario: [231100] Announcements - Add
 
 @TestCase:58579
 Scenario: [58579] Live Help - Chat Feature
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click on the Live Help button on the upper right
 	Then I should see the Live Help dialog
 	Then In the Live Help dialog I should see a small icon with three lines in the upper left hand corner
