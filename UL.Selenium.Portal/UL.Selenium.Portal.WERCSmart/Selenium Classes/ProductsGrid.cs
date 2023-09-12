@@ -1040,6 +1040,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public string GetDateDiscontinuedByProductId(string anID)
+		{
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listOfProducts = this.containerElement.FindElements(By.XPath(".//td//small"));
+			IWebElement matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
+			if (matchingProduct == null)
+			{
+				Report.Error("No matching product has been found for ID: " + anID);
+				return "";
+			}
+
+			IWebElement dateDiscontinued =
+				matchingProduct.FindElement(By.XPath("../../..//td[@data-bind='text: DateDiscontinued']"), 2);
+
+			if (dateDiscontinued == null)
+			{
+				Report.Error("No matching date discontinued has been found for ID: " + anID);
+				return "";
+			}
+			return dateDiscontinued.Text;
+		}
 
 		public string GetRetailersStatusByID(string anID)
 		{

@@ -55,6 +55,7 @@ And I filter for the product saved as: TestCase209162
 And I click Row Actions for the first product returned
 Then I click on the Row Action: Discontinue
 Then I confirm Discontinue Product popup contains correct text with product Id saved as: TestCase209162
-#Then I confirm that I see the following text in the modal window popup: Discontinuing your registration does not obsolete the registration. Discontinue means you are no longer maintaining the registration data or manufacturing this product. Retailers may have inventory of this product on hand and you may need the data for historical purposes. Discontinuing does not impact the ability to obsolete the registration, when time permits.
 Then In the popup with the following title: Discontinue Product I click the Yes button
+Then I confirm Date Discontinued contains today's date for product saved as: TestCase209162
+
 
