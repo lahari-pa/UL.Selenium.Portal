@@ -951,6 +951,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+		public bool DoubleClickCategory(string category)
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//span[contains(text(), '{category}')]"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category {category}");
+				return false;
+			}
+			Report.Info("Matching Category was found");
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(Category).Build().Perform();
+			Category.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
+
+			Category.Click();
+			Category.Click();
+
+			Delay.Seconds(2);
+			Report.Screenshot();
+			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			if (editScreen != null)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Popup was not found.");
+			}
+
+			return false;
+		}
 
 		public string GetCurrentValueInMTRFormat(string category)
 		{
