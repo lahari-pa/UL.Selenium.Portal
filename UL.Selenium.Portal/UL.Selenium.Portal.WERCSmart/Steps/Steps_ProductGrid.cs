@@ -2389,9 +2389,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			var thisProductsGrid = new ProductsGrid();
-			string getDate = thisProductsGrid.GetDateDiscontinuedByProductId(id);
-			string currentDate = DateTime.Now.ToString("MM/DD/YYYY");
-			Report.IsTrue(getDate.Contains(currentDate), "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
+			string getDate = DateTime.Parse(thisProductsGrid.GetDateDiscontinuedByProductId(id)).ToString("MM/dd/yyyy");
+			string currentDate = DateTime.Now.ToString("MM/dd/yyyy");
+			Report.IsTrue(getDate==currentDate, "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
 		}
 
 		[StepDefinition(@"For product saved as: (.*) the status is: (.*)")]
