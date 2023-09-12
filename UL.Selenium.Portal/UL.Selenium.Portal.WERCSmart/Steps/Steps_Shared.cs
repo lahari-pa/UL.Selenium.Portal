@@ -13397,7 +13397,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(battType.Contains("Carbon zinc"), "Failed to confirm Battery Types section contains correct battery type", "Successfully confirmed Battery Types section contains correct battery type");
 			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATTT");
 			Report.IsTrue(battItself.Contains("1"), "Failed to confirm 'Product Itself is a battery' section contains value '1'", "Successfully confirmed 'Product Itself is a battery' section contains value '1'");
-			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("BATACT");
+			selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("[BATACT]");
 			newValueEditor.EnterValueIntoField("1");
 			newValueEditor.ClickButton("Save");
 		}
