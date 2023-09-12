@@ -105,13 +105,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			//WercSmartSettings.TestCaseId = 101;
-			if (WercSmartSettings.TestCaseId == 0)
-			{
-				throw new Exception("ERROR: Failed to find TestCaseId!");
-			}
+			//if (WercSmartSettings.TestCaseId == 0)
+			//{
+			//	throw new Exception("ERROR: Failed to find TestCaseId!");
+			//}
 
-			Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
-			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
+			//Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
+			//Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
@@ -1633,14 +1633,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
 			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
-			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
-			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
-			Report.StartSubStep("I set the pH field to: 10.4");
-			stepsProductCharacteristics.SetPHTo("10.4");
-			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
-			Report.StartSubStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Solid spray");
+			Report.StartSubStep("I set the pH field to: 12");
+			stepsProductCharacteristics.SetPHTo("12");
+			Report.StartSubStep("I set the Water Solubility description to: No data available");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No data available");
+			Report.StartSubStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then to: This product is classified as a D003 Hazardous Waste under RCRA.");
+			MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D003 Hazardous Waste under RCRA.");
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
@@ -1677,7 +1677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
 						break;
 					case "pH":
-						if (row["do not have exact data"]== "Yes")
+						if (row["do not have exact data"] == "Yes")
 						{
 							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
 							MyNewProduct.SectExatcDataNotKnown("pH");
@@ -3079,8 +3079,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.Screenshot();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 
 		}
 
@@ -3101,6 +3101,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
+		[StepDefinition(@"I call Shared Step 40650 \(Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path\)")]
+		public void ICallSharedRegulatoryInformation1_TSCAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Complaint");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+		
 		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
 		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
@@ -5541,6 +5557,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+	[StepDefinition(@"I call Shared Step 214644 \(Physical and Chemical Properties - Applicable Only to Bonding Agent\)")]
+		public void GivenICallSharedPhysicalChemicalProperties_applicable_only_to_bonding_agent()
+		{
+
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 20");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "20");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: 7.1 - 9.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "7.1 - 9.9");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			//Ticket 63666 indicates boiling point change from "Not tested/Unknown"
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			//Ticket 54725 indicates flash point change from ">=93C and <=815C"
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: >93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
+			Report.StartSubStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartSubStep("I set the Select the best Water Solubility description field to: Soluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
 		[StepDefinition(@"I call Shared Step 228844 \(Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path\)")]
 		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasLiquidSolidAvailable_SelectSolid_Continue_HappyPath()
 		{
@@ -5767,14 +5817,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep(
 				"I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status",
 				"Compliant with Domestic Substances List (DSL)");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(

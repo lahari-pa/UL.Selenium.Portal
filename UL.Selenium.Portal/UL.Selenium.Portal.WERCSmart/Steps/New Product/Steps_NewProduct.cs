@@ -3594,7 +3594,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
 		}
-
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
