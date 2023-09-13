@@ -1042,6 +1042,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetDateDiscontinuedByProductId(string anID)
 		{
+			var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homePage.WaitLoading();
 			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listOfProducts = this.ContainerElement.FindElements(By.XPath(".//td//small"));
 			IWebElement matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
 			if (matchingProduct == null)
