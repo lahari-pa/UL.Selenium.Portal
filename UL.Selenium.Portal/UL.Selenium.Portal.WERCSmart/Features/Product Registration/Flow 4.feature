@@ -16,7 +16,7 @@ Feature: Flow 4
 @ignore
 @TestCase:57922
 Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Odor Remover/Eliminator - Aerosol
@@ -48,7 +48,7 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 @ignore
 @TestCase:57924
 Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Penetrants
@@ -81,7 +81,7 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 @ignore
 @TestCase:57925
 Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Maintenance Product - Non-Aerosol
@@ -115,7 +115,7 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 
 @TestCase:57927
 Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
@@ -146,7 +146,7 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 @ignore
 @TestCase:57931
 Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Mousse
@@ -179,7 +179,7 @@ Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 @ignore
 @TestCase:57933
 Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
@@ -211,7 +211,7 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 
 @TestCase:57950
 Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
@@ -245,7 +245,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 
 @TestCase:57952
 Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Gel
@@ -277,7 +277,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 
 @TestCase:57958
 Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive - Aerosol Web Spray
@@ -308,7 +308,7 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 @ignore
 @TestCase:57977
 Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding(RU000912) - 4AL - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
@@ -340,7 +340,7 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 
 @TestCase:57982
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
@@ -404,7 +404,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 
 @TestCase:57983
 Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lubricant, Multi-Purpose, Not for Personal Use
@@ -499,7 +499,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 
 @TestCase:57988
 Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Non-Aerosol
@@ -527,7 +527,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Solid
@@ -567,32 +567,55 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 
 @TestCase:57991
 Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Glue sticks for glue guns
 	Then I save the product information as: TestCase57991
+	Given I generate a random UPC number and save as: UPC57991
 	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| CASNumber    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 24937-78-8	   | 40   | false               | false       |            |
+		| 68131-77-1	   | 45   | false               | false       |            |
+		| 8002-74-2        | 15   | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
+		| No                                       | 10                     | 10                        | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Then I click continue
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57991, container type: Plastic Container and size: 13.2
+	Given I should see following container type from the drop down list
+	|Container Type|
+	|Cardboard|
+	|Cardboard with Gas Cylinder|
+	|Clay-Coated News Board|
+	|Coated or Laminated Paperboard|
+	|Empty Syringe - Medical|
+	|Full Syringe - Medical|
+	|Glass Container|
+	|Metal Container|
+	|Metal Cylinder|
+	|Other |
+	|Paper bag|
+	|Plastic bag|
+	|Plastic Container|
+	|Plastic Liner/Corrugate|
+	|Vial - Medical|
+	|Wooden box|
+	|Wooden crate|
+	And I confirm that retailer "WG" is present under the 'Destination Retailers' column in the UPC table
+	Then I click continue	
+	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I call Shared step 214825 (Additional Documents to Provide - Upload Product Label - Continue)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given in the Optional Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57991
