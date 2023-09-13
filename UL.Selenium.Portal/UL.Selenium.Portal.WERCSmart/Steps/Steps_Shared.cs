@@ -7707,50 +7707,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(120);
 			thisPowerDesignerPlus.Wait_for_load(240);
-			/*
-			Report.UseSubSteps = true;
-			var selStepsSha = new Steps_SHA();
-			var selStepsStudio = new Steps_Studio();
-			Report.StartSubStep("I navigate to Power Designer Plus");
-			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
-			GeneralUtilities.StudioWaitForSpinner();
-			Report.StartSubStep("I filter by product ID");
-
-			if (WercSmartSettings.TestCaseId == 0)
-			{
-				throw new Exception("Needs the test case ID to fetch the product ID to continue!");
-			}
-			var productDetails = (ProductInformation)Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId);
-			string id = productDetails.Id;
-			//string id = Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId).ToString();
-			if (id == null)
-			{
-				throw new Exception($"Needs the product ID to be saved to context as 'TestCase{WercSmartSettings.TestCaseId}'!");
-			}
-
-			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
-			Report.StartSubStep("I confirm CKLT (Checklist) is selected as the subformat");
-			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
-			Report.StartSubStep("I click continue");
-			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
-			Delay.Seconds(3);
-			
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
-			{
-				selStepsStudio.InPDIEnsureSECT2318IsActive();
-				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			}
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
-			{
-				selStepsStudio.InPDIEnsureSECT0077IsActive();
-				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
-			}
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
-			*/
 		}
 
 		[StepDefinition(
