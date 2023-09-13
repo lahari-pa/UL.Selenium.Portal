@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow22
+@NewProduct
 Feature: Flow 22
 
 @tfsdesign
@@ -115,27 +116,38 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 
 @TestCase:60547
 Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60547
 	Given I delete all products with UPC Number: saved as UPC60547
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Then I save the product information as: TestCase60547
-	#Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
 	Given I call Shared Step 60756 (Product Information with Country and every option)
-	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I click continue
-	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
-	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName			    | Percent	| PublicallyDisclosed | TradeSecret | PublicName |
+		| Air					    | 90		| false               | false       |            |
+		| Oxygen				    | 3.89      | false               | false       |            |
+		| 1-Butene				    | 3.85      | false               | false       |            |
+		| Hydrocarbon propellant    | 3.89		| false               | false       |            |
+	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
+		| TSCA																		                  | Prop 65 |
+		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
-	Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1954
+	Then I set the UN Number option to: UN1950
+	Then in the International Marine (IMDG) Classification page I click Continue
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 0.5
-	Given I click continue
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+	Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 1
+	Then I confirm that I see the following VOC Grams Ozone value: 1
+	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then I should see the following Voc Limits present:
+	| Use									                        | VOC Compliance Limit | Regulation                  |
+	| Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol | 1.8                  | Aerosol Coatings CARB limit |
+	And The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
+	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)	
+	Then I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can - Metal and size: 33
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
@@ -146,3 +158,4 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60547. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
+

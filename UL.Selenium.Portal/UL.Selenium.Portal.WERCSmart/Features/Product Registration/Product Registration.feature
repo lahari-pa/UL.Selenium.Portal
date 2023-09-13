@@ -807,3 +807,24 @@ Scenario: [147447] Sears - Authoring option ONLY available
 		| Option            |
 		| Request to author |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase147447
+
+# Created by Saikiran Chittampally
+@TestCase:50863
+Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "Inventory Status, Prop 65" Page Using the Type of Product: Lip Balm
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC50863
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+	Then I save the product information as: TestCase50863
+	Given I should see the Product Information Page
+	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Cocos Nucifera Oil  | 50      | false               | false       |            |
+		| White Mineral Oil (petroleum)       | 50       | false               | false       |            |
+	Given I call Shared Step 234333 (Inventory Status, Prop 65 (US) - Applicable Only to Lip Balm (RU000246))
+	Given I call Shared Step 234334 (Regulatory Information 3 - Applicable Only to Lip Balm (RU000246))
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
+

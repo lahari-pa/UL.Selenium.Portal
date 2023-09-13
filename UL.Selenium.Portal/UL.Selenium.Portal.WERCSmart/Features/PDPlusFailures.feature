@@ -34,13 +34,13 @@ Feature: PDPlusFailures
 #This feature is used to hold copies of scenarios that fail / often fail in PD+. If a scenario found in this feature and has been passing consistently, feel free to remove it from the feature file.
 
 Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Crayon
 	Then I save the product information as: TestCase86452
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Sodium hydroxide
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Water
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
 	And I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
@@ -52,7 +52,7 @@ Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given If purchase details are showing click confirm order	
+	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86452)
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Submitted
@@ -260,7 +260,7 @@ Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Comple
 	Then I save the product information as: TestCase75335
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
