@@ -1048,16 +1048,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
 			if (matchingProduct == null)
 			{
-				Report.Error("No matching product has been found for ID: " + anID);
+				Report.Error($"No matching product has been found for ID: {anID}");
 				return "";
 			}
 
 			IWebElement dateDiscontinued =
-				matchingProduct.FindElement(By.XPath("../../..//td[@data-bind='text: DateDiscontinued']"), 2);
+				matchingProduct.FindElement(By.XPath("//td[@data-bind='text: DateDiscontinued']"), 2);
 
 			if (dateDiscontinued == null)
 			{
-				Report.Error("No matching date discontinued has been found for ID: " + anID);
+				Report.Error($"No matching date discontinued has been found for ID: {anID}");
 				return "";
 			}
 			return dateDiscontinued.Text;

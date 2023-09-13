@@ -1652,7 +1652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			string text = "Discontinuing your registration does not obsolete the registration. Discontinue means you are no longer maintaining the registration data or manufacturing this product. Retailers may have inventory of this product on hand and you may need the data for historical purposes. Discontinuing does not impact the ability to obsolete the registration, when time permits.\r\nAre you sure you want to Discontinue the product ?\r\nLight Bulbs - Germicidal Ultra Violet Bulb (" + id +")";
-			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{text}' in modal window. Found text '" + modal.GetText() + "' instead.",
+			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{text}' in modal window. Found text '{modal.GetText()}' instead.",
 				$"Successfully found text '{text}' in modal window.");
 		}
 
