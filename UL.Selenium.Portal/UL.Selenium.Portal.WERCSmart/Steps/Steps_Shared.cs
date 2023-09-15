@@ -7383,25 +7383,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) to the Section - Applicable Only to Type of Product: GRASS SEED")]
-		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode)
+			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) with data: (.*) to the Section - Applicable Only to Type of Product: GRASS SEED")]
+		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode,string data)
 		{
 			
 			Report.UseSubSteps = true;
 			var thisStepsStudio = new Steps_Studio();
 			Report.Info("In Designer Plus clicking Add New Link to add Data Code");
-			var thisStudioPowerDesignerPlusDesignMode =
-				new StudioPowerDesignerPlusDesignMode();
+			var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
 				"Power designer has opened");
 			thisStudioPowerDesignerPlusDesignMode.ClickAddNewButton();
-			Delay.Seconds(1);
+			Delay.Seconds(2);
 			thisStepsStudio.ISetUsageType(usageType);
+			thisStepsStudio.IFilterDatacode(dataCode);
+			Delay.Seconds(5);
+			thisStepsStudio.ISelectDataCode(data);
+			thisStudioPowerDesignerPlusDesignMode.ClickSaveAndClose();
 			GeneralUtilities.StudioWaitForSpinner();
-			
 		}
+		[StepDefinition(@"I confirm data code:(.*) with value:(.*) added")]
+		public void GivenIConfirmDataCodeAdded(string datacode, string value)
+		{
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
+				"Power designer has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DataCodeTitleConfirm(datacode),$"Failed to find '{datacode}'",$"Succesfully found '{datacode}'");
+		}
+		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product:  GRASS SEED")]
+		public void GivenIRemoveDataCode(string datacode)
+		{
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.DataCodeTitleClick(datacode);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.RemoveElementClick(), $"Failed to click remove element", $"Succesfully clicked remove element");
+			if (SeleniumWebDriver.CurrentDriver.WaitForAlert(2))
+			{
+				Report.Info("Found an alert");
+				string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				Report.Info("Got an alert: " + alertText);
+			}
+			else
+			{
+				Report.Info("Did not find an alert");
+			}
+			GeneralUtilities.StudioWaitForSpinner();
+		}
+		[StepDefinition(@"I confirm data code: (.*) with value: (.*) removed")]
+		public void GivenIConfirmDataCodeRemoved(string datacode, string value)
+		{
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
+				"Power designer has opened");
+			Report.IsFalse(thisStudioPowerDesignerPlusDesignMode.DataCodeTitleConfirm(datacode), $"Found '{datacode}'", $"'{datacode}' dhould not be found");
 
-			[StepDefinition(@"I call Shared Step 79501 \(WPS Studio - PD\+ - Create Component for 3rd party product\)")]
+		}
+		[StepDefinition(@"I call Shared Step 79501 \(WPS Studio - PD\+ - Create Component for 3rd party product\)")]
 		public void GivenICallSharedStep79501WPSStudio_PD_CreateComponentForRdPartyProduct(
 			TechTalk.SpecFlow.Table components)
 		{

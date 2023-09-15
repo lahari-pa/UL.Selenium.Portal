@@ -206,6 +206,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");
 			Delay.Seconds(2);
 		}
+		public void IFilterDatacode(string datacode)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().FilterDataCode(datacode), $"Failed to filter datacode:{datacode}", $"Successfully filtered datacode {datacode} is set");
+			Delay.Seconds(2);
+		}
+		public void ISelectDataCode(string data)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SelectDataCode(data), $"Failed to select datacode:{data}", $"Successfully select datacode {data} is set");
+			Delay.Seconds(2);
+		}
 
 		public void ISetTheAuthoringCompleteCodeToNGHS()
 		{

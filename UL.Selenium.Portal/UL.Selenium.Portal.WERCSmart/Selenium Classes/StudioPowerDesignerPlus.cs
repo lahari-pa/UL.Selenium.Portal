@@ -224,14 +224,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SetUsageType(string usage)
 		{
 			IWebElement UsageTypeSelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='ucSelUsage_ddlUsages']"), 2);
-			if (UsageTypeSelect != null)
-			{
-				UsageTypeSelect.Select(usage);
-				return (UsageTypeSelect.SelectedOption() == usage);
-			}
-			return false;
+			UsageTypeSelect.Select(usage);
+			return (UsageTypeSelect.SelectedOption() == usage);
 		}
-
+		public bool FilterDataCode(string datacode)
+		{
+			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter - subsectionGrid - grid']"), 2);
+			FilterDataCode.Select(datacode);
+			return (FilterDataCode.SelectedOption() == datacode);
+		}
+		public bool SelectDataCode(string data)
+		{
+			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid - grid']//tr"), 2);
+			SelectDataCode.Select(data);
+			return (SelectDataCode.SelectedOption() == data);
+		}
+		
 	}
 
 	class StudioPowerDesignerPlusDesignMode : BaseObject
@@ -536,6 +544,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
 			return AddNewButton.TryClick();
+		}
+		public bool ClickSaveAndClose()
+		{
+			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id= 'add - subsection - save - and - close']"));
+			return SaveAndClose.TryClick();
+		}
+		public bool DataCodeTitleConfirm(string title)
+		{
+			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[contains(@title,'{title}')]"));
+			return dataCodeTitle.Displayed;
+		}
+		public void DataCodeTitleClick(string title)
+		{
+			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[contains(@title,'{title}')]"));
+			dataCodeTitleClick.RightClick();
+		}
+		public bool RemoveElementClick()
+		{
+			IWebElement dataCodeRemove = SeleniumWebDriver.CurrentDriver.FindElement(By.PartialLinkText("Remove Element"));
+			return dataCodeRemove.TryClick();
 		}
 
 		public bool ClickRefresh()

@@ -396,8 +396,8 @@ Scenario: [58604] Condom - RU000937
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
 @TestCase:213910
-Scenario: [213910] Container Types - Primary Physical State Liquid - Dishwashing Soap - RU000610
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Grass Seed (RU000470)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC213910
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -446,7 +446,7 @@ Scenario: [213910] Container Types - Primary Physical State Liquid - Dishwashing
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213910)
 	Given I call Shared Step 120845 (WPS Studio - PD+ - change to MTR/CKLT for product saved as: TestCase213910)
 	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase213910
-	#Given I call Shared Step 231412 I add the UsageType: PTXT with Datacode FERT to the Section - Applicable Only to Type of Product: GRASS SEED
-	#Given I confirm data code added
-	#Given I remove the FERT PTXT Datacode to the Section - Applicable Only to Type of Product:  GRASS SEED
-	#Given I confirm data code removed
+	Given I call Shared Step 231412 I add the UsageType: PVAL with Datacode FERTK with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product: GRASS SEED
+	Given I confirm data code: Nitrogen / Nitrates (“N”) with value: 4 added
+	Given I remove the Datacode: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product:  GRASS SEED
+	Given I confirm data code: Nitrogen / Nitrates (“N”) with value: 4 removed
