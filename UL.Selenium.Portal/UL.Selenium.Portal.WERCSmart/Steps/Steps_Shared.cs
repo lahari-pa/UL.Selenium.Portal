@@ -3384,6 +3384,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+		[StepDefinition(@"I call Shared Step 234311 \(Product Information - Applicable Only to Light Bulbs - Germicidal Ultra Violet \(RU000962\)\)")]
+		public void ThenICallSharedStepProductInformation_ApplicableOnlyToLightBulbs_GermicidalUltraVioletRU()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
+			Delay.Seconds(1);
+			var buttonTable = new Table(new string[] {
+				"Checkbox" });
+			buttonTable.AddRow(new string[] {
+				"United States"
+			});
+			buttonTable.AddRow(new string[] {
+				"Canada"
+			});
+			Report.StartSubStep(
+				"Verify options in section 'Select countries the product may be sold in' should be: United States, Canada");
+			MyStepsNewProduct.CheckCheboxesInSectionAndOrder("should", "Select countries the product may be sold in", buttonTable);
+			Report.StartSubStep(
+				"Verify selected option is United States by default in section 'Select countries the product may be sold in'");
+			Report.IsTrue(new NewProduct().SelectedOptionsForSection("Select countries the product may be sold in")
+				.Contains("United States"), "Failed to confirm selected option is United States by default", "Successfully confirmed selected option is United States by default");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 
 		[StepDefinition(@"I call Shared Step 65511 \(Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
 		public void ICallSharedProductInformation_NoChildNoDirectShipNoPLClickContinue()
