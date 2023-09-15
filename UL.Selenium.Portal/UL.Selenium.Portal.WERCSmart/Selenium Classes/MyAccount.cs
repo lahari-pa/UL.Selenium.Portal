@@ -2367,7 +2367,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "orderHistoryContainer")]
 		protected override IWebElement containerElement { get; set; }
 		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-default' and contains(text(),'{value}')]"), 2);
-
+		private IWebElement InvoiceNumber => this.containerElement.FindElement(By.XPath(".//span[@data-bind = 'text: OrderNumber']"), 2);
+		List<IWebElement> Orders => this.containerElement.FindElements(By.XPath(".//tbody//tr"), 2).ToList();
 		public bool Order_History_Select(string history_type)
 		{
 			Report.Info("Beginning Order_History_Select");
@@ -2395,7 +2396,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info(history_type + " Found - Attempting to Select");
 			myType.Click();
 			Delay.Seconds(1 * Delay.SpeedFactor);
+			var homepage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homepage.WaitLoading();
 			return true;
+		}
+		public bool InvoiceNumberExists()
+		{
+			Report.Info("Attempt to find invoice number");
+			return this.InvoiceNumber != null;
+		}
+		public bool OrdersExist()
+		{
+			Report.Info("Attempt to find orders rows");
+			return this.Orders != null;
+		}
+		public string GetFirstInvoiceNumber()
+		{
+			Report.Info("Attempt to get invoice number");
+			return this.InvoiceNumber.Text;
+		}
+		public string GetUserNameForOrder(string savedInvoiceNumber)
+		{
+			string invoiceNumber = Context.GetFromContext(savedInvoiceNumber).ToString();
+			string userName = null;
+			foreach(IWebElement element in this.Orders)
+			{
+				IWebElement InvoiceNumber = element.FindElement(By.XPath("//span[@data-bind = 'text: OrderNumber']"), 2);
+				IWebElement UserName = element.FindElement(By.XPath("//td[@data-bind ='text: SubmittedBy']"), 2);
+				if (InvoiceNumber.Text == invoiceNumber)
+				{ userName = UserName.Text; }
+			}
+			return userName;
 		}
 		public string Get_Invoice_Number(string submitted_by)
 		{

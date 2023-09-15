@@ -2890,6 +2890,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked search button");
 			Delay.Seconds(10);
 		}
+		[StepDefinition(@"In the Supplier Manager Popup I (should|should not) see supliers")]
+		public void ThenInTheSupplierManagerPopupIShouldSeeSupliers(string condition)
+		{
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			if (condition == "should")
+			{
+				new StudioSupplierManager().WaitForSuppliersToLoad();
+				Report.IsTrue(thisStudioSupplierManager.SupplierExists(), "Failed to confirm there is supplier shown with such search criteria", "Successfully confirmed there is supplier shown with such search criteria");
+			}
+		}
 
 		//Step can be used for New User Request button in Supplier Manager too
 		[StepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
