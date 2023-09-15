@@ -147,14 +147,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickStatusFilter(string option)
 		{
-			IList<IWebElement> allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
+			IList<IWebElement> allFilters = this.ContainerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
 			IWebElement requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
 			return requiredFilter.TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool MoreFiltersOptionPresent()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
+			return this.ContainerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
 		}
 
 		public bool ClickMoreFilters()
@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool MoreFiltersExpanded()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2);
 			string expandedAttr = el?.GetAttribute("aria-expanded");
 			bool.TryParse(expandedAttr, out bool result);
 			return expandedAttr != null && result;
@@ -1003,7 +1003,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			while (activePage <= lastPage)
 			{
 				Report.Info("Looking for product with 'Edit UPC' Actions on page: " + activePage);
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@class,'ellipsis')]/following-sibling::ul/li//a[not(@style='display: none;') and text()='Edit UPCs']"), 2);
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//button[contains(@class,'ellipsis')]/following-sibling::ul/li//a[not(@style='display: none;') and text()='Edit UPCs']"), 2);
 				if (el == null)
 				{
 					Report.Info("No Edit UPC actions on page " + activePage + ". Clicking next.");
@@ -1040,10 +1040,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public string GetDateDiscontinuedByProductId(string anID)
+		{
+			var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homePage.WaitLoading();
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listOfProducts = this.ContainerElement.FindElements(By.XPath(".//td//small"));
+			IWebElement matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
+			if (matchingProduct == null)
+			{
+				Report.Error($"No matching product has been found for ID: {anID}");
+				return "";
+			}
+
+			IWebElement dateDiscontinued =
+				matchingProduct.FindElement(By.XPath("//td[@data-bind='text: DateDiscontinued']"), 2);
+
+			if (dateDiscontinued == null)
+			{
+				Report.Error($"No matching date discontinued has been found for ID: {anID}");
+				return "";
+			}
+			return dateDiscontinued.Text;
+		}
 
 		public string GetRetailersStatusByID(string anID)
 		{
-			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listOfProducts = this.containerElement.FindElements(By.XPath(".//td//small"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listOfProducts = this.ContainerElement.FindElements(By.XPath(".//td//small"));
 			IWebElement matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
 			if (matchingProduct == null)
 			{
