@@ -336,13 +336,5 @@ Then In the Supplier Manager Popup I enter the following search term: saved as I
 Then In the Supplier Manager Popup I click on the search button
 Then In the Supplier Manager Popup I should see supliers
 Then In the Supplier Manager Popup I click on the close button
-Then I Click 'Suppliers' in SHA Manager
-Then In the Supplier Manager Popup I enter the following search term: saved as  InvoiceNumber
-Then In the Supplier Manager Popup I click on the search button
-Then In the Supplier Manager Popup I should see supliers
-Then In the Supplier Manager Popup I click on the close button
-Then I Click 'Suppliers' in SHA Manager
-Then In the Supplier Manager Popup I enter the following search term: saved as    InvoiceNumber
-Then In the Supplier Manager Popup I click on the search button
-Then In the Supplier Manager Popup I should see supliers
-Then In the Supplier Manager Popup I click on the close button
+Then I call Shared Step - In the Supplier Manager popup I select radio button Invoice Number and enter search term with spaces: saved as InvoiceNumber
+ 
