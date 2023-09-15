@@ -103,16 +103,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					MyStepsNewProduct.ClickContinue();
 				}
 			}
-
-			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			//WercSmartSettings.TestCaseId = 101;
-			//if (WercSmartSettings.TestCaseId == 0)
-			//{
-			//	throw new Exception("ERROR: Failed to find TestCaseId!");
-			//}
-
-			//Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
-			//Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
@@ -752,16 +742,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		/// <summary>
@@ -3392,6 +3382,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"United States of America");
 			}
 
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		[StepDefinition(@"I call Shared Step 234311 \(Product Information - Applicable Only to Light Bulbs - Germicidal Ultra Violet \(RU000962\)\)")]
+		public void ThenICallSharedStepProductInformation_ApplicableOnlyToLightBulbs_GermicidalUltraVioletRU()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
+			Delay.Seconds(1);
+			var buttonTable = new Table(new string[] {
+				"Checkbox" });
+			buttonTable.AddRow(new string[] {
+				"United States"
+			});
+			buttonTable.AddRow(new string[] {
+				"Canada"
+			});
+			Report.StartSubStep(
+				"Verify options in section 'Select countries the product may be sold in' should be: United States, Canada");
+			MyStepsNewProduct.CheckCheboxesInSectionAndOrder("should", "Select countries the product may be sold in", buttonTable);
+			Report.StartSubStep(
+				"Verify selected option is United States by default in section 'Select countries the product may be sold in'");
+			Report.IsTrue(new NewProduct().SelectedOptionsForSection("Select countries the product may be sold in")
+				.Contains("United States"), "Failed to confirm selected option is United States by default", "Successfully confirmed selected option is United States by default");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -13690,6 +13708,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newValueEditor.ClickButton("Save");
 		}
 
+
+		[StepDefinition(@"I call Shared step 214825 \(Additional Documents to Provide - Upload Product Label - Continue\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadProductLabel_Continue_()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartSubStep(
+					@"I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
 
 		[StepDefinition(@"I call shared step 149691 \(WPS Studio - PD\+ - PLP product for Canada - publish alias HGHS documents for product saved as: (.*)\)")]
 		public void GivenICallSharedStepWPSStudio_PD_PLPProductForCanada_PublishAliasHGHSDocumentsForProductSavedAs(string savedAs)

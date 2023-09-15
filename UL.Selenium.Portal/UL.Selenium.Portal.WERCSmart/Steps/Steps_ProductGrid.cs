@@ -11,6 +11,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2380,6 +2381,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ProductsGrid().ClickFirstActionsEditUpc(),
 				"Failed to click Actions - Edit UPC",
 				"Successfully clicked Actions - Edit UPC");
+		}
+
+		[StepDefinition(@"I confirm Date Discontinued contains today's date for product saved as: (.*)")]
+		public void ThenIConfirmDateDiscontinuedContainsTodaysDateForProductSavedAsTestCase(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			var thisProductsGrid = new ProductsGrid();
+			string getDate = DateTime.Parse(thisProductsGrid.GetDateDiscontinuedByProductId(id)).ToString("MM/dd/yyyy");
+			string currentDate = DateTime.Now.ToString("MM/dd/yyyy");
+			Report.IsTrue(getDate==currentDate, "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
 		}
 
 		[StepDefinition(@"For product saved as: (.*) the status is: (.*)")]
