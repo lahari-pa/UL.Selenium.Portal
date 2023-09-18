@@ -791,24 +791,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[StepDefinition(@"In the Order History screen for Invoice Number saved as (.*) I save user name as: (.*)")]
-		public void ThenInTheOrderHistoryScreenForInvoiceNumberSavedAsInvoiceNumberISaveUserNameAsUserName(string savedInvoiceNumber, string savedAsUserName)
-		{
-			var orderHistory = new MyAccount_OrderHistory();
-			if (Report.IsTrue(orderHistory.OrdersExist(), "Failed to find Orders", "Successfully found Orders"))
-			{
-				string getUserName = orderHistory.GetUserNameForOrder(savedInvoiceNumber);
-				if (getUserName != null)
-				{
-					Context.AddToContext(savedAsUserName, getUserName);
-					Report.Info($"Successfully saved User Name {getUserName}");
-				}
-				else
-				{
-					Report.Failure("Cannot get User Name");
-				}
-			}
-		}
 
 
 		[StepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]

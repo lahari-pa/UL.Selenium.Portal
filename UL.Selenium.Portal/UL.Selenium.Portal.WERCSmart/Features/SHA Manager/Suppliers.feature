@@ -328,7 +328,6 @@ Then I navigate to the MyAccount page
 Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I save first Invoice Number as: InvoiceNumber
-Then In the Order History screen for Invoice Number saved as InvoiceNumber I save user name as: UserName
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I Click 'Suppliers' in SHA Manager
 Then In the Supplier Manager Popup I select radio button: Invoice Number
