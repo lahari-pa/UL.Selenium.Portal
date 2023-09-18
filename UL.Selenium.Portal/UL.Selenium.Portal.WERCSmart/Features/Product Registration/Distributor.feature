@@ -38,18 +38,18 @@ Scenario: [122365] Create a distributor request and process it to completed
 	Given I log in with the account saved in TReVor as: DistributorAccount
 	Then the WERCSmart homepage should load
 	Given I create a distibutor request as TestCase0002 and send to manufacturer
-	#And I click the Register New Product icon in the Navigation Pane
-	#And I should see the header New Product
-	#And I set the radio option in section: Select the type of product to create: to: Request a UPC from a Manufacturer
-	#Given I click continue
-	#And I should see the Distributor Request - UPC Selection Page
-	#And I set the Enter Manufacturer's Contact Email option to: User_574c25cd650f.kxxyxunf@mailosaur.io
-	#And I set the Provide Manufacturer's Uniform Product Code (UPC) for the Product option to: UPC86463
-	##And I click outside of the login popup
-	#And I click outside Provide manufacturer UPC textbox
-	#Given I click continue
-	#And I save the product information as: TestCase0002
-	#And I click on I understand checkbox and then Send to Manufacturer
+	And I click the Register New Product icon in the Navigation Pane
+	And I should see the header New Product
+	And I set the radio option in section: Select the type of product to create: to: Request a UPC from a Manufacturer
+	Given I click continue
+	And I should see the Distributor Request - UPC Selection Page
+	And I set the Enter Manufacturer's Contact Email option to: User_574c25cd650f.kxxyxunf@mailosaur.io
+	And I set the Provide Manufacturer's Uniform Product Code (UPC) for the Product option to: UPC86463
+	And I click outside of the login popup
+	And I click outside Provide manufacturer UPC textbox
+	Given I click continue
+	And I save the product information as: TestCase0002
+	And I click on I understand checkbox and then Send to Manufacturer
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 	Then the WERCSmart homepage should load
