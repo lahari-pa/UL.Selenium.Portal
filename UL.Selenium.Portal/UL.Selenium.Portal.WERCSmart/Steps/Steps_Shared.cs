@@ -13303,7 +13303,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[Then(@"I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Battery Products\) for product saved as: (.*)")]
+		[StepDefinition(@"I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Battery Products\) for product saved as: (.*)")]
 		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
 		{
 			Report.UseSubSteps = true;
