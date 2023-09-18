@@ -14,12 +14,15 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class StudioPowerDesignerPlus : BaseObject
+	public class StudioPowerDesignerPlus : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'container')]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		//protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class, 'container')]");
+
+		private IWebElement ProductIsCheckedOutIcon => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//i[@title='Product is Checked Out']"));
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
@@ -51,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			//this.ContainerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
 				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
@@ -151,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSourceProduct(string sourceProduct)
 		{
-			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
+			IWebElement enterField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
 			enterField.EnterText(sourceProduct);
 			return (enterField.GetValue() == sourceProduct);
 		}
@@ -167,7 +170,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement enterField = this.containerElement.FindElement(By.XPath(".//button[contains(@class, 'refresh')]"));
 			return enterField.TryClick();
 		}
+		public bool ProductIsCheckedOutIconDisplayed()
+		{
+			return this.ProductIsCheckedOutIcon.Displayed;
 
+		}
 		public string GetSourceProductName()
 		{
 			IWebElement label = this.containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"), 5);
@@ -529,6 +536,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (refreshButton != null)
 			{
 				return refreshButton.TryClick();
+			}
+
+			return false;
+		}
+		public bool ClickRefreshButtonLeft()
+		{
+			IWebElement refreshButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@title = 'Refresh']"));
+			if (refreshButton != null)
+			{
+				return refreshButton.TryClick();
+			}
+
+			return false;
+		}
+		public bool ClickSearchFormatSubformat()
+		{
+			IWebElement searchButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id = 'selectFormatselFormat']"));
+			if (searchButton != null)
+			{
+				return searchButton.TryClick();
 			}
 
 			return false;
@@ -924,7 +951,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+		public bool DoubleClickCategory(string category)
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//span[contains(text(), '{category}')]"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category {category}");
+				return false;
+			}
+			Report.Info("Matching Category was found");
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(Category).Build().Perform();
+			Category.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
 
+			Category.Click();
+			Category.Click();
+
+			Delay.Seconds(2);
+			Report.Screenshot();
+			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			if (editScreen != null)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Popup was not found.");
+			}
+
+			return false;
+		}
+
+		public string GetCurrentValueInMTRFormat(string category)
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//b/span[@name = '{category}']"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category {category}");
+			}
+			return Category.Text;
+
+		}
 		public string GetCategoryValue(string category)
 		{
 			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
