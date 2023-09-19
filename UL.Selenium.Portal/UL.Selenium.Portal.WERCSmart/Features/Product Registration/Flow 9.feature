@@ -418,7 +418,7 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then I set the Slow-Release Agent field to: 10.50
 	Then I click continue
 	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Then I add the following ingredients:
 		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Grass Seed        | 45      | false               | false       |            |
@@ -446,7 +446,7 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213910)
 	Given I call Shared Step 120845 (WPS Studio - PD+ - change to MTR/CKLT for product saved as: TestCase213910)
 	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase213910
-	Given I call Shared Step 231412 I add the UsageType: PVAL with Datacode FERTK with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product: GRASS SEED
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTK with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product: GRASS SEED
 	Given I confirm data code: Nitrogen / Nitrates (“N”) with value: 4 added
 	Given I remove the Datacode: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product:  GRASS SEED
 	Given I confirm data code: Nitrogen / Nitrates (“N”) with value: 4 removed

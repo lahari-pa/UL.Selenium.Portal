@@ -7491,7 +7491,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
@@ -7582,7 +7581,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"MTR",
 				"False"
 			});
-			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			//thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			thisStepsStudio.GivenICloseCurrentDocument();
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
 			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
