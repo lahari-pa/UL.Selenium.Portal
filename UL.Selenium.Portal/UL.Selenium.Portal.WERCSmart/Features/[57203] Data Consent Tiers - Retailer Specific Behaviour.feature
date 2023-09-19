@@ -76,6 +76,8 @@ Scenario: [57218] Retailer specific - Family Dollar
 	When I click the Products in Scope button and confirm that an excel file is produced called FD_Report_DataUsageTier_<Date>.xlsx and save as FamilyDollarExcelFile
 	And I confirm the excel file saved as FamilyDollarExcelFile can be opened and contains data
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:57221
 Scenario: [57221] Retailer specific - Target
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -102,6 +104,8 @@ Scenario: [57223] Retailer specific - Walgreens
 	When I click the Products in Scope button and confirm that an excel file is produced called WG_Report_DataUsageTier_<Date>.xlsx and save as WalgreensExcelFile
 	And I confirm the excel file saved as WalgreensExcelFile can be opened and contains data
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:57225
 Scenario: [57225] Retailer specific - Walmart
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -133,6 +137,8 @@ Scenario: [69112] Retailer specific - Topco
 	When I select the retailer: TopCo
 	And I confirm that: TopCo requires suppliers of products to grant Tier 1 at this time. What are the Data Usage Tiers? Data Consent Tiers Accepted Tier 1: Regulatory Support By agreeing to the Terms of Use upon creation of the WERCSmart account, you agree that all registrations will comply with Data Tier 1 for Regulatory Support to the retail recipient for your product registrations. This option cannot be changed in any way. The Terms of Use designate Tier 1 as: Mandatory Consent. Any registered WERCSmart supplier of a product (a "Direct Supplier") is deemed to consent to providing Tier 1 Data Use - Regulatory Support ("Tier 1 Consent") to any entity that sells, transports, stores or disposes of such Direct Supplier's product (each, a "WERCSmart Recipient"). The WERCSmart platform provides Direct Suppliers with a current list of all WERCSmart Recipients as well as product-level information about which specific Recipients are in receipt of Tier 1 data. Any registered supplier that provides components to a Direct Supplier (a "Third-Party Supplier") is also deemed to provide Tier 1 Consent to WERCSmart Recipients. Use of the term "Supplier(s)" shall mean both Direct Suppliers and Third-Party Suppliers. is showing under the Data Consent Tiers
 
+#Removed from regression 2023/08
+@ignore
 @TestCase:74540
 Scenario: [74540] Target - Data Tier Warning when not all are selected
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -169,8 +175,9 @@ Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded C
 	Then I click the Products in Scope button and confirm that a file is not produced called CV_Report_DataUsageTier_<Date>.xlsx
 	Then I navigate to the Homepage and then In the Products Grid I delete All products
 
-
-	@singleRun
+#Removed from regression 2023/08
+@ignore
+@singleRun
 @TestCase:115255
 Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included Categories)
 	# Commented Sections require later flow bug fix, leave commented til corrected

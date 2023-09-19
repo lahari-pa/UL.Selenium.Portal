@@ -15,13 +15,13 @@ Feature: Flow 29 - Beverage
 
 @TReVorId:11622
 @TestCase:60694
-Scenario: [60694] Wine - RU001418
+Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Less than 70% of Alcohol Content) - DOT - Packaging Group III Should be Pre-Selected
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60694
 	Given I delete all products with UPC Number: saved as UPC60694
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
 	Then I save the product information as: TestCase60694
 	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
 	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
@@ -31,7 +31,7 @@ Scenario: [60694] Wine - RU001418
 	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694.
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
@@ -93,9 +93,9 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 
 @TestCase:144468
-Scenario: [144468] Alcoholic Beverages - With DOT Exception
+Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: ProductAccount
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
@@ -103,15 +103,23 @@ Then I confirm that the the option: United States is checked for the following s
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
 Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 49818 (Beverage Regulatory Details)
+Given I call Shared Step 92981a (Beverage Regulatory Details):
+	| BPA | Percent of Alcohol |
+	| No  | 10                |
 And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
 And The following checkboxes should not be displayed for section: Please select DOT Exceptions if applicable?
-		| Checkbox                                                     |
-		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+	| Checkbox                                                     |
+	| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+And I set the Please select DOT Exceptions if applicable? option to exactly match: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less
+And I click continue
+Then I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And in the Ratailer page I click Continue
+And in the Additional Documents to Provide page I click Continue
+And in the Optional Comments page I click Continue
+And In the Data Acceptance page I select Agreed
+Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Beer
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
-
 
 
 # Created by Saikiran Chittampally
@@ -137,7 +145,6 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Given in the optional comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
-
 
 
 # Created by Saikiran Chittampally
@@ -188,3 +195,24 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I call Shared Step 216863 (UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine) Enter UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
 	Then I should see the Additional Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
+
+	@TestCase:161374
+
+	Scenario: [161374] Enhanced Water Beverage (RUU001411)
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Enhanced Water Beverage
+	Then I save the product information as: TestCase161374
+	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
+	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+	Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
+	Given I call Shared Step 178053 (Beverage Regulatory Details - BPA - Prop65):
+	| BPA | Percent of Alcohol | Prop 65 |
+	| No  | 100                | No      |
+	And in the Retailer page I click Continue
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Comments page I click Continue
+	And In the Data Acceptance page I select Agreed
+	Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Enhanced Water Beverage
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase161374

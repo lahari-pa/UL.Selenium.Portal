@@ -337,37 +337,67 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57977
 
-@ignore
 @TestCase:57982
-Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [57982] WERCSmart Portal Flow Test for Bonding Agent (RU000023)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Then I save the product information as: TestCase57982
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+	Then I generate a random UPC number and save as: UPC57982
+	Then I call Shared Step 214643 (Product Information - Applicable Only to Bonding Agent (RU000023))
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 57978 (Physical and Chemical Properties - All select Gas - Continue - Happy Path)
+	Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023))
+		| Section                  | do not have exact data | Value                    |
+		| Primary Physical State   |                        | Liquid                   |
+		| Secondary Physical State |                        | Liquid                   |
+		| pH                       |                        | 5                        |
+		| Relative Density         |                        | 0.82                     |
+		| Primary State Options    |                        | Aerosol Gas Liquid Solid |
+		| Boiling Point (in Celsius) |                        | 100                      |
+		| Flash Point (in Celsius) | Yes                    | None, No Flash Point     |
+		| Water Solubility         |                        | Insoluble in water       |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
-	Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57981 (Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Acetic Acid       | 100     | false               | false       |            |
+	Then I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
-	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+		| No                                       | 10                    | 6                          | Yes            |
+	Then I confirm that I see the following CARB value: 10
+	Then I confirm that I see the following OTC Model Rule value: 6
+	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
+	Then I should see the following Voc Limits present:
+	| Use			| VOC Compliance Limit | Regulation           |
+	| Bonding agent | 10                   | OTC Model rule limit |
+	| Bonding agent | 10                   | CARB limit           |
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer       |
+		| The Home Depot |
+	Then I click Done on Select Retailers window
+	Then I click continue
+	Then I call Shared Step 226089 (Add UPC - Applicable Only to Bonding Agent (RU000023)) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
+	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bonding agent
+	Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023))
+	| Section                                              | Value             |
+	| Type of Product                                      | Bonding agent     |
+	| Primary Physical State                               | Liquid            |
+	| Secondary Physical State                             | Liquid            |
+	| Product has been granted an Alternative Control Plan | No                |
+	| CARB                                                 | 10                |
+	| OTC Model Rule                                       | 6                 |
+	| Container Type                                       | Plastic Container |
+	| Size (Ounces)                                        | 12.5              |
+	| Retailers                                            | HD                |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
 
 @TestCase:57983
@@ -404,37 +434,65 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
 
-@ignore
+@OnlyInStaging
 @TestCase:57985
-Scenario: [57985] Footwear or Leather Care Product - Aerosol - (RU000744) - 4A
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol
 	Then I save the product information as: TestCase57985
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
-	Given I call Shared Step 57528 (Physical and Chemical Properties - Aerosol Only - add data - Continue - Happy Path)
+	Then I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
+		| Section                    | do not have exact data | Value                                                                                                 |
+		| Primary Physical State     |                        | Aerosol                                                                                               |
+		| Primary State Options      |                        | Aerosol |
+		| Secondary Physical State   |                        | Solid spray                                                                                           |
+		| pH                         |  Yes                   | Not tested/Unknown                                                                                    |
+		| has a flammable propellant |                        | This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS). |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+		| CASNumber	     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 1174921-73-3   | 37.5    | false               | false       |            |
+		| 106-97-8       | 25.5    | false               | false       |            |
+		| 74-98-6        | 25.5    | false               | false       |            |
+		| 141-78-6       | 11.5    | false               | false       |            |
+	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
+		| TSCA																		                  | Prop 65 |
+		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
-	Given in the Volatile Organic Compound Summary page I click Continue
+		| No                                       | 75                    | 15                         | Yes            |
+	Then I confirm that I see the following CARB value: 75
+	Then I confirm that I see the following OTC Model Rule value: 15
+	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
+	And I should see the following Voc percent for each state:
+		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
+		| New York        | State Allowable Limit | 15        | 75                  | Does not exceed the State Limits |
+	Then I should see the following Voc Limits present:
+	| Use									     | VOC Compliance Limit | Regulation           |
+	| Footwear or Leather Care Product - Aerosol | 75                   | OTC Model rule limit |
+	| Footwear or Leather Care Product - Aerosol | 75                   | CARB limit           |
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
+	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
+	| Section                                    | Value                                                                                                                                                                                |
+	| Type of Product                            | Footwear or Leather Care Product - Aerosol                                                                                                                                           |
+	| FIFRA 25(b) Exempt						 | Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
+	| UN Number                                  | UN1950                                                                                                                                                                               |
+	| Proper Shipping Name                       | Aerosols                                                                                                                                                                             |
+	| Hazard Class                               | 2.1                                                                                                                                                                                  |
+	| Packing Group                              | None                                                                                                                                                                                 |
+	| CARB									     | 75                                                                                                                                                                                   |
+	| OTC Model Rule							 | 15                                                                                                                                                                                   |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
 
 @TestCase:57988
@@ -464,36 +522,44 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
 
-@ignore
+
 @TestCase:57990
-Scenario: [57990] Footwear or Leather Care Product - Solid- (RU000745) - 4S
+Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Solid
 	Then I save the product information as: TestCase57990
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
+	Then I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+		| Water         | 100     | false               | false       |            |
+	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
+		| TSCA																		 | Prop 65 |
+		| This product is exempt from TSCA chemical Inventory listing requirements.  | No      |
+	Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
-	Given in the Volatile Organic Compound Summary page I click Continue
+		| Yes                                      | 5                     | 5                          | Yes            |
+	Then I confirm that I see the following CARB value: 5
+	Then I confirm that I see the following OTC Model Rule value: 5
+	Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
+	Then I should see the following Voc Limits present:
+	| Use									   | VOC Compliance Limit | Regulation           |
+	| Footwear or Leather Care Product - Solid | 55                   | OTC Model rule limit |
+	| Footwear or Leather Care Product - Solid | 55                   | CARB limit           |
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Then I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Then I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Chrome     | Magnolia | No data available | 1                     |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Solid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57990
 

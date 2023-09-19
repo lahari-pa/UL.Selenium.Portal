@@ -11,6 +11,7 @@
 @RetailPartners
 @run_Flow2
 @Steps_Flow2A
+@UPC
 Feature: Flow 2
 
 #Remove from regression: 2023/05
@@ -422,3 +423,60 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63666
+
+	#Executed in Staging Environment
+	# Created by Saikiran Chittampally
+@TestCase:217787
+Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing Soap - RU000610
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC217787
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Liquid Dishwashing Soap
+	Then I save the product information as: TestCase217787
+	Given I call Shared Step 217788 (Product Information - not Pesticide, US only, select Yes for JSON Question - Happy Path)
+	Given I call Shared Step 217789 (Physical and Chemical Properties - Physical Property - Liquid )
+	Given I call Shared Step 217792 California Cleaning Product Disclosure - Manufacturer
+	Then I add the following ingredients:
+		| ComponentName                                       | Percent | PublicallyDisclosed | TradeSecret | PublicName                                          |
+		| Sodium laureth sulfate                              | 20      | true                | false       | Sodium Laureth Sulfate                              |
+		| Ammonium laureth sulfate                            | 20      | true                | false       | Ammonium Laureth Sulfate                            |
+		| Dodecylbenzene sulfonic acid                        | 5       | true                | false       | Dodecylbenzene Sulfonic Acid                        |
+		| D-Glucopyranose, oligomeric, decyl octyl glycosides | 5       | true                | false       | D-Glucopyranose, oligomeric, decyl octyl glycosides |
+		| Sodium hydroxide                                    | 1       | true                | false       | Sodium hydroxide                                    |
+		| Water                                               | 49      | true                | false       | Water                                               |
+	Given On the Ingredients page for the Ingredient: Sodium laureth sulfate I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Antifungal Agent|
+	Given On the Ingredients page for the Ingredient: Ammonium laureth sulfate I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Antimicrobial Agent|
+	Given On the Ingredients page for the Ingredient: Dodecylbenzene sulfonic acid I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Deodorizing Agent|
+	Given On the Ingredients page for the Ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Preservative|
+	Given On the Ingredients page for the Ingredient: Sodium hydroxide I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Deodorizing Agent|
+	Given On the Ingredients page for the Ingredient: Water I add Ingredient Type: Intentionally Added and Functional Purpose:
+	|Functional Purpose|
+	|Diluent|
+	Given I click continue
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC217787, container type: Plastic Container and size: 8.6 do not click continue
+	Given I should see following container type from the drop down list
+	|Container Type|
+	| Coated or Laminated Paperboard |
+	| Full Syringe - Medical         |
+	| Glass Container                |
+	| Metal Container                |
+	| Metal Cylinder                 |
+	| Plastic Container              |
+	| Vial - Medical                 |
+	Given I click continue
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
