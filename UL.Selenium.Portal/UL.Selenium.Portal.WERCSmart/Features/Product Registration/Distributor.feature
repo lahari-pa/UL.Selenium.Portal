@@ -17,6 +17,7 @@
 @PaymentMethods
 @run_Distributor
 @ProductSetUp
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
 Feature: Distributor
 
@@ -30,17 +31,17 @@ Feature: Distributor
 @TestCase:122365
 Scenario: [122365] Create a distributor request and process it to completed
 	Given I generate a random UPC number and save as: UPC86463
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
-	Given I create a Chalk product and take to completed for distributor and save as: TestCase0001
-	Given I save to context name: UPC86463 and value: 635039847816
-	Given I save to context name: TestCase0001 and value: 1616035
-	Given I navigate to the landing page
+	#Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	#Given I create a Chalk product and take to completed for distributor and save as: TestCase0001
+	#Given I save to context name: UPC86463 and value: 635039847816
+	#Given I save to context name: TestCase0001 and value: 1616035
+	#Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: DistributorAccount
 	Then the WERCSmart homepage should load
 	Given I create a distibutor request as TestCase0002 and send to manufacturer
 	And I click the Register New Product icon in the Navigation Pane
 	And I should see the header New Product
-	And I set the radio option in section: Select the type of product to create: to: Request a UPC from a Manufacturer
+	And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Request a UPC from a Manufacturer
 	Given I click continue
 	And I should see the Distributor Request - UPC Selection Page
 	And I set the Enter Manufacturer's Contact Email option to: User_574c25cd650f.kxxyxunf@mailosaur.io
