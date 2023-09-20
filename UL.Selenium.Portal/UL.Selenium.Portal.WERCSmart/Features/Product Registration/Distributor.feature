@@ -27,7 +27,7 @@ Feature: Distributor
 
 @tfs_design
 #Removed from regression: 2023/05
-#@ignore
+@ignore
 @TestCase:122365
 Scenario: [122365] Create a distributor request and process it to completed
 	Given I generate a random UPC number and save as: UPC86463
