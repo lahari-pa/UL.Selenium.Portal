@@ -32,15 +32,15 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Then I save the product information as: TestCase80089
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	#And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
-	#	| CASNumber | ComponentName | Percentage |
-	#	| 100-41-4  | Ethylbenzene  | 35         |
+	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
+		| CASNumber | ComponentName | Percentage |
+		| 100-41-4  | Ethylbenzene  | 50         |
 	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing800892
 		| CASNumber  | ComponentName | Percentage |
-		| RR-38669-6 | FLAVORS       | 50         |
+		| RR-38669-6 | FLAVORS       | 45         |
 	And call Shared Step 80091 - Ingredients - Add Non-generic component - set percentage - not publicly disclosed and save ingredient as: Ing800893
 		| CASNumber | ComponentName | Percentage |
-		| 108-95-2  | Phenol        | 50         |
+		| 108-95-2  | Phenol        | 10         |
 	Then in the Ingredients page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
