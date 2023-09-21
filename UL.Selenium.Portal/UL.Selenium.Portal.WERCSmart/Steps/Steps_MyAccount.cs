@@ -772,6 +772,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+		[StepDefinition(@"In the Order History screen I save first Invoice Number as: (.*)")]
+		public void ThenInTheOrderHistoryScreenISaveFirstInvoiceNumberAsInvoiceNumber(string savedAs)
+		{
+			var orderHistory = new MyAccount_OrderHistory();
+
+			if (Report.IsTrue(orderHistory.InvoiceNumberExists(), "Failed to find Ivoice Number under Order Number column", "Successfully found Ivoice Number under Order Number column"))
+				{
+				string getInvoiceNumber = orderHistory.GetFirstInvoiceNumber();
+				if(getInvoiceNumber != null)
+				{
+					Context.AddToContext(savedAs, getInvoiceNumber);
+					Report.Info($"Successfully saved Invoice Number {getInvoiceNumber}");
+				}
+				else
+				{
+					Report.Failure("Can not get Invoice Number");
+				}
+			}
+		}
+
 
 		[StepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]
 		public void ThenInTheOrderHistoryScreenIGetTheInvoiceNumberAndDateAndConfirmTheInvoiceEmailHasArrivedForUserSavedAs(string savedAs)

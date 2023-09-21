@@ -17,16 +17,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductType_Section:DistributorRequestUPCSection")]
 	class WERCSmart_Distributor_NewProducts_ProductType_DistributorRequestUPCSection
 	{
-		[StepDefinition(@"In the New Product Section, in section: '(Enter Manufacturer's Contact Email)': set option to to: (.*)")]
-		[StepDefinition(@"In the New Product Section, in section: '(Provide Manufacturer's Uniform Product Code (UPC) for the Product)': set option to to: (.*)")]
-		[StepDefinition(@"In the New Product Section, in section: '(Product Name)': set option to to: (.*)")]
-		public void DistributorRequestUPCSectionSetOption(string section, string option)
+		[StepDefinition(@"In the New Product Section, in section: 'Enter Manufacturer's Contact Email': set option to to: (.*)")]
+		public void DistributorRequestUPCSectionEmailSetOption(string option)
 		{
-			var thisNewProduct = new NewProduct();
-			Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-					$"Failed to set the input to {option.Trim()} in section: {section.Trim()}",
-					$"Successfully set the input to {option.Trim()} in section: {section.Trim()}");
-			Delay.Seconds(1);
+			string section = "Enter Manufacturer's Contact Email";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[StepDefinition(@"In the New Product Section, in section: 'Provide Manufacturer's Uniform Product Code /(UPC/) for the Product': set option to to: (.*)")]
+		public void DistributorRequestUPCSectionManufacturerSetOption(string option)
+		{
+			string section = "Enter Manufacturer's Contact Email";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the New Product Section, in section: 'Product Name': set option to to: (.*)")]
+		public void DistributorRequestUPCSectionProductNameSetOption(string option)
+		{
+			string section = "Enter Manufacturer's Contact Email";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 	}
 }

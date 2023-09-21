@@ -6157,6 +6157,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+		[StepDefinition(@"I call Shared Step - In the Supplier Manager popup I select radio button (.*) and enter search term with spaces: (.*)")]
+		public void ThenICallSharedStep_InTheSupplierManagerPopupEnterSearchTermWithSpacesSavedAsInvoiceNumber(string radioButton, string searchTerm)
+		{
+			if(searchTerm.Contains("saved as "))
+			{
+				searchTerm = searchTerm.Replace("saved as ", "");
+			}
+
+			if (Context.GetFromContext(searchTerm) != null)
+			{
+				searchTerm = Context.GetFromContext(searchTerm).ToString();
+			}
+			Report.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space before it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(" " + searchTerm);
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with three space before it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm("   " + searchTerm);
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space afret it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with two space after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space before it and after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(" " + searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with thre space before it and three after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm("   " + searchTerm + "   ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+		}
 
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
 		public void GivenICallShared65080LoginToStudioAndOpenSHAManager()
