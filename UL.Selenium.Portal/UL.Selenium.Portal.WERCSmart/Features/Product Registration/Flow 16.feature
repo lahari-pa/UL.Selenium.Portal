@@ -11,6 +11,7 @@
 @RetailPartners
 @run_Flow16
 @UPC
+@SHA
 Feature: Flow 16
 
 @TestCase:59273
@@ -518,8 +519,6 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-
-
 @TestCase:122366
 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -555,3 +554,38 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
 	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+	@TestCase:220789
+
+	Scenario: [220789] Carbon Zinc Battery - RU000727
+	
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC220789
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
+	Then I save the product information as: TestCase220789
+	Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water         | 100      | false               | false       |            |
+	Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Then I call Shared Step 150905 (Retailer - NR selected by default)
+	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
+	Then in the Additional Documents to Provide page I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	Then in the Optional Comments page I click Continue
+	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
+	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
+	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
+	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
+	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
+	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220789
+	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)
+	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products): TestCase220789
+	Then I switch to the 'SHA' tab
+	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220789)
+	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220789

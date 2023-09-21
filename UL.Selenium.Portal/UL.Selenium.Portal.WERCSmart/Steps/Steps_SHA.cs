@@ -3178,6 +3178,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+
+
 		[StepDefinition(@"I save a product which blue and has retailers and at least 1 UCP as (.*)")]
 		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAndUPCAsTestCase(string saveAs)
 		{
@@ -5184,6 +5186,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButton(), "Failed to click on Supplier Manager window button", "Succesfully clicked Supplier Manager window close button");
 			}
 		}
+		[StepDefinition(@"In SHA Manager I confirm product Id color is (.*) for product saved as: (.*)")]
+		public void ThenInSHAManagerIConfirmProductIdColorIsBlue(string color, string savedAs)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			var myStudioShaManager = new StudioSHAManager();
+			Report.Info("Verify product id is blue");
+			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
+		}
+
 	}
 
 }
