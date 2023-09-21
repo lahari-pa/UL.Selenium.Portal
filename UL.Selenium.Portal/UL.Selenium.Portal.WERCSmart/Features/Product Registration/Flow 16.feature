@@ -621,7 +621,9 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220191
 	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220191)
-	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products): TestCase220191
+	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products):
+	| ProductId      | BattaryType    |
+	| TestCase220191 | Nickel cadmium |
 	Then I switch to the 'SHA' tab
 	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220191)
 	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220191
