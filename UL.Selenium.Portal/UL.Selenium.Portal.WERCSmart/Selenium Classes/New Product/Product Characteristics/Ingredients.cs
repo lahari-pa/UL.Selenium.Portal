@@ -232,7 +232,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					if (!string.IsNullOrEmpty(ingredient.PublicName))
 					{
 						IWebElement publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
-						publicName.Select(ingredient.PublicName);
+						List<IWebElement> options = publicName.FindElements(By.XPath("//option")).ToList();
+						string optionText;
+						foreach (IWebElement option in options)
+						{
+						 optionText = option.Text;
+							if (optionText.ToLower() == ingredient.PublicName.ToLower())
+							{
+								publicName.Select(optionText);
+							}
+						}
 					}
 
 					if (!string.IsNullOrEmpty(ingredient.GenericName))

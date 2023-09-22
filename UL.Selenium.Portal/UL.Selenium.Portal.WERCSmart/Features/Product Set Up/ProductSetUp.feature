@@ -34,7 +34,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
 		| CASNumber | ComponentName | Percentage | PublicName   |
-		| 100-41-4  | Ethylbenzene  | 50         | ETHYLBENZENE |
+		| 100-41-4  | Ethylbenzene  | 50         | any          |
 	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing800892
 		| CASNumber  | ComponentName | Percentage |
 		| RR-38669-6 | FLAVORS       | 45         |
