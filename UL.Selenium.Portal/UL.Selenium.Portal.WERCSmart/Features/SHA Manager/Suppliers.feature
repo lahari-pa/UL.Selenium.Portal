@@ -17,6 +17,8 @@
 @run_ProductSetUp
 @SupplierAccounts
 @Studio_Header
+@MyAccount
+
 
 Feature: Suppliers
 
@@ -317,3 +319,21 @@ When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur
 Then In the Supplier Manager Popup I confirm After-Market Distributor is turned on
 Then I confirm After-Market Distributor Toggle enable check after clicking save button
 Then I close Supplier Manager window
+
+@TestCase:207486
+Scenario: [207486] Supplier Manager -Search returns the correct values - Invoice Number - With leading and/or trailing whitespace
+
+Given I log in with the account saved in TReVor as: ProductAccount
+Then I navigate to the MyAccount page
+Then In the My Account page I navigate to the Order History page
+Then In the Order History screen I select Subscription
+Then In the Order History screen I save first Invoice Number as: InvoiceNumber
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+Then In the Supplier Manager Popup I select radio button: Invoice Number
+Then In the Supplier Manager Popup I enter the following search term: saved as InvoiceNumber
+Then In the Supplier Manager Popup I click on the search button
+Then In the Supplier Manager Popup I should see supliers
+Then In the Supplier Manager Popup I click on the close button
+Then I call Shared Step - In the Supplier Manager popup I select radio button Invoice Number and enter search term with spaces: saved as InvoiceNumber
+ 

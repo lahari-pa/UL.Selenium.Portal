@@ -23,6 +23,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement Column(string columnTitle) => this.ContainerElement.FindElement(By.XPath($".//th//div[contains(text(),'{columnTitle}')]"), 2);
 		IWebElement RadioButton(string radio) => this.ContainerElement.FindElement(By.XPath($".//input[@type = 'radio'][following-sibling::text()[position()=1][contains(.,'{radio}')]]"), 2);
 		List<IWebElement> ToggleButtons => this.ContainerElement.FindElements(By.XPath(".//form[@id = 'frmFeatures']//tr"), 2).ToList();
+		private IWebElement Supplier => this.ContainerElement.FindElement(By.XPath(".//table[@id = 'listSupplierInfo']//tr[@id]"), 2);
+		public bool SupplierExists()
+		{
+			Report.Info("Attempting to confirm Supplier is displayed in table");
+			return this.Supplier != null;
+		}
 
 		public bool ToggleButtonsExists()
 		{

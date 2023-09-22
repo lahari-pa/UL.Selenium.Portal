@@ -268,6 +268,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(5);
 			}
 		}
+		[StepDefinition(@"in the PD+ page in the Edit Toolbar page I check the Datacodes status:")]
+		public void GivenICheckTheDatacodesAsFollows(Table table)
+		{
+			foreach (TableRow thisRow in table.Rows)
+			{
+				var thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+				if (thisStudioPowerDesignerPlusDesignMode.GetCurrentStatusOfDataCode(thisRow["datacode"]) != thisRow["value"])
+				{
+					thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
+					Delay.Seconds(15);
+					var thisGraphicEditor = new GraphicEditor();
+					Report.IsTrue(thisGraphicEditor.Wait_for_load(120), "Graphic editor has not loaded", "Graphic editor has loaded.");
+					string valueToSearchFor = "";
+
+					Report.Info($"Attempting to set value: {thisRow["value"]} for graphic: {thisRow["datacode"]}");
+					switch (thisRow["value"].ToLower())
+					{
+						case "pass":
+							valueToSearchFor = "DPQA_PASS";
+							break;
+						case "fail":
+							valueToSearchFor = "DPQA_FAIL";
+							break;
+						case "warn":
+							valueToSearchFor = "DPQA_PASS_WARN";
+							break;
+						case "na":
+							valueToSearchFor = "DPQA_NA";
+							break;
+						case "unknown":
+							valueToSearchFor = "DPQA_UNK";
+							break;
+						default:
+							throw new Exception("you must provide a valid value");
+					}
+
+					Report.IsTrue(thisGraphicEditor.SelectGraphic(valueToSearchFor),
+						"Failed to select graphic: " + valueToSearchFor, "Set graphic: " + valueToSearchFor);
+					Report.IsTrue(thisGraphicEditor.ClickButton("save"), "Failed to click save button",
+						"Clicked save button");
+					Delay.Seconds(1);
+					thisGraphicEditor.Wait_for_close();
+					Delay.Seconds(5);
+				}
+				else
+				{
+					Report.Info($"{thisRow["datacode"]} datacode is already set to {thisRow["value"]}");
+				}
+			}
+		}
+
 
 		[StepDefinition(@"in the Edit Toolbar page I check the following items:")]
 		public void GivenInTheEditToolbarPageICheckTheFollowingItems(Table table)
