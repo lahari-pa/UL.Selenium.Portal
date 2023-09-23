@@ -227,19 +227,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			UsageTypeSelect.Select(usage);
 			return (UsageTypeSelect.SelectedOption() == usage);
 		}
-		public bool FilterDataCode(string datacode)
+		public void FilterDataCode(string datacode)
 		{
-			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter - subsectionGrid - grid']"), 2);
-			FilterDataCode.Select(datacode);
-			return (FilterDataCode.SelectedOption() == datacode);
+			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter-subsectionGrid-grid']"), 2);
+			FilterDataCode.SendKeys(datacode);
 		}
 		public bool SelectDataCode(string data)
 		{
-			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid - grid']//tr"), 2);
-			SelectDataCode.Select(data);
-			return (SelectDataCode.SelectedOption() == data);
+			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid-grid']//tr[@id='subsectionGrid-grid0']"), 2);
+			return SelectDataCode.TryClick();
 		}
-		
 	}
 
 	class StudioPowerDesignerPlusDesignMode : BaseObject
@@ -542,22 +539,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickAddNewButton()
 		{
-			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
 			return AddNewButton.TryClick();
 		}
 		public bool ClickSaveAndClose()
 		{
-			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id= 'add - subsection - save - and - close']"));
+			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='add-subsection-save-and-close']"));
 			return SaveAndClose.TryClick();
 		}
-		public bool DataCodeTitleConfirm(string title)
+		public bool DataCodeTitleConfirm(string title, string value)
 		{
-			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[contains(@title,'{title}')]"));
-			return dataCodeTitle.Displayed;
+			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}') and //span[contains(text(),'{value}')]]"));
+			if (dataCodeTitle == null)
+			{
+				Report.Info("Datacode not found");
+				return false;
+			}
+			else
+			{
+				Report.Info("Datacode was found");
+				return true;
+			}
 		}
+		
 		public void DataCodeTitleClick(string title)
 		{
-			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[contains(@title,'{title}')]"));
+			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}')]"));
 			dataCodeTitleClick.RightClick();
 		}
 		public bool RemoveElementClick()
