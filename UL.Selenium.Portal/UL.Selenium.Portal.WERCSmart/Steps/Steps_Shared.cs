@@ -2,6 +2,7 @@ using NPOI.SS.Formula.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -102,16 +103,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					MyStepsNewProduct.ClickContinue();
 				}
 			}
-
-			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			//WercSmartSettings.TestCaseId = 101;
-			if (WercSmartSettings.TestCaseId == 0)
-			{
-				throw new Exception("ERROR: Failed to find TestCaseId!");
-			}
-
-			Report.Info($"The TestCaseId was found as: {WercSmartSettings.TestCaseId}");
-			Context.AddToContext($"TestCase{WercSmartSettings.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
@@ -751,16 +742,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
 			Report.StartSubStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		/// <summary>
@@ -1633,14 +1624,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			Report.StartSubStep("I set the Primary Physical State field to: Aerosol");
 			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
-			Report.StartSubStep("I set the Secondary Physical State field to: Liquid spray");
-			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
-			Report.StartSubStep("I set the pH field to: 10.4");
-			stepsProductCharacteristics.SetPHTo("10.4");
-			Report.StartSubStep("If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Soluble in water");
-			Report.StartSubStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			Report.StartSubStep("I set the Secondary Physical State field to: Solid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Solid spray");
+			Report.StartSubStep("I set the pH field to: 12");
+			stepsProductCharacteristics.SetPHTo("12");
+			Report.StartSubStep("I set the Water Solubility description to: No data available");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "No data available");
+			Report.StartSubStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then to: This product is classified as a D003 Hazardous Waste under RCRA.");
+			MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "This product is classified as a D003 Hazardous Waste under RCRA.");
 			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
@@ -1677,7 +1668,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe(row["Value"]);
 						break;
 					case "pH":
-						if (row["do not have exact data"]== "Yes")
+						if (row["do not have exact data"] == "Yes")
 						{
 							Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
 							MyNewProduct.SectExatcDataNotKnown("pH");
@@ -3079,8 +3070,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.Screenshot();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 
 		}
 
@@ -3101,6 +3092,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
+		[StepDefinition(@"I call Shared Step 40650 \(Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path\)")]
+		public void ICallSharedRegulatoryInformation1_TSCAShown_NoToProp65()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Complaint");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
+			Report.StartSubStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+		
 		[StepDefinition(@"I call Shared Step 214541 \(Waste Classification Data - Applicable Only to Nickel Metal Hydride \(NiMH\) Battery \(RU000373\)\)")]
 		[StepDefinition(@"I call Shared Step 214520 \(Waste Classification Data - Applicable Only to Alkaline Battery\)")]
 		public void ICallSharedStepRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
@@ -3375,6 +3382,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"United States of America");
 			}
 
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		[StepDefinition(@"I call Shared Step 234311 \(Product Information - Applicable Only to Light Bulbs - Germicidal Ultra Violet \(RU000962\)\)")]
+		public void ThenICallSharedStepProductInformation_ApplicableOnlyToLightBulbs_GermicidalUltraVioletRU()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Information");
+			Delay.Seconds(1);
+			var buttonTable = new Table(new string[] {
+				"Checkbox" });
+			buttonTable.AddRow(new string[] {
+				"United States"
+			});
+			buttonTable.AddRow(new string[] {
+				"Canada"
+			});
+			Report.StartSubStep(
+				"Verify options in section 'Select countries the product may be sold in' should be: United States, Canada");
+			MyStepsNewProduct.CheckCheboxesInSectionAndOrder("should", "Select countries the product may be sold in", buttonTable);
+			Report.StartSubStep(
+				"Verify selected option is United States by default in section 'Select countries the product may be sold in'");
+			Report.IsTrue(new NewProduct().SelectedOptionsForSection("Select countries the product may be sold in")
+				.Contains("United States"), "Failed to confirm selected option is United States by default", "Successfully confirmed selected option is United States by default");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -5561,6 +5596,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 
+	[StepDefinition(@"I call Shared Step 214644 \(Physical and Chemical Properties - Applicable Only to Bonding Agent\)")]
+		public void GivenICallSharedPhysicalChemicalProperties_applicable_only_to_bonding_agent()
+		{
+
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 20");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "20");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: 7.1 - 9.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "7.1 - 9.9");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			//Ticket 63666 indicates boiling point change from "Not tested/Unknown"
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			//Ticket 54725 indicates flash point change from ">=93C and <=815C"
+			Report.StartSubStep("I set the Flash Point (in Celsius) field to: >93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
+			Report.StartSubStep("I set the Flash Point Testing Method Used option to: Closed cup method");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			Report.StartSubStep("I set the Select the best Water Solubility description field to: Soluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+
 		[StepDefinition(@"I call Shared Step 228844 \(Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path\)")]
 		public void ThenICallSharedStepPhysicalandChemicalProperties_AerosolGasLiquidSolidAvailable_SelectSolid_Continue_HappyPath()
 		{
@@ -5787,14 +5856,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartSubStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
 			Report.StartSubStep(
 				"I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status",
 				"Compliant with Domestic Substances List (DSL)");
-			Report.StartSubStep("In the Waste Classification Data page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
 		}
 
 		[StepDefinition(
@@ -6135,6 +6204,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsNewProduct.ClickContinue();
 			}
 
+		}
+		[StepDefinition(@"I call Shared Step - In the Supplier Manager popup I select radio button (.*) and enter search term with spaces: (.*)")]
+		public void ThenICallSharedStep_InTheSupplierManagerPopupEnterSearchTermWithSpacesSavedAsInvoiceNumber(string radioButton, string searchTerm)
+		{
+			if(searchTerm.Contains("saved as "))
+			{
+				searchTerm = searchTerm.Replace("saved as ", "");
+			}
+
+			if (Context.GetFromContext(searchTerm) != null)
+			{
+				searchTerm = Context.GetFromContext(searchTerm).ToString();
+			}
+			Report.UseSubSteps = true;
+			var myStepsSha = new Steps_SHA();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space before it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(" " + searchTerm);
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with three space before it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm("   " + searchTerm);
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space afret it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with two space after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with one space before it and after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm(" " + searchTerm + " ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+			Report.StartSubStep("I Click 'Suppliers' in SHA Manager");
+			myStepsSha.IClickSuppliersInSHAManager();
+			Report.StartSubStep("In the Supplier Manager Popup I select radio button: Invoice Number");
+			myStepsSha.InSupplierManagerPopupISelectRadioButton(radioButton);
+			Report.StartSubStep("In the Supplier Manager Popup I enter the search term with thre space before it and three after it");
+			myStepsSha.InSupplierManagerPopupIEnterSearchTerm("   " + searchTerm + "   ");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the search button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			Report.StartSubStep("In the Supplier Manager Popup I should see supliers");
+			myStepsSha.ThenInTheSupplierManagerPopupIShouldSeeSupliers("should");
+			Report.StartSubStep("In the Supplier Manager Popup I click on the close button");
+			myStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
 		}
 
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
@@ -7078,7 +7234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = productDetails.Id;
 			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
-				x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+				x.Status == "Closed" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
 			{
 				Report.Info("Did not find matching job");
@@ -7868,46 +8024,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void Shared65969_GoToPdPlus_SelectYourProductAndCklt_Continue()
 		{
 			Report.UseSubSteps = true;
-			var selStepsSha = new Steps_SHA();
-			var selStepsStudio = new Steps_Studio();
-			Report.StartSubStep("I navigate to Power Designer Plus");
-			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
-			GeneralUtilities.StudioWaitForSpinner();
-			Report.StartSubStep("I filter by product ID");
-
-			if (WercSmartSettings.TestCaseId == 0)
-			{
-				throw new Exception("Needs the test case ID to fetch the product ID to continue!");
-			}
-
-			string id = Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId).ToString();
-			if (id == null)
-			{
-				throw new Exception($"Needs the product ID to be saved to context as 'TestCase{WercSmartSettings.TestCaseId}'!");
-			}
-
-			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
-			Report.StartSubStep("I confirm CKLT (Checklist) is selected as the subformat");
-			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
-			Report.StartSubStep("I click continue");
-			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisTopMenu = new StudioTopMenu();
+			Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Report.Screenshot();
 			Delay.Seconds(3);
+			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
+			thisPowerDesignerPlus.Wait_for_load(240);
+			Delay.Seconds(10);
 
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			if (!thisPowerDesignerPlus.Wait_for_load(240))
 			{
-				selStepsStudio.InPDIEnsureSECT2318IsActive();
-				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
 			}
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
-			{
-				selStepsStudio.InPDIEnsureSECT0077IsActive();
-				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
-			}
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(240), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+				"Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+				"Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
+				"Set format option");
+			Report.StartSubStep("I click the Edit Existing product radio button if not already selected");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
+				"Set action option");
+			Report.Screenshot();
+			Delay.Seconds(1);
+			Report.StartSubStep("I filter for the product");
+			var productDetails = (ProductInformation)Context.GetFromContext("TestCase" + WercSmartSettings.TestCaseId);
+			string id = productDetails.Id;
+			thisPowerDesignerPlus.EnterSourceProduct(id);
+			thisPowerDesignerPlus.ClickRefreshButton();
+			Delay.Seconds(120);
+			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			Report.StartStep("I click Continue");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
+			Delay.Seconds(120);
+			thisPowerDesignerPlus.Wait_for_load(240);
 		}
 
 		[StepDefinition(
@@ -13349,7 +13509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I don't need a WHMIS Compliant SDS");
 
 			Report.StartSubStep("I upload a PDF file to section: Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
-			MyNewProduct.UploadPDFFile("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProduct.UploadPDFFile("Label in both French and English", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 
 
 			Report.StartSubStep("In the Regulatory Documents to Provide page I click Continue");
@@ -13482,6 +13642,424 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					@"I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			MyNewProductSteps.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Battery Products\) for product saved as: (.*)")]
+		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisTopMenu = new StudioTopMenu();
+			
+			Report.StartSubStep(
+				"I set the data codes to show the Green check mark graphic in Reviewer Checklist section");
+			Report.Info("In power tools workspace I set edit to true");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			//new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"CAWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"EPAN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"HCM",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"OTC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RAUNDW",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DPQAUN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"WSWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+
+				//thisStepsStudio.InPDIEnsureSECT2318IsActive();
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0755] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Reviewer Checklist");
+
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			Report.StartSubStep(
+				"I set the data codes to show the Green check mark graphic in Battery/BCP Checklist section");
+			thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0756] Battery/BCP Checklist");
+			thisStepsStudio.GivenICheckTheDatacodesAsFollows(table2);
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("authoring");
+			Report.StartSubStep("I open the Current Document pop up using the tool bar icons");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			Report.StartSubStep("Select the Authorize Formula and Attributes for publishing check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			GeneralUtilities.StudioWaitForSpinner();
+			//Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+			//	"Set language option");
+			//Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+			//	"Set subformat option");
+			Report.StartSubStep("Select the Apply to all subformats check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Screenshot();
+			Report.Info("Clicked apply, waiting");
+			Delay.Seconds(10);
+			Report.Info("Now going to wait for spinner");
+			if (!GeneralUtilities.StudioWaitForSpinner(30))
+			{
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert())
+				{
+					Report.Info("Spinner is still showing but alert is there.");
+					Report.Screenshot();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				}
+			}
+			Report.StartSubStep("I close Current Document window");
+			thisStepsStudio.GivenICloseCurrentDocument();
+
+		}
+		[StepDefinition(@"I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product")]
+		public void ThenICallSharedStepPowerDesignerPlus_APPLYRULESToProduct()
+		{
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("wizards");
+			Report.StartSubStep("I select the Apply Rules icon from the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			Report.StartSubStep("I select the Single rule radio button");
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			Report.StartSubStep("I click the three ... icon to open the Select Rule pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			Report.StartSubStep("I click the filter icon");
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			Report.StartSubStep("In the rule name filter box I enter the studio user name");
+			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+
+			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Report.StartSubStep("I select the rule  by clicking on it");
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			Report.StartSubStep("I click Apply");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(10);
+			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				Delay.Seconds(1);
+			}
+
+			Report.StartSubStep("I close the Apply Rules pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+			if (new ApplyRulesPage().Wait_for_load(20))
+			{
+				Delay.Seconds(3);
+				Report.Info("Clicking on close in apply rules popup did not work. Trying again...");
+				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+				Report.Screenshot();
+				Delay.Seconds(3);
+				if (new ApplyRulesPage().Wait_for_load(1))
+				{
+					Report.Error("Apply rules popup did not close after two attempts");
+					SeleniumBrowser.WebBrowser.Close();
+				}
+			}
+		}
+
+		[StepDefinition(@"I call Sared Step 214627 Power Designer Plus - PUBLISH Product \(Applicable Only to Battery Products \): (.*)")]
+		public void ThenICallSaredStepPowerDesignerPlus_PUBLISHProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
+		{
+			var thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("product");
+			Report.StartSubStep("I click the Document queue icon in the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			Report.StartSubStep("I click the filter icon");
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			Report.StartSubStep("I enter the product id in the Product/Alias area of the filter and click Apply");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			for (int i = 0; i < 5; i++)
+			{
+				Delay.Seconds(5);
+				Report.Screenshot();
+				var newDocumentQueuePage = new DocumentQueuePage();
+				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+					"Document queue page loaded");
+				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+				if (listOfDocuments.Count > 0)
+				{
+					break;
+				}
+			}
+			Report.StartSubStep(
+				"I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
+			var tblCheckDocument = new Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"Language",
+				"DocType",
+				"Authorized"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"CKLT",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWHD",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWST",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF",
+				"3"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			Report.StartSubStep("I click Process Documents");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Delay.Seconds(4);
+			//Report.Screenshot();
+			Report.Info($"waiting for spinner...");
+			GeneralUtilities.StudioWaitForSpinner(60);
+			Report.Info($"fFinished waiting for spinner...");
+			Report.StartSubStep(
+				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			Report.StartSubStep("I click OK ");
+			thisStepsStudio.ICloseAlert();
+			Report.StartSubStep("I close the Document queue window");
+			var thisTopMenu = new StudioTopMenu();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+			Report.StartSubStep("I open Job Queue window");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			thisTopMenu.ClickSubMenu("System", "Job Queue");
+			GeneralUtilities.StudioWaitForSpinner();
+			Delay.Seconds(5);
+			var thisStudioJobQueue = new StudioJobQueue();
+			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
+				"Job queue has loaded");
+			Delay.Seconds(5);
+			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
+				x.Status == "Working" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+			if (matchingJob == null)
+			{
+				Report.Info("Did not find matching job");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Success("Found job as expected");
+				//Wait for job to not appear in the list
+				for (int i = 0; i < 2; i++)
+				{
+					thisStudioJobQueue = new StudioJobQueue();
+					if (Report.IsTrue(thisStudioJobQueue.TopBarMenuButtonExists("Refresh"), "Failed to find Refresh button", "Successfully found Refresh button"))
+					{
+						Report.IsTrue(thisStudioJobQueue.ClickTopBarMenuBotton("Refresh"), "Failed to click Refresh button", "Successfully clicked Refresh button");
+					}
+					ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+					matchingJob = ListOfJobs.FirstOrDefault(x =>
+						x.Status == "Working" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+					if (matchingJob == null)
+					{
+						Report.Info("Job is no longer found so assume it has completed");
+						Report.Screenshot();
+					}
+					Delay.Seconds(1);
+				}
+			}
+			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("History"), "Failed to click History button", "Successfully clicked History button");
+			Delay.Seconds(3);
+			if (Report.IsTrue(thisStudioJobQueue.TopBarMenuButtonExists("Refresh"), "Failed to find Refresh button", "Successfully found Refresh button"))
+			{
+				Report.IsTrue(thisStudioJobQueue.ClickTopBarMenuBotton("Refresh"), "Failed to click Refresh button", "Successfully clicked Refresh button");
+			}
+			List<Job> ListOfJobsInHistory = thisStudioJobQueue.GetFirstXJobs(20);
+			Job matchingJobInHistory = ListOfJobsInHistory.FirstOrDefault(x =>
+				x.Status == "Closed" && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+			if (matchingJobInHistory == null)
+			{
+				Report.Info("Did not find matching job in History tab");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Found matching job in History tab");
+				Report.Screenshot();
+			}
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var globalSteps = new GlobalSteps();
+			Report.StartSubStep("I switch to the PD+ tab");
+			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			Delay.Seconds(30);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickRefreshButtonLeft(), "Failed to click Refresh button", "Successfully clicked Refresh button");
+			Delay.Seconds(30);
+			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
+			Report.IsTrue(thisPowerDesignerPlus.ProductIsCheckedOutIconDisplayed(), "Failed to find 'Product is Checked Out' icon", "Successfully 'Product is Checked Out' icon");
+		}
+		
+
+		[StepDefinition(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\): (.*)")]
+		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts(string savedAs)
+		{
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.UseSubSteps = true;
+			var thisTopMenu = new StudioTopMenu();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var globalSteps = new GlobalSteps();
+			var newValueEditor = new ValueEditor();
+			Report.StartSubStep("I switch to the PD+ tab");
+			globalSteps.WhenISwitchToTheTab("Power Designer Plus");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickSearchFormatSubformat(), "Failed to click Search button", "Successfully clicked Search button");
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Format"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Format/SubFormat");
+					Report.Screenshot();
+					break;
+				}
+			}
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
+				"Set format option");
+			var selStepsStudio = new Steps_Studio();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			// 'If you can't click on them select Options and make sure Edit mode is selected.'
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("SECT0069"))
+			{
+				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
+			}
+			Report.Info($"Getting saved product: {savedAs}");
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error($"Context does not contain: {savedAs}");
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			string productName = product.Name;
+			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
+			newValueEditor.ClickButton("Cancel");
+			Report.IsTrue(battManufacturer.Contains(productName), "Failed to confirm Battery Manufacturers section contains correct product name", "Successfully confirmed confirm Battery Manufacturers section contains correct product name");
+			Report.IsTrue(battManufacturer.Contains(id), "Failed to confirm Battery Manufacturers section contains correct product ID", "Successfully confirmed confirm Battery Manufacturers section contains correct product ID");
+			string battType = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATYPE");
+			Report.IsTrue(battType.Contains("Carbon zinc"), "Failed to confirm Battery Types section contains correct battery type", "Successfully confirmed Battery Types section contains correct battery type");
+			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATTT");
+			Report.IsTrue(battItself.Contains("1"), "Failed to confirm 'Product Itself is a battery' section contains value '1'", "Successfully confirmed 'Product Itself is a battery' section contains value '1'");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DoubleClickCategory("BATACT"), "Failed to double click category", "Successfully double clicked category");
+			//selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("[BATACT]");
+			newValueEditor.EnterValueIntoField("1");
+			newValueEditor.ClickButton("Save");
+		}
+
+
+		[StepDefinition(@"I call Shared step 214825 \(Additional Documents to Provide - Upload Product Label - Continue\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_UploadProductLabel_Continue_()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartSubStep(
+					@"I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Product Label", "Volatile Organic Compounds", @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}

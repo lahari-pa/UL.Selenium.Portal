@@ -91,7 +91,7 @@ Then I call Shared Step 57500 (The Product- Enter name, select product type - Co
 Then I save the product information as: Product200434
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |
@@ -136,7 +136,7 @@ Then I call Shared Step 57500 (The Product- Enter name, select product type - Co
 Then I save the product information as: Product200449
 Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |

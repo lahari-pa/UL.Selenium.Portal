@@ -2367,7 +2367,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "orderHistoryContainer")]
 		protected override IWebElement containerElement { get; set; }
 		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-default' and contains(text(),'{value}')]"), 2);
-
+		private IWebElement InvoiceNumber => this.containerElement.FindElement(By.XPath(".//span[@data-bind = 'text: OrderNumber']"), 2);
 		public bool Order_History_Select(string history_type)
 		{
 			Report.Info("Beginning Order_History_Select");
@@ -2395,7 +2395,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info(history_type + " Found - Attempting to Select");
 			myType.Click();
 			Delay.Seconds(1 * Delay.SpeedFactor);
+			var homepage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homepage.WaitLoading();
 			return true;
+		}
+		public bool InvoiceNumberExists()
+		{
+			Report.Info("Attempt to find invoice number");
+			return this.InvoiceNumber != null;
+		}
+		public string GetFirstInvoiceNumber()
+		{
+			Report.Info("Attempt to get invoice number");
+			return this.InvoiceNumber.Text;
 		}
 		public string Get_Invoice_Number(string submitted_by)
 		{

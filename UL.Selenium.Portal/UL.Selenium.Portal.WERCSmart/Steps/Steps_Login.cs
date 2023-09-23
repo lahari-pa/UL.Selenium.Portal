@@ -17,9 +17,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class StepsLogin
 	{
 		[StepDefinition(@"I click on the Forgot Your Password Link")]
-		[When(@"I click on the Forgot Your Password Link")]
-		[StepDefinition(@"I click on the Forgot Your Password Link")]
-		[StepDefinition(@"I click on the Forgot Your Password Link")]
 		public void GivenIClickOnTheForgotYourPasswordLink()
 		{
 			Report.IsTrue(new Login().Click_Forgotten_Password(), "Failed to click 'Forgot Your Password?'", "Successfully clicked 'Forgot Your Password?'");

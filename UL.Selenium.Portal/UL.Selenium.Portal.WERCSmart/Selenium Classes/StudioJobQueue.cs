@@ -16,6 +16,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public const string BasePath = "//iframe[@id='Widget3FRAME']";
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
+		private IWebElement TopBarMenuButton(string button) => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//div[@class='ui-jqgrid-view']//div[@title = '{button}']"));
+		public bool TopBarMenuButtonExists(string button)
+		{
+			Report.Info($"Attempt to find button {button}");
+			return this.TopBarMenuButton(button) != null;
+		}
+		public bool ClickTopBarMenuBotton(string button)
+		{
+			return this.TopBarMenuButton(button).TryClick();
+		}
 
 		public bool WaitForJobInformationList(int secondsToWait)
 		{

@@ -18,9 +18,9 @@ Feature: Account has Partial Stewardship Data
 
 
 Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username   | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto4 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Given I verify the following users exist and if not I create them using SHAUser
+| username   | FirstName | LastName   | Role         | EmailAddress                |
+| SHAQAAuto4 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #@ignore
 @TestCase:86114

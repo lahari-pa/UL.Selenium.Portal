@@ -183,7 +183,6 @@ Scenario: [64854] Navigation Settings
 		| My Messages          |
 		| Retail Partners      |
 		| My Reports           |
-		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
 	And I click on Sign Out
@@ -321,13 +320,13 @@ Scenario: [231100] Announcements - Add
 
 @TestCase:58579
 Scenario: [58579] Live Help - Chat Feature
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click on the Live Help button on the upper right
 	Then I should see the Live Help dialog
 	Then In the Live Help dialog I should see a small icon with three lines in the upper left hand corner
 	Then In the Live Help dialog I should see an x in the upper right hand corner
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
-    Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
+    Then In the Live Help dialog I should see the following text in the message area: Hello there! Thank you for being a UL WERCSmart User. Reach out to us right here, and we'll get back to you as soon as we can! How may I help you today?
 	#Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
 	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
 	Then In the Live Help dialog I should see the paperclip icon in the lower right hand corner

@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to, ${page } is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to", "${page } is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -3594,7 +3594,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
 		}
-
 	}
 
 	//public class UPCWarning : SeleniumBaseObject
