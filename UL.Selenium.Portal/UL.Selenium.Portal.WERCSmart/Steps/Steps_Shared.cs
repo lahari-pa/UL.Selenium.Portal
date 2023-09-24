@@ -7771,21 +7771,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Format",
 				"Subformat",
 				"Language",
-				"DocType"
-			});
-			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
-				"MTR",
-				"SBCS",
-				"EN",
-				"PDF"
+				"DocType",
+				"Authorized"
 			});
 			tblCheckDocument.AddRow(new string[] {
 				"saved as " + savedAs,
 				"MTR",
 				"CKLT",
 				"EN",
-				"PDF"
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWHD",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"HWST",
+				"EN",
+				"PDF",
+				"3"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
+				"EN",
+				"PDF",
+				"3"
 			});
 			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
 			Delay.Seconds(3);
