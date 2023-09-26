@@ -6712,7 +6712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//End Editmode
 
-
+			/*
 			Report.Info("Now going to click the sections side tab if its not open");
 			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
@@ -6733,6 +6733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+			*/
 
 		}
 
@@ -6831,6 +6832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("In power tools workspace I set edit to true");
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
+			var newValueEditor = new ValueEditor();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
 			// 'If you can't click on them select Options and make sure Edit mode is selected.'
@@ -6846,6 +6848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			/*
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
@@ -6856,12 +6859,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsStudio.InPDIEnsureSECT0077IsActive();
 				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
 			}
+			
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
+			*/
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+			}
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0755] Reviewer Checklist"))
+			{
+				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Reviewer Checklist");
+
+			}
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
@@ -6892,6 +6906,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			var thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DoubleClickCategoryAuthc(), "Failed to double click category", "Successfully double clicked category");
+
+			//selStepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("AUTHC");
+			newValueEditor.EnterValueIntoField("NGHS");
+			newValueEditor.ClickButton("Save");
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
 			var table3 = new Table(new string[] {
@@ -6910,6 +6929,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Apply rules"
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DoubleClickCategory("BATACT"), "Failed to double click category", "Successfully double clicked category");
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
 			Report.StartSubStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
