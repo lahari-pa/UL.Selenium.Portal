@@ -663,7 +663,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "West Virginia", "WV" },
 				{ "Wisconsin", "WI" },
 				{ "Wyoming", "WY" }
-			};
+				};
 			}
 
 		}
@@ -701,18 +701,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		private List<IWebElement> GetButtons(string value)
+		{
+			
+			var values = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath($".//*[@value='{value}']|.//*[text()='{value}']"), 2).ToList();
+			return values;
+		}
 
-
-
-
-
-
-
-
-
-
-
-
+		internal bool TryClickButton(string buttonValue, out string errMsg)
+		{
+			errMsg = null;
+			List<IWebElement> foundButtons = this.GetButtons(buttonValue).Where(x => x.Displayed).ToList();
+			if (foundButtons.Count == 0)
+			{
+				errMsg = $"Could not find the button '{buttonValue}'";
+				return false;
+			}
+			if (foundButtons.Count > 1)
+			{
+				errMsg = $"There was more then one button with the value '{buttonValue}'";
+				return false;
+			}
+			IWebElement button = foundButtons[0];
+			if (!button.TryClick())
+			{
+				errMsg = "Button found but could not be clicked.";
+				return false;
+			}
+			return true;
+		}
 	}
 }
 
