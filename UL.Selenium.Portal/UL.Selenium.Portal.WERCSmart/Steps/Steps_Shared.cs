@@ -13725,8 +13725,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 		
 
-		[StepDefinition(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\): (.*)")]
-		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts(string savedAs)
+		[StepDefinition(@"I call Shared Step 214632\(Power Designer Plus - MTR/BATT - Update BATACT \(Active Battery Indicator\) to Finish Processing Battery \(Alone\) Products\):")]
+		public void ThenICallSharedStepPowerDesignerPlus_MTRBATT_UpdateBATACTActiveBatteryIndicatorToFinishProcessingBatteryAloneProducts(Table table)
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
@@ -13773,12 +13773,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0069] Battery Information");
 			}
-			Report.Info($"Getting saved product: {savedAs}");
-			if (!Context.Contains(savedAs))
+			Report.Info($"Getting saved product: {table.Rows[0]["ProductId"]}");
+			if (!Context.Contains(table.Rows[0]["ProductId"]))
 			{
-				Report.Error($"Context does not contain: {savedAs}");
+				Report.Error($"Context does not contain: {table.Rows[0]["ProductId"]}");
 			}
-			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			var product = (ProductInformation)Context.GetFromContext(table.Rows[0]["ProductId"]);
 			string id = product.Id;
 			string productName = product.Name;
 			string battManufacturer = thisStudioPowerDesignerPlusDesignMode.GetCategoryValue("Battery Manufacturers");
@@ -13786,7 +13786,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(battManufacturer.Contains(productName), "Failed to confirm Battery Manufacturers section contains correct product name", "Successfully confirmed confirm Battery Manufacturers section contains correct product name");
 			Report.IsTrue(battManufacturer.Contains(id), "Failed to confirm Battery Manufacturers section contains correct product ID", "Successfully confirmed confirm Battery Manufacturers section contains correct product ID");
 			string battType = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATYPE");
-			Report.IsTrue(battType.Contains("Carbon zinc"), "Failed to confirm Battery Types section contains correct battery type", "Successfully confirmed Battery Types section contains correct battery type");
+			Report.IsTrue(battType.Contains(table.Rows[0]["BatteryType"]), "Failed to confirm Battery Types section contains correct battery type", "Successfully confirmed Battery Types section contains correct battery type");
 			string battItself = thisStudioPowerDesignerPlusDesignMode.GetCurrentValueInMTRFormat("BATTT");
 			Report.IsTrue(battItself.Contains("1"), "Failed to confirm 'Product Itself is a battery' section contains value '1'", "Successfully confirmed 'Product Itself is a battery' section contains value '1'");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DoubleClickCategory("BATACT"), "Failed to double click category", "Successfully double clicked category");
