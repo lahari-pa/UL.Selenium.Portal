@@ -6709,10 +6709,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
 
-
 			//End Editmode
-
-			/*
+			//Commented section below as it doesn't correspond to TC in TFS
+			/* 
 			Report.Info("Now going to click the sections side tab if its not open");
 			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
@@ -6848,6 +6847,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+
+			//Commented section below as it doesn't correspond to TC in TFS
+
 			/*
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
