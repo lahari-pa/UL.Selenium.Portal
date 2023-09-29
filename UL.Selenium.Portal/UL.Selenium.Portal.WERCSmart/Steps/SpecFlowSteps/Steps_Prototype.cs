@@ -62,9 +62,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-					$"Failed to set the input to {option.Trim()} in section: {section.Trim()}",
-					$"Successfully set the input to {option.Trim()} in section: {section.Trim()}");
+				section=section.Trim();
+				option = option.Trim();
+				Report.IsTrue(thisNewProduct.SetOptionInSection(section, option),
+					$"Failed to set the input to {option} in section: {section}",
+					$"Successfully set the input to {option} in section: {section}");
 				Delay.Seconds(1);
 			}
 		}
