@@ -708,7 +708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return values;
 		}
 
-		internal bool TryClickButton(string buttonValue, out string errMsg)
+		internal bool TryClickUniqueButton(string buttonValue, out string errMsg)
 		{
 			errMsg = null;
 			List<IWebElement> foundButtons = this.GetButtons(buttonValue).Where(x => x.Displayed).ToList();

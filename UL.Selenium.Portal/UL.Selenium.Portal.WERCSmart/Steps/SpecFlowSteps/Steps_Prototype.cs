@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var value = Context.GetFromContext(option)?.ToString();
 				if (value == null)
 				{
-					throw new Exception($"Could not find item in context: { value } for checking field input is correct value!");
+					throw new Exception($"Could not find item in context: { option } for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
 					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
