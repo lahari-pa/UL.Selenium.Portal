@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.DistributorSteps.New_Product
 	[Binding, Scope(Tag = "Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryInformation2")]
 	internal class RegulatoryInformation2
 	{
-		[StepDefinition(@"In the New Product Section, set the radio option in section: 'Product contains microbeads': to: (Yes|No)")]
+		[StepDefinition(@"In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads': to: (Yes|No)")]
 		public void SelectProductTypeToCreate(string option)
 		{
 			string section = "Product contains microbeads";
