@@ -446,7 +446,7 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase213905)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213905)
 	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue for CKLT and MTR only) for product saved as: TestCase213905
+	Given I call Shared Step 209526(b) (WPS Studio - PD+ - set all data and publish using rule and doc queue for CKLT and MTR only) for product saved as: TestCase213905
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase213905
 	When I switch to the 'Power Designer Plus' tab

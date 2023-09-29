@@ -15831,9 +15831,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
 		}
 		[StepDefinition(
-			@"I call Shared Step 209526 \(WPS Studio - PD\+ - set all data and publish using rule and doc queue for CKLT and MTR only\) for product saved as: (.*)")]
-		public void GivenICallSharedStep209526WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndMTROnly(
-			string savedAs)
+			@"I call Shared Step 209526(b) \(WPS Studio - PD\+ - set all data and publish using rule and doc queue for CKLT and MTR only\) for product saved as: (.*)")]
+		public void GivenICallSharedStep209526WPSStudio_PD_SetAllDataAndPublish_CKLTAndMTROnly(string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
 			{
