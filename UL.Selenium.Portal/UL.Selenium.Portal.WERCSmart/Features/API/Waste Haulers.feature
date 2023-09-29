@@ -10,6 +10,7 @@
 @ProductGrid
 Feature: [API] Waste Haulers
 
+@OnlyInStaging
 @ScenarioId:1382
 Scenario: Waste Hauler API Test
 	Given I authenticate WasteHauler username: WasteHaulerAPITest@ydcdps5a.mailosaur.net, password: Welcome1!
