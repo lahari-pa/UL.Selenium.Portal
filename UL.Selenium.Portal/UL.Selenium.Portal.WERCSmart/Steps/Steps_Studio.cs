@@ -2063,14 +2063,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
-
-
-
 		}
-
-
-
-
-
+		public void ISetUsageType(string usageType)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");
+		}
+		public void IFilterDatacode(string datacode)
+		{
+			new StudioPowerDesignerPlus().FilterDataCode(datacode);
+		}
+		public void ISelectDataCode(string data)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SelectDataCode(), $"Failed to select datacode:{data}", $"Successfully selected datacode {data} is set");
+		}
+		
+		[StepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
+		public void GivenIConfirmDataCodeAdded(string data, string value)
+		{
+			try
+			{
+				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
+					"Power designer has opened");
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DataCodeTitleConfirm(data, value), $"Failed to find '{data}'", $"Succesfully found '{data}'");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
+		}
+		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product")]
+		public void GivenIRemoveDataCode(string datacode)
+		{
+			try
+			{
+				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.DataCodeTitleClick(datacode);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.RemoveElementClick(), $"Failed to click remove element", $"Succesfully clicked remove element");
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert(2))
+				{
+					Report.Info("Found an alert");
+					string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+					Report.Info("Got an alert: " + alertText);
+				}
+				else
+				{
+					Report.Info("Did not find an alert");
+				}
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
+		}
 	}
 }
