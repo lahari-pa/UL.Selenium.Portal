@@ -7823,7 +7823,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) with data: (.*) to the Section - Applicable Only to Type of Product: GRASS SEED")]
+			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) with data: (.*) to the Section - Applicable Only to Type of Product")]
 		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode,string data)
 		{
 			
@@ -7834,15 +7834,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
 				"Power designer has opened");
 			thisStudioPowerDesignerPlusDesignMode.ClickAddNewButton();
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 			thisStepsStudio.ISetUsageType(usageType);
 			thisStepsStudio.IFilterDatacode(dataCode);
 			Delay.Seconds(5);
 			thisStepsStudio.ISelectDataCode(data);
 			Delay.Seconds(5);
 			thisStudioPowerDesignerPlusDesignMode.ClickSaveAndClose();
-			GeneralUtilities.StudioWaitForSpinner(30);
-			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+			GeneralUtilities.StudioWaitForSpinner(60);
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60);
 		}
 		
 		[StepDefinition(@"I call Shared Step 79501 \(WPS Studio - PD\+ - Create Component for 3rd party product\)")]
@@ -15145,105 +15145,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 
-		}
-
-		[StepDefinition(@"I call Shared Step 120845 \(WPS Studio - PD\+ - change to MTR/CKLT for product saved as: (.*)\)")]
-		public void GivenICallSharedStepWPSStudio_PD_ChangeToMTRCKLTForProductSavedAsTestCase(string savedAs)
-		{
-			var thisStudioPowerDesignerPlusDesignMode =
-				new StudioPowerDesignerPlusDesignMode();
-
-			if (Context.Contains("ElectronicProduct"))
-			{
-				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
-				{
-					Report.Info("Skipping step because this is an electronic product");
-					return;
-				}
-			}
-
-			Report.UseSubSteps = true;
-			var thisTopMenu = new StudioTopMenu();
-			Report.StartSubStep("I click the Authoring menu option and Select Power Designer Plus");
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
-			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
-				"Failed to navigate to power designer plus", "Navigated to power designer plus");
-			Report.Screenshot();
-			Delay.Seconds(3);
-			Report.StartSubStep("I select EN as the Language, MTR/CKLT as the format/subformat");
-			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			if (!thisPowerDesignerPlus.Wait_for_load(120))
-			{
-
-				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
-				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
-				Delay.Seconds(3);
-			}
-
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(60), "Power designer plus has not loaded",
-				"Power designer plus has loaded");
-			Report.Info("Setting power designer plus options...");
-			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
-				"Set language option");
-			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
-				"Set subformat option");
-			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
-				"Set format option");
-			Report.StartSubStep("I click the Edit Existing product radio button if not already selected");
-			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
-				"Set action option");
-			Report.Screenshot();
-			Delay.Seconds(1);
-			Report.StartSubStep("I filter for the product");
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string id = productDetails.Id;
-			thisPowerDesignerPlus.EnterSourceProduct(id);
-			thisPowerDesignerPlus.ClickRefreshButton();
-			Delay.Seconds(3);
-
-			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
-			Report.StartSubStep("I click Continue");
-			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
-			Delay.Seconds(3);
-			thisPowerDesignerPlus.Wait_for_load(60);
-
-			//HERE ADD EDITMODE
-
-			Report.Info("In power tools workspace I set edit to true");
-
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
-				"Power designer has opened");
-			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
-			Delay.Seconds(1);
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
-				"Document options panel has not opened",
-				"Document options panel has opened");
-			Report.Info($"spinner wait...");
-			Report.Screenshot();
-			GeneralUtilities.StudioWaitForSpinner(120);
-			Report.Info($"spinner wait end.");
-			Report.Screenshot();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
-				"Successfully set edit to true");
-			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-
-
-			//End Editmode
-
-
-			Report.Info("Now going to click the sections side tab if its not open");
-			thisPowerDesignerPlus.Wait_for_load(60);
-			var selStepsStudio = new Steps_Studio();
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			selStudioPowerDesignerPlus.Wait_for_load(60);
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0877"))
-			{
-				selStepsStudio.InPDIEnsureSECT0877IsActive();				
-			}			
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(@"I call Shared Step 92580 \(Click \.\.\. in Actions > Update Data > Summary Page - Edit Product\)")]

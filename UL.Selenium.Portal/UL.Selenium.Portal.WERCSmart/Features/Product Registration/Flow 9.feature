@@ -445,23 +445,23 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase213910)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213910)
-	Given I call Shared Step 120845 (WPS Studio - PD+ - change to MTR/CKLT for product saved as: TestCase213910)
+	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
 	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase213910
-	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product: GRASS SEED
-	Given I confirm data code:FERTN with data:Nitrogen / Nitrates (“N”) with value:21 added
-	Given I remove the Datacode:Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product:  GRASS SEED	
-	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTK with data: Potassium (“K”) to the Section - Applicable Only to Type of Product: GRASS SEED
-	Given I confirm data code:FERTK with data:Potassium (“K”) with value:4 added
-	Given I remove the Datacode:Potassium (“K”) to the Section - Applicable Only to Type of Product:  GRASS SEED	
-	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTP with data: Phosphates / Phosphorous (“P”) to the Section - Applicable Only to Type of Product: GRASS SEED
-	Given I confirm data code:FERTP with data:Phosphates / Phosphorous (“P”) with value:22 added
-	Given I remove the Datacode:Phosphates / Phosphorous (“P”) to the Section - Applicable Only to Type of Product:  GRASS SEED	
-	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTS with data: Slow-Release Agent to the Section - Applicable Only to Type of Product: GRASS SEED
-	Given I confirm data code:FERTS with data:Slow-Release Agent with value:10.50 added
-	Given I remove the Datacode:Slow-Release Agent to the Section - Applicable Only to Type of Product:  GRASS SEED	
-	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode PCFR with data: Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product: GRASS SEED
-	Given I confirm data code:PCFR with data:Restricted Fertilizer in Pinellas County, Florida with value:May be sold only October 1 through May 31, Pinellas County, Florida added
-	Given I remove the Datacode:Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product:  GRASS SEED
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Nitrogen / Nitrates (“N”) with value:21 added
+	Given I remove the Datacode:Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTK with data: Potassium (“K”) to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Potassium (“K”) with value:4 added
+	Given I remove the Datacode:Potassium (“K”) to the Section - Applicable Only to Type of Product	
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTP with data: Phosphates / Phosphorous (“P”) to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Phosphates / Phosphorous (“P”) with value:22 added
+	Given I remove the Datacode:Phosphates / Phosphorous (“P”) to the Section - Applicable Only to Type of Product	
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTS with data: Slow-Release Agent to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Slow-Release Agent with value:10.50 added
+	Given I remove the Datacode:Slow-Release Agent to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode PCFR with data: Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Restricted Fertilizer in Pinellas County, Florida with value:May be sold only October 1 through May 31, Pinellas County, Florida added
+	Given I remove the Datacode:Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase213910)
 

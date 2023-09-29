@@ -203,18 +203,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void ISetUsageType(string usageType)
 		{
-			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");
-			Delay.Seconds(2);
+			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");	
 		}
 		public void IFilterDatacode(string datacode)
 		{
 			new StudioPowerDesignerPlus().FilterDataCode(datacode);
-			Delay.Seconds(2);
 		}
 		public void ISelectDataCode(string data)
 		{
-			Report.IsTrue(new StudioPowerDesignerPlus().SelectDataCode(data), $"Failed to select datacode:{data}", $"Successfully selected datacode {data} is set");
-			Delay.Seconds(5);
+			Report.IsTrue(new StudioPowerDesignerPlus().SelectDataCode(), $"Failed to select datacode:{data}", $"Successfully selected datacode {data} is set");
 		}
 
 		public void ISetTheAuthoringCompleteCodeToNGHS()
@@ -2079,27 +2076,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 		}
-		[StepDefinition(@"In Power Designer I ensure SECT0877 is the Active Section")]
-		public void InPDIEnsureSECT0877IsActive()
-		{
-			string click = "left";
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			if (new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT0877]"))
-			{
-				Report.Success("The Section was already active");
-				return;
-			}
-			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
-								"Studio power designer is open");
-			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT0877] WALMART QC RESPONSE FORM", click),
-				"Failed to " + click + " click section: " + "[SECT0877] WALMART QC RESPONSE FORM",
-				"Successfully " + click + " clicked " + "[SECT0877] WALMART QC RESPONSE FORM");
-			Delay.Seconds(3);
-			return;
-		}
-
-		[StepDefinition(@"I confirm data code:(.*) with data:(.*) with value:(.*) added")]
-		public void GivenIConfirmDataCodeAdded(string datacode, string data, string value)
+		
+		[StepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
+		public void GivenIConfirmDataCodeAdded(string data, string value)
 		{
 			try
 			{
@@ -2116,7 +2095,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 			}
 		}
-		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product:  GRASS SEED")]
+		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product")]
 		public void GivenIRemoveDataCode(string datacode)
 		{
 			try

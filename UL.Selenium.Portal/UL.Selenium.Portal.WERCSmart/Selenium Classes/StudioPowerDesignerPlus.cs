@@ -239,7 +239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter-subsectionGrid-grid']"), 2);
 			FilterDataCode.SendKeys(datacode);
 		}
-		public bool SelectDataCode(string data)
+		public bool SelectDataCode()
 		{
 			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid-grid']//tr[@id='subsectionGrid-grid0']"), 2);
 			return SelectDataCode.TryClick();
