@@ -21,9 +21,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.DistributorSteps.New_Product
 	internal class RegulatoryInformation2
 	{
 		[StepDefinition(@"In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads': to: (Yes|No)")]
-		public void SelectProductTypeToCreate(string option)
+		public void SelectProductContainsMicrobeads(string option)
 		{
 			string section = "Product contains microbeads";
+			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+		}
+		[StepDefinition(@"In the Regulatory Information 2 Section, set the option in section: 'Product is considered ""Rinse off""': to: (Yes|No)")]
+		public void SelectProductRinseOff(string option)
+		{
+			string section = "Product is considered \"Rinse off\"";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 	}
