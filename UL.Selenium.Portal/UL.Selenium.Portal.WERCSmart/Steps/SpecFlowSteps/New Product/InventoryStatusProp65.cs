@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string section = "Canadian Environmental Protection Act (CEPA) status";
 				new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 			}
-			[StepDefinition(@"In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?': to: (Yes|No")]
+			[StepDefinition(@"In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?': to: (Yes|No)")]
 			public void SelectProp65(string option)
 			{
 				string section = "Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?";
@@ -52,9 +52,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			}
 
 			[StepDefinition(@"In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor short-form warning- indicate which of the following is provided:': to: (WARNING: Cancer -|WARNING: Reproductive Harm -|WARNING: Cancer and Reproductive Harm -)")]
-			public void SelectIfTheProductCarriesASafeHarborShortFormWarning(string option)
+			public void SelectIfTheProductCarriesASafeHarborShortFormWarningIndicateWhichIsProvided(string option)
 			{
 				string section = "If the product carries a safe-harbor short-form warning- indicate which of the following is provided:";
+				new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			}
+			[StepDefinition(@"In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: (	This product can expose you to chemicals including [name of one or more chemicals]- which is [are] known to the State of California to cause cancer. For more information go to|	This product can expose you to chemicals including [name of one or more chemicals]- which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to|	This product can expose you to chemicals including [name of one or more chemicals]- which is [are] known to the State of California to cause cancer- and [name of one or more chemicals]- which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to|	This product can expose you to chemicals including [name of one or more chemicals]- which is [are] known to the State of California to cause cancer and birth defects or other reproductive harm. For more information go to|Does not apply)")]
+			public void SelectIfTheProductCarriesASafeHarborShortFormWarningIndicateWhichIsUsed(string option)
+			{
+				string section = "If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:";
 				new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 			}
 
