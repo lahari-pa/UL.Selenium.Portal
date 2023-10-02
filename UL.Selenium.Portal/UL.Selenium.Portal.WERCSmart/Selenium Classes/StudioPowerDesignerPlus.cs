@@ -228,8 +228,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
-
-
+		public bool SetUsageType(string usage)
+		{
+			IWebElement UsageTypeSelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='ucSelUsage_ddlUsages']"), 2);
+			UsageTypeSelect.Select(usage);
+			return (UsageTypeSelect.SelectedOption() == usage);
+		}
+		public void FilterDataCode(string datacode)
+		{
+			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter-subsectionGrid-grid']"), 2);
+			FilterDataCode.SendKeys(datacode);
+		}
+		public bool SelectDataCode()
+		{
+			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid-grid']//tr[@id='subsectionGrid-grid0']"), 2);
+			return SelectDataCode.TryClick();
+		}
 	}
 
 	class StudioPowerDesignerPlusDesignMode : BaseObject
@@ -528,6 +542,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool ClickAddNewButton()
+		{
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
+			return AddNewButton.TryClick();
+		}
+		public bool ClickSaveAndClose()
+		{
+			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='add-subsection-save-and-close']"));
+			return SaveAndClose.TryClick();
+		}
+		public bool DataCodeTitleConfirm(string title, string value)
+		{
+			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}') and //span[contains(text(),'{value}')]]"));
+			if (dataCodeTitle == null)
+			{
+				Report.Info("Datacode not found");
+				return false;
+			}
+			else
+			{
+				Report.Info("Datacode was found");
+				return true;
+			}
+		}
+		
+		public void DataCodeTitleClick(string title)
+		{
+			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}')]"));
+			dataCodeTitleClick.RightClick();
+		}
+		public bool RemoveElementClick()
+		{
+			IWebElement dataCodeRemove = SeleniumWebDriver.CurrentDriver.FindElement(By.PartialLinkText("Remove Element"));
+			return dataCodeRemove.TryClick();
 		}
 
 		public bool ClickRefresh()

@@ -192,13 +192,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			try
 			{
-				SeleniumBrowser.Alert.WaitForAlert(3);
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				SeleniumWebDriver.CurrentDriver.WaitForAlert(3);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 			}
 			catch
 			{
 				Report.Info("No alert found");
 			}
+		}
+
+		public void ISetUsageType(string usageType)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");	
+		}
+		public void IFilterDatacode(string datacode)
+		{
+			new StudioPowerDesignerPlus().FilterDataCode(datacode);
+		}
+		public void ISelectDataCode(string data)
+		{
+			Report.IsTrue(new StudioPowerDesignerPlus().SelectDataCode(), $"Failed to select datacode:{data}", $"Successfully selected datacode {data} is set");
 		}
 
 		public void ISetTheAuthoringCompleteCodeToNGHS()
@@ -1503,11 +1516,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			var valueEdit = new ValueEditor();
 
 			Report.Info("I check that the WALMART QC RESPONSE FORM is not already filled in with junk data");
-			if(selStudioPowerDesignerPlus.GivenCategoryContainsData("Additional Information"))
+			if (selStudioPowerDesignerPlus.GivenCategoryContainsData("Additional Information"))
 			{
 				Delay.Seconds(1);
 				selStudioPowerDesignerPlus.Wait_for_load(30);
@@ -1515,8 +1528,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.StartStep("I Select the Catagory Titled: Inquiry Date");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
-			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
@@ -1527,8 +1540,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 
 			Report.StartStep("I Double Click on the section with name: Response Date");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");			
-			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
@@ -1614,7 +1627,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			valueEdit.ClickSaveButton();
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 
-			Delay.Seconds(1);			
+			Delay.Seconds(1);
 
 
 			Report.StartStep("I Double Click on the section with name: Additional Information");
@@ -1672,8 +1685,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InPDIEnsureSECT2318IsActive()
 		{
 			string click = "left";
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
-			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			if (new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
 			{
 				Report.Success("The Section was already active");
 				return;
@@ -1684,8 +1697,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to " + click + " click section: " + "[SECT2318] WALMART QC RESPONSE FORM",
 				"Successfully " + click + " clicked " + "[SECT2318] WALMART QC RESPONSE FORM");
 			Delay.Seconds(3);
-			return;		
-
+			return;
 		}
 
 		[StepDefinition(@"In Power Designer I ensure SECT0077 is the Active Section")]
@@ -2063,14 +2075,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
+		}
+		
+		[StepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
+		public void GivenIConfirmDataCodeAdded(string data, string value)
+		{
+			try
+			{
+				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
+					"Power designer has opened");
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DataCodeTitleConfirm(data, value), $"Failed to find '{data}'", $"Succesfully found '{data}'");
 
-
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
+		}
+		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product")]
+		public void GivenIRemoveDataCode(string datacode)
+		{
+			try
+			{
+				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.DataCodeTitleClick(datacode);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.RemoveElementClick(), $"Failed to click remove element", $"Succesfully clicked remove element");
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert(2))
+				{
+					Report.Info("Found an alert");
+					string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+					Report.Info("Got an alert: " + alertText);
+				}
+				else
+				{
+					Report.Info("Did not find an alert");
+				}
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
 
 		}
-
-
-
-
-
 	}
 }
