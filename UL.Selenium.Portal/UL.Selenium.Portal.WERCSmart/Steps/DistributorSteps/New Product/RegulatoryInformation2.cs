@@ -24,13 +24,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.DistributorSteps.New_Product
 		public void SelectProductContainsMicrobeads(string option)
 		{
 			string section = "Product contains microbeads";
-			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Regulatory Information 2 Section, set the option in section: 'Product is considered ""Rinse off""': to: (Yes|No)")]
 		public void SelectProductRinseOff(string option)
 		{
 			string section = "Product is considered \"Rinse off\"";
-			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Regulatory Information 2 Section, click link HR 1321")]
+		public void ClickLinkHR1321()
+		{
+			string linkText = "HR 1321";
+			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[StepDefinition(@"In the Regulatory Information 2 Section, click link Free Water Act of 2015")]
+		public void ClickLinkFreeWaterOf2015()
+		{
+			string linkText = "Free Water Act of 2015";
+			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 	}
 }
