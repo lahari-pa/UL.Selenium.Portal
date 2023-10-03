@@ -544,6 +544,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickAddNewButton()
+		{
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
+			return AddNewButton.TryClick();
+		}
+		public bool ClickSaveAndClose()
+		{
+			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='add-subsection-save-and-close']"));
+			return SaveAndClose.TryClick();
+		}
+		public bool DataCodeTitleConfirm(string title, string value)
+		{
+			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}') and //span[contains(text(),'{value}')]]"));
+			if (dataCodeTitle == null)
+			{
+				Report.Info("Datacode not found");
+				return false;
+			}
+			else
+			{
+				Report.Info("Datacode was found");
+				return true;
+			}
+		}
+		
+		public void DataCodeTitleClick(string title)
+		{
+			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}')]"));
+			dataCodeTitleClick.RightClick();
+		}
+		public bool RemoveElementClick()
+		{
+			IWebElement dataCodeRemove = SeleniumWebDriver.CurrentDriver.FindElement(By.PartialLinkText("Remove Element"));
+			return dataCodeRemove.TryClick();
+		}
+
 		public bool ClickRefresh()
 		{
 			IWebElement refreshButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='cmdRefreshDoc']"));
@@ -971,6 +1007,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (Category == null)
 			{
 				Report.Info($"Can not find category {category}");
+				return false;
+			}
+			Report.Info("Matching Category was found");
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(Category).Build().Perform();
+			Category.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
+
+			Category.Click();
+			Category.Click();
+
+			Delay.Seconds(2);
+			Report.Screenshot();
+			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			if (editScreen != null)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Popup was not found.");
+			}
+
+			return false;
+		}
+		public bool DoubleClickCategoryAuthc()
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@usg ='PVAL']//span[text()= '[AUTHC]']"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category AUTHC");
 				return false;
 			}
 			Report.Info("Matching Category was found");

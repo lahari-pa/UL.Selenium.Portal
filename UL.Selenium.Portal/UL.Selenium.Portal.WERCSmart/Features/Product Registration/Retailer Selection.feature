@@ -208,11 +208,11 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 		|           | calcium       | 100     |                     |            |             |
 	Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-	Then In the 'Select Retailers' window I select the retailer: Albertsons Companies
-	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Albertsons Companies appear in alphabetical order
+	Then In the 'Select Retailers' window I select the retailer: Ace Hardware Corporation
+	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Ace Hardware Corporation appear in alphabetical order
 	Then I select the following retailers in the Retailer page
-		| Retailers            |
-		| Albertsons Companies |
+		| Retailers                |
+		| Ace Hardware Corporation |
 	Then I click the delete icon in the Retailer page
 	Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
 	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order

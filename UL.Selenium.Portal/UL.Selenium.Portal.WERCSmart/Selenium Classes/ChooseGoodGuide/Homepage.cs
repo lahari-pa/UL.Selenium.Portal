@@ -26,6 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		}
 		public void WaitLoading()
 		{
+			Delay.Seconds(5);
 			int timeoutCounter = 0;
 			string currentPaceProgress = this.GetPaceProgress();
 			while (currentPaceProgress != "100%" && timeoutCounter < 120)
