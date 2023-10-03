@@ -396,6 +396,7 @@ Scenario: [58604] Condom - RU000937
 
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
+@OnlyInStaging
 @TestCase:213910
 Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Grass Seed (RU000470)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -468,6 +469,7 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
+@OnlyInStaging
 @TestCase:213905
 Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: Fertilizer (RU000462)
 	Given I log in with the account saved in TReVor as: ProductAccount

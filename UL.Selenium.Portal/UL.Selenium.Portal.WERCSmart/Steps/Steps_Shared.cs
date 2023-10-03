@@ -5314,54 +5314,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 214000 \(Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue\)")]
-		public void
-			GivenICallSharedStep_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
-		{
-			var MyNewProduct = new StepsNewProduct();
-			var myNewProductClass = new NewProduct();
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I should see the Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Information");
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
-
-			Report.StartSubStep(
-				"I set the Does the product contain fertilizer (N, P, K) field to: Yes");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Does the product contain fertilizer (N, P, K)",
-				"Yes");
-			Report.StartSubStep(
-				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
-				"No");
-			Report.StartSubStep(
-				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
-				"No");
-			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
-			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
-			{
-				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
-					"No");
-			}
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartSubStep(
-				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
-				"No");
-			Report.StartSubStep("In the Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
-		}
-
 		/*
 		[StepDefinition(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
 		public void GivenICallSharedStepProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue_HappyPath()
@@ -16153,28 +16105,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
 				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			}
-		}
-		[StepDefinition(
-			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) with data: (.*) to the Section - Applicable Only to Type of Product")]
-		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode, string data)
-		{
-
-			Report.UseSubSteps = true;
-			var thisStepsStudio = new Steps_Studio();
-			Report.Info("In Designer Plus clicking Add New Link to add Data Code");
-			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
-				"Power designer has opened");
-			thisStudioPowerDesignerPlusDesignMode.ClickAddNewButton();
-			Delay.Seconds(2);
-			thisStepsStudio.ISetUsageType(usageType);
-			thisStepsStudio.IFilterDatacode(dataCode);
-			Delay.Seconds(5);
-			thisStepsStudio.ISelectDataCode(data);
-			Delay.Seconds(5);
-			thisStudioPowerDesignerPlusDesignMode.ClickSaveAndClose();
-			GeneralUtilities.StudioWaitForSpinner(30);
-			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 		}
 	}
 }
