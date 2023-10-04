@@ -5314,54 +5314,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 214000 \(Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue\)")]
-		public void
-			GivenICallSharedStep_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
-		{
-			var MyNewProduct = new StepsNewProduct();
-			var myNewProductClass = new NewProduct();
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I should see the Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Product Information");
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
-
-			Report.StartSubStep(
-				"I set the Does the product contain fertilizer (N, P, K) field to: Yes");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Does the product contain fertilizer (N, P, K)",
-				"Yes");
-			Report.StartSubStep(
-				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
-				"No");
-			Report.StartSubStep(
-				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
-				"No");
-			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
-			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
-			{
-				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
-					"No");
-			}
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartSubStep(
-				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
-				"No");
-			Report.StartSubStep("In the Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
-		}
-
 		/*
 		[StepDefinition(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
 		public void GivenICallSharedStepProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue_HappyPath()
@@ -15944,6 +15896,215 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Dietary Supplements Label");
 			Report.StartSubStep("In the Regulatory Information 3 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
+		[StepDefinition(
+			@"I call Shared Step 214000 \(Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue\)")]
+		public void
+			GivenICallSharedStep_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
+			Report.StartSubStep(
+				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
+				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
+			Report.StartSubStep(
+				"I set the Does the product contain fertilizer (N, P, K) field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Does the product contain fertilizer (N, P, K)",
+				"Yes");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+		[StepDefinition(@"I call Shared Step 213923 \(Physical and Chemical Properties - Applicable Only to Engine Fertilizer\)")]
+		public void Shared_EnterPhysicalProperty_Liquid_ForFertilizer()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I set the Primary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			Report.StartSubStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			Report.StartSubStep("I set the Relative Density option to: 11.16");
+			MyNewProduct.SetTheSectionOptionTo("Relative Density", "11.16");
+			Report.StartStep("I set the Relative Density option to: lb./gal. (pounds per gallon)");
+			MyNewProduct.SectRadioButtonInSection("Relative Density", "lb./gal. (pounds per gallon)");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			Report.StartSubStep("I set the pH field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("pH", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			Report.StartSubStep("I set the Boiling Point (in Celsius) field to: Not tested/Unknown");
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			Report.StartSubStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
+			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: Soluble in water");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			Report.StartSubStep("In the Physical and Chemical Properties page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Physical and Chemical Properties");
+		}
+		[StepDefinition(
+			@"I call Shared Step 209526\(b\) \(WPS Studio - PD\+ - set all data and publish using rule and doc queue for CKLT and MTR only\) for product saved as: (.*)")]
+		public void GivenICallSharedStep209526WPSStudio_PD_SetAllDataAndPublish_CKLTAndMTROnly(string savedAs)
+		{
+			if (Context.Contains("ElectronicProduct"))
+			{
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
+			}
+
+			Report.UseSubSteps = true;
+			Report.Info("In power tools workspace setting edit to true");
+			var thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			var table2 = new Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"CAWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"EPAN",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"HCM",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"OTC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RAUNDW",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"UNIFFC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"WSWC",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VOCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAHDPF",
+				"pass"
+			});
+			var thisStepsStudio = new Steps_Studio();
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0756] Battery/BCP Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0756] Battery/BCP Checklist");
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			var table3 = new Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+
+			Report.Info("Going to do publishing");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Delay.Seconds(3);
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			GeneralUtilities.StudioWaitForSpinner();
+			var table4 = new Table(new string[] {
+				"Text",
+				"Should Show"
+			});
+			table4.AddRow(new string[] {
+				"CKLT",
+				"False"
+			});
+			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			thisStepsStudio.GivenICloseCurrentDocument();
+			GeneralUtilities.StudioWaitForSpinner(30);
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			}
 		}
 	}
 }

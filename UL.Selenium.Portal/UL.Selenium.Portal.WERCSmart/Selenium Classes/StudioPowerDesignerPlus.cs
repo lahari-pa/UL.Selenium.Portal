@@ -319,9 +319,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
-			
+
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
-			if(listOfMenuItems.IsNullOrEmpty())
+			if (listOfMenuItems.IsNullOrEmpty())
 			{
 				Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 				Report.Screenshot();
@@ -338,7 +338,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 					Report.Screenshot();
-					Report.Info($"Is the page showing spacing as bottom of the page?");	
+					Report.Info($"Is the page showing spacing as bottom of the page?");
 
 				}
 
@@ -546,7 +546,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickAddNewButton()
 		{
-			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));			
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));
 			return AddNewButton.TryClick();
 		}
 		public bool ClickSaveAndClose()
@@ -568,7 +568,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return true;
 			}
 		}
-		
+
 		public void DataCodeTitleClick(string title)
 		{
 			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}')]"));
@@ -1128,9 +1128,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					IWebElement wantedCategory = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//table[contains(@title,'{category}')]"), 2);
 					string dataCode = wantedCategory.GetAttribute("ss");
-					IWebElement inputField= wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"),2);
-					
-					
+					IWebElement inputField = wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"), 2);
+
+
 					if (inputField == null)
 					{
 						Report.Info("inputField was not found");
@@ -1138,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					Report.Info("inputField Category was found");
 					string foundText = inputField.Text;
-					if(foundText==""|| foundText== " "|| foundText.ToLower().Contains("data required"))
+					if (foundText == "" || foundText == " " || foundText.ToLower().Contains("data required"))
 					{
 						Report.Info("The found text indicated the category did not contain data");
 						return false;
@@ -1163,7 +1163,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 		}
-
 	}
 
 	class GraphicEditor : BaseObject
