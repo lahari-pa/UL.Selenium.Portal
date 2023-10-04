@@ -37,11 +37,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool LinkElementExists(string linkText)
 		{
-			return this.InputField(linkText) != null;
+			return this.LinkElement(linkText) != null;
 		}
 		public bool LinkElementClick(string linkText)
 		{
-			return this.InputField(linkText).TryClick();
+			return this.LinkElement(linkText).TryClick();
 		}
 
 		#region web elements

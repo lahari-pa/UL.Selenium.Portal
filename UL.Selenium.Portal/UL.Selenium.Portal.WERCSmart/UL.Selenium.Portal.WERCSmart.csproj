@@ -35,6 +35,7 @@
     <PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.1.18" />
     <PackageReference Include="UL.Automation.TReVor" Version="5.1.18" />
     <PackageReference Include="UL.Automation.Utilities" Version="5.1.18" />
+    <PackageReference Include="UL.Automation.Utilities.PDF" Version="5.1.47" />
     <PackageReference Include="UL.Automation.WebDriver" Version="5.1.18" />
 
     <!-- ===== TREVOR PACKAGE(S) ===== -->
