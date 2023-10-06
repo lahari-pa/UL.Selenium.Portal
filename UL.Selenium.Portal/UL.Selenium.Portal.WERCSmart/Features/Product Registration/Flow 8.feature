@@ -13,6 +13,7 @@
 @UPC
 @SHA
 @run_Flow8
+@Studio
 Feature: Flow 8
 
 @TestCase:57295
@@ -785,3 +786,65 @@ Scenario: [128743] Ammunition - Other DOT Exception Validation
 	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step (Transportation Details - Other DOT Exception Validation - Continue - Happy Path)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128743
+
+# Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
+# Created by Saikiran Chittampally
+@TestCase:214039
+Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow for Product Type: SOIL (RU001075)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC214039
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil (No Additives, Fertilizers, or Inhibitors)
+	Then I save the product information as: TestCase214039
+	Given I should see the Product Information Page
+	Given I call Shared Step 214040 (Product Information -Applicable Only to Type of Product: SOIL No - Continue)
+	Given I call Shared Step 214041 (Physical and Chemical Properties - Applicable Only to SOIL)
+	Then I add the following ingredients:
+		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| N/A209      | 50      | false               | false       |            |
+		| 308075-07-2 | 50      | false               | false       |            |
+	Given I click continue
+	Given I call Shared Step 231514 (Inventory Status, Prop 65 - Applicable Only to SOIL)
+	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
+	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+	Then I click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC214039, container type: Plastic bag and size: 56 do not click continue
+	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
+	Then I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Soil (No Additives, Fertilizers, or Inhibitors)
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase214039)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase214039)
+	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
+	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase214039
+	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
+	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase214039
+	When I switch to the 'Power Designer Plus' tab
+	Then I confirm data code with data:Does the product contain fertilizer (N, P, K) with value:No added
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Nitrogen / Nitrates with value:  added
+	Given I remove the Datacode:Nitrogen / Nitrates to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTP with data: Phosphates / Phosphorous to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Phosphates / Phosphorous with value:  added
+	Given I remove the Datacode:Phosphates / Phosphorous to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTK with data: Potassium to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Potassium with value:  added
+	Given I remove the Datacode:Potassium to the Section - Applicable Only to Type of Product	
+	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTS with data: Slow-Release Agent to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Slow-Release Agent with value:  added
+	Given I remove the Datacode:Slow-Release Agent to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode PCFR with data: Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Restricted Fertilizer in Pinellas County, Florida with value:  added
+	Given I remove the Datacode:Restricted Fertilizer in Pinellas County, Florida to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase214039)
+
