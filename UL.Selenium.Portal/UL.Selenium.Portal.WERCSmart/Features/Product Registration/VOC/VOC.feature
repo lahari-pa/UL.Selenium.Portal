@@ -10,8 +10,6 @@
 @RetailPartners
 @NewProduct
 @run_voc
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
-
 Feature: VOC
 
 @test74626
