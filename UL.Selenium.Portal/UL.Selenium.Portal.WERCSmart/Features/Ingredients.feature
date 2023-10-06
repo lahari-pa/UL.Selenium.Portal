@@ -26,7 +26,7 @@ Background:
 
 @TestCase:71985
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71985
@@ -37,7 +37,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	##Product Characteristics
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 50.0    | false               | false       |            |
+		| Wood chips    | 50.0    | false               | false       |            |
 		| RED 4         | 23.0    | false               | false       |            |
 		| Clothianidin  | 27.0    | false               | false       |            |
 	When In the ingredients table I click Chemical Name to order
@@ -45,11 +45,11 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| Name         |
 		| Clothianidin |
 		| RED 4        |
-		| Wood dust    |
+		| Wood chips    |
 	When In the ingredients table I click Chemical Name to order
 	Then In the ingredients table the ingredients should be in the following order
 		| Name         |
-		| Wood dust    |
+		| Wood chips   |
 		| RED 4        |
 		| Clothianidin |
 	When In the ingredients table I click CAS Number to order
@@ -57,18 +57,18 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| Name         |
 		| RED 4        |
 		| Clothianidin |
-		| Wood dust    |
+		| Wood chips   |
 	When In the ingredients table I click CAS Number to order
 	Then In the ingredients table the ingredients should be in the following order
 		| Name         |
-		| Wood dust    |
+		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
 
 @TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71987
@@ -78,7 +78,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 70.0    | false               | false       |            |
+		| Wood chips    | 70.0    | false               | false       |            |
 		| RED 4         | 5.0     | false               | false       |            |
 		| Clothianidin  | 25.0    | false               | false       |            |
 	When In the ingredients table I click Percent to order
@@ -86,18 +86,18 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| Name         |
 		| RED 4        |
 		| Clothianidin |
-		| Wood dust    |
+		| Wood chips   |
 	When In the ingredients table I click Percent to order
 	Then In the ingredients table the ingredients should be in the following order
 		| Name         |
-		| Wood dust    |
+		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I save the product information as: TestCase65469
@@ -115,7 +115,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65470
@@ -137,7 +137,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 #CLF - this is basically the same as 65470
 @TestCase:65459
 Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public Name are not active
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65459
@@ -218,7 +218,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 @TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71291
@@ -228,7 +228,6 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Physical and Chemical Properties page I click Continue
 	Given I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood dust     | 75.0    | false               | false       |            |
 		| Wood chips    | 75.0    | false               | false       |            |
 		| RED 4         | 20.0    | false               | false       |            |
 		| Clothianidin  | 5.0     | false               | false       |            |
@@ -242,8 +241,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable

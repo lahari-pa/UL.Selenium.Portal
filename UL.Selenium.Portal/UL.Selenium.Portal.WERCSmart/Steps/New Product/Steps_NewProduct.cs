@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to", "${page } is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to", $"{page } is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
