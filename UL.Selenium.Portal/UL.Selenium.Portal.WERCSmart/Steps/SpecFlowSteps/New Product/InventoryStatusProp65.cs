@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 			}
 
-			[StepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, set the radio option in section: 'Canadian Environmental Protection Act \(CEPA\) status' to: (Compliant with Domestic Substances List (DSL)|Compliant with Non-Domestic Substances List (NDSL)|Exempt (DSL and/or NDSL))")]
+			[StepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, set the radio option in section: 'Canadian Environmental Protection Act \(CEPA\) status' to: (Compliant with Domestic Substances List \(DSL\)|Compliant with Non-Domestic Substances List \(NDSL\)|Exempt \(DSL and/or NDSL\))")]
 			public void SelectCEPAStatus(string option)
 			{
 				string section = "Canadian Environmental Protection Act (CEPA) status";
