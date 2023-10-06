@@ -166,16 +166,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Define an extraction folder.
 			string extractionFolder = Path.Combine(Directory.GetCurrentDirectory(), "Temp", Guid.NewGuid().ToString());
 			_ = Directory.CreateDirectory(extractionFolder);
-
+			//"C:\Users\32143\source\repos\UL.Selenium.Portal\UL.Selenium.Portal\UL.Selenium.Portal.WERCSmart\Dependencies\PDF\HR1321.pdf"
 			try
 			{
 				// Define location to save comparison pdf to.
 				string toCompareFile = Path.Combine(extractionFolder, "BILLS-114hr1321enr.pdf");
 				Report.Info($"Saving comparison PDF file to: {toCompareFile}");
-				FileInfo fileInfoDownloded = new FileInfo(toCompareResourceFile);
-				fileInfoDownloded.MoveTo(toCompareFile);
+				FileInfo fileDownloded = new FileInfo(toCompareResourceFile);
+				fileDownloded.MoveTo(toCompareFile);
 				// Get from embedded resources.
-				_ = EmbeddedResourceHelpers.ExtractToFile(toCompareResourceFile, studioAssembly, toCompareFile);
+				//_ = EmbeddedResourceHelpers.ExtractToFile(toCompareResourceFile, studioAssembly, toCompareFile);
 
 				// Define location to store saved images to.
 				string compareImageFolder = Path.Combine(extractionFolder, "Images", "BILLS-114hr1321enr");
@@ -187,10 +187,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				// Define location to save oracle pdf to.
 				string oracleFile = Path.Combine(extractionFolder, "HR1321.pdf");
 				Report.Info($"Saving oracle PDF file to: {oracleFile}");
-				FileInfo fileInfoOriginal = new FileInfo(oracleResourceFile);
-				fileInfoOriginal.MoveTo(oracleFile);
+				var extractToFile = EmbeddedResourceHelpers.ExtractToFile(oracleResourceFile, studioAssembly, oracleFile);
+							
+				FileInfo fileOriginal = new FileInfo(oracleFile);
+				//fileOriginal.MoveTo(oracleFile);
 				// Get from embedded resources.
-				_ = EmbeddedResourceHelpers.ExtractToFile(oracleResourceFile, studioAssembly, oracleFile);
 
 				// Define location to store saved images to.
 				string oracleImageFolder = Path.Combine(extractionFolder, "Images", "HR1321");
@@ -204,10 +205,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Failure($"Expected to find: {oracleOutputFiles.Count} images, but found: {comparisonOutputFiles.Count} instead!");
 				}
-				else
-				{
 					// Iterate through each page.
-					for (int i = 0; i < oracleOutputFiles.Count; i++)
+					int pagecount = Math.Min(oracleOutputFiles.Count, comparisonOutputFiles.Count);
+					for (int i = 0; i < pagecount; i++)
 					{
 						Report.StartSubStep($"Checking Page: {i + 1}");
 
@@ -218,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						// Load each image file.
 						Image oracleImage = Image.FromFile(oracleImagePath);
 						Image comparisonImage = Image.FromFile(comparisonImagePath);
-
+						var result = oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage1);
 						try
 						{
 							// Run comparison. By default, tolerance is 0% (so exact match), can be changed if required.
@@ -240,25 +240,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 								// Report oracle image.
 								Report.Info("Oracle:");
-								Report.Image(oracleImage);
+								Report.ImageFile(oracleImagePath);
+							
 
 								// Report comparison image.
 								Report.Info("Showing:");
-								Report.Image(comparisonImage);
+								Report.ImageFile(comparisonImagePath);
 
-								// Report diff image.
+							// Report diff image.
 								Report.Info("Difference:");
-								Report.Image(diffImage);
+								Report.ImageFile(diffImagePath);
 							}
 							else
 							{
 								// Matched successfully.
 								Report.Success("Page matched successfully!", showScreenshot: false);
 
-								// Report oracle image.
-								Report.Image(oracleImage);
-							}
+							// Report oracle image.
+							//Report.Image(oracleImage);
+							Report.ImageFile(oracleImagePath);
+
 						}
+					}
 						catch (Exception ex)
 						{
 							Report.Info($"Fixable ERROR: {ex.Message}");
@@ -269,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							comparisonImage.Dispose();
 						}
 					}
-				}
+				
 			}
 			catch (Exception ex)
 			{
@@ -279,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (Directory.Exists(extractionFolder))
 				{
-					Directory.Delete(extractionFolder, true);
+					//Directory.Delete(extractionFolder, true);
 				}
 			}
 		}
