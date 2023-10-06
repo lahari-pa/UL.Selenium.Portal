@@ -10,6 +10,8 @@
 @RetailPartners
 @NewProduct
 @run_voc
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
 Feature: VOC
 
 @test74626
@@ -588,6 +590,49 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
+
+	@TestCase:0000
+Scenario: [0000] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step Shows Alternative Control Plan
+	Given I generate a random UPC number and save as: UPC73503
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
+	Then I save the product information as: TestCase73503
+	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	And I call Shared Step 57532 (Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path)
+	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| 7647-14-5     | 100     | false               | false       |            |
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product has not been evaluated with regard to TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to but does not comply with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: Yes
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is the need to warn triggered by' to: A chemical or chemicals in the product, or chemicals formed during the use of the product.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is the need to warn triggered by' to: A chemical or chemicals in the packaging.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is the need to warn triggered by' to: A chemical or chemicals in both the product and packaging.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'How is the exposure warning transmitted?' to: By affixing it to the product or its packaging
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'How is the exposure warning transmitted?' to: By providing warning materials (labels, shelf signage, online warning language) to a retailer’s authorized agent
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'How is the exposure warning transmitted?' to: Other (Please specify)
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'Other' field for section: 'How is the exposure warning transmitted?': other
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured' to: Prior to August 30, 2018
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured' to: On or After August 30, 2018
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured' to: Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor short-form warning- indicate which of the following is provided:': to: WARNING: Cancer -
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor short-form warning- indicate which of the following is provided:': to: WARNING: Reproductive Harm -
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor short-form warning- indicate which of the following is provided:': to: WARNING: Cancer and Reproductive Harm -
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor short-form warning- indicate which of the following is provided:': to: Does not apply
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'Enter the names of one or more listed carcinogens which are the subject of this warning' section: name
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'Enter the names of one or more listed reproductive or developmental toxicants which are the subject of this warning:' section: name
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer, and [name of one or more chemicals], which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'Enter the names of one or more listed carcinogens which are the subject of this warning' section: name
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer and birth defects or other reproductive harm. For more information go to
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'Enter the names of one or more listed chemicals that are both carcinogens and reproductive or developmental toxicants which are the subject of this warning:' section: name
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'If the product carries a safe-harbor long-form warning- indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:': to: Does not apply
+	Then In the Inventory Status, Prop 65 (US) Section, enter value in 'If the product carries a custom warning, please provide the exact text that is being used:' section: name
 
 @TestCase:73503
 Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step Shows Alternative Control Plan
