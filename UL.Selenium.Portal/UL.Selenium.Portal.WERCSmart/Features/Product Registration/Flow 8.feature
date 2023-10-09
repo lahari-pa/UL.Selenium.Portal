@@ -829,7 +829,6 @@ Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow 
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase214039
 	When I switch to the 'Power Designer Plus' tab
-	Then I confirm data code with data:Does the product contain fertilizer (N, P, K) with value:No added
 	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates to the Section - Applicable Only to Type of Product
 	Given I confirm data code with data:Nitrogen / Nitrates with value:  added
 	Given I remove the Datacode:Nitrogen / Nitrates to the Section - Applicable Only to Type of Product

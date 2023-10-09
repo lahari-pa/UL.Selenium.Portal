@@ -16162,10 +16162,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			Report.StartSubStep("I should see the Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Information");
-			Report.StartSubStep(
-				"I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
-			MyNewProduct.SetTheSectionOptionTo("Which best describes your product, including when FIFRA 25(b) Exempt",
-				"Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)");
 			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
 
 			Report.StartSubStep(
