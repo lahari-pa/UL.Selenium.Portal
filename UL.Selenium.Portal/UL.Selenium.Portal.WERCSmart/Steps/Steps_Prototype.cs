@@ -218,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						// Load each image file.
 						Image oracleImage = Image.FromFile(oracleImagePath);
 						Image comparisonImage = Image.FromFile(comparisonImagePath);
-						var result = oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage1);
+						//var result = oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage1);
 						try
 						{
 							// Run comparison. By default, tolerance is 0% (so exact match), can be changed if required.
