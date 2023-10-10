@@ -316,8 +316,8 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 
 	@TestCase:0000
 Scenario: [0000] Actions - 3rd Party Access Code Window
-	Given I log in with the account saved in TReVor as: SingleRetailerAccount
-	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	#Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 	Then I save the product information as: TestCase125144
