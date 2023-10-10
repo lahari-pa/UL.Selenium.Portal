@@ -13,6 +13,7 @@
     <None Remove="Dependencies\Images\NAVIGATOR-LOGO TM.png" />
     <None Remove="Dependencies\PDF\HR1321.pdf" />
     <None Remove="Dependencies\PDF\HR2page.pdf" />
+    <None Remove="Dependencies\PDF\page2.pdf" />
     <None Remove="Dependencies\PDF\testdoc.pdf" />
   </ItemGroup>
 
@@ -24,7 +25,7 @@
     <EmbeddedResource Include="Dependencies\Images\image2.jpg" />
     <EmbeddedResource Include="Dependencies\Images\NAVIGATOR-LOGO TM.png" />
     <EmbeddedResource Include="Dependencies\PDF\HR1321.pdf" />
-    <EmbeddedResource Include="Dependencies\PDF\HR2page.pdf" />
+    <EmbeddedResource Include="Dependencies\PDF\page2.pdf" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
   </ItemGroup>
 
