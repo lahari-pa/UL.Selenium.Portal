@@ -19,10 +19,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Consent to Tier 2.1, 2.2, 4.2 Data Uses";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the Formulation > Batteries Section, I confirm displayed text is correct")]
+		[StepDefinition(@"In the Formulation > Batteries Section, I confirm displayed 'Data Use Cansents' text is correct")]
 		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
 		{
-			var newProductPage = new NewProduct();
+			string section = "Formulation > Batteries";
 			string[] correctText =
 			{
 			"Data Use Consents",
@@ -30,10 +30,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"You have the option of allowing this battery to be included in such programs by providing the consent below. Such consent means:",
 			"a. That your battery data may be utilized when UL generates aggregate usage reports, chemical screening results and transparency ratios for such Direct Supplier products (Tier 2.1),",
 			"b. That the identity of ingredients in your battery (i.e., the standard chemical names or CAS Numbers) may be disclosed to your customer and the relevant WERCSmart Recipient, but only if you have marked an ingredient as publicly disclosed on the formulation page (Tier 2.2) or if applicable law requires that an ingredient be publicly disclosed, and",
-			 "c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).",
+			"c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).",
 			"These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."
 			};
-			new Steps_Prototype().GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(correctText);
+			new Steps_Prototype().GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(section, correctText);
 
 		}
 

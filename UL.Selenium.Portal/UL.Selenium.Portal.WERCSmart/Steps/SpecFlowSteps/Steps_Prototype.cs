@@ -76,11 +76,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new NewProduct().ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
-		[StepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
-		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string[] correctText)
+		[StepDefinition(@"I confirm the (.*) page displays the correct text")]
+		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string section, string[] correctText)
 		{
 			var newProductPage = new NewProduct();
-			Report.IsTrue(newProductPage.CheckTextOnThePage(correctText), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
+			Report.IsTrue(newProductPage.CheckTextOnThePage(correctText), $"The text in the {section} page displayed the incorrect text", $"The text in the {section} page displayed the correct text");
 		}
 
 

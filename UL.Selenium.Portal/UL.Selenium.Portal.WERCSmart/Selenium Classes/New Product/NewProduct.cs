@@ -5894,7 +5894,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckTextOnThePage(string[] correctText)
 		{
-
 			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
 			var foundText = displayedText.Text;
 
@@ -5906,39 +5905,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			for (int i = 0; i < foundStringArray.Count(); i++)
 			{
 
-				if (foundStringArray[0] != correctText[0])
+				if (foundStringArray[i] != correctText[i])
 				{
-					Report.Failure("The first line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[1] != correctText[1])
-				{
-					Report.Failure("The second line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[2] != correctText[2])
-				{
-					Report.Failure("The third line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[3] != correctText[3])
-				{
-					Report.Failure("The fourth line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[4] != correctText[4])
-				{
-					Report.Failure("The fifth line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[5] != correctText[5])
-				{
-					Report.Failure("The sixth line in the displayed text was incorrect");
-					return false;
-				}
-				if (foundStringArray[6] != correctText[6])
-				{
-					Report.Failure("The seventh line in the displayed text was incorrect");
+					Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
 					return false;
 				}
 			}
