@@ -78,4 +78,10 @@
   <ItemGroup>
     <Folder Include="Features\SHA Manager\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="automationSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
