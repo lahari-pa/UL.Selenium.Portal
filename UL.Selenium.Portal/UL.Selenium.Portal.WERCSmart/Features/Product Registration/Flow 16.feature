@@ -12,7 +12,6 @@
 @run_Flow16
 @UPC
 @SHA
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries
 Feature: Flow 16
 
 @TestCase:59273
@@ -425,9 +424,6 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
 	And I should see the Formulation > Batteries Page
-	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
-	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Declined
-	Then In the Formulation > Batteries Section, I confirm displayed 'Data Use Cansents' text is correct
 	Given I confirm the Formulation > Batteries displays the correct text
     Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
     Given I click continue
