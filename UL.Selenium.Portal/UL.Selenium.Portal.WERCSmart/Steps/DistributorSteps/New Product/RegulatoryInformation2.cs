@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.DistributorSteps.New_Product
 		public void AfterClickingHR1321ComparePdfFile()
 		{
 			string downloadedFilePath = Context.GetFromContext("HR1321file")?.ToString() ?? "";
-			string originalFilePath = "Dependencies.PDF.page2.pdf";
+			string originalFilePath = "Dependencies.PDF.HR1321.pdf";
 			new Steps_Prototype().CompareTwoPdfFiles(downloadedFilePath, originalFilePath);
 		}
 	}

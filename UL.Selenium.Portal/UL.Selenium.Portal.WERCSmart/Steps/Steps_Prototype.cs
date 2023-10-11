@@ -282,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (Directory.Exists(extractionFolder))
 				{
-					//Directory.Delete(extractionFolder, true);
+					Directory.Delete(extractionFolder, true);
 				}
 			}
 		}
