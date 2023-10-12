@@ -350,7 +350,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 # Created by Saikiran Chittampally
 @TestCase:183582
 Scenario: [183582] Behaviors and Restrictions on Duplicate UPCs 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -427,7 +427,7 @@ Then The home screen should load
 # Created by Saikiran Chittampally
 @TestCase:184567
 Scenario: [184567] My Products - Single Retailer: Indicator and Hover Message / And "Kit Registrations" removed from Additional Programs
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

@@ -228,8 +228,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
-
-
+		public bool SetUsageType(string usage)
+		{
+			IWebElement UsageTypeSelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='ucSelUsage_ddlUsages']"), 2);
+			UsageTypeSelect.Select(usage);
+			return (UsageTypeSelect.SelectedOption() == usage);
+		}
+		public void FilterDataCode(string datacode)
+		{
+			IWebElement FilterDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='filter-subsectionGrid-grid']"), 2);
+			FilterDataCode.SendKeys(datacode);
+		}
+		public bool SelectDataCode()
+		{
+			IWebElement SelectDataCode = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='subsectionGrid-grid']//tr[@id='subsectionGrid-grid0']"), 2);
+			return SelectDataCode.TryClick();
+		}
 	}
 
 	class StudioPowerDesignerPlusDesignMode : BaseObject
@@ -305,9 +319,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
-			
+
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
-			if(listOfMenuItems.IsNullOrEmpty())
+			if (listOfMenuItems.IsNullOrEmpty())
 			{
 				Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 				Report.Screenshot();
@@ -324,7 +338,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 					Report.Screenshot();
-					Report.Info($"Is the page showing spacing as bottom of the page?");	
+					Report.Info($"Is the page showing spacing as bottom of the page?");
 
 				}
 
@@ -528,6 +542,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool ClickAddNewButton()
+		{
+			IWebElement AddNewButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='tdAddSSBottom']//input[@title='Add New']"));
+			return AddNewButton.TryClick();
+		}
+		public bool ClickSaveAndClose()
+		{
+			IWebElement SaveAndClose = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='add-subsection-save-and-close']"));
+			return SaveAndClose.TryClick();
+		}
+		public bool DataCodeTitleConfirm(string title, string value)
+		{
+			IWebElement dataCodeTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}') and //span[contains(text(),'{value}')]]"));
+			if (dataCodeTitle == null)
+			{
+				Report.Info("Datacode not found");
+				return false;
+			}
+			else
+			{
+				Report.Info("Datacode was found");
+				return true;
+			}
+		}
+
+		public void DataCodeTitleClick(string title)
+		{
+			IWebElement dataCodeTitleClick = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//table[contains(@title,'{title}')]"));
+			dataCodeTitleClick.RightClick();
+		}
+		public bool RemoveElementClick()
+		{
+			IWebElement dataCodeRemove = SeleniumWebDriver.CurrentDriver.FindElement(By.PartialLinkText("Remove Element"));
+			return dataCodeRemove.TryClick();
 		}
 
 		public bool ClickRefresh()
@@ -983,6 +1033,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+		public bool DoubleClickCategoryAuthc()
+		{
+			IWebElement Category = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@usg ='PVAL']//span[text()= '[AUTHC]']"), 10);
+			if (Category == null)
+			{
+				Report.Info($"Can not find category AUTHC");
+				return false;
+			}
+			Report.Info("Matching Category was found");
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(Category).Build().Perform();
+			Category.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
+
+			Category.Click();
+			Category.Click();
+
+			Delay.Seconds(2);
+			Report.Screenshot();
+			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			if (editScreen != null)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Popup was not found.");
+			}
+
+			return false;
+		}
 
 		public string GetCurrentValueInMTRFormat(string category)
 		{
@@ -1046,9 +1128,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					IWebElement wantedCategory = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//table[contains(@title,'{category}')]"), 2);
 					string dataCode = wantedCategory.GetAttribute("ss");
-					IWebElement inputField= wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"),2);
-					
-					
+					IWebElement inputField = wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"), 2);
+
+
 					if (inputField == null)
 					{
 						Report.Info("inputField was not found");
@@ -1056,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					Report.Info("inputField Category was found");
 					string foundText = inputField.Text;
-					if(foundText==""|| foundText== " "|| foundText.ToLower().Contains("data required"))
+					if (foundText == "" || foundText == " " || foundText.ToLower().Contains("data required"))
 					{
 						Report.Info("The found text indicated the category did not contain data");
 						return false;
@@ -1081,7 +1163,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 		}
-
 	}
 
 	class GraphicEditor : BaseObject

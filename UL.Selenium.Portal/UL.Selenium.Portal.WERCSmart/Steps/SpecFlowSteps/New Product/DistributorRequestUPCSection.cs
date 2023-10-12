@@ -14,7 +14,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-	[Binding, Scope(Tag = "Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductType_Section:DistributorRequestUPCSection")]
+	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:DistributorRequestUPCSection")]
 	class WERCSmart_Distributor_NewProducts_ProductType_DistributorRequestUPCSection
 	{
 		[StepDefinition(@"In the New Product Section, in section: 'Enter Manufacturer's Contact Email': set option to to: (.*)")]
