@@ -74,20 +74,25 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Then I delete the product: TestCase63663
 
 #actions/delete
+@OnlyInIntegration
 @TestCase:56216
 Scenario: [56216] My Products grid Actions - Delete Navigation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Then I click the Register New Product icon in the Navigation Pane
+	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Then I create a shell product with name TestProduct saved as TestProduct
-	Then I navigate to the home page
-	Given I search for the product saved as: TestProduct
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase56216
+	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Then I click the My Products icon in the Navigation Pane
+	Then the WERCSmart homepage should load
+	Given I search for the product saved as: TestCase56216
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Delete
 	And I cancel the Delete Dialog
 	Then I should see products in the Product Grid
-	#Given I save the number of items in the pie chart
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Delete
 	And I confirm the Delete Dialog
