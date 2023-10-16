@@ -5892,6 +5892,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return true;
 		}
 
+		public bool CheckTextOnThePage(string[] correctText)
+		{
+			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
+			var foundText = displayedText.Text;
+
+			var updatedString = foundText.Replace("\r\n\r\n", "|");
+
+			var updatedStringFinal = updatedString.Replace("\r\n", "|");
+
+			string[] foundStringArray = updatedStringFinal.Split('|');
+			for (int i = 0; i < foundStringArray.Count(); i++)
+			{
+
+				if (foundStringArray[i] != correctText[i])
+				{
+					Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
+					return false;
+				}
+			}
+			return true;
+		}
+
 		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
 		{
 
