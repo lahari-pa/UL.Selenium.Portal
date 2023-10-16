@@ -24,6 +24,7 @@
 @UPC
 @ViewUpcs
 @UPC
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryInformation2
 Feature: Actions
 
 # Assigned to Amanda Coutant
@@ -312,6 +313,33 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 	Then I click on the Row Action: Access Code
 	Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 12345678
 	Given I click close on the Save Changes popup dialog
+
+	@TestCase:0000
+Scenario: [0000] Actions - 3rd Party Access Code Window
+	Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase125144
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
+		|           | Copper sulfate  | 11.67   | false               |            | false       |
+		|           | Nitric acid     | 55      | false               |            | false       |
+	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Then In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads' to: Yes
+	Then In the Regulatory Information 2 Section, set the option in section: 'Product is considered "Rinse off"' to: Yes
+	Then In the Regulatory Information 2 Section, 'HR 1321' link should be displayed
+	Then In the Regulatory Information 2 Section, click 'HR 1321' link
+	Then In the Regulatory Information 2 Section, after clicking 'HR 1321' link I confirm pdf file is downloaded
+	Then In the Regulatory Information 2 Section, after clicking 'HR 1321' link I compere downloaded pdf file with original file
+	Then In the Regulatory Information 2 Section, 'Free Water Act of 2015' link should be displayed
+	Then In the Regulatory Information 2 Section, click 'Free Water Act of 2015' link
+	Then In the Regulatory Information 2 Section, after clicking 'Free Water Act of 2015' link I confirm new tab should exists
+	Then In the Regulatory Information 2 Section, after clicking 'Free Water Act of 2015' link I switch to new tab
+	Then In the Regulatory Information 2 Section, after clicking 'Free Water Act of 2015' link I close new opened tab
+	Then I click continue
 
 
 @TestCase:152230
