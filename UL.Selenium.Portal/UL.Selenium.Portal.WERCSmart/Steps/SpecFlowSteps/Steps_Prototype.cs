@@ -184,7 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				// Define location to save comparison pdf to.
-				string toCompareFile = Path.Combine(extractionFolder, "BILLS-114hr1321enr.pdf");
+				string toCompareFile = Path.Combine(extractionFolder, "downloaded.pdf");
 				Report.Info($"Saving comparison PDF file to: {toCompareFile}");
 				FileInfo fileDownloded = new FileInfo(toCompareResourceFile);
 				fileDownloded.MoveTo(toCompareFile);
@@ -192,14 +192,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//_ = EmbeddedResourceHelpers.ExtractToFile(toCompareResourceFile, studioAssembly, toCompareFile);
 
 				// Define location to store saved images to.
-				string compareImageFolder = Path.Combine(extractionFolder, "Images", "BILLS-114hr1321enr");
+				string compareImageFolder = Path.Combine(extractionFolder, "Images", "downloadedFile");
 				Report.Info($"Extracting comparison images to: {compareImageFolder}_«PageNumber».png");
 
 				// Extract page 'images' from PDF file.
 				_ = PdfHelpers.ConvertPdfToImages(toCompareFile, compareImageFolder, out List<string> comparisonOutputFiles);
 
 				// Define location to save oracle pdf to.
-				string oracleFile = Path.Combine(extractionFolder, "HR1321.pdf");
+				string oracleFile = Path.Combine(extractionFolder, "originalFile.pdf");
 				Report.Info($"Saving oracle PDF file to: {oracleFile}");
 				var extractToFile = EmbeddedResourceHelpers.ExtractToFile(oracleResourceFile, studioAssembly, oracleFile);
 							
@@ -208,7 +208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				// Get from embedded resources.
 
 				// Define location to store saved images to.
-				string oracleImageFolder = Path.Combine(extractionFolder, "Images", "HR1321");
+				string oracleImageFolder = Path.Combine(extractionFolder, "Images", "originalFile");
 				Report.Info($"Extracting oracle images to: {oracleImageFolder}_«PageNumber».png");
 
 				// Extract page 'images' from PDF file.
@@ -271,7 +271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								Report.Success("Page matched successfully!", showScreenshot: false);
 
 							// Report oracle image.
-							//Report.Image(oracleImage);
+							
 							Report.ImageFile(oracleImagePath);
 
 						}
