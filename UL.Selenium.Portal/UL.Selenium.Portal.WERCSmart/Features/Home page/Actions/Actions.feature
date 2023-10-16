@@ -24,6 +24,7 @@
 @UPC
 @ViewUpcs
 @UPC
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulation3rdParty
 Feature: Actions
 
 # Assigned to Amanda Coutant
@@ -296,6 +297,8 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 		| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
 		|           | Copper sulfate  | 11.67   | false               |            | false       |
 		|           | Nitric acid     | 55      | false               |            | false       |
+	Then In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
 	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
