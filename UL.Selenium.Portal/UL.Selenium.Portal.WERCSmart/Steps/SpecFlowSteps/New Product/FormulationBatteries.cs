@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).",
 			"These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."
 			};
-			new Steps_Prototype().GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(section, correctText);
+			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText);
 
 		}
 

@@ -285,6 +285,22 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
 	Then I confirm that all products appear in the 'My Products' grid
 
+	@TestCase:0000
+Scenario: [0000] Actions - 3rd Party Access Code Window
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase125144
+	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+		| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
+		|           | Copper sulfate  | 11.67   | false               |            | false       |
+		|           | Nitric acid     | 55      | false               |            | false       |
+	Then In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
+	Then In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Declined
+	Then In the Formulation > 3rdParty Section, I confirm displayed 'Chemical Assessments and SDS Authoring' text is correct
+	Then In the Formulation > 3rdParty Section, I confirm displayed 'Data Use Consents' text is correct
 
 @TestCase:125144
 Scenario: [125144] Actions - 3rd Party Access Code Window
@@ -297,8 +313,6 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 		| 7647-14-5 | Sodium chloride | 33.33   | false               |            | false       |
 		|           | Copper sulfate  | 11.67   | false               |            | false       |
 		|           | Nitric acid     | 55      | false               |            | false       |
-	Then In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
-	Then In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
 	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
