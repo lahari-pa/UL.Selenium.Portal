@@ -19,8 +19,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Consent to Tier 2.1, 2.2, 4.2 Data Uses";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the Formulation > Batteries Section, I confirm displayed 'Data Use Cansents' text is correct")]
-		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
+		[StepDefinition(@"In the Formulation > Batteries Section, I confirm text 'Data Use Cansents' (should|should not) be displayed")]
+		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string condition)
 		{
 			string section = "Formulation > Batteries";
 			string[] correctText =
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).",
 			"These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."
 			};
-			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText);
+			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText, condition);
 
 		}
 

@@ -23,8 +23,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string option = "Accept";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the Formulation > 3rdParty Section, I confirm displayed 'Chemical Assessments and SDS Authoring' text is correct")]
-		public void GivenIConfirmTheFormulation3rdPartyDisplaysTheCorrectText()
+		[StepDefinition(@"In the Formulation > 3rdParty Section, I confirm text 'Chemical Assessments and SDS Authoring' (should|should not) be displayed")]
+		public void GivenIConfirmTheFormulation3rdPartyDisplaysTheCorrectText(string condition)
 		{
 			string section = "Formulation > 3rd Party";
 			string[] correctText =
@@ -32,11 +32,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"1. Chemical Assessments and SDS Authoring",
 			"WERCSmart combines direct supplier and 3rd party quantitative formulations for purposes of a product's chemical assessment, and in some cases, for SDS authoring. Unless an ingredient is checked as public, the identity of an ingredient (the CAS# and the chemical name) in a 3rd party formulation, when combined with a direct supplier's formulation, is masked (whether or not checked as a trade secret). Please note, however, that 3rd party ingredient chemical names may be disclosed on international shipping labels as required."
 			};
-			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText);
+			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText, condition);
 
 		}
-		[StepDefinition(@"In the Formulation > 3rdParty Section, I confirm displayed 'Data Use Consents' text is correct")]
-		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText()
+		[StepDefinition(@"In the Formulation > 3rdParty Section, I confirm text 'Data Use Consents' (should|should not) be displayed")]
+		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText(string condition)
 		{
 			string section = "Formulation > 3rd Party";
 			string[] correctText =
@@ -53,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"c. That your customer can publicly disclose the identity of ingredients in your component, but only if you have marked an ingredient as publicly disclosed (Tier 4.2).",
 			"These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."
 			};
-			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText);
+			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText, condition);
 
 		}
 	}
