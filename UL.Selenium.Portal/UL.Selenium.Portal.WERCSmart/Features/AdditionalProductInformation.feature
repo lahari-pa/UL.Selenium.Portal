@@ -170,4 +170,55 @@ Scenario: [133161] Fertilizer - P, N, or K question
 	And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 
-
+# Created by Saikiran Chittampally
+@onlyInIntegration
+@TestCase:211384
+Scenario: [211384] Product Information Screen - General Validation for N, P, K, and Slow Release Agent Questions
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Then I click the Add Product icon in the Navigation Pane
+	And the Product Editor page should be loaded
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
+	Then I save the product information as: TestCase211384
+	Given I should see the Product Information Page
+	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is a Retailer's Private Label or Brand option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
+	And I see the following sections
+		| Section                       |
+		| Phosphates /Phosphorous (“P”) |
+		| Nitrogen /Nitrates (“N”)      |
+		| Potassium(“K”)                |
+		| Slow-Release Agent            |
+	Then I set the Phosphates /Phosphorous (“P”) field to: 14
+	Then I set the Nitrogen /Nitrates (“N”) field to: 8
+	Then I set the Potassium(“K”) field to: 14
+	Then I set the Slow-Release Agent field to: 3
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: The Product
+	Then I set 'Type of Product' to: Soil Conditioner
+	And I click continue
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: The Product
+	Then I set 'Type of Product' to: Soil (No Additives, Fertilizers, or Inhibitors)
+	And I click continue
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: The Product
+	Then I set 'Type of Product' to: Fertilizer
+	And I click continue
+	And I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then I click continue
+	Then I should see the Physical and Chemical Properties Page
+	Then I click the My Products icon in the Navigation Pane
+	Given I delete the product: TestCase211384
