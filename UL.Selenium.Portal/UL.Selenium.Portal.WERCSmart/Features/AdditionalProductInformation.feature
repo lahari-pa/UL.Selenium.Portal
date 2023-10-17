@@ -171,7 +171,6 @@ Scenario: [133161] Fertilizer - P, N, or K question
 	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 
 # Created by Saikiran Chittampally
-@onlyInIntegration
 @TestCase:211384
 Scenario: [211384] Product Information Screen - General Validation for N, P, K, and Slow Release Agent Questions
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -222,8 +221,8 @@ Scenario: [211384] Product Information Screen - General Validation for N, P, K, 
 	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
 	Given I delete the product: TestCase211384
+
 #Created by Saikiran Chittampally
-@onlyInIntegration
 @TestCase:217076
 Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow Release Agent
 	Given I log in with the account saved in TReVor as: ProductAccount
