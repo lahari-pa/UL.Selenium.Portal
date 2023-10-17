@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
 			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
 
@@ -244,6 +244,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 
+		}
+		public bool DeselectRetailer(string retailer)
+		{
+			ReadOnlyCollection<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+
+			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+
+			if (matchingRetailer == null)
+			{
+				Report.Info("Could not find matching retailer. Retailers found were: " + string.Join(",", this.GetRetailers()));
+				return false;
+			}
+			else
+			{
+				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				if (retailerCheckbox == null)
+				{
+					Report.Info(("Found retailer but could not find checkbox"));
+					Report.Screenshot();
+					return false;
+				}
+				else
+				{
+					return retailerCheckbox.TryClick();
+				}
+
+			}
 		}
 
 	}
