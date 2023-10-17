@@ -337,3 +337,21 @@ Then In the Supplier Manager Popup I should see supliers
 Then In the Supplier Manager Popup I click on the close button
 Then I call Shared Step - In the Supplier Manager popup I select radio button Invoice Number and enter search term with spaces: saved as InvoiceNumber
  
+# Created by Saikiran Chittampally
+# Executed in QA-Integration env as Edit permission provided for SHAManager Account in Integration environment
+@TestCase:214081
+Scenario: [214081] Create New IFS Account - Turn UL Retail Services (IFS) Toggle ON
+Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
+Then I Click 'Suppliers' in SHA Manager
+And I should see the 'Supplier Manager' popup
+When I search with email in the supplier manager window: 2e063d578bc1@.mailosaur.net
+Then I confirm following toggles displayed
+|ToggleInfo|
+| UL Retail Services (IFS) |
+| After-Market Distributor |
+| Prescription Pharma      |
+| UL Test Company          |
+|Document Reader           |
+Then I confirm UL Retail Services (IFS) Toggle enable check after clicking back button
+Then I confirm UL Retail Services (IFS) Toggle enable check after clicking save button
+Then I close Supplier Manager window
