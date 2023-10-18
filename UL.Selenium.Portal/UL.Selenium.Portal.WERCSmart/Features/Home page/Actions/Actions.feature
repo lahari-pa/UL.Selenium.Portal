@@ -314,7 +314,6 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 	Given I click close on the Save Changes popup dialog
 
 
-
 @TestCase:152230
 Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
