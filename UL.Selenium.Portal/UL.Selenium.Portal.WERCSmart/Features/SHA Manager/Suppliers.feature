@@ -339,6 +339,7 @@ Then I call Shared Step - In the Supplier Manager popup I select radio button In
  
 # Created by Saikiran Chittampally
 # Executed in QA-Integration env as Edit permission provided for SHAManager Account in Integration environment
+@OnlyInIntegration
 @TestCase:214081
 Scenario: [214081] Create New IFS Account - Turn UL Retail Services (IFS) Toggle ON
 Given I call Shared Step 65080b (Login to Studio as user saved as: SHAManager and Open SHA manager)
