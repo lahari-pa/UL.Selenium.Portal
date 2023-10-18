@@ -29,10 +29,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
+		IWebElement LinkElement(string linkText) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkText}']"), 2);
 
 		public bool InputFieldExists(string fieldName)
 		{
 			return this.InputField(fieldName) != null;
+		}
+		public bool LinkElementExists(string linkText)
+		{
+			return this.LinkElement(linkText) != null;
+		}
+		public bool LinkElementClick(string linkText)
+		{
+			return this.LinkElement(linkText).TryClick();
 		}
 
 		#region web elements

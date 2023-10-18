@@ -2366,7 +2366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		[FindsBy(How = How.Id, Using = "orderHistoryContainer")]
 		protected override IWebElement containerElement { get; set; }
-		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-default' and contains(text(),'{value}')]"), 2);
+		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-gray' and contains(text(),'{value}')]"), 2);
 		private IWebElement InvoiceNumber => this.containerElement.FindElement(By.XPath(".//span[@data-bind = 'text: OrderNumber']"), 2);
 		public bool Order_History_Select(string history_type)
 		{
@@ -2380,7 +2380,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					myType = this.containerElement.FindElement(By.XPath(".//div[@id='selectorGroup']/label/input[@value='WERCS']"), 2);
 					break;
 				case "Subscription":
-					myType = this.containerElement.FindElement(By.XPath(".//div[@id='selectorGroup']/label/input[@value='SUBSCRIPTION']"), 2);
+					myType = this.containerElement.FindElement(By.XPath(".//a[@data-bind=\"click: $root.sourceTypeSelected('SUBSCRIPTION')\"][text()='Subscription']"), 2);
 					break;
 				default:
 					throw new Exception("Failed to Find Correct Option Name");
