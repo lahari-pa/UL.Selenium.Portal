@@ -707,8 +707,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Emoty Cart pop up message text matched the expected value: '" + value + "'");
 		}
 
+		//Adding My Products|Add Product icon in Navigation page due to the new changes in Integration environment
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[StepDefinition(@"I click the (Home|My Products|Add Product|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)

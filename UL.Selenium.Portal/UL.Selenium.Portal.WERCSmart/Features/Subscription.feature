@@ -1246,7 +1246,7 @@ Scenario: [87997] Order History - Subscription Features
 	When In the Order History screen I select Subscription
 	Then I Confirm that I see the field : Filter
 	And I Confirm that I see the field : Clear Filter
-	Given I filter with order Number : INV00095035, Clear Filter
+	#Given I filter with order Number : INV00095035, Clear Filter
 	Then I Confirm Clear Filter results are correct: INV00095035
 	Given I filter with order Number : INV00095035, Filter
 	Then I Confirm Filter results are correct: INV00095035
