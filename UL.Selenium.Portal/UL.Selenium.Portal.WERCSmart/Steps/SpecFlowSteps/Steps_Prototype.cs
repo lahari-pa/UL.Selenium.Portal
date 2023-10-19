@@ -83,11 +83,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new NewProduct().ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
-		[StepDefinition(@"I confirm the (.*) page displays the correct text")]
-		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string section, string[] correctText)
+		public void GivenIConfirmTheTextsDisplaysTheCorrectText(string section, string[] correctText, string condition)
 		{
 			var newProductPage = new NewProduct();
-			Report.IsTrue(newProductPage.CheckTextOnThePage(correctText), $"The text in the {section} page displayed the incorrect text", $"The text in the {section} page displayed the correct text");
+			if (condition == "should")
+			{
+				Report.IsTrue(newProductPage.CheckTextOnThePage(correctText), $"The text in the {section} page displayed the incorrect text", $"The text in the {section} page displayed the correct text");
+			}
+			else
+			{
+				Report.IsFalse(newProductPage.CheckTextOnThePage(correctText), $"The text is displayed in the {section} page, but should not", $"The text is not displayed in the {section} page, as expected");
+
+			}
 		}
 
 

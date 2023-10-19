@@ -284,7 +284,6 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
 	Then I confirm that all products appear in the 'My Products' grid
 
-
 @TestCase:125144
 Scenario: [125144] Actions - 3rd Party Access Code Window
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
