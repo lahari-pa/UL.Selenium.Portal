@@ -19,7 +19,6 @@
 @Studio_Header
 @Studio
 @DeleteActiveProducts
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:NeonicotinoidWarning
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -234,8 +233,6 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 		| Clothianidin  | 5.0     | false               | false       |            |
 	Then in the Ingredients page I click Continue
 	And I should see the Neonicotinoid Warning Page
-	Then In the Neonicotinoid Warning Section, warning message should be displayed
-	Then In the Neonicotinoid Warning Section, warning message should not be displayed
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
