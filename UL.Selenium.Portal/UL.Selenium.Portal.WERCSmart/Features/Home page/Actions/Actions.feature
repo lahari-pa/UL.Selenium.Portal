@@ -331,7 +331,6 @@ Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 	Given I close the current window
 
 # Created by Saikiran Chittampally
-@onlyInIntegration
 @TestCase:95861
 Scenario: [95861] Monitor Progress- Verify the Monitor Progress Option is Enabled and Disabled
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -364,8 +363,9 @@ Scenario: [95861] Monitor Progress- Verify the Monitor Progress Option is Enable
 		|Mask						   |300						| 1.005					  | 20		 | Black	| Odorless | No data available | 10					  |
 	Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
 	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Then If purchase details are showing click confirm order	
-	Then In the Thank You screen I click Home	
+	Then In the Purchase Summary screen I click Confirm Order
+	Then In the Thank You screen I click Home
+	Then the WERCSmart homepage should load
 	Given I search for the product saved as: TestCase95861
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Monitor Progress
@@ -377,7 +377,6 @@ Scenario: [95861] Monitor Progress- Verify the Monitor Progress Option is Enable
 	| Disable Monitoring |
 	Then I click on the Row Action: Disable Monitoring
 	Given In the Archive Retailers popup, I Deselect the checkbox next to the retailer Family Dollar	
-	#Given I ensure that the check box next to Show Archived Retailers is unselected
 	Then I click ok
 	When I click Row Actions for the most recent product returned
 	Given I should not see the following Actions options
