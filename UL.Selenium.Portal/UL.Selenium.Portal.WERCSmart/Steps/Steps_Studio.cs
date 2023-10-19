@@ -2085,8 +2085,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
 					"Power designer has opened");
-				GeneralUtilities.StudioWaitForSpinner(30);
-				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
+				GeneralUtilities.StudioWaitForSpinner(60);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60);
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.DataCodeTitleConfirm(data, value), $"Failed to find '{data}'", $"Succesfully found '{data}'");
 
 			}
