@@ -308,7 +308,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		
+		[StepDefinition(@"I (should|should not) see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
+		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string condition, string title, string subtitle, string text)
+		{
+			var thisNewProduct = new NewProduct();
+			Alert thisAlert = thisNewProduct.GetAlert();
+			if (condition == "should")
+			{
+				Report.IsTrue(thisAlert.Title == title, "Title is not as expected", "Warning title is displayed");
+				Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), "SubTitle is not as expected. Expected " + subtitle + " but got: " + thisAlert.SubTitle, "Warning subtitle is displayed");
+				Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Warning text is displayed");
+			}
+			else
+			{
+				Report.IsFalse(thisAlert.Title == title, "Warning title is displayed, but it is not expected", "Warning title is not displayed, as expected");
+				Report.IsFalse(thisAlert.SubTitle.Contains(subtitle), "SubTitle is displayed, but it is not expected.", "SubTitle is not displayed, as expected.");
+				Report.IsFalse(thisAlert.Text == text, "Warning text is displayed, but it is not expected.", "Warning text is not displayed, as expected.");
+			}
+		}
 
 	}
 }
