@@ -5905,7 +5905,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2).ToList();
-			bool result = false;
+			bool result = true;
 			foreach (IWebElement element in displayedText)
 			{
 				var foundText = element.Text;
@@ -5924,10 +5924,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						{
 							Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
 							result = false;
-						}
-						else
-						{
-							result = true;
 						}
 
 					}
