@@ -316,8 +316,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (condition == "should")
 			{
 				Report.IsTrue(thisAlert.Title == title, "Title is not as expected", "Warning title is displayed");
-				Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), "SubTitle is not as expected. Expected " + subtitle + " but got: " + thisAlert.SubTitle, "Warning subtitle is displayed");
-				Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Warning text is displayed");
+				Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), $"SubTitle is not as expected. Expected {subtitle}, but got: {thisAlert.SubTitle}", "Warning subtitle is displayed");
+				Report.IsTrue(thisAlert.Text == text, $"Text is not as expected. Expected {text}, but got: {thisAlert.Text}", "Warning text is displayed");
 			}
 			else
 			{
