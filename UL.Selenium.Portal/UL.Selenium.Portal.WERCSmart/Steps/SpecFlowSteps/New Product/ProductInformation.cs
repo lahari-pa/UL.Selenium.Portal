@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product has been classified using OSHA \(US\) Globally Harmonized Standards \(GHS\) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards \(Canada\)' to: (Yes|No)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product has been classified using OSHA \(US\) Globally Harmonized Standards \(GHS\) under 29 CFR 1910\.1200 and\/or CCOHS WHMIS Standards \(Canada\)' to: (Yes|No)")]
 		public void SelectOSHAGloballyHarmonizedStandards(string option)
 		{
 			string section = "Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)";
@@ -26,7 +26,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: (Yes|No)")]
 		public void SelectProductIsShippedDirectly(string option)
 		{
-			string section = "Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.";
+			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: (Yes|No)")]
+		public void SelectProductIsRetailerPrivateLabel(string option)
+		{
+			string section = "Product is a Retailer's Private Label or Brand";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer \(Goods Not for Resale\)' to: (Yes|No)")]
+		public void SelectProductIsSoldToTheRetailer(string option)
+		{
+			string section = "Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child \(US is 12 and under; Canada is 14 and under\)' to: (Yes|No)")]
+		public void SelectProductIsMarketedForUseByChild(string option)
+		{
+			string section = "Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: (Yes|No)")]
@@ -35,11 +53,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Select countries the product may be sold in' to: (United States|Canada))")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Select countries the product may be sold in' to: (United States|Canada)")]
 		public void SelectCountriesTheProductMayBeSold(string option)
 		{
 			string section = "Select countries the product may be sold in";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)?' to: (Yes|No)")]
+		public void SelectDoesProductContainFertilizer(string option)
+		{
+			string section = "Does the product contain fertilizer (N, P, K)?";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Nitrogen /Nitrates \(“N”\)' to: (.*)")]
+		public void SetNitrogen(string option)
+		{
+			string section = "Nitrogen /Nitrates (“N”)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Phosphates \/Phosphorous \(“P”\)' to: (.*)")]
+		public void SetPhosphates(string option)
+		{
+			string section = "Phosphates /Phosphorous (“P”)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Potassium\(“K”\)' to: (.*)")]
+		public void SetPotassium(string option)
+		{
+			string section = "Potassium(“K”)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Slow-Release Agent' to: (.*)")]
+		public void SetSlowReleaseAgent(string option)
+		{
+			string section = "Slow-Release Agent";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Select one option below' to: (Battery is packaged for Retail Sale|Battery is not packaged for Retail Sale)")]
+		public void SelectOneOptionBelow(string option)
+		{
+			string section = "Select one option below";
+			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 	}
 }
