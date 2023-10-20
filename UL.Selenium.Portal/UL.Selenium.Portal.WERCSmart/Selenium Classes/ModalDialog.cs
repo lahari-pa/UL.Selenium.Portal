@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetRetailers()
 		{
-			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath(".//td/span"));
 
 			var retailerList = new List<string>();
 			foreach (IWebElement retailer in retailers)
@@ -164,18 +164,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			ReadOnlyCollection<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
-
-			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+			IWebElement matchingRetailer = this.ContainerElement.FindElement(By.XPath($".//td/span[contains(text(),'{retailer}')]"));
 
 			if (matchingRetailer == null)
 			{
-				Report.Info("Could not find matching retailer. Retailers found were: " + string.Join(",", this.GetRetailers()));
+				Report.Info($"Could not find matching retailer. Retailers found were: { this.GetRetailers()}");
 				return false;
 			}
 			else
 			{
-				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("../..//input"), 2);
 				if (retailerCheckbox == null)
 				{
 					Report.Info(("Found retailer but could not find checkbox"));
@@ -186,7 +184,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					return retailerCheckbox.TryCheck();
 				}
-
 			}
 		}
 
@@ -247,18 +244,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool DeselectRetailer(string retailer)
 		{
-			ReadOnlyCollection<IWebElement> retailers = this.ContainerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
-
-			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+			IWebElement matchingRetailer = this.ContainerElement.FindElement(By.XPath($".//td/span[contains(text(),'{retailer}')]"));
 
 			if (matchingRetailer == null)
 			{
-				Report.Info("Could not find matching retailer. Retailers found were: " + string.Join(",", this.GetRetailers()));
+				Report.Info($"Could not find matching retailer. Retailers found were: { this.GetRetailers()}");
 				return false;
 			}
 			else
 			{
-				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("../..//input"), 2);
 				if (retailerCheckbox == null)
 				{
 					Report.Info(("Found retailer but could not find checkbox"));

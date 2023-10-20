@@ -3641,7 +3641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisModalDialog = new ModalDialog();
 			Report.IsTrue(thisModalDialog.DeselectRetailer(retailer), $"Failed to select: { retailer }",
-				"Successfully selected: { retailer }");
+				$"Successfully selected: { retailer }");
 		}
 	}
 }
