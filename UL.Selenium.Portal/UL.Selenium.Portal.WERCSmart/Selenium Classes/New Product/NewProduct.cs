@@ -29,10 +29,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
+		IWebElement LinkElement(string linkText) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkText}']"), 2);
 
 		public bool InputFieldExists(string fieldName)
 		{
 			return this.InputField(fieldName) != null;
+		}
+		public bool LinkElementExists(string linkText)
+		{
+			return this.LinkElement(linkText) != null;
+		}
+		public bool LinkElementClick(string linkText)
+		{
+			return this.LinkElement(linkText).TryClick();
 		}
 
 		#region web elements
@@ -5890,6 +5899,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 				return true;
+		}
+
+		public bool CheckTextOnThePage(string[] correctText)
+		{
+
+			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2).ToList();
+			bool result = true;
+			foreach (IWebElement element in displayedText)
+			{
+				var foundText = element.Text;
+
+				var updatedString = foundText.Replace("\r\n\r\n", "|");
+
+				var updatedStringFinal = updatedString.Replace("\r\n", "|");
+
+				string[] foundStringArray = updatedStringFinal.Split('|');
+				if (foundStringArray.Length == correctText.Length)
+				{
+					for (int i = 0; i < foundStringArray.Count(); i++)
+					{
+
+						if (foundStringArray[i] != correctText[i])
+						{
+							Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
+							result = false;
+						}
+
+					}
+				}
+			}
+			return result;
 		}
 
 		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()

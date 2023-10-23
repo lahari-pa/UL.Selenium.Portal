@@ -24,9 +24,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			return this.PaceProgress.GetAttribute("data-progress-text");
 		}
+		public bool GetPaceProgressExists()
+		{
+			return this.PaceProgress != null;
+		}
 		public void WaitLoading()
 		{
-			Delay.Seconds(5);
+			if (!this.GetPaceProgressExists())
+			{
+				Report.Info("Cannot get Pace Progress line");
+				Delay.Seconds(1);
+			}
 			int timeoutCounter = 0;
 			string currentPaceProgress = this.GetPaceProgress();
 			while (currentPaceProgress != "100%" && timeoutCounter < 120)
