@@ -44,7 +44,7 @@ Scenario: [1234506] Create new account with supplier settings for Canada Has Add
 
 @TestCase:1234507
 Scenario: [1234507] Create new account with supplier settings for Canada Has pack and partial stewardship
-	Given I go to the WERCSmart Log in
+	#Given I go to the WERCSmart Log in
 	Given I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: CanadaHasPackandPartialStewardship
 
 @TestCase:1234508
@@ -109,4 +109,4 @@ Scenario: [1234522] Create new account with supplier settings for Cart No Produc
 
 @TestCase:1234523
 Scenario: [1234523] Create new account with a subscription but no products accounts
-	Given I create a new supplier NO products account with the following parameters and update TReVor information for: SubCart
+	Given I create a new supplier NO products account with the following parameters and update TReVor information for: SubCartNoProducts
