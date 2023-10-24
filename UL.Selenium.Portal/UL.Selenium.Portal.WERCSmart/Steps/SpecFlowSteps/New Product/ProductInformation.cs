@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Select countries the product may be sold in";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)?' to: (Yes|No)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)\?' to: (Yes|No)")]
 		public void SelectDoesProductContainFertilizer(string option)
 		{
 			string section = "Does the product contain fertilizer (N, P, K)?";
@@ -95,6 +95,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Select one option below";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+		}
+
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Would you like to set the product as Item Preview' to: 'Yes - Add to Item Preview'")]
+		public void SettheProductAsItemPreview()
+		{
+			string section = "Would you like to set the product as Item Preview";
+			string option = "Yes - Add to Item Preview";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: (.*)")]
+		public void SelectTheCountryOfOrigin(string option)
+		{
+			string section = "Would you like to set the product as Item Preview";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 	}
 }
