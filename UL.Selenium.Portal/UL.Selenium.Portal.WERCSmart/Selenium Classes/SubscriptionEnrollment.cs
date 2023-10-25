@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Articles(string articles)
 		{
 			Report.Info("Selecting Number of Articles: " + articles);
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'" + articles + "')]"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath(string.Format($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'{0}')]", articles)), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string foundTitle = menu.Text.Trim();
@@ -168,7 +168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);		
 
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'" + enArticles + "')]"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath(string.Format($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'{0}')]", enArticles)), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string foundTitle = menu.Text.Trim();
@@ -227,7 +227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Formulated_Products(string formProds)
 		{
 			Report.Info("Selecting Number of Formulated Products: " + formProds);
-			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'" + formProds + "')]"), 2).ToList();
+			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath(string.Format($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'{0}')]", formProds)), 2).ToList();
 			foreach (var menu in listofMenus)
 			{
 				string foundTitle = menu.Text.Trim();
