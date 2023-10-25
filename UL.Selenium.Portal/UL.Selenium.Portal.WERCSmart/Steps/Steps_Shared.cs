@@ -16106,5 +16106,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			}
 		}
+		[StepDefinition(@"I call Shared Step 217669 \(Product Information - Pesticide\(NO\), Sold\(US\), Child\(YES\), OSHA\(NO\), DSV\(NO\), PL\(NO\), GNFR\(NO\)\)")]
+		public void ICallSharedProductInformation_ChildYes_NoDirectShipNoPLClickContinue()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep(
+				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "Yes");
+			Report.StartSubStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+
+			Report.StartSubStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
 	}
 }

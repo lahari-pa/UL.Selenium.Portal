@@ -74,7 +74,6 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Then I delete the product: TestCase63663
 
 #actions/delete
-@OnlyInIntegration
 @TestCase:56216
 Scenario: [56216] My Products grid Actions - Delete Navigation
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -84,7 +83,7 @@ Scenario: [56216] My Products grid Actions - Delete Navigation
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase56216
-	Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 217669 (Product Information - Pesticide(NO), Sold(US), Child(YES), OSHA(NO), DSV(NO), PL(NO), GNFR(NO))
 	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
 	Then I click the My Products icon in the Navigation Pane
 	Then the WERCSmart homepage should load
