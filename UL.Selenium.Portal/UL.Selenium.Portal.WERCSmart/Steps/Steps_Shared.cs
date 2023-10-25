@@ -1454,8 +1454,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.UseSubSteps = true;
 			var MyStepsHomePage = new StepsHomepage();
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartSubStep("I click the Register New Product icon in the Navigation Pane");
-			MyStepsHomePage.ClickItemInNavigationPanel("Register New Product");
+			Report.StartSubStep("I click the Add Product icon in the Navigation Pane");
+			MyStepsHomePage.ClickItemInNavigationPanel("Add Product");
 			Report.StartSubStep("I should see the New Product Page");
 			MyNewProduct.GivenIShouldSeeXPage("New Product");
 			Report.StartSubStep("I set the Select the type of product to create field to: Create a New Registration");
