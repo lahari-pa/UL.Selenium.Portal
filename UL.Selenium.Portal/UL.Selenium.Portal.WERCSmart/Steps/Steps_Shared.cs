@@ -1455,7 +1455,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsHomePage = new StepsHomepage();
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartSubStep("I click the Register New Product icon in the Navigation Pane");
-			MyStepsHomePage.ClickItemInNavigationPanel("Register New Product");
+			MyStepsHomePage.ClickItemInNavigationPanel("Add Product");
 			Report.StartSubStep("I should see the New Product Page");
 			MyNewProduct.GivenIShouldSeeXPage("New Product");
 			Report.StartSubStep("I set the Select the type of product to create field to: Create a New Registration");
@@ -16105,6 +16105,95 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
 				thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			}
+		}
+		[StepDefinition(@"I call Shared Step 214041 \(Physical and Chemical Properties - Applicable Only to SOIL\)")]
+		public void GivenICallSharedEnterPhysicalProperty_Solid_Applicable_Only_To_Soil()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartSubStep("Primary Physical State should be showing the value: Solid");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
+			if (!showing.Contains("Solid"))
+			{
+				Report.StartSubStep("I set the Primary Physical State option to: Solid");
+				Report.Info("Setting the Physical State to Solid because it was not selected by default");
+				MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			}
+
+			Report.StartSubStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			Report.StartSubStep("I set the Select the best Water Solubility description option to: Dispersible");
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.StartSubStep(
+					"I set the Secondary Physical State option to: Solid");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid");
+			}
+			Report.StartSubStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+
+		}
+		[StepDefinition(@"I call Shared Step 231514 \(Inventory Status, Prop 65 - Applicable Only to SOIL\)")]
+		public void ICallSharedInventory_Status_NoToProp65_Applicable_Only_To_Soil()
+		{
+			Report.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is exempt from TSCA chemical Inventory listing requirements.");
+			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+		[StepDefinition(
+		   @"I call Shared Step 214040 \(Product Information -Applicable Only to Type of Product: SOIL No - Continue\)")]
+		public void
+		   GivenICallSharedStep_Applicable_only_to_product_SOIL_Continue()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I should see the Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Information");
+			new GlobalSteps().ISetTagFIFRAPopupExpectedToBeX(true);
+
+			Report.StartSubStep(
+				"I set the Does the product contain fertilizer (N, P, K) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Does the product contain fertilizer (N, P, K)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartSubStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartSubStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartSubStep("In the Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 		[StepDefinition(@"I call Shared Step 217669 \(Product Information - Pesticide\(NO\), Sold\(US\), Child\(YES\), OSHA\(NO\), DSV\(NO\), PL\(NO\), GNFR\(NO\)\)")]
 		public void ICallSharedProductInformation_ChildYes_NoDirectShipNoPLClickContinue()
