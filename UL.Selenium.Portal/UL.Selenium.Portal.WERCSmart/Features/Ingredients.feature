@@ -796,8 +796,9 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 # Created by Saikiran Chittampally
 @TestCase:158853
 Scenario: [158853] Ingredient Identifier
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then the WERCSmart homepage should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase158853
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -830,8 +831,11 @@ Scenario: [158853] Ingredient Identifier
 	Then I switch to the Data Summary page
 	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
 	Given I close the browser tab with the Summary page
-	Given I click the Home navigation icon
-	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158853
+	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then In the Purchase Summary screen I click Confirm Order
+	Then In the Thank You screen I click Home
+	Then the WERCSmart homepage should load
+	Given I delete the product: TestCase158853
 
 	
 
