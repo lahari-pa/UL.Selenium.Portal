@@ -18,10 +18,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	class RegulatoryInformation3
 	{
 		[StepDefinition(@"In the Regulatory Information 3 Section, set the checkbox option in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.': to: (Drug Facts Panel|Supplement Facts Panel|Nutrition Facts Panel|None of the Above)")]
-		public void SelectProductTypeToCreate(string option1, string option2)
+		public void SelectProductLabel(string option1)
 		{
 			string section = "Refer to your Product Label.  From the options, select those that appear on the Label.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option1);
 		}
+
+
+		[StepDefinition(@"In the Regulatory Information 3 Section, the link: (OTC Drug Facts Label (may include Active Ingredient)|Nutritional and Supplement Labels|Dietary Supplements Label) (should|should not) be displayed")]
+		public void Regulatory3LinkExists(string linkText, string condition)
+		{
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
+
+
+
+
+
+
+
 	}
 }
