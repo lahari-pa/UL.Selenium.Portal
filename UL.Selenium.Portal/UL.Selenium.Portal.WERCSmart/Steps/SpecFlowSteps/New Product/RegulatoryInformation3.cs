@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		}
 
 
-		[StepDefinition(@"In the Regulatory Information 3 Section, the following link: (OTC Drug Facts Label \(may include Active Ingredient\)|Nutritional and Supplement Labels|Dietary Supplements Label) (should|should not) be displayed")]
+		[StepDefinition(@"In the Regulatory Information 3 Section, the following link: (OTC Drug Facts Label may include Active Ingredient|Nutritional and Supplement Labels|Dietary Supplements Label) (should|should not) be displayed")]
 		public void Regulatory3LinkExists(string linkText, string condition)
 		{
 			new Steps_Prototype().LinkElementExists(condition, linkText);
