@@ -14,6 +14,8 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Text.RegularExpressions;
 using TReVor.Integrations;
 using TReVor.Integrations.Classes;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using NPOI.Util;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -25,12 +27,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 
 
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Automation_ProductsAccount", "123-456-7889",
+			subCompanyInfo.AddRow("ProductAccount_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Automation_ProductsAccount", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 						//subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
 			//	"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
@@ -276,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//Save account and update TReVor data
-			Report.Info(savedAs + " Created");
+			Report.Info($"{savedAs} Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -284,10 +286,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier packaging only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountPkgOnlyWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Packaging_Only", "123-456-7889",
+			subCompanyInfo.AddRow("PackagingOnly_<random>", "UNITED STATES", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Packaging_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -321,7 +323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
-			Report.Info(savedAs + " Created");
+			Report.Info($"{savedAs} Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -329,10 +331,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier lockout account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountLockOutWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_AccountLockTest", "123-456-7889",
+			subCompanyInfo.AddRow("AccountLockOut_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_AccountLockTest", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			if (this.BasicSignup(savedAs))
@@ -345,10 +347,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Canada address only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaAddressOnlyWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "CANADA", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "1425 Kingsway", "Address2", "Sudbury", "ON", "P3A 4R7", "QA_Packaging_Only", "123-456-7889",
+			subCompanyInfo.AddRow("CanadaAddressOnly_<random>", "CANADA", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "1425 Kingsway", "Address2", "Sudbury", "ON", "P3A 4R7", "QA_Packaging_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			if (this.BasicSignup(savedAs))
@@ -361,10 +363,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Full_Stewardship_Only", "123-456-7889",
+			subCompanyInfo.AddRow("fullstwrdshiponly_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Full_Stewardship_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
@@ -387,10 +389,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasAddressPackagingWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_CanHasAddPkg", "123-456-7889",
+			subCompanyInfo.AddRow("CanadaHasAddressPackaging_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_CanHasAddPkg", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
@@ -486,7 +488,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -494,10 +496,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasPackAndPartialStwdshipWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
+			subCompanyInfo.AddRow("CanadaHasPackandPartialStewardship_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -586,7 +588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -594,10 +596,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier no pkg stewardship partial and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoPkgPartialStwdshipWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
+			subCompanyInfo.AddRow("CanadaNoPkgStwdPartial_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
@@ -616,7 +618,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
 			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -624,13 +626,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier data consent and update TReVor information for: (.*)")]
 		public void CreateNewAccountDataConsentWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_DataConsent", "123-456-7889",
+			subCompanyInfo.AddRow("DataConsentAccount<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_DataConsent", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = MailosaurFunctions.CreateEmail(account.Email);
+			account.Email = MailosaurHelpers.DefaultMailbox.CreateEmail(account.Email);
 			account.Identifier = savedAs;
 			UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
 			Report.Success("Account details saved!");
@@ -682,10 +684,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier no Canada data and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoCanadaDataWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanadaData", "123-456-7889",
+			subCompanyInfo.AddRow("NoCanadaData_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanadaData", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
@@ -696,10 +698,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier no canada yes packaging full stewardship with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoCanYesPkgStwdFullWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanYesPkgStwdFull", "123-456-7889",
+			subCompanyInfo.AddRow("NoCanYesPkgStwdFull_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanYesPkgStwdFull", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -745,7 +747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -753,14 +755,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
-
-
-
-
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Partial_Stewardship_Only", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Partial_Stewardship_Only", "123-456-7889",
+			subCompanyInfo.AddRow("PartialStewardshipOnly_<random>", "UNITED STATES", "WERCS", "Test_Automation_Partial_Stewardship_Only", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Partial_Stewardship_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -774,7 +772,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
 			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
 			myAccount.StewardshipInformation("Quebec", "QU-1-1");
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -782,10 +780,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier premium subscription with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountPremiumSubsWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_PremiumSubscription", "123-456-7889",
+			subCompanyInfo.AddRow("PremiumSubscriptionAccount_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_PremiumSubscription", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -837,7 +835,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//Save account and update TReVor data
-			Report.Info(savedAs + " Created");
+			Report.Info($"{savedAs} Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -845,10 +843,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Partial Stewardship and packaging account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipAndPkgWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Pkg", "123-456-7889",
+			subCompanyInfo.AddRow("PackagePartialStewardship_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Pkg", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -891,7 +889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
 			//update TReVor info
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -899,17 +897,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier no PLP with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoPLPWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_NoPLP_Products", "123-456-7889",
+			subCompanyInfo.AddRow("NoPLProductsAccount_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_NoPLP_Products", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
 
 			//update TReVor info
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -917,10 +915,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Canada has all data with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasAddressPackageStwdshipWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_CanadaAllData", "123-456-7889",
+			subCompanyInfo.AddRow("CanadaHasAllData_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_CanadaAllData", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -1014,7 +1012,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -1022,10 +1020,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Products in cart with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountProductInCartWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_ProductsInCart", "123-456-7889",
+			subCompanyInfo.AddRow("ProductsInCart_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_ProductsInCart", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			var myProductsetup = new Steps_ProductSetup();
 
@@ -1042,10 +1040,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier sub cart with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountSubCartWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_SubCart", "123-456-7889",
+			subCompanyInfo.AddRow("SubCart_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_SubCart", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 
@@ -1085,17 +1083,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
 			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("10", "10", "10");
 
-			Report.Info(savedAs + " Account Created");
+			Report.Info($"{savedAs} Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
 		[StepDefinition(@"I create a new supplier Visual with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountVisualWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Visual", "123-456-7889",
+			subCompanyInfo.AddRow("VisualAccount_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Visual", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
@@ -1108,7 +1106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public WERCSmartUser SaveUser(Table information, string savedAs)
 		{
 			WERCSmartUser account = information.CreateInstance<WERCSmartUser>();
-			account.Email = MailosaurFunctions.CreateEmail(account.Email);
+			account.Email = MailosaurHelpers.DefaultMailbox.CreateEmail(account.Email);
 			account.Identifier = savedAs;
 			Context.AddToContext(savedAs, account, true);
 
@@ -1158,15 +1156,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public bool SaveUserToTReVor(string savedAs, WERCSmartUser account)
 		{
 			
-			var user = TReVorSettings.GetCredential(savedAs);
+			var user = TReVorSettings.VaultRecords.GetCredential(savedAs);
 
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password and email in TReVor");
 				
 				TReVorSettings.UpdateCredential(user.Alias,account.Email,account.Password);
-				TReVorSettings.Refresh.SoftwareCredentials();				
-				var foundUser = TReVorSettings.GetCredential(user.Alias);
+				TReVorSettings.VaultRecords.Refresh();				
+				var foundUser = TReVorSettings.VaultRecords.GetCredential(user.Alias);
 				Report.Info($"founduser.username = '{foundUser.UserName}'");
 				Report.Info($"account.email = '{account.Email}'");
 
@@ -1183,7 +1181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info($"did not match the username to email... waiting 5 seconds then checking again");
 						Delay.Seconds(5);
 						x++;
-						foundUser = TReVorSettings.GetCredential(user.Alias);
+						foundUser = TReVorSettings.VaultRecords.GetCredential(user.Alias);
 					}
 
 					Report.Info($"founduser.username = '{foundUser.UserName}'");
@@ -1213,10 +1211,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier NO products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewNOProductsAccountWithFollowingParameters(string savedAs)
 		{
-			Report.Info("Setting up account for user: '" + savedAs + "'");
+			Report.Info($"Setting up account for user: '{savedAs}'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+			subCompanyInfo.AddRow("NoProductsAccount_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
@@ -1323,7 +1321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable3);
 
 			//Save account and update TReVor data
-			Report.Info(savedAs + " Created");
+			Report.Info($"{savedAs} Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
@@ -1469,7 +1467,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(e.Message);
 			}
 		}
-
+		
+		[StepDefinition(@"I create a new (Manufacturer|Supplier) account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountsWithFollowingParametersTable(string accountType, string savedAs)
+		{
+			Report.Info($"Setting up account for user: '{savedAs}'");
+			Random rnd = new Random();
+			string address = $"{rnd.Next()} {savedAs} Street";
+			string phonenumber = DateTime.UtcNow.Ticks.ToString().Substring(8);
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow($"{savedAs.Replace(" ","")}_<random>", "UNITED STATES", "WERCS", $"{savedAs}", "Welcome1!", $"{address}", "", "Latham", "Florida", "12205", $"QA_{savedAs}_{rnd.Next()}", phonenumber,
+				phonenumber, $"{accountType}", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			if (this.BasicSignup(savedAs))
+			{
+				this.SaveUserToTReVor(savedAs, account);
+			}
+		}
+		
 	}
 }
 

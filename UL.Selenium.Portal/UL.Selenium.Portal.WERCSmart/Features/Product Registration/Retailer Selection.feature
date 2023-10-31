@@ -419,7 +419,7 @@ Then In the Thank You screen I click Home
 And I click the Retail Partners icon in the Navigation Pane
 Then I should see the following heading Retail Partners
 When I select the retailer: Rite Aid
-And I confirm that: Rite Aid requests suppliers of Cleaning, Health & Beauty, OTC (Over-the-Counter), Nutritional Supplements, Artists Supplies, Stationery, as well as Toys and Candle products to grant Tier 2,1, 2.2, 3 and 4.1 consent. is showing under the Data Consent Tiers heading
+And I confirm that: Rite Aid requests suppliers of Cleaning, Health & Beauty, OTC (Over-the-Counter), Nutritional Supplements, Artists Supplies, Stationery, Toys and Miscellaneous products to grant Tier 2.1, 2.2, 3 and 4.1 consent. is showing under the Data Consent Tiers heading
 Then I confirm that when hover over the tooltip icon : There are registrations in the account enrolled in Single-Retailer Subscription. For those registrations, only Tier 1 is applicable. You may convert existing registrations to Tiered Subscription in the My Account / Subscription Information area in WERCSmart. This will then permit these registrations to participate in the Retailer's overall Data Tier Consent program. is showing
 And I navigate to the home page
 Then The home screen should load
