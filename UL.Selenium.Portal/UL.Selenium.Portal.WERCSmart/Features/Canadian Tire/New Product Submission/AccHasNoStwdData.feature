@@ -21,6 +21,8 @@ Background:
 		| username   | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto9 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86121
 Scenario: [86121] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -68,6 +70,8 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86121)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86121 and its status is: Completed
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86122
 Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -113,6 +117,8 @@ Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86122)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86122 and its status is: Completed
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86123
 Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -150,6 +156,8 @@ Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86123)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86123 and its status is: Completed
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86124
 Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -190,6 +198,8 @@ Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product 
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86123)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86124 and its status is: Completed
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86416
 Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86416
