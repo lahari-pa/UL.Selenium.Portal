@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
 				GeneralUtilities.Wait_for_load_finish();
-				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				Report.IsTrue(selNav.Click_Icon("My Products"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}
@@ -708,10 +708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Adding My Products|Add Product icon in Navigation page due to the new changes in Integration environment
-		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|My Products|Add Product|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
 		{
 			try

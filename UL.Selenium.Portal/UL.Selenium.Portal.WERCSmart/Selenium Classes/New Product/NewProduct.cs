@@ -5903,24 +5903,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckTextOnThePage(string[] correctText)
 		{
-			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
-			var foundText = displayedText.Text;
 
-			var updatedString = foundText.Replace("\r\n\r\n", "|");
-
-			var updatedStringFinal = updatedString.Replace("\r\n", "|");
-
-			string[] foundStringArray = updatedStringFinal.Split('|');
-			for (int i = 0; i < foundStringArray.Count(); i++)
+			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2).ToList();
+			bool result = true;
+			foreach (IWebElement element in displayedText)
 			{
+				var foundText = element.Text;
 
-				if (foundStringArray[i] != correctText[i])
+				var updatedString = foundText.Replace("\r\n\r\n", "|");
+
+				var updatedStringFinal = updatedString.Replace("\r\n", "|");
+
+				string[] foundStringArray = updatedStringFinal.Split('|');
+				if (foundStringArray.Length == correctText.Length)
 				{
-					Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
-					return false;
+					for (int i = 0; i < foundStringArray.Count(); i++)
+					{
+
+						if (foundStringArray[i] != correctText[i])
+						{
+							Report.Failure($"The line in the displayed text was incorrect, expected text is '{correctText[i]}', but actual text is '{foundStringArray[i]}'");
+							result = false;
+						}
+
+					}
 				}
 			}
-			return true;
+			return result;
 		}
 
 		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
