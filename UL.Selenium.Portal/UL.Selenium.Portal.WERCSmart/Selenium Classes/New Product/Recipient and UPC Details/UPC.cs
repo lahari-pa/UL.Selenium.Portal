@@ -117,6 +117,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+		public List<string> UPCProductNameError()
+		{
+			IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			List<string> el = container.FindElements(By.XPath(".//label[contains(text(),'Product Name')]/..//span"), 2).Select(x => x.Text).ToList();
+			return el;
+		}
+
+		public void EnterProductName(string name)
+		{
+			IWebElement container = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2).EnterText(name);
+		}
 
 		public bool InputUpcCaseInformation(UpcCaseInformation info)
 		{

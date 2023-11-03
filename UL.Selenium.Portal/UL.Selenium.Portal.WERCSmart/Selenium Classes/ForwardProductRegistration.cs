@@ -726,6 +726,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//span[contains(text(), '" + option + "')]/../div//span[contains(text(), '" + level + "')]"), 2);
 			return elem != null;
 		}
+		public void ProductNameEnterText(string text)
+		{
+			IWebElement container = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='col-sm-12 form-group has-success']"), 2);
+			container.FindElement(By.XPath("//label[contains(text(),'Product Name')]/..//input"), 2).EnterText(text);
+		}
+		public List<string> ProductNameErrorMesage()
+		{
+			IWebElement container = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='col-sm-12 form-group has-success']"), 2);
+			List<string> el = container.FindElements(By.XPath("//label[contains(text(),'Product Name')]/..//span"), 2).Select(x => x.Text).ToList();
+			return el;
+		}
 
 		public class SelectProducts : ForwardProductRegistration
 		{
