@@ -44,7 +44,6 @@ Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium I
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 | Lithium Ion  | <any>        | 6                               | 6                                  |
-
 Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 60096 (Lithium Battery Transportation)
 Given I call Shared Step 144968b (Retailers - Add Retailers for Web viewers & RPS) for a non PL Product

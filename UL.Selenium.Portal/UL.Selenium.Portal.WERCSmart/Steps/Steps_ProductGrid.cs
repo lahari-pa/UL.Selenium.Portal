@@ -2583,8 +2583,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheArchiveRetailersPopupSelectTheCheckboxNextToTheRetailer(string retailer)
 		{
 			var thisModalDialog = new ModalDialog();
-			Report.IsTrue(thisModalDialog.SelectRetailer(retailer), "Failed to select: " + retailer,
-				"Successfully selected: " + retailer);
+			Report.IsTrue(thisModalDialog.SelectRetailer(retailer), $"Failed to select:  { retailer}",
+				$"Successfully selected: { retailer }");
 		}
 
 		[StepDefinition(@"In the Archive Retailers popup click on: (.*)")]
@@ -3635,6 +3635,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> isStringContained = selMoreFilters.GetDataOfAdditionalPrograms();
 			Report.IsTrue(isStringContained.All(x => (new[] { "None", "California Cleaning SB 258", "California Cosmetic Fragrance/Flavor SB 312", "Distributor Product - Approved", "Distributor Product - Pending Approval", "Distributor Product - Rejected", "Target Sustainability Product Index" }).Contains(x)), "Failed to find the expected option under Additional Programs", "Successfully found the expected options under Additional programs");
 
+		}
+		[StepDefinition(@"In the Archive Retailers popup, I Deselect the checkbox next to the retailer (.*)")]
+		public void InTheArchiveRetailersPopupDeSelectTheCheckboxNextToTheRetailer(string retailer)
+		{
+			var thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.DeselectRetailer(retailer), $"Failed to select: { retailer }",
+				$"Successfully selected: { retailer }");
 		}
 	}
 }

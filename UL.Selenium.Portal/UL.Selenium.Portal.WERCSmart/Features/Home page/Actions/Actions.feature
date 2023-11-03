@@ -76,18 +76,22 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 #actions/delete
 @TestCase:56216
 Scenario: [56216] My Products grid Actions - Delete Navigation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Then I click the Register New Product icon in the Navigation Pane
+	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Then I create a shell product with name TestProduct saved as TestProduct
-	Then I navigate to the home page
-	Given I search for the product saved as: TestProduct
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase56216
+	Given I call Shared Step 217669 (Product Information - Pesticide(NO), Sold(US), Child(YES), OSHA(NO), DSV(NO), PL(NO), GNFR(NO))
+	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Then I click the My Products icon in the Navigation Pane
+	Then the WERCSmart homepage should load
+	Given I search for the product saved as: TestCase56216
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Delete
 	And I cancel the Delete Dialog
 	Then I should see products in the Product Grid
-	#Given I save the number of items in the pie chart
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Delete
 	And I confirm the Delete Dialog
@@ -284,7 +288,6 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
 	Then I confirm that all products appear in the 'My Products' grid
 
-
 @TestCase:125144
 Scenario: [125144] Actions - 3rd Party Access Code Window
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -329,3 +332,56 @@ Scenario: [152230] SHA Manager - UPC Retailer and Feed - UPC Details
 		| Gas Name         | Any Data |
 	Given I close UPC Details popup in Retailer and UPC Feed page
 	Given I close the current window
+
+# Created by Saikiran Chittampally
+@TestCase:95861
+Scenario: [95861] Monitor Progress- Verify the Monitor Progress Option is Enabled and Disabled
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then the WERCSmart homepage should load
+	Then I click the Add Product icon in the Navigation Pane
+	And the Product Editor page should be loaded
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase95861
+	Given I generate a random UPC number and save as: UPC95861
+	Given I generate a random UPC number and save as: UPC958611
+	Given I should see the Product Information Page
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
+	Given I click the single retailer checkbox
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| Family Dollar |
+		| Dollar General |
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC95861, container type: Plastic Container and size: 5
+	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC958611, container type: Paper bag and size: 5
+	Then I click continue
+	Given I call Shared Step 77383 (Regulatory Documents to Provide - Request to Author (Happy Path))
+	Then in the Additional Documents to Provide page I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		|Personal Protection Equipment |Autoignition Temperature| Minimum Ignition Energy |Viscosity |Appearance| Odor	   | Odor Threshold    | Partition Coefficient|
+		|Mask						   |300						| 1.005					  | 20		 | Black	| Odorless | No data available | 10					  |
+	Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then In the Purchase Summary screen I click Confirm Order
+	Then In the Thank You screen I click Home
+	Then the WERCSmart homepage should load
+	Given I search for the product saved as: TestCase95861
+	When I click Row Actions for the most recent product returned
+	Then I click on the Row Action: Monitor Progress
+	Given In the Archive Retailers popup, I select the checkbox next to the retailer Family Dollar	
+	Then I click ok	
+	When I click Row Actions for the most recent product returned
+	Given I should see the following Actions options
+	| Option         |
+	| Disable Monitoring |
+	Then I click on the Row Action: Disable Monitoring
+	Given In the Archive Retailers popup, I Deselect the checkbox next to the retailer Family Dollar	
+	Then I click ok
+	When I click Row Actions for the most recent product returned
+	Given I should not see the following Actions options
+	| Option         |
+	| Disable Monitoring |
