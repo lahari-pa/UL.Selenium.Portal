@@ -51,6 +51,7 @@ Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86462
 
 @ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86463
 Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT CT - Package type not required
 	Given I generate a random UPC number and save as: UPC86463
