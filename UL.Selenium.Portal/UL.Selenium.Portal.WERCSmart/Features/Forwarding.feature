@@ -26,6 +26,7 @@ Background:
 		| SHAQAAuto11 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86003
 Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not required/shown
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto11 and save as: ProductSetup86003
