@@ -157,7 +157,8 @@ And In the Recent Activities page, I collapse the first row of the products tabl
 And In the recent Activities page, I check that there are no additional rows below the expanded version of the first row in the products table.
 
 
-
+@ignore
+#Ignore Tag Added On 11/2023
 @ScenarioId:6967
 Scenario: [99209] Base Functionality - Recent Activities - Confirm Most Recent Order
 Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
