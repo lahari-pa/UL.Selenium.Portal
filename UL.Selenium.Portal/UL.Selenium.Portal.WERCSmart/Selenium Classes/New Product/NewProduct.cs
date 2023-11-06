@@ -2748,7 +2748,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public bool UploadFileForSection(string section, string pdfFilePath)
+		public bool CheckButtonExistsInSection(string section, string button)
+		{
+			string path = $".//span[contains(text(),'{section}')]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),'{section}')]//..//a[contains(text(), '{button}')]";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info($"Checking button {button} exists for section: {section}");
+			Report.Screenshot();
+			return el.Displayed;
+		}
+		public bool ClickButton(string section, string button)
+		{
+			string path = $".//span[contains(text(),'{section}')]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),'{section}')]//..//a[contains(text(), '{button}')]";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info($"Clicking {button} for document type: {section}");
+			Report.Screenshot();
+			if (el == null)
+			{
+				Report.Error($"The {button} button was not found!! - Looking for xpath: {path}");
+				return false;
+			}
+			return el.TryClick() ;
+		}
+
+			public bool UploadFileForSection(string section, string pdfFilePath)
 		{
 			string path = "//span[contains(text(),'" + section + "')]//..//div[@class='ws-dropzone-container invalid']//a";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
