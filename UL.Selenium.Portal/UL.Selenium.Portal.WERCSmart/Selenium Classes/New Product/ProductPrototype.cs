@@ -35,6 +35,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region Methods
+
+		public PanelPrototype(string label)
+		{
+			Report.Info($"Attempting to get {label} panel.");
+			_label = label;
+		}
 		public bool PanelExpandButtonExists()
 		{
 			Report.Info($"Attempting to confirm panel expand button exists.");
@@ -146,7 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement ErrorMessageGet(string errorMessage)
 		{
 			Report.Info($"Attempting to get '{errorMessage}' error message.");
-			return this.ContainerElement.FindElement(By.XPath($".//*[@class='form-error'][.//*[text()='{errorMessage}']]"), 1);
+			return this.ContainerElement.FindElement(By.XPath($".//*[@class='form-error'][.//*[contains(text(),'{errorMessage}')]]"), 1);
 		}
 
 		public bool ErrorMessageExists(string errorMessage)
