@@ -149,10 +149,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
 
-		[StepDefinition(@"In the Regulatory Documents to Provide Section, the alert message (should|should not) be displayed with text: 'STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in.'")]
+		[StepDefinition(@"In the Regulatory Documents to Provide Section, the alert message (should|should not) be displayed with text: 'STOP! When selecting authoring of a Safety Data Sheet \(SDS\) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in My Company. You can then resume your registration set up.'")]
 		public void TextInAlertMessage(string condition)
 		{
-			string alertText = "STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in.";
+			string alertText = "STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in My Company. You can then resume your registration set up.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 	}
