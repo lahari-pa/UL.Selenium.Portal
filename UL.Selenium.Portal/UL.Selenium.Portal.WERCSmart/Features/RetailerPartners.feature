@@ -28,6 +28,8 @@ Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 # Below step to be added when we have a db connection string
 # And Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56895
 Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

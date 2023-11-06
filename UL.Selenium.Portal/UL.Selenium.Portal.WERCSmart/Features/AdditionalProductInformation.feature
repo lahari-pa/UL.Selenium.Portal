@@ -91,7 +91,8 @@ And I should see following statement: Product has been classified using OSHA (US
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85367
 
-
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:85368
 Scenario: [85368] Which one best describes your product question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

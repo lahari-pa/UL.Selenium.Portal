@@ -26,6 +26,7 @@ Background:
 
 		
 @ignore
+#Ignore Tag Added On 11/2023
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @TestCase:86187
@@ -329,6 +330,7 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	
 
 @ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86170
 Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86170
@@ -372,6 +374,7 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	| Canadian Tire |
 
 @ignore
+#Ignore Tag Added On 11/2023
 @TestCase:86395
 Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86395

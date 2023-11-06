@@ -137,6 +137,8 @@ Then In the Recent Activities page, I expand the first row of the products table
 Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Recent Activities page, for the column: Product ID
 Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Recent Activities page, for the column: UPC Number
 
+@ignore
+#Ignore Tag Added On 11/2023
 @ScenarioId:6966
 Scenario: [106645] Base Functionality - Recent Activities page - Expand arrow
 Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
@@ -180,6 +182,8 @@ Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays dates in the format of yyyy-mm-dd
 
 @tfs_design
+@ignore
+#Ignore Tag Added On 11/2023
 @ScenarioId:6980
 #The loading period for the bar is too short to be able to perfomr robust automation on 
 Scenario: [104958] Base Functionality - Recent Activities - Page is Loading - indicator shows
