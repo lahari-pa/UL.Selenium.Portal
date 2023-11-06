@@ -124,7 +124,9 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
-	
+
+@ignore
+#Ignore Tag Added On 11/2023	
 @TestCase:59277
 Scenario: [59277] Magnesium Battery - RU000728
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
