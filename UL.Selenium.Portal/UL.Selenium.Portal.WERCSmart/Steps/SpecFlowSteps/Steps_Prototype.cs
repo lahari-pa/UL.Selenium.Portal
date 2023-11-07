@@ -78,14 +78,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("In the (.*) section an error message (should|should not) be displayed with the text: (.*)")]
-		public void InSectionErrorMessageShouldOrShouldNotDisplayWithText(string section, string shouldShouldNot, string errorText)
-		{
-			bool expected = shouldShouldNot == "should";
-			var thisNewProduct = new NewProduct();
-
-		}
-
 		public void ClickContinue()
 		{
 			Report.IsTrue(new NewProduct().ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
