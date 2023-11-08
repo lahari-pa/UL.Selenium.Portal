@@ -135,3 +135,11 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Then In the SHA UPC list I should see the case pack asterisk for the UPC: saved as UPC160940
 	And I close the current window and switch to the main window in Studio
 	Then In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes
+
+	#Created by Sai Chittampally
+@TestCase:48610
+	Scenario: [48610] Document Request- third column appears as 'Published'
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In the SHA manager grid I see the WPS ID product: 1774859  and its status is: Accepted
+	When In SHA Manager I right click on the selected product:1774859 with option:Document Request
+	Then I confirm Published column header is displayed

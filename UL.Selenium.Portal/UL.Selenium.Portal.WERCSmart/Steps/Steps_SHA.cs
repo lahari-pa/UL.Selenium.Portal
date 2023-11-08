@@ -588,8 +588,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			var thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(option), "Failed to select option: " + option,
-				"Selected option: " + option);
+			Report.IsTrue(thisContextMenu.SelectOption(option), $"Failed to select option: {option }",
+				$"Selected option: { option }");
 		}
 
 		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
@@ -5205,7 +5205,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Verify product id is blue");
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 		}
+		[StepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
+		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string id, string option)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.SelectTheProduct();
+			Report.IsTrue(myStudioShaManager.RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+			this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(option);
+		}
 
+		[StepDefinition(@"I confirm (.*) column header is displayed")]
+		public void ThenInSHAManagerIRightClickProductDocumentRequest(string header)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			string headerText = myStudioShaManager.DocumentRequestHeader();
+			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
+		}
+
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID product: (.*) and its status is: (.*)")]
+		public void GivenInTheSHAManagerGridISeeTheWPSIDProductTestCaseAndItsStatusIs(string productId, string status)
+		{
+			Report.Info($"Searching for id: {productId} and status: { status }");
+			int counter = 0;
+			bool found = false;
+			while (counter < 10 && !found)
+			{
+				var thisStudioManager = new StudioSHAManager();
+				thisStudioManager.Wait_for_load();
+				thisStudioManager.ClickBottomMenuOption("Search");
+
+				var myStepsSha = new Steps_SHA();
+
+				var table = new Table(new string[] {
+					"SearchTerm",
+					"SearchValue"
+				});
+				table.AddRow(new string[] {
+					"ProductID",
+					productId
+				});
+				table.AddRow(new string[] {
+					"Status",
+					"Accepted"
+				});
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+				Delay.Seconds(2);
+				var mySHAManager = new StudioSHAManager();
+				mySHAManager.WaitForProductList(10);
+
+				Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				if (topProductnew != null)
+				{
+					found = true;
+				}
+				counter++;
+			}
+			Report.IsTrue(found, $"Expected: id={productId } and status { status }", "Statuses match", showSuccessScreenshot: false);
+		}
 	}
 
 }
