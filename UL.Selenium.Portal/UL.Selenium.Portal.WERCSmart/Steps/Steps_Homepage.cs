@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
 				GeneralUtilities.Wait_for_load_finish();
-				Report.IsTrue(selNav.Click_Icon("M Products"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				Report.IsTrue(selNav.Click_Icon("My Products"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}
