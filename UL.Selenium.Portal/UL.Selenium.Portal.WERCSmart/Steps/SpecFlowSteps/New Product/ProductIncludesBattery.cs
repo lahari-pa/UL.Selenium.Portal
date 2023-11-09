@@ -16,6 +16,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Indicate how battery is packaged";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
+		[StepDefinition(@"In the Product Includes Battery Section, the text message (should|should not) be displayed with text: 'Product includes a battery when sold'")]
+		public void TextInAlertMessage(string condition)
+		{
+			string alertText = "Product includes a battery when sold";
+			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
+		}
 		[StepDefinition(@"In the Product Includes Battery Section, set the radio option in section: 'Battery Type': to: (Carbon Zinc|Alkaline)")]
 		public void SelectBatteryType(string option)
 		{
