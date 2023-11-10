@@ -770,6 +770,8 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given I call Shared Step (Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128744
 
+	@ignore
+#Ignore Tag Added On 11/2023
 	@TestCase:128743
 Scenario: [128743] Ammunition - Other DOT Exception Validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

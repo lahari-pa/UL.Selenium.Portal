@@ -46,6 +46,8 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:62849
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -167,6 +169,8 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57512
 Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -178,6 +182,8 @@ Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57512
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57516
 Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -189,6 +195,8 @@ Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57516
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57520
 Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-B
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -200,6 +208,8 @@ Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57522
 Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -211,6 +221,8 @@ Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57527
 Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -222,6 +234,8 @@ Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57527
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57529
 Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -233,6 +247,8 @@ Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57533
 Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -244,6 +260,8 @@ Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57533
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57534
 Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -255,6 +273,8 @@ Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57534
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:57546
 Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -266,6 +286,8 @@ Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:66344
 Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -278,6 +300,8 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:66345
 Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -904,6 +928,8 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 	 
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

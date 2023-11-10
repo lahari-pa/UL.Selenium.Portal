@@ -13,6 +13,8 @@
 @run_RegulatoryInformation1
 Feature: Regulatory Information 1
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:85492
 Scenario: [85492] Regulatory Information 1 - navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
