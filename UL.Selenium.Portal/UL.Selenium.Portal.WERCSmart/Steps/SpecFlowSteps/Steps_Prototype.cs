@@ -97,9 +97,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
-
-
 		public void ClickLinkElement(string linkText)
 		{
 			if (Report.IsTrue(new NewProduct().LinkElementExists(linkText), $"Failed to find link element with text {linkText}", $"Successfully found link element with text {linkText}"))
@@ -117,7 +114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Info($"Attempt to confirm link element {linkText} is not displayed");
-				Report.IsFalse(new NewProduct().LinkElementExists(linkText), $"Failed to find link element with text {linkText}", $"Successfully found link element with text {linkText}");
+				Report.IsFalse(new NewProduct().LinkElementExists(linkText), $"Failed to confirm link element with text {linkText} is not displayed", $"Successfully confirmed link element with text {linkText} is not displayed");
 			}
 		}
 
@@ -326,6 +323,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(thisAlert.Text == text, "Warning text is displayed, but it is not expected.", "Warning text is not displayed, as expected.");
 			}
 		}
+		[StepDefinition(@"I click the browse button for section: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFile(string section, string pdfFile)
+		{
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
+		}
+		[StepDefinition(@"I click the button (.*) for section: (.*)")]
+		public void ClickButtonForSection(string section, string button)
+		{
+			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
+		}
 
+		[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
+		public void CheckButtonExistsForSection(string section, string condition, string button)
+		{
+			if(condition == "should")
+			{
+				Report.IsTrue(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} exists for section {section}", $"Successfully confirmed {button} exists for {section}");
+			}
+			else
+			{
+				Report.IsFalse(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} does not exist for section {section}", $"Successfully confirmed {button} does not exist for {section}");
+			}
+		}
+		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleIClickTheButton(string popupTitle, string buttonTitle)
+		{
+			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
+		}
+		[StepDefinition(@"The alert message (should|should not) displayed with text: (.*)")]
+		public void AlertMessageDisplayed(string displayed, string alert)
+		{
+			bool expectDisplayed = false;
+			switch (displayed)
+			{
+				case "should":
+					expectDisplayed = true;
+					break;
+				case "should not":
+					break;
+				default:
+					Report.Failure("Step parameter must be either 'should' or 'should not'");
+					return;
+			}
+			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
+			if (actualAlerts == null)
+			{
+				Report.Failure("Error fetching alert messages!");
+				return;
+			}
+			Report.IsTrue(actualAlerts.Contains(alert) == expectDisplayed,
+				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: {alert} but got: {string.Join(",", actualAlerts)}",
+				$"Message: '{alert}' is displayed as expected");
+		}
 	}
 }
