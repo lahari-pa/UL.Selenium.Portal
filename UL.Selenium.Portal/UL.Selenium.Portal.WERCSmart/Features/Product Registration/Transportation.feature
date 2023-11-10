@@ -20,9 +20,9 @@ Feature: Transportation
 
 
 Background:
-	#Given I verify the following users exist and if not I create them using SHAUser
-	#	| username    | FirstName | LastName   | Role         | EmailAddress                |
-	#	| SHAQAAuto28 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto28 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 # Assigned to Beverly Barrett
