@@ -13,7 +13,8 @@
 
 Feature:  EPA State Expiry Date Validation (Suite ID: 56545)
 
-
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56593
 Scenario: [56593] Pesticide Data - EPA Expiration date validation (Iowa - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -33,6 +34,8 @@ Scenario: [56593] Pesticide Data - EPA Expiration date validation (Iowa - Dec 31
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56593
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56592
 Scenario: [56592] Pesticide Data - EPA Expiration date validation (Georgia - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -72,6 +75,8 @@ Scenario: [56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56591
 Scenario: [56591] Pesticide Data - EPA Expiration date validation (Colorado Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -180,6 +185,8 @@ Scenario: [56583] Pesticide Data - EPA Expiration date validation (Arkansas > De
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56583
 
 # Assigned to Barrett, Beverly
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56594
 Scenario: [56594] Pesticide Data - EPA Expiration date validation (Idaho - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -202,6 +209,8 @@ Scenario: [56594] Pesticide Data - EPA Expiration date validation (Idaho - Dec 3
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56594
 
 # Assigned to Barrett, Beverly
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56596
 Scenario: [56596] Pesticide Data - EPA Expiration date validation (Indiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -224,6 +233,8 @@ Scenario: [56596] Pesticide Data - EPA Expiration date validation (Indiana - Dec
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56599
 Scenario: [56599] Pesticide Data - EPA Expiration date validation (Kentucky - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -250,6 +261,8 @@ Scenario: [56599] Pesticide Data - EPA Expiration date validation (Kentucky - De
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:56600
 Scenario: [56600] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
