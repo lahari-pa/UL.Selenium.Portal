@@ -5206,8 +5206,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 		}
 		[StepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
-		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string id, string option)
+		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string savedAs, string option)
 		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
 			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.SelectTheProduct();
 			Report.IsTrue(myStudioShaManager.RightClickProductByID(id), "Failed to right click product", "Right clicked product");
@@ -5220,48 +5222,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myStudioShaManager = new StudioSHAManager();
 			string headerText = myStudioShaManager.DocumentRequestHeader();
 			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
-		}
-
-		[StepDefinition(@"In the SHA manager grid I see the WPS ID product: (.*) and its status is: (.*)")]
-		public void GivenInTheSHAManagerGridISeeTheWPSIDProductTestCaseAndItsStatusIs(string productId, string status)
-		{
-			Report.Info($"Searching for id: {productId} and status: { status }");
-			int counter = 0;
-			bool found = false;
-			while (counter < 10 && !found)
-			{
-				var thisStudioManager = new StudioSHAManager();
-				thisStudioManager.Wait_for_load();
-				thisStudioManager.ClickBottomMenuOption("Search");
-
-				var myStepsSha = new Steps_SHA();
-
-				var table = new Table(new string[] {
-					"SearchTerm",
-					"SearchValue"
-				});
-				table.AddRow(new string[] {
-					"ProductID",
-					productId
-				});
-				table.AddRow(new string[] {
-					"Status",
-					"Accepted"
-				});
-				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
-
-				Delay.Seconds(2);
-				var mySHAManager = new StudioSHAManager();
-				mySHAManager.WaitForProductList(10);
-
-				Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
-				if (topProductnew != null)
-				{
-					found = true;
-				}
-				counter++;
-			}
-			Report.IsTrue(found, $"Expected: id={productId } and status { status }", "Statuses match", showSuccessScreenshot: false);
 		}
 	}
 
