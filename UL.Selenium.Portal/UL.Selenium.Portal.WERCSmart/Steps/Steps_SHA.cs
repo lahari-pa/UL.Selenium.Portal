@@ -588,8 +588,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			var thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(option), "Failed to select option: " + option,
-				"Selected option: " + option);
+			Report.IsTrue(thisContextMenu.SelectOption(option), $"Failed to select option: {option }",
+				$"Selected option: { option }");
 		}
 
 		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
@@ -5205,7 +5205,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Verify product id is blue");
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 		}
+		[StepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
+		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string savedAs, string option)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.SelectTheProduct();
+			Report.IsTrue(myStudioShaManager.RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+			this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(option);
+		}
 
+		[StepDefinition(@"I confirm (.*) column header is displayed")]
+		public void ThenInSHAManagerIRightClickProductDocumentRequest(string header)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			string headerText = myStudioShaManager.DocumentRequestHeader();
+			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
+		}
 	}
 
 }
