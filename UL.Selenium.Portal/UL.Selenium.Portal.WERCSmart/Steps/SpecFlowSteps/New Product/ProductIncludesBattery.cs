@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -27,6 +29,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Battery Type";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Includes Battery Section enter value (.*) in (Battery Type|Manufacturer|Quantity of Batteries per Package|Quantity of Batteries to Operate Product|Grams Lithium|Watt Hours) field")]
+		public void EnterBatteryInformation(string value, string option)
+		{
+			new Steps_Prototype().EnterBatteryInformation(value, option);
+
 		}
 	}
 }

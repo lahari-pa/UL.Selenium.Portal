@@ -30,6 +30,7 @@ using BoDi;
 using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -378,6 +379,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(actualAlerts.Contains(alert) == expectDisplayed,
 				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: {alert} but got: {string.Join(",", actualAlerts)}",
 				$"Message: '{alert}' is displayed as expected");
+		}
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for option (.*)")]
+		public void EnterBatteryInformation(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().SetBatteriesOption(value, option), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		
 		}
 	}
 }
