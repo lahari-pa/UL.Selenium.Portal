@@ -728,11 +728,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public void ProductNameEnterText(string text)
 		{
-			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//label[contains(text(),'Product Name')]/..//input"), 2).EnterText(text);
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/following-sibling::input"), 2).EnterText(text);
 		}
 		public List<string> ProductNameErrorMesage()
 		{
-			List<string> el = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//label[contains(text(),'Product Name')]/..//span"), 2).Select(x => x.Text).ToList();
+			List<string> el = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@class='col-sm-12 form-group has-feedback has-error']//span"), 2).Select(x => x.Text).ToList();
 			return el;
 		}
 

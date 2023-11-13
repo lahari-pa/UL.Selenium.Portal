@@ -119,13 +119,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> UPCProductNameError()
 		{
-			List<string> el = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//label[contains(text(),'Product Name')]/..//span"), 2).Select(x => x.Text).ToList();
+			List<string> el = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@class='form-group has-error']//span"), 2).Select(x => x.Text).ToList();
 			return el;
 		}
 
 		public void EnterProductName(string name)
 		{
-			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2).EnterText(name);
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='form-group has-error']//input"), 2).EnterText(name);
 		}
 
 		public bool InputUpcCaseInformation(UpcCaseInformation info)
