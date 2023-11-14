@@ -20,6 +20,8 @@ Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Tr
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+Given I generate a random UPC number and save as: UPC74337
+Then I save the product information as: TestCase74337
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 40
@@ -621,7 +623,7 @@ And I call Shared Step 74340 (Product Information - Pesticide= Not considered, S
 And I call Shared Step 74339 (Physical and Chemical Properties - Select Liquid and enter only Secondary state, Relative Density, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: >93C and <=815C
+And I set the Flash Point (in Celsius) field to: >=93C and <=815C
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
 | Closed cup method        |
