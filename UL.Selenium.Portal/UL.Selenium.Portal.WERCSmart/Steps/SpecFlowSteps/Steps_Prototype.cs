@@ -30,6 +30,7 @@ using BoDi;
 using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -354,6 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Delay.Seconds(5);
 			Delay.Seconds(1);
 		}
+
 		[StepDefinition(@"The alert message (should|should not) displayed with text: (.*)")]
 		public void AlertMessageDisplayed(string displayed, string alert)
 		{
@@ -378,6 +380,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(actualAlerts.Contains(alert) == expectDisplayed,
 				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: {alert} but got: {string.Join(",", actualAlerts)}",
 				$"Message: '{alert}' is displayed as expected");
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for select option (.*)")]
+		public void EnterBatterySelectOption(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().SetSelectBatteriesOptions(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for input option (.*)")]
+		public void EnterBatteryInputInformation(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().EnterInputBatteriesOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for search select option (.*)")]
+		public void EnterBatterySearchSelectInformation(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+
 		}
 	}
 }

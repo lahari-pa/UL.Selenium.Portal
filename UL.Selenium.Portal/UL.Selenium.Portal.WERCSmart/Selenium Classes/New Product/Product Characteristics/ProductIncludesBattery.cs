@@ -14,6 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class ProductIncludesBattery : NewProduct
 	{
+		IWebElement BatteriesTable => this.ContainerElement.FindElement(By.XPath(".//table"), 2);
+
 		public string IndicateHowBatteryIsPackaged {
 			get
 			{
@@ -181,6 +183,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					batteryCount++;
 				}
 			}
+		}
+		public bool SetSelectBatteriesOptions(string batteryOption, string value)
+		{
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
+			IWebElement optionField = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]//select"), 2);
+			optionField.Select(value);
+			string batteryType = optionField.SelectedOption();
+			return batteryType == value;	
+		}
+		public bool EnterInputBatteriesOption(string batteryOption, string value)
+		{
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
+			IWebElement optionField = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex}]//input"), 2);
+			return optionField.TryEnterText(value);
+		}
+
+		public bool SetBatteriesSearchSelectOption(string batteryOption, string value)
+		{
+			bool result = false;
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
+			IWebElement manufacturer = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]"), 2);
+			if (manufacturer == null || !manufacturer.TryClick())
+				{
+					throw new Exception("Failed to click Manufacturer element");
+				}
+			if (new SearchBoxPrototype().SearchInputExists() == false)
+			{
+				throw new Exception("Enter manufacturer text instructions did not appear.");
+			}
+			new SearchBoxPrototype().SearchInputEnterText(value);
+			if (new SearchBoxPrototype().SearchResultsExists() == false)
+			{
+				throw new Exception("There are no result options to select");
+			}
+			var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			Delay.Seconds(1);
+			homePage.WaitLoading();
+			Delay.Seconds(1);
+			result = new SearchBoxPrototype().SearchResultClick(value);
+			return result;
 		}
 
 		public void DeleteEmptyBatteryRows()
