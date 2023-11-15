@@ -26,10 +26,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
-		[StepDefinition(@"In the Product Includes Battery Section enter value (.*) in (Battery Type|Manufacturer|Quantity of Batteries per Package|Quantity of Batteries to Operate Product|Grams Lithium|Watt Hours) field")]
-		public void EnterBatteryInformation(string value, string option)
+		[StepDefinition(@"In the Product Includes Battery Section enter value (.*) in (Battery Type|Grams Lithium|Watt Hours) field")]
+		public void EnterBatterySelectInformation(string value, string option)
 		{
-			new Steps_Prototype().EnterBatteryInformation(value, option);
+			new Steps_Prototype().EnterBatterySelectOption(value, option);
+		}
+		[StepDefinition(@"In the Product Includes Battery Section enter value (.*) in (Quantity of Batteries per Package|Quantity of Batteries to Operate Product) field")]
+		public void EnterBatteryInputInformation(string value, string option)
+		{
+			new Steps_Prototype().EnterBatteryInputInformation(value, option);
+		}
+		[StepDefinition(@"In the Product Includes Battery Section enter value (.*) in 'Manufacturer' field")]
+		public void EnterBatteryManufacturer(string value)
+		{
+			new Steps_Prototype().EnterBatterySearchSelectInformation(value, "Manufacturer");
 		}
 	}
 }

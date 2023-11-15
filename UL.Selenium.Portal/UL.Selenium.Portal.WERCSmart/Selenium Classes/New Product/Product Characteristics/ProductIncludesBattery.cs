@@ -14,6 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class ProductIncludesBattery : NewProduct
 	{
+		IWebElement BatteriesTable => this.ContainerElement.FindElement(By.XPath(".//table"), 2);
+
 		public string IndicateHowBatteryIsPackaged {
 			get
 			{
@@ -182,67 +184,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				}
 			}
 		}
-		public bool SetBatteriesOption(string value, string batteryOption)
+		public bool SetSelectBatteriesOptions(string batteryOption, string value)
 		{
-			ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//tbody//tr"));
-
-			IWebElement thisTable = this.ContainerElement.FindElement(By.XPath(".//table"), 2);
-				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
-				int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
-						
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
 			IWebElement optionField = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]//select"), 2);
-			if(batteryOption == "Battery Type" || batteryOption == "Watt Hours" || batteryOption == "Grams Lithium")
-			{
-				optionField.Select(value);
-				string batteryType = optionField.SelectedOption();
-				return batteryType == value;
-			}
-			if (batteryOption == "Manufacturer")
-			{
-				IWebElement manufacturer = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]"), 2);
-				if (manufacturer == null || !manufacturer.TryClick())
+			optionField.Select(value);
+			string batteryType = optionField.SelectedOption();
+			return batteryType == value;	
+		}
+		public bool EnterInputBatteriesOption(string batteryOption, string value)
+		{
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
+			IWebElement optionField = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex}]//input"), 2);
+			return optionField.TryEnterText(value);
+		}
+
+		public bool SetBatteriesSearchSelectOption(string batteryOption, string value)
+		{
+			bool result = false;
+			List<KeyValuePair<int, string>> th = this.TableHeaders(this.BatteriesTable);
+			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
+			IWebElement manufacturer = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]"), 2);
+			if (manufacturer == null || !manufacturer.TryClick())
 				{
 					throw new Exception("Failed to click Manufacturer element");
 				}
-				IWebElement enterTextInstructions = manufacturer.WaitUntilElementVisible(By.XPath(".//span[contains(@class, 'select2')]"), 5);
-				if (enterTextInstructions == null)
-				{
-					throw new Exception("Enter manufacturer text instructions did not appear.");
-				}
-				string alpha = "abcdefghijklmnopqrstuvwxyz";
-				int count = 0;
-				bool foundResult = false;
-				while (!foundResult && count < alpha.Length - 1)
-				{
-					if (this.EnterManufacturer == null)
-					{
-						throw new Exception("Enter manufacturer element was not found!");
-					}
-					Report.Info($"Entering text: {alpha[count]} into the search input");
-					this.EnterManufacturer.TryEnterText(value == "<any>" ? alpha[count].ToString() : value);
-
-					//possible update needed to get all results then select random or one without error? or just move to next alpha if error?
-					IWebElement result = this.EnterManufacturer.FindElement(By.XPath("./parent::span/following-sibling::span/ul/li[not(contains(@class,'loading-results'))]"), 10);
-					foundResult = result != null;
-					if (foundResult)
-					{
-						Report.Info("Found search results. Clicking the first option.");
-						string resultElText = result.Text;
-						return result.TryClick();
-					}
-					count++;
-				}
-				if (!foundResult)
-				{
-					throw new Exception("Manufacturer drop down could not be found");
-				}
-			}
-			if (batteryOption == "Quantity of Batteries per Package" || batteryOption== "Quantity of Batteries to Operate Product")
+			if (new SearchBoxPrototype().SearchInputExists() == false)
 			{
-				IWebElement perPackage = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex}]//input"), 2);
-				return perPackage.TryEnterText(value);
+				throw new Exception("Enter manufacturer text instructions did not appear.");
 			}
-			return false;
+			new SearchBoxPrototype().SearchInputEnterText(value);
+			if (new SearchBoxPrototype().SearchResultsExists() == false)
+			{
+				throw new Exception("There are no result options to select");
+			}
+			var homePage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			Delay.Seconds(1);
+			homePage.WaitLoading();
+			Delay.Seconds(1);
+			result = new SearchBoxPrototype().SearchResultClick(value);
+			return result;
 		}
 
 		public void DeleteEmptyBatteryRows()
