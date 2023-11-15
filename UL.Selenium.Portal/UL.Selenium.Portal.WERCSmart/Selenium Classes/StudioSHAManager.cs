@@ -1228,16 +1228,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
-				{
-					SeleniumWebDriver.CurrentDriver.ExitIFrame();
-					if (!SeleniumWebDriver.CurrentDriver.SwitchToIFrame("Widget2FRAME"))
-					{
-						Report.Info("Could not switch to iframe");
-						return false;
-					}
-				}
-
 				IWebElement SupplierLink =
 					SeleniumWebDriver.CurrentDriver.FindElement(
 						By.XPath(".//div[@id='ddtopmenubar']//li[@id='supplierbar']/a"));

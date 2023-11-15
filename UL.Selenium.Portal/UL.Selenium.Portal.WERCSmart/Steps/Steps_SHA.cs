@@ -4662,6 +4662,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I ensure that the correct tabs are displayed at the bottom of the suppliers popup")]
+		public void IEnsureThatTheCorrectTabsAreDisplayedAtTheBottomOfTheSuppliersPopup(Table table)
+		{
+			Report.Info("Checking for tabs at the bottom of the Suppliers popup");
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(new StudioSupplierManager().CheckForSupplierTab(thisRow[@"Tab"]), "Failed to find Supplier Tab " + thisRow[@"Tab"], "Successfully found Supplier Tab " + thisRow[@"Tab"]);
+			}
+		}
+
 		[StepDefinition(@"I ensure that there is a SubscriptionStatus column in the Supplier Manager popup")]
 		public void IEnsureThatThereIsASubscriptionStatusColumn()
 		{

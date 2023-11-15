@@ -276,6 +276,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return categoryHeaders != null;
 		}
 
+		public bool CheckForSupplierTab(string tabTitle)
+		{
+			IWebElement supplierTab = this.ContainerElement.FindElement(By.XPath(string.Format(".//ul[@class='ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all']//li//a[text()='{0}']", tabTitle)), 2);
+			return supplierTab != null;
+		}
+
 		public bool CheckForSupplierManagerColumn(string columnTitle)
 		{
 			return this.Column(columnTitle).Displayed;
