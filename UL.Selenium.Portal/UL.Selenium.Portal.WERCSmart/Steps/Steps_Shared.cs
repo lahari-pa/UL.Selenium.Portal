@@ -12100,7 +12100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I select Edit for the first UPC in the right hand side of the table");
 			new StepsForwardProductRegistration().SelectEditForFirstUPC();
 			Report.StartSubStep("I confirm that Package Type is not shown for UPC");
-			new StepsForwardProductRegistration().ConfirmPackageTypeNotShown();
+			new StepsForwardProductRegistration().ConfirmPackageTypeNotShown();			
 			Report.StartSubStep("I click Save in the Edit UPC modal");
 			new StepsForwardProductRegistration().InTheUPCModalWindowIClickSave();
 			Report.StartSubStep("I click continue");
@@ -16219,6 +16219,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartSubStep("In the Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 104290 \(Enter Regulatory Information - TSCA Not Prop 65\)")]
+		public void GivenICallSharedEnterRegulatory_TSCACEPANotProp()
+		{
+			Report.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartSubStep("I should see the Inventory Status, Prop 65 (US) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Inventory Status, Prop 65 (US)");
+			Report.StartSubStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "This product is subject to and complies with TSCA chemical Inventory listing requirements.");
+			Report.StartSubStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
+			Report.StartSubStep("In the Inventory Status, Prop 65 (US) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Inventory Status, Prop 65 (US)");
+		}
+		[StepDefinition(@"I call Shared Step \(Forwarding - Not PLP - Select Product: (.*) & UPCs step - Edit existing UPC Confirm Product name (.*) with error message:(.*) and erase text: (.*)\)")]
+		public void SharedStepProductname(string savedAs,string text,string errMsg, string eraseText)
+		{
+			Report.UseSubSteps = true;
+			Report.StartSubStep("I select the first product in the Select UPCs tab");
+			new StepsForwardProductRegistration().SelectTheFirstProductSelectUPCs();
+			Report.StartSubStep("I select the check box next to existing UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectFirstUPC();
+			Report.StartSubStep("I select Edit for the first UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectEditForFirstUPC();
+			Report.StartSubStep("I enter the product name more than 200 characters");
+			new StepsForwardProductRegistration().ProductNameEnterTextData(text);
+			Report.StartSubStep("I click Save in the Edit UPC modal");
+			new StepsForwardProductRegistration().InTheUPCModalWindowIClickSave();
+			Report.StartSubStep("I confirm that Product name error message displayed");
+			new StepsUPC().IseeProductNameErrorMessage(errMsg);
+			Report.StartSubStep("I earse few characters from product name");
+			new StepsForwardProductRegistration().ProductNameEnterTextData(eraseText);
+			Report.StartSubStep("I click Save in the Edit UPC modal");
+			new StepsForwardProductRegistration().InTheUPCModalWindowIClickSave();
+			Report.StartSubStep("I click continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 		}
 	}
 }

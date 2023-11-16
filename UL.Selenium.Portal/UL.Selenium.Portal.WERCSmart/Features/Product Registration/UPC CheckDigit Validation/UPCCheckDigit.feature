@@ -4,6 +4,8 @@
 @ProductGrid
 @SHA
 @Homepage
+@ForwardProductRegistration
+@PaymentMethods
 
 Feature: UPCCheckDigit
 
@@ -79,3 +81,46 @@ Scenario: [169528] UPC Check Digit validations - With Recert
 	| saved as badUPC | Cardboard      | 10   | myPkg        |
 	Then In the Universal Product Code (UPC) page I click Save
 	And I should see the following error text displayed in the UPC screen: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
+
+	# Created by Saikiran Chittampally
+@TestCase:217214
+Scenario: [217214] Ingredient Table - Sum of Ingredients: Decimal Place Maximum is Five
+Given I log in with the account saved in TReVor as: ProductAccount
+	Then the WERCSmart homepage should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561a (The Product - Enter Product Name: Battery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or Tool and select Type of Product): Battery Powered Equipment or Tool 
+	Then I save the product information as: TestCase217214
+	Given I generate a random UPC number and save as: UPC217214
+	Given I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
+	Given I call Shared Step 104290 (Enter Regulatory Information - TSCA Not Prop 65)
+	Given I call Shared Step 48367 (Product Includes Battery > any type)
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+		| Alkaline     | <any>        | 4                               | 2                                  |
+	Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
+	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	| Retailer  |
+	| Walgreens |	
+	And I should see the Universal Product Code Page
+	Given I click the 'Add Casepack' button
+	Given I add the following into the UPC case fields
+		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC217214   | Cardboard      | 6    | 10      |                          | 4A: steel box         |
+	Then I click continue
+	Then I see the following product name error message: The Product Name on Label must be up to 200 characters max.
+	Then I erase a few characters from the product name to be under the 200 character limit: Battery Powered Equipment or Tool
+	Then I click continue	
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Then In the Thank You screen I click Home
+	Then the WERCSmart homepage should load
+	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration	
+	And I enter the text: saved as TestCase217214 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase217214
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase217214
+	And I click continue on the Forward Product Registration page
+	And In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Canadian Tire under Other Retailers and save it as: retailer217214
+	And I click continue on the Forward Product Registration page
+	Given I call Shared Step (Forwarding - Not PLP - Select Product: TestCase217214 & UPCs step - Edit existing UPC Confirm Product name Battery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBatteryBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery with error message:The Product Name on Label must be up to 200 characters max. and erase text: Battery)
+	And I click the My Products icon in the Navigation Pane

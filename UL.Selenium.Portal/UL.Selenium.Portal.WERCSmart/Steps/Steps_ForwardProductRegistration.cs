@@ -255,6 +255,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Package Type is correctly not shown.");
 		}
 
+		[StepDefinition(@"I confirm that Product name error message shown")]
+		public void ProductNameEnterTextData(string text)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			selForwardProdReg.ProductNameEnterText(text);
+		}
+
 		[StepDefinition(@"I confirm that Transportation is shown")]
 		public void ConfirmTransportationShown()
 		{
