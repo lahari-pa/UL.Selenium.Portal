@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region Methods
 		public ProductPrototype(string label)
 		{
-			Report.Info($"Attempting to get {label} group.");
+			Report.Info($"Attempting to get {label} group.");;
 			_label = label;
 		}
 		#region Option Input Methods
@@ -132,6 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool TextInputExists()
 		{
 			Report.Info($"Attempting to confirm text input exists.");
+			var test = this.TextInputGet();
 			return this.TextInputGet() != null;
 		}
 
@@ -203,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		protected override By ContainerElementLocator => By.XPath($"//span[contains(@class,'select2-container--open')][.//input[@type='search']]");
 		private IWebElement SearchInput => this.FindElement(By.XPath(".//input[@type='search']"),1);
 		public List<IWebElement> SearchResultsList => this.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).ToList();
-		private IWebElement SearchResult(string searchText) => this.SearchResultsList.Where(x => x.Text.Contains(searchText)).FirstOrDefault();
+		private IWebElement SearchResult(string searchText) => this.SearchResultsList.Where(x => x.Text.ToLower().Contains(searchText.ToLower())).FirstOrDefault();
 		private IWebElement SearchResultAlert(string alertText) => this.FindElement(By.XPath($".//li[@role='alert'][@text()='{alertText}']"), 1);
 		private IWebElement SearchResultHighlighted => this.SearchResultsList.Where(x => x.GetAttribute("class").Contains("-highlighted")).FirstOrDefault();
 
