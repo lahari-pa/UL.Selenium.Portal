@@ -33,7 +33,7 @@ using UL.Automation.Utilities;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
-	[Binding, Scope(Tag = "StepsProductPrototype")]
+	[Binding, Scope(Tag = "Steps_ProductPrototype")]
 	class Steps_ProductPrototype
 	{
 		[StepDefinition(@"In section: (.*), set select option: (.*)")]

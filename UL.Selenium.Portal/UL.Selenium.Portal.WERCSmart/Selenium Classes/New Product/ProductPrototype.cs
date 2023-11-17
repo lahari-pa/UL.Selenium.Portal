@@ -126,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement TextInputGet()
 		{
 			Report.Info($"Attempting to get text input.");
-			return this.FindElement(By.XPath($".//input[@type='text']"),1);
+			return this.FindElement(By.XPath($".//input[@type='text']|.//textarea"),1);
 		}
 
 		public bool TextInputExists()

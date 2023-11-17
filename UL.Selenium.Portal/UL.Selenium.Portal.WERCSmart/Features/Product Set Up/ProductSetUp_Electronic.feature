@@ -19,9 +19,10 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 
-@StepsProductPrototype
+@Steps_ProductPrototype
 
 Feature: ProductSetUp_Electronic
 
@@ -35,6 +36,7 @@ Feature: ProductSetUp_Electronic
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And the WERCSmart homepage should load
 	And I click the Add Product icon in the Navigation Pane
 	And I should see the New Product Page
 	And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -42,7 +44,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
 	And I should see the The Product Page
 	#And In section: Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS), enter text: Test
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Test
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: TestCase84109
 	#And In the Product Section, set the option in section: 'Type of Product (select)' to: Answering machine, No battery included
 	And In section: Type of Product (select), click search text box
 	And In the search input pop-up, search and select: Answering machine, No battery included
@@ -83,7 +85,10 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	And I should see the Optional Comments Page
+	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Given in the Optional Comments page I click Continue
 
 	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	#Given If purchase details are showing click confirm order
