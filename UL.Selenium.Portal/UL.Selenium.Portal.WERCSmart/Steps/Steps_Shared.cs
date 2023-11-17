@@ -2990,6 +2990,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
+			Delay.Seconds(20);
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
 			//Andrew - I have updated this step so only items in the hardcoded FIFRA lists of ingredients handle the popup.
