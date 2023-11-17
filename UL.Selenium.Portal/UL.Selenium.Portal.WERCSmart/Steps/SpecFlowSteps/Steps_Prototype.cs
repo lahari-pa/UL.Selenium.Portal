@@ -432,5 +432,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
 		}
+
+		[StepDefinition(@"I should be on the (.*) Page")]
+		public void GivenIShouldBeOnXPage(string page)
+		{
+			var newProduct = new NewProduct();
+			if (newProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(newProduct.WaitForSection(page), $"{page} is not showing when it was expected to", $"{page} is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
 	}
 }
