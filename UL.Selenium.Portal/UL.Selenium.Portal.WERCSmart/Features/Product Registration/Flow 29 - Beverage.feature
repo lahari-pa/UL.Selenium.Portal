@@ -196,6 +196,8 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should see the Additional Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
 
+@ignore
+#Ignore Tag Added On 11/2023
 	@TestCase:161374
 
 	Scenario: [161374] Enhanced Water Beverage (RUU001411)

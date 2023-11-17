@@ -223,6 +223,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	And I should see the The Product Page
 
 @OnlyInIntegration
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

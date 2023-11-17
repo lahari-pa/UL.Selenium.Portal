@@ -731,7 +731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
 			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(), "The popup was still showing", "The popup was no longer showing");
-			
+
 
 		}
 
@@ -808,7 +808,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string downloadsFolder = SeleniumWebDriver.Interface.DownloadsFolder;
 
 			System.IO.Directory.Move(destination, downloadsFolder + @"\testdoc.xlsx");
-			
+
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
 
 			//File.SetLastWriteTime(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx", DateTime.Now);
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> foundRetailersInitials = new List<string>();
 			foreach(var item in foundRetaiers)
 			{
-				foundRetailersInitials.Add(new RetailerAbbreviations().TryConvertToAbbreviation($"{item}")); 
+				foundRetailersInitials.Add(new RetailerAbbreviations().TryConvertToAbbreviation($"{item}"));
 
 			}
 			bool countsMatch =  foundRetailersInitials.Count() == deletedRetailersInitials.Count();
@@ -1601,7 +1601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			NewProduct NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.CheckAllRetailesInAddRetailersPopupAreSelected(), "Not all Retailers were selected", "All Retailers were selected");
 
-			
+
 		}
 
 		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
@@ -1685,7 +1685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 
-				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!",	"Successfully inputted UPC information!");
+				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 				Report.StartStep("In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue");
 				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Global Trade Item Number (GTIN) / Universal Product Code (UPC)");
 				GeneralUtilities.Wait_for_load_finish();
@@ -1825,5 +1825,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I see the following product name error message: (.*)")]
+		public void IseeProductNameError(string errMsg)
+		{
+			Report.Info("Checking error message");
+			var selNewUpc = new UPC();
+			List<string> el = selNewUpc.UPCProductNameError();			
+			Report.IsTrue(el.Contains(errMsg), "Error message not displayed", $"{errMsg} is displayed");
+		}
+
+		[StepDefinition(@"I see the forward registration page product name error message: (.*)")]
+		public void IseeProductNameErrorMessage(string errMsg)
+		{
+			Report.Info("Checking error message");
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<string> el = selForwardProdReg.ProductNameErrorMesage();
+			Report.IsTrue(el.Contains(errMsg), "Error message not displayed", $"{errMsg} is displayed");
+		}
+
+		[StepDefinition(@"I erase a few characters from the product name to be under the 200 character limit: (.*)")]
+		public void IEraseProductName(string prodName)
+		{
+			var selNewUpc = new UPC();
+			selNewUpc.EnterProductName(prodName);			
+		}
 	}
 }

@@ -723,8 +723,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnsureThatOptionIsListedAtLevel(string option, string level)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//span[contains(text(), '" + option + "')]/../div//span[contains(text(), '" + level + "')]"), 2);
+			IWebElement elem = this.ContainerElement.FindElement(By.XPath($"//span[contains(text(), '{ option }')]/../div//span[contains(text(), '{ level }')]"), 2);
 			return elem != null;
+		}
+		public void ProductNameEnterText(string text)
+		{
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/following-sibling::input"), 2).EnterText(text);
+		}
+		public List<string> ProductNameErrorMesage()
+		{
+			List<string> el = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@class='col-sm-12 form-group has-feedback has-error']//span"), 2).Select(x => x.Text).ToList();
+			return el;
 		}
 
 		public class SelectProducts : ForwardProductRegistration
