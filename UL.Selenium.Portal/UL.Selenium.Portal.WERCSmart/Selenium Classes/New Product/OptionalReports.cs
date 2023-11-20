@@ -19,17 +19,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		public bool SelectInputForSection(string section, string selection)
 		{
-			IWebElement sectionHeader = this.containerElement.FindElement(By.XPath(@"//div[@class='doc-name']//span[contains(text(), """ + section + @""")]/../.."), 2);
+			/*IWebElement sectionHeader = this.ContainerElement.FindElement(By.XPath($@"//div[@class='doc-name']//span[contains(text(), '{section}')]/../.."), 2);
 			if (sectionHeader == null)
 			{
 				Report.Info("Could not find section title '" + section + "' on page.");
 				return false;
 			}
-
-			IWebElement input = sectionHeader.FindElement(By.XPath(@"//input[@class='select2-search__field']"), 2);
+			*/
+			IWebElement input = this.ContainerElement.FindElement(By.XPath($@"//div[@class='doc-name']//span[contains(text(), '{section}')]/../..//input[@class='select2-search__field']"), 2);
 			if (input == null)
 			{
-				Report.Info("Could not find input field for section '" + section + "'.");
+				Report.Info($"Could not find input field for section '{section}'.");
 				return false;
 			}
 
@@ -37,15 +37,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			if (!clickInput)
 			{
-				Report.Info("Failed to click input for section '" + section + "'.");
+				Report.Info($"Failed to click input for section '{section}'.");
 				return false;
 			}
 
-			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='select2-container select2-container--default select2-container--open']//li[contains(text(), """ + selection + @""")]"), 2);
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//span[@class='select2-container select2-container--default select2-container--open']//li[contains(text(), '{selection}')]"), 2);
 
 			if (select == null)
 			{
-				Report.Info("Could not find selection '" + selection + "'.");
+				Report.Info($"Could not find input field for section '{selection}'.");
 				return false;
 			}
 
@@ -54,10 +54,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckTotalForSection(string section, string value)
 		{
-			IWebElement total = this.containerElement.FindElement(By.XPath(@"//div[@class='doc-name']//span[contains(text(), """ + section + @""")]/../../following-sibling::div//span[contains(text(), """ + value + @""")]"), 2);
+			IWebElement total = this.ContainerElement.FindElement(By.XPath($@"//div[@class='doc-name']//span[contains(text(), '{section}')]/../../following-sibling::div//span[contains(@data-bind, 'total')]"), 2);
 			if (total == null)
 			{
-				Report.Info("Could not find Total text for section '" + section + "'.");
+				Report.Info($"Could not find Total text for section '{section}'.");
 				return false;
 			}
 
@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			else
 			{
-				Report.Info("Failed to find text '" + value + "' in section '" + section + "'. Found text: '" + total.Text + "'.");
+				Report.Info($"Failed to find text '{value} ' in section '{section}'. Found text: '{total.Text}'.");
 				return false;
 			}
 		}
