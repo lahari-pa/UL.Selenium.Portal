@@ -415,5 +415,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(reports.CheckTotalForSection(section, value), $"Failed to find the correct value {value} for section {section}.",
 				$"Successfully found correct value {value} for section {section}.");
 		}
+
+		[StepDefinition(@"I enter the following into the comments field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
+		{
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
+		}
 	}
 }
