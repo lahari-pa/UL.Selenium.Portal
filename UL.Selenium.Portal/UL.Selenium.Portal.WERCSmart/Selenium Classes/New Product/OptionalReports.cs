@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 			*/
-			IWebElement input = this.ContainerElement.FindElement(By.XPath($@"//span[contains(text(), '{section}')]/../following-sibling::div//input"), 2);
+			IWebElement input = this.ContainerElement.FindElement(By.XPath($@"//div[span[contains(text(), '{section}')]]/following-sibling::div//input"), 2);
 			if (input == null)
 			{
 				Report.Info($"Could not find input field for section '{section}'.");
@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckTotalForSection(string section, string value)
 		{
-			IWebElement total = this.ContainerElement.FindElement(By.XPath($@"//span[contains(text(), '{section}')]/../../following-sibling::div//span[contains(@data-bind, 'total')]"), 2);
+			IWebElement total = this.ContainerElement.FindElement(By.XPath($@"//div[div[span[contains(text(), '{section}')]]]/following-sibling::div//span[contains(@data-bind, 'total')]"), 2);
 			if (total == null)
 			{
 				Report.Info($"Could not find Total text for section '{section}'.");
