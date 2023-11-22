@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("New Product page is not loaded");
 				return;
 			}
-			if (page.ToLower() != "new product" && !newProduct.WaitForSection(page))
+			if (!page.Equals("New Product", StringComparison.InvariantCultureIgnoreCase) && !newProduct.WaitForSection(page))
 			{
 				Report.Error($@"The page title did not match expected! Expected ""{page}""");
 			}

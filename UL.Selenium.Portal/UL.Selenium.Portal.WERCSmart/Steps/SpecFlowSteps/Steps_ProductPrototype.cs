@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void InSectionEnterText(string section, string text)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
-			if (Report.IsTrue(productPrototype.ContainerElement != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			if (Report.IsTrue(!productPrototype.ContainerVisible(), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
 			{
 				if (Report.IsTrue(productPrototype.TextInputExists(), $"Failure, text input does not exist.", $"Success, text input exists."))
 				{
