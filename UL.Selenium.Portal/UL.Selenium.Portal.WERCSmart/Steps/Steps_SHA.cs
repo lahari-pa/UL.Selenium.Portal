@@ -5223,6 +5223,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string headerText = myStudioShaManager.DocumentRequestHeader();
 			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
 		}
+		
+		[StepDefinition(@"I Confirm that productID: (.*) and name matches with the Product selected in the SHA Manager Product List")]
+		public void IConfirmProductID_ProductnameMatchProductListGrid(string productsavedAs)
+		{
+			var product = (ProductInformation)Context.GetFromContext(productsavedAs);
+			string id = product.Id;
+			string name = product.Name;
+			try
+			{
+				string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
+				Report.Info("Looking for SHA Manager Review window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info($"Checking handle: { handle }");
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+					IWebElement ele = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@title='Product Data Review']//b"), 2);
+					if (ele != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						Report.IsTrue(ele.Text.Contains(id), "Product id does not match", "product id matched succesfully");
+						Report.IsTrue(ele.Text.Contains(name), "Product name does not match", "product name matched succesfully");
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the review grid List window");
+					Report.Screenshot();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 	}
 
 }
