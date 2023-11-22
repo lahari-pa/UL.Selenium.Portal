@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
-	[Binding, Scope(Tag = "Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment")]
+	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment")]
 	internal class ElectronicEquipment
 	{
 		[StepDefinition(@"In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: (Yes|No)")]

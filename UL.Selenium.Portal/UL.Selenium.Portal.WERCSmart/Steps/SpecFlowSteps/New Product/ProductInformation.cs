@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
-	[Binding, Scope(Tag = "Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation")]
+	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation")]
 	internal class ProductInformation
 	{
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25\(b\) Exempt' to: (Product is intended for preventing, destroying, repelling, or mitigating pests \(including insects, rodents, mold, virus, bacteria, and other micro-organisms\)|Product is intended for use as a plant regulator \(controls growth\), defoliant \(removes leaves\), or desiccant \(dehydrates plants to control growth\)|Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description \(ex. kills, sterilizes, disinfects, sanitizes, antimicrobial\))")]
