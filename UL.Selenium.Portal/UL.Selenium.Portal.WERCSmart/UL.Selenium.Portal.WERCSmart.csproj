@@ -76,7 +76,6 @@
 
   <ItemGroup>
     <Folder Include="Features\SHA Manager\" />
-    <Folder Include="Steps\SpecFlowSteps\New Product\Review and Submit\" />
     <Folder Include="Steps\SpecFlowSteps\New Product\Recipient and UPC Details\" />
     <Folder Include="Steps\SpecFlowSteps\New Product\Product Characteristics\" />
   </ItemGroup>

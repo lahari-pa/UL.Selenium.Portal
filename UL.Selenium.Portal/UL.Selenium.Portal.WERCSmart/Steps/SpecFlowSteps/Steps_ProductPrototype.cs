@@ -33,7 +33,7 @@ using UL.Automation.Utilities;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
-	[Binding, Scope(Tag = "StepsProductPrototype")]
+	[Binding, Scope(Tag = "Steps_ProductPrototype")]
 	class Steps_ProductPrototype
 	{
 		[StepDefinition(@"In section: (.*), set select option: (.*)")]
@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void InSectionEnterText(string section, string text)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
-			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			if (Report.IsTrue(!productPrototype.ContainerVisible(), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
 			{
 				if (Report.IsTrue(productPrototype.TextInputExists(), $"Failure, text input does not exist.", $"Success, text input exists."))
 				{
