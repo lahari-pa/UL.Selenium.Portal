@@ -407,5 +407,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
 		}
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
+		}
+		[StepDefinition(@"I click button: (.*)")]
+		public void ClickButton(string button)
+		{
+			if(Report.IsTrue(new NewProduct().ButtonExists(button),
+				$"Failed to find button {button}",
+				$"Successfully found button {button}"))
+			{
+				Report.IsTrue(new NewProduct().ButtonClick(button),
+				$"Failed to click button {button}",
+				$"Successfully clicked button {button}");
+			}
+			
+		}
 	}
 }
