@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region Methods
 		public ProductPrototype(string label)
 		{
-			Report.Info($"Attempting to get {label} group.");;
+			Report.Info($"Attempting to get '{label}' group.");;
 			_label = label;
 		}
 		#region Option Input Methods
