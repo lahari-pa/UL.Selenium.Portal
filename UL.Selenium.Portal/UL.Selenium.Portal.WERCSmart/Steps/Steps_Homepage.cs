@@ -347,6 +347,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I click the (My Products|Add Product|Alerts|Retail Partners|My Reports|Shopping Cart|Support|Chat|Prescription Pharmaceutical) page")]
+		public void ThenIClickTheSpecificTab(string tabName)
+		{
+			try
+			{
+				Report.Info(string.Format("Navigating to the {0} Page", tabName));
+				var selNav = new NavigationBar();
+				GeneralUtilities.Wait_for_load_finish();
+				Report.IsTrue(selNav.Click_Icon(tabName), string.Format("Failed to click the '{0}' icon!", tabName), string.Format("Successfully clicked the '{0}' icon!", tabName));
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+			Delay.Seconds(5);
+		}
+
 		[StepDefinition(@"I navigate to the home page")]
 		public void ThenINavigateToTheHomePage()
 		{
