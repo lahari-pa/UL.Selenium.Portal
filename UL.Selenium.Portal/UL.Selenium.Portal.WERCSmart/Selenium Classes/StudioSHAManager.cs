@@ -2068,6 +2068,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+		public bool SelectTheProduct()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_cb']")).TryClick();
+		}
+		public string DocumentRequestHeader()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//th[@id='listrequestdocuments_uploaded']/div")).GetInnerText();
+		}
 
 	}
 

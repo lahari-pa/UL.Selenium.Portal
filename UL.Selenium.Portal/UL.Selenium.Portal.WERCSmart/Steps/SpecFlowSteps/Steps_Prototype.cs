@@ -30,6 +30,8 @@ using BoDi;
 using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using System.Runtime.InteropServices;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -78,9 +80,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		public void ClickContinue()
+		[StepDefinition(@"in the (.*) page, I click Continue")]
+		public void GivenInPageIClickContinue(string page)
 		{
-			Report.IsTrue(new NewProduct().ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+			var newProduct = new NewProduct();
+			if (!newProduct.WaitForContainerToBeVisible())
+			{
+				Report.Failure("New Product page is not loaded");
+				return;
+			}
+			if (!page.Equals("New Product", StringComparison.InvariantCultureIgnoreCase) && !newProduct.WaitForSection(page))
+			{
+				Report.Error($@"The page title did not match expected! Expected ""{page}""");
+			}
+			Report.Info("Clicking Continue");
+			Report.IsTrue(newProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
+			if (page == "The Product" && newProduct.HeaderText == "The Product")
+			{
+				Report.Info("The active page is still 'The Product' after clicking continue");
+				Report.Info("Checking for Raw Materials Warning pop up");
+				var thisModalDialog = new ModalDialog();
+				if (!thisModalDialog.WaitForContainerToBeVisible() || thisModalDialog.GetTitle() != "Warning")
+				{
+					Report.Failure("Failed to click continue to the next page!");
+					return;
+				}
+				Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
+			}
 		}
 
 		public void GivenIConfirmTheTextsDisplaysTheCorrectText(string section, string[] correctText, string condition)
@@ -96,9 +122,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-
-
-
 
 		public void ClickLinkElement(string linkText)
 		{
@@ -117,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Info($"Attempt to confirm link element {linkText} is not displayed");
-				Report.IsFalse(new NewProduct().LinkElementExists(linkText), $"Failed to find link element with text {linkText}", $"Successfully found link element with text {linkText}");
+				Report.IsFalse(new NewProduct().LinkElementExists(linkText), $"Failed to confirm link element with text {linkText} is not displayed", $"Successfully confirmed link element with text {linkText} is not displayed");
 			}
 		}
 
@@ -326,6 +349,115 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(thisAlert.Text == text, "Warning text is displayed, but it is not expected.", "Warning text is not displayed, as expected.");
 			}
 		}
+		[StepDefinition(@"I click the browse button for section: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFile(string section, string pdfFile)
+		{
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
+		}
+		[StepDefinition(@"I click the button (.*) for section: (.*)")]
+		public void ClickButtonForSection(string section, string button)
+		{
+			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
+		}
 
+		[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
+		public void CheckButtonExistsForSection(string section, string condition, string button)
+		{
+			if(condition == "should")
+			{
+				Report.IsTrue(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} exists for section {section}", $"Successfully confirmed {button} exists for {section}");
+			}
+			else
+			{
+				Report.IsFalse(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} does not exist for section {section}", $"Successfully confirmed {button} does not exist for {section}");
+			}
+		}
+		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleIClickTheButton(string popupTitle, string buttonTitle)
+		{
+			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"The alert message (should|should not) displayed with text: (.*)")]
+		public void AlertMessageDisplayed(string displayed, string alert)
+		{
+			bool expectDisplayed = false;
+			switch (displayed)
+			{
+				case "should":
+					expectDisplayed = true;
+					break;
+				case "should not":
+					break;
+				default:
+					Report.Failure("Step parameter must be either 'should' or 'should not'");
+					return;
+			}
+			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
+			if (actualAlerts == null)
+			{
+				Report.Failure("Error fetching alert messages!");
+				return;
+			}
+			Report.IsTrue(actualAlerts.Contains(alert) == expectDisplayed,
+				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: {alert} but got: {string.Join(",", actualAlerts)}",
+				$"Message: '{alert}' is displayed as expected");
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for select option (.*)")]
+		public void EnterBatterySelectOption(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().SetSelectBatteriesOptions(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for input option (.*)")]
+		public void EnterBatteryInputInformation(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().EnterInputBatteriesOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+
+		}
+
+		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for search select option (.*)")]
+		public void EnterBatterySearchSelectInformation(string value, string option)
+		{
+			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		}
+		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
+		public void IClickTheInputSectionAndSelect(string section, string selection)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.SelectInputForSection(section, selection), $"Failed to select input {selection} for section {section}.",
+				$"Successfully selected input {selection} for section {section}.");
+		}
+
+		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
+		public void TotalForSectionShouldEqual(string section, string value)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.CheckTotalForSection(section, value), $"Failed to find the correct value {value} for section {section}.",
+				$"Successfully found correct value {value} for section {section}.");
+		}
+
+		[StepDefinition(@"I enter the following into the comments field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
+		{
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
+		}
+
+		[StepDefinition(@"I should be on the (.*) Page")]
+		public void GivenIShouldBeOnXPage(string page)
+		{
+			var newProduct = new NewProduct();
+			if (newProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(newProduct.WaitForSection(page), $"{page} is not showing when it was expected to", $"{page} is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
 	}
 }

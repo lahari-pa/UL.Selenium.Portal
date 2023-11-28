@@ -19,6 +19,8 @@
 @run_ULSolutionCenter
 Feature: UL Solution Center
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:59654
 Scenario: [59654] UL Solution Center shows when expanded menu item is clicked
 	Given I login as the administrator
@@ -45,6 +47,8 @@ Scenario: [59655] UL Solution Center shows correct entries
 		| ULGHS                    |
 		| Navigator                |
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:81288
 Scenario: [81288] UL Solution Center shows correct entries - ECOLOGO section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -59,6 +63,8 @@ Scenario: [81288] UL Solution Center shows correct entries - ECOLOGO section
 	And I close the window that opened
 	Then I confirm that the UL Solution Center page is loaded
 
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:59657
 Scenario: [59657] UL Solution Center shows correct entries - Prospector section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -103,7 +109,8 @@ Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPL
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
 
-#@ignore
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:59660
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -132,6 +139,8 @@ Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
+@ignore
+#Ignore Tag Added On 11/2023
 @TestCase:102411
 Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

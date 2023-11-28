@@ -588,8 +588,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			var thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(option), "Failed to select option: " + option,
-				"Selected option: " + option);
+			Report.IsTrue(thisContextMenu.SelectOption(option), $"Failed to select option: {option }",
+				$"Selected option: { option }");
 		}
 
 		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
@@ -5205,7 +5205,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Verify product id is blue");
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 		}
+		[StepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
+		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string savedAs, string option)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = product.Id;
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.SelectTheProduct();
+			Report.IsTrue(myStudioShaManager.RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+			this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(option);
+		}
 
+		[StepDefinition(@"I confirm (.*) column header is displayed")]
+		public void ThenInSHAManagerIRightClickProductDocumentRequest(string header)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			string headerText = myStudioShaManager.DocumentRequestHeader();
+			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
+		}
+		
+		[StepDefinition(@"I Confirm that productID: (.*) and name matches with the Product selected in the SHA Manager Product List")]
+		public void IConfirmProductID_ProductnameMatchProductListGrid(string productsavedAs)
+		{
+			var product = (ProductInformation)Context.GetFromContext(productsavedAs);
+			string id = product.Id;
+			string name = product.Name;
+			try
+			{
+				string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
+				Report.Info("Looking for SHA Manager Review window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info($"Checking handle: { handle }");
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+					IWebElement ele = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@title='Product Data Review']//b"), 2);
+					if (ele != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						Report.IsTrue(ele.Text.Contains(id), "Product id does not match", "product id matched succesfully");
+						Report.IsTrue(ele.Text.Contains(name), "Product name does not match", "product name matched succesfully");
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the review grid List window");
+					Report.Screenshot();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 	}
 
 }
