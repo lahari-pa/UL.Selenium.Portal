@@ -31,6 +31,7 @@ using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using System.Runtime.InteropServices;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -79,9 +80,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		public void ClickContinue()
+		[StepDefinition(@"in the (.*) page, I click Continue")]
+		public void GivenInPageIClickContinue(string page)
 		{
-			Report.IsTrue(new NewProduct().ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+			var newProduct = new NewProduct();
+			if (!newProduct.WaitForContainerToBeVisible())
+			{
+				Report.Failure("New Product page is not loaded");
+				return;
+			}
+			if (!page.Equals("New Product", StringComparison.InvariantCultureIgnoreCase) && !newProduct.WaitForSection(page))
+			{
+				Report.Error($@"The page title did not match expected! Expected ""{page}""");
+			}
+			Report.Info("Clicking Continue");
+			Report.IsTrue(newProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
+			if (page == "The Product" && newProduct.HeaderText == "The Product")
+			{
+				Report.Info("The active page is still 'The Product' after clicking continue");
+				Report.Info("Checking for Raw Materials Warning pop up");
+				var thisModalDialog = new ModalDialog();
+				if (!thisModalDialog.WaitForContainerToBeVisible() || thisModalDialog.GetTitle() != "Warning")
+				{
+					Report.Failure("Failed to click continue to the next page!");
+					return;
+				}
+				Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
+			}
 		}
 
 		public void GivenIConfirmTheTextsDisplaysTheCorrectText(string section, string[] correctText, string condition)
@@ -399,13 +424,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterBatterySearchSelectInformation(string value, string option)
 		{
 			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		}
+		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
+		public void IClickTheInputSectionAndSelect(string section, string selection)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.SelectInputForSection(section, selection), $"Failed to select input {selection} for section {section}.",
+				$"Successfully selected input {selection} for section {section}.");
+		}
 
+		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
+		public void TotalForSectionShouldEqual(string section, string value)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.CheckTotalForSection(section, value), $"Failed to find the correct value {value} for section {section}.",
+				$"Successfully found correct value {value} for section {section}.");
 		}
 
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
+		}
+
+		[StepDefinition(@"I should be on the (.*) Page")]
+		public void GivenIShouldBeOnXPage(string page)
+		{
+			var newProduct = new NewProduct();
+			if (newProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(newProduct.WaitForSection(page), $"{page} is not showing when it was expected to", $"{page} is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
