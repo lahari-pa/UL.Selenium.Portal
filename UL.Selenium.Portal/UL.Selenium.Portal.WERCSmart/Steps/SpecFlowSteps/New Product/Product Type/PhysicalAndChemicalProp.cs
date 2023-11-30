@@ -31,21 +31,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 
 		//INSTERT RELATIVE DENSITY SET OPTION STEP HERE -- escape issue 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for sub section: 'pH' enter text: (.*)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'pH' enter text: (.*)")]
 		public void EnterTextForPH(string text)
 		{
 			string section = "pH";
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for sub section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'")]
-		public void SelectCheckboxForPH(string text)
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'")]
+		public void SelectCheckboxForPH()
 		{
 			string section = "pH";
+			string text = "I do not have exact pH data available to me";
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-		//INSTERT PH STEP HERE --dropdown
+		//INSTERT PH DROPDOWN STEP HERE -- escape issue 
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: (Yes|No)")]
 		public void SelectProductContainsMicrobeads(string option)
@@ -54,7 +55,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		// next step -- boiling point
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: (.*)")]
+		public void EnterTextForBoilingPoint(string text)
+		{
+			string section = "Boiling Point (in Celsius)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
+		public void SelectCheckboxForBoilingPoint()
+		{
+			string section = "Boiling Point (in Celsius)";
+			string text = "I do not have exact Boiling Point data available to me";
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+		}
+
+
+
+
+
+
 
 
 	}
