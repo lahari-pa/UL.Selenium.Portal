@@ -5265,8 +5265,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
+		[StepDefinition(@"In the Review Screen I check Ascending or Decending order in the Fomulation section")]
+		public void ThenICheckAscDecInFormulationSection()
+		{
+			int i = 0;
+			var myStudioShaManager = new StudioSHAManager();
+			List<string> columns = new List<string> {
+				"listProductFormulation_CAS",
+				"listProductFormulation_ChemicalName",
+				"listProductFormulation_PercentHigh",
+				"listProductFormulation_PercentRange",
+				"listProductFormulation_PubliclyAvailable",
+				"listProductFormulation_PublicName"
+			};
+			Report.Info("Get each column and verify asc, dec");
+			List<IWebElement> expectedValues = myStudioShaManager.GetFormulationCloumns();
+			
+				foreach (var column in expectedValues)
+				{
+					column.TryClick();
+					myStudioShaManager.AscDecCheck(columns[i++], "asc");
+			}			
+		}
 	}
 
-}
+	}
 
 

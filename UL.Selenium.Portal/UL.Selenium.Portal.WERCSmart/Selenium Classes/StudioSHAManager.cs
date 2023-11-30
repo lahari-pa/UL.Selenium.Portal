@@ -49,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckPopupHeader(string header)
 		{
 			IWebElement PopupHeader = this.containerElement.FindElement(By.XPath($"//span[@class = 'ui-dialog-title' and text() = '{header}']"));
-			if( PopupHeader == null)
+			if (PopupHeader == null)
 			{
 				Report.Info("Failed to find popup header");
 				return false;
@@ -168,7 +168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info($"Loading bar wait over.");
 				// waits up to timeout (30) seconds for the loading bar to then become invisible
 				Report.Info($"Starting Loading bar wait to become invisible.");
-				bool invs= SeleniumWebDriver.CurrentDriver.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+				bool invs = SeleniumWebDriver.CurrentDriver.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
 				Report.Info($"Loading bar wait to become invisible is finished");
 				return invs;
 			}
@@ -405,7 +405,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						myProductSearch.ClickButton("Find");
 						mySHAManager.WaitForProductList(30);
 					}
-					
+
 				}
 
 				Delay.Seconds(5);
@@ -722,7 +722,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				Report.Info("Found matching cell");
 				var thisContextMenu = new RightClickProductMenu();
-				
+
 				//matchingTD2.RightClick();
 				//This below is to handle the Right click clicking below the element.
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
@@ -1175,7 +1175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < 30; i++)
 			{
-				IWebElement messageEl =	SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"),2);
+				IWebElement messageEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"), 2);
 				if (messageEl != null)
 				{
 					string messageTextFound = messageEl.Text;
@@ -1410,12 +1410,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			List<string> foundUPCStrings = new List<string>();
 
 			var rawUPCSFound = this.UPCAssessmentScreenGetUPCs();
-			if(rawUPCSFound.IsNullOrEmpty())
+			if (rawUPCSFound.IsNullOrEmpty())
 			{
 				Report.Info($"The list of Raw UPC data was null or empty");
 				return null;
-			}	
-			foreach(var item in rawUPCSFound)
+			}
+			foreach (var item in rawUPCSFound)
 			{
 				foundUPCStrings.Add(item.UPCNumber);
 			}
@@ -1435,7 +1435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 
-			var row = rows[0];			
+			var row = rows[0];
 			var upcText = row.Text.Split(' ')[0];
 			Report.Info("UPC row text: " + upcText);
 			var thisUpc = new SHAManagerProdcutUPC {
@@ -1443,7 +1443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				UPCNumber = upcText
 			};
 			foundfirstItem = thisUpc;
-			if(!foundfirstItem.IsNullOrEmpty())
+			if (!foundfirstItem.IsNullOrEmpty())
 			{
 				Report.Info($"Found first UPC: {foundfirstItem.UPCNumber}");
 			}
@@ -1457,20 +1457,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string editedString = titleElFullString.Replace("WERCSmart Product ID", "").Trim();
 			var editedStringArray = editedString.ToArray();
 			string finalString = null;
-			foreach(char character in editedStringArray)
+			foreach (char character in editedStringArray)
 			{
 				Report.Info($"Character found was: {character}");
-				if(char.IsDigit(character))
+				if (char.IsDigit(character))
 				{
 					Report.Info($"The character found was a digit");
-					finalString= finalString+ character;
+					finalString = finalString + character;
 				}
 				else
 				{
 					Report.Info($"Character was not a digit, end of ID found");
 					Report.Info($"final string: {finalString.Trim()}");
 					return finalString.Trim();
-					
+
 				}
 			}
 
@@ -1922,11 +1922,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> CASnumbers = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//div[@class='ui-jqgrid-bdiv']//table[@id='listProductFormulation']//td[1]"), 2);
 			IList<IWebElement> percent = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@class='ui-jqgrid-bdiv']//table[@id='listProductFormulation']//td[3]"), 2);
 
-			
+
 			foreach (var CAS in CASnumbers)
 			{
 				casList.Add(CAS.Text);
-				
+
 			}
 			foreach (var cas in casList)
 			{
@@ -1936,11 +1936,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				percentList.Add(percentage.Text);
 			}
-			foreach(var per in percentList)
+			foreach (var per in percentList)
 			{
 				Report.Info(per);
 			}
-			
+
 			foreach (TableRow row in table.Rows)
 			{
 
@@ -1955,7 +1955,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 			}
-			
+
 
 			return true;
 
@@ -2056,7 +2056,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
 		{
-			IList <IWebElement> elList = this.containerElement.FindElements(By.XPath("//select[@id='docType']//option"), 2);
+			IList<IWebElement> elList = this.containerElement.FindElements(By.XPath("//select[@id='docType']//option"), 2);
 
 			foreach (IWebElement el in elList)
 			{
@@ -2076,10 +2076,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//th[@id='listrequestdocuments_uploaded']/div")).GetInnerText();
 		}
+		public bool AscDecCheck(string formColumn, string ascendingOrDescending)
+		{
+			IWebElement notificationSortDateHeader = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
+						$"//table//th[@id='{formColumn}']//span[@class='s-ico']/span[not(contains(@class, 'disabled'))]"),2);
+			string currentSort = notificationSortDateHeader.GetAttribute("sort");
 
+			if (ascendingOrDescending == "asc")
+			{
+				if (currentSort == "asc")
+				{
+					Report.Info("Notifications are already sorted ascendingly");
+					return true;
+				}
+				else
+				{
+					return notificationSortDateHeader.FindElement(By.XPath("./.."), 2).TryClick();
+				}
+			}
+			else
+			{
+				if (currentSort == "desc")
+				{
+					Report.Info("Notifications are already sorted descendingly");
+					return true;
+				}
+				else
+				{
+					return notificationSortDateHeader.FindElement(By.XPath("./.."), 2).TryClick();
+				}
+			}
+		}
+		public List<IWebElement> GetFormulationCloumns()
+		{
+			return SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@id='gview_listProductFormulation']//table//tr[@class='ui-jqgrid-labels']/th")).ToList();
+		}
 	}
 
-	class StudioSHAManagerProductSearch : BaseObject
+		class StudioSHAManagerProductSearch : BaseObject
 	{
 		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
 
@@ -3566,129 +3600,126 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
-	{
-		protected override By ContainerElementLocator => By.XPath("//body");
-
-		public string GetProductTypeNameDisplayedInUPCRetailerAndFeedPage()
+		class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
 		{
-			IWebElement productName = this.ContainerElement.FindElement(By.XPath(@"//div[@class='main']//h1[contains(text(), 'WERCSmart Product ID')]"));
-			string productNameDisplayed = "";
-			if (productName == null)
+			protected override By ContainerElementLocator => By.XPath("//body");
+
+			public string GetProductTypeNameDisplayedInUPCRetailerAndFeedPage()
 			{
-				Report.Info("Element was null");
-			}
-			else
-			{
-				 productNameDisplayed = productName.GetElementText();				
-			}
-
-			int dashIndex = productNameDisplayed.LastIndexOf('-');
-			if (dashIndex >= 0)
-			{
-				return productNameDisplayed.Substring(dashIndex + 1).Trim();
-			}
-			else
-			{
-				Report.Info($"Product name did not contain a '-' symbol, product name displayed: {productNameDisplayed}");
-				return string.Empty;
-			}
-
-		}
-
-		public bool SelectFirstUPCInUPCRetailerAndFeed()
-		{
-			IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
-
-			if (firstUPC == null)
-			{
-				Report.Info("El was null");
-				return false;
-			}
-
-			return firstUPC.TryClick();
-		}
-
-		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
-		{
-			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
-
-			if (retailerEl == null)
-			{
-				Report.Info("El was null");
-				return false;
-			}
-
-			return retailerEl.TryClick();
-		}
-
-		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
-		{
-
-			IWebElement bodyEl = this.ContainerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
-			if(bodyEl.IsNullOrEmpty())
-			{
-				Report.Info($"body el was not found in the popup or did not load in time.");
-				Report.Screenshot();
-				return null;
-			}
-			
-			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
-			List<string> itemsNotFound = new List<string>();
-
-			bool propertyFound = false;
-			bool valueFound = false;
-
-			foreach (TableRow row in table.Rows)
-			{
-				propertyFound = false;
-				valueFound = false;
-
-				foreach (IWebElement el in columnOneList)
+				IWebElement productName = this.ContainerElement.FindElement(By.XPath(@"//div[@class='main']//h1[contains(text(), 'WERCSmart Product ID')]"));
+				string productNameDisplayed = "";
+				if (productName == null)
 				{
-					if (el.Text == row["Property"])
-					{
-						propertyFound = true;
-					}
+					Report.Info("Element was null");
+				}
+				else
+				{
+					productNameDisplayed = productName.GetElementText();
+				}
 
-					if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+				int dashIndex = productNameDisplayed.LastIndexOf('-');
+				if (dashIndex >= 0)
+				{
+					return productNameDisplayed.Substring(dashIndex + 1).Trim();
+				}
+				else
+				{
+					Report.Info($"Product name did not contain a '-' symbol, product name displayed: {productNameDisplayed}");
+					return string.Empty;
+				}
+
+			}
+
+			public bool SelectFirstUPCInUPCRetailerAndFeed()
+			{
+				IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
+
+				if (firstUPC == null)
+				{
+					Report.Info("El was null");
+					return false;
+				}
+
+				return firstUPC.TryClick();
+			}
+
+			public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
+			{
+				IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
+
+				if (retailerEl == null)
+				{
+					Report.Info("El was null");
+					return false;
+				}
+
+				return retailerEl.TryClick();
+			}
+
+			public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
+			{
+
+				IWebElement bodyEl = this.ContainerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
+				if (bodyEl.IsNullOrEmpty())
+				{
+					Report.Info($"body el was not found in the popup or did not load in time.");
+					Report.Screenshot();
+					return null;
+				}
+
+				IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
+				List<string> itemsNotFound = new List<string>();
+
+				bool propertyFound = false;
+				bool valueFound = false;
+
+				foreach (TableRow row in table.Rows)
+				{
+					propertyFound = false;
+					valueFound = false;
+
+					foreach (IWebElement el in columnOneList)
 					{
-						valueFound = true;
+						if (el.Text == row["Property"])
+						{
+							propertyFound = true;
+						}
+
+						if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+						{
+							valueFound = true;
+						}
+						if (valueFound && propertyFound)
+						{
+							break;
+						}
 					}
-					if (valueFound && propertyFound)
+					if (!propertyFound)
 					{
-						break;
+						Report.Info("The following property was not found:" + row["Property"]);
+						itemsNotFound.Add("Property Not Found: " + row["Property"]);
+					}
+					if (!valueFound)
+					{
+						Report.Info("The following value was not found:" + row["Value"]);
+						itemsNotFound.Add("Value Not Found: " + row["Value"]);
 					}
 				}
-				if (!propertyFound)
-				{
-					Report.Info("The following property was not found:" + row["Property"]);
-					itemsNotFound.Add("Property Not Found: " + row["Property"]);
-				}
-				if (!valueFound)
-				{
-					Report.Info("The following value was not found:" + row["Value"]);
-					itemsNotFound.Add("Value Not Found: " + row["Value"]);
-				}
+
+				return itemsNotFound;
 			}
 
-			return itemsNotFound;
-		}
-
-		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
-		{
-			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
-
-			if (closeButton == null)
+			public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
 			{
-				Report.Info("El was null");
-				return false;
+				IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
+
+				if (closeButton == null)
+				{
+					Report.Info("El was null");
+					return false;
+				}
+
+				return closeButton.TryClick();
 			}
-
-			return closeButton.TryClick();
 		}
-
-	
-	}
-
-}
+		}
