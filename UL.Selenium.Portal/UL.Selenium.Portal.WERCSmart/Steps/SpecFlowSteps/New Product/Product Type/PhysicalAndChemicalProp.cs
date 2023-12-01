@@ -10,16 +10,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	[Binding, Scope(Tag = "PhysicalAndChemicalProp")]
 	internal class PhysicalAndChemicalProp
 	{
-		// ADD OPT. FOR gas cylinder text = "Product is packaged in a gas cylinder (e.g.- whip cream)" -- escape issue 
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Liquid|Solid|Gas|Aerosol)")]
 		public void SelectPrimaryPhsicalState(string option)
 		{
+			// ADD OPT. FOR gas cylinder text = "Product is packaged in a gas cylinder (e.g.- whip cream)" -- escape issue 
+
 			string section = "Primary Physical State";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		// INSTERT SECONDARY PHYSICAL STATE STEP HERE -- dropdown 
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: (.*)")]
+		public void SelectSecondaryPhsicalState(string option)
+		{
+			string section = "Secondary Physical State";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: (.*)")]
@@ -63,6 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
+
 		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
 		public void SelectCheckboxForBoilingPoint()
 		{
@@ -73,12 +81,78 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 
 		//INSERT BOILING POINT DROWDOWN STEP HERE -- escape issue
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: (.*)")]
+		public void EnterTextForFlashPoint(string text)
+		{
+			string section = "Flash Point (in Celsius)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+		}
 
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
+		public void SelectCheckboxForFlashPoint()
+		{
+			string section = "Flash Point (in Celsius)";
+			string text = "I do not have exact Flash Point data available to me";
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+		}
+
+		//INSERT FLASH POINT DROPDOWN STEP HERE -- escape issue
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: (Closed cup method|Open cup method|Not applicable/available)")]
+		public void SelectFlashPointTestingMethod(string option)
+		{
+			string section = "Flash Point Testing Method Used";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: (Cloth not soluble|Completely soluble|Dispersible|Immiscible|Insoluble in water|Miscible|Miscible in water|
+        Moderately soluble|Mostly soluble|Negligible|No data available|Partially soluble|Soluble in water)")]
+		public void SelectWaterSolubility(string option)
+		{
+			string section = "Select the best Water Solubility description";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
 
+		//INSTERT SET OPTION FOR HAZARDOUS WASTE STEP HERE -- escape issue
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select all potential allergens included in this product' to: (Dairy|Egg|Wheat|Peanuts|Tree Nuts|Soybeans|Shellfish or Crustaceans|None of the Above)")]
+		public void SelectPotentialAllergens(string option)
+		{
+			string section = "Select all potential allergens included in this product";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: (Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat
+		|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
+		public void SelectIngredientsFacilityProcesses(string option)
+		{
+			string section = "Product is manufactured in a facility that processes, or contains";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+
+		//INSTERT SET PRODUCT SOLD AS STEP HERE -- escape issue 
+
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following sweeteners' to: (Saccharin|Aspartame|Acesulfame potassium|Advantame|Steviol glycosides|Luo han guo fruit extracts|Sucralose|Neotame|None of the Above)")]
+		public void SelectProductSweeteners(string option)
+		{
+			string section = "Product contains the following sweeteners";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye(s)' to: (FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3
+		|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
+		public void SelectArtificalDyes(string option)
+		{
+			string section = "Product contains the following artificial dye(s)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
 	}
 }
