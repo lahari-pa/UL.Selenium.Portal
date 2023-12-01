@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
 	[Binding, Scope(Tag = "PhysicalAndChemicalProp")]
-	internal class PhysicalAndChemicalProp
+	 class PhysicalAndChemicalProp
 	{
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Liquid|Solid|Gas|Aerosol)")]
