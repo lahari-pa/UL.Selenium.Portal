@@ -5265,6 +5265,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
+		[StepDefinition(@"I add 3rd Party Component in Studio")]
+		public void IcallSharedStepIAdd3rdPartyComponent(string casId, string compName, string chemName)
+		{
+			try
+			{
+				var thisStepsStudio = new Steps_Studio();
+				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+					"Power designer has opened");
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "ManageComponents");
+				thisStudioPowerDesignerPlusDesignMode.AddRowClick();
+				Delay.Seconds(3);
+				thisStudioPowerDesignerPlusDesignMode.AddComponent(casId, compName,chemName);
+				
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains("MIXTURE"),"Succesfully component added","Failed to add component");
+				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+				Delay.Seconds(3);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 	}
 
 }

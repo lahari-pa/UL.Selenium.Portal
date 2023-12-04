@@ -313,7 +313,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			input.SendKeys(Keys.Return);
 			Delay.Seconds(5);
 		}
+		public void AddComponent(string casId, string compID, string chemName)
+		{
+			try
+			{
+				IWebElement CASId = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtCASID']"), 2);
+				CASId.EnterText(casId);
+				IWebElement CompName = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtCompID']"), 2);
+				CompName.EnterText(compID);
+				IWebElement chemicalName = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtChemName']"), 2);
+				chemicalName.EnterText(chemName);
+				IWebElement save = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='btnOk']"), 2);
+				save.Click();
+				Delay.Seconds(10);
+				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+					Delay.Seconds(1);
+				}
+				Delay.Seconds(10);
+				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+					Delay.Seconds(1);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Info($"Threw an expection of type:{ex.Message}");
+			}
+		}
+		public bool AddRowClick()
+		{
+			IWebElement AddRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='componentGrid-grid_toppager_left']//td[@title='Add Row']"), 2);
+			if (AddRow != null)
+			{
+				AddRow.Click();
+			}
+			return false;
+		}
+		public IWebElement VerifyComponent()
+		{
+			 return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//tr[@id='componentGrid-grid0']"), 2);
 
+		}
 
 
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
