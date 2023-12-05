@@ -17,10 +17,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct")]
 	class WERCSmart_Distributor_NewProducts_ProductType_TheProduct
 	{
-		[StepDefinition(@"In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label- Container or Safety Data Sheet \(SDS\)' to: (.*)")]
+		[StepDefinition(@"In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet \(SDS\)' to: (.*)")]
 		public void SelectProductNameAsItAppearsOnPackagingLabel(string option)
 		{
-			string section = "Product Name as it appears on the Packaging Label- Container or Safety Data Sheet (SDS)";
+			string section = "Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 

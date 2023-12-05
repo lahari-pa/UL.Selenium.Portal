@@ -30,6 +30,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
 		IWebElement LinkElement(string linkText) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkText}']"), 2);
+		IWebElement Button(string button) => this.ContainerElement.FindElement(By.XPath($"//button//span[text() = '{button}']"), 2);
+
+		public bool ButtonExists(string button)
+		{
+			return this.Button(button) != null;
+		}
+		public bool ButtonClick(string button)
+		{
+			return this.Button(button).TryClick();
+		}
 
 		public bool InputFieldExists(string fieldName)
 		{
