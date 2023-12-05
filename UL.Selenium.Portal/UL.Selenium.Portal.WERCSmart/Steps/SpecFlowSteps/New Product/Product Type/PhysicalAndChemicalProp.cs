@@ -11,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	 class PhysicalAndChemicalProp
 	{
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Liquid|Solid|Gas|Aerosol)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g.- whip cream\)|Liquid|Solid|Gas|Aerosol)")]
 		public void SelectPrimaryPhsicalState(string option)
 		{
 			// ADD OPT. FOR gas cylinder text = "Product is packaged in a gas cylinder (e.g.- whip cream)" -- escape issue 
@@ -63,7 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: (.*)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' enter text: (.*)")]
 		public void EnterTextForBoilingPoint(string text)
 		{
 			string section = "Boiling Point (in Celsius)";
@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 
 		//INSERT BOILING POINT DROWDOWN STEP HERE -- escape issue
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: (.*)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point \(in Celsius\)' enter text: (.*)")]
 		public void EnterTextForFlashPoint(string text)
 		{
 			string section = "Flash Point (in Celsius)";
@@ -107,8 +107,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: (Cloth not soluble|Completely soluble|Dispersible|Immiscible|Insoluble in water|Miscible|Miscible in water|
-        Moderately soluble|Mostly soluble|Negligible|No data available|Partially soluble|Soluble in water)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to:
+		(Cloth not soluble|Completely soluble|Dispersible|Immiscible|Insoluble in water|Miscible|Miscible in water|Moderately soluble|Mostly soluble|Negligible|No data available|Partially soluble|Soluble in water)")]
 		public void SelectWaterSolubility(string option)
 		{
 			string section = "Select the best Water Solubility description";
@@ -126,8 +126,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: (Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat
-		|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to:
+		(Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
 		public void SelectIngredientsFacilityProcesses(string option)
 		{
 			string section = "Product is manufactured in a facility that processes, or contains";
@@ -146,13 +146,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye(s)' to: (FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3
-		|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye\(s\)' to:
+		(FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
 		public void SelectArtificalDyes(string option)
 		{
 			string section = "Product contains the following artificial dye(s)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+
+
+
+
 
 	}
 }
