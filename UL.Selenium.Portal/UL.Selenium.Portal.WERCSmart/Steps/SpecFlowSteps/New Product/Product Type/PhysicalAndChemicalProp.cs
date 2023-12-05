@@ -34,7 +34,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section,text);
 		}
 
-		//INSTERT RELATIVE DENSITY SET OPTION STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: (g/ml \(grams per milliliter\)|lb./gal. \(pounds per gallon\))")]
 		public void SelectRelativeDensity(string option)
 		{
@@ -58,7 +57,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-		//INSTERT PH DROPDOWN STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'pH' to: (<= 2|2.1 - 3.9|4 - 6.9|7 \(Neutral\)|7.1 - 9.9|10 - 12.4|>= 12.5|Not tested/Unknown)")]
 		public void SelectPhRange(string option)
 		{
@@ -91,7 +89,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-		//INSERT BOILING POINT DROWDOWN STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point \(in Celsius\)' to: (<= 20C \(68F\)|20.1C \(68.1F\) - 35C \(95F\)|>35C \(95F\) - 37.7C \(99.9F\)|> 37.7C \(99.9F\)|Not tested/Unknown)")]
 		public void SelectBoilingPoint(string option)
 		{
@@ -116,7 +113,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-		//INSERT FLASH POINT DROPDOWN STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point \(in Celsius\)' to: (<23C|>=23C and <38C|>=38C and <=60C|>60C and <=93C|>=93C and <=815C|Not Tested/Unknown|None, No Flash Point)")]
 		public void SelectFlashPoint(string option)
 		{
@@ -142,7 +138,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		//INSTERT SET OPTION FOR HAZARDOUS WASTE STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to:
 		(This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
 		public void SelectHazardousWaste(string option)
@@ -169,7 +164,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		//INSTERT SET PRODUCT SOLD AS STEP HERE -- escape issue
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: (Kosher|Gluten-free|Halal|Genetically Modified Organisms \(GMOs\)-free|Organic per USDA Standards|Non-Perishable|None of the Above)")]
 		public void SelectProductVerifiedAndSoldAs(string option)
 		{
