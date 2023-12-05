@@ -209,9 +209,8 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	When I Confirm that productID: TestCase142905 and name matches with the Product selected in the SHA Manager Product List
 
 	@TestCase:193958
-Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create and Add a 3rd Party Product Containing PVGEN Components to Trigger Formulation Validation for CA Cleaning Type Product
+Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create and Add a 3rd Party Product Containing a 3rd Party Component with PVGEN Ingredients
 	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I generate a random UPC number and save as: UPC193958
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 	Then I save the product information as: TestCase193958
@@ -232,25 +231,27 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	Then In the Thank You screen I click Home
+	Then In the Thank You screen I click Home	
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase193958)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase193958)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase193958)
 	Then I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase193958)
-	Given I add 3rd Party Component in Studio
+	
+	Given I call shared step add 3rd Party Component in Studio: TestCase193958 MIXTURE Water  
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase193958
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase193958)
-
+	
 	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I generate a random UPC number and save as: UPC193958
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	Then I save the product information as: TestCase193958
+	Then I save the product information as: TestCaseTwo193958
+	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water       | 100      | false               | false       |            |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase193958
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseTwo193958
 

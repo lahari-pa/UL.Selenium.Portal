@@ -5265,23 +5265,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-		[StepDefinition(@"I add 3rd Party Component in Studio")]
-		public void IcallSharedStepIAdd3rdPartyComponent(string casId, string compName, string chemName)
+		[StepDefinition(@"I call shared step add 3rd Party Component in Studio:(.*) (.*) (.*)")]
+		public void IcallSharedStepIAddThirdPartyComponent(string casId, string compNameSavedAs, string chemName)
 		{
 			try
 			{
-				var thisStepsStudio = new Steps_Studio();
+				var productDetails = (ProductInformation)Context.GetFromContext(compNameSavedAs);
+				string compName = "WPS"+productDetails.Id;
 				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 					"Power designer has opened");
-				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "ManageComponents");
-				thisStudioPowerDesignerPlusDesignMode.AddRowClick();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "Manage components");
 				Delay.Seconds(3);
+				var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+				thisPowerDesignerPlus.Wait_for_load(60);
+				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.AddRowClick(), "Failed to click on AddRow icon", "Succesfully clicked on AddRow icon");
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
+				thisPowerDesignerPlus.Wait_for_load(60);
+				Delay.Seconds(10);
+				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
 				thisStudioPowerDesignerPlusDesignMode.AddComponent(casId, compName,chemName);
-				
-				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains("MIXTURE"),"Succesfully component added","Failed to add component");
-				thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-				Delay.Seconds(3);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
+				thisPowerDesignerPlus.Wait_for_load(60);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains(chemName), "Failed to add component", "Succesfully component added");
+				SeleniumWebDriver.CurrentDriver.Close();
 			}
 			catch (Exception ex)
 			{
