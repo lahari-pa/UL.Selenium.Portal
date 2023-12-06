@@ -238,9 +238,11 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase193958)
 	Then I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase193958)
 	
-	Given I call shared step add 3rd Party Component in Studio: TestCase193958 MIXTURE Water  
+	Given I call shared step add 3rd Party Component in Studio: TestCase193958 MIXTURE Water
+	Given I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase193958
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase193958
+	When I switch to the 'Power Designer Plus' tab
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase193958)
 	
@@ -249,9 +251,7 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: TestCaseTwo193958
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)	
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water       | 100      | false               | false       |            |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseTwo193958
+		| TestCase193958       | 100      | true               | false       |            |
 

@@ -5265,13 +5265,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-		[StepDefinition(@"I call shared step add 3rd Party Component in Studio:(.*) (.*) (.*)")]
-		public void IcallSharedStepIAddThirdPartyComponent(string casId, string compNameSavedAs, string chemName)
+		[StepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*) (.*)")]
+		public void IcallSharedStepIAddThirdPartyComponent(string casIdsavedAs, string compName, string chemName)
 		{
 			try
 			{
-				var productDetails = (ProductInformation)Context.GetFromContext(compNameSavedAs);
-				string compName = "WPS"+productDetails.Id;
+				var product = (ProductInformation)Context.GetFromContext(casIdsavedAs);
+				string casId = product.Id;
 				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 					"Power designer has opened");
@@ -5281,12 +5281,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisPowerDesignerPlus.Wait_for_load(60);
 				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				Delay.Seconds(3);
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.AddRowClick(), "Failed to click on AddRow icon", "Succesfully clicked on AddRow icon");
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
 				Delay.Seconds(10);
 				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
+				Delay.Seconds(3);
 				thisStudioPowerDesignerPlusDesignMode.AddComponent(casId, compName,chemName);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
