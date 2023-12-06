@@ -1726,24 +1726,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
-		[StepDefinition(@"I enter the text of Does your product contain a Prop 65 chemical field to: (Yes|No)")]
-		public void GivenEnterProductContainerOrLinerContainsBisphenolABPAValue(string value)
-		{
-			Report.Info("I set the text of Does your product contain a Prop 65 chemical field to: " + value);
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.EnterDoesYourProductContainAProp65ChemicalValue(value), "Failed to set the text of Does your product contain a Prop 65 chemical field to " + value,
-			"Successfully set the text of Does your product contain a Prop 65 chemical field to " + value);
-		}
-
-		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product field to: (.*)")]
-		public void GivenEnterPercentOfAlcoholInTheProductValue(string value)
-		{
-			Report.Info("I set the text of Does your product contain a Prop 65 chemica field to: " + value);
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.EnterDoesYourProductContainAProp65ChemicalValue(value), "Failed to set the text of Does your product contain a Prop 65 chemica field to " + value,
-			"Successfully set the text of Does your product contain a Prop 65 chemica field to " + value);
-		}
-
 		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
 		public void DataForStatesInVOCContentAsWeightPercentageTable()
 		{
