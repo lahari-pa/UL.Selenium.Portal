@@ -352,10 +352,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-				Report.Info(string.Format("Navigating to the {0} Page", tabName));
+				Report.Info($"Navigating to the {tabName} Page");
 				var selNav = new NavigationBar();
 				GeneralUtilities.Wait_for_load_finish();
-				Report.IsTrue(selNav.Click_Icon(tabName), string.Format("Failed to click the '{0}' icon!", tabName), string.Format("Successfully clicked the '{0}' icon!", tabName));
+				Report.IsTrue(selNav.Click_Icon(tabName), $"Failed to click the '{tabName}' icon!", $"Successfully clicked the '{tabName}' icon!");
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}
