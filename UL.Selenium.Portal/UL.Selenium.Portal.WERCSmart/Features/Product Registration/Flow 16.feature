@@ -126,7 +126,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
 @ignore
-#Ignore Tag Added On 11/2023	
+#Removed from regression 2023/11	
 @TestCase:59277
 Scenario: [59277] Magnesium Battery - RU000728
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
