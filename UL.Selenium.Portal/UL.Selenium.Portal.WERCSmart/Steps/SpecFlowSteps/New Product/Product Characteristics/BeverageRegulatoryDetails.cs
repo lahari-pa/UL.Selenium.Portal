@@ -16,7 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"I enter the text of Product's container or liner contains Bisphenol A (BPA) field to: (Yes|No)")]
 		public void GivenEnterProductsContainerOrLinerContainsBisphenolABPAValue(string value)
 		{
-			Report.Info(string.Format("I set the text of Product's container or liner contains Bisphenol A (BPA) field to: {0}", value));
+			Report.Info($"I set the text of Product's container or liner contains Bisphenol A (BPA) field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", value);
 		}
@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"I enter the text of Does your product contain a Prop 65 chemical field to: (Yes|No)")]
 		public void GivenEnterProductContainAProp65ChemicalValue(string value)
 		{
-			Report.Info(string.Format("I set the text of Does your product contain a Prop 65 chemical field to: {0}", value));
+			Report.Info($"I set the text of Does your product contain a Prop 65 chemical field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", value);
 		}
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product field to: (.*)")]
 		public void GivenEnterPercentOfAlcoholInTheProductValue(string value)
 		{
-			Report.Info(string.Format("I set the text of Does your product contain a Prop 65 chemica field to: {0}", value));
+			Report.Info($"I set the text of Does your product contain a Prop 65 chemica field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", value);
 		}
