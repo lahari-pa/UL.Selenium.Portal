@@ -2990,6 +2990,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
+			var thisStudioShaManager = new StudioSHAManager();
 			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(120), "Loading did not finish", showSuccessScreenshot: false);
 			List<string> popupCausing = new Ingredients().IngredientsFIFRAPopup();
 
