@@ -224,7 +224,7 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 
 @OnlyInIntegration
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

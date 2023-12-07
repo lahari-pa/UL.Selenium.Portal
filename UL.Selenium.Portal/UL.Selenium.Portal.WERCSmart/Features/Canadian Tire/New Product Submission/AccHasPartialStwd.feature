@@ -23,7 +23,7 @@ Given I verify the following users exist and if not I create them using SHAUser
 | SHAQAAuto4 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86114
 Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -72,7 +72,7 @@ Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Re
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86115
 Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -120,7 +120,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86452
 Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -160,7 +160,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86117
 Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -201,7 +201,7 @@ Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product 
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86117 and its status is: Completed
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86116
 Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86116
@@ -252,7 +252,7 @@ Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT re
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86454
 Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 	Given I generate a random UPC number and save as: UPC86454
@@ -305,7 +305,7 @@ Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86455
 Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -358,7 +358,7 @@ Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 		| Canadian Tire |
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86458
 Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86458

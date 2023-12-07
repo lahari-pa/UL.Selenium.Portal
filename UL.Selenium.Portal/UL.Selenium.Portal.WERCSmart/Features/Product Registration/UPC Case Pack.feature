@@ -64,7 +64,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 	@ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:87643
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
@@ -538,7 +538,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:87821
 Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
