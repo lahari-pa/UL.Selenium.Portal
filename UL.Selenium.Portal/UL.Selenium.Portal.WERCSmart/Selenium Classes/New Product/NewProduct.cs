@@ -3222,48 +3222,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public bool EnterWeightInkilogramsSingleUnitValue(string value)
-		{
-			try
-			{
-				IWebElement textFieldEl = this.containerElement.FindElement(By.XPath(".//label[text()='Weight in kilograms (single unit)']/../following-sibling::div//input"), 2);
-				textFieldEl.EnterText(value);
-				return true;
-			}
-			catch (Exception e)
-			{
-				return false;
-			}
-		}
-
-		public bool EnterHeightInInchesSingleUnitValue(string value)
-		{
-			try
-			{
-				IWebElement textFieldEl = this.containerElement.FindElement(By.XPath(".//label[text()='Height in inches (single unit)']/../following-sibling::div//select//option[text()='" + value + "']"), 2);
-				textFieldEl.EnterText(value);
-				return true;
-			}
-			catch (Exception e)
-			{
-				return false;
-			}
-		}
-
-		public bool EnterProductContainerOrLinerContainsBisphenolABPAValue(string value)
-		{
-			try
-			{
-				IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'container or liner contains Bisphenol A (BPA)')]/../following-sibling::div//div//label//span[text()='" + value + "']"), 2);
-				inputEl.TryClick();
-				return true;
-			}
-			catch (Exception e)
-			{
-				return false;
-			}
-		}
-		
 		public string Appearance {
 			get
 			{

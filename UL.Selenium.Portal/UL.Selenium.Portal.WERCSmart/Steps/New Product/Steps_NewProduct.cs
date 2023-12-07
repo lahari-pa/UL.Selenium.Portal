@@ -1726,33 +1726,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
-		[StepDefinition(@"I enter the text of Weight in kilograms \(single unit\) field to: (.*)")]
-		public void GivenIEnterTheTextOfWeightInKilogramsSingleUnitFieldTo(string value)
-		{
-			Report.Info("I set the text of Weight in kilograms \\(single unit\\) field to: " + value);
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.EnterWeightInkilogramsSingleUnitValue(value), "Failed to set the text of Weight in kilograms \\(single unit\\) field to " + value,
-			"Successfully set the text of Weight in kilograms \\(single unit\\) field to " + value);
-		}
-
-		[StepDefinition(@"I enter the text of Height in inches \(single unit\) field to: (.*)")]
-		public void GivenIEnterTheTextOHeightInInchesSingleUnitFieldTo(string value)
-		{
-			Report.Info("I set the text of Height in Inches \\(single unit\\) field to: " + value);
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.EnterHeightInInchesSingleUnitValue(value), "Failed to set the text of Height in Inches \\(single unit\\) field to " + value,
-			"Successfully set the text of Height in Inches \\(single unit\\) field to " + value);
-		}
-
-		[StepDefinition(@"I enter the text of Product Container Or Liner Contains Bisphenol ABPA field to: (Yes|No)")]
-		public void GivenEnterProductContainerOrLinerContainsBisphenolABPAValue(string value)
-		{
-			Report.Info("I set the text of Height in Inches \\(single unit\\) field to: " + value);
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.EnterHeightInInchesSingleUnitValue(value), "Failed to set the text of Height in Inches \\(single unit\\) field to " + value,
-			"Successfully set the text of Height in Inches \\(single unit\\) field to " + value);
-		}
-
 		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
 		public void DataForStatesInVOCContentAsWeightPercentageTable()
 		{
