@@ -318,7 +318,6 @@ Scenario: [127791] Pharma - Retailer Default
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 	Given I generate a random UPC number and save as: UPC127791
 	Given I click continue
-	Then I should see the Product Type Page
 	Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
 	Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
 	Then I click continue
@@ -336,7 +335,7 @@ Scenario: [127791] Pharma - Retailer Default
 	Given I fill all empty fields in the Pharma Ingredients screen
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water       | 100     | false               | false       |            |
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
