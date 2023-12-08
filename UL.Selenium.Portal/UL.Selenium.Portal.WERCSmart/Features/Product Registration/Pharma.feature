@@ -101,21 +101,12 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50 and size: 1
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
 
-
-
-
-
-
-
-
-
 @TestCase:127970
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide
-	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 	Given I generate a random UPC number and save as: UPC127970
-	Given I click continue
-	Then I should see the Product Type Page
+	Then I click continue
 	Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
 	Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
 	Then I click continue
@@ -133,7 +124,7 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 	Given I fill all empty fields in the Pharma Ingredients screen
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+		| Water       | 100     | false               | false       |            |
 	Given I set the Should this product be refrigerated for transport or storage? option to: No
 	Then I click continue
 	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
@@ -141,8 +132,6 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
-#When I click continue
-#When I click continue
 	Then in the Regulatory Documents to Provide page I click Continue
 	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
@@ -150,23 +139,10 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 		| Option                       |
 		| Safety Data Sheet (Optional) |
 	Then in the Additional Documents to Provide page I click Continue
-#When I click continue
-#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-#When I click continue
-#When I click continue
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127970
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
-
-
-
-
-
-
-
-
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
