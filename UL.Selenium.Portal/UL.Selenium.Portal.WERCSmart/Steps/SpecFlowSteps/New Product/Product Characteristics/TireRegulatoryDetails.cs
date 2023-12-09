@@ -11,6 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TireRegulatoryDetails")]
 	internal class TireRegulatoryDetails
 	{
+<<<<<<< HEAD
 		[StepDefinition(@"I enter the text of Product is intended for agricultural use only field to: (Yes|No)")]
 		public void GivenIEnterTheTextOfProductIsIntendedForAgriculturalUseOnlyFieldTo(string value)
 		{
@@ -18,5 +19,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Product is intended for agricultural use only", value);
 		}
+=======
+
+		[StepDefinition(@"I enter the text of Weight in kilograms \(single unit\) field to: (.*)")]
+		public void GivenIEnterTheTextOfWeightInKilogramsSingleUnitFieldTo(string value)
+		{
+			Report.Info($"I set the text of Weight in kilograms \\(single unit\\) field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Weight in kilograms (single unit)", value);
+		}
+
+		[StepDefinition(@"I enter the text of Height in inches \(single unit\) field to: (.*)")]
+		public void GivenIEnterTheTextOHeightInInchesSingleUnitFieldTo(string value)
+		{
+			Report.Info($"I set the text of Height in Inches \\(single unit\\) field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Height in inches (single unit)", value);
+		}
+
+		[StepDefinition(@"I enter the text of Product Container Or Liner Contains Bisphenol ABPA field to: (Yes|No)")]
+		public void GivenEnterProductContainerOrLinerContainsBisphenolABPAValue(string value)
+		{
+			Report.Info($"I set the text of Product Container Or Liner Contains Bisphenol ABPA field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Product Container Or Liner Contains Bisphenol ABPA", value);
+		}
+
+>>>>>>> origin/QA
 	}
 }
