@@ -11,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TireRegulatoryDetails")]
 	internal class TireRegulatoryDetails
 	{
-<<<<<<< HEAD
+
 		[StepDefinition(@"I enter the text of Product is intended for agricultural use only field to: (Yes|No)")]
 		public void GivenIEnterTheTextOfProductIsIntendedForAgriculturalUseOnlyFieldTo(string value)
 		{
@@ -19,7 +19,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Product is intended for agricultural use only", value);
 		}
-=======
 
 		[StepDefinition(@"I enter the text of Weight in kilograms \(single unit\) field to: (.*)")]
 		public void GivenIEnterTheTextOfWeightInKilogramsSingleUnitFieldTo(string value)
@@ -45,6 +44,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Product Container Or Liner Contains Bisphenol ABPA", value);
 		}
 
->>>>>>> origin/QA
 	}
 }
