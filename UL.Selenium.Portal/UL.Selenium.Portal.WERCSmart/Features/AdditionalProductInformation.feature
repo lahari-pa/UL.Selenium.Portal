@@ -92,7 +92,7 @@ And I should see following statement: Product is shipped directly by supplier to
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85367
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:85368
 Scenario: [85368] Which one best describes your product question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

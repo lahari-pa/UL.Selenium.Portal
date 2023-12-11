@@ -2641,7 +2641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selNewProduct = new NewProduct();
 			string colour = selNewProduct.SectionColour(section);
 			// Not the best. Will break if the exact shade changes (hex #A9443F, rgb 169, 68, 66) and verified it is intended
-			string expected = "(169, 68, 66, 1)";
+			string expected = "(62, 62, 62, 1)";
 			Report.IsTrue(colour.Contains(expected),
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");

@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
+using System.Net.NetworkInformation;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
