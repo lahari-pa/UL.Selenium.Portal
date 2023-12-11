@@ -8,6 +8,12 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.BaseClasses;
+using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using OpenQA.Selenium.DevTools.V108.DOM;
+using NPOI.SS.Formula.Functions;
+using TechTalk.SpecFlow.CommonModels;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -100,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				Report.Error("Failed to find the text input for Expiration date on the state row: " + state);
 				return false;
-			}			
+			}
 
 			input.Clear();
 			input.EnterText(value);
@@ -151,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return null;
 			}
-			
+
 			IWebElement kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
 			if (kellyExpirationDateInput == null)
 			{
@@ -204,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					//	break;
 					//}
 					Report.Info("Failed to click the calender button.Trying again...");
-					if(state=="NY")
+					if (state == "NY")
 					{
 						Report.Info("Attempting to access the NY calendar button by scolling the page down again");
 						new Actions(SeleniumBrowser.WebBrowser).SendKeys(Keys.ArrowDown).Perform();
@@ -214,11 +220,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						}
 
 					}
-					
+
 
 					attempt++;
 				}
-				catch(Exception)
+				catch (Exception)
 				{
 
 				}
@@ -415,7 +421,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		
+
 
 		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
 		{
@@ -448,4 +454,149 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 	}
+	class PesticideDetailsStateRegistrationRow : SeleniumBaseObject
+	{
+		public string state;
+		public PesticideDetailsStateRegistrationRow(string state)
+		{
+			this.state = state;
+		}
+		protected override By ContainerElementLocator => By.XPath($".//tr[td//div[text() = '{this.state}']]");
+		public bool EnterStatus(string status)
+		{
+			Report.Info($"Attempt to select status {status} for state {this.state}");
+			IWebElement Status = this.ContainerElement.FindElement(By.XPath($".//span[text() = '{status}']"));
+			this.ContainerElement.Scroll();
+			return Status.TryClick();
+		}
+		public bool EnterDate(string date)
+		{
+			bool result = false;
+			var pesticideDetailsStateRegistrationTable = new PesticideDetailsStateRegistrationTable();
+			Report.Info($"Attempt to enter date {date} for state {this.state}");
+			IWebElement Date = this.ContainerElement.FindElement(By.XPath(".//td//input[@type = 'text']"));
+			if (Date != null)
+			{
+				this.ContainerElement.Scroll();
+				result = Date.TryEnterText(date);
+				if (result == true)
+				{
+					pesticideDetailsStateRegistrationTable.ClickActiveDay();
+				}
+			}
+			else
+			{
+				Report.Info("Cannot find State Expiration Date input");
+			}
+			return result;
+		}
+		public bool DateIsPrefilled(string status)
+		{
+			string getDate;
+			Report.Info($"Attempt to verify State Expiration Date is prefilled for state {state}");
+			bool result = false;
+			IWebElement Date = this.ContainerElement.FindElement(By.XPath(".//td//input[@type = 'text']"));
+			this.ContainerElement.Scroll();
+			getDate = Date.GetValue();
+			if (getDate.Length > 0 && getDate != null)
+			{
+				Report.Info($"Prefilled date is {getDate}");
+				result = true;
+			}
+			return result;
+		}
+		public bool SelectedStatusForState(string status)
+		{
+			Report.Info($"Attempt to verify {status} status is selected for state {this.state}");
+			IWebElement Status = this.ContainerElement.FindElement(By.XPath($".//div//label[span[text() = '{status}']]//input"));
+			this.ContainerElement.Scroll();
+			return Status.Selected;
+		}
+		public bool ColorHighlighting(string days)
+		{
+			bool result = false;
+			string colorAttribute;
+			Report.Info($"Attempt to verify row color highlighting indicates item is expiring in less then {days} for state {state}");
+			this.ContainerElement.Scroll();
+			colorAttribute = this.ContainerElement.GetAttribute("class");
+				switch (days)
+				{
+					case "90":
+						if (colorAttribute == "rpds-rowcolor-1")
+						{
+							result = true;
+						}
+						break;
+					case "31":
+						if (colorAttribute == "rpds-rowcolor-2")
+						{
+							result = true;
+						}
+						break;
+				}	
+		return result;
+		}
+		public bool VerifyExpirationImportedMark()
+		{
+			Report.Info($"Attempt to verify check mark is displayed for state {this.state}");
+			IWebElement CheckMark = this.ContainerElement.FindElement(By.XPath($".//div[@class='fa fa-check']"));
+			this.ContainerElement.Scroll();
+			return CheckMark.Displayed;
+		}
+
+	}
+	class PesticideDetailsStateRegistrationTable : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//table[@class = 'table table-hover table-fixed']");
+		List<IWebElement> Rows => this.ContainerElement.FindElements(By.XPath(".//tbody//tr")).ToList();
+		List<IWebElement> StatusRadioButtons => this.ContainerElement.FindElements(By.XPath(".//tr[td//div[text() = 'AK']]//td[div//input[@type = 'radio']]")).ToList();
+		List<IWebElement> SelectAllRadioButtons => this.ContainerElement.FindElements(By.XPath("//td[div//span[text() = 'Select All']]//input")).ToList();
+
+		private IWebElement ActiveDay => this.ContainerElement.FindElement(By.XPath("//td[@class = 'active day']"));
+
+		public bool ClickActiveDay()
+		{
+			return this.ActiveDay.TryClick();
+		}
+
+		public bool SelectOneStatusForAllStatesWithNoSelectedStatus(string status)
+		{
+			bool result = true;
+			string getState;
+			foreach (IWebElement row in this.Rows)
+			{
+				row.Scroll();
+				IWebElement State = row.FindElement(By.XPath($".//td//div"));
+				getState = State.Text;
+				if( !new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
+				{
+					if(!new PesticideDetailsStateRegistrationRow(getState).EnterStatus(status))
+					{
+						Report.Failure($"Failed to selest status {status} for state {getState}");
+						result = false;
+					}
+				}
+			}
+			return result;
+		}
+
+		public bool ClickSelectAllForStatus(string status)
+		{
+			bool result = false;
+			string getStatus;
+			int i = 0;
+			foreach (IWebElement statusRadio in this.StatusRadioButtons)
+			{
+				getStatus = statusRadio.Text;
+				if(getStatus == status)
+				{
+					result = this.SelectAllRadioButtons[i].TryClick();
+					break;
+				}
+				i++;
+			}
+			return result;
+		}
+	}
+
 }
