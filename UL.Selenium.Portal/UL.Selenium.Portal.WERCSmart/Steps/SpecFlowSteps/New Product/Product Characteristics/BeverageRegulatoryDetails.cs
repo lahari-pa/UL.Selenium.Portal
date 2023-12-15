@@ -29,10 +29,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", value);
 		}
 
-		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product field to: (.*)")]
+		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: (.*)")]
 		public void GivenEnterPercentOfAlcoholInTheProductValue(string value)
 		{
-			Report.Info($"I set the text of Does your product contain a Prop 65 chemica field to: {value}");
+			Report.Info($"I set the text of Percent of Alcohol in the Product (numeric entry only) field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", value);
 		}
