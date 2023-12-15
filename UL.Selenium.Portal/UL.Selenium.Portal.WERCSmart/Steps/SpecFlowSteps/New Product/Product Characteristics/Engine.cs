@@ -27,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		}
 
 		[StepDefinition(@"I enter the text of Engine Date of Manufacture field to: (.*)")]
-		public void GivenEnterEngineDateOfManufacture	Value(string value)
+		public void GivenEnterEngineDateOfManufactureValue(string value)
 		{
 			Report.Info($"I set the text of Engine Date of Manufacture field to: {value}");
 			var selNewProduct = new Steps_Prototype();
