@@ -64,16 +64,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		/*
-		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), set the option in section: 'Odor Threshold' to:(0.010 - 2.014 ppm \(phosphine\)|0.02 - 0.126 ppm \(Fluorine\)|0.042 ppm \(EPA\)|0.13 ppm \(Hydrogen sulfide\)|0.29 - 0.97 ppm \(Nitric oxide\)|0.51 ppm \(PH3\)|1680 mg/m3 (Bromodichloromethane)
-		"No data available|0.51 ppm \(PH3\))"]
+		
+		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), set the option in section: 'Odor Threshold' to:(0.010 - 2.014 ppm \(phosphine\)|0.02 - 0.126 ppm \(Fluorine\)|0.042 ppm \(EPA\)|0.13 ppm \(Hydrogen sulfide\)|0.29 - 0.97 ppm \(Nitric oxide\)|0.51 ppm \(PH3\)|1680 mg/m3 \(Bromodichloromethane\)|"+
+		@"0.51 ppm \(PH3\)|2.5 ppm \(Diborane\)|2-5 ppm \(Hydrogen Bromide\)|No data available|No information available|Not applicable)")]
 		public void SelectOdorThreshold(string option)
 		{
 			string section = "Odor Threshold";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		*/
+		
 
 		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Partition Coefficient' enter text:(.*)")]
 		public void EnterPartitionCoefficienty(string text)
