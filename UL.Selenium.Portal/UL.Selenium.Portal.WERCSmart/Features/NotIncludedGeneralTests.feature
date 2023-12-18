@@ -250,6 +250,39 @@ Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published 
 		| Product_status      |
 		| GHS                 |
 
+Scenario: [NOTINCLUDEDGENERALTEST] Subscription by Account and Product Type Report 
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Subscription by Account and Product Type report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Subscription by Account and Product Type is shown as: Subscription information for submitted registrations, including overall quantity of IDs and UPCs for the accounts.  All products and all accounts. Indicator of Past Due balance and Active subscriptions. Quantity of registrations per status, including cancelled, excluding new.  Internal Use Only.
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called Subscription by Account and Product Type.xlsx and save as Testcase122472
+	#Update Colum headings
+	Then I confirm that the excel file saved as: Testcase122472 contains the following columns:
+		| Column                                       |
+		| Supplier                                     |
+		| Administrator E-Mail                         |
+		| Country                                      |
+		| Total Active IDs Qty                         |
+		| Total Active UPC Qty                         |
+		| Submitted (Qty of IDs / UPCs in this status) |
+		| Assigned                                     |
+		| Completed                                    |
+		| Cancelled                                    |
+		| Suspended                                    |
+		| Accepted                                     |
+		| Release for distribution                     |
+		| Formula                                      |
+		| Enhanced                                     |
+		| Articles                                     |
+		| Subscription                                 |
+		| Agency                                       |
+		| Subscription Date (most recent)              |
+		| Active Subscription                          |
+		| Past Due Balance                             |
+	Then I delete the Advanced Report file saved as Testcase122472
+
 Scenario: [NOTINCLUDEDGENERALTEST] UL Solutions: Navigator Logo has TradeMark Symbol
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load

@@ -68,6 +68,15 @@ Scenario: [142283] Subscription Status - Active
 	Given In the Supplier Manager Popup I select radio button: E-Mail
 	Given In the Supplier Manager Popup I click on the search button
 	Given In the Supplier Manager Popup I click on the first supplier returned
+	Given I ensure that the correct tabs are displayed at the bottom of the suppliers popup
+	| Tab                 |
+	| Company Information |
+	| User Information    |
+	| Vendor information  |
+	| Subscription        |
+	| Data Tier Consent   |
+	| WERCSLink           |
+	| Agency              |
 	Given I ensure that there is a SubscriptionStatus column in the Supplier Manager popup
 	Given I ensure that I see the status Active under the SubscriptionStatus column
 	Given I ensure that the Subscription tab has black font

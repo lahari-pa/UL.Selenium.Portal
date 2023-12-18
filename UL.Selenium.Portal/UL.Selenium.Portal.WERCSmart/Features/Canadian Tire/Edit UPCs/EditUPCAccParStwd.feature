@@ -30,7 +30,7 @@ Background:
 
 		
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86257
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86257
@@ -55,7 +55,7 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86257
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86258
 Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86258
@@ -78,7 +78,7 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86258
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86259
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
@@ -100,7 +100,7 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	Then In the SHA list of UPCs I should see UPC: saved as UPC862591
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:86260
 Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86260

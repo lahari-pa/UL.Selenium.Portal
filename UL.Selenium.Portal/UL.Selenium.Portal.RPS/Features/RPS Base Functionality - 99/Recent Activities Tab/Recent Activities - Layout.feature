@@ -138,7 +138,7 @@ Then I call Shared Step 111155 (Table Heading or sub heading - confirm column re
 Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Recent Activities page, for the column: UPC Number
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @ScenarioId:6966
 Scenario: [106645] Base Functionality - Recent Activities page - Expand arrow
 Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
@@ -160,7 +160,7 @@ And In the recent Activities page, I check that there are no additional rows bel
 
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @ScenarioId:6967
 Scenario: [99209] Base Functionality - Recent Activities - Confirm Most Recent Order
 Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
@@ -183,7 +183,7 @@ Then In the recent activities Page, In the Products table I confirm the Most Rec
 
 @tfs_design
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @ScenarioId:6980
 #The loading period for the bar is too short to be able to perfomr robust automation on 
 Scenario: [104958] Base Functionality - Recent Activities - Page is Loading - indicator shows
