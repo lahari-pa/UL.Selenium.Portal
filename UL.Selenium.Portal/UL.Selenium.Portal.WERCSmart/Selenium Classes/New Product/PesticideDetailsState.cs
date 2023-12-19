@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using OpenQA.Selenium.DevTools.V108.DOM;
 using NPOI.SS.Formula.Functions;
 using TechTalk.SpecFlow.CommonModels;
+using iTextSharp.text;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -553,7 +554,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		List<IWebElement> SelectAllRadioButtons => this.ContainerElement.FindElements(By.XPath("//td[div//span[text() = 'Select All']]//input")).ToList();
 
 		private IWebElement ActiveDay => this.ContainerElement.FindElement(By.XPath("//td[@class = 'active day']"));
-
+		
 		public bool ClickActiveDay()
 		{
 			return this.ActiveDay.TryClick();
@@ -565,7 +566,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string getState;
 			foreach (IWebElement row in this.Rows)
 			{
-				row.Scroll();
+				(SeleniumBrowser.WebBrowser as IJavaScriptExecutor).ExecuteScript("scroll(getOffset(row).left, getOffset(row).top);", row);
+				Delay.Seconds(1.0);
+				//row.Scroll();
 				IWebElement State = row.FindElement(By.XPath($".//td//div"));
 				getState = State.Text;
 				if( !new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
@@ -598,5 +601,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return result;
 		}
 	}
+	public static class ScrollFunction
+	{
+		public static void ScrollToElement(this IWebDriver webDriver, IWebElement element)
+		{
+			(webDriver as IJavaScriptExecutor).ExecuteScript("scroll(getOffset(element).left, getOffset(element).top);", element);
+			Delay.Seconds(1.0);
+		}
+	}
+
 
 }
