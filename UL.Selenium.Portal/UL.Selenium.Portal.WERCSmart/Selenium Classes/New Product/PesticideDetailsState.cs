@@ -467,7 +467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info($"Attempt to select status {status} for state {this.state}");
 			IWebElement Status = this.ContainerElement.FindElement(By.XPath($".//span[text() = '{status}']"));
-			this.ContainerElement.Scroll();
+			Status.ScrollToElement();
 			return Status.TryClick();
 		}
 		public bool EnterDate(string date)
@@ -478,7 +478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement Date = this.ContainerElement.FindElement(By.XPath(".//td//input[@type = 'text']"));
 			if (Date != null)
 			{
-				this.ContainerElement.Scroll();
+				Date.ScrollToElement();
 				result = Date.TryEnterText(date);
 				if (result == true)
 				{
@@ -497,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempt to verify State Expiration Date is prefilled for state {state}");
 			bool result = false;
 			IWebElement Date = this.ContainerElement.FindElement(By.XPath(".//td//input[@type = 'text']"));
-			this.ContainerElement.Scroll();
+			Date.ScrollToElement();
 			getDate = Date.GetValue();
 			if (getDate.Length > 0 && getDate != null)
 			{
@@ -510,7 +510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info($"Attempt to verify {status} status is selected for state {this.state}");
 			IWebElement Status = this.ContainerElement.FindElement(By.XPath($".//div//label[span[text() = '{status}']]//input"));
-			this.ContainerElement.Scroll();
+			Status.ScrollToElement();
 			return Status.Selected;
 		}
 		public bool ColorHighlighting(string days)
@@ -518,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			bool result = false;
 			string colorAttribute;
 			Report.Info($"Attempt to verify row color highlighting indicates item is expiring in less then {days} for state {state}");
-			this.ContainerElement.Scroll();
+			this.ContainerElement.ScrollToElement();
 			colorAttribute = this.ContainerElement.GetAttribute("class");
 				switch (days)
 				{
@@ -541,7 +541,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info($"Attempt to verify check mark is displayed for state {this.state}");
 			IWebElement CheckMark = this.ContainerElement.FindElement(By.XPath($".//div[@class='fa fa-check']"));
-			this.ContainerElement.Scroll();
+			CheckMark.ScrollToElement();
 			return CheckMark.Displayed;
 		}
 
@@ -566,14 +566,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string getState;
 			foreach (IWebElement row in this.Rows)
 			{
-				(SeleniumBrowser.WebBrowser as IJavaScriptExecutor).ExecuteScript("scroll(getOffset(row).left, getOffset(row).top);", row);
-				Delay.Seconds(1.0);
-				//row.Scroll();
 				IWebElement State = row.FindElement(By.XPath($".//td//div"));
 				getState = State.Text;
-				if( !new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
+				bool statusIsSelected = new PesticideDetailsStateRegistrationRow(getState).SelectedStatusForState("Registered");
+				if ( !new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
 				{
-					if(!new PesticideDetailsStateRegistrationRow(getState).EnterStatus(status))
+					if (!State.VisibleInViewport())
+					{
+						State.ScrollToElement();
+					}
+					if (!new PesticideDetailsStateRegistrationRow(getState).EnterStatus(status))
 					{
 						Report.Failure($"Failed to selest status {status} for state {getState}");
 						result = false;
@@ -603,9 +605,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	}
 	public static class ScrollFunction
 	{
-		public static void ScrollToElement(this IWebDriver webDriver, IWebElement element)
+		public static void ScrollToElement(this IWebElement element)
 		{
-			(webDriver as IJavaScriptExecutor).ExecuteScript("scroll(getOffset(element).left, getOffset(element).top);", element);
+			int x = element.Location.X;
+			int y = element.Location.Y;
+			(element.GetWebDriver() as IJavaScriptExecutor).ExecuteScript("scroll(arguments[0], arguments[1]);", x,y);
 			Delay.Seconds(1.0);
 		}
 	}

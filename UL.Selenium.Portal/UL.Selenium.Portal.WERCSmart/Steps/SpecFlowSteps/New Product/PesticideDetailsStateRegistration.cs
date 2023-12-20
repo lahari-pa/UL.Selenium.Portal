@@ -50,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			new Steps_Prototype().VerifyCheckMerk(condition, state);
 		}
-		[StepDefinition(@"In the Pesticide Details - State Registration Details section, select the status: (Registered|Restricted, Not Registered|No State Registration Required|Pending State Registration) for all states with no status selected")]
+		[StepDefinition(@"In the Pesticide Details - State Registration Details section, select the status: (Registered|Restricted, Not Registered|No State Registration Required|Pending State Registration) for all states with no status preselected")]
 		public void SelectStatusForAllStates(string status)
 		{
 			new Steps_Prototype().GivenISetTheFollowingStatusForAllStates(status);
