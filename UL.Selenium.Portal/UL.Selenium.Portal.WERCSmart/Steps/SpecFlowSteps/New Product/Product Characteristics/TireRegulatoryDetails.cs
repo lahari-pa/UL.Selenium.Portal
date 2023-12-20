@@ -12,6 +12,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	internal class TireRegulatoryDetails
 	{
 
+		[StepDefinition(@"I enter the text of Product is intended for agricultural use only field to: (Yes|No)")]
+		public void GivenIEnterTheTextOfProductIsIntendedForAgriculturalUseOnlyFieldTo(string value)
+		{
+			Report.Info($"I set the text of Product is intended for agricultural use only field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Product is intended for agricultural use only", value);
+		}
+
 		[StepDefinition(@"I enter the text of Weight in kilograms \(single unit\) field to: (.*)")]
 		public void GivenIEnterTheTextOfWeightInKilogramsSingleUnitFieldTo(string value)
 		{
