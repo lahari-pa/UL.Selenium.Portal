@@ -424,7 +424,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterBatterySearchSelectInformation(string value, string option)
 		{
 			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
+		}
+		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
+		public void IClickTheInputSectionAndSelect(string section, string selection)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.SelectInputForSection(section, selection), $"Failed to select input {selection} for section {section}.",
+				$"Successfully selected input {selection} for section {section}.");
+		}
 
+		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
+		public void TotalForSectionShouldEqual(string section, string value)
+		{
+			var reports = new OptionalReports();
+			Report.IsTrue(reports.CheckTotalForSection(section, value), $"Failed to find the correct value {value} for section {section}.",
+				$"Successfully found correct value {value} for section {section}.");
 		}
 
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
@@ -444,6 +458,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("New product page was not visible");
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
+		}
+		[StepDefinition(@"I click button: (.*)")]
+		public void ClickButton(string button)
+		{
+			if(Report.IsTrue(new NewProduct().ButtonExists(button),
+				$"Failed to find button {button}",
+				$"Successfully found button {button}"))
+			{
+				Report.IsTrue(new NewProduct().ButtonClick(button),
+				$"Failed to click button {button}",
+				$"Successfully clicked button {button}");
+			}
+			
 		}
 	}
 }

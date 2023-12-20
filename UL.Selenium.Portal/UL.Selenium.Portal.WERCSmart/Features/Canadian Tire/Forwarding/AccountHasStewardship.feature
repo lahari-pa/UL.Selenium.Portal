@@ -24,7 +24,7 @@ Background:
 		| SHAQAAuto5  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 		@ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\Forwarding\Account has Stewardship information\Select Existing UPC - no edit
 @TestCase:87217
 Scenario: [87217] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
