@@ -534,8 +534,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductpage = new NewProduct();
 			string foundValue = newProductpage.GetValueVOCSummary(category);
 			Report.IsTrue(foundValue?.Trim() == expectedValue.Trim(),
-				"value was not as expected! Expected: " + expectedValue + ", but found: " + foundValue + "!",
-				"value was showing: " + expectedValue + ", as expected!");
+				$"value was not as expected! Expected: {expectedValue}, but found: {foundValue}!",
+				$"value was showing: {expectedValue}, as expected!");
 		}
 
 		[StepDefinition(@"I confirm that I see todays VOC Analysis Date")]
@@ -546,8 +546,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string found = newProductpage.GetValueVOCSummary("VOC Analysis");
 
 			Report.IsTrue(found.Trim() == date.Trim(),
-				"date was not as expected! Expected: " + date + ", but found: " + found + "!",
-				"statement was showing: " + date + ", as expected!");
+				$"date was not as expected! Expected: {date}, but found: {found}!",
+				$"statement was showing: {date}, as expected!");
 		}
 
 	}
