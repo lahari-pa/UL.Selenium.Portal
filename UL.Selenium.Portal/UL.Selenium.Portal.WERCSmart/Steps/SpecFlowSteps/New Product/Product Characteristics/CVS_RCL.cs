@@ -96,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Is this product intended to be rinsed off after use?", value);
 		}
 
-		[StepDefinition(@"I enter the text of Does your product contain a Prop 65 chemical field to: (Yes|No)")]
+		[StepDefinition(@"I enter the text of Is this product intended to be ingested field to: (Yes|No)")]
 		public void GivenEnterProductIntendedToBeIngestedValue(string value)
 		{
 			Report.Info($"I set the text of Is this product intended to be ingested field to: {value}");
