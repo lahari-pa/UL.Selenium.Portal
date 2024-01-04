@@ -550,5 +550,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"statement was showing: {date}, as expected!");
 		}
 
+		[StepDefinition(@"I confirm that the (.*) table (should|should not) exists")]
+		public void ThenIConfirmThatTableExists(string tableName, string condition)
+		{
+			var newProductpage = new NewProduct();
+			if (condition == "should")
+			{
+				Report.IsTrue(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table exists", $"Successsfully confirmed '{tableName}' table exists");
+			}
+			else
+			{
+				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
+			}
+		}
+
 	}
 }

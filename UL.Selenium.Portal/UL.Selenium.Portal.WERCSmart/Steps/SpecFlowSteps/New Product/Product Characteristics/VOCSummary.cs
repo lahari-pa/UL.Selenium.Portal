@@ -76,6 +76,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Your acknowledgement of this registration includes that your product";
 			new Steps_Prototype().SetTheSectionOptionTo(section, "Yes, I Acknowledge");
 		}
-
+		[StepDefinition(@"In the Volatile Organic Compound Summary Section, confirm 'Limits' table (should|should not) exists")]
+		public void VOCLimitsTableExists(string condition)
+		{
+			string tableName = "Limits";
+			new Steps_Prototype().ThenIConfirmThatTableExists(tableName, condition);
+		}
+		[StepDefinition(@"In the Volatile Organic Compound Summary Section, confirm 'VOC Content \(g/L minus water and exempt compounds for high solids; g\/L with water and exempts for low solids\)' table (should|should not) exists")]
+		public void VOCContentTableExists(string condition)
+		{
+			string tableName = "VOC Content (g/L minus water and exempt compounds for high solids; g/L with water and exempts for low solids)";
+			new Steps_Prototype().ThenIConfirmThatTableExists(tableName, condition);
+		}
+		[StepDefinition(@"In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table (should|should not) exists")]
+		public void VOCContentAsWeightTableExists(string condition)
+		{
+			string tableName = "VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.";
+			new Steps_Prototype().ThenIConfirmThatTableExists(tableName, condition);
+		}
 	}	
 }
