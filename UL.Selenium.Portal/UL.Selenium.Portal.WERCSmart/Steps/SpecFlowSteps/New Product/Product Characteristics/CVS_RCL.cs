@@ -76,5 +76,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Product contains microbeads?", value);
 		}
 
+		[StepDefinition(@"I enter the text of requency of Product Application over 24 hours field to: (.*)")]
+		public void GivenEnterFrequencyOfProductApplicationOver24HoursValue(string value)
+		{
+			Report.Info($"I set the text of Frequency of Product Application over 24 hours field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Frequency of Product Application over 24 hours", value);
+		}
+
+		[StepDefinition(@"I enter the text of How is the product applied field to: (.*)")]
+		public void GivenEntePrHowIsTheProductAppliedValue(string value)
+		{
+			Report.Info($"I set the text of How is the product applied field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("How is the product applied?", value);
+		}
+
+		[StepDefinition(@"I upload the following PDF to section named Upload Full Product Label: (.*)")]
+		public void GivenUploadToSectionUploadFullProductLabel(string value)
+		{
+			Report.Info($"I upload PDF to section named Upload Full Product Label (required)");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", value);
+		}
+
 	}
 }
