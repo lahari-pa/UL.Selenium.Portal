@@ -32,6 +32,7 @@ using System.Reflection;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using System.Runtime.InteropServices;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -60,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var value = Context.GetFromContext(option)?.ToString();
 				if (value == null)
 				{
-					throw new Exception($"Could not find item in context: { option } for checking field input is correct value!");
+					throw new Exception($"Could not find item in context: {option} for checking field input is correct value!");
 				}
 				section = section.Trim();
 				value = value.Trim();
@@ -71,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				section=section.Trim();
+				section = section.Trim();
 				option = option.Trim();
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section, option),
 					$"Failed to set the input to {option} in section: {section}",
@@ -232,7 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string oracleFile = Path.Combine(extractionFolder, "originalFile.pdf");
 				Report.Info($"Saving oracle PDF file to: {oracleFile}");
 				var extractToFile = EmbeddedResourceHelpers.ExtractToFile(oracleResourceFile, studioAssembly, oracleFile);
-							
+
 				FileInfo fileOriginal = new FileInfo(oracleFile);
 				//fileOriginal.MoveTo(oracleFile);
 				// Get from embedded resources.
@@ -249,74 +250,74 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Failure($"Expected to find: {oracleOutputFiles.Count} images, but found: {comparisonOutputFiles.Count} instead!");
 				}
-					// Iterate through each page.
-					int pagecount = Math.Min(oracleOutputFiles.Count, comparisonOutputFiles.Count);
-					for (int i = 0; i < pagecount; i++)
+				// Iterate through each page.
+				int pagecount = Math.Min(oracleOutputFiles.Count, comparisonOutputFiles.Count);
+				for (int i = 0; i < pagecount; i++)
+				{
+					Report.StartSubStep($"Checking Page: {i + 1}");
+
+					// Define image paths for each image file.
+					string oracleImagePath = oracleOutputFiles[i];
+					string comparisonImagePath = comparisonOutputFiles[i];
+
+					// Load each image file.
+					Image oracleImage = Image.FromFile(oracleImagePath);
+					Image comparisonImage = Image.FromFile(comparisonImagePath);
+					//var result = oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage1);
+					try
 					{
-						Report.StartSubStep($"Checking Page: {i + 1}");
-
-						// Define image paths for each image file.
-						string oracleImagePath = oracleOutputFiles[i];
-						string comparisonImagePath = comparisonOutputFiles[i];
-
-						// Load each image file.
-						Image oracleImage = Image.FromFile(oracleImagePath);
-						Image comparisonImage = Image.FromFile(comparisonImagePath);
-						//var result = oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage1);
-						try
+						// Run comparison. By default, tolerance is 0% (so exact match), can be changed if required.
+						if (!oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage))
 						{
-							// Run comparison. By default, tolerance is 0% (so exact match), can be changed if required.
-							if (!oracleImage.CompareTo(comparisonImage, 0, false, out Image diffImage))
-							{
-								// If we don't have a match, then render out the differential image.
-								// The differential image will show a black pixel where there was a mismatched pixel located.
+							// If we don't have a match, then render out the differential image.
+							// The differential image will show a black pixel where there was a mismatched pixel located.
 
-								// Define the folder to be used.
-								string diffImageFolder = Path.Combine(extractionFolder, "Images", "Differentials");
-								_ = Directory.CreateDirectory(diffImageFolder);
+							// Define the folder to be used.
+							string diffImageFolder = Path.Combine(extractionFolder, "Images", "Differentials");
+							_ = Directory.CreateDirectory(diffImageFolder);
 
-								// Save the differential image to disk.
-								string diffImagePath = Path.Combine(diffImageFolder, $"Difference_{i + 1}.png");
-								diffImage.Save(diffImagePath, ImageFormat.Png);
+							// Save the differential image to disk.
+							string diffImagePath = Path.Combine(diffImageFolder, $"Difference_{i + 1}.png");
+							diffImage.Save(diffImagePath, ImageFormat.Png);
 
-								// Report failure and add image to the report.
-								Report.Failure("Page did not match!", false);
-
-								// Report oracle image.
-								Report.Info("Oracle:");
-								Report.ImageFile(oracleImagePath);
-							
-
-								// Report comparison image.
-								Report.Info("Showing:");
-								Report.ImageFile(comparisonImagePath);
-
-							// Report diff image.
-								Report.Info("Difference:");
-								Report.ImageFile(diffImagePath);
-							}
-							else
-							{
-								// Matched successfully.
-								Report.Success("Page matched successfully!", showScreenshot: false);
+							// Report failure and add image to the report.
+							Report.Failure("Page did not match!", false);
 
 							// Report oracle image.
-							
+							Report.Info("Oracle:");
+							Report.ImageFile(oracleImagePath);
+
+
+							// Report comparison image.
+							Report.Info("Showing:");
+							Report.ImageFile(comparisonImagePath);
+
+							// Report diff image.
+							Report.Info("Difference:");
+							Report.ImageFile(diffImagePath);
+						}
+						else
+						{
+							// Matched successfully.
+							Report.Success("Page matched successfully!", showScreenshot: false);
+
+							// Report oracle image.
+
 							Report.ImageFile(oracleImagePath);
 
 						}
 					}
-						catch (Exception ex)
-						{
-							Report.Info($"Fixable ERROR: {ex.Message}");
-						}
-						finally
-						{
-							oracleImage.Dispose();
-							comparisonImage.Dispose();
-						}
+					catch (Exception ex)
+					{
+						Report.Info($"Fixable ERROR: {ex.Message}");
 					}
-				
+					finally
+					{
+						oracleImage.Dispose();
+						comparisonImage.Dispose();
+					}
+				}
+
 			}
 			catch (Exception ex)
 			{
@@ -364,7 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
 		{
-			if(condition == "should")
+			if (condition == "should")
 			{
 				Report.IsTrue(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} exists for section {section}", $"Successfully confirmed {button} exists for {section}");
 			}
@@ -469,7 +470,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click button: (.*)")]
 		public void ClickButton(string button)
 		{
-			if(Report.IsTrue(new NewProduct().ButtonExists(button),
+			if (Report.IsTrue(new NewProduct().ButtonExists(button),
 				$"Failed to find button {button}",
 				$"Successfully found button {button}"))
 			{
@@ -477,7 +478,54 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Failed to click button {button}",
 				$"Successfully clicked button {button}");
 			}
-			
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I set the following data: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).EnterDate(date), $"Failed to enter a State Expiration Date {date} for state {state}", $"Successfully entered a State Expiration Date {date} for state {state}");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I select status: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingStatus(string status, string state)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).EnterStatus(status), $"Failed to select status {status} for state {state}", $"Successfully selected status {status} for state {state}");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify expiration date for state: (.*)")]
+		public void VerifyDateIsPrefilled(string state)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).DateIsPrefilled(state), $"Failed to confirm State Expiration Date for state {state} is prefilled", $"Successfully confirmed State Expiration Date for state {state} is prefilled");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify status: (.*) is selected for the following state: (.*)")]
+		public void StatusIsSelectedForTheState(string status, string state)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).SelectedStatusForState(status), $"Failed to confirm status {status} is selected for state {state}", $"Successfully confirmed status {status} is selected for state {state}");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify row color highlighting indicates item is expiring in less then (31|90) for state: (.*)")]
+		public void VerifyRowColor(string days, string state)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).ColorHighlighting( days), $"Failed to confirm row color highlighting indicates item is expiring in less then {days} for state {state}", $"Successfully confirmed row color highlighting indicates item is expiring in less then {days} for state {state}");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify check mark in Expiration Imported column (should|should not) be displayed for state: (.*)")]
+		public void VerifyCheckMerk(string condition, string state)
+		{
+			if (condition == "should")
+			{
+				Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column exists for state {state}", $"Successfully confirmed check mark in Expiration Imported column exists for state {state}");
+			}
+			else
+			{
+				Report.IsFalse(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column doesn't exist for state {state}", $"Successfully confirmed check mark in Expiration Imported column doesn't exist for state {state}");
+
+			}
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I select status: (.*) for the all states with no selected status")]
+		public void GivenISetTheFollowingStatusForAllStates(string status)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationTable().SelectOneStatusForAllStatesWithNoSelectedStatus(status), $"Failed to select status {status} for states with no status selected", $"Successfully selected status {status} for all states with no status selected");
+		}
+		[StepDefinition(@"In Pesticide Details - State Registration Details page I click 'Select All' for status: (.*) for the all states")]
+		public void GivenIClickSelectAllForAllStates(string status)
+		{
+			Report.IsTrue(new PesticideDetailsStateRegistrationTable().ClickSelectAllForStatus(status), $"Failed to click 'Select All' for {status}", $"Successfully clicked 'Select All' for status {status}");
 		}
 	}
 }

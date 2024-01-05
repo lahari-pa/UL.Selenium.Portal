@@ -263,3 +263,76 @@ Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow 
 	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
 	Given I delete the product: TestCase217076
+
+
+	# Created by Saikiran Chittampally
+@TestCase:213920
+Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK Product Types
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Then I click the Add Product icon in the Navigation Pane
+	And the Product Editor page should be loaded
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	Then I save the product information as: TestCase213920
+	Given I should see the Product Information Page
+	And I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	And I see the following sections
+		| Section                       |
+		| Phosphates /Phosphorous (“P”) |
+		| Nitrogen /Nitrates (“N”)      |
+		| Potassium(“K”)                |
+		| Slow-Release Agent            |
+	Then I set the Phosphates /Phosphorous (“P”) field to: 25
+	Then I set the Nitrogen /Nitrates (“N”) field to: 205.36
+	Then I set the Potassium(“K”) field to: 71.25
+	Then I set the Slow-Release Agent field to: 400.36
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: Product Information
+	Then I set the Nitrogen /Nitrates (“N”) field to: 0
+	Then I set the Slow-Release Agent field to: 0
+	And I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
+	Then I click the My Products icon in the Navigation Pane
+	Given I delete the product: TestCase213920
+
+	# Created by Saikiran Chittampally
+@TestCase:213919
+Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Product Types
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Then I click the Add Product icon in the Navigation Pane
+	And the Product Editor page should be loaded
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
+	Then I save the product information as: TestCase213919
+	Given I should see the Product Information Page
+	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
+	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
+	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+	And I see the following sections
+		| Section                       |
+		| Phosphates /Phosphorous (“P”) |
+		| Nitrogen /Nitrates (“N”)      |
+		| Potassium(“K”)                |
+		| Slow-Release Agent            |
+	Then I set the Phosphates /Phosphorous (“P”) field to: 25
+	Then I set the Nitrogen /Nitrates (“N”) field to: 10
+	Then I set the Potassium(“K”) field to: 36.36
+	Then I set the Slow-Release Agent field to: 0
+	Then I click continue
+	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should see the Physical and Chemical Properties Page
+	Then I click the My Products icon in the Navigation Pane
+	Given I delete the product: TestCase213919
