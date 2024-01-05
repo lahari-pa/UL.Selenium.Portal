@@ -76,6 +76,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Product contains microbeads?", value);
 		}
 
+		[StepDefinition(@"I enter the text of list the label claims for the product field to: (.*)")]
+		public void GivenEnterListTheLabelClaimsForTheProductValue(string value)
+		{
+			Report.Info($"I set the text of list the label claims for the product field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("List the label claims for the product", value);
+		}
+
+		[StepDefinition(@"I enter the text of list the foreseeable mis-uses for the product field to: (.*)")]
+		public void GivenEnterListTheForeseeableMisusesForTheProductValue(string value)
+		{
+			Report.Info($"I set the text of list the foreseeable mis-uses for the product field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("List the foreseeable mis-uses for the product", value);
+		}
+
+		[StepDefinition(@"I enter the text of select all body parts where the product may be applied field to: (.*)")]
+		public void GivenEnteSelectAllBodyPartsWhereTheProductMayBeAppliedValue(string value)
+		{
+			Report.Info($"I set the text of select all body parts where the product may be applied field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("select all body parts where the product may be applied", value);
+		}
+
 		[StepDefinition(@"I enter the text of requency of Product Application over 24 hours field to: (.*)")]
 		public void GivenEnterFrequencyOfProductApplicationOver24HoursValue(string value)
 		{

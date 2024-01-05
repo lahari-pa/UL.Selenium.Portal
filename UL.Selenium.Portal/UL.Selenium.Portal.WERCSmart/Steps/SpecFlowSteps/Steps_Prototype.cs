@@ -527,5 +527,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new PesticideDetailsStateRegistrationTable().ClickSelectAllForStatus(status), $"Failed to click 'Select All' for {status}", $"Successfully clicked 'Select All' for status {status}");
 		}
+
+		[StepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
+		{
+			var newProductpage = new NewProduct();
+			string foundValue = newProductpage.GetValueVOCSummary(category);
+			Report.IsTrue(foundValue?.Trim() == expectedValue.Trim(),
+				$"value was not as expected! Expected: {expectedValue}, but found: {foundValue}!",
+				$"value was showing: {expectedValue}, as expected!");
+		}
+
+		[StepDefinition(@"I confirm that I see todays VOC Analysis Date")]
+		public void ThenIConfirmThatISeeTodaysVOCAnalysisDate()
+		{
+			string date = DateTime.Now.ToString("MM/dd/yyyy");
+			var newProductpage = new NewProduct();
+			string found = newProductpage.GetValueVOCSummary("VOC Analysis");
+
+			Report.IsTrue(found.Trim() == date.Trim(),
+				$"date was not as expected! Expected: {date}, but found: {found}!",
+				$"statement was showing: {date}, as expected!");
+		}
+
+		[StepDefinition(@"I confirm that the (.*) table (should|should not) exists")]
+		public void ThenIConfirmThatTableExists(string tableName, string condition)
+		{
+			var newProductpage = new NewProduct();
+			if (condition == "should")
+			{
+				Report.IsTrue(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table exists", $"Successsfully confirmed '{tableName}' table exists");
+			}
+			else
+			{
+				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
+			}
+		}
+
 	}
 }
