@@ -100,5 +100,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("select all body parts where the product may be applied", value);
 		}
 
+		[StepDefinition(@"I enter the text of Other field to: (.*)")]
+		public void GivenEnterOtherValue(string value)
+		{
+			Report.Info($"I set the text of Other field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Other", value);
+		}
+
 	}
 }
