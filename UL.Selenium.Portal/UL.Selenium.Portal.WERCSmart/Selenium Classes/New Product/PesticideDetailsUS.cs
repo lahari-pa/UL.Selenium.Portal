@@ -16,6 +16,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return addRowBtn.TryClick();
 		}
 
+
+
 		public bool EditRegistrationNumber(string epaNumber, int row)
 		{
 			IWebElement table = this.Table();
