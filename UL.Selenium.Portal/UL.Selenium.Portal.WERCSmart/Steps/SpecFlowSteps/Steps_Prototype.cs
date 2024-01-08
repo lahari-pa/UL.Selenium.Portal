@@ -502,7 +502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify row color highlighting indicates item is expiring in less then (31|90) for state: (.*)")]
 		public void VerifyRowColor(string days, string state)
 		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).ColorHighlighting( days), $"Failed to confirm row color highlighting indicates item is expiring in less then {days} for state {state}", $"Successfully confirmed row color highlighting indicates item is expiring in less then {days} for state {state}");
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).ColorHighlighting(days), $"Failed to confirm row color highlighting indicates item is expiring in less then {days} for state {state}", $"Successfully confirmed row color highlighting indicates item is expiring in less then {days} for state {state}");
 		}
 		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify check mark in Expiration Imported column (should|should not) be displayed for state: (.*)")]
 		public void VerifyCheckMerk(string condition, string state)
@@ -564,5 +564,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the VOC for California Air District\(s\) Section, for (.*) area enter 'VOC info' value: (.*)")]
+		public void EnterVOCInfoValue(string area, string value)
+		{
+			var vocForCaliforniaAirDistrict = new VOCForCaliforniaAirDistrict();
+			if (Report.IsTrue(vocForCaliforniaAirDistrict.VocInfoExists(area), $"Failed to confirm VOC Info input field exists for area {area}", $"Successfully confirmed VOC Info input field exists for area {area}"))
+			{
+				Report.IsTrue(vocForCaliforniaAirDistrict.VocInfoEnterText(area, value), $"Failed to enter VOC Info value for area {area}", $"Successfully entered VOC Info value for area {area}");
+			}
+		}
 	}
 }
