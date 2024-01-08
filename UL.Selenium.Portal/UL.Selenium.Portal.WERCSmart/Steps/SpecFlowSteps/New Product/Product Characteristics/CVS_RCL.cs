@@ -68,12 +68,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Indicate your Product Category", value);
 		}
 
-		[StepDefinition(@"I enter the text of product contains microbeads field to: (Yes|No)")]
-		public void GivenEnteProductContainsMicrobeadslValue(string value)
+		[StepDefinition(@"I enter the text of CVS Store Brand associated to this product field to: (.*)")]
+		public void GivenEnterCVSStoreBrandAssociatedToThisProductValue(string value)
 		{
-			Report.Info($"I set the text of product contains microbeads field to: {value}");
+			Report.Info($"I set the text of CVS Store Brand associated to this product field to: {value}");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.SetTheSectionOptionTo("Product contains microbeads?", value);
+			selNewProduct.SetTheSectionOptionTo("What is the CVS Store Brand associated to this product?", value);
+		}
+
+		[StepDefinition(@"I enter the text of Select the options that appear on the label field to: (.*)")]
+		public void GivenEnterSelectTheOptionsThatAppearOnTheLabelValue(string value)
+		{
+			Report.Info($"I set the text of Select the options that appear on the label field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Refer to your Product Label. Select the options that appear on the label.", value);
+		}
+
+
+
+
+
+		[StepDefinition(@"I enter the text of Is this product intended to be rinsed off after use field to: (Yes|No)")]
+		public void GivenEnterProductIntendedToBeRinsedOffAfterUseValue(string value)
+		{
+			Report.Info($"I set the text of Is this product intended to be rinsed off after use field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Is this product intended to be rinsed off after use?", value);
+		}
+
+		[StepDefinition(@"I enter the text of Is this product intended to be ingested field to: (Yes|No)")]
+		public void GivenEnterProductIntendedToBeIngestedValue(string value)
+		{
+			Report.Info($"I set the text of Is this product intended to be ingested field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Is this product intended to be ingested?", value);
+		}
+
+		[StepDefinition(@"I enter the text of This product a personal care sanitizer- wash- or cleanser field to: (Yes|No)")]
+		public void GivenEnterThisProductAPersonalCareSanitizerWashOrCleanserValue(string value)
+		{
+			Report.Info($"I set the text of This product a personal care sanitizer- wash- or cleanser field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Is this product a personal care sanitizer- wash- or cleanser (e.g.- Hand- Body- Facial)?", value);
 		}
 
 		[StepDefinition(@"I enter the text of list the label claims for the product field to: (.*)")]
