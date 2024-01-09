@@ -100,5 +100,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("select all body parts where the product may be applied", value);
 		}
 
+
+		[StepDefinition(@"I enter the text of Toxicology Risk Assessment field to: (.*)")]
+		public void GivenEnterToxicologyRiskAssessmentValue(string value)
+		{
+			Report.Info($"I set the text of Toxicology Risk Assessment field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Toxicological Risk Assessments are an analysis of the Human health risk for specific audiences", value);
+		}
+
+		[StepDefinition(@"I enter the text of HR 1321 field to: (.*)")]
+		public void GivenEnterHR1321Value(string value)
+		{
+			Report.Info($"I set the text of HR 1321 field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("HR 1321", value);
+		}
+
 	}
 }
