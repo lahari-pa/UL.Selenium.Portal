@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NPOI.SS.Formula.Functions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -158,6 +160,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.Info($"I upload PDF to section named Upload Full Product Label (required)");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", value);
+		}
+
+
+
+
+		[StepDefinition(@"I enter the text of How is the product applied field to: (.*)")]
+		public void GivenEnterProductDesignedForAgeGroupValue(string value)
+		{
+			Report.Info($"I set the text of Product designed for Age Group field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Product designed for Age Group", value);
+		}
+
+		[StepDefinition(@"I enter the text of Did any organisms survive the US Pharmacopia Microbiological Testing field to: (.*)")]
+		public void GivenEnterDidAnyOrganismsSurviveTheUSPharmacopiaMicrobiologicalTestingValue(string value)
+		{
+			Report.Info($"I set the text of Did any organisms survive the US Pharmacopia Microbiological Testing field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Did any organisms survive the US Pharmacopia Microbiological Testing?", value);
+		}
+
+		[StepDefinition(@"I enter the text of If so- which micro-organisms survived field to: (.*)")]
+		public void GivenEnterIfSoWhichMicroOrganismsSurvivedValue(string value)
+		{
+			Report.Info($"I set the text of If so- which micro-organisms survived field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("If so- which micro-organisms survived\t", value);
 		}
 
 	}
