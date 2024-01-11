@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.Info($"I set the text of If so- which micro-organisms survived field to: {value}");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.SetTheSectionOptionTo("If so- which micro-organisms survived\t", value);
+			selNewProduct.SetTheSectionOptionTo("If so- which micro-organisms survived", value);
 		}
+
 	}
 }
