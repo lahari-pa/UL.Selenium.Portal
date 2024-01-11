@@ -1257,10 +1257,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking Continue");
 			selModal.ClickContinue();
+			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Entering new password in New Password input: *******");
 			selModal.EnterNewPassword(adminPassword);
 			Report.Info("Entering new password in Verify Password input: *******");
 			selModal.EnterVerifyPassword(adminPassword);
+			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking save in the Change Password popup");
 			Report.IsTrue(selModal.ClickSave(),
 				"Failed to click save in Change Password",
@@ -1290,7 +1292,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 
 			Report.StartStep($"I update the password for user: {user}");
 			var selMyAccount = new StepsMyAccount();
@@ -1306,7 +1308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CreateUserAndSetPassword(string savedAs, Table table)
 		{
 
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 
 			Report.StartStep("I add a new user");
 			Report.Info("Adding user with the following information");
@@ -1350,15 +1352,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsSignup().DefineUser("NewUser", userTable);
 
 			//var testuser= (WERCSmartUser)Context.GetFromContext("NewUser");
-
-
-
-
-
-
-
-
-
 		}
 
 
