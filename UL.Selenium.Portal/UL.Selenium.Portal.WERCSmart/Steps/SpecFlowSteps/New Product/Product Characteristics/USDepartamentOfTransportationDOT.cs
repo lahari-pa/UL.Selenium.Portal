@@ -52,6 +52,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Regulatory reference for any exemption or exceptions taken";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'For the lighter, provide the DOT Approval Number \(LAA\)': to: (.*)")]
+		public void SetForTheLighterprovideDOTApprovalNumber(string option)
+		{
+			string section = "For the lighter, provide the DOT Approval Number (LAA)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.': to: (Based on defined viscosity parameters, this product is classified as PG III.|The Packaging Group inconsistency is allowed based on a Special Provision associated with the assigned UN#.|The Packaging Group inconsistency is allowed based on an exemption or exception associated with the assigned UN#.|The UN# classification assigned to this product has a specific Packaging Group required.)")]
 		public void SetProductHasBoilingPoint(string option)
 		{
