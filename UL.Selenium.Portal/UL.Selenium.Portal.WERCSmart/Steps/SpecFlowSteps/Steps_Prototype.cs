@@ -573,5 +573,74 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(vocForCaliforniaAirDistrict.VocInfoEnterText(area, value), $"Failed to enter VOC Info value for area {area}", $"Successfully entered VOC Info value for area {area}");
 			}
 		}
+		[StepDefinition(@"I confirm the checkbox with description: (.*) (should|should not) be displayed")]
+		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description, string condition)
+		{
+			if (condition == "should")
+			{
+				Report.IsTrue(new NewProduct().StandaloneCheckbox(description) != null,
+					$"Failed to confirm checkbox '{description}' is displayed!",
+					$"Successfully confirmed checkbox '{description}' is displayed as expected");
+			}
+			else
+			{
+				Report.IsFalse(new NewProduct().StandaloneCheckbox(description) != null,
+					$"Failed to confirm checkbox '{description}' is not displayed!",
+					$"Successfully confirmed checkbox '{description}' is not displayed, as expected");
+			}
+		}
+		[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		public void ICheckTheCheckboxWithDescription(string check, string description)
+		{
+			var selNewProduct = new NewProduct();
+			bool toCheck = false;
+			if (check == "check")
+			{
+				toCheck = true;
+			}
+			else if (check == "uncheck")
+			{
+				toCheck = false;
+			}
+			else
+			{
+				throw new Exception("Specflow paramater must be equal to 'check' or 'uncheck'");
+			}
+			bool isChecked = selNewProduct.StandaloneCheckbox(description).Checked();
+			if (isChecked == toCheck)
+			{
+				Report.Success($"The checkbox was already {check}ed");
+				return;
+			}
+			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
+				$"Failed to check the checkbox with description: '{description}'!",
+				$"Successfully checked the checkbox with description: '{description}'");
+			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
+				$"The checkbox was not {check}ed after",
+				$"The checkbox is {check}ed as expected");
+		}
+
+		[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		public void CheckingFieldInputIsCorrect(string section, string value)
+		{
+			if (value.StartsWith("~saved as"))
+			{
+				string savedAs = value.Replace("~saved as", "").Trim();
+				value = Context.GetFromContext(savedAs)?.ToString();
+				if (value == null)
+				{
+					throw new Exception($"Could not find item in context: {savedAs} for checking field input is correct value!");
+				}
+			}
+			List<string> showing = new NewProduct().SelectedOptionsForSection(section);
+			Report.Info("Value(s) showing were: " + string.Join(", ", showing));
+			var expected = value.Split('|').Select(x => x.Trim()).ToList();
+			foreach (string expec in expected)
+			{
+				Report.IsTrue(showing.Contains(expec), $"Failed to find the selected value: {expec} in the section: {section}!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
+			}
+			Report.Screenshot();
+		}
+
 	}
 }

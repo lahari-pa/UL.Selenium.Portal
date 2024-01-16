@@ -84,10 +84,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Refer to your Product Label. Select the options that appear on the label.", value);
 		}
 
-
-
-
-
 		[StepDefinition(@"I enter the text of Is this product intended to be rinsed off after use field to: (Yes|No)")]
 		public void GivenEnterProductIntendedToBeRinsedOffAfterUseValue(string value)
 		{
@@ -158,6 +154,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.Info($"I upload PDF to section named Upload Full Product Label (required)");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", value);
+		}
+
+		[StepDefinition(@"I enter the text of Other field to: (.*)")]
+		public void GivenEnterOtherValue(string value)
+		{
+			Report.Info($"I set the text of Other field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Other", value);
+		}
+
+		[StepDefinition(@"I enter the text of HR 1321 field to: (.*)")]
+		public void GivenEnterHR1321Value(string value)
+		{
+			Report.Info($"I set the text of HR 1321 field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("HR 1321", value);
 		}
 
 	}
