@@ -95,12 +95,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void EnterNewPassword(string password)
 		{
-			this.containerElement.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
 		}
 
 		public void EnterVerifyPassword(string password)
 		{
-			this.containerElement.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(password);
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(password);
 		}
 
 		public bool ClickContinue()
@@ -111,7 +111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSave()
 		{
-			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/a"), 2)
+			return this.ContainerElement.FindElements(By.XPath("//div[@class='modal-footer']/a"), 2)
 				.FirstOrDefault(x => x.Text.ToLower() == "save").TryClick();
 		}
 
