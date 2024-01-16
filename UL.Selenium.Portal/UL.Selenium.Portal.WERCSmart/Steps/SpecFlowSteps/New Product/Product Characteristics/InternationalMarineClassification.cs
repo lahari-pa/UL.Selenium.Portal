@@ -29,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Technical Name (if applicable)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, set the option in section: 'Hazard Class': to: (.*)")]
+		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, set the option in section: 'Hazard Class (select)': to: (.*)")]
 		public void SetHazardClassIMDG(string option)
 		{
 			string section = "Hazard Class (select)";

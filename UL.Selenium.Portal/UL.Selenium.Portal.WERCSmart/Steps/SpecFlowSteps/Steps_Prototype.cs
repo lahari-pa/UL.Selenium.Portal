@@ -609,14 +609,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool isChecked = selNewProduct.StandaloneCheckbox(description).Checked();
 			if (isChecked == toCheck)
 			{
-				Report.Failure($"The checkbox was already {check}ed");
+				Report.Success($"The checkbox was already {check}ed");
 				return;
 			}
 			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
 				$"Failed to check the checkbox with description: '{description}'!",
 				$"Successfully checked the checkbox with description: '{description}'");
 			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
-				$"The checkbox was is {check}ed after",
+				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
 		}
 
