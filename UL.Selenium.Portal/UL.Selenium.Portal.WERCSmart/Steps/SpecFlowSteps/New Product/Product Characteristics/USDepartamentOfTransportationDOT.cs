@@ -64,7 +64,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		/*
+		
 		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, verify section: 'UN Number' contains value: (.*)")]
 		public void VerifyUNNumberIMDG(string value)
 		{
@@ -83,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Technical Name (if applicable)";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
-		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, verify section: 'Hazard Class \(select\)' contains value: (.*)")]
+		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, verify section: 'Hazard Class \(select\)' contains value: (.*)")]
 		public void VerifyHazardClassIMDG(string value)
 		{
 			string section = "Hazard Class (select)";
@@ -94,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "Packing Group (select)";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
-		}*/
+		}
 	}
 	
 }
