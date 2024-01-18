@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NPOI.SS.Formula.Functions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
