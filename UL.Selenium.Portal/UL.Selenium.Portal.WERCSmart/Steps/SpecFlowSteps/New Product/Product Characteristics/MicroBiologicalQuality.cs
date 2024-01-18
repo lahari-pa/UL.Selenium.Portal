@@ -13,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	internal class MicroBiologicalQuality
 	{
 
-		[StepDefinition(@"I enter the text of How is the product applied field to: (.*)")]
+		[StepDefinition(@"I enter the text of Product designed for Age Group field to: (.*)")]
 		public void GivenEnterProductDesignedForAgeGroupValue(string value)
 		{
 			Report.Info($"I set the text of Product designed for Age Group field to: {value}");
