@@ -2122,6 +2122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info($"Column not found: { columnName}");
 			}
 		}
+
 		[StepDefinition(@"I filter Product Name (.*) with action: (.*)")]
 		public void IFilterWithWPSID(string wpsId, string action)
 		{
@@ -2140,6 +2141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
 		[StepDefinition(@"I save Description as: (.*)")]
 		public void ISaveDescription(string saveAs)
 		{
@@ -2173,6 +2175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
 		[StepDefinition(@"I Confirm Clear Filter returns correct results: (.*)")]
 		public void IConfirmProductNameClearFilter(string value)
 		{
@@ -2191,18 +2194,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I set filterby dropdown with: (.*) Status")]
-		public void ISetFilterByDropdownResult(string value)
+		[StepDefinition(@"I apply filtering with: (.*) Status")]
+		public void IApplyFilterResult(string value)
 		{
+			try
+			{
 			var selorderAccount = new MyAccount_OrderHistory();
-			selorderAccount.FilterBySearch(value);
+			selorderAccount.ApplyFilterBySearch(value);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
-		[StepDefinition(@"I confirm filtered with the (.*) status")]
+
+		[StepDefinition(@"I confirm filtered with the completed status")]
 		public void IConfirmFilterByDropdownResultWithSelectedStatus()
 		{
+			try
+			{
+				var selorderAccount = new MyAccount_OrderHistory();
+				string Srcstatus = selorderAccount.FilterBySearchResult();
+				Report.IsTrue(Srcstatus.Length > 2, "Product FilterBy search not working as expected", "Product FilterBy search working as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I click on Filter Button")]
+		public void IClickFilterButton()
+		{
 			var selorderAccount = new MyAccount_OrderHistory();
-			string Srcstatus = selorderAccount.FilterBySearch();
-			Report.IsTrue(Srcstatus.Length > 2, "Product FilterBy search not working as expected", "Product FilterBy search working as expected");
+			selorderAccount.FilterButton();
 		}
 	}
 }

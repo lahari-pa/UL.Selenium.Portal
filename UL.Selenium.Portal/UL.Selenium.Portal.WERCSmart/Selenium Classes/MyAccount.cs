@@ -2376,7 +2376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = ".//td[@data-bind='text: Description']")]
 		private IWebElement _description;
-		private IWebElement FliterStatus => this.containerElement.FindElement(By.XPath($".//span[contains(@data-bind, 'StrStatus')]"), 2);
+		private IWebElement FliterStatus => this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'StrStatus')]"), 2);
 		private IWebElement FilterBy => this.containerElement.FindElement(By.XPath(".//div[@class='table-search']//select"), 2);
 		public string Description
 		{
@@ -2515,18 +2515,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return columnsNotFound;
 		}
-		public void FilterBySearch(string option)
+		public void ApplyFilterBySearch(string option)
 		{
 			Delay.Seconds(5);
 			this.FilterBy.Select(option);
 		}
-		public string FilterBySearch()
+		public string FilterBySearchResult()
 		{
 			Delay.Seconds(5);
 			return this.FliterStatus.Text;
 		}
-
-	}
+		public void FilterButton()
+		{
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[contains(text(), 'Filter')]"), 2).TryClick();
+		}
+		}
 	public class MyAccount_MyLibrary : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]

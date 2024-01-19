@@ -788,9 +788,6 @@ Scenario: [223737] - Order History
 	| Payment Method        |
 	| Fee                   |
 	| Actions               |
-	Given I set filterby dropdown with: Completed Status
-	When I filter Product Name  with action: Filter
-	Then I confirm filtered with the Completed status
 	When I filter Product Name Mixture, Blend, Formula, Polymer or Solution from Third 3rd, 3d Party with action: Filter
 	Then I click view details link
 	Then I save Description as: testCaseDescription 
@@ -802,6 +799,8 @@ Scenario: [223737] - Order History
 	Then I Confirm Filter results are correct: 2261769
 	Then I Confirm Clear Filter returns correct results: Clear Filter
 	Then I Confirm Clear Filter results are correct: 2261769
-
+	Given I apply filtering with: Completed Status
+	When I click on Filter Button
+	Then I confirm filtered with the completed status
 
 
