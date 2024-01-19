@@ -10,9 +10,9 @@ using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
+	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Sustainability")]
 	internal class Sustainability
 	{
-		[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Sustainabilit")]
 
 		[StepDefinition(@"I enter the text of Sustainability Information field to: (.*)")]
 		public void GivenEnterSustainabilityInformationValue(string value)
