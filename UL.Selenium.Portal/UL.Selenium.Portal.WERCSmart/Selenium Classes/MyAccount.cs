@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		List<IWebElement> OrderNumClearFilter => this.ContainerElement.FindElements(By.XPath(".//span[contains(@data-bind, 'OrderNumber')]"), 2).ToList();
 		IWebElement ViewDetailsLink => this.ContainerElement.FindElement(By.XPath(".//table//td/a[contains(text(), 'View details')]"), 2);
-
+		IWebElement ProductSearch => this.ContainerElement.FindElement(By.XPath(".//input[contains(@placeholder, 'WPS ID (Exact)/Product Name')]"), 2);
 		public bool HeaderExists(string header)
 		{
 			Report.Info($"Starting looking for header {header}");
@@ -1487,6 +1487,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.ViewDetailsLink.TryClick();
 		}
+		public void ProductSearchText(string wpsId)
+		{
+			this.ProductSearch.EnterText(wpsId);
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
@@ -2368,6 +2372,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 		private IWebElement FliterButton(string value) => this.containerElement.FindElement(By.XPath($".//button[@class='btn btn-gray' and contains(text(),'{value}')]"), 2);
 		private IWebElement InvoiceNumber => this.containerElement.FindElement(By.XPath(".//span[@data-bind = 'text: OrderNumber']"), 2);
+		private IWebElement WsTab => this.containerElement.FindElement(By.XPath("//div[@id='selectorGroup']/ul/li[@class='active']/a"), 2);
+
+		[FindsBy(How = How.XPath, Using = ".//td[@data-bind='text: Description']")]
+		private IWebElement _description;
+		private IWebElement FliterStatus => this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'StrStatus')]"), 2);
+		private IWebElement FilterBy => this.containerElement.FindElement(By.XPath(".//div[@class='table-search']//select"), 2);
+		public string Description
+		{
+			get => this._description.GetValue();
+			set
+			{
+				this._description.EnterText(value);
+				Report.Success($"Entered description: { value }");
+			}
+		}
 		public bool Order_History_Select(string history_type)
 		{
 			Report.Info("Beginning Order_History_Select");
@@ -2469,8 +2488,46 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.FliterButton(value).TryClick();
 		}
+		public bool TabExists(string value)
+		{
+			Delay.Seconds(5);
+			string wstab = this.WsTab.GetValue();
+			return wstab == value;
+		}
+		public List<string> CheckWercsmartTabColumns(Table table)
+		{
+			IList<IWebElement> columnNames = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@id='orderHistoryContainer']//table//th"), 2);
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
 
-	}
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+			foreach (TableRow row in table.Rows)
+			{
+
+				if (!columnNamesStrings.Contains(row["Column Name"]))
+				{
+					columnsNotFound.Add(row["Column Name"]);
+				}
+			}
+
+			return columnsNotFound;
+		}
+		public void ApplyFilterBySearch(string option)
+		{
+			this.FilterBy.Select(option);
+		}
+		public string FilterBySearchResult()
+		{
+			return this.FliterStatus.Text;
+		}
+		public void FilterButton()
+		{
+			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[contains(text(), 'Filter')]"), 2).TryClick();
+		}
+		}
 	public class MyAccount_MyLibrary : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
