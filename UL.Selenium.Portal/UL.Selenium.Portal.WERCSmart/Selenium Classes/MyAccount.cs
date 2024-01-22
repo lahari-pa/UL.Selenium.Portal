@@ -2517,12 +2517,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public void ApplyFilterBySearch(string option)
 		{
-			Delay.Seconds(5);
 			this.FilterBy.Select(option);
 		}
 		public string FilterBySearchResult()
 		{
-			Delay.Seconds(5);
 			return this.FliterStatus.Text;
 		}
 		public void FilterButton()
