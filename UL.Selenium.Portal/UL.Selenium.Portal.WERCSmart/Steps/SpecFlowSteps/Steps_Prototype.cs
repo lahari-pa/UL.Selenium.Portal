@@ -33,6 +33,8 @@ using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using System.Runtime.InteropServices;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
+using NPOI.SS.Formula.Functions;
+using TechTalk.SpecFlow.CommonModels;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -642,5 +644,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
+		[StepDefinition(@"In the 'Create the Kit' page add product: (.*)")]
+		public void CreateTheKitAddProduct(string product)
+		{
+			if(Report.IsTrue(new CreateTheKit().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(new CreateTheKit().SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
+			}
+			if (Report.IsTrue(new SearchBoxPrototype().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(new SearchBoxPrototype().SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
+			}
+			Report.IsTrue(new SearchBoxPrototype().SearchResultsExists(), "Failed to find search results", "Successfully found search results");
+			var homePage = new Selenium_Classes.ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homePage.WaitLoading();
+			Report.IsTrue(new SearchBoxPrototype().SearchResultClick(product), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
+		}
 	}
 }
