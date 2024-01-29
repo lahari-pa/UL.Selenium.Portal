@@ -722,10 +722,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
 				"Entered company or brand name value");
 		}
-		[StepDefinition(@"I confirm in the browser popup")]
-		public void GivenIConfirmInTheBrowserPopup()
+		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		public void ConfirmThealertPopup(string action)
 		{
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
+			if (action == "accept")
+			{
+				Report.Info("Accepting the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+			}
+
+			if (action == "dismiss")
+			{
+				Report.Info("Dismissing the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
+			}
+		}
+		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
+		{
+			if (condition == "should")
+			{
+				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
+					Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{message}'. Actual: '{alertText}'.", "Successfully found text in alert!");
+				}
+				else
+				{
+					Report.Failure("Alert not present!");
+				}
+			}
+			else
+			{
+				if (!SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					Report.Success("Alert is not displayed as expected");
+				}
+				else
+				{
+					Report.Failure("Alert still displayed when it is not expected");
+				}
+			}
+
 		}
 
 	}

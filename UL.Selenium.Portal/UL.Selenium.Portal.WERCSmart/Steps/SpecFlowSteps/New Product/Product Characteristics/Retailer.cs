@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -16,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_Prototype().ISelectTheRetailer(retailer);
 		}
-		[StepDefinition(@"In the Retailers Section, click 'Add Retailers' button")]
+		[StepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
 		public void ClickAddRetailers()
 		{
 			string button = "Add Retailers";
@@ -99,10 +100,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_Prototype().GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(companyBrandName);
 		}
-		[StepDefinition(@"In the Retailer Section after clicking 'Cancel' in 'Add New Supplier' modal window click 'Ok' in alert message 'Are you sure want to cancel\?'")]
-		public void AcceptAlertAreYouSureToCancel()
+		[StepDefinition(@"In the Retailer Section after clicking 'Cancel' in 'Add New Supplier' modal window click (Ok|Cancel) in alert message 'Are you sure want to cancel\?'")]
+		public void AcceptAlertAreYouSureToCancel(string responce)
 		{
-			new Steps_Prototype().GivenIConfirmInTheBrowserPopup();
+			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should", "Are you sure want to cancel ?");
+			if(responce == "Ok")
+			{
+				new Steps_Prototype().ConfirmThealertPopup("accept");
+			}
+			else
+			{
+				new Steps_Prototype().ConfirmThealertPopup("dismiss");
+			}
+			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should not", "Are you sure want to cancel ?");
+
 		}
 	}
 }
