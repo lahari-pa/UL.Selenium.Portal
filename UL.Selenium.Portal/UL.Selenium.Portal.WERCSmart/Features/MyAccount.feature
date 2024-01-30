@@ -771,3 +771,36 @@ Scenario: [223555] - User Role- Reset Password Option - Used Too Recently
 	Given I go to Reset Password in User Grid for the current user
 	When I enter new password for the account saved as: PasswordResetAccount
 	Then I Confirm following error message displayed: This password was used too recently.
+
+	# Created by Saikiran Chittampally
+	@TestCase:223737
+Scenario: [223737] - Order History
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then the WERCSmart homepage should load
+	Given I navigate to My Account
+	Given In the My Account page I navigate to the Order History page
+	Then I confirm WERCSmart tab is selected by default
+	Then I confirm following columns displayed
+	| Column Name		    |
+	| Submission Date       |
+	| Submitted By          |
+	| Payment Received Date |
+	| Payment Method        |
+	| Fee                   |
+	| Actions               |
+	When I filter Product Name Mixture, Blend, Formula, Polymer or Solution from Third 3rd, 3d Party with action: Filter
+	Then I click view details link
+	Then I save Description as: testCaseDescription 
+	Then I Confirm Product name or wpsId Filter results testCaseDescription are correct : Mixture, Blend, Formula, Polymer or Solution from Third 3rd, 3d Party (1775498)
+	Then I Confirm Clear Filter returns correct results: Clear Filter
+	Given I filter Product Name 1775498 with action: Filter
+	When I Confirm Clear Filter returns correct results: Clear Filter
+	When I filter with order Number : 2261769, Filter
+	Then I Confirm Filter results are correct: 2261769
+	Then I Confirm Clear Filter returns correct results: Clear Filter
+	Then I Confirm Clear Filter results are correct: 2261769
+	Given I apply filtering with: Completed Status
+	When I click on Filter Button
+	Then I confirm filtered with the completed status
+
+

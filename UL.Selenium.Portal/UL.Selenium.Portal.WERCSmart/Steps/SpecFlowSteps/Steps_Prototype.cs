@@ -33,6 +33,8 @@ using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using System.Runtime.InteropServices;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
+using NPOI.SS.Formula.Functions;
+using TechTalk.SpecFlow.CommonModels;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -640,6 +642,130 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(showing.Contains(expec), $"Failed to find the selected value: {expec} in the section: {section}!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
 			}
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"In the 'Create the Kit' page add product: (.*)")]
+		public void CreateTheKitAddProduct(string product)
+		{
+			if(Report.IsTrue(new CreateTheKit().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(new CreateTheKit().SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
+			}
+			if (Report.IsTrue(new SearchBoxPrototype().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(new SearchBoxPrototype().SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
+			}
+			Report.IsTrue(new SearchBoxPrototype().SearchResultsExists(), "Failed to find search results", "Successfully found search results");
+			var homePage = new Selenium_Classes.ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homePage.WaitLoading();
+			Report.IsTrue(new SearchBoxPrototype().SearchResultClick(product), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
+		}
+
+		[StepDefinition(@"I click Done on Select Retailers window")]
+		public void IClickDoneButtonOnSelectRetailersWindow()
+		{
+			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
+		}
+		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		public void ThenIClickTheDeleteIconInTheRetailerPage()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to delete selected retailers", "Successfully deleted selected retailers");
+		}
+		[StepDefinition(@"I select the retailer: (.*)")]
+		public void ISelectTheRetailer(string retailer)
+		{
+			var selectRetailers = new SelectRetailers();
+			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
+		}
+		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
+		public void ClickRetailersOption(string option)
+		{
+			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), $"Failed to click the retailers option: {option}", $"Successfully clicked the retailers option: {option}");
+		}
+		[StepDefinition(@"I (check|uncheck) the retailer: (.*)")]
+		public void CheckUncheckTheRetailer(string condition, string retailer)
+		{
+			Report.IsTrue(new Retailer().CheckUncheckRetailer(condition,  retailer), $"Failed to {condition} retailer: {retailer}!", $"Successfully {condition}ed retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
+		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
+		public void RetailerPrivateLabelSelect(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select Vendor: (.*)")]
+		public void SelectVendorInRetailerSection(string retailer, string option)
+		{
+			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I click 'Add New Supplier' button")]
+		public void ClickAddNewSupplierInRetailerSection(string retailer)
+		{
+			Report.IsTrue(new RetailersRow(retailer).ClickAddNewSupplier(), $"Failed to click 'Add New Supplier' button for {retailer} retailer", $"Successfully clicked 'Add New Supplier' button for {retailer} retailer");
+		}
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierIDInput), "Failed to add supplier ID input",
+				"Entered supplier ID value");
+		}
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
+				"Entered company or brand name value");
+		}
+		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		public void ConfirmThealertPopup(string action)
+		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
+			if (action == "accept")
+			{
+				Report.Info("Accepting the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+			}
+
+			if (action == "dismiss")
+			{
+				Report.Info("Dismissing the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
+			}
+		}
+		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
+		{
+			if (condition == "should")
+			{
+				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
+					Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{message}'. Actual: '{alertText}'.", "Successfully found text in alert!");
+				}
+				else
+				{
+					Report.Failure("Alert not present!");
+				}
+			}
+			else
+			{
+				if (!SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					Report.Success("Alert is not displayed as expected");
+				}
+				else
+				{
+					Report.Failure("Alert still displayed when it is not expected");
+				}
+			}
+
 		}
 
 	}
