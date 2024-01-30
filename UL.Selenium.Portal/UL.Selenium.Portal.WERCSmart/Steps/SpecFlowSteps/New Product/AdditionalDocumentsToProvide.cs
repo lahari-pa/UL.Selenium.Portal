@@ -11,20 +11,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide")]
 	internal class AdditionalDocumentsToProvide
 	{
-		[StepDefinition(@"I enter the text of Generic Private Label (all sides) field to: (.*)")]
-		public void GivenEnterGenericPrivateLabelAllSidesValue(string value)
+		[StepDefinition(@"I upload PDF document to Generic Private Label (all sides) field")]
+		public void GivenEnterGenericPrivateLabelAllSidesValue()
 		{
-			Report.Info($"I set the text of Generic Private Label (all sides) field to: {value}");
+			Report.Info($"I upload PDF document to Generic Private Label (all sides) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.SetTheSectionOptionTo("Generic Private Label (all sides)", value);
+			selNewProduct.UploadPDFFile("Generic Private Label (all sides)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I enter the text of Upload SDS (Optional) field to: (.*)")]
-		public void GivenEnterUploadSDSOptionalValue(string value)
+		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
+		public void GivenEnterUploadSDSOptionalValue()
 		{
-			Report.Info($"I set the text of Upload SDS (Optional) field to: {value}");
+			Report.Info($"I upload PDF document to Upload SDS (Optional) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.SetTheSectionOptionTo("Upload SDS (Optional)", value);
+			selNewProduct.UploadPDFFile("Upload SDS (Optional)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 	}
 }
