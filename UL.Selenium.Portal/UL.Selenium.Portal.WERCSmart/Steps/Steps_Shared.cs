@@ -5935,8 +5935,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selNewProductSteps.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
-			selNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product field to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ", "Yes");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			selNewProductSteps.SetTheSectionOptionTo(
