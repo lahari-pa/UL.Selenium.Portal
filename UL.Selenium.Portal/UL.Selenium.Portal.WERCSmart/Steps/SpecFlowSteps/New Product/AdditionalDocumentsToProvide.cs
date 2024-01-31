@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	internal class AdditionalDocumentsToProvide
 	{
 		[StepDefinition(@"I upload PDF document to Generic Private Label (all sides) field")]
-		public void GivenEnterGenericPrivateLabelAllSidesValue()
+		public void UploadGenericPrivateLabelAllSides()
 		{
 			Report.Info($"I upload PDF document to Generic Private Label (all sides) field");
 			var selNewProduct = new Steps_Prototype();
@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		}
 
 		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
-		public void GivenEnterUploadSDSOptionalValue()
+		public void UploadSDSOptional()
 		{
 			Report.Info($"I upload PDF document to Upload SDS (Optional) field");
 			var selNewProduct = new Steps_Prototype();
