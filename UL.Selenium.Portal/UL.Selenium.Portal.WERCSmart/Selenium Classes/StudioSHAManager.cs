@@ -1367,17 +1367,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<SHAManagerProdcutUPC> UPCAssessmentScreenGetUPCs()
 		{
 			var rList = new List<SHAManagerProdcutUPC>();
-			IList<IWebElement> rows = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']//following-sibling::tr"), 2);
-			IWebElement headerRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr[@class='DarkBack']"), 2);
+			IList<IWebElement> rows = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr"), 2);
+			IWebElement headerRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
 			if (headerRow == null)
 			{
 				Report.Info("Could not locate 'dark black' header row");
 				return null;
 			}
-
-			IList<IWebElement> headers = headerRow.FindElements(By.XPath("./td"), 2);
-			int upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath(".//th[contains(text(),'UPC Number')]"))) +
-							  1;
 
 			foreach (IWebElement row in rows)
 			{
