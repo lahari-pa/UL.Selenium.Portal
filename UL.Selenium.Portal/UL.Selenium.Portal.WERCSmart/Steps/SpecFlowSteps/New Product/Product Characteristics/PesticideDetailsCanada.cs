@@ -117,5 +117,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
 		}
+		[StepDefinition(@"In the 'Pesticide Details - Canada' message 'For each Province make the appropriate selection from the options available' (should|should not) be displayed")]
+		public void ForEachProvincemakeSelection(string condition)
+		{
+			string text = "For each Province, make the appropriate selection from the options available";
+			new Steps_Prototype().AlertMessageDisplayed(condition, text);
+		}
 	}
 }
