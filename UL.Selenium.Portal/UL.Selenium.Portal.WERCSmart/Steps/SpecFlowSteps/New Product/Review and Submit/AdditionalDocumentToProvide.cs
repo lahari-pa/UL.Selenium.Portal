@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	{
 		
 		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
-		public void GivenUploadOSHACompliantSafetyDataSheetOptionalValue()
+		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
 			Report.Info($"I upload PDF document to OSHA-compliant Safety Data Sheet (Optional) field");
 			var selNewProduct = new Steps_Prototype();
@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		}
 
 		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
-		public void GivenUploadFullProductLabelRequired()
+		public void UploadPDFDocumentToFullProductLabelRequired()
 		{
 			Report.Info($"I upload PDF document to Upload Full Product Label (required)  field");
 			var selNewProduct = new Steps_Prototype();
