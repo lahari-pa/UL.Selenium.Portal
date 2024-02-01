@@ -5265,13 +5265,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-		[StepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*) (.*)")]
-		public void IcallSharedStepIAddThirdPartyComponent(string casIdsavedAs, string compName, string chemName)
+		[StepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*)")]
+		public void IcallSharedStepIAddThirdPartyComponent(string compName, string casIdsavedAs)
 		{
 			try
 			{
 				var product = (ProductInformation)Context.GetFromContext(casIdsavedAs);
 				string casId = product.Id;
+				string casIdTest = "WPS" + casId;
 				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 					"Power designer has opened");
@@ -5289,11 +5290,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
 				Delay.Seconds(3);
-				thisStudioPowerDesignerPlusDesignMode.AddComponent(casId, compName,chemName);
+				thisStudioPowerDesignerPlusDesignMode.AddComponent(casIdTest, compName, casId);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
-				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains(chemName), "Failed to add component", "Succesfully component added");
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains(casId), "Failed to add component", "Succesfully component added");
 				SeleniumWebDriver.CurrentDriver.Close();
 			}
 			catch (Exception ex)

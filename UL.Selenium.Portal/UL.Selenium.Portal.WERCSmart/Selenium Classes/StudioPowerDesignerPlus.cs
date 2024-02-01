@@ -324,7 +324,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement chemicalName = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtChemName']"), 2);
 				chemicalName.EnterText(chemName);
 				IWebElement save = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='btnOk']"), 2);
-				save.Click();
+				save.TryClick();
 				Delay.Seconds(10);
 				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
 				{
@@ -348,9 +348,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement AddRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='componentGrid-grid_toppager_left']//td[@title='Add Row']"), 2);
 			if (AddRow != null)
 			{
-				AddRow.Click();
+				AddRow.TryClick();
 			}
-			return false;
+			return AddRow != null;
 		}
 		public IWebElement VerifyComponent()
 		{
