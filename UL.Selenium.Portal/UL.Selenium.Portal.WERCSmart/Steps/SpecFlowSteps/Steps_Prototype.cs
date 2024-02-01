@@ -689,5 +689,113 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+
+		[StepDefinition(@"I click Done on Select Retailers window")]
+		public void IClickDoneButtonOnSelectRetailersWindow()
+		{
+			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
+		}
+		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		public void ThenIClickTheDeleteIconInTheRetailerPage()
+		{
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to delete selected retailers", "Successfully deleted selected retailers");
+		}
+		[StepDefinition(@"I select the retailer: (.*)")]
+		public void ISelectTheRetailer(string retailer)
+		{
+			var selectRetailers = new SelectRetailers();
+			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
+		}
+		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
+		public void ClickRetailersOption(string option)
+		{
+			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), $"Failed to click the retailers option: {option}", $"Successfully clicked the retailers option: {option}");
+		}
+		[StepDefinition(@"I (check|uncheck) the retailer: (.*)")]
+		public void CheckUncheckTheRetailer(string condition, string retailer)
+		{
+			Report.IsTrue(new Retailer().CheckUncheckRetailer(condition,  retailer), $"Failed to {condition} retailer: {retailer}!", $"Successfully {condition}ed retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
+		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
+		public void RetailerPrivateLabelSelect(string retailer, string option)
+		{
+			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select Vendor: (.*)")]
+		public void SelectVendorInRetailerSection(string retailer, string option)
+		{
+			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
+		}
+		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I click 'Add New Supplier' button")]
+		public void ClickAddNewSupplierInRetailerSection(string retailer)
+		{
+			Report.IsTrue(new RetailersRow(retailer).ClickAddNewSupplier(), $"Failed to click 'Add New Supplier' button for {retailer} retailer", $"Successfully clicked 'Add New Supplier' button for {retailer} retailer");
+		}
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierIDInput), "Failed to add supplier ID input",
+				"Entered supplier ID value");
+		}
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
+				"Entered company or brand name value");
+		}
+		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		public void ConfirmThealertPopup(string action)
+		{
+			SeleniumWebDriver.CurrentDriver.WaitForAlert();
+
+			if (action == "accept")
+			{
+				Report.Info("Accepting the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+			}
+
+			if (action == "dismiss")
+			{
+				Report.Info("Dismissing the pop up alert");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
+			}
+		}
+		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
+		{
+			if (condition == "should")
+			{
+				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
+					Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{message}'. Actual: '{alertText}'.", "Successfully found text in alert!");
+				}
+				else
+				{
+					Report.Failure("Alert not present!");
+				}
+			}
+			else
+			{
+				if (!SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				{
+					Report.Success("Alert is not displayed as expected");
+				}
+				else
+				{
+					Report.Failure("Alert still displayed when it is not expected");
+				}
+			}
+
+		}
+
 	}
 }
