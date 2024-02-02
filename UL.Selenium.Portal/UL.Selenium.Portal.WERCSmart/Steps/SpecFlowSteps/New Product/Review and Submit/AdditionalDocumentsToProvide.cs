@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -42,6 +43,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			Report.Info($"I upload PDF document to Generally Recognized as Safe (GRAS) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Generally Recognized as Safe (GRAS)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Toxicity Characteristic Leaching Procedure (TCLP) field")]
+		public void UploadPDFDocumentToToxicityCharacteristicLeachingProcedureTCLP()
+		{
+			Report.Info($"I upload PDF document to Toxicity Characteristic Leaching Procedure (TCLP) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 	}
 }
