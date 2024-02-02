@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 			Report.IsTrue(this.RegulatoryInformation1.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 			var expected = (noOrYes == "Yes");
-			this.RegulatoryInformation1.Prop65 = expected;
+ 			this.RegulatoryInformation1.Prop65 = expected;
 			Report.IsTrue(this.RegulatoryInformation1.Prop65 == expected,
 				"Failed to set Prop 65 value to: " + noOrYes,
 				"Successfully set Prop 65 value to: " + noOrYes);

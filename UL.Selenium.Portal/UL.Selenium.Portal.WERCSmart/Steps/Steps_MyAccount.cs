@@ -1257,10 +1257,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking Continue");
 			selModal.ClickContinue();
+			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Entering new password in New Password input: *******");
 			selModal.EnterNewPassword(adminPassword);
 			Report.Info("Entering new password in Verify Password input: *******");
 			selModal.EnterVerifyPassword(adminPassword);
+			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking save in the Change Password popup");
 			Report.IsTrue(selModal.ClickSave(),
 				"Failed to click save in Change Password",
@@ -1290,7 +1292,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 
 			Report.StartStep($"I update the password for user: {user}");
 			var selMyAccount = new StepsMyAccount();
@@ -1306,7 +1308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CreateUserAndSetPassword(string savedAs, Table table)
 		{
 
-			ReportSettings.UseSubSteps = true;
+			Report.UseSubSteps = true;
 
 			Report.StartStep("I add a new user");
 			Report.Info("Adding user with the following information");
@@ -1350,15 +1352,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsSignup().DefineUser("NewUser", userTable);
 
 			//var testuser= (WERCSmartUser)Context.GetFromContext("NewUser");
-
-
-
-
-
-
-
-
-
 		}
 
 
@@ -2098,6 +2091,137 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I confirm (.*) tab is selected by default")]
+		public void ThenIConfirmSelectedTabDisplayed(string value)
+		{
+			Report.StartStep($" I confirm WERCSmart tab displayed by default");
+			var selorderAccount = new MyAccount_OrderHistory();
+			Report.IsTrue(selorderAccount.TabExists(value), $" {value} is not selected by default", $" {value} selected by default");
+		}
+
+		[StepDefinition(@"I confirm following columns displayed")]
+		public void ThenIConfirmIfColumnNamesMatch(Table table)
+		{
+			Report.StartStep($" I confirm following WERCSmart table columns displayed");
+			var selorderAccount = new MyAccount_OrderHistory();
+			List<string> columnsNotFound = selorderAccount.CheckWercsmartTabColumns(table);
+
+			Report.IsTrue(columnsNotFound.Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+
+			foreach (string columnName in columnsNotFound)
+			{
+				Report.Info($"Column not found: { columnName}");
+			}
+		}
+
+		[StepDefinition(@"I filter Product Name (.*) with action: (.*)")]
+		public void IFilterWithWPSID(string wpsId, string action)
+		{
+			Report.StartStep($" In the WPSID search text box enter { wpsId }");
+			try
+			{
+				var MyAccount = new MyAccount();
+				var selMyAccount = new MyAccount_OrderHistory();
+				MyAccount.ProductSearchText(wpsId);
+				selMyAccount.ClickGivenFilterAction(action);
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I save Description as: (.*)")]
+		public void ISaveDescription(string saveAs)
+		{
+			try
+			{
+				var myOderHistoryDetails = new MyAccount_OrderHistory();
+				var thisDescription = myOderHistoryDetails.Description;
+				Delay.Seconds(1);
+
+				Context.AddToContext(saveAs, thisDescription);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I Confirm Product name or wpsId Filter results (.*) are correct : (.*)")]
+		public void IConfirmProductNameFilterResult(string value, string text)
+		{
+			try
+			{
+				var description = Context.GetFromContext(value);
+
+				Report.IsTrue(description.Equals(text), "product name Filter not working as expected",
+						"product name Filter working as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Confirm Clear Filter returns correct results: (.*)")]
+		public void IConfirmProductNameClearFilter(string value)
+		{
+			try
+			{
+				var MyAccount = new MyAccount();
+				var selorderAccount = new MyAccount_OrderHistory();
+				selorderAccount.ClickGivenFilterAction(value);
+				int count = MyAccount.OrderNumberClearFilter();
+				Report.IsTrue(count > 2, "Product Name clear Filter not working as expected", "Product Name clear Filter working as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I apply filtering with: (.*) Status")]
+		public void IApplyFilterResult(string value)
+		{
+			try
+			{
+			var selorderAccount = new MyAccount_OrderHistory();
+			selorderAccount.ApplyFilterBySearch(value);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm filtered with the completed status")]
+		public void IConfirmFilterByDropdownResultWithSelectedStatus()
+		{
+			try
+			{
+				var selorderAccount = new MyAccount_OrderHistory();
+				string Srcstatus = selorderAccount.FilterBySearchResult();
+				Report.IsTrue(Srcstatus.Length > 2, "Product FilterBy search not working as expected", "Product FilterBy search working as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I click on Filter Button")]
+		public void IClickFilterButton()
+		{
+			var selorderAccount = new MyAccount_OrderHistory();
+			selorderAccount.FilterButton();
 		}
 	}
 }

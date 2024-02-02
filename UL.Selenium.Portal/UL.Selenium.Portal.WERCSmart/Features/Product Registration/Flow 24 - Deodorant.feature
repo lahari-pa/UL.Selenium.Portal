@@ -104,7 +104,7 @@ Scenario: [60637] Summary View - Hyperlink for Document Uploads
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:60619
 Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

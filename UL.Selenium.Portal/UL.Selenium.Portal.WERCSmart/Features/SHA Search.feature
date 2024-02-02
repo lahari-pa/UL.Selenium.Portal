@@ -208,6 +208,41 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	When I click the following option in the bottom menu: Review
 	When I Confirm that productID: TestCase142905 and name matches with the Product selected in the SHA Manager Product List
 
+	@TestCase:142910
+	Scenario: [142910] SHA Manager - Review - Product Data - Verify Ascending and Descending Filtering of the Columns
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC142910
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase142910
+	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC142910, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase142910)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase142910 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase142910)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase142910 and its status is: Assigned
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase142910)
+	Given In SHA Manager I select the first product saved as: TestCase142910
+	When I click the following option in the bottom menu: Review	
+	When I Confirm that productID: TestCase142910 and name matches with the Product selected in the SHA Manager Product List
+	Given In the Review Screen I check Ascending or Decending order in the Fomulation section
+
+
 	@TestCase:193958
 Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create and Add a 3rd Party Product Containing a 3rd Party Component with PVGEN Ingredients
 	Given I log in with the account saved in TReVor as: ProductAccount

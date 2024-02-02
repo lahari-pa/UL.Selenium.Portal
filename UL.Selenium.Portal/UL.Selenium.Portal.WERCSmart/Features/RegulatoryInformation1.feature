@@ -14,7 +14,7 @@
 Feature: Regulatory Information 1
 
 @ignore
-#Ignore Tag Added On 11/2023
+#Removed from regression 2023/11
 @TestCase:85492
 Scenario: [85492] Regulatory Information 1 - navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
