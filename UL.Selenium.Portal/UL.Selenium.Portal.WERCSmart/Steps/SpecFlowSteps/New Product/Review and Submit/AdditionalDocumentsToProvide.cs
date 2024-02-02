@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Atp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			Report.Info($"I upload PDF document to Upload SDS (Optional) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Upload SDS (Optional)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to International Fragrance Association (IFRA) field")]
+		public void UploadPDFDocumentToInternationalFragranceAssociationIFRA()
+		{
+			Report.Info($"I upload PDF document to International Fragrance Association (IFRA) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("International Fragrance Association (IFRA)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Generally Recognized as Safe (GRAS) field")]
+		public void UploadPDFDocumentToGenerallyRecognizedAsSafeGRAS()
+		{
+			Report.Info($"I upload PDF document to Generally Recognized as Safe (GRAS) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Generally Recognized as Safe (GRAS)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 	}
 }
