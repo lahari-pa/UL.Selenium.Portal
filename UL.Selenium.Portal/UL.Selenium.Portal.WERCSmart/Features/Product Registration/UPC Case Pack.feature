@@ -690,3 +690,62 @@ Scenario: [209159] UPC Assessment Details - Edit UPC updates - the Added column 
 	Then In the SHA UPC list I should see UPC: saved as UPC209159 in Any Row of the UPC table
 	And I close the current window and switch to the main window in Studio
 	
+
+	# Created by Saikiran Chittampally
+	@TestCase:119633
+Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archived
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC119633
+	Given I generate a random UPC number and save as: UPC1196331
+	Given I generate a random UPC number and save as: UPC1196332
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase119633
+	Given I call Shared Step (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	
+	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC119633, container type: Plastic Container and size: 25 - do not click continue
+	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC1196331, container type: Plastic Container and size: 2 - do not click continue
+	And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC1196332, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC119633 and Transportation option: 4A: steel box	
+
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	And I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase119633)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase119633)
+	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase119633)
+	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase119633)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase119633
+	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase119633)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase119633)		
+	Given I navigate to the landing page
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I search for the product saved as: TestCase119633
+	When I click Row Actions for the most recent product returned
+	Then I click on the Row Action: Edit UPCs	
+	And I click Save in The Product Page
+	And I delete UPC saved as: UPC1196331 
+	Given I Click Ok in the Delete Rows Warning Popup
+	And I click Save in The Product Page
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase119633 and its status is: Accepted
+	Then I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase119633
+	And I confirm the Product UPC window has opened
+	Then In the SHA UPC list I should see the case pack asterisk for the UPC: saved as UPC1196331
+	And I close the current window and switch to the main window in Studio
