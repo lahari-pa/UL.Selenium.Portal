@@ -6,11 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
-<<<<<<< HEAD
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-=======
 using static NPOI.HSSF.Util.HSSFColor;
->>>>>>> origin/QA
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -49,7 +46,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("OSHA-compliant Safety Data Sheet (Optional)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-<<<<<<< HEAD
 		[StepDefinition(@"I upload PDF document to International Fragrance Association (IFRA) field")]
 		public void UploadPDFDocumentToInternationalFragranceAssociationIFRA()
 		{
@@ -73,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
-=======
+
 		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
 		public void UploadPDFDocumentToFullProductLabelRequired()
 		{
@@ -82,6 +78,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required) ", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
->>>>>>> origin/QA
 	}
 }
