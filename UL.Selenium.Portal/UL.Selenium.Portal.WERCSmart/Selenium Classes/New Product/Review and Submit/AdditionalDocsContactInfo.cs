@@ -33,93 +33,111 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		
 		 public bool SelectSubFormatType(string value)
 		{
-			try
+			if (this.SubFormatTypeDropDownExists())
 			{
+				if (this.SubFormatTypeDD.FindElements(By.XPath("./option"), 2).All(x => x.Text != value))
+				{
+					Report.Info("The value was not available in the drop down options!");
+					return false;
+				}
 				Report.Info("Selecting text from the Sub Format Type Drown down");
-				this.SubFormatTypeDD.Select(value);
-				return true;
-			}
-			catch (Exception)
-			{
-				Report.Info("Could not select an option from the Sub Format Type drop drop"); 
-				return false;
-			}
+				 this.SubFormatTypeDD.Select(value);
+				
+			}			
+				Report.Info("Sub Format Drop Down does not exist");
+				return false;		
+		}
+
+		public bool Address1Exsits()
+		{
+			Report.Info("Checking to see if the first address textbox exists");
+			return this.Address1 != null;
 		}
 
 		public bool EnterTextAddress1(string text)
 		{
-			if(this.Address1 != null)
-			{
-				Report.Info("Attempting to enter text in the first Address textbox");
-				return this.Address1.TryEnterText(text); 
-			}
-			Report.Info("Could not find the first address textbox");
-			return false;
+
+			Report.Info("Attempting to enter text in the first Address textbox");
+			return this.Address1.TryEnterText(text); 	
+		}
+
+		public bool Address2Exsits()
+		{
+			Report.Info("Checking to see if the second Address textbox exists");
+			return this.Address2 != null;
 		}
 
 		public bool EnterTextAddress2(string text)
 		{
-			if (this.Address2 != null)
-			{
-				Report.Info("Attempting to enter text in the second Address textbox");
-				return this.Address2.TryEnterText(text);
-			}
-			Report.Info("Could not find the second address textbox");
-			return false;
+			
+			Report.Info("Attempting to enter text in the second Address textbox");
+			return this.Address2.TryEnterText(text);
+			
+		}
+
+		public bool PhoneExsits()
+		{
+			Report.Info("Checking to see if the Phone textbox exists");
+			return this.Phone != null;
 		}
 
 		public bool EnterTextPhone(string text)
 		{
-			if (this.Phone != null)
-			{
-				Report.Info("Attempting to enter text in the Phone textbox");
-				return this.Phone.TryEnterText(text);
-			}
-			Report.Info("Could not find the phone textbox");
-			return false;
+		
+			Report.Info("Attempting to enter text in the Phone textbox");
+			return this.Phone.TryEnterText(text);
+			
 		}
 
+		public bool EmergencyPhoneExsits()
+		{
+			Report.Info("Checking to see if the Emergency Phone textbox exists");
+			return this.EmergencyPhone != null;
+		}
 
 		public bool EnterTextEmergencyPhone(string text)
 		{
-			if (this.EmergencyPhone != null)
-			{
-				Report.Info("Attempting to enter text in the Emergency Phone textbox");
-				return this.EmergencyPhone.TryEnterText(text);
-			}
-			Report.Info("Could not find the Emergency Phone textbox");
-			return false;
+			
+			Report.Info("Attempting to enter text in the Emergency Phone textbox");
+			return this.EmergencyPhone.TryEnterText(text);
+		
 		}
 
+		public bool EmailExsits()
+		{
+			Report.Info("Checking to see if the Email textbox exists");
+			return this.Email != null;
+		}
 
 		public bool EnterTextEmail(string text)
 		{
-			if (this.Email != null)
-			{
-				Report.Info("Attempting to enter text in the Email textbox");
-				return this.Email.TryEnterText(text);
-			}
-			Report.Info("Could not find the Email textbox");
-			return false;
+			
+			Report.Info("Attempting to enter text in the Email textbox");
+			return this.Email.TryEnterText(text);
+			
+		}
+
+		public bool RemoveButtonExsits()
+		{
+			Report.Info("Checking to see if the Remove button exists");
+			return this.RemoveButton != null;
 		}
 
 		public bool ClickRemoveButton()
+		{			
+			Report.Info("Attempting to click the Remove button");
+			return this.RemoveButton.TryClick();		
+		}
+
+		public bool AddRowButtonExsits()
 		{
-			if (this.RemoveButton == null)
-			{
-				Report.Info("Cound not find the remove button");
-				return false;
-			}
-			return this.RemoveButton.TryClick();
+			Report.Info("Checking to see if the Add Row button exists");
+			return this.AddRowButton != null;
 		}
 
 		public bool ClickAddRowButton()
 		{
-			if (this.AddRowButton == null)
-			{
-				Report.Info("Cound not find the Add Row button");
-				return false;
-			}
+			Report.Info("Attempting to click the Add Row button");
 			return this.AddRowButton.TryClick();
 		}
 

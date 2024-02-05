@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
@@ -24,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		public void EnterTextForAddress(string text)
 		{
 			string section = "Address";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().SetTheSectionOptionTo(section, text); 
 		}
 
 		[StepDefinition(@"In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: (.*)")]
@@ -46,56 +48,79 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		"Thailand GHS SDS|Taiwan GHS SDS|Australia GHS SDS|Assessment Summary Report|VOC Restriction|Malaysia GHS SDS)")]
 		public void EnterTextForSubFormatType(string option)
 		{
-			
-			new AdditionalDocsContactInfo().SelectSubFormatType(option);
+			if(new AdditionalDocsContactInfo().SubFormatTypeDropDownExists())
+			{
+				new AdditionalDocsContactInfo().SelectSubFormatType(option);
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents  Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for the first 'Address': (.*)")]
 		public void EnterTextForSubSectionAddress1(string text)
 		{
-			new AdditionalDocsContactInfo().EnterTextAddress1(text);
+			if(new AdditionalDocsContactInfo().Address1Exsits())
+			{
+				new AdditionalDocsContactInfo().EnterTextAddress1(text);
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for the second 'Address': (.*)")]
 		public void EnterTextForSubSectionAddress2(string text)
 		{
-			new AdditionalDocsContactInfo().EnterTextAddress2(text);
+			if (new AdditionalDocsContactInfo().Address2Exsits())
+			{
+				new AdditionalDocsContactInfo().EnterTextAddress2(text);
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Phone' : (.*)")]
 		public void EnterTextForSubSectionPhone(string text)
 		{
-			new AdditionalDocsContactInfo().EnterTextPhone(text);
+			if (new AdditionalDocsContactInfo().PhoneExsits())
+			{
+				new AdditionalDocsContactInfo().EnterTextPhone(text);
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Emergency Phone' : (.*)")]
 		public void EnterTextForSubSectionEmergencyPhone(string text)
 		{
-			new AdditionalDocsContactInfo().EnterTextEmergencyPhone(text);
+			if (new AdditionalDocsContactInfo().EmergencyPhoneExsits())
+			{
+				new AdditionalDocsContactInfo().EnterTextEmergencyPhone(text);
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Email' : (.*)")]
 		public void EnterTextForSubSectionEmail(string text)
 		{
-			new AdditionalDocsContactInfo().EnterTextEmail(text);
+			if (new AdditionalDocsContactInfo().EmailExsits())
+			{
+				new AdditionalDocsContactInfo().EnterTextEmail(text);
+			}
 		}
 
 
 		[StepDefinition(@"In the Additional Documents -> Contact Information section, in the sub section: 'Please provide contact information required to display on SDS(s) per region.' click the 'Remove' button")]
 		public void ClickRemoveButton()
 		{
-			new AdditionalDocsContactInfo().ClickRemoveButton();
+			if (new AdditionalDocsContactInfo().RemoveButtonExsits())
+			{
+				new AdditionalDocsContactInfo().ClickRemoveButton();
+			}
 		}
 
 		[StepDefinition(@"In the Additional Documents -> Contact Information section, in the sub section: 'Please provide contact information required to display on SDS(s) per region.' click the 'Add Row' button")]
 		public void ClickAddRowButton()
 		{
-			new AdditionalDocsContactInfo().ClickAddRowButton();
+			if (new AdditionalDocsContactInfo().AddRowButtonExsits())
+			{
+				new AdditionalDocsContactInfo().ClickAddRowButton();
+			}
 		}
 
 
 		[StepDefinition(@"In the Additional Documents -> Contact Information section, in the sub section: 'Please go to My Account to manage your SDS emergency contact information for this document format.' click the 'My Account' link")]
-		public void ClicMyAccountLink()
+		public void ClickMyAccountLink()
 
 		{
 			string linkText = "My Account";
