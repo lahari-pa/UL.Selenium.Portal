@@ -75,8 +75,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.Info($"I upload PDF document to Upload Full Product Label (required)  field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Upload Full Product Label (required) ", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
+		[StepDefinition(@"I upload PDF document to Upload Volatile Organic Compounds field")]
+		public void UploadPDFDocumentToVolatileOrganicCompoundsRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Volatile Organic Compounds field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Volatile Organic Compounds", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Upload Transportation Exemption Letter or Special Permit field")]
+		public void UploadPDFDocumentToTransportationExemptionLetterOrSpecialPermitRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Transportation Exemption Letter or Special Permit  field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Transportation Exemption Letter or Special Permit", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
 	}
 }
