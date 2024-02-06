@@ -40,9 +40,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info("The value was not available in the drop down options!");
 					return false;
 				}
-				Report.Info("Selecting text from the Sub Format Type Drown down");
-				 this.SubFormatTypeDD.Select(value);
-				
+				Report.Info("Selecting value from the Sub Format Type Drown down");
+				this.SubFormatTypeDD.Select(value);
+				string selectedValue=this.SubFormatTypeDD.Selected.ToString();
+				Report.Info($"Checking if the selected value: {selectedValue} matches the expected value: {value}");
+				return selectedValue == value; 
 			}			
 				Report.Info("Sub Format Drop Down does not exist");
 				return false;		
