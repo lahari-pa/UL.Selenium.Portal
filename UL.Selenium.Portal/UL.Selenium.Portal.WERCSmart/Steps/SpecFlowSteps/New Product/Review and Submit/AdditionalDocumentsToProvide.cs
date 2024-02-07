@@ -70,10 +70,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
-		public void UploadPDFDocumentToFullProductLabelRequired()
+		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
+		public void UploadPDFDocumentToUploadFullProductLabelRequired()
 		{
-			Report.Info($"I upload PDF document to Upload Full Product Label (required)  field");
+			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
