@@ -564,7 +564,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			newProductIngredients.ClickComponentSearchPlaceholder();
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
-			Delay.Seconds(3);
 		}
 		[StepDefinition(@"I enter WPSId: (.*) in the component search box")]
 		public void EnterWpsIDComponentSearchBox(string value)
