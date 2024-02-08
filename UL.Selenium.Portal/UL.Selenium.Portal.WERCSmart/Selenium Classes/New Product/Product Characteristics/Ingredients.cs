@@ -15,6 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	internal class Ingredients : NewProduct
 	{
+		IWebElement CompSearch => this.ContainerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 		public bool AddIngredient(Ingredient ingredient)
 		{
 			try
@@ -622,7 +623,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			homepage.WaitLoading();
 			return inputEl.GetValue() == value;
 		}
-
+		public void ElementEnterKey()
+		{
+			this.CompSearch.SendKeys(Keys.Enter);
+		}
 		public bool ClickComponentSearchPlaceholder()
 		{
 			Report.Info("Clicking the search box");
