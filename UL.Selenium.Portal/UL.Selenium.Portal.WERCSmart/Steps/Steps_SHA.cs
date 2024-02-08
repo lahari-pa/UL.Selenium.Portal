@@ -5297,6 +5297,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					myStudioShaManager.AscDecCheck(columns[i++], "asc");
 			}			
 		}
+		[StepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*)")]
+		public void IcallSharedStepIAddThirdPartyComponent(string compName, string casIdsavedAs)
+		{
+			try
+			{
+				var product = (ProductInformation)Context.GetFromContext(casIdsavedAs);
+				string casId = product.Id;
+				string casIdTest = string.Concat("WPS", casId);
+				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+					"Power designer has opened");
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "Manage components");
+				
+				var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+				thisPowerDesignerPlus.Wait_for_load(60);
+				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"), 10);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.AddRowClick(), "Failed to click on AddRow icon", "Succesfully clicked on AddRow icon");
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
+				thisPowerDesignerPlus.Wait_for_load(60);
+				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.Id("modalDialogFrameFrm"),30);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
+				thisStudioPowerDesignerPlusDesignMode.AddComponent(casIdTest, compName, casId);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
+				thisPowerDesignerPlus.Wait_for_load(60);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.VerifyComponent().Text.Contains(casId), "Failed to add component", "Succesfully component added");
+				SeleniumWebDriver.CurrentDriver.Close();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 	}
 
 	}
