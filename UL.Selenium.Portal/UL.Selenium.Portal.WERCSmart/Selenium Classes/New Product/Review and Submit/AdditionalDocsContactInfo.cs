@@ -23,8 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement EmergencyPhone => this.ContainerElement.FindElement(By.XPath(".//td[5]//input[@class='form-control']"), 2);
 		private IWebElement Email => this.ContainerElement.FindElement(By.XPath(".//td[4]//input[@class='form-control']"), 2);
 		private IWebElement RemoveButton => this.ContainerElement.FindElement(By.XPath(".//td[@class='remove delete-row col-xs-1']"), 2);
-		private IWebElement AddRowButton => this.ContainerElement.FindElement(By.XPath(".//td[@class='col-xs-12']//button[@class='btn btn-primary']"), 2); 
-
+		private IWebElement AddRowButton => this.ContainerElement.FindElement(By.XPath(".//td[@class='col-xs-12']//button[@class='btn btn-primary']"), 2);
 		public bool SubFormatTypeDropDownExists()
 		{
 			Report.Info("Checking to see if the Sub Format Type dropdown exists"); 
@@ -32,22 +31,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		
 		 public bool SelectSubFormatType(string value)
-		{
-			if (this.SubFormatTypeDropDownExists())
-			{
-				if (this.SubFormatTypeDD.FindElements(By.XPath("./option"), 2).All(x => x.Text != value))
-				{
-					Report.Info("The value was not available in the drop down options!");
-					return false;
-				}
-				Report.Info("Selecting value from the Sub Format Type Drown down");
+		{						
 				this.SubFormatTypeDD.Select(value);
-				string selectedValue=this.SubFormatTypeDD.Selected.ToString();
-				Report.Info($"Checking if the selected value: {selectedValue} matches the expected value: {value}");
-				return selectedValue == value; 
-			}			
-				Report.Info("Sub Format Drop Down does not exist");
-				return false;		
+				Report.Info($"Checking if the selected value: {this.SubFormatTypeSelectedValue()} matches the expected value: {value}");
+				return this.SubFormatTypeSelectedValue() == value; 										
+		}
+
+		public string SubFormatTypeSelectedValue()
+		{
+			Report.Info("Getting the selected value from the Sub Format Type Drown down");
+			return this.SubFormatTypeDD.Selected.ToString();
+
+		}
+		public bool SubFormatTypeOptionExists(string value)
+		{
+			Report.Info($"Checking if the option: {value} exists in the drop down options");
+			return this.SubFormatTypeDD.FindElements(By.XPath("./option"), 2).Any(x=> string.Equals(x.Text , value));
+
 		}
 
 		public bool Address1Exsits()

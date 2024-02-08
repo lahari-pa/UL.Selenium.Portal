@@ -50,8 +50,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			if(new AdditionalDocsContactInfo().SubFormatTypeDropDownExists())
 			{
-				new AdditionalDocsContactInfo().SelectSubFormatType(option);
+				Report.Info($"The Sub Format Type dropdown exists! Checking if the option: {option} exists in the drop down!");
+
+				if (new AdditionalDocsContactInfo().SubFormatTypeOptionExists(option))
+				{
+					Report.Info($"Selecting the option: {option} in the drop down!");
+					new AdditionalDocsContactInfo().SelectSubFormatType(option);
+				}
 			}
+			Report.Info("The Sub Format Type dropdown does not exist");
+			return;
+
 		}
 
 		[StepDefinition(@"In the Additional Documents  Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for the first 'Address': (.*)")]
@@ -61,6 +70,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().EnterTextAddress1(text);
 			}
+			Report.Info("The First Address textbox does not exist");
+			return;
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for the second 'Address': (.*)")]
@@ -70,6 +81,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().EnterTextAddress2(text);
 			}
+			Report.Info("The second Address textbox does not exist");
+			return;
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Phone' : (.*)")]
@@ -79,6 +92,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().EnterTextPhone(text);
 			}
+			Report.Info("The Phone textbox does not exist");
+			return;
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Emergency Phone' : (.*)")]
@@ -88,6 +103,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().EnterTextEmergencyPhone(text);
 			}
+			Report.Info("The Emergency Phone textbox does not exist");
+			return;
 		}
 
 		[StepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for 'Email' : (.*)")]
@@ -97,6 +114,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().EnterTextEmail(text);
 			}
+			Report.Info("The email textbox does not exist");
+			return; 
 		}
 
 
@@ -107,6 +126,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().ClickRemoveButton();
 			}
+			Report.Info("The Remove button does not exist");
+			return;
 		}
 
 		[StepDefinition(@"In the Additional Documents -> Contact Information section, in the sub section: 'Please provide contact information required to display on SDS(s) per region.' click the 'Add Row' button")]
@@ -116,6 +137,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			{
 				new AdditionalDocsContactInfo().ClickAddRowButton();
 			}
+			Report.Info("The Add Row button does not exist");
+			return;
 		}
 
 
