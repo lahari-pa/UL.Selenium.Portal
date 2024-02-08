@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
@@ -84,6 +85,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			Report.Info($"I upload PDF document to Upload Volatile Organic Compounds field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Volatile Organic Compounds", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
+		public void UploadPDFDocumentToFullProductLabelRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Provide Full Product Label (required) field")]
+		public void UploadPDFDocumentToProvideFullProductLabelRequired()
+		{
+			Report.Info($"I upload PDF document to Provide Full Product Label (required) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Provide Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to California Air Resources Board (CARB) Executive Order field")]
+		public void UploadPDFDocumentToCaliforniaAirResourcesBoardCARBExecutiveOrder()
+		{
+			Report.Info($"I upload PDF document to California Air Resources Board (CARB) Executive Order field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("California Air Resources Board (CARB) Executive Order", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[StepDefinition(@"I upload PDF document to Upload Transportation Exemption Letter or Special Permit field")]
