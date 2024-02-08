@@ -280,14 +280,13 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: TestCaseTwo193958
-	Given I call Shared Step (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
 	Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
 	Given I enter WPSId: TestCase193958 in the component search box
-	Given I add the following CA Cleaning ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		|  WPSTestCase193958        | 100     | false               | false       |       TestCase193958     | Intentionally Added      | Bleaching Agent |    |       |
+	Given I change the percent field to 100
+	Given for ingredient: TestCase193958 I select Public Name as: TestCase193958
 	Then I click continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseTwo193958

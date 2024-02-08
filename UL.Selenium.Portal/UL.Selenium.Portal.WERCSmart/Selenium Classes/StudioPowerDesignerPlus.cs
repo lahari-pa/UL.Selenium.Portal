@@ -317,7 +317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement CASId = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtCASID']"), 2);
+				IWebElement CASId = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//input[@name='txtCASID']"), 20);
 				CASId.EnterText(casId);
 				IWebElement CompName = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='txtCompID']"), 2);
 				CompName.EnterText(compID);
@@ -325,17 +325,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				chemicalName.EnterText(chemName);
 				IWebElement save = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@name='btnOk']"), 2);
 				save.TryClick();
-				Delay.Seconds(10);
-				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert(10))
 				{
 					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
-					Delay.Seconds(1);
 				}
-				Delay.Seconds(10);
-				if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
+				if (SeleniumWebDriver.CurrentDriver.WaitForAlert(10))
 				{
 					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
-					Delay.Seconds(1);
 				}
 			}
 			catch (Exception ex)
@@ -345,7 +341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool AddRowClick()
 		{
-			IWebElement AddRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='componentGrid-grid_toppager_left']//td[@title='Add Row']"), 2);
+			IWebElement AddRow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[@id='componentGrid-grid_toppager_left']//td[@title='Add Row']"), 5);
 			if (AddRow != null)
 			{
 				AddRow.TryClick();
@@ -363,20 +359,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 
-			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
 			if (listOfMenuItems.IsNullOrEmpty())
 			{
 				Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
 				Report.Screenshot();
 				Report.Info($"Is the page showing spacing as bottom of the page?");
 				Report.Info($"Attempting to scroll to the top of the page...");
-				SeleniumBrowser.WebBrowser.ScrollToTopOfPage();
+				SeleniumWebDriver.CurrentDriver.ScrollToTopOfPage();
 				Report.Screenshot();
 				Report.Info($"switching to correct iframe...");
-				IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.Id("Widget3FRAME"));
-				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("Widget3FRAME"), 2);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 				Report.Info($"Attempting to regrab the menu items...");
-				listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+				listOfMenuItems = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
 				if (listOfMenuItems.IsNullOrEmpty())
 				{
 					Report.Info($"The list of menu items 'ReadOnlyCollection' was found to be null or empty");
@@ -397,13 +393,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingMenuItem == null)
 			{
-				Report.Info("Failed to find menu item: " + menuItem);
+				Report.Info($"Failed to find menu item: { menuItem }");
 				return false;
 			}
 
 			if (!matchingMenuItem.TryClick())
 			{
-				Report.Info("Failed to click menu item: " + menuItem);
+				Report.Info($"Failed to click menu item: { menuItem }");
 			}
 
 			if (submenuItem.Length > 0)
@@ -413,14 +409,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				if (matchingSubMenuItem == null)
 				{
-					Report.Info("Failed to find sub menu item: " + submenuItem);
+					Report.Info($"Failed to find sub menu item: { submenuItem }");
 					return false;
 				}
 
 
 				if (!matchingSubMenuItem.TryClick())
 				{
-					Report.Info("Failed to click sub menu item: " + submenuItem);
+					Report.Info($"Failed to click sub menu item: { submenuItem }");
 				}
 			}
 

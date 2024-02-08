@@ -5304,24 +5304,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var product = (ProductInformation)Context.GetFromContext(casIdsavedAs);
 				string casId = product.Id;
-				string casIdTest = "WPS" + casId;
+				string casIdTest = string.Concat("WPS", casId);
 				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 					"Power designer has opened");
 				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "Manage components");
-				Delay.Seconds(3);
+				
 				var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 				thisPowerDesignerPlus.Wait_for_load(60);
-				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
+				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"), 10);
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
-				Delay.Seconds(3);
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.AddRowClick(), "Failed to click on AddRow icon", "Succesfully clicked on AddRow icon");
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
-				Delay.Seconds(10);
-				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"));
+				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.Id("modalDialogFrameFrm"),30);
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
-				Delay.Seconds(3);
 				thisStudioPowerDesignerPlusDesignMode.AddComponent(casIdTest, compName, casId);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
