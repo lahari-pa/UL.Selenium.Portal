@@ -966,8 +966,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	public class DeleteRowsWarning : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");
-		public IWebElement DeleteRowsWarningPopupOkButton => ContainerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
-		public IWebElement DeleteRowsWarningPopupCancelButton => ContainerElement.FindElement(By.XPath("//button[text()='Cancel']"), 2);
+		public IWebElement DeleteRowsWarningPopupOkButton => this.ContainerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
+		public IWebElement DeleteRowsWarningPopupCancelButton => this.ContainerElement.FindElement(By.XPath("//button[text()='Cancel']"), 2);
 
 	}
 

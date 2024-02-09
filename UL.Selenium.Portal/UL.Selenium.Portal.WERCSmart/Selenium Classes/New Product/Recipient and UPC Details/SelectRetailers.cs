@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				return retailerInput.Selected;
 			}
-			Report.Error("Could not find retailer: " + retailer);
+			Report.Error($"Could not find retailer: {retailer}");
 			return false;
 		}
 
