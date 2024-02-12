@@ -152,12 +152,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		}
 		#endregion
 		#region Table Row
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter: (.*)")]
-		public void IngredientsTableRowEnterPercent(string searchType, string searchText, string columnLabel, string inputText)
+		internal IngredientsTableRow IngredientsRowSearchTypeGet(string searchType, string searchText)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
-			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
-			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
 			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
 			switch (searchType)
 			{
@@ -173,6 +170,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.Error("Error: Invalid Search Type");
 					break;
 			}
+			return ingredientRow;
+		}
+
+		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter: (.*)")]
+		public void IngredientsTableRowEnterPercent(string searchType, string searchText, string columnLabel, string inputText)
+		{
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellTextInputExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column text input does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column text input does exist.");
 			Report.IsTrue(ingredientRow.CellTextInputEnterText(columnLabel, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input failed to enter text '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input enter text '{inputText}'.");
 			string displayedText = ingredientRow.CellTextInputText(columnLabel);
@@ -185,21 +192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellCheckBoxExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box does exist.");
 			Report.IsTrue(ingredientRow.CellCheckBoxClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column check box.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column check box.");
 		}
@@ -211,21 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellCheckBoxExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box does exist.");
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
@@ -237,21 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellCheckBoxExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box does exist.");
 			if (ingredientRow.CellCheckBoxIsChecked(columnLabel) != expected)
 			{
@@ -266,21 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column select.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column select.");
 		}
@@ -292,21 +243,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionExists(columnLabel, optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "does not" : "does")} exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {does_doesnot} exist.");
 		}
@@ -317,21 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
@@ -343,21 +266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(string.Equals(ingredientRow.CellSelectValue(columnLabel), optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "is not" : "is")} selected.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {is_isnot} selected.");
 		}
@@ -368,21 +277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.RowRemoveButtonExists(), $"Failure, {searchType}:'{searchText}' row remove button does not exist.", $"Success, {searchType}:'{searchText}' row remove button does exist.");
 		}
 
@@ -392,21 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
-			IngredientsTableRow ingredientRow = new IngredientsTableRow(null);
-			switch (searchType)
-			{
-				case "component name":
-					Report.IsTrue(ingredientsTable.IngredientsRowChemicalNameExists(searchText), $"Failure, ingredients table row with component name '{searchText}' is not displayed.", $"Success, ingredients table row with component name '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowChemicalNameGet(searchText);
-					break;
-				case "CAS number":
-					Report.IsTrue(ingredientsTable.IngredientsRowCASNumberExists(searchText), $"Failure, ingredients table row with CAS number '{searchText}' is not  not displayed.", $"Success, ingredients table row with CAS number '{searchText}' is displayed.");
-					ingredientRow = ingredientsTable.IngredientsRowCASNumberGet(searchText);
-					break;
-				default:
-					Report.Error("Error: Invalid Search Type");
-					break;
-			}
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.RowRemoveButtonExists(), $"Failure, {searchType}:'{searchText}' row remove button does not exist.", $"Success, {searchType}:'{searchText}' row remove button does exist.");
 			Report.IsTrue(ingredientRow.RowRemoveButtonClick(), $"Failure, failed to click {searchType}:'{searchText}' row remove button.", $"Success, clicked {searchType}:'{searchText}' row remove button.");
 		}
