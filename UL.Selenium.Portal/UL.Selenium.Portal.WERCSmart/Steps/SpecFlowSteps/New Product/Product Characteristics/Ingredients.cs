@@ -520,6 +520,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 			foreach(TableRow inputRow in inputTable.Rows)
 			{
+				string[] searchTypes = new string[] { "component name", "CAS number" };
+				Report.IsTrue(searchTypes.Contains(inputRow["SearchType"]),$"Failure, '{inputRow["SearchType"]}' is not a valid search type ('component name' or 'CAS number').",$"Success, '{inputRow["SearchType"]}' is a valid search type.");
 				Report.StartSubStep($"In the Ingredients section, add component with {inputRow["SearchType"]}: {inputRow["SearchText"]}");
 				this.IngredientsTableAddIngredientBy(inputRow["SearchType"], inputRow["SearchText"]);
 				Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Percent' column text input enter: {inputRow["Percent"]}");
