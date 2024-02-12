@@ -124,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
 			bool expected = is_isnot == "is";
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(searchBoxPrototype.SearchResultExists(searchText) == expected, $"Failure, '{searchText}' search result {(expected?"is not":"is")} displayed.", $"Success, '{searchText}' search result {is_isnot} displayed.");
+			Report.IsTrue(searchBoxPrototype.SearchResultTextExists(searchText) == expected, $"Failure, '{searchText}' search result {(expected?"is not":"is")} displayed.", $"Success, '{searchText}' search result {is_isnot} displayed.");
 		}
 
 		[StepDefinition(@"In the search input pop-up, search and select: (.*)")]
@@ -134,8 +134,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(searchBoxPrototype.SearchInputExists(), $"Failure, search input box does not exist.", $"Success, search input box exists.");
 			Report.IsTrue(searchBoxPrototype.SearchInputEnterText(searchText), $"Failure, failed to enter '{searchText}' in search input box.", $"Success, entered '{searchText}' in search input box.");
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(searchBoxPrototype.SearchResultExists(searchText), $"Failure, '{searchText}' search result is not displayed.", $"Success, '{searchText}' search result is displayed.");
-			Report.IsTrue(searchBoxPrototype.SearchResultClick(searchText), $"Failure, failed to click '{searchText}' search result.", $"Success, clicked '{searchText}' search result.");
+			Report.IsTrue(searchBoxPrototype.SearchResultTextExists(searchText), $"Failure, '{searchText}' search result is not displayed.", $"Success, '{searchText}' search result is displayed.");
+			Report.IsTrue(searchBoxPrototype.SearchResultTextGet(searchText).Click(), $"Failure, failed to click '{searchText}' search result.", $"Success, clicked '{searchText}' search result.");
 			searchBoxPrototype.WaitForContainerToBeInvisible();
 		}
 

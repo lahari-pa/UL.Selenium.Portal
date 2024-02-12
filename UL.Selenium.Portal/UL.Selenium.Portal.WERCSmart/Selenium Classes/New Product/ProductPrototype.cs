@@ -21,6 +21,8 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using System.Drawing;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -198,16 +200,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 		#endregion
 	}
+
+	public class SearchBoxResult
+	{
+		#region Page Objects
+		private IWebElement ContainerElement { get; set; }
+		public string ResultText => this.ContainerElement?.Text;
+		public string ComponentName => this.ContainerElement.FindElement(By.XPath(".//span[@class='component-name']"), 1)?.Text;
+		public string CASNumber => this.ContainerElement.FindElement(By.XPath(".//span[@class='text-muted']"), 1)?.Text;
+		public List<string> SynonymList => this.ContainerElement.FindElements(By.XPath(".//li"), 1).Select(x => x?.Text).ToList();
+		public bool Highlighted => this.ContainerElement.GetAttribute("class").Contains("-highlighted");
+		public string DisplayName => this.ComponentName.IsNullOrEmpty() ? this.ResultText : this.ComponentName;
+		#endregion
+		#region Methods
+		public SearchBoxResult(IWebElement searchBoxComponent)
+		{
+			this.ContainerElement = searchBoxComponent;
+		}
+
+		public bool Click()
+		{
+			Report.Info($"Attempting to click '{this.DisplayName}' search result.");
+			return this.ContainerElement.TryClick();
+		}
+		#endregion
+	}
+
 	public class SearchBoxPrototype:SeleniumBaseObject
 	{
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath($"//span[contains(@class,'select2-container--open')][.//input[@type='search']]");
 		private IWebElement SearchInput => this.FindElement(By.XPath(".//input[@type='search']"),1);
-		public List<IWebElement> SearchResultsList => this.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).ToList();
-		private IWebElement SearchResult(string searchText) => this.SearchResultsList.Where(x => x.Text.ToLower().Contains(searchText.ToLower())).FirstOrDefault();
+		List<SearchBoxResult> SearchResultList => this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).Select(x => new SearchBoxResult(x)).ToList();
 		private IWebElement SearchResultAlert(string alertText) => this.FindElement(By.XPath($".//li[@role='alert'][@text()='{alertText}']"), 1);
-		private IWebElement SearchResultHighlighted => this.SearchResultsList.Where(x => x.GetAttribute("class").Contains("-highlighted")).FirstOrDefault();
-
+		private IWebElement SearchResultLoading => this.FindElement(By.XPath(".//li[.//div[@class='loading']]"), 1);
 		#endregion
 
 		#region Methods
@@ -215,6 +241,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info($"Attempting to confirm search input box exists.");
 			return this.SearchInput != null;
+		}
+
+		public bool SearchInputClick()
+		{
+			Report.Info($"Attempting to click search input box.");
+			return this.SearchInput.TryClick();
 		}
 
 		public bool SearchInputEnterText(string text)
@@ -232,25 +264,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SearchResultsExists()
 		{
 			Report.Info($"Attempting to confirm search results exist.");
-			return !this.SearchResultsList.IsNullOrEmpty();
+			return !this.SearchResultList.IsNullOrEmpty();
+		}
+		
+		public bool SearchResultTextExists(string searchText)
+		{
+			Report.Info($"Attempting to confirm text: '{searchText}' search result exists.");
+			return this.SearchResultList.Any(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
-		public bool SearchResultExists(string searchText)
+		public bool SearchComponentExists(string searchText)
 		{
-			Report.Info($"Attempting to confirm '{searchText}' search result exists.");
-			return this.SearchResult(searchText) != null;
+			Report.Info($"Attempting to confirm component name: '{searchText}' search result exists.");
+			return this.SearchResultList.Any(x => x.ComponentName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
-		public bool SearchResultClick(string searchText)
+		public bool SearchCASNumberExists(string searchText)
 		{
-			Report.Info($"Attempting to click '{searchText}' search result.");
-			return this.SearchResult(searchText).TryClick();
+			Report.Info($"Attempting to confirm CAS number: '{searchText}' search result exists.");
+			return this.SearchResultList.Any(x => x.CASNumber.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
-		public bool SearchResultHighlightedExists()
+		public SearchBoxResult SearchResultTextGet(string searchText)
 		{
-			Report.Info($"Attempting to confirm highlighted search result exists.");
-			return this.SearchResultHighlighted != null;
+			Report.Info($"Attempting to get text: '{searchText}' search result.");
+			return this.SearchResultList.Where(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+		}
+
+		public SearchBoxResult SearchComponentGet(string searchText)
+		{
+			Report.Info($"Attempting to get component name: '{searchText}' search result.");
+			return this.SearchResultList.Where(x => x.ComponentName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+		}
+
+		public SearchBoxResult SearchCASNumberGet(string searchText)
+		{
+			Report.Info($"Attempting to get CAS number: '{searchText}' search result.");
+			return this.SearchResultList.Where(x => x.CASNumber.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+		}
+
+		public bool WaitForSearchResults(int waitTime = 30)
+		{
+			return this.SearchResultLoading.WaitForElementToBecomeStale(waitTime);
 		}
 		#endregion
 	}
