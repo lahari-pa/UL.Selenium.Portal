@@ -224,7 +224,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			Delay.Seconds(1);
 			homePage.WaitLoading();
 			Delay.Seconds(1);
-			result = new SearchBoxPrototype().SearchResultClick(value);
+			result = new SearchBoxPrototype().SearchResultTextGet(value).Click();
 			return result;
 		}
 

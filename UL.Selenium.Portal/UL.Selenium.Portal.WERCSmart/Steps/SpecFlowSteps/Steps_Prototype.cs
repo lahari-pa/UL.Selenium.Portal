@@ -647,18 +647,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the 'Create the Kit' page add product: (.*)")]
 		public void CreateTheKitAddProduct(string product)
 		{
-			if(Report.IsTrue(new CreateTheKit().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			CreateTheKit createTheKit = new CreateTheKit();
+			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
+			if(Report.IsTrue(createTheKit.SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
 			{
-				Report.IsTrue(new CreateTheKit().SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
+				Report.IsTrue(createTheKit.SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
 			}
-			if (Report.IsTrue(new SearchBoxPrototype().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			if (Report.IsTrue(searchBoxPrototype.SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
 			{
-				Report.IsTrue(new SearchBoxPrototype().SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
+				Report.IsTrue(searchBoxPrototype.SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
 			}
-			Report.IsTrue(new SearchBoxPrototype().SearchResultsExists(), "Failed to find search results", "Successfully found search results");
+			Report.IsTrue(searchBoxPrototype.SearchResultsExists(), "Failed to find search results", "Successfully found search results");
 			var homePage = new Selenium_Classes.ChooseGoodGuide.ChooseGoodGuide_Homepage();
 			homePage.WaitLoading();
-			Report.IsTrue(new SearchBoxPrototype().SearchResultClick(product), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
+			Report.IsTrue(searchBoxPrototype.SearchComponentGet(product).Click(), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
 		}
 
 		[StepDefinition(@"In the 'Pesticide Details - Canada' in row (.*) enter Pest Control Number: (.*)")]

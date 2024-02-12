@@ -198,6 +198,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new Ingredients().SelectIngredientPublicName(ingredient, publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " + ingredient + " to: " + publicName);
 		}
 
+		[StepDefinition(@"for ingredient: (.*) I select Public Name as: (.*)")]
+		public void ForIngredientISelectPublicNameAs(string ingredient, string publicName)
+		{
+			string casIdTest = string.Concat("WPS", ingredient);
+			Report.IsTrue(new Ingredients().SelectIngredientPublicName(casIdTest, publicName), $"Failed to set public name for ingredient: { casIdTest } to: { publicName }", $"Successfully set public name for ingredient: {ingredient } to: { publicName }");
+	 	}
+
 		[StepDefinition(@"I select the first Public Name dropdown option for ingredient: (.*)")]
 		public void IngredientSelectPublicName(string chemicalName)
 		{
@@ -557,9 +564,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			newProductIngredients.ClickComponentSearchPlaceholder();
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
-			Delay.Seconds(3);
 		}
-
+		[StepDefinition(@"I enter WPSId: (.*) in the component search box")]
+		public void EnterWpsIDComponentSearchBox(string value)
+		{
+			var newProductIngredients = new Ingredients();
+			var product = (ProductInformation)Context.GetFromContext(value);
+			string casId = product.Id;
+			string casIdTest = string.Concat("WPS", casId);
+			newProductIngredients.ClickComponentSearchPlaceholder();
+			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(casIdTest), $"Failed to enter text '{casIdTest}' in the component search box!", $"Successully entered text '{casIdTest}' in the component search box");
+			newProductIngredients.ElementEnterKey();
+		}
 		[StepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
 		public void SearchForAndSelectComponentIngredients(string identifier, string value, string savedAs)
 		{
