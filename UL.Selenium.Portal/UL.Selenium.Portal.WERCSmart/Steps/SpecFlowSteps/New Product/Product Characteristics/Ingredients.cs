@@ -503,6 +503,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
+
+		/// Copy and paste the following tables to create the table structure as needed 
+		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
 		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{
