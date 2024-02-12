@@ -10,6 +10,8 @@
 @wercsmart
 @RetailPartners
 @run_CVSRCL
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
 
 Feature: CVS RCL
 
@@ -323,6 +325,10 @@ Scenario: [74188] CVS Store Brand Associations and verification
 	Given I navigate to the home page
 	Given I save the UPC number 050428290231 as: UPC74188
 	Given I delete all products with UPC Number: saved as UPC74188
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+	Then 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74188
