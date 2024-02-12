@@ -12,6 +12,8 @@
 @run_CVSRCL
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 
 Feature: CVS RCL
 
@@ -328,9 +330,12 @@ Scenario: [74188] CVS Store Brand Associations and verification
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-	Then 
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Lip Balm
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Lip Balm
+	Then in the The Product page, I click Continue
+	Then In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74188
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
