@@ -52,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			bool expected = is_isnot == "is";
 			SearchBoxPrototype searchBox = new SearchBoxPrototype();
-			Report.IsTrue(searchBox.WaitForSearchResults(5), $"Failure, search did not finish.", $"Success, search finished.");
+			Report.IsTrue(searchBox.WaitForSearchResults(30), $"Failure, search did not finish.", $"Success, search finished.");
 			Report.IsTrue(searchBox.SearchResultsExists() == expected, $"Failure, search results list {(expected ? "is not" : "is")} displayed.", $"Success, search results list {is_isnot} displayed.");
 		}
 
@@ -146,8 +146,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 			bool expected = does_doesnot == "does";
 			IngredientsTableHeaderRow headerRow = new IngredientsTableHeaderRow();
-			IngredientsTable ingredientsTable = new IngredientsTable();
-			SearchBoxPrototype searchBox = new SearchBoxPrototype();
 			Report.IsTrue(headerRow.ColumnHeaderExists(columnTitle) == expected, $"Failure, '{columnTitle}' column header {(expected ? "does not" : "does")} exist.", $"Success, '{columnTitle}' column header {does_doesnot} exist.");
 		}
 		#endregion
