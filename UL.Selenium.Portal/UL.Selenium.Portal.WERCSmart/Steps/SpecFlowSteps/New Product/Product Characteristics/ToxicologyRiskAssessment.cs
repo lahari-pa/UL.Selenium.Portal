@@ -19,5 +19,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("I want a TRA performed on the registration", value);
 		}
+
+		[StepDefinition(@"I enter the text of Toxicology Risk Assessment field to: (.*)")]
+		public void GivenEnterToxicologyRiskAssessmentValue(string value)
+		{
+			Report.Info($"I set the text of Toxicology Risk Assessment field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Toxicological Risk Assessments are an analysis of the Human health risk for specific audiences", value);
+		}
+
+		[StepDefinition(@"I enter the text of You've completed the additional information needed for the TRA field to: (.*)")]
+		public void GivenEnterYouveCompletedTheAdditionalInformationNeededForTheTRAValue(string value)
+		{
+			Report.Info($"I set the text of You've completed the additional information needed for the TRA field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("You've completed the additional information needed for the TRA", value);
+		}
+
 	}
 }
