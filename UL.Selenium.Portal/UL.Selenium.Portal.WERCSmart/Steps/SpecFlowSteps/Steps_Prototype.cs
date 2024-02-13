@@ -663,6 +663,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(searchBoxPrototype.SearchComponentGet(product).Click(), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
 		}
 
+		[StepDefinition(@"In the 'Pesticide Details - Canada' in row (.*) enter Pest Control Number: (.*)")]
+		public void EnterPestControlNumber(int rowNumber, string value)
+		{
+			if (Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).RowNumberExists(), $"Failed to find row # {rowNumber}", "Successfully found row # {rowNumber}"))
+			{
+				Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).EnterPCN(value), "Failed to enter text in PCN input field", "Successfully entered text in PCN input field");
+			}
+		}
+		[StepDefinition(@"In the 'Pesticide Details - Canada' in row (.*) click Remove Icon")]
+		public void ClickRemoveIcon(int rowNumber)
+		{
+			if (Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).RowNumberExists(), $"Failed to find row # {rowNumber}", "Successfully found row # {rowNumber}"))
+			{
+				Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).ClickRemoveIcon(), $"Failed to click Remove Icon for row {rowNumber}", $"Successfully clicked Remove Icon for row {rowNumber}");
+			}
+		}
+		[StepDefinition(@"I confirm the pop up (should|should not) be displayed with the heading: (.*)")]
+		public void ThenIConfirmThePopUpShowsTheHeading(string condition, string title)
+		{
+			if (condition == "should")
+			{
+				if (Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible"))
+				{
+					string actualTitle = new ModalDialog().GetTitle();
+					Report.IsTrue(actualTitle == title, $"Title is {actualTitle}, but should be: {title}",
+						$"Title is showing as expected: {title}");
+				}
+			}
+			else
+			{
+				Report.IsFalse(new ModalDialog().WaitForContainerToBeVisible(), "The modal is visible, but it is not expected", "The modal is not visible as expected");
+			}
+		}
+
+
 		[StepDefinition(@"I click Done on Select Retailers window")]
 		public void IClickDoneButtonOnSelectRetailersWindow()
 		{
