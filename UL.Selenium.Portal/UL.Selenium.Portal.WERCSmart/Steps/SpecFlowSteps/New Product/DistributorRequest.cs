@@ -26,5 +26,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Manufacturer's UPC for the Product", value);
 		}
+
+		[StepDefinition(@"I enter the text of Product Name field to: (.*)")]
+		public void GivenEnterProductNameValue(string value)
+		{
+			Report.Info($"I set the text of Product Name field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("Product Name", value);
+		}
+
+		[StepDefinition(@"I enter the text of The Manufacturer has not yet approved the request. field to: (.*)")]
+		public void GivenEnterTheManufacturerHasNotYetApprovedTheRequestValue(string value)
+		{
+			Report.Info($"I set the text of The Manufacturer has not yet approved the request. field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("The Manufacturer has not yet approved the request", value);
+		}
 	}
 }
