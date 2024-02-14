@@ -47,18 +47,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).ColorHighlighting(days), $"Failed to confirm row color highlighting indicates item is expiring in less then {days} for state {state}", $"Successfully confirmed row color highlighting indicates item is expiring in less then {days} for state {state}");
 		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details section I verify check mark in Expiration Imported column (should|should not) be displayed for state: (.*)")]
-		public void VerifyCheckMarkinExpirationImported(string condition, string state)
+		[StepDefinition(@"In Pesticide Details - State Registration Details section I verify check mark in Expiration Imported column (is|is not) displayed for state: (.*)")]
+		public void VerifyCheckMarkinExpirationImported(string is_isnot, string state)
 		{
-			if (condition == "should")
-			{
-				Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column exists for state {state}", $"Successfully confirmed check mark in Expiration Imported column exists for state {state}");
-			}
-			else
-			{
-				Report.IsFalse(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column doesn't exist for state {state}", $"Successfully confirmed check mark in Expiration Imported column doesn't exist for state {state}");
-
-			}
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark() == expected, $"Failure, check mark in Expiration Imported column {(expected ? "is not" : "is")} displayed for state {state}.", $"Success, check mark in Expiration Imported column {is_isnot} displayed for state {state}.");
 		}
 		[StepDefinition(@"In the Pesticide Details - State Registration Details section, select the status: (Registered|Restricted, Not Registered|No State Registration Required|Pending State Registration) for all states with no status preselected")]
 		public void SelectStatusForAllStates(string status)
