@@ -29,10 +29,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: (Yes|No)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand \(Private Label, Store Brand\) product ' to: (Yes|No)")]
 		public void SelectProductIsRetailerPrivateLabel(string option)
 		{
-			string section = "Product is a Retailer's Private Label or Brand";
+			string section = "Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer \(Goods Not for Resale\)' to: (Yes|No)")]
@@ -57,6 +57,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void SelectCountriesTheProductMayBeSold(string option)
 		{
 			string section = "Select countries the product may be sold in";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\)' to: (United States|Canada)")]
+		public void SelectCountriesTheProductMayBeSoldUSCanada(string option)
+		{
+			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)\?' to: (Yes|No)")]
@@ -107,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: (.*)")]
 		public void SelectTheCountryOfOrigin(string option)
 		{
-			string section = "Would you like to set the product as Item Preview";
+			string section = "Select the product's Country of Origin";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 	}
