@@ -749,3 +749,78 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	And I confirm the Product UPC window has opened
 	Then In the SHA UPC list I should see the case pack asterisk for the UPC: saved as UPC1196331
 	And I close the current window and switch to the main window in Studio
+
+	@TestCase:217540
+Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Data
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I generate a random UPC number and save as: UPC217540
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
+	Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
+	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC217540, container type: Plastic Container and size: 2 - do not click continue
+	Then I click continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And If purchase details are showing click confirm order
+	And I navigate to the home page
+
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase217540A	
+	Given I generate a random UPC number and save as: UPC217540A
+	Given I call Shared Step (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I call Shared Step 104290 (Enter Regulatory Information - TSCA Not Prop 65)
+	
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC217540A, container type: Plastic bag and size: 2 - do not click continue
+	Then I click continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase217540B
+	Given I generate a random UPC number and save as: UPC217540B
+	Given I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+	Given I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| CVS      |
+		| Canadian Tire         |
+	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC217540B, container type: Plastic Container and size: 2 - do not click continue
+	Then I click continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	
+	Given in the Optional Comments page I click Continue
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And If purchase details are showing click confirm order
+	And I navigate to the home page	
