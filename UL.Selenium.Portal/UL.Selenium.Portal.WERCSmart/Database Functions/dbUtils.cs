@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.TReVor.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes.Configuration;
 
 namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {
@@ -14,10 +15,10 @@ namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 			switch (TReVorSettings.SoftwareBranch)
 			{
 				case "Development":
-					connectionString = ConfigurationManager.ConnectionStrings["WERCSmartDev"].ConnectionString;
+					connectionString = WercsmartConfig.CurrentConfig.ConnectionStrings.DevelopmentConnectionString;
 					break;
 				case "Staging":
-					connectionString = ConfigurationManager.ConnectionStrings["WERCSmartDev"].ConnectionString;
+					connectionString = WercsmartConfig.CurrentConfig.ConnectionStrings.DevelopmentConnectionString;
 					//Report.Error("Staging connection string is not available yet");
 					break;
 				default:

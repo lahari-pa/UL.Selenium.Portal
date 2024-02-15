@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "DevelopmentConnectionString": "Data Source=wpssql2012deva.thewercs.local;Initial Catalog=WebPortalV3;Integrated Security=True;Connection Timeout=120"
+  }
+}
