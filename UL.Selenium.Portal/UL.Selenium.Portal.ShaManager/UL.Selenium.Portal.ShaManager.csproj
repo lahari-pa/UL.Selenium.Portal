@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net8.0-windows</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,7 +41,7 @@
 		<!-- ===== MISC. PACKAGE(S) ===== -->
 
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
-		<PackageReference Include="iTextSharp" Version="5.5.11" />
+		<PackageReference Include="iTextSharp" Version="5.5.13.3" />
 		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

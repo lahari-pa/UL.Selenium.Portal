@@ -3319,7 +3319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
 		{
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
+			Report.IsTrue(pesticideDetailsStateObject.EnterEpaPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
 		}
 
 		[StepDefinition(@"I set first VOC option to: 'Yes'")]

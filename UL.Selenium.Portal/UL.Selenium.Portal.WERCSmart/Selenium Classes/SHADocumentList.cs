@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
@@ -14,6 +12,7 @@ using UL.Automation.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using System;
 using System.Net;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -123,39 +122,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return null;
 		}
-
-		public string DocumentText(string address)
-		{
-		
-			var reader = new PdfReader(new Uri(address));
-			var output = new StringWriter();
-			Report.Info("Attempting to get Document Text");
-			for (int i = 1; i <= reader.NumberOfPages; i++)
-			{
-				Report.Info($"Getting text for page: {i}");
-				output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));
-			}
-			return output.ToString();
-		}
-
-
-		public void DownloadFileFromURL(string url, string downloadPath)
-		{
-			using (WebClient client = new WebClient())
-			{
-				client.DownloadFile(url,downloadPath);
-			}
-
-		}
-		//static async Task DownloadFile(string url, string filePath)
-		//{
-		//	using (var wc = new WebClient())
-		//	{
-		//		await wc.DownloadFileTaskAsync(url, filePath);
-
-		//	}
-		//}
-
-
 	}
 }

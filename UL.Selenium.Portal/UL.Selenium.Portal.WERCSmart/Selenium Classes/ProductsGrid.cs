@@ -635,7 +635,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					if (delDialog.ClickDelete())
 					{
 						Report.Info("Clicked 'delete'");
-						new DashboardPage().RefreshPageObject();
 						Delay.Seconds(10);
 						GeneralUtilities.Wait_for_load_finish();
 						//Delay.Seconds(3);

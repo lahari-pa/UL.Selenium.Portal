@@ -1,3 +1,6 @@
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Parser;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +24,6 @@ using System.Collections.ObjectModel;
 using UL.Automation.Utilities.Functions;
 using TReVor.Api.Wrapper.Classes;
 using System.Diagnostics;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using TReVor.Core.Classes.Software;
 using UL.Selenium.Portal.WERCSmart.Extensions;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
@@ -31,6 +32,8 @@ using UL.Automation.TReVor.Classes;
 using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
 using Mailosaur;
 using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.Utilities;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -1181,7 +1184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var email = (Mailosaur.Models.Message)Context.GetFromContext("Matching");
-				// string emailBody = MailosaurFunctions.GetEmailBody(email);
+				// string emailBody = MailosaurHelpers.DefaultMailbox.GetEmailBody(email);
 				string emailBody = MailosaurHelpers.DefaultMailbox.GetEmailBody(email);
 
 				//Report.Info("Body of the Email was: " + emailBody);
@@ -2224,7 +2227,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that the file saved as: (.*) contains text")]
 		public void CheckThatFileSavedAsContainsText(string fileSavedAs)
 		{
-		
 			var thisSHADocument = new SHADocumentList();
 			Delay.Seconds(3);
 			Report.Screenshot();
@@ -2233,15 +2235,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
-
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
+			
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText!=null, "PDF does not contains text","PDF does contain text");		
 
@@ -2250,7 +2245,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
 		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs,string searchText)
 		{
-
 			var thisSHADocument = new SHADocumentList();
 			Delay.Seconds(3);
 			Report.Screenshot();
@@ -2260,17 +2254,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(searchText), "PDF does not contain the text", "PDF does contain the text");
-
 		}
 
 

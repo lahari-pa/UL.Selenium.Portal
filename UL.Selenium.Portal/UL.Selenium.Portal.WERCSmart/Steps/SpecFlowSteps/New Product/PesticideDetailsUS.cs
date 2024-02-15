@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void EnterEPANO(string option)
 		{
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(option), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
+			Report.IsTrue(pesticideDetailsStateObject.EnterEpaPesticideRegistrationNo(option), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
 		}
 		[StepDefinition(@"In the Pesticide Details - U.S. Section, click Add Row in the EPA Registration Table")]
 		public void ClickAddRow()

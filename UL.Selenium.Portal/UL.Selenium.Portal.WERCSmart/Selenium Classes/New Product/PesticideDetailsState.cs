@@ -14,7 +14,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using OpenQA.Selenium.DevTools.V108.DOM;
 using NPOI.SS.Formula.Functions;
 using TechTalk.SpecFlow.CommonModels;
-using iTextSharp.text;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -151,15 +150,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string GetPesticideRegKellyExpirationDate(string state)
 		{
-			IWebElement EPATable = this.Table();
-			if (EPATable == null)
+			IWebElement epaTable = this.Table();
+			if (epaTable == null)
 			{
 				Report.Failure("The State Pesticide Registration Table could not be found");
 				Report.Screenshot();
 				return null;
 			}
 
-			IWebElement kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
+			IWebElement kellyExpirationDateInput = epaTable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
 			if (kellyExpirationDateInput == null)
 			{
 				Report.Failure("Failed to find a match on the State text: '" + state + "'");
@@ -429,7 +428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement calendar = this.containerElement.FindElement(By.XPath("//div[text()='" + state + "']/../following-sibling::td//input[@data-date-format=\"yyyy-mm-dd\"]"), 2);
 			return calendar.TryEnterText(date);
 		}
-		public bool EnterEPAPesticideRegistrationNo(string enterText)
+		public bool EnterEpaPesticideRegistrationNo(string enterText)
 		{
 			IWebElement textField = this.containerElement.FindElement(By.XPath("//th[text()='EPA Pesticide Registration No.']/../../following-sibling::tbody//input"), 2);
 			return textField.TryEnterText(enterText);

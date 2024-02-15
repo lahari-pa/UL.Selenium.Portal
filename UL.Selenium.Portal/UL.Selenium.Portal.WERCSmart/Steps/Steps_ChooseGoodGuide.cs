@@ -16,6 +16,7 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Utilities;
+using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -382,7 +383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				case ("Email"):
 					{
-						value = MailosaurFunctions.CreateEmail(value);
+						value = MailosaurHelpers.DefaultMailbox.CreateEmail(value);
 						Context.AddToContext("AccountEmailAddress", value);
 						accountCreation.Email = value;
 						Report.IsTrue(accountCreation.Email == value, "Failed to enter the email address: " + value, "Successfully entered the email address: " + value);
@@ -498,10 +499,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			bool passed = MailosaurFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
+			bool passed = MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived(emailTitle, emailToFind);
 			if (!passed)
 			{
-				passed = MailosaurFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
+				passed = MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived(emailTitle, emailToFind);
 			}
 			Report.IsTrue(passed, "Email has not arrived as expected", "Email has arrived as expected");
 		}

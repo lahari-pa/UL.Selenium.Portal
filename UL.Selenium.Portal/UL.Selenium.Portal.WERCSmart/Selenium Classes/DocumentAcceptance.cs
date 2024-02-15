@@ -1,16 +1,16 @@
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.SpecFlow.Classes;
 using System.Collections.ObjectModel;
+using UL.Automation.Utilities;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -214,16 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public string DocumentText(string address)
-		{
-			var reader = new PdfReader(address);
-			var output = new StringWriter();
-			for (int i = 1; i <= reader.NumberOfPages; i++)
-			{
-				output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));
-			}
-			return output.ToString();
-		}
+		public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdf(address, new SimpleTextExtractionStrategy());
 
 		public bool ConfirmDocumentAcceptancePageIsShowing()
 		{

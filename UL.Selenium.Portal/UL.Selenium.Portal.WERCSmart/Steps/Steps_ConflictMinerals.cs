@@ -8,8 +8,10 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Automation.Utilities;
+using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using Message = Mailosaur.Models.Message;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -297,7 +299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("Signup Confirmation", emailToFind),
+			Report.IsTrue(MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("Signup Confirmation", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
@@ -310,7 +312,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("New CARP Account Created", emailToFind),
+
+			Report.IsTrue(MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("New CARP Account Created", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
@@ -325,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			for (int i = 0; i < 30; i++)
 			{
-				if (MailosaurFunctions.CheckEmailHasArrived("New Verification Code", emailToFind))
+				if (MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("New Verification Code", emailToFind))
 				{
 					Report.Success("Verification code has been found");
 					return;
@@ -369,9 +372,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			IOrderedEnumerable<Email> ListOfEmails = MailosaurFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
-				.OrderByDescending(y => y.CreationDate);
-			Email thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
+			IOrderedEnumerable<Message> ListOfEmails = MailosaurHelpers.DefaultMailbox.GetAllEmailsForEmailAddress(emailToFind)
+				.OrderByDescending(y => y.Received);
+
+			Message thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
 
 			if (thisEmail == null)
 			{

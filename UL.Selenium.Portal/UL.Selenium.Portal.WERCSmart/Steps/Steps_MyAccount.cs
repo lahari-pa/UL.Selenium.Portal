@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
 using static NUnit.Framework.Internal.OSPlatform;
 using UL.Automation.Utilities.Mailosaur.Classes;
+using Message = Mailosaur.Models.Message;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -443,7 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info("Email Address = " + emailAddress);
 					}
 					// adding this to allow checking for confirmation email to the new user
-					//MailosaurFunctions.StoreCurrentInbox(emailAddress);
+					//MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(emailAddress);
 					MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
@@ -902,7 +903,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < Convert.ToInt32(userCount); i++)
 			{
 				string myDate = DateTime.Now.ToString("HHmmssddMMyy");
-				string myEmail = MailosaurFunctions.CreateEmail(myDate);
+				string myEmail = MailosaurHelpers.DefaultMailbox.CreateEmail(myDate);
 				if (myEmail == "")
 				{
 					throw new Exception("Failed to Create a New Email Address");
@@ -1384,7 +1385,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
 			var emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 			var email = Context.GetFromContext("CurrentEmail").ToString();
-			List<Email> differences = MailosaurFunctions.GetInboxDifferences(email);
+			List<Message> differences = MailosaurHelpers.DefaultMailbox.GetInboxDifferences(email);
 			Report.Info("Checking that email differences have been found...");
 			if (differences.FirstOrDefault() == null)
 			{
@@ -1392,7 +1393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.Info("Emails have been found!");
-			Email matchingEmail = differences.FirstOrDefault(x => x.From != null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
+			Message matchingEmail = differences.FirstOrDefault(x => x.From != null && x.From.FirstOrDefault()?.Email.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
 			if (matchingEmail == null)
 			{
 				Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");

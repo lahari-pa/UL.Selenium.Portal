@@ -19,10 +19,9 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using TReVor.Core.Classes.Software;
 using NUnit.Framework;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2600,16 +2599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
@@ -2642,16 +2632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
@@ -2673,18 +2654,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
-
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / English twice", "PDF contains NGHS / English twice");
@@ -2704,22 +2675,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
-
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/Français");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / Français twice", "PDF contains NGHS / English twice");
-
 		}
 
 

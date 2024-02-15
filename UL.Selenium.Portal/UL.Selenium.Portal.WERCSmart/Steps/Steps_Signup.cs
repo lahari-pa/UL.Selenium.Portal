@@ -109,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Setting up account details for user: '" + savedAs + "'");
 				WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
-				account.Email = MailosaurFunctions.CreateEmail(account.Email);
+				account.Email = MailosaurHelpers.DefaultMailbox.CreateEmail(account.Email);
 				account.Identifier = savedAs;
 				Context.AddToContext(savedAs, account, true);
 				Report.Success("Account details saved!");
@@ -465,7 +465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Storing inbox for address: " + user.Email);
-				MailosaurFunctions.StoreCurrentInbox(user.Email);
+				MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(user.Email);
 				Report.Success("Inbox stored successfully!");
 			}
 			catch (Exception ex)
