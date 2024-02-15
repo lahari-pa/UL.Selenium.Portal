@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "StepsPrototype")]
 	class Steps_Prototype
 	{
-		[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
+		//[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option),
@@ -49,8 +49,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully set radio option: '{option}'");
 		}
 
-		[StepDefinition(@"I set the (.*) field to: (.*)")]
-		[StepDefinition(@"I set the (.*) option to: (.*)")]
+		//[StepDefinition(@"I set the (.*) field to: (.*)")]
+		//[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -159,25 +159,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the tab with url: (.*)")]
 		public void CloseTabWithUrl(string url)
 		{
-			SeleniumBrowser.CloseTabWithURL(url);
-			Report.IsTrue(!SeleniumBrowser.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
+			SeleniumWebDriver.CurrentDriver.CloseTabWithURL(url);
+			Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
 		}
 		[StepDefinition(@"I confirm the tab (should|should not) exists with url: (.*)")]
 		public void NewTabShouldExists(string condition, string url)
 		{
 			if (condition == "should")
 			{
-				Report.IsTrue(SeleniumBrowser.GetTabURLs().Contains(url), $"Failed to confirm new tab exists with url {url}", $"Successfully confirmed new tab exists with url {url}");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), $"Failed to confirm new tab exists with url {url}", $"Successfully confirmed new tab exists with url {url}");
 			}
 			else
 			{
-				Report.IsTrue(!SeleniumBrowser.GetTabURLs().Contains(url), $"Failed confirm new tab does not exist with url {url}", $"Successfully confirmed new tab does not exist with url {url}");
+				Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), $"Failed confirm new tab does not exist with url {url}", $"Successfully confirmed new tab does not exist with url {url}");
 			}
 		}
 		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Confirm File is downloaded with name: " + file);
+			Report.StartStep($"{Report.Details.StepIndex} - Confirm File is downloaded with name: {file}");
 			try
 			{
 				Delay.Seconds(10);
@@ -361,13 +361,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
 		}
-		[StepDefinition(@"I click the button (.*) for section: (.*)")]
+		//[StepDefinition(@"I click the button (.*) for section: (.*)")]
 		public void ClickButtonForSection(string section, string button)
 		{
 			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
 		}
 
-		[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
+		//[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
 		{
 			if (condition == "should")
@@ -483,7 +483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					$"Successfully confirmed checkbox '{description}' is not displayed, as expected");
 			}
 		}
-		[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		//[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
 		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
 			var selNewProduct = new NewProduct();
@@ -514,7 +514,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"The checkbox is {check}ed as expected");
 		}
 
-		[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		//[StepDefinition(@"(.*) should be showing the value: (.*)")]
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
 			if (value.StartsWith("~saved as"))
