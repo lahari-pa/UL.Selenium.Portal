@@ -4,8 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Castle.Core.Internal;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
@@ -17,6 +16,7 @@ using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Steps;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
@@ -113,22 +113,8 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return null;
         }
 
-        public string DocumentText(string address)
-        {
-            var reader = new PdfReader(new Uri(address));
-            var output = new StringWriter();
-            for (int i = 1; i <= reader.NumberOfPages; i++)
-            {
-                output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));
-            }
-            return output.ToString();
-        }
-
-
-
+        public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdfUri(address, new SimpleTextExtractionStrategy());
         
-
-
         #endregion
 
         public class Widget : SeleniumBaseObject

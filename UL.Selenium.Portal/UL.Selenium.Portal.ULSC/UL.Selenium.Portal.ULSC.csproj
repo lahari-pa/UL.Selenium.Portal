@@ -41,7 +41,6 @@
     <!-- ===== MISC. PACKAGE(S) ===== -->
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
-    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -51,5 +50,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="automationSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="specflow.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

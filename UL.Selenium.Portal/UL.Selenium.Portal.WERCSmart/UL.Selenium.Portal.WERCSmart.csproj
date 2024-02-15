@@ -11,11 +11,7 @@
 
   <ItemGroup>
     <!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
-    
-    <PackageReference Include="itext7" Version="8.0.3" />
-    
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
-    
+
     <PackageReference Include="UL.Automation" Version="5.1.95" />
     <PackageReference Include="UL.Automation.Framework.NUnit" Version="5.1.95" />
     <PackageReference Include="UL.Automation.Reporting.Html" Version="5.1.95" />
@@ -50,7 +46,9 @@
 
     <!-- ===== MISC. PACKAGE(S) ===== -->
 
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />    
+    <PackageReference Include="itext7" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <!--<PackageReference Include="iTextSharp" Version="5.5.13.3" />-->
     <!--<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -60,7 +58,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\SHA Manager\" />
-    <Folder Include="Steps\SpecFlowSteps\New Product\Recipient and UPC Details\" />
+    <None Update="automationSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="specflow.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

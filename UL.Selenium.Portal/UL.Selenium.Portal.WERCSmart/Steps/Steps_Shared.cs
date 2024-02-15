@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
+using TReVor.Integrations.Classes.Configuration;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
@@ -8238,6 +8239,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 23195 \(Login into WERCSmart Portal - Administrator Role\)")]
 		public void Shared23195_LoginToWercSmartPortal_AdministratorRole()
 		{
+			var tst = TReVorConfig.CurrentSettings;
+			var allRecs = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.AllRecords;
+
 			var selGlobalSteps = new GlobalSteps();
 			selGlobalSteps.LoginToAccount("ProductAccount");
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();

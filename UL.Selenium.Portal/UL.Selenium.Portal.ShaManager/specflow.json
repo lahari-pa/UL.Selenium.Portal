@@ -1,0 +1,12 @@
+﻿{
+  "bindingCulture": {
+    "name": "en-us"
+  },
+  "language": {
+    "feature": "en-us"
+  },
+  "stepAssemblies": [
+    { "assembly": "UL.Automation.SpecFlow" },
+    { "assembly": "UL.Selenium.Portal.WERCSmart" }
+  ]
+}

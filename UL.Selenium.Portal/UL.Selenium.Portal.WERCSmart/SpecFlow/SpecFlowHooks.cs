@@ -22,11 +22,13 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 		{
 			this.PerformBranchSkipLogic(container, "Staging");
 		}
+
 		[BeforeScenario("OnlyInStaging")]
 		public void RunOnlyInStagingLogic(IObjectContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "QA-Integration");
 		}
+
 		private void PerformBranchSkipLogic(IObjectContainer container, string targetBranchName)
 		{
 			string branchName = this.GetBranchName();
