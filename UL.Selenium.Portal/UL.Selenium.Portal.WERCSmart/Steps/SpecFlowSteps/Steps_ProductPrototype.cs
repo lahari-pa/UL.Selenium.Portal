@@ -105,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[StepDefinition(@"In section: (.*), click search text box")]
-		public void InSectionEnterSearchText(string section)
+		public void InSectionClickSearchText(string section)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();

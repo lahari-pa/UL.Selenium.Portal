@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string section = "Type of Product (select)";
 			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
 			//new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			productPrototype.InSectionEnterSearchText(section);
+			productPrototype.InSectionClickSearchText(section);
 			productPrototype.InSearchPopUpSearchAndSelect(option);
 		}
 
