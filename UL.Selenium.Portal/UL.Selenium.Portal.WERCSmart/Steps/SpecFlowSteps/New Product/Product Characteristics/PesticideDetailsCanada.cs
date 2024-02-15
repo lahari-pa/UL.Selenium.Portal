@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -97,12 +99,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the 'Pesticide Details - Canada' in row number (.*) enter 'Canada\'s 5-Digit Pest Control Number\(s\) \(PCN\) or 8-Digit Drug Identification Number\(s\) \(DIN\)': (.*)")]
 		public void SetOptionForCanadas5DigitPestControlNumbers(int rowNumber, string value)
 		{
-			new Steps_Prototype().EnterPestControlNumber(rowNumber, value);
+			if (Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).RowNumberExists(), $"Failed to find row # {rowNumber}", "Successfully found row # {rowNumber}"))
+			{
+				Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).EnterPCN(value), "Failed to enter text in PCN input field", "Successfully entered text in PCN input field");
+			}
 		}
 		[StepDefinition(@"In the 'Pesticide Details - Canada' in the table 'Canada\'s 5-Digit Pest Control Number\(s\) \(PCN\) or 8-Digit Drug Identification Number\(s\) \(DIN\)' click Remove Icon for row number: (.*)")]
 		public void SetOptionForCanadas5DigitPestControlNumbers(int rowNumber)
 		{
-			new Steps_Prototype().ClickRemoveIcon(rowNumber);
+			if (Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).RowNumberExists(), $"Failed to find row # {rowNumber}", "Successfully found row # {rowNumber}"))
+			{
+				Report.IsTrue(new PesticideDetailsCanadaTableRow(rowNumber).ClickRemoveIcon(), $"Failed to click Remove Icon for row {rowNumber}", $"Successfully clicked Remove Icon for row {rowNumber}");
+			}
 		}
 		[StepDefinition(@"In the 'Pesticide Details - Canada' after clicking Remove icon in 'Remove Item' modal window click button: (Yes|No)")]
 		public void RemoveItemModalClickYesNo(string button)
