@@ -11,6 +11,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -42,7 +43,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SelectTypeOfProduct(string option)
 		{
 			string section = "Type of Product (select)";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
+			//new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			productPrototype.InSectionEnterSearchText(section);
+			productPrototype.InSearchPopUpSearchAndSelect(option);
 		}
 
 		[StepDefinition(@"In the Product Section, click 'Add new Product Line/Brand name' link")]
