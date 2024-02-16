@@ -85,7 +85,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Jelly, Jam or Preserves
 	Then I save the product information as: TestCase60723
-	Given I call Shared Step 69687 (Product Information - US, No(PL))
+    Given I call Shared Step 74123 (Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up

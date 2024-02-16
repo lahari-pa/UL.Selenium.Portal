@@ -32,4 +32,4 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
     Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Gasoline Container, Portable
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
+    Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase60673
