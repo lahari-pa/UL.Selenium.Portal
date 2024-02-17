@@ -3,6 +3,7 @@
 @Homepage
 @wercsmart
 @run_Batteries
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries
 
 Feature: Batteries
 
@@ -88,33 +89,27 @@ Scenario: [97489] Stand alone Magnesium Battery
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
 @TestCase:97495
 Scenario: [97495] Stand alone Nickel-Cadmium Battery
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel-cadmium battery
 	Then I save the product information as: TestCase97495
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
+	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	Given I click the browse button for document type: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and for control label: Article Information Sheet (AIS) and upload a PDF
+	Then I click continue
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Nickel        | 100     | false               | false       |            |
 	Given I click continue
-	Given I should see the Formulation > Batteries Page
-	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
-	Given I click continue
+	Given I should see the Formulation > Batteries Page	 
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+    Given I click continue
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	And If the UPCs Warning popup is displayed I click OK
-	#And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-	#And I click continue
-	#And I click continue
-	#And I click continue
-	Given I should see the Regulatory Documents to Provide Page
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-	Given I click the browse button for document type: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and for control label: Article Information Sheet (AIS) and upload a PDF
 	Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -122,7 +117,7 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I click continue
 	And I should see the Data Acceptance Page
-	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97495
 
