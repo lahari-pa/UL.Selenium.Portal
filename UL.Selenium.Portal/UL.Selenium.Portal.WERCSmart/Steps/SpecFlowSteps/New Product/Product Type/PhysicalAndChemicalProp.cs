@@ -81,12 +81,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
 		public void SelectCheckboxForBoilingPoint()
 		{
-			string section = "Boiling Point (in Celsius)";
+			string section = "check";
 			string text = "I do not have exact Boiling Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point \(in Celsius\)' to: (<= 20C \(68F\)|20.1C \(68.1F\) - 35C \(95F\)|>35C \(95F\) - 37.7C \(99.9F\)|> 37.7C \(99.9F\)|Not tested/Unknown)")]
@@ -105,12 +105,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point \(in Celsius\)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
 		public void SelectCheckboxForFlashPoint()
 		{
-			string section = "Flash Point (in Celsius)";
+			string section = "check";
 			string text = "I do not have exact Flash Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point \(in Celsius\)' to: (<23C|>=23C and <38C|>=38C and <=60C|>60C and <=93C|>=93C and <=815C|Not Tested/Unknown|None, No Flash Point)")]
@@ -154,8 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to:
-		(Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: (Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
 		public void SelectIngredientsFacilityProcesses(string option)
 		{
 			string section = "Product is manufactured in a facility that processes, or contains";
@@ -179,8 +178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye\(s\)' to:
-		(FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye\(s\)' to: (FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
 		public void SelectArtificalDyes(string option)
 		{
 			string section = "Product contains the following artificial dye(s)";

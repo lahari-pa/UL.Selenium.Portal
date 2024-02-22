@@ -120,6 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
 		public void ShouldBeShowingFollowing(string section, string option)
 		{
+			Delay.Seconds(10);
 			var dataSummarySheet = new DataSummary();
 
 			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);

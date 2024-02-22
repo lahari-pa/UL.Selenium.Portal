@@ -36,15 +36,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.Info($"I upload PDF document to Flash Point Testing Report field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Flash Point Testing Report", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Flash Point Document", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
+		[StepDefinition(@"I upload PDF document to Upload SDS \(Optional\) field")]
 		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
 			Report.Info($"I upload PDF document to OSHA-compliant Safety Data Sheet (Optional) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("OSHA-compliant Safety Data Sheet (Optional)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[StepDefinition(@"I upload PDF document to International Fragrance Association (IFRA) field")]
