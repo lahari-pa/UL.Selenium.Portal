@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		}
 
 		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
-		public void EnterUPCInformation(string upc, string containerType, string size)
+		public void EnterUPCInformation(string upc, string size, string containerType)
 		{		
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,

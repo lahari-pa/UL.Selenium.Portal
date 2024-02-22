@@ -605,6 +605,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+		[StepDefinition(@"I set the additional option for section (.*) to: (.*)")]
+		public void SectExatcDataNotKnown(string section, string option)
+		{
+			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
+				$"Failed to set the input to {option} in section: {section}",
+				$"Successfully set the input to {option} in section: {section}");
+		}
+
+		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
+		public void ShouldBeShowingFollowing(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);
+			Report.IsTrue(found.Contains(option),
+					$"Option was not as expected! Expected: {option} in section: {section} but got: {string.Join(",", found)}",
+					$"Option was showing: {option} in section: {section}");
+		}
 
 	}
 }

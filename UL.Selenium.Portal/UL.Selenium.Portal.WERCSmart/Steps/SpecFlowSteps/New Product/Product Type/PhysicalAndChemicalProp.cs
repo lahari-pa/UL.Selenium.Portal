@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "pH";
 			string text = "I do not have exact pH data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().SectExatcDataNotKnown(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'pH' to: (<= 2|2.1 - 3.9|4 - 6.9|7 \(Neutral\)|7.1 - 9.9|10 - 12.4|>= 12.5|Not tested/Unknown)")]
@@ -81,12 +81,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
 		public void SelectCheckboxForBoilingPoint()
 		{
 			string section = "Boiling Point (in Celsius)";
 			string text = "I do not have exact Boiling Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().SectExatcDataNotKnown(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point \(in Celsius\)' to: (<= 20C \(68F\)|20.1C \(68.1F\) - 35C \(95F\)|>35C \(95F\) - 37.7C \(99.9F\)|> 37.7C \(99.9F\)|Not tested/Unknown)")]
@@ -105,12 +105,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point \(in Celsius\)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
 		public void SelectCheckboxForFlashPoint()
 		{
 			string section = "Flash Point (in Celsius)";
 			string text = "I do not have exact Flash Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().SectExatcDataNotKnown(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point \(in Celsius\)' to: (<23C|>=23C and <38C|>=38C and <=60C|>60C and <=93C|>=93C and <=815C|Not Tested/Unknown|None, No Flash Point)")]
