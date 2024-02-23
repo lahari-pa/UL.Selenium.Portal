@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide")]
 	internal class AdditionalDocumentsToProvide
 	{
-		[StepDefinition(@"I upload PDF document to Packaged Product Photo (front and back) field")]
+		[StepDefinition(@"I upload PDF document to Packaged Product Photo \(front and back\) field")]
 		public void UploadPDFDocumentToPackagedProductPhotoFrontAndBack()
 		{
 			Report.Info($"I upload PDF document to Packaged Product Photo (front and back) field");
@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Flash Point Testing Report", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
+		[StepDefinition(@"I upload PDF document to Upload SDS \(Optional\) field")]
 		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
 			Report.Info($"I upload PDF document to OSHA-compliant Safety Data Sheet (Optional) field");
@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("OSHA-compliant Safety Data Sheet (Optional)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to International Fragrance Association (IFRA) field")]
+		[StepDefinition(@"I upload PDF document to International Fragrance Association \(IFRA\) field")]
 		public void UploadPDFDocumentToInternationalFragranceAssociationIFRA()
 		{
 			Report.Info($"I upload PDF document to International Fragrance Association (IFRA) field");
@@ -55,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("International Fragrance Association (IFRA)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Generally Recognized as Safe (GRAS) field")]
+		[StepDefinition(@"I upload PDF document to Generally Recognized as Safe \(GRAS\) field")]
 		public void UploadPDFDocumentToGenerallyRecognizedAsSafeGRAS()
 		{
 			Report.Info($"I upload PDF document to Generally Recognized as Safe (GRAS) field");
@@ -63,20 +63,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Generally Recognized as Safe (GRAS)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Toxicity Characteristic Leaching Procedure (TCLP) field")]
+		[StepDefinition(@"I upload PDF document to Toxicity Characteristic Leaching Procedure \(TCLP\) field")]
 		public void UploadPDFDocumentToToxicityCharacteristicLeachingProcedureTCLP()
 		{
 			Report.Info($"I upload PDF document to Toxicity Characteristic Leaching Procedure (TCLP) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
-		}
-
-		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
-		public void UploadPDFDocumentToUploadFullProductLabelRequired()
-		{
-			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
-			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[StepDefinition(@"I upload PDF document to Upload Volatile Organic Compounds field")]
@@ -86,7 +78,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Volatile Organic Compounds", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
-		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
+
+		[StepDefinition(@"I upload PDF document to Upload Full Product Label \(required\) field")]
 		public void UploadPDFDocumentToFullProductLabelRequired()
 		{
 			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
@@ -94,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Provide Full Product Label (required) field")]
+		[StepDefinition(@"I upload PDF document to Provide Full Product Label \(required\) field")]
 		public void UploadPDFDocumentToProvideFullProductLabelRequired()
 		{
 			Report.Info($"I upload PDF document to Provide Full Product Label (required) field");
@@ -102,7 +95,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Provide Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to California Air Resources Board (CARB) Executive Order field")]
+		[StepDefinition(@"I upload PDF document to California Air Resources Board \(CARB\) Executive Order field")]
 		public void UploadPDFDocumentToCaliforniaAirResourcesBoardCARBExecutiveOrder()
 		{
 			Report.Info($"I upload PDF document to California Air Resources Board (CARB) Executive Order field");
