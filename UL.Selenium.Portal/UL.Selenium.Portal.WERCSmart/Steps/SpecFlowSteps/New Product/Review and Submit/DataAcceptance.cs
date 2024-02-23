@@ -22,6 +22,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string button = "Summary";
 			new Steps_Prototype().ClickButton(button);
 		}
+		[StepDefinition(@"In the Data Acceptance Section, click 'Accept' button")]
+		public void ClickAcceptButton()
+		{
+			string button = "Accept";
+			new Steps_Prototype().ClickButton(button);
+		}
 		[StepDefinition(@"In the Data Acceptance Section, I confirm text 'Data Acceptance' text (should|should not) be displayed")]
 		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText(string condition)
 		{

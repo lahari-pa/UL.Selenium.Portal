@@ -131,6 +131,7 @@ And in the Ratailer page I click Continue
 And in the Additional Documents to Provide page I click Continue
 And in the Optional Comments page I click Continue
 And In the Data Acceptance page I select Agreed
+
 Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Beer
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
 
@@ -210,6 +211,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
 	Then I close the Data Summary Tab
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
