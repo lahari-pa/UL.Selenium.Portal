@@ -201,6 +201,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then I should be on the Additional Documents to Provide Page
 	Then in the Optional Comments page, I click Continue
 	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, I confirm text 'Data Acceptance' text should be displayed
 	Then In the Data Acceptance Section, click 'Summary' button
 	Then I switch to the Data Summary page
 	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Alcoholic Beverages - Wine

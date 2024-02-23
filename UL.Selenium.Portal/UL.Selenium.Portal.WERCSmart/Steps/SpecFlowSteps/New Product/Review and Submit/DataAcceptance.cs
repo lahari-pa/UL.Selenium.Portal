@@ -22,5 +22,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string button = "Summary";
 			new Steps_Prototype().ClickButton(button);
 		}
+		[StepDefinition(@"In the Data Acceptance Section, I confirm text 'Data Acceptance' text (should|should not) be displayed")]
+		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText(string condition)
+		{
+			string section = "Data Acceptance";
+			string[] correctText =
+			{
+			"UL’s WERCSmart recipients rely on UL WERCSmart assessments that are performed based on the data you provide about a product. Inaccurate registration data may lead to fines and unsafe working conditions (e.g. related to handling, storage, transportation and disposal of the product) and, ultimately, your organization may incur liability.",
+			"By submitting this registration, you confirm that data provided is accurate and complete. If you also provided a Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label, you confirm the document is compliant with the respective regulations for the region(s) selected for sale of the product. You also confirm the document(s) provided are the most current version and the documents accurately reflect the product being registered.",
+			"Should UL have any questions regarding your registration, the data will be suspended or rejected and you will be notified via electronic mail (e-mail). To avoid delays, please verify your contact information is accurate below, as well as within the My Account area of UL’s WERCSmart product."
+			};
+			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText, condition);
+
+		}
 	}
 }
