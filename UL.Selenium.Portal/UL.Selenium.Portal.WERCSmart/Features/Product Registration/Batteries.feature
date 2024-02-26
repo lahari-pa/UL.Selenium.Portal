@@ -105,7 +105,7 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Then I should see the Product Information Page
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	When In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 	Then I should see the Regulatory Documents to Provide Page	
@@ -117,7 +117,7 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Then I should see the Physical and Chemical Properties Page
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with' set the option to: No
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -166,7 +166,7 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Then I should see the Product Information Page
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	When In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 	Then I should see the Regulatory Documents to Provide Page	
@@ -178,7 +178,7 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Then I should see the Physical and Chemical Properties Page
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with' set the option to: No
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
