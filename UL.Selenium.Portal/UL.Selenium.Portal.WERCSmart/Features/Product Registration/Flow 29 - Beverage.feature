@@ -23,6 +23,7 @@
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 Feature: Flow 29 - Beverage
 
 
@@ -131,7 +132,6 @@ And in the Ratailer page I click Continue
 And in the Additional Documents to Provide page I click Continue
 And in the Optional Comments page I click Continue
 And In the Data Acceptance page I select Agreed
-
 Then I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Beer
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
 
@@ -189,6 +189,11 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then in the Transportation Details 1 page, I click Continue
 	Then I should be on the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the 'Select retailers' window I should only see the following retailers:
+		| Retailer									|
+		| Walgreens									|
+		| No Retailer/No UPC Product				|
+		| Publix								    |
 	Then In the Select Retailers window, select retailer: Walgreens
 	Then In the Select Retailers window, click 'Done' button
 	Then In the Retailer Section, for retailer: Walgreens select 'Indicate full name of product, as sold, via this retailer' option: Walgreens
@@ -199,7 +204,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 	Then I should be on the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page, I click Continue
-	Then I should be on the Additional Documents to Provide Page
+	Then I should be on the Optional Comments Page
 	Then in the Optional Comments page, I click Continue
 	Then I should be on the Data Acceptance Page
 	Then In the Data Acceptance Section, I confirm text 'Data Acceptance' text should be displayed
@@ -210,9 +215,17 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then In the Summary Page, the 'Percent of Alcohol in the Product (numeric entry only)' section should be showing the following value: 23
 	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
 	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 12.3
+	Then In the Summary Page, verify table data in column Retailers showing the value: WG
 	Then I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+	Then I search for the product saved as: TestCase105007
+	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
@@ -225,7 +238,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	#Given in the Additional Documents to Provide section page I click Continue
 	#Given in the optional comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
 
 
 # Created by Saikiran Chittampally
