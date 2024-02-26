@@ -204,12 +204,13 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then I should be on the Data Acceptance Page
 	Then In the Data Acceptance Section, I confirm text 'Data Acceptance' text should be displayed
 	Then In the Data Acceptance Section, click 'Summary' button
-	Then I switch to the Data Summary page
+	Then I switch to the tab with Data Summary page
 	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Alcoholic Beverages - Wine
 	Then In the Summary Page, the 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' section should be showing the following value: Yes
 	Then In the Summary Page, the 'Percent of Alcohol in the Product (numeric entry only)' section should be showing the following value: 23
 	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
-	Then I close the Data Summary Tab
+	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
+	Then I close the tab with Data Summary page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -223,7 +224,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	#Given in the Additional Documents to Provide section page I click Continue
 	#Given in the optional comments page I click Continue
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
 
 
