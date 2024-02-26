@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with' set the option to: (Yes|No)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with a pH <= 2 or a pH >= 12.5\?' set the option to: (Yes|No)")]
 		public void SelectProductContainsMicrobeads(string option)
 		{
 			string section = "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?";
@@ -129,8 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to:
-		(Cloth not soluble|Completely soluble|Dispersible|Immiscible|Insoluble in water|Miscible|Miscible in water|Moderately soluble|Mostly soluble|Negligible|No data available|Partially soluble|Soluble in water)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: (Cloth not soluble|Completely soluble|Dispersible|Immiscible|Insoluble in water|Miscible|Miscible in water|Moderately soluble|Mostly soluble|Negligible|No data available|Partially soluble|Soluble in water)")]
 		public void SelectWaterSolubility(string option)
 		{
 			string section = "Select the best Water Solubility description";

@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "StepsPrototype")]
 	class Steps_Prototype
 	{
-		[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
+		//[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option),
@@ -49,8 +49,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully set radio option: '{option}'");
 		}
 
-		[StepDefinition(@"I set the (.*) field to: (.*)")]
-		[StepDefinition(@"I set the (.*) option to: (.*)")]
+		//[StepDefinition(@"I set the (.*) field to: (.*)")]
+		//[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -125,6 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
+		[StepDefinition(@"Click link element with test: (.*)")]
 
 		public void ClickLinkElement(string linkText)
 		{
@@ -133,6 +134,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(new NewProduct().LinkElementClick(linkText), $"Failed to click link element with text {linkText}", $"Successfully clicked link element with text {linkText}");
 			}
 		}
+		[StepDefinition(@"Confirm link element (should|should not) exists with test: (.*)")]
+
 		public void LinkElementExists(string condition, string linkText)
 		{
 			if (condition == "should")
@@ -156,25 +159,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the tab with url: (.*)")]
 		public void CloseTabWithUrl(string url)
 		{
-			SeleniumBrowser.CloseTabWithURL(url);
-			Report.IsTrue(!SeleniumBrowser.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
+			SeleniumWebDriver.CurrentDriver.CloseTabWithURL(url);
+			Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
 		}
 		[StepDefinition(@"I confirm the tab (should|should not) exists with url: (.*)")]
 		public void NewTabShouldExists(string condition, string url)
 		{
 			if (condition == "should")
 			{
-				Report.IsTrue(SeleniumBrowser.GetTabURLs().Contains(url), $"Failed to confirm new tab exists with url {url}", $"Successfully confirmed new tab exists with url {url}");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), $"Failed to confirm new tab exists with url {url}", $"Successfully confirmed new tab exists with url {url}");
 			}
 			else
 			{
-				Report.IsTrue(!SeleniumBrowser.GetTabURLs().Contains(url), $"Failed confirm new tab does not exist with url {url}", $"Successfully confirmed new tab does not exist with url {url}");
+				Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), $"Failed confirm new tab does not exist with url {url}", $"Successfully confirmed new tab does not exist with url {url}");
 			}
 		}
 		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Confirm File is downloaded with name: " + file);
+			Report.StartStep($"{Report.Details.StepIndex} - Confirm File is downloaded with name: {file}");
 			try
 			{
 				Delay.Seconds(10);
@@ -358,13 +361,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
 		}
-		[StepDefinition(@"I click the button (.*) for section: (.*)")]
+		//[StepDefinition(@"I click the button (.*) for section: (.*)")]
 		public void ClickButtonForSection(string section, string button)
 		{
 			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
 		}
 
-		[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
+		//[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
 		{
 			if (condition == "should")
@@ -410,40 +413,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Message: '{alert}' is displayed as expected");
 		}
 
-		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for select option (.*)")]
-		public void EnterBatterySelectOption(string value, string option)
-		{
-			Report.IsTrue(new ProductIncludesBattery().SetSelectBatteriesOptions(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
-		}
-
-		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for input option (.*)")]
-		public void EnterBatteryInputInformation(string value, string option)
-		{
-			Report.IsTrue(new ProductIncludesBattery().EnterInputBatteriesOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
-
-		}
-
-		[StepDefinition(@"In the Product Includes Battery page enter value (.*) for search select option (.*)")]
-		public void EnterBatterySearchSelectInformation(string value, string option)
-		{
-			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption(option, value), $"Failed to enter {value} in {option} field", $"Succesfully entered {value} in {option} field");
-		}
-		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
-		public void IClickTheInputSectionAndSelect(string section, string selection)
-		{
-			var reports = new OptionalReports();
-			Report.IsTrue(reports.SelectInputForSection(section, selection), $"Failed to select input {selection} for section {section}.",
-				$"Successfully selected input {selection} for section {section}.");
-		}
-
-		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
-		public void TotalForSectionShouldEqual(string section, string value)
-		{
-			var reports = new OptionalReports();
-			Report.IsTrue(reports.CheckTotalForSection(section, value), $"Failed to find the correct value {value} for section {section}.",
-				$"Successfully found correct value {value} for section {section}.");
-		}
-
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
@@ -463,12 +432,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
-		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
-		{
-			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
-		}
 		[StepDefinition(@"I click button: (.*)")]
 		public void ClickButton(string button)
 		{
@@ -481,54 +444,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully clicked button {button}");
 			}
 		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I set the following data: (.*) for the following state: (.*)")]
-		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).EnterDate(date), $"Failed to enter a State Expiration Date {date} for state {state}", $"Successfully entered a State Expiration Date {date} for state {state}");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I select status: (.*) for the following state: (.*)")]
-		public void GivenISetTheFollowingStatus(string status, string state)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).EnterStatus(status), $"Failed to select status {status} for state {state}", $"Successfully selected status {status} for state {state}");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify expiration date for state: (.*)")]
-		public void VerifyDateIsPrefilled(string state)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).DateIsPrefilled(state), $"Failed to confirm State Expiration Date for state {state} is prefilled", $"Successfully confirmed State Expiration Date for state {state} is prefilled");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify status: (.*) is selected for the following state: (.*)")]
-		public void StatusIsSelectedForTheState(string status, string state)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).SelectedStatusForState(status), $"Failed to confirm status {status} is selected for state {state}", $"Successfully confirmed status {status} is selected for state {state}");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify row color highlighting indicates item is expiring in less then (31|90) for state: (.*)")]
-		public void VerifyRowColor(string days, string state)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).ColorHighlighting(days), $"Failed to confirm row color highlighting indicates item is expiring in less then {days} for state {state}", $"Successfully confirmed row color highlighting indicates item is expiring in less then {days} for state {state}");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I verify check mark in Expiration Imported column (should|should not) be displayed for state: (.*)")]
-		public void VerifyCheckMerk(string condition, string state)
-		{
-			if (condition == "should")
-			{
-				Report.IsTrue(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column exists for state {state}", $"Successfully confirmed check mark in Expiration Imported column exists for state {state}");
-			}
-			else
-			{
-				Report.IsFalse(new PesticideDetailsStateRegistrationRow(state).VerifyExpirationImportedMark(), $"Failed to confirm check mark in Expiration Imported column doesn't exist for state {state}", $"Successfully confirmed check mark in Expiration Imported column doesn't exist for state {state}");
-
-			}
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I select status: (.*) for the all states with no selected status")]
-		public void GivenISetTheFollowingStatusForAllStates(string status)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationTable().SelectOneStatusForAllStatesWithNoSelectedStatus(status), $"Failed to select status {status} for states with no status selected", $"Successfully selected status {status} for all states with no status selected");
-		}
-		[StepDefinition(@"In Pesticide Details - State Registration Details page I click 'Select All' for status: (.*) for the all states")]
-		public void GivenIClickSelectAllForAllStates(string status)
-		{
-			Report.IsTrue(new PesticideDetailsStateRegistrationTable().ClickSelectAllForStatus(status), $"Failed to click 'Select All' for {status}", $"Successfully clicked 'Select All' for status {status}");
-		}
 
 		[StepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
@@ -539,19 +454,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"value was not as expected! Expected: {expectedValue}, but found: {foundValue}!",
 				$"value was showing: {expectedValue}, as expected!");
 		}
-
-		[StepDefinition(@"I confirm that I see todays VOC Analysis Date")]
-		public void ThenIConfirmThatISeeTodaysVOCAnalysisDate()
-		{
-			string date = DateTime.Now.ToString("MM/dd/yyyy");
-			var newProductpage = new NewProduct();
-			string found = newProductpage.GetValueVOCSummary("VOC Analysis");
-
-			Report.IsTrue(found.Trim() == date.Trim(),
-				$"date was not as expected! Expected: {date}, but found: {found}!",
-				$"statement was showing: {date}, as expected!");
-		}
-
 		[StepDefinition(@"I confirm that the (.*) table (should|should not) exists")]
 		public void ThenIConfirmThatTableExists(string tableName, string condition)
 		{
@@ -563,16 +465,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
-			}
-		}
-
-		[StepDefinition(@"In the VOC for California Air District\(s\) Section, for (.*) area enter 'VOC info' value: (.*)")]
-		public void EnterVOCInfoValue(string area, string value)
-		{
-			var vocForCaliforniaAirDistrict = new VOCForCaliforniaAirDistrict();
-			if (Report.IsTrue(vocForCaliforniaAirDistrict.VocInfoExists(area), $"Failed to confirm VOC Info input field exists for area {area}", $"Successfully confirmed VOC Info input field exists for area {area}"))
-			{
-				Report.IsTrue(vocForCaliforniaAirDistrict.VocInfoEnterText(area, value), $"Failed to enter VOC Info value for area {area}", $"Successfully entered VOC Info value for area {area}");
 			}
 		}
 		[StepDefinition(@"I confirm the checkbox with description: (.*) (should|should not) be displayed")]
@@ -591,7 +483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					$"Successfully confirmed checkbox '{description}' is not displayed, as expected");
 			}
 		}
-		[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		//[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
 		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
 			var selNewProduct = new NewProduct();
@@ -622,7 +514,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"The checkbox is {check}ed as expected");
 		}
 
-		[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		//[StepDefinition(@"(.*) should be showing the value: (.*)")]
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
 			if (value.StartsWith("~saved as"))
@@ -644,84 +536,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the 'Create the Kit' page add product: (.*)")]
-		public void CreateTheKitAddProduct(string product)
+		[StepDefinition(@"I confirm the pop up (should|should not) be displayed with the heading: (.*)")]
+		public void ThenIConfirmThePopUpShowsTheHeading(string condition, string title)
 		{
-			if(Report.IsTrue(new CreateTheKit().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			if (condition == "should")
 			{
-				Report.IsTrue(new CreateTheKit().SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
+				if (Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible"))
+				{
+					string actualTitle = new ModalDialog().GetTitle();
+					Report.IsTrue(actualTitle == title, $"Title is {actualTitle}, but should be: {title}",
+						$"Title is showing as expected: {title}");
+				}
 			}
-			if (Report.IsTrue(new SearchBoxPrototype().SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			else
 			{
-				Report.IsTrue(new SearchBoxPrototype().SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
+				Report.IsFalse(new ModalDialog().WaitForContainerToBeVisible(), "The modal is visible, but it is not expected", "The modal is not visible as expected");
 			}
-			Report.IsTrue(new SearchBoxPrototype().SearchResultsExists(), "Failed to find search results", "Successfully found search results");
-			var homePage = new Selenium_Classes.ChooseGoodGuide.ChooseGoodGuide_Homepage();
-			homePage.WaitLoading();
-			Report.IsTrue(new SearchBoxPrototype().SearchResultClick(product), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
 		}
 
-		[StepDefinition(@"I click Done on Select Retailers window")]
-		public void IClickDoneButtonOnSelectRetailersWindow()
-		{
-			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
-		}
-		[StepDefinition(@"I click the delete icon in the Retailer page")]
-		public void ThenIClickTheDeleteIconInTheRetailerPage()
-		{
-			var retailerObject = new Retailer();
-			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to delete selected retailers", "Successfully deleted selected retailers");
-		}
-		[StepDefinition(@"I select the retailer: (.*)")]
-		public void ISelectTheRetailer(string retailer)
-		{
-			var selectRetailers = new SelectRetailers();
-			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
-		}
 		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
 		public void ClickRetailersOption(string option)
 		{
 			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), $"Failed to click the retailers option: {option}", $"Successfully clicked the retailers option: {option}");
 		}
-		[StepDefinition(@"I (check|uncheck) the retailer: (.*)")]
-		public void CheckUncheckTheRetailer(string condition, string retailer)
-		{
-			Report.IsTrue(new Retailer().CheckUncheckRetailer(condition,  retailer), $"Failed to {condition} retailer: {retailer}!", $"Successfully {condition}ed retailer: {retailer}");
-		}
-		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
-		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
-		{
-			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
-		}
-		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
-		public void RetailerPrivateLabelSelect(string retailer, string option)
-		{
-			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
-		}
-		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select Vendor: (.*)")]
-		public void SelectVendorInRetailerSection(string retailer, string option)
-		{
-			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
-		}
-		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I click 'Add New Supplier' button")]
-		public void ClickAddNewSupplierInRetailerSection(string retailer)
-		{
-			Report.IsTrue(new RetailersRow(retailer).ClickAddNewSupplier(), $"Failed to click 'Add New Supplier' button for {retailer} retailer", $"Successfully clicked 'Add New Supplier' button for {retailer} retailer");
-		}
-		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
-		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
-		{
-			var thisAddNewSupplier = new AddNewSupplier();
-			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierIDInput), "Failed to add supplier ID input",
-				"Entered supplier ID value");
-		}
-		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
-		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
-		{
-			var thisAddNewSupplier = new AddNewSupplier();
-			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
-				"Entered company or brand name value");
-		}
+
 		[StepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{

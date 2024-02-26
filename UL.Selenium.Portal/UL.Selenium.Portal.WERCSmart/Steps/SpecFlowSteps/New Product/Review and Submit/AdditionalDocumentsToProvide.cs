@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
@@ -70,13 +71,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
-		public void UploadPDFDocumentToFullProductLabelRequired()
+		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
+		public void UploadPDFDocumentToUploadFullProductLabelRequired()
 		{
-			Report.Info($"I upload PDF document to Upload Full Product Label (required)  field");
+			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Upload Full Product Label (required) ", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
+		[StepDefinition(@"I upload PDF document to Upload Volatile Organic Compounds field")]
+		public void UploadPDFDocumentToVolatileOrganicCompoundsRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Volatile Organic Compounds field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Volatile Organic Compounds", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+		[StepDefinition(@"I upload PDF document to Upload Full Product Label (required) field")]
+		public void UploadPDFDocumentToFullProductLabelRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Provide Full Product Label (required) field")]
+		public void UploadPDFDocumentToProvideFullProductLabelRequired()
+		{
+			Report.Info($"I upload PDF document to Provide Full Product Label (required) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Provide Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to California Air Resources Board (CARB) Executive Order field")]
+		public void UploadPDFDocumentToCaliforniaAirResourcesBoardCARBExecutiveOrder()
+		{
+			Report.Info($"I upload PDF document to California Air Resources Board (CARB) Executive Order field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("California Air Resources Board (CARB) Executive Order", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I upload PDF document to Upload Transportation Exemption Letter or Special Permit field")]
+		public void UploadPDFDocumentToTransportationExemptionLetterOrSpecialPermitRequired()
+		{
+			Report.Info($"I upload PDF document to Upload Transportation Exemption Letter or Special Permit  field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Transportation Exemption Letter or Special Permit", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
 	}
 }
