@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void SelectRetailers(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
-			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
+			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
 		public void ClickAddRetailers()
