@@ -80,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		}
 
 		[StepDefinition(@"I upload PDF document to Upload Full Product Label \(required\) field")]
-		public void UploadPDFDocumentToFullProductLabelRequired()
+		public void GivenIUploadPDFDocumentToUploadFullProductLabelRequiredField()
 		{
 			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
