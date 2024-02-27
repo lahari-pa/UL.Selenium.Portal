@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient_and_UPC_Details
@@ -26,9 +28,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		}
 
 		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
-		public void EnterUPCInformation(string upc, string size, string containerType)
-		{		
-				var upcInfo = new UpcInformation {
+		public void EnterUPCInformation(string upc, string containerType, string size)
+		{
+
+			if (upc.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					upc = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+
+			var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
 					UpcNumber = upc,

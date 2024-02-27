@@ -26,6 +26,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -138,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-
+			
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
@@ -11236,7 +11237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartSubStep("I set 'Product is shipped directly' to No");
 			stepsProductInformation.SetProductIsShippedDirectlyTo("No");
-			Report.StartSubStep("I set 'Is Retailers Private Brand' to No'");
+			Report.StartSubStep("I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to No'");
 			stepsProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
 			Report.StartSubStep("I set 'Solely for the retailers use' to No'");
 			stepsProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
