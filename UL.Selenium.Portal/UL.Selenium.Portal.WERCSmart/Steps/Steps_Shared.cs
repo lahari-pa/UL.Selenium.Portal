@@ -11237,7 +11237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartSubStep("I set 'Product is shipped directly' to No");
 			stepsProductInformation.SetProductIsShippedDirectlyTo("No");
-			Report.StartSubStep("I set 'Is Retailers Private Brand' to No'");
+			Report.StartSubStep("I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to No'");
 			stepsProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
 			Report.StartSubStep("I set 'Solely for the retailers use' to No'");
 			stepsProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
