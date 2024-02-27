@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: (Yes|No)")]
 		public void SelectProductIsRetailerPrivateLabel(string option)
 		{
-			string section = "Product is a Retailer's Private Label or Brand";
+			string section = "Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer \(Goods Not for Resale\)' to: (Yes|No)")]
