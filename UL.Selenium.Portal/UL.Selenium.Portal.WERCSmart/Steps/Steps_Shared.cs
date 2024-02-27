@@ -681,41 +681,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Toxicity Characteristic Leaching Procedure (TCLP)");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 48369 Toxicity Characteristic Leaching Procedure \(TCLP\) - select No to all with Copper - Click Continue - Happy Path")]
-		public void
-			GivenICallShared61449ToxicityCharacteristicLeachingProcedureTCLP_SelectNoToAllWithCopper_ClickContinue_HappyPath()
-		{
-			Report.UseSubSteps = true;
-			var stepsNewProduct = new StepsNewProduct();
-			var stepsTclp = new Steps_ToxicityCharacteristicsLeachingProcedure();
-			Report.StartSubStep("Toxicity Characteristic Leaching Procedure (TCLP)");
-			stepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
-			Report.StartSubStep("I set the Product has had TCLP testing to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing", "No");
-			Report.StartSubStep("I set the Lead to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Lead", "No");
-			Report.StartSubStep("I set the Mercury to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Mercury", "No");
-			Report.StartSubStep("I set the Silver to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Silver", "No");
-			Report.StartSubStep("I set the Cadmium to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Cadmium", "No");
-			Report.StartSubStep("I set the Chromium to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Chromium", "No");
-			Report.StartSubStep("I set the Barium to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Barium", "No");
-			Report.StartSubStep("I set the Arsenic to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Arsenic", "No");
-			Report.StartSubStep("I set the Selenium to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Selenium", "No");
-			Report.StartSubStep("I set the Copper to: No");
-			stepsNewProduct.SetTheSectionOptionTo("Copper", "No");
-			Report.StartSubStep("I click continue");
-			stepsNewProduct.GivenInTheNewProductPageIClickContinue(
-				"Toxicity Characteristic Leaching Procedure (TCLP)");
-		}
-
 		[StepDefinition(@"I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all")]
 		public void GivenICallShared58189AnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
 		{
@@ -3162,21 +3127,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?", "No");
 			Report.StartSubStep("In the Waste Classification Data page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
-		}
-
-		[StepDefinition(@"I call Shared Step 150905 \(Retailer - NR selected by default - Click Continue - Happy Path\)")]
-		public void ICallSharedRetailer_RetailerNRSelectedByDefault_ClickDone()
-		{
-			Report.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartSubStep("I should see the Retailer Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
-			Report.StartSubStep("In the Retailer page I click Continue");
-			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
-
 		}
 
 		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
