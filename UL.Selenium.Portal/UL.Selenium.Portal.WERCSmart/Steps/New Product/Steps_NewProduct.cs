@@ -254,7 +254,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
-			Delay.Seconds(5);
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
 				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to", $"{page } is showing as expected");
