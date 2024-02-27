@@ -45,6 +45,8 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Battery
+#Removed from regression: 2024/02
+@ignore
 @TestCase:97489
 Scenario: [97489] Stand alone Magnesium Battery
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
