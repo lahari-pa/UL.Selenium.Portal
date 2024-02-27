@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -34,7 +36,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[StepDefinition(@"In the Pesticide Details - U.S. Section, in 'EPA Pesticide Registration No.' enter (.*)")]
 		public void EnterEPANO(string option)
 		{
-			new Steps_Prototype().ThenIEnterTheFollowingEPAPesticideRegistrationNo_(option);
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(option), "Failed to enter EPA Pesticide Registration No.", "Successfully entered EPA Pesticide Registration No.");
 		}
 		[StepDefinition(@"In the Pesticide Details - U.S. Section, click Add Row in the EPA Registration Table")]
 		public void ClickAddRow()
