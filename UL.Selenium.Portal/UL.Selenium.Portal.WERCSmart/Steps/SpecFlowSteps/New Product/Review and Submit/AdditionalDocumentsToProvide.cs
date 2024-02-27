@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Flash Point Testing Report", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[StepDefinition(@"I upload PDF document to Upload SDS (Optional) field")]
+		[StepDefinition(@"I upload PDF document to Upload SDS \(Optional\) field")]
 		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
 			Report.Info($"I upload PDF document to OSHA-compliant Safety Data Sheet (Optional) field");
