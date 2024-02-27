@@ -176,9 +176,16 @@ And in the Ingredients page I click Continue
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
+		# ====== Following the steps from 'Shared Step' 57506 ====== #
+	And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+	And I set the Please select DOT Exceptions if applicable field to: 173.120(a)(4)
+	Given in the Transportation Details 1 page I click Continue
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
-	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+		# ====== Following the steps from 'Shared Step' 62536 ====== #
+	Given I should see the Transportation Details 2 Page
+	And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
+	Given in the Transportation Details 2 page I click Continue
 
 		# ====== Following the steps from 'Shared Step' 57510 ====== #
 	Given I should see the Retailer Page
