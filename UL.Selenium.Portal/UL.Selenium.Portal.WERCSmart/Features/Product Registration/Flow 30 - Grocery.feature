@@ -11,7 +11,6 @@
 @RetailPartners
 @SubEnrollment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
-<<<<<<< HEAD
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
@@ -22,7 +21,6 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:FuelContainerRegulatoryDetails
-=======
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Product
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
@@ -34,7 +32,6 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @GTINAndUPC
->>>>>>> origin/QA
 @run_Flow30_Grocery
 Feature: [64735] Flow 30 - Grocery
 
@@ -84,31 +81,20 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-<<<<<<< HEAD
 
 	# ====== Following the steps from 'Shared Step' 57561 ====== #
-=======
->>>>>>> origin/QA
 	Given I should see the The Product Page
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Condiments, Sauces
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60724
 
-<<<<<<< HEAD
 	# ====== Following the steps from 'Shared Step' 69687 ====== #
-=======
-	# ====== Following the steps from 'Shared Step' 57561 ====== #
->>>>>>> origin/QA
 	Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
 	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
 	Given in the Product Information page I click Continue
 
-<<<<<<< HEAD
-=======
-	# ====== Following the steps from 'Shared Step' 60567 ====== #
->>>>>>> origin/QA
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 	Given in the Regulatory Documents To Provide page I click Continue
 
@@ -117,7 +103,6 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	Given In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 20
 	Given In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
-<<<<<<< HEAD
 	Given In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
 	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
@@ -128,18 +113,6 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: None of the Above
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following sweeteners' to: None of the Above
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye(s)' to: None of the Above
-=======
-	Given I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
-	Given I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: >=23C and <38C
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Select all potential allergens included in this product' to: Dairy
-	And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: None of the Above
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following sweeteners' to: None of the Above
-	And I set the Product contains the following artificial dye(s) field to: None of the Above
->>>>>>> origin/QA
 	Given in the Physical and Chemical Properties page I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -160,10 +133,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60724 enter Size: Glass Container and enter Container Type: 20
 	Given in the Universal Product Code (UPC) page I click Continue
 
-<<<<<<< HEAD
 	# ====== Following the steps from 'Shared Step' 60567 ====== #
-=======
->>>>>>> origin/QA
 	Given I upload PDF document to Upload SDS (Optional) field
 	Given I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
