@@ -142,6 +142,19 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:105007
 Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	#Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
+	#Given I call Shared Step 105009 (Physical and Chemical Properties - Wine Not Regulated <=24% Alcohol)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 105010 (Beverage Regulatory Details Less < 24%)
+	#Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
+	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	#Given in the Additional Documents to Provide section page I click Continue
+	#Given in the optional comments page I click Continue
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC105007
@@ -226,19 +239,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then The home screen should load
 	Then I search for the product saved as: TestCase105007
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
-	#Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
-	#Given I call Shared Step 105009 (Physical and Chemical Properties - Wine Not Regulated <=24% Alcohol)
-	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	#Given I call Shared Step 105010 (Beverage Regulatory Details Less < 24%)
-	#Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
-	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
-	#Given in the Additional Documents to Provide section page I click Continue
-	#Given in the optional comments page I click Continue
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase105007
+	
 
 
 # Created by Saikiran Chittampally
