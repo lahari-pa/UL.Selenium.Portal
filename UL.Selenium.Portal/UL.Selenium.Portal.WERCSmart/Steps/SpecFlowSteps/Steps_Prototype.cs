@@ -613,15 +613,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully set the input to {option} in section: {section}");
 		}
 
-		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
-		public void ShouldBeShowingFollowing(string section, string option)
-		{
-			var dataSummarySheet = new DataSummary();
-			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);
-			Report.IsTrue(found.Contains(option),
-					$"Option was not as expected! Expected: {option} in section: {section} but got: {string.Join(",", found)}",
-					$"Option was showing: {option} in section: {section}");
-		}
-
 	}
 }
