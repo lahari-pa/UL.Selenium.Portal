@@ -605,13 +605,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		[StepDefinition(@"I set the additional option for section (.*) to: (.*)")]
-		public void SectExatcDataNotKnown(string section, string option)
-		{
-			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
-				$"Failed to set the input to {option} in section: {section}",
-				$"Successfully set the input to {option} in section: {section}");
-		}
 
 	}
 }
