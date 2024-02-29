@@ -648,8 +648,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							{
 								delDialog.ClickDelete();
 							}
-							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-							if (row == null)
+							row = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+							if (!row.Displayed)
 							{
 								Report.Info($"The products grid was emtpy");
 								return true;
