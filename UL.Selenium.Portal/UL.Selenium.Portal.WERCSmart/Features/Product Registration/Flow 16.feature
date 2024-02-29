@@ -533,8 +533,8 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
 		Given I add the following batteries:
-	 | Battery Type    | Manufacturer                                                  | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
-	 | Lithium Primary | Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 4                               | 4                                  | lithiumbattery |
+	 | Battery Type    | Manufacturer                                   | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
+	 | Lithium Primary | 2CR5 Primary Cylindrical Battery (WPS 1547109) | 4                                 | 4                                        | lithiumbattery |
 	Given I click continue
 	And I set 'Product has had TCLP; Report is available' to: No
 	And I set the Lead option to: No

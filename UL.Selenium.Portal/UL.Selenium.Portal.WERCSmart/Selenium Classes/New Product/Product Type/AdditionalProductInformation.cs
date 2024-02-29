@@ -143,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			get
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
+					.FirstOrDefault(x => x.Text.Contains("Private Label, Store Brand"))
 					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
@@ -172,7 +172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 				}
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
+					.FirstOrDefault(x => x.Text.Contains("Private Label, Store Brand"))
 					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 
