@@ -122,6 +122,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return isSelected;
 		}
+
+		public bool OptionSetSelect(bool selected, string optionLabel)
+		{
+			bool isSelected = this.OptionSelected(optionLabel);
+			if (isSelected != selected)
+			{
+				isSelected = this.OptionClick(optionLabel);
+			}
+			return this.OptionSelected(optionLabel) == selected;
+		}
 		#endregion
 
 		#region Text Input Methods

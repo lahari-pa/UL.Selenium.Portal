@@ -10,6 +10,10 @@
 @wercsmart
 @RetailPartners
 @run_CVSRCL
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 
 Feature: CVS RCL
 

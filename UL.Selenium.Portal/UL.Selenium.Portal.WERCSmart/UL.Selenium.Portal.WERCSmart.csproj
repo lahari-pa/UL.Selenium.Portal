@@ -31,16 +31,16 @@
   <ItemGroup>
     <!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
     
-    <PackageReference Include="UL.Automation" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.Framework.NUnit" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.Reporting.Html" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.SpecFlow" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.TReVor" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.Utilities" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.Utilities.PDF" Version="5.1.51" />
-    <PackageReference Include="UL.Automation.WebDriver" Version="5.1.51" />
+    <PackageReference Include="UL.Automation" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.Framework.NUnit" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.Reporting.Html" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.Reporting.ProgressDialog" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.SpecFlow" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.TReVor" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.Utilities" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.Utilities.PDF" Version="5.1.90" />
+    <PackageReference Include="UL.Automation.WebDriver" Version="5.1.90" />
 
     <!-- ===== TREVOR PACKAGE(S) ===== -->
 

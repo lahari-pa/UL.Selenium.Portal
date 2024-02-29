@@ -42,9 +42,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			ProductPrototype productPrototype = new ProductPrototype(section);
 			if(Report.IsTrue(productPrototype != null,$"Failure, '{section}' section does not exist.",$"Success, '{section}' section exists."))
 			{
-				if (Report.IsTrue(productPrototype.OptionExists(option),$"Failure, '{option}' radio option does not exist.",$"Success, '{option}' radio option exists."))
+				if (Report.IsTrue(productPrototype.OptionExists(option),$"Failure, '{option}' option does not exist.",$"Success, '{option}' option exists."))
 				{
 					Report.IsTrue(productPrototype.OptionSelect(option),$"Failure, failed to select '{option}' option.",$"Success, selected '{option}' option.");
+				}
+			}
+		}
+
+		[StepDefinition(@"In section: (.*), set option: (.*) so it (is|is not) selected")]
+		public void InSectionSetOptionIsIsNotSelected(string section, string option, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' radio option does not exist.", $"Success, '{option}' radio option exists."))
+				{
+					Report.IsTrue(productPrototype.OptionSetSelect(expected, option), $"Failure, failed to set '{option}' option so it {is_isnot} selected.", $"Success, set '{option}' option so it {is_isnot} selected.");
 				}
 			}
 		}
@@ -91,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[StepDefinition(@"In section: (.*), click search text box")]
-		public void InSectionEnterSearchText(string section)
+		public void InSectionClickSearchText(string section)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
