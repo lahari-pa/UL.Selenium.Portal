@@ -159,20 +159,20 @@ Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 
-    # ====== Following the steps from 'Shared Step' 57408 ====== #
+    # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57561 ====== #
+	# ====== Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol) ====== #
 	Given I should see the The Product Page
 	Given I set 'Type of Product' to: Antiperspirant for Women (Non-Aerosol)
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase159880
 
-    # ====== Following the steps from 'Shared Step' 57401 ====== #
+    # ======Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path) ====== #
     Given I should see the Product Information Page
-	Given Select countries the product may be sold in should be showing the value: United States
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
 	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No
 	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No
 	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product field to: No
@@ -188,20 +188,20 @@ Given I set the When mixed with an equal amount of water, will this produce a so
 Given I set the Select the best Water Solubility description option to: Dispersible
 Given I click continue
 
-# ====== Following the steps from 'Shared Step' 29181 ====== #
+# ====== Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
 And I should see the Ingredients Page
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water         | 100     | false               | false       |            |
 And in the Ingredients page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57503 ====== #
+	# ====== Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57507 ====== #
+	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport option to: Not Regulated
 	Given in the Transportation Details 1 page I click Continue
