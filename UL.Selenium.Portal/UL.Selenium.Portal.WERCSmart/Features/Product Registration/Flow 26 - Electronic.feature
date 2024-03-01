@@ -47,7 +47,7 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 	# ====== Following the steps from 'Shared Step' 60935 ====== #
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
 	Given in the Product Information page I click Continue
@@ -62,10 +62,10 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
     | Alkaline     | <any>        | 6                                 | 6                                        |
 
 	# ====== Following the steps from 'Shared Step' 61449 ====== #
-	    Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
-		And I set the Product has had TCLP testing field to: No
-		Given I set all the metal presence value to: No
-		Given in the Toxicity Characteristic Leaching Procedure (TCLP) page I click Continue
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And I set the Product has had TCLP testing field to: No
+	Given I set all the metal presence value to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page I click Continue
 
 	# ====== Following the steps from 'Shared Step' 57408 ====== #
 	Given I should see the Retailer Page

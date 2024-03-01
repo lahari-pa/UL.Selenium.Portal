@@ -11,6 +11,7 @@
 @RetailPartners
 @SubEnrollment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @run_FLow32_Grocery
 
 Feature: [64739] Flow 32 - Grocery
@@ -38,7 +39,7 @@ And in the New Product page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57561 ====== #
 And I should see the The Product Page
-And I set the Product Name as it a appears on the Package Label field to: Food Item Dispensed by Compressed Gas - Dairy Topping
+And I set 'Product Name' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 #And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
 And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 And in the The Product page I click Continue
@@ -46,12 +47,11 @@ Then I save the product information as: TestCase60774
 
 # ====== Following the steps from 'Shared Step' 60756 ====== #
 And I should see the Product Information Page
-And Select countries the product may be sold in should be showing the value: United States
+And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
 And I set the Select the product's Country of Origin field to: United Kingdom
 And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
 And I set the Product is shipped directly by supplier to the consumer. field to: No
 And I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product field to: No
-And I set the Product is a Retailer's Private Label or Brand field to: No
 And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
 And in the Product Information page I click Continue
 
@@ -83,8 +83,6 @@ Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false               | false       |            |
 And in the Ingredients page I click Continue
-Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 
 # ====== Following the steps from 'Shared Step' 57503 ====== #
 Given I should see the Inventory Status, Prop 65 (US) Page
@@ -144,7 +142,7 @@ Given Type of Product (select) should be showing the following option: Food Item
 Given I close the Data Summary Tab
 Given I should see the Data Acceptance Page
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
 
 @TestCase:60775
 Scenario: [60775] Cooking Oil, Non-Aerosol - RU000942
@@ -168,7 +166,7 @@ And in the New Product page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57561 ====== #
 And I should see the The Product Page
-And I set the Product Name as it a appears on the Package Label field to: Cooking oil - Non-Aerosol
+And I set 'Type of Product' to: Cooking oil - Non-Aerosol
 #And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
 And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 And in the The Product page I click Continue
@@ -176,6 +174,7 @@ Then I save the product information as: TestCase60775
 
 # ====== Following the steps from 'Shared Step' 60756 ====== #
 And I should see the Product Information Page
+And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
 And I set the Select the product's Country of Origin field to: United Kingdom
 And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
 And I set the Product is shipped directly by supplier to the consumer. field to: No
