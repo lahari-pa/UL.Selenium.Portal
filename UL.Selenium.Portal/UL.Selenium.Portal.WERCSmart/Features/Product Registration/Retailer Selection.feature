@@ -12,6 +12,8 @@
 @run_RetailerSelection
 @UPC
 @PaymentMethods
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
+@StepsPrototype
 
 Feature: Retailer Selection
 
@@ -240,7 +242,20 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 	Then I save the product information as: TestCase128920
 	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
+
 	Given I set the Contains Circuit Board option to: No
 	Given I set the Has a LCD or Plasma Display option to: No
 	Then I click continue
