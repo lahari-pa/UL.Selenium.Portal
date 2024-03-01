@@ -35,7 +35,7 @@ Then I save the product information as: TestCase60642
 	Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	Given in the Product Information page I click Continue
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)

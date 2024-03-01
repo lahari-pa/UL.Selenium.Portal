@@ -44,7 +44,6 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	#Given I navigate to the home page
 	#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
-
 @TestCase:58759
 Scenario: [58759] Servers, Small-Scale - RU001183
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -58,7 +57,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	Given in the Product Information page I click Continue
 
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
