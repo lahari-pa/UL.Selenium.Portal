@@ -170,7 +170,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.789
 	Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
 	Then In the Physical and Chemical Properties Section, set the option in section: 'pH' to: 7 (Neutral)
-	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: I do not have exact Boiling Point data available to me
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
 	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: Not Tested/Unknown
@@ -211,7 +211,9 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then in the Retailer page, I click Continue
 	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify option 'Size (Fluid Ounces)' is present
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC105007 enter Size: 12.3 and enter Container Type: Glass Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 	#Given in the Additional Documents to Provide section page I click Continue
 	Then I should be on the Additional Documents to Provide Page
