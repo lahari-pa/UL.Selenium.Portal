@@ -17,6 +17,8 @@
 @SubUpgrade
 @ProductSetUp
 @SubEnrollmentNew
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@StepsPrototype
 @run_Subscription
 
 Feature: Subscription
@@ -695,7 +697,13 @@ Scenario: [105063] Upgrade Subscription Message
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
 	Then I save the product information as: TestCase105063
-	And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+	#And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given in the Product Information page I click Continue
+
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |

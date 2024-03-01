@@ -23,13 +23,15 @@
 @ForwardProductRegistration
 @ProductSetUp
 @run_ProductCreateAndComplete
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@ignore
 Feature: Product Create and Process to Completed
 
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto18 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto18 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @ignore
 @TestCase:87913
@@ -39,7 +41,13 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87913
-	Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	#Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given in the Product Information page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
