@@ -13,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	internal class BeverageRegulatoryDetails
 	{
 
-		[StepDefinition(@"I enter the text of Product's container or liner contains Bisphenol A (BPA) field to: (Yes|No)")]
+		[StepDefinition(@"I enter the text of Product's container or liner contains Bisphenol A \(BPA\) field to: (Yes|No)")]
 		public void GivenEnterProductsContainerOrLinerContainsBisphenolABPAValue(string value)
 		{
 			Report.Info($"I set the text of Product's container or liner contains Bisphenol A (BPA) field to: {value}");
@@ -29,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", value);
 		}
 
-		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: (.*)")]
+		[StepDefinition(@"I enter the text of Percent of Alcohol in the Product \(numeric entry only\) field to: (.*)")]
 		public void GivenEnterPercentOfAlcoholInTheProductValue(string value)
 		{
 			Report.Info($"I set the text of Percent of Alcohol in the Product (numeric entry only) field to: {value}");
