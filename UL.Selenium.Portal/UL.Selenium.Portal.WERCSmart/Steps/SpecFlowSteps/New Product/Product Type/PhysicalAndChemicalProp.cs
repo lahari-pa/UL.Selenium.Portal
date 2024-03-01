@@ -52,9 +52,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'")]
 		public void SelectCheckboxForPH()
 		{
-			string section = "pH";
+			string section = "check";
 			string text = "I do not have exact pH data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'pH' to: (<= 2|2.1 - 3.9|4 - 6.9|7 \(Neutral\)|7.1 - 9.9|10 - 12.4|>= 12.5|Not tested/Unknown)")]
