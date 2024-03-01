@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: I do not have exact Boiling Point data available to me")]
 		public void SelectCheckboxForBoilingPoint()
 		{
 			string section = "check";
