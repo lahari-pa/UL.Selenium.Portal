@@ -62,8 +62,8 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Harbor Freight Tools
-	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
 	Given In the Select Retailers window, click 'Done' button
+	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
 	Given in the Retailer page I click Continue
 
 	# ====== Following the steps from 'Shared Step' 57960 ====== #
@@ -74,7 +74,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 
 	# ====== Following the steps from 'Shared Step' 57883 ====== #
 	Given I upload PDF document to Upload SDS (Optional) field
-	Given I upload PDF document to Upload Full Product Label (required) field
+	Given I upload PDF document to Generic Private Label (all sides) field
 	Then in the Additional Documents To Provide page I click Continue
 	Then in the Optional Comments page I click Continue
 
@@ -86,4 +86,4 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-    Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase60673
+    #Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase60673

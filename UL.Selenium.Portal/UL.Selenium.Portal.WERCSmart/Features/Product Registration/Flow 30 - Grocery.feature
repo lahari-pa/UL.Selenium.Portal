@@ -151,7 +151,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
 
 
 
@@ -187,13 +187,20 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given in the Regulatory Documents To Provide page I click Continue
 
 		# ====== Following the steps from 'Shared Step' 60747 ====== #
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Given In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 20
+	Given In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	Given In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
+	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: >=23C and <38C
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select all potential allergens included in this product' to: Dairy
-	And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: Dairy or products containing dairy or milk
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: None of the Above
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following sweeteners' to: None of the Above
-	And I set the Product contains the following artificial dye(s) field to: None of the Above
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye(s)' to: None of the Above
 	Given in the Physical and Chemical Properties page I click Continue
 
 		# ====== Following the steps from 'Shared Step' 57503 ====== #
@@ -212,7 +219,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 		# ====== Following the steps from 'Shared Step' 57960 ====== #
 	Given I should see the Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60723 enter Size: Cardboard and enter Container Type: 20
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60723 enter Size: Glass Container and enter Container Type: 20
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I upload PDF document to Upload SDS (Optional) field
@@ -228,11 +235,11 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
     Given I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Jelly, Jam or Preserves
+	Given Type of Product (select) should be showing the following option: Condiments, Sauces
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
 
 @ignore
 @tfs_design
