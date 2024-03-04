@@ -184,11 +184,9 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57503 ====== #
 	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Given in the Regulatory Documents To Provide page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57561 ====== #
 	Given I save the product information as: TestProduct
 	Given in the Product Characteristics page I click Continue
 	And Primary Physical State should be showing the error messages: This is a required field.
