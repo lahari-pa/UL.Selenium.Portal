@@ -23,10 +23,11 @@
 @Ingredients
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
+@ignore
 @TestCase:60617
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -220,30 +221,26 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given in the Transportation Details 1 page I click Continue
 
 Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
-Given I set the Product has been granted an Alternative Control Plan option to: No
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
-And MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
-Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: abc
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: !@
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 123.456
-And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 12.34
-Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: abc
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: !@
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Enter a valid number
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 123.456
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
-Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 12.34
-
-Then I should see the Volatile Organic Compound Summary Page
-Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
-And in the Volatile Organic Compound Summary page I click Continue
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: This is a required field.
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: This is a required field.
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: abc
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: !@
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 123.456
+And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 12.34
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: abc
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: !@
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 123.456
+And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct

@@ -413,6 +413,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Message: '{alert}' is displayed as expected");
 		}
 
+		[StepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
+		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
+		{
+			Delay.Seconds(1);
+			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
+			if (should == "should")
+			{
+				foreach (string item in errorMessagesExpected)
+				{
+					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
+						"Failed to find the error message: " + item + " under section: " + section + "!",
+						"Successfully found the error message: " + item + " for section: " + section, false, false);
+				}
+			}
+			if (should == "should not")
+			{
+				foreach (string item in errorMessagesExpected)
+				{
+					Report.IsFalse(errorMessages.Contains(item.Trim()),
+						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
+						"The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+				}
+			}
+			Report.Screenshot();
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
