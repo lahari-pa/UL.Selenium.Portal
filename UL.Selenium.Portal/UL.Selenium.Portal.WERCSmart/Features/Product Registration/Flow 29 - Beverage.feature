@@ -38,15 +38,17 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Given I generate a random UPC number and save as: UPC60694
 	Given I delete all products with UPC Number: saved as UPC60694
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#I call Shared Step 234546 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product )(Step has not created yet)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Then I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine (RU001418)
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Wine
 	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase60694
-	#Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
+	#Then I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine (RU001418)
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
@@ -62,6 +64,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#I call Shared Step 239830 (Inventory Status, Prop 65 (US) - TSCA (EXEMPT) / Prop 65 (NO) - (General Shared-Step))(Step has not created yet)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
@@ -72,14 +75,17 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: 27
 	Then in the Beverage Regulatory Details page, I click Continue
 	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path
+	#I call Shared Step 234437 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine (RU001418) - (More than 24% but Less than 70% Alcohol Content))(Step has not created yet)
 	Then I should be on the Transportation Details 1 Page
 	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
-	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
-	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+	Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
+	#Then I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Then I should be on the U. S. Department of Transportation (DOT) Classification Page
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
 	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
