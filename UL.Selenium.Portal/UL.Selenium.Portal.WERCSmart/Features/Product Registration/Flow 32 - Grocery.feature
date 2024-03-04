@@ -172,15 +172,14 @@ Then The home screen should load
 Given I generate a random UPC number and save as: UPC60775
 Given I delete all products with UPC Number: saved as UPC60775
 
-# ====== Following the steps from 'Shared Step' 57753 ====== #
-Given I click the Add Product icon in the Navigation Pane
-And I should see the New Product Page
-And I set the Select the type of product to create option to: Create a New Registration
-And in the New Product page I click Continue
+    # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+    Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 
-# ====== Following the steps from 'Shared Step' 57561 ====== #
+# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping ====== #
 And I should see the The Product Page
-And I set 'Type of Product' to: Cooking oil - Non-Aerosol
+And I set 'Product Name' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 #And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
 And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 And in the The Product page I click Continue
