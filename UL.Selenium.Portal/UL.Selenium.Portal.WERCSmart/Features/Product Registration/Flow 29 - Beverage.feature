@@ -24,6 +24,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalAirTransportClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
 Feature: Flow 29 - Beverage
 
 
@@ -68,77 +71,37 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then I enter the text of Product's container or liner contains Bisphenol A (BPA) field to: No
 	Then I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: 27
 	Then in the Beverage Regulatory Details page, I click Continue
-	#Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path
 	Then I should be on the Transportation Details 1 Page
-	Then In the Transportation Details 1 Section, verify in 'Product is Regulated for Transport' section is option: Yes
-	Then In the Transportation Details 1 Section, verify in 'Product is Regulated for Transport' section is option: No, due to an exemption or exception
-	Then In the Transportation Details 1 Section, verify in 'Product is Regulated for Transport' section is option: Not Regulated
-	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
-	Then In the Transportation Details 1 page the 'Please select DOT Exceptions if applicable?' question is displayed
-	Then In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable?' section is option: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less
-	Then In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable?' section is option: 173.150(e):  Aqueous solutions of alcohol with <= 24% alcohol by volume and no other hazardous material
-	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
-	Then In the Transportation Details 1 page the 'Please select DOT Exceptions if applicable?' question is not displayed
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
 	Then in the Transportation Details 1 page, I click Continue
-	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	Then I should be on the U. S. Department of Transportation (DOT) Classification Page
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 3
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+	Then I should be on the International Air Transport (IATA) Classification Page
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the International Air Transport (IATA) Classification page, I click Continue
+	Then I should be on the International Marine (IMDG) Classification Page
+	Then In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+	Then In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN3065
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: III
+	Then in the International Marine (IMDG) Classification page, I click Continue
 	Then I should be on the Retailer Page
-	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the 'Select retailers' window I should only see the following retailers:
-		| Retailer									|
-		| Walgreens									|
-		| No Retailer/No UPC Product				|
-		| Publix								    |
-	Then In the Select Retailers window, select retailer: Walgreens
-	Then In the Select Retailers window, click 'Done' button
-	Then In the Retailer Section, for retailer: Walgreens select 'Indicate full name of product, as sold, via this retailer' option: Walgreens
-	Then in the Retailer page, I click Continue
-	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC105007 enter Size: 12.3 and enter Container Type: Glass Container
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
-	#Given in the Additional Documents to Provide section page I click Continue
-	Then I should be on the Additional Documents to Provide Page
-	Then in the Additional Documents to Provide page, I click Continue
-	Then I should be on the Optional Comments Page
-	Then in the Optional Comments page, I click Continue
-	Then I should be on the Data Acceptance Page
-	Then In the Data Acceptance Section, I confirm text 'Data Acceptance' text should be displayed
-	Then In the Data Acceptance Section, click 'Summary' button
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
-	Then I switch to the tab with Data Summary page
-	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Alcoholic Beverages - Wine
-	Then In the Summary Page, the 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' section should be showing the following value: Yes
-	Then In the Summary Page, the 'Percent of Alcohol in the Product (numeric entry only)' section should be showing the following value: 23
-	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
-	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
-	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 12.3
-	Then In the Summary Page, verify table data in column Retailers showing the value: WG
-	Then I close the tab with Data Summary page
-	Then I should be on the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-	Then The Purchase Summary Page is displayed
-	Then In the Purchase Summary Page, click the 'Home' button
-	Then The home screen should load
-	Then I search for the product saved as: TestCase105007
-	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I generate a random UPC number and save as: UPC60694
-	Given I delete all products with UPC Number: saved as UPC60694
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
-	Then I save the product information as: TestCase60694
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 92964 (Beverage Regulatory Details Less < 70%)
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694.
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
+	
 
 #Retailers section needs to be confirmed!
 @TReVorId:22293
