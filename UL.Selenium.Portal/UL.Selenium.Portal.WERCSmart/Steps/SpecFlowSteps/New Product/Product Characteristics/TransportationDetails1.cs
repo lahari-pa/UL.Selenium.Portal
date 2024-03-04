@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -15,6 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "Product is Regulated for Transport";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			Delay.Seconds(9999);
 		}
 		[StepDefinition(@"In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: (DOT|IMDG|IATA|TDG)")]
 		public void SetSelectAllModesOfTransport(string option)

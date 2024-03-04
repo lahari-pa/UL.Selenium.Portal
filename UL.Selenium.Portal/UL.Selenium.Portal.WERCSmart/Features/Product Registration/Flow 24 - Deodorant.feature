@@ -21,7 +21,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @GTINAndUPC
 @Ingredients
+@RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
@@ -183,7 +185,6 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 
 	# ====== Following the steps from 'Shared Step' 57503 ====== #
 	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 	Given in the Regulatory Documents To Provide page I click Continue
 
 	# ====== Following the steps from 'Shared Step' 57561 ====== #
@@ -199,8 +200,8 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	# ====== Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
 	And I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-	| Component Name |
-	| Water          |
+		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water      |  100    | false                | false        |   Water    |
 	And in the Ingredients page I click Continue
 
 	# ====== Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
@@ -208,6 +209,10 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	Given I should see the Regulatory Information 3 Page
+	Given In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Given in the Regulatory Information 3 page I click Continue
 
 	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
 	Given I should see the Transportation Details 1 Page
@@ -217,7 +222,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
 Given I set the Product has been granted an Alternative Control Plan option to: No
 And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
-And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+And MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
 Given I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: abc
 And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Enter a valid number
 And HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
@@ -236,4 +241,9 @@ And MVOC (microbial volatile organic compound) content as weight percentage of t
 Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 123.456
 And MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: Invalid number. 2 decimal places allowed
 Given I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 12.34
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
+
+Then I should see the Volatile Organic Compound Summary Page
+Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+And in the Volatile Organic Compound Summary page I click Continue
+
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
