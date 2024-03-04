@@ -7,7 +7,9 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient_and_UPC_Details
 {
@@ -52,13 +54,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 					ContainerType = containerType,
 					Size = size,
 					UpcNumber = upc,
-					};
+			};
 
 		
 			var NP = new NewProduct();
 				NP.WaitForContainerToBeVisible(30);
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
-			}
+		}
+		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, verify retailer '(.*)' (is|is not) present under the 'Destination Retailers' column")]
+		public void RetailerUnderDestinationRetailers(string retailer, string is_isnot)
+		{
+			new StepsNewProduct().ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(retailer, is_isnot);
+		}
+		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, verify option '(.*)' (is|is not) present")]
+		public void UPCOptionIsIsNotPresent(string option, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			List<string> upcOptions = new UPC().GetUPCOptions();
+			Report.IsTrue(upcOptions.Contains(option) == expected,
+				$"Failure, option {option} {(expected ? "is not" : "is")} displayed", $"Success, option {option} {is_isnot} displayed.");
+		}
 	}
 }
