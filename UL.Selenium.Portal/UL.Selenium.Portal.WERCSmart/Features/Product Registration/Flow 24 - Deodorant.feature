@@ -20,6 +20,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @GTINAndUPC
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
@@ -166,33 +168,31 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 
 	# ====== Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol) ====== #
 	Given I should see the The Product Page
-	Given I set 'Type of Product' to: Antiperspirant for Women (Non-Aerosol)
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Antiperspirants - Non-aerosol
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase159880
 
     # ======Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path) ====== #
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No
-	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product field to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
 Given I save the product information as: TestProduct
 Given in the Product Characteristics page I click Continue
 And Primary Physical State should be showing the error messages: This is a required field.
-Given I set the Primary Physical State option to: Solid
-Given I set the Secondary Physical State option to: Solid
-Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description option to: Dispersible
+Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Dispersible
 Given I click continue
 
 # ====== Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
 And I should see the Ingredients Page
-Then I add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Water         | 100     | false               | false       |            |
+Then In the Ingredients section, add component with component name: Water
 And in the Ingredients page I click Continue
 
 	# ====== Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
@@ -203,7 +203,7 @@ And in the Ingredients page I click Continue
 
 	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
 	Given I should see the Transportation Details 1 Page
-	Given I set the Product is Regulated for Transport option to: Not Regulated
+	Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Given in the Transportation Details 1 page I click Continue
 
 Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue

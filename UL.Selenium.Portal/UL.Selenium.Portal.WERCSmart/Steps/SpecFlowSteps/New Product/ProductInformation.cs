@@ -122,6 +122,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
+		[Given(@"In the Product Information Section, set the option in section: '([^']*)' to select: United States of America")]
+		public void GivenInTheProductInformationSectionSetTheOptionInSectionToSelectUnitedStatesOfAmerica(string p0)
+		{
+			throw new PendingStepException();
+		}
+
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\) ' (to|to not) select: (United States|Canada)")]
 		public void RetailersSellingLocation(string to_notto, string option)
 		{
