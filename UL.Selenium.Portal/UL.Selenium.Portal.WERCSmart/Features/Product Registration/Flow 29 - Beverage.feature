@@ -108,7 +108,8 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then I should be on the Retailer Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 	
-
+@ignore
+#Removed from regression 2024/03
 #Retailers section needs to be confirmed!
 @TReVorId:22293
 @TestCase:60695
@@ -165,7 +166,8 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
 
 
-
+@ignore
+#Removed from regression 2024/03
 @TestCase:144468
 Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 
