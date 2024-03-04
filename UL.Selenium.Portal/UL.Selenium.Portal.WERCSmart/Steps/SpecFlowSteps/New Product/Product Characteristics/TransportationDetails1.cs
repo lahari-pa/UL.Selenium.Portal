@@ -47,5 +47,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Other DOT Exception";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[StepDefinition(@"In the Transportation Details 1 Section, verify in 'Product is Regulated for Transport' section (is|is not) option: (.*)")]
+		public void ThenInTheTransportationDetailsSectionVerifyInSectionIsOptionYes(string is_isnot, string option)
+		{
+			string section = "Product is Regulated for Transport";
+			new Steps_ProductPrototype().InSectionVerifyOption(section, option, is_isnot);
+		}
+		[StepDefinition(@"In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable\?' section (is|is not) option: (.*)")]
+		public void ThenInTheTransportationDetailsSectionVerifyInSectionOptions(string is_isnot, string option)
+		{
+			string section = "Please select DOT Exceptions if applicable?";
+			new Steps_ProductPrototype().InSectionVerifyOption(section, option, is_isnot);
+		}
+		[StepDefinition(@"In the Transportation Details 1 page the 'Please select DOT Exceptions if applicable\?' question (is|is not) displayed")]
+		public void ThenInTheTransportationDetailsPageThePleaseSelectDOTExceptionsIfApplicableQuestionIsDisplayed(string is_isnot)
+		{
+			string section = "Please select DOT Exceptions if applicable?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+
+		}
+
 	}
 }

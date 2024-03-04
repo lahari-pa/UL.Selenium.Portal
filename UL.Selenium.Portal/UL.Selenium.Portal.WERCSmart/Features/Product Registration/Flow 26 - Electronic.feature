@@ -20,6 +20,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
+@StepsPrototype
 @GTINAndUPC
 @run_Flow26_Electronic
 
@@ -61,11 +63,19 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
     | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
     | Alkaline     | <any>        | 6                                 | 6                                        |
 
-	# ====== Following the steps from 'Shared Step' 61449 ====== #
-	    Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
-		And I set the Product has had TCLP testing field to: No
-		Given I set all the metal presence value to: No
-		Given in the Toxicity Characteristic Leaching Procedure (TCLP) page I click Continue
+	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
 
 	# ====== Following the steps from 'Shared Step' 57408 ====== #
 	Given I should see the Retailer Page
