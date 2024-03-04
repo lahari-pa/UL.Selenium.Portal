@@ -10,7 +10,8 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-
+using UL.Selenium.Portal.WERCSmart.Steps;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -616,7 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool DeleteFirstRow()
+		public bool DeleteFirstRow(string savedas)
 		{
 			IWebElement row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			IWebElement toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
@@ -638,58 +639,87 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						new DashboardPage().RefreshPageObject();
 						Delay.Seconds(10);
 						GeneralUtilities.Wait_for_load_finish();
-						//Delay.Seconds(3);
-						Report.Info("Checking the products grid is empty");
-						int x = 0;
-						while (x < 10)
+
+						new StepsHomepage().ThenINavigateToTheHomePage();
+
+						Report.Info("Attempting to get product from context");
+						if (!Context.Contains(savedas))
 						{
-							var modalD = new ModalDialog();
-							if (modalD.ContainerVisible())
+							Report.Failure($"Context did not contain the Product saved as: {savedas}");
+						}
+						else
+						{
+							Report.Info("Found in Context");
+						}
+						var obj = Context.GetFromContext(savedas);
+						Report.Info("Attempting to convert Product to type ProductInformation");
+						var Product = (ProductInformation)obj;
+						Report.Info("Attempting to delete: " + Product.Name);
+						var ProductGrid = new ProductsGrid {
+							ProductIdField = Product.Id
+						};
+						if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+						{
+							if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
 							{
-								delDialog.ClickDelete();
-							}
-							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-							if (row == null)
-							{
-								Report.Info($"The products grid was emtpy");
-								return true;
-							}
-							try
-							{
-
-								toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
-								toggleButton.TryClick();
-								deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
-								deleteButton.TryClick();
-								delDialog.WaitForContainerToBeVisible();
-								Delay.Seconds(10);
 								GeneralUtilities.Wait_for_load_finish();
-								if (modalD.ContainerVisible())
+
+								//Delay.Seconds(3);
+								Report.Info("Checking the products grid is empty");
+								int x = 0;
+								while (x < 10)
 								{
-									delDialog.ClickDelete();
-								}
-								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-								if (row == null)
-								{
-									Report.Info($"The products grid was emtpy");
-									return true;
+									var modalD = new ModalDialog();
+									if (modalD.ContainerVisible())
+									{
+										delDialog.ClickDelete();
+									}
+									row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+									if (row == null)
+									{
+										Report.Info($"The products grid was emtpy");
+										return true;
+									}
+									try
+									{
+
+										toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+										toggleButton.TryClick();
+										deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
+										deleteButton.TryClick();
+										delDialog.WaitForContainerToBeVisible();
+										Delay.Seconds(10);
+										GeneralUtilities.Wait_for_load_finish();
+										if (modalD.ContainerVisible())
+										{
+											delDialog.ClickDelete();
+										}
+										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+										if (row == null)
+										{
+											Report.Info($"The products grid was emtpy");
+											return true;
+										}
+
+										Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
+										Delay.Seconds(15);
+										x++;
+									}
+									catch
+									{
+										Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
+										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+										if (row == null)
+										{
+											Report.Info($"The products grid was emtpy");
+											return true;
+										}
+										Report.Info($"The Products grid was still not empty after all attempts");
+										return false;
+									}
+
 								}
 
-								Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
-								Delay.Seconds(15);
-								x++;
-							}
-							catch
-							{
-								Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
-								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-								if (row == null)
-								{
-									Report.Info($"The products grid was emtpy");
-									return true;
-								}
-								Report.Info($"The Products grid was still not empty after all attempts");
-								return false;
 							}
 
 						}

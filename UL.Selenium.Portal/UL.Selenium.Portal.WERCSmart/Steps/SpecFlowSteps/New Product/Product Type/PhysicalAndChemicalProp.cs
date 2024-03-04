@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	 class PhysicalAndChemicalProp
 	{
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g.- whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
 		public void SelectPrimaryPhsicalState(string option)
 		{
 			string section = "Primary Physical State";
@@ -138,8 +138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to:
-		(This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: (This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
 		public void SelectHazardousWaste(string option)
 		{
 			string section = "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then";
