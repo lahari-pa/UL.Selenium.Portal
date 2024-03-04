@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -15,7 +18,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Select Retailers window, select retailer: (.*)")]
 		public void SelectRetailers(string retailer)
 		{
-			new Steps_Prototype().ISelectTheRetailer(retailer);
+			var selectRetailers = new SelectRetailers();
+			Report.IsTrue(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
 		public void ClickAddRetailers()
@@ -26,12 +30,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Select Retailers window, click 'Done' button")]
 		public void ClickDoneButton()
 		{
-			new Steps_Prototype().IClickDoneButtonOnSelectRetailersWindow();
+			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
 		}
 		[StepDefinition(@"In the Retailer Section, click 'Delete' icon")]
 		public void ClickDeleteButton()
 		{
-			new Steps_Prototype().ThenIClickTheDeleteIconInTheRetailerPage();
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to delete selected retailers", "Successfully deleted selected retailers");
 		}
 		[StepDefinition(@"In the Select Retailers window, click 'Show logo tile view' link")]
 		public void ClickShowLogoTile()
@@ -54,27 +59,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Retailer Section, (check|uncheck) the retailer: (.*)")]
 		public void CheckUncheckTheretailer(string condition, string retailer)
 		{
-			new Steps_Prototype().CheckUncheckTheRetailer(condition, retailer);
+			Report.IsTrue(new Retailer().CheckUncheckRetailer(condition, retailer), $"Failed to {condition} retailer: {retailer}!", $"Successfully {condition}ed retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, for retailer: (.*) enter 'Indicate full name of product, as sold, via this retailer': (.*)")]
-		public void EnterPrivateNameForRetailer(string retailer, string privateLabel)
+		public void EnterPrivateNameForRetailer(string retailer, string option)
 		{
-			new Steps_Prototype().ForRetailerIEnterPrivateLabelName(retailer, privateLabel);
+			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Indicate full name of product, as sold, via this retailer' option: (.*)")]
-		public void SelectPrivateNameForRetailer(string retailer, string privateLabel)
+		public void SelectPrivateNameForRetailer(string retailer, string option)
 		{
-			new Steps_Prototype().RetailerPrivateLabelSelect(retailer, privateLabel);
+			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Select Vendor' option: (.*)")]
 		public void SelectVendorOption(string retailer, string option)
 		{
-			new Steps_Prototype().SelectVendorInRetailerSection(retailer, option);
+			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
 		}
 		[StepDefinition(@"In the Retailer Section, for retailer: (.*) click 'Add New Supplier' button")]
 		public void ClickAddNewSupplierButton(string retailer)
 		{
-			new Steps_Prototype().ClickAddNewSupplierInRetailerSection(retailer);
+			Report.IsTrue(new RetailersRow(retailer).ClickAddNewSupplier(), $"Failed to click 'Add New Supplier' button for {retailer} retailer", $"Successfully clicked 'Add New Supplier' button for {retailer} retailer");
 		}
 		[StepDefinition(@"In the Retailer Section 'Add New Supplier' modal window, click 'Save' button")]
 		public void ClickSaveAddNewSupplier()
@@ -93,12 +98,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Supplier ID': (.*)")]
 		public void EnterSupplierIdAddNewSupplier(string supplierId)
 		{
-			new Steps_Prototype().GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(supplierId);
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierId), "Failed to add supplier ID input",
+				"Entered supplier ID value");
 		}
 		[StepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Company or Brand Name': (.*)")]
 		public void EnterCompanyBrandNameAddNewSupplier(string companyBrandName)
 		{
-			new Steps_Prototype().GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(companyBrandName);
+			var thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyBrandName), "Failed to add company or brand name input",
+				"Entered company or brand name value");
 		}
 		[StepDefinition(@"In the Retailer Section after clicking 'Cancel' in 'Add New Supplier' modal window click (Ok|Cancel) in alert message 'Are you sure want to cancel\?'")]
 		public void AcceptAlertAreYouSureToCancel(string responce)

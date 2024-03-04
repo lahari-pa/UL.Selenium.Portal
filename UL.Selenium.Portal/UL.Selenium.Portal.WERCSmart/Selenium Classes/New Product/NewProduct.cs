@@ -5941,7 +5941,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckTextOnThePage(string[] correctText)
 		{
 
-			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2).ToList();
+			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }'] | //div[@data-bind='html: description']"), 2).ToList();
 			bool result = true;
 			foreach (IWebElement element in displayedText)
 			{
