@@ -181,19 +181,27 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
-Given I save the product information as: TestProduct
-Given in the Product Characteristics page I click Continue
-And Primary Physical State should be showing the error messages: This is a required field.
-Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Dispersible
-Given I click continue
+	# ====== Following the steps from 'Shared Step' 57503 ====== #
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents To Provide page I click Continue
 
-# ====== Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
-And I should see the Ingredients Page
-Then In the Ingredients section, add component with component name: Water
-And in the Ingredients page I click Continue
+	# ====== Following the steps from 'Shared Step' 57561 ====== #
+	Given I save the product information as: TestProduct
+	Given in the Product Characteristics page I click Continue
+	And Primary Physical State should be showing the error messages: This is a required field.
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Dispersible
+	Given I click continue
+
+	# ====== Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| Component Name |
+	| Water          |
+	And in the Ingredients page I click Continue
 
 	# ====== Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
 	Given I should see the Inventory Status, Prop 65 (US) Page
