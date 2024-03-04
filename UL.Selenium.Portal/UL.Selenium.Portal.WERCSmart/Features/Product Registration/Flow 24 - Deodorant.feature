@@ -162,7 +162,7 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 @TestCase:159880
 Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 
     # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
     Given I click the Add Product icon in the Navigation Pane
@@ -243,4 +243,4 @@ Given In the VOC - Ozone Transport Commission Section, set the option in section
 And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
 Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
 
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
