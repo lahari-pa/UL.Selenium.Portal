@@ -656,11 +656,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						var obj = Context.GetFromContext(savedas);
 						Report.Info("Attempting to convert Product to type ProductInformation");
 						var Product = (ProductInformation)obj;
-						Report.Info("Attempting to delete: " + Product.Name);
+						Report.Info(string.Format("Attempting to delete: {0}", Product.Name));
 						var ProductGrid = new ProductsGrid {
 							ProductIdField = Product.Id
 						};
-						if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+						if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, string.Format("Value: {0} was not inputted into the Product Id field correctly!", Product.Id), string.Format("Value: {0} was correctly inputted into the Product Id field", Product.Id), false, false))
 						{
 							if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
 							{

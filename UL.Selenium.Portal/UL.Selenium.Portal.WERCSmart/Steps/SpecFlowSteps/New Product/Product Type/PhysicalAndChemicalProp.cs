@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
@@ -126,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 
