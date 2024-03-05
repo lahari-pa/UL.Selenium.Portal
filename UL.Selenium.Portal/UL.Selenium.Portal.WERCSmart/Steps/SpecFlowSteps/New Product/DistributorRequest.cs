@@ -42,5 +42,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("The Manufacturer has not yet approved the request", value);
 		}
+
+		[StepDefinition(@"I upload PDF document to 'Close Request Form' field")]
+		public void UploadPDFDocumentToCloseRequestForm()
+		{
+			Report.Info($"I upload PDF document to Close Request Form field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Close Request Form", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
+		[StepDefinition(@"I enter the text of The Manufacturer has rejected the request. field to: (.*)")]
+		public void GivenEnterTheTheManufacturerHasRejectedTheRequestValue(string value)
+		{
+			Report.Info($"I set the text of The Manufacturer has rejected the request. field to: {value}");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.SetTheSectionOptionTo("The Manufacturer has rejected the request.", value);
+		}
+
 	}
 }
