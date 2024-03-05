@@ -92,7 +92,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	Given in the Product Information page I click Continue
 
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
@@ -130,7 +130,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	# ====== Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Glass Container and size: 20 ====== #
 	Given I should see the Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60724 enter Size: Glass Container and enter Container Type: 20
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60724 enter Size: 20 and enter Container Type: Glass Container
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
@@ -179,7 +179,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
     Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	Given in the Product Information page I click Continue
 
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
@@ -218,7 +218,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 		# ====== Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Glass Container and size: 20 ====== #
 	Given I should see the Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60723 enter Size: Glass Container and enter Container Type: 20
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60723 enter Size: 20 and enter Container Type: Glass Container
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I upload PDF document to Upload SDS (Optional) field
