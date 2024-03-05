@@ -47,7 +47,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	# ====== And I call Shared Step 69687 (Product Information - US, No(PL)) ====== #
 	Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: Yes
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: Yes
     Given in the Product Information page I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page

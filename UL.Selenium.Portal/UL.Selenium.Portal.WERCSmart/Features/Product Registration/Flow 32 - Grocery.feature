@@ -59,7 +59,7 @@ And In the Product Information Section, set the option in section: 'Retailers wi
 And In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United Kingdom
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-And In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 And in the Product Information page I click Continue
 
@@ -103,10 +103,7 @@ Given in the Inventory Status, Prop 65 (US) page I click Continue
 # ====== Following the steps from 'Shared Step' 57506 ====== #
 And I should see the Transportation Details 1 Page
 And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-And I set the below options for field: Select all modes of transport that you've classified the product for
-| Option                   |
-| IMDG                     |
-| Shipping fully regulated |
+Given In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping fully regulated
 And in the Transportation Details 1 page I click Continue
 
 # ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
@@ -191,7 +188,7 @@ And In the Product Information Section, set the option in section: 'Retailers wi
 And In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United Kingdom
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-And In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 And in the Product Information page I click Continue
 
@@ -237,10 +234,7 @@ Given in the Inventory Status, Prop 65 (US) page I click Continue
 # ====== Following the steps from 'Shared Step' 57506 ====== #
 And I should see the Transportation Details 1 Page
 And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-And I set the below options for field: Select all modes of transport that you've classified the product for
-| Option                   |
-| IMDG                     |
-| Shipping fully regulated |
+Given In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping fully regulated
 And in the Transportation Details 1 page I click Continue
 
 # ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
