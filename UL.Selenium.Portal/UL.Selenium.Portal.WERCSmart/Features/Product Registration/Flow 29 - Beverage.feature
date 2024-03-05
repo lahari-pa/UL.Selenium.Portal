@@ -25,32 +25,91 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalAirTransportClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
 Feature: Flow 29 - Beverage
 
 
 @TReVorId:11622
 @TestCase:60694
 Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Less than 70% of Alcohol Content) - DOT - Packaging Group III Should be Pre-Selected
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60694
 	Given I delete all products with UPC Number: saved as UPC60694
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#I call Shared Step 234546 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product )(Step has not created yet)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Wine
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase60694
-	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
-	Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 92964 (Beverage Regulatory Details Less < 70%)
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60694.
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
+	#Then I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine (RU001418)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Then in the Product Information page, I click Continue
+	#Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
+	Then I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.7844
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 78
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 34
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then in the Physical and Chemical Properties page, I click Continue
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#I call Shared Step 239830 (Inventory Status, Prop 65 (US) - TSCA (EXEMPT) / Prop 65 (NO) - (General Shared-Step))(Step has not created yet)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	#Given I call Shared Step 92964 (Beverage Regulatory Details Less < 70%)
+	Then I should be on the Beverage Regulatory Details Page
+	Then I enter the text of Product's container or liner contains Bisphenol A (BPA) field to: No
+	Then I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: 27
+	Then in the Beverage Regulatory Details page, I click Continue
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path
+	#I call Shared Step 234437 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine (RU001418) - (More than 24% but Less than 70% Alcohol Content))(Step has not created yet)
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+	Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page, I click Continue
+	#Then I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
+	Then I should be on the U. S. Department of Transportation (DOT) Classification Page
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 3
+	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+	Then I should be on the International Air Transport (IATA) Classification Page
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the International Air Transport (IATA) Classification page, I click Continue
+	Then I should be on the International Marine (IMDG) Classification Page
+	Then In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+	Then In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN3065
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: III
+	Then in the International Marine (IMDG) Classification page, I click Continue
+	Then I should be on the Retailer Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
-
+	
+@ignore
+#Removed from regression 2024/03
 #Retailers section needs to be confirmed!
 @TReVorId:22293
 @TestCase:60695
@@ -107,7 +166,8 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
 
 
-
+@ignore
+#Removed from regression 2024/03
 @TestCase:144468
 Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 

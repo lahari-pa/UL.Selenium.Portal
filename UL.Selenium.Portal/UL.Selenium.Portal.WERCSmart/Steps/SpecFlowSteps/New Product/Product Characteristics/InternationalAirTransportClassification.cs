@@ -70,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, verify section: 'UN Number' contains value: (.*)")]
+		[StepDefinition(@"In the International Air Transport \(IATA\) Classification Section, verify section: 'UN Number' contains value: (.*)")]
 		public void VerifyUNNumberIATA(string value)
 		{
 			string section = "UN Number";
