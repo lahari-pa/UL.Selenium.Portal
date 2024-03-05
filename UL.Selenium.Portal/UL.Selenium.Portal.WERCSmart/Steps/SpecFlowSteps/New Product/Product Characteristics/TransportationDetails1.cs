@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -22,11 +25,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Select all modes of transport that you've classified the product for";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[StepDefinition(@"In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
-		public void SetSelectAllModesOfTransport2(string option)
+		[StepDefinition(@"In the Transportation Details 1 Section, set the option for (DOT|IMDG|IATA|TDG) mode of transport to: (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
+		public void SetSelectAllModesOfTransport2(string section, string option)
 		{
-			string section = "Select all modes of transport that you've classified the product for";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			if (Report.IsTrue(new TransportationDetails1().ShippingMethodExists(section, option), $"Failed to find checkbox {option} for {section}", $"Successfully found checkbox {option} for {section}"))
+			{
+				Report.IsTrue(new TransportationDetails1().ShippingMethodSelect(section, option), $"Failed to click checkbox {option} for {section}", $"Successfully cicked checkbox {option} for {section}");
+				Report.IsTrue(new TransportationDetails1().ShippingMethodSelected(section, option), $"Failed to confirm checkbox {option} for {section} is checked", $"Successfully confirmed checkbox {option} for {section} is checked");
+			}
 		}
 		[StepDefinition(@"In the Transportation Details 1 Section, set the option in section: 'Provide Special Permit numbers \(if applicable\)': to: (.*)")]
 		public void SetProvideSpecialPermitNumbers(string option)
