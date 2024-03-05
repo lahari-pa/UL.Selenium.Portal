@@ -419,14 +419,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
-			Report.Info(string.Format("Error messages showing are: {0}", errorMessages));
+			Report.Info(string.Format($"Error messages showing are: {errorMessages}"));
 			if (should == "should")
 			{
 				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
-						string.Format("Failed to find the error message: {0} under section: {1}!", item, section),
-						string.Format("Successfully found the error message: {0} for section: {1}", item, section), false, false);
+						string.Format($"Failed to find the error message: {item} under section: {section}!"),
+						string.Format($"Successfully found the error message: {item} for section: {section}"), false, false);
 				}
 			}
 			if (should == "should not")
@@ -434,8 +434,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsFalse(errorMessages.Contains(item.Trim()),
-						string.Format("The error message: {0} was displayed under section {1} when it should not be.", item, section),
-						string.Format("The error message: {0} was not displayed under section: {1} as expected", item, section), false, false);
+						string.Format($"The error message: {item} was displayed under section {section} when it should not be."),
+						string.Format($"The error message: {item} was not displayed under section: {section} as expected"), false, false);
 				}
 			}
 			Report.Screenshot();
