@@ -236,7 +236,7 @@ Given in the Inventory Status, Prop 65 (US) page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57506 ====== #
 And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport option to: Yes
+And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
 And I set the below options for field: Select all modes of transport that you've classified the product for
 | Option                   |
 | IMDG                     |

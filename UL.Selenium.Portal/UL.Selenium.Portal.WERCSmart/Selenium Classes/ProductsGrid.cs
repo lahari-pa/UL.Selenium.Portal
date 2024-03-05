@@ -642,6 +642,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 						new StepsHomepage().ThenINavigateToTheHomePage();
 
+						GeneralUtilities.Wait_for_load_finish();
+
 						Report.Info("Attempting to get product from context");
 						if (!Context.Contains(savedas))
 						{
