@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
 using NPOI.SS.Formula.Functions;
 using TechTalk.SpecFlow.CommonModels;
+using RestSharp.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -512,6 +513,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
+		}
+		[StepDefinition(@"Confirm the checkbox with description: (.*) (is|is not) checked")]
+		public void TheCheckboxWithDescriptionIsIsNotChecked(string description, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			bool isChecked = new NewProduct().StandaloneCheckbox(description).Checked();
+			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox with description: '{description} {(expected ? "is not" : "is")} checked'!",$"Successfully confirmed the checkbox with description: '{description}' {is_isnot} checked");
 		}
 
 		//[StepDefinition(@"(.*) should be showing the value: (.*)")]

@@ -75,5 +75,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(upcOptions.Contains(option) == expected,
 				$"Failure, option {option} {(expected ? "is not" : "is")} displayed", $"Success, option {option} {is_isnot} displayed.");
 		}
+		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, under Transportation column the checkbox '(.*)' (is|is not) checked")]
+		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionUnderTransportationColumnTheCheckboxDOTIsChecked(string checkbox, string is_isnot)
+		{
+			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(checkbox, is_isnot);
+		}
 	}
 }

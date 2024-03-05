@@ -110,5 +110,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Transportation Exemption Letter or Special Permit", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
+		[StepDefinition(@"In the Additional Documents to Provide Section, for section (.*) button View (should|should not) exists")]
+		public void InTheAdditionalDocumentsToProviveCheckButtonViewForSection(string section, string condition)
+		{
+			string button = "view";
+			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
+		}
+		[StepDefinition(@"In the Additional Documents to Provide Section, for section (.*) button Remove (should|should not) exists")]
+		public void InTheAdditionalDocumentsToProvideCheckButtonRemoveForSection(string section, string condition)
+		{
+			string button = "remove";
+			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
+		}
+		[StepDefinition(@"In the Additional Documents to Provide Section, for section (.*) I click button 'View'")]
+		public void InTheAdditionalDocumentsToProvideClickViewButtonForSection(string section)
+		{
+			string button = "view";
+			new Steps_Prototype().ClickButtonForSection(section, button);
+		}
+		[StepDefinition(@"In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded")]
+		public void InTheAdditionalDocumentsToProvideAfterClickingViewPdfIsDownloaded()
+		{
+			string file = "testdoc.pdf";
+			string savedAs = "downloadedFile";
+			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
+		}
 	}
 }
