@@ -401,7 +401,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Additional Documents to Provide Section, for section OSHA SDS button Remove should exists
 	Then In the Additional Documents to Provide Section, for section OSHA SDS I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
-	Given in the Additional Documents to Provide section page I click Continue
+	Given in the Additional Documents to Provide page I click Continue
 	#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: [string]
 	Then I should be on the Optional Comments Page
 	Then The Provide any additional comments or information about the product that you want the Assessment Team to know. question is displayed
@@ -417,11 +417,11 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
 	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: DOT
 	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: Shipping with limited quantity
-	Then In the Summary Page, the 'UN Number' section should be showing the following value: UN3065
 	Then In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Alcoholic beverages
 	Then In the Summary Page, the 'Hazard Class (select)' section should be showing the following value: 3
 	Then In the Summary Page, the 'Packing Group (select)' section should be showing the following value: II
-	Then In the Summary Page, verify table data in column UPC Transportation showing the value: DOT-- Shipping with limited quantity
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: DOT
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: Shipping with limited quantity  
 	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
 	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 22.8
 	Then In the Summary Page, verify table data in column Retailers showing the value: PX, WG

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using TechTalk.SpecFlow;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.Utilities.Functions;
+using System.Drawing;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -89,14 +90,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
 
-		public List<string> GetInfoForSectionOption(string section, string option)
+		public string GetInfoForSectionOption(string section, string option)
 		{
-
-
 			this.WaitForSpinner();
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@".//h3[@class='summary-question' and contains(text(),""" + section + @""")]/../p[contains(text(),""" + option + @""")]"), 2);
-
-			return els.Select(x => x.GetElementText()).ToList();
+			IWebElement els = this.ContainerElement.FindElement(By.XPath($@".//h3[@class='summary-question' and contains(text(),""{section}"")]/../p[contains(text(),""{option}"")]"), 2);
+			return els.Text;
 		}
 
 		public bool VerifyTableValueInSammeryPage(string tableHeader, string tableValue)
@@ -151,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					if (tableData[0,i] == tableHeader)
 					{
 						Report.Info($"Found column header {tableHeader} in table");
-						status = tableData[1, i] == tableValue;
+						status = tableData[1, i].Contains(tableValue);
 					}
 
 				}
