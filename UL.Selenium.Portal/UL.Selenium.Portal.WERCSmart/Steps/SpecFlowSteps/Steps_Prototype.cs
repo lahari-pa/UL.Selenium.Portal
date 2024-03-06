@@ -577,6 +577,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
 			}
 		}
+
 		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
 		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
 		{
@@ -605,6 +606,104 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
+		public void CheckOptionsInSection(string should, string exclusive, string section, List<string> options)
+		{
+			var expectedOptionsLower = new List<string>();
+			List<string> displayedOptions = new List<string>();
+			var differences = new List<string>();
+
+			if (section == "Container Type")
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForContainerTypeField();
+			}
+			else
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			}
+			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
+			options.RemoveAll(x => x.Equals("none", StringComparison.CurrentCultureIgnoreCase));
+			expectedOptionsLower = options.Select(x => x.ToLower()).ToList();
+
+			if (exclusive == "displayed")
+			{
+				if (should == "should")
+				{
+					differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
+					Report.IsTrue(expectedOptionsLower.All(x => displayedOptionsLower.Contains(x.ToLower())),
+						$"All expected options were not displayed under section: {section}. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}. The displayed options were: {string.Join(", ", displayedOptions)}",
+						$"All expected options were displayed under section: {section} : {string.Join(", ", displayedOptions)}");
+				}
+				else if (should == "should not")
+				{
+					Report.IsTrue(!expectedOptionsLower.Any(x => displayedOptionsLower.Contains(x)),
+						$"The following options were available for section: '{section}' when they were not expected!: '{string.Join(", ", options)}'",
+						$"The following options were not available for section: '{section}' as expected: {string.Join(", ", options)}");
+				}
+			}
+			else if (exclusive == "displayed exclusively")
+			{
+				Report.Info($"Expected options to be displayed are: {string.Join(", ", options)}");
+			
+				bool allMatch = true;
+
+				foreach (string displayedOption in displayedOptionsLower)
+				{
+					bool match = false;
+					foreach (string expectedOption in expectedOptionsLower)
+					{
+						if (expectedOption != displayedOption)
+						{
+							continue;
+						}
+						match = true;
+						break;
+					}
+					if (match)
+					{
+						continue;
+					}
+					allMatch = false;
+					Report.Failure($"Option: {displayedOption} was displayed when it was not expected!");
+					Report.Screenshot();
+				}
+				if (allMatch)
+				{
+					Report.Success($"The displayed options matched the expected options exactly for section: {section}");
+					Report.Screenshot();
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	}
 }

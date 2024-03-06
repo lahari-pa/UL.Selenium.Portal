@@ -46,5 +46,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Other DOT Exception";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+
+		[StepDefinition(@"In the Transportation Details 1 Section, for section 'Product is Regulated for Transport': the following options should be displayed exclusively: option 1 \(or 'none'\): (.*) , option 2 \(or 'none'\): (.*)")]
+		public void CheckOptionsInProductIsRegulatedForTransportSection(string option1, string option2)
+		{
+			string should = "should";
+			string exclusive = "displayed exclusively";
+			string section = "Product is Regulated for Transport"; 
+			List <string> expectedOptions = new List<string> {option1,option2};
+			expectedOptions.RemoveAll(x => x.Equals("none", StringComparison.CurrentCultureIgnoreCase));
+			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, expectedOptions);
+		}
+
+
 	}
 }
