@@ -125,11 +125,7 @@ Given in the International Marine (IMDG) Classification page I click Continue
 # ====== And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60774, container type: Aerosol Can - Metal and size: 20 ====== #
 And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-Then I add the following into the UPC Fields
-| Field         | Value               |
-| UPCNumber     | saved as UPC60774   |
-| ContainerType | Aerosol Can - Metal |
-| Size          | 20                  |
+Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60774 enter Size: 20 and enter Container Type: Aerosol Can - Metal
 And in the Universal Product Code (UPC) page I click Continue
 
 # Additional Documents to Provide Page
@@ -256,11 +252,7 @@ Given in the International Marine (IMDG) Classification page I click Continue
 # ====== And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can - Metal and size: 20 ====== #
 And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-Then I add the following into the UPC Fields
-| Field         | Value               |
-| UPCNumber     | saved as UPC60775   |
-| ContainerType | Aerosol Can - Metal |
-| Size          | 20                  |
+Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60775 enter Size: 20 and enter Container Type: Aerosol Can - Metal
 And in the Universal Product Code (UPC) page I click Continue
 
 # Additional Documents to Provide Page

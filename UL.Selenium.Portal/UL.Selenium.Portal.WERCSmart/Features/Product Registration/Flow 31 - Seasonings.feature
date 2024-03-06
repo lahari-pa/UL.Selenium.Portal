@@ -165,7 +165,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	And I should see the Regulatory Documents to Provide Page
 	And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
     Then in the Regulatory Documents to Provide page I click Continue
-
+	
 		# ====== Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients) ====== #
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -205,10 +205,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	# ====== And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path) ====== #
 	And I should see the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-	And I set the below options for field: Select all modes of transport that you've classified the product for
-	| Option                   |
-	| IMDG                     |
-	| Shipping fully regulated |
+	Given In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping fully regulated
 	And in the Transportation Details 1 page I click Continue
 
 	# ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
