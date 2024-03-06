@@ -1,9 +1,11 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -122,10 +124,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[Given(@"In the Product Information Section, set the option in section: '([^']*)' to select: United States of America")]
-		public void GivenInTheProductInformationSectionSetTheOptionInSectionToSelectUnitedStatesOfAmerica(string p0)
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: (.*)")]
+		public void RetailersWillBeSellingMyProductAtTheirStoreLocations(string option)
 		{
-			throw new PendingStepException();
+			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, "United States");
 		}
 
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\) ' (to|to not) select: (United States|Canada)")]

@@ -7,6 +7,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -28,11 +29,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Transportation Details 1 Section, set the option for (DOT|IMDG|IATA|TDG) mode of transport to: (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
 		public void SetSelectAllModesOfTransport2(string section, string option)
 		{
-			if (Report.IsTrue(new TransportationDetails1().ShippingMethodExists(section, option), $"Failed to find checkbox {option} for {section}", $"Successfully found checkbox {option} for {section}"))
-			{
-				Report.IsTrue(new TransportationDetails1().ShippingMethodSelect(section, option), $"Failed to click checkbox {option} for {section}", $"Successfully cicked checkbox {option} for {section}");
-				Report.IsTrue(new TransportationDetails1().ShippingMethodSelected(section, option), $"Failed to confirm checkbox {option} for {section} is checked", $"Successfully confirmed checkbox {option} for {section} is checked");
-			}
+			var MyNewProduct = new StepsNewProduct();
+			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
+				section);
+			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
+				option);
 		}
 		[StepDefinition(@"In the Transportation Details 1 Section, set the option in section: 'Provide Special Permit numbers \(if applicable\)': to: (.*)")]
 		public void SetProvideSpecialPermitNumbers(string option)

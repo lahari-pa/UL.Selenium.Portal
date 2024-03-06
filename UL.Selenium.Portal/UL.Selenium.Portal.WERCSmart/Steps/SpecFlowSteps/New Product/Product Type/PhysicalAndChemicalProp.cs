@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
@@ -11,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	 class PhysicalAndChemicalProp
 	{
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g.- whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
 		public void SelectPrimaryPhsicalState(string option)
 		{
 			string section = "Primary Physical State";
@@ -80,8 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: I do not have exact Boiling Point data available to me")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
 		public void SelectCheckboxForBoilingPoint()
 		{
 			string section = "check";
@@ -126,6 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 
@@ -137,8 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to:
-		(This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: (This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
 		public void SelectHazardousWaste(string option)
 		{
 			string section = "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then";
