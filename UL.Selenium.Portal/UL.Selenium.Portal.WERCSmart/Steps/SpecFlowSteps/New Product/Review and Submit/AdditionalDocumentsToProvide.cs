@@ -87,6 +87,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
+		[StepDefinition(@"I upload PDF document to Generic Private Label \(all sides\) field")]
+		public void GivenIUploadPDFDocumentToGenericPrivateLabelAllSidesField()
+		{
+			Report.Info($"I upload PDF document to Generic Private Label (all sides) field");
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+		}
+
 		[StepDefinition(@"I upload PDF document to Provide Full Product Label \(required\) field")]
 		public void UploadPDFDocumentToProvideFullProductLabelRequired()
 		{
