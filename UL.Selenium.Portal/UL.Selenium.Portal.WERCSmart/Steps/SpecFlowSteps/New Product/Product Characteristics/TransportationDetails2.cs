@@ -7,8 +7,11 @@ using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
+	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2")]
+
 	class WERCSmart_Distributor_NewProducts_TransportationDetails2
 	{
+
 		[StepDefinition(@"In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken\?': to: (I do not ship internationally but I do know the classification|I do not ship internationally and I do not know the classification)")]
 		public void SetInternationalShippingWhenDOTExemptionTaken(string option)
 		{

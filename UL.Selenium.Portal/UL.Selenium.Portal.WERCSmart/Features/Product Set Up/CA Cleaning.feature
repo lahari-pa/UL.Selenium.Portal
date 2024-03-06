@@ -17,6 +17,13 @@
 @CACleaning
 @MyIngredients
 @run_CACleaning
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:CaliforniaCleaningProductDisclosure
+
 Feature:  California Cleaning Scenarios
 
 
@@ -245,16 +252,46 @@ Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product
 @TestCase:139193
 Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
 
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I log in with the account saved in TReVor as: ProductAccount
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Then I should see the The Product Page
+Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+Then I set 'Type of Product' to: Bleach
 Then I save the product information as: TestCase139193
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-Then I set the value 'FIFRAPopupExpected' to be: true
-Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
-Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
-Given I click continue
+Then I click continue
+#Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+#Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+#Then I set the value 'FIFRAPopupExpected' to be: true
+Then I should see the Product Information Page
+When In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+When In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+When In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: Yes
+When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+Then in the Product Information page, I click Continue
+Then I should see the Regulatory Documents to Provide Page
+Then I set the OSHA-compliant Safety Data Sheet, English field to: Request to author	
+Then I click continue
+#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Then I should see the Physical and Chemical Properties Page
+Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+Then in the Physical and Chemical Properties page, I click Continue
+Then I should see the California Cleaning Product Disclosure Page
+#Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Manufacturer
+Given In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: Company Name
+Given In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: No
+Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
+Then in the California Cleaning Product Disclosure page, I click Continue
 Given I confirm there is a message displayed at the top of the Ingredients page
 Given I confirm there is a checkbox with the following text: Don't show this again in the message displayed at the top of the Ingredients page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139193

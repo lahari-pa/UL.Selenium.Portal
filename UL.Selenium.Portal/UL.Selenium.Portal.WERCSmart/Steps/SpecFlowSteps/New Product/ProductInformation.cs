@@ -1,9 +1,11 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -31,10 +33,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: (Yes|No)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand \(Private Label, Store Brand\) product ' to: (Yes|No)")]
 		public void SelectProductIsRetailerPrivateLabel(string option)
 		{
-			string section = "Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ";
+			string section = "Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
@@ -120,6 +122,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Select the product's Country of Origin";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: (.*)")]
+		public void RetailersWillBeSellingMyProductAtTheirStoreLocations(string option)
+		{
+			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, "United States");
 		}
 
 		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\) ' (to|to not) select: (United States|Canada)")]
