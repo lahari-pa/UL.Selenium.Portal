@@ -425,6 +425,9 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
 	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 22.8
 	Then In the Summary Page, verify table data in column Retailers showing the value: PX, WG
+	Then In the Summary Page, the document section OSHA SDS should be showing the following document: testdoc.pdf
+	Then In the Summary Page, click the View button for section: OSHA SDS
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Then I close the tab with Data Summary page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
 
