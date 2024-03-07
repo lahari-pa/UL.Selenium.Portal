@@ -31,6 +31,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @SafetyDataSheetAuthoring
+@AdditionalDocsContactInfo
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 Feature: UPC Case Pack
 
@@ -770,7 +771,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
-	Then I set 'Type of Product' to: Chalk
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
 	Given in the The Product page I click Continue	
 	#Given I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
 	Then I should see the Product Information Page
@@ -785,7 +786,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	#Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
 	Then I should see the Regulatory Documents to Provide Page	
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-	When In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	When In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I don't need a WHMIS Compliant SDS
 	Then in the Regulatory Documents to Provide page, I click Continue	
 	
 	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -802,7 +803,9 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given I click continue
 	#Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)	
 	Then I should see the Inventory Status, Prop 65 (US) Page
-	Given For Canadian Environmental Protection Act (CEPA) status I select: Compliant with Domestic Substances List (DSL)
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue	
 	#Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
 	Then I should see the Retailer Page
@@ -815,7 +818,13 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given in the Optional Comments page I click Continue
+	#Given I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
+	Given In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
+	Given In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
+	Given In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: 1234 8856789
+	Given in the Additional Documents page I click Continue	
 	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 	#	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
@@ -844,7 +853,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
-	Then I set 'Type of Product' to: Chalk
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
 	Given in the The Product page I click Continue	
 	Then I should see the Product Information Page
 	Then I save the product information as: TestCase217540A	
@@ -917,7 +926,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
-	Then I set 'Type of Product' to: Chalk
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
 	Given in the The Product page I click Continue	
 	Then I should see the Product Information Page
 	Then I save the product information as: TestCase217540B
