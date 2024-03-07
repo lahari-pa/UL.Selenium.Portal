@@ -139,6 +139,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
 			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
 			productPrototype.InSectionSetOptionIsIsNotSelected(section, option, is_isnot);
+		}
+
 		[StepDefinition(@"In the Product Information Section, Check or Uncheck for the section (.*): Retailers will be selling my product at their store locations in \(select either or both\) to : (.*)")]
 		public void CheckOrUncheckRetailersSellingLocation(string section, string option)
 		{
