@@ -9,6 +9,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @run_Flow6
 
 Feature: Flow 6
