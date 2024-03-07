@@ -33,6 +33,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			Report.IsTrue(new DataSummary().VerifyTableValueInSammeryPage(column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
 		}
+		[StepDefinition(@"In the Summary Page, the document section (.*) should be showing the following document: (.*)")]
+		public void InTheSummaryPageDocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+			string found = dataSummarySheet.GetDocumentForSection(section, option);
+			Report.IsTrue(found.Contains(option),
+				$"Expected: {option} but got: {found} for section {section}.",
+				$"Got value: {option} as expected for section {section}.");
+		}
+		[StepDefinition(@"In the Summary Page, click the View button for section: (.*)")]
+		public void InTheSummaryPageIClickTheViewButtonForDocument(string section)
+		{
+			var dataSummarySheet = new DataSummary();
+			Report.IsTrue(dataSummarySheet.ClickViewForDocument(section),
+				$"Failed to click the View button for section {section}.",
+				$"Successfully clicked the View button for section {section}.");
+		}
+		[StepDefinition(@"In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded")]
+		public void InTheSummaryPageAfterClickingViewPdfIsDownloaded()
+		{
+			string file = "testdoc.pdf";
+			string savedAs = "downloadedFile";
+			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
+		}
 	}
 }
 

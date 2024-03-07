@@ -95,6 +95,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Packing Group (select)";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
+		
+
 	}
-	
+
 }
