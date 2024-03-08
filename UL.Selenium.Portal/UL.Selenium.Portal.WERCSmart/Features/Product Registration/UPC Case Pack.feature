@@ -30,6 +30,7 @@
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Ingredients
 @SafetyDataSheetAuthoring
 @AdditionalDocsContactInfo
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
@@ -780,7 +781,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	When In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue	
 	#Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
@@ -797,10 +798,10 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| water        | 100     | false               | false       |            |
-	Given I click continue
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water      |  100    | false                | false        | Water    |
+	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)	
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
@@ -862,7 +863,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	When In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue	
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -877,10 +878,10 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| water        | 100     | false               | false       |            |
-	Given I click continue
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water      |  100    | false                | false        | Water    |
+	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 104290 (Enter Regulatory Information - TSCA Not Prop 65)
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
@@ -937,7 +938,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	When In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue	
 	#Given I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
@@ -952,10 +953,10 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| water        | 100     | false               | false       |            |
-	Given I click continue
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water      |  100    | false                | false        | Water    |
+	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given For Canadian Environmental Protection Act (CEPA) status I select: Compliant with Domestic Substances List (DSL)
