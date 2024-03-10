@@ -1,4 +1,4 @@
-@Shared
+﻿@Shared
 @LandingPage
 @Login
 @Homepage
@@ -215,6 +215,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
+	Given In the International Marine (IMDG) Classification Section, set the option in section: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.': to: Based on defined viscosity parameters, this product is classified as PG III.
 	Given in the International Marine (IMDG) Classification page I click Continue
 
 		# ====== And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path) ====== #
