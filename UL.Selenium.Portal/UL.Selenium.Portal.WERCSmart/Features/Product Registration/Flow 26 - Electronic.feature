@@ -65,11 +65,9 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 # ======  | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | ====== #
 # ======  | Alkaline     | <any>        | 6                                 | 6                                        | ====== #
 	Given I should see the Product Includes Battery Page
-	Given In the Product Includes Battery Section, set the radio option in section: 'Indicate how battery is packaged': to: Installed in the product
-	Given In the Product Includes Battery Section enter value Alkaline in Battery Type field
-    Given In the Product Includes Battery Section enter value 6 in Quantity of Batteries per Package field
-    Given In the Product Includes Battery Section enter value 6 in Quantity of Batteries to Operate Product field
-    Given In the Product Includes Battery Section enter value FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) in 'Manufacturer' field
+	Given In the Product Includes Battery Section enter the values in the table:
+          | Battery Is Packaged      | Battery Type | Manufacturer                                                       | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+          | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) | 6                                 | 6                                        |
 	Given in the Product Includes Battery page, I click Continue
 
 # ======  Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path  ====== #

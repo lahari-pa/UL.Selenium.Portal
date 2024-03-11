@@ -42,5 +42,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption("Manufacturer", value), $"Failed to enter {value} in Manufacturer field", $"Succesfully entered {value} in Manufacturer field");
 		}
+
+		[StepDefinition(@"In the Product Includes Battery Section enter the values in the table:")]
+		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
+		{
+			try
+			{
+				foreach (TableRow thisRow in table.Rows)
+				{
+					if (table.ContainsColumn("Battery Is Packaged"))
+					{
+						this.SelectIndicateHowBatteryIsPackaged("Installed in the product");
+					}
+					if (table.ContainsColumn("Battery Type"))
+					{
+						this.EnterBatterySelectInformation("Alkaline", "Battery Type");
+					}
+					if (table.ContainsColumn("Manufacturer"))
+					{
+						this.EnterBatteryManufacturer("FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820)");
+					}
+					if (table.ContainsColumn("Quantity of Batteries per Package"))
+					{
+						this.EnterBatteryInputInformation("6", "Quantity of Batteries per Package");
+					}
+					if (table.ContainsColumn("Quantity of Batteries to Operate Product"))
+					{
+						this.EnterBatteryInputInformation("6", "Quantity of Batteries to Operate Product");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 	}
 }
