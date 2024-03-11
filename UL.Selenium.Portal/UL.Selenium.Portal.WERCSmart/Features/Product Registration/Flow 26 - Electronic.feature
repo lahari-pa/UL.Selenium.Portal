@@ -22,6 +22,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 @GTINAndUPC
 @run_Flow26_Electronic
 
@@ -36,20 +38,20 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given I generate a random UPC number and save as: UPC60671
 	Given I delete all products with UPC Number: saved as UPC60671
 
-	# ====== Following the steps from 'Shared Step' 57408 ====== #
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57561 ====== #
+	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor & Desktop) ====== #
 	Given I should see the The Product Page
 	Given I set 'Type of Product' to: Computer (Combination of Monitor & Desktop)
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60671
 
-	# ====== Following the steps from 'Shared Step' 60935 ====== #
+	# ====== And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only) ====== #
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States of America
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
 	Given in the Product Information page I click Continue
@@ -59,11 +61,16 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Given I call Shared Step 48367 (Product Includes Battery > any type)
-    | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
-    | Alkaline     | <any>        | 6                                 | 6                                        |
+# ======  Given I call Shared Step 48367 (Product Includes Battery > any type) ====== #
+# ======  | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | ====== #
+# ======  | Alkaline     | <any>        | 6                                 | 6                                        | ====== #
+	Given I should see the Product Includes Battery Page
+	Given In the Product Includes Battery Section enter the values in the table:
+          | Battery Is Packaged      | Battery Type | Manufacturer                                                       | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+          | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) | 6                                 | 6                                        |
+	Given in the Product Includes Battery page, I click Continue
 
-	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+# ======  Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path  ====== #
 	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
 	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
 	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
@@ -77,16 +84,19 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
 	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57408 ====== #
+	Given I should see the Electronic Equipment Page
+	Given In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: Yes
+	Given In the Electronic Equipment Section, set the option in section: 'Has a Cathode Ray Tube (CRT)' to: Yes
+	Given in the Electronic Equipment page I click Continue
+
 	Given I should see the Retailer Page
 	Given in the Retailer page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57883 ====== #
-	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text ====== #
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
 
-	# ====== Following the steps from 'Shared Step' 57408 ====== #
+	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop) ====== #
     Given I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
