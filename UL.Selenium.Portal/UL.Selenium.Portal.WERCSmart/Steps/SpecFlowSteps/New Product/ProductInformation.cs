@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand \(Private Label, Store Brand\) product ' to: (Yes|No)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand \(Private Label, Store Brand\) product' to: (Yes|No)")]
 		public void SelectProductIsRetailerPrivateLabel(string option)
 		{
 			string section = "Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product";
@@ -131,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, "United States");
 		}
 
-		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\) ' (to|to not) select: (United States|Canada)")]
+		[StepDefinition(@"In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\)' (to|to not) select: (United States|Canada)")]
 		public void RetailersSellingLocation(string to_notto, string option)
 		{
 			bool expected = to_notto == "to";
