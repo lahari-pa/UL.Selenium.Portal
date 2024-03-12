@@ -401,9 +401,9 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option:  Footwear or Leather Care Product - All other forms
+	Given Type of Product (select) should be showing the following option: Footwear or Leather Care Product - All other forms
 	Given I close the Data Summary Tab
-	Given I should see the Data Acceptance Page
+    Given I should see the Data Acceptance Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
 
