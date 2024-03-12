@@ -1,4 +1,4 @@
-@Shared
+﻿@Shared
 @LandingPage
 @Login
 @Homepage
@@ -9,7 +9,9 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@PhysicalAndChemicalProp
 @@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @run_Flow33_CookingOilSpray
 
 Feature: Flow 33 - Cooking Oil Spray
@@ -31,7 +33,24 @@ Scenario: [69577] Cooking Oil Spray - Aerosol
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
-	And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given in the Regulatory Documents to Provide page I click Continue
+
+	#And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
+	And I should see the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Product is packaged in a gas cylinder (e.g., whip cream)
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Dispersible
+	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select all potential allergens included in this product' to: Dairy
+	And In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: Dairy or products containing dairy or milk
+	And In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: None of the Above
+	And In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following sweeteners' to: None of the Above
+	And In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye(s)' to: None of the Above
+	And in the Physical and Chemical Properties page I click Continue
+
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 	And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
