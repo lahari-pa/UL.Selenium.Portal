@@ -292,7 +292,6 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	And I should see the The Product Page
 	And I set 'Product Name' to: Footwear or Leather Care Product - All other forms
-	#And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
 	And I set 'Type of Product' to: Footwear or Leather Care Product - All other forms
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase57986
@@ -313,17 +312,20 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	And in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 228844 (Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path)
-	#And I should see the Physical and Chemical Properties Page
-	#And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
-	#And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid spray
-	#And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.4
-	#And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
-	#And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Gas
-	#And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
-	#And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	#And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Gel Consistency
-	#And in the Physical and Chemical Properties page I click Continue
+	 #Given I call Shared Step 228844 (Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path)
+	And I should see the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid spray
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.4
+	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Gas
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Gas
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Gel Consistency
+	And in the Physical and Chemical Properties page I click Continue
 
 	# ====== 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue ====== #
 	# ====== 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |      ====== #

@@ -125,11 +125,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: (Closed cup method|Open cup method|Not applicable/available)")]
 		public void SelectFlashPointTestingMethod(string option)
 		{
-			GeneralUtilities.Wait_for_load_finish();
-			Delay.Seconds(10);
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			GeneralUtilities.Wait_for_load_finish();
 		}
 
 
