@@ -186,15 +186,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point Testing Method Used': the following options should be displayed exclusively: option 1 \(or 'none'\): (.*) , option 2 \(or 'none'\): (.*) , option 3 \(or 'none'\): (.*)")]
-		public void CheckOptionsInFlashPointTestingMethodSection(string option1, string option2, string option3)
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point Testing Method Used': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInFlashPointTestingMethodSection(string condition, string displayed, Table table)
 		{
 			string section = "Flash Point Testing Method Used";
-			string should = "should";
-			string exclusive = "displayed exclusively";
-			List<string> expectedOptions = new List<string> { option1, option2 ,option3 };
-			expectedOptions.RemoveAll(x => x.Equals("none", StringComparison.CurrentCultureIgnoreCase));
-			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, expectedOptions);
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
 
 

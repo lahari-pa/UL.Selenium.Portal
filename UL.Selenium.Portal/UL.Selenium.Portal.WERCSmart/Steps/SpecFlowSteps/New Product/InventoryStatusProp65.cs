@@ -96,6 +96,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			}
 
+
+			[StepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the following sections (should only|should|should not) be displayed:")]
+			public void CheckSectionsDisplayedInventoryStatusPage(string condition , Table sections)
+			{
+				
+				new Steps_Prototype().CheckDisplayedSections(condition, sections);
+			}
+
+
 		}
 	}
 }
