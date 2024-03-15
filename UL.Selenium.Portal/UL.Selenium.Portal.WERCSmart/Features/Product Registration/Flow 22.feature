@@ -77,7 +77,16 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Photograph Coating - Aerosol
 	Then I save the product information as: TestCase60545
-	Given I call Shared Step 60756 (Product Information with Country and every option)
+	#Given I call Shared Step 60756 (Product Information with Country and every option)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given in the Product Information page I click Continue
+
 	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
 	Given I click continue
 	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
@@ -154,13 +163,13 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60547
 
-	# ====== Following the steps from 'Shared Step' 60756 ====== #
+	#Given I call Shared Step 60756 (Product Information with Country and every option)
 	Given I should see the Product Information Page
-	Given I set the Select countries the product may be sold in option to: United States
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer. option to: No
-	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
 	# ====== Following the steps from 'Shared Step' 57528 ====== #
