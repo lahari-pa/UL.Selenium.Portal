@@ -38,9 +38,12 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
+
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -53,7 +56,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -182,10 +185,12 @@ Then The home screen should load
 
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
-Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the Add Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -198,7 +203,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -324,6 +329,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -336,7 +342,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -443,6 +449,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -455,7 +462,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -584,6 +591,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC74364
@@ -595,7 +603,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -725,6 +733,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC74365
@@ -736,7 +745,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -866,6 +875,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC74366
@@ -877,7 +887,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -986,6 +996,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC74368
@@ -997,7 +1008,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1123,6 +1134,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -1135,7 +1147,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1255,6 +1267,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -1264,7 +1277,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1384,6 +1397,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -1393,7 +1407,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1517,6 +1531,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 Then I save the product information as: TestCase74379
@@ -1527,7 +1542,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1651,6 +1666,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -1660,7 +1676,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
@@ -1780,6 +1796,7 @@ Then In the New Product Section, set the radio option in section: 'Select the ty
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Then in the The Product page, I click Continue
 
@@ -1789,7 +1806,7 @@ And In the Product Information Section, set the option in section: 'Which best d
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
 
