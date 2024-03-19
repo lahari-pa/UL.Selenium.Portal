@@ -186,7 +186,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-Then in the Add Product page, I click Continue
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -326,6 +326,8 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
+
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -446,6 +448,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -588,6 +591,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -730,6 +734,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -872,6 +877,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -993,6 +999,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1131,6 +1138,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1264,6 +1272,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1394,6 +1403,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1528,6 +1538,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1663,6 +1674,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -1793,6 +1805,7 @@ Then The home screen should load
 #And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I click the Add Product icon in the Navigation Pane
 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
