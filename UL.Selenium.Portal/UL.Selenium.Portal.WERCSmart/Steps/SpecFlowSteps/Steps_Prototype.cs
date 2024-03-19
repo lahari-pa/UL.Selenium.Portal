@@ -643,7 +643,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
+		[StepDefinition(@"The following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
@@ -666,8 +666,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
 					Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
-						"All expected options were not displayed under section: " + section + ". The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()) + ". The displayed options were: " + string.Join(", ", displayedOptions),
-						"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
+						$"All expected options were not displayed under section: {section}. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}. The displayed options were: {string.Join(", ", displayedOptions)}",
+						$"All expected options were displayed under section: {section} : {string.Join(", ", displayedOptions)}");
 				}
 				else if (should == "should not")
 				{
@@ -676,7 +676,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						$"The following options were not available for section: '{section}' as expected: {string.Join(", ", expectedOptions)}");
 				}
 			}
-			else if (exclusive == "displayed exclusively")
+			else if (exclusive == "exclusively displayed")
 			{
 				Report.Info("Expected options to be displayed are:");
 				foreach (string option in expectedOptions)
@@ -701,12 +701,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						continue;
 					}
 					allMatch = false;
-					Report.Failure("Option: " + displayedOption + " was displayed when it was not expected!");
+					Report.Failure($"Option: {displayedOption} was displayed when it was not expected!");
 					Report.Screenshot();
 				}
 				if (allMatch)
 				{
-					Report.Success("The displayed options matched the expected options exactly for section: " + section);
+					Report.Success($"The displayed options matched the expected options exactly for section: {section}");
 					Report.Screenshot();
 				}
 			}
@@ -716,7 +716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (should|should only|should not) see the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
-			Report.Info("Beginning I " + condition + " the following sections");
+			Report.Info($"Beginning I {condition} the following {sections}");
 			var expectedSections = new List<string>();
 			foreach (TableRow Row in sections.Rows)
 			{
@@ -725,8 +725,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var expectedNormalised = expectedSections.Select(x => x.Replace(" ", "")).ToList();
 			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
 			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
-			Report.Info("Actual sections: " + string.Join(",", ActualSections));
-			Report.Info("Expected sections: " + string.Join(",", expectedSections));
+			Report.Info($"Actual sections: {string.Join(",", ActualSections)}");
+			Report.Info($"Expected sections: {string.Join(",", expectedSections)}");
 			if (condition == "should only")
 			{
 				var mismatch = new List<string>();
@@ -737,17 +737,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						mismatch.Add(section);
 					}
 				}
-				Report.IsTrue(expectedSections.All(ActualSections.Contains) && expectedSections.Count == ActualSections.Count, "The following sections were showing when they should not be: " + string.Join("; ", mismatch), "The only displayed sections were: '" + string.Join("; ", ActualSections) + "' as expected");
+				Report.IsTrue(expectedSections.All(ActualSections.Contains) && expectedSections.Count == ActualSections.Count, $"The following sections were showing when they should not be: {string.Join("; ", mismatch)}", $"The only displayed sections were: '{string.Join("; ", ActualSections)}' as expected");
 				return;
 			}
 			if (condition == "should")
 			{
-				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections");
+				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
 				return;
 			}
 			if (condition == "should not")
 			{
-				Report.IsFalse(expectedSections.Any(ActualSections.Contains), "Sections were showing which should not be. The sections not allowed are: " + string.Join("; ", expectedSections) + ". Actual sections: " + string.Join("; ", ActualSections), "Sections were not showing as expected: " + string.Join("; ", expectedSections));
+				Report.IsFalse(expectedSections.Any(ActualSections.Contains), $"Sections were showing which should not be. The sections not allowed are: {string.Join("; ", expectedSections)}. Actual sections: {string.Join("; ", ActualSections)}", $"Sections were not showing as expected: {string.Join("; ", expectedSections)}");
 			}
 		}
 
@@ -777,27 +777,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			Report.Failure("Error message was showing when it wasn't expected to! Error(s): " + string.Join(", ", errors));
+			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
 			Report.Screenshot();
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
 }
