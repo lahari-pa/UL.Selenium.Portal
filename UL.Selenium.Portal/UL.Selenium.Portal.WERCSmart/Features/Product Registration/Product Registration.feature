@@ -13,6 +13,8 @@
 @UPC
 @NewProduct
 @run_ProductRegistration
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 Feature: Product Registration
 
 @tfs_design
@@ -55,12 +57,13 @@ Scenario: [63705] New Product - BCP
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63705
 	# Shared step 63704
-	And I should see the Product Information Page
-	And In the Information Page the check box for: United States should be: checked
-	And I set 'Product is shipped directly' to: No
-	And I set 'Product is a Retailers Private Label or Brand' to: No
-	And I set 'Product is solely for the Retailer's use' to: No
-	And in the New Product page I click Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
 	And I set 'Prop65' to: No
 	And in the New Product page I click Continue

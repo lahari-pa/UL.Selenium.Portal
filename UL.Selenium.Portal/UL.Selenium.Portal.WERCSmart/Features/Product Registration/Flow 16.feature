@@ -12,6 +12,17 @@
 @run_Flow16
 @UPC
 @SHA
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:LithiumBatteryTransportation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 Feature: Flow 16
 
 @TestCase:59273
@@ -528,34 +539,76 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
 	Then I save the product information as: TestCase122366
-	Then I call Shared Step 63704 (Product Information - US, No(DSV), No(PL), No(GNFR))
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Then I should see the Product Includes Battery Page
-	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
-		Given I add the following batteries:
-	 | Battery Type    | Manufacturer                                   | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
-	 | Lithium Primary | 2CR5 Primary Cylindrical Battery (WPS 1547109) | 4                                 | 4                                        | lithiumbattery |
-	Given I click continue
-	And I set 'Product has had TCLP; Report is available' to: No
-	And I set the Lead option to: No
-	And I set the Mercury option to: No
-	And I set the Silver option to: No
-	And I set the Cadmium option to: No
-	And I set the Chromium option to: No
-	And I set the Barium option to: No
-	And I set the Arsenic option to: No
-	And I set the Selenium option to: No
-	Given I click continue
+	#Then I call Shared Step 63704 (Product Information - US, No(DSV), No(PL), No(GNFR))
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	Given I should see the Product Includes Battery Page
+	Then In the Product Includes Battery Section, set the radio option in section: 'Indicate how battery is packaged': to: The battery is shipped with but not included in my product.
+	Given In the Product Includes Battery Section enter the values in the table:
+		| Battery Type    | Grams Lithium    | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
+		| Lithium Primary | > 1 g and <= 2 g | wercs        | 4                                 | 4                                        | lithiumbattery |
+	Then in the Product Includes Battery page, I click Continue
+
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
+
 	Then I should see the Electronic Equipment Page
-	And I set 'Contains Circuit Board' to: No
-	And I set 'Has a LCD or Plasma Display' to: No
-	Given I click continue
-	Given I call Shared Step 60096 (Lithium Battery Transportation)
-	And In the 'Select Retailers' window I select the retailer: Walgreens
-	And I click continue
-	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	Then in the Electronic Equipment page, I click Continue
+
+	#Given I call Shared Step 60096 (Lithium Battery Transportation)
+	Then I should see the Lithium Battery Transportation Page
+	Then In the Lithium Battery Transportation Section, set the radio option in section: 'For U.S. Department of Transportation (DOT), indicate the transport classification': to: Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9
+	Then In the Lithium Battery Transportation Section, set the radio option in section: 'For Marine transport (IMDG), indicate the classification': to: Meets requirements of IMDG Special Provision 188 to be transported as non-dangerous goods
+	Then In the Lithium Battery Transportation Section, set the radio option in section: 'For Air transport (IATA), indicate the classification': to: Section I
+	Then In the Lithium Battery Transportation Section, set the radio option in section: 'For Canada's Transportation of Dangerous Goods (TDG), indicate the classification': to: Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9
+	Then in the Lithium Battery Transportation page, I click Continue
+
+	Then I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Walgreens
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
+	#And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
+	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify option 'Packaging Type' is not present
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC122366 enter Size: 12 and enter Container Type: Plastic Container
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Then I should see the Optional Comments Page
+	Then in the Optional Comments page, I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
 
 	@TestCase:220789
 

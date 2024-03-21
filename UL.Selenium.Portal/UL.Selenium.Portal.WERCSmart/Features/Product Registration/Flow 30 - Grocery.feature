@@ -90,9 +90,9 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 	# ====== And I call Shared Step 69687 (Product Information - US, No(PL)) ====== #
 	Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
@@ -177,9 +177,9 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 
 		# ====== And I call Shared Step 69687 (Product Information - US, No(PL)) ====== #
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'

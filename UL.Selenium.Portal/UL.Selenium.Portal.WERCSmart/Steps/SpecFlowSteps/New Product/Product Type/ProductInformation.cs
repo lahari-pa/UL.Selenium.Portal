@@ -141,6 +141,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			productPrototype.InSectionSetOptionIsIsNotSelected(section, option, is_isnot);
 		}
 
+		[StepDefinition(@"In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in \(select either or both\)' is (checked|not checked) for: (United States|Canada)")]
+		public void RetailersSellingLocationConfirm(string checked_notchecked, string option)
+		{
+			bool expected = checked_notchecked == "checked";
+			string is_isnot = expected ? "is" : "is not";
+			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
+			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
+			productPrototype.InSectionConfirmOptionIsIsNotSelected(section, option, is_isnot);
+		}
+
 		[StepDefinition(@"In the Product Information Section, Check or Uncheck for the section (.*): Retailers will be selling my product at their store locations in \(select either or both\) to : (.*)")]
 		public void CheckOrUncheckRetailersSellingLocation(string section, string option)
 		{
