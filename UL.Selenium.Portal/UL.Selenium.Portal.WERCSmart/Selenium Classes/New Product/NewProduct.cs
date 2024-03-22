@@ -6016,14 +6016,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClearTextBox(string placeholderValue)
 		{
-			//IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@"//input[(.//ancestor::div[starts-with(@class,'forroup')]//label[contains(text(),'{section}')]) and @type='text' and @placeholder='{placeholderValue}']"), 2);
 			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']")); 
 			return textbox.ClearTextBox(); 
 		}
 
 		public bool ConfirmTextboxDisplayed(string placeholderValue)
 		{
-			//IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and @type='text' and @placeholder='{placeholderValue}']"), 2);
 			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']"));
 			return textbox != null;
 		}
