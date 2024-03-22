@@ -90,8 +90,8 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Then I save the product information as: TestCase207582
 	#Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
 	Then I should see the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
-	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to not select: Canada
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to not select: Canada
 
 	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
