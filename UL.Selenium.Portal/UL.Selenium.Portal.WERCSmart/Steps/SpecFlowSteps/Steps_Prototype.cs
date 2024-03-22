@@ -10,6 +10,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
@@ -425,18 +426,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				foreach (string item in errorMessagesExpected)
 				{
-					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
-						string.Format($"Failed to find the error message: {item} under section: {section}!"),
-						string.Format($"Successfully found the error message: {item} for section: {section}"), false, false);
+					Report.IsTrue(errorMessages.Any(e => e.Contains(item)), $"Failed to find the error message: {item} under section: {section}!",
+						$"Successfully found the error message: {item} for section: {section}");
 				}
 			}
 			if (should == "should not")
 			{
 				foreach (string item in errorMessagesExpected)
 				{
-					Report.IsFalse(errorMessages.Contains(item.Trim()),
-						string.Format($"The error message: {item} was displayed under section {section} when it should not be."),
-						string.Format($"The error message: {item} was not displayed under section: {section} as expected"), false, false);
+					Report.IsFalse(errorMessages.Contains(item.Trim()), $"The error message: {item} was displayed under section {section} when it should not be.",
+						$"The error message: {item} was not displayed under section: {section} as expected", false, false);
 				}
 			}
 			Report.Screenshot();
@@ -639,8 +638,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Alert still displayed when it is not expected");
 				}
 			}
-
+		}
+		[StepDefinition(@"In section: (.*) , I clear the textbox field with the placeholder value: (.*)")]
+		public void ClearTextBoxField(string section, string placeholderValue)
+		{
+			if(Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!",$"Successfully located a textbox under the section: {section}"))
+			{
+				Report.IsTrue(new NewProduct().ClearTextBox(placeholderValue), $"Failed to clear the textbox!", $"Successfully cleared the textbox!");
+			}
 		}
 
+		[StepDefinition(@"In the section: (.*) confirm that the shadow text value: (.*) is displayed in the textbox")]
+		public void ShadowTextDisplayed(string section, string shadowText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");	
+		}
+
+		[StepDefinition(@"I navigate to the Home Page")]
+		public void NavigateToTheHomePage()
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				GeneralUtilities.Wait_for_load_finish();
+				Report.IsTrue(selNav.Click_Icon("My Products"), "Failed to click the 'My Products' icon!", "Successfully clicked the 'My Products' icon!");
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I delete the product: (.*)")]
+		public void DeleteAProduct(string savedas)
+		{
+			Report.Info("Attempting to get product from context");
+			if (!Context.Contains(savedas))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedas}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedas);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+			Report.Info("Attempting to delete: " + Product.Name);
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
+			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+			{
+				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
+				{
+					GeneralUtilities.Wait_for_load_finish();
+					if (!ProductGrid.RowsAreFoundInProductGrid())
+					{
+						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
+						return;
+					}
+					ProductGridItem firstProduct = ProductGrid.FirstProductInGrid();
+					if (Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId == Product.Id, "First product did not match the required paremeters!", "Product was showing at the top of the grid, as expected!"))
+					{
+						Report.IsTrue(ProductGrid.DeleteFirstRow(savedas), "Failed to delete product in first row!", "Successfully deleted product in first row!");
+					}
+				}
+			}
+		}
 	}
 }
