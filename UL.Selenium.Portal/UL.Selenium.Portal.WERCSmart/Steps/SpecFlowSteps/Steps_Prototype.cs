@@ -612,6 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
 			}
 		}
+
 		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
 		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
 		{
@@ -638,6 +639,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Alert still displayed when it is not expected");
 				}
 			}
+
+		}
+
+		[StepDefinition(@"The following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
+		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
+		{
+			var expectedOptions = new List<string>();
+			List<string> displayedOptions = new List<string>();
+			var differences = new List<string>();
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
+			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
+			if (section == "Container Type")
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForContainerTypeField();
+			}
+			else
+			{
+				displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			}
+			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
+			if (exclusive == "displayed")
+			{
+				if (should == "should")
+				{
+					differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
+					Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
+						$"All expected options were not displayed under section: {section}. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}. The displayed options were: {string.Join(", ", displayedOptions)}",
+						$"All expected options were displayed under section: {section} : {string.Join(", ", displayedOptions)}");
+				}
+				else if (should == "should not")
+				{
+					Report.IsTrue(!expectedOptionsLower.Any(x => displayedOptionsLower.Contains(x)),
+						$"The following options were available for section: '{section}' when they were not expected!: '{string.Join(", ", expectedOptions)}'",
+						$"The following options were not available for section: '{section}' as expected: {string.Join(", ", expectedOptions)}");
+				}
+			}
+			else if (exclusive == "exclusively displayed")
+			{
+				Report.Info("Expected options to be displayed are:");
+				foreach (string option in expectedOptions)
+				{
+					Report.Info(option);
+				}
+				bool allMatch = true;
+				foreach (string displayedOption in displayedOptionsLower)
+				{
+					bool match = false;
+					foreach (string expectedOption in expectedOptionsLower)
+					{
+						if (expectedOption != displayedOption)
+						{
+							continue;
+						}
+						match = true;
+						break;
+					}
+					if (match)
+					{
+						continue;
+					}
+					allMatch = false;
+					Report.Failure($"Option: {displayedOption} was displayed when it was not expected!");
+					Report.Screenshot();
+				}
+				if (allMatch)
+				{
+					Report.Success($"The displayed options matched the expected options exactly for section: {section}");
+					Report.Screenshot();
+				}
+			}
+		}
 		}
 		[StepDefinition(@"In section: (.*) , I clear the textbox field with the placeholder value: (.*)")]
 		public void ClearTextBoxField(string section, string placeholderValue)
@@ -648,6 +720,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+
+		[StepDefinition(@"I (should|should only|should not) see the following sections")]
+		public void CheckDisplayedSections(string condition, Table sections)
+		{
+			Report.Info($"Beginning I {condition} the following {sections}");
+			var expectedSections = new List<string>();
+			foreach (TableRow Row in sections.Rows)
+			{
+				expectedSections.Add(Row["Section"]);
+			}
+			var expectedNormalised = expectedSections.Select(x => x.Replace(" ", "")).ToList();
+			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
+			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
+			Report.Info($"Actual sections: {string.Join(",", ActualSections)}");
+			Report.Info($"Expected sections: {string.Join(",", expectedSections)}");
+			if (condition == "should only")
+			{
+				var mismatch = new List<string>();
+				foreach (string section in ActualSections)
+				{
+					if (!expectedSections.Contains(section))
+					{
+						mismatch.Add(section);
+					}
+				}
+				Report.IsTrue(expectedSections.All(ActualSections.Contains) && expectedSections.Count == ActualSections.Count, $"The following sections were showing when they should not be: {string.Join("; ", mismatch)}", $"The only displayed sections were: '{string.Join("; ", ActualSections)}' as expected");
+				return;
+			}
+			if (condition == "should")
+			{
+				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
+				return;
+			}
+			if (condition == "should not")
+			{
+				Report.IsFalse(expectedSections.Any(ActualSections.Contains), $"Sections were showing which should not be. The sections not allowed are: {string.Join("; ", expectedSections)}. Actual sections: {string.Join("; ", ActualSections)}", $"Sections were not showing as expected: {string.Join("; ", expectedSections)}");
+			}
+		}
+
+
+		[StepDefinition(@"section: (.*) is highlighed in red indicating an error")]
+		public void SectionIsHighlightedInRedIndicatingAnError(string section)
+		{
+			var selNewProduct = new NewProduct();
+			string colour = selNewProduct.SectionColour(section);
+			// Not the best. Will break if the exact shade changes (hex #A9443F, rgb 169, 68, 66) and verified it is intended
+			string expected = "(62, 62, 62, 1)";
+			Report.IsTrue(colour.Contains(expected),
+				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
+				$"Section '{section}' colour was red as expected");
+		}
 		[StepDefinition(@"In the section: (.*) confirm that the shadow text value: (.*) is displayed in the textbox")]
 		public void ShadowTextDisplayed(string section, string shadowText)
 		{
@@ -673,6 +796,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+
+		[StepDefinition(@"I should not see any error messages on the page")]
+		public void NoErrorMessages()
+		{
+			var NewProduct = new NewProduct();
+
+			List<string> errors = NewProduct.ErrorMessagesText;
+			if (!errors.Any())
+			{
+				Report.Success("As expected, the error message was not showing.");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
+			Report.Screenshot();
+		}
 		[StepDefinition(@"I delete the product: (.*)")]
 		public void DeleteAProduct(string savedas)
 		{
