@@ -710,7 +710,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		}
+		
 		[StepDefinition(@"In section: (.*) , I clear the textbox field with the placeholder value: (.*)")]
 		public void ClearTextBoxField(string section, string placeholderValue)
 		{
@@ -812,27 +812,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
 			Report.Screenshot();
 		}
-		[StepDefinition(@"I delete the product: (.*)")]
-		public void DeleteAProduct(string savedas)
+	[StepDefinition(@"I delete the product: (.*)")]
+	public void DeleteAProduct(string savedas)
+	{
+		Report.Info("Attempting to get product from context");
+		if (!Context.Contains(savedas))
 		{
-			Report.Info("Attempting to get product from context");
-			if (!Context.Contains(savedas))
-			{
-				Report.Failure($"Context did not contain the Product saved as: {savedas}");
-			}
-			else
-			{
-				Report.Info("Found in Context");
-			}
-			var obj = Context.GetFromContext(savedas);
-			Report.Info("Attempting to convert Product to type ProductInformation");
-			var Product = (ProductInformation)obj;
-			Report.Info("Attempting to delete: " + Product.Name);
-			var ProductGrid = new ProductsGrid {
-				ProductIdField = Product.Id
-			};
-			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
-			{
+			Report.Failure($"Context did not contain the Product saved as: {savedas}");
+		}
+		else
+		{
+			Report.Info("Found in Context");
+		}
+		var obj = Context.GetFromContext(savedas);
+		Report.Info("Attempting to convert Product to type ProductInformation");
+		var Product = (ProductInformation)obj;
+		Report.Info("Attempting to delete: " + Product.Name);
+		var ProductGrid = new ProductsGrid {
+			ProductIdField = Product.Id
+		};
+		if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+		{
 				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
 				{
 					GeneralUtilities.Wait_for_load_finish();
@@ -849,5 +849,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
+
+
 	}
 }
+
+
