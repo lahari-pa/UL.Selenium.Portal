@@ -73,5 +73,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 		}
 
+
+		[StepDefinition(@"In the Transportation Details 1 Section, for section 'Product is Regulated for Transport': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInProductIsRegulatedForTransportSection(string condition, string displayed, Table table)
+		{
+			
+			string section = "Product is Regulated for Transport"; 
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
+
 	}
 }
