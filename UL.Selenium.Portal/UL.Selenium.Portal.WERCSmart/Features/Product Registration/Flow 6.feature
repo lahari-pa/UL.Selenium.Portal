@@ -184,6 +184,9 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 # Created by Saikiran Chittampally
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 6
+
+#Removed from regression 2024/03
+@ignore
 @TestCase:57134
 Scenario: [57134] Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE with Granted 'Alternative Control Plan' (VOC Exempt)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -229,6 +232,9 @@ Scenario: [57134] Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE w
 	# Created by Saikiran Chittampally
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 6
+
+#Removed from regression 2024/03
+@ignore
 @TestCase:208260
 Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE with NOT Granted 'Alternative Control Plan' (VOC Exempt)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

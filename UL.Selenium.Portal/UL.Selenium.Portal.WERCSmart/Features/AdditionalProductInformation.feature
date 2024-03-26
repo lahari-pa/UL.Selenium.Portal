@@ -29,7 +29,8 @@ And I should see following statement: Product has been classified using OSHA (US
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:31359
 Scenario: [31359] Product Information - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -42,7 +43,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31359
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85242
 Scenario: [85242] Product Information with marketed child question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -57,7 +59,8 @@ And I should see following statement: Product has been classified using OSHA (US
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85242
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85244
 Scenario: [85244] Product Information with marketed child question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,7 +74,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85244
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85367
 Scenario: [85367] Which one best describes your product question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -106,7 +110,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85368
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85488
 Scenario: [85488] Private Label and Goods Not for Resale question - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -120,8 +125,8 @@ And I should see following statement: Product is a Retailer's Private Label or B
 And I should see following statement: Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85488
 
-
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85489
 Scenario: [85489] Private Label and Goods Not for Resale question - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

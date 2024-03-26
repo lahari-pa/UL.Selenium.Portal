@@ -17,6 +17,8 @@
 
 Feature: New Product
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:31343
 Scenario: [31343] New Product screen navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -30,6 +32,8 @@ Scenario: [31343] New Product screen navigation
 		| Copy from an Existing Registration |
 	#TODO: create another test case for ULSC options in New product screen
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:31344
 Scenario: [31344] New Product Screen validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

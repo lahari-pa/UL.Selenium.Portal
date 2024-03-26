@@ -223,6 +223,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S28
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:122300
 	Scenario: [122300] UPC Transportation Error - Mode 6 - Scenario 15	
 
@@ -403,7 +405,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S20
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:122297
 	Scenario: [122297] UPC Transportation Error - Mode 4x5 - Scenario 25 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -460,20 +463,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+#Removed from regression 2024/03
+@ignore
 @TestCase:122298
 	Scenario: [122298] UPC Transportation Error - Mode 4x5 - Scenario 35 
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

@@ -94,7 +94,8 @@ Scenario: [31833] Physical and Chemical Properties - Liquid only validation
 	And Select the best Water Solubility description should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31833
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:31786
 Scenario: [31786] Physical and Chemical Properties - Aerosol only navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -121,6 +122,8 @@ Scenario: [31826] Physical and Chemical Properties - Gas only validation
 	And Select the best Water Solubility description should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31826
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:31804
 Scenario: [31804] Physical and Chemical Properties - Gas only navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -128,6 +128,8 @@ Scenario: [85276] Select Retailers - Errors highlighted
 		| Sears/K-Mart        |
 		| Wal-Mart/SAM'S CLUB |
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:96708
 Scenario: [96708] Beverage RU - No Walmart
 	Given I generate a random UPC number and save as: UPC96708

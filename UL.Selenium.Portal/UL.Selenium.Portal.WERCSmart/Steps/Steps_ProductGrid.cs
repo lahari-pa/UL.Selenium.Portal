@@ -2982,7 +2982,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
+		//[StepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
 		public void ThenIClickTheShowOnlyDiscontinuedProductsCheckboxInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3007,7 +3007,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the (.*) checkbox in the 'My Products' grid")]
+		[StepDefinition(@"I click the '(.*)' checkbox in the 'My Products' grid")]
 		public void ThenIClickTheCheckboxInTheMyProductsGrid(string checkbox)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
