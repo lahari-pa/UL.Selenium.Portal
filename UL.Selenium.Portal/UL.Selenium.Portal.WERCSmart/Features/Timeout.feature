@@ -101,6 +101,8 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 #Then I wait for 960 seconds
 #And the landing page should load
 
+#Removed from regression 2024/03
+@ignore
 @Timeout3
 @ScenarioId:1439
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
@@ -110,8 +112,8 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can b
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
 
-
-
+#Removed from regression 2024/03
+@ignore
 @Timeout4
 @ScenarioId:1437
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works Correctly
@@ -122,8 +124,10 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works C
 #Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 #Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
 
+#Removed from regression 2024/03
 @Timeout5
 @ScenarioId:1435
+@ignore
 Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup can be interacted with
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I click the following option in the bottom menu: Search
@@ -155,6 +159,8 @@ Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup c
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
 
+#Removed from regression 2024/03
+@ignore
 @Timeout6
 @ScenarioId:1436
 Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup- TimeoutFeature Works Correctly

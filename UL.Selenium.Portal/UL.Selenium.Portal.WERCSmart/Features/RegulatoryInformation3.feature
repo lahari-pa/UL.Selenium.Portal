@@ -14,6 +14,8 @@
 
 Feature: Regulatory Information 3
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:88022
 Scenario: [88022] Regulatory Information 3 - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

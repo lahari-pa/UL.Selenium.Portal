@@ -153,9 +153,12 @@ Scenario: [58606] Medicinal Liquids - RU001188
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Obsolete
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
+
+#Removed from regression 2024/03
 @ProductSetUp
 @42196
 @TestCase:42196
+@ignore
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
