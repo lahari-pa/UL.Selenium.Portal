@@ -21,6 +21,8 @@ Feature: Lithium Battery Transport Information
 #		| username    | FirstName | LastName   | Role         | EmailAddress                |
 #		| SHAQAAuto16 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:65512
 Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
