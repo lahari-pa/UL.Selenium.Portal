@@ -711,7 +711,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 		
-		[StepDefinition(@"In section: (.*) , I clear the textbox field with the placeholder value: (.*)")]
+		[StepDefinition(@"In (.*) section, clear the textbox field with the placeholder value: (.*)")]
 		public void ClearTextBoxField(string section, string placeholderValue)
 		{
 			if(Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!",$"Successfully located a textbox under the section: {section}"))
@@ -771,7 +771,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
 		}
-		[StepDefinition(@"In the section: (.*) confirm that the shadow text value: (.*) is displayed in the textbox")]
+		[StepDefinition(@"In the (.*) section, confirm that the shadow text: '(.*)' is displayed in the textbox")]
 		public void ShadowTextDisplayed(string section, string shadowText)
 		{
 			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");	
