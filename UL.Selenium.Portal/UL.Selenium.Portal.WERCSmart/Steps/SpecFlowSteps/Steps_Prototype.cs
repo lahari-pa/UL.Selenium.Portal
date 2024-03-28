@@ -10,6 +10,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.SpecFlow.Classes;
 using UL.Automation.TReVor.Classes;
@@ -425,18 +426,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				foreach (string item in errorMessagesExpected)
 				{
-					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
-						string.Format($"Failed to find the error message: {item} under section: {section}!"),
-						string.Format($"Successfully found the error message: {item} for section: {section}"), false, false);
+					Report.IsTrue(errorMessages.Any(e => e.Contains(item)), $"Failed to find the error message: {item} under section: {section}!",
+						$"Successfully found the error message: {item} for section: {section}");
 				}
 			}
 			if (should == "should not")
 			{
 				foreach (string item in errorMessagesExpected)
 				{
-					Report.IsFalse(errorMessages.Contains(item.Trim()),
-						string.Format($"The error message: {item} was displayed under section {section} when it should not be."),
-						string.Format($"The error message: {item} was not displayed under section: {section} as expected"), false, false);
+					Report.IsFalse(errorMessages.Contains(item.Trim()), $"The error message: {item} was displayed under section {section} when it should not be.",
+						$"The error message: {item} was not displayed under section: {section} as expected", false, false);
 				}
 			}
 			Report.Screenshot();
@@ -711,6 +710,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
+		
+		[StepDefinition(@"In (.*) section, clear the textbox field with the placeholder value: (.*)")]
+		public void ClearTextBoxField(string section, string placeholderValue)
+		{
+			if(Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!",$"Successfully located a textbox under the section: {section}"))
+			{
+				Report.IsTrue(new NewProduct().ClearTextBox(placeholderValue), $"Failed to clear the textbox!", $"Successfully cleared the textbox!");
+			}
+		}
 
 
 		[StepDefinition(@"I (should|should only|should not) see the following sections")]
@@ -763,6 +771,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
 		}
+		[StepDefinition(@"In the (.*) section, confirm that the shadow text: '(.*)' is displayed in the textbox")]
+		public void ShadowTextDisplayed(string section, string shadowText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");	
+		}
+
+		[StepDefinition(@"I navigate to the Home Page")]
+		public void NavigateToTheHomePage()
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				GeneralUtilities.Wait_for_load_finish();
+				Report.IsTrue(selNav.Click_Icon("My Products"), "Failed to click the 'My Products' icon!", "Successfully clicked the 'My Products' icon!");
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 
 		[StepDefinition(@"I should not see any error messages on the page")]
@@ -779,6 +811,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
 			Report.Screenshot();
-		}
+		}	
 	}
 }
+
+
