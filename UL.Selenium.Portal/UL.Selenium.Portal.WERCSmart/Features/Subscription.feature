@@ -1159,6 +1159,8 @@ Scenario: [112388] Subscription - Contact Information and Billing Information Ap
 	Then In the company information page I confirm that the Address shippingAddress for: action_menu: Shipping Address country: CANADA address one: 725 6th Ave, address two: testshipping, city: Ontalon, State: Ontario, Zip: 99977, phoneNo: 956-608-9990, saveAddressOption: shippingAddress updated correctly
 	
 # Created by Saikiran Chittampally
+#Removed from regression 2024/04
+@ignore
 @TestCase:204225
 Scenario: [204225] Subscription - Billing Frequency
 	Given I go to the WERCSmart Log in

@@ -58,6 +58,8 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:64874
 Scenario: [64874] Division Area - no divisions set up
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
