@@ -22,6 +22,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
@@ -6013,6 +6014,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return skuField.Text.Length == 0;
 		}
 
+		public bool ClearTextBox(string placeholderValue)
+		{
+			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']")); 
+			return textbox.ClearTextBox(); 
+		}
+
+		public bool ConfirmTextboxDisplayed(string placeholderValue)
+		{
+			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']"));
+			return textbox != null;
+		}
 	}
 
 	public class ProductInformation

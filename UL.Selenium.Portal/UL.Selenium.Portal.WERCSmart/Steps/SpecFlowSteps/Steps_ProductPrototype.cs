@@ -180,5 +180,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new ProductPrototype(question).WaitForContainerToBeVisible() == expected,
 				$"Failure, question {question} {(expected ? "is not" : "is")} displayed", $"Success, question {question} {is_isnot} displayed.");
 		}
+
 	}
 }
