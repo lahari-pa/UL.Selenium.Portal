@@ -12,6 +12,8 @@ using UL.Automation.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using TechTalk.SpecFlow;
+using UL.Automation.Utilities.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1573,6 +1575,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.IsTrue(ProductGrid.DeleteFirstRow(savedas), "Failed to delete product in first row!", "Successfully deleted product in first row!");
 					}
 				}
+			}
+		}
+
+		public void DeleteAllProductsMatchingCriteria(string value)
+		{
+			var productGrid = new ProductsGrid();
+			if (Report.IsTrue(productGrid.ClickMoreFilters(), "Failed to click the 'More Filters' option in the product grid", "Successfully clicked the 'More Filters' option in the product grid!", false, false))
+			{
+
+				if (value.ToLower().Contains("saved as"))
+				{
+					value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+				}
+				productGrid.UpcNumber = value;
+				if (!Report.IsTrue(productGrid.UpcNumber == value, $"Value: {value} was not inputted into the UPC Number field correctly!", $"Value: {value} was correctly inputted into the UPC Number field", false, false))
+				{
+				// Return so that we don't start removing all elements in the datagrid!
+					return;
+				}
+
+				if (!Report.IsTrue(productGrid.ClickUpcNumberSearchButton(), "Failed to click the UPC Search button!", "Successfully clicked the UPC Search button!", false, false))
+				{
+				// Again, return just in case we don't have the correct results in the search grid!
+					return;
+				}
+				GeneralUtilities.Wait_for_load_finish();
 			}
 		}
 
