@@ -1672,9 +1672,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-			if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
+			if (myNewProduct.SectionExists("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product"))
 			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			}
 
 			if (myNewProduct.SectionExists(
