@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @PhysicalAndChemicalProp
 @Ingredients
@@ -18,6 +19,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow6
 
 Feature: Flow 6
@@ -291,8 +295,8 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	And I should see the The Product Page
-	And I set 'Product Name' to: Footwear or Leather Care Product - All other forms
-	And I set 'Type of Product' to: Footwear or Leather Care Product - All other forms
+    And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Footwear or Leather Care Product - All other forms
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Footwear or Leather Care Product - All other forms
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase57986
 
@@ -396,15 +400,15 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 
 	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text ====== #
 	And I should see the Optional Comments Page
-	And I enter the following into the comments field: Comments Field Text
+	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comments Field Text
 	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms ====== #
 	Given I should see the Data Acceptance Page
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Footwear or Leather Care Product - All other forms
-	Given I close the Data Summary Tab
+	Given In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Footwear or Leather Care Product - All other forms
+	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
