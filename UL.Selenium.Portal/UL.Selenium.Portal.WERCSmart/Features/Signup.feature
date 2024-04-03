@@ -17,6 +17,8 @@ Feature: Sign Up
 Background:
 	Given I go to the WERCSmart Log in
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:53069
 Scenario: [53069] Signup - Account Creation - Happy Path
 	Given I define the user: SignupUser with the following parameters:
