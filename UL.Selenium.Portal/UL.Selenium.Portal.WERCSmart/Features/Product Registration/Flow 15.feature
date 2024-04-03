@@ -17,6 +17,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @GTINAndUPC
 @run_Flow15
 
@@ -83,7 +85,6 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58760 enter Size: 22 and enter Container Type: Plastic Container
-	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	And in the Universal Product Code (UPC) page I click Continue
 
 	Given in the Additional Documents to Provide page I click Continue
@@ -95,12 +96,11 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED) ====== #
-		Given I should see the Data Acceptance Page
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Light Bulbs - Light Emitting Diodes (LED)
-	Given I close the Data Summary Tab
 	Given I should see the Data Acceptance Page
+	Given In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Light Bulbs - Light Emitting Diodes (LED)
+	Given I close the tab with Data Summary page
 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
