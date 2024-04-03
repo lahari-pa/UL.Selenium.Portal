@@ -10,11 +10,13 @@
 @wercsmart
 @RetailPartners
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @GTINAndUPC
 @run_Flow15
 
@@ -34,8 +36,8 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 
 	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping ====== #
 	And I should see the The Product Page
-	And I set 'Product Name' to: Light Bulbs - Light Emitting Diodes (LED)
-	And I set 'Type of Product' to: Light Bulbs - Light Emitting Diodes (LED)
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Light Bulbs - Light Emitting Diodes (LED)
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Light Bulbs - Light Emitting Diodes (LED)
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase58760
 
@@ -80,11 +82,8 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	# ====== Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22 ====== #
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then I add the following into the UPC Fields
-	| Field         | Value               |
-	| UPCNumber     | saved as UPC58760   |
-	| ContainerType | Plastic Container   |
-	| Size          | 22                  |
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58760 enter Size: 22 and enter Container Type: Plastic Container
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	And in the Universal Product Code (UPC) page I click Continue
 
 	Given in the Additional Documents to Provide page I click Continue
@@ -92,7 +91,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 
 	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text ====== #
 	And I should see the Optional Comments Page
-	And I enter the following into the comments field: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED) ====== #
