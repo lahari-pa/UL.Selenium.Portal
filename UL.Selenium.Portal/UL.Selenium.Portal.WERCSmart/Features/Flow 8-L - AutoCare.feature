@@ -29,13 +29,13 @@ Scenario: [216819] Container Types - Primary Physical State Liquid - Engine Moto
 	Then I should see the The Product Page
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Engine (Motor) Oil for Auto or Boat
 	Then I set 'Type of Product' to: Engine (Motor) Oil for Auto or Boat
-	Then I save the product information as: TestCase216819
 	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase216819
 	#Then I call Shared Step 217667 (Product Information - Applicable Only to Engine Motor Oil for Auto or Boat (RU000269))
 	Then I should see the Product Information Page
 	When In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	When In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 	Then I should see the Regulatory Documents to Provide Page
@@ -47,7 +47,7 @@ Scenario: [216819] Container Types - Primary Physical State Liquid - Engine Moto
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	Given In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.8892
 	Given In the Physical and Chemical Properties Section, for section: 'pH' enter text: 13
-	When In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: I do not have exact Boiling Point data available to me
+	When In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
 	Given In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: Not tested/Unknown
 	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 180
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available

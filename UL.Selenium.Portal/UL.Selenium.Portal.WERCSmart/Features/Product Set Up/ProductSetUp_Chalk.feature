@@ -21,6 +21,7 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
 		| SHAQAAuto21 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 2024/03
 @ignore
 @TestCase:75335
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)

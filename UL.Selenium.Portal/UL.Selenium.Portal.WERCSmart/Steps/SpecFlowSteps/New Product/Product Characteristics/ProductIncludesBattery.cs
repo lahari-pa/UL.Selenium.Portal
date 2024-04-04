@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,25 +51,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			{
 				foreach (TableRow thisRow in table.Rows)
 				{
-					if (table.ContainsColumn("Battery Is Packaged"))
-					{
-						this.SelectIndicateHowBatteryIsPackaged("Installed in the product");
-					}
 					if (table.ContainsColumn("Battery Type"))
 					{
-						this.EnterBatterySelectInformation("Alkaline", "Battery Type");
+						this.EnterBatterySelectInformation($"{thisRow["Battery Type"]}", "Battery Type");
+					}
+					if(table.ContainsColumn("Grams Lithium"))
+					{
+						this.EnterBatterySelectInformation($"{thisRow["Grams Lithium"]}", "Grams Lithium");
 					}
 					if (table.ContainsColumn("Manufacturer"))
 					{
-						this.EnterBatteryManufacturer("FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820)");
+						this.EnterBatteryManufacturer($"{thisRow["Manufacturer"]}");
 					}
 					if (table.ContainsColumn("Quantity of Batteries per Package"))
 					{
-						this.EnterBatteryInputInformation("6", "Quantity of Batteries per Package");
+						this.EnterBatteryInputInformation($"{thisRow["Quantity of Batteries per Package"]}", "Quantity of Batteries per Package");
 					}
 					if (table.ContainsColumn("Quantity of Batteries to Operate Product"))
 					{
-						this.EnterBatteryInputInformation("6", "Quantity of Batteries to Operate Product");
+						this.EnterBatteryInputInformation($"{thisRow["Quantity of Batteries to Operate Product"]}", "Quantity of Batteries to Operate Product");
 					}
 				}
 			}

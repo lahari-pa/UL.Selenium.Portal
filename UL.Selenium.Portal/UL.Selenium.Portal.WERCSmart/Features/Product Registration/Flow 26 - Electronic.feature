@@ -51,9 +51,9 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 	# ====== And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only) ====== #
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -65,9 +65,10 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 # ======  | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | ====== #
 # ======  | Alkaline     | <any>        | 6                                 | 6                                        | ====== #
 	Given I should see the Product Includes Battery Page
+	Then In the Product Includes Battery Section, set the radio option in section: 'Indicate how battery is packaged': to: The battery is shipped with but not included in my product.
 	Given In the Product Includes Battery Section enter the values in the table:
-          | Battery Is Packaged      | Battery Type | Manufacturer                                                       | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
-          | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) | 6                                 | 6                                        |
+		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+		| Alkaline     | wercs        | 6                                 | 6                                        |
 	Given in the Product Includes Battery page, I click Continue
 
 # ======  Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path  ====== #

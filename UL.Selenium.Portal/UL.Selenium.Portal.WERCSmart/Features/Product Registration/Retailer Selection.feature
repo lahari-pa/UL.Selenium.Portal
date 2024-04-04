@@ -128,6 +128,8 @@ Scenario: [85276] Select Retailers - Errors highlighted
 		| Sears/K-Mart        |
 		| Wal-Mart/SAM'S CLUB |
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:96708
 Scenario: [96708] Beverage RU - No Walmart
 	Given I generate a random UPC number and save as: UPC96708
@@ -243,9 +245,9 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 	Then I save the product information as: TestCase128920
 	#Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
 	Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)

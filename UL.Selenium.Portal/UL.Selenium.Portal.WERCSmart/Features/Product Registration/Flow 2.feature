@@ -151,6 +151,8 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:57648
 Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -127,7 +127,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			GeneralUtilities.Wait_for_load_finish();
 		}
 
 
@@ -186,7 +185,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point Testing Method Used': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInFlashPointTestingMethodSection(string condition, string displayed, Table table)
+		{
+			string section = "Flash Point Testing Method Used";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
 
 
 

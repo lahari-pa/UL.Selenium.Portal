@@ -419,6 +419,8 @@ Scenario: [74207] Product Development Manager (PDM) and verification
 	Then Who is the Product Development Manager (PDM) for this product? should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74207
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:74270
 Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Selected but has an eligible UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -449,6 +451,8 @@ Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Se
 	And I should see the Regulatory Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74270
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:74272
 Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a UPC that does not start 050428
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

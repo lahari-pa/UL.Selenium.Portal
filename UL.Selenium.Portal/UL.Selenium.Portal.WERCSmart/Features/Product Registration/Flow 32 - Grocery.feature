@@ -53,13 +53,13 @@ And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy To
 And in the The Product page I click Continue
 Then I save the product information as: TestCase60774
 
-# ====== Given I call Shared Step 60756 (Product Information with Country and every option) ====== #
+#And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
 And I should see the Product Information Page
-And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 And In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United Kingdom
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 And in the Product Information page I click Continue
 
@@ -68,7 +68,7 @@ And I should see the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 Then in the Regulatory Documents to Provide page I click Continue
 
-# ====== And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder) ====== #
+#And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
 And I should see the Physical and Chemical Properties Page
 And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Product is packaged in a gas cylinder (e.g., whip cream)
 And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -178,13 +178,13 @@ And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy To
 And in the The Product page I click Continue
 Then I save the product information as: TestCase60775
 
-# ====== Given I call Shared Step 60756 (Product Information with Country and every option) ====== #
+#And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
 And I should see the Product Information Page
-And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
+And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 And In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United Kingdom
 And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 And in the Product Information page I click Continue
 
@@ -193,7 +193,7 @@ And I should see the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 Then in the Regulatory Documents to Provide page I click Continue
 
-# ====== And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder) ====== #
+#And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
 And I should see the Physical and Chemical Properties Page
 And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Product is packaged in a gas cylinder (e.g., whip cream)
 And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
