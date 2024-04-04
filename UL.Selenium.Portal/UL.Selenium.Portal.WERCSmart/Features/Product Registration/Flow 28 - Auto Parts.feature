@@ -69,7 +69,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	# ====== Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Cardboard and size: 20 ====== #
 	Given I should see the Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60673 enter Size: Cardboard and enter Container Type: 20
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60673 enter Size: 20 and enter Container Type: Cardboard
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I upload PDF document to Upload SDS (Optional) field
