@@ -21,6 +21,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:FuelContainerRegulatoryDetails
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow28_AutoParts
 Feature: [64733] Flow 28 - Auto Parts
 
@@ -78,11 +80,11 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Gasoline Container, Portable ====== #
-    Given I should see the Data Acceptance Page
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Gasoline Container, Portable
-	Given I close the Data Summary Tab
-    Given I should see the Data Acceptance Page
+	Given I should see the Data Acceptance Page
+	Given In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Gasoline Container, Portable
+	Given I close the tab with Data Summary page
+	Given I should see the Data Acceptance Page
 
     Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
