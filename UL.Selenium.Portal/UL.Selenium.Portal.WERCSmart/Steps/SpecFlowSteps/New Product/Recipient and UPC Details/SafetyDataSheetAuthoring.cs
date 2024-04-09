@@ -18,14 +18,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-
 		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Autoignition Temperature \(°C\)' enter text: (.*)")]
 		public void EnterAutoignitionTemperature(string text)
 		{
 			string section = "Autoignition Temperature (°C)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
-
 
 		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Minimum Ignition Energy \(mJ\)' enter text: (.*)")]
 		public void EnterMiniumIgnitionEngergy(string text)
