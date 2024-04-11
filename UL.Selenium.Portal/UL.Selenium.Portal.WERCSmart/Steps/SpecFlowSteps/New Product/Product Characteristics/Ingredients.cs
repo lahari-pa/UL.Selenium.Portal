@@ -10,6 +10,7 @@ using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -382,11 +383,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
+		[StepDefinition(@"In the Ingredients section, I (should|should not) see the ingredients error message")]
+		public void IngredientsTableAddFollowingIngredients(string should)
+		{
+			StepsIngredients stepsIngredients = new StepsIngredients();
+			Report.StartSubStep($"Then I check if the error message is showing");
+			stepsIngredients.IngredientsErrorMessageShowing(should);
+		}
 
-		/// Copy and paste the following tables to create the table structure as needed 
-		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-		///
-		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+			/// Copy and paste the following tables to create the table structure as needed 
+			///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+			///
+			/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
 		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{

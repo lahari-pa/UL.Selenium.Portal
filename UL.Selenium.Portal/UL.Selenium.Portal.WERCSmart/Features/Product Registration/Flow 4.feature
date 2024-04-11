@@ -512,7 +512,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
     # ======		| Acetic Acid  | 100      | false               | false       |            | ====== #
     And I should see the Ingredients Page
     When in the Ingredients page I click Continue
-    Then I should see the ingredients error message
+    Then In the Ingredients section, I should see the ingredients error message
     Then In the Ingredients section, add the following ingredients:
     		| SearchType     | SearchValue | SearchText  | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
     		| component name | Acetic Acid | Acetic Acid | 100     | False               | false         | false       |
