@@ -527,8 +527,6 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
     Then I should see the Transportation Details 1 Page
     Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
-    #Given In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
-    #Given In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
     Given in the Transportation Details 1 page I click Continue
 
 	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
