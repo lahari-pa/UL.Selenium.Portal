@@ -457,36 +457,110 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
-	Then I save the product information as: TestCase57982
+
+	 # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+    Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+
+	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent ====== #
+    And I should see the The Product Page
+    And I set 'Product Name' to: Bonding agent
+    And I set 'Type of Product' to: Bonding agent
+    And in the The Product page I click Continue
+    Then I save the product information as: TestCase57982
 	Then I generate a random UPC number and save as: UPC57982
-	Then I call Shared Step 214643 (Product Information - Applicable Only to Bonding Agent (RU000023))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
-	Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023))
-		| Section                  | do not have exact data | Value                    |
-		| Primary Physical State   |                        | Liquid                   |
-		| Secondary Physical State |                        | Liquid                   |
-		| pH                       |                        | 5                        |
-		| Relative Density         |                        | 0.82                     |
-		| Primary State Options    |                        | Aerosol Gas Liquid Solid |
-		| Boiling Point (in Celsius) |                        | 100                      |
-		| Flash Point (in Celsius) | Yes                    | None, No Flash Point     |
-		| Water Solubility         |                        | Insoluble in water       |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Acetic Acid  | 100      | false               | false       |            |
-	And I call Shared Step 40650 (Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)	
-	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
-		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 10                     | 6                          | Yes            |
+
+	# ====== Given I call Shared Step 214643 (Product Information - Applicable Only to Bonding Agent (RU000023)) ====== #
+	# ====== | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | ====== #
+	# ====== | No                                                             | No                           | No                     | No                  | ====== #
+	And I should see the Product Information Page
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	And in the Product Information page I click Continue
+
+	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
+    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+    Given in the Regulatory Documents to Provide page I click Continue
+
+	# ====== Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023)) ====== #
+	# ====== 	| Section                  | do not have exact data | Value                    | ====== #
+	# ====== 	| Primary Physical State   |                        | Liquid                   | ====== #
+	# ====== 	| Secondary Physical State |                        | Liquid                   | ====== #
+	# ====== 	| pH                       |                        | 5                        | ====== #
+	# ====== 	| Relative Density         |                        | 0.82                     | ====== #
+	# ====== 	| Primary State Options    |                        | Aerosol Gas Liquid Solid | ====== #
+	# ====== 	| Boiling Point (in Celsius) |                        | 100                    | ====== #
+	# ====== 	| Flash Point (in Celsius) | Yes                    | None, No Flash Point     | ====== #
+	# ====== 	| Water Solubility         |                        | Insoluble in water       | ====== #
+	And I should see the Physical and Chemical Properties Page
+    And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+    And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 5
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.82
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	And In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	And In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+    And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Insoluble in water
+    And in the Physical and Chemical Properties page I click Continue
+
+	# ====== And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: ====== #
+    # ======		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | ====== #
+    # ======		| Acetic Acid  | 100      | false               | false       |            | ====== #
+    And I should see the Ingredients Page
+    When in the Ingredients page I click Continue
+    Then I should see the ingredients error message
+    Then In the Ingredients section, add the following ingredients:
+    		| SearchType     | SearchValue | SearchText  | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    		| component name | Acetic Acid | Acetic Acid | 100     | False               | false         | false       |
+    And in the Ingredients page I click Continue
+
+	# ====== And I call Shared Step 40650 (Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
+    Then I should see the Transportation Details 1 Page
+    Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+    #Given In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+    #Given In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    Given in the Transportation Details 1 page I click Continue
+
+	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
+	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
+	# ====== 		| No                                       | 10                    | 6                          | Yes            |  ====== #
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 10
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 6
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	And I click continue
+
+	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
-	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+
+    # ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot ====== #
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: The Home Depot
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
 	Then I click continue
-	Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5
-	Given I should see following container type from the drop down list
+
+	# ====== I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57982, container type: Plastic Container and size: 12.5 ====== #
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then I add the following into the UPC Fields
+	| Field         | Value               |
+	| UPCNumber     | saved as UPC57982   |
+	| ContainerType | Plastic Container   |
+	| Size          | 12.5                |
+    Given I should see following container type from the drop down list
 	|Container Type|
 	| Coated or Laminated Paperboard |
 	| Full Syringe - Medical         |
@@ -497,24 +571,52 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	| Vial - Medical                 |
 	And I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
 	Then I click continue	
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
+
+	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the New Product page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023))
-	| Section                                              | Value             |
-	| Type of Product                                      | Bonding agent     |
-	| Primary Physical State                               | Liquid            |
-	| Secondary Physical State                             | Liquid            |
-	| Product has been granted an Alternative Control Plan | No                |
-	| CARB                                                 | 10                |
-	| OTC Model Rule                                       | 6                 |
-	| Container Type                                       | Plastic Container |
-	| Size (Ounces)                                        | 12.5              |
-	| Retailers                                            | HD                |
+
+	# ====== Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional)) ====== #
+	# ====== | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient | ====== #
+	# ====== | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               | ====== #
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+
+	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text ====== #
+    And I should see the Optional Comments Page
+    And I enter the following into the comments field: Comments Text
+    Then in the Optional Comments page I click Continue
+
+	# ====== Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023)) ====== #
+	# ====== | Section                                              | Value             | ====== #
+	# ====== | Type of Product                                      | Bonding agent     | ====== #
+	# ====== | Primary Physical State                               | Liquid            | ====== #
+	# ====== | Secondary Physical State                             | Liquid            | ====== #
+	# ====== | Product has been granted an Alternative Control Plan | No                | ====== #
+	# ====== | CARB                                                 | 10                | ====== #
+	# ====== | OTC Model Rule                                       | 6                 | ====== #
+	# ====== | Container Type                                       | Plastic Container | ====== #
+	# ====== | Size (Ounces)                                        | 12.5              | ====== #
+	# ====== | Retailers                                            | HD                | ====== #
+	Given I should see the Data Acceptance Page
+	Given In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Bonding agent
+	Given In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
+	Given In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Liquid
+	Given In the Summary Page, the 'CARB' section should be showing the following value: 10
+	Given In the Summary Page, the 'OTC Model Rule' section should be showing the following value: 6
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
 
 @TestCase:57983

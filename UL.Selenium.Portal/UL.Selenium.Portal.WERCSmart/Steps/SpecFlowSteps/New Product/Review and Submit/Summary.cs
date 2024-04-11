@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
