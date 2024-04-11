@@ -370,8 +370,8 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 
 	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol) ====== #
     And I should see the The Product Page
-    And I set 'Product Name' to: Hair Styling Gel
-    And I set 'Type of Product' to: Hair Styling Gel
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Hair Styling Gel
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Hair Styling Gel
     And in the The Product page I click Continue
     Then I save the product information as: TestCase57952
 
