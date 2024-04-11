@@ -465,8 +465,8 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 
 	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent ====== #
     And I should see the The Product Page
-    And I set 'Product Name' to: Bonding agent
-    And I set 'Type of Product' to: Bonding agent
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to:  Bonding agent
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bonding agent
     And in the The Product page I click Continue
     Then I save the product information as: TestCase57982
 	Then I generate a random UPC number and save as: UPC57982
