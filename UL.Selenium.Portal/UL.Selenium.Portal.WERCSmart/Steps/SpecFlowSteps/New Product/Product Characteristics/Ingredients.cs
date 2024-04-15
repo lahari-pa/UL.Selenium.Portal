@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium.DevTools.V108.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -383,12 +384,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
-		[StepDefinition(@"In the Ingredients section, I (should|should not) see the ingredients error message")]
-		public void IngredientsTableAddFollowingIngredients(string should)
+		[StepDefinition(@"In the Ingredients page, I (should|should not) see the following ingredients error message")]
+		public void IngredientsTableAddFollowingIngredients(string shouldOrShouldNot)
 		{
 			StepsIngredients stepsIngredients = new StepsIngredients();
 			Report.StartSubStep($"Then I check if the error message is showing");
-			stepsIngredients.IngredientsErrorMessageShowing(should);
+			stepsIngredients.IngredientsErrorMessageShowing(shouldOrShouldNot);
 		}
 
 			/// Copy and paste the following tables to create the table structure as needed 
